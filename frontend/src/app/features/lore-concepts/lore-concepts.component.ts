@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { LoreConcept, LoreConceptCategory } from '../../core/models/models';
 
@@ -454,6 +454,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 })
 export class LoreConceptsComponent {
   private readonly service = inject(WarhammerService);
+  private readonly route = inject(ActivatedRoute);
   readonly concepts = toSignal(this.service.loreConcepts$, { initialValue: [] as LoreConcept[] });
   readonly filterCategory = signal<'all' | LoreConceptCategory>('all');
   readonly conceptImages = signal<Map<string, string>>(new Map());
@@ -496,6 +497,14 @@ export class LoreConceptsComponent {
           });
         }
       });
+
+      // Scroll vers le fragment URL une fois les concepts rendus
+      const frag = this.route.snapshot.fragment;
+      if (frag && list.some(c => c.id === frag)) {
+        setTimeout(() => {
+          document.getElementById(frag)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
     });
   }
 
