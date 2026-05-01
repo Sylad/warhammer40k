@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ClaudeUsageBadgeComponent } from '../../shared/components/claude-usage-badge/claude-usage-badge.component';
+import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ClaudeUsageBadgeComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, ClaudeUsageBadgeComponent, BreadcrumbComponent],
   template: `
     <header class="topbar">
       <a class="brand" routerLink="/">
@@ -47,6 +48,8 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         <button class="quota-dismiss" (click)="quota.dismiss()">✕</button>
       </div>
     }
+
+    <app-breadcrumb />
 
     <main class="wrap">
       <router-outlet />
