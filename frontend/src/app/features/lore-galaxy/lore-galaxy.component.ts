@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { WarhammerService } from '../../core/services/warhammer.service';
 
 interface Segmentum {
   id: string;
@@ -33,52 +33,29 @@ interface HotZone {
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <div class="badge">✦ Carte des Cinq Segmenta</div>
+        <div class="badge">✦ Imperius Dominatus · Carte des Cinq Segmenta</div>
         <h1>La Galaxie</h1>
         <p class="lede">
-          La Voie Lactée du 41<sup>e</sup> millénaire. Cinq Segmenta administratifs depuis Terra,
-          deux failles warp permanentes, et une Cicatrice qui partage l'Imperium en deux moitiés
-          depuis la chute de Cadia. Survolez les zones-clés, cliquez pour lire leur lore.
+          Carte canonique de la Voie Lactée au M42. Cinq Segmenta administratifs depuis Terra,
+          deux failles warp permanentes, et la Cicatrix Maledictum qui traverse la galaxie
+          depuis la chute de Cadia. Survolez les pastilles colorées, cliquez pour explorer le lore.
         </p>
       </div>
     </section>
 
     <div class="layout">
       <main class="map-wrap">
-        <svg class="galaxy-map" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+        <svg class="galaxy-map" viewBox="0 0 700 490" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <radialGradient id="galaxyCore" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#fff7c2" stop-opacity="0.95"/>
-              <stop offset="20%" stop-color="#f0d276" stop-opacity="0.6"/>
-              <stop offset="60%" stop-color="#7b1113" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#050403" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="eyeOfTerror" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#9c2680" stop-opacity="0.95"/>
-              <stop offset="50%" stop-color="#3a0e3e" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="maelstrom" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#c43a26" stop-opacity="0.85"/>
-              <stop offset="60%" stop-color="#5a0e10" stop-opacity="0.6"/>
-              <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="cicatrix" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#c43a26" stop-opacity="0"/>
-              <stop offset="20%" stop-color="#c43a26" stop-opacity="0.7"/>
-              <stop offset="50%" stop-color="#f0d276" stop-opacity="0.95"/>
-              <stop offset="80%" stop-color="#9c2680" stop-opacity="0.7"/>
-              <stop offset="100%" stop-color="#9c2680" stop-opacity="0"/>
-            </linearGradient>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
               <feMerge>
                 <feMergeNode in="blur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
             <filter id="strongGlow">
-              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feGaussianBlur stdDeviation="5" result="blur"/>
               <feMerge>
                 <feMergeNode in="blur"/>
                 <feMergeNode in="SourceGraphic"/>
@@ -86,75 +63,40 @@ interface HotZone {
             </filter>
           </defs>
 
-          <!-- Fond étoiles -->
-          @for (s of stars(); track s.id) {
-            <circle [attr.cx]="s.cx" [attr.cy]="s.cy" [attr.r]="s.r" [attr.fill]="s.fill" [attr.opacity]="s.opacity" />
+          <!-- Image canonique W40K (post-Cicatrix Imperius Dominatus) -->
+          @if (mapBgUrl()) {
+            <image [attr.href]="mapBgUrl()" x="0" y="0" width="700" height="490" />
+          } @else {
+            <rect x="0" y="0" width="700" height="490" fill="#0a0814" />
+            <text x="350" y="245" text-anchor="middle" fill="#8d8678" font-family="Cinzel, serif" font-size="14">
+              Chargement de la carte galactique…
+            </text>
           }
 
-          <!-- Bras de spirale galactique (4 bras Voie Lactée stylisés) -->
-          <g opacity="0.42">
-            <path d="M 500,350 Q 350,200 180,250 T 80,400" stroke="#c9a24a" stroke-width="60" fill="none" stroke-linecap="round" opacity="0.18"/>
-            <path d="M 500,350 Q 650,500 820,450 T 920,300" stroke="#c9a24a" stroke-width="60" fill="none" stroke-linecap="round" opacity="0.18"/>
-            <path d="M 500,350 Q 400,500 220,560 T 100,500" stroke="#c9a24a" stroke-width="50" fill="none" stroke-linecap="round" opacity="0.13"/>
-            <path d="M 500,350 Q 600,200 770,150 T 920,250" stroke="#c9a24a" stroke-width="50" fill="none" stroke-linecap="round" opacity="0.13"/>
-          </g>
+          <!-- Voile sombre pour rendre les hot zones plus contrastées -->
+          <rect x="0" y="0" width="700" height="490" fill="#000" opacity="0.18" />
 
-          <!-- Coeur galactique brillant -->
-          <ellipse cx="500" cy="350" rx="320" ry="220" fill="url(#galaxyCore)" opacity="0.7"/>
-
-          <!-- Segmenta — labels arrondis -->
-          @for (seg of segmenta; track seg.id) {
-            <g [attr.transform]="segmentumTransform(seg.id)" opacity="0.6">
-              <text [attr.fill]="seg.color" font-family="Cinzel, serif" font-size="13" letter-spacing="3" text-anchor="middle" filter="url(#glow)">
-                {{ seg.name | uppercase }}
-              </text>
-            </g>
-          }
-
-          <!-- Cicatrix Maledictum (la déchirure) -->
-          <line x1="160" y1="120" x2="900" y2="600" stroke="url(#cicatrix)" stroke-width="3" stroke-dasharray="2 4" opacity="0.85" filter="url(#strongGlow)"/>
-          <line x1="160" y1="120" x2="900" y2="600" stroke="#f0d276" stroke-width="0.8" stroke-dasharray="1 8" opacity="0.5"/>
-          <text x="320" y="180" fill="#f0d276" font-family="Cinzel, serif" font-size="11" letter-spacing="2" opacity="0.85" filter="url(#glow)">CICATRIX MALEDICTUM</text>
-
-          <!-- Œil de la Terreur (tache warp) -->
-          <ellipse cx="290" cy="220" rx="55" ry="38" fill="url(#eyeOfTerror)" filter="url(#strongGlow)"/>
-          <ellipse cx="290" cy="220" rx="22" ry="14" fill="#1a0a26" opacity="0.85"/>
-          <text x="290" y="282" fill="#9c2680" font-family="Cinzel, serif" font-size="10" letter-spacing="2" text-anchor="middle" filter="url(#glow)">ŒIL DE LA TERREUR</text>
-
-          <!-- Maelstrom -->
-          <ellipse cx="660" cy="430" rx="32" ry="22" fill="url(#maelstrom)" filter="url(#glow)"/>
-          <text x="660" y="475" fill="#c43a26" font-family="Cinzel, serif" font-size="9" letter-spacing="2" text-anchor="middle" filter="url(#glow)">MAELSTROM</text>
-
-          <!-- Hot zones (mondes-clés cliquables) -->
+          <!-- Hot zones (pastilles cliquables) -->
           @for (hz of hotZones; track hz.id) {
             <g class="hot-zone" [class.zone-rift]="hz.type === 'rift'" (click)="goTo(hz)" (mouseenter)="hoveredId.set(hz.id)" (mouseleave)="hoveredId.set(null)">
-              <circle [attr.cx]="hz.cx" [attr.cy]="hz.cy" [attr.r]="hz.r + 6" [attr.fill]="hz.color" opacity="0.18" filter="url(#glow)"/>
+              <circle [attr.cx]="hz.cx" [attr.cy]="hz.cy" [attr.r]="hz.r + 4" [attr.fill]="hz.color" opacity="0.25" filter="url(#strongGlow)"/>
               <circle [attr.cx]="hz.cx" [attr.cy]="hz.cy" [attr.r]="hz.r" [attr.fill]="hz.color" filter="url(#glow)" class="hz-core"/>
-              <circle [attr.cx]="hz.cx" [attr.cy]="hz.cy" [attr.r]="hz.r - 1" fill="#fff" opacity="0.6"/>
-              <text [attr.x]="hz.cx" [attr.y]="hz.cy - hz.r - 8" fill="#e8deca" font-family="Cinzel, serif" font-size="10" letter-spacing="2" text-anchor="middle" class="hz-label">
+              <circle [attr.cx]="hz.cx" [attr.cy]="hz.cy" [attr.r]="hz.r - 1.5" fill="#fff" opacity="0.7"/>
+              <text [attr.x]="hz.cx" [attr.y]="hz.cy - hz.r - 6" fill="#fff" font-family="Cinzel, serif" font-size="9" letter-spacing="1.5" text-anchor="middle" class="hz-label" style="paint-order: stroke; stroke: #000; stroke-width: 2.5; stroke-linejoin: round;">
                 {{ hz.name | uppercase }}
               </text>
             </g>
           }
-
-          <!-- Légende coin haut-gauche -->
-          <g transform="translate(20, 30)" opacity="0.85">
-            <text fill="#c9a24a" font-family="Cinzel, serif" font-size="11" letter-spacing="3">VOIE LACTÉE · M42</text>
-            <text fill="#8d8678" font-family="Inter, sans" font-size="9" y="14">Imperium Sanctus / Imperium Nihilus</text>
-          </g>
-
-          <!-- Marker Imperium Sanctus / Nihilus -->
-          <text x="220" y="500" fill="#1d4ba0" font-family="Cinzel, serif" font-size="14" letter-spacing="3" opacity="0.65" filter="url(#glow)">IMPERIUM SANCTUS</text>
-          <text x="730" y="240" fill="#3a3a3a" font-family="Cinzel, serif" font-size="14" letter-spacing="3" opacity="0.85" filter="url(#glow)">IMPERIUM NIHILUS</text>
         </svg>
 
-        <!-- Tooltip flottant pour la zone hovered -->
         @if (hoveredZone(); as hz) {
-          <div class="tooltip" [style.left.px]="hoveredX()" [style.top.px]="hoveredY()">
+          <div class="tooltip">
             <div class="tt-name" [style.color]="hz.color">{{ hz.name }}</div>
             <div class="tt-type">{{ typeLabel(hz.type) }}</div>
             <p>{{ hz.description }}</p>
-            <div class="tt-cta">Cliquez pour explorer →</div>
+            @if (hz.conceptId) {
+              <div class="tt-cta">Cliquez pour explorer →</div>
+            }
           </div>
         }
       </main>
@@ -176,17 +118,17 @@ interface HotZone {
         <h3>Failles warp</h3>
         <div class="rift-card eye">
           <div class="rift-name">Œil de la Terreur</div>
-          <p>Plaie warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos.</p>
+          <p>Plaie warp permanente née de la naissance de Slaanesh (M30).</p>
           <a class="rift-link" routerLink="/lore/concepts" fragment="eye-of-terror">Voir lore →</a>
         </div>
         <div class="rift-card maelstrom">
           <div class="rift-name">Maelstrom</div>
-          <p>Tempête warp permanente du Segmentum Ultima. Bandes Chaos et pirates.</p>
+          <p>Tempête warp permanente du Segmentum Ultima.</p>
           <a class="rift-link" routerLink="/lore/concepts" fragment="maelstrom">Voir lore →</a>
         </div>
         <div class="rift-card cicatrix">
           <div class="rift-name">Cicatrix Maledictum</div>
-          <p>Déchirure galactique née de la chute de Cadia (M41). Divise Sanctus et Nihilus.</p>
+          <p>Déchirure galactique née de la chute de Cadia (M41). Imperium Sanctus / Nihilus.</p>
           <a class="rift-link" routerLink="/lore/concepts" fragment="cicatrix-maledictum">Voir lore →</a>
         </div>
 
@@ -200,6 +142,11 @@ interface HotZone {
             </li>
           }
         </ul>
+
+        <div class="credit">
+          Carte : <em>Imperius Dominatus, Imperial Record 0853</em> (M42).<br>
+          Source : Warhammer 40K Wiki Fandom (CC BY-SA).
+        </div>
       </aside>
     </div>
 
@@ -231,7 +178,7 @@ interface HotZone {
 
     .hero {
       position: relative;
-      min-height: 220px;
+      min-height: 200px;
       border: 1px solid var(--border);
       overflow: hidden;
       background: #050403;
@@ -239,7 +186,7 @@ interface HotZone {
       margin-bottom: 24px;
       display: flex;
       align-items: end;
-      padding: 36px 50px 30px;
+      padding: 32px 50px 26px;
     }
     .hero-overlay {
       position: absolute;
@@ -263,15 +210,14 @@ interface HotZone {
       background: rgba(201, 162, 74, 0.1);
     }
     h1 {
-      font-size: clamp(40px, 5vw, 60px);
+      font-size: clamp(38px, 4.8vw, 56px);
       line-height: 1.04;
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       color: var(--gold-bright);
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
     }
-    .lede { font-size: 14px; color: var(--text); line-height: 1.65; margin: 0; max-width: 700px; }
+    .lede { font-size: 14px; color: var(--text); line-height: 1.65; margin: 0; max-width: 720px; }
 
-    /* Layout map + legend */
     .layout {
       display: grid;
       grid-template-columns: 1fr 320px;
@@ -283,9 +229,8 @@ interface HotZone {
     .map-wrap {
       position: relative;
       border: 1px solid var(--border);
-      background: radial-gradient(circle at 50% 50%, #0a0814 0%, #050403 70%);
+      background: #050403;
       box-shadow: var(--shadow);
-      padding: 8px;
       overflow: hidden;
     }
 
@@ -296,19 +241,20 @@ interface HotZone {
     }
 
     .hot-zone { cursor: pointer; transition: transform 0.2s; transform-origin: center; transform-box: fill-box; }
-    .hot-zone:hover .hz-core { transform: scale(1.6); transform-origin: center; transform-box: fill-box; }
-    .hot-zone .hz-label { transition: opacity 0.2s; }
-    .hot-zone:hover .hz-label { fill: #fff7c2; }
+    .hot-zone:hover .hz-core { transform: scale(1.5); transform-origin: center; transform-box: fill-box; }
+    .hot-zone .hz-label { transition: opacity 0.2s; pointer-events: none; }
+    .hot-zone:hover .hz-label { fill: var(--gold-bright); }
 
     .tooltip {
       position: absolute;
       pointer-events: none;
-      max-width: 240px;
+      max-width: 280px;
       padding: 10px 14px 12px;
       border: 1px solid var(--border-strong);
-      background: rgba(8, 6, 4, 0.95);
+      background: rgba(8, 6, 4, 0.96);
       box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-      transform: translate(-50%, -110%);
+      top: 12px;
+      right: 12px;
       z-index: 10;
     }
     .tt-name {
@@ -339,7 +285,6 @@ interface HotZone {
       font-weight: 700;
     }
 
-    /* Légende latérale */
     .legend {
       display: flex;
       flex-direction: column;
@@ -454,6 +399,16 @@ interface HotZone {
       box-shadow: 0 0 6px var(--hz-color);
     }
 
+    .credit {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+    .credit em { color: var(--gold); font-style: italic; }
+
     .cta-bottom {
       max-width: 760px;
       margin: 30px auto 8px;
@@ -499,54 +454,50 @@ interface HotZone {
 })
 export class LoreGalaxyComponent {
   private readonly router = inject(Router);
+  private readonly service = inject(WarhammerService);
 
   readonly hoveredId = signal<string | null>(null);
-  readonly hoveredX = signal<number>(0);
-  readonly hoveredY = signal<number>(0);
-
-  readonly stars = signal<{ id: number; cx: number; cy: number; r: number; fill: string; opacity: number }[]>(
-    Array.from({ length: 200 }, (_, i) => ({
-      id: i,
-      cx: Math.random() * 1000,
-      cy: Math.random() * 700,
-      r: Math.random() * 1.4 + 0.2,
-      fill: Math.random() > 0.85 ? '#f0d276' : '#ffffff',
-      opacity: Math.random() * 0.6 + 0.3,
-    })),
-  );
+  readonly mapBgUrl = signal<string>('');
 
   readonly segmenta: Segmentum[] = [
-    { id: 'solar', name: 'Solar', color: '#f0d276', description: 'Centre galactique. Contient Terra, Mars, le Trône d\'Or. Cœur historique de l\'Imperium.' },
-    { id: 'pacificus', name: 'Pacificus', color: '#3a6cc4', description: 'Ouest galactique. Frontière fragile face aux Tyranides et aux Aeldari Craftworlds.' },
-    { id: 'tempestus', name: 'Tempestus', color: '#5fc97a', description: 'Sud galactique. Régions tau, Hive Fleet Leviathan en progression.' },
-    { id: 'obscurus', name: 'Obscurus', color: '#9c2680', description: 'Nord galactique. Œil de la Terreur, Cadia (détruite), Croisades Noires.' },
-    { id: 'ultima', name: 'Ultima', color: '#1d4ba0', description: 'Est galactique. Macragge, Ultramar, le Maelstrom. QG Croisade Indomitus.' },
+    { id: 'solar', name: 'Solar', color: '#f0d276', description: 'Centre galactique. Terra, Mars, Trône d\'Or.' },
+    { id: 'pacificus', name: 'Pacificus', color: '#3a6cc4', description: 'Ouest galactique. Halo Stars, Calixis Sector.' },
+    { id: 'tempestus', name: 'Tempestus', color: '#5fc97a', description: 'Sud galactique. Veiled Region, frontière.' },
+    { id: 'obscurus', name: 'Obscurus', color: '#9c2680', description: 'Nord galactique. Œil de la Terreur, Cadia (✝).' },
+    { id: 'ultima', name: 'Ultima', color: '#1d4ba0', description: 'Est galactique. Macragge, Ultramar, Maelstrom.' },
   ];
 
+  // Coordonnées calibrées sur l'image canonique (700×490)
   readonly hotZones: HotZone[] = [
-    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 500, cy: 350, r: 7, color: '#f0d276',
-      description: 'Capitale sacrée de l\'Imperium. Le Palais Impérial couvre l\'Himalaya, la Sanctum Imperialis abrite le Trône d\'Or.', conceptId: 'holy-terra' },
-    { id: 'mars', name: 'Mars', type: 'world', cx: 515, cy: 345, r: 5, color: '#b85a3a',
-      description: 'Capitale de l\'Adeptus Mechanicus. Planète-forge, théocratie du Dieu-Machine.', conceptId: 'mars' },
-    { id: 'macragge', name: 'Macragge', type: 'world', cx: 760, cy: 360, r: 6, color: '#1d4ba0',
-      description: 'Monde-mère des Ultramarines. Capitale d\'Ultramar (500 mondes), QG Croisade Indomitus.', conceptId: 'macragge' },
-    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 350, cy: 250, r: 5, color: '#5a6878',
-      description: 'Forteresse-monde devant l\'Œil. Détruite à la 13ᵉ Croisade Noire (M41). Origine de la Cicatrix Maledictum.', conceptId: 'cadia' },
-    { id: 'fenris', name: 'Fenris', type: 'world', cx: 380, cy: 320, r: 4, color: '#8090a0',
-      description: 'Monde-glacier des Space Wolves. Russ y est parti en quête de la Wolftime.' },
-    { id: 'baal', name: 'Baal', type: 'world', cx: 560, cy: 460, r: 4, color: '#c9302c',
+    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 138, cy: 113, r: 9, color: '#9c2680',
+      description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos.', conceptId: 'eye-of-terror' },
+    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 165, cy: 135, r: 6, color: '#5a6878',
+      description: 'Forteresse-monde tombée à la 13ᵉ Croisade Noire (M41). Origine de la Cicatrix.', conceptId: 'cadia' },
+    { id: 'fenris', name: 'Fenris', type: 'world', cx: 175, cy: 105, r: 5, color: '#8090a0',
+      description: 'Monde-glacier des Space Wolves. Russ y est parti à la Wolftime.' },
+    { id: 'caliban', name: 'Caliban (✝)', type: 'world', cx: 240, cy: 175, r: 5, color: '#1a4f2a',
+      description: 'Monde-forêt des Dark Angels. Détruit pendant l\'Hérésie d\'Horus.' },
+    { id: 'baal', name: 'Baal', type: 'world', cx: 305, cy: 130, r: 5, color: '#c9302c',
       description: 'Monde-mère des Blood Angels. Sanctuaire de Sanguinius.' },
-    { id: 'caliban', name: 'Caliban (✝)', type: 'world', cx: 470, cy: 280, r: 4, color: '#1a4f2a',
-      description: 'Monde-forêt des Dark Angels. Détruit pendant l\'Hérésie d\'Horus, suite à la trahison de Luther.' },
-    { id: 'commorragh', name: 'Commorragh', type: 'nexus', cx: 230, cy: 320, r: 5, color: '#3a0e3e',
-      description: 'Cité Sombre des Drukhari, nichée dans les replis du Webway. Capitale d\'Asdrubael Vect.' },
-    { id: 'titan', name: 'Titan', type: 'world', cx: 510, cy: 360, r: 4, color: '#5a6878',
-      description: 'Lune de Saturne. Monde-forteresse caché des Grey Knights. Aucune trace officielle dans l\'Imperium.' },
-    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 290, cy: 220, r: 8, color: '#9c2680',
-      description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos depuis l\'Hérésie.', conceptId: 'eye-of-terror' },
-    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 660, cy: 430, r: 7, color: '#c43a26',
-      description: 'Tempête warp permanente du Segmentum Ultima. Bandes Chaos, pirates Drukhari.', conceptId: 'maelstrom' },
+    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 235, cy: 245, r: 7, color: '#f0d276',
+      description: 'Capitale sacrée de l\'Imperium. Trône d\'Or, Astronomican.', conceptId: 'holy-terra' },
+    { id: 'mars', name: 'Mars', type: 'world', cx: 248, cy: 240, r: 5, color: '#b85a3a',
+      description: 'Capitale de l\'Adeptus Mechanicus.', conceptId: 'mars' },
+    { id: 'titan', name: 'Titan', type: 'world', cx: 245, cy: 255, r: 4, color: '#5a6878',
+      description: 'Lune de Saturne. Monde-forteresse caché des Grey Knights.' },
+    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 365, cy: 270, r: 8, color: '#c43a26',
+      description: 'Tempête warp permanente du Segmentum Ultima. Bandes Chaos, pirates.', conceptId: 'maelstrom' },
+    { id: 'macragge', name: 'Macragge', type: 'world', cx: 530, cy: 405, r: 7, color: '#1d4ba0',
+      description: 'Monde-mère des Ultramarines. Capitale d\'Ultramar (500 mondes).', conceptId: 'macragge' },
+    { id: 'commorragh', name: 'Commorragh', type: 'nexus', cx: 50, cy: 340, r: 5, color: '#3a0e3e',
+      description: 'Cité Sombre des Drukhari, nichée dans le Webway. Capitale d\'Asdrubael Vect.' },
   ];
+
+  constructor() {
+    this.service.getWikiImage('Imperium of Man galaxy map').subscribe(r => {
+      if (r.imageUrl) this.mapBgUrl.set(r.imageUrl);
+    });
+  }
 
   hoveredZone(): HotZone | null {
     const id = this.hoveredId();
@@ -558,17 +509,6 @@ export class LoreGalaxyComponent {
     if (hz.conceptId) {
       this.router.navigate(['/lore/concepts'], { fragment: hz.conceptId });
     }
-  }
-
-  segmentumTransform(id: string): string {
-    const positions: Record<string, string> = {
-      solar:     'translate(500, 250)',
-      pacificus: 'translate(180, 360) rotate(-90)',
-      tempestus: 'translate(500, 620)',
-      obscurus:  'translate(500, 110)',
-      ultima:    'translate(890, 360) rotate(90)',
-    };
-    return positions[id] ?? '';
   }
 
   typeLabel(t: HotZone['type']): string {
