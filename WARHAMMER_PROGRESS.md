@@ -117,9 +117,36 @@ Viewer fullscreen modal : image HD centrée + fond noir profond + infos titre/ar
 
 ## État actuel (à mettre à jour à chaque session)
 
-**Date dernière mise à jour** : 2026-04-30 (session 7)
-**Phase active** : aucune — **P1-P9 toutes ✅ TERMINÉES** 🎉
-**Prochaine phase** : aucune — refonte UX warhammer COMPLÈTE.
+**Date dernière mise à jour** : 2026-05-01 (session 9)
+**Phase active** : aucune — **UX P1-P9 + enrichissement F4 + F5 + F6 + Dashboard + F9 toutes ✅ TERMINÉES** 🎉
+**Prochaine phase** : F7 (Lore concepts encyclopédie) ou F3 (enrichir 51 sous-factions minimalistes) ou F8 (carte galactique SVG).
+
+## ⭐ État cumulé après session 9 (2026-05-01)
+
+| Catégorie | Avant F4 | Après F9 |
+|---|---|---|
+| Factions parents | 11 | **17** |
+| Sous-factions | 63 | **102** |
+| Pages UI | 9 | **14** |
+| Types `SubFactionType` | 11 | **19** |
+| Lore narratif (entités/sections) | 0 | **6 sections Empereur + 20 fiches Primarques + 4 fiches Dieux Chaos + 10 organisations civiles** |
+
+**Nouvelles factions parents (F4)** : Adeptus Custodes, Officio Assassinorum, Drukhari, Grey Knights, Leagues of Votann, Genestealer Cults — chacune avec sous-factions enrichies (Shield Hosts, Temples, Kabales, Wych Cults, Haemonculus Covens, Brotherhoods, Kindreds, Cultes).
+
+**Nouvelles pages lore (F5+F6+F9)** :
+- `/lore` (hub avec 4 cards actives + 1 à venir)
+- `/lore/emperor` — narrative scrollable 6 sections + 5 stats + images alternées
+- `/lore/primarchs` — 20 fiches filtrables (9/9/2) avec status badges
+- `/lore/chaos-gods` — 4 dieux multi-couleur + 8 daemons notables + primarques corrompus liés
+- `/lore/civilians` — 10 organisations filtrables par catégorie (governance/religion/military/psyker/commerce/training)
+
+**Dashboard refondu** : hero image-bg Empereur sur Trône d'Or + 2 CTA + quick lore bar + 4 shortcut cards image-first + Brèves du 41ᵉ millénaire (lore feed dynamique) + stats bar étendue.
+
+**Backend lore module** : étendu massivement avec endpoints `/api/lore/emperor`, `/api/lore/primarchs[/:id]`, `/api/lore/chaos-gods[/:id]`, `/api/lore/imperial-orgs[/:id]`. Seeds : `emperor.json`, `primarchs.json`, `chaos-gods.json`, `imperial-orgs.json`.
+
+**Topbar** : ajout du lien "✠ LORE" entre Galerie et À propos.
+
+**Commits GitHub** : `b91cb30 feat: Phase F4 + F5 + F6 + Dashboard refonte` + `1ac2ef6 feat: Phase F9 — Civils impériaux`.
 
 **État du site** :
 - http://nas:4201/ → Dashboard (hero + 4 shortcuts + stats bar)
@@ -390,3 +417,55 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 ### Sessions précédentes
 - Phase initiale : SSE backend OL + SSE finance déclarations + claude-usage-badge SSE 3 apps.
 - Pas directement liée à Warhammer UX, mais environnement stable.
+
+### 2026-05-01 session 8 (F4 + F5 + F6 + Dashboard refonte)
+**Phase F4 — Nouvelles factions parents (+6 factions, +39 sous-factions)** :
+- Étendu `SubFactionType` union avec 8 nouveaux types : `shield_host`, `temple`, `kabal`, `wych_cult`, `haemonculus_coven`, `brotherhood`, `kindred`, `cult` (4 fichiers TS modifiés en miroir : backend service.ts + frontend models.ts + 2 maps frontend faction-detail/subfaction-detail).
+- **Adeptus Custodes** (Imperium gold, ⚜) + 6 Shield Hosts (Shadowkeepers + Hykanatoi enrichis avec Trajann Valoris/Castellan Geôliers/Custodian Guard ; Solar Watch / Aquilan Shield / Eternal / Emissaries Imperatus minimaux).
+- **Officio Assassinorum** (Imperium dark, ☠) + 4 Temples enrichis : Callidus (polymorphine + Phase Sword), Vindicare (Exitus Rifle + M'Shen tueuse de Konrad Curze), Eversor (frénésie chimique + neurogen), Culexus (Pariah anti-psyker + Animus Speculum).
+- **Drukhari** (Xenos violet sombre, ⛧) + 10 sous-factions : 4 Kabales (Black Heart/Asdrubael Vect, Obsidian Rose/Lady Malys, Poisoned Tongue, Flayed Skull), 3 Wych Cults (Strife/Lelith Hesperax, Cursed Blade, Red Grief), 3 Haemonculus Covens (Prophets of Flesh/Urien Rakarth, Black Descent, Dark Creed).
+- **Grey Knights** (Imperium silver, ✠) + 8 Brotherhoods : 1st (Suprême Grand Master, Kaldor Draigo perdu dans le Warp), 8th Purifiers (Castellan Crowe + Black Blade of Antwyr), 2nd-7th minimaux.
+- **Leagues of Votann** (Xenos slate, ⚒) + 5 Kindreds : Trans-Hyperian Alliance (Ûthar the Destined enrichi), Greater Thurian, Kronus Hegemony, Ymyr Conglomerate, Urani-Surtr Regulates.
+- **Genestealer Cults** (Xenos purple, ☩) + 6 Cultes : Cult of the Four-Armed Emperor (Patriarche/Magus/Primus enrichi), Twisted Helix, Bladed Cog, Hivecult, Pauper Princes, Rusted Claw.
+
+**Phase F5 — Pages Lore dédiées** :
+- Backend lore-feed module étendu : endpoints `GET /api/lore/emperor`, `/api/lore/primarchs[/:id]`. Models `Emperor` (sections + stats), `Primarch` (number, allegiance, status, statusDetail, etc.).
+- `/lore` (hub) : 4 cards (Empereur active, Primarques active, Panthéon Chaos active, Galaxie à venir).
+- `/lore/emperor` : page narrative scrollable, hero image-bg Trône d'Or, 5 stats, 6 sections (Origine mystique → Statut M42 — un dieu en gestation ?), images alternées, citations.
+- `/lore/primarchs` : hero + compteurs dynamiques (9/9/2) + filtres par allegiance + grille 20 cards image-first avec N° + status badge + allegiance + lien vers Légion. Images wiki async par primarque.
+- Topbar : ajout lien "✠ LORE" entre Galerie et À propos.
+
+**Phase F6 — Panthéon Chaos** :
+- Backend étendu : endpoint `GET /api/lore/chaos-gods[/:id]`. Model `ChaosGod` (portfolio, daemons hierarchy, primarchsCorrupted, legions, citation).
+- `/lore/chaos-gods` : page longue scrollable, 4 sections multi-couleur distinctes (Khorne rouge ⚔ / Tzeentch bleu ✦ / Nurgle vert ☣ / Slaanesh rose ♆). Chaque section avec hero image-bg + sigil + nom + title + sphere + citation, body 2 cols (description+lore+daemons VS portfolio+primarques+légions).
+- 8 daemons notables : Skarbrand, Ka'Bandha, Kairos Fateweaver, The Changeling, Rotigus Rainfather, Ku'gath Plaguefather, Shalaxi Helbane, Syll'Esske.
+- Quick nav en haut pour sauter directement à un dieu.
+
+**Dashboard refonte (image-first immersif)** :
+- Hero image bg Empereur sur Trône d'Or via wiki proxy + glow doré + 2 CTA ("⚔ Explorer les factions" + "✠ Le Trône d'Or").
+- Quick lore bar (3 cards horizontales) : L'Empereur / Les 20 Primarques / Le Panthéon Chaos.
+- 4 Shortcut cards image-first (au lieu de cards plates) avec hover scale+glow doré et images bg wiki (Space Marines, Black Library, Astartes animation, fresque impériale).
+- Section "Brèves du 41ᵉ millénaire" : 3 events random du lore-feed avec border-left coloré par type (rouge menace/guerre, or événement, bleu découverte, violet prophétie).
+- Stats bar étendue : 17 factions / 102 sous-factions / 11 romans / 16 vidéos / 10 œuvres + citation "Le Trône veille".
+
+**Commit GitHub** : `b91cb30 feat: Phase F4 + F5 + F6 + Dashboard refonte`.
+
+### 2026-05-01 session 9 (F9 — Civils impériaux)
+**Phase F9 — Civils Impériaux (les rouages humains de l'Imperium)** :
+- Backend étendu : endpoint `GET /api/lore/imperial-orgs[/:id]`. Model `ImperialOrganization` (category, color, sigil, keyRole, functions, notableFigures) + `ImperialOrgCategory` union ('governance' | 'military' | 'religion' | 'psyker' | 'commerce' | 'training').
+- `/lore/civilians` : page filtrable par catégorie, hero + 3 compteurs (10 orgs / 50 fonctions / 12 figures notables). Chaque org avec hero coloré + sigil + nom + title + meta (N° + category badge), body 2 cols (description+lore+citation+figures notables VS sidebar Rôle clé+fonctions).
+- 10 organisations enrichies : Adeptus Administratum (Master of Administratum), Adeptus Ministorum (Sebastian Thor), Adeptus Arbites, Rogue Traders (Aurelia Malys), Schola Progenium (Yarrick), Navigators (Maison Belisarius), Astropaths, Sœurs du Silence (Aleya), Imperial Knight Households (House Hawkshroud), Remembrancers (Solomon Voss + Mersadie Oliton).
+- Hub mis à jour : la card "Civils Impériaux" est maintenant active.
+
+**Subagent `about-readme-sync`** créé en `~/.claude/agents/about-readme-sync.md` (mémoire `subagent_about_readme_sync.md`) — auto-syncs Stack/Sources des pages About + README quand on ajoute une techno.
+
+**Commit GitHub** : `1ac2ef6 feat: Phase F9 — Civils impériaux`.
+
+**À reprendre next session** :
+- **F7 (Lore concepts encyclopédie)** : pages dédiées pour Trône d'Or, Astronomican, Webway, Œil de la Terreur, Maelstrom, Cicatrix Maledictum, Codex Astartes, Imperium Sanctus/Nihilus, Holy Terra, Macragge, Cadia (détruite), Nuceria, Barbarus, Fenris, Caliban. Pattern lore similaire à F5/F6/F9. ~12-15 concepts à seeder.
+- **F3 (enrichir 51 sous-factions minimalistes)** : Aeldari (Eldrad/Yriel/Phoenix Lords), Tyranides (Swarmlord/Old One Eye), Necrons (Trazyn/Anrakyr/Szarekh/Crypteks), Orks (Mad Dok Grotsnik/Big Mek), Sœurs (Saint Celestine/Ephrael Stern), Tau (Shadowsun/Farsight), AdMech (Belisarius Cawl). Lourd mais data-only.
+- **F8 (Carte galactique SVG interactive)** : 5 Segmenta + Œil de la Terreur + Maelstrom + Cicatrice Maledictum + Webway tracés. Hot zones cliquables (Cadia, Armageddon, Macragge, Krieg, Vraks). Imperium Sanctus vs Nihilus visualisé. Routes warp principales. Lourd côté SVG/interactivité.
+- **F10 (Intégration galerie ↔ factions)** : suggestions catégorie image-meta = 6 built-in + 17 noms de factions + custom. Léger.
+- **Tweaks UX** : breadcrumb (Factions › Space Marines › Ultramarines › Marneus Calgar), combobox catégorize CSS custom (au lieu de datalist natif), primarque image dans sous-faction card.
+
+**Specs à charger en froid pour F7/F3/F8** : `warhammer_vision`, `warhammer_specs_location`, `warhammer_ux_lessons`, `warhammer_subfactions_pattern`, `warhammer_lore_sources` + ce tracker. Le Fluff Bible PDF (`/volume2/docker/developpeur/warhammer40k/fluff/1400214179388.pdf` + `pdftotext` dispo NAS) reste source canonique pour F7.

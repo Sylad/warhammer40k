@@ -171,14 +171,14 @@ Modifier la galerie : les **noms de toutes les factions** doivent apparaître da
 ---
 
 ## Ordre suggéré d'attaque
-1. **Finance Tracker** (chantier en attente, gros) — refonte React+shadcn complète
-2. **Phase F4** : Adeptus Custodes + Officio Assassinorum (les hérésies les plus criantes)
-3. **Phase F5** : L'Empereur + 20 Primarques
-4. **Phase F4** (suite) : Drukhari, Grey Knights, Votann, Genestealer Cults
-5. **Phase F6** : Chaos Pantheon
-6. **Phase F9** : Civils impériaux
-7. **Phase F7** : Lore concepts encyclopédie
-8. **Phase F3** : Compléter sous-factions existantes
+1. ~~**Finance Tracker**~~ — chantier toujours en attente (refonte React+shadcn)
+2. ✅ **Phase F4** : Custodes + Officio Assassinorum (session 8, 2026-05-01)
+3. ✅ **Phase F5** : L'Empereur + 20 Primarques (session 8, 2026-05-01)
+4. ✅ **Phase F4** suite : Drukhari + Grey Knights + Votann + Genestealer Cults (session 8/9)
+5. ✅ **Phase F6** : Chaos Pantheon (session 8, 2026-05-01)
+6. ✅ **Phase F9** : Civils impériaux (session 9, 2026-05-01)
+7. **Phase F7** : Lore concepts encyclopédie ⬅ **PROCHAINE**
+8. **Phase F3** : Compléter sous-factions existantes (Aeldari/Tyranides/Necrons/Orks/Sœurs/Tau/AdMech)
 9. **Phase F8** : Galaxy map (interactive SVG)
 10. **Phase F10** : Intégration galerie ↔ factions
 11. **Tweaks UX** : breadcrumb, combobox, etc.
@@ -187,9 +187,21 @@ Modifier la galerie : les **noms de toutes les factions** doivent apparaître da
 
 ## Sauvegardes utiles
 - Données : `/volume2/docker/developpeur/data/warhammer/`
-  - `subfactions.json` (63 entrées — SM/Chaos enrichis)
-  - `image-meta.json` (catégorisation user)
-  - `imported/` (images importées via /api/image-import)
-  - `artworks.json`, `artwork-collections.json`, `youtube-channels.json`, etc.
-- Code backend : `warhammer40k/backend/src/modules/` (17 modules dont subfactions, image-import, image-meta)
-- Code frontend : `warhammer40k/frontend/src/app/features/` (dashboard, factions, faction-detail, subfaction-detail, unit-detail, series, videos, gallery)
+  - `factions.json` (**17 factions** — toutes lore enrichies post-F4)
+  - `subfactions.json` (**102 entrées** — Custodes/Assassinorum/Drukhari/GK/Votann/Genestealer ajoutés)
+  - `emperor.json` (6 sections + 5 stats)
+  - `primarchs.json` (20 entrées : 9 loyalistes + 9 traîtres + 2 expurgés)
+  - `chaos-gods.json` (4 dieux + 8 daemons notables)
+  - `imperial-orgs.json` (10 organisations civiles)
+  - `image-meta.json`, `imported/`, `artworks.json`, `artwork-collections.json`, `youtube-channels.json`, `lore-feed.json`
+- Code backend : `warhammer40k/backend/src/modules/` (~15 modules dont subfactions, image-import, image-meta, lore-feed étendu)
+- Code frontend : `warhammer40k/frontend/src/app/features/` :
+  - V1-V9 : dashboard, factions, faction-detail, subfaction-detail, unit-detail, series, videos, gallery, about
+  - F5-F9 : lore-hub, lore-emperor, lore-primarchs, lore-chaos-gods, lore-civilians
+
+## Commits GitHub
+
+- `b91cb30 feat: Phase F4 + F5 + F6 + Dashboard refonte` (2026-05-01)
+- `1ac2ef6 feat: Phase F9 — Civils impériaux` (2026-05-01)
+
+Repo : https://github.com/Sylad/warhammer40k (privé)
