@@ -1,0 +1,77 @@
+[
+  {
+    "id": "lf-001",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Signal hérétique",
+    "body": "Une flotte inconnue a été détectée aux abords du Segmentum Ultima. L'Astropathique impérial reste silencieux."
+  },
+  {
+    "id": "lf-002",
+    "icon": "✦",
+    "type": "evenement",
+    "title": "Retour d'un primarque",
+    "body": "Les archives impériales mentionnent une mobilisation inhabituelle des Chapitres Astartes. Guilliman observe.",
+    "factionId": "space-marines"
+  },
+  {
+    "id": "lf-003",
+    "icon": "✹",
+    "type": "menace",
+    "title": "Menace xénos",
+    "body": "Des mondes-frontières disparaissent dans un silence absolu. Les ruches tyranides se rapprochent.",
+    "factionId": "tyranides"
+  },
+  {
+    "id": "lf-004",
+    "icon": "⚔",
+    "type": "guerre",
+    "title": "Croisade noire",
+    "body": "Abaddon mobilise ses légions à la lisière de l'Œil de la Terreur. La 13e Croisade gronde.",
+    "factionId": "chaos-space-marines"
+  },
+  {
+    "id": "lf-005",
+    "icon": "⊗",
+    "type": "evenement",
+    "title": "Réveil nécron",
+    "body": "Plusieurs mondes-tombeaux ont activé leurs phalanges intérieures. L'éveil s'accélère.",
+    "factionId": "necrons"
+  },
+  {
+    "id": "lf-006",
+    "icon": "◈",
+    "type": "prophetie",
+    "title": "Vision d'un Archiviste",
+    "body": "Eldrad Ulthran a transmis une prophétie aux Mondes-Vaisseaux. Sa parole pèse plus lourd qu'une planète."
+  },
+  {
+    "id": "lf-007",
+    "icon": "Ψ",
+    "type": "decouverte",
+    "title": "Artefact xénos retrouvé",
+    "body": "L'Inquisition a saisi un artefact d'origine inconnue dans les archives d'un Rogue Trader. Excommunication imminente."
+  },
+  {
+    "id": "lf-008",
+    "icon": "★",
+    "type": "guerre",
+    "title": "Front cadien",
+    "body": "Les régiments cadiens se redéploient. La Garde Impériale tient la ligne, comme toujours.",
+    "factionId": "astra-militarum"
+  },
+  {
+    "id": "lf-009",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Waaagh! galactique",
+    "body": "Ghazghkull Mag Uruk Thraka rallie une horde monstrueuse. Les mondes industriels tremblent."
+  },
+  {
+    "id": "lf-010",
+    "icon": "✝",
+    "type": "evenement",
+    "title": "Acte de foi",
+    "body": "Une Sœur de Bataille a accompli un miracle sur le monde-saint d'Ophelia VII. Le Vénérium ouvre une enquête."
+  }
+]

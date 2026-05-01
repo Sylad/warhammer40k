@@ -1,0 +1,12 @@
+[
+  { "id": "aw-001", "title": "Ultramarines — Frères de Bataille", "artist": "John Stone", "image": "ultramarines-brothers.jpg", "category": "Space Marines", "faction": "space-marines", "likes": 256, "wikiQuery": "Ultramarines warhammer" },
+  { "id": "aw-002", "title": "La Bataille de Cadia", "artist": "Nicolas Giacondino", "image": "battle-of-cadia.jpg", "category": "Imperium", "faction": "astra-militarum", "likes": 312, "wikiQuery": "Fall of Cadia" },
+  { "id": "aw-003", "title": "Sainte Célestine", "artist": "Bastien Lecouffe Deharme", "image": "saint-celestine.jpg", "category": "Imperium", "faction": "soeurs-de-bataille", "likes": 198, "wikiQuery": "Saint Celestine warhammer" },
+  { "id": "aw-004", "title": "Tyranide — Guerrier Vorace", "artist": "Wayne England", "image": "tyranid-warrior.jpg", "category": "Xénos", "faction": "tyranides", "likes": 275, "wikiQuery": "Tyranid warhammer" },
+  { "id": "aw-005", "title": "Farseer Eldrad Ulthran", "artist": "Daarken", "image": "eldrad-ulthran.jpg", "category": "Xénos", "faction": "aeldari", "likes": 189, "wikiQuery": "Eldrad Ulthran" },
+  { "id": "aw-006", "title": "Titan Warlord", "artist": "Jonas De Ro", "image": "titan-warlord.jpg", "category": "Véhicules", "likes": 231, "wikiQuery": "Warlord Titan warhammer" },
+  { "id": "aw-007", "title": "Démon Majeur de Khorne", "artist": "Chris Cold", "image": "khorne-demon.jpg", "category": "Chaos", "faction": "chaos-space-marines", "likes": 206, "wikiQuery": "Bloodthirster" },
+  { "id": "aw-008", "title": "Callidus Assassin", "artist": "Ben Wootten", "image": "callidus-assassin.jpg", "category": "Personnages", "faction": "inquisition", "likes": 177, "wikiQuery": "Callidus Assassin" },
+  { "id": "aw-009", "title": "Roboute Guilliman", "artist": "John Blanche", "image": "guilliman.jpg", "category": "Personnages", "faction": "space-marines", "likes": 412, "wikiQuery": "Roboute Guilliman" },
+  { "id": "aw-010", "title": "Khârn le Traître", "artist": "Mark Gibbons", "image": "kharn.jpg", "category": "Chaos", "faction": "chaos-space-marines", "likes": 298, "wikiQuery": "Kharn the Betrayer" }
+]

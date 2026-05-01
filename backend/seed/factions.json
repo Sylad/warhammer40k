@@ -1,0 +1,179 @@
+[
+  {
+    "id": "space-marines",
+    "nom": "Space Marines",
+    "alignement": "Imperium",
+    "description": "Guerriers génétiquement améliorés, champions de l'Empereur, les Space Marines sont le rempart de l'Humanité contre les ténèbres de la galaxie.",
+    "couleurThematique": "#1a3a6e",
+    "symbole": "⚔",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/c1/Adeptus_Astartes_Icon.jpg/revision/latest/scale-to-width-down/80?cb=20190630130730",
+    "sousTitre": "Adeptus Astartes",
+    "citation": "Nous sommes la colère de l'Empereur. Nous sommes Ses épées. Nous sommes les Space Marines.",
+    "lore": {
+      "origine": "Créés durant les derniers jours de la Grande Croisade, les Space Marines sont issus du génie de l'Empereur. Leur création reste l'un des secrets les mieux gardés de l'Imperium.",
+      "organisation": "Chaque Space Marine appartient à un Chapitre, une confrérie autonome mais unie par un serment sacré. Le Codex Astartes est leur doctrine, leur guide, leur loi.",
+      "doctrine": "Polyvalents et implacables, ils combattent sur tous les fronts. Leur foi, leur honneur et leur dévouement sont leurs armes les plus redoutables."
+    },
+    "stats": {
+      "chapitresConnus": "1.000+",
+      "effectifs": "1 MILLION+",
+      "mondeOrigine": "Terra",
+      "allegiance": "Imperium"
+    },
+    "liensRapides": [
+      "Chronologie du Chapitre",
+      "Personnages célèbres",
+      "Monde d'origine",
+      "Héraldique et symboles",
+      "Relations et alliances"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Carte galactique",
+      "Bibliothèque des archives",
+      "Voir les romans liés"
+    ]
+  },
+  {
+    "id": "chaos-space-marines",
+    "nom": "Chaos Space Marines",
+    "alignement": "Chaos",
+    "description": "Anciens frères corrompus par les Dieux du Chaos. Dix mille ans de haine contre l'Imperium qui les a trahis.",
+    "couleurThematique": "#6b1a1a",
+    "symbole": "✸",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/5/5a/Star_of_Chaos.jpg/revision/latest/scale-to-width-down/80?cb=20110716020415",
+    "sousTitre": "Légions Renégates · Traîtres de l'Hérésie d'Horus",
+    "citation": "Nous avons servi un dieu fou. Nous avons combattu pour un cadavre sur un trône. Plus jamais.",
+    "lore": {
+      "origine": "Lors de l'Hérésie d'Horus, neuf des vingt Légions Space Marines originelles trahirent l'Empereur pour suivre le Maître de Guerre Horus. Vaincus à Terra, ces traîtres se réfugièrent dans l'Œil de la Terreur, où le temps et la réalité se distordent. Dix mille années standard plus tard, ils en ressortent à peine vieillis d'une vie d'homme — mais infiniment plus corrompus, transformés par le Warp en champions des Quatre Dieux du Chaos.",
+      "organisation": "Chaque Légion Renégate s'est dispersée en bandes de guerre commandées par des Seigneurs du Chaos et des Princes Démons. La Légion Noire d'Abaddon mène les Croisades Noires depuis l'Œil. Les Word Bearers conservent leurs Chapelains et leur ferveur religieuse. Les Night Lords frappent depuis l'ombre sans dieu pour seul maître que le carnage. Les World Eaters de Khorne refusent toute arme à distance. Les Emperor's Children chantent leurs orgies de souffrance pour Slaanesh. Les Death Guard de Mortarion répandent les pestes de Nurgle.",
+      "doctrine": "Là où les Astartes loyalistes incarnent la discipline, les Renégats incarnent l'excès. Bolters bénis par des sigils blasphématoires, armures fusionnées à la chair, démons liés aux armes : chaque Marine du Chaos est une œuvre cauchemardesque, façonnée par dix millénaires de guerre et la faveur capricieuse de leurs dieux. Leur seul but : abattre le Faux-Empereur et voir l'Imperium réduit en cendres."
+    },
+    "stats": {
+      "chapitresConnus": "9 Légions traîtresses · innombrables warbands",
+      "effectifs": "Inconnu — disséminés dans l'Œil de la Terreur",
+      "mondeOrigine": "Œil de la Terreur (anciens : Terra, Cthonia, Barbarus, Nostramo…)",
+      "allegiance": "Dieux du Chaos"
+    },
+    "liensRapides": [
+      "Les neuf Légions traîtresses",
+      "Hérésie d'Horus",
+      "L'Œil de la Terreur",
+      "Croisades Noires d'Abaddon",
+      "Champions des Quatre Dieux"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Cartographie de l'Œil de la Terreur",
+      "Codex de l'Hérésie",
+      "Voir les romans de la Black Library"
+    ]
+  },
+  {
+    "id": "aeldari",
+    "nom": "Aeldari",
+    "alignement": "Xenos",
+    "description": "Race antique aux pouvoirs psychiques insondables, dernière relique d'un empire déchu par sa propre décadence.",
+    "couleurThematique": "#1a5c3a",
+    "symbole": "◈",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/9/96/EldarRaceRune.png/revision/latest/scale-to-width-down/80?cb=20180214075644"
+  },
+  {
+    "id": "orks",
+    "nom": "Orks",
+    "alignement": "Xenos",
+    "description": "Horde brutale et exubérante vivant uniquement pour le combat. Leur foi collective rend leur technologie réelle.",
+    "couleurThematique": "#3a5c1a",
+    "symbole": "☠",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/36/Orks_symbol.png/revision/latest/scale-to-width-down/80?cb=20101021112013"
+  },
+  {
+    "id": "tyranides",
+    "nom": "Tyranides",
+    "alignement": "Xenos",
+    "description": "Nuée extra-galactique consumant toute biomasse sur son passage. La Ruche-Mère pense pour des trillions d'organismes.",
+    "couleurThematique": "#4a1a5c",
+    "symbole": "⌬",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/cb/TyranidsIcon.jpg/revision/latest/scale-to-width-down/80?cb=20230331182929"
+  },
+  {
+    "id": "necrons",
+    "nom": "Nécrons",
+    "alignement": "Xenos",
+    "description": "Anciens êtres de chair devenus machines immortelles. Ils dormaient depuis soixante millions d'années.",
+    "couleurThematique": "#1a4a1a",
+    "symbole": "⊗",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/5/55/AnkhoftheTriarch9thEdition.jpg/revision/latest/scale-to-width-down/80?cb=20200925173557"
+  },
+  {
+    "id": "tau",
+    "nom": "T'au",
+    "alignement": "Xenos",
+    "description": "Empire technologique guidé par la philosophie du Bien Commun. La diplomatie, puis les armes à plasma.",
+    "couleurThematique": "#1a4a5c",
+    "symbole": "◎",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/f/f0/T%27au_Empire_Icon.png/revision/latest/scale-to-width-down/80?cb=20230512074501"
+  },
+  {
+    "id": "astra-militarum",
+    "nom": "Astra Militarum",
+    "alignement": "Imperium",
+    "description": "La Garde Impériale : des billions de soldats défendant l'Humanité au prix de leur vie. La mort est leur seule certitude.",
+    "couleurThematique": "#3a3a1a",
+    "symbole": "★",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/7/7c/Astra_Militarum_Icon.jpg/revision/latest/scale-to-width-down/80?cb=20190630130730",
+    "sousTitre": "Le Marteau de l'Empereur · Garde Impériale",
+    "citation": "Une vie pour l'Empereur, c'est peu de chose. Mais un milliard de vies, c'est une victoire.",
+    "lore": {
+      "origine": "L'Astra Militarum n'est pas une armée mais d'innombrables armées. À tout instant, ses régiments combattent sur cent zones de guerre et dix mille mondes. Chaque planète impériale doit céder dix pour cent de ses forces armées au Departmento Munitorium. Les hommes recrutés deviennent un régiment baptisé d'après leur monde natal — Cadiens, Catachans, Valhallans, Mordians, Tallarns, Attilans — et ne reviennent jamais chez eux.",
+      "organisation": "Le Lord Commandant Militant dirige la stratégie globale depuis Terra ; quatre bases segmentaires (Cypra Mundi, Bakka, Kar Duniash, Hydraphur) coordonnent les fronts. Pour chaque combattant, une armée invisible de scribes, observateurs et logisticiens du Munitorium soutient l'effort. Les Commissaires marchent en première ligne, garants de la foi et de la discipline. Les Storm Troopers, élite recrutée à la Schola Progenium, renforcent les régiments les plus exposés.",
+      "doctrine": "Volume écrasant, courage inflexible, foi absolue dans l'Empereur. Le Lasgun universel arme la masse ; les Leman Russ, les Basilisks et les Baneblades brisent les lignes. Le Garde Impérial sait que sa vie compte peu — seul compte le tir suivant, l'ordre suivant, l'avancée suivante. Là où les Space Marines frappent comme une lame, l'Astra Militarum déferle comme une marée qu'aucune armée xénos ou hérétique ne peut endiguer indéfiniment."
+    },
+    "stats": {
+      "chapitresConnus": "Innombrables régiments — un par recrutement planétaire",
+      "effectifs": "Mille milliards et plus",
+      "mondeOrigine": "Tous les mondes de l'Imperium",
+      "allegiance": "Imperium · Adeptus Terra"
+    },
+    "liensRapides": [
+      "Régiments emblématiques",
+      "Departmento Munitorium",
+      "Commissaires de l'Empereur",
+      "Schola Progenium",
+      "Doctrines de blindés"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Carte galactique des fronts",
+      "Manuels du Tactica Imperialis",
+      "Voir les romans liés (Cain, Gaunt's Ghosts)"
+    ]
+  },
+  {
+    "id": "adeptus-mechanicus",
+    "nom": "Adeptus Mechanicus",
+    "alignement": "Imperium",
+    "description": "Prêtres-machines vénérant l'Omnimessie, gardiens des secrets technologiques de l'Humanité.",
+    "couleurThematique": "#5c1a1a",
+    "symbole": "⚙",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/c6/MechanicusLogo.jpg/revision/latest/scale-to-width-down/80?cb=20181128190539"
+  },
+  {
+    "id": "soeurs-de-bataille",
+    "nom": "Sœurs de Bataille",
+    "alignement": "Imperium",
+    "description": "Fanatiques religieuses de l'Adepta Sororitas. Leur foi absolue dans l'Empereur génère de véritables miracles.",
+    "couleurThematique": "#4a1a1a",
+    "symbole": "✝",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/d/dc/Adeptus_Sororitas_Icon.jpg/revision/latest/scale-to-width-down/80?cb=20110820063406"
+  },
+  {
+    "id": "inquisition",
+    "nom": "Inquisition",
+    "alignement": "Imperium",
+    "description": "Les agents secrets de l'Imperium traquant l'hérésie, la mutation et l'alien. Leurs pouvoirs sont illimités, leur jugement final.",
+    "couleurThematique": "#2a1a4a",
+    "symbole": "Ψ",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/34/InquisitionIconBW.png/revision/latest/scale-to-width-down/80?cb=20240508133600"
+  }
+]

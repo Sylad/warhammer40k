@@ -1,0 +1,5 @@
+[
+  { "id": "horus-heresy", "name": "Horus Heresy", "description": "Illustrations de la grande hérésie", "count": 312 },
+  { "id": "40k-core-book", "name": "40K Core Book", "description": "Visuels du livre de base", "count": 276 },
+  { "id": "black-library-covers", "name": "Black Library Covers", "description": "Couvertures de romans Black Library", "count": 198 }
+]

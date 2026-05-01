@@ -1,0 +1,29 @@
+name: warhammer40k
+
+services:
+  warhammer-backend:
+    build:
+      context: ./backend
+    ports:
+      - "3001:3001"
+    env_file: ./backend/.env
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      CORS_ORIGIN: "http://nas:4201"
+      IMAGES_DIR: /app/images
+      SHARED_DATA_DIR: /app/shared-data
+    volumes:
+      - "/volume2/photo/Jeux/Warhammer 40K:/app/images:ro"
+      - /volume2/docker/developpeur/data/warhammer:/app/data
+      - /volume2/docker/developpeur/data/shared:/app/shared-data
+    restart: unless-stopped
+
+  warhammer-frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "4201:80"
+    depends_on:
+      - warhammer-backend
+    restart: unless-stopped

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "le-librarium",
+    "name": "Le Librarium",
+    "description": "Lore FR détaillé · factions, personnages, timeline",
+    "language": "FR",
+    "url": "https://www.youtube.com/@LeLibrarium",
+    "avatar": "LL",
+    "priority": true
+  },
+  {
+    "id": "indomitus-40k",
+    "name": "Indomitus 40K",
+    "description": "Récits FR immersifs · ambiance grimdark",
+    "language": "FR",
+    "url": "https://www.youtube.com/@Indomitus40k",
+    "avatar": "I4",
+    "priority": true
+  },
+  {
+    "id": "astartes-official",
+    "name": "Astartes",
+    "description": "Animation culte · Space Marines iconiques",
+    "language": "EN",
+    "url": "https://www.youtube.com/@Astartes40k",
+    "avatar": "A",
+    "priority": true
+  },
+  {
+    "id": "sire-lambert",
+    "name": "Sire Lambert",
+    "description": "FR · lore + hobby accessible",
+    "language": "FR",
+    "url": "https://www.youtube.com/@SireLambert",
+    "avatar": "SL",
+    "priority": false
+  },
+  {
+    "id": "fws",
+    "name": "French Wargame Studio",
+    "description": "FR · jeu, hobby et visuel",
+    "language": "FR",
+    "url": "https://www.youtube.com/@FrenchWargameStudio",
+    "avatar": "FWS",
+    "priority": false
+  },
+  {
+    "id": "vox-obscura",
+    "name": "La Vox Obscura",
+    "description": "FR · narration sombre",
+    "language": "FR",
+    "url": "https://www.youtube.com/@LaVoxObscura",
+    "avatar": "VO",
+    "priority": false
+  },
+  {
+    "id": "luetin09",
+    "name": "Luetin09",
+    "description": "EN · analyses lore long format",
+    "language": "EN",
+    "url": "https://www.youtube.com/@Luetin09",
+    "avatar": "L9",
+    "priority": false
+  },
+  {
+    "id": "majorkill",
+    "name": "Majorkill",
+    "description": "EN · contenu Warhammer accessible",
+    "language": "EN",
+    "url": "https://www.youtube.com/@majorkill",
+    "avatar": "MK",
+    "priority": false
+  }
+]

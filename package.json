@@ -1,0 +1,9 @@
+{
+  "name": "warhammer40k",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm run start:dev",
+    "dev:frontend": "cd frontend && npm start"
+  }
+}
