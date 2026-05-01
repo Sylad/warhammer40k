@@ -2102,5 +2102,291 @@
     "description": "Culte des mondes-déserts et des hors-la-loi. Leurs hybrides chevauchent des bikes et des wheels customisés Mad Max-esque.",
     "loreShort": "Hybrides motards des wastelands.",
     "wikiQuery": "Rusted Claw Genestealer"
+  },
+  {
+    "id": "mymeara",
+    "factionId": "aeldari",
+    "name": "Mymeara",
+    "type": "craftworld",
+    "description": "Vaisseau-monde glacé, fondateur du temple de la Voie de l'Effacement. Mymeara mène une longue guerre froide contre les Imperium pour récupérer la Hache Spectrale d'Irilith.",
+    "loreShort": "Le Givre, gardien de la mémoire phénix.",
+    "loreLong": "Vaisseau-monde de petite taille au climat artificiellement glacé. Mymeara héberge le temple unique d'Irilith, premier des Phoenix Lords aujourd'hui perdu. Ses flottes traquent toute trace de leurs reliques disparues à travers l'Imperium.",
+    "currentLeader": "Farseer Estyr Tael",
+    "currentLeaderRole": "Conseil des Visions",
+    "wikiQuery": "Craftworld Mymeara",
+    "notableUnits": [
+      {
+        "name": "Wraithseer Iyanna",
+        "role": "Liaison spectrale",
+        "description": "Wraithseer hôte du fragment d'âme du Phénix perdu d'Irilith.",
+        "wikiQuery": "Wraithseer Eldar"
+      },
+      {
+        "name": "Vaul's Wrath",
+        "role": "Titans Aeldari",
+        "description": "Cohorte de Revenant Titans héritage de la collaboration avec les Forge Worlds défuntes.",
+        "wikiQuery": "Revenant Titan Eldar"
+      }
+    ]
+  },
+  {
+    "id": "lugganath",
+    "factionId": "aeldari",
+    "name": "Lugganath",
+    "type": "craftworld",
+    "description": "Vaisseau-monde le plus proche de la Toile aux Mondes Crones. Lugganath croit que l'avenir des Aeldari réside dans la Toile, non plus dans la matière. Forte présence Harlequin.",
+    "loreShort": "Le Mystique, prophète de la Toile.",
+    "loreLong": "Le plus mystique des vaisseau-mondes. Lugganath entretient des liens étroits avec les troupes Harlequin et les Mondes Crones. Sa philosophie : abandonner la galaxie matérielle et fonder un nouveau peuple dans la Toile pour échapper à Slaanesh.",
+    "currentLeader": "Farseer Aerthain Lhir",
+    "currentLeaderRole": "Conseil de la Toile",
+    "wikiQuery": "Craftworld Lugganath",
+    "notableUnits": [
+      {
+        "name": "Harlequins Léthérs",
+        "role": "Cabaret de la Vraie Mort",
+        "description": "Troupe Harlequin attachée à Lugganath, dansant la Chute incessamment.",
+        "wikiQuery": "Harlequins Eldar"
+      },
+      {
+        "name": "Voidweavers",
+        "role": "Skimmer-tisserands",
+        "description": "Pilotes virtuoses des Voidweavers, exploitant les chemins de la Toile en combat.",
+        "wikiQuery": "Voidweaver Harlequin"
+      }
+    ]
+  },
+  {
+    "id": "yme-loc",
+    "factionId": "aeldari",
+    "name": "Yme-Loc",
+    "type": "craftworld",
+    "description": "Vaisseau-monde industrieux, célèbre pour son artisanat de Wraithlords et de chars Falcon. Yme-Loc privilégie la guerre mécanisée et la maîtrise du métal psycho-fluide.",
+    "loreShort": "L'Atelier, forge des Wraith.",
+    "loreLong": "Vaisseau-monde d'artisans. Ses Bonesingers (chante-os) sont les plus virtuoses des Aeldari. Yme-Loc est célèbre pour produire les meilleurs Wraithlords, Wraithguard et chars Falcon de la galaxie. Spécialiste de la Voie de l'Artisan.",
+    "currentLeader": "Bonesinger Marach Eldenfa",
+    "currentLeaderRole": "Maître-Chante des Os",
+    "wikiQuery": "Craftworld Yme-Loc",
+    "notableUnits": [
+      {
+        "name": "Wraithlords d'Yme-Loc",
+        "role": "Géants de psycho-os",
+        "description": "Wraithlords reconnaissables à leurs gravures dorées, parmi les plus puissants jamais forgés.",
+        "wikiQuery": "Wraithlord Eldar"
+      },
+      {
+        "name": "Falcon Grand Maître",
+        "role": "Char-flottant",
+        "description": "Char Falcon évolué, signature d'Yme-Loc, équipé d'armes psycho-modulables.",
+        "wikiQuery": "Falcon Grav Tank Eldar"
+      }
+    ]
+  },
+  {
+    "id": "hive-fleet-jormungandr",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Jörmungandr",
+    "type": "hive-fleet",
+    "description": "Flotte-Ruche spécialisée dans la guerre souterraine. Jörmungandr préfère engloutir les mondes par-dessous, tunneliisant à travers la croûte plutôt que de débarquer en force.",
+    "loreShort": "La Ruche-Ver, dévoreuse de tréfonds.",
+    "loreLong": "Apparue lors de l'invasion de Stranivar, Jörmungandr est la flotte-ruche stratège du sous-sol. Ses Trygons et Mawlocs émergent par milliers depuis les nappes profondes. Elle privilégie l'effondrement urbain à l'assaut frontal. Particulièrement redoutée par les Garde Impériale en environnement ruche.",
+    "currentLeader": "Esprit-Ruche Subterrain",
+    "currentLeaderRole": "Conscience tactique de la flotte",
+    "wikiQuery": "Hive Fleet Jormungandr",
+    "notableUnits": [
+      {
+        "name": "Trygon Prime",
+        "role": "Tunnelier-foreur",
+        "description": "Géant souterrain qui ouvre des tunnels-ruche vers la surface, suivis de millions de fantassins.",
+        "wikiQuery": "Trygon Tyranid"
+      },
+      {
+        "name": "Mawloc",
+        "role": "Émergence éclair",
+        "description": "Tunnelier qui jaillit du sol au cœur des formations ennemies, rendant tout terrain impossible à défendre.",
+        "wikiQuery": "Mawloc Tyranid"
+      }
+    ]
+  },
+  {
+    "id": "hive-fleet-hydra",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Hydra",
+    "type": "hive-fleet",
+    "description": "Flotte-Ruche de l'écrasement par le nombre. Hydra ne fait pas de finesse — ses milliards de Termagants et Hormagaunts submergent toute défense par saturation absolue.",
+    "loreShort": "La Marée, victoire par submersion.",
+    "loreLong": "Hydra a englouti la planète Tarsis Ultra et plusieurs systèmes du Segmentum Tempestus avant d'être ralentie. Sa philosophie : qualité par la quantité. Une cellule de Hydra peut déployer cent fois plus de bioformes qu'une flotte rivale. Aucune cité-ruche ne survit à un siège complet de Hydra.",
+    "currentLeader": "Esprit-Ruche Saturation",
+    "currentLeaderRole": "Conscience démographique",
+    "wikiQuery": "Hive Fleet Hydra Tyranid",
+    "notableUnits": [
+      {
+        "name": "Hordes de Termagants",
+        "role": "Bioforme de saturation",
+        "description": "Vagues de millions de Termagants armés de bio-flecheurs, conçues pour épuiser les munitions ennemies avant le second assaut.",
+        "wikiQuery": "Termagant Tyranid"
+      },
+      {
+        "name": "Hormagaunt Brood",
+        "role": "Mêlée bondissante",
+        "description": "Bioformes bondissantes ultra-rapides qui ferment la distance pendant que les Termagants saturent les défenses.",
+        "wikiQuery": "Hormagaunt Tyranid"
+      }
+    ]
+  },
+  {
+    "id": "hive-fleet-gorgon",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Gorgon",
+    "type": "hive-fleet",
+    "description": "Flotte-Ruche des Mondes-jardins. Gorgon adapte ses bioformes en quelques jours pour neutraliser toute défense xénos ou impériale. Spécialiste de l'éradication des Aeldari.",
+    "loreShort": "L'Adapteur, fléau des Aeldari.",
+    "loreLong": "Repérée pour la première fois sur les Mondes-Forêts d'Aeldari ravagés. Gorgon a la capacité d'évoluer ses bioformes plus vite que toute autre flotte connue. Ses créatures portent des armures bio-toxiques qui bloquent les pouvoirs psychiques — fait unique chez les tyranides. Cibles préférées : Aeldari et Tau.",
+    "currentLeader": "Esprit-Ruche Évolutif",
+    "currentLeaderRole": "Conscience adaptative",
+    "wikiQuery": "Hive Fleet Gorgon Tyranid",
+    "notableUnits": [
+      {
+        "name": "Venomthropes",
+        "role": "Brume biotoxique",
+        "description": "Bioformes qui exhalent des spores toxiques, signature de Gorgon en environnement boisé.",
+        "wikiQuery": "Venomthrope Tyranid"
+      },
+      {
+        "name": "Toxicrene",
+        "role": "Tentacules envenimées",
+        "description": "Bioforme à tentacules venimeuses, particulièrement adaptée à l'éradication des Aeldari.",
+        "wikiQuery": "Toxicrene Tyranid"
+      }
+    ]
+  },
+  {
+    "id": "hive-fleet-kronos",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Kronos",
+    "type": "hive-fleet",
+    "description": "Flotte-Ruche de l'artillerie biologique. Kronos privilégie le bombardement à distance par bioformes Carnifex et créatures-canons synaptiques.",
+    "loreShort": "Le Marteleur, artillerie organique.",
+    "loreLong": "Kronos est la flotte-ruche qui a affronté les Necrons sur Damocles. Elle développe des bioformes massives munies d'organes-canons. Sa stratégie : briser les défenses par bombardement biologique de longue portée avant l'assaut de mêlée. La seule flotte connue à avoir contraint un Necron à reculer.",
+    "currentLeader": "Esprit-Ruche Synaptique-Lourd",
+    "currentLeaderRole": "Conscience de bombardement",
+    "wikiQuery": "Hive Fleet Kronos Tyranid",
+    "notableUnits": [
+      {
+        "name": "Exocrine",
+        "role": "Canon biologique",
+        "description": "Bioforme massive armée d'un bio-canon dévastateur. Signature stratégique de Kronos.",
+        "wikiQuery": "Exocrine Tyranid"
+      },
+      {
+        "name": "Carnifex Cannonbeast",
+        "role": "Bête-canon",
+        "description": "Variante Kronos du Carnifex équipée d'organes-canons saturés.",
+        "wikiQuery": "Carnifex Tyranid"
+      }
+    ]
+  },
+  {
+    "id": "nihilakh-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Nihilakh",
+    "type": "dynasty",
+    "description": "Dynastie Necron des collectionneurs et des aristocrates. Nihilakh est la dynastie de Trazyn l'Infini, gardien des reliques galactiques et adversaire éternel d'Orikan.",
+    "loreShort": "La Couronne d'Or, dynastie de Trazyn.",
+    "loreLong": "Nihilakh est la dynastie la plus paranoïaque et collectionneuse. Trazyn l'Infini, son archiviste suprême, possède des trillions d'artefacts stasis-cellés, dont des Aeldari, des Custodes et un Saint vivant. Son palais-prison de Solemnace est l'une des plus grandes archives de la galaxie. Rivalité éternelle avec Orikan le Devin.",
+    "currentLeader": "Trazyn l'Infini",
+    "currentLeaderRole": "Archiviste-Suzerain de Solemnace",
+    "wikiQuery": "Nihilakh Dynasty Necron",
+    "notableUnits": [
+      {
+        "name": "Trazyn l'Infini",
+        "role": "Archiviste suprême",
+        "description": "Le plus célèbre Necron Lord. Collectionneur ultime, capable de transférer sa conscience entre des dizaines de corps-pylônes.",
+        "wikiQuery": "Trazyn the Infinite"
+      },
+      {
+        "name": "Triarch Praetorians",
+        "role": "Garde rapprochée",
+        "description": "Garde élite à hampes-de-foudre, ultime ligne de défense de Solemnace.",
+        "wikiQuery": "Triarch Praetorian Necron"
+      }
+    ]
+  },
+  {
+    "id": "thokt-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Thokt",
+    "type": "dynasty",
+    "description": "Dynastie des physiciens fous. Thokt expérimente l'antimatière, la causalité et les armes singularité — au risque de l'annihilation absolue. Souvent jugée hérétique par les autres dynasties.",
+    "loreShort": "Les Lentilles, savants fous Necron.",
+    "loreLong": "Thokt est la dynastie des esprits-savants ayant survécu au sommeil de soixante millions d'années. Leur obsession : comprendre la singularité au cœur de chaque trou noir. Ils manipulent l'antimatière comme matière courante. Plusieurs systèmes Imperium ont disparu de la cartographie astropathique après expérimentation Thokt.",
+    "currentLeader": "Phaeron Ipsis Vargard",
+    "currentLeaderRole": "Lentille-Suzerain",
+    "wikiQuery": "Thokt Dynasty Necron",
+    "notableUnits": [
+      {
+        "name": "Cryptek Stéréologue",
+        "role": "Physicien causal",
+        "description": "Maître de la singularité, capable de créer des armes-vortex en plein combat.",
+        "wikiQuery": "Necron Cryptek"
+      },
+      {
+        "name": "Doomstalker",
+        "role": "Plateforme antimatière",
+        "description": "Plateforme tripode armée d'un canon-singularité expérimental.",
+        "wikiQuery": "Doomstalker Necron"
+      }
+    ]
+  },
+  {
+    "id": "charnovokh-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Charnovokh",
+    "type": "dynasty",
+    "description": "Dynastie de chasseurs nocturnes. Charnovokh frappe par embuscade depuis l'ombre, drainant lentement les ressources des mondes ennemis avant de débarquer en force.",
+    "loreShort": "L'Ombre Bleue, prédateurs furtifs.",
+    "loreLong": "Charnovokh éveille progressivement ses tombeaux par cellules dormantes. Ses Cryptek emploient des champs perturbateurs qui troublent la psyché impériale. Spécialiste des chasses-démon prolongées sur des dizaines d'années. Couleurs caractéristiques : noir profond et bleu nuit.",
+    "currentLeader": "Phaeron Vekrah",
+    "currentLeaderRole": "Suzerain de l'Ombre",
+    "wikiQuery": "Charnovokh Dynasty Necron",
+    "notableUnits": [
+      {
+        "name": "Flayed Ones",
+        "role": "Chasseurs psychotiques",
+        "description": "Necrons frappés du Mal de la Chair, semant la terreur dans les sous-sols urbains.",
+        "wikiQuery": "Flayed One Necron"
+      },
+      {
+        "name": "Canoptek Wraith",
+        "role": "Phantasme méta-spatial",
+        "description": "Drone-prédateur capable de phaser à travers la matière pour exécuter à courte portée.",
+        "wikiQuery": "Canoptek Wraith Necron"
+      }
+    ]
+  },
+  {
+    "id": "maynarkh-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Maynarkh",
+    "type": "dynasty",
+    "description": "Dynastie de l'annihilation totale. Maynarkh ne négocie pas — leurs Phaerons sont des Destroyer Lords obsessionnels par le génocide pur. Considérée corrompue même par les autres dynasties.",
+    "loreShort": "Les Massacreurs, génocidaires froids.",
+    "loreLong": "Maynarkh fut éveillée prématurément lors de la Trahison de l'Étoile-Croisée. Sa noblesse, contaminée par le Destroyer Cult, voue un culte au néant. Jamais ils ne capturent — ils consomment. Plusieurs systèmes des Indomitus Crusade ont disparu sans trace après contact. Aucune négociation n'est possible.",
+    "currentLeader": "Phaeron Sennapem",
+    "currentLeaderRole": "Suzerain Massacreur",
+    "wikiQuery": "Maynarkh Dynasty Necron",
+    "notableUnits": [
+      {
+        "name": "Destroyer Lords",
+        "role": "Aristocrates corrompus",
+        "description": "Anciens nobles consumés par le Destroyer Cult, avides du néant pur.",
+        "wikiQuery": "Destroyer Lord Necron"
+      },
+      {
+        "name": "C'tan Shard",
+        "role": "Fragment de Dieu Stellaire",
+        "description": "Fragment d'un C'tan capturé, asservi par les Crypteks Maynarkh comme arme de masse.",
+        "wikiQuery": "Ctan Shard Necron"
+      }
+    ]
   }
 ]

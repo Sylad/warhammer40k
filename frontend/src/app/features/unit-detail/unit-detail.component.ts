@@ -7,15 +7,13 @@ import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { Faction, Unit, UnitType } from '../../core/models/models';
 
-type TabKey = 'apercu' | 'equipement' | 'lore' | 'regles' | 'variantes' | 'galerie';
+type TabKey = 'apercu' | 'equipement' | 'lore' | 'variantes';
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: 'apercu',     label: 'Aperçu' },
   { key: 'equipement', label: 'Équipement' },
   { key: 'lore',       label: 'Histoire & Lore' },
-  { key: 'regles',     label: 'Règles (optionnel)' },
   { key: 'variantes',  label: 'Variantes' },
-  { key: 'galerie',    label: 'Galerie' },
 ];
 
 const STAT_ROWS: { key: keyof NonNullable<Unit['stats']>; label: string }[] = [
@@ -209,24 +207,6 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               }
             }
 
-            <!-- RÈGLES (placeholder) -->
-            @if (activeTab() === 'regles') {
-              <article class="panel">
-                <h2 class="panel-title">Règles</h2>
-                <p class="panel-text muted">Les règles détaillées de cette unité seront ajoutées dans une prochaine mise à jour. Consultez le codex de référence pour le moment.</p>
-              </article>
-            }
-
-            <!-- GALERIE (placeholder) -->
-            @if (activeTab() === 'galerie') {
-              <article class="panel">
-                <h2 class="panel-title">Galerie</h2>
-                <p class="panel-text muted">La galerie d'œuvres dédiée à cette unité sera enrichie prochainement. En attendant, consultez la galerie générale de la faction.</p>
-                <a class="cta cta-outline" routerLink="/gallery">
-                  <span class="cta-ico">▦</span>OUVRIR LA GALERIE
-                </a>
-              </article>
-            }
           </div>
 
           <aside class="sidebar">
@@ -1008,10 +988,21 @@ export class UnitDetailComponent {
       this.heroImage.set(null);
       this.loreImage.set(null);
 
-      const heroQ = u.wikiQuery ?? u.nom;
-      this.service.getWikiImage(heroQ).subscribe({
-        next: r => { if (r.imageUrl) this.heroImage.set(r.imageUrl); },
-        error: () => {},
+      const datasheetUrl = `/api/images/datasheets/${u.id}`;
+      fetch(datasheetUrl, { method: 'HEAD' }).then(r => {
+        if (r.ok) {
+          this.heroImage.set(datasheetUrl);
+        } else {
+          this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
+            next: res => { if (res.imageUrl) this.heroImage.set(res.imageUrl); },
+            error: () => {},
+          });
+        }
+      }).catch(() => {
+        this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
+          next: res => { if (res.imageUrl) this.heroImage.set(res.imageUrl); },
+          error: () => {},
+        });
       });
 
       const loreQ = `${f.nom} battle warhammer`;
@@ -1025,14 +1016,21 @@ export class UnitDetailComponent {
       const list = this.relatedUnits();
       list.forEach(r => {
         if (this.relatedImages().has(r.id)) return;
-        this.service.getWikiImage(r.wikiQuery ?? r.nom).subscribe({
-          next: res => {
-            if (res.imageUrl) {
-              this.relatedImages.update(m => new Map(m).set(r.id, res.imageUrl!));
-            }
-          },
-          error: () => {},
-        });
+        const datasheetUrl = `/api/images/datasheets/${r.id}`;
+        fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
+          if (head.ok) {
+            this.relatedImages.update(m => new Map(m).set(r.id, datasheetUrl));
+          } else {
+            this.service.getWikiImage(r.wikiQuery ?? r.nom).subscribe({
+              next: res => {
+                if (res.imageUrl) {
+                  this.relatedImages.update(m => new Map(m).set(r.id, res.imageUrl!));
+                }
+              },
+              error: () => {},
+            });
+          }
+        }).catch(() => {});
       });
     });
 

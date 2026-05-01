@@ -21,18 +21,6 @@ const CATEGORIES: CategoryDef[] = [
   { key: 'Mes images', label: 'Mes images', query: 'warhammer 40k personal collection' },
 ];
 
-const PALETTE: { hex: string; label: string }[] = [
-  { hex: '#c9a24a', label: 'Or' },
-  { hex: '#7b1113', label: 'Rouge sang' },
-  { hex: '#1f3d75', label: 'Bleu profond' },
-  { hex: '#2f5f8f', label: 'Bleu acier' },
-  { hex: '#0f6b43', label: 'Vert épidémie' },
-  { hex: '#5a2d8f', label: 'Violet psyker' },
-  { hex: '#3a2410', label: 'Brun cuir' },
-  { hex: '#0c0c0c', label: 'Noir abysse' },
-  { hex: '#e8deca', label: 'Os' },
-];
-
 const PAGE_SIZE = 8;
 type SortBy = 'recent' | 'popular' | 'alpha';
 
@@ -96,7 +84,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <section class="section">
             <h2 class="section-title">Parcourir par catégorie</h2>
             <div class="category-grid">
-              @for (cat of categories; track cat.key) {
+              @for (cat of availableCategories(); track cat.key) {
                 <button class="category-card"
                   type="button"
                   [class.active]="filterCategory() === cat.key"
@@ -181,7 +169,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <label>Catégorie</label>
               <select [ngModel]="filterCategory() ?? ''" (ngModelChange)="filterCategory.set($event || null)">
                 <option value="">Toutes</option>
-                @for (c of categories; track c.key) {
+                @for (c of availableCategories(); track c.key) {
                   <option [value]="c.key">{{ c.label }}</option>
                 }
               </select>
@@ -193,20 +181,6 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <option value="popular">Populaires</option>
                 <option value="alpha">A — Z</option>
               </select>
-            </div>
-          </section>
-
-          <section class="side-panel">
-            <h3>Couleurs dominantes</h3>
-            <div class="color-palette">
-              @for (c of palette; track c.hex) {
-                <button class="color-dot"
-                  type="button"
-                  [style.background]="c.hex"
-                  [class.active]="filterColor() === c.hex"
-                  [title]="c.label"
-                  (click)="toggleColorFilter(c.hex)"></button>
-              }
             </div>
           </section>
 
@@ -866,21 +840,6 @@ type SortBy = 'recent' | 'popular' | 'alpha';
     }
     .filter-row select:focus { border-color: var(--border-strong); }
 
-    .color-palette {
-      display: grid;
-      grid-template-columns: repeat(9, minmax(0, 1fr));
-      gap: 8px;
-    }
-    .color-dot {
-      aspect-ratio: 1;
-      border: 1px solid rgba(201, 162, 74, 0.32);
-      cursor: pointer;
-      padding: 0;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-    .color-dot:hover { transform: scale(1.12); border-color: var(--gold); }
-    .color-dot.active { border-color: var(--gold-bright); box-shadow: 0 0 0 1px var(--gold-bright), 0 0 12px rgba(201, 162, 74, 0.4); }
-
     .artist-row, .col-row {
       display: grid;
       grid-template-columns: 32px 1fr;
@@ -1399,7 +1358,6 @@ export class GalleryComponent {
   private readonly service = inject(WarhammerService);
 
   readonly categories = CATEGORIES;
-  readonly palette = PALETTE;
 
   private readonly catalogArtworks = toSignal(this.service.artworks$, { initialValue: [] as Artwork[] });
   private readonly localImages = toSignal(this.service.images$, { initialValue: [] as string[] });
@@ -1443,6 +1401,35 @@ export class GalleryComponent {
     return Array.from(set).sort();
   });
 
+  readonly availableCategories = computed<{ key: string; label: string }[]>(() => {
+    const counts = new Map<string, number>();
+    for (const a of this.artworks()) {
+      const tags = [a.category, ...(a.extraCategories ?? [])].filter(Boolean) as string[];
+      for (const t of tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+    }
+    const out: { key: string; label: string }[] = [];
+    const seen = new Set<string>();
+    for (const c of CATEGORIES) {
+      if ((counts.get(c.key) ?? 0) > 0) {
+        out.push({ key: c.key, label: c.label });
+        seen.add(c.key);
+      }
+    }
+    for (const fname of this.factionCategories()) {
+      if (!seen.has(fname) && (counts.get(fname) ?? 0) > 0) {
+        out.push({ key: fname, label: fname });
+        seen.add(fname);
+      }
+    }
+    for (const c of this.customCategories()) {
+      if (!seen.has(c) && (counts.get(c) ?? 0) > 0) {
+        out.push({ key: c, label: c });
+        seen.add(c);
+      }
+    }
+    return out;
+  });
+
   readonly factionCategories = computed<string[]>(() =>
     this.factions().map(f => f.nom).sort((a, b) => a.localeCompare(b, 'fr')),
   );
@@ -1481,11 +1468,10 @@ export class GalleryComponent {
   readonly importMessage = signal<string>('');
 
   readonly searchQuery = signal('');
-  readonly filterCategory = signal<ArtworkCategory | null>(null);
+  readonly filterCategory = signal<string | null>(null);
   readonly filterFaction = signal<string>('');
   readonly filterArtist = signal<string>('');
   readonly filterCollection = signal<string>('');
-  readonly filterColor = signal<string>('');
   readonly sortBy = signal<SortBy>('recent');
   readonly bookmarks = signal<Set<string>>(new Set());
   readonly pageCount = signal(1);
@@ -1510,7 +1496,7 @@ export class GalleryComponent {
   );
 
   readonly hasActiveFilters = computed(() =>
-    !!(this.filterCategory() || this.filterFaction() || this.filterArtist() || this.filterCollection() || this.filterColor() || this.searchQuery().trim()),
+    !!(this.filterCategory() || this.filterFaction() || this.filterArtist() || this.filterCollection() || this.searchQuery().trim()),
   );
 
   readonly filteredArtworks = computed(() => {
@@ -1519,7 +1505,6 @@ export class GalleryComponent {
     const fac = this.filterFaction();
     const artist = this.filterArtist();
     const coll = this.filterCollection();
-    const color = this.filterColor();
 
     let list = this.artworks().slice();
 
@@ -1536,7 +1521,6 @@ export class GalleryComponent {
     if (fac) list = list.filter(a => a.faction === fac);
     if (artist) list = list.filter(a => a.artist === artist);
     if (coll) list = list.filter(a => a.collectionId === coll);
-    if (color) list = list.filter(a => Array.isArray(a.colors) && a.colors.includes(color));
 
     const sort = this.sortBy();
     if (sort === 'popular') list.sort((a, b) => (b.likes ?? 0) - (a.likes ?? 0));
@@ -1584,9 +1568,17 @@ export class GalleryComponent {
     });
   }
 
-  categoryBg(key: ArtworkCategory): string {
-    const url = this.imgCache()[`cat:${key}`];
-    return url ? `url('${url}')` : 'linear-gradient(135deg, #1a0a08 0%, #050403 100%)';
+  categoryBg(key: string): string {
+    const cached = this.imgCache()[`cat:${key}`];
+    if (cached) return `url('${cached}')`;
+    const arts = this.artworks().filter(a => a.category === key || (a.extraCategories ?? []).includes(key));
+    if (arts.length > 0) {
+      const first = arts[0];
+      if (first.isLocal) return `url('${this.service.imageUrl(first.image)}')`;
+      const url = this.imgCache()[`art:${first.id}`];
+      if (url) return `url('${url}')`;
+    }
+    return 'linear-gradient(135deg, #1a0a08 0%, #050403 100%)';
   }
 
   artBg(art: Artwork): string {
@@ -1607,11 +1599,11 @@ export class GalleryComponent {
     return url ? `url('${url}')` : '';
   }
 
-  categoryCount(key: ArtworkCategory): number {
+  categoryCount(key: string): number {
     return this.artworks().filter(a => a.category === key || (a.extraCategories ?? []).includes(key)).length;
   }
 
-  toggleCategoryFilter(key: ArtworkCategory): void {
+  toggleCategoryFilter(key: string): void {
     this.filterCategory.set(this.filterCategory() === key ? null : key);
     this.pageCount.set(1);
   }
@@ -1626,18 +1618,12 @@ export class GalleryComponent {
     this.pageCount.set(1);
   }
 
-  toggleColorFilter(hex: string): void {
-    this.filterColor.set(this.filterColor() === hex ? '' : hex);
-    this.pageCount.set(1);
-  }
-
   resetFilters(): void {
     this.searchQuery.set('');
     this.filterCategory.set(null);
     this.filterFaction.set('');
     this.filterArtist.set('');
     this.filterCollection.set('');
-    this.filterColor.set('');
     this.pageCount.set(1);
   }
 

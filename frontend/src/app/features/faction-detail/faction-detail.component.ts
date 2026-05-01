@@ -1076,15 +1076,21 @@ export class FactionDetailComponent {
       if (!list.length) return;
       list.forEach(u => {
         if (this.unitImages().has(u.id)) return;
-        const q = u.wikiQuery ?? u.nom;
-        this.service.getWikiImage(q).subscribe({
-          next: r => {
-            if (r.imageUrl) {
-              this.unitImages.update(m => new Map(m).set(u.id, r.imageUrl!));
-            }
-          },
-          error: () => {},
-        });
+        const datasheetUrl = `/api/images/datasheets/${u.id}`;
+        fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
+          if (head.ok) {
+            this.unitImages.update(m => new Map(m).set(u.id, datasheetUrl));
+          } else {
+            this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
+              next: r => {
+                if (r.imageUrl) {
+                  this.unitImages.update(m => new Map(m).set(u.id, r.imageUrl!));
+                }
+              },
+              error: () => {},
+            });
+          }
+        }).catch(() => {});
       });
     });
 

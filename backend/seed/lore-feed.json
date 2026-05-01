@@ -73,5 +73,215 @@
     "type": "evenement",
     "title": "Acte de foi",
     "body": "Une Sœur de Bataille a accompli un miracle sur le monde-saint d'Ophelia VII. Le Vénérium ouvre une enquête."
+  },
+  {
+    "id": "lf-011",
+    "icon": "⚜",
+    "type": "evenement",
+    "title": "Croisade Indomitus",
+    "body": "Roboute Guilliman lance la Croisade Indomitus depuis Macragge. Cinq cents flottes traversent la Cicatrix Maledictum pour sauver l'Imperium déchiré."
+  },
+  {
+    "id": "lf-012",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Cicatrix Maledictum",
+    "body": "La Grande Cicatrice galactique scinde la galaxie en deux. Imperium Sanctus à l'est, Imperium Nihilus à l'ouest — privé de la lumière de l'Astronomican."
+  },
+  {
+    "id": "lf-013",
+    "icon": "⚔",
+    "type": "guerre",
+    "title": "Chute de Cadia",
+    "body": "La forteresse-monde Cadia tombe sous l'assaut d'Abaddon le Despoiler. Treize millénaires de défense balayés en un jour. La Treizième Croisade Noire change la galaxie."
+  },
+  {
+    "id": "lf-014",
+    "icon": "✦",
+    "type": "evenement",
+    "title": "Réveil de Magnus",
+    "body": "Le Daemon Primarch Magnus le Rouge déchire le voile de Fenris. Les Space Wolves, ses ennemis éternels, contre-attaquent. La Guerre des Loups commence."
+  },
+  {
+    "id": "lf-015",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Flotte-Ruche Léviathan",
+    "body": "Le Leviathan, plus grande flotte tyranide jamais détectée, s'enfonce vers le cœur de l'Imperium. Les Blood Angels et leurs Successeurs convergent sur Baal."
+  },
+  {
+    "id": "lf-016",
+    "icon": "◈",
+    "type": "prophetie",
+    "title": "Vision d'Eldrad Ulthran",
+    "body": "Le Farseer suprême d'Ulthwé révèle qu'une étoile rouge sang annoncera la résurrection d'un fils-fantôme. Les Aeldari préparent un piège qui n'aura jamais lieu."
+  },
+  {
+    "id": "lf-017",
+    "icon": "⊗",
+    "type": "evenement",
+    "title": "Réveil de Trazyn",
+    "body": "Trazyn l'Infini émerge de torpeur dans son palais-prison de Solemnace. Trois millions de prisonniers stasis-cellés, dont un Custodes vivant. Sa rivalité avec Orikan reprend."
+  },
+  {
+    "id": "lf-018",
+    "icon": "Ψ",
+    "type": "decouverte",
+    "title": "Cawl révèle les Primaris",
+    "body": "Belisarius Cawl ouvre ses laboratoires hérétiques. Dix mille ans de génie défendu d'un édit du Saint Empereur. Les Primaris Marines sont nés."
+  },
+  {
+    "id": "lf-019",
+    "icon": "★",
+    "type": "guerre",
+    "title": "Bataille de Macragge",
+    "body": "La Flotte Behemoth atteint Ultramar. Marneus Calgar défend Macragge des hordes tyranides — premier choc galactique avec l'Esprit-Ruche."
+  },
+  {
+    "id": "lf-020",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Waaagh! Ghazghkull",
+    "body": "Ghazghkull Mag Uruk Thraka rallie un million d'Orks autour d'Octarius. Sa croisade verte attire l'attention de l'Esprit-Ruche tyranide. Deux apocalypses convergent."
+  },
+  {
+    "id": "lf-021",
+    "icon": "⚔",
+    "type": "guerre",
+    "title": "Plague Wars d'Ultramar",
+    "body": "Mortarion, Daemon Primarch des Death Guard, déchaîne la Peste Solaire sur Ultramar. Guilliman, ressuscité, livre bataille contre son frère corrompu."
+  },
+  {
+    "id": "lf-022",
+    "icon": "✝",
+    "type": "evenement",
+    "title": "Sainte Célestine ressuscite",
+    "body": "La Vivante Sainte Célestine est tuée à Cadia. Trois jours plus tard, l'Empereur la rappelle à la vie. Les Sœurs de Bataille marchent à sa suite."
+  },
+  {
+    "id": "lf-023",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Eveil de la Bête",
+    "body": "Le Roi-Ork de Ullanor rallie une armada planétoïde. Imperial Fists annihilés. L'Imperium chancelle au M32 — un événement effacé des chroniques officielles."
+  },
+  {
+    "id": "lf-024",
+    "icon": "◈",
+    "type": "prophetie",
+    "title": "Le Roi des Cendres",
+    "body": "Les Mécanicus de Ryza captent un signal psychique martien. La voix de l'Empereur sur le Trône d'Or s'affaiblit. Combien de temps encore tiendra-t-Il ?"
+  },
+  {
+    "id": "lf-025",
+    "icon": "Ψ",
+    "type": "decouverte",
+    "title": "Tombe Necron de Cadia",
+    "body": "Sous les ruines de Cadia, des sondages mécanicus exposent une crypte Necron pré-Imperium. Trazyn et Orikan envoient leurs agents. Première lutte d'archives."
+  },
+  {
+    "id": "lf-026",
+    "icon": "⊗",
+    "type": "evenement",
+    "title": "Retour du Lion",
+    "body": "Lion El'Jonson, Primarque des Dark Angels, sort de stase millénaire. Sa fureur d'Imperium déchu remplit les Rocheflèches de la Première Légion."
+  },
+  {
+    "id": "lf-027",
+    "icon": "⚔",
+    "type": "guerre",
+    "title": "Croisade de Sabbat",
+    "body": "Warmaster Macaroth poursuit la croisade entamée par Slaydo. Les Fantômes de Tanith de Gaunt s'engouffrent dans la guerre la plus brutale du Segmentum Pacificus."
+  },
+  {
+    "id": "lf-028",
+    "icon": "✹",
+    "type": "menace",
+    "title": "Schisme T'au",
+    "body": "Le Commandeur Farsight rompt avec l'Empire T'au après des découvertes interdites. Ses Enclaves de Mont'yr forment un schisme militaire que l'Éthérée ne peut tolérer."
+  },
+  {
+    "id": "lf-029",
+    "icon": "★",
+    "type": "guerre",
+    "title": "Troisième Guerre d'Armageddon",
+    "body": "Le Commissaire Yarrick et le Maréchal Helbrecht défendent les cités-ruches contre l'invasion de Ghazghkull. Helsreach brûle. La Saint-Marie d'Armageddon résiste."
+  },
+  {
+    "id": "lf-030",
+    "icon": "✝",
+    "type": "evenement",
+    "title": "Reliques de Sanguinius",
+    "body": "Le sang séché du Primarque Sanguinius est récupéré dans les ruines de Terra. Le Chapelain Lemartes reçoit la mission sacrée de le ramener à Baal. Les Black Rage frémissent."
+  },
+  {
+    "id": "lf-031",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Ascension d'Abaddon",
+    "body": "Abaddon le Despoiler récupère la Cape de Slaughter et brandit Drach'nyen. Les Légions Noires se rallient sous sa bannière. La Treizième Croisade Noire commence."
+  },
+  {
+    "id": "lf-032",
+    "icon": "◈",
+    "type": "prophetie",
+    "title": "Le Dieu-Empereur dort",
+    "body": "Les Custodes rapportent que le Maître de l'Humanité s'éveille — ou meurt — selon les jours. Aucun mortel n'a vu Son visage depuis dix mille ans. Sauf un."
+  },
+  {
+    "id": "lf-033",
+    "icon": "Ψ",
+    "type": "decouverte",
+    "title": "Forge perdue de Mars",
+    "body": "Cawl localise une forge martienne pré-Hérésie scellée depuis l'Hérésie de Kelbor-Hal. Les schématiques de Standard Template Constructs y dorment. L'Inquisition exige le silence."
+  },
+  {
+    "id": "lf-034",
+    "icon": "⊗",
+    "type": "evenement",
+    "title": "Triumvirat de Macragge",
+    "body": "Guilliman, Yvraine et Cawl entrent dans le Sanctuaire de Macragge. La Lance d'Ynnead transperce le Tyranide. Ynnari, Imperium et Mechanicus alliés une seule heure."
+  },
+  {
+    "id": "lf-035",
+    "icon": "✦",
+    "type": "evenement",
+    "title": "Renaissance de Vulkan",
+    "body": "Sur Nocturne, la Salamandre relit les artefacts d'Vulkan. Le Primarque Salamandre n'est pas mort. Sa quête des Neuf Reliques continue dans l'ombre."
+  },
+  {
+    "id": "lf-036",
+    "icon": "⚔",
+    "type": "guerre",
+    "title": "Siège du Fenris",
+    "body": "Magnus le Rouge revient se venger des Space Wolves. Les Loups d'Hiver, les Loups Cendrés, les Loups d'Acier convergent. Le ciel de Fenris brûle de feu warp."
+  },
+  {
+    "id": "lf-037",
+    "icon": "☠",
+    "type": "menace",
+    "title": "Crise du Trône d'Or",
+    "body": "Les Adeptus Custodes signalent une dégradation accélérée du Trône d'Or. L'Empereur consume des milliers d'âmes psyches chaque jour. Le Mechanicus est sourd à la requête."
+  },
+  {
+    "id": "lf-038",
+    "icon": "⊗",
+    "type": "evenement",
+    "title": "Réveil de Maugan Ra",
+    "body": "Le Phénix Eldar Maugan Ra émerge de son temple-monde. Sa fauche-canon hurle. Iyanden marche vers la guerre."
+  },
+  {
+    "id": "lf-039",
+    "icon": "Ψ",
+    "type": "decouverte",
+    "title": "Crypte d'Anrakyr",
+    "body": "Anrakyr le Voyageur exhume le berceau d'une dynastie Necron oubliée sous Cadia. Trois cent millions d'âmes-piscine attendent l'éveil. Sera-ce à temps ?"
+  },
+  {
+    "id": "lf-040",
+    "icon": "◈",
+    "type": "prophetie",
+    "title": "Le Pâle dans l'Œil",
+    "body": "Un Drukhari Aeldari de Commorragh prophétise que la Fin viendra par la Soif d'âmes. Slaanesh sourit dans le Warp. Trois Aeldari murmurent Ynnead."
   }
 ]

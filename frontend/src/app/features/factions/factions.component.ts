@@ -87,12 +87,6 @@ const RESOURCES = [
           </article>
         }
 
-        <article class="card card-extra" (click)="resetFilters()">
-          <div class="extra-icon">⚜</div>
-          <h2>+6 autres<br/>factions</h2>
-          <p>Drukhari, Leagues of Votann, Genestealer Cults, Adepta Sororitas, Grey Knights, et autres encore...</p>
-          <span class="card-arrow-cta">VOIR TOUTES →</span>
-        </article>
       </div>
 
       <aside class="sidebar">
@@ -364,56 +358,6 @@ const RESOURCES = [
       font-size: 18px;
     }
 
-    /* CARD EXTRA "+6 autres factions" */
-    .card-extra {
-      background: linear-gradient(180deg, rgba(201, 162, 74, 0.06), rgba(0, 0, 0, 0.92));
-      border: 1px dashed rgba(201, 162, 74, 0.45);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 28px 20px;
-      cursor: pointer;
-    }
-    .card-extra::before { display: none; }
-    .extra-icon {
-      font-size: 48px;
-      color: var(--gold);
-      margin-bottom: 14px;
-      text-shadow: 0 0 28px rgba(201, 162, 74, 0.35);
-    }
-    .card-extra h2 {
-      color: var(--gold-bright);
-      font-family: var(--serif);
-      font-size: 22px;
-      line-height: 1.05;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin: 0 0 12px;
-      -webkit-line-clamp: unset;
-      overflow: visible;
-      display: block;
-    }
-    .card-extra p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.55;
-      max-width: 260px;
-      margin: 0 0 18px;
-      -webkit-line-clamp: unset;
-      overflow: visible;
-      display: block;
-    }
-    .card-arrow-cta {
-      border: 1px solid rgba(201, 162, 74, 0.6);
-      color: var(--gold);
-      padding: 10px 20px;
-      letter-spacing: 0.13em;
-      font-size: 11px;
-      font-weight: 900;
-    }
-
     /* SIDEBAR */
     .sidebar {
       display: grid;
@@ -632,8 +576,4 @@ export class FactionsComponent {
     return 'linear-gradient(135deg, #1a3a6e 0%, #0a0a0a 100%)';
   }
 
-  resetFilters() {
-    this.filterKey.set('all');
-    this.searchQuery.set('');
-  }
 }

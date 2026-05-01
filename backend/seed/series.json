@@ -3,13 +3,31 @@
     "id": "heresie-horus",
     "titre": "L'Hérésie d'Horus",
     "titreVO": "Horus Heresy",
-    "auteurs": ["Dan Abnett", "Graham McNeill", "Aaron Dembski-Bowden", "Ben Counter", "James Swallow"],
+    "auteurs": [
+      "Dan Abnett",
+      "Graham McNeill",
+      "Aaron Dembski-Bowden",
+      "Ben Counter",
+      "James Swallow"
+    ],
     "nbLivres": 54,
     "readBooks": 28,
-    "badges": ["Fondamental", "Papier", "Audible"],
+    "badges": [
+      "Fondamental",
+      "Papier",
+      "Audible"
+    ],
     "epoque": "M30 — Grande Croisade & Hérésie",
-    "factionIds": ["space-marines", "chaos-space-marines"],
-    "tags": ["Primarchs", "Grande Croisade", "Trahison", "Fondateur"],
+    "factionIds": [
+      "space-marines",
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Primarchs",
+      "Grande Croisade",
+      "Trahison",
+      "Fondateur"
+    ],
     "premierLivre": "Horus Rising (L'Ascension d'Horus)",
     "description": "La série fondatrice. Dix mille ans avant le présent du 41e millénaire, l'Imperium est à son apogée. Puis Horus, le fils bien-aimé de l'Empereur, tombe. La plus grande guerre civile de l'histoire de l'humanité commence.",
     "niveauEntree": "Fondamental — à lire en premier"
@@ -18,13 +36,26 @@
     "id": "fantomes-gaunt",
     "titre": "Les Fantômes de Tanith",
     "titreVO": "Gaunt's Ghosts",
-    "auteurs": ["Dan Abnett"],
+    "auteurs": [
+      "Dan Abnett"
+    ],
     "nbLivres": 15,
     "readBooks": 9,
-    "badges": ["Garde Impériale", "Papier", "Audible"],
+    "badges": [
+      "Garde Impériale",
+      "Papier",
+      "Audible"
+    ],
     "epoque": "M41 — Croisade de Sabbat",
-    "factionIds": ["astra-militarum"],
-    "tags": ["Garde Impériale", "Guerre de tranchées", "Commissaire", "Série longue"],
+    "factionIds": [
+      "astra-militarum"
+    ],
+    "tags": [
+      "Garde Impériale",
+      "Guerre de tranchées",
+      "Commissaire",
+      "Série longue"
+    ],
     "premierLivre": "Premier & Unique (First and Only)",
     "description": "La série emblématique de la Garde Impériale. Commissaire Ibram Gaunt commande les Fantômes de Tanith — des soldats sans monde natal, légers, fantomatiques. De la guerre de tranchées au heroïsme, c'est la série de guerre la plus humaine de la Black Library.",
     "niveauEntree": "Idéal pour débuter — très accessible"
@@ -33,13 +64,26 @@
     "id": "eisenhorn",
     "titre": "Eisenhorn",
     "titreVO": "Eisenhorn Trilogy",
-    "auteurs": ["Dan Abnett"],
+    "auteurs": [
+      "Dan Abnett"
+    ],
     "nbLivres": 3,
     "readBooks": 3,
-    "badges": ["Inquisition", "Papier", "Audible"],
+    "badges": [
+      "Inquisition",
+      "Papier",
+      "Audible"
+    ],
     "epoque": "M41 — Ordo Xenos",
-    "factionIds": ["inquisition"],
-    "tags": ["Inquisition", "Thriller", "Ordo Xenos", "Trilogie"],
+    "factionIds": [
+      "inquisition"
+    ],
+    "tags": [
+      "Inquisition",
+      "Thriller",
+      "Ordo Xenos",
+      "Trilogie"
+    ],
     "premierLivre": "Xénos (Xenos)",
     "description": "L'inquisiteur Gregor Eisenhorn traque les hérétiques, les mutants et les xénos à travers l'Imperium. Une trilogie noire et addictive, mêlant thriller et space opera. Eisenhorn est l'un des personnages les plus complexes et appréciés de la Black Library.",
     "niveauEntree": "Excellent point d'entrée pour l'Inquisition"
@@ -48,13 +92,25 @@
     "id": "ravenor",
     "titre": "Ravenor",
     "titreVO": "Ravenor Trilogy",
-    "auteurs": ["Dan Abnett"],
+    "auteurs": [
+      "Dan Abnett"
+    ],
     "nbLivres": 3,
     "readBooks": 1,
-    "badges": ["Inquisition", "Aventure", "Papier"],
+    "badges": [
+      "Inquisition",
+      "Aventure",
+      "Papier"
+    ],
     "epoque": "M41 — Ordo Xenos (suite d'Eisenhorn)",
-    "factionIds": ["inquisition"],
-    "tags": ["Inquisition", "Suite Eisenhorn", "Ordo Xenos"],
+    "factionIds": [
+      "inquisition"
+    ],
+    "tags": [
+      "Inquisition",
+      "Suite Eisenhorn",
+      "Ordo Xenos"
+    ],
     "premierLivre": "Ravenor",
     "description": "Suite directe d'Eisenhorn. Gideon Ravenor, ancien acolyte d'Eisenhorn devenu Inquisiteur, enquête depuis son fauteuil de confinement — son corps brisé, mais son esprit psychique plus puissant que jamais. Une trilogie encore plus sombre et psychédélique.",
     "niveauEntree": "Lire après Eisenhorn"
@@ -63,13 +119,24 @@
     "id": "bequin",
     "titre": "La Trilogie Bequin (Magos)",
     "titreVO": "Bequin Trilogy",
-    "auteurs": ["Dan Abnett"],
+    "auteurs": [
+      "Dan Abnett"
+    ],
     "nbLivres": 3,
     "readBooks": 0,
-    "badges": ["Inquisition", "Papier"],
+    "badges": [
+      "Inquisition",
+      "Papier"
+    ],
     "epoque": "M41 — Suite de la saga Eisenhorn/Ravenor",
-    "factionIds": ["inquisition"],
-    "tags": ["Inquisition", "Suite saga", "Beta Bequin"],
+    "factionIds": [
+      "inquisition"
+    ],
+    "tags": [
+      "Inquisition",
+      "Suite saga",
+      "Beta Bequin"
+    ],
     "premierLivre": "Pariah",
     "description": "La conclusion de la grande saga Eisenhorn-Ravenor, vue par Beta Bequin. Les fils narratifs de deux décennies de romans convergent. Magos est le troisième tome de cette trilogie finale. Indispensable pour les fans de la saga.",
     "niveauEntree": "Lire après Eisenhorn + Ravenor"
@@ -78,13 +145,26 @@
     "id": "ciaphas-cain",
     "titre": "Ciaphas Caïn, Héros de l'Imperium",
     "titreVO": "Ciaphas Cain",
-    "auteurs": ["Sandy Mitchell"],
+    "auteurs": [
+      "Sandy Mitchell"
+    ],
     "nbLivres": 9,
     "readBooks": 4,
-    "badges": ["Aventure", "Papier", "Audible"],
+    "badges": [
+      "Aventure",
+      "Papier",
+      "Audible"
+    ],
     "epoque": "M41 — Diverses campagnes",
-    "factionIds": ["astra-militarum"],
-    "tags": ["Comédie", "Commissaire", "Accessible", "Léger"],
+    "factionIds": [
+      "astra-militarum"
+    ],
+    "tags": [
+      "Comédie",
+      "Commissaire",
+      "Accessible",
+      "Léger"
+    ],
     "premierLivre": "Pour l'Honneur de l'Empereur (For the Emperor)",
     "description": "La série la plus légère et la plus drôle de la Black Library. Commissaire Ciaphas Caïn est — selon lui — un lâche et un imposteur. Mais ses aventures font toujours de lui un héros malgré lui. Une parodie affectueuse de l'univers grimdark, parfaite pour changer d'ambiance.",
     "niveauEntree": "Parfait pour une lecture détendue"
@@ -93,13 +173,25 @@
     "id": "night-lords",
     "titre": "La Trilogie Night Lords",
     "titreVO": "Night Lords Trilogy",
-    "auteurs": ["Aaron Dembski-Bowden"],
+    "auteurs": [
+      "Aaron Dembski-Bowden"
+    ],
     "nbLivres": 3,
     "readBooks": 3,
-    "badges": ["Aventure", "Papier"],
+    "badges": [
+      "Aventure",
+      "Papier"
+    ],
     "epoque": "M41 — Guerres post-Hérésie",
-    "factionIds": ["chaos-space-marines"],
-    "tags": ["Chaos", "Antihéros", "Night Lords", "Sombre"],
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Chaos",
+      "Antihéros",
+      "Night Lords",
+      "Sombre"
+    ],
     "premierLivre": "La Légende des Damnés (Soul Hunter)",
     "description": "La série la plus audacieuse de la Black Library. Écrite du point de vue des Night Lords — des Space Marines du Chaos terrifiants. Aaron Dembski-Bowden transforme ces monstres en antihéros tragiques. Une réflexion profonde sur la loyauté, la trahison et la survie dans un univers sans espoir.",
     "niveauEntree": "Pour les lecteurs confirmés de WH40k"
@@ -108,13 +200,25 @@
     "id": "ahriman",
     "titre": "La Trilogie Ahriman",
     "titreVO": "Ahriman Trilogy",
-    "auteurs": ["John French"],
+    "auteurs": [
+      "John French"
+    ],
     "nbLivres": 3,
     "readBooks": 1,
-    "badges": ["Aventure", "Papier"],
+    "badges": [
+      "Aventure",
+      "Papier"
+    ],
     "epoque": "M41 — Mille Fils / Chaos",
-    "factionIds": ["chaos-space-marines"],
-    "tags": ["Chaos", "Mille Fils", "Psyker", "Ahriman"],
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Chaos",
+      "Mille Fils",
+      "Psyker",
+      "Ahriman"
+    ],
     "premierLivre": "Ahriman: Exile",
     "description": "L'histoire du plus grand sorcier du Chaos, Ahriman, condamné à errer après avoir lancé le Sort de Rubrique qui a transformé ses frères en armures vides. Une saga sur la culpabilité, la puissance et la quête d'une rédemption impossible.",
     "niveauEntree": "Pour les fans de l'Hérésie d'Horus"
@@ -123,13 +227,25 @@
     "id": "ultramarines",
     "titre": "La Série Ultramarines",
     "titreVO": "Ultramarines Series",
-    "auteurs": ["Graham McNeill"],
+    "auteurs": [
+      "Graham McNeill"
+    ],
     "nbLivres": 6,
     "readBooks": 2,
-    "badges": ["Space Marines", "Papier", "Audible"],
+    "badges": [
+      "Space Marines",
+      "Papier",
+      "Audible"
+    ],
     "epoque": "M41 — Guerres Ultramarines",
-    "factionIds": ["space-marines"],
-    "tags": ["Space Marines", "Ultramarines", "Uriel Ventris"],
+    "factionIds": [
+      "space-marines"
+    ],
+    "tags": [
+      "Space Marines",
+      "Ultramarines",
+      "Uriel Ventris"
+    ],
     "premierLivre": "L'Honneur de Macragge (Nightbringer)",
     "description": "Suivant le Capitaine Uriel Ventris des Ultramarines, cette série est l'une des plus accessibles pour découvrir les Space Marines. Graham McNeill construit un héros humain dans une armure de demidieu, confronté à des ennemis aussi bien extérieurs qu'internes à son Chapitre.",
     "niveauEntree": "Bon point d'entrée pour les Space Marines"
@@ -138,13 +254,26 @@
     "id": "space-wolves",
     "titre": "Les Space Wolves",
     "titreVO": "Space Wolves Series",
-    "auteurs": ["William King", "Lee Lightner"],
+    "auteurs": [
+      "William King",
+      "Lee Lightner"
+    ],
     "nbLivres": 8,
     "readBooks": 5,
-    "badges": ["Space Marines", "Papier"],
+    "badges": [
+      "Space Marines",
+      "Papier"
+    ],
     "epoque": "M41 — Fenris",
-    "factionIds": ["space-marines"],
-    "tags": ["Space Marines", "Space Wolves", "Ragnar", "Viking"],
+    "factionIds": [
+      "space-marines"
+    ],
+    "tags": [
+      "Space Marines",
+      "Space Wolves",
+      "Ragnar",
+      "Viking"
+    ],
     "premierLivre": "L'Éveil de Ragnar (Space Wolf)",
     "description": "La série sur les guerriers-loups de Fenris. Ragnar Blackmane passe du jeune initié au héros légendaire des Space Wolves. Une saga d'action et d'honneur avec une forte atmosphère nordique-viking dans un contexte de science-fiction grimdark.",
     "niveauEntree": "Accessible et divertissant"
@@ -153,15 +282,678 @@
     "id": "mechanicum",
     "titre": "Mechanicum",
     "titreVO": "Mechanicum",
-    "auteurs": ["Graham McNeill"],
+    "auteurs": [
+      "Graham McNeill"
+    ],
     "nbLivres": 1,
     "readBooks": 1,
-    "badges": ["Fondamental", "Papier"],
+    "badges": [
+      "Fondamental",
+      "Papier"
+    ],
     "epoque": "M30 — Hérésie d'Horus",
-    "factionIds": ["adeptus-mechanicus"],
-    "tags": ["Adeptus Mechanicus", "Mars", "Hérésie", "Roman unique"],
+    "factionIds": [
+      "adeptus-mechanicus"
+    ],
+    "tags": [
+      "Adeptus Mechanicus",
+      "Mars",
+      "Hérésie",
+      "Roman unique"
+    ],
     "premierLivre": "Mechanicum",
     "description": "L'un des meilleurs romans de toute la Black Library. La guerre civile arrive sur Mars pendant l'Hérésie d'Horus. L'Adeptus Mechanicus se fracture. Un roman sur la technologie, la foi et ce que signifie être humain quand on remplace sa chair par du métal.",
     "niveauEntree": "Roman unique — excellent"
+  },
+  {
+    "id": "siege-de-terra",
+    "titre": "Le Siège de Terra",
+    "titreVO": "Siege of Terra",
+    "auteurs": [
+      "Aaron Dembski-Bowden",
+      "Dan Abnett",
+      "John French",
+      "Chris Wraight",
+      "Gav Thorpe",
+      "James Swallow"
+    ],
+    "nbLivres": 12,
+    "readBooks": 0,
+    "badges": [
+      "Fondamental",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M30 — Apogée de l'Hérésie",
+    "factionIds": [
+      "space-marines",
+      "chaos-space-marines",
+      "adeptus-custodes",
+      "astra-militarum"
+    ],
+    "tags": [
+      "Conclusion HH",
+      "Empereur",
+      "Horus vs Empereur",
+      "Trône d'Or"
+    ],
+    "premierLivre": "La Guerre Solaire (The Solar War)",
+    "description": "La conclusion épique de l'Hérésie d'Horus. Les flottes de Horus assiègent Terra. Le Palais Impérial brûle. C'est ici que l'Empereur affronte Horus pour la dernière fois. Douze tomes qui bouclent dix mille ans de mythologie et expliquent pourquoi le Maître de l'Humanité finit sur le Trône d'Or.",
+    "niveauEntree": "À lire après l'Hérésie d'Horus principale"
+  },
+  {
+    "id": "dawn-of-fire",
+    "titre": "Aube de Feu",
+    "titreVO": "Dawn of Fire",
+    "auteurs": [
+      "Guy Haley",
+      "Mike Brooks",
+      "Andy Clark",
+      "Nick Kyme"
+    ],
+    "nbLivres": 7,
+    "readBooks": 0,
+    "badges": [
+      "M42",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M42 — Ère Indomitus",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "soeurs-de-bataille",
+      "tyranides"
+    ],
+    "tags": [
+      "Indomitus Crusade",
+      "Guilliman",
+      "Présent narratif",
+      "Cycle multi-auteur"
+    ],
+    "premierLivre": "Le Fils Vengeur (Avenging Son)",
+    "description": "Le grand cycle narratif de l'Imperium contemporain. Roboute Guilliman, ressuscité, mène la Croisade Indomitus pour reprendre la galaxie. Sept tomes qui font avancer le présent du 41e/42e millénaire pour la première fois en trente ans.",
+    "niveauEntree": "Idéal pour qui veut le présent du lore (M42)"
+  },
+  {
+    "id": "dark-imperium",
+    "titre": "Dark Imperium",
+    "titreVO": "Dark Imperium",
+    "auteurs": [
+      "Guy Haley"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "M42",
+      "Primaris",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M42 — Retour de Guilliman",
+    "factionIds": [
+      "space-marines",
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Roboute Guilliman",
+      "Mortarion",
+      "Plague Wars",
+      "Primaris"
+    ],
+    "premierLivre": "Dark Imperium",
+    "description": "Roboute Guilliman, ramené à la vie après dix mille ans, contemple ce qu'est devenu l'Imperium. Sa croisade contre son frère Mortarion et la Plague Wars d'Ultramar. Trilogie de référence pour comprendre le M42.",
+    "niveauEntree": "Excellent point d'entrée pour le présent narratif"
+  },
+  {
+    "id": "the-beast-arises",
+    "titre": "L'Éveil de la Bête",
+    "titreVO": "The Beast Arises",
+    "auteurs": [
+      "Dan Abnett",
+      "Aaron Dembski-Bowden",
+      "Guy Haley",
+      "Rob Sanders",
+      "David Annandale",
+      "Gav Thorpe"
+    ],
+    "nbLivres": 12,
+    "readBooks": 0,
+    "badges": [
+      "M32",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M32 — Guerre contre les Orks",
+    "factionIds": [
+      "space-marines",
+      "orks",
+      "astra-militarum",
+      "adeptus-custodes"
+    ],
+    "tags": [
+      "Orks",
+      "Vandire",
+      "Imperial Fists",
+      "Cycle multi-auteur"
+    ],
+    "premierLivre": "Je Suis Slaughterman (I Am Slaughterman)",
+    "description": "Au 32e millénaire, une lune-arme orkoïde apparaît dans le système solaire. Les Imperial Fists sont anéantis. L'Imperium chancelle. Douze tomes qui racontent une apocalypse oubliée et changent à jamais la place des Custodes et de l'Adeptus Terra.",
+    "niveauEntree": "Cycle dense — fans confirmés"
+  },
+  {
+    "id": "watchers-of-the-throne",
+    "titre": "Gardiens du Trône",
+    "titreVO": "Watchers of the Throne",
+    "auteurs": [
+      "Chris Wraight"
+    ],
+    "nbLivres": 2,
+    "readBooks": 0,
+    "badges": [
+      "Custodes",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M42 — Crise du 13e Croisade Noire",
+    "factionIds": [
+      "adeptus-custodes",
+      "officio-assassinorum"
+    ],
+    "tags": [
+      "Custodes",
+      "Sisters of Silence",
+      "Terra",
+      "Politique"
+    ],
+    "premierLivre": "L'Empereur Préserve (The Emperor's Legion)",
+    "description": "Pour la première fois en dix mille ans, les Custodes quittent le Palais Impérial. Vue de l'intérieur du Trône : politique, terreur et duty. Chris Wraight au sommet de son art. Un must pour qui veut comprendre la haute administration impériale.",
+    "niveauEntree": "Excellent — accessible et politique"
+  },
+  {
+    "id": "vaults-of-terra",
+    "titre": "Les Voûtes de Terra",
+    "titreVO": "Vaults of Terra",
+    "auteurs": [
+      "Chris Wraight"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "Inquisition",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41 — Veille de la 13e Croisade Noire",
+    "factionIds": [
+      "inquisition"
+    ],
+    "tags": [
+      "Inquisition",
+      "Terra",
+      "Conspiration",
+      "Crowl"
+    ],
+    "premierLivre": "Le Carapace (The Carrion Throne)",
+    "description": "L'inquisiteur Erasmus Crowl enquête dans les bas-fonds de Terra elle-même. Un thriller noir au cœur du Palais Impérial. Trilogie qui révèle ce que personne ne veut voir sous la peinture dorée du Trône.",
+    "niveauEntree": "Bon — Inquisition urbaine accessible"
+  },
+  {
+    "id": "devastation-de-baal",
+    "titre": "La Dévastation de Baal",
+    "titreVO": "Devastation of Baal",
+    "auteurs": [
+      "Guy Haley"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Blood Angels",
+      "Tyranides",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41 — Avant l'Ère Indomitus",
+    "factionIds": [
+      "space-marines",
+      "tyranides"
+    ],
+    "tags": [
+      "Blood Angels",
+      "Tyranides",
+      "Baal",
+      "Dante",
+      "Survival"
+    ],
+    "premierLivre": "La Dévastation de Baal",
+    "description": "Le Hive Fleet Leviathan dévore Baal et ses lunes. Les Blood Angels et leurs Successeurs livrent leur dernière bataille. Roman unique iconique : ce qui se passe sur Baal explique l'urgence de la Croisade Indomitus.",
+    "niveauEntree": "Roman unique — très accessible"
+  },
+  {
+    "id": "helsreach",
+    "titre": "Helsreach",
+    "titreVO": "Helsreach",
+    "auteurs": [
+      "Aaron Dembski-Bowden"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Black Templars",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41 — Troisième Guerre d'Armageddon",
+    "factionIds": [
+      "space-marines",
+      "orks",
+      "astra-militarum"
+    ],
+    "tags": [
+      "Black Templars",
+      "Orks",
+      "Armageddon",
+      "Maréchal Helbrecht",
+      "Grimaldus"
+    ],
+    "premierLivre": "Helsreach",
+    "description": "Roman unique culte d'ADB. Le Maréchal Grimaldus défend la cité-ruche de Helsreach contre les hordes de Ghazghkull Thraka. Un siège épique sur deux millions de pages d'émotion. Adapté en film d'animation fan-made légendaire.",
+    "niveauEntree": "Excellent point d'entrée Space Marines"
+  },
+  {
+    "id": "black-legion",
+    "titre": "La Légion Noire (Talon of Horus)",
+    "titreVO": "Black Legion",
+    "auteurs": [
+      "Aaron Dembski-Bowden"
+    ],
+    "nbLivres": 2,
+    "readBooks": 0,
+    "badges": [
+      "Chaos",
+      "Abaddon",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M31 — Après l'Hérésie",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Abaddon",
+      "Black Legion",
+      "Long War",
+      "Eye of Terror"
+    ],
+    "premierLivre": "La Serre d'Horus (The Talon of Horus)",
+    "description": "Comment Abaddon est devenu Abaddon le Despoiler. ADB raconte l'œil de la Terreur post-Hérésie : la Longue Guerre, la naissance de la Légion Noire, et l'âme tordue du successeur d'Horus. Indispensable pour aimer le Chaos.",
+    "niveauEntree": "Lire après l'Hérésie d'Horus"
+  },
+  {
+    "id": "salamanders",
+    "titre": "Les Salamandres",
+    "titreVO": "Tome of Fire / Salamanders",
+    "auteurs": [
+      "Nick Kyme"
+    ],
+    "nbLivres": 5,
+    "readBooks": 0,
+    "badges": [
+      "Salamanders",
+      "Papier"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "space-marines"
+    ],
+    "tags": [
+      "Salamanders",
+      "Vulkan",
+      "Forge",
+      "Honneur"
+    ],
+    "premierLivre": "Salamandre (Salamander)",
+    "description": "Les Salamandres : forgerons-guerriers de Nocturne, héritiers de Vulkan. Cycle qui plonge dans la culture la plus humaine des Space Marines. Famille, foi, feu et fer.",
+    "niveauEntree": "Bon — Space Marines hors Ultramarines"
+  },
+  {
+    "id": "word-bearers",
+    "titre": "La Trilogie Word Bearers",
+    "titreVO": "Word Bearers Trilogy",
+    "auteurs": [
+      "Anthony Reynolds"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "Chaos",
+      "Papier"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Word Bearers",
+      "Marduk",
+      "Foi corrompue",
+      "Lorgar"
+    ],
+    "premierLivre": "Apôtre Sombre (Dark Apostle)",
+    "description": "Le Dark Apostle Marduk mène les Word Bearers à travers l'enfer matériel et chaotique. La trilogie qui donne le ton de la légion la plus religieusement vouée au Chaos. Sombre, brutal, fanatique.",
+    "niveauEntree": "Bon — Chaos accessible"
+  },
+  {
+    "id": "yarrick",
+    "titre": "Yarrick",
+    "titreVO": "Yarrick",
+    "auteurs": [
+      "David Annandale"
+    ],
+    "nbLivres": 4,
+    "readBooks": 0,
+    "badges": [
+      "Garde Impériale",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41 — Trois Guerres d'Armageddon",
+    "factionIds": [
+      "astra-militarum",
+      "orks"
+    ],
+    "tags": [
+      "Commissaire",
+      "Yarrick",
+      "Armageddon",
+      "Ghazghkull"
+    ],
+    "premierLivre": "Yarrick : La Forge de l'Acier (Imperial Creed)",
+    "description": "Saga du Commissaire Sebastian Yarrick, Saint vivant de la Garde Impériale. Sa nemesis : Ghazghkull Mag Uruk Thraka, l'Ork qui ne meurt pas. Quatre romans qui font de Yarrick l'un des héros militaires les plus iconiques.",
+    "niveauEntree": "Très accessible — guerre brute"
+  },
+  {
+    "id": "cadia-tient-bon",
+    "titre": "Cadia Tient Bon",
+    "titreVO": "Cadia Stands",
+    "auteurs": [
+      "Justin D Hill"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Garde Impériale",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41 — 13e Croisade Noire",
+    "factionIds": [
+      "astra-militarum",
+      "chaos-space-marines"
+    ],
+    "tags": [
+      "Cadia",
+      "Abaddon",
+      "Croisade Noire XIII",
+      "Chute de Cadia"
+    ],
+    "premierLivre": "Cadia Tient Bon",
+    "description": "Le roman officiel de la Chute de Cadia. La forteresse-monde face à la 13e Croisade Noire d'Abaddon. Un événement charnière : la fin de la galaxie telle qu'elle existait depuis dix mille ans.",
+    "niveauEntree": "Excellent — événement fondateur du M42"
+  },
+  {
+    "id": "infinite-and-divine",
+    "titre": "L'Infini et le Divin",
+    "titreVO": "The Infinite and the Divine",
+    "auteurs": [
+      "Robert Rath"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Necrons",
+      "Papier",
+      "Audible",
+      "Comédie"
+    ],
+    "epoque": "Hors temps — millions d'années",
+    "factionIds": [
+      "necrons"
+    ],
+    "tags": [
+      "Trazyn",
+      "Orikan",
+      "Necrons",
+      "Rivalité éternelle",
+      "Humour"
+    ],
+    "premierLivre": "L'Infini et le Divin",
+    "description": "Trazyn l'Infini et Orikan le Devin se haïssent depuis des millions d'années. Un roman comique-épique qui suit leur rivalité absurde à travers les âges. Considéré comme l'une des meilleures œuvres de la Black Library, et le meilleur point d'entrée Necrons.",
+    "niveauEntree": "Roman unique — chef-d'œuvre"
+  },
+  {
+    "id": "twice-dead-king",
+    "titre": "Le Roi Deux Fois Mort",
+    "titreVO": "The Twice-Dead King",
+    "auteurs": [
+      "Nate Crowley"
+    ],
+    "nbLivres": 2,
+    "readBooks": 0,
+    "badges": [
+      "Necrons",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "necrons"
+    ],
+    "tags": [
+      "Necrons",
+      "Oltyx",
+      "Dynastie",
+      "Honneur"
+    ],
+    "premierLivre": "Bannissement (Ruin)",
+    "description": "Le seigneur Necron Oltyx, banni de sa dynastie, doit défendre une crypte oubliée contre la marée tyranide. Une duologie sombre et tragique qui humanise (ironiquement) les Necrons.",
+    "niveauEntree": "Bon — Necrons accessibles"
+  },
+  {
+    "id": "path-of-the-eldar",
+    "titre": "La Voie des Eldars",
+    "titreVO": "Path of the Eldar",
+    "auteurs": [
+      "Gav Thorpe"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "Aeldari",
+      "Papier"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "aeldari"
+    ],
+    "tags": [
+      "Eldars",
+      "Voies",
+      "Vaisseau-Monde",
+      "Aspect Warriors"
+    ],
+    "premierLivre": "La Voie du Guerrier (Path of the Warrior)",
+    "description": "La trilogie qui explique vraiment la culture Aeldari : les Voies (Warrior, Seer, Outcast) et leur impact sur la psyché eldarique. Pour comprendre pourquoi un Eldar passe sa vie à choisir des chemins.",
+    "niveauEntree": "Excellent point d'entrée Aeldari"
+  },
+  {
+    "id": "brutal-kunnin",
+    "titre": "Brutalement Malin",
+    "titreVO": "Brutal Kunnin",
+    "auteurs": [
+      "Mike Brooks"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Orks",
+      "Papier",
+      "Audible",
+      "Comédie"
+    ],
+    "epoque": "M42 — Ère Indomitus",
+    "factionIds": [
+      "orks"
+    ],
+    "tags": [
+      "Orks",
+      "Speed Freeks",
+      "Ufthak",
+      "Humour"
+    ],
+    "premierLivre": "Brutal Kunnin",
+    "description": "Du POV ork ! Suivez Ufthak et son Wargear de Speed Freeks dans une campagne de pillage. Mike Brooks réussit l'impossible : rendre les Orks drôles sans les ridiculiser. Suite : Da Big Dakka.",
+    "niveauEntree": "Excellent point d'entrée Orks"
+  },
+  {
+    "id": "fire-caste",
+    "titre": "La Caste du Feu",
+    "titreVO": "Fire Caste",
+    "auteurs": [
+      "Peter Fehervari"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "T'au",
+      "Garde Impériale",
+      "Papier"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "tau",
+      "astra-militarum"
+    ],
+    "tags": [
+      "T'au",
+      "Vietnam War aesthetic",
+      "Horreur psychologique",
+      "Pheonix Kingdoms"
+    ],
+    "premierLivre": "Fire Caste",
+    "description": "Apocalypse Now version 40K. Une guerre de jungle entre la Garde Impériale et les T'au tourne à l'horreur cosmique. Roman atypique, dérangeant, considéré comme l'un des plus uniques de la BL.",
+    "niveauEntree": "Pour fans confirmés — atypique"
+  },
+  {
+    "id": "farsight",
+    "titre": "Farsight",
+    "titreVO": "Farsight",
+    "auteurs": [
+      "Phil Kelly"
+    ],
+    "nbLivres": 2,
+    "readBooks": 0,
+    "badges": [
+      "T'au",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "tau"
+    ],
+    "tags": [
+      "T'au",
+      "Farsight",
+      "Schisme",
+      "Sword of Mont'yr"
+    ],
+    "premierLivre": "Farsight : Crise (Crisis of Faith)",
+    "description": "Le commandant T'au Farsight, héros déchu et schismatique, défend son Enclave contre le Chaos et l'Empire T'au lui-même. Duologie qui explore la facette la plus tragique du Greater Good.",
+    "niveauEntree": "Bon — T'au politique"
+  },
+  {
+    "id": "mark-of-faith",
+    "titre": "La Marque de la Foi",
+    "titreVO": "Mark of Faith",
+    "auteurs": [
+      "Rachel Harrison"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Soeurs de Bataille",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M42 — Ère Indomitus",
+    "factionIds": [
+      "soeurs-de-bataille"
+    ],
+    "tags": [
+      "Adepta Sororitas",
+      "Foi",
+      "Reliques",
+      "Pèlerinage"
+    ],
+    "premierLivre": "La Marque de la Foi",
+    "description": "Une Sœur de Bataille traverse la galaxie déchirée pour mener un pèlerinage sacré. Le meilleur roman moderne sur les Adepta Sororitas — foi, doute et martyre.",
+    "niveauEntree": "Excellent point d'entrée Sœurs"
+  },
+  {
+    "id": "belisarius-cawl",
+    "titre": "Belisarius Cawl : La Grande Œuvre",
+    "titreVO": "Belisarius Cawl: The Great Work",
+    "auteurs": [
+      "Guy Haley"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Adeptus Mechanicus",
+      "Papier",
+      "Audible"
+    ],
+    "epoque": "M42",
+    "factionIds": [
+      "adeptus-mechanicus",
+      "necrons"
+    ],
+    "tags": [
+      "Cawl",
+      "Primaris",
+      "Necrons",
+      "Mars"
+    ],
+    "premierLivre": "Belisarius Cawl : La Grande Œuvre",
+    "description": "Le Magos Dominus Belisarius Cawl — créateur des Primaris — se retrouve coincé sur un monde Necron. Roman phare pour comprendre le génie hérétique qui a refait les Space Marines.",
+    "niveauEntree": "Bon — Mechanicus + Necrons"
+  },
+  {
+    "id": "horusian-wars",
+    "titre": "Les Guerres Horusiennes",
+    "titreVO": "Horusian Wars",
+    "auteurs": [
+      "John French"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "Inquisition",
+      "Papier"
+    ],
+    "epoque": "M41",
+    "factionIds": [
+      "inquisition"
+    ],
+    "tags": [
+      "Inquisition",
+      "Covenant",
+      "Horusiens",
+      "Daemons"
+    ],
+    "premierLivre": "Résurrection (Resurrection)",
+    "description": "L'inquisiteur Covenant et son acolyte Cleander Von Castellan traquent les hérétiques Horusiens — ceux qui croient qu'un seul homme pourrait redevenir Empereur. Trilogie sombre, occulte, exigeante.",
+    "niveauEntree": "Pour fans Inquisition confirmés"
   }
 ]
