@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import type { LoreEvent, Emperor, Primarch, ChaosGod } from './lore-feed.model.js';
+import type { LoreEvent, Emperor, Primarch, ChaosGod, ImperialOrganization } from './lore-feed.model.js';
 
 function loadJson<T>(file: string, fallback: T): T {
   const filePath = path.resolve(process.cwd(), 'data', file);
@@ -16,12 +16,14 @@ export class LoreFeedService {
   private readonly emperor: Emperor | null;
   private readonly primarchs: Primarch[];
   private readonly chaosGods: ChaosGod[];
+  private readonly imperialOrgs: ImperialOrganization[];
 
   constructor() {
     this.events = loadJson<LoreEvent[]>('lore-feed.json', []);
     this.emperor = loadJson<Emperor | null>('emperor.json', null);
     this.primarchs = loadJson<Primarch[]>('primarchs.json', []);
     this.chaosGods = loadJson<ChaosGod[]>('chaos-gods.json', []);
+    this.imperialOrgs = loadJson<ImperialOrganization[]>('imperial-orgs.json', []);
   }
 
   findAll(): LoreEvent[] { return this.events; }
@@ -44,5 +46,11 @@ export class LoreFeedService {
 
   getChaosGod(id: string): ChaosGod | undefined {
     return this.chaosGods.find(g => g.id === id);
+  }
+
+  getImperialOrgs(): ImperialOrganization[] { return this.imperialOrgs; }
+
+  getImperialOrg(id: string): ImperialOrganization | undefined {
+    return this.imperialOrgs.find(o => o.id === id);
   }
 }

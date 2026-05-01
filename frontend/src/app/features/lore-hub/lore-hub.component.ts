@@ -234,6 +234,16 @@ export class LoreHubComponent {
       available: true,
     },
     {
+      route: '/lore/civilians',
+      ico: '⚙',
+      eyebrow: 'Les rouages humains',
+      title: 'Civils Impériaux',
+      description:
+        'Administratum, Ministorum, Arbites, Navigators, Astropaths, Sœurs du Silence, Rogue Traders, Knight Households… les ordres invisibles qui font tenir l\'Imperium debout.',
+      meta: '10 organisations · 30+ fonctions',
+      available: true,
+    },
+    {
       route: '/lore/galaxy',
       ico: '✦',
       eyebrow: 'Carte galactique',

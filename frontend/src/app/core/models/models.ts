@@ -332,3 +332,36 @@ export interface ChaosGod {
   primarchsCorrupted: ChaosGodPrimarchLink[];
   legions: string[];
 }
+
+// === Imperial civilian organizations ===
+export type ImperialOrgCategory =
+  | 'governance'
+  | 'military'
+  | 'religion'
+  | 'psyker'
+  | 'commerce'
+  | 'training';
+
+export interface ImperialOrgFigure {
+  name: string;
+  role: string;
+  description?: string;
+  wikiQuery?: string;
+}
+
+export interface ImperialOrganization {
+  id: string;
+  number: number;
+  name: string;
+  title: string;
+  category: ImperialOrgCategory;
+  color: string;
+  sigil: string;
+  wikiQuery: string;
+  description: string;
+  loreLong: string;
+  citation?: string;
+  keyRole: string;
+  functions: string[];
+  notableFigures: ImperialOrgFigure[];
+}

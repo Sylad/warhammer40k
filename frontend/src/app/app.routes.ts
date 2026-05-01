@@ -73,6 +73,11 @@ export const routes: Routes = [
           .then(m => m.LoreChaosGodsComponent)
       },
       {
+        path: 'lore/civilians',
+        loadComponent: () => import('./features/lore-civilians/lore-civilians.component')
+          .then(m => m.LoreCiviliansComponent)
+      },
+      {
         path: 'about',
         loadComponent: () => import('./features/about/about.component')
           .then(m => m.AboutComponent)

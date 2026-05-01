@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import {
   Faction, Unit, DescriptionResponse, Serie, Video,
   Channel, Artwork, ArtworkCollection, ArtworkArtist, LoreEvent,
-  SubFaction, Emperor, Primarch, ChaosGod,
+  SubFaction, Emperor, Primarch, ChaosGod, ImperialOrganization,
 } from '../models/models';
 
 export interface WikiImageResult {
@@ -152,6 +152,14 @@ export class WarhammerService {
 
   getChaosGod(id: string): Observable<ChaosGod> {
     return this.http.get<ChaosGod>(`${this.base}/lore/chaos-gods/${id}`);
+  }
+
+  readonly imperialOrgs$: Observable<ImperialOrganization[]> = this.http
+    .get<ImperialOrganization[]>(`${this.base}/lore/imperial-orgs`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getImperialOrg(id: string): Observable<ImperialOrganization> {
+    return this.http.get<ImperialOrganization>(`${this.base}/lore/imperial-orgs/${id}`);
   }
 
   // === Image meta (catégorisation user) ===

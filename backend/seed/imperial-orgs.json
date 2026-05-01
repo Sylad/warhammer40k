@@ -1,0 +1,304 @@
+[
+  {
+    "id": "adeptus-administratum",
+    "number": 1,
+    "name": "Adeptus Administratum",
+    "title": "La Bureaucratie Galactique",
+    "category": "governance",
+    "color": "#a89060",
+    "sigil": "✎",
+    "wikiQuery": "Adeptus Administratum scribes",
+    "description": "Le bras administratif de l'Imperium. Mille milliards de scribes, taxateurs, archivistes — l'invisible squelette qui maintient un million de mondes humains en cohésion.",
+    "loreLong": "L'Administratum gère tout ce qui n'est pas la guerre directe : taxes impériales (la Décime), recensements planétaires, droits commerciaux, archives Solar, ordres logistiques pour les Croisades. Sa hiérarchie est si vaste qu'aucun fonctionnaire ne connaît le nombre exact de ses pairs. Les pétitions à l'Administratum prennent souvent des décennies à être traitées — quand elles le sont. Le Master of the Administratum siège au Conseil des Hauts Seigneurs de Terra. Une simple erreur de calcul ici peut affamer un système solaire ou enrichir un pirate.",
+    "citation": "Toute chose est calculée. Toute chose est inscrite. Aucune chose n'échappe à la Décime.",
+    "keyRole": "Administration civile et fiscale de l'Imperium",
+    "functions": [
+      "Collecte de la Décime impériale (taxe sur chaque monde)",
+      "Recensement et archivage perpétuel",
+      "Logistique militaire des Croisades",
+      "Gestion des droits commerciaux inter-planétaires",
+      "Conservation des Records de l'Imperium"
+    ],
+    "notableFigures": [
+      {
+        "name": "Master of the Administratum",
+        "role": "Haut Seigneur de Terra",
+        "description": "Siège au Conseil des Hauts Seigneurs aux côtés de Trajann Valoris et de l'Inquisitor Representative.",
+        "wikiQuery": "Master of the Administratum"
+      }
+    ]
+  },
+  {
+    "id": "adeptus-ministorum",
+    "number": 2,
+    "name": "Adeptus Ministorum",
+    "title": "L'Ecclésiarchie · L'Église Impériale",
+    "category": "religion",
+    "color": "#9a3a3a",
+    "sigil": "✠",
+    "wikiQuery": "Adeptus Ministorum Ecclesiarchy",
+    "description": "L'Église officielle de l'Imperium. Trillions de fidèles vénèrent l'Empereur comme un dieu — malgré les protestations historiques de l'Empereur Lui-même contre Sa propre divinisation.",
+    "loreLong": "Né d'un mouvement religieux populaire après l'Hérésie d'Horus, le Ministorum fut institutionnalisé pour canaliser la ferveur humaine vers la stabilité impériale. Ses Confesseurs prêchent la haine du mutant, du psyker non sanctionné, de l'étranger et de l'hérétique. L'Ecclésiarchie ne peut pas, par décret, lever de force armée standard — alors elle a contourné en créant les Sœurs de Bataille (Adepta Sororitas) et la Frateris Militia. Sébastian Thor lança la Réforme au M37, restructurant l'Imperium pour les siècles à venir.",
+    "citation": "Sa chair est ton bouclier. Sa lumière est ton chemin. Crains les ténèbres qui ne sont pas Lui.",
+    "keyRole": "Culte de l'Empereur-Dieu et inquisition douce des âmes",
+    "functions": [
+      "Prédication officielle du culte impérial",
+      "Encadrement spirituel des populations",
+      "Canalisation des Sœurs de Bataille (bras armé)",
+      "Lutte contre les hérésies populaires",
+      "Pèlerinages et reliques sacrées"
+    ],
+    "notableFigures": [
+      {
+        "name": "Ecclésiarque",
+        "role": "Chef du Ministorum",
+        "description": "Haut Seigneur de Terra. Choisit les Saints, les Cardinals, et déclare les Croisades de Foi.",
+        "wikiQuery": "Ecclesiarch Warhammer"
+      },
+      {
+        "name": "Sébastian Thor",
+        "role": "Réformateur (M37)",
+        "description": "Mit fin à la sanglante Apostasie sous Goge Vandire et restructura l'Imperium en sept siècles.",
+        "wikiQuery": "Sebastian Thor"
+      }
+    ]
+  },
+  {
+    "id": "adeptus-arbites",
+    "number": 3,
+    "name": "Adeptus Arbites",
+    "title": "Les Juges de Terra",
+    "category": "military",
+    "color": "#3a3a3a",
+    "sigil": "⚖",
+    "wikiQuery": "Adeptus Arbites Judges",
+    "description": "La police impériale chargée de faire respecter la Lex Imperialis sur tous les mondes. Indépendants des autorités planétaires, ils n'obéissent qu'à Terra.",
+    "loreLong": "Les Arbitrators sont équipés de power maul, shotguns à munitions diverses (chair-shrédant et anti-émeute), armures de combat lourdes. Leurs forteresses-tribunaux dominent les ruches, et leurs Marshals supervisent des secteurs entiers. Ils n'enquêtent pas sur les crimes mineurs — ils écrasent les rebellions, les hérésies civiles et les rébellions de gouverneur planétaire. Ils peuvent, dans les cas extrêmes, déclarer un monde Excommunicate Traitoris et requérir une Croisade.",
+    "citation": "La Loi est l'Empereur. L'Empereur est la Loi. Pas d'exception.",
+    "keyRole": "Application de la Lex Imperialis sur les mondes humains",
+    "functions": [
+      "Suppression des rebellions et hérésies civiles",
+      "Surveillance des gouverneurs planétaires",
+      "Tribunaux suprêmes hors juridiction locale",
+      "Liaison avec l'Inquisition pour les cas hérétiques",
+      "Déclaration formelle d'Excommunicate Traitoris"
+    ],
+    "notableFigures": [
+      {
+        "name": "Lord Marshal",
+        "role": "Commandant suprême des Arbites",
+        "description": "Coordonne les Arbitrators de tout un Segmentum.",
+        "wikiQuery": "Adeptus Arbites Lord Marshal"
+      }
+    ]
+  },
+  {
+    "id": "rogue-traders",
+    "number": 4,
+    "name": "Rogue Traders",
+    "title": "Les Marchands-Princes des Étoiles",
+    "category": "commerce",
+    "color": "#7a4a8b",
+    "sigil": "✦",
+    "wikiQuery": "Rogue Trader Warrant of Trade",
+    "description": "Marchands-explorateurs portant un Warrant of Trade impérial. Au-delà des frontières connues, ils négocient, conquièrent et fondent des colonies au nom de l'Empereur — avec leurs propres flottes.",
+    "loreLong": "Le Warrant of Trade fut institué par l'Empereur lui-même durant la Grande Croisade : un document mystique donnant à son porteur le droit d'agir en Son nom au-delà des limites de l'Imperium. Les Rogue Traders sont des barons stellaires : possèdent leur propre flotte, leur propre armée, leur propre réseau commercial. Certains sont fabuleusement riches, d'autres pirates à peine déguisés. Ils traitent avec les xenos quand l'Imperium ne le peut pas, explorent la Halo Stars où aucun amiral n'oserait aller, et parfois déclenchent des Croisades en revenant avec des secrets blasphématoires.",
+    "citation": "Mon Warrant date de la Grande Croisade. Aucun gouverneur ne me commande.",
+    "keyRole": "Exploration et commerce inter-stellaire au-delà de l'Imperium",
+    "functions": [
+      "Exploration des régions galactiques inconnues",
+      "Commerce avec les xénos (sous condition)",
+      "Fondation de colonies au nom de l'Empereur",
+      "Diplomatie hors normes impériales",
+      "Récupération de technologies anciennes (STC)"
+    ],
+    "notableFigures": [
+      {
+        "name": "Lady Aurelia Malys",
+        "role": "Rogue Trader célèbre",
+        "description": "Commande la dynastie Malys, une des plus puissantes Charters de la Warhammer 40,000 Rogue Trader RPG.",
+        "wikiQuery": "Aurelia Malys Rogue Trader"
+      }
+    ]
+  },
+  {
+    "id": "schola-progenium",
+    "number": 5,
+    "name": "Schola Progenium",
+    "title": "Les Orphelinats du Trône",
+    "category": "training",
+    "color": "#5a6878",
+    "sigil": "✦",
+    "wikiQuery": "Schola Progenium",
+    "description": "Système d'éducation et d'endoctrinement pour les orphelins de soldats impériaux. Forme la prochaine génération de Commissaires, Storm Troopers, Confesseurs et Sœurs de Bataille.",
+    "loreLong": "Quand un soldat impérial meurt en service, ses enfants — les Progena — sont récupérés par la Schola. Élevés en discipline militaire absolue, ils étudient histoire, théologie, tactique militaire, et combat depuis l'âge de cinq ans. Une Schola peut rejeter un enfant si jugé inapte ou suspect ; les acceptés deviennent l'élite humaine de l'Imperium. Beaucoup sortent comme Commissaires (officiers politiques de la Garde), d'autres comme Storm Troopers (Tempestus Scions), d'autres comme Confesseurs ou Sœurs Sororitas.",
+    "citation": "Tu n'as plus de famille. La Schola est ta mère. L'Empereur est ton père.",
+    "keyRole": "Formation des élites humaines de l'Imperium",
+    "functions": [
+      "Recueillir et endoctriner les orphelins militaires",
+      "Former les Commissaires (officiers politiques)",
+      "Former les Tempestus Scions (Storm Troopers)",
+      "Recruter pour les Sœurs de Bataille",
+      "Préparer les Confesseurs Ministorum"
+    ],
+    "notableFigures": [
+      {
+        "name": "Yarrick (vétéran)",
+        "role": "Commissaire légendaire",
+        "description": "Sébastien Yarrick, héros d'Armageddon, fut formé par la Schola Progenium. Une légende vivante (jusqu'à sa mort).",
+        "wikiQuery": "Sebastian Yarrick"
+      }
+    ]
+  },
+  {
+    "id": "navigators",
+    "number": 6,
+    "name": "Navigators",
+    "title": "Les Yeux du Warp",
+    "category": "psyker",
+    "color": "#6a3a8b",
+    "sigil": "👁",
+    "wikiQuery": "Navis Nobilite Navigator",
+    "description": "Mutants humains autorisés à vivre — leur troisième œil leur permet de voir l'Astronomican à travers le Warp. Sans eux, aucun voyage interstellaire prolongé ne serait possible.",
+    "loreLong": "Les Navigators sont une mutation humaine stabilisée des temps préhistoriques. Leur Pineal Eye (Œil de Lumière) leur permet de fixer l'Astronomican comme un phare céleste, naviguant à travers les courants imprévisibles du Warp. Ils sont organisés en Navis Nobilite — Maisons de Navigators de pure souche, jalouses de leurs lignées génétiques. Sans eux, l'Imperium s'effondrerait : ils sont aussi indispensables que techniquement \"hérétiques\" (mutants). Le regard direct d'un Navigator non protégé peut tuer un humain instantanément.",
+    "citation": "Je vois la lumière du Trône. Je vois la mort dans le Warp. Je vous guide entre les deux.",
+    "keyRole": "Navigation des vaisseaux interstellaires à travers le Warp",
+    "functions": [
+      "Voir l'Astronomican (phare psychique de l'Empereur)",
+      "Guider les vaisseaux dans le Warp pendant des semaines à des mois",
+      "Maintenir la cohérence des courants warp pour la flotte",
+      "Détecter les tempêtes warp avant émergence",
+      "Œil mortel : arme de dernier recours en combat rapproché"
+    ],
+    "notableFigures": [
+      {
+        "name": "Maison Belisarius",
+        "role": "Lignée navigatrice ancienne",
+        "description": "Une des plus puissantes Maisons Navis Nobilite, alliée des Space Wolves depuis l'Hérésie.",
+        "wikiQuery": "House Belisarius Navigator"
+      }
+    ]
+  },
+  {
+    "id": "astropaths",
+    "number": 7,
+    "name": "Astropaths",
+    "title": "Les Voix Aveugles",
+    "category": "psyker",
+    "color": "#3a6cc4",
+    "sigil": "✹",
+    "wikiQuery": "Astropath Adeptus Astra Telepathica",
+    "description": "Psykers humains soumis au Soul Binding rituel — l'Empereur Lui-même touche leur âme depuis le Trône d'Or. Ils en sortent aveugles, mais peuvent désormais transmettre des messages d'un système à l'autre via le Warp.",
+    "loreLong": "Sans les Astropaths, l'Imperium serait sourd. La communication interstellaire ne se fait pas par radio (trop lente : des années pour atteindre Terra) mais par Astrotelepathy : un message psychique encodé dans des symboles oniriques traverse le Warp en heures ou jours. Le rituel du Soul Binding, qui les prépare, est mortel : 60% des candidats meurent, 30% deviennent fous, 10% sortent aveugles mais fonctionnels — voilà les Astropaths utilisables. Ils servent dans les Choirs Astropathiques sur chaque vaisseau, chaque monde, chaque forteresse. Ils sont consommables : un Astropath ne dure qu'une à deux décennies en moyenne.",
+    "citation": "Mes yeux ont brûlé pour Lui. Mes oreilles entendent maintenant Sa volonté.",
+    "keyRole": "Communication interstellaire à travers le Warp",
+    "functions": [
+      "Transmission de messages astrotélépathiques (Codified Sendings)",
+      "Réception de messages depuis Terra (Master Class)",
+      "Détection des tempêtes Warp (limited)",
+      "Choirs sur vaisseaux et planètes (5+ Astropaths pour redondance)",
+      "Quartier-maître spirituel — souvent dans la même équipe qu'un Navigator"
+    ],
+    "notableFigures": [
+      {
+        "name": "Astropath Prime",
+        "role": "Maître Astropathe d'un Segmentum",
+        "description": "Coordonne le réseau de Choirs sur un Segmentum entier.",
+        "wikiQuery": "Astropath Prime"
+      }
+    ]
+  },
+  {
+    "id": "soeurs-du-silence",
+    "number": 8,
+    "name": "Sœurs du Silence",
+    "title": "Sororitas Silentia · Les Voix Mortes",
+    "category": "military",
+    "color": "#c0c0d0",
+    "sigil": "✠",
+    "wikiQuery": "Sisters of Silence",
+    "description": "Femmes pariah — naturellement immunisées au Warp. Leur seule présence éteint la magie, étouffe les daemons, paralyse les psykers. Élite des escortes Custodes.",
+    "loreLong": "Comme les Custodes, elles furent créées par l'Empereur Lui-même bien avant la Grande Croisade. Toutes femmes, toutes Pariah (humaines naturellement immunisées au Warp), elles ont fait vœu de silence absolu — leur voix est leur arme la plus mortelle, à n'utiliser qu'en dernier recours. Elles patrouillent partout où la magie est un risque : escortes des Custodes, missions Inquisitoriales contre les psykers traîtres, Black Ships qui collectent les psykers à travers la galaxie. Pendant l'Hérésie, elles furent presque éteintes — réveillées au M42 quand Guilliman réorganisa l'Imperium.",
+    "citation": "(Aucune. Les Sœurs ne parlent jamais.)",
+    "keyRole": "Anti-psykers et escortes Custodes",
+    "functions": [
+      "Patrouille des secteurs psy-actifs",
+      "Escorte des Custodes en mission",
+      "Black Ships : collecte des psykers humains",
+      "Soumission des sorciers ennemis",
+      "Garde de prisonniers psy-puissants"
+    ],
+    "notableFigures": [
+      {
+        "name": "Knight-Centura Aleya",
+        "role": "Sœur du Silence légendaire",
+        "description": "Combattit aux côtés des Custodes durant la Grande Croisade et l'Hérésie. Symbole de l'ordre.",
+        "wikiQuery": "Aleya Sister of Silence"
+      }
+    ]
+  },
+  {
+    "id": "imperial-knights",
+    "number": 9,
+    "name": "Imperial Knight Households",
+    "title": "Les Maisons Chevaleresques",
+    "category": "military",
+    "color": "#1a4f8b",
+    "sigil": "⚜",
+    "wikiQuery": "Imperial Knights Household",
+    "description": "Nobles humains pilotant des Knights — machines de guerre bipèdes haute comme une église. Chaque Maison est un fief stellaire ancien, lié à l'Imperium par serment féodal.",
+    "loreLong": "Les Knight Worlds sont des planètes archaïques préservées par l'Adeptus Mechanicus en échange d'un serment d'allégeance : leurs nobles humains pilotent des Knights, machines bipèdes ancestrales (héritées de la STC originelle) qui combattent depuis les premiers jours de l'humanité. Chaque pilote est un noble depuis l'enfance, fusionné avec son Throne Mechanicum jusqu'à sa mort. Les Knights des Maisons Loyalistes (Hawkshroud, Cadmus, Krast) combattent aux côtés des Astartes ; certaines Maisons (Devine, Lucaris) ont basculé Chaos pendant l'Hérésie d'Horus et survivent dans l'Œil de la Terreur.",
+    "citation": "Mon armure est mon serment. Mon serment est mon âme.",
+    "keyRole": "Cavalerie lourde anti-titan de l'Imperium",
+    "functions": [
+      "Combat anti-titan en Knights bipèdes",
+      "Garde de planètes féodales archaïques (Knight Worlds)",
+      "Service en lance dans les Croisades majeures",
+      "Préservation des STC ancestrales liées aux Knights",
+      "Alliance permanente avec l'Adeptus Mechanicus"
+    ],
+    "notableFigures": [
+      {
+        "name": "House Hawkshroud",
+        "role": "Maison loyaliste exemplaire",
+        "description": "Connue pour son honneur et sa promptitude à répondre aux appels de l'Imperium.",
+        "wikiQuery": "House Hawkshroud Knight"
+      }
+    ]
+  },
+  {
+    "id": "remembrancers",
+    "number": 10,
+    "name": "Remembrancers",
+    "title": "Les Témoins de la Grande Croisade",
+    "category": "training",
+    "color": "#8b6a3a",
+    "sigil": "✎",
+    "wikiQuery": "Remembrancer Order Imperium",
+    "description": "Artistes, poètes et historiens autorisés à accompagner les Légions Astartes durant la Grande Croisade — pour documenter les exploits humains. Tous périrent ou furent mis sous silence pendant l'Hérésie d'Horus.",
+    "loreLong": "À l'apogée de la Grande Croisade, l'Empereur autorisa la création de l'Ordre des Remembrancers : des artistes embarqués sur les flottes des primarques pour documenter, peindre, écrire la gloire de l'humanité reconquérante. Beaucoup étaient civils, certains naïfs, d'autres conspirateurs. Quand l'Hérésie commença, ils furent les premiers témoins — et donc les premières cibles. La plupart périrent ; quelques fragments de leurs œuvres survivent dans les archives Black Library. L'Ordre n'a jamais été restauré, et l'Imperium garde aujourd'hui ses guerres dans le secret.",
+    "citation": "J'ai vu ce qu'aucun mortal ne devrait voir. Je l'écris quand même.",
+    "keyRole": "Documentation artistique de la Grande Croisade (M30, disparus depuis)",
+    "functions": [
+      "Peindre, sculpter, écrire les exploits Astartes",
+      "Embarquement sur flottes des primarques (M30 uniquement)",
+      "Création des seuls témoignages contemporains de l'Hérésie",
+      "Préservation par les Légions traîtresses paradoxalement",
+      "Archive partielle dans Black Library"
+    ],
+    "notableFigures": [
+      {
+        "name": "Solomon Voss",
+        "role": "Remembrancer en chef",
+        "description": "Auteur de Lectitio Divinitatus avant son interdiction. Premier à écrire que l'Empereur était un dieu.",
+        "wikiQuery": "Solomon Voss Remembrancer"
+      },
+      {
+        "name": "Mersadie Oliton",
+        "role": "Remembrancer attachée à Horus",
+        "description": "Témoin direct de la chute du Warmaster. Rare survivante de l'Ordre.",
+        "wikiQuery": "Mersadie Oliton"
+      }
+    ]
+  }
+]
