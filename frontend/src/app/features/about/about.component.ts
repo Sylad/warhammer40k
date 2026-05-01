@@ -496,5 +496,17 @@ export class AboutComponent {
       why: 'Catalogue d\'illustrations 40K filtrables par faction. Référence visuelle pour la galerie impériale.',
       url: 'https://40k.gallery/',
     },
+    {
+      name: 'Lexicanum',
+      by: 'Communauté W40K',
+      why: 'Wiki MediaWiki anglais encyclopédique — pages dédiées même pour les personnages secondaires (Makari, Colm Corbec) là où le Fandom EN manque. Source d\'images bundlées.',
+      url: 'https://wh40k.lexicanum.com/wiki/Main_Page',
+    },
+    {
+      name: 'Omnis Bibliotheca',
+      by: 'Communauté FR Warhammer',
+      why: 'Wiki MediaWiki francophone — texte directement utilisable en FR pour enrichir les fiches sans passer par la traduction.',
+      url: 'https://omnis-bibliotheca.com/index.php/Cat%C3%A9gorie:Imperium',
+    },
   ];
 }
