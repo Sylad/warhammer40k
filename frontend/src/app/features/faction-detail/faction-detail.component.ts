@@ -235,7 +235,7 @@ const DEFAULT_RESOURCES = [
                 <span>{{ v.titre }}</span>
               </a>
             }
-            <a class="media-card" routerLink="/galerie">
+            <a class="media-card" routerLink="/gallery">
               <div class="media-thumb" [style.--m-img]="galleryThumb()">
                 <span class="play">▦</span>
               </div>

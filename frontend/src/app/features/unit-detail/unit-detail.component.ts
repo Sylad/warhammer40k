@@ -89,7 +89,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
             }
             <p class="hero-desc">{{ u.description || u.loreCourt || f.description }}</p>
             <div class="hero-cta">
-              <a class="cta cta-solid" routerLink="/galerie">
+              <a class="cta cta-solid" routerLink="/gallery">
                 <span class="cta-ico">▦</span>VOIR DANS LA GALERIE
               </a>
               <a class="cta cta-outline" routerLink="/videos">
@@ -222,7 +222,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               <article class="panel">
                 <h2 class="panel-title">Galerie</h2>
                 <p class="panel-text muted">La galerie d'œuvres dédiée à cette unité sera enrichie prochainement. En attendant, consultez la galerie générale de la faction.</p>
-                <a class="cta cta-outline" routerLink="/galerie">
+                <a class="cta cta-outline" routerLink="/gallery">
                   <span class="cta-ico">▦</span>OUVRIR LA GALERIE
                 </a>
               </article>
