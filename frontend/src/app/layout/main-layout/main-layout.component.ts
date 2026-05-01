@@ -30,6 +30,9 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         <a routerLink="/gallery" routerLinkActive="active">
           <span class="nav-ico">▦</span>Galerie
         </a>
+        <a routerLink="/lore" routerLinkActive="active">
+          <span class="nav-ico">✠</span>Lore
+        </a>
         <a routerLink="/about" routerLinkActive="active">
           <span class="nav-ico">⚜</span>À propos
         </a>

@@ -1,8 +1,9 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import type { LoreEvent } from '../../core/models/models';
 
 interface ShortcutCard {
   route: string;
@@ -11,7 +12,16 @@ interface ShortcutCard {
   ico: string;
   count: () => number;
   countLabel: string;
+  wikiQuery: string;
 }
+
+const TYPE_LABEL: Record<string, string> = {
+  menace: 'Menace',
+  evenement: 'Événement',
+  decouverte: 'Découverte',
+  guerre: 'Guerre',
+  prophetie: 'Prophétie',
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -19,36 +29,99 @@ interface ShortcutCard {
   imports: [CommonModule, RouterLink],
   template: `
     <section class="hero">
-      <div class="hero-overlay"></div>
+      <div class="hero-bg" [style.background-image]="heroImg()"></div>
+      <div class="hero-grad"></div>
+      <div class="hero-glow"></div>
       <div class="hero-content">
         <div class="eyebrow">Codex Numérique du 41<sup>e</sup> millénaire</div>
         <h1>Bienvenue, Initié</h1>
-        <p>
-          Plongez dans l'univers de Warhammer 40,000. Factions, romans, vidéos, galerie —
-          un codex immersif pour explorer la galaxie en guerre éternelle.
+        <p class="lede">
+          Sa lumière guide tes pas dans les archives sacrées de l'Imperium.
+          Factions, primarques, romans, daemons du Warp — un codex immersif pour
+          explorer la galaxie en guerre éternelle.
         </p>
+        <div class="hero-actions">
+          <a routerLink="/factions" class="cta-primary">⚔ Explorer les factions</a>
+          <a routerLink="/lore/emperor" class="cta-secondary">✠ Le Trône d'Or</a>
+        </div>
+        <div class="hero-citation">
+          « Dans les ténèbres du lointain futur, il n'y a que la guerre. »
+        </div>
       </div>
+    </section>
+
+    <section class="quick-lore">
+      <a routerLink="/lore/emperor" class="ql-card">
+        <span class="ql-sigil">✠</span>
+        <div>
+          <div class="ql-title">L'Empereur</div>
+          <div class="ql-meta">6 sections lore</div>
+        </div>
+      </a>
+      <a routerLink="/lore/primarchs" class="ql-card">
+        <span class="ql-sigil">⚜</span>
+        <div>
+          <div class="ql-title">Les 20 Primarques</div>
+          <div class="ql-meta">9 loyalistes · 9 traîtres · 2 perdus</div>
+        </div>
+      </a>
+      <a routerLink="/lore/chaos-gods" class="ql-card">
+        <span class="ql-sigil chaos">☠</span>
+        <div>
+          <div class="ql-title">Le Panthéon Chaos</div>
+          <div class="ql-meta">Khorne · Tzeentch · Nurgle · Slaanesh</div>
+        </div>
+      </a>
     </section>
 
     <section class="shortcuts">
       @for (s of shortcuts; track s.route) {
         <a class="shortcut" [routerLink]="s.route">
-          <div class="shortcut-ico">{{ s.ico }}</div>
-          <h2>{{ s.title }}</h2>
-          <p>{{ s.subtitle }}</p>
-          <div class="shortcut-foot">
-            <span class="num">{{ s.count() }}</span>
-            <span class="lbl">{{ s.countLabel }}</span>
-            <span class="arrow">→</span>
+          <div class="shortcut-img" [style.background-image]="shortcutImg(s.route)"></div>
+          <div class="shortcut-overlay"></div>
+          <div class="shortcut-content">
+            <div class="shortcut-ico">{{ s.ico }}</div>
+            <h2>{{ s.title }}</h2>
+            <p>{{ s.subtitle }}</p>
+            <div class="shortcut-foot">
+              <span class="num">{{ s.count() }}</span>
+              <span class="lbl">{{ s.countLabel }}</span>
+              <span class="arrow">→</span>
+            </div>
           </div>
         </a>
       }
     </section>
 
+    @if (events().length > 0) {
+      <section class="lore-feed">
+        <header class="lf-head">
+          <h2>Brèves du 41<sup>e</sup> millénaire</h2>
+          <span class="lf-sub">Signaux astropathiques captés à la veille de la Cicatrice</span>
+        </header>
+        <div class="lf-grid">
+          @for (e of events(); track e.id) {
+            <article class="lf-card" [attr.data-type]="e.type">
+              <div class="lf-icon">{{ e.icon }}</div>
+              <div class="lf-body">
+                <div class="lf-type">{{ typeLabel(e.type) }}</div>
+                <h3>{{ e.title }}</h3>
+                <p>{{ e.body }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
     <section class="stats-bar">
       <div class="stat">
         <strong>{{ factions().length }}</strong>
         <span>Factions</span>
+      </div>
+      <div class="stat">
+        <strong>{{ subFactionsCount() }}</strong>
+        <span>Sous-factions</span>
       </div>
       <div class="stat">
         <strong>{{ series().length }}</strong>
@@ -63,39 +136,61 @@ interface ShortcutCard {
         <span>Œuvres</span>
       </div>
       <div class="quote">
-        « Dans les ténèbres du lointain futur, il n'y a que la guerre. »
+        « Le Trône veille. Et nous chantons Sa garde éternelle. »
       </div>
     </section>
   `,
   styles: [`
     :host { display: block; }
 
+    /* === HERO immersif Empereur/Trône === */
     .hero {
       position: relative;
-      min-height: 320px;
+      min-height: 480px;
       border: 1px solid var(--border);
       overflow: hidden;
-      background: #080706;
+      background: #050403;
       box-shadow: var(--shadow);
       margin-bottom: 28px;
       display: flex;
       align-items: end;
-      padding: 60px 50px;
+      padding: 70px 60px 56px;
     }
-    .hero-overlay {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.45;
+      filter: grayscale(0.15) contrast(1.08) brightness(0.85);
+      transition: opacity 0.6s;
+    }
+    .hero-grad {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 80% 50%, rgba(123, 17, 19, 0.4), transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(201, 162, 74, 0.15), transparent 50%),
-        linear-gradient(0deg, rgba(0,0,0,0.95), transparent 60%);
+        radial-gradient(circle at 80% 30%, rgba(201, 162, 74, 0.32), transparent 50%),
+        radial-gradient(circle at 15% 80%, rgba(123, 17, 19, 0.5), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.96) 80%);
     }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-glow {
+      position: absolute;
+      top: 30%;
+      right: 12%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240, 210, 118, 0.18) 0%, transparent 65%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+
     .eyebrow {
       color: var(--gold);
       font-size: 12px;
       font-weight: 950;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 14px;
     }
@@ -103,93 +198,293 @@ interface ShortcutCard {
       margin: 0 0 18px;
       font-family: var(--serif);
       color: var(--gold-bright);
-      font-size: clamp(40px, 5vw, 76px);
-      line-height: 0.9;
+      font-size: clamp(46px, 5.5vw, 84px);
+      line-height: 0.92;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      text-shadow: 0 0 38px rgba(201, 162, 74, 0.3);
+      text-shadow: 0 0 50px rgba(201, 162, 74, 0.45);
     }
-    .hero p {
-      margin: 0;
-      color: #cfc3ad;
-      font-size: 16px;
+    .lede {
+      margin: 0 0 22px;
+      color: #d8cfb8;
+      font-size: 16.5px;
       line-height: 1.7;
+      max-width: 620px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .cta-primary, .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .cta-primary {
+      background: var(--gold);
+      color: var(--bg);
+      border: 1px solid var(--gold);
+    }
+    .cta-primary:hover {
+      background: var(--gold-bright);
+      box-shadow: 0 0 30px rgba(240, 210, 118, 0.45);
+    }
+    .cta-secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold-soft);
+    }
+    .cta-secondary:hover {
+      background: rgba(201, 162, 74, 0.1);
+      border-color: var(--gold);
+      color: var(--gold-bright);
+    }
+    .hero-citation {
+      font-style: italic;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      max-width: 540px;
     }
 
+    /* === QUICK LORE — 3 raccourcis vers les pages lore === */
+    .quick-lore {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .ql-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      border: 1px solid var(--border);
+      background: rgba(11, 9, 7, 0.65);
+      transition: all 0.2s;
+      color: inherit;
+    }
+    .ql-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      background: rgba(20, 14, 8, 0.7);
+    }
+    .ql-sigil {
+      font-size: 28px;
+      color: var(--gold);
+      filter: drop-shadow(0 0 10px rgba(201, 162, 74, 0.4));
+      flex-shrink: 0;
+    }
+    .ql-sigil.chaos { color: #c43a26; filter: drop-shadow(0 0 12px rgba(196, 58, 38, 0.5)); }
+    .ql-title {
+      font-family: var(--serif);
+      color: var(--gold-bright);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .ql-meta {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* === SHORTCUTS image-first === */
     .shortcuts {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
     .shortcut {
       position: relative;
-      padding: 26px 24px;
       border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(19,15,11,0.92), rgba(5,4,3,0.96));
+      overflow: hidden;
       box-shadow: 0 18px 50px rgba(0,0,0,0.5);
       transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
       display: block;
+      min-height: 280px;
+      background: #080706;
     }
     .shortcut:hover {
       transform: translateY(-5px);
       border-color: var(--border-strong);
-      box-shadow: 0 28px 80px rgba(0,0,0,0.7), 0 0 40px rgba(201, 162, 74, 0.08);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.7), 0 0 40px rgba(201, 162, 74, 0.12);
+    }
+    .shortcut-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s, filter 0.5s;
+      filter: grayscale(0.2) contrast(1.05);
+    }
+    .shortcut:hover .shortcut-img {
+      transform: scale(1.05);
+      filter: grayscale(0) contrast(1.12);
+    }
+    .shortcut-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.96) 100%);
+    }
+    .shortcut-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 22px 22px 20px;
+      min-height: 280px;
     }
     .shortcut-ico {
-      font-size: 36px;
+      font-size: 32px;
       color: var(--gold);
-      margin-bottom: 14px;
-      text-shadow: 0 0 20px rgba(201, 162, 74, 0.3);
+      margin-bottom: 12px;
+      text-shadow: 0 0 20px rgba(201, 162, 74, 0.5);
+      align-self: flex-start;
     }
     .shortcut h2 {
-      margin: 0 0 8px;
+      margin: auto 0 8px;
       font-family: var(--serif);
       color: var(--gold-bright);
-      font-size: 20px;
+      font-size: 22px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.95);
     }
     .shortcut p {
-      margin: 0 0 18px;
-      color: #c3baaa;
+      margin: 0 0 16px;
+      color: #d8cfb8;
       font-size: 13px;
-      line-height: 1.55;
+      line-height: 1.5;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.95);
     }
     .shortcut-foot {
       display: flex;
       align-items: baseline;
       gap: 10px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(201, 162, 74, 0.18);
+      padding-top: 12px;
+      border-top: 1px solid rgba(201, 162, 74, 0.25);
     }
     .shortcut-foot .num {
-      color: var(--gold);
+      color: var(--gold-bright);
       font-family: var(--serif);
       font-size: 22px;
     }
     .shortcut-foot .lbl {
-      color: var(--muted);
+      color: var(--gold);
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       flex: 1;
     }
-    .shortcut-foot .arrow { color: var(--gold); font-size: 18px; }
+    .shortcut-foot .arrow { color: var(--gold-bright); font-size: 18px; }
 
+    /* === LORE FEED === */
+    .lore-feed {
+      margin-bottom: 36px;
+    }
+    .lf-head {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .lf-head h2 {
+      font-family: var(--serif);
+      color: var(--gold-bright);
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .lf-sub {
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+    }
+    .lf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .lf-card {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      background: rgba(11, 9, 7, 0.55);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .lf-card:hover {
+      border-color: var(--border-strong);
+      background: rgba(20, 14, 8, 0.65);
+    }
+    .lf-card[data-type="menace"] { border-left: 3px solid #c43a26; }
+    .lf-card[data-type="guerre"] { border-left: 3px solid #c43a26; }
+    .lf-card[data-type="evenement"] { border-left: 3px solid var(--gold); }
+    .lf-card[data-type="decouverte"] { border-left: 3px solid #6a9fd8; }
+    .lf-card[data-type="prophetie"] { border-left: 3px solid #b39ad8; }
+
+    .lf-icon {
+      font-size: 30px;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .lf-body { flex: 1; }
+    .lf-type {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+    .lf-card h3 {
+      font-family: var(--serif);
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .lf-card p {
+      color: var(--text);
+      font-size: 12.5px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* === STATS BAR === */
     .stats-bar {
       display: grid;
-      grid-template-columns: repeat(4, auto) 1fr;
+      grid-template-columns: repeat(5, auto) 1fr;
       align-items: center;
       border: 1px solid var(--border);
       background: rgba(8,7,6,0.84);
       box-shadow: var(--shadow);
     }
     .stat {
-      padding: 18px 28px;
+      padding: 18px 26px;
       border-right: 1px solid rgba(201, 162, 74, 0.13);
       display: flex;
       align-items: baseline;
@@ -198,7 +493,7 @@ interface ShortcutCard {
     .stat strong {
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 28px;
+      font-size: 26px;
       line-height: 1;
     }
     .stat span {
@@ -215,9 +510,10 @@ interface ShortcutCard {
       font-size: 13px;
       text-align: right;
     }
-    @media (max-width: 760px) {
+    @media (max-width: 1100px) {
       .stats-bar { grid-template-columns: 1fr; }
       .quote { text-align: left; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(201, 162, 74, 0.13); }
     }
   `],
 })
@@ -229,22 +525,29 @@ export class DashboardComponent {
   readonly videos = toSignal(this.service.videos$, { initialValue: [] });
   readonly artworks = toSignal(this.service.artworks$, { initialValue: [] });
 
+  readonly events = signal<LoreEvent[]>([]);
+  readonly heroImg = signal<string>('');
+  readonly shortcutImages = signal<Map<string, string>>(new Map());
+  readonly subFactionsCount = signal<number>(0);
+
   readonly shortcuts: ShortcutCard[] = [
     {
       route: '/factions',
       title: 'Factions',
-      subtitle: 'Les peuples du 41e millénaire — Imperium, Chaos, xénos.',
+      subtitle: 'Les peuples du 41ᵉ millénaire — Imperium, Chaos, xénos.',
       ico: '⚔',
       count: () => this.factions().length,
       countLabel: 'factions majeures',
+      wikiQuery: 'Space Marines battle Adeptus Astartes',
     },
     {
       route: '/romans',
       title: 'Romans',
-      subtitle: 'La bibliothèque Black Library — Hérésie d\'Horus, Eisenhorn...',
+      subtitle: 'La bibliothèque Black Library — Hérésie d\'Horus, Eisenhorn…',
       ico: '▤',
       count: () => this.series().length,
       countLabel: 'séries',
+      wikiQuery: 'Black Library Warhammer 40000 books',
     },
     {
       route: '/videos',
@@ -253,14 +556,49 @@ export class DashboardComponent {
       ico: '▶',
       count: () => this.videos().length,
       countLabel: 'vidéos',
+      wikiQuery: 'Astartes animated film',
     },
     {
-      route: '/galerie',
+      route: '/gallery',
       title: 'Galerie',
       subtitle: 'Galerie impériale — artworks, illustrations, visuels.',
       ico: '▦',
       count: () => this.artworks().length,
       countLabel: 'œuvres',
+      wikiQuery: 'Warhammer 40k art fresco imperial',
     },
   ];
+
+  constructor() {
+    // Hero image — Empereur sur Trône d'Or
+    this.service.getWikiImage('Emperor of Mankind Golden Throne').subscribe(r => {
+      if (r.imageUrl) this.heroImg.set(`url('${r.imageUrl}')`);
+    });
+
+    // Shortcut images
+    this.shortcuts.forEach(s => {
+      this.service.getWikiImage(s.wikiQuery).subscribe(r => {
+        if (r.imageUrl) {
+          const m = new Map(this.shortcutImages());
+          m.set(s.route, r.imageUrl);
+          this.shortcutImages.set(m);
+        }
+      });
+    });
+
+    // Lore feed (3 events random)
+    this.service.loreFeed(3).subscribe(events => this.events.set(events));
+
+    // SubFactions count
+    this.service.getSubFactions().subscribe(list => this.subFactionsCount.set(list.length));
+  }
+
+  shortcutImg(route: string): string | null {
+    const url = this.shortcutImages().get(route);
+    return url ? `url('${url}')` : null;
+  }
+
+  typeLabel(type: string): string {
+    return TYPE_LABEL[type] ?? type;
+  }
 }

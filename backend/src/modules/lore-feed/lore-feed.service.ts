@@ -1,17 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { LoreEvent } from './lore-feed.model.js';
+import type { LoreEvent, Emperor, Primarch, ChaosGod } from './lore-feed.model.js';
+
+function loadJson<T>(file: string, fallback: T): T {
+  const filePath = path.resolve(process.cwd(), 'data', file);
+  return fs.existsSync(filePath)
+    ? (JSON.parse(fs.readFileSync(filePath, 'utf-8')) as T)
+    : fallback;
+}
 
 @Injectable()
 export class LoreFeedService {
   private readonly events: LoreEvent[];
+  private readonly emperor: Emperor | null;
+  private readonly primarchs: Primarch[];
+  private readonly chaosGods: ChaosGod[];
 
   constructor() {
-    const filePath = path.resolve(process.cwd(), 'data', 'lore-feed.json');
-    this.events = fs.existsSync(filePath)
-      ? (JSON.parse(fs.readFileSync(filePath, 'utf-8')) as LoreEvent[])
-      : [];
+    this.events = loadJson<LoreEvent[]>('lore-feed.json', []);
+    this.emperor = loadJson<Emperor | null>('emperor.json', null);
+    this.primarchs = loadJson<Primarch[]>('primarchs.json', []);
+    this.chaosGods = loadJson<ChaosGod[]>('chaos-gods.json', []);
   }
 
   findAll(): LoreEvent[] { return this.events; }
@@ -20,5 +30,19 @@ export class LoreFeedService {
     if (this.events.length <= count) return this.events;
     const shuffled = [...this.events].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
+  }
+
+  getEmperor(): Emperor | null { return this.emperor; }
+
+  getPrimarchs(): Primarch[] { return this.primarchs; }
+
+  getPrimarch(id: string): Primarch | undefined {
+    return this.primarchs.find(p => p.id === id);
+  }
+
+  getChaosGods(): ChaosGod[] { return this.chaosGods; }
+
+  getChaosGod(id: string): ChaosGod | undefined {
+    return this.chaosGods.find(g => g.id === id);
   }
 }

@@ -13,6 +13,14 @@ export type SubFactionType =
   | 'forgeworld'
   | 'order'
   | 'legion'
+  | 'shield_host'
+  | 'temple'
+  | 'kabal'
+  | 'wych_cult'
+  | 'haemonculus_coven'
+  | 'brotherhood'
+  | 'kindred'
+  | 'cult'
   | 'other';
 
 export interface NotableUnit {

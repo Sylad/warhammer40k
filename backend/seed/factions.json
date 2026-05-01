@@ -175,5 +175,215 @@
     "couleurThematique": "#2a1a4a",
     "symbole": "Ψ",
     "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/34/InquisitionIconBW.png/revision/latest/scale-to-width-down/80?cb=20240508133600"
+  },
+  {
+    "id": "adeptus-custodes",
+    "nom": "Adeptus Custodes",
+    "alignement": "Imperium",
+    "description": "Gardes personnels de l'Empereur, façonnés un par un par Sa propre main. Plus rares que les Astartes, plus puissants à l'unité, et tous voués à un seul devoir : veiller éternellement sur le Trône d'Or.",
+    "couleurThematique": "#c9a24a",
+    "symbole": "⚜",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/8/85/AdeptusCustodes_Logo.png/revision/latest/scale-to-width-down/80",
+    "sousTitre": "La Garde de l'Empereur",
+    "citation": "Nous sommes les yeux qui jamais ne se ferment. Nous sommes la lame qui jamais ne tombe.",
+    "lore": {
+      "origine": "Forgés un à un par l'Empereur Lui-même bien avant la Grande Croisade, les Custodes sont Ses tout premiers chevaliers — antérieurs aux Astartes, façonnés à partir de génomes uniques choisis dans les lignées les plus nobles de Terra. Aucun ne se ressemble : chaque Custode est un seul de son espèce.",
+      "organisation": "Au sommet trône le Captain-General. Sous lui, les Shield Hosts répartissent les Mille Compagnons selon leurs serments : certains gardent la Salle du Trône (Hykanatoi), d'autres traquent les ennemis qui souillent Sol (Shadowkeepers), d'autres encore veillent au-delà du système solaire (Solar Watch). Chaque Custode est aussi un érudit, un poète, un duelliste — la perfection martiale ET intellectuelle.",
+      "doctrine": "Pas de tactiques de masse, pas de doctrines codifiées : chaque Custode est une armée à lui seul, pesant des décennies d'entraînement et d'augmentations génétiques. Leur lance-garde combine une lame d'énergie et un canon de bolter ; leur armure dorée est un blindage de classe Terminator. Là où mille Astartes seraient brisés, dix Custodes peuvent vaincre."
+    },
+    "stats": {
+      "shieldHostsConnus": "10+",
+      "effectifs": "10.000 (estim.)",
+      "mondeOrigine": "Terra (Palais Impérial)",
+      "allegiance": "L'Empereur seul"
+    },
+    "liensRapides": [
+      "Shield Hosts",
+      "Sœurs du Silence",
+      "Captain-General Trajann Valoris",
+      "Constantin Valdor (légende)",
+      "Trône d'Or"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Bibliothèque des archives",
+      "Voir les romans liés",
+      "Chronologie de la Grande Croisade"
+    ]
+  },
+  {
+    "id": "officio-assassinorum",
+    "nom": "Officio Assassinorum",
+    "alignement": "Imperium",
+    "description": "Quatre temples, quatre disciplines, un seul mandat : éliminer les ennemis de l'Imperium par la mort silencieuse. Les assassins du Haut Seigneur de Terra n'ont ni nom, ni visage, ni passé.",
+    "couleurThematique": "#3a3a3a",
+    "symbole": "☠",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/0/03/Officio_Assassinorum_Logo.png/revision/latest/scale-to-width-down/80",
+    "sousTitre": "Les Lames Sans Visage de l'Empereur",
+    "citation": "Et il en sera ainsi : un, et un, et un. Pas une cible — une vérité.",
+    "lore": {
+      "origine": "Né dans les ombres de la Réforme de Sebastian Thor (M37), l'Officio Assassinorum centralisa des traditions clandestines bien plus anciennes — certaines remontant à la Grande Croisade. Quatre temples furent codifiés, chacun spécialisé dans une forme de mort distincte. Aujourd'hui, leurs opérations sont sanctionnées par le Conseil des Haut Seigneurs de Terra.",
+      "organisation": "Quatre temples distincts — Callidus, Vindicare, Eversor, Culexus — chacun avec son Grand Maître. Au-dessus, le Grand Maître de l'Officio Assassinorum coordonne et alloue les contrats. Aucun assassin ne connaît son successeur : les recrues sont arrachées à l'enfance, transformées en armes, puis effacées des registres impériaux.",
+      "doctrine": "Pas d'armée. Pas d'occupation. Une cible, une mort, une disparition. Chaque temple a sa signature : la polymorphine de Callidus, l'Exitus Rifle des Vindicare, la frénésie chimique des Eversor, l'animus speculum des Culexus. Un assassin ne revient jamais bredouille — ou ne revient pas du tout."
+    },
+    "stats": {
+      "templesActifs": "4",
+      "effectifs": "Classifié",
+      "mondeOrigine": "Terra (Citadel of the Eversor, etc.)",
+      "allegiance": "Conseil des Haut Seigneurs"
+    },
+    "liensRapides": [
+      "Temple Callidus",
+      "Temple Vindicare",
+      "Temple Eversor",
+      "Temple Culexus",
+      "Hiérarchie de l'Imperium"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Bibliothèque des archives",
+      "Voir les romans liés",
+      "Personnages historiques"
+    ]
+  },
+  {
+    "id": "drukhari",
+    "nom": "Drukhari",
+    "alignement": "Xenos",
+    "description": "Cousins sadiques des Aeldari, prédateurs interstellaires nichés dans Commorragh. Leur survie dépend de la souffrance d'autres âmes — ils volent, torturent, esclavagent pour échapper à l'appétit insatiable de Slaanesh qui guette leur âme.",
+    "couleurThematique": "#3a0e3e",
+    "symbole": "⛧",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/9/9f/Drukhari_Logo.png/revision/latest/scale-to-width-down/80",
+    "sousTitre": "Les Eldars Noirs",
+    "citation": "La douleur est notre nourriture. Le cri est notre musique. La cruauté est notre art.",
+    "lore": {
+      "origine": "Quand Slaanesh naquit dans la Chute de l'Empire Eldar (M30), une partie des Aeldari trouva refuge non dans les Vaisseaux-Mondes, mais dans la Toile — le réseau interdimensionnel. Là, ils édifièrent Commorragh, la Cité Sombre : un labyrinthe de tours, d'arènes et de tortures, caché dans les replis du Webway.",
+      "organisation": "Pas de roi unique — Commorragh est dirigée par le Suprême Overlord Asdrubael Vect, mais chaque Kabale, chaque Wych Cult et chaque Coven Haemonculus est une fief autonome. Les Drukhari raidissent l'espace réel pour kidnapper des esclaves et engranger leurs cris : c'est ainsi qu'ils nourrissent leur âme et tiennent Slaanesh à distance.",
+      "doctrine": "Vitesse, précision, terreur. Les Drukhari frappent en raids éclair depuis les portes du Webway, prennent ce qu'ils veulent (esclaves, technologie, douleur) et disparaissent avant que la cible ne réalise. Leurs armes empoisonnées, leurs lames fendantes, leurs splinter rifles transforment le combat en récolte rituelle."
+    },
+    "stats": {
+      "kabalesConnues": "100+",
+      "effectifs": "Inestimable",
+      "mondeOrigine": "Commorragh (Webway)",
+      "allegiance": "Aucune (rivalités entre Kabales)"
+    },
+    "liensRapides": [
+      "Asdrubael Vect (Suprême Overlord)",
+      "Commorragh — la Cité Sombre",
+      "La Chute de l'Empire Aeldari",
+      "Webway",
+      "Relations avec les Aeldari Craftworlds"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Carte du Webway",
+      "Bibliothèque des archives",
+      "Voir les romans liés"
+    ]
+  },
+  {
+    "id": "grey-knights",
+    "nom": "Grey Knights",
+    "alignement": "Imperium",
+    "description": "Chapitre psyker secret du 666ᵉ Founding, succursale militaire de l'Ordo Malleus. Aucune mention dans les chroniques officielles, aucune trace dans les registres impériaux : ils sont la lame qui éteint les daemons, et ils n'existent pas.",
+    "couleurThematique": "#5a6878",
+    "symbole": "✠",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/0/0a/Grey_Knights_Icon.png/revision/latest/scale-to-width-down/80",
+    "sousTitre": "Les Chevaliers du Titan",
+    "citation": "Ils ne savent même pas que nous existons. Et ceux qui le savent ne s'en souviennent pas.",
+    "lore": {
+      "origine": "Créés en secret après l'Hérésie d'Horus pour combattre les daemons sortis du Warp en masse, les Grey Knights sont issus du génome lui-même de l'Empereur — non d'un primarque. Leur fondateur, Janus, fut le premier Suprême Grand Master. Ils n'apparaissent dans aucune Croisade officielle. L'Ordo Malleus efface chaque témoin de leur passage.",
+      "organisation": "Structurés en huit Brotherhoods (et non en compagnies), chacun mené par un Brother-Captain, chacun spécialisé dans un aspect de la guerre anti-daemonique. Le Suprême Grand Master règne depuis Titan, leur monde-forteresse caché en orbite de Saturne. Tous les Grey Knights sont psykers — c'est leur trait essentiel.",
+      "doctrine": "Combattre le Warp avec le Warp. Leur Nemesis Force Weapons sont forgés pour annuler la matière daemonique. Leur armure est gravée des Vrais Noms des hôtes infernaux qu'ils chassent. Quand un Grey Knight tombe, son corps est récupéré et brûlé pour qu'aucun daemon ne s'empare de son âme. Aucun d'entre eux n'a jamais succombé au Chaos — c'est une des raisons pour laquelle ils existent encore."
+    },
+    "stats": {
+      "brotherhoods": "8",
+      "effectifs": "1.000 max (par charte)",
+      "mondeOrigine": "Titan (lune de Saturne)",
+      "allegiance": "Ordo Malleus / Inquisition"
+    },
+    "liensRapides": [
+      "Kaldor Draigo (Suprême Grand Master)",
+      "Castellan Crowe (Purifiers)",
+      "Ordo Malleus",
+      "Titan — monde-forteresse",
+      "Sœurs du Silence (alliés)"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Bibliothèque des archives",
+      "Voir les romans liés",
+      "Liste des daemons majeurs"
+    ]
+  },
+  {
+    "id": "leagues-of-votann",
+    "nom": "Leagues of Votann",
+    "alignement": "Xenos",
+    "description": "Descendants des Squats originels — humains augmentés génétiquement il y a des millénaires, devenus mineurs-ingénieurs autosuffisants. Leurs Kindreds vivent à l'écart de l'Imperium dans des forteresses spatiales sous les pôles galactiques.",
+    "couleurThematique": "#7d8a9c",
+    "symbole": "⚒",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/c3/Leagues_of_Votann_Logo.png/revision/latest/scale-to-width-down/80",
+    "sousTitre": "Les Fils du Trône-Forge",
+    "citation": "Nous étions là avant l'Imperium. Nous serons là après. La pierre se souvient.",
+    "lore": {
+      "origine": "Au M22-M24, des humains s'établirent dans les régions denses de la galaxie pour exploiter les minerais — l'Âge des Voyages des Étoiles. Leur isolement durant l'Âge des Ténèbres permit aux Squats de muter par augmentation génétique, devenant ces êtres robustes et bas-de-taille connus sous le nom de Kin. Quand l'Imperium réémergea, certains Kin avaient déjà bâti leur propre civilisation — refusant de se soumettre.",
+      "organisation": "Société clanique structurée en Kindreds (Ligues), chacune dirigée par un Kâhl et son Conseil des Anciens. Les IA ancestrales appelées Votann (Trônes-Forges) règnent en arrière-plan : chaque Kindred consulte son Votann avant chaque décision majeure. Au-dessus, le Kônall League's Council coordonne les Kindreds. Ils n'ont pas de Roi.",
+      "doctrine": "Économie de moyens, ingénierie d'élite, blindages massifs. Pas de guerre éternelle pour la guerre — seulement quand on les vole, on les attaque, ou quand on profane une tombe ancestrale. Leurs armes (HYLas rifle, plasma weapons) sont les plus précises de la galaxie. Un Hearthkyn vaut dix soldats impériaux."
+    },
+    "stats": {
+      "kindreds": "5+ documentés",
+      "effectifs": "Inconnus (recensement Kin secret)",
+      "mondeOrigine": "Régions polaires galactiques",
+      "allegiance": "Aucune (neutralité armée)"
+    },
+    "liensRapides": [
+      "Ûthar the Destined",
+      "Kâhl",
+      "Votann (Trônes-Forges)",
+      "Hearthkyn",
+      "Hernkyn"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Atlas Kin",
+      "Bibliothèque des archives",
+      "Voir les romans liés"
+    ]
+  },
+  {
+    "id": "genestealer-cults",
+    "nom": "Genestealer Cults",
+    "alignement": "Xenos",
+    "description": "Cultes hybrides cachés sous les ruches impériales, infiltrés dans la société humaine. Précurseurs des Tyranides : leur Patriarche reste tapi pendant des décennies, infectant des générations entières avant l'arrivée de la Hive Fleet.",
+    "couleurThematique": "#5a3a8c",
+    "symbole": "☩",
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/4/4c/Genestealer_Cults_Logo.png/revision/latest/scale-to-width-down/80",
+    "sousTitre": "Les Enfants du Patriarche",
+    "citation": "Le Quatre-Bras vient. Préparez le grand banquet.",
+    "lore": {
+      "origine": "Quand un Genestealer pur (vanguard organism Tyranide) infecte un humain, il ne le tue pas — il le polluit. Les générations suivantes naissent de plus en plus humaines en apparence, mais toutes liées psychiquement au Patriarche par le Broodlink. Le Culte se développe dans l'ombre, parfois pendant un siècle ou deux, jusqu'à dominer une planète entière de l'intérieur.",
+      "organisation": "Le Patriarche (Genestealer pur) est le centre absolu. Sous lui, le Magus (psyker hybride) et le Primus (chef militaire) ; chacun commande des Acolytes (3-4 bras), des Neophytes (apparence humaine) et des hordes humaines aveuglées par le Broodlink. Quand l'Hive Fleet approche, le Culte se révèle : revolte simultanée, monde livré sur un plateau aux Tyranides.",
+      "doctrine": "Patience, infiltration, multiplication, révélation. Pendant des décennies, ils minent les bases impériales (PDF, Adeptus, Mechanicus) en placant leurs hybrides en infiltration. Quand le Magus reçoit le signal de la Hive Fleet, le monde explose en révolution intérieure. Aucune guerre ouverte n'est possible contre eux : on ne sait pas qu'ils sont là."
+    },
+    "stats": {
+      "cultesIdentifiés": "Innombrables",
+      "effectifs": "Plusieurs millions par culte mature",
+      "mondeOrigine": "Tout monde des ruches impériales",
+      "allegiance": "Tyranides (Hive Mind via Patriarche)"
+    },
+    "liensRapides": [
+      "Patriarche",
+      "Magus",
+      "Primus",
+      "Acolyte Iconward",
+      "Hive Fleet (Tyranides)"
+    ],
+    "resources": [
+      "Lexique Warhammer 40,000",
+      "Bibliothèque des archives",
+      "Voir les romans liés (Genestealer Cults)",
+      "Symptomatologie de l'infestation"
+    ]
   }
 ]

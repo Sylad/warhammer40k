@@ -17,6 +17,14 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
   forgeworld: 'Monde-Forge',
   order: 'Ordre',
   legion: 'Légion',
+  shield_host: 'Shield Host',
+  temple: 'Temple',
+  kabal: 'Kabale',
+  wych_cult: 'Culte Wych',
+  haemonculus_coven: 'Coven Haemonculus',
+  brotherhood: 'Brotherhood',
+  kindred: 'Kindred',
+  cult: 'Culte',
   other: 'Sous-faction',
 };
 

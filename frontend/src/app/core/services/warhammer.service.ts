@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import {
   Faction, Unit, DescriptionResponse, Serie, Video,
   Channel, Artwork, ArtworkCollection, ArtworkArtist, LoreEvent,
-  SubFaction,
+  SubFaction, Emperor, Primarch, ChaosGod,
 } from '../models/models';
 
 export interface WikiImageResult {
@@ -132,6 +132,27 @@ export class WarhammerService {
   readonly loreFeedAll$: Observable<LoreEvent[]> = this.http
     .get<LoreEvent[]>(`${this.base}/lore/all`)
     .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  // === Lore special : Empereur + Primarques ===
+  readonly emperor$: Observable<Emperor> = this.http
+    .get<Emperor>(`${this.base}/lore/emperor`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  readonly primarchs$: Observable<Primarch[]> = this.http
+    .get<Primarch[]>(`${this.base}/lore/primarchs`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getPrimarch(id: string): Observable<Primarch> {
+    return this.http.get<Primarch>(`${this.base}/lore/primarchs/${id}`);
+  }
+
+  readonly chaosGods$: Observable<ChaosGod[]> = this.http
+    .get<ChaosGod[]>(`${this.base}/lore/chaos-gods`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getChaosGod(id: string): Observable<ChaosGod> {
+    return this.http.get<ChaosGod>(`${this.base}/lore/chaos-gods/${id}`);
+  }
 
   // === Image meta (catégorisation user) ===
   getImageMeta(): Observable<Record<string, ImageMeta>> {

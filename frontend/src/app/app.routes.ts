@@ -53,6 +53,26 @@ export const routes: Routes = [
       },
       { path: 'galerie', redirectTo: '/gallery', pathMatch: 'full' },
       {
+        path: 'lore',
+        loadComponent: () => import('./features/lore-hub/lore-hub.component')
+          .then(m => m.LoreHubComponent)
+      },
+      {
+        path: 'lore/emperor',
+        loadComponent: () => import('./features/lore-emperor/lore-emperor.component')
+          .then(m => m.LoreEmperorComponent)
+      },
+      {
+        path: 'lore/primarchs',
+        loadComponent: () => import('./features/lore-primarchs/lore-primarchs.component')
+          .then(m => m.LorePrimarchsComponent)
+      },
+      {
+        path: 'lore/chaos-gods',
+        loadComponent: () => import('./features/lore-chaos-gods/lore-chaos-gods.component')
+          .then(m => m.LoreChaosGodsComponent)
+      },
+      {
         path: 'about',
         loadComponent: () => import('./features/about/about.component')
           .then(m => m.AboutComponent)

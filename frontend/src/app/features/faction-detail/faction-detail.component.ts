@@ -953,7 +953,12 @@ export class FactionDetailComponent {
         chapter: 'Chapitres', regiment: 'Régiments', klan: 'Klans',
         craftworld: 'Vaisseaux-Mondes', hivefleet: 'Flottes-Ruches',
         dynasty: 'Dynasties', sept: 'Septs', forgeworld: 'Mondes-Forges',
-        order: 'Ordres', legion: 'Légions', other: 'Sous-factions',
+        order: 'Ordres', legion: 'Légions',
+        shield_host: 'Shield Hosts', temple: 'Temples',
+        kabal: 'Kabales', wych_cult: 'Cultes Wych',
+        haemonculus_coven: 'Covens Haemonculus', brotherhood: 'Brotherhoods',
+        kindred: 'Kindreds', cult: 'Cultes',
+        other: 'Sous-factions',
       };
       return map[t] ?? 'Sous-factions';
     }
@@ -967,7 +972,12 @@ export class FactionDetailComponent {
       chapter: 'Chapitre', regiment: 'Régiment', klan: 'Klan',
       craftworld: 'Vaisseau-Monde', hivefleet: 'Flotte-Ruche',
       dynasty: 'Dynastie', sept: 'Sept', forgeworld: 'Monde-Forge',
-      order: 'Ordre', legion: 'Légion', other: 'Sous-faction',
+      order: 'Ordre', legion: 'Légion',
+      shield_host: 'Shield Host', temple: 'Temple',
+      kabal: 'Kabale', wych_cult: 'Culte Wych',
+      haemonculus_coven: 'Coven Haemonculus', brotherhood: 'Brotherhood',
+      kindred: 'Kindred', cult: 'Culte',
+      other: 'Sous-faction',
     };
     return map[type] ?? type;
   }

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "khorne",
+    "number": 1,
+    "name": "Khorne",
+    "title": "Le Dieu du Sang · Le Trône de Crânes",
+    "sphere": "Sang, rage, combat, honneur martial",
+    "color": "#8b1a1a",
+    "sigil": "⚔",
+    "wikiQuery": "Khorne Chaos God",
+    "description": "Khorne est le plus ancien et le plus pur des Quatre. Dieu de la guerre martiale, du sang versé en combat franc, de la rage incarnée. Il méprise la magie et la sorcellerie — pour Lui, la vraie force se mesure à la lame.",
+    "loreLong": "Khorne s'éleva en premier, né de la première guerre que l'humanité fit à elle-même il y a des millénaires. Son trône, fait de crânes et baigné de sang, dominait déjà l'Immaterium quand les autres dieux du Chaos étaient encore des chuchotements. Ses fidèles ne prient pas — ils tuent. Chaque crâne offert, chaque goutte de sang versée en combat (jamais en sacrifice rituel froid : Khorne est un guerrier, pas un prêtre) renforce Son pouvoir. Il accorde force surhumaine, rage incontrôlable et endurance légendaire à ceux qui Le servent. Mais Sa colère est aussi Son piège : tomber dans la rage absolue, c'est devenir un esclave perpétuellement enragé, jusqu'à la mort. La devise de Ses Légions, World Eaters et tribus berserk, retentit dans toute la galaxie : « DU SANG POUR LE DIEU DU SANG ! DES CRÂNES POUR LE TRÔNE DE CRÂNES ! »",
+    "citation": "Que coule le sang. Aucun ne sera laissé sans crâne. Aucun crâne ne sera laissé sans dévotion.",
+    "portfolio": ["Sang versé en combat", "Rage et frénésie", "Honneur martial brutal", "Mépris de la magie", "Force pure"],
+    "daemons": {
+      "lesser": "Bloodletters",
+      "elite": "Flesh Hounds, Bloodcrushers",
+      "greater": "Bloodthirsters",
+      "notable": [
+        {
+          "name": "Skarbrand",
+          "description": "Bloodthirster banni, l'Exilé. Si puissant qu'il défia Khorne lui-même — ses ailes lui furent arrachées en punition. Sa rage est sans pareille.",
+          "wikiQuery": "Skarbrand Bloodthirster"
+        },
+        {
+          "name": "Ka'Bandha",
+          "description": "Bloodthirster qui tua Sanguinius, primarque des Blood Angels, lors d'un duel à Signus Prime durant l'Hérésie.",
+          "wikiQuery": "Ka'Bandha Bloodthirster"
+        }
+      ]
+    },
+    "primarchsCorrupted": [
+      { "name": "Angron", "legion": "World Eaters", "primarchId": "angron" }
+    ],
+    "legions": ["World Eaters", "Crimson Slaughter", "Skullbringers", "innombrables warbands"]
+  },
+  {
+    "id": "tzeentch",
+    "number": 2,
+    "name": "Tzeentch",
+    "title": "Le Changeur des Voies · L'Architecte du Destin",
+    "sphere": "Changement, savoir, ambition, schémas",
+    "color": "#3a6cc4",
+    "sigil": "✦",
+    "wikiQuery": "Tzeentch Chaos God",
+    "description": "Tzeentch est le dieu du changement perpétuel et de l'intrigue. Patron des sorciers, des conspirateurs, et de tous ceux qui rêvent d'un destin différent. Aucun de Ses plans ne se déroule jamais comme prévu — c'est l'ironie qui Le nourrit.",
+    "loreLong": "Tzeentch s'éleva quand l'humanité commença à imaginer ce qu'elle pourrait devenir — l'ambition primitive devint Sa première offrande. Il est le dieu des sorciers, des bibliothécaires fous, des comploteurs et de quiconque tisse des plans dans l'ombre. Sa magie est la plus puissante de tous les dieux du Chaos : Il accorde la connaissance interdite, le pouvoir psychique brut, la capacité à voir l'avenir — mais avec un prix. Chaque vision est partielle. Chaque plan engendre dix nouveaux plans. Chaque savoir conquis devient obsolète à l'instant où il est compris. Magnus le Rouge, primarque des Thousand Sons, fut Sa prise de choix : un psyker assez puissant pour tordre la galaxie elle-même. Le Changeur des Voies ne hait personne — Il joue avec tout le monde, y compris Ses propres serviteurs, qu'Il sacrifiera sans hésiter quand le motif l'exigera.",
+    "citation": "Tout est un plan. Aucun plan n'est complet. Tout est encore à écrire.",
+    "portfolio": ["Sorcellerie et magie", "Connaissance interdite", "Schémas dans les schémas", "Ambition", "Mutation"],
+    "daemons": {
+      "lesser": "Pink Horrors (qui se scindent en Blue Horrors à la mort)",
+      "elite": "Flamers, Screamers, Burning Chariots",
+      "greater": "Lords of Change",
+      "notable": [
+        {
+          "name": "Kairos Fateweaver",
+          "description": "Lord of Change à deux têtes — l'une voit le passé, l'autre voit le futur. Conseiller à double tranchant pour quiconque ose le consulter.",
+          "wikiQuery": "Kairos Fateweaver"
+        },
+        {
+          "name": "The Changeling",
+          "description": "Daemon-architecte de la confusion. Personne ne sait à quoi il ressemble vraiment — il prend toutes les formes selon son besoin.",
+          "wikiQuery": "The Changeling Tzeentch"
+        }
+      ]
+    },
+    "primarchsCorrupted": [
+      { "name": "Magnus le Rouge", "legion": "Thousand Sons", "primarchId": "magnus" }
+    ],
+    "legions": ["Thousand Sons", "Sorcerers Cabals", "Trickster Cults", "innombrables warbands sorciers"]
+  },
+  {
+    "id": "nurgle",
+    "number": 3,
+    "name": "Nurgle",
+    "title": "Le Seigneur de la Pourriture · Grand-Père",
+    "sphere": "Maladie, désespoir, acceptation, vie persistante",
+    "color": "#6a8b3a",
+    "sigil": "☣",
+    "wikiQuery": "Nurgle Chaos God",
+    "description": "Nurgle est paradoxal : dieu de la maladie, de la putréfaction et du désespoir, mais aussi de la vie qui persiste malgré tout. Ses fidèles L'appellent affectueusement Grand-Père — Il les aime, vraiment, comme un père aime ses fils malades.",
+    "loreLong": "Nurgle s'éleva quand les premiers humains craignirent la maladie et la vieillesse. Sa réponse ne fut pas la guérison, mais l'acceptation : oui, vous pourrissez, oui, vous mourez — et alors ? La vie continue. Les vermisseaux dans la chair sont aussi vivants que vous. Sa philosophie est étrangement aimante : Il est le seul dieu du Chaos à éprouver une affection sincère pour Ses fidèles. Il leur donne immunité aux maladies (paradoxalement), endurance physique inébranlable, joie au milieu de la dégradation. Mortarion, primarque pâle de Barbarus, embrassa Nurgle pendant l'Hérésie pour échapper à la maladie psychique dont sa Légion souffrait. Aujourd'hui, sa Death Guard incarne cette joie morbide : ses Plague Marines rient en marchant à travers les épidémies. La devise de Nurgle est plus douce qu'on ne le croit : « La pourriture est libération. »",
+    "citation": "Pourquoi craindre la fin, mes enfants ? Embrassez-la. Devenez-la. Vous deviendrez éternels.",
+    "portfolio": ["Maladie et putréfaction", "Endurance physique", "Acceptation joyeuse", "Cycle vie/mort", "Affection paternelle"],
+    "daemons": {
+      "lesser": "Plaguebearers",
+      "elite": "Nurglings (essaims), Beasts of Nurgle, Plague Drones",
+      "greater": "Great Unclean Ones",
+      "notable": [
+        {
+          "name": "Rotigus Rainfather",
+          "description": "Great Unclean One de la pluie de pestilence — fait pleuvoir des plaies sur les mondes qu'il visite.",
+          "wikiQuery": "Rotigus Great Unclean One"
+        },
+        {
+          "name": "Ku'gath Plaguefather",
+          "description": "Great Unclean One et chimiste perpétuel — cherche la maladie ultime qui tuerait toute vie d'un coup.",
+          "wikiQuery": "Kugath Plaguefather"
+        }
+      ]
+    },
+    "primarchsCorrupted": [
+      { "name": "Mortarion", "legion": "Death Guard", "primarchId": "mortarion" }
+    ],
+    "legions": ["Death Guard", "Plague Knights", "Tallymen", "innombrables warbands pestilentiels"]
+  },
+  {
+    "id": "slaanesh",
+    "number": 4,
+    "name": "Slaanesh",
+    "title": "Le Prince des Plaisirs · Celui Qui Murmure",
+    "sphere": "Excès, sensation extrême, perfection, désir",
+    "color": "#9c2680",
+    "sigil": "♆",
+    "wikiQuery": "Slaanesh Chaos God",
+    "description": "Le plus jeune des Quatre. Slaanesh naquit du déclin de l'Empire Eldar (M30) — quand les Aeldari atteignirent une décadence telle que leur sensualité collective créa un nouveau dieu. Sa naissance détruisit la civilisation eldar et créa l'Œil de la Terreur.",
+    "loreLong": "Slaanesh est le dieu du plaisir — mais pas le plaisir doux. Le plaisir extrême, sans limites, qui devient douleur, qui devient à nouveau plaisir, dans un cycle où le sens disparaît. Sensualité, perfection esthétique, soif de sensation, recherche de l'expérience ultime — tout devient Sa porte d'entrée. Slaanesh naquit dans une explosion warp tellement violente qu'elle créa l'Œil de la Terreur et tua presque tous les Aeldari de l'époque. Aujourd'hui encore, les Aeldari survivants vivent dans la terreur de Slaanesh : leurs âmes Lui sont destinées par défaut, raison pour laquelle ils portent des Pierres-Esprit pour protéger leur essence. Fulgrim, primarque des Emperor's Children, fut Sa prise dans l'Imperium : poussé à l'excès dans tous les arts, il bascula dans l'esthétisme du massacre raffiné.",
+    "citation": "Tu désires. Tu n'oses pas. Murmure-moi ton désir, et je te le rendrai cent fois.",
+    "portfolio": ["Plaisir extrême", "Perfection artistique", "Excès et décadence", "Désir interdit", "Sensation absolue"],
+    "daemons": {
+      "lesser": "Daemonettes (six bras, deux poitrines, beauté terrifiante)",
+      "elite": "Fiends of Slaanesh, Seekers, Hellflayers",
+      "greater": "Keepers of Secrets",
+      "notable": [
+        {
+          "name": "Shalaxi Helbane",
+          "description": "Keeper of Secrets duelliste — la plus grande chasseuse, traque les héros impériaux les plus prestigieux pour les briser un par un.",
+          "wikiQuery": "Shalaxi Helbane"
+        },
+        {
+          "name": "Syll'Esske",
+          "description": "Couple fusionné Daemonette + Herald, monture vivante de cavalerie daemonique.",
+          "wikiQuery": "Syll'Esske Slaanesh"
+        }
+      ]
+    },
+    "primarchsCorrupted": [
+      { "name": "Fulgrim", "legion": "Emperor's Children", "primarchId": "fulgrim" }
+    ],
+    "legions": ["Emperor's Children", "Cult of the Slaaneshi", "Hedonists", "innombrables warbands"]
+  }
+]

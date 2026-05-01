@@ -1,199 +1,463 @@
 [
   {
-    "id": "ultramarines", "factionId": "space-marines", "name": "Ultramarines", "type": "chapter",
+    "id": "ultramarines",
+    "factionId": "space-marines",
+    "name": "Ultramarines",
+    "type": "chapter",
     "description": "Le chapitre fondateur le plus discipliné et numéreux, gardien du Codex Astartes.",
     "loreShort": "Fils de Roboute Guilliman, parangons du Codex.",
     "loreLong": "Les Ultramarines sont le 13ᵉ chapitre fondateur de l'Adeptus Astartes, considérés par beaucoup comme les Space Marines incarnant la perfection codifiée. Sous leur primarque Roboute Guilliman, ils établirent l'Imperium Secundus pendant l'Hérésie d'Horus et sauvèrent l'Imperium par la rédaction du Codex Astartes. Basés sur Macragge dans le secteur d'Ultramar (les seuls Space Marines à régner sur un véritable empire stellaire), ils incarnent la discipline, l'honneur et l'application stricte de la doctrine. Avec le retour de Guilliman au M41, ils sont à nouveau au cœur de l'Imperium.",
     "motto": "Théoden a Gloria · Honneur et Discipline",
-    "primarch": "Roboute Guilliman", "primarchWikiQuery": "Roboute Guilliman primarch",
-    "currentLeader": "Marneus Calgar", "currentLeaderRole": "Chapter Master (Lord of Macragge)",
-    "homeworld": "Macragge", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Roboute Guilliman",
+    "primarchWikiQuery": "Roboute Guilliman primarch",
+    "currentLeader": "Marneus Calgar",
+    "currentLeaderRole": "Chapter Master (Lord of Macragge)",
+    "homeworld": "Macragge",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Ultramarines warhammer 40000",
     "citation": "Théoden a Gloria.",
     "notableUnits": [
-      { "name": "Roboute Guilliman", "role": "Primarque (Lord Commander of the Imperium)", "description": "Primarque retourné de stase, dirige la Croisade Indomitus.", "wikiQuery": "Roboute Guilliman" },
-      { "name": "Marneus Calgar", "role": "Chapter Master", "description": "Maître du chapitre, vétéran ascendu en Primaris, légende de Macragge.", "wikiQuery": "Marneus Calgar Ultramarines" },
-      { "name": "Varro Tigurius", "role": "Chief Librarian", "description": "Plus puissant psyker du chapitre.", "wikiQuery": "Varro Tigurius" },
-      { "name": "Cato Sicarius", "role": "Captain of the 2nd Company", "description": "Audacieux capitaine, héros de Damnos et Talassar.", "wikiQuery": "Cato Sicarius" },
-      { "name": "Victrix Guard", "role": "Garde du Primarque", "description": "Garde personnelle de Guilliman, équipée d'armes-relique.", "wikiQuery": "Victrix Guard Ultramarines" }
+      {
+        "name": "Roboute Guilliman",
+        "role": "Primarque (Lord Commander of the Imperium)",
+        "description": "Primarque retourné de stase, dirige la Croisade Indomitus.",
+        "wikiQuery": "Roboute Guilliman"
+      },
+      {
+        "name": "Marneus Calgar",
+        "role": "Chapter Master",
+        "description": "Maître du chapitre, vétéran ascendu en Primaris, légende de Macragge.",
+        "wikiQuery": "Marneus Calgar Ultramarines"
+      },
+      {
+        "name": "Varro Tigurius",
+        "role": "Chief Librarian",
+        "description": "Plus puissant psyker du chapitre.",
+        "wikiQuery": "Varro Tigurius"
+      },
+      {
+        "name": "Cato Sicarius",
+        "role": "Captain of the 2nd Company",
+        "description": "Audacieux capitaine, héros de Damnos et Talassar.",
+        "wikiQuery": "Cato Sicarius"
+      },
+      {
+        "name": "Victrix Guard",
+        "role": "Garde du Primarque",
+        "description": "Garde personnelle de Guilliman, équipée d'armes-relique.",
+        "wikiQuery": "Victrix Guard Ultramarines"
+      }
     ]
   },
   {
-    "id": "blood-angels", "factionId": "space-marines", "name": "Blood Angels", "type": "chapter",
+    "id": "blood-angels",
+    "factionId": "space-marines",
+    "name": "Blood Angels",
+    "type": "chapter",
     "description": "Chapitre noble et tragique, hanté par la Soif Rouge et la Rage Noire héritées de leur primarque mort.",
     "loreShort": "Fils de Sanguinius, anges déchus rongés par la malédiction.",
     "loreLong": "Les Blood Angels descendent du primarque Sanguinius, ange ailé tombé sur Terra face à Horus pour sauver l'Empereur. Tous ses fils portent la Malédiction des Anges : la Soif Rouge (besoin de sang) et la Rage Noire (folie meurtrière des derniers instants de leur primarque). Basés sur Baal, monde radioactif, ils incarnent l'aristocratie martiale et la beauté tragique des Astartes. Ils ont été presque détruits par la Hive Fleet Léviathan mais subsistent.",
     "motto": "Pour Sanguinius et l'Empereur",
-    "primarch": "Sanguinius", "primarchWikiQuery": "Sanguinius primarch Blood Angels",
-    "currentLeader": "Dante", "currentLeaderRole": "Chapter Master (le plus vieux Space Marine vivant)",
-    "homeworld": "Baal", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Sanguinius",
+    "primarchWikiQuery": "Sanguinius primarch Blood Angels",
+    "currentLeader": "Dante",
+    "currentLeaderRole": "Chapter Master (le plus vieux Space Marine vivant)",
+    "homeworld": "Baal",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Blood Angels warhammer",
     "citation": "Mort à l'ennemi de l'Empereur ! Sang pour l'Empereur !",
     "notableUnits": [
-      { "name": "Commander Dante", "role": "Chapter Master, Regent of Imperium Nihilus", "description": "Plus vieux Space Marine vivant (1500+ ans), porteur du Casque de Sanguinius.", "wikiQuery": "Commander Dante Blood Angels" },
-      { "name": "Mephiston", "role": "Lord of Death (Chief Librarian)", "description": "Seul Blood Angel à avoir vaincu la Rage Noire, plus puissant que jamais.", "wikiQuery": "Mephiston Lord of Death" },
-      { "name": "Sanguinary Guard", "role": "Élite ailée", "description": "Vétérans dorés portant les ailes de Sanguinius, élite du chapitre.", "wikiQuery": "Sanguinary Guard Blood Angels" },
-      { "name": "Death Company", "role": "Frères perdus à la Rage Noire", "description": "Marines tombés dans la folie, lancés en première ligne pour mourir avec honneur.", "wikiQuery": "Death Company Blood Angels" },
-      { "name": "Astorath", "role": "High Chaplain", "description": "Le Grand Chapelain, exécuteur miséricordieux des frères perdus.", "wikiQuery": "Astorath Blood Angels" }
+      {
+        "name": "Commander Dante",
+        "role": "Chapter Master, Regent of Imperium Nihilus",
+        "description": "Plus vieux Space Marine vivant (1500+ ans), porteur du Casque de Sanguinius.",
+        "wikiQuery": "Commander Dante Blood Angels"
+      },
+      {
+        "name": "Mephiston",
+        "role": "Lord of Death (Chief Librarian)",
+        "description": "Seul Blood Angel à avoir vaincu la Rage Noire, plus puissant que jamais.",
+        "wikiQuery": "Mephiston Lord of Death"
+      },
+      {
+        "name": "Sanguinary Guard",
+        "role": "Élite ailée",
+        "description": "Vétérans dorés portant les ailes de Sanguinius, élite du chapitre.",
+        "wikiQuery": "Sanguinary Guard Blood Angels"
+      },
+      {
+        "name": "Death Company",
+        "role": "Frères perdus à la Rage Noire",
+        "description": "Marines tombés dans la folie, lancés en première ligne pour mourir avec honneur.",
+        "wikiQuery": "Death Company Blood Angels"
+      },
+      {
+        "name": "Astorath",
+        "role": "High Chaplain",
+        "description": "Le Grand Chapelain, exécuteur miséricordieux des frères perdus.",
+        "wikiQuery": "Astorath Blood Angels"
+      }
     ]
   },
   {
-    "id": "dark-angels", "factionId": "space-marines", "name": "Dark Angels", "type": "chapter",
+    "id": "dark-angels",
+    "factionId": "space-marines",
+    "name": "Dark Angels",
+    "type": "chapter",
     "description": "Chapitre secret obsédé par la traque des Tombés, leurs frères renégats du Massacre de Caliban.",
     "loreShort": "Fils du Lion El'Jonson, gardiens d'un secret millénaire.",
     "loreLong": "Premier chapitre fondateur, les Dark Angels portent une honte indélébile : lors du Massacre de Caliban à la fin de l'Hérésie, leur monde-mère fut détruit et un tiers de leurs frères trahirent. Depuis, le chapitre traque secrètement ces Tombés (Fallen). Leur primarque Lion El'Jonson dort dans la Roche, leur monastère-vaisseau, jusqu'à son retour au M42. Le chapitre est divisé en compagnies internes secrètes : Deathwing (1ère, Terminator) et Ravenwing (2ème, motardes).",
     "motto": "Pour le Lion ! Repentir !",
-    "primarch": "Lion El'Jonson", "primarchWikiQuery": "Lion El'Jonson primarch",
-    "currentLeader": "Azrael", "currentLeaderRole": "Supreme Grand Master",
-    "homeworld": "Caliban (détruit) / La Roche", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Lion El'Jonson",
+    "primarchWikiQuery": "Lion El'Jonson primarch",
+    "currentLeader": "Azrael",
+    "currentLeaderRole": "Supreme Grand Master",
+    "homeworld": "Caliban (détruit) / La Roche",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Dark Angels warhammer 40000",
     "citation": "Pour le Lion ! Repentir aux Tombés !",
     "notableUnits": [
-      { "name": "Lion El'Jonson", "role": "Primarque (réveillé au M42)", "description": "Primarque retourné, premier des fils de l'Empereur à reprendre le combat.", "wikiQuery": "Lion El'Jonson primarch" },
-      { "name": "Azrael", "role": "Supreme Grand Master", "description": "Maître du chapitre, gardien des secrets des Tombés et de la Roche.", "wikiQuery": "Azrael Dark Angels" },
-      { "name": "Belial", "role": "Master of the Deathwing", "description": "Commande la 1ère compagnie en armure Terminator.", "wikiQuery": "Belial Dark Angels" },
-      { "name": "Sammael", "role": "Master of the Ravenwing", "description": "Commande la 2ème compagnie motorisée.", "wikiQuery": "Sammael Dark Angels Ravenwing" },
-      { "name": "Deathwing Knights", "role": "Élite Terminator", "description": "Garde du Cercle Intérieur, masses-foudre et armures terminator ancestrales.", "wikiQuery": "Deathwing Knights" },
-      { "name": "Ravenwing Black Knights", "role": "Élite motorisée", "description": "Cavaliers d'élite chassant les Tombés.", "wikiQuery": "Ravenwing Black Knights" }
+      {
+        "name": "Lion El'Jonson",
+        "role": "Primarque (réveillé au M42)",
+        "description": "Primarque retourné, premier des fils de l'Empereur à reprendre le combat.",
+        "wikiQuery": "Lion El'Jonson primarch"
+      },
+      {
+        "name": "Azrael",
+        "role": "Supreme Grand Master",
+        "description": "Maître du chapitre, gardien des secrets des Tombés et de la Roche.",
+        "wikiQuery": "Azrael Dark Angels"
+      },
+      {
+        "name": "Belial",
+        "role": "Master of the Deathwing",
+        "description": "Commande la 1ère compagnie en armure Terminator.",
+        "wikiQuery": "Belial Dark Angels"
+      },
+      {
+        "name": "Sammael",
+        "role": "Master of the Ravenwing",
+        "description": "Commande la 2ème compagnie motorisée.",
+        "wikiQuery": "Sammael Dark Angels Ravenwing"
+      },
+      {
+        "name": "Deathwing Knights",
+        "role": "Élite Terminator",
+        "description": "Garde du Cercle Intérieur, masses-foudre et armures terminator ancestrales.",
+        "wikiQuery": "Deathwing Knights"
+      },
+      {
+        "name": "Ravenwing Black Knights",
+        "role": "Élite motorisée",
+        "description": "Cavaliers d'élite chassant les Tombés.",
+        "wikiQuery": "Ravenwing Black Knights"
+      }
     ]
   },
   {
-    "id": "space-wolves", "factionId": "space-marines", "name": "Space Wolves", "type": "chapter",
+    "id": "space-wolves",
+    "factionId": "space-marines",
+    "name": "Space Wolves",
+    "type": "chapter",
     "description": "Chapitre guerrier rebelle au Codex, organisé en Grandes Compagnies tribales et fier de son indépendance.",
     "loreShort": "Fils de Leman Russ, loups de Fenris, indomptables et fiers.",
     "loreLong": "Les Space Wolves sont l'incarnation du guerrier viking espace, refusant le Codex Astartes pour conserver une organisation tribale ancestrale. Leur primarque Leman Russ disparut dans l'Œil de la Terreur en quête du remède à la malédiction du Wulfen (mutation lupine touchant certains frères). Basés sur Fenris, monde glaciaire, ils sont divisés en 12 Grandes Compagnies dirigées chacune par un Wolf Lord. Leur rivalité avec les Thousand Sons est légendaire.",
     "motto": "Russ et l'Empereur !",
-    "primarch": "Leman Russ", "primarchWikiQuery": "Leman Russ primarch",
-    "currentLeader": "Logan Grimnar", "currentLeaderRole": "Great Wolf (Chapter Master)",
-    "homeworld": "Fenris", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Leman Russ",
+    "primarchWikiQuery": "Leman Russ primarch",
+    "currentLeader": "Logan Grimnar",
+    "currentLeaderRole": "Great Wolf (Chapter Master)",
+    "homeworld": "Fenris",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Space Wolves warhammer",
     "citation": "Russ ! Russ ! Russ !",
     "notableUnits": [
-      { "name": "Logan Grimnar", "role": "Great Wolf", "description": "Maître du chapitre légendaire, le Vieux Loup, plus de 700 ans de combat.", "wikiQuery": "Logan Grimnar" },
-      { "name": "Ragnar Blackmane", "role": "Wolf Lord (jeune et impétueux)", "description": "Plus jeune Wolf Lord de l'histoire.", "wikiQuery": "Ragnar Blackmane Space Wolves" },
-      { "name": "Bjorn the Fell-Handed", "role": "Dreadnought ancestral", "description": "Plus vieux Dreadnought connu, contemporain de Leman Russ lui-même.", "wikiQuery": "Bjorn the Fell-Handed" },
-      { "name": "Thunderwolf Cavalry", "role": "Cavalerie d'élite", "description": "Wolf Guards montés sur des Thunderwolves féroces.", "wikiQuery": "Thunderwolf Cavalry Space Wolves" },
-      { "name": "Wulfen", "role": "Frères touchés par la malédiction lupine", "description": "Mi-hommes mi-loups, retrouvés récemment dans l'Œil.", "wikiQuery": "Wulfen Space Wolves" },
-      { "name": "Njal Stormcaller", "role": "Rune Priest légendaire", "description": "Plus puissant Rune Priest du chapitre.", "wikiQuery": "Njal Stormcaller" }
+      {
+        "name": "Logan Grimnar",
+        "role": "Great Wolf",
+        "description": "Maître du chapitre légendaire, le Vieux Loup, plus de 700 ans de combat.",
+        "wikiQuery": "Logan Grimnar"
+      },
+      {
+        "name": "Ragnar Blackmane",
+        "role": "Wolf Lord (jeune et impétueux)",
+        "description": "Plus jeune Wolf Lord de l'histoire.",
+        "wikiQuery": "Ragnar Blackmane Space Wolves"
+      },
+      {
+        "name": "Bjorn the Fell-Handed",
+        "role": "Dreadnought ancestral",
+        "description": "Plus vieux Dreadnought connu, contemporain de Leman Russ lui-même.",
+        "wikiQuery": "Bjorn the Fell-Handed"
+      },
+      {
+        "name": "Thunderwolf Cavalry",
+        "role": "Cavalerie d'élite",
+        "description": "Wolf Guards montés sur des Thunderwolves féroces.",
+        "wikiQuery": "Thunderwolf Cavalry Space Wolves"
+      },
+      {
+        "name": "Wulfen",
+        "role": "Frères touchés par la malédiction lupine",
+        "description": "Mi-hommes mi-loups, retrouvés récemment dans l'Œil.",
+        "wikiQuery": "Wulfen Space Wolves"
+      },
+      {
+        "name": "Njal Stormcaller",
+        "role": "Rune Priest légendaire",
+        "description": "Plus puissant Rune Priest du chapitre.",
+        "wikiQuery": "Njal Stormcaller"
+      }
     ]
   },
   {
-    "id": "imperial-fists", "factionId": "space-marines", "name": "Imperial Fists", "type": "chapter",
+    "id": "imperial-fists",
+    "factionId": "space-marines",
+    "name": "Imperial Fists",
+    "type": "chapter",
     "description": "Maîtres du siège et de la défense, gardiens éternels du Trône d'Or et de Terra.",
     "loreShort": "Fils de Rogal Dorn, défenseurs de l'Empereur.",
     "loreLong": "Les Imperial Fists sont les défenseurs personnels de l'Empereur. Leur primarque Rogal Dorn fortifia le Palais Impérial pendant le Siège de Terra et brisa l'assaut d'Horus. Maîtres incontestés de la guerre de siège, ils excellent autant en attaque qu'en défense de fortifications. Leur monde-mère est le Phalanx, gigantesque vaisseau-forteresse dérivant à travers la galaxie. Le chapitre cultive une discipline stoïque et une tolérance extrême à la douleur (rituel de la Cage de Douleur).",
     "motto": "Primarque-Imperator pour Toujours !",
-    "primarch": "Rogal Dorn", "primarchWikiQuery": "Rogal Dorn primarch",
-    "currentLeader": "Tor Garadon", "currentLeaderRole": "Captain of the 3rd Company (figure principale Primaris)",
-    "homeworld": "Phalanx (forteresse-monde mobile)", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Rogal Dorn",
+    "primarchWikiQuery": "Rogal Dorn primarch",
+    "currentLeader": "Tor Garadon",
+    "currentLeaderRole": "Captain of the 3rd Company (figure principale Primaris)",
+    "homeworld": "Phalanx (forteresse-monde mobile)",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Imperial Fists warhammer",
     "citation": "Le rempart est éternel.",
     "notableUnits": [
-      { "name": "Tor Garadon", "role": "Captain of 3rd Company", "description": "Capitaine vétéran, figure majeure du chapitre à l'ère Primaris.", "wikiQuery": "Tor Garadon Imperial Fists" },
-      { "name": "Darnath Lysander", "role": "Captain of 1st Company", "description": "Légende vivante, Terminator porteur du Marteau de Dorn.", "wikiQuery": "Darnath Lysander" },
-      { "name": "Sternguard Veterans", "role": "Vétérans d'élite", "description": "Compagnie de vétérans portant des bolters spéciaux et munitions exotiques.", "wikiQuery": "Sternguard Veterans Imperial Fists" }
+      {
+        "name": "Tor Garadon",
+        "role": "Captain of 3rd Company",
+        "description": "Capitaine vétéran, figure majeure du chapitre à l'ère Primaris.",
+        "wikiQuery": "Tor Garadon Imperial Fists"
+      },
+      {
+        "name": "Darnath Lysander",
+        "role": "Captain of 1st Company",
+        "description": "Légende vivante, Terminator porteur du Marteau de Dorn.",
+        "wikiQuery": "Darnath Lysander"
+      },
+      {
+        "name": "Sternguard Veterans",
+        "role": "Vétérans d'élite",
+        "description": "Compagnie de vétérans portant des bolters spéciaux et munitions exotiques.",
+        "wikiQuery": "Sternguard Veterans Imperial Fists"
+      }
     ]
   },
   {
-    "id": "salamanders", "factionId": "space-marines", "name": "Salamanders", "type": "chapter",
+    "id": "salamanders",
+    "factionId": "space-marines",
+    "name": "Salamanders",
+    "type": "chapter",
     "description": "Forgerons-guerriers protecteurs des innocents, maîtres de la flamme et des armes lourdes.",
     "loreShort": "Fils de Vulkan, artisans et gardiens de Nocturne.",
     "loreLong": "Les Salamanders, fils du primarque Vulkan, sont uniques parmi les Astartes : peau noire et yeux rouges (mutation génétique due aux radiations de Nocturne), ils accordent autant d'importance à protéger les innocents qu'à abattre l'ennemi. Maîtres-forgerons, ils créent leurs propres armes-reliques. Vulkan disparut au M31 mais aurait laissé 9 artefacts cachés que ses fils traquent encore. Le chapitre est très en sous-effectif.",
     "motto": "Pour Vulkan, le Père des Forges !",
-    "primarch": "Vulkan", "primarchWikiQuery": "Vulkan primarch Salamanders",
-    "currentLeader": "Adrax Agatone", "currentLeaderRole": "Captain of 3rd Company (figure majeure Primaris)",
-    "homeworld": "Nocturne", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Vulkan",
+    "primarchWikiQuery": "Vulkan primarch Salamanders",
+    "currentLeader": "Adrax Agatone",
+    "currentLeaderRole": "Captain of 3rd Company (figure majeure Primaris)",
+    "homeworld": "Nocturne",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Salamanders warhammer",
     "citation": "Dans les flammes du combat, l'âme du Salamander est trempée.",
     "notableUnits": [
-      { "name": "Vulkan He'stan", "role": "Forgefather (gardien des reliques)", "description": "Cherche les 9 reliques de Vulkan à travers la galaxie.", "wikiQuery": "Vulkan He'stan Forgefather" },
-      { "name": "Adrax Agatone", "role": "Captain of 3rd Company", "description": "Capitaine Primaris, héritier de la tradition forgeron.", "wikiQuery": "Adrax Agatone Salamanders" },
-      { "name": "Tu'Shan", "role": "Chapter Master (Regent of Prometheus)", "description": "Maître du chapitre, défendit des civils contre l'Inquisition.", "wikiQuery": "Tu'Shan Salamanders" },
-      { "name": "Firedrakes", "role": "Élite Terminator", "description": "1ère compagnie en armure Terminator, lance-flammes lourds.", "wikiQuery": "Firedrake Terminator Salamanders" }
+      {
+        "name": "Vulkan He'stan",
+        "role": "Forgefather (gardien des reliques)",
+        "description": "Cherche les 9 reliques de Vulkan à travers la galaxie.",
+        "wikiQuery": "Vulkan He'stan Forgefather"
+      },
+      {
+        "name": "Adrax Agatone",
+        "role": "Captain of 3rd Company",
+        "description": "Capitaine Primaris, héritier de la tradition forgeron.",
+        "wikiQuery": "Adrax Agatone Salamanders"
+      },
+      {
+        "name": "Tu'Shan",
+        "role": "Chapter Master (Regent of Prometheus)",
+        "description": "Maître du chapitre, défendit des civils contre l'Inquisition.",
+        "wikiQuery": "Tu'Shan Salamanders"
+      },
+      {
+        "name": "Firedrakes",
+        "role": "Élite Terminator",
+        "description": "1ère compagnie en armure Terminator, lance-flammes lourds.",
+        "wikiQuery": "Firedrake Terminator Salamanders"
+      }
     ]
   },
   {
-    "id": "white-scars", "factionId": "space-marines", "name": "White Scars", "type": "chapter",
+    "id": "white-scars",
+    "factionId": "space-marines",
+    "name": "White Scars",
+    "type": "chapter",
     "description": "Cavaliers nomades de Chogoris, maîtres de la guerre éclair et de la frappe rapide.",
     "loreShort": "Fils du Khan, vent éternel des steppes.",
     "loreLong": "Les White Scars descendent de Jaghatai Khan, primarque issu des steppes de Chogoris. Cavaliers et nomades par tradition, ils privilégient l'attaque éclair, l'enveloppement et le harcèlement. Maîtres incontestés des Bike Squads et Land Speeders. Leur Khan disparut dans la Tempête Cicatrice (Webway) en chassant un démon.",
     "motto": "Pour le Khan ! La chasse continue !",
-    "primarch": "Jaghatai Khan", "primarchWikiQuery": "Jaghatai Khan primarch",
-    "currentLeader": "Kor'sarro Khan", "currentLeaderRole": "Master of the Hunt (3rd Company Captain)",
-    "homeworld": "Chogoris (Mundus Planus)", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Jaghatai Khan",
+    "primarchWikiQuery": "Jaghatai Khan primarch",
+    "currentLeader": "Kor'sarro Khan",
+    "currentLeaderRole": "Master of the Hunt (3rd Company Captain)",
+    "homeworld": "Chogoris (Mundus Planus)",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "White Scars warhammer",
     "citation": "Le vent attend pour personne.",
     "notableUnits": [
-      { "name": "Kor'sarro Khan", "role": "Master of the Hunt", "description": "Plus grand chasseur du chapitre, porte sa lame Moonfang.", "wikiQuery": "Kor'sarro Khan White Scars" },
-      { "name": "Stormseers", "role": "Bibliothécaires nomades", "description": "Psykers liés aux esprits des steppes et aux tempêtes psychiques.", "wikiQuery": "Stormseer White Scars" }
+      {
+        "name": "Kor'sarro Khan",
+        "role": "Master of the Hunt",
+        "description": "Plus grand chasseur du chapitre, porte sa lame Moonfang.",
+        "wikiQuery": "Kor'sarro Khan White Scars"
+      },
+      {
+        "name": "Stormseers",
+        "role": "Bibliothécaires nomades",
+        "description": "Psykers liés aux esprits des steppes et aux tempêtes psychiques.",
+        "wikiQuery": "Stormseer White Scars"
+      }
     ]
   },
   {
-    "id": "iron-hands", "factionId": "space-marines", "name": "Iron Hands", "type": "chapter",
+    "id": "iron-hands",
+    "factionId": "space-marines",
+    "name": "Iron Hands",
+    "type": "chapter",
     "description": "Chapitre cybernétique méprisant la chair faible, alliés étroits du Mechanicus.",
     "loreShort": "Fils de Ferrus Manus, fer et cybernétique.",
     "loreLong": "Les Iron Hands méprisent la chair faillible et la remplacent par des augmentations cybernétiques. Leur primarque Ferrus Manus avait littéralement les mains de fer (étreinte avec le Dragon de Médusa). Tué par Fulgrim au Dropsite Massacre, sa mort obsède le chapitre. Très proches de l'Adeptus Mechanicus, organisés en Clans.",
     "motto": "La chair est faible.",
-    "primarch": "Ferrus Manus", "primarchWikiQuery": "Ferrus Manus primarch",
-    "currentLeader": "Feirros", "currentLeaderRole": "Iron Father (Primaris Techmarine)",
-    "homeworld": "Medusa", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Ferrus Manus",
+    "primarchWikiQuery": "Ferrus Manus primarch",
+    "currentLeader": "Feirros",
+    "currentLeaderRole": "Iron Father (Primaris Techmarine)",
+    "homeworld": "Medusa",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Iron Hands warhammer",
     "citation": "La chair est faible. Le fer est éternel.",
     "notableUnits": [
-      { "name": "Feirros", "role": "Iron Father", "description": "Techmarine légendaire, hybride homme-machine.", "wikiQuery": "Feirros Iron Hands" },
-      { "name": "Iron Father", "role": "Hybride Techmarine-Chaplain", "description": "Rôle unique aux Iron Hands : prêtre et techmarine.", "wikiQuery": "Iron Father Iron Hands" }
+      {
+        "name": "Feirros",
+        "role": "Iron Father",
+        "description": "Techmarine légendaire, hybride homme-machine.",
+        "wikiQuery": "Feirros Iron Hands"
+      },
+      {
+        "name": "Iron Father",
+        "role": "Hybride Techmarine-Chaplain",
+        "description": "Rôle unique aux Iron Hands : prêtre et techmarine.",
+        "wikiQuery": "Iron Father Iron Hands"
+      }
     ]
   },
   {
-    "id": "raven-guard", "factionId": "space-marines", "name": "Raven Guard", "type": "chapter",
+    "id": "raven-guard",
+    "factionId": "space-marines",
+    "name": "Raven Guard",
+    "type": "chapter",
     "description": "Maîtres de l'infiltration et de la guerre asymétrique, frappant depuis l'ombre.",
     "loreShort": "Fils de Corvus Corax, ombres de l'Imperium.",
     "loreLong": "Les Raven Guard descendent de Corvus Corax, primarque libérateur d'esclaves dans son enfance. Ils privilégient infiltration, raids et guerre asymétrique. Décimés au Dropsite Massacre, ils tentèrent une régénération accélérée qui produisit des aberrations. Leur primarque disparut volontairement dans l'Œil en quête de rédemption.",
     "motto": "Victoire ou Mort !",
-    "primarch": "Corvus Corax", "primarchWikiQuery": "Corvus Corax primarch",
-    "currentLeader": "Kayvaan Shrike", "currentLeaderRole": "Chapter Master",
-    "homeworld": "Deliverance (lune de Kiavahr)", "founding": "1ʳᵉ Fondation (M30)",
+    "primarch": "Corvus Corax",
+    "primarchWikiQuery": "Corvus Corax primarch",
+    "currentLeader": "Kayvaan Shrike",
+    "currentLeaderRole": "Chapter Master",
+    "homeworld": "Deliverance (lune de Kiavahr)",
+    "founding": "1ʳᵉ Fondation (M30)",
     "wikiQuery": "Raven Guard warhammer",
     "citation": "Du néant, par les ombres, à la victoire.",
     "notableUnits": [
-      { "name": "Kayvaan Shrike", "role": "Chapter Master", "description": "Légende vivante de l'infiltration et du combat aérien.", "wikiQuery": "Kayvaan Shrike Raven Guard" },
-      { "name": "Vanguard Veterans", "role": "Spécialistes assaut sauteur", "description": "Vétérans en jump packs, frappe verticale.", "wikiQuery": "Vanguard Veterans Raven Guard" }
+      {
+        "name": "Kayvaan Shrike",
+        "role": "Chapter Master",
+        "description": "Légende vivante de l'infiltration et du combat aérien.",
+        "wikiQuery": "Kayvaan Shrike Raven Guard"
+      },
+      {
+        "name": "Vanguard Veterans",
+        "role": "Spécialistes assaut sauteur",
+        "description": "Vétérans en jump packs, frappe verticale.",
+        "wikiQuery": "Vanguard Veterans Raven Guard"
+      }
     ]
   },
   {
-    "id": "black-templars", "factionId": "space-marines", "parentSubFactionId": "imperial-fists", "name": "Black Templars", "type": "chapter",
+    "id": "black-templars",
+    "factionId": "space-marines",
+    "parentSubFactionId": "imperial-fists",
+    "name": "Black Templars",
+    "type": "chapter",
     "description": "Croisés zélés en perpétuelle Croisade Éternelle, refusant le Codex Astartes et les bibliothécaires.",
     "loreShort": "Successeurs des Imperial Fists, fanatiques de la foi.",
     "loreLong": "Les Black Templars sont le plus grand des chapitres successeurs des Imperial Fists, fondés par Sigismund après l'Hérésie. Refusant le Codex Astartes, ils restent en Croisade Éternelle depuis 10 millénaires sans monde-mère, voyageant en flottes-cathédrales. Ils détestent les psykers et incarnent la pure foi en l'Empereur. Effectif réel défie le Codex (probablement 5000+ frères).",
     "motto": "L'Empereur protège ! Pas de pitié, pas de rémission !",
     "primarchWikiQuery": "Sigismund Black Templars",
-    "currentLeader": "Helbrecht", "currentLeaderRole": "High Marshal (Maître du chapitre)",
-    "homeworld": "Flotte-cathédrale (Eternal Crusader)", "founding": "Successeur 2ᵉ Fondation",
+    "currentLeader": "Helbrecht",
+    "currentLeaderRole": "High Marshal (Maître du chapitre)",
+    "homeworld": "Flotte-cathédrale (Eternal Crusader)",
+    "founding": "Successeur 2ᵉ Fondation",
     "wikiQuery": "Black Templars warhammer",
     "citation": "Pas de pitié ! Pas de rémission ! Pas de peur !",
     "notableUnits": [
-      { "name": "Helbrecht", "role": "High Marshal", "description": "Plus haut commandant des Black Templars, mène la Croisade Éternelle.", "wikiQuery": "Helbrecht High Marshal Black Templars" },
-      { "name": "Grimaldus", "role": "Reclusiarch (High Chaplain)", "description": "Chapelain défenseur d'Helsreach contre les Orks de Ghazghkull.", "wikiQuery": "Grimaldus Black Templars" },
-      { "name": "Sword Brethren", "role": "Élite vétérane", "description": "Vétérans de la Croisade Éternelle.", "wikiQuery": "Sword Brethren Black Templars" }
+      {
+        "name": "Helbrecht",
+        "role": "High Marshal",
+        "description": "Plus haut commandant des Black Templars, mène la Croisade Éternelle.",
+        "wikiQuery": "Helbrecht High Marshal Black Templars"
+      },
+      {
+        "name": "Grimaldus",
+        "role": "Reclusiarch (High Chaplain)",
+        "description": "Chapelain défenseur d'Helsreach contre les Orks de Ghazghkull.",
+        "wikiQuery": "Grimaldus Black Templars"
+      },
+      {
+        "name": "Sword Brethren",
+        "role": "Élite vétérane",
+        "description": "Vétérans de la Croisade Éternelle.",
+        "wikiQuery": "Sword Brethren Black Templars"
+      }
     ]
   },
   {
-    "id": "crimson-fists", "factionId": "space-marines", "parentSubFactionId": "imperial-fists", "name": "Crimson Fists", "type": "chapter",
+    "id": "crimson-fists",
+    "factionId": "space-marines",
+    "parentSubFactionId": "imperial-fists",
+    "name": "Crimson Fists",
+    "type": "chapter",
     "description": "Successeurs des Imperial Fists décimés par les Orks de Snagrod, presque effacés mais toujours debout.",
     "loreShort": "Tenaces, gardiens de Rynn's World.",
     "loreLong": "Les Crimson Fists furent presque anéantis lors de l'invasion Ork de Rynn's World. Un missile nucléaire dévia et détruisit leur monastère, les réduisant à quelques dizaines de frères. Pedro Kantor regroupa les survivants et reconquit Rynn's World en 18 mois.",
     "motto": "Pour Dorn et l'Empereur !",
     "primarchWikiQuery": "Rogal Dorn primarch",
-    "currentLeader": "Pedro Kantor", "currentLeaderRole": "Chapter Master",
-    "homeworld": "Rynn's World", "founding": "Successeur 2ᵉ Fondation",
+    "currentLeader": "Pedro Kantor",
+    "currentLeaderRole": "Chapter Master",
+    "homeworld": "Rynn's World",
+    "founding": "Successeur 2ᵉ Fondation",
     "wikiQuery": "Crimson Fists warhammer",
     "citation": "Nous nous tenons seuls. C'est la nature des Crimson Fists.",
     "notableUnits": [
-      { "name": "Pedro Kantor", "role": "Chapter Master", "description": "Sauveur du chapitre après la Catastrophe de Rynn's World.", "wikiQuery": "Pedro Kantor Crimson Fists" }
+      {
+        "name": "Pedro Kantor",
+        "role": "Chapter Master",
+        "description": "Sauveur du chapitre après la Catastrophe de Rynn's World.",
+        "wikiQuery": "Pedro Kantor Crimson Fists"
+      }
     ]
   },
   {
-    "id": "deathwatch", "factionId": "space-marines", "name": "Deathwatch", "type": "chapter",
+    "id": "deathwatch",
+    "factionId": "space-marines",
+    "name": "Deathwatch",
+    "type": "chapter",
     "description": "Chapitre spécial puisant des kill-teams parmi tous les chapitres pour combattre les Xenos.",
     "loreShort": "Élite anti-Xenos, bras de l'Ordo Xenos.",
     "loreLong": "Le Deathwatch est le bras armé de l'Ordo Xenos de l'Inquisition. Les chapitres tributaires prêtent leurs frères au Deathwatch pour des missions spécialisées contre les Xenos. Chaque frère sert un cycle (le Long Vigil) avant de retourner à son chapitre.",
@@ -201,68 +465,1372 @@
     "wikiQuery": "Deathwatch warhammer",
     "citation": "Suffer not the alien to live.",
     "notableUnits": [
-      { "name": "Watch Captain Artemis", "role": "Capitaine légendaire", "description": "Expert en chasse aux Xenos.", "wikiQuery": "Watch Captain Artemis Deathwatch" },
-      { "name": "Kill Teams", "role": "Unités composites", "description": "Squads composées de frères de plusieurs chapitres.", "wikiQuery": "Deathwatch Kill Team" }
+      {
+        "name": "Watch Captain Artemis",
+        "role": "Capitaine légendaire",
+        "description": "Expert en chasse aux Xenos.",
+        "wikiQuery": "Watch Captain Artemis Deathwatch"
+      },
+      {
+        "name": "Kill Teams",
+        "role": "Unités composites",
+        "description": "Squads composées de frères de plusieurs chapitres.",
+        "wikiQuery": "Deathwatch Kill Team"
+      }
     ]
   },
-
-  { "id": "death-korps-of-krieg", "factionId": "astra-militarum", "name": "Death Korps of Krieg", "type": "regiment", "description": "Régiment de guerre de tranchée fanatique cherchant la rédemption par le sacrifice après la guerre civile de Krieg.", "loreShort": "Soldats masqués, sacrifice et discipline.", "loreLong": "Les Death Korps de Krieg viennent d'un monde-mort vitrifié par sa propre rébellion contre l'Imperium au M37. Depuis, leurs descendants combattent dans l'Astra Militarum pour expier la trahison ancestrale, recherchant la mort honorable comme rédemption. Élevés en clones uniformes dans des cuves, ils portent des masques à gaz et combattent la guerre de tranchée la plus brutale, parfaitement insensibles aux pertes massives. Le siège de Vraks fut leur opération-signature.", "homeworld": "Krieg (monde mort)", "currentLeader": "Marshal", "currentLeaderRole": "Maréchaux des Korps", "wikiQuery": "Death Korps of Krieg", "citation": "Per Sanguinis, Per Sacrificium." },
-  { "id": "cadian-shock-troops", "factionId": "astra-militarum", "name": "Cadian Shock Troops", "type": "regiment", "description": "Régiment d'élite formé sur le monde-forteresse Cadia, premier rempart contre l'Œil de la Terreur.", "loreShort": "Élite humaine, Cadia tient — toujours.", "loreLong": "Les Cadians étaient les meilleurs soldats humains de l'Imperium, élevés sur le monde-forteresse Cadia gardant la seule sortie stable de l'Œil de la Terreur. Lors de la 13ème Croisade Noire d'Abaddon, Cadia fut détruit, mais les Cadians survivants forment encore les régiments d'élite de la Garde.", "homeworld": "Cadia (détruit M41)", "currentLeader": "Lord Castellan Creed", "currentLeaderRole": "Lord Castellan (légendaire)", "wikiQuery": "Cadian Shock Troops", "citation": "Cadia tient — pour toujours." },
-  { "id": "catachan-jungle-fighters", "factionId": "astra-militarum", "name": "Catachan Jungle Fighters", "type": "regiment", "description": "Soldats colossaux nés du monde-mort Catachan, experts du combat de jungle et démolition.", "loreShort": "Diables verts musclés, jungle warriors.", "loreLong": "Catachan est un monde mortel où la flore tente de vous tuer chaque jour. Les humains qui y survivent grandissent musclés, gigantesques, brutaux et résistants. Surnommés Catachan Devils, ils excellent en guerre asymétrique, démolition et survie en milieu hostile.", "homeworld": "Catachan", "wikiQuery": "Catachan Jungle Fighters", "citation": "Si vous y survivez, c'est que vous êtes Catachan." },
-  { "id": "vostroyan-firstborn", "factionId": "astra-militarum", "name": "Vostroyan Firstborn", "type": "regiment", "description": "Régiment cérémoniel composé du premier-né de chaque famille de Vostroya, dette éternelle à l'Empereur.", "loreShort": "Aristocratie martiale, fusils ouvragés.", "loreLong": "Vostroya refusa d'envoyer ses soldats à la défense de Terra pendant l'Hérésie. Honteux de leur lâcheté, les Vostroyens jurèrent depuis d'envoyer chaque premier-né de chaque famille servir dans l'Astra Militarum à perpétuité.", "homeworld": "Vostroya", "wikiQuery": "Vostroyan Firstborn" },
-  { "id": "mordian-iron-guard", "factionId": "astra-militarum", "name": "Mordian Iron Guard", "type": "regiment", "description": "Régiment de drill parfait, infanterie en uniforme bleu rigoureux, maîtres du tir disciplíné.", "loreShort": "Discipline impeccable, lignes de tir parfaites.", "loreLong": "Mordian est un monde tidalement bloqué où une moitié vit dans l'obscurité éternelle. Les régiments mordiens sont l'incarnation de la discipline militaire prussienne : drill parfait, uniformes immaculés, lignes de tir géométriques.", "homeworld": "Mordian", "wikiQuery": "Mordian Iron Guard" },
-  { "id": "tallarn-desert-raiders", "factionId": "astra-militarum", "name": "Tallarn Desert Raiders", "type": "regiment", "description": "Cavaliers du désert Tallarn, maîtres de la guérilla et des frappes rapides en territoire hostile.", "loreShort": "Nomades du désert, guérilla et embuscades.", "loreLong": "Tallarn fut empoisonné chimiquement par l'Iron Warrior Perturabo lors de l'Hérésie. Les survivants nomadisèrent dans les déserts toxiques et développèrent une expertise sans pareille en guerre du désert.", "homeworld": "Tallarn", "wikiQuery": "Tallarn warhammer" },
-  { "id": "valhallan-ice-warriors", "factionId": "astra-militarum", "name": "Valhallan Ice Warriors", "type": "regiment", "description": "Soldats endurcis du monde glaciaire Valhalla, vagues humaines insensibles aux pertes.", "loreShort": "Endurance glaciale, vagues humaines.", "loreLong": "Valhalla est un monde glaciaire où survivre est déjà un acte héroïque. Quand les Orks envahirent et furent enfin repoussés, les Valhallans développèrent une mentalité de la guerre d'attrition : vagues humaines patientes, retranchement profond.", "homeworld": "Valhalla", "wikiQuery": "Valhallan Ice Warriors" },
-  { "id": "tanith-first-and-only", "factionId": "astra-militarum", "name": "Tanith First and Only", "type": "regiment", "description": "Régiment des Fantômes de Gaunt, dernier des Tanith après la perte de leur monde, infiltration et tireurs d'élite.", "loreShort": "Fantômes du Colonel Gaunt, le seul et l'unique.", "loreLong": "Tanith fut détruit par le Chaos avant même que ses régiments ne puissent partir. Le Colonel-Commissaire Ibram Gaunt sauva un seul régiment, le Tanith First, devenu \"First and Only\". Surnommés Gaunt's Ghosts, ils excellent en infiltration et tireurs d'élite. Personnages culte de Dan Abnett.", "homeworld": "Tanith (détruit)", "currentLeader": "Colonel-Commissar Ibram Gaunt", "currentLeaderRole": "Colonel-Commissar (héros culte)", "wikiQuery": "Tanith First and Only Gaunt's Ghosts", "citation": "Du néant, des Fantômes." },
-
-  { "id": "world-eaters", "factionId": "chaos-space-marines", "name": "World Eaters", "type": "legion", "description": "Légion XII vouée à Khorne, gladiateurs cybernétiques assoiffés de sang et de crânes.", "loreShort": "Sang pour le Dieu du Sang, crânes pour le Trône.", "loreLong": "La XIIème légion fut originellement nommée War Hounds. Lors de leur découverte de leur primarque Angron sur Nuceria, les Astartes acceptèrent la mutation des Butcher's Nails (Clous du Boucher) implantés dans leur crâne, qui amplifient la rage à des niveaux insoutenables. Voués à Khorne pendant l'Hérésie. Angron a été ressuscité en Daemon-Primarque, libéré de l'Œil au M42.", "primarch": "Angron (Daemon-Primarch)", "primarchWikiQuery": "Angron primarch World Eaters", "currentLeader": "Kharn the Betrayer", "currentLeaderRole": "Champion éternel de Khorne", "homeworld": "Skalathrax (gelé) / Œil de la Terreur", "wikiQuery": "World Eaters warhammer", "citation": "Le sang pour le Dieu du Sang, les crânes pour le Trône !", "notableUnits": [ { "name": "Angron", "role": "Daemon-Primarque", "description": "Primarque ressuscité en Daemon, manifestation de la rage absolue de Khorne.", "wikiQuery": "Angron primarch" }, { "name": "Kharn the Betrayer", "role": "Champion éternel", "description": "Plus célèbre Champion de Khorne, traître de Skalathrax, hache Gorechild.", "wikiQuery": "Kharn the Betrayer" }, { "name": "Berzerkers", "role": "Frénétiques signature", "description": "Marines drogués aux Butcher's Nails, frénésie totale, hache à chaîne.", "wikiQuery": "Khorne Berzerkers" }, { "name": "Eightbound", "role": "Possédés-gladiateurs", "description": "Marines fusionnés avec démons mineurs de Khorne.", "wikiQuery": "Eightbound World Eaters" } ] },
-  { "id": "death-guard", "factionId": "chaos-space-marines", "name": "Death Guard", "type": "legion", "description": "Légion XIV vouée à Nurgle, guerriers pourrissants immunisés à la douleur, propageant la peste.", "loreShort": "Plague Marines de Mortarion, peste éternelle.", "loreLong": "La XIVème légion d'origine de Mortarion sur Barbarus. Réputés pour leur résistance physique surhumaine, ils tombèrent à Nurgle pendant l'Hérésie quand un fléau frappa leur flotte coincée dans le Warp. Devenus immortels et pourrissants. Ils ont récemment lancé la Plague Wars contre Ultramar.", "primarch": "Mortarion (Daemon-Primarch)", "primarchWikiQuery": "Mortarion primarch Death Guard", "currentLeader": "Typhus", "currentLeaderRole": "Herald of Nurgle, Captain of the Plague Fleet", "homeworld": "Plague Planet", "wikiQuery": "Death Guard warhammer", "citation": "La peste est notre arme, et notre cadeau.", "notableUnits": [ { "name": "Mortarion", "role": "Daemon-Primarque", "description": "Primarque ressuscité, Lord of Death.", "wikiQuery": "Mortarion Daemon Primarch" }, { "name": "Typhus", "role": "Herald of Nurgle", "description": "Premier Plague Marine, propagation de la Peste Destroyer originelle.", "wikiQuery": "Typhus Death Guard" }, { "name": "Plague Marines", "role": "Élite signature", "description": "Marines pourrissants immunisés à la douleur.", "wikiQuery": "Plague Marines Death Guard" }, { "name": "Deathshroud", "role": "Garde personnelle de Mortarion", "description": "Garde Terminator du primarque, faux énergétiques.", "wikiQuery": "Deathshroud Terminators" } ] },
-  { "id": "thousand-sons", "factionId": "chaos-space-marines", "name": "Thousand Sons", "type": "legion", "description": "Légion XV vouée à Tzeentch, sorciers éternels emprisonnés dans des armures animées par la magie.", "loreShort": "Sorciers de Magnus, savoir et changement.", "loreLong": "La XVème légion fondée par Magnus the Red, primarque cyclopéen et sorcier suprême. Quand l'Empereur interdit la psykerie aux Astartes au Conseil de Nikée, Magnus défia l'ordre. Sa transgression entraina la Rubric of Ahriman par son fils Ahzek Ahriman : tous les Thousand Sons non-psykers furent transformés en poussière dans leurs armures.", "primarch": "Magnus the Red (Daemon-Primarch)", "primarchWikiQuery": "Magnus the Red primarch", "currentLeader": "Ahzek Ahriman", "currentLeaderRole": "Chief Sorcerer", "homeworld": "Planète des Sorciers (Sortiarius)", "wikiQuery": "Thousand Sons warhammer", "citation": "Tout est poussière.", "notableUnits": [ { "name": "Magnus the Red", "role": "Daemon-Primarque", "description": "Plus puissant psyker de l'Imperium, Daemon de Tzeentch.", "wikiQuery": "Magnus the Red primarch" }, { "name": "Ahzek Ahriman", "role": "Chief Sorcerer", "description": "Architecte de la Rubric, exilé par Magnus.", "wikiQuery": "Ahzek Ahriman Thousand Sons" }, { "name": "Rubric Marines", "role": "Squad signature", "description": "Marines réduits à de la poussière dans leur armure, animés magiquement.", "wikiQuery": "Rubric Marines Thousand Sons" }, { "name": "Scarab Occult Terminators", "role": "Élite Terminator", "description": "1ère compagnie en armure Cataphractii.", "wikiQuery": "Scarab Occult Terminators" } ] },
-  { "id": "emperors-children", "factionId": "chaos-space-marines", "name": "Emperor's Children", "type": "legion", "description": "Légion III vouée à Slaanesh, en quête perpétuelle de la perfection sensorielle et du plaisir.", "loreShort": "Noise Marines de Fulgrim, perfection corrompue.", "loreLong": "La IIIème légion, primarque Fulgrim, recherchait la perfection en toute chose. Cette obsession les rendit vulnérables à Slaanesh : Fulgrim fut possédé par un démon en touchant un sabre maudit et corrompit toute sa légion.", "primarch": "Fulgrim (Daemon-Primarch)", "primarchWikiQuery": "Fulgrim primarch", "currentLeader": "Lucius the Eternal", "currentLeaderRole": "Champion éternel de Slaanesh", "homeworld": "Œil de la Terreur", "wikiQuery": "Emperor's Children warhammer", "citation": "La perfection est notre arme.", "notableUnits": [ { "name": "Fulgrim", "role": "Daemon-Primarque", "description": "Primarque possédé puis devenu Daemon-Prince de Slaanesh.", "wikiQuery": "Fulgrim Daemon Primarch" }, { "name": "Lucius the Eternal", "role": "Champion éternel", "description": "Combattant le plus virtuose de la légion, immortel.", "wikiQuery": "Lucius the Eternal" }, { "name": "Noise Marines", "role": "Squad signature", "description": "Marines avec armes soniques, instruments-armes ravageurs.", "wikiQuery": "Noise Marines Emperor's Children" } ] },
-  { "id": "black-legion", "factionId": "chaos-space-marines", "name": "Black Legion", "type": "legion", "description": "Légion XVI sous Abaddon le Conquérant, fer de lance des 13 Croisades Noires contre l'Imperium.", "loreShort": "Successeurs des Sons of Horus, le Maître de Guerre.", "loreLong": "Anciennement Sons of Horus, renommés Black Legion par Abaddon après la mort d'Horus à Terra. Devenue la plus grande coalition Chaos. La 13ème Croisade Noire, sous Abaddon, brisa Cadia et déchira la galaxie en deux.", "primarch": "Horus (mort) / Abaddon (Warmaster actuel)", "primarchWikiQuery": "Horus primarch Sons", "currentLeader": "Abaddon the Despoiler", "currentLeaderRole": "Warmaster of Chaos (Brisseur de Cadia)", "homeworld": "Œil de la Terreur (multiples bases)", "wikiQuery": "Black Legion warhammer Abaddon", "citation": "Et nous sommes la Légion Noire. Et nous sommes Légion.", "notableUnits": [ { "name": "Abaddon the Despoiler", "role": "Warmaster of Chaos", "description": "Successeur d'Horus, brisa Cadia, mène la 13ème Croisade Noire.", "wikiQuery": "Abaddon the Despoiler" }, { "name": "Chosen", "role": "Élite vétérane", "description": "Vétérans choisis du Warmaster.", "wikiQuery": "Chosen Black Legion" } ] },
-  { "id": "word-bearers", "factionId": "chaos-space-marines", "name": "Word Bearers", "type": "legion", "description": "Légion XVII première à tomber, prêcheurs zélés des Dieux du Chaos.", "loreShort": "Apôtres sombres de Lorgar.", "loreLong": "La XVIIème légion, primarque Lorgar, fut la première à tomber au Chaos — bien avant l'Hérésie. Lorgar voulait à tout prix vénérer un dieu, et l'Empereur le rejeta brutalement. Premier Apôtre Sombre Erebus orchestra l'Hérésie elle-même.", "primarch": "Lorgar (Daemon-Primarch)", "primarchWikiQuery": "Lorgar primarch Word Bearers", "currentLeader": "Erebus", "currentLeaderRole": "First Chaplain (architecte de l'Hérésie)", "homeworld": "Sicarus (Œil de la Terreur)", "wikiQuery": "Word Bearers warhammer", "citation": "Que le mot soit chair.", "notableUnits": [ { "name": "Lorgar", "role": "Daemon-Primarque", "description": "Primarque-prophète, architecte théologique du Chaos.", "wikiQuery": "Lorgar Daemon Primarch" }, { "name": "Erebus", "role": "First Chaplain", "description": "Architecte humain de l'Hérésie d'Horus.", "wikiQuery": "Erebus Word Bearers" }, { "name": "Dark Apostles", "role": "Chapelains chaotiques", "description": "Prêcheurs des Dieux Sombres menant les rituels.", "wikiQuery": "Dark Apostle Word Bearers" } ] },
-  { "id": "iron-warriors", "factionId": "chaos-space-marines", "name": "Iron Warriors", "type": "legion", "description": "Légion IV maîtres du siège, ingénieurs nihilistes spécialistes de la destruction de forteresses.", "loreShort": "Briseurs de murs, fer et amertume.", "loreLong": "La IVème légion, primarque Perturabo, étaient les maîtres du siège équivalents aux Imperial Fists. L'Empereur leur confiait toujours les missions les plus dures et ingrates — sans reconnaissance. Leur ressentiment grandissant les fit basculer dans le Chaos.", "primarch": "Perturabo (Daemon-Primarch)", "primarchWikiQuery": "Perturabo primarch Iron Warriors", "currentLeader": "Honsou", "currentLeaderRole": "Warsmith célèbre", "homeworld": "Medrengard", "wikiQuery": "Iron Warriors warhammer", "citation": "Le fer est partout. Et nous sommes le fer.", "notableUnits": [ { "name": "Perturabo", "role": "Daemon-Primarque", "description": "Primarque ingénieur amer, architecte de sièges.", "wikiQuery": "Perturabo Daemon Primarch" }, { "name": "Warsmith", "role": "Spécialistes du siège", "description": "Officiers ingénieurs commandant les opérations de siège.", "wikiQuery": "Warsmith Iron Warriors" } ] },
-  { "id": "alpha-legion", "factionId": "chaos-space-marines", "name": "Alpha Legion", "type": "legion", "description": "Légion XX maîtres de l'infiltration et de la duplicité, jouant un jeu millénaire dont le but reste flou.", "loreShort": "Hydra dominatus, secrets et ruse.", "loreLong": "La XXème et dernière légion, dirigée par les jumeaux primarques Alpharius et Omegon. Maîtres de l'infiltration, espionnage, sabotage et désinformation, leur but profond reste mystérieux. Tous les Alpha Legionnaires se font appeler 'Alpharius'.", "primarch": "Alpharius / Omegon", "primarchWikiQuery": "Alpharius Omegon Alpha Legion", "homeworld": "Inconnu (multiples cellules)", "wikiQuery": "Alpha Legion warhammer", "citation": "Hydra dominatus. Je suis Alpharius.", "notableUnits": [ { "name": "Alpharius", "role": "Primarque (un des deux jumeaux)", "description": "Jumeau-primarque, un d'eux a été 'tué' par Guilliman mais lequel ?", "wikiQuery": "Alpharius primarch" } ] },
-  { "id": "night-lords", "factionId": "chaos-space-marines", "name": "Night Lords", "type": "legion", "description": "Légion VIII terreurs nocturnes, raiders sadiques cultivant la peur comme arme.", "loreShort": "Seigneurs de la Nuit, terreur et raids.", "loreLong": "La VIIIème légion, primarque Konrad Curze (le Night Haunter), né dans les ténèbres de Nostramo. Curze utilisait la terreur comme outil de gouvernance. Tué par l'assassin M'Shen, il l'avait prophétisé. Sa légion fragmentée erre dans les bordures, raidant les mondes.", "primarch": "Konrad Curze (mort)", "primarchWikiQuery": "Konrad Curze primarch Night Haunter", "currentLeader": "Sevatar", "currentLeaderRole": "Premier Capitaine légendaire", "homeworld": "Tsagualsa / Nostramo (détruit)", "wikiQuery": "Night Lords warhammer", "citation": "La terreur est notre arme. La nuit notre allié.", "notableUnits": [ { "name": "Konrad Curze", "role": "Primarque (mort)", "description": "Le Night Haunter, primarque cauchemardesque.", "wikiQuery": "Konrad Curze primarch" }, { "name": "Sevatar", "role": "First Captain (légende)", "description": "Premier Capitaine, le plus dangereux des Night Lords après Curze.", "wikiQuery": "Sevatar Night Lords" }, { "name": "Raptors", "role": "Sauteurs d'élite", "description": "Marines en jump packs, frappes nocturnes verticales.", "wikiQuery": "Raptors Night Lords" } ] },
-
-  { "id": "ulthwe", "factionId": "aeldari", "name": "Ulthwé", "type": "craftworld", "description": "Vaisseau-monde le plus proche de l'Œil de la Terreur, riche en visionnaires et farseers.", "loreShort": "L'Œil qui Veille, fardeau prophétique.", "loreLong": "Ulthwé est le vaisseau-monde Aeldari le plus proche de l'Œil de la Terreur, ce qui amplifie le don prophétique de ses farseers. Leur élite Black Guardians est composée de civils si endurcis qu'ils égalent presque des Aspect Warriors.", "currentLeader": "Eldrad Ulthran", "currentLeaderRole": "Plus puissant Farseer Aeldari", "wikiQuery": "Craftworld Ulthwe Eldar", "notableUnits": [ { "name": "Eldrad Ulthran", "role": "Farseer suprême", "description": "Plus grand Farseer connu, manipulateur du destin galactique.", "wikiQuery": "Eldrad Ulthran" }, { "name": "Black Guardians", "role": "Garde civile élite", "description": "Civils-soldats endurcis, signature militaire d'Ulthwé.", "wikiQuery": "Black Guardians Ulthwe" } ] },
-  { "id": "saim-hann", "factionId": "aeldari", "name": "Saim-Hann", "type": "craftworld", "description": "Vaisseau-monde des Wild Riders, organisé en Tribus de Sang, célèbre pour ses jetbikes.", "loreShort": "Cavaliers sauvages, vitesse et liberté.", "loreLong": "Saim-Hann préserve le mode de vie tribal des anciens Aeldari avant la Chute. Organisé en Wild Rider Clans, il privilégie la mobilité totale via jetbikes et vyper.", "wikiQuery": "Saim-Hann craftworld Eldar" },
-  { "id": "iyanden", "factionId": "aeldari", "name": "Iyanden", "type": "craftworld", "description": "Vaisseau-monde dévasté par les Tyranides, peuplé majoritairement de Spirit Hosts (esprits).", "loreShort": "Vaisseau des morts, fantômes guerriers.", "loreLong": "Iyanden fut presque anéanti par la Hive Fleet Kraken au M41. Ses armées sont composées de Wraith constructs animés par les âmes des morts piégées dans des cristaux d'âme.", "currentLeader": "Yriel", "currentLeaderRole": "Autarch corsaire", "wikiQuery": "Iyanden craftworld Eldar", "notableUnits": [ { "name": "Yriel", "role": "Autarch corsaire", "description": "Exilé revenu défendre Iyanden lors de l'invasion Tyranide.", "wikiQuery": "Prince Yriel Iyanden" }, { "name": "Wraithknight", "role": "Construct titanique", "description": "Mecha animé par l'âme d'un Aeldari mort.", "wikiQuery": "Wraithknight Iyanden" } ] },
-  { "id": "biel-tan", "factionId": "aeldari", "name": "Biel-Tan", "type": "craftworld", "description": "Vaisseau-monde militariste cherchant la restauration de l'empire Aeldari, brisé après la Treizième Croisade Noire.", "loreShort": "Rose ardente, restauration de l'empire.", "wikiQuery": "Biel-Tan craftworld" },
-  { "id": "alaitoc", "factionId": "aeldari", "name": "Alaitoc", "type": "craftworld", "description": "Vaisseau-monde austère prônant le strict respect du Chemin Aeldari, célèbre pour ses Pathfinders.", "loreShort": "Chemin strict, tireurs d'élite.", "wikiQuery": "Alaitoc craftworld" },
-
-  { "id": "hive-fleet-behemoth", "factionId": "tyranides", "name": "Flotte-Ruche Béhémoth", "type": "hivefleet", "description": "Première flotte tyranide rencontrée par l'Imperium, anéantie à la Bataille de Macragge.", "loreShort": "Première vague, dévorée par les Ultramarines.", "loreLong": "La Hive Fleet Behemoth fut le premier contact officiel de l'Imperium avec les Tyranides au M41. Anéantie à la Bataille de Macragge par les Ultramarines de Marneus Calgar (au prix de la 1ère Compagnie entière).", "wikiQuery": "Hive Fleet Behemoth" },
-  { "id": "hive-fleet-kraken", "factionId": "tyranides", "name": "Flotte-Ruche Kraken", "type": "hivefleet", "description": "Deuxième flotte majeure, fragmentée en multiples splinters, plus rapide et adaptative.", "loreShort": "Vague fragmentée, rapide et adaptative.", "wikiQuery": "Hive Fleet Kraken" },
-  { "id": "hive-fleet-leviathan", "factionId": "tyranides", "name": "Flotte-Ruche Léviathan", "type": "hivefleet", "description": "Plus grande flotte tyranide jamais rencontrée, attaquant l'Imperium sur plusieurs fronts.", "loreShort": "Vague titanesque, le Grand Dévoreur.", "loreLong": "La Hive Fleet Leviathan est la plus grande flotte-ruche jamais observée, arrivant par-dessous le plan galactique simultanément sur plusieurs fronts. Elle a presque détruit Baal et Devastation of Baal.", "wikiQuery": "Hive Fleet Leviathan" },
-
-  { "id": "sautekh-dynasty", "factionId": "necrons", "name": "Dynastie Sautekh", "type": "dynasty", "description": "Dynastie dominante du Réveil Necron, dirigée par Imotekh le Stormlord.", "loreShort": "Dynastie dominante, Imotekh le Stormlord.", "currentLeader": "Imotekh the Stormlord", "currentLeaderRole": "Phaeron suprême de Sautekh", "wikiQuery": "Sautekh Dynasty Necron" },
-  { "id": "mephrit-dynasty", "factionId": "necrons", "name": "Dynastie Mephrit", "type": "dynasty", "description": "Dynastie agressive et expansionniste, spécialisée dans la guerre solaire et les armes énergétiques.", "loreShort": "Soleil noir, agression et énergie.", "wikiQuery": "Mephrit Dynasty Necron" },
-  { "id": "novokh-dynasty", "factionId": "necrons", "name": "Dynastie Novokh", "type": "dynasty", "description": "Dynastie cruelle vouée au combat ritualisé, peignant ses unités en rouge sang.", "loreShort": "Tueurs rituels, rouge sang.", "wikiQuery": "Novokh Dynasty Necron" },
-  { "id": "nephrekh-dynasty", "factionId": "necrons", "name": "Dynastie Nephrekh", "type": "dynasty", "description": "Dynastie maître du voyage interstitiel, préfèrant la téléportation aux véhicules.", "loreShort": "Sables d'or, téléportation.", "wikiQuery": "Nephrekh Dynasty Necron" },
-
-  { "id": "goff", "factionId": "orks", "name": "Goff", "type": "klan", "description": "Klan le plus brutal et nombreux, voué au combat rapproché et aux choppas.", "loreShort": "Plus gros, plus dur, plus krunchy.", "loreLong": "Les Goffs sont le klan d'Ork le plus brutal et nombreux. Le Warlord Ghazghkull Mag Uruk Thraka, le Beast of Armageddon, est un Goff archétypal.", "currentLeader": "Ghazghkull Mag Uruk Thraka", "currentLeaderRole": "Warboss-prophète, le Beast of Armageddon", "wikiQuery": "Goff Orks warhammer", "notableUnits": [ { "name": "Ghazghkull", "role": "Prophète d'la Waaagh!", "description": "Plus grand Warboss connu, prophète de Gork et Mork.", "wikiQuery": "Ghazghkull Mag Uruk Thraka" } ] },
-  { "id": "bad-moons", "factionId": "orks", "name": "Bad Moons", "type": "klan", "description": "Klan le plus riche, dents qui repoussent vite, équipement rutilant et flashy.", "loreShort": "Riches, jaunes, dakka brillant.", "wikiQuery": "Bad Moons Orks" },
-  { "id": "blood-axes", "factionId": "orks", "name": "Blood Axes", "type": "klan", "description": "Klan tactique influencé par les humains, mercenaires et stratégie occasionnelle.", "loreShort": "Mercenaires rusés, tactique humaine.", "wikiQuery": "Blood Axes Orks" },
-  { "id": "death-skulls", "factionId": "orks", "name": "Death Skulls", "type": "klan", "description": "Klan kleptomane peint en bleu pour la chance, looters et pilleurs de premier ordre.", "loreShort": "Bleu chanceux, looters de tout.", "wikiQuery": "Death Skulls Orks" },
-  { "id": "evil-sunz", "factionId": "orks", "name": "Evil Sunz", "type": "klan", "description": "Klan obsédé par la vitesse, peint en rouge (le rouge va plus vite).", "loreShort": "Da red wunz go fasta.", "wikiQuery": "Evil Sunz Orks" },
-  { "id": "snakebites", "factionId": "orks", "name": "Snakebites", "type": "klan", "description": "Klan traditionaliste rejetant la technologie, montant des squigs et boars géants.", "loreShort": "Tribu sauvage, squigs et tradition.", "wikiQuery": "Snakebites Orks" },
-
-  { "id": "our-martyred-lady", "factionId": "soeurs-de-bataille", "name": "Order of Our Martyred Lady", "type": "order", "description": "Plus grand ordre, gardien des reliques de Sainte Katherine.", "loreShort": "Ordre majeur, héritage de Sainte Katherine.", "currentLeader": "Morvenn Vahl", "currentLeaderRole": "Abbess Sanctorum (suprême Adepta Sororitas)", "wikiQuery": "Order Our Martyred Lady Sisters of Battle" },
-  { "id": "argent-shroud", "factionId": "soeurs-de-bataille", "name": "Order of the Argent Shroud", "type": "order", "description": "Ordre du silence et du devoir humble, agissant sans attendre la louange.", "loreShort": "Silence, devoir humble.", "wikiQuery": "Argent Shroud Sisters of Battle" },
-  { "id": "bloody-rose", "factionId": "soeurs-de-bataille", "name": "Order of the Bloody Rose", "type": "order", "description": "Ordre du combat rapproché passionné, fond sur les ennemis avec ferveur.", "loreShort": "Passion brûlante, combat rapproché.", "wikiQuery": "Bloody Rose Sisters of Battle" },
-  { "id": "ebon-chalice", "factionId": "soeurs-de-bataille", "name": "Order of the Ebon Chalice", "type": "order", "description": "Plus ancien ordre, garde la pureté de la doctrine originelle d'Alicia Dominica.", "loreShort": "Doctrine originelle, plus ancien ordre.", "wikiQuery": "Ebon Chalice Sisters of Battle" },
-  { "id": "sacred-rose", "factionId": "soeurs-de-bataille", "name": "Order of the Sacred Rose", "type": "order", "description": "Ordre serein voué à la prière et à la contemplation des saints visions.", "loreShort": "Sérénité, contemplation et visions.", "wikiQuery": "Sacred Rose Sisters of Battle" },
-  { "id": "valorous-heart", "factionId": "soeurs-de-bataille", "name": "Order of the Valorous Heart", "type": "order", "description": "Ordre stoïque endurant la souffrance comme acte de foi.", "loreShort": "Stoïcisme, foi à travers la douleur.", "wikiQuery": "Valorous Heart Sisters of Battle" },
-
-  { "id": "tau-sept", "factionId": "tau", "name": "T'au Sept", "type": "sept", "description": "Sept fondateur, équilibre des trois castes du Bien Suprême, doctrine standard.", "loreShort": "Sept fondateur, équilibre canonique.", "homeworld": "T'au", "currentLeader": "Aun'Va", "currentLeaderRole": "Maître Éthéré", "wikiQuery": "T'au sept warhammer" },
-  { "id": "viorla-sept", "factionId": "tau", "name": "Vior'la Sept", "type": "sept", "description": "Sept agressif et belliqueux, combattants ardents au sang chaud.", "loreShort": "Ardeur martiale, sang chaud.", "homeworld": "Vior'la", "wikiQuery": "Vior'la sept Tau" },
-  { "id": "borkan-sept", "factionId": "tau", "name": "Bork'an Sept", "type": "sept", "description": "Sept érudit, centre de la recherche et des académies.", "loreShort": "Académies et tech avancée.", "homeworld": "Bork'an", "wikiQuery": "Bork'an sept Tau" },
-  { "id": "sacea-sept", "factionId": "tau", "name": "Sa'cea Sept", "type": "sept", "description": "Sept urbain et cosmopolite, mélange de toutes les castes.", "loreShort": "Mégalopole cosmopolite.", "homeworld": "Sa'cea", "wikiQuery": "Sa'cea sept Tau" },
-  { "id": "dalyth-sept", "factionId": "tau", "name": "Dal'yth Sept", "type": "sept", "description": "Sept frontalier accueillant les Aliens et les rebelles humains dans le Bien Suprême.", "loreShort": "Frontière diplomatique.", "homeworld": "Dal'yth", "wikiQuery": "Dal'yth sept Tau" },
-  { "id": "farsight-enclaves", "factionId": "tau", "name": "Farsight Enclaves", "type": "sept", "description": "Enclaves rebelles du Commandeur Farsight, ayant rompu avec l'Empire Tau.", "loreShort": "Renégats, secret de Farsight.", "loreLong": "Les Farsight Enclaves sont une faction rebelle Tau coupée de l'Empire principal après la mystérieuse découverte du Commandeur Farsight (O'Shovah) sur Arthas Moloch — où il aurait découvert la vérité sur les Éthérés.", "homeworld": "Vior'la (originaire) / Enclaves Farsight", "currentLeader": "Commander Farsight (O'Shovah)", "currentLeaderRole": "Commandeur dissident", "wikiQuery": "Farsight Enclaves Tau", "citation": "Mont'au n'est jamais vraiment passé." },
-
-  { "id": "mars", "factionId": "adeptus-mechanicus", "name": "Mars", "type": "forgeworld", "description": "Sainte Mars, monde-forge originel et capitale spirituelle du Mechanicus.", "loreShort": "Saint berceau, capitale spirituelle.", "loreLong": "Mars est le berceau du Culte Mechanicus, lieu d'éveil de l'Omnissiah et premier monde-forge. Toutes les autres forges existent à son image. Gouvernée par le Fabricator-General, second seulement à l'Empereur de jure dans l'Imperium.", "homeworld": "Mars", "currentLeader": "Fabricator-General Kane", "currentLeaderRole": "Fabricator-General", "wikiQuery": "Mars forge world Mechanicus" },
-  { "id": "graia", "factionId": "adeptus-mechanicus", "name": "Graia", "type": "forgeworld", "description": "Monde-forge de production militaire, théâtre de l'invasion Chaos repoussée par le Titan Invictus.", "loreShort": "Monde-forge militaire, Titan Invictus.", "homeworld": "Graia", "wikiQuery": "Graia forge world" },
-  { "id": "stygies-viii", "factionId": "adeptus-mechanicus", "name": "Stygies VIII", "type": "forgeworld", "description": "Monde-forge soupçonné d'études interdites, équipement de qualité et secrets technologiques.", "loreShort": "Études interdites, secrets tech.", "homeworld": "Stygies VIII", "wikiQuery": "Stygies VIII forge world" },
-  { "id": "lucius", "factionId": "adeptus-mechanicus", "name": "Lucius", "type": "forgeworld", "description": "Monde-forge spécialiste des Titans et de la téléportation.", "loreShort": "Téléportation et Titans.", "homeworld": "Lucius", "wikiQuery": "Lucius forge world" }
+  {
+    "id": "death-korps-of-krieg",
+    "factionId": "astra-militarum",
+    "name": "Death Korps of Krieg",
+    "type": "regiment",
+    "description": "Régiment de guerre de tranchée fanatique cherchant la rédemption par le sacrifice après la guerre civile de Krieg.",
+    "loreShort": "Soldats masqués, sacrifice et discipline.",
+    "loreLong": "Les Death Korps de Krieg viennent d'un monde-mort vitrifié par sa propre rébellion contre l'Imperium au M37. Depuis, leurs descendants combattent dans l'Astra Militarum pour expier la trahison ancestrale, recherchant la mort honorable comme rédemption. Élevés en clones uniformes dans des cuves, ils portent des masques à gaz et combattent la guerre de tranchée la plus brutale, parfaitement insensibles aux pertes massives. Le siège de Vraks fut leur opération-signature.",
+    "homeworld": "Krieg (monde mort)",
+    "currentLeader": "Marshal",
+    "currentLeaderRole": "Maréchaux des Korps",
+    "wikiQuery": "Death Korps of Krieg",
+    "citation": "Per Sanguinis, Per Sacrificium."
+  },
+  {
+    "id": "cadian-shock-troops",
+    "factionId": "astra-militarum",
+    "name": "Cadian Shock Troops",
+    "type": "regiment",
+    "description": "Régiment d'élite formé sur le monde-forteresse Cadia, premier rempart contre l'Œil de la Terreur.",
+    "loreShort": "Élite humaine, Cadia tient — toujours.",
+    "loreLong": "Les Cadians étaient les meilleurs soldats humains de l'Imperium, élevés sur le monde-forteresse Cadia gardant la seule sortie stable de l'Œil de la Terreur. Lors de la 13ème Croisade Noire d'Abaddon, Cadia fut détruit, mais les Cadians survivants forment encore les régiments d'élite de la Garde.",
+    "homeworld": "Cadia (détruit M41)",
+    "currentLeader": "Lord Castellan Creed",
+    "currentLeaderRole": "Lord Castellan (légendaire)",
+    "wikiQuery": "Cadian Shock Troops",
+    "citation": "Cadia tient — pour toujours."
+  },
+  {
+    "id": "catachan-jungle-fighters",
+    "factionId": "astra-militarum",
+    "name": "Catachan Jungle Fighters",
+    "type": "regiment",
+    "description": "Soldats colossaux nés du monde-mort Catachan, experts du combat de jungle et démolition.",
+    "loreShort": "Diables verts musclés, jungle warriors.",
+    "loreLong": "Catachan est un monde mortel où la flore tente de vous tuer chaque jour. Les humains qui y survivent grandissent musclés, gigantesques, brutaux et résistants. Surnommés Catachan Devils, ils excellent en guerre asymétrique, démolition et survie en milieu hostile.",
+    "homeworld": "Catachan",
+    "wikiQuery": "Catachan Jungle Fighters",
+    "citation": "Si vous y survivez, c'est que vous êtes Catachan."
+  },
+  {
+    "id": "vostroyan-firstborn",
+    "factionId": "astra-militarum",
+    "name": "Vostroyan Firstborn",
+    "type": "regiment",
+    "description": "Régiment cérémoniel composé du premier-né de chaque famille de Vostroya, dette éternelle à l'Empereur.",
+    "loreShort": "Aristocratie martiale, fusils ouvragés.",
+    "loreLong": "Vostroya refusa d'envoyer ses soldats à la défense de Terra pendant l'Hérésie. Honteux de leur lâcheté, les Vostroyens jurèrent depuis d'envoyer chaque premier-né de chaque famille servir dans l'Astra Militarum à perpétuité.",
+    "homeworld": "Vostroya",
+    "wikiQuery": "Vostroyan Firstborn"
+  },
+  {
+    "id": "mordian-iron-guard",
+    "factionId": "astra-militarum",
+    "name": "Mordian Iron Guard",
+    "type": "regiment",
+    "description": "Régiment de drill parfait, infanterie en uniforme bleu rigoureux, maîtres du tir disciplíné.",
+    "loreShort": "Discipline impeccable, lignes de tir parfaites.",
+    "loreLong": "Mordian est un monde tidalement bloqué où une moitié vit dans l'obscurité éternelle. Les régiments mordiens sont l'incarnation de la discipline militaire prussienne : drill parfait, uniformes immaculés, lignes de tir géométriques.",
+    "homeworld": "Mordian",
+    "wikiQuery": "Mordian Iron Guard"
+  },
+  {
+    "id": "tallarn-desert-raiders",
+    "factionId": "astra-militarum",
+    "name": "Tallarn Desert Raiders",
+    "type": "regiment",
+    "description": "Cavaliers du désert Tallarn, maîtres de la guérilla et des frappes rapides en territoire hostile.",
+    "loreShort": "Nomades du désert, guérilla et embuscades.",
+    "loreLong": "Tallarn fut empoisonné chimiquement par l'Iron Warrior Perturabo lors de l'Hérésie. Les survivants nomadisèrent dans les déserts toxiques et développèrent une expertise sans pareille en guerre du désert.",
+    "homeworld": "Tallarn",
+    "wikiQuery": "Tallarn warhammer"
+  },
+  {
+    "id": "valhallan-ice-warriors",
+    "factionId": "astra-militarum",
+    "name": "Valhallan Ice Warriors",
+    "type": "regiment",
+    "description": "Soldats endurcis du monde glaciaire Valhalla, vagues humaines insensibles aux pertes.",
+    "loreShort": "Endurance glaciale, vagues humaines.",
+    "loreLong": "Valhalla est un monde glaciaire où survivre est déjà un acte héroïque. Quand les Orks envahirent et furent enfin repoussés, les Valhallans développèrent une mentalité de la guerre d'attrition : vagues humaines patientes, retranchement profond.",
+    "homeworld": "Valhalla",
+    "wikiQuery": "Valhallan Ice Warriors"
+  },
+  {
+    "id": "tanith-first-and-only",
+    "factionId": "astra-militarum",
+    "name": "Tanith First and Only",
+    "type": "regiment",
+    "description": "Régiment des Fantômes de Gaunt, dernier des Tanith après la perte de leur monde, infiltration et tireurs d'élite.",
+    "loreShort": "Fantômes du Colonel Gaunt, le seul et l'unique.",
+    "loreLong": "Tanith fut détruit par le Chaos avant même que ses régiments ne puissent partir. Le Colonel-Commissaire Ibram Gaunt sauva un seul régiment, le Tanith First, devenu \"First and Only\". Surnommés Gaunt's Ghosts, ils excellent en infiltration et tireurs d'élite. Personnages culte de Dan Abnett.",
+    "homeworld": "Tanith (détruit)",
+    "currentLeader": "Colonel-Commissar Ibram Gaunt",
+    "currentLeaderRole": "Colonel-Commissar (héros culte)",
+    "wikiQuery": "Tanith First and Only Gaunt's Ghosts",
+    "citation": "Du néant, des Fantômes."
+  },
+  {
+    "id": "world-eaters",
+    "factionId": "chaos-space-marines",
+    "name": "World Eaters",
+    "type": "legion",
+    "description": "Légion XII vouée à Khorne, gladiateurs cybernétiques assoiffés de sang et de crânes.",
+    "loreShort": "Sang pour le Dieu du Sang, crânes pour le Trône.",
+    "loreLong": "La XIIème légion fut originellement nommée War Hounds. Lors de leur découverte de leur primarque Angron sur Nuceria, les Astartes acceptèrent la mutation des Butcher's Nails (Clous du Boucher) implantés dans leur crâne, qui amplifient la rage à des niveaux insoutenables. Voués à Khorne pendant l'Hérésie. Angron a été ressuscité en Daemon-Primarque, libéré de l'Œil au M42.",
+    "primarch": "Angron (Daemon-Primarch)",
+    "primarchWikiQuery": "Angron primarch World Eaters",
+    "currentLeader": "Kharn the Betrayer",
+    "currentLeaderRole": "Champion éternel de Khorne",
+    "homeworld": "Skalathrax (gelé) / Œil de la Terreur",
+    "wikiQuery": "World Eaters warhammer",
+    "citation": "Le sang pour le Dieu du Sang, les crânes pour le Trône !",
+    "notableUnits": [
+      {
+        "name": "Angron",
+        "role": "Daemon-Primarque",
+        "description": "Primarque ressuscité en Daemon, manifestation de la rage absolue de Khorne.",
+        "wikiQuery": "Angron primarch"
+      },
+      {
+        "name": "Kharn the Betrayer",
+        "role": "Champion éternel",
+        "description": "Plus célèbre Champion de Khorne, traître de Skalathrax, hache Gorechild.",
+        "wikiQuery": "Kharn the Betrayer"
+      },
+      {
+        "name": "Berzerkers",
+        "role": "Frénétiques signature",
+        "description": "Marines drogués aux Butcher's Nails, frénésie totale, hache à chaîne.",
+        "wikiQuery": "Khorne Berzerkers"
+      },
+      {
+        "name": "Eightbound",
+        "role": "Possédés-gladiateurs",
+        "description": "Marines fusionnés avec démons mineurs de Khorne.",
+        "wikiQuery": "Eightbound World Eaters"
+      }
+    ]
+  },
+  {
+    "id": "death-guard",
+    "factionId": "chaos-space-marines",
+    "name": "Death Guard",
+    "type": "legion",
+    "description": "Légion XIV vouée à Nurgle, guerriers pourrissants immunisés à la douleur, propageant la peste.",
+    "loreShort": "Plague Marines de Mortarion, peste éternelle.",
+    "loreLong": "La XIVème légion d'origine de Mortarion sur Barbarus. Réputés pour leur résistance physique surhumaine, ils tombèrent à Nurgle pendant l'Hérésie quand un fléau frappa leur flotte coincée dans le Warp. Devenus immortels et pourrissants. Ils ont récemment lancé la Plague Wars contre Ultramar.",
+    "primarch": "Mortarion (Daemon-Primarch)",
+    "primarchWikiQuery": "Mortarion primarch Death Guard",
+    "currentLeader": "Typhus",
+    "currentLeaderRole": "Herald of Nurgle, Captain of the Plague Fleet",
+    "homeworld": "Plague Planet",
+    "wikiQuery": "Death Guard warhammer",
+    "citation": "La peste est notre arme, et notre cadeau.",
+    "notableUnits": [
+      {
+        "name": "Mortarion",
+        "role": "Daemon-Primarque",
+        "description": "Primarque ressuscité, Lord of Death.",
+        "wikiQuery": "Mortarion Daemon Primarch"
+      },
+      {
+        "name": "Typhus",
+        "role": "Herald of Nurgle",
+        "description": "Premier Plague Marine, propagation de la Peste Destroyer originelle.",
+        "wikiQuery": "Typhus Death Guard"
+      },
+      {
+        "name": "Plague Marines",
+        "role": "Élite signature",
+        "description": "Marines pourrissants immunisés à la douleur.",
+        "wikiQuery": "Plague Marines Death Guard"
+      },
+      {
+        "name": "Deathshroud",
+        "role": "Garde personnelle de Mortarion",
+        "description": "Garde Terminator du primarque, faux énergétiques.",
+        "wikiQuery": "Deathshroud Terminators"
+      }
+    ]
+  },
+  {
+    "id": "thousand-sons",
+    "factionId": "chaos-space-marines",
+    "name": "Thousand Sons",
+    "type": "legion",
+    "description": "Légion XV vouée à Tzeentch, sorciers éternels emprisonnés dans des armures animées par la magie.",
+    "loreShort": "Sorciers de Magnus, savoir et changement.",
+    "loreLong": "La XVème légion fondée par Magnus the Red, primarque cyclopéen et sorcier suprême. Quand l'Empereur interdit la psykerie aux Astartes au Conseil de Nikée, Magnus défia l'ordre. Sa transgression entraina la Rubric of Ahriman par son fils Ahzek Ahriman : tous les Thousand Sons non-psykers furent transformés en poussière dans leurs armures.",
+    "primarch": "Magnus the Red (Daemon-Primarch)",
+    "primarchWikiQuery": "Magnus the Red primarch",
+    "currentLeader": "Ahzek Ahriman",
+    "currentLeaderRole": "Chief Sorcerer",
+    "homeworld": "Planète des Sorciers (Sortiarius)",
+    "wikiQuery": "Thousand Sons warhammer",
+    "citation": "Tout est poussière.",
+    "notableUnits": [
+      {
+        "name": "Magnus the Red",
+        "role": "Daemon-Primarque",
+        "description": "Plus puissant psyker de l'Imperium, Daemon de Tzeentch.",
+        "wikiQuery": "Magnus the Red primarch"
+      },
+      {
+        "name": "Ahzek Ahriman",
+        "role": "Chief Sorcerer",
+        "description": "Architecte de la Rubric, exilé par Magnus.",
+        "wikiQuery": "Ahzek Ahriman Thousand Sons"
+      },
+      {
+        "name": "Rubric Marines",
+        "role": "Squad signature",
+        "description": "Marines réduits à de la poussière dans leur armure, animés magiquement.",
+        "wikiQuery": "Rubric Marines Thousand Sons"
+      },
+      {
+        "name": "Scarab Occult Terminators",
+        "role": "Élite Terminator",
+        "description": "1ère compagnie en armure Cataphractii.",
+        "wikiQuery": "Scarab Occult Terminators"
+      }
+    ]
+  },
+  {
+    "id": "emperors-children",
+    "factionId": "chaos-space-marines",
+    "name": "Emperor's Children",
+    "type": "legion",
+    "description": "Légion III vouée à Slaanesh, en quête perpétuelle de la perfection sensorielle et du plaisir.",
+    "loreShort": "Noise Marines de Fulgrim, perfection corrompue.",
+    "loreLong": "La IIIème légion, primarque Fulgrim, recherchait la perfection en toute chose. Cette obsession les rendit vulnérables à Slaanesh : Fulgrim fut possédé par un démon en touchant un sabre maudit et corrompit toute sa légion.",
+    "primarch": "Fulgrim (Daemon-Primarch)",
+    "primarchWikiQuery": "Fulgrim primarch",
+    "currentLeader": "Lucius the Eternal",
+    "currentLeaderRole": "Champion éternel de Slaanesh",
+    "homeworld": "Œil de la Terreur",
+    "wikiQuery": "Emperor's Children warhammer",
+    "citation": "La perfection est notre arme.",
+    "notableUnits": [
+      {
+        "name": "Fulgrim",
+        "role": "Daemon-Primarque",
+        "description": "Primarque possédé puis devenu Daemon-Prince de Slaanesh.",
+        "wikiQuery": "Fulgrim Daemon Primarch"
+      },
+      {
+        "name": "Lucius the Eternal",
+        "role": "Champion éternel",
+        "description": "Combattant le plus virtuose de la légion, immortel.",
+        "wikiQuery": "Lucius the Eternal"
+      },
+      {
+        "name": "Noise Marines",
+        "role": "Squad signature",
+        "description": "Marines avec armes soniques, instruments-armes ravageurs.",
+        "wikiQuery": "Noise Marines Emperor's Children"
+      }
+    ]
+  },
+  {
+    "id": "black-legion",
+    "factionId": "chaos-space-marines",
+    "name": "Black Legion",
+    "type": "legion",
+    "description": "Légion XVI sous Abaddon le Conquérant, fer de lance des 13 Croisades Noires contre l'Imperium.",
+    "loreShort": "Successeurs des Sons of Horus, le Maître de Guerre.",
+    "loreLong": "Anciennement Sons of Horus, renommés Black Legion par Abaddon après la mort d'Horus à Terra. Devenue la plus grande coalition Chaos. La 13ème Croisade Noire, sous Abaddon, brisa Cadia et déchira la galaxie en deux.",
+    "primarch": "Horus (mort) / Abaddon (Warmaster actuel)",
+    "primarchWikiQuery": "Horus primarch Sons",
+    "currentLeader": "Abaddon the Despoiler",
+    "currentLeaderRole": "Warmaster of Chaos (Brisseur de Cadia)",
+    "homeworld": "Œil de la Terreur (multiples bases)",
+    "wikiQuery": "Black Legion warhammer Abaddon",
+    "citation": "Et nous sommes la Légion Noire. Et nous sommes Légion.",
+    "notableUnits": [
+      {
+        "name": "Abaddon the Despoiler",
+        "role": "Warmaster of Chaos",
+        "description": "Successeur d'Horus, brisa Cadia, mène la 13ème Croisade Noire.",
+        "wikiQuery": "Abaddon the Despoiler"
+      },
+      {
+        "name": "Chosen",
+        "role": "Élite vétérane",
+        "description": "Vétérans choisis du Warmaster.",
+        "wikiQuery": "Chosen Black Legion"
+      }
+    ]
+  },
+  {
+    "id": "word-bearers",
+    "factionId": "chaos-space-marines",
+    "name": "Word Bearers",
+    "type": "legion",
+    "description": "Légion XVII première à tomber, prêcheurs zélés des Dieux du Chaos.",
+    "loreShort": "Apôtres sombres de Lorgar.",
+    "loreLong": "La XVIIème légion, primarque Lorgar, fut la première à tomber au Chaos — bien avant l'Hérésie. Lorgar voulait à tout prix vénérer un dieu, et l'Empereur le rejeta brutalement. Premier Apôtre Sombre Erebus orchestra l'Hérésie elle-même.",
+    "primarch": "Lorgar (Daemon-Primarch)",
+    "primarchWikiQuery": "Lorgar primarch Word Bearers",
+    "currentLeader": "Erebus",
+    "currentLeaderRole": "First Chaplain (architecte de l'Hérésie)",
+    "homeworld": "Sicarus (Œil de la Terreur)",
+    "wikiQuery": "Word Bearers warhammer",
+    "citation": "Que le mot soit chair.",
+    "notableUnits": [
+      {
+        "name": "Lorgar",
+        "role": "Daemon-Primarque",
+        "description": "Primarque-prophète, architecte théologique du Chaos.",
+        "wikiQuery": "Lorgar Daemon Primarch"
+      },
+      {
+        "name": "Erebus",
+        "role": "First Chaplain",
+        "description": "Architecte humain de l'Hérésie d'Horus.",
+        "wikiQuery": "Erebus Word Bearers"
+      },
+      {
+        "name": "Dark Apostles",
+        "role": "Chapelains chaotiques",
+        "description": "Prêcheurs des Dieux Sombres menant les rituels.",
+        "wikiQuery": "Dark Apostle Word Bearers"
+      }
+    ]
+  },
+  {
+    "id": "iron-warriors",
+    "factionId": "chaos-space-marines",
+    "name": "Iron Warriors",
+    "type": "legion",
+    "description": "Légion IV maîtres du siège, ingénieurs nihilistes spécialistes de la destruction de forteresses.",
+    "loreShort": "Briseurs de murs, fer et amertume.",
+    "loreLong": "La IVème légion, primarque Perturabo, étaient les maîtres du siège équivalents aux Imperial Fists. L'Empereur leur confiait toujours les missions les plus dures et ingrates — sans reconnaissance. Leur ressentiment grandissant les fit basculer dans le Chaos.",
+    "primarch": "Perturabo (Daemon-Primarch)",
+    "primarchWikiQuery": "Perturabo primarch Iron Warriors",
+    "currentLeader": "Honsou",
+    "currentLeaderRole": "Warsmith célèbre",
+    "homeworld": "Medrengard",
+    "wikiQuery": "Iron Warriors warhammer",
+    "citation": "Le fer est partout. Et nous sommes le fer.",
+    "notableUnits": [
+      {
+        "name": "Perturabo",
+        "role": "Daemon-Primarque",
+        "description": "Primarque ingénieur amer, architecte de sièges.",
+        "wikiQuery": "Perturabo Daemon Primarch"
+      },
+      {
+        "name": "Warsmith",
+        "role": "Spécialistes du siège",
+        "description": "Officiers ingénieurs commandant les opérations de siège.",
+        "wikiQuery": "Warsmith Iron Warriors"
+      }
+    ]
+  },
+  {
+    "id": "alpha-legion",
+    "factionId": "chaos-space-marines",
+    "name": "Alpha Legion",
+    "type": "legion",
+    "description": "Légion XX maîtres de l'infiltration et de la duplicité, jouant un jeu millénaire dont le but reste flou.",
+    "loreShort": "Hydra dominatus, secrets et ruse.",
+    "loreLong": "La XXème et dernière légion, dirigée par les jumeaux primarques Alpharius et Omegon. Maîtres de l'infiltration, espionnage, sabotage et désinformation, leur but profond reste mystérieux. Tous les Alpha Legionnaires se font appeler 'Alpharius'.",
+    "primarch": "Alpharius / Omegon",
+    "primarchWikiQuery": "Alpharius Omegon Alpha Legion",
+    "homeworld": "Inconnu (multiples cellules)",
+    "wikiQuery": "Alpha Legion warhammer",
+    "citation": "Hydra dominatus. Je suis Alpharius.",
+    "notableUnits": [
+      {
+        "name": "Alpharius",
+        "role": "Primarque (un des deux jumeaux)",
+        "description": "Jumeau-primarque, un d'eux a été 'tué' par Guilliman mais lequel ?",
+        "wikiQuery": "Alpharius primarch"
+      }
+    ]
+  },
+  {
+    "id": "night-lords",
+    "factionId": "chaos-space-marines",
+    "name": "Night Lords",
+    "type": "legion",
+    "description": "Légion VIII terreurs nocturnes, raiders sadiques cultivant la peur comme arme.",
+    "loreShort": "Seigneurs de la Nuit, terreur et raids.",
+    "loreLong": "La VIIIème légion, primarque Konrad Curze (le Night Haunter), né dans les ténèbres de Nostramo. Curze utilisait la terreur comme outil de gouvernance. Tué par l'assassin M'Shen, il l'avait prophétisé. Sa légion fragmentée erre dans les bordures, raidant les mondes.",
+    "primarch": "Konrad Curze (mort)",
+    "primarchWikiQuery": "Konrad Curze primarch Night Haunter",
+    "currentLeader": "Sevatar",
+    "currentLeaderRole": "Premier Capitaine légendaire",
+    "homeworld": "Tsagualsa / Nostramo (détruit)",
+    "wikiQuery": "Night Lords warhammer",
+    "citation": "La terreur est notre arme. La nuit notre allié.",
+    "notableUnits": [
+      {
+        "name": "Konrad Curze",
+        "role": "Primarque (mort)",
+        "description": "Le Night Haunter, primarque cauchemardesque.",
+        "wikiQuery": "Konrad Curze primarch"
+      },
+      {
+        "name": "Sevatar",
+        "role": "First Captain (légende)",
+        "description": "Premier Capitaine, le plus dangereux des Night Lords après Curze.",
+        "wikiQuery": "Sevatar Night Lords"
+      },
+      {
+        "name": "Raptors",
+        "role": "Sauteurs d'élite",
+        "description": "Marines en jump packs, frappes nocturnes verticales.",
+        "wikiQuery": "Raptors Night Lords"
+      }
+    ]
+  },
+  {
+    "id": "ulthwe",
+    "factionId": "aeldari",
+    "name": "Ulthwé",
+    "type": "craftworld",
+    "description": "Vaisseau-monde le plus proche de l'Œil de la Terreur, riche en visionnaires et farseers.",
+    "loreShort": "L'Œil qui Veille, fardeau prophétique.",
+    "loreLong": "Ulthwé est le vaisseau-monde Aeldari le plus proche de l'Œil de la Terreur, ce qui amplifie le don prophétique de ses farseers. Leur élite Black Guardians est composée de civils si endurcis qu'ils égalent presque des Aspect Warriors.",
+    "currentLeader": "Eldrad Ulthran",
+    "currentLeaderRole": "Plus puissant Farseer Aeldari",
+    "wikiQuery": "Craftworld Ulthwe Eldar",
+    "notableUnits": [
+      {
+        "name": "Eldrad Ulthran",
+        "role": "Farseer suprême",
+        "description": "Plus grand Farseer connu, manipulateur du destin galactique.",
+        "wikiQuery": "Eldrad Ulthran"
+      },
+      {
+        "name": "Black Guardians",
+        "role": "Garde civile élite",
+        "description": "Civils-soldats endurcis, signature militaire d'Ulthwé.",
+        "wikiQuery": "Black Guardians Ulthwe"
+      }
+    ]
+  },
+  {
+    "id": "saim-hann",
+    "factionId": "aeldari",
+    "name": "Saim-Hann",
+    "type": "craftworld",
+    "description": "Vaisseau-monde des Wild Riders, organisé en Tribus de Sang, célèbre pour ses jetbikes.",
+    "loreShort": "Cavaliers sauvages, vitesse et liberté.",
+    "loreLong": "Saim-Hann préserve le mode de vie tribal des anciens Aeldari avant la Chute. Organisé en Wild Rider Clans, il privilégie la mobilité totale via jetbikes et vyper.",
+    "wikiQuery": "Saim-Hann craftworld Eldar"
+  },
+  {
+    "id": "iyanden",
+    "factionId": "aeldari",
+    "name": "Iyanden",
+    "type": "craftworld",
+    "description": "Vaisseau-monde dévasté par les Tyranides, peuplé majoritairement de Spirit Hosts (esprits).",
+    "loreShort": "Vaisseau des morts, fantômes guerriers.",
+    "loreLong": "Iyanden fut presque anéanti par la Hive Fleet Kraken au M41. Ses armées sont composées de Wraith constructs animés par les âmes des morts piégées dans des cristaux d'âme.",
+    "currentLeader": "Yriel",
+    "currentLeaderRole": "Autarch corsaire",
+    "wikiQuery": "Iyanden craftworld Eldar",
+    "notableUnits": [
+      {
+        "name": "Yriel",
+        "role": "Autarch corsaire",
+        "description": "Exilé revenu défendre Iyanden lors de l'invasion Tyranide.",
+        "wikiQuery": "Prince Yriel Iyanden"
+      },
+      {
+        "name": "Wraithknight",
+        "role": "Construct titanique",
+        "description": "Mecha animé par l'âme d'un Aeldari mort.",
+        "wikiQuery": "Wraithknight Iyanden"
+      }
+    ]
+  },
+  {
+    "id": "biel-tan",
+    "factionId": "aeldari",
+    "name": "Biel-Tan",
+    "type": "craftworld",
+    "description": "Vaisseau-monde militariste cherchant la restauration de l'empire Aeldari, brisé après la Treizième Croisade Noire.",
+    "loreShort": "Rose ardente, restauration de l'empire.",
+    "wikiQuery": "Biel-Tan craftworld"
+  },
+  {
+    "id": "alaitoc",
+    "factionId": "aeldari",
+    "name": "Alaitoc",
+    "type": "craftworld",
+    "description": "Vaisseau-monde austère prônant le strict respect du Chemin Aeldari, célèbre pour ses Pathfinders.",
+    "loreShort": "Chemin strict, tireurs d'élite.",
+    "wikiQuery": "Alaitoc craftworld"
+  },
+  {
+    "id": "hive-fleet-behemoth",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Béhémoth",
+    "type": "hivefleet",
+    "description": "Première flotte tyranide rencontrée par l'Imperium, anéantie à la Bataille de Macragge.",
+    "loreShort": "Première vague, dévorée par les Ultramarines.",
+    "loreLong": "La Hive Fleet Behemoth fut le premier contact officiel de l'Imperium avec les Tyranides au M41. Anéantie à la Bataille de Macragge par les Ultramarines de Marneus Calgar (au prix de la 1ère Compagnie entière).",
+    "wikiQuery": "Hive Fleet Behemoth"
+  },
+  {
+    "id": "hive-fleet-kraken",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Kraken",
+    "type": "hivefleet",
+    "description": "Deuxième flotte majeure, fragmentée en multiples splinters, plus rapide et adaptative.",
+    "loreShort": "Vague fragmentée, rapide et adaptative.",
+    "wikiQuery": "Hive Fleet Kraken"
+  },
+  {
+    "id": "hive-fleet-leviathan",
+    "factionId": "tyranides",
+    "name": "Flotte-Ruche Léviathan",
+    "type": "hivefleet",
+    "description": "Plus grande flotte tyranide jamais rencontrée, attaquant l'Imperium sur plusieurs fronts.",
+    "loreShort": "Vague titanesque, le Grand Dévoreur.",
+    "loreLong": "La Hive Fleet Leviathan est la plus grande flotte-ruche jamais observée, arrivant par-dessous le plan galactique simultanément sur plusieurs fronts. Elle a presque détruit Baal et Devastation of Baal.",
+    "wikiQuery": "Hive Fleet Leviathan"
+  },
+  {
+    "id": "sautekh-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Sautekh",
+    "type": "dynasty",
+    "description": "Dynastie dominante du Réveil Necron, dirigée par Imotekh le Stormlord.",
+    "loreShort": "Dynastie dominante, Imotekh le Stormlord.",
+    "currentLeader": "Imotekh the Stormlord",
+    "currentLeaderRole": "Phaeron suprême de Sautekh",
+    "wikiQuery": "Sautekh Dynasty Necron"
+  },
+  {
+    "id": "mephrit-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Mephrit",
+    "type": "dynasty",
+    "description": "Dynastie agressive et expansionniste, spécialisée dans la guerre solaire et les armes énergétiques.",
+    "loreShort": "Soleil noir, agression et énergie.",
+    "wikiQuery": "Mephrit Dynasty Necron"
+  },
+  {
+    "id": "novokh-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Novokh",
+    "type": "dynasty",
+    "description": "Dynastie cruelle vouée au combat ritualisé, peignant ses unités en rouge sang.",
+    "loreShort": "Tueurs rituels, rouge sang.",
+    "wikiQuery": "Novokh Dynasty Necron"
+  },
+  {
+    "id": "nephrekh-dynasty",
+    "factionId": "necrons",
+    "name": "Dynastie Nephrekh",
+    "type": "dynasty",
+    "description": "Dynastie maître du voyage interstitiel, préfèrant la téléportation aux véhicules.",
+    "loreShort": "Sables d'or, téléportation.",
+    "wikiQuery": "Nephrekh Dynasty Necron"
+  },
+  {
+    "id": "goff",
+    "factionId": "orks",
+    "name": "Goff",
+    "type": "klan",
+    "description": "Klan le plus brutal et nombreux, voué au combat rapproché et aux choppas.",
+    "loreShort": "Plus gros, plus dur, plus krunchy.",
+    "loreLong": "Les Goffs sont le klan d'Ork le plus brutal et nombreux. Le Warlord Ghazghkull Mag Uruk Thraka, le Beast of Armageddon, est un Goff archétypal.",
+    "currentLeader": "Ghazghkull Mag Uruk Thraka",
+    "currentLeaderRole": "Warboss-prophète, le Beast of Armageddon",
+    "wikiQuery": "Goff Orks warhammer",
+    "notableUnits": [
+      {
+        "name": "Ghazghkull",
+        "role": "Prophète d'la Waaagh!",
+        "description": "Plus grand Warboss connu, prophète de Gork et Mork.",
+        "wikiQuery": "Ghazghkull Mag Uruk Thraka"
+      }
+    ]
+  },
+  {
+    "id": "bad-moons",
+    "factionId": "orks",
+    "name": "Bad Moons",
+    "type": "klan",
+    "description": "Klan le plus riche, dents qui repoussent vite, équipement rutilant et flashy.",
+    "loreShort": "Riches, jaunes, dakka brillant.",
+    "wikiQuery": "Bad Moons Orks"
+  },
+  {
+    "id": "blood-axes",
+    "factionId": "orks",
+    "name": "Blood Axes",
+    "type": "klan",
+    "description": "Klan tactique influencé par les humains, mercenaires et stratégie occasionnelle.",
+    "loreShort": "Mercenaires rusés, tactique humaine.",
+    "wikiQuery": "Blood Axes Orks"
+  },
+  {
+    "id": "death-skulls",
+    "factionId": "orks",
+    "name": "Death Skulls",
+    "type": "klan",
+    "description": "Klan kleptomane peint en bleu pour la chance, looters et pilleurs de premier ordre.",
+    "loreShort": "Bleu chanceux, looters de tout.",
+    "wikiQuery": "Death Skulls Orks"
+  },
+  {
+    "id": "evil-sunz",
+    "factionId": "orks",
+    "name": "Evil Sunz",
+    "type": "klan",
+    "description": "Klan obsédé par la vitesse, peint en rouge (le rouge va plus vite).",
+    "loreShort": "Da red wunz go fasta.",
+    "wikiQuery": "Evil Sunz Orks"
+  },
+  {
+    "id": "snakebites",
+    "factionId": "orks",
+    "name": "Snakebites",
+    "type": "klan",
+    "description": "Klan traditionaliste rejetant la technologie, montant des squigs et boars géants.",
+    "loreShort": "Tribu sauvage, squigs et tradition.",
+    "wikiQuery": "Snakebites Orks"
+  },
+  {
+    "id": "our-martyred-lady",
+    "factionId": "soeurs-de-bataille",
+    "name": "Order of Our Martyred Lady",
+    "type": "order",
+    "description": "Plus grand ordre, gardien des reliques de Sainte Katherine.",
+    "loreShort": "Ordre majeur, héritage de Sainte Katherine.",
+    "currentLeader": "Morvenn Vahl",
+    "currentLeaderRole": "Abbess Sanctorum (suprême Adepta Sororitas)",
+    "wikiQuery": "Order Our Martyred Lady Sisters of Battle"
+  },
+  {
+    "id": "argent-shroud",
+    "factionId": "soeurs-de-bataille",
+    "name": "Order of the Argent Shroud",
+    "type": "order",
+    "description": "Ordre du silence et du devoir humble, agissant sans attendre la louange.",
+    "loreShort": "Silence, devoir humble.",
+    "wikiQuery": "Argent Shroud Sisters of Battle"
+  },
+  {
+    "id": "bloody-rose",
+    "factionId": "soeurs-de-bataille",
+    "name": "Order of the Bloody Rose",
+    "type": "order",
+    "description": "Ordre du combat rapproché passionné, fond sur les ennemis avec ferveur.",
+    "loreShort": "Passion brûlante, combat rapproché.",
+    "wikiQuery": "Bloody Rose Sisters of Battle"
+  },
+  {
+    "id": "ebon-chalice",
+    "factionId": "soeurs-de-bataille",
+    "name": "Order of the Ebon Chalice",
+    "type": "order",
+    "description": "Plus ancien ordre, garde la pureté de la doctrine originelle d'Alicia Dominica.",
+    "loreShort": "Doctrine originelle, plus ancien ordre.",
+    "wikiQuery": "Ebon Chalice Sisters of Battle"
+  },
+  {
+    "id": "sacred-rose",
+    "factionId": "soeurs-de-bataille",
+    "name": "Order of the Sacred Rose",
+    "type": "order",
+    "description": "Ordre serein voué à la prière et à la contemplation des saints visions.",
+    "loreShort": "Sérénité, contemplation et visions.",
+    "wikiQuery": "Sacred Rose Sisters of Battle"
+  },
+  {
+    "id": "valorous-heart",
+    "factionId": "soeurs-de-bataille",
+    "name": "Order of the Valorous Heart",
+    "type": "order",
+    "description": "Ordre stoïque endurant la souffrance comme acte de foi.",
+    "loreShort": "Stoïcisme, foi à travers la douleur.",
+    "wikiQuery": "Valorous Heart Sisters of Battle"
+  },
+  {
+    "id": "tau-sept",
+    "factionId": "tau",
+    "name": "T'au Sept",
+    "type": "sept",
+    "description": "Sept fondateur, équilibre des trois castes du Bien Suprême, doctrine standard.",
+    "loreShort": "Sept fondateur, équilibre canonique.",
+    "homeworld": "T'au",
+    "currentLeader": "Aun'Va",
+    "currentLeaderRole": "Maître Éthéré",
+    "wikiQuery": "T'au sept warhammer"
+  },
+  {
+    "id": "viorla-sept",
+    "factionId": "tau",
+    "name": "Vior'la Sept",
+    "type": "sept",
+    "description": "Sept agressif et belliqueux, combattants ardents au sang chaud.",
+    "loreShort": "Ardeur martiale, sang chaud.",
+    "homeworld": "Vior'la",
+    "wikiQuery": "Vior'la sept Tau"
+  },
+  {
+    "id": "borkan-sept",
+    "factionId": "tau",
+    "name": "Bork'an Sept",
+    "type": "sept",
+    "description": "Sept érudit, centre de la recherche et des académies.",
+    "loreShort": "Académies et tech avancée.",
+    "homeworld": "Bork'an",
+    "wikiQuery": "Bork'an sept Tau"
+  },
+  {
+    "id": "sacea-sept",
+    "factionId": "tau",
+    "name": "Sa'cea Sept",
+    "type": "sept",
+    "description": "Sept urbain et cosmopolite, mélange de toutes les castes.",
+    "loreShort": "Mégalopole cosmopolite.",
+    "homeworld": "Sa'cea",
+    "wikiQuery": "Sa'cea sept Tau"
+  },
+  {
+    "id": "dalyth-sept",
+    "factionId": "tau",
+    "name": "Dal'yth Sept",
+    "type": "sept",
+    "description": "Sept frontalier accueillant les Aliens et les rebelles humains dans le Bien Suprême.",
+    "loreShort": "Frontière diplomatique.",
+    "homeworld": "Dal'yth",
+    "wikiQuery": "Dal'yth sept Tau"
+  },
+  {
+    "id": "farsight-enclaves",
+    "factionId": "tau",
+    "name": "Farsight Enclaves",
+    "type": "sept",
+    "description": "Enclaves rebelles du Commandeur Farsight, ayant rompu avec l'Empire Tau.",
+    "loreShort": "Renégats, secret de Farsight.",
+    "loreLong": "Les Farsight Enclaves sont une faction rebelle Tau coupée de l'Empire principal après la mystérieuse découverte du Commandeur Farsight (O'Shovah) sur Arthas Moloch — où il aurait découvert la vérité sur les Éthérés.",
+    "homeworld": "Vior'la (originaire) / Enclaves Farsight",
+    "currentLeader": "Commander Farsight (O'Shovah)",
+    "currentLeaderRole": "Commandeur dissident",
+    "wikiQuery": "Farsight Enclaves Tau",
+    "citation": "Mont'au n'est jamais vraiment passé."
+  },
+  {
+    "id": "mars",
+    "factionId": "adeptus-mechanicus",
+    "name": "Mars",
+    "type": "forgeworld",
+    "description": "Sainte Mars, monde-forge originel et capitale spirituelle du Mechanicus.",
+    "loreShort": "Saint berceau, capitale spirituelle.",
+    "loreLong": "Mars est le berceau du Culte Mechanicus, lieu d'éveil de l'Omnissiah et premier monde-forge. Toutes les autres forges existent à son image. Gouvernée par le Fabricator-General, second seulement à l'Empereur de jure dans l'Imperium.",
+    "homeworld": "Mars",
+    "currentLeader": "Fabricator-General Kane",
+    "currentLeaderRole": "Fabricator-General",
+    "wikiQuery": "Mars forge world Mechanicus"
+  },
+  {
+    "id": "graia",
+    "factionId": "adeptus-mechanicus",
+    "name": "Graia",
+    "type": "forgeworld",
+    "description": "Monde-forge de production militaire, théâtre de l'invasion Chaos repoussée par le Titan Invictus.",
+    "loreShort": "Monde-forge militaire, Titan Invictus.",
+    "homeworld": "Graia",
+    "wikiQuery": "Graia forge world"
+  },
+  {
+    "id": "stygies-viii",
+    "factionId": "adeptus-mechanicus",
+    "name": "Stygies VIII",
+    "type": "forgeworld",
+    "description": "Monde-forge soupçonné d'études interdites, équipement de qualité et secrets technologiques.",
+    "loreShort": "Études interdites, secrets tech.",
+    "homeworld": "Stygies VIII",
+    "wikiQuery": "Stygies VIII forge world"
+  },
+  {
+    "id": "lucius",
+    "factionId": "adeptus-mechanicus",
+    "name": "Lucius",
+    "type": "forgeworld",
+    "description": "Monde-forge spécialiste des Titans et de la téléportation.",
+    "loreShort": "Téléportation et Titans.",
+    "homeworld": "Lucius",
+    "wikiQuery": "Lucius forge world"
+  },
+  {
+    "id": "shadowkeepers",
+    "factionId": "adeptus-custodes",
+    "name": "Shadowkeepers",
+    "type": "shield_host",
+    "description": "Geôliers des prisonniers du Trône d'Or, gardiens des secrets que l'Empereur Lui-même a scellés.",
+    "loreShort": "Geôliers des secrets impériaux les plus noirs.",
+    "loreLong": "Le Shield Host le plus secret de tous, les Shadowkeepers ne quittent presque jamais le Palais Impérial. Leur mission : surveiller les prisonniers du Trône d'Or — entités si dangereuses que l'Empereur Lui-même les a scellées avant de Se laisser enfermer dans le Trône. Ce qu'ils gardent, personne d'autre ne le sait. Ils sont armés des armes-relique les plus anciennes de l'Officio Custodes : lances Castellan, boucliers Praesidium et armures Aquilon datant des premiers jours de la Grande Croisade.",
+    "motto": "Ce qui dort ne doit pas s'éveiller.",
+    "currentLeader": "Inconnu (classifié)",
+    "currentLeaderRole": "Shield-Captain des Shadowkeepers",
+    "homeworld": "Terra (Geôles du Palais Impérial)",
+    "founding": "Pré-Grande Croisade (M30)",
+    "wikiQuery": "Shadowkeepers Custodes",
+    "citation": "Ne demande pas qui nous gardons. Sois reconnaissant qu'ils soient gardés.",
+    "notableUnits": [
+      {
+        "name": "Geôliers Castellan",
+        "role": "Élite des Shadowkeepers",
+        "description": "Vétérans armés des Castellan Axes, lames forgées pour briser les âmes daemoniaques.",
+        "wikiQuery": "Castellan Custodes"
+      }
+    ]
+  },
+  {
+    "id": "hykanatoi",
+    "factionId": "adeptus-custodes",
+    "name": "Hykanatoi",
+    "type": "shield_host",
+    "description": "Sentinelles éternelles de la Salle du Trône, ils n'ont pas quitté leurs postes depuis dix mille ans.",
+    "loreShort": "Sentinelles immobiles de la Salle du Trône.",
+    "loreLong": "Les Hykanatoi sont les Custodes les plus proches du Trône d'Or. Postés dans la Sanctum Imperialis, ils gardent les portes que personne ne franchit jamais sans permission divine. Leur quotidien : la station immobile, la méditation guerrière, l'écoute du chuchotement de l'Empereur. Quand un Hykanatos prend position, il peut y rester des semaines sans bouger, plongé dans une transe martiale que les Sœurs du Silence appellent la « Veille des Mille Yeux ». Ce sont les premiers et derniers défenseurs de l'Empereur — si la Sanctum tombe, l'Imperium tombe.",
+    "motto": "Nous veillons. Nous restons.",
+    "currentLeader": "Trajann Valoris (en tant que Captain-General supervise tous les Shield Hosts)",
+    "currentLeaderRole": "Captain-General de l'Adeptus Custodes",
+    "homeworld": "Terra (Sanctum Imperialis)",
+    "founding": "Pré-Grande Croisade (M30)",
+    "wikiQuery": "Hykanatoi Custodes",
+    "citation": "L'Empereur veille. Nous veillons sur Lui.",
+    "notableUnits": [
+      {
+        "name": "Trajann Valoris",
+        "role": "Captain-General",
+        "description": "Capitaine-Général actuel, choisi personnellement par l'Empereur dans Ses rares moments de lucidité. Porte la Watcher's Axe.",
+        "wikiQuery": "Trajann Valoris"
+      },
+      {
+        "name": "Custodian Guard",
+        "role": "Compagnie d'élite",
+        "description": "L'unité la plus emblématique des Hykanatoi : guerriers en armure dorée armés de lances de garde Custodes.",
+        "wikiQuery": "Custodian Guard"
+      }
+    ]
+  },
+  {
+    "id": "solar-watch",
+    "factionId": "adeptus-custodes",
+    "name": "Solar Watch",
+    "type": "shield_host",
+    "description": "Force de réaction rapide du système solaire, mobilisable en quelques heures aux frontières de Sol.",
+    "loreShort": "Réponse rapide aux menaces sur Sol.",
+    "wikiQuery": "Solar Watch Custodes"
+  },
+  {
+    "id": "aquilan-shield",
+    "factionId": "adeptus-custodes",
+    "name": "Aquilan Shield",
+    "type": "shield_host",
+    "description": "Escorte des Hauts Dignitaires impériaux et des Inquisiteurs en mission sensible hors de Terra.",
+    "loreShort": "Escorte des dignitaires en mission.",
+    "wikiQuery": "Aquilan Shield Custodes"
+  },
+  {
+    "id": "eternal-shield",
+    "factionId": "adeptus-custodes",
+    "name": "Eternal",
+    "type": "shield_host",
+    "description": "Shield Host des opérations longues — déploiements de plusieurs siècles loin du Palais Impérial.",
+    "loreShort": "Vétérans des déploiements pluri-séculaires.",
+    "wikiQuery": "Eternal Custodes Shield Host"
+  },
+  {
+    "id": "emissaries-imperatus",
+    "factionId": "adeptus-custodes",
+    "name": "Emissaries Imperatus",
+    "type": "shield_host",
+    "description": "Diplomates et envoyés impériaux, ils portent la voix du Trône à travers le Segmentum Solar.",
+    "loreShort": "Diplomates impériaux à la lance dorée.",
+    "wikiQuery": "Emissaries Imperatus"
+  },
+  {
+    "id": "callidus-temple",
+    "factionId": "officio-assassinorum",
+    "name": "Temple Callidus",
+    "type": "temple",
+    "description": "Maîtres de l'infiltration polymorphique. Ils peuvent prendre l'apparence de n'importe qui — même de leur cible.",
+    "loreShort": "Caméléons biologiques de l'Imperium.",
+    "loreLong": "Les Callidus sont les assassins de l'illusion. Grâce à la polymorphine — une drogue qui altère leur structure cellulaire — ils peuvent se faire passer pour leur cible des heures durant, copiant voix, gestes et souvenirs récents. Leur arme de prédilection : le Phase Sword, lame qui ignore l'armure et les boucliers, et le Neural Shredder qui dissout l'esprit avant le corps. Là où d'autres assassins frappent depuis l'ombre, le Callidus frappe depuis la chaise même de la cible — souvent en buvant son verre.",
+    "motto": "Je suis toi. Tu n'es plus.",
+    "currentLeader": "Grand Maître du Temple Callidus",
+    "currentLeaderRole": "Grand Master Callidus",
+    "homeworld": "Terra (Temple Callidus)",
+    "founding": "M37 (Réforme de Sebastian Thor)",
+    "wikiQuery": "Callidus Assassin",
+    "citation": "Ta dernière conversation, c'est avec moi que tu l'as eue.",
+    "notableUnits": [
+      {
+        "name": "Vindicia",
+        "role": "Callidus légendaire",
+        "description": "Assassine vétérane, infiltra une cellule génestealer pendant 12 ans avant d'éliminer son patriarche.",
+        "wikiQuery": "Callidus Assassin"
+      }
+    ]
+  },
+  {
+    "id": "vindicare-temple",
+    "factionId": "officio-assassinorum",
+    "name": "Temple Vindicare",
+    "type": "temple",
+    "description": "Snipers d'élite. Une cible, une balle, une distance impossible. Le Vindicare ne rate jamais.",
+    "loreShort": "Tireurs d'élite mythiques de l'Imperium.",
+    "loreLong": "Les Vindicare sont les assassins de la distance. Leur Exitus Rifle, fusil de précision personnalisé pour chaque assassin, peut tirer trois types de munitions : Standard (tue n'importe quoi), Shieldbreaker (annule les boucliers), Turbo-Penetrator (abat un Carnifex). Un Vindicare s'entraîne pour intégrer chaque environnement comme une statue : on ne le voit jamais venir, on ne le voit jamais partir. Le légendaire M'Shen abattit le primarque traître Konrad Curze d'un seul coup — exécution sanctionnée par Curze lui-même, qui voulait sa propre fin.",
+    "motto": "Une cible. Une balle. Une vérité.",
+    "currentLeader": "Grand Maître du Temple Vindicare",
+    "currentLeaderRole": "Grand Master Vindicare",
+    "homeworld": "Terra (Temple Vindicare)",
+    "founding": "M37 (Réforme de Sebastian Thor)",
+    "wikiQuery": "Vindicare Assassin",
+    "citation": "Tu mourras avant d'entendre le coup.",
+    "notableUnits": [
+      {
+        "name": "M'Shen",
+        "role": "Vindicare légendaire (M41)",
+        "description": "L'assassine qui exécuta Konrad Curze, primarque des Night Lords — sanctionnée par Curze lui-même.",
+        "wikiQuery": "Vindicare M'Shen Konrad Curze"
+      }
+    ]
+  },
+  {
+    "id": "eversor-temple",
+    "factionId": "officio-assassinorum",
+    "name": "Temple Eversor",
+    "type": "temple",
+    "description": "Bombes biologiques en frénésie chimique. Quand l'Imperium veut un massacre exemplaire, il envoie un Eversor.",
+    "loreShort": "Tornades chimiques de la mort de masse.",
+    "loreLong": "L'Eversor n'est pas un assassin discret — c'est une déclaration de terreur. Boosté par un cocktail de drogues neurogen, frenzon et adrénaline impossibles à survivre pour un humain normal, il devient une machine à tuer pendant quelques heures, capable d'éliminer une compagnie entière à mains nues. Ses neuro-implants accélèrent ses réflexes, ses griffes Power Claw tranchent l'acier, son pistolet Executor tire des projectiles incendiaires. Quand l'Eversor meurt, son corps explose dans une déflagration biologique. Cible secondaire : l'horreur des survivants.",
+    "motto": "Que la peur soit le message.",
+    "currentLeader": "Grand Maître du Temple Eversor",
+    "currentLeaderRole": "Grand Master Eversor",
+    "homeworld": "Terra (Citadel of the Eversor)",
+    "founding": "M37 (Réforme de Sebastian Thor)",
+    "wikiQuery": "Eversor Assassin",
+    "citation": "Quand je tomberai, vous tomberez avec moi.",
+    "notableUnits": []
+  },
+  {
+    "id": "culexus-temple",
+    "factionId": "officio-assassinorum",
+    "name": "Temple Culexus",
+    "type": "temple",
+    "description": "Chasseurs de psykers. Leur seule présence éteint le Warp ; ils sont l'absence, le néant, la fin de la pensée.",
+    "loreShort": "Néants psychiques, terreurs des sorciers.",
+    "loreLong": "Le Culexus est un Pariah — un humain naturellement immunisé au Warp, qui projette autour de lui une zone de néant psychique appelée \"Soulless\". Pour les psykers, sa simple présence est une amputation de l'âme : ils ne peuvent ni ressentir, ni manifester, ni respirer la magie. Pour les humains normaux, le Culexus inspire une terreur primale instinctive. Son arme principale, l'Animus Speculum, canalise sa propre nullité psychique en faisceau dévastateur capable de désintégrer un psyker en quelques secondes. Les Culexus sont déployés contre les Mages Chaotiques, les Hive Tyrants et tout ce qui touche au Warp.",
+    "motto": "Là où je suis, le Warp n'est plus.",
+    "currentLeader": "Grand Maître du Temple Culexus",
+    "currentLeaderRole": "Grand Master Culexus",
+    "homeworld": "Terra (Temple Culexus)",
+    "founding": "M37 (Réforme de Sebastian Thor)",
+    "wikiQuery": "Culexus Assassin",
+    "citation": "Tu cherches le Warp ? Il a peur de moi.",
+    "notableUnits": []
+  },
+  {
+    "id": "kabal-of-the-black-heart",
+    "factionId": "drukhari",
+    "name": "Kabal of the Black Heart",
+    "type": "kabal",
+    "description": "La Kabale dominante de Commorragh, dirigée par Asdrubael Vect lui-même — Suprême Overlord de la Cité Sombre depuis dix mille ans.",
+    "loreShort": "Kabale d'Asdrubael Vect, maîtres absolus de Commorragh.",
+    "loreLong": "Fondée par Asdrubael Vect lui-même, la Kabal of the Black Heart est la plus puissante de toutes. Vect arracha le pouvoir aux anciennes maisons nobles dans une nuit de poignards qui dura mille ans, et règne désormais sur Commorragh comme une araignée sur sa toile. La Kabale dispose d'une flotte de raiders sans égal, d'arènes de gladiateurs incomparables et d'un réseau d'espions qui s'étend jusque dans la Salle du Trône d'Or. Aucun Drukhari n'oserait défier Vect ouvertement.",
+    "motto": "Le pouvoir n'est ni donné, ni mérité. Il est pris.",
+    "currentLeader": "Asdrubael Vect",
+    "currentLeaderRole": "Suprême Overlord de Commorragh",
+    "homeworld": "Commorragh (Webway)",
+    "founding": "M30 (post-Chute)",
+    "wikiQuery": "Kabal of the Black Heart",
+    "citation": "Tu n'es pas un sujet. Tu es une note dans mon agenda.",
+    "notableUnits": [
+      {
+        "name": "Asdrubael Vect",
+        "role": "Suprême Overlord",
+        "description": "Le plus ancien et le plus rusé des Drukhari. Survit depuis dix mille ans grâce à sa cruauté absolue et à des cohortes de doublures bio-engineered.",
+        "wikiQuery": "Asdrubael Vect"
+      },
+      {
+        "name": "Kabalite Trueborn",
+        "role": "Élite kabalite",
+        "description": "Les rares Drukhari nés naturellement (et non clonés) — les plus pures lignées nobles, les meilleures armes.",
+        "wikiQuery": "Kabalite Trueborn"
+      }
+    ]
+  },
+  {
+    "id": "kabal-of-the-obsidian-rose",
+    "factionId": "drukhari",
+    "name": "Kabal of the Obsidian Rose",
+    "type": "kabal",
+    "description": "Maîtres armuriers de Commorragh. Leurs splinter weapons sont les plus précis et les plus ciselés de toute la Cité Sombre.",
+    "loreShort": "Armuriers d'élite, splinter weapons signature.",
+    "loreLong": "La Kabal of the Obsidian Rose règne sur les forges noires de Commorragh. Leur Archonte, Lady Malys, est connue pour sa préscience troublante — certains disent qu'elle a entr'aperçu les fils du destin pendant un séjour dans le Webway profond. La Kabale fournit les meilleures splinter weapons à toute la Cité Sombre, et ses raiders ressemblent moins à des assassins qu'à des sculpteurs de mort, chaque tir prémédité avec une précision artistique.",
+    "motto": "La beauté du tir surpasse la violence du choc.",
+    "currentLeader": "Lady Malys",
+    "currentLeaderRole": "Archonte de la Kabale",
+    "homeworld": "Commorragh (Webway)",
+    "founding": "M30",
+    "wikiQuery": "Kabal of the Obsidian Rose",
+    "citation": "Mes balles sont des poèmes. Apprécie la rime avant de mourir."
+  },
+  {
+    "id": "kabal-of-the-poisoned-tongue",
+    "factionId": "drukhari",
+    "name": "Kabal of the Poisoned Tongue",
+    "type": "kabal",
+    "description": "Maîtres des poisons et des venins. Leurs armes sont gravées de toxines qui torturent avant de tuer.",
+    "loreShort": "Spécialistes des venins exotiques.",
+    "wikiQuery": "Kabal of the Poisoned Tongue"
+  },
+  {
+    "id": "kabal-of-the-flayed-skull",
+    "factionId": "drukhari",
+    "name": "Kabal of the Flayed Skull",
+    "type": "kabal",
+    "description": "Pillards aériens spécialisés dans les raids véhicule-vs-monde. Leurs Reaver jetbikes sont les plus rapides de Commorragh.",
+    "loreShort": "Cavaliers aériens, raids éclair.",
+    "wikiQuery": "Kabal of the Flayed Skull"
+  },
+  {
+    "id": "cult-of-strife",
+    "factionId": "drukhari",
+    "name": "Cult of Strife",
+    "type": "wych_cult",
+    "description": "Le plus prestigieux des Wych Cults, gladiateurs des arènes de Commorragh dirigés par la légendaire Lelith Hesperax.",
+    "loreShort": "Gladiateurs ultimes de Lelith Hesperax.",
+    "loreLong": "Le Cult of Strife est le plus célèbre Wych Cult de Commorragh. Ses combattantes — les Wyches — vivent et meurent dans les Crucibael, les arènes flottantes où les esclaves capturés sont jetés contre des bêtes du Webway. Leur Succubus Lelith Hesperax est invaincue depuis mille ans : elle ne porte pas d'armure, ne se sert que de ses lames-ongles, et danse autour de chaque adversaire avec une grâce mortelle. Les places des arènes sont vendues à prix d'or aux nobles drukhari.",
+    "motto": "Le sang du combat fait taire la faim de Slaanesh.",
+    "currentLeader": "Lelith Hesperax",
+    "currentLeaderRole": "Succubus du Cult of Strife",
+    "homeworld": "Commorragh (Crucibael)",
+    "founding": "M30",
+    "wikiQuery": "Cult of Strife Drukhari",
+    "citation": "Tu meurs. Je danse. C'est aussi simple que ça.",
+    "notableUnits": [
+      {
+        "name": "Lelith Hesperax",
+        "role": "Succubus suprême",
+        "description": "La plus mortelle gladiatrice de toute Commorragh. Combat sans armure, ses lames-ongles tranchent à travers tout.",
+        "wikiQuery": "Lelith Hesperax"
+      }
+    ]
+  },
+  {
+    "id": "cult-of-the-cursed-blade",
+    "factionId": "drukhari",
+    "name": "Cult of the Cursed Blade",
+    "type": "wych_cult",
+    "description": "Wyches initiées aux lames daemoniques retournées contre le Warp. Sombre, dangereux, redouté même à Commorragh.",
+    "loreShort": "Wyches aux lames daemoniques.",
+    "wikiQuery": "Cult of the Cursed Blade"
+  },
+  {
+    "id": "cult-of-the-red-grief",
+    "factionId": "drukhari",
+    "name": "Cult of the Red Grief",
+    "type": "wych_cult",
+    "description": "Cult itinérant qui déserte les arènes pour traquer la guerre véritable — préfèrent la chasse au combat ritualisé.",
+    "loreShort": "Wyches chasseuses, hors arènes.",
+    "wikiQuery": "Cult of the Red Grief"
+  },
+  {
+    "id": "prophets-of-flesh",
+    "factionId": "drukhari",
+    "name": "Prophets of Flesh",
+    "type": "haemonculus_coven",
+    "description": "Le plus ancien Coven Haemonculus. Sculpteurs de chair, créateurs de Grotesques et de Talos. Dirigé par Urien Rakarth, le maître absolu.",
+    "loreShort": "Sculpteurs de chair, Coven d'Urien Rakarth.",
+    "loreLong": "Les Prophets of Flesh sont les plus anciens Haemonculi de Commorragh — certains de leurs membres remontent à la Chute elle-même. Urien Rakarth, leur Maître, a peut-être survécu à dix mille ans grâce à des techniques de transfert d'âme et de greffe corporelle dont seuls ses pairs connaissent les rudiments. Le Coven crée des Grotesques (esclaves musclés), des Talos (machines de guerre vivantes-mortes), et leurs ateliers résonnent des cris perpétuels de leurs sujets d'expérimentation.",
+    "motto": "La chair est argile. Nous sculptons.",
+    "currentLeader": "Urien Rakarth",
+    "currentLeaderRole": "Maître Haemonculus",
+    "homeworld": "Commorragh (Coven des Prophets of Flesh)",
+    "founding": "M30",
+    "wikiQuery": "Prophets of Flesh Haemonculus",
+    "citation": "Tu n'es pas vivant. Tu n'es pas mort. Tu es matière première.",
+    "notableUnits": [
+      {
+        "name": "Urien Rakarth",
+        "role": "Maître Haemonculus",
+        "description": "Le plus ancien et talentueux Haemonculi. Possède les Talos qu'il a sculpté lui-même il y a mille ans.",
+        "wikiQuery": "Urien Rakarth"
+      }
+    ]
+  },
+  {
+    "id": "black-descent",
+    "factionId": "drukhari",
+    "name": "Black Descent",
+    "type": "haemonculus_coven",
+    "description": "Coven secret obsédé par la transmutation des âmes. Leurs expériences fusionnent chair et Warp.",
+    "loreShort": "Transmutation âme-chair-Warp.",
+    "wikiQuery": "Black Descent Haemonculus"
+  },
+  {
+    "id": "dark-creed",
+    "factionId": "drukhari",
+    "name": "Dark Creed",
+    "type": "haemonculus_coven",
+    "description": "Coven qui pratique la résurrection forcée. Leurs sujets meurent et reviennent à volonté — pour mourir encore.",
+    "loreShort": "Maîtres de la résurrection forcée.",
+    "wikiQuery": "Dark Creed Haemonculus"
+  },
+  {
+    "id": "1st-brotherhood",
+    "factionId": "grey-knights",
+    "name": "1st Brotherhood",
+    "type": "brotherhood",
+    "description": "La Brotherhood d'élite, gardée du Suprême Grand Master. Domicile spirituel de Kaldor Draigo, héros perdu dans le Warp depuis des siècles.",
+    "loreShort": "Brotherhood du Suprême Grand Master.",
+    "loreLong": "La 1st Brotherhood est la plus ancienne et prestigieuse des huit Brotherhoods. Elle compte les meilleurs psykers, les meilleurs duelistes, et reçoit les missions les plus impossibles. Son ancien Suprême Grand Master Kaldor Draigo s'est vu condamné à errer dans le Warp depuis qu'il a gravé le Vrai Nom de M'kar le Réincarné dans le cœur de Mortarion (primarque de la Mort) — un acte si pur qu'il déchira la trame réelle. Il revient ponctuellement, intemporel, pour livrer une bataille puis disparaître à nouveau.",
+    "motto": "Première à servir, première à mourir, première à revenir.",
+    "currentLeader": "Suprême Grand Master (poste actuel classifié)",
+    "currentLeaderRole": "Suprême Grand Master des Grey Knights",
+    "homeworld": "Titan (Saturne)",
+    "founding": "Pré-Hérésie (M30, secret)",
+    "wikiQuery": "Grey Knights 1st Brotherhood",
+    "citation": "Nous chassons ce que d'autres ne savent même pas exister.",
+    "notableUnits": [
+      {
+        "name": "Kaldor Draigo",
+        "role": "Suprême Grand Master (perdu dans le Warp)",
+        "description": "Le plus puissant Grey Knight. Voyage à travers le temps et le Warp, livrant batailles isolées contre les daemons primordiaux.",
+        "wikiQuery": "Kaldor Draigo"
+      }
+    ]
+  },
+  {
+    "id": "8th-brotherhood",
+    "factionId": "grey-knights",
+    "name": "8th Brotherhood (Purifiers)",
+    "type": "brotherhood",
+    "description": "Les Purifiers — Grey Knights élus pour leur pureté absolue de l'âme. Ils combattent les daemons les plus puissants en première ligne.",
+    "loreShort": "Élite spirituelle, anti-daemons majeurs.",
+    "loreLong": "La 8th Brotherhood héberge les Purifiers — Grey Knights dont la pureté est telle qu'ils peuvent affronter les Greater Daemons en duel direct sans corruption. Ils sont menés par Castellan Crowe, gardien du Black Blade of Antwyr — une lame daemonique scellée que Crowe transporte sans jamais l'utiliser, ses chuchotements tentant constamment de le corrompre. Les Purifiers ne dorment qu'en dernière nécessité, méditant sans cesse pour préserver leur âme.",
+    "motto": "L'âme pure est l'arme dernière.",
+    "currentLeader": "Castellan Crowe",
+    "currentLeaderRole": "Brother-Captain des Purifiers",
+    "homeworld": "Titan (Saturne)",
+    "founding": "Pré-Hérésie (M30)",
+    "wikiQuery": "Grey Knights Purifiers",
+    "citation": "Le daemon murmure. Je n'écoute pas.",
+    "notableUnits": [
+      {
+        "name": "Castellan Crowe",
+        "role": "Brother-Captain (gardien du Blade of Antwyr)",
+        "description": "Champion solitaire qui porte la lame daemonique scellée. Son destin est de la garder sans jamais succomber.",
+        "wikiQuery": "Castellan Crowe"
+      }
+    ]
+  },
+  {
+    "id": "2nd-brotherhood",
+    "factionId": "grey-knights",
+    "name": "2nd Brotherhood",
+    "type": "brotherhood",
+    "description": "Brotherhood de combat conventionnel, spécialisée dans les engagements à grande échelle.",
+    "loreShort": "Bataillons conventionnels.",
+    "wikiQuery": "Grey Knights 2nd Brotherhood"
+  },
+  {
+    "id": "3rd-brotherhood",
+    "factionId": "grey-knights",
+    "name": "3rd Brotherhood",
+    "type": "brotherhood",
+    "description": "Brotherhood de réaction rapide, déployée aux abords des Webway warp.",
+    "loreShort": "Réaction rapide warp.",
+    "wikiQuery": "Grey Knights 3rd Brotherhood"
+  },
+  {
+    "id": "4th-brotherhood",
+    "factionId": "grey-knights",
+    "name": "4th Brotherhood",
+    "type": "brotherhood",
+    "description": "Spécialistes des sièges et des forteresses daemoniques.",
+    "loreShort": "Sièges anti-forteresse.",
+    "wikiQuery": "Grey Knights 4th Brotherhood"
+  },
+  {
+    "id": "5th-brotherhood",
+    "factionId": "grey-knights",
+    "name": "5th Brotherhood",
+    "type": "brotherhood",
+    "description": "Brotherhood psyker pure, divinatrice et tactique.",
+    "loreShort": "Psykers tacticiens.",
+    "wikiQuery": "Grey Knights 5th Brotherhood"
+  },
+  {
+    "id": "6th-brotherhood",
+    "factionId": "grey-knights",
+    "name": "6th Brotherhood",
+    "type": "brotherhood",
+    "description": "Spécialistes du combat rapproché contre les Bloodthirsters et autres avatars de Khorne.",
+    "loreShort": "Anti-Khorne.",
+    "wikiQuery": "Grey Knights 6th Brotherhood"
+  },
+  {
+    "id": "7th-brotherhood",
+    "factionId": "grey-knights",
+    "name": "7th Brotherhood",
+    "type": "brotherhood",
+    "description": "Brotherhood des longues missions — exorcismes planétaires de plusieurs siècles.",
+    "loreShort": "Missions séculaires.",
+    "wikiQuery": "Grey Knights 7th Brotherhood"
+  },
+  {
+    "id": "trans-hyperian-alliance",
+    "factionId": "leagues-of-votann",
+    "name": "Trans-Hyperian Alliance",
+    "type": "kindred",
+    "description": "Le Kindred dominant et le plus diplomatique. Tisse les liens entre toutes les Ligues et négocie avec les puissances extérieures (Imperium, T'au, voire Aeldari).",
+    "loreShort": "Diplomates suprêmes des Kin.",
+    "loreLong": "Le Trans-Hyperian Alliance est le plus politiquement influent des Kindreds. Ses Kâhls servent souvent de voix unifiée des Ligues quand il faut négocier avec les puissances extérieures — un rôle vital depuis l'expansion de l'Imperium dans le voisinage galactique. Leur Votann est l'un des plus anciens, et certains affirment qu'il contient la mémoire des décisions de la Grande Croisade. Leur héros le plus célèbre, Ûthar the Destined, est dit avoir consulté le Votann lui-même avant chaque bataille.",
+    "motto": "L'alliance est plus forte que l'isolement.",
+    "currentLeader": "Ûthar the Destined",
+    "currentLeaderRole": "Kâhl champion",
+    "homeworld": "Kapellar System",
+    "founding": "M22 (Âge des Voyages des Étoiles)",
+    "wikiQuery": "Trans-Hyperian Alliance Votann",
+    "citation": "La pierre se souvient. Le Votann délibère. Nous agissons.",
+    "notableUnits": [
+      {
+        "name": "Ûthar the Destined",
+        "role": "Kâhl légendaire",
+        "description": "Champion-Kâhl du Trans-Hyperian, choisi par le Votann lui-même selon les prophéties.",
+        "wikiQuery": "Uthar the Destined Votann"
+      }
+    ]
+  },
+  {
+    "id": "greater-thurian",
+    "factionId": "leagues-of-votann",
+    "name": "Greater Thurian League",
+    "type": "kindred",
+    "description": "Kindred industriel le plus prolifique. Leurs forges produisent armes et véhicules pour toutes les autres Ligues.",
+    "loreShort": "Forges industrielles maîtresses.",
+    "wikiQuery": "Greater Thurian League"
+  },
+  {
+    "id": "kronus-hegemony",
+    "factionId": "leagues-of-votann",
+    "name": "Kronus Hegemony",
+    "type": "kindred",
+    "description": "Ligue militaire pure — la plus belliqueuse. Ses Hearthkyn sont entrés en conflit ouvert avec l'Imperium plusieurs fois.",
+    "loreShort": "Militaristes anti-Imperium.",
+    "wikiQuery": "Kronus Hegemony Votann"
+  },
+  {
+    "id": "ymyr-conglomerate",
+    "factionId": "leagues-of-votann",
+    "name": "Ymyr Conglomerate",
+    "type": "kindred",
+    "description": "Plus grande coalition Kin connue, regroupe plusieurs Ligues mineures sous une bannière commerciale et militaire.",
+    "loreShort": "Coalition commerciale géante.",
+    "wikiQuery": "Ymyr Conglomerate Votann"
+  },
+  {
+    "id": "urani-surtr",
+    "factionId": "leagues-of-votann",
+    "name": "Urani-Surtr Regulates",
+    "type": "kindred",
+    "description": "Kindred des explorateurs et chasseurs de primes. Leurs Hernkyn Pioneers parcourent les mondes inconnus.",
+    "loreShort": "Explorateurs et chasseurs de primes.",
+    "wikiQuery": "Urani-Surtr Regulates"
+  },
+  {
+    "id": "cult-of-the-four-armed-emperor",
+    "factionId": "genestealer-cults",
+    "name": "Cult of the Four-Armed Emperor",
+    "type": "cult",
+    "description": "Le Culte iconique, vénéré pour son Patriarche ancestral et son Iconographie qui ridiculise l'Aquila à deux têtes en Aquila à quatre bras.",
+    "loreShort": "Le Culte symbolique, ennemi rituel de l'Aquila.",
+    "loreLong": "Le Cult of the Four-Armed Emperor est l'archétype du Culte Genestealer mature. Présent sur des dizaines de mondes-ruches, il s'incarne comme une réponse millénariste à la décadence impériale : ses fidèles voient le Patriarche comme un Empereur véritable, débarrassé du Trône d'Or. Le Magus principal est un sermonneur charismatique qui inverse les rituels eklesiastiques en culte du Quatre-Bras. Quand la Hive Fleet approche, ce sont les Cult of the Four-Armed Emperor qui ouvrent les premiers les portes des forteresses.",
+    "motto": "Le Trône d'Or ment. Le Quatre-Bras vient.",
+    "currentLeader": "Patriarche du Quatre-Bras",
+    "currentLeaderRole": "Centre psychique du Broodlink",
+    "homeworld": "Variable (mondes-ruches infestés)",
+    "founding": "M40-M41",
+    "wikiQuery": "Cult Four-Armed Emperor Genestealer",
+    "citation": "Nous attendons. Lui vient.",
+    "notableUnits": [
+      {
+        "name": "Patriarche",
+        "role": "Genestealer pur",
+        "description": "Le centre du Broodlink. Ne quitte jamais sa cachette souterraine. Tue d'un seul regard psychique.",
+        "wikiQuery": "Genestealer Patriarch"
+      },
+      {
+        "name": "Magus",
+        "role": "Psyker hybride",
+        "description": "Sermonneur charismatique qui prêche la venue du Quatre-Bras et coordonne les hordes.",
+        "wikiQuery": "Genestealer Magus"
+      },
+      {
+        "name": "Primus",
+        "role": "Chef militaire hybride",
+        "description": "Tactique brutal des révoltes du Culte.",
+        "wikiQuery": "Genestealer Primus"
+      }
+    ]
+  },
+  {
+    "id": "twisted-helix",
+    "factionId": "genestealer-cults",
+    "name": "Twisted Helix",
+    "type": "cult",
+    "description": "Culte issu d'un monde-forge. Ses hybrides sont augmentés cybernétiquement, fusion de chair Genestealer et de pièces Mechanicus.",
+    "loreShort": "Cybernétiquement augmentés.",
+    "wikiQuery": "Twisted Helix Genestealer"
+  },
+  {
+    "id": "bladed-cog",
+    "factionId": "genestealer-cults",
+    "name": "Bladed Cog",
+    "type": "cult",
+    "description": "Culte ayant infiltré le Mechanicus. Leurs Magos hybrides volent et corrompent des STC pour leur Patriarche.",
+    "loreShort": "Infiltration Mechanicus.",
+    "wikiQuery": "Bladed Cog Genestealer"
+  },
+  {
+    "id": "hivecult",
+    "factionId": "genestealer-cults",
+    "name": "Hivecult",
+    "type": "cult",
+    "description": "Culte des bas-fonds des ruches impériales — recrute parmi les exclus, les mendiants, les esclaves industriels.",
+    "loreShort": "Culte des bas-fonds urbains.",
+    "wikiQuery": "Hivecult Genestealer"
+  },
+  {
+    "id": "pauper-princes",
+    "factionId": "genestealer-cults",
+    "name": "Pauper Princes",
+    "type": "cult",
+    "description": "Culte qui se pose en alternative messianique aux nobles impériaux corrompus. Promet abondance et égalité aux paysans.",
+    "loreShort": "Messianique anti-nobles.",
+    "wikiQuery": "Pauper Princes Genestealer"
+  },
+  {
+    "id": "rusted-claw",
+    "factionId": "genestealer-cults",
+    "name": "Rusted Claw",
+    "type": "cult",
+    "description": "Culte des mondes-déserts et des hors-la-loi. Leurs hybrides chevauchent des bikes et des wheels customisés Mad Max-esque.",
+    "loreShort": "Hybrides motards des wastelands.",
+    "wikiQuery": "Rusted Claw Genestealer"
+  }
 ]

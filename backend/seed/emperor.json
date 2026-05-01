@@ -1,0 +1,58 @@
+{
+  "title": "L'Empereur de l'Humanité",
+  "subtitle": "Le Maître de l'Humanité · Dieu en gestation · Cadavre vivant",
+  "description": "Né dans les ténèbres préhistoriques de Terra, l'Empereur incarne dix mille ans de civilisation impériale. Cloué sur le Trône d'Or depuis la fin de l'Hérésie d'Horus, Il maintient l'Astronomican qui guide les vaisseaux dans le Warp. Son Église Ecclésiarchique Le vénère comme un dieu — d'autres le voient comme un cadavre vivant, ou un dieu en gestation que la souffrance humaine nourrira un jour.",
+  "citation": "Mes fils. Mes plus grands fils. Voilà ce que j'ai fait pour vous.",
+  "wikiQuery": "Emperor of Mankind Warhammer 40000",
+  "stats": [
+    { "domaine": "Naissance", "valeur": "Anatolie, Terra (~M-08)" },
+    { "domaine": "Nature", "valeur": "Perpetual / Maître psyker" },
+    { "domaine": "Statut actuel", "valeur": "Encastré sur le Trône d'Or" },
+    { "domaine": "Pouvoir maintenu", "valeur": "Astronomican (phare psychique galactique)" },
+    { "domaine": "Successeur désigné", "valeur": "Aucun (Roboute Guilliman fait office)" }
+  ],
+  "sections": [
+    {
+      "id": "origine",
+      "title": "Origine mystique",
+      "icon": "✦",
+      "body": "L'Empereur naquit en Anatolie, à l'époque préhistorique de Terra. Selon les fragments de Ses propres souvenirs, II fut l'aboutissement d'un sacrifice rituel des chamans humains les plus puissants : tous se suicidèrent simultanément pour réincarner leurs âmes dans un seul nouveau-né — afin que ce nouveau-né puisse, à terme, sauver l'humanité du Chaos qu'ils avaient pressenti. Pendant des millénaires, II marcha parmi les hommes sous mille noms : guerrier, prophète, savant. II observa la chute de civilisations, prit part à des guerres oubliées, et apprit la magie psychique sous toutes ses formes.",
+      "wikiQuery": "Emperor of Mankind ancient Terra"
+    },
+    {
+      "id": "grande-croisade",
+      "title": "La Grande Croisade",
+      "icon": "⚔",
+      "body": "Au M30, après l'Âge des Ténèbres et la victoire des Guerres d'Unification de Terra, l'Empereur lança Sa Grande Croisade pour reconquérir les mondes humains éparpillés dans la galaxie. II créa secrètement vingt fils — les Primarques — par génétique et magie, perdus puis retrouvés à travers la galaxie. À chacun II confia une Légion de Space Marines, Ses guerriers transhumains. La Croisade dura plus de deux cents ans : des millions de mondes ramenés sous la bannière de l'Aquila, des civilisations xenos écrasées, l'Imperium fondé.",
+      "wikiQuery": "Great Crusade Emperor primarchs"
+    },
+    {
+      "id": "heresie",
+      "title": "L'Hérésie d'Horus",
+      "icon": "☠",
+      "body": "Quand l'Empereur Se retira sur Terra pour bâtir le Webway humain en secret, II nomma Horus Lupercal Warmaster — son fils préféré, son favori. Mais le Chaos avait préparé son piège. Sept primarques tombèrent dans la corruption, puis Horus lui-même. Sept ans de guerre civile galactique suivirent. Sanguinius mourut. Konrad Curze fut exécuté. Magnus, Mortarion, Angron et les autres devinrent Daemon-Princes. Le Siège de Terra culmina dans un duel final entre l'Empereur et Horus à bord du Vengeful Spirit. L'Empereur tua Horus — au prix de Sa propre intégrité physique.",
+      "wikiQuery": "Horus Heresy Emperor duel"
+    },
+    {
+      "id": "trone-or",
+      "title": "Le Trône d'Or",
+      "icon": "⚜",
+      "body": "Mortellement blessé après le duel, l'Empereur fut transporté sur Terra et installé sur le Trône d'Or — une machine ancestrale construite à l'origine pour ouvrir le Webway humain. Depuis dix mille ans, Son corps déchu y est maintenu en vie artificielle, Son esprit projeté dans le Warp pour alimenter l'Astronomican — le phare psychique sans lequel la navigation interstellaire serait impossible. Mille psykers humains sont sacrifiés chaque jour pour Le nourrir. Les techno-prêtres réparent constamment le Trône, qui se dégrade plus vite que jamais.",
+      "wikiQuery": "Golden Throne Emperor Warhammer"
+    },
+    {
+      "id": "m42-apparitions",
+      "title": "Apparitions au M42",
+      "icon": "✹",
+      "body": "Au cours des derniers millénaires, l'Empereur a parfois manifesté des miracles : guérisons spontanées, visions prophétiques, victoires impossibles attribuées à Sa volonté. Les apparitions se sont multipliées au M42, après la Cicatrice Maledictum. Yvraine, prêtresse Ynnari, a entendu Sa voix dans le Webway. Roboute Guilliman, retourné de stase, a parlé avec Lui sur le Trône — et est ressorti horrifié de ce qu'il a vu. Saint Celestine est apparue, ressuscitée par Sa volonté. Pour les uns, II est un dieu. Pour les autres, une marionnette du Chaos. Pour la vérité, personne ne sait.",
+      "wikiQuery": "Emperor M42 apparitions Guilliman"
+    },
+    {
+      "id": "statut-actuel",
+      "title": "Statut actuel — un dieu en gestation ?",
+      "icon": "✠",
+      "body": "Au M42, l'Imperium est divisé physiquement par la Cicatrice : Imperium Sanctus (avec Terra) et Imperium Nihilus (coupé de l'Astronomican). Le Trône d'Or se dégrade au-delà des capacités du Mechanicus. Roboute Guilliman dirige la Croisade Indomitus pour gagner du temps. Personne ne sait combien d'années il reste avant l'effondrement final. Et au-dessus de tout, une question demeure : l'Empereur est-Il vraiment mort ? S'éveille-t-Il pour devenir le dieu que les mortels Lui demandent ? Ou est-Il déjà devenu cette chose obscure qui, dans le Warp, observe la galaxie d'un œil tranquille et patient ?",
+      "wikiQuery": "Imperium Sanctus Nihilus M42"
+    }
+  ]
+}
