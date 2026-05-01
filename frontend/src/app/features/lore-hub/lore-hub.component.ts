@@ -259,9 +259,9 @@ export class LoreHubComponent {
       eyebrow: 'Carte galactique',
       title: 'La Galaxie',
       description:
-        'Les 5 Segmenta, l\'Œil de la Terreur, le Maelstrom, la Cicatrice Maledictum, le Webway. Une carte SVG interactive des hot zones impériales.',
-      meta: 'Phase F8 — à venir',
-      available: false,
+        'Les 5 Segmenta, l\'Œil de la Terreur, le Maelstrom, la Cicatrice Maledictum, les mondes-clés. Carte SVG interactive avec hot zones cliquables.',
+      meta: '11 hot zones · 3 failles warp',
+      available: true,
     },
   ];
 }

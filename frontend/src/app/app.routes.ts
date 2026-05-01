@@ -83,6 +83,11 @@ export const routes: Routes = [
           .then(m => m.LoreConceptsComponent)
       },
       {
+        path: 'lore/galaxy',
+        loadComponent: () => import('./features/lore-galaxy/lore-galaxy.component')
+          .then(m => m.LoreGalaxyComponent)
+      },
+      {
         path: 'about',
         loadComponent: () => import('./features/about/about.component')
           .then(m => m.AboutComponent)
