@@ -955,5 +955,145 @@
     "premierLivre": "Résurrection (Resurrection)",
     "description": "L'inquisiteur Covenant et son acolyte Cleander Von Castellan traquent les hérétiques Horusiens — ceux qui croient qu'un seul homme pourrait redevenir Empereur. Trilogie sombre, occulte, exigeante.",
     "niveauEntree": "Pour fans Inquisition confirmés"
+  },
+  {
+    "id": "path-of-the-dark-eldar",
+    "titre": "La Voie des Eldars Noirs",
+    "titreVO": "Path of the Dark Eldar",
+    "auteurs": [
+      "Andy Chambers"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "Drukhari",
+      "Papier"
+    ],
+    "epoque": "M41 — Commorragh, intrigues entre Kabales rivales",
+    "factionIds": [
+      "drukhari"
+    ],
+    "tags": [
+      "Commorragh",
+      "Kabale",
+      "Intrigue",
+      "Xenos",
+      "Cruauté"
+    ],
+    "premierLivre": "Path of the Renegade",
+    "description": "Dans les profondeurs labyrinthiques de Commorragh, l'Archonte Yllithian conspire pour ressusciter un seigneur Drukhari déchu et bouleverser l'équilibre des Kabales. Trahisons, tortures raffinées et alliances impies se succèdent au rythme des fêtes sanglantes de la Cité Sombre. Andy Chambers livre la seule trilogie majeure consacrée aux Drukhari, plongée immersive dans leur société décadente. Lelith Hesperax, Vect et la noblesse cruelle des Eldars Noirs y déploient toute leur splendeur empoisonnée.",
+    "niveauEntree": "Idéal pour découvrir la société Drukhari et Commorragh — l'unique grande œuvre dédiée à la faction"
+  },
+  {
+    "id": "grey-knights-trilogy",
+    "titre": "Trilogie Grey Knights",
+    "titreVO": "Grey Knights Trilogy",
+    "auteurs": [
+      "Ben Counter"
+    ],
+    "nbLivres": 3,
+    "readBooks": 0,
+    "badges": [
+      "Grey Knights",
+      "Papier"
+    ],
+    "epoque": "M41 — Chasses démoniaques aux confins de l'Imperium",
+    "factionIds": [
+      "grey-knights"
+    ],
+    "tags": [
+      "Démons",
+      "Inquisition",
+      "Chasse",
+      "Pureté",
+      "Chapitre Secret"
+    ],
+    "premierLivre": "Grey Knights",
+    "description": "Justicar Alaric et ses frères Grey Knights traquent des cultes démoniaques que nul autre Astartes ne peut affronter. De l'enquête initiale aux abysses de Dark Adeptus jusqu'aux arènes infernales de Hammer of Daemons, Alaric incarne la pureté absolue des Chevaliers Gris face à la corruption. Ben Counter signe la trilogie fondatrice du Chapitre, mêlant horreur démonique et héroïsme stoïque. La voix officielle des Grey Knights en roman.",
+    "niveauEntree": "Idéal pour découvrir les Grey Knights — porte d'entrée canonique du Chapitre"
+  },
+  {
+    "id": "castellan-crowe",
+    "titre": "Castellan Crowe",
+    "titreVO": "Castellan Crowe",
+    "auteurs": [
+      "David Annandale"
+    ],
+    "nbLivres": 2,
+    "readBooks": 0,
+    "badges": [
+      "Grey Knights",
+      "Papier"
+    ],
+    "epoque": "M41 — Porteur de la Lame Noire d'Antwyr",
+    "factionIds": [
+      "grey-knights"
+    ],
+    "tags": [
+      "Lame Maudite",
+      "Sanctus",
+      "Démons",
+      "Tourment",
+      "Chasse"
+    ],
+    "premierLivre": "Warden of the Blade",
+    "description": "Le Castellan Garran Crowe porte la Lame Noire d'Antwyr, arme démoniaque qui hurle dans son esprit pour le corrompre. À la tête des Sanctus, il mène ses frères dans des chasses où la lame elle-même menace de le briser. David Annandale transforme cette malédiction en méditation sur la foi et la résistance. Un duo de romans intense, centré sur l'un des héros les plus tragiques des Grey Knights.",
+    "niveauEntree": "Lecture pour fans confirmés des Grey Knights — complément à la trilogie Counter"
+  },
+  {
+    "id": "cult-of-the-spiral-dawn",
+    "titre": "Le Culte de l'Aube Spirale",
+    "titreVO": "Cult of the Spiral Dawn",
+    "auteurs": [
+      "Peter Fehervari"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Genestealer Cults",
+      "Papier"
+    ],
+    "epoque": "M41 — Monde-jungle de Redemption, infiltration tyranide",
+    "factionIds": [
+      "genestealer-cults"
+    ],
+    "tags": [
+      "Infiltration",
+      "Hybrides",
+      "Paranoia",
+      "Dark Coil",
+      "Tyranides"
+    ],
+    "premierLivre": "Cult of the Spiral Dawn",
+    "description": "Sur le monde-jungle de Redemption, un culte genestealer s'épanouit dans l'ombre des plantations, tissant sa toile autour de la Garde Impériale et de la population civile. Peter Fehervari livre une fiction torve et hallucinée, signature de son Dark Coil, où la frontière entre foi et infestation se dissout. Roman unique mais référence absolue sur les Cultes Genestealer, à mi-chemin entre horreur tropicale et conspiration cosmique.",
+    "niveauEntree": "Roman unique — porte d'entrée principale sur les Genestealer Cults"
+  },
+  {
+    "id": "the-bookkeepers-skull",
+    "titre": "Le Crâne du Comptable",
+    "titreVO": "The Bookkeeper's Skull",
+    "auteurs": [
+      "Justin D Hill"
+    ],
+    "nbLivres": 1,
+    "readBooks": 0,
+    "badges": [
+      "Genestealer Cults",
+      "Papier"
+    ],
+    "epoque": "M41 — Monde agricole frontalier infesté",
+    "factionIds": [
+      "genestealer-cults"
+    ],
+    "tags": [
+      "Enquête",
+      "Hybrides",
+      "Monde Agricole",
+      "Adeptus Arbites",
+      "Suspicion"
+    ],
+    "premierLivre": "The Bookkeeper's Skull",
+    "description": "Sur un monde agricole reculé, un comptable de l'Administratum découvre que les chiffres ne tombent plus juste — et que les villageois ne sont plus tout à fait humains. Justin D Hill construit un thriller rural d'une lenteur inquiétante, où la révélation du Culte Genestealer s'opère par fragments. Roman court mais d'une efficacité redoutable pour comprendre l'infestation vue d'en bas.",
+    "niveauEntree": "Roman unique — excellent complément à Cult of the Spiral Dawn, point de vue impérial"
   }
 ]

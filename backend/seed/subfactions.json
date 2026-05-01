@@ -916,6 +916,12 @@
         "role": "Garde civile élite",
         "description": "Civils-soldats endurcis, signature militaire d'Ulthwé.",
         "wikiQuery": "Black Guardians Ulthwe"
+      },
+      {
+        "name": "Asurmen",
+        "role": "Phoenix Lord",
+        "description": "Premier des Phoenix Lords et Main d'Asuryan, Asurmen fonda le culte des Dire Avengers à l'aube de la Chute, transmettant aux Aeldari l'art de canaliser la guerre sans sombrer dans Slaanesh. Ulthwé, craftworld prophétique baigné par l'Œil de la Terreur, le voit régulièrement combattre aux côtés des Black Guardians lors des heures les plus sombres lues dans les visions des Voyants. Sa lame jumelée et son armure rituelle incarnent la discipline ancestrale qui maintient le craftworld debout face à la damnation.",
+        "wikiQuery": "Asurmen Phoenix Lord"
       }
     ]
   },
@@ -927,7 +933,21 @@
     "description": "Vaisseau-monde des Wild Riders, organisé en Tribus de Sang, célèbre pour ses jetbikes.",
     "loreShort": "Cavaliers sauvages, vitesse et liberté.",
     "loreLong": "Saim-Hann préserve le mode de vie tribal des anciens Aeldari avant la Chute. Organisé en Wild Rider Clans, il privilégie la mobilité totale via jetbikes et vyper.",
-    "wikiQuery": "Saim-Hann craftworld Eldar"
+    "wikiQuery": "Saim-Hann craftworld Eldar",
+    "notableUnits": [
+      {
+        "name": "Wild Riders",
+        "role": "Cavaliers sauvages",
+        "description": "Cœur guerrier de Saim-Hann, les Wild Riders chevauchent jetbikes ornés des couleurs vives de leurs clans, dressés à charger en formation serpentine avant de se disperser comme une volée d'oiseaux. Leur code d'honneur clanique privilégie la vitesse, l'audace et le duel personnel, faisant d'eux les frappes éclairs les plus redoutées du Pacte des craftworlds.",
+        "wikiQuery": "Saim-Hann Wild Riders"
+      },
+      {
+        "name": "Baharroth",
+        "role": "Phoenix Lord",
+        "description": "Surnommé le Cri du Vent, Baharroth est le premier des Swooping Hawks et le seul Phoenix Lord à avoir vu sa propre mort en rêve avant de la vivre. Saim-Hann, craftworld nomade bondissant à travers la galaxie, vénère sa doctrine d'attaque verticale et de liberté absolue, mêlant fauconnerie de guerre et raids aériens à l'éthique des clans cavaliers.",
+        "wikiQuery": "Baharroth Phoenix Lord"
+      }
+    ]
   },
   {
     "id": "iyanden",
@@ -952,6 +972,12 @@
         "role": "Construct titanique",
         "description": "Mecha animé par l'âme d'un Aeldari mort.",
         "wikiQuery": "Wraithknight Iyanden"
+      },
+      {
+        "name": "Spiritseer",
+        "role": "Voyant des âmes",
+        "description": "Sur Iyanden décimé par les Tyranides, les Spiritseers sont devenus la colonne vertébrale du craftworld, seuls capables de guider les Wraith-constructs en communion directe avec les pierres-âmes des défunts. Drapés de blanc et de jaune funéraire, ils chuchotent aux ancêtres pour les réveiller au combat, portant le fardeau d'une nation où les morts sont plus nombreux que les vivants.",
+        "wikiQuery": "Spiritseer Iyanden"
       }
     ]
   },
@@ -982,6 +1008,12 @@
         "role": "Manifestation du Dieu de la Guerre",
         "description": "Statue magmatique animée — manifestation locale du Dieu de la Guerre Aeldari fragmenté.",
         "wikiQuery": "Avatar of Khaine"
+      },
+      {
+        "name": "Fuegan",
+        "role": "Phoenix Lord",
+        "description": "Le Pèlerin du Feu, dernier des Phoenix Lords à n'avoir jamais été vaincu, mène les Fire Dragons dans une croisade brûlante pour purifier la galaxie de ses indignes occupants. Sa philosophie de feu rédempteur épouse parfaitement la doctrine martiale de Biel-Tan, le craftworld qui rêve de reconquérir l'empire Aeldari par la lance et la flamme.",
+        "wikiQuery": "Fuegan Phoenix Lord"
       }
     ]
   },
@@ -1012,6 +1044,12 @@
         "role": "Pathfinder légendaire",
         "description": "Plus grand sniper Aeldari. Aurait abattu un Trygon en plein saut.",
         "wikiQuery": "Illic Nightspear"
+      },
+      {
+        "name": "Jain Zar",
+        "role": "Phoenix Lord",
+        "description": "Tempête du Silence et première des Howling Banshees, Jain Zar voyage seule entre les craftworlds pour réveiller le sanctuaire de son Aspect lorsque la guerre approche. Alaitoc, peuplé de Rangers et de chasseurs solitaires, vénère sa discipline féline et son Silent Death, miroir guerrier de leur propre culte du tireur isolé patient et invisible.",
+        "wikiQuery": "Jain Zar Phoenix Lord"
       }
     ]
   },
@@ -1023,7 +1061,21 @@
     "description": "Première flotte tyranide rencontrée par l'Imperium, anéantie à la Bataille de Macragge.",
     "loreShort": "Première vague, dévorée par les Ultramarines.",
     "loreLong": "La Hive Fleet Behemoth fut le premier contact officiel de l'Imperium avec les Tyranides au M41. Anéantie à la Bataille de Macragge par les Ultramarines de Marneus Calgar (au prix de la 1ère Compagnie entière).",
-    "wikiQuery": "Hive Fleet Behemoth"
+    "wikiQuery": "Hive Fleet Behemoth",
+    "notableUnits": [
+      {
+        "name": "Old One Eye",
+        "role": "Carnifex légendaire",
+        "description": "Carnifex unique survivant des premières incursions Tyranides sur Catachan, ayant échappé à de multiples assauts impériaux et perdu un œil dans l'affrontement. Considéré par les Catachans comme une bête mythique, il rôde toujours dans les jungles équatoriales et resurgit à chaque résurgence des spores Behemoth.",
+        "wikiQuery": "Old One Eye Carnifex"
+      },
+      {
+        "name": "Hive Tyrant de Behemoth",
+        "role": "Commandant synaptique",
+        "description": "Première manifestation impériale d'un Hive Tyrant, ces commandants de bataille dirigèrent l'assaut Tyranide sur Macragge en 745.M41. Leurs gènes de combat brutaux, optimisés par l'Esprit-Ruche après la défaite contre les Ultramarines, persistent dans toutes les flottes-ruches qui suivirent.",
+        "wikiQuery": "Hive Tyrant Tyranid"
+      }
+    ]
   },
   {
     "id": "hive-fleet-kraken",
@@ -1052,6 +1104,12 @@
         "role": "Bête souterraine",
         "description": "Worm géant qui surgit du sous-sol planétaire pour décapiter les défenses impériales.",
         "wikiQuery": "Trygon Prime"
+      },
+      {
+        "name": "Broodlord Genestealer",
+        "role": "Patriarche infiltrateur",
+        "description": "Genestealer alpha à l'intelligence affûtée, dirigeant les couvées d'infiltration qui précèdent chaque vague de Kraken. Capable de coordonner des cultes dormants et d'orchestrer des sabotages stellaires des décennies avant l'arrivée des splinter fleets, il incarne la tactique de dispersion fulgurante propre à Kraken.",
+        "wikiQuery": "Broodlord Genestealer"
       }
     ]
   },
@@ -1063,7 +1121,21 @@
     "description": "Plus grande flotte tyranide jamais rencontrée, attaquant l'Imperium sur plusieurs fronts.",
     "loreShort": "Vague titanesque, le Grand Dévoreur.",
     "loreLong": "La Hive Fleet Leviathan est la plus grande flotte-ruche jamais observée, arrivant par-dessous le plan galactique simultanément sur plusieurs fronts. Elle a presque détruit Baal et Devastation of Baal.",
-    "wikiQuery": "Hive Fleet Leviathan"
+    "wikiQuery": "Hive Fleet Leviathan",
+    "notableUnits": [
+      {
+        "name": "Norn Emissary",
+        "role": "Psyker synaptique majeur",
+        "description": "Bioforme psychique récente déployée par Leviathan, conduit synaptique parfait entre l'Esprit-Ruche et les essaims locaux. Sa lance d'os canalise une volonté collective si dense qu'elle peut effondrer les défenses psychiques d'un Astropathe à des kilomètres et coordonner plusieurs vagues simultanément.",
+        "wikiQuery": "Norn Emissary"
+      },
+      {
+        "name": "Tervigon",
+        "role": "Génitrice d'essaims",
+        "description": "Bioforme matriarcale gestante générant en continu des couvées de Termagants à même le champ de bataille. Pilier logistique de la flotte la plus massive jamais observée, le Tervigon de Leviathan permet aux essaims de se régénérer plus vite que les armes impériales ne peuvent les faucher.",
+        "wikiQuery": "Tervigon Tyranid"
+      }
+    ]
   },
   {
     "id": "sautekh-dynasty",
@@ -1092,6 +1164,24 @@
         "role": "Maître Archiviste",
         "description": "Collectionneur d'artefacts et de héros vivants en stase. Plus grand musée vivant de la galaxie.",
         "wikiQuery": "Trazyn the Infinite"
+      },
+      {
+        "name": "Orikan le Devin",
+        "role": "Cryptek Chronomancien",
+        "description": "Astromancien et chronomancien sans égal, Orikan est le rival éternel de Trazyn l'Infini, leurs duels d'esprit traversant les millénaires sur Solemnace. Capable de manipuler le temps et de prédire l'avenir avec une précision absolue, il sert la dynastie Sautekh tout en poursuivant ses propres prophéties cosmiques.",
+        "wikiQuery": "Orikan the Diviner"
+      },
+      {
+        "name": "Szarekh, le Roi Silencieux",
+        "role": "Triarche Suprême des Necrons",
+        "description": "Dernier Triarche survivant et ancien dirigeant absolu de l'Empire Necron, Szarekh mena la révolte qui brisa les C'tan avant de s'exiler par honte de la biotransférence imposée à son peuple. Revenu en M42 après avoir affronté les Tyranides au-delà de la galaxie, il rallie désormais toutes les dynasties — la Sautekh en premier, en tant que première dynastie loyaliste — pour la guerre finale.",
+        "wikiQuery": "Szarekh the Silent King"
+      },
+      {
+        "name": "Triarch Stalker",
+        "role": "Marcheur de commandement",
+        "description": "Vestige des anciennes légions des Triarches, le Triarch Stalker arpente le champ de bataille en désignant ses cibles à des armes arcanes qui frappent simultanément depuis toute la phalange. Sa présence rappelle aux warriors la gloire perdue de l'ancien Empire.",
+        "wikiQuery": "Triarch Stalker"
       }
     ]
   },
@@ -1109,7 +1199,21 @@
     "currentLeaderRole": "Phaerakh Mephrit",
     "homeworld": "Mephrit (capitale dynastique)",
     "founding": "M-60 millions",
-    "citation": "Nous étions là avant la chair. Nous serons là après."
+    "citation": "Nous étions là avant la chair. Nous serons là après.",
+    "notableUnits": [
+      {
+        "name": "Lychguards Mephrit",
+        "role": "Garde royale",
+        "description": "Élite martiale de la cour Mephrit, ces guerriers d'élite portent boucliers dispersion et warscythes pour protéger les Overlords avec une loyauté absolue. La dynastie Mephrit, jadis l'une des plus brutales et expansionnistes, déploie ses Lychguards comme exécuteurs impériaux autant que gardes du corps.",
+        "wikiQuery": "Necron Lychguard"
+      },
+      {
+        "name": "Doomsday Ark",
+        "role": "Plateforme d'artillerie lourde",
+        "description": "Char antigravitationnel armé du redoutable canon Doomsday, capable de raser des cités entières d'une seule décharge. La dynastie Mephrit, célèbre pour son obsession de la suprématie technologique solaire, en fit l'épine dorsale de ses guerres de conquête.",
+        "wikiQuery": "Doomsday Ark"
+      }
+    ]
   },
   {
     "id": "novokh-dynasty",
@@ -1125,7 +1229,21 @@
     "currentLeaderRole": "Phaeron Novokh",
     "homeworld": "Novokh (capitale rouge)",
     "founding": "M-60 millions",
-    "citation": "Nous nous souvenons de la chaleur. Nous voulons encore la sentir."
+    "citation": "Nous nous souvenons de la chaleur. Nous voulons encore la sentir.",
+    "notableUnits": [
+      {
+        "name": "Lokhust Heavy Destroyers",
+        "role": "Destructeurs antigravitationnels",
+        "description": "Variante moderne des Destroyers, ces unités antigravitationnelles fanatisées par la nihilomancie déversent un déluge de tirs gauss lourds. Chez les Novokh, leurs carapaces sont rituellement repeintes du sang des ennemis vaincus, héritage de la psychose martiale de la dynastie.",
+        "wikiQuery": "Lokhust Heavy Destroyer"
+      },
+      {
+        "name": "Flayed Ones rituels",
+        "role": "Horreurs ritualisées",
+        "description": "Là où d'autres dynasties cachent leurs Flayed Ones par honte, la Novokh embrasse leur folie sanglante comme rite de guerre, drapant ses warriors de peaux fraîches avant la bataille. Cette pratique macabre alimente la réputation cauchemardesque de la dynastie à travers la galaxie.",
+        "wikiQuery": "Flayed Ones"
+      }
+    ]
   },
   {
     "id": "nephrekh-dynasty",
@@ -1141,7 +1259,15 @@
     "currentLeaderRole": "Phaeron Nephrekh",
     "homeworld": "Nephrekh (capitale solaire)",
     "founding": "M-60 millions",
-    "citation": "Nous arrivons. Nous prenons. Nous n'étions jamais là."
+    "citation": "Nous arrivons. Nous prenons. Nous n'étions jamais là.",
+    "notableUnits": [
+      {
+        "name": "Tomb Sentinels translocateurs",
+        "role": "Constructs téléporteurs",
+        "description": "Variante Canoptek spécialisée dans les sauts dimensionnels, les Tomb Sentinels Nephrekh exploitent la maîtrise dynastique de la translocation pour apparaître sans préavis derrière les lignes ennemies. La dynastie Nephrekh, vénérant le Dieu-Soleil, a perfectionné l'art de voyager par les rayons photoniques eux-mêmes.",
+        "wikiQuery": "Canoptek Tomb Sentinel"
+      }
+    ]
   },
   {
     "id": "goff",
@@ -1160,6 +1286,18 @@
         "role": "Prophète d'la Waaagh!",
         "description": "Plus grand Warboss connu, prophète de Gork et Mork.",
         "wikiQuery": "Ghazghkull Mag Uruk Thraka"
+      },
+      {
+        "name": "Boss Zagstruk",
+        "role": "Boss Stormboyz",
+        "description": "Zagstruk dirige les Vulturez, élite des Stormboyz Goff, et incarne une discipline militaire grotesque rare chez les Orks. Doté d'un rokkit pack surpuissant et de bottes-lames qui fendent ses ennemis en deux à l'atterrissage, il fond du ciel sur les officiers ennemis pour les décapiter au sol. Sa brutalité ordonnée fait de lui le parfait représentant du clan Goff, où la baston frontale est élevée au rang de religion.",
+        "wikiQuery": "Boss Zagstruk"
+      },
+      {
+        "name": "Stormboyz",
+        "role": "Troupes de saut",
+        "description": "Bizarrerie du clan Goff, les Stormboyz sont des jeunes Orks fascinés par la discipline militaire, qui s'entraînent en formation et marchent au pas avant de charger. Équipés de rokkit packs instables qui explosent presque autant qu'ils décollent, ils plongent depuis les cieux en hurlant pour s'écraser sur les lignes ennemies. Les autres Orks les considèrent comme des excentriques, mais leur efficacité brutale est indéniable.",
+        "wikiQuery": "Ork Stormboyz"
       }
     ]
   },
@@ -1184,6 +1322,18 @@
         "role": "Painboy infame",
         "description": "Painboy fou — opère sans anesthésique, donne des cyber-augmentations qui rendent fous. Origine Bad Moons. Adule de Goff aujourd'hui.",
         "wikiQuery": "Mad Dok Grotsnik"
+      },
+      {
+        "name": "Kaptin Badrukk",
+        "role": "Kaptin Freebooter",
+        "description": "Pirate ork légendaire bardé d'or et de dents arrachées à ses rivaux, Badrukk écume la galaxie à la tête des Flash Gitz, mercenaires les mieux équipés de toute la WAAAGH!. Bien que techniquement Freebooter, il fraie naturellement avec les Bad Moons dont la richesse ostentatoire correspond à son goût du clinquant et des armes hors de prix. Sa cupidité n'a d'égale que sa brutalité, et ses canons snazzguns pulvérisent toute opposition.",
+        "wikiQuery": "Kaptin Badrukk"
+      },
+      {
+        "name": "Big Mek",
+        "role": "Ingénieur de guerre",
+        "description": "Les Bad Moons abritent les plus opulents Big Meks de la galaxie, capables de financer leurs inventions les plus délirantes grâce à leurs dents repoussant sans cesse. Armés de Kustom Force Fields ou de Shokk Attack Guns, ils érigent des forteresses mobiles et bricolent des engins de guerre toujours plus monstrueux. Leur génie chaotique transforme la ferraille en machines de mort dignes des plus grandes WAAAGH!.",
+        "wikiQuery": "Ork Big Mek"
       }
     ]
   },
@@ -1225,7 +1375,21 @@
     "currentLeaderRole": "Warboss Death Skulls",
     "homeworld": "Variable (toujours en mouvement)",
     "founding": "Toujours existé",
-    "citation": "C'tait à toi ? Plus mainant. C'est bleu mainant. Ça veut dire chance."
+    "citation": "C'tait à toi ? Plus mainant. C'est bleu mainant. Ça veut dire chance.",
+    "notableUnits": [
+      {
+        "name": "Mek Boss Buzzgob",
+        "role": "Big Mek légendaire",
+        "description": "Buzzgob est l'un des Big Meks les plus prolifiques de l'histoire ork, célèbre pour ses Stompas titanesques bricolés à partir d'épaves récupérées sur d'innombrables champs de bataille. Naturellement affilié aux Death Skulls dont la kleptomanie compulsive lui fournit une réserve infinie de matière première, il considère chaque carcasse de Titan impérial comme un cadeau personnel. Ses créations rugissent, fument et écrasent tout sur leur passage.",
+        "wikiQuery": "Mek Boss Buzzgob"
+      },
+      {
+        "name": "Lootas",
+        "role": "Pillards lourdement armés",
+        "description": "Iconiques chez les Death Skulls, les Lootas sont des Boyz obsédés par les armes ennemies les plus grosses et bruyantes. Ils traînent sur les champs de bataille leurs Deffguns improvisés, assemblages instables d'armes lourdes pillées et boulonnées sur n'importe quel support. Leur joie pure à arroser l'ennemi de tirs erratiques en fait la pire cauchemar de toute ligne de défense.",
+        "wikiQuery": "Ork Lootas"
+      }
+    ]
   },
   {
     "id": "evil-sunz",
@@ -1265,7 +1429,21 @@
     "currentLeaderRole": "Chef-Sage Snakebite",
     "homeworld": "Mondes féraux Orks",
     "founding": "Toujours existé",
-    "citation": "Vous brillez avec vos jouets. Nous mangeons quand le ciel tombe."
+    "citation": "Vous brillez avec vos jouets. Nous mangeons quand le ciel tombe.",
+    "notableUnits": [
+      {
+        "name": "Painboy",
+        "role": "Chirurgien rituel",
+        "description": "Chez les Snakebites, le Painboy est moins un médecin qu'un chaman-boucher dont les pratiques évoquent les âges les plus sauvages de l'espèce ork. Armé de sa redoutable Urty Syringe et d'une trousse pleine d'outils dignes d'une forge, il recoud, greffe et amputait sans anesthésie au milieu des chants tribaux. Ses patients survivent rarement intacts, mais ceux qui s'en sortent en ressortent plus grands, plus méchants et souvent dotés d'organes en trop.",
+        "wikiQuery": "Ork Painboy"
+      },
+      {
+        "name": "Squiggoths",
+        "role": "Bête de guerre colossale",
+        "description": "Monture totémique des Snakebites, le Squiggoth est un squig géant de la taille d'un éléphant cuirassé, monté en hurlant par les Boyz les plus traditionalistes du clan. Là où les autres Orks préfèrent les Battlewagons crachant la fumée, les Snakebites chevauchent ces colosses bestiaux qui piétinent l'infanterie et encornent les blindés. Leur survivance illustre le mépris du clan pour la technologie au profit de la chair brute.",
+        "wikiQuery": "Squiggoth"
+      }
+    ]
   },
   {
     "id": "our-martyred-lady",
@@ -1294,6 +1472,24 @@
         "role": "Daemonifuge",
         "description": "Sœur Repentia maudite — porte une marque daemonique sur le visage qui terrifie les daemons.",
         "wikiQuery": "Ephrael Stern"
+      },
+      {
+        "name": "Morvenn Vahl",
+        "role": "Abbess Sanctorum",
+        "description": "Abbess Sanctorum Imperialis, plus haute autorité spirituelle et martiale de l'Adepta Sororitas, Morvenn Vahl porte l'armure Paragon et brandit la lance Lance of Illumination. Elle conduit toutes les Sœurs au combat au nom de l'Empereur, et son lien avec Our Martyred Lady scelle son serment au sang des saintes martyrisées.",
+        "wikiQuery": "Morvenn Vahl Adepta Sororitas"
+      },
+      {
+        "name": "Junith Eruita",
+        "role": "Canoness Superior",
+        "description": "Canoness Superior emblématique de Our Martyred Lady, Junith Eruita prêche la parole de l'Empereur depuis sa chaire ailée, le Pulpit of Saint Holline. Sa voix tonnante embrase la foi de ses Sœurs tandis que ses bolters jumelés réduisent en cendres les hérétiques.",
+        "wikiQuery": "Junith Eruita Canoness"
+      },
+      {
+        "name": "Triumph of Saint Katherine",
+        "role": "Chariot reliquaire",
+        "description": "Procession sacrée portant les reliques des six grandes saintes des Adepta Sororitas, le Triumph of Saint Katherine est un autel mouvant dont la simple présence enflamme la dévotion des fidèles. Aucun Ordo ne possède ce reliquaire en propre : il appartient à toute l'Ecclesiarchia, mais ses gardiennes sont traditionnellement choisies parmi Our Martyred Lady.",
+        "wikiQuery": "Triumph of Saint Katherine"
       }
     ]
   },
@@ -1311,7 +1507,21 @@
     "currentLeaderRole": "Canoness Suprême Argent Shroud",
     "homeworld": "Holy Terra (chapelles silencieuses)",
     "founding": "Réforme de Sebastian Thor (M36)",
-    "citation": "Ne parle pas. Tue, prie, marche."
+    "citation": "Ne parle pas. Tue, prie, marche.",
+    "notableUnits": [
+      {
+        "name": "Seraphim Squad",
+        "role": "Escouade aéroportée",
+        "description": "Anges descendus du ciel sur des jump packs rugissants, les Seraphim de l'Argent Shroud frappent en silence et disparaissent avant que l'ennemi n'ait compris le châtiment divin. Maîtresses du tir en vol croisé, elles incarnent la doctrine de l'Ordre : agir sans paroles, juger sans hésitation.",
+        "wikiQuery": "Seraphim Adepta Sororitas"
+      },
+      {
+        "name": "Sister Superior Argent",
+        "role": "Chef d'escouade",
+        "description": "Voix discrète mais inflexible de chaque escouade Argent Shroud, la Sister Superior mène ses Sœurs par l'exemple plutôt que par la harangue. Son combi-arme et son épée énergétique frappent là où les hérétiques croyaient l'ombre sûre.",
+        "wikiQuery": "Sister Superior Adepta Sororitas"
+      }
+    ]
   },
   {
     "id": "bloody-rose",
@@ -1327,7 +1537,27 @@
     "currentLeaderRole": "Canoness Suprême Bloody Rose",
     "homeworld": "San Leor",
     "founding": "Réforme de Sebastian Thor (M36)",
-    "citation": "Ce qui pleure n'est pas mort. Tue-le."
+    "citation": "Ce qui pleure n'est pas mort. Tue-le.",
+    "notableUnits": [
+      {
+        "name": "Mistress of Repentance",
+        "role": "Maîtresse pénitente",
+        "description": "Gardienne implacable des Repentia, la Mistress of Repentance fait claquer ses fouets neuro-électriques pour pousser les damnées vers la rédemption par le sang. Au sein du Bloody Rose, elle incarne la beauté terrible du châtiment volontaire.",
+        "wikiQuery": "Mistress of Repentance"
+      },
+      {
+        "name": "Repentia Squad",
+        "role": "Pénitentes au eviscerator",
+        "description": "Sœurs déchues cherchant à laver leur faute dans une dernière charge suicidaire, les Repentia avancent torse nu sous la bure, brandissant d'énormes eviscerators. Le Bloody Rose les vénère comme l'expression la plus pure de sa doctrine : tuer ou mourir pour expier.",
+        "wikiQuery": "Repentia Squad Adepta Sororitas"
+      },
+      {
+        "name": "Cassia Orsinio",
+        "role": "Sister Repentia",
+        "description": "Repentia déchue et héroïne d'une saga Black Library, Cassia Orsinio cherche sa rédemption à travers les mondes ravagés de l'Imperium, son eviscerator pour seul écho à ses prières. Sa quête d'expiation est devenue un chant murmuré dans les chapelles du Bloody Rose.",
+        "wikiQuery": "Cassia Orsinio Sister Repentia"
+      }
+    ]
   },
   {
     "id": "ebon-chalice",
@@ -1343,7 +1573,21 @@
     "currentLeaderRole": "Canoness Suprême Ebon Chalice",
     "homeworld": "Holy Terra",
     "founding": "Daughters of the Emperor (pré-Réforme)",
-    "citation": "Le calice est plein. Buvez. Le calice se remplit."
+    "citation": "Le calice est plein. Buvez. Le calice se remplit.",
+    "notableUnits": [
+      {
+        "name": "Saint Sebastian Thor",
+        "role": "Saint fondateur",
+        "description": "Prophète et reformateur qui mit fin à l'Apostasie de Goge Vandire, Sebastian Thor refonda l'Ecclesiarchia et bénit la fondation de l'Ebon Chalice, l'Ordre le plus ancien des Adepta Sororitas. Sa parole demeure la pierre angulaire des liturgies sororitas.",
+        "wikiQuery": "Sebastian Thor Ecclesiarchy"
+      },
+      {
+        "name": "Imagifier",
+        "role": "Porteuse de reliques",
+        "description": "Au sein de l'Ebon Chalice, l'Imagifier porte les Simulacra Imperialis, statues sacrées des saintes et des martyrs dont la simple vision restaure la foi vacillante. Plus ancien Ordre des Sœurs, l'Ebon Chalice garde les plus précieuses de ces icônes.",
+        "wikiQuery": "Imagifier Adepta Sororitas"
+      }
+    ]
   },
   {
     "id": "sacred-rose",
@@ -1359,7 +1603,21 @@
     "currentLeaderRole": "Canoness Suprême Sacred Rose",
     "homeworld": "Mausolea",
     "founding": "Réforme de Sebastian Thor (M36)",
-    "citation": "Mon cœur ne tremble plus. Mes mains, elles, savent."
+    "citation": "Mon cœur ne tremble plus. Mes mains, elles, savent.",
+    "notableUnits": [
+      {
+        "name": "Hospitaller",
+        "role": "Sœur médecin",
+        "description": "Soignante des corps autant que des âmes, l'Hospitaller du Sacred Rose veille sur les blessées, sa narthecium prêt à arracher une Sœur à la mort comme à délivrer le Coup de Grâce de l'Empereur. Sa présence apaisée incarne la sérénité contemplative chère à l'Ordre.",
+        "wikiQuery": "Sister Hospitaller Adepta Sororitas"
+      },
+      {
+        "name": "Dialogus",
+        "role": "Voix sacrée",
+        "description": "Gardienne de la parole pure et des chants liturgiques, la Dialogus du Sacred Rose amplifie les hymnes de bataille jusqu'à ce que le champ de guerre devienne cathédrale. Son verbe cristallise la foi et fait trembler les hérésies les plus retorses.",
+        "wikiQuery": "Dialogus Adepta Sororitas"
+      }
+    ]
   },
   {
     "id": "valorous-heart",
@@ -1375,7 +1633,21 @@
     "currentLeaderRole": "Canoness Suprême Valorous Heart",
     "homeworld": "Lanthano",
     "founding": "Réforme de Sebastian Thor (M36)",
-    "citation": "La douleur est un mensonge que mon corps me raconte. Je n'écoute plus."
+    "citation": "La douleur est un mensonge que mon corps me raconte. Je n'écoute plus.",
+    "notableUnits": [
+      {
+        "name": "Mortifier",
+        "role": "Marcheuse pénitente",
+        "description": "Cyborg-pénitente liée à un sarcophage de combat, la Mortifier expie ses fautes sous des lames pénitentielles et des mitrailleuses lourdes. Le Valorous Heart, qui endure stoïquement les souillures du Chaos, vénère ces machines comme la preuve que la chair faillible peut encore servir l'Empereur.",
+        "wikiQuery": "Mortifier Adepta Sororitas"
+      },
+      {
+        "name": "Sister Superior Valorous",
+        "role": "Chef d'escouade",
+        "description": "Au sein du Valorous Heart, la Sister Superior incarne la résilience faite femme : taciturne, marquée par les visions du Warp qu'elle a affrontées, elle mène ses Sœurs avec une foi inébranlable face aux pires corruptions du Chaos.",
+        "wikiQuery": "Sister Superior Adepta Sororitas"
+      }
+    ]
   },
   {
     "id": "tau-sept",
@@ -1391,7 +1663,27 @@
     "loreLong": "T'au Sept est le Sept fondateur de l'Empire T'au, situé sur la planète T'au elle-même. Il abrite le siège du Ethereal Council et incarne la pureté du Greater Good. Toutes les unités T'au Sept sont légèrement plus loyales, plus stables psychiquement (proximité aux Ethereals). Leur héros le plus célèbre est Aun'Va, l'Ethereal Suprême — bien qu'il ait disparu mystérieusement au M41. Le sceptre du Greater Good réside ici.",
     "motto": "Le Plus Grand Bien. La voix du Sept.",
     "founding": "M-1000 (Avant-mémoire T'au)",
-    "citation": "Une seule voix. Un seul futur."
+    "citation": "Une seule voix. Un seul futur.",
+    "notableUnits": [
+      {
+        "name": "Commander Shadowsun",
+        "role": "Suprême Commandant des armées T'au",
+        "description": "O'Shaserra, héritière directe du Commandeur Puretide, incarne la doctrine moderne de la Troisième Sphère d'Expansion. Pilotant son XV22 Stealthsuit accompagnée de ses drones MV52, elle frappe vite et disparaît avant la riposte. Élevée par les Éthérés au rang de Suprême Commandant, elle porte sur ses épaules l'avenir militaire de la Caste du Feu.",
+        "wikiQuery": "Commander Shadowsun"
+      },
+      {
+        "name": "Aun'Va",
+        "role": "Maître du Conseil Éthéré",
+        "description": "Plus haute autorité spirituelle et politique de l'Empire T'au, Aun'Va guida la Troisième Sphère d'Expansion par sa rhétorique inspirée du Bien Suprême. Assassiné lors de la Damocles Gulf Crusade, sa mort fut dissimulée par un hologramme au peuple T'au pour préserver l'unité. Son héritage demeure le ciment idéologique du Sept-capital.",
+        "wikiQuery": "Aun'Va"
+      },
+      {
+        "name": "XV86 Coldstar Battlesuit",
+        "role": "Commandement aéroporté rapide",
+        "description": "Évolution du XV85 Enforcer dotée de réacteurs haute-altitude, le Coldstar permet aux Commandeurs T'au de traverser un champ de bataille en quelques secondes. Doctrine privilégiée du Sept-capital pour coordonner les fronts dispersés.",
+        "wikiQuery": "XV86 Coldstar Battlesuit"
+      }
+    ]
   },
   {
     "id": "viorla-sept",
@@ -1407,7 +1699,21 @@
     "currentLeader": "Commander O'Shoh (Bravestorm)",
     "currentLeaderRole": "Shas'O Vior'la",
     "founding": "M-500 (expansion T'au)",
-    "citation": "Si tu hésites au combat, tu n'es plus Vior'la."
+    "citation": "Si tu hésites au combat, tu n'es plus Vior'la.",
+    "notableUnits": [
+      {
+        "name": "XV8 Crisis Battlesuit",
+        "role": "Armure de combat polyvalente",
+        "description": "Pierre angulaire de la Caste du Feu, le Crisis combine mobilité par réacteurs et système d'armement modulaire (lance-missiles, fusion blasters, plasma rifles). Vior'la fournit la majorité des pilotes les plus agressifs de l'Empire, formés à la doctrine Mont'ka — la frappe décisive.",
+        "wikiQuery": "XV8 Crisis Battlesuit"
+      },
+      {
+        "name": "Fire Warrior Strike Team",
+        "role": "Infanterie de ligne pulse rifle",
+        "description": "Cœur des armées T'au, ces guerriers Shas'la armés de pulse rifles incarnent la discipline de feu de la Caste du Feu. Vior'la, monde des Soleils Jumeaux, produit les bataillons les plus martiaux de l'Empire — leurs cadets connaissent la guerre avant le doute.",
+        "wikiQuery": "Fire Warrior"
+      }
+    ]
   },
   {
     "id": "borkan-sept",
@@ -1423,7 +1729,27 @@
     "currentLeader": "Aun'T'on (Ethereal Bork'an)",
     "currentLeaderRole": "Aun Bork'an",
     "founding": "M-500",
-    "citation": "Le savoir est l'arme première du Greater Good."
+    "citation": "Le savoir est l'arme première du Greater Good.",
+    "notableUnits": [
+      {
+        "name": "XV104 Riptide Battlesuit",
+        "role": "Armure de combat lourde expérimentale",
+        "description": "Fruit de la collaboration entre la Caste de la Terre de Bork'an et la Caste du Feu, le Riptide intègre un réacteur à nova capable de surcharger ses systèmes au prix d'un risque de surchauffe. Symbole de l'audace technologique borkanienne, il représente le saut qualitatif de la Troisième Sphère.",
+        "wikiQuery": "XV104 Riptide Battlesuit"
+      },
+      {
+        "name": "KX139 Ta'unar Stormsurge",
+        "role": "Plate-forme d'artillerie titanique",
+        "description": "Conçue par les ingénieurs de Bork'an pour répondre aux Titans impériaux, la Stormsurge est une armure de siège bipède qui s'ancre au sol par stabilisateurs avant d'ouvrir le feu avec ses canons pulse-driver. Démonstration vivante du progrès matériel au service du Bien Suprême.",
+        "wikiQuery": "KX139 Ta'unar Stormsurge"
+      },
+      {
+        "name": "Pathfinder Team",
+        "role": "Éclaireurs et marqueurs de cible",
+        "description": "Shas'la volontaires équipés de markerlights, les Pathfinders illuminent les cibles ennemies pour guider tirs guidés et frappes orbitales. Bork'an déploie des variantes équipées de pulse sniper rifles longue portée, expression élégante de la doctrine Kauyon — le piège patient.",
+        "wikiQuery": "Pathfinder Team Tau"
+      }
+    ]
   },
   {
     "id": "sacea-sept",
@@ -1463,7 +1789,27 @@
     "currentLeader": "Por'el (Water Caste leader)",
     "currentLeaderRole": "Por'el Dal'yth",
     "founding": "M-500",
-    "citation": "Combattre coûte. Vendre rapporte. Calcule avant de tirer."
+    "citation": "Combattre coûte. Vendre rapporte. Calcule avant de tirer.",
+    "notableUnits": [
+      {
+        "name": "Kroot Carnivore Squad",
+        "role": "Auxiliaires xenos mercenaires",
+        "description": "Chasseurs aviens du monde Pech, les Kroot servent l'Empire T'au depuis leur libération du joug Ork. Dal'yth, Sept marchand par excellence, gère traités et soldes des Kroothawks — leur génétique adaptative absorbe les traits des proies dévorées, faisant d'eux des trackers redoutés.",
+        "wikiQuery": "Kroot Carnivore"
+      },
+      {
+        "name": "Vespid Stingwing Strain",
+        "role": "Auxiliaires xenos volants",
+        "description": "Insectoïdes ailés du monde-ruche Vespid, ces alliés portent des neutron blasters issus de leur cristal natal. Leur Strain Leader communique avec les Éthérés via communion casque — relation diplomatique exemplaire des alliances pacifiques que Dal'yth tisse aux marges de l'Empire.",
+        "wikiQuery": "Vespid Stingwing"
+      },
+      {
+        "name": "TX7 Hammerhead Gunship",
+        "role": "Char antigrav d'appui-feu",
+        "description": "Plate-forme antigrav signature de la Caste du Feu, le Hammerhead embarque un railgun capable de percer le blindage le plus lourd. Dal'yth assure les routes commerciales qui acheminent munitions et pièces détachées vers les fronts les plus reculés de la Sphère.",
+        "wikiQuery": "Hammerhead Gunship"
+      }
+    ]
   },
   {
     "id": "farsight-enclaves",
@@ -1477,7 +1823,27 @@
     "currentLeader": "Commander Farsight (O'Shovah)",
     "currentLeaderRole": "Commandeur dissident",
     "wikiQuery": "Farsight Enclaves Tau",
-    "citation": "Mont'au n'est jamais vraiment passé."
+    "citation": "Mont'au n'est jamais vraiment passé.",
+    "notableUnits": [
+      {
+        "name": "Commander Farsight",
+        "role": "Fondateur exilé des Enclaves",
+        "description": "O'Shovah, élève du légendaire Puretide, brisa avec l'Empire après la Damocles Gulf Crusade pour fonder ses propres Enclaves au-delà de l'espace T'au. Porteur de la dawn blade, lame xenos d'origine inconnue, il incarne la dissidence martiale — un Bien Suprême libéré de la tutelle des Éthérés.",
+        "wikiQuery": "Commander Farsight"
+      },
+      {
+        "name": "O'Vesa",
+        "role": "Pilote Riptide vétéran de l'Octuor",
+        "description": "Membre de The Eight, l'élite personnelle de Farsight, O'Vesa pilote un Riptide expérimental à la modulation nova maîtrisée. Génie technique issu de Bork'an avant son ralliement aux Enclaves, il incarne la fusion entre savoir académicien et liberté martiale prônée par O'Shovah.",
+        "wikiQuery": "O'Vesa"
+      },
+      {
+        "name": "The Eight",
+        "role": "Garde rapprochée de Farsight",
+        "description": "Octuor de Commandeurs Battlesuit triés sur le volet par O'Shovah, chacun spécialisé dans une discipline de guerre — close combat, longue portée, soutien lourd, vitesse. Ensemble, ils forment l'arme la plus létale jamais déployée par les Enclaves, capable de défier des Primarques sans flancher.",
+        "wikiQuery": "The Eight Farsight"
+      }
+    ]
   },
   {
     "id": "mars",
@@ -1490,7 +1856,27 @@
     "homeworld": "Mars",
     "currentLeader": "Fabricator-General Kane",
     "currentLeaderRole": "Fabricator-General",
-    "wikiQuery": "Mars forge world Mechanicus"
+    "wikiQuery": "Mars forge world Mechanicus",
+    "notableUnits": [
+      {
+        "name": "Belisarius Cawl",
+        "role": "Archmagos Dominus, Prime Conduit de l'Omnissiah",
+        "description": "Plus ancien Magos encore en activité, Cawl a oeuvré dix mille ans en secret sous le Mont Olympus de Mars pour parachever le projet Primaris confié par Roboute Guilliman. Hérétek aux yeux des puristes, génie sacré aux yeux des autres, son corps n'est plus qu'une cathédrale de chair augmétée et de cogitateurs antiques. Sa simple existence redéfinit la doctrine du Credo Mechanicus.",
+        "wikiQuery": "Belisarius Cawl Warhammer 40k"
+      },
+      {
+        "name": "Skitarii Rangers",
+        "role": "Infanterie de reconnaissance lourde",
+        "description": "Cyber-soldats des Légions Skitarii, leurs chairs purgées de toute faiblesse organique et leurs cortex liés au Canticle of the Omnissiah. Armés de galvanic rifles à longue portée, ils patrouillent les Forge Worlds et purgent les fouilles archéotechniques au nom du Dieu-Machine. Mars en aligne les cohortes les plus anciennes et les plus décorées du Cult Mechanicus.",
+        "wikiQuery": "Skitarii Rangers"
+      },
+      {
+        "name": "Tech-Priest Manipulus",
+        "role": "Haut Magos, ingénieur de bataille",
+        "description": "Magos itinérant doté du transonic cannon et du magnarail lance, le Manipulus accompagne les maniples Skitarii sur le champ de bataille pour exhorter la machine. Sa simple présence augmente la cadence des galvanic rifles, comme si les armes elles-mêmes communiaient avec le Dieu-Machine. Sur Mars, ses rituels d'enchantement sont consignés dans les archives du Magos Dominus.",
+        "wikiQuery": "Tech-Priest Manipulus"
+      }
+    ]
   },
   {
     "id": "graia",
@@ -1506,7 +1892,27 @@
     "currentLeader": "Fabricator-General Drakhan",
     "currentLeaderRole": "Fabricator-General Graia",
     "founding": "M-30 (Grande Croisade)",
-    "citation": "Ce que l'Omnissiah a écrit, l'Omnissiah a écrit. Pas un caractère de plus."
+    "citation": "Ce que l'Omnissiah a écrit, l'Omnissiah a écrit. Pas un caractère de plus.",
+    "notableUnits": [
+      {
+        "name": "Tech-Priest Dominus",
+        "role": "Magos Dominus, commandeur de maniple",
+        "description": "Seigneur de guerre du Cult Mechanicus, le Dominus dirige les cohortes Skitarii depuis sa carapace ambulante hérissée d'eradication ray et de macrostubber. Sur Graia, ces Magos supervisent personnellement les Adeptus Titanicus et les chaînes de montage de Warhound. Chacun de leurs ordres binaires vaut un edict sacré du Fabricator-General.",
+        "wikiQuery": "Tech-Priest Dominus"
+      },
+      {
+        "name": "Onager Dunecrawler",
+        "role": "Marcheur de soutien à quatre pattes",
+        "description": "Char-araignée canonique du Mechanicus, le Dunecrawler grimpe les terrains les plus hostiles sur ses quatre jambes hydrauliques pour cracher salves de neutron laser ou icarus array. Graia en a perfectionné les variantes lourdes durant le siège de la forge par les Forces du Chaos, transformant ce marcheur de prospection en pièce d'artillerie sacrée.",
+        "wikiQuery": "Onager Dunecrawler"
+      },
+      {
+        "name": "Knight Households (Serment de Graia)",
+        "role": "Chevaliers Impériaux liés par serment",
+        "description": "Plusieurs Maisons Chevalières prêtent allégeance à Graia en échange de protocoles STC et de pièces de rechange sacrées. Leurs Knight Paladins et Errants marchent au côté des Légions Cybernetica lorsque la forge appelle au ban. Cet accord, scellé en code-binaire, lie le sang noble des Chevaliers à l'huile sacrée du Dieu-Machine.",
+        "wikiQuery": "Imperial Knights Household"
+      }
+    ]
   },
   {
     "id": "stygies-viii",
@@ -1522,7 +1928,27 @@
     "currentLeader": "Magos Dominus Helinatre",
     "currentLeaderRole": "Magos Dominus Stygies",
     "founding": "M-25 (post-Hérésie)",
-    "citation": "L'Inquisition condamne. L'Omnissiah comprend."
+    "citation": "L'Inquisition condamne. L'Omnissiah comprend.",
+    "notableUnits": [
+      {
+        "name": "Magos Biologis",
+        "role": "Haut Magos de la caste génétique",
+        "description": "Les Biologis de Stygies VIII étudient la chair comme d'autres étudient le métal, disséquant xenos et mutants pour en extraire les schémas biologiques interdits. Soupçonnés d'hérésies par les puristes martiens, ils n'en demeurent pas moins indispensables aux projets vat-grown du Mechanicus. Leur cantique mêle code-binaire et séquences génétiques psalmodiées.",
+        "wikiQuery": "Magos Biologis"
+      },
+      {
+        "name": "Kastelan Robots",
+        "role": "Robots de bataille de la Legio Cybernetica",
+        "description": "Vestiges du Dark Age of Technology réveillés par les Datasmiths, les Kastelan sont des automates colossaux dont les protocoles de combat alternent entre Aegis défensif et Conqueror offensif. Stygies VIII en conserve des cohortes entières, soupçonnée d'avoir restauré des STC interdites recouvrées sur des mondes xenos. Leurs poings phosphor brûlent au nom de l'Omnissiah.",
+        "wikiQuery": "Kastelan Robot"
+      },
+      {
+        "name": "Sicarian Infiltrators",
+        "role": "Assassins Skitarii d'élite",
+        "description": "Augmétés jusqu'à la perversion, les Sicariens de Stygies VIII se faufilent derrière les lignes ennemies pour saboter les noosphères adverses au moyen de stubcarbines et de flechette blasters. Leur neurostatic aura paralyse les cogitateurs ennemis comme un rite d'excommunication binaire. La forge VIII en ferait, dit-on, un usage que Mars condamnerait publiquement.",
+        "wikiQuery": "Sicarian Infiltrator"
+      }
+    ]
   },
   {
     "id": "lucius",
@@ -1538,7 +1964,27 @@
     "currentLeader": "Fabricator-General Mardak",
     "currentLeaderRole": "Fabricator-General Lucius",
     "founding": "M-32 (post-Hérésie)",
-    "citation": "L'acier de Lucius est l'épée du Trône."
+    "citation": "L'acier de Lucius est l'épée du Trône.",
+    "notableUnits": [
+      {
+        "name": "Skitarii Marshal",
+        "role": "Commandant Skitarii, Maréchal de cohorte",
+        "description": "Officier suprême des Légions Skitarii, le Marshal hurle les cantiques de guerre en code-binaire pour coordonner les charges des Vanguards et Rangers. Sur Lucius, forge belliqueuse forgeant les armures des Astartes, ces Marshals mènent eux-mêmes les expéditions de récupération sur les champs de bataille calcinés. Leur archeotech pistol est un héritage du Heresy.",
+        "wikiQuery": "Skitarii Marshal"
+      },
+      {
+        "name": "Kataphron Destroyers",
+        "role": "Battle servitors lourds",
+        "description": "Servitors massifs montés sur chenilles, les Kataphron Destroyers portent des plasma culverins et des heavy grav-cannons capables d'écraser un Land Raider. Lucius, fidèle à sa réputation belliqueuse, en aligne des phalanges entières en première ligne pour soutenir les Astartes qu'elle équipe. Leurs cogitateurs hurlent en boucle l'hymne Omnissiah-Maximus.",
+        "wikiQuery": "Kataphron Destroyer"
+      },
+      {
+        "name": "Skitarii Vanguards",
+        "role": "Infanterie d'assaut radioactive",
+        "description": "Frères d'armes des Rangers, les Vanguards portent des radium carbines dont les rayonnements rongent la chair ennemie longtemps après l'impact. Eux-mêmes pourrissent lentement sous leurs robes ocres, considérant cette dégradation comme une bénédiction du Dieu-Machine. Lucius les déploie en vagues sacrificielles pour reprendre les forges contestées.",
+        "wikiQuery": "Skitarii Vanguard"
+      }
+    ]
   },
   {
     "id": "shadowkeepers",
@@ -2126,6 +2572,12 @@
         "role": "Titans Aeldari",
         "description": "Cohorte de Revenant Titans héritage de la collaboration avec les Forge Worlds défuntes.",
         "wikiQuery": "Revenant Titan Eldar"
+      },
+      {
+        "name": "Karandras",
+        "role": "Phoenix Lord",
+        "description": "Le Chasseur des Ombres, second et actuel maître des Striking Scorpions, succéda à Arhra le Traître après que celui-ci eut sombré dans les Voies Sombres. Mymeara, craftworld glacial dont les guerriers chassent en silence dans la neige et le brouillard, partage avec Karandras une histoire intime : c'est là qu'il fut perdu, retrouvé, et que sa relique servit de catalyseur à la défense ultime du craftworld.",
+        "wikiQuery": "Karandras Phoenix Lord"
       }
     ]
   },
@@ -2334,6 +2786,18 @@
         "role": "Plateforme antimatière",
         "description": "Plateforme tripode armée d'un canon-singularité expérimental.",
         "wikiQuery": "Doomstalker Necron"
+      },
+      {
+        "name": "Anrakyr le Voyageur",
+        "role": "Pyrrhian Eternal — Overlord errant",
+        "description": "Overlord du monde-couronne déchu de Pyrrhia, Anrakyr a abandonné son trône pour mener une croisade pan-galactique afin de réveiller les dynasties endormies et reforger l'Empire Necron. Allié naturel des Thokt expérimentaux, il marche au combat avec son tachyon arrow et la maîtrise unique de pirater les machines vivantes ennemies.",
+        "wikiQuery": "Anrakyr the Traveller"
+      },
+      {
+        "name": "Cryptek Plasmancer",
+        "role": "Cryptek énergétique",
+        "description": "Maîtres de l'énergie plasmique pure, les Plasmanciers Thokt manipulent des soleils miniatures qu'ils projettent sur leurs ennemis. Cette caste savante incarne l'audace expérimentale de la dynastie, n'hésitant jamais à canaliser des forces que les autres dynasties jugent trop instables.",
+        "wikiQuery": "Necron Plasmancer Cryptek"
       }
     ]
   },
