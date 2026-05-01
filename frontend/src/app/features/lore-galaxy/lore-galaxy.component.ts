@@ -45,7 +45,12 @@ interface HotZone {
 
     <div class="layout">
       <main class="map-wrap">
-        <svg class="galaxy-map" viewBox="0 0 700 490" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <!-- Debug overlay : affiche x/y au hover (viewBox 700×490) pour calibrer les hot zones -->
+        <div class="debug-coords">
+          coords SVG : <strong>{{ debugX() }}</strong>, <strong>{{ debugY() }}</strong>
+          <span class="debug-hint">(hover map, copie-colle dans le chat)</span>
+        </div>
+        <svg class="galaxy-map" viewBox="0 0 700 490" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" (mousemove)="onMapMove($event)">
           <defs>
             <filter id="glow">
               <feGaussianBlur stdDeviation="2.5" result="blur"/>
@@ -233,6 +238,21 @@ interface HotZone {
       box-shadow: var(--shadow);
       overflow: hidden;
     }
+    .debug-coords {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      z-index: 5;
+      padding: 4px 10px;
+      background: rgba(0,0,0,0.85);
+      border: 1px solid var(--gold-soft);
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--gold-bright);
+      pointer-events: none;
+    }
+    .debug-coords strong { color: #f0d276; min-width: 28px; display: inline-block; }
+    .debug-hint { color: var(--muted); font-size: 10px; margin-left: 8px; font-style: italic; }
 
     .galaxy-map {
       width: 100%;
@@ -458,6 +478,21 @@ export class LoreGalaxyComponent {
 
   readonly hoveredId = signal<string | null>(null);
   readonly mapBgUrl = signal<string>('');
+  readonly debugX = signal<string>('—');
+  readonly debugY = signal<string>('—');
+
+  onMapMove(e: MouseEvent) {
+    const svg = e.currentTarget as SVGSVGElement;
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const m = svg.getScreenCTM();
+    if (m) {
+      const local = pt.matrixTransform(m.inverse());
+      this.debugX.set(local.x.toFixed(0));
+      this.debugY.set(local.y.toFixed(0));
+    }
+  }
 
   readonly segmenta: Segmentum[] = [
     { id: 'solar', name: 'Solar', color: '#f0d276', description: 'Centre galactique. Terra, Mars, Trône d\'Or.' },
@@ -467,24 +502,24 @@ export class LoreGalaxyComponent {
     { id: 'ultima', name: 'Ultima', color: '#1d4ba0', description: 'Est galactique. Macragge, Ultramar, Maelstrom.' },
   ];
 
-  // Coordonnées calibrées sur l'image canonique HD (viewBox 700×490)
-  // Calibration : x% / y% mesurés sur l'image, convertis en pixels viewBox.
+  // Coordonnées calibrées sur image canonique HD (viewBox 700×490, ratio = 700/3054 = 0.229)
+  // Positions mesurées via grille SVG superposée sur l'image originale.
   readonly hotZones: HotZone[] = [
-    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 130, cy: 130, r: 12, color: '#9c2680',
+    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 120, cy: 130, r: 12, color: '#9c2680',
       description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos. Visible : tache noire entourée de Halo Stars.', conceptId: 'eye-of-terror' },
-    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 165, cy: 158, r: 6, color: '#5a6878',
+    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 145, cy: 155, r: 6, color: '#5a6878',
       description: 'Forteresse-monde tombée à la 13ᵉ Croisade Noire (M41). Origine de la Cicatrix.', conceptId: 'cadia' },
-    { id: 'baal', name: 'Baal', type: 'world', cx: 332, cy: 162, r: 5, color: '#c9302c',
+    { id: 'baal', name: 'Baal', type: 'world', cx: 325, cy: 165, r: 5, color: '#c9302c',
       description: 'Monde-mère des Blood Angels. Sanctuaire de Sanguinius. Système triple-soleils irradié.', conceptId: 'baal' },
-    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 248, cy: 248, r: 7, color: '#f0d276',
+    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 125, cy: 215, r: 7, color: '#f0d276',
       description: 'Capitale sacrée de l\'Imperium. Trône d\'Or, Astronomican.', conceptId: 'holy-terra' },
-    { id: 'mars', name: 'Mars', type: 'world', cx: 258, cy: 250, r: 5, color: '#b85a3a',
+    { id: 'mars', name: 'Mars', type: 'world', cx: 135, cy: 220, r: 5, color: '#b85a3a',
       description: 'Capitale de l\'Adeptus Mechanicus.', conceptId: 'mars' },
-    { id: 'titan', name: 'Titan', type: 'world', cx: 254, cy: 258, r: 4, color: '#5a6878',
+    { id: 'titan', name: 'Titan', type: 'world', cx: 130, cy: 225, r: 4, color: '#5a6878',
       description: 'Lune de Saturne. Monde-forteresse caché des Grey Knights.' },
-    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 392, cy: 282, r: 10, color: '#c43a26',
+    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 285, cy: 240, r: 10, color: '#c43a26',
       description: 'Tempête warp permanente du Segmentum Ultima. Bandes Chaos, pirates.', conceptId: 'maelstrom' },
-    { id: 'macragge', name: 'Macragge', type: 'world', cx: 600, cy: 425, r: 7, color: '#1d4ba0',
+    { id: 'macragge', name: 'Macragge', type: 'world', cx: 425, cy: 380, r: 7, color: '#1d4ba0',
       description: 'Monde-mère des Ultramarines. Capitale d\'Ultramar (500 mondes).', conceptId: 'macragge' },
   ];
 
