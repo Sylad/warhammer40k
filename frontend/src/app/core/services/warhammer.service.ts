@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import {
   Faction, Unit, DescriptionResponse, Serie, Video,
   Channel, Artwork, ArtworkCollection, ArtworkArtist, LoreEvent,
-  SubFaction, Emperor, Primarch, ChaosGod, ImperialOrganization,
+  SubFaction, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept,
 } from '../models/models';
 
 export interface WikiImageResult {
@@ -160,6 +160,14 @@ export class WarhammerService {
 
   getImperialOrg(id: string): Observable<ImperialOrganization> {
     return this.http.get<ImperialOrganization>(`${this.base}/lore/imperial-orgs/${id}`);
+  }
+
+  readonly loreConcepts$: Observable<LoreConcept[]> = this.http
+    .get<LoreConcept[]>(`${this.base}/lore/concepts`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getLoreConcept(id: string): Observable<LoreConcept> {
+    return this.http.get<LoreConcept>(`${this.base}/lore/concepts/${id}`);
   }
 
   // === Image meta (catégorisation user) ===

@@ -365,3 +365,28 @@ export interface ImperialOrganization {
   functions: string[];
   notableFigures: ImperialOrgFigure[];
 }
+
+// === Lore concepts (encyclopédie) ===
+export type LoreConceptCategory = 'imperial' | 'warp' | 'world' | 'doctrine';
+
+export interface LoreConceptRelated {
+  name: string;
+  conceptId?: string;
+  description?: string;
+}
+
+export interface LoreConcept {
+  id: string;
+  number: number;
+  name: string;
+  title: string;
+  category: LoreConceptCategory;
+  color: string;
+  sigil: string;
+  wikiQuery: string;
+  description: string;
+  loreLong: string;
+  citation?: string;
+  keyFacts: string[];
+  relatedConcepts: LoreConceptRelated[];
+}

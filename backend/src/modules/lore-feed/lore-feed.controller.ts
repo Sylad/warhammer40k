@@ -1,6 +1,6 @@
 import { Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { LoreFeedService } from './lore-feed.service.js';
-import type { ChaosGod, Emperor, ImperialOrganization, LoreEvent, Primarch } from './lore-feed.model.js';
+import type { ChaosGod, Emperor, ImperialOrganization, LoreConcept, LoreEvent, Primarch } from './lore-feed.model.js';
 
 @Controller('lore')
 export class LoreFeedController {
@@ -57,5 +57,17 @@ export class LoreFeedController {
     const o = this.service.getImperialOrg(id);
     if (!o) throw new NotFoundException(`Imperial Org ${id} not found`);
     return o;
+  }
+
+  @Get('concepts')
+  loreConcepts(): LoreConcept[] {
+    return this.service.getLoreConcepts();
+  }
+
+  @Get('concepts/:id')
+  loreConcept(@Param('id') id: string): LoreConcept {
+    const c = this.service.getLoreConcept(id);
+    if (!c) throw new NotFoundException(`Lore concept ${id} not found`);
+    return c;
   }
 }

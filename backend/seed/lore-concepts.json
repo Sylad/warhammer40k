@@ -1,0 +1,346 @@
+[
+  {
+    "id": "golden-throne",
+    "number": 1,
+    "name": "Le Trône d'Or",
+    "title": "Le Sarcophage de l'Empereur",
+    "category": "imperial",
+    "color": "#c9a24a",
+    "sigil": "⚜",
+    "wikiQuery": "Golden Throne Emperor Warhammer",
+    "description": "Sarcophage mécanique préhistorique sur lequel l'Empereur est cloué depuis dix mille ans. Sans Lui — sans le Trône d'Or — il n'y a ni Astronomican, ni Imperium, ni avenir.",
+    "loreLong": "Le Trône d'Or fut construit à l'origine pour ouvrir le Webway humain : l'Empereur le faisait fonctionner depuis Sa cathédrale secrète sous le Palais Impérial pendant que la Grande Croisade et la trahison d'Horus se déroulaient. Quand l'Empereur fut mortellement blessé après le duel sur le Vengeful Spirit, on Le plaça sur ce Trône qui sert désormais de support vital — la machine maintient Son corps déchu, projette Son esprit dans le Warp pour alimenter l'Astronomican. Mille psykers humains sont sacrifiés chaque jour pour Le nourrir. Au M42, le Trône se dégrade à un rythme que même le Mechanicus ne sait plus contenir : sa technologie pré-impériale est partiellement perdue. Quand il s'éteindra, l'Imperium sombrera dans le silence du Warp.",
+    "citation": "Une cathédrale-machine. Un cadavre vivant. Un dieu qui ne peut pas mourir.",
+    "keyFacts": [
+      "Construit avant la Grande Croisade par les techno-prêtres",
+      "Mille psykers humains sacrifiés par jour pour le maintien",
+      "Mécanisme partiellement compris par le Mechanicus actuel",
+      "Lié physiquement à l'Astronomican et au Webway",
+      "Localisation : Sanctum Imperialis, Palais Impérial, Terra"
+    ],
+    "relatedConcepts": [
+      { "name": "Astronomican", "conceptId": "astronomican", "description": "Phare psychique alimenté par l'Empereur sur le Trône" },
+      { "name": "Webway", "conceptId": "webway", "description": "Le Trône fut conçu à l'origine pour l'ouvrir aux humains" },
+      { "name": "L'Empereur", "description": "Lien vers la fiche Empereur (/lore/emperor)" }
+    ]
+  },
+  {
+    "id": "astronomican",
+    "number": 2,
+    "name": "L'Astronomican",
+    "title": "Le Phare Psychique de l'Imperium",
+    "category": "imperial",
+    "color": "#f0d276",
+    "sigil": "✦",
+    "wikiQuery": "Astronomican beacon Emperor",
+    "description": "Phare psychique d'une ampleur galactique, projeté depuis Terra par l'esprit de l'Empereur. Il guide les Navigators à travers le Warp — sans lui, aucun voyage interstellaire prolongé n'est possible.",
+    "loreLong": "L'Astronomican est l'un des grands miracles techniques et psychiques de l'Imperium. L'Empereur, depuis le Trône d'Or, projette en permanence un faisceau psychique qui rayonne à 50.000 années-lumière à travers la galaxie. Les Navigators l'utilisent comme étoile polaire pour naviguer dans les courants imprévisibles du Warp. Pour l'alimenter, mille psykers humains sont sacrifiés chaque jour : leurs âmes sont consommées en quelques heures dans le Choir Astronomican sous le Palais Impérial. Au M42, après la Cicatrice Maledictum, l'Astronomican ne traverse plus la galaxie : l'Imperium Nihilus (la moitié coupée) doit naviguer à l'aveugle ou par des phares improvisés.",
+    "citation": "Sa lumière guide nos vaisseaux. Sa lumière nous rappelle que nous existons encore.",
+    "keyFacts": [
+      "Portée : ~50.000 années-lumière (toute la galaxie en théorie)",
+      "Source : esprit de l'Empereur sur le Trône d'Or",
+      "Carburant : 1000 psykers humains/jour dans le Choir Astronomican",
+      "Coupé pour Imperium Nihilus depuis Cicatrix Maledictum (M42)",
+      "Unique au monde — aucune copie possible"
+    ],
+    "relatedConcepts": [
+      { "name": "Trône d'Or", "conceptId": "golden-throne", "description": "Source de l'Astronomican" },
+      { "name": "Navigators", "description": "Seuls humains capables de voir l'Astronomican à travers le Warp" },
+      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "A coupé l'Astronomican en deux" }
+    ]
+  },
+  {
+    "id": "warp",
+    "number": 3,
+    "name": "Le Warp",
+    "title": "L'Immaterium · Le Royaume du Chaos",
+    "category": "warp",
+    "color": "#7a4a8b",
+    "sigil": "✹",
+    "wikiQuery": "Warp Immaterium Chaos",
+    "description": "Dimension psychique parallèle où les émotions et les pensées des êtres vivants prennent forme. C'est par lui que les vaisseaux voyagent entre les étoiles — et c'est de lui que viennent les daemons.",
+    "loreLong": "Le Warp est l'envers psychique de la réalité matérielle. Toute pensée, émotion, intention humaine ou xenos y laisse une trace ; les émotions extrêmes y créent des entités daemoniques. Les vaisseaux impériaux y plongent à l'aide de leur Warp Drive et y voyagent à des vitesses superluminelles — guidés par les Navigators qui voient l'Astronomican. Mais le Warp est imprévisible : tempêtes, courants psychiques, prédateurs daemoniques, distorsions temporelles. Un voyage de quelques jours en réalité matérielle peut prendre des années dans le Warp ; un autre peut renvoyer un vaisseau dans le passé. Les psykers humains et xenos puisent leur pouvoir directement dans le Warp — au risque d'attirer l'attention de ce qui y vit.",
+    "citation": "Plonger dans le Warp, c'est nager dans une mer de cauchemars affamés.",
+    "keyFacts": [
+      "Dimension parallèle, psy-réactive aux émotions",
+      "Habité par les daemons et les Quatre Dieux du Chaos",
+      "Carburant pour la magie psychique humaine et xenos",
+      "Voyage interstellaire impossible sans (Warp Drive)",
+      "Distorsions temporelles : le temps n'est pas linéaire"
+    ],
+    "relatedConcepts": [
+      { "name": "Œil de la Terreur", "conceptId": "eye-of-terror", "description": "Faille warp permanente" },
+      { "name": "Astronomican", "conceptId": "astronomican", "description": "Phare qui rend la navigation possible" },
+      { "name": "Panthéon Chaos", "description": "Lien vers /lore/chaos-gods" }
+    ]
+  },
+  {
+    "id": "eye-of-terror",
+    "number": 4,
+    "name": "L'Œil de la Terreur",
+    "title": "Plaie de Slaanesh dans la Galaxie",
+    "category": "warp",
+    "color": "#9c2680",
+    "sigil": "👁",
+    "wikiQuery": "Eye of Terror Warhammer",
+    "description": "Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos exilées depuis la fin de l'Hérésie d'Horus. La frontière entre le Warp et l'espace réel s'y dissout.",
+    "loreLong": "Quand Slaanesh naquit du déclin de l'Empire Aeldari, l'explosion psychique fut si violente qu'elle déchira la trame réelle sur des dizaines de milliers d'années-lumière dans le Segmentum Obscurus. L'Œil de la Terreur est le résultat — une fissure permanente où Warp et espace réel se mélangent. Les Légions Chaos s'y réfugièrent après l'Hérésie d'Horus et y existent depuis dans une éternité distordue : pour eux, dix mille ans terrestres équivalent à quelques décennies subjectives. Les Croisades Noires (Black Crusades) d'Abaddon le Maudit en sortent périodiquement pour assaillir l'Imperium. La 13ᵉ Croisade Noire (M41) provoqua la chute de Cadia et la formation de la Cicatrix Maledictum.",
+    "citation": "Au cœur de l'Œil, le temps est un suggestif. Et la mort est facultative.",
+    "keyFacts": [
+      "Né de la naissance de Slaanesh (M30)",
+      "Localisé : Segmentum Obscurus, près de Cadia (détruite)",
+      "Repaire principal des Légions Chaos exilées",
+      "Temps distordu : ~10.000 ans IM = décennies subjectives",
+      "Source des 13 Croisades Noires d'Abaddon"
+    ],
+    "relatedConcepts": [
+      { "name": "Slaanesh", "description": "Dieu Chaos dont la naissance créa l'Œil" },
+      { "name": "Cadia", "conceptId": "cadia", "description": "Forteresse-monde devant l'Œil, détruite M41" },
+      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Extension de l'Œil créée par la 13ᵉ Croisade Noire" }
+    ]
+  },
+  {
+    "id": "maelstrom",
+    "number": 5,
+    "name": "Le Maelstrom",
+    "title": "L'Autre Faille Warp",
+    "category": "warp",
+    "color": "#8b1a1a",
+    "sigil": "⚆",
+    "wikiQuery": "Maelstrom warp Warhammer",
+    "description": "Tempête warp permanente dans le Segmentum Ultima. Plus petite que l'Œil de la Terreur mais tout aussi dangereuse. Repaire de bandes Chaos mineures et de pirates impériaux.",
+    "loreLong": "Le Maelstrom est l'autre grande faille warp permanente de la galaxie, située au centre du Segmentum Ultima — non loin de Macragge. Moins étendu que l'Œil de la Terreur, il abrite néanmoins de nombreuses bandes de renégats Chaos, des pirates Drukhari, des refuges de Eldars Exodites en exil, et des secrets encore plus anciens. La Croisade des Cendres et plusieurs guerres ultramarines l'ont contenu mais jamais extirpé. Au M42, son activité a augmenté en sympathie avec la Cicatrix Maledictum.",
+    "keyFacts": [
+      "Localisation : Segmentum Ultima, près de Macragge",
+      "Plus petit que l'Œil de la Terreur",
+      "Hôte de bandes Chaos, pirates, exilés xenos",
+      "Activité accrue depuis la Cicatrix Maledictum",
+      "Surveillé par les Ultramarines"
+    ],
+    "relatedConcepts": [
+      { "name": "Macragge", "conceptId": "macragge", "description": "Capitale Ultramarines proche du Maelstrom" },
+      { "name": "Œil de la Terreur", "conceptId": "eye-of-terror", "description": "Plus grande faille warp permanente" }
+    ]
+  },
+  {
+    "id": "webway",
+    "number": 6,
+    "name": "Le Webway",
+    "title": "La Toile Aeldari",
+    "category": "warp",
+    "color": "#3a6cc4",
+    "sigil": "✦",
+    "wikiQuery": "Webway Eldar Aeldari",
+    "description": "Réseau interdimensionnel construit par les Anciens il y a soixante millions d'années. Il permet de voyager dans la galaxie sans plonger dans le Warp — les Aeldari et les Drukhari l'utilisent encore.",
+    "loreLong": "Le Webway fut construit par les Anciens (Old Ones), une race xenos préhistorique, comme alternative au Warp pour le voyage interstellaire. Ses tunnels existent dans une dimension intermédiaire stable — ni Warp, ni espace réel — protégés par des champs psy-physiques. Les Aeldari l'héritèrent et l'élargirent à l'apogée de leur empire (M-30). Quand Slaanesh naquit, certaines portions s'effondrèrent ; les Drukhari se réfugièrent à Commorragh dans les replis profonds du Webway. L'Empereur tenta de construire un Webway humain depuis Terra — c'était le projet secret du Trône d'Or — mais Magnus le Rouge brisa l'expérience en projetant son esprit pour avertir Terra de la trahison d'Horus.",
+    "citation": "Une route plus rapide que la lumière, plus sûre que le Warp. Mais qui nous appartient à peine.",
+    "keyFacts": [
+      "Construit par les Anciens (M-65 millions)",
+      "Stabilisé entre Warp et réalité matérielle",
+      "Hôte principal : Aeldari (craftworlds + Drukhari)",
+      "Commorragh, capitale Drukhari, niche dans le Webway",
+      "Webway humain : projet inachevé de l'Empereur"
+    ],
+    "relatedConcepts": [
+      { "name": "Commorragh", "description": "Capitale Drukhari nichée dans le Webway" },
+      { "name": "Trône d'Or", "conceptId": "golden-throne", "description": "Construit pour ouvrir le Webway aux humains" },
+      { "name": "Magnus le Rouge", "description": "A brisé le Webway humain en alertant Terra" }
+    ]
+  },
+  {
+    "id": "cicatrix-maledictum",
+    "number": 7,
+    "name": "Cicatrix Maledictum",
+    "title": "La Grande Cicatrice",
+    "category": "warp",
+    "color": "#c43a26",
+    "sigil": "⚡",
+    "wikiQuery": "Cicatrix Maledictum Great Rift",
+    "description": "Déchirure warp galactique créée au M41 par la chute de Cadia. La galaxie entière est désormais divisée en deux : Imperium Sanctus (avec Terra) et Imperium Nihilus (coupé de l'Astronomican).",
+    "loreLong": "À la fin du M41, la 13ᵉ Croisade Noire d'Abaddon le Maudit aboutit après dix millénaires d'attaques répétées : Cadia, le monde-forteresse qui scellait l'Œil de la Terreur, fut détruite. La déstabilisation warp provoqua une déchirure cataclysmique qui s'étendit en quelques années à travers toute la galaxie — la Cicatrix Maledictum. Pour la première fois depuis dix mille ans, l'Astronomican ne traverse plus l'Imperium en entier. La galaxie est désormais divisée : Imperium Sanctus (la moitié de Terra, encore sous l'Astronomican) et Imperium Nihilus (la moitié coupée, plongée dans la nuit warp). Roboute Guilliman fut ramené à la vie pour gérer cette crise — il dirige depuis la Croisade Indomitus pour reconquérir Nihilus.",
+    "citation": "La galaxie a été coupée en deux. Personne ne peut plus prétendre que l'Imperium ne tombe pas.",
+    "keyFacts": [
+      "Date : fin M41 / début M42 (~999.M41)",
+      "Cause : chute de Cadia + 13ᵉ Croisade Noire",
+      "Divise la galaxie : Sanctus (Terra) vs Nihilus",
+      "Astronomican coupé pour Imperium Nihilus",
+      "Trigger de la Croisade Indomitus de Guilliman"
+    ],
+    "relatedConcepts": [
+      { "name": "Imperium Sanctus", "conceptId": "imperium-sanctus", "description": "La moitié 'sauvée' avec Terra" },
+      { "name": "Imperium Nihilus", "conceptId": "imperium-nihilus", "description": "La moitié coupée plongée dans la nuit warp" },
+      { "name": "Cadia", "conceptId": "cadia", "description": "Monde dont la chute a déclenché la Cicatrice" },
+      { "name": "Roboute Guilliman", "description": "Ramené pour la crise" }
+    ]
+  },
+  {
+    "id": "imperium-sanctus",
+    "number": 8,
+    "name": "Imperium Sanctus",
+    "title": "L'Imperium de la Lumière",
+    "category": "imperial",
+    "color": "#1d4ba0",
+    "sigil": "✠",
+    "wikiQuery": "Imperium Sanctus M42",
+    "description": "La moitié de la galaxie qui contient Terra — encore éclairée par l'Astronomican. Plus stable, plus défendable, mais aussi plus pressée par les forces ennemies qui s'y concentrent.",
+    "loreLong": "Imperium Sanctus est la moitié 'lumineuse' de la galaxie post-Cicatrice. Elle contient Terra, le Trône d'Or, l'Astronomican source — donc tous les centres de pouvoir traditionnels de l'Imperium. Roboute Guilliman y a établi son Quartier Général pour la Croisade Indomitus. Mais Sanctus n'est pas safe : avec Cadia détruite, les invasions chaotiques arrivent désormais directement dans son territoire ; les Tyranides progressent depuis le sud galactique ; les Nécrons s'éveillent partout. La Croisade Indomitus combat sur tous les fronts.",
+    "keyFacts": [
+      "Contient Terra, Mars, Holy Earth, Macragge",
+      "Encore éclairée par l'Astronomican",
+      "Quartier Général de la Croisade Indomitus",
+      "Sous attaque permanente : Chaos + Tyranides + Nécrons",
+      "Stabilité relative — mais en déclin"
+    ],
+    "relatedConcepts": [
+      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Déchirure qui a créé la division" },
+      { "name": "Imperium Nihilus", "conceptId": "imperium-nihilus", "description": "L'autre moitié, coupée" },
+      { "name": "Roboute Guilliman", "description": "Lord Commander, dirige la Croisade Indomitus" }
+    ]
+  },
+  {
+    "id": "imperium-nihilus",
+    "number": 9,
+    "name": "Imperium Nihilus",
+    "title": "L'Imperium Plongé dans la Nuit",
+    "category": "imperial",
+    "color": "#3a3a3a",
+    "sigil": "☾",
+    "wikiQuery": "Imperium Nihilus M42",
+    "description": "La moitié de la galaxie coupée de l'Astronomican depuis la Cicatrix Maledictum. Naviguer y est extrêmement risqué. Beaucoup de mondes sont isolés, certains tombés au Chaos, d'autres tenus par des héros locaux.",
+    "loreLong": "Quand la Cicatrix Maledictum se forma, environ la moitié de la galaxie fut coupée de l'Astronomican — c'est devenu l'Imperium Nihilus. Les vaisseaux qui osent y naviguer doivent improviser : phares psychiques locaux improvisés, Navigators désorientés, voyages warp qui durent des décennies pour quelques années-lumière. Certains mondes sont tombés au Chaos en quelques mois ; d'autres ont survécu par des miracles locaux (Saint Celestine apparaît partout, Krieg tient bon, certains chapitres Astartes orphelins refusent de mourir). La Croisade Indomitus envoie des flottes chercher à reconnecter Nihilus — avec un succès limité.",
+    "citation": "Là où Sa lumière ne porte plus, les mortels doivent allumer leurs propres bougies.",
+    "keyFacts": [
+      "Coupé de l'Astronomican depuis la Cicatrix",
+      "Voyage warp extrêmement risqué (et lent)",
+      "Mondes isolés, tombés ou héroïquement résistants",
+      "Saint Celestine y apparaît fréquemment",
+      "Reconnaissance par flottes Indomitus en cours"
+    ],
+    "relatedConcepts": [
+      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Cause de l'isolement" },
+      { "name": "Imperium Sanctus", "conceptId": "imperium-sanctus", "description": "L'autre moitié, encore éclairée" },
+      { "name": "Saint Celestine", "description": "Sainte vivante apparaissant dans Nihilus" }
+    ]
+  },
+  {
+    "id": "codex-astartes",
+    "number": 10,
+    "name": "Codex Astartes",
+    "title": "La Bible Militaire de Guilliman",
+    "category": "doctrine",
+    "color": "#a89060",
+    "sigil": "⚔",
+    "wikiQuery": "Codex Astartes Guilliman",
+    "description": "Doctrine militaire écrite par Roboute Guilliman après l'Hérésie d'Horus. Divise les anciennes Légions Astartes de plusieurs dizaines de milliers de marines en chapitres autonomes de 1.000 maximum.",
+    "loreLong": "Après la fin de l'Hérésie d'Horus, Roboute Guilliman fit le constat amer que les Légions Astartes — colossales, avec parfois 100.000 marines chacune sous un seul primarque — étaient trop puissantes pour ne pas représenter un risque existentiel pour l'Imperium. Il rédigea le Codex Astartes : un manuel militaire qui scinda chaque Légion en multiples chapitres autonomes de 1.000 marines maximum, organisés en compagnies (Tactique / Assaut / Devastator / Scout / Veterans). Tous les chapitres post-Codex respectent cette structure ; certains chapitres Loyalistes Légions originelles refusèrent (Space Wolves, Black Templars) et restèrent en grandes formations. Le Codex est aussi un manuel tactique exhaustif — ses 600 stratégies sont étudiées encore au M42.",
+    "keyFacts": [
+      "Auteur : Roboute Guilliman, post-Hérésie",
+      "Limite chapitres à 1.000 marines maximum",
+      "Structure : 10 compagnies par chapitre",
+      "Refusé par : Space Wolves, Black Templars, Blood Angels (partiel)",
+      "600+ stratégies tactiques codifiées"
+    ],
+    "relatedConcepts": [
+      { "name": "Roboute Guilliman", "description": "Auteur du Codex" },
+      { "name": "Space Marines", "description": "Soumis au Codex (la majorité)" }
+    ]
+  },
+  {
+    "id": "holy-terra",
+    "number": 11,
+    "name": "Holy Terra",
+    "title": "La Capitale Sacrée",
+    "category": "world",
+    "color": "#d4a017",
+    "sigil": "✠",
+    "wikiQuery": "Holy Terra Imperial Palace",
+    "description": "Berceau de l'humanité, capitale spirituelle et politique de l'Imperium. Couverte d'un Palais Impérial qui occupe presque tout l'Himalaya. Le Trône d'Or s'y trouve.",
+    "loreLong": "Terra est devenue Holy Terra après l'Unification par l'Empereur (M-22) et la fondation de l'Imperium. Sa surface est entièrement urbanisée : ruches géantes, manufactorums, cathédrales du Ministorum, et au cœur, le Palais Impérial — gigantesque complexe qui couvre presque tout l'Himalaya. À l'intérieur du Palais, la Sanctum Imperialis abrite le Trône d'Or. Terra est aussi le siège du Conseil des Hauts Seigneurs, de l'Administratum central, des Custodes, des Sœurs du Silence, et des principales bibliothèques impériales. Sa population dépasse les 100 milliards. Aucun véhicule ne se déplace en surface sans autorisation : l'air y est si pollué qu'il faut un masque pour respirer. C'est aussi le but ultime de tout pèlerinage du Ministorum.",
+    "keyFacts": [
+      "Population : 100+ milliards",
+      "Capitale politique, religieuse et militaire",
+      "Palais Impérial = quasi tout l'Himalaya",
+      "Sanctum Imperialis abrite le Trône d'Or",
+      "Pollution extrême — masques obligatoires"
+    ],
+    "relatedConcepts": [
+      { "name": "Trône d'Or", "conceptId": "golden-throne", "description": "Au cœur du Palais Impérial" },
+      { "name": "Adeptus Custodes", "description": "Gardiens du Palais" },
+      { "name": "Mars", "conceptId": "mars", "description": "Planète sœur, capitale Mechanicus" }
+    ]
+  },
+  {
+    "id": "mars",
+    "number": 12,
+    "name": "Mars",
+    "title": "La Forge Sacrée du Mechanicus",
+    "category": "world",
+    "color": "#b85a3a",
+    "sigil": "⚙",
+    "wikiQuery": "Mars Adeptus Mechanicus",
+    "description": "Capitale de l'Adeptus Mechanicus, planète-forge couverte d'usines géantes vouées à la fabrication d'armes, véhicules et machines. La sœur martienne de Terra a son propre régime théocratique du Dieu-Machine.",
+    "loreLong": "Mars n'est pas seulement la planète-mère du Mechanicus — c'est sa capitale spirituelle et industrielle. Ses tunnels souterrains, dont certains précèdent l'humanité, abritent les sanctuaires les plus saints du Cult Mechanicus. Les Magos travaillent dans des manufactorums géants pour produire les armes, les véhicules, les Titans, les bolters de tout l'Imperium. Une stricte hiérarchie théologique gouverne tout : du Fabricator-General au plus simple servitor, chaque membre vénère le Dieu-Machine (Omnissiah). Mars fournit les Knight Worlds en STC anciens et entretient des relations exclusives — et parfois tendues — avec Terra. Mars survit à la Cicatrix Maledictum et reste connectée à Terra par voie warp directe.",
+    "keyFacts": [
+      "Capitale Adeptus Mechanicus",
+      "Plus ancienne colonie humaine après Terra",
+      "Théocratie du Dieu-Machine (Omnissiah)",
+      "Production de Titans, Knights, armes Astartes",
+      "Voie warp directe vers Terra (M42)"
+    ],
+    "relatedConcepts": [
+      { "name": "Holy Terra", "conceptId": "holy-terra", "description": "Planète sœur, capitale Imperium" },
+      { "name": "Adeptus Mechanicus", "description": "Hôte de Mars" },
+      { "name": "Belisarius Cawl", "description": "Magos Dominus de Mars, créateur des Primaris" }
+    ]
+  },
+  {
+    "id": "macragge",
+    "number": 13,
+    "name": "Macragge",
+    "title": "Capitale d'Ultramar · Trône Bleu",
+    "category": "world",
+    "color": "#1d4ba0",
+    "sigil": "Ω",
+    "wikiQuery": "Macragge Ultramarines homeworld",
+    "description": "Monde-mère des Ultramarines. Capitale d'Ultramar, l'unique empire stellaire dirigé par un chapitre Astartes. Roboute Guilliman y règne en Lord Commander quand il n'est pas en Croisade.",
+    "loreLong": "Macragge est unique : c'est le seul monde Astartes à régner sur un véritable empire stellaire — les 500 mondes d'Ultramar dans le Segmentum Ultima. Roboute Guilliman, après l'Hérésie d'Horus, fit d'Ultramar un modèle de civilisation impériale : prospérité, justice, défense surhumaine. La Forteresse de Macragge est le château ancestral des Ultramarines, surmonté de la Tour d'Honneur où chaque Chapter Master est intronisé. Au M42, Macragge est aussi le QG opérationnel de la Croisade Indomitus — Guilliman y revient quand il peut. Macragge a survécu à plusieurs invasions Tyranides (Tyrannic Wars) ; c'est sur Macragge que mourut Marneus Calgar (avant de revenir Primaris).",
+    "citation": "Macragge la pierre, Macragge l'épée, Macragge l'Honneur de l'humanité.",
+    "keyFacts": [
+      "Capitale d'Ultramar (500 mondes)",
+      "Forteresse de Macragge — château ancestral",
+      "Seul empire stellaire dirigé par un chapitre Astartes",
+      "QG opérationnel Croisade Indomitus (M42)",
+      "Survécu aux Tyrannic Wars (Hive Fleet Behemoth)"
+    ],
+    "relatedConcepts": [
+      { "name": "Ultramarines", "description": "Hôte de Macragge" },
+      { "name": "Roboute Guilliman", "description": "Primarque, Lord Commander" },
+      { "name": "Maelstrom", "conceptId": "maelstrom", "description": "Faille warp menaçant le Segmentum Ultima" }
+    ]
+  },
+  {
+    "id": "cadia",
+    "number": 14,
+    "name": "Cadia",
+    "title": "La Forteresse-Monde Tombée",
+    "category": "world",
+    "color": "#5a6878",
+    "sigil": "✠",
+    "wikiQuery": "Cadia fortress world Eye of Terror",
+    "description": "Monde-forteresse millénaire devant l'Œil de la Terreur. Dernière barrière entre les Légions Chaos et le reste de la galaxie pendant dix mille ans. Détruit par la 13ᵉ Croisade Noire d'Abaddon (M41).",
+    "loreLong": "Cadia se tenait à l'embouchure de l'Œil de la Terreur, en première ligne de chaque Croisade Noire depuis dix mille ans. Sa population entière — les Cadiens — était formée à la guerre dès l'enfance. Les Cadian Shock Troops étaient considérés comme les meilleurs soldats humains de la Garde Impériale. Les Pylônes Cadiens, structures préhumaines mystérieuses, stabilisaient l'Œil de la Terreur et limitaient son expansion. À la 13ᵉ Croisade Noire (999.M41), Abaddon le Maudit lança son assaut le plus dévastateur : Cadia tomba, les Pylônes furent détruits, et l'Œil se déchaîna. La déstabilisation warp qui s'ensuivit créa la Cicatrix Maledictum. Ursarkar Creed, dernier héros cadien, déclara que 'Cadia tient toujours' — alors même que sa planète n'était plus.",
+    "citation": "Cadia tient. Cadia tient. CADIA TIENT.",
+    "keyFacts": [
+      "Première ligne face à l'Œil de la Terreur (~10.000 ans)",
+      "Cadiens : meilleure infanterie humaine de la Garde",
+      "Pylônes Cadiens préhumains stabilisaient l'Œil",
+      "Détruite à la 13ᵉ Croisade Noire (999.M41)",
+      "Cause directe de la Cicatrix Maledictum"
+    ],
+    "relatedConcepts": [
+      { "name": "Œil de la Terreur", "conceptId": "eye-of-terror", "description": "Que Cadia gardait" },
+      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Conséquence directe de la chute de Cadia" },
+      { "name": "Astra Militarum", "description": "Régiments Cadians, héritage des survivants" }
+    ]
+  }
+]

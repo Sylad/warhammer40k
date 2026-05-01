@@ -70,5 +70,14 @@
     "url": "https://www.youtube.com/@majorkill",
     "avatar": "MK",
     "priority": false
+  },
+  {
+    "id": "imperial-iterator",
+    "name": "Imperial Iterator",
+    "description": "Animations IA Warhammer 40k — clips musicaux originaux et fan-films, qualité cinéma",
+    "language": "EN",
+    "url": "https://www.youtube.com/@ImperialIterator",
+    "avatar": "II",
+    "priority": true
   }
 ]

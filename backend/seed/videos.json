@@ -9,7 +9,12 @@
     "embedType": "playlist",
     "type": "Parodie",
     "langue": "EN",
-    "tags": ["Parodie", "Space Marines", "Humour", "Animation"],
+    "tags": [
+      "Parodie",
+      "Space Marines",
+      "Humour",
+      "Animation"
+    ],
     "incontournable": true,
     "thumbnail": "Space Marine cartoon parody warhammer",
     "duration": "Série",
@@ -27,7 +32,12 @@
     "embedType": "playlist",
     "type": "Parodie",
     "langue": "EN",
-    "tags": ["Parodie", "Flashgitz", "Humour", "Animation"],
+    "tags": [
+      "Parodie",
+      "Flashgitz",
+      "Humour",
+      "Animation"
+    ],
     "incontournable": false,
     "thumbnail": "Sisters of Battle warhammer",
     "duration": "Série",
@@ -45,7 +55,11 @@
     "embedType": null,
     "type": "Parodie",
     "langue": "EN",
-    "tags": ["Parodie", "Animation", "Humour"],
+    "tags": [
+      "Parodie",
+      "Animation",
+      "Humour"
+    ],
     "incontournable": false,
     "thumbnail": "Ork warhammer parody cartoon",
     "duration": "Chaîne",
@@ -63,7 +77,12 @@
     "embedType": "playlist",
     "type": "Parodie",
     "langue": "EN",
-    "tags": ["Parodie", "Empereur", "Humour", "Lore profond"],
+    "tags": [
+      "Parodie",
+      "Empereur",
+      "Humour",
+      "Lore profond"
+    ],
     "incontournable": true,
     "thumbnail": "Emperor of Mankind Golden Throne warhammer",
     "duration": "Série",
@@ -81,7 +100,12 @@
     "embedType": "video",
     "type": "Animation fan",
     "langue": "Sans dialogue",
-    "tags": ["Space Marines", "Action", "Chef-d'œuvre", "Court-métrage"],
+    "tags": [
+      "Space Marines",
+      "Action",
+      "Chef-d'œuvre",
+      "Court-métrage"
+    ],
     "incontournable": true,
     "thumbnail": null,
     "duration": "21:34",
@@ -100,7 +124,12 @@
     "embedType": "playlist",
     "type": "Animation fan",
     "langue": "EN",
-    "tags": ["Black Templars", "Orks", "Adaptation roman", "Grimaldus"],
+    "tags": [
+      "Black Templars",
+      "Orks",
+      "Adaptation roman",
+      "Grimaldus"
+    ],
     "incontournable": true,
     "thumbnail": "Black Templars siege Helsreach warhammer",
     "duration": "1:24:35",
@@ -118,7 +147,12 @@
     "embedType": "video",
     "type": "Animation fan",
     "langue": "EN",
-    "tags": ["Inquisition", "CGI", "Court-métrage", "Fan film"],
+    "tags": [
+      "Inquisition",
+      "CGI",
+      "Court-métrage",
+      "Fan film"
+    ],
     "incontournable": false,
     "thumbnail": null,
     "duration": "9:18",
@@ -136,7 +170,12 @@
     "embedType": "video",
     "type": "Animation fan",
     "langue": "EN",
-    "tags": ["Inquisition", "CGI", "Film", "Fan film"],
+    "tags": [
+      "Inquisition",
+      "CGI",
+      "Film",
+      "Fan film"
+    ],
     "incontournable": true,
     "thumbnail": null,
     "duration": "1:00:42",
@@ -154,7 +193,11 @@
     "embedType": "playlist",
     "type": "Série officielle",
     "langue": "EN",
-    "tags": ["Blood Angels", "Space Marines", "Officiel"],
+    "tags": [
+      "Blood Angels",
+      "Space Marines",
+      "Officiel"
+    ],
     "incontournable": false,
     "thumbnail": "Blood Angels space marine warhammer",
     "duration": "Série",
@@ -172,7 +215,11 @@
     "embedType": null,
     "type": "Série officielle",
     "langue": "EN",
-    "tags": ["Anthologie", "Multi-factions", "Officiel"],
+    "tags": [
+      "Anthologie",
+      "Multi-factions",
+      "Officiel"
+    ],
     "incontournable": false,
     "thumbnail": "warhammer 40k anthology cinematic",
     "duration": "Série",
@@ -190,7 +237,11 @@
     "embedType": null,
     "type": "Chaîne lore",
     "langue": "EN",
-    "tags": ["Lore", "Approfondi", "Toutes factions"],
+    "tags": [
+      "Lore",
+      "Approfondi",
+      "Toutes factions"
+    ],
     "incontournable": true,
     "thumbnail": "warhammer 40k lore galaxy",
     "duration": "Chaîne",
@@ -209,7 +260,12 @@
     "embedType": null,
     "type": "Chaîne lore",
     "langue": "EN",
-    "tags": ["Lore", "Guide", "Débutants", "Factions"],
+    "tags": [
+      "Lore",
+      "Guide",
+      "Débutants",
+      "Factions"
+    ],
     "incontournable": false,
     "thumbnail": "warhammer 40k codex book",
     "duration": "Chaîne",
@@ -227,7 +283,12 @@
     "embedType": null,
     "type": "Chaîne officielle",
     "langue": "FR",
-    "tags": ["Officiel", "FR", "Trailers", "Previews"],
+    "tags": [
+      "Officiel",
+      "FR",
+      "Trailers",
+      "Previews"
+    ],
     "incontournable": false,
     "thumbnail": "warhammer 40k logo aquila",
     "duration": "Chaîne",
@@ -245,7 +306,12 @@
     "embedType": null,
     "type": "Chaîne lore",
     "langue": "FR",
-    "tags": ["Lore", "FR", "Factions", "Histoire"],
+    "tags": [
+      "Lore",
+      "FR",
+      "Factions",
+      "Histoire"
+    ],
     "incontournable": true,
     "thumbnail": "warhammer 40k space marine combat",
     "duration": "Chaîne",
@@ -263,7 +329,12 @@
     "embedType": null,
     "type": "Chaîne lore",
     "langue": "FR/EN",
-    "tags": ["Lore", "FR", "Hobby", "Accessible"],
+    "tags": [
+      "Lore",
+      "FR",
+      "Hobby",
+      "Accessible"
+    ],
     "incontournable": false,
     "thumbnail": "warhammer hobby miniature painting",
     "duration": "Chaîne",
@@ -281,12 +352,43 @@
     "embedType": null,
     "type": "Chaîne lore",
     "langue": "FR",
-    "tags": ["Lore", "FR", "Histoire", "Factions"],
+    "tags": [
+      "Lore",
+      "FR",
+      "Histoire",
+      "Factions"
+    ],
     "incontournable": false,
     "thumbnail": "warhammer 40k battle imperium",
     "duration": "Chaîne",
     "category": "lore",
     "language": "FR",
     "featured": false
+  },
+  {
+    "id": "imperial-iterator-fallen-crown",
+    "titre": "The Fallen Crown — So They Say",
+    "createur": "Imperial Iterator",
+    "description": "Music video original animé entièrement par IA. Suit la vie d'un Garde Impérial — mesurée en heures, héros morts à la première chute, le reste devient boue. Une plongée poétique et brutale dans l'expérience Astra Militarum, narration musicale, animation cinéma.",
+    "url": "https://www.youtube.com/watch?v=cHFc9cViSP4",
+    "embedId": "cHFc9cViSP4",
+    "embedType": "video",
+    "type": "Animation fan",
+    "langue": "EN",
+    "tags": [
+      "IA",
+      "Music Video",
+      "Astra Militarum",
+      "Animation",
+      "Lore",
+      "Original"
+    ],
+    "incontournable": true,
+    "thumbnail": "Astra Militarum Imperial Guardsman trench warfare",
+    "duration": "4:05",
+    "category": "animation",
+    "channelId": "imperial-iterator",
+    "language": "EN",
+    "featured": true
   }
 ]
