@@ -17,12 +17,16 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 
 ## Fonctionnalités
 
-- **9 pages** : Dashboard, Factions, Faction Detail, SubFaction Detail, Unit Detail, Romans, Vidéos, Galerie
-- **Hiérarchie faction → sous-faction → unité** : 11 factions principales, 63 sous-factions (Ultramarines, Iron Hands, World Eaters, Krieg, etc.) avec successeurs, primarques, leaders actuels, notable units inline
-- **Galerie 1500+ images** avec multi-catégorisation user (chips), import depuis Wikipedia Fandom / Reddit r/Warhammer40k / URL directe
-- **Wiki-image proxy** (Wikipedia Fandom EN) pour fetch les illustrations à la volée
-- **Black Library** — séries de romans avec progression de lecture
+- **14 pages** : Dashboard, Factions, Faction Detail, SubFaction Detail, Unit Detail, Romans, Vidéos, Galerie, Lore Hub, Empereur, Primarques, Panthéon Chaos, Civils Impériaux, Concepts (Trône d'Or, Astronomican, Œil de la Terreur, Cadia, Baal, etc.), Carte galactique, À propos
+- **Hiérarchie faction → sous-faction → unité** : 17 factions principales, 113 sous-factions (Ultramarines, Iron Hands, World Eaters, Krieg, Drukhari Kabales, Necron Dynasties, Tyranid Hive Fleets, etc.) avec successeurs, primarques, leaders actuels, notable units inline
+- **Galerie 1500+ images** avec multi-catégorisation user (chips), import depuis Wikipedia Fandom / Reddit r/Warhammer40k / URL directe, catégories dynamiques (built-in + factions + customs)
+- **Datasheets locales** : 119 unités sur 133 ont un visuel curé bundlé dans l'image Docker (HEAD-check + fallback wiki proxy)
+- **Wiki-image proxy** (Wikipedia Fandom EN) pour fetch les illustrations à la volée + cache in-memory
+- **Black Library** — 33 séries de romans avec progression de lecture, badges et tags
 - **Vidéos lore** — chaînes YT (officielles + créateurs) catégorisées
+- **Lore narratif** : 6 sections Empereur, 20 fiches Primarques, 4 dieux Chaos, 10 organisations civiles, 15 concepts (Trône d'Or, Astronomican, Webway, Cicatrix, etc.), carte galactique SVG calibrée
+- **Brèves du 41ᵉ millénaire** : ticker dashboard de 40 entrées atmosphériques (Croisade Indomitus, Cicatrix, Chute de Cadia, Plague Wars, etc.)
+- **Breadcrumb global** + fragment scroll + fil narratif central
 - Cosmétique : design tokens custom (or sur fond noir, Cinzel/Inter), pas de Bootstrap/Material-default
 - Stockage JSON, pas de DB
 
@@ -30,8 +34,8 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 
 | Couche | Tech |
 |---|---|
-| Frontend | Angular 19 standalone components + Material M3 + tokens CSS custom |
-| Backend | NestJS 10 + TypeScript 5 + Anthropic SDK |
+| Frontend | Angular 19 standalone components + Material M3 (legacy en retrait) + tokens CSS custom + Cinzel/Inter |
+| Backend | NestJS 11 + TypeScript 5 + Anthropic SDK |
 | Storage | JSON local (pas de DB) |
 | Sources externes | Wikipedia Fandom EN (wiki-image proxy), Reddit JSON public, 40k.gallery |
 | Build | Docker multi-stage (node:20-alpine → nginx:alpine) |
@@ -63,13 +67,20 @@ Frontend disponible sur `http://localhost:4201`.
 ## Données seed
 
 `backend/seed/` contient les fichiers JSON commités comme état initial :
-- `factions.json` (11 factions principales)
-- `subfactions.json` (63 sous-factions enrichies)
-- `units.json` (catalogue d'unités)
-- `artworks.json` + `artwork-collections.json` (catalog galerie + collections)
-- `videos.json` + `channels.json` (lore-channels YT)
-- `series.json` (romans Black Library)
-- `lore-feed.json` (événements lore homepage)
+- `factions.json` (17 factions principales)
+- `subfactions.json` (113 sous-factions enrichies)
+- `units.json` (133 unités)
+- `series.json` (33 séries Black Library)
+- `videos.json` + `channels.json` (vidéos + 8 chaînes YT)
+- `artworks.json` + `artwork-collections.json` (35 artworks + collections)
+- `lore-feed.json` (40 entrées atmosphériques ticker)
+- `emperor.json` (6 sections narratives)
+- `primarchs.json` (20 fiches : 9 loyalistes / 9 traîtres / 2 expurgés)
+- `chaos-gods.json` (4 dieux + 8 daemons notables)
+- `imperial-orgs.json` (10 organisations civiles)
+- `lore-concepts.json` (15 concepts : Trône d'Or, Astronomican, Webway, Cicatrix, Cadia, Baal, etc.)
+
+`backend/public/datasheets/` contient 119 JPEGs d'unités (curés à la main, bundlés dans l'image Docker), servis via `/api/images/datasheets/:unitId`.
 
 Au premier lancement, copie ces fichiers dans `data/` (cf instructions ci-dessus). Ensuite `data/` n'est plus rejoué — tes catégorisations et imports persistent.
 

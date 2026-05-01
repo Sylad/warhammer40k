@@ -1,16 +1,27 @@
 # Warhammer 40K — Roadmap d'enrichissement
 
-> Plan validé 2026-05-01 après refonte UX complète (9 phases). À reprendre après le chantier Finance Tracker.
+> Plan V1 complet le 2026-05-01. Audit V2 (cleanup + datasheet pattern + enrichissement seeds) le 2026-05-02.
 
-## État actuel ✅
-- **9 phases UX terminées** : Foundations, Dashboard, Factions, Faction Detail, Unit Detail, Romans, Vidéos, Galerie, SubFactions
-- **63 sous-factions seedées** dans `data/warhammer/subfactions.json` :
+## État actuel ✅ V1 COMPLET + AUDIT V2
+
+- **Toutes les phases UX terminées** : P1-P9 + F4-F10 + Tweaks UX (breadcrumb, primarque overlay, fragment scroll)
+- **17 factions parents** dans `factions.json` (toutes lore enrichies post-F4)
+- **113 sous-factions** dans `subfactions.json` :
   - 12 chapitres Space Marines **enrichis** (loreLong, currentLeader, notableUnits, citation)
   - 8 régiments Astra Militarum **enrichis**
   - 9 légions Chaos **enrichies**
-  - Aeldari (5), Tyranides (3), Necrons (4), Orks (6), Sœurs (6), Tau (6), AdMech (4) — données minimales
-- **Galerie complète** : 1468 images perso + 10 catalog + import (Wiki/Reddit/URL) + multi-catégorisation chips input
-- **Backend** : 17 modules NestJS + tous les endpoints /api/subfactions, /api/image-import, /api/image-meta, etc.
+  - Custodes (6), Officio Assassinorum (4), Drukhari (10), Grey Knights (8), Votann (5), Genestealer Cults (6) **enrichis F4**
+  - Aeldari (8 : Ulthwé/Saim-Hann/Iyanden/Biel-Tan/Alaitoc/Mymeara/Lugganath/Yme-Loc)
+  - Tyranides (7 : Behemoth/Kraken/Leviathan/Jörmungandr/Hydra/Gorgon/Kronos)
+  - Necrons (9 : Sautekh/Mephrit/Novokh/Nephrekh/Nihilakh-Trazyn/Thokt/Charnovokh/Maynarkh)
+  - Orks (6), Sœurs (6), Tau (6), AdMech (4) — données minimales
+- **133 unités** : 119 ont une datasheet JPEG bundlée dans `backend/public/datasheets/<unit-id>.jpg`, 14 reposent sur le wiki proxy en fallback
+- **33 séries Black Library** seedées avec readBooks/badges/tags
+- **40 entrées lore-feed** (ticker dashboard)
+- **35 artworks** curés (multi-factions wiki-fed)
+- **15 lore-concepts** (Trône d'Or, Astronomican, Webway, Œil, Maelstrom, Cicatrix, Codex, Sanctus/Nihilus, Terra, Macragge, Cadia, Fenris, Caliban, Baal)
+- **Galerie complète** : 1468+ images perso + 35 catalog + import (Wiki/Reddit/URL) + multi-catégorisation chips + catégories dynamiques (built-in + factions + customs)
+- **Backend** : 15+ modules NestJS, endpoints `/api/lore/{emperor,primarchs,chaos-gods,imperial-orgs,concepts}`, `/api/images/datasheets/:unitId`, `/api/wiki-image`, `/api/image-import`, `/api/image-meta`, etc.
 
 ---
 
@@ -170,38 +181,53 @@ Modifier la galerie : les **noms de toutes les factions** doivent apparaître da
 
 ---
 
-## Ordre suggéré d'attaque
+## Ordre d'attaque (historique)
 1. ~~**Finance Tracker**~~ — chantier toujours en attente (refonte React+shadcn)
 2. ✅ **Phase F4** : Custodes + Officio Assassinorum (session 8, 2026-05-01)
 3. ✅ **Phase F5** : L'Empereur + 20 Primarques (session 8, 2026-05-01)
 4. ✅ **Phase F4** suite : Drukhari + Grey Knights + Votann + Genestealer Cults (session 8/9)
 5. ✅ **Phase F6** : Chaos Pantheon (session 8, 2026-05-01)
 6. ✅ **Phase F9** : Civils impériaux (session 9, 2026-05-01)
-7. **Phase F7** : Lore concepts encyclopédie ⬅ **PROCHAINE**
-8. **Phase F3** : Compléter sous-factions existantes (Aeldari/Tyranides/Necrons/Orks/Sœurs/Tau/AdMech)
-9. **Phase F8** : Galaxy map (interactive SVG)
-10. **Phase F10** : Intégration galerie ↔ factions
-11. **Tweaks UX** : breadcrumb, combobox, etc.
+7. ✅ **Phase F7** : Lore concepts encyclopédie (15 concepts dont Baal — session 10, 2026-05-01)
+8. ✅ **Phase F8** : Galaxy map SVG (8 hot zones calibrées — session 10, 2026-05-01)
+9. ✅ **Phase F10** : Intégration galerie ↔ factions (catégories dynamiques — session 11, 2026-05-02)
+10. ✅ **Tweaks UX** : breadcrumb, primarque overlay, fragment scroll, /galerie redirect (session 10, 2026-05-01)
+11. ✅ **Audit V2** : cleanup mort code (cards/onglets/panneaux placeholders) + datasheet locale prioritaire (HEAD-check) + enrichissement seeds (series 11→33, lore-feed 10→40, subfactions xenos +11, artworks 10→35) (session 11, 2026-05-02)
+12. 🟡 **Phase F3 résiduelle** : compléter Aeldari (Eldrad détaillé/Phoenix Lords notableUnits), Necrons (Trazyn déjà ✅, Anrakyr/Szarekh/Crypteks à pousser), Tyranides (Swarmlord/Old One Eye), Orks (Mad Dok/Big Mek/Wazdakka), Sœurs (Celestine/Stern), Tau (Shadowsun/Aun'Shi), AdMech (Cawl déjà ✅, Skitarii Marshal). Lourd mais data-only.
+13. 🟡 **Datasheets manquantes** : 14 unités sans visuel local (Sanguinius, Horus, Fulgrim, Yarrick, Macharius, Corbec, Ravenor, Valeria, Magos Biologis, Hellbrute, Henchmen, Makari, Leman Russ Primarch, Primaris Intercessor) — wiki fallback OK mais inconsistant.
+14. 🟡 **Series xénos** : Drukhari, Grey Knights, Votann, Genestealer Cults absents (corpus BL maigre, à étoffer si BL publie).
+15. 🟡 **Auth multi-rôles** : read public / write authentifié — chantier mentionné post-push initial, jamais entamé.
 
 ---
 
 ## Sauvegardes utiles
 - Données : `/volume2/docker/developpeur/data/warhammer/`
   - `factions.json` (**17 factions** — toutes lore enrichies post-F4)
-  - `subfactions.json` (**102 entrées** — Custodes/Assassinorum/Drukhari/GK/Votann/Genestealer ajoutés)
+  - `subfactions.json` (**113 entrées** — F4 + xenos enrichis V2)
+  - `units.json` (**133 unités**)
+  - `series.json` (**33 séries** — V2)
+  - `lore-feed.json` (**40 entrées** — V2)
+  - `artworks.json` (**35 entrées** — V2)
+  - `lore-concepts.json` (**15 concepts** dont Baal)
   - `emperor.json` (6 sections + 5 stats)
   - `primarchs.json` (20 entrées : 9 loyalistes + 9 traîtres + 2 expurgés)
   - `chaos-gods.json` (4 dieux + 8 daemons notables)
   - `imperial-orgs.json` (10 organisations civiles)
-  - `image-meta.json`, `imported/`, `artworks.json`, `artwork-collections.json`, `youtube-channels.json`, `lore-feed.json`
-- Code backend : `warhammer40k/backend/src/modules/` (~15 modules dont subfactions, image-import, image-meta, lore-feed étendu)
+  - `image-meta.json`, `imported/`, `artwork-collections.json`, `channels.json`, `videos.json`
+- Datasheets locales : `warhammer40k/backend/public/datasheets/<unit-id>.jpg` (119 fichiers, bundled Docker)
+- Code backend : `warhammer40k/backend/src/modules/` (15+ modules dont subfactions, image-import, image-meta, lore-feed étendu)
 - Code frontend : `warhammer40k/frontend/src/app/features/` :
-  - V1-V9 : dashboard, factions, faction-detail, subfaction-detail, unit-detail, series, videos, gallery, about
-  - F5-F9 : lore-hub, lore-emperor, lore-primarchs, lore-chaos-gods, lore-civilians
+  - V1 : dashboard, factions, faction-detail, subfaction-detail, unit-detail, series, videos, gallery, about
+  - F5-F9 : lore-hub, lore-emperor, lore-primarchs, lore-chaos-gods, lore-civilians, lore-concepts, lore-galaxy
+  - Shared : breadcrumb (global)
 
 ## Commits GitHub
 
 - `b91cb30 feat: Phase F4 + F5 + F6 + Dashboard refonte` (2026-05-01)
 - `1ac2ef6 feat: Phase F9 — Civils impériaux` (2026-05-01)
+- `18b3d4f feat: tweak UX — breadcrumb global` (2026-05-01)
+- `46502b0 feat: tweaks UX — primarque mini-portrait + galaxy clean` (2026-05-01)
+- `3c7f196 chore: cleanup mort code + fix liens cassés post-audit` (2026-05-01)
+- `354204f feat: enrichissement seeds + datasheet locale prioritaire + cleanup audit V2` (2026-05-02)
 
 Repo : https://github.com/Sylad/warhammer40k (privé)

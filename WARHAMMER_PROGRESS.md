@@ -117,19 +117,24 @@ Viewer fullscreen modal : image HD centrée + fond noir profond + infos titre/ar
 
 ## État actuel (à mettre à jour à chaque session)
 
-**Date dernière mise à jour** : 2026-05-01 (session 9)
-**Phase active** : aucune — **UX P1-P9 + enrichissement F4 + F5 + F6 + Dashboard + F9 toutes ✅ TERMINÉES** 🎉
-**Prochaine phase** : F7 (Lore concepts encyclopédie) ou F3 (enrichir 51 sous-factions minimalistes) ou F8 (carte galactique SVG).
+**Date dernière mise à jour** : 2026-05-02 (session 11 — Audit V2)
+**Phase active** : aucune — **V1 + F4-F10 + Tweaks UX + Audit V2 toutes ✅ TERMINÉES** 🎉
+**Prochaine phase potentielle** : F3 résiduelle (enrichir notableUnits xenos), 14 datasheets manquantes, ou auth multi-rôles.
 
-## ⭐ État cumulé après session 9 (2026-05-01)
+## ⭐ État cumulé après session 11 (2026-05-02)
 
-| Catégorie | Avant F4 | Après F9 |
+| Catégorie | Avant F4 | Après V2 |
 |---|---|---|
 | Factions parents | 11 | **17** |
-| Sous-factions | 63 | **102** |
-| Pages UI | 9 | **14** |
+| Sous-factions | 63 | **113** |
+| Pages UI | 9 | **15** (dashboard, factions, faction-detail, subfaction-detail, unit-detail, romans, videos, gallery, lore hub, lore-emperor, lore-primarchs, lore-chaos-gods, lore-civilians, lore-concepts, lore-galaxy + about) |
 | Types `SubFactionType` | 11 | **19** |
-| Lore narratif (entités/sections) | 0 | **6 sections Empereur + 20 fiches Primarques + 4 fiches Dieux Chaos + 10 organisations civiles** |
+| Séries Black Library | 5 | **33** |
+| Entrées lore-feed | 10 | **40** |
+| Artworks catalog | 0 | **35** |
+| Lore-concepts | 0 | **15** |
+| Lore narratif (entités) | 0 | **6 sections Empereur + 20 Primarques + 4 Chaos Gods + 10 organisations civiles + 15 concepts** |
+| Datasheets unités locales | 0 | **119** (bundled Docker `backend/public/datasheets/`) |
 
 **Nouvelles factions parents (F4)** : Adeptus Custodes, Officio Assassinorum, Drukhari, Grey Knights, Leagues of Votann, Genestealer Cults — chacune avec sous-factions enrichies (Shield Hosts, Temples, Kabales, Wych Cults, Haemonculus Covens, Brotherhoods, Kindreds, Cultes).
 
@@ -469,3 +474,62 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 - **Tweaks UX** : breadcrumb (Factions › Space Marines › Ultramarines › Marneus Calgar), combobox catégorize CSS custom (au lieu de datalist natif), primarque image dans sous-faction card.
 
 **Specs à charger en froid pour F7/F3/F8** : `warhammer_vision`, `warhammer_specs_location`, `warhammer_ux_lessons`, `warhammer_subfactions_pattern`, `warhammer_lore_sources` + ce tracker. Le Fluff Bible PDF (`/volume2/docker/developpeur/warhammer40k/fluff/1400214179388.pdf` + `pdftotext` dispo NAS) reste source canonique pour F7.
+
+### 2026-05-01 session 10 (F7 + F8 + F10 + Tweaks UX)
+
+**F7 — Lore concepts encyclopédie** : page `/lore/concepts` filtrable + 15 concepts seedés dans `lore-concepts.json` (Trône d'Or, Astronomican, Webway, Œil de la Terreur, Maelstrom, Cicatrix Maledictum, Codex Astartes, Imperium Sanctus/Nihilus, Holy Terra, Macragge, Cadia, Fenris, Caliban, Baal). Chaque concept a `keyFacts[]`, `relatedConcepts[]`, `wikiQuery`, citation. Backend module `lore-concepts` ajouté.
+
+**F8 — Carte galactique SVG interactive** : page `/lore/galaxy` avec image HD bg + 8 hot zones SVG calibrées via PIL grid overlay (Œil de la Terreur 88,163 / Cadia 90,167 / Baal 325,165 / Terra 126,265 / Mars 134,262 / Titan 130,272 / Maelstrom 268,262 / Macragge 424,398). viewBox 700×490 mappé au visuel canonique 3054×2136. Hot zones cliquent vers le concept correspondant.
+
+**F10 — Intégration galerie ↔ factions** : `allCategories()` computed sur gallery.component.ts qui combine 6 built-in + 17 noms de factions + customs. Modal de catégorisation montre toutes les options.
+
+**Tweaks UX** :
+- Breadcrumb global (`shared/components/breadcrumb`) — parse l'URL via NavigationEnd, mappe slugs vers labels canoniques (chaos-gods → Panthéon Chaos, etc.).
+- Mini-portrait Primarque overlay sur sous-faction card (faction-detail), via `primarchWikiQuery` lookup.
+- Fix `/galerie` → `/gallery` (2 occurrences unit-detail).
+- Fragment scroll `withInMemoryScrolling` + anchorScrolling activés dans `app.config.ts`, scroll manuel setTimeout 100ms dans `lore-concepts` pour les fragments.
+- Galaxy debug overlay temporaire (grid + coords curseur) ajouté puis retiré après calibration.
+
+**Cloudflare tunnels** : tunnel quick-mode lancé pour partager warhammer + ol-companion à la famille sans VPN. Binary `cloudflared` téléchargé dans `~/.local/bin/`.
+
+**Source de lore mémorisée** : Omnis Bibliotheca (FR) — wiki Warhammer francophone, ajout dans `warhammer_lore_sources.md`.
+
+**Commits GitHub** : `46502b0`, `4360fe0`, `ddc2f93`, `18b3d4f`, `3c7f196`.
+
+### 2026-05-02 session 11 (Audit V2 — cleanup + enrichissement seeds + fix images)
+
+**Cleanup mort code** :
+- `factions.component.ts` : card "+6 autres factions" + CSS associé + `resetFilters()` méthode (toutes les factions présentes désormais).
+- `gallery.component.ts` : panneau "Couleurs dominantes" + signal `filterColor` + filtre + `toggleColorFilter()` + `PALETTE` constant + CSS `.color-palette`/`.color-dot` (sans valeur ajoutée).
+- `unit-detail.component.ts` : tabs "Règles (optionnel)" + "Galerie" placeholders (100% narratif, pas de jeu plateau ; galerie globale suffit).
+
+**Catégories galerie dynamiques + fallback image** :
+- "Parcourir par catégorie" + dropdown filtre listent toute catégorie ayant ≥1 image (au lieu des 7 statiques). Computed `availableCategories` = built-in + factions (17) + customs créées par l'utilisateur, comptées et triées.
+- `categoryBg(key)` fait fallback sur la 1ère œuvre de la catégorie quand aucun pré-cache wiki n'existe (locale via `service.imageUrl` ou wiki cached). Plus de cards noires.
+
+**Datasheet locale prioritaire (fix images unités)** :
+- Pattern HEAD-check sur `/api/images/datasheets/<unit-id>` avant fallback vers wiki proxy.
+- 119/133 unités ont une JPEG bundlée dans `backend/public/datasheets/<unit-id>.jpg` (servies via `images.controller.ts:30`).
+- Appliqué sur : `unit-detail.component.ts` (heroImage + relatedImages), `faction-detail.component.ts` (unitImages liste).
+- 14 unités sans datasheet (Sanguinius, Horus, Fulgrim, Yarrick, Macharius, Corbec, Ravenor, Valeria, Magos Biologis, Hellbrute, Henchmen, Makari, Leman Russ Primarch, Primaris Intercessor) → wiki fallback automatique.
+
+**Enrichissement seeds (4 fichiers)** :
+- `series.json` : 11 → 33 (Siege of Terra, Dawn of Fire, Dark Imperium, Beast Arises, Watchers of the Throne, Vaults of Terra, Devastation of Baal, Helsreach, Black Legion, Salamanders, Word Bearers, Yarrick, Cadia Stands, Infinite & Divine, Twice-Dead King, Path of the Eldar, Brutal Kunnin, Fire Caste, Farsight, Mark of Faith, Belisarius Cawl, Horusian Wars). Distribution : SM 10 / AM 9 / Chaos 8 / Inquisition 5 / Orks 4 / Custodes 3 / Necrons 3 / AdMech 2 / Sœurs 2 / Tyranides 2 / T'au 2 / Aeldari 1.
+- `subfactions.json` : 102 → 113 xenos enrichis. Aeldari +3 (Mymeara, Lugganath, Yme-Loc), Tyranides +4 (Jörmungandr, Hydra, Gorgon, Kronos), Necrons +4 (Nihilakh-Trazyn, Thokt, Charnovokh, Maynarkh).
+- `lore-feed.json` : 10 → 40 (atmosphère ticker dashboard : Indomitus, Cicatrix, Cadia, Magnus, Léviathan, Trazyn, Cawl, Plague Wars, Yarrick, Helsreach, etc.).
+- `artworks.json` : 10 → 35 (Sanguinius, Horus, Empereur Trône d'Or, Magnus, Mortarion, Abaddon, Lion, Logan, Dante, Calgar, Cawl, Eldrad, Yvraine, Drazhar, Ghazghkull, Trazyn, Imotekh, Farsight, Swarmlord, Eisenhorn, Custodes Captain-General, Repentia, Yarrick, Cicatrix, Knight Lancer).
+
+**Mémoires créées** :
+- `warhammer_unit_image_fallback.md` (reference) — recette HEAD-check datasheet + wiki fallback, où sont les JPEGs, pattern à reproduire.
+- `warhammer_state_2026_05_01.md` (project) — refresh post-V1 complet avec compteurs seeds.
+
+**Commit GitHub** : `354204f feat: enrichissement seeds + datasheet locale prioritaire + cleanup audit V2` (8 fichiers, +1776/-219 lignes).
+
+**Validation Playwright** : sm-tactique → datasheet locale OK ; sm-sanguinius (sans datasheet) → wiki fallback OK ; gallery "Sœurs de Bataille" custom catégorie → image fallback 1ère œuvre OK.
+
+**À reprendre next session (si reprise)** :
+- F3 résiduelle : compléter notableUnits xenos (Aeldari Eldrad/Phoenix Lords/Yriel ; Tyranides Swarmlord/Old One Eye/Norn ; Necrons Anrakyr/Szarekh/Crypteks ; Orks Mad Dok/Big Mek ; Sœurs Stern ; Tau Shadowsun/Aun'Shi ; AdMech Skitarii Marshal).
+- 14 datasheets manquantes : prendre images du wiki + cropper à la main, déposer dans `backend/public/datasheets/` puis rebuild backend.
+- Series xénos (Drukhari/GK/Votann/Genestealer Cults absents).
+- Auth multi-rôles (read public / write authentifié).
+- Rafraîchir `WARHAMMER_PROGRESS.md` et `WARHAMMER_ROADMAP.md` après chaque grosse session pour éviter dérive.
