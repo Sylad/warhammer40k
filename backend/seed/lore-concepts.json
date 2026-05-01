@@ -19,9 +19,20 @@
       "Localisation : Sanctum Imperialis, Palais Impérial, Terra"
     ],
     "relatedConcepts": [
-      { "name": "Astronomican", "conceptId": "astronomican", "description": "Phare psychique alimenté par l'Empereur sur le Trône" },
-      { "name": "Webway", "conceptId": "webway", "description": "Le Trône fut conçu à l'origine pour l'ouvrir aux humains" },
-      { "name": "L'Empereur", "description": "Lien vers la fiche Empereur (/lore/emperor)" }
+      {
+        "name": "Astronomican",
+        "conceptId": "astronomican",
+        "description": "Phare psychique alimenté par l'Empereur sur le Trône"
+      },
+      {
+        "name": "Webway",
+        "conceptId": "webway",
+        "description": "Le Trône fut conçu à l'origine pour l'ouvrir aux humains"
+      },
+      {
+        "name": "L'Empereur",
+        "description": "Lien vers la fiche Empereur (/lore/emperor)"
+      }
     ]
   },
   {
@@ -44,9 +55,20 @@
       "Unique au monde — aucune copie possible"
     ],
     "relatedConcepts": [
-      { "name": "Trône d'Or", "conceptId": "golden-throne", "description": "Source de l'Astronomican" },
-      { "name": "Navigators", "description": "Seuls humains capables de voir l'Astronomican à travers le Warp" },
-      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "A coupé l'Astronomican en deux" }
+      {
+        "name": "Trône d'Or",
+        "conceptId": "golden-throne",
+        "description": "Source de l'Astronomican"
+      },
+      {
+        "name": "Navigators",
+        "description": "Seuls humains capables de voir l'Astronomican à travers le Warp"
+      },
+      {
+        "name": "Cicatrix Maledictum",
+        "conceptId": "cicatrix-maledictum",
+        "description": "A coupé l'Astronomican en deux"
+      }
     ]
   },
   {
@@ -69,9 +91,20 @@
       "Distorsions temporelles : le temps n'est pas linéaire"
     ],
     "relatedConcepts": [
-      { "name": "Œil de la Terreur", "conceptId": "eye-of-terror", "description": "Faille warp permanente" },
-      { "name": "Astronomican", "conceptId": "astronomican", "description": "Phare qui rend la navigation possible" },
-      { "name": "Panthéon Chaos", "description": "Lien vers /lore/chaos-gods" }
+      {
+        "name": "Œil de la Terreur",
+        "conceptId": "eye-of-terror",
+        "description": "Faille warp permanente"
+      },
+      {
+        "name": "Astronomican",
+        "conceptId": "astronomican",
+        "description": "Phare qui rend la navigation possible"
+      },
+      {
+        "name": "Panthéon Chaos",
+        "description": "Lien vers /lore/chaos-gods"
+      }
     ]
   },
   {
@@ -94,9 +127,20 @@
       "Source des 13 Croisades Noires d'Abaddon"
     ],
     "relatedConcepts": [
-      { "name": "Slaanesh", "description": "Dieu Chaos dont la naissance créa l'Œil" },
-      { "name": "Cadia", "conceptId": "cadia", "description": "Forteresse-monde devant l'Œil, détruite M41" },
-      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Extension de l'Œil créée par la 13ᵉ Croisade Noire" }
+      {
+        "name": "Slaanesh",
+        "description": "Dieu Chaos dont la naissance créa l'Œil"
+      },
+      {
+        "name": "Cadia",
+        "conceptId": "cadia",
+        "description": "Forteresse-monde devant l'Œil, détruite M41"
+      },
+      {
+        "name": "Cicatrix Maledictum",
+        "conceptId": "cicatrix-maledictum",
+        "description": "Extension de l'Œil créée par la 13ᵉ Croisade Noire"
+      }
     ]
   },
   {
@@ -118,8 +162,16 @@
       "Surveillé par les Ultramarines"
     ],
     "relatedConcepts": [
-      { "name": "Macragge", "conceptId": "macragge", "description": "Capitale Ultramarines proche du Maelstrom" },
-      { "name": "Œil de la Terreur", "conceptId": "eye-of-terror", "description": "Plus grande faille warp permanente" }
+      {
+        "name": "Macragge",
+        "conceptId": "macragge",
+        "description": "Capitale Ultramarines proche du Maelstrom"
+      },
+      {
+        "name": "Œil de la Terreur",
+        "conceptId": "eye-of-terror",
+        "description": "Plus grande faille warp permanente"
+      }
     ]
   },
   {
@@ -142,9 +194,19 @@
       "Webway humain : projet inachevé de l'Empereur"
     ],
     "relatedConcepts": [
-      { "name": "Commorragh", "description": "Capitale Drukhari nichée dans le Webway" },
-      { "name": "Trône d'Or", "conceptId": "golden-throne", "description": "Construit pour ouvrir le Webway aux humains" },
-      { "name": "Magnus le Rouge", "description": "A brisé le Webway humain en alertant Terra" }
+      {
+        "name": "Commorragh",
+        "description": "Capitale Drukhari nichée dans le Webway"
+      },
+      {
+        "name": "Trône d'Or",
+        "conceptId": "golden-throne",
+        "description": "Construit pour ouvrir le Webway aux humains"
+      },
+      {
+        "name": "Magnus le Rouge",
+        "description": "A brisé le Webway humain en alertant Terra"
+      }
     ]
   },
   {
@@ -167,10 +229,25 @@
       "Trigger de la Croisade Indomitus de Guilliman"
     ],
     "relatedConcepts": [
-      { "name": "Imperium Sanctus", "conceptId": "imperium-sanctus", "description": "La moitié 'sauvée' avec Terra" },
-      { "name": "Imperium Nihilus", "conceptId": "imperium-nihilus", "description": "La moitié coupée plongée dans la nuit warp" },
-      { "name": "Cadia", "conceptId": "cadia", "description": "Monde dont la chute a déclenché la Cicatrice" },
-      { "name": "Roboute Guilliman", "description": "Ramené pour la crise" }
+      {
+        "name": "Imperium Sanctus",
+        "conceptId": "imperium-sanctus",
+        "description": "La moitié 'sauvée' avec Terra"
+      },
+      {
+        "name": "Imperium Nihilus",
+        "conceptId": "imperium-nihilus",
+        "description": "La moitié coupée plongée dans la nuit warp"
+      },
+      {
+        "name": "Cadia",
+        "conceptId": "cadia",
+        "description": "Monde dont la chute a déclenché la Cicatrice"
+      },
+      {
+        "name": "Roboute Guilliman",
+        "description": "Ramené pour la crise"
+      }
     ]
   },
   {
@@ -192,9 +269,20 @@
       "Stabilité relative — mais en déclin"
     ],
     "relatedConcepts": [
-      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Déchirure qui a créé la division" },
-      { "name": "Imperium Nihilus", "conceptId": "imperium-nihilus", "description": "L'autre moitié, coupée" },
-      { "name": "Roboute Guilliman", "description": "Lord Commander, dirige la Croisade Indomitus" }
+      {
+        "name": "Cicatrix Maledictum",
+        "conceptId": "cicatrix-maledictum",
+        "description": "Déchirure qui a créé la division"
+      },
+      {
+        "name": "Imperium Nihilus",
+        "conceptId": "imperium-nihilus",
+        "description": "L'autre moitié, coupée"
+      },
+      {
+        "name": "Roboute Guilliman",
+        "description": "Lord Commander, dirige la Croisade Indomitus"
+      }
     ]
   },
   {
@@ -217,9 +305,20 @@
       "Reconnaissance par flottes Indomitus en cours"
     ],
     "relatedConcepts": [
-      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Cause de l'isolement" },
-      { "name": "Imperium Sanctus", "conceptId": "imperium-sanctus", "description": "L'autre moitié, encore éclairée" },
-      { "name": "Saint Celestine", "description": "Sainte vivante apparaissant dans Nihilus" }
+      {
+        "name": "Cicatrix Maledictum",
+        "conceptId": "cicatrix-maledictum",
+        "description": "Cause de l'isolement"
+      },
+      {
+        "name": "Imperium Sanctus",
+        "conceptId": "imperium-sanctus",
+        "description": "L'autre moitié, encore éclairée"
+      },
+      {
+        "name": "Saint Celestine",
+        "description": "Sainte vivante apparaissant dans Nihilus"
+      }
     ]
   },
   {
@@ -241,8 +340,14 @@
       "600+ stratégies tactiques codifiées"
     ],
     "relatedConcepts": [
-      { "name": "Roboute Guilliman", "description": "Auteur du Codex" },
-      { "name": "Space Marines", "description": "Soumis au Codex (la majorité)" }
+      {
+        "name": "Roboute Guilliman",
+        "description": "Auteur du Codex"
+      },
+      {
+        "name": "Space Marines",
+        "description": "Soumis au Codex (la majorité)"
+      }
     ]
   },
   {
@@ -264,9 +369,20 @@
       "Pollution extrême — masques obligatoires"
     ],
     "relatedConcepts": [
-      { "name": "Trône d'Or", "conceptId": "golden-throne", "description": "Au cœur du Palais Impérial" },
-      { "name": "Adeptus Custodes", "description": "Gardiens du Palais" },
-      { "name": "Mars", "conceptId": "mars", "description": "Planète sœur, capitale Mechanicus" }
+      {
+        "name": "Trône d'Or",
+        "conceptId": "golden-throne",
+        "description": "Au cœur du Palais Impérial"
+      },
+      {
+        "name": "Adeptus Custodes",
+        "description": "Gardiens du Palais"
+      },
+      {
+        "name": "Mars",
+        "conceptId": "mars",
+        "description": "Planète sœur, capitale Mechanicus"
+      }
     ]
   },
   {
@@ -288,9 +404,19 @@
       "Voie warp directe vers Terra (M42)"
     ],
     "relatedConcepts": [
-      { "name": "Holy Terra", "conceptId": "holy-terra", "description": "Planète sœur, capitale Imperium" },
-      { "name": "Adeptus Mechanicus", "description": "Hôte de Mars" },
-      { "name": "Belisarius Cawl", "description": "Magos Dominus de Mars, créateur des Primaris" }
+      {
+        "name": "Holy Terra",
+        "conceptId": "holy-terra",
+        "description": "Planète sœur, capitale Imperium"
+      },
+      {
+        "name": "Adeptus Mechanicus",
+        "description": "Hôte de Mars"
+      },
+      {
+        "name": "Belisarius Cawl",
+        "description": "Magos Dominus de Mars, créateur des Primaris"
+      }
     ]
   },
   {
@@ -313,9 +439,19 @@
       "Survécu aux Tyrannic Wars (Hive Fleet Behemoth)"
     ],
     "relatedConcepts": [
-      { "name": "Ultramarines", "description": "Hôte de Macragge" },
-      { "name": "Roboute Guilliman", "description": "Primarque, Lord Commander" },
-      { "name": "Maelstrom", "conceptId": "maelstrom", "description": "Faille warp menaçant le Segmentum Ultima" }
+      {
+        "name": "Ultramarines",
+        "description": "Hôte de Macragge"
+      },
+      {
+        "name": "Roboute Guilliman",
+        "description": "Primarque, Lord Commander"
+      },
+      {
+        "name": "Maelstrom",
+        "conceptId": "maelstrom",
+        "description": "Faille warp menaçant le Segmentum Ultima"
+      }
     ]
   },
   {
@@ -338,9 +474,57 @@
       "Cause directe de la Cicatrix Maledictum"
     ],
     "relatedConcepts": [
-      { "name": "Œil de la Terreur", "conceptId": "eye-of-terror", "description": "Que Cadia gardait" },
-      { "name": "Cicatrix Maledictum", "conceptId": "cicatrix-maledictum", "description": "Conséquence directe de la chute de Cadia" },
-      { "name": "Astra Militarum", "description": "Régiments Cadians, héritage des survivants" }
+      {
+        "name": "Œil de la Terreur",
+        "conceptId": "eye-of-terror",
+        "description": "Que Cadia gardait"
+      },
+      {
+        "name": "Cicatrix Maledictum",
+        "conceptId": "cicatrix-maledictum",
+        "description": "Conséquence directe de la chute de Cadia"
+      },
+      {
+        "name": "Astra Militarum",
+        "description": "Régiments Cadians, héritage des survivants"
+      }
+    ]
+  },
+  {
+    "id": "baal",
+    "number": 15,
+    "name": "Baal",
+    "title": "Le Sanctuaire de Sanguinius",
+    "category": "world",
+    "color": "#c9302c",
+    "sigil": "🩸",
+    "wikiQuery": "Baal Blood Angels homeworld",
+    "description": "Monde-mère des Blood Angels. Système triple-soleils irradié, cratérisé par la guerre. Sanctuaire posthume de Sanguinius.",
+    "loreLong": "Baal est un système triple-étoiles dont la planète principale, Baal Secundus, fut le foyer de Sanguinius après son arrivée chez les humains primitifs irradiés. Le monde est radioactif et hostile : les habitants survivent dans des cités-bunkers entre les zones contaminées. La forteresse-monastère des Blood Angels, perchée sur le mont Seraph, abrite le Sang Originel — quelques gouttes du sang de Sanguinius lui-même, conservées comme relique sacrée. Au M42, Baal a survécu à un siège épuisant de la Hive Fleet Leviathan dans une bataille apocalyptique : le Chapitre y a presque été anéanti, mais Guilliman et la Croisade Indomitus sont arrivés à temps. La Soif Rouge — héritage génétique de la mort tragique de Sanguinius — touche tous les Blood Angels et leurs Chapitres successeurs.",
+    "citation": "Le sang de l'Ange tombé coule encore dans nos veines. Et il a soif.",
+    "keyFacts": [
+      "Système triple-soleils, irradié",
+      "Foyer du primarque Sanguinius (mort à Terra M30)",
+      "Forteresse-monastère sur le mont Seraph",
+      "Relique : Sang Originel de Sanguinius",
+      "Survivant du siège de Hive Fleet Leviathan (M42)",
+      "Origine de la Soif Rouge (malédiction Blood Angels)"
+    ],
+    "relatedConcepts": [
+      {
+        "name": "Sanguinius",
+        "description": "Primarque mort à Terra, dont le sang coule encore dans les Blood Angels"
+      },
+      {
+        "name": "Holy Terra",
+        "conceptId": "holy-terra",
+        "description": "Lieu de la mort de Sanguinius"
+      },
+      {
+        "name": "Macragge",
+        "conceptId": "macragge",
+        "description": "QG Indomitus qui sauva Baal"
+      }
     ]
   }
 ]

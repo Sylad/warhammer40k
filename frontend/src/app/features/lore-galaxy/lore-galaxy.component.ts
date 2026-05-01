@@ -467,36 +467,31 @@ export class LoreGalaxyComponent {
     { id: 'ultima', name: 'Ultima', color: '#1d4ba0', description: 'Est galactique. Macragge, Ultramar, Maelstrom.' },
   ];
 
-  // Coordonnées calibrées sur l'image canonique (700×490)
+  // Coordonnées calibrées sur l'image canonique HD (viewBox 700×490, ratio matche image 3054×2136)
   readonly hotZones: HotZone[] = [
-    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 138, cy: 113, r: 9, color: '#9c2680',
-      description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos.', conceptId: 'eye-of-terror' },
-    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 165, cy: 135, r: 6, color: '#5a6878',
+    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 135, cy: 130, r: 11, color: '#9c2680',
+      description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos. Visible : tache noire entourée de Halo Stars.', conceptId: 'eye-of-terror' },
+    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 175, cy: 165, r: 6, color: '#5a6878',
       description: 'Forteresse-monde tombée à la 13ᵉ Croisade Noire (M41). Origine de la Cicatrix.', conceptId: 'cadia' },
-    { id: 'fenris', name: 'Fenris', type: 'world', cx: 175, cy: 105, r: 5, color: '#8090a0',
-      description: 'Monde-glacier des Space Wolves. Russ y est parti à la Wolftime.' },
-    { id: 'caliban', name: 'Caliban (✝)', type: 'world', cx: 240, cy: 175, r: 5, color: '#1a4f2a',
-      description: 'Monde-forêt des Dark Angels. Détruit pendant l\'Hérésie d\'Horus.' },
-    { id: 'baal', name: 'Baal', type: 'world', cx: 305, cy: 130, r: 5, color: '#c9302c',
-      description: 'Monde-mère des Blood Angels. Sanctuaire de Sanguinius.' },
-    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 235, cy: 245, r: 7, color: '#f0d276',
+    { id: 'baal', name: 'Baal', type: 'world', cx: 305, cy: 145, r: 5, color: '#c9302c',
+      description: 'Monde-mère des Blood Angels. Sanctuaire de Sanguinius. Système triple-soleils irradié.', conceptId: 'baal' },
+    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 225, cy: 252, r: 7, color: '#f0d276',
       description: 'Capitale sacrée de l\'Imperium. Trône d\'Or, Astronomican.', conceptId: 'holy-terra' },
-    { id: 'mars', name: 'Mars', type: 'world', cx: 248, cy: 240, r: 5, color: '#b85a3a',
+    { id: 'mars', name: 'Mars', type: 'world', cx: 240, cy: 250, r: 5, color: '#b85a3a',
       description: 'Capitale de l\'Adeptus Mechanicus.', conceptId: 'mars' },
-    { id: 'titan', name: 'Titan', type: 'world', cx: 245, cy: 255, r: 4, color: '#5a6878',
+    { id: 'titan', name: 'Titan', type: 'world', cx: 232, cy: 260, r: 4, color: '#5a6878',
       description: 'Lune de Saturne. Monde-forteresse caché des Grey Knights.' },
-    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 365, cy: 270, r: 8, color: '#c43a26',
+    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 375, cy: 280, r: 9, color: '#c43a26',
       description: 'Tempête warp permanente du Segmentum Ultima. Bandes Chaos, pirates.', conceptId: 'maelstrom' },
-    { id: 'macragge', name: 'Macragge', type: 'world', cx: 530, cy: 405, r: 7, color: '#1d4ba0',
+    { id: 'macragge', name: 'Macragge', type: 'world', cx: 515, cy: 412, r: 7, color: '#1d4ba0',
       description: 'Monde-mère des Ultramarines. Capitale d\'Ultramar (500 mondes).', conceptId: 'macragge' },
-    { id: 'commorragh', name: 'Commorragh', type: 'nexus', cx: 50, cy: 340, r: 5, color: '#3a0e3e',
-      description: 'Cité Sombre des Drukhari, nichée dans le Webway. Capitale d\'Asdrubael Vect.' },
   ];
 
   constructor() {
-    this.service.getWikiImage('Imperium of Man galaxy map').subscribe(r => {
-      if (r.imageUrl) this.mapBgUrl.set(r.imageUrl);
-    });
+    // Force URL HD (full résolution 3054x2136 au lieu du scale-down 700px du wiki proxy)
+    this.mapBgUrl.set(
+      'https://static.wikia.nocookie.net/warhammer40k/images/f/fa/SpaceMarineChapterHomeworldsGreatRift.png/revision/latest/scale-to-width-down/2000'
+    );
   }
 
   hoveredZone(): HotZone | null {

@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarhammerService, ImageMeta, RedditPost } from '../../core/services/warhammer.service';
-import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist } from '../../core/models/models';
+import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
 interface CategoryDef {
   key: ArtworkCategory;
@@ -1405,6 +1405,7 @@ export class GalleryComponent {
   private readonly localImages = toSignal(this.service.images$, { initialValue: [] as string[] });
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
   readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
+  readonly factions = toSignal(this.service.factions$, { initialValue: [] as Faction[] });
 
   readonly imageMeta = signal<Record<string, ImageMeta>>({});
 
@@ -1442,10 +1443,22 @@ export class GalleryComponent {
     return Array.from(set).sort();
   });
 
-  readonly allCategories = computed<string[]>(() => [
-    ...CATEGORIES.filter(c => c.key !== 'Mes images').map(c => c.key as string),
-    ...this.customCategories(),
-  ]);
+  readonly factionCategories = computed<string[]>(() =>
+    this.factions().map(f => f.nom).sort((a, b) => a.localeCompare(b, 'fr')),
+  );
+
+  readonly allCategories = computed<string[]>(() => {
+    const seen = new Set<string>();
+    const out: string[] = [];
+    const push = (s: string) => { if (!seen.has(s)) { seen.add(s); out.push(s); } };
+    // 6 built-in (catégories visuelles globales)
+    CATEGORIES.filter(c => c.key !== 'Mes images').forEach(c => push(c.key as string));
+    // 17 factions (intégration F10)
+    this.factionCategories().forEach(push);
+    // Custom (créées par user)
+    this.customCategories().forEach(push);
+    return out;
+  });
 
   // Categorize modal state — multi-cat
   readonly catModalOpen = signal(false);
