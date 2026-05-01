@@ -123,6 +123,11 @@ const DEFAULT_RESOURCES = [
                 @for (sf of subFactions(); track sf.id) {
                   <a class="sf-card" [routerLink]="['/subfactions', sf.id]"
                      [style.--sf-img]="subFactionImg(sf.id)">
+                    @if (primarchImgUrl(sf.id); as pImg) {
+                      <div class="sf-primarch" [title]="sf.primarch">
+                        <img [src]="pImg" [alt]="sf.primarch || ''" loading="lazy" />
+                      </div>
+                    }
                     <div class="sf-content">
                       <span class="sf-type">{{ subFactionTypeLabel(sf.type) }}</span>
                       <h3>{{ sf.name }}</h3>
@@ -521,6 +526,35 @@ const DEFAULT_RESOURCES = [
     }
     .sf-card:hover { transform: translateY(-5px); border-color: rgba(201, 162, 74, 0.65); box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7), 0 0 28px rgba(201, 162, 74, 0.1); }
     .sf-card:hover::before { transform: scale(1.06); filter: contrast(1.3) saturate(1.05) brightness(0.95); }
+
+    /* Mini-portrait primarque dans coin haut-droit de la card */
+    .sf-primarch {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(201, 162, 74, 0.6);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 16px rgba(201, 162, 74, 0.25);
+      background: #050403;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .sf-primarch img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: contrast(1.1) saturate(1.05);
+      display: block;
+    }
+    .sf-card:hover .sf-primarch {
+      transform: scale(1.1);
+      border-color: var(--gold-bright);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8), 0 0 22px rgba(240, 210, 118, 0.5);
+    }
     .sf-content {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -942,6 +976,7 @@ export class FactionDetailComponent {
     { initialValue: [] as SubFaction[] }
   );
   readonly subFactionImages = signal(new Map<string, string>());
+  readonly primarchImages = signal(new Map<string, string>());
 
   readonly subFactionLabel = computed(() => {
     const list = this.subFactions();
@@ -980,6 +1015,10 @@ export class FactionDetailComponent {
       other: 'Sous-faction',
     };
     return map[type] ?? type;
+  }
+
+  primarchImgUrl(id: string): string | null {
+    return this.primarchImages().get(id) ?? null;
   }
 
   subFactionImg(id: string): string | null {
@@ -1059,6 +1098,23 @@ export class FactionDetailComponent {
           next: r => {
             if (r.imageUrl) {
               this.subFactionImages.update(m => new Map(m).set(s.id, r.imageUrl!));
+            }
+          },
+          error: () => {},
+        });
+      });
+    });
+
+    // Charge images primarques pour mini-portrait dans sous-faction card
+    effect(() => {
+      const list = this.subFactions();
+      if (!list.length) return;
+      list.forEach(s => {
+        if (!s.primarchWikiQuery || this.primarchImages().has(s.id)) return;
+        this.service.getWikiImage(s.primarchWikiQuery).subscribe({
+          next: r => {
+            if (r.imageUrl) {
+              this.primarchImages.update(m => new Map(m).set(s.id, r.imageUrl!));
             }
           },
           error: () => {},

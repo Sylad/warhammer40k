@@ -45,12 +45,7 @@ interface HotZone {
 
     <div class="layout">
       <main class="map-wrap">
-        <!-- Debug overlay : affiche x/y au hover (viewBox 700×490) pour calibrer les hot zones -->
-        <div class="debug-coords">
-          coords SVG : <strong>{{ debugX() }}</strong>, <strong>{{ debugY() }}</strong>
-          <span class="debug-hint">(hover map, copie-colle dans le chat)</span>
-        </div>
-        <svg class="galaxy-map" viewBox="0 0 700 490" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" (mousemove)="onMapMove($event)">
+        <svg class="galaxy-map" viewBox="0 0 700 490" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
             <filter id="glow">
               <feGaussianBlur stdDeviation="2.5" result="blur"/>
@@ -238,21 +233,6 @@ interface HotZone {
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .debug-coords {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      z-index: 5;
-      padding: 4px 10px;
-      background: rgba(0,0,0,0.85);
-      border: 1px solid var(--gold-soft);
-      font-family: monospace;
-      font-size: 11px;
-      color: var(--gold-bright);
-      pointer-events: none;
-    }
-    .debug-coords strong { color: #f0d276; min-width: 28px; display: inline-block; }
-    .debug-hint { color: var(--muted); font-size: 10px; margin-left: 8px; font-style: italic; }
 
     .galaxy-map {
       width: 100%;
@@ -478,21 +458,6 @@ export class LoreGalaxyComponent {
 
   readonly hoveredId = signal<string | null>(null);
   readonly mapBgUrl = signal<string>('');
-  readonly debugX = signal<string>('—');
-  readonly debugY = signal<string>('—');
-
-  onMapMove(e: MouseEvent) {
-    const svg = e.currentTarget as SVGSVGElement;
-    const pt = svg.createSVGPoint();
-    pt.x = e.clientX;
-    pt.y = e.clientY;
-    const m = svg.getScreenCTM();
-    if (m) {
-      const local = pt.matrixTransform(m.inverse());
-      this.debugX.set(local.x.toFixed(0));
-      this.debugY.set(local.y.toFixed(0));
-    }
-  }
 
   readonly segmenta: Segmentum[] = [
     { id: 'solar', name: 'Solar', color: '#f0d276', description: 'Centre galactique. Terra, Mars, Trône d\'Or.' },
