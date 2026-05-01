@@ -467,23 +467,24 @@ export class LoreGalaxyComponent {
     { id: 'ultima', name: 'Ultima', color: '#1d4ba0', description: 'Est galactique. Macragge, Ultramar, Maelstrom.' },
   ];
 
-  // Coordonnées calibrées sur l'image canonique HD (viewBox 700×490, ratio matche image 3054×2136)
+  // Coordonnées calibrées sur l'image canonique HD (viewBox 700×490)
+  // Calibration : x% / y% mesurés sur l'image, convertis en pixels viewBox.
   readonly hotZones: HotZone[] = [
-    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 135, cy: 130, r: 11, color: '#9c2680',
+    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 130, cy: 130, r: 12, color: '#9c2680',
       description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos. Visible : tache noire entourée de Halo Stars.', conceptId: 'eye-of-terror' },
-    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 175, cy: 165, r: 6, color: '#5a6878',
+    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 165, cy: 158, r: 6, color: '#5a6878',
       description: 'Forteresse-monde tombée à la 13ᵉ Croisade Noire (M41). Origine de la Cicatrix.', conceptId: 'cadia' },
-    { id: 'baal', name: 'Baal', type: 'world', cx: 305, cy: 145, r: 5, color: '#c9302c',
+    { id: 'baal', name: 'Baal', type: 'world', cx: 332, cy: 162, r: 5, color: '#c9302c',
       description: 'Monde-mère des Blood Angels. Sanctuaire de Sanguinius. Système triple-soleils irradié.', conceptId: 'baal' },
-    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 225, cy: 252, r: 7, color: '#f0d276',
+    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 248, cy: 248, r: 7, color: '#f0d276',
       description: 'Capitale sacrée de l\'Imperium. Trône d\'Or, Astronomican.', conceptId: 'holy-terra' },
-    { id: 'mars', name: 'Mars', type: 'world', cx: 240, cy: 250, r: 5, color: '#b85a3a',
+    { id: 'mars', name: 'Mars', type: 'world', cx: 258, cy: 250, r: 5, color: '#b85a3a',
       description: 'Capitale de l\'Adeptus Mechanicus.', conceptId: 'mars' },
-    { id: 'titan', name: 'Titan', type: 'world', cx: 232, cy: 260, r: 4, color: '#5a6878',
+    { id: 'titan', name: 'Titan', type: 'world', cx: 254, cy: 258, r: 4, color: '#5a6878',
       description: 'Lune de Saturne. Monde-forteresse caché des Grey Knights.' },
-    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 375, cy: 280, r: 9, color: '#c43a26',
+    { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 392, cy: 282, r: 10, color: '#c43a26',
       description: 'Tempête warp permanente du Segmentum Ultima. Bandes Chaos, pirates.', conceptId: 'maelstrom' },
-    { id: 'macragge', name: 'Macragge', type: 'world', cx: 515, cy: 412, r: 7, color: '#1d4ba0',
+    { id: 'macragge', name: 'Macragge', type: 'world', cx: 600, cy: 425, r: 7, color: '#1d4ba0',
       description: 'Monde-mère des Ultramarines. Capitale d\'Ultramar (500 mondes).', conceptId: 'macragge' },
   ];
 
