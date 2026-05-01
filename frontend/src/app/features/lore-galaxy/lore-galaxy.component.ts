@@ -505,17 +505,17 @@ export class LoreGalaxyComponent {
   // Coordonnées calibrées sur image canonique HD (viewBox 700×490, ratio = 700/3054 = 0.229)
   // Positions mesurées via grille SVG superposée sur l'image originale.
   readonly hotZones: HotZone[] = [
-    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 120, cy: 130, r: 12, color: '#9c2680',
+    { id: 'eye-of-terror', name: 'Œil de la Terreur', type: 'rift', cx: 115, cy: 155, r: 12, color: '#9c2680',
       description: 'Faille warp permanente née de la naissance de Slaanesh (M30). Repaire des Légions Chaos. Visible : tache noire entourée de Halo Stars.', conceptId: 'eye-of-terror' },
-    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 145, cy: 155, r: 6, color: '#5a6878',
+    { id: 'cadia', name: 'Cadia (✝)', type: 'world', cx: 145, cy: 175, r: 6, color: '#5a6878',
       description: 'Forteresse-monde tombée à la 13ᵉ Croisade Noire (M41). Origine de la Cicatrix.', conceptId: 'cadia' },
     { id: 'baal', name: 'Baal', type: 'world', cx: 325, cy: 165, r: 5, color: '#c9302c',
       description: 'Monde-mère des Blood Angels. Sanctuaire de Sanguinius. Système triple-soleils irradié.', conceptId: 'baal' },
-    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 125, cy: 215, r: 7, color: '#f0d276',
+    { id: 'terra', name: 'Holy Terra', type: 'world', cx: 119, cy: 247, r: 7, color: '#f0d276',
       description: 'Capitale sacrée de l\'Imperium. Trône d\'Or, Astronomican.', conceptId: 'holy-terra' },
-    { id: 'mars', name: 'Mars', type: 'world', cx: 135, cy: 220, r: 5, color: '#b85a3a',
+    { id: 'mars', name: 'Mars', type: 'world', cx: 128, cy: 244, r: 5, color: '#b85a3a',
       description: 'Capitale de l\'Adeptus Mechanicus.', conceptId: 'mars' },
-    { id: 'titan', name: 'Titan', type: 'world', cx: 130, cy: 225, r: 4, color: '#5a6878',
+    { id: 'titan', name: 'Titan', type: 'world', cx: 124, cy: 254, r: 4, color: '#5a6878',
       description: 'Lune de Saturne. Monde-forteresse caché des Grey Knights.' },
     { id: 'maelstrom', name: 'Maelstrom', type: 'rift', cx: 285, cy: 240, r: 10, color: '#c43a26',
       description: 'Tempête warp permanente du Segmentum Ultima. Bandes Chaos, pirates.', conceptId: 'maelstrom' },
