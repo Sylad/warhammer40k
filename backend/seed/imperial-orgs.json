@@ -300,5 +300,179 @@
         "wikiQuery": "Mersadie Oliton"
       }
     ]
+  },
+  {
+    "id": "imperial-navy",
+    "number": 11,
+    "name": "Imperial Navy",
+    "title": "La Flotte Impériale",
+    "category": "military",
+    "color": "#3a5a8c",
+    "sigil": "⚓",
+    "wikiQuery": "Imperial Navy Warhammer 40k",
+    "description": "Bras spatial de l'Imperium, l'Imperialis Navis projette la puissance de l'Empereur entre les étoiles, escortant les armées du Astra Militarum à travers le Warp et tenant les voies de transit des cinq Segmenta. Ses vaisseaux-cathédrales, longs de plusieurs kilomètres, sont à la fois forteresses, monastères et villes flottantes. Sans elle, l'Imperium se disloquerait en mondes isolés en quelques décennies.",
+    "loreLong": "L'Imperial Navy est née durant la Grande Croisade et fut réorganisée après l'Hérésie d'Horus selon les édits du primarque Rogal Dorn, qui sépara définitivement la flotte spatiale des forces terrestres pour éviter qu'un seul commandant ne contrôle à nouveau les deux. Elle est divisée en cinq Battlefleets majeures, une par Segmentum — Battlefleet Solar (cœur du système solaire et défense de Terra), Battlefleet Pacificus, Battlefleet Tempestus, Battlefleet Obscurus et Battlefleet Ultima — chacune commandée par un Lord Admiral et subdivisée en flottes sectorielles et sous-sectorielles. Le Lord High Admiral, siégeant parmi les Hauts Seigneurs de Terra, en est le commandant suprême théorique. Les officiers proviennent de dynasties navales héréditaires recrutées sur les mondes-amiraux comme Cypra Mundi ou Bakka, formés dès l'enfance dans les Schola Navis, tandis que les équipages comptent des centaines de milliers de ratings, conscrits voidborn et armsmen presse-gangés sur les mondes-ruches. La classification des navires va des escorts (frégates Sword-class, destroyers Cobra-class, 1,5 à 2 km, opérant en escadrons de quatre à six) aux croiseurs légers (Dauntless-class, ~4,5 km), croiseurs de ligne (Lunar, Gothic, Tyrant-class, 5 à 6 km), grand cruisers (Avenger, Exorcist, ~6 à 7 km), jusqu'aux battleships capitaux (Retribution, Apocalypse, Oberon-class, 8 à 9 km) et aux légendaires Emperor-class Battleships avec leur cathédrale dorsale culminant à près de 12 km de proue à poupe. Leur arsenal mêle macro-canons, lance-batteries, torpilles, escadrilles de Fury interceptors et Marauder bombers lancées depuis les ponts d'envol. Depuis le Cicatrix Maledictum et la Croisade Indomitus de Roboute Guilliman, la Navy mène un effort de guerre titanesque pour rouvrir les routes Warp coupées et reconquérir Imperium Nihilus.",
+    "citation": "« Que mes canons parlent pour l'Empereur, et que le silence du vide réponde Amen. » — Litanie de feu de Battlefleet Obscurus",
+    "keyRole": "Domination spatiale et translation Warp des armées impériales",
+    "functions": [
+      "Escorter les convois de troupes et de matériel de l'Astra Militarum à travers le Warp",
+      "Établir et briser les blocades orbitales lors des campagnes planétaires",
+      "Bombardement orbital de précision et Exterminatus sur ordre des Hauts Seigneurs",
+      "Patrouiller les routes Warp majeures et protéger le commerce inter-systèmes",
+      "Engager les flottes xenos (Tyranides, Eldars, Orks Krooz) et les Black Crusades du Chaos",
+      "Maintenir les chantiers orbitaux Ring of Iron, Cypra Mundi et Voss pour la construction et le carénage des vaisseaux",
+      "Coopérer avec l'Adeptus Astartes et la Rogue Trader fleet lors des Croisades"
+    ],
+    "notableFigures": [
+      {
+        "name": "Lord High Admiral of the Imperial Navy",
+        "role": "Haut Seigneur de Terra",
+        "description": "Commandant suprême de toutes les Battlefleets, il siège au Conseil des Hauts Seigneurs de Terra et arbitre la répartition stratégique des flottes entre les cinq Segmenta. Son palais-bureau se trouve sur Luna, d'où il supervise Battlefleet Solar et la défense rapprochée du Système Sol.",
+        "wikiQuery": "Lord High Admiral Imperial Navy 40k"
+      },
+      {
+        "name": "Emperor-class Battleship",
+        "role": "Classe de vaisseau capital",
+        "description": "Cuirassé sacré long de près de 12 km, reconnaissable à son immense cathédrale dorsale et ses huit ponts d'envol abritant des escadrons de Fury et de Marauder. Symbole religieux autant qu'arme stratégique, sa présence à elle seule peut briser le moral d'une flotte ennemie.",
+        "wikiQuery": "Emperor-class Battleship Battlefleet Gothic"
+      },
+      {
+        "name": "Retribution-class Battleship",
+        "role": "Classe de cuirassé de ligne",
+        "description": "Cuirassé classique de 8 km armé de macro-canons et de lance-batteries en quadruple bordée, pivot des lignes de bataille de Battlefleet Obscurus et Tempestus. Considéré comme le sacro-saint étalon du combat naval impérial depuis le 35e millénaire.",
+        "wikiQuery": "Retribution-class Battleship 40k"
+      },
+      {
+        "name": "Lunar-class Cruiser",
+        "role": "Classe de croiseur de ligne",
+        "description": "Le croiseur le plus produit de la Navy, 5 km de long, équilibré entre macro-canons et lance-batteries, capable de former l'épine dorsale de toute escadre sectorielle. Plusieurs milliers d'exemplaires patrouillent l'Imperium, certains coques actifs depuis dix mille ans.",
+        "wikiQuery": "Lunar-class Cruiser Battlefleet Gothic"
+      },
+      {
+        "name": "Cobra-class Destroyer",
+        "role": "Classe d'escorteur",
+        "description": "Petit escorteur de 1,5 km, rapide et fragile, spécialisé dans les attaques en meute à la torpille contre les navires de ligne ennemis. Opère en escadrons de quatre à six unités, sacrifiable mais redoutable lors des charges initiales.",
+        "wikiQuery": "Cobra-class Destroyer 40k"
+      },
+      {
+        "name": "Lord-Admiral Cornelius von Bismarck",
+        "role": "Lord-Admiral de Battlefleet Gothic",
+        "description": "Vainqueur héroïque de la Gothic War contre Abaddon le Despoiler, il commanda la défense du Gothic Sector lors de la 12e Croisade Noire et sauva plusieurs Blackstone Fortresses de la capture totale. Figure tutélaire des cadets de la Schola Navis.",
+        "wikiQuery": "Cornelius von Bismarck Gothic War"
+      }
+    ]
+  },
+  {
+    "id": "adeptus-titanicus",
+    "number": 12,
+    "name": "Collegia Titanica",
+    "title": "Les God-Engines de l'Imperium",
+    "category": "military",
+    "color": "#aa3030",
+    "sigil": "♆",
+    "wikiQuery": "Adeptus Titanicus Collegia Titanica",
+    "description": "La Collegia Titanica est la branche guerrière de l'Adeptus Mechanicus qui fabrique, entretient et déploie les Titans, ces god-engines bipèdes hauts comme des cathédrales. Plus grandes machines de guerre encore en service dans l'Imperium, elles sont vénérées comme des avatars de l'Omnimessie et marchent sous l'égide de Légions Titanica héritées de la Grande Croisade.",
+    "loreLong": "Née sur Mars durant l'Âge des Ténèbres, la Collegia Titanica organise ses forces en Légions Titanica — Legio Gryphonicus (les War Griffons), Legio Tempestus (les Stormlords), Legio Astorum (les Warp Runners), Legio Mortis (les Death's Heads, traîtresses depuis l'Hérésie), Legio Ignatum (les Fire Wasps) ou Legio Crucius (les Anguis Imperator). Chaque Légion est rattachée à un forge-monde — Mars, Triplex Phall, Lucius, Gryphonne IV — qui produit ses god-engines selon des STC sacrées jalousement préservées par les Tech-Priests Magi. Le commandement d'un Titan exige un Princeps : un être augmenté chirurgicalement pour interfacer son esprit avec le manifold du god-engine, fusion mentale où la conscience humaine côtoie l'esprit-machine furieux et souvent bestial du Titan. Les classes vont du léger Warhound de 12 mètres à l'Imperator de 55 mètres, véritable ville-cathédrale ambulante. Durant la Grande Croisade puis l'Hérésie d'Horus, près de la moitié des Légions trahirent l'Empereur et marchent désormais sous les bannières des Dieux du Chaos. Aujourd'hui, une Maniple Titanica déployée sur un champ de bataille suffit à briser une planète : aucun chapitre Astartes, aucune Garde Impériale ne peut rivaliser avec la puissance brute d'un Warlord en colère, encore moins celle d'un Imperator bénissant ses ennemis du tonnerre de ses canons à plasma.",
+    "citation": "« Quand un Titan marche, les dieux retiennent leur souffle. Quand il rugit, les mondes s'agenouillent. »",
+    "keyRole": "Déploiement des plus grandes machines de guerre de l'Imperium",
+    "functions": [
+      "Production et entretien des Titans god-engines sur les forge-mondes sacrés",
+      "Formation et augmentation chirurgicale des Princeps via l'interface manifold",
+      "Déploiement par Légions Titanica au service du Mechanicus et de l'Imperium",
+      "Combat anti-Titan, démolition de cités-ruches et siège de forteresses ennemies",
+      "Préservation des STC sacrées et des rituels d'éveil des esprits-machines",
+      "Participation aux Triumphs impériaux et aux campagnes de Cruzada majeures"
+    ],
+    "notableFigures": [
+      {
+        "name": "Warhound Scout Titan",
+        "role": "Classe légère — ~12m, 1 Princeps + 2 Moderati",
+        "description": "Éclaireur agile et imprévisible, le Warhound traque les flancs ennemis avec son vulcan mega-bolter ou son inferno gun. Son esprit-machine bestial et féral en fait le manifold le plus instable des Titans : ses Princeps survivent rarement à plus de quelques décennies de service.",
+        "wikiQuery": "Warhound Titan Adeptus Titanicus"
+      },
+      {
+        "name": "Reaver Battle Titan",
+        "role": "Classe moyenne — ~25m, 1 Princeps + 3 Moderati",
+        "description": "Épine dorsale des Légions Titanica, le Reaver est polyvalent et redoutable, armé d'une combinaison modulable de laser blaster, gatling blaster, melta cannon et apocalypse missile launcher. Il forme le coeur de la plupart des Maniples de bataille.",
+        "wikiQuery": "Reaver Titan Adeptus Titanicus"
+      },
+      {
+        "name": "Warlord Battle Titan",
+        "role": "Classe lourde — ~33m, 1 Princeps Senioris + 4 Moderati",
+        "description": "Le plus iconique des god-engines, véritable forteresse mobile bardée de plasma annihilator, volcano cannon et apocalypse missile launcher. Un seul Warlord en marche peut décider de l'issue d'une bataille planétaire.",
+        "wikiQuery": "Warlord Titan Adeptus Titanicus"
+      },
+      {
+        "name": "Warmaster Battle Titan",
+        "role": "Classe Heresy-era — ~38m, 1 Princeps Senioris + 5 Moderati",
+        "description": "Conçu durant la Grande Croisade comme alternative au Warlord, le Warmaster troque la mobilité contre une puissance de feu écrasante, équipé de canons à plasma jumelés et de revelator missile launchers capables de raser une cité-ruche en quelques salves.",
+        "wikiQuery": "Warmaster Titan Adeptus Titanicus"
+      },
+      {
+        "name": "Imperator Titan",
+        "role": "Classe Emperor — ~55m, équipage 50+",
+        "description": "La plus grande machine de guerre humaine encore en service, véritable ville-cathédrale ambulante coiffée d'un sanctuaire dédié à l'Empereur. Elle transporte des centaines de Skitarii, des batteries défensives entières et un plasma annihilator capable de vaporiser un Warlord d'un seul tir.",
+        "wikiQuery": "Imperator Titan"
+      },
+      {
+        "name": "Princeps Senioris",
+        "role": "Commandant suprême d'une Maniple Titanica",
+        "description": "Pilote vétéran lié par manifold à un Warlord ou un Imperator, le Princeps Senioris commande l'ensemble d'une Maniple. À chaque sortie, il perd un peu plus de son humanité au profit de la conscience-Titan, finissant souvent immergé en permanence dans son amniotank, devenu l'un avec son god-engine.",
+        "wikiQuery": "Princeps Adeptus Titanicus"
+      },
+      {
+        "name": "Legio Astorum",
+        "role": "Légion Titanica loyaliste — les Warp Runners",
+        "description": "Basée sur Lucius, la Legio Astorum (« les Warp Runners ») s'illustra durant le Siège de Terra en défendant le Palais Impérial aux côtés des Imperial Fists. Reconnaissable à sa livrée bleu nuit étoilée, elle reste l'une des Légions les plus prestigieuses du M41.",
+        "wikiQuery": "Legio Astorum Warp Runners"
+      }
+    ]
+  },
+  {
+    "id": "sigillite-council",
+    "number": 13,
+    "name": "Le Conseil du Sigillite",
+    "title": "Les Architectes Cachés de l'Imperium",
+    "category": "governance",
+    "color": "#9b7d4a",
+    "sigil": "ʘ",
+    "wikiQuery": "Malcador the Sigillite",
+    "description": "Le Conseil du Sigillite n'a jamais été une institution officielle, mais le cercle le plus restreint qui ait jamais entouré l'Empereur de l'Humanité. Sous ce nom officieux se cachent les rares figures — Malcador en tête, Constantin Valdor à ses côtés — qui posèrent aux côtés du Maître de l'Humanité les fondations administratives, militaires et secrètes de l'Imperium durant la Grande Croisade et l'Hérésie d'Horus. Leurs empreintes silencieuses survivent aujourd'hui dans la quasi-totalité des Adeptus de l'Imperium moderne.",
+    "loreLong": "Pendant que l'Empereur unifiait la galaxie l'arme à la main, c'est Malcador le Sigillite qui bâtissait dans l'ombre la machinerie administrative capable de gouverner un million de mondes. Premier Régent de Terra et second psyker le plus puissant de l'humanité après l'Empereur lui-même, le Sigillite porta les sceaux de l'autorité impériale là où son maître ne pouvait être. À la veille de l'Hérésie, il fonda l'Inquisition pour traquer les hérétiques, les psykers déviants et les démons ; il édifia l'Adeptus Astra Telepathica, l'Officio Assassinorum, la Schola Progenium, et accompagna l'Empereur dans la création de l'Adeptus Custodes. À ses côtés se tenait Constantin Valdor, premier Captain-General des Dix Mille, compagnon-confident de l'Empereur depuis les Guerres d'Unification, parangon martial de la garde dorée. Quand Horus fit tomber les Portes du Palais, ce furent Malcador et Valdor qui tinrent Terra avec lui — le Sigillite à l'administration et aux flammes psychiques, le Captain-General lame contre lame face aux traîtres Astartes. Au moment où l'Empereur monta à bord du Vengeful Spirit pour affronter son fils déchu, Malcador prit sa place sur le Trône d'Or pour maintenir le bouclier psychique de Terra : il y consuma sa vie en quelques heures, et fut nommé à titre posthume Premier des Hauts Seigneurs de Terra. Valdor, lui, disparut peu après la victoire dans une expédition aux confins de la galaxie dont nulle chronique n'a jamais rapporté l'issue — son destin demeure l'un des plus profonds silences de l'Imperium.",
+    "citation": "« J'ai servi l'Empereur pendant plus de quatre mille ans. En cet instant, ma tâche est presque achevée. »",
+    "keyRole": "Architecture cachée de l'Imperium aux côtés de l'Empereur",
+    "functions": [
+      "Régence administrative de Terra et port des sceaux impériaux (Malcador)",
+      "Fondation de l'Inquisition pour traquer hérétiques, psykers déviants et démons",
+      "Fondation de l'Adeptus Astra Telepathica, de la Schola Progenium et de l'Officio Assassinorum",
+      "Garde personnelle de l'Empereur et défense du Palais Impérial (Valdor et les Custodes)",
+      "Conseil rapproché au Maître de l'Humanité durant l'Unification, la Grande Croisade et l'Hérésie d'Horus"
+    ],
+    "notableFigures": [
+      {
+        "name": "Malcador the Sigillite",
+        "role": "Premier Régent de Terra, Premier des Hauts Seigneurs",
+        "description": "Second psyker le plus puissant de l'humanité après l'Empereur lui-même, Malcador fut l'architecte administratif silencieux de l'Imperium tout entier. Sous son sceau naquirent l'Inquisition, l'Adeptus Astra Telepathica, l'Officio Assassinorum et la Schola Progenium ; il participa avec l'Empereur à la fondation des Custodes et à la sélection des Primarques retrouvés. Lorsque l'Empereur dut affronter Horus, le Sigillite prit sa place sur le Trône d'Or pour en maintenir les défenses psychiques : il y consuma sa vie en quelques heures, mourant pour garder son ami millénaire éveillé. Son sigil personnel orne encore aujourd'hui les documents les plus secrets de l'Imperium.",
+        "wikiQuery": "Malcador the Sigillite"
+      },
+      {
+        "name": "Constantin Valdor",
+        "role": "Premier Captain-General de l'Adeptus Custodes",
+        "description": "Confident-frère de l'Empereur depuis les Guerres d'Unification de Terra, Constantin Valdor fut le premier des Dix Mille et le parangon absolu de l'élite martiale impériale. Durant le Siège de Terra, il commanda la défense du Palais et affronta des Astartes traîtres en duel personnel, n'admettant jamais la défaite. Après la victoire, il quitta Terra dans une expédition aux confins de la galaxie pour des raisons que ni les chroniques Custodes ni les annales impériales n'ont jamais consignées. Son destin reste l'un des plus grands mystères de la lore des Custodes — disparu, mais jamais déclaré mort.",
+        "wikiQuery": "Constantin Valdor"
+      },
+      {
+        "name": "Le Trône d'Or",
+        "role": "Sacrifice du Sigillite",
+        "description": "Machinerie psychique antique d'origine pré-impériale, le Trône d'Or est le siège sur lequel l'Empereur agonisant règne depuis l'Hérésie. Ce fut sur ce Trône que Malcador prit sa place au moment où l'Empereur monta affronter Horus — il y consuma sa vie en quelques heures pour en maintenir actif le bouclier psychique de Terra.",
+        "wikiQuery": "Golden Throne Emperor of Mankind"
+      },
+      {
+        "name": "Les Chevaliers-Errants (Knights-Errant)",
+        "role": "Agents secrets du Sigillite",
+        "description": "Recrutés par Malcador parmi les Astartes loyalistes durant l'Hérésie, les Knights-Errant — Garviel Loken, Nathaniel Garro, Iacton Qruze et d'autres — opéraient hors des Légions, sans insigne ni allégeance visible. Ils furent les premiers visages de ce qui deviendrait après la guerre les Grey Knights et l'Inquisition naissante.",
+        "wikiQuery": "Knights-Errant Horus Heresy"
+      }
+    ]
   }
 ]
