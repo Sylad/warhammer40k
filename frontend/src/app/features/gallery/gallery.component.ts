@@ -516,7 +516,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
       line-height: 0.95;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      text-shadow: 0 0 38px rgba(201, 162, 74, 0.28);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 38px rgba(201, 162, 74, 0.28);
     }
     .hero-desc {
       max-width: 620px;

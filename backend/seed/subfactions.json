@@ -961,8 +961,29 @@
     "name": "Biel-Tan",
     "type": "craftworld",
     "description": "Vaisseau-monde militariste cherchant la restauration de l'empire Aeldari, brisé après la Treizième Croisade Noire.",
-    "loreShort": "Rose ardente, restauration de l'empire.",
-    "wikiQuery": "Biel-Tan craftworld"
+    "loreShort": "Croisade verte impitoyable pour reconstruire l'empire eldar.",
+    "wikiQuery": "Biel-Tan craftworld",
+    "loreLong": "Biel-Tan est le Vaisseau-Monde le plus belliqueux des Aeldari. Surnommé 'Croisade Verte' à cause des forêts qui couvrent sa coque, il a juré de reconquérir tous les Mondes-Exodites perdus et de reconstruire l'ancien empire eldar — fût-ce au prix de l'extinction de toutes les autres races. Ses Avatars de Khaine sont en activité quasi-permanente. Au M42, après la naissance d'Ynnead, plusieurs Bibliothèques de Biel-Tan se rallièrent aux Ynnari (mouvement Yvraine), divisant le Vaisseau-Monde.",
+    "motto": "Le sang d'autrui est le carburant de notre rédemption.",
+    "currentLeader": "Conseil Phoenix de Biel-Tan",
+    "currentLeaderRole": "Conseil des Aspect Warriors",
+    "homeworld": "Vaisseau-Monde Biel-Tan",
+    "founding": "M-30 (post-Chute)",
+    "citation": "Nous sommes la rage qui n'a pas mort avec Slaanesh.",
+    "notableUnits": [
+      {
+        "name": "Maugan Ra (Phoenix Lord)",
+        "role": "Phoenix Lord des Dark Reapers",
+        "description": "Plus ancien Phoenix Lord encore vivant. Combat avec son Maugetar, fusil-faux qui décapite à mille pas.",
+        "wikiQuery": "Maugan Ra Phoenix Lord"
+      },
+      {
+        "name": "Avatar de Khaine",
+        "role": "Manifestation du Dieu de la Guerre",
+        "description": "Statue magmatique animée — manifestation locale du Dieu de la Guerre Aeldari fragmenté.",
+        "wikiQuery": "Avatar of Khaine"
+      }
+    ]
   },
   {
     "id": "alaitoc",
@@ -970,8 +991,29 @@
     "name": "Alaitoc",
     "type": "craftworld",
     "description": "Vaisseau-monde austère prônant le strict respect du Chemin Aeldari, célèbre pour ses Pathfinders.",
-    "loreShort": "Chemin strict, tireurs d'élite.",
-    "wikiQuery": "Alaitoc craftworld"
+    "loreShort": "Snipers et Rangers — guerre clandestine du Vaisseau le plus discret.",
+    "wikiQuery": "Alaitoc craftworld",
+    "loreLong": "Alaitoc est le Vaisseau-Monde le plus paranoïaque concernant la corruption par Slaanesh. Ses lois sociales sont si strictes que beaucoup de jeunes Aeldari fuguent pour devenir Rangers ou Outcasts. Paradoxe : ces fugueurs deviennent souvent les meilleurs guerriers du Vaisseau, sniper-rôdeurs experts en infiltration, en Pathfinders et en chasse depuis l'ombre. La doctrine martiale d'Alaitoc privilégie la frappe asymétrique, la guerre du chasseur, la fuite tactique — jamais l'engagement frontal.",
+    "motto": "Frappe l'invisible. Disparaît avant qu'il ne te voie.",
+    "currentLeader": "Farseer Eldrad Ulthran (en lien indirect)",
+    "currentLeaderRole": "Conseil des Farseers d'Alaitoc",
+    "homeworld": "Vaisseau-Monde Alaitoc",
+    "founding": "M-30 (post-Chute)",
+    "citation": "Nous voyons. Nous frappons. Nous ne sommes plus là.",
+    "notableUnits": [
+      {
+        "name": "Pathfinders d'Alaitoc",
+        "role": "Snipers d'élite",
+        "description": "Rangers vétérans armés de Long Rifles — capables d'abattre un Hive Tyrant à 5 km.",
+        "wikiQuery": "Alaitoc Pathfinders"
+      },
+      {
+        "name": "Illic Nightspear",
+        "role": "Pathfinder légendaire",
+        "description": "Plus grand sniper Aeldari. Aurait abattu un Trygon en plein saut.",
+        "wikiQuery": "Illic Nightspear"
+      }
+    ]
   },
   {
     "id": "hive-fleet-behemoth",
@@ -989,8 +1031,29 @@
     "name": "Flotte-Ruche Kraken",
     "type": "hivefleet",
     "description": "Deuxième flotte majeure, fragmentée en multiples splinters, plus rapide et adaptative.",
-    "loreShort": "Vague fragmentée, rapide et adaptative.",
-    "wikiQuery": "Hive Fleet Kraken"
+    "loreShort": "Flotte fragmentée — myriade d'essaims dispersés et adaptatifs.",
+    "wikiQuery": "Hive Fleet Kraken",
+    "loreLong": "Quand la Flotte-Ruche Béhémoth fut brisée par les Ultramarines à Macragge (M41), des fragments de son corps psychique fuirent dans toutes les directions. La Flotte-Ruche Kraken est l'un de ces fragments — devenue elle-même une menace majeure mais avec une stratégie différente : pas un seul essaim massif, mais des dizaines de sous-essaims qui frappent simultanément à des dizaines d'années-lumière de distance. Cette tactique d'éparpillement dilue les ressources de défense impériales et permet à Kraken d'absorber des planètes entières en parallèle. Les Genestealers infiltrés trahissent leur monde au moment optimal.",
+    "motto": "(Voix Kraken)",
+    "currentLeader": "Hive Mind (Kraken)",
+    "currentLeaderRole": "Conscience d'essaim",
+    "homeworld": "Vide intergalactique → Segmentum Pacificus + Solar",
+    "founding": "M41 (post-Béhémoth)",
+    "citation": "Mille essaims. Mille attaques. Une seule faim.",
+    "notableUnits": [
+      {
+        "name": "Swarmlord",
+        "role": "Avatar tactique du Hive Mind",
+        "description": "Hive Tyrant unique, capable de penser stratégiquement. Aurait tué Kor'sarro Khan dans plusieurs lignes temporelles.",
+        "wikiQuery": "Swarmlord Tyranid"
+      },
+      {
+        "name": "Trygon Prime",
+        "role": "Bête souterraine",
+        "description": "Worm géant qui surgit du sous-sol planétaire pour décapiter les défenses impériales.",
+        "wikiQuery": "Trygon Prime"
+      }
+    ]
   },
   {
     "id": "hive-fleet-leviathan",
@@ -1008,10 +1071,29 @@
     "name": "Dynastie Sautekh",
     "type": "dynasty",
     "description": "Dynastie dominante du Réveil Necron, dirigée par Imotekh le Stormlord.",
-    "loreShort": "Dynastie dominante, Imotekh le Stormlord.",
-    "currentLeader": "Imotekh the Stormlord",
-    "currentLeaderRole": "Phaeron suprême de Sautekh",
-    "wikiQuery": "Sautekh Dynasty Necron"
+    "loreShort": "Dynastie d'Imotekh — chefs militaires des Necrons réveillés.",
+    "currentLeader": "Imotekh le Stormlord",
+    "currentLeaderRole": "Phaeron Sautekh",
+    "wikiQuery": "Sautekh Dynasty Necron",
+    "loreLong": "La Dynastie Sautekh est aujourd'hui la plus puissante et la plus active des Necrons. Sous le règne d'Imotekh le Stormlord (Phaeron Sautekh), elle a brisé d'innombrables flottes impériales et tau, et est en train de réunifier d'autres dynasties sous sa bannière. Imotekh est un stratège brillant, calculateur, qui maîtrise la météo locale (par technologie ancestrale) pour piéger ses ennemis dans des tempêtes électriques. Les Sautekh comptent dans leurs rangs Trazyn the Infinite, le Maître Archiviste qui collectionne les artefacts vivants — y compris des Primarques en stase, paraît-il.",
+    "motto": "Notre patience est plus longue que vos étoiles.",
+    "homeworld": "Mandragora (couronne)",
+    "founding": "M-60 millions (Anciens Royaumes Necrontyr)",
+    "citation": "Vous éveillez ce qui dormait. Maintenant, vous craindrez ce qui regarde.",
+    "notableUnits": [
+      {
+        "name": "Imotekh the Stormlord",
+        "role": "Phaeron Sautekh",
+        "description": "Maître stratège qui unifie les dynasties Necrons. Contrôle la météo locale.",
+        "wikiQuery": "Imotekh the Stormlord"
+      },
+      {
+        "name": "Trazyn the Infinite",
+        "role": "Maître Archiviste",
+        "description": "Collectionneur d'artefacts et de héros vivants en stase. Plus grand musée vivant de la galaxie.",
+        "wikiQuery": "Trazyn the Infinite"
+      }
+    ]
   },
   {
     "id": "mephrit-dynasty",
@@ -1019,8 +1101,15 @@
     "name": "Dynastie Mephrit",
     "type": "dynasty",
     "description": "Dynastie agressive et expansionniste, spécialisée dans la guerre solaire et les armes énergétiques.",
-    "loreShort": "Soleil noir, agression et énergie.",
-    "wikiQuery": "Mephrit Dynasty Necron"
+    "loreShort": "Dynastie xénophobe à la guerre permanente.",
+    "wikiQuery": "Mephrit Dynasty Necron",
+    "loreLong": "La Dynastie Mephrit est connue pour sa cruauté envers les races organiques. Là où d'autres dynasties Necrons réveillées tentent des alliances temporaires (Sautekh-Imperium contre Tyranides parfois), les Mephrit considèrent toute forme de chair comme une infestation à éradiquer. Leurs tactiques sont brutales : extermination planétaire, pillage technologique, glassage thermique. Avant la Grande Endormie, les Mephrit étaient déjà connus pour leurs guerres contre les anciens xenos. Au M42, ils refusent même les pactes Sautekh.",
+    "motto": "Toute chair s'éteint. C'est notre devoir cosmique.",
+    "currentLeader": "Phaerakh Tahek-Aman",
+    "currentLeaderRole": "Phaerakh Mephrit",
+    "homeworld": "Mephrit (capitale dynastique)",
+    "founding": "M-60 millions",
+    "citation": "Nous étions là avant la chair. Nous serons là après."
   },
   {
     "id": "novokh-dynasty",
@@ -1028,8 +1117,15 @@
     "name": "Dynastie Novokh",
     "type": "dynasty",
     "description": "Dynastie cruelle vouée au combat ritualisé, peignant ses unités en rouge sang.",
-    "loreShort": "Tueurs rituels, rouge sang.",
-    "wikiQuery": "Novokh Dynasty Necron"
+    "loreShort": "Dynastie berserk — les seuls Necrons à vénérer la guerre frontale.",
+    "wikiQuery": "Novokh Dynasty Necron",
+    "loreLong": "Les Novokh sont une anomalie parmi les Necrons : là où la plupart des dynasties calculent froidement, les Novokh embrassent une forme de berserk technique. Leurs guerriers sont peints en rouge sang (rougeur ajoutée artificiellement aux nécrodermes) et chargent en première ligne. Les Lychguard Novokh sont les meilleurs duellistes du clavi-monde Necron. Cette agressivité a un coût : haute mortalité (les corps Necrons sont reconstruits, mais l'âme se fragmente) et indiscipline tactique — les autres dynasties les méprisent en privé.",
+    "motto": "Que les os connaissent encore le sang.",
+    "currentLeader": "Phaeron Akhmat-Hor",
+    "currentLeaderRole": "Phaeron Novokh",
+    "homeworld": "Novokh (capitale rouge)",
+    "founding": "M-60 millions",
+    "citation": "Nous nous souvenons de la chaleur. Nous voulons encore la sentir."
   },
   {
     "id": "nephrekh-dynasty",
@@ -1037,8 +1133,15 @@
     "name": "Dynastie Nephrekh",
     "type": "dynasty",
     "description": "Dynastie maître du voyage interstitiel, préfèrant la téléportation aux véhicules.",
-    "loreShort": "Sables d'or, téléportation.",
-    "wikiQuery": "Nephrekh Dynasty Necron"
+    "loreShort": "Dynastie mystique — pèlerins du soleil noir.",
+    "wikiQuery": "Nephrekh Dynasty Necron",
+    "loreLong": "Les Nephrekh sont la dynastie la plus mystérieuse, vouée à un culte solaire ancien : ils croient que leurs Cryptek-Prêtres ont scellé des fragments de la Lumière du Premier Soleil dans des reliques vivantes. Leur technologie est plus avancée que la moyenne Necron — ils font usage massif des Translocations Quantiques, téléportations rituelles à grande échelle. Ils ne combattent presque jamais en attaque directe : ils apparaissent, frappent un objectif précis, disparaissent. Au M42, plusieurs équipes Inquisitoriales tentent d'intercepter leurs traductions sans succès.",
+    "motto": "La lumière noire nous porte. Nous portons la lumière noire.",
+    "currentLeader": "Cryptek-Phaeron Sah-Haru",
+    "currentLeaderRole": "Phaeron Nephrekh",
+    "homeworld": "Nephrekh (capitale solaire)",
+    "founding": "M-60 millions",
+    "citation": "Nous arrivons. Nous prenons. Nous n'étions jamais là."
   },
   {
     "id": "goff",
@@ -1066,8 +1169,23 @@
     "name": "Bad Moons",
     "type": "klan",
     "description": "Klan le plus riche, dents qui repoussent vite, équipement rutilant et flashy.",
-    "loreShort": "Riches, jaunes, dakka brillant.",
-    "wikiQuery": "Bad Moons Orks"
+    "loreShort": "Orks riches — leurs dents repoussent plus vite que les autres.",
+    "wikiQuery": "Bad Moons Orks",
+    "loreLong": "Les Bad Moons sont le Klan le plus riche d'Orkdom. Pour des raisons biologiques, leurs dents (= monnaie ork, les 'teef') repoussent à un rythme exceptionnel. Conséquence : ils peuvent s'offrir les meilleures armes, les meilleurs Meks, les meilleures munitions. Leurs armures sont jaune vif — couleur du fric et du soleil. Beaucoup de Bad Moons sont des Mekboyz, des Big Meks ou des Pilots de Deff Dreads. Mais leur richesse les rend impopulaires auprès des Goffs (qui les méprisent comme efféminés) et leur attire les jalousies des Death Skulls (qui les pillent volontiers).",
+    "motto": "Plus de teef = plus gros pétard.",
+    "currentLeader": "Big Mek Buzzgob",
+    "currentLeaderRole": "Big Mek (chef d'engineerie)",
+    "homeworld": "Pillarus (peut-être)",
+    "founding": "Toujours existé",
+    "citation": "Mes teef poussent vites — c'est qu'l'Empereur Vert m'aime.",
+    "notableUnits": [
+      {
+        "name": "Mad Dok Grotsnik",
+        "role": "Painboy infame",
+        "description": "Painboy fou — opère sans anesthésique, donne des cyber-augmentations qui rendent fous. Origine Bad Moons. Adule de Goff aujourd'hui.",
+        "wikiQuery": "Mad Dok Grotsnik"
+      }
+    ]
   },
   {
     "id": "blood-axes",
@@ -1075,8 +1193,23 @@
     "name": "Blood Axes",
     "type": "klan",
     "description": "Klan tactique influencé par les humains, mercenaires et stratégie occasionnelle.",
-    "loreShort": "Mercenaires rusés, tactique humaine.",
-    "wikiQuery": "Blood Axes Orks"
+    "loreShort": "Orks tacticiens — les seuls qui apprennent des humains.",
+    "wikiQuery": "Blood Axes Orks",
+    "loreLong": "Les Blood Axes sont vus comme déshonorés par les autres Klans Orks : ils ont copié les tactiques humaines. Leurs WAAAGH! sont organisés en 'régiments', leurs tactiques utilisent les flancs (concept étranger pour la plupart des Orks), et certains Blood Axes ont même servi comme mercenaires de la Garde Impériale (uniques cas Orks fonctionnant temporairement avec d'autres races). Camouflage couleur olive ou kaki. Pour autant, ils restent Orks à 100% — la trahison fait partie du divertissement.",
+    "motto": "Saisis l'occase. Y'a toujours moyen.",
+    "currentLeader": "Boss Snikrot",
+    "currentLeaderRole": "Warboss Kommandos",
+    "homeworld": "Variable (mondes feral)",
+    "founding": "Toujours existé",
+    "citation": "Si t'es plus malin qu'eux, t'es pas obligé d'être plus fort. Mais sois fort aussi.",
+    "notableUnits": [
+      {
+        "name": "Boss Snikrot",
+        "role": "Maître des Kommandos",
+        "description": "Spécialiste des assassinats furtifs derrière les lignes ennemies. Apparaît partout, n'est jamais vu.",
+        "wikiQuery": "Boss Snikrot"
+      }
+    ]
   },
   {
     "id": "death-skulls",
@@ -1084,8 +1217,15 @@
     "name": "Death Skulls",
     "type": "klan",
     "description": "Klan kleptomane peint en bleu pour la chance, looters et pilleurs de premier ordre.",
-    "loreShort": "Bleu chanceux, looters de tout.",
-    "wikiQuery": "Death Skulls Orks"
+    "loreShort": "Pilleurs et superstitieux — peignent leurs trophées en bleu.",
+    "wikiQuery": "Death Skulls Orks",
+    "loreLong": "Les Death Skulls sont les charognards d'Orkdom. Leur obsession : récupérer toute arme, tout véhicule, toute pièce de technologie qu'ils trouvent — y compris en plein combat sur les morts ennemis. Bleu est leur couleur sacrée : ils peignent leurs nouveaux trophées en bleu, croyant que ça leur porte chance. Ce qui est paradoxalement vrai (la chance les protège statistiquement plus que les autres Klans). Toute armée Death Skulls est un patchwork hétéroclite d'armes piquées : des bolters Astartes à côté de plasmas Tau et de fuseaux Eldar, le tout repeint en bleu. Quand ils repartent, plus rien ne reste.",
+    "motto": "Si c'est cassé : pique. Si c'est intact : pique. Si c'est vivant : pique d'abord, vérifie après.",
+    "currentLeader": "Boss Skarsnix",
+    "currentLeaderRole": "Warboss Death Skulls",
+    "homeworld": "Variable (toujours en mouvement)",
+    "founding": "Toujours existé",
+    "citation": "C'tait à toi ? Plus mainant. C'est bleu mainant. Ça veut dire chance."
   },
   {
     "id": "evil-sunz",
@@ -1093,8 +1233,23 @@
     "name": "Evil Sunz",
     "type": "klan",
     "description": "Klan obsédé par la vitesse, peint en rouge (le rouge va plus vite).",
-    "loreShort": "Da red wunz go fasta.",
-    "wikiQuery": "Evil Sunz Orks"
+    "loreShort": "Vitesse pure — bikes, buggies, tout ce qui va vite.",
+    "wikiQuery": "Evil Sunz Orks",
+    "loreLong": "Les Evil Sunz vivent une vérité orkoid simple : 'Rouge va plus vite'. Leur Klan est obsédé par la vitesse. Ils peignent tous leurs véhicules en rouge — des Warbikes aux Battlewagons, des Trukks aux Deff Koptas. Et étrangement, leurs véhicules vont effectivement plus vite que ceux des autres Klans (effet 'gestalt' du WAAAGH! psychique ork qui rend la croyance vraie). Leurs guerres sont des chevauchées hurlantes à 200 km/h. Un Klan Evil Sunz qui débarque sur ton monde, tu le sais en quelques heures — toutes les routes deviennent des autoroutes du chaos.",
+    "motto": "Rouge va plus vite. Tout est plus vite si t'as pas peur.",
+    "currentLeader": "Wazdakka Gutsmek",
+    "currentLeaderRole": "Speed Freek Boss",
+    "homeworld": "Variable (toujours sur la route)",
+    "founding": "Toujours existé",
+    "citation": "Si t'es à pied, t'es déjà mort. Lève le cul, prends un bike.",
+    "notableUnits": [
+      {
+        "name": "Wazdakka Gutsmek",
+        "role": "Speed Freek légendaire",
+        "description": "Boss Evil Sunz devenu mythique pour son ambition : encercler la galaxie en une chevauchée orbitale. A déjà couvert plusieurs systèmes solaires en tournoi de bike.",
+        "wikiQuery": "Wazdakka Gutsmek"
+      }
+    ]
   },
   {
     "id": "snakebites",
@@ -1102,8 +1257,15 @@
     "name": "Snakebites",
     "type": "klan",
     "description": "Klan traditionaliste rejetant la technologie, montant des squigs et boars géants.",
-    "loreShort": "Tribu sauvage, squigs et tradition.",
-    "wikiQuery": "Snakebites Orks"
+    "loreShort": "Tribalistes anciens — refusent technologie moderne, élèvent des Squiggoths.",
+    "wikiQuery": "Snakebites Orks",
+    "loreLong": "Les Snakebites sont le Klan le plus traditionaliste : ils refusent les avancées technologiques modernes (Mek-tek, plasma) et privilégient le combat tribal — peaux animales, Squiggoths-de-bataille, lances et haches en métal brut. Ils sont méprisés par les autres Orks comme 'arriérés' mais leur connaissance de la nature ork (élevage Squig, magie Weirdboy primitive, traditions chamaniques) leur donne une stabilité écologique unique. Quand un monde Ork s'effondre par excès de Mek-tek, les Snakebites survivent quand les autres meurent.",
+    "motto": "Ce que la terre te donne, c'est ce qu'il te faut. Pas plus.",
+    "currentLeader": "Wurrgog Prophet anonyme",
+    "currentLeaderRole": "Chef-Sage Snakebite",
+    "homeworld": "Mondes féraux Orks",
+    "founding": "Toujours existé",
+    "citation": "Vous brillez avec vos jouets. Nous mangeons quand le ciel tombe."
   },
   {
     "id": "our-martyred-lady",
@@ -1111,10 +1273,29 @@
     "name": "Order of Our Martyred Lady",
     "type": "order",
     "description": "Plus grand ordre, gardien des reliques de Sainte Katherine.",
-    "loreShort": "Ordre majeur, héritage de Sainte Katherine.",
-    "currentLeader": "Morvenn Vahl",
-    "currentLeaderRole": "Abbess Sanctorum (suprême Adepta Sororitas)",
-    "wikiQuery": "Order Our Martyred Lady Sisters of Battle"
+    "loreShort": "Premier Ordre — gardiennes des reliques de Sainte Katherine.",
+    "currentLeader": "Saint Celestine (en mission perpétuelle)",
+    "currentLeaderRole": "Vivante Sainte de l'Imperium",
+    "wikiQuery": "Order Our Martyred Lady Sisters of Battle",
+    "loreLong": "Order of Our Martyred Lady est l'ordre le plus ancien et le plus prestigieux des Sœurs de Bataille — descendant direct des Daughters of the Emperor. Elles gardent les reliques sacrées de Sainte Katherine, martyrisée pendant l'Apostasie de Goge Vandire (M36). Saint Celestine, sainte vivante du M42, est l'une des leurs. Leur couleur est le rouge sang sur armure noire — le rouge des martyres. Leurs Repentia, repenties qui ont fauté et cherchent la rédemption par la mort en combat, sont les plus nombreuses de tous les Ordres.",
+    "motto": "Mort par la foi. Vie par le sacrifice.",
+    "homeworld": "Ophelia VII",
+    "founding": "Réforme de Sebastian Thor (M36)",
+    "citation": "Ma sœur est tombée. Je ne tomberai qu'avec elle.",
+    "notableUnits": [
+      {
+        "name": "Saint Celestine",
+        "role": "Vivante Sainte de l'Empereur",
+        "description": "Sœur martyre ressuscitée par l'Empereur Lui-même. Apparaît dans les zones les plus désespérées de Imperium Nihilus.",
+        "wikiQuery": "Saint Celestine"
+      },
+      {
+        "name": "Ephrael Stern (Daemonifuge)",
+        "role": "Daemonifuge",
+        "description": "Sœur Repentia maudite — porte une marque daemonique sur le visage qui terrifie les daemons.",
+        "wikiQuery": "Ephrael Stern"
+      }
+    ]
   },
   {
     "id": "argent-shroud",
@@ -1122,8 +1303,15 @@
     "name": "Order of the Argent Shroud",
     "type": "order",
     "description": "Ordre du silence et du devoir humble, agissant sans attendre la louange.",
-    "loreShort": "Silence, devoir humble.",
-    "wikiQuery": "Argent Shroud Sisters of Battle"
+    "loreShort": "Sœurs silencieuses — actes plus forts que paroles.",
+    "wikiQuery": "Argent Shroud Sisters of Battle",
+    "loreLong": "Les Sœurs d'Argent Shroud refusent les louanges et les déclarations. Elles parlent par leurs actes seulement. Leurs armures argentées (au lieu du noir traditionnel) sont nues de tout symbole exhibitionniste — pas de litanie peinte, pas de cri de guerre crié à la radio. Elles surgissent en silence, accomplissent leur devoir, repartent. Cette discipline ascétique fait d'elles l'Ordre le plus respecté par les Custodes (qui sont également silencieux). Sainte Silvana, fondatrice, est canonisée comme exemple d'humilité martiale.",
+    "motto": "(Silence éloquent)",
+    "currentLeader": "Canoness Bélisarius",
+    "currentLeaderRole": "Canoness Suprême Argent Shroud",
+    "homeworld": "Holy Terra (chapelles silencieuses)",
+    "founding": "Réforme de Sebastian Thor (M36)",
+    "citation": "Ne parle pas. Tue, prie, marche."
   },
   {
     "id": "bloody-rose",
@@ -1131,8 +1319,15 @@
     "name": "Order of the Bloody Rose",
     "type": "order",
     "description": "Ordre du combat rapproché passionné, fond sur les ennemis avec ferveur.",
-    "loreShort": "Passion brûlante, combat rapproché.",
-    "wikiQuery": "Bloody Rose Sisters of Battle"
+    "loreShort": "Combat rapproché — chargent en hurlant.",
+    "wikiQuery": "Bloody Rose Sisters of Battle",
+    "loreLong": "Bloody Rose est l'Ordre le plus agressif des Sœurs de Bataille. Là où les Argent Shroud se taisent, les Bloody Rose hurlent. Elles privilégient le combat rapproché : Eviscerators (tronçonneuses géantes), Power Mauls, Chainswords. Leurs Repentia sont particulièrement célèbres pour charger nues, armées seulement de leurs Eviscerators, dans les hordes ennemies. Couleur thématique : rose sanglant sur armure noire. Mireille Mira, Canoness vétérane, est l'une des grandes figures du M42.",
+    "motto": "Que la rose éclaire la nuit. Que ses épines saignent.",
+    "currentLeader": "Canoness Mireille Mira",
+    "currentLeaderRole": "Canoness Suprême Bloody Rose",
+    "homeworld": "San Leor",
+    "founding": "Réforme de Sebastian Thor (M36)",
+    "citation": "Ce qui pleure n'est pas mort. Tue-le."
   },
   {
     "id": "ebon-chalice",
@@ -1140,8 +1335,15 @@
     "name": "Order of the Ebon Chalice",
     "type": "order",
     "description": "Plus ancien ordre, garde la pureté de la doctrine originelle d'Alicia Dominica.",
-    "loreShort": "Doctrine originelle, plus ancien ordre.",
-    "wikiQuery": "Ebon Chalice Sisters of Battle"
+    "loreShort": "Plus ancien Ordre — gardiennes des écritures sacrées.",
+    "wikiQuery": "Ebon Chalice Sisters of Battle",
+    "loreLong": "Order of the Ebon Chalice est le plus ancien des six Ordres principaux. Elles ont la garde du Calice Sacré — relique liée à l'Apostasie de Goge Vandire et à sa chute. Leur uniforme est noir avec des symboles dorés, et elles incarnent la tradition la plus stricte du Ministorum. Leurs Sisters Hospitaller (médicales) sont les plus expérimentées. Leur particularité : aucune Sœur Ebon Chalice n'a jamais été corrompue par le Chaos en dix mille ans — record imbattu.",
+    "motto": "La foi ne se brise pas. La foi nous brise.",
+    "currentLeader": "Canoness Veronica",
+    "currentLeaderRole": "Canoness Suprême Ebon Chalice",
+    "homeworld": "Holy Terra",
+    "founding": "Daughters of the Emperor (pré-Réforme)",
+    "citation": "Le calice est plein. Buvez. Le calice se remplit."
   },
   {
     "id": "sacred-rose",
@@ -1149,8 +1351,15 @@
     "name": "Order of the Sacred Rose",
     "type": "order",
     "description": "Ordre serein voué à la prière et à la contemplation des saints visions.",
-    "loreShort": "Sérénité, contemplation et visions.",
-    "wikiQuery": "Sacred Rose Sisters of Battle"
+    "loreShort": "Sœurs sereines — calmes au cœur des batailles les plus sanglantes.",
+    "wikiQuery": "Sacred Rose Sisters of Battle",
+    "loreLong": "Order of the Sacred Rose se distingue par leur sérénité : leurs Sœurs prient même au cœur des combats les plus brutaux, leurs voix douces persistant à travers le tonnerre des bolters. Cette paix intérieure leur donne une force extraordinaire — peu d'entre elles paniquent en combat. Leurs robes sont blanches, signe de pureté immaculée. Beaucoup de Sœurs Sacred Rose deviennent ensuite des Sisters of Silence (transition rare entre les deux ordres).",
+    "motto": "La paix au cœur. La guerre dans la main.",
+    "currentLeader": "Canoness Praxedes",
+    "currentLeaderRole": "Canoness Suprême Sacred Rose",
+    "homeworld": "Mausolea",
+    "founding": "Réforme de Sebastian Thor (M36)",
+    "citation": "Mon cœur ne tremble plus. Mes mains, elles, savent."
   },
   {
     "id": "valorous-heart",
@@ -1158,8 +1367,15 @@
     "name": "Order of the Valorous Heart",
     "type": "order",
     "description": "Ordre stoïque endurant la souffrance comme acte de foi.",
-    "loreShort": "Stoïcisme, foi à travers la douleur.",
-    "wikiQuery": "Valorous Heart Sisters of Battle"
+    "loreShort": "Endurance et stoïcisme — refusent la douleur, refusent la fuite.",
+    "wikiQuery": "Valorous Heart Sisters of Battle",
+    "loreLong": "Order of the Valorous Heart cultive le stoïcisme à un niveau quasi-Astartes. Leurs Sœurs ignorent la douleur (entraînement en conditionnement neural), refusent toute retraite, et s'engagent dans des combats voués à l'échec si l'honneur l'exige. Couleur : noir et or, austère. Beaucoup d'entre elles sont également Sœurs Hospitalières (médicales) — elles soignent leurs blessures et reprennent le combat sans plainte.",
+    "motto": "L'aigle ne pleure pas dans la tempête.",
+    "currentLeader": "Canoness Eleanor",
+    "currentLeaderRole": "Canoness Suprême Valorous Heart",
+    "homeworld": "Lanthano",
+    "founding": "Réforme de Sebastian Thor (M36)",
+    "citation": "La douleur est un mensonge que mon corps me raconte. Je n'écoute plus."
   },
   {
     "id": "tau-sept",
@@ -1167,11 +1383,15 @@
     "name": "T'au Sept",
     "type": "sept",
     "description": "Sept fondateur, équilibre des trois castes du Bien Suprême, doctrine standard.",
-    "loreShort": "Sept fondateur, équilibre canonique.",
-    "homeworld": "T'au",
-    "currentLeader": "Aun'Va",
-    "currentLeaderRole": "Maître Éthéré",
-    "wikiQuery": "T'au sept warhammer"
+    "loreShort": "Sept fondateur — capitale T'au, héritage Aun'Va.",
+    "homeworld": "T'au (capitale d'Empire)",
+    "currentLeader": "Conseil Ethereal de T'au",
+    "currentLeaderRole": "Aun (Ethereal Council)",
+    "wikiQuery": "T'au sept warhammer",
+    "loreLong": "T'au Sept est le Sept fondateur de l'Empire T'au, situé sur la planète T'au elle-même. Il abrite le siège du Ethereal Council et incarne la pureté du Greater Good. Toutes les unités T'au Sept sont légèrement plus loyales, plus stables psychiquement (proximité aux Ethereals). Leur héros le plus célèbre est Aun'Va, l'Ethereal Suprême — bien qu'il ait disparu mystérieusement au M41. Le sceptre du Greater Good réside ici.",
+    "motto": "Le Plus Grand Bien. La voix du Sept.",
+    "founding": "M-1000 (Avant-mémoire T'au)",
+    "citation": "Une seule voix. Un seul futur."
   },
   {
     "id": "viorla-sept",
@@ -1179,9 +1399,15 @@
     "name": "Vior'la Sept",
     "type": "sept",
     "description": "Sept agressif et belliqueux, combattants ardents au sang chaud.",
-    "loreShort": "Ardeur martiale, sang chaud.",
+    "loreShort": "Sept guerrier — formation spartiate.",
     "homeworld": "Vior'la",
-    "wikiQuery": "Vior'la sept Tau"
+    "wikiQuery": "Vior'la sept Tau",
+    "loreLong": "Vior'la Sept est connu pour produire les meilleurs Fire Warriors de l'Empire T'au. La culture y est presque spartiate : entraînement rigoureux dès l'enfance, doctrine de combat agressive, mépris de la fuite. Vior'la Fire Warriors sont les premiers déployés sur les fronts les plus hostiles. Le commandant le plus célèbre est O'Shoh (Commander Bravestorm), spécialiste de l'assaut frontal. Couleur thématique : rouge éclatant.",
+    "motto": "L'éclat de l'épée annonce le matin.",
+    "currentLeader": "Commander O'Shoh (Bravestorm)",
+    "currentLeaderRole": "Shas'O Vior'la",
+    "founding": "M-500 (expansion T'au)",
+    "citation": "Si tu hésites au combat, tu n'es plus Vior'la."
   },
   {
     "id": "borkan-sept",
@@ -1189,9 +1415,15 @@
     "name": "Bork'an Sept",
     "type": "sept",
     "description": "Sept érudit, centre de la recherche et des académies.",
-    "loreShort": "Académies et tech avancée.",
+    "loreShort": "Sept des sciences et de la technologie.",
     "homeworld": "Bork'an",
-    "wikiQuery": "Bork'an sept Tau"
+    "wikiQuery": "Bork'an sept Tau",
+    "loreLong": "Bork'an Sept est le centre intellectuel de l'Empire T'au. Ses Earth Caste sont les chercheurs les plus avancés : ce sont eux qui ont développé le railgun haute énergie, les drones de combat avancés, et certaines technologies anti-Warp. Leurs unités militaires sont équipées des armes les plus modernes. Bork'an entretient des relations étroites avec les Demiurg (race minière xenos) et a souvent des Demiurg comme alliés temporaires. Couleur thématique : ocre et bleu.",
+    "motto": "Comprendre, c'est conquérir.",
+    "currentLeader": "Aun'T'on (Ethereal Bork'an)",
+    "currentLeaderRole": "Aun Bork'an",
+    "founding": "M-500",
+    "citation": "Le savoir est l'arme première du Greater Good."
   },
   {
     "id": "sacea-sept",
@@ -1199,9 +1431,23 @@
     "name": "Sa'cea Sept",
     "type": "sept",
     "description": "Sept urbain et cosmopolite, mélange de toutes les castes.",
-    "loreShort": "Mégalopole cosmopolite.",
-    "homeworld": "Sa'cea",
-    "wikiQuery": "Sa'cea sept Tau"
+    "loreShort": "Sept urbain — guerre dans les villes.",
+    "homeworld": "Sa'cea (cité-monde)",
+    "wikiQuery": "Sa'cea sept Tau",
+    "loreLong": "Sa'cea Sept est le plus densement peuplé de l'Empire T'au. Sa cité-monde abrite plusieurs milliards d'individus. La doctrine militaire Sa'cea est spécialisée dans les combats urbains — leurs Fire Warriors sont les meilleurs en CQB (close quarters battle) parmi tous les Sept. Couleur thématique : jaune et noir, avec des motifs de feu stylisés. Aun'Shi, l'un des très rares Ethereals à se battre lui-même au front (avec son honor blade), vient de Sa'cea.",
+    "motto": "Là où les rues brûlent, nous restons debout.",
+    "currentLeader": "Aun'Shi (l'Ethéré-Combattant)",
+    "currentLeaderRole": "Aun guerrier Sa'cea",
+    "founding": "M-300",
+    "citation": "Tu meurs dans ta rue, tu y meurs en vain. Bats-toi.",
+    "notableUnits": [
+      {
+        "name": "Aun'Shi",
+        "role": "Ethereal au combat",
+        "description": "Le seul Ethereal connu à se battre personnellement avec son Honor Blade. Champion du Sept Sa'cea.",
+        "wikiQuery": "Aun'Shi Tau"
+      }
+    ]
   },
   {
     "id": "dalyth-sept",
@@ -1209,9 +1455,15 @@
     "name": "Dal'yth Sept",
     "type": "sept",
     "description": "Sept frontalier accueillant les Aliens et les rebelles humains dans le Bien Suprême.",
-    "loreShort": "Frontière diplomatique.",
+    "loreShort": "Sept commercial — diplomates et marchands.",
     "homeworld": "Dal'yth",
-    "wikiQuery": "Dal'yth sept Tau"
+    "wikiQuery": "Dal'yth sept Tau",
+    "loreLong": "Dal'yth Sept est le centre commercial de l'Empire T'au. Ses Fire Warriors sont moins militaristes que ceux de Vior'la, mais leurs Air Caste pilotent les meilleures flottes de l'Empire et entretiennent des routes commerciales avec d'autres factions xenos (Kroot, Demiurg, parfois Tarellians). Dal'yth est aussi connu pour ses négociations diplomatiques — c'est par Dal'yth que les T'au ouvrirent contact avec l'Imperium pour la première fois (avec un succès limité).",
+    "motto": "Le commerce avant la guerre. Le commerce qui devient guerre.",
+    "currentLeader": "Por'el (Water Caste leader)",
+    "currentLeaderRole": "Por'el Dal'yth",
+    "founding": "M-500",
+    "citation": "Combattre coûte. Vendre rapporte. Calcule avant de tirer."
   },
   {
     "id": "farsight-enclaves",
@@ -1246,9 +1498,15 @@
     "name": "Graia",
     "type": "forgeworld",
     "description": "Monde-forge de production militaire, théâtre de l'invasion Chaos repoussée par le Titan Invictus.",
-    "loreShort": "Monde-forge militaire, Titan Invictus.",
-    "homeworld": "Graia",
-    "wikiQuery": "Graia forge world"
+    "loreShort": "Forge sacrée gardienne du Calice Mortis.",
+    "homeworld": "Graia (Forgeworld)",
+    "wikiQuery": "Graia forge world",
+    "loreLong": "Graia est l'un des plus anciens Mondes-Forges, gardien du Calice Mortis — relique-armure dont l'origine remonte à la Grande Croisade. Les techno-prêtres Graia sont les plus stricts dans la lecture des écritures Omnissiah : aucune innovation, aucune déviation, seulement la préservation pure. Leur production : Skitarii classiques, Knights Errants, Imperial Guard équipement. Leur héros : Tech-Priest Dominus Drakhan, vétéran des purges xenos.",
+    "motto": "Préserver. Maintenir. Refuser le changement.",
+    "currentLeader": "Fabricator-General Drakhan",
+    "currentLeaderRole": "Fabricator-General Graia",
+    "founding": "M-30 (Grande Croisade)",
+    "citation": "Ce que l'Omnissiah a écrit, l'Omnissiah a écrit. Pas un caractère de plus."
   },
   {
     "id": "stygies-viii",
@@ -1256,9 +1514,15 @@
     "name": "Stygies VIII",
     "type": "forgeworld",
     "description": "Monde-forge soupçonné d'études interdites, équipement de qualité et secrets technologiques.",
-    "loreShort": "Études interdites, secrets tech.",
+    "loreShort": "Forge xeno-traceuse — collectionneuse d'artefacts proscrits.",
     "homeworld": "Stygies VIII",
-    "wikiQuery": "Stygies VIII forge world"
+    "wikiQuery": "Stygies VIII forge world",
+    "loreLong": "Stygies VIII est la Forge la plus controversée du Mechanicus. Ses techno-prêtres pratiquent l'archeotech-recherche sans relâche : ils collectionnent, étudient, parfois reverse-engineerent des artefacts xenos (Aeldari, Necron, Tau). Cela les met régulièrement en conflit avec l'Inquisition (Ordo Xenos), mais leur production technologique avancée les rend indispensables. Belisarius Cawl, célèbre Magos de Mars, a parfois collaboré avec eux. Leur Skitarii portent un équipement modifié unique.",
+    "motto": "Le savoir interdit reste savoir. L'Omnissiah s'en réjouit.",
+    "currentLeader": "Magos Dominus Helinatre",
+    "currentLeaderRole": "Magos Dominus Stygies",
+    "founding": "M-25 (post-Hérésie)",
+    "citation": "L'Inquisition condamne. L'Omnissiah comprend."
   },
   {
     "id": "lucius",
@@ -1266,9 +1530,15 @@
     "name": "Lucius",
     "type": "forgeworld",
     "description": "Monde-forge spécialiste des Titans et de la téléportation.",
-    "loreShort": "Téléportation et Titans.",
-    "homeworld": "Lucius",
-    "wikiQuery": "Lucius forge world"
+    "loreShort": "Forge militante — fournisseur principal des Imperial Knights.",
+    "homeworld": "Lucius (Forgeworld)",
+    "wikiQuery": "Lucius forge world",
+    "loreLong": "Lucius est la Forge spécialisée dans la production des Imperial Knights et de leurs systèmes d'armes. Ses techno-prêtres ont pacted avec la plupart des Knight Households loyalistes pour fournir l'entretien des Throne Mechanicums et les Knights nouveaux. Au M42, Lucius produit également les nouveaux Knights Castigator pour la Croisade Indomitus. Sa relation symbiotique avec Knight Households la rend politiquement puissante.",
+    "motto": "Le chevalier sans la forge n'est qu'un homme. La forge sans le chevalier est silencieuse.",
+    "currentLeader": "Fabricator-General Mardak",
+    "currentLeaderRole": "Fabricator-General Lucius",
+    "founding": "M-32 (post-Hérésie)",
+    "citation": "L'acier de Lucius est l'épée du Trône."
   },
   {
     "id": "shadowkeepers",

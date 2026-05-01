@@ -151,7 +151,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
       line-height: 1.05;
       margin: 0 0 14px;
       color: var(--gold-bright);
-      text-shadow: 0 0 35px rgba(201, 162, 74, 0.25);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
     }
     .lede { font-size: 15px; color: var(--text); line-height: 1.6; margin: 0 0 18px; max-width: 640px; }
     .counters { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--border); }

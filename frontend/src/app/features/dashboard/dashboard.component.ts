@@ -202,7 +202,7 @@ const TYPE_LABEL: Record<string, string> = {
       line-height: 0.92;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      text-shadow: 0 0 50px rgba(201, 162, 74, 0.45);
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 0 50px rgba(201, 162, 74, 0.45);
     }
     .lede {
       margin: 0 0 22px;

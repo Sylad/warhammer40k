@@ -162,7 +162,7 @@ interface Inspiration {
       line-height: 1.05;
       margin: 0 0 18px;
       color: var(--gold-bright);
-      text-shadow: 0 0 35px rgba(201, 162, 74, 0.25);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
     }
     .lede {
       font-size: 17px;

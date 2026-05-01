@@ -117,6 +117,30 @@ a:hover { color: var(--gold-bright); }
 .badge.green { border-color: rgba(35, 145, 90, 0.5);  color: #80e0ad; background: rgba(15, 107, 67, 0.35); }
 .badge.red   { border-color: rgba(170, 45, 45, 0.55); color: #ff8a8a; background: rgba(123, 17, 19, 0.42); }
 
+/* Lisibilité texte sur hero image-bg
+ * Ajoute une ombre noire douce aux éléments qui flottent au-dessus
+ * d'images (eyebrow, lede, hero-desc, citations).
+ * Le panel latéral (.hero-panel) déjà sur fond ombré n'est pas ciblé. */
+.hero .eyebrow,
+.hero-text .eyebrow,
+.hero .lede,
+.hero-text .lede,
+.hero .hero-desc,
+.hero-text .hero-desc,
+.hero .hero-citation,
+.hero-content > p,
+.hero-text > p {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 1px 2px rgba(0, 0, 0, 0.95);
+}
+
+/* Annule l'ombre dans les sous-panels qui ont leur propre fond */
+.hero-panel .eyebrow,
+.hero-panel p,
+.priority-panel .eyebrow,
+.priority-panel p {
+  text-shadow: none;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #111; }

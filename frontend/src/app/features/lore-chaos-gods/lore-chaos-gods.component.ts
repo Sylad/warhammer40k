@@ -193,7 +193,7 @@ import type { ChaosGod } from '../../core/models/models';
       line-height: 1.04;
       margin: 0 0 14px;
       color: var(--gold-bright);
-      text-shadow: 0 0 35px rgba(201, 162, 74, 0.25);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
     }
     .lede { font-size: 15px; color: var(--text); line-height: 1.7; margin: 0 0 22px; max-width: 720px; }
 

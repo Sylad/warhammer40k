@@ -199,7 +199,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
       line-height: 1.04;
       margin: 0 0 14px;
       color: var(--gold-bright);
-      text-shadow: 0 0 35px rgba(201, 162, 74, 0.25);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
     }
     .lede { font-size: 15px; color: var(--text); line-height: 1.65; margin: 0 0 18px; max-width: 680px; }
 
