@@ -3,12 +3,13 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
-import type { ChaosGod } from '../../core/models/models';
+import type { ChaosGod, ChaosGodDaemon } from '../../core/models/models';
+import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
 @Component({
   selector: 'app-lore-chaos-gods',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -36,8 +37,9 @@ import type { ChaosGod } from '../../core/models/models';
     @for (god of gods(); track god.id) {
       <article class="god" [id]="god.id" [style.--god-color]="god.color">
         <header class="god-head">
-          <div class="god-bg" [style.background-image]="godImg(god.id)"></div>
+          <button class="god-bg" type="button" [style.background-image]="godImg(god.id)" (click)="openGodLightbox(god)" aria-label="Voir en grand"></button>
           <div class="god-bg-overlay"></div>
+          <span class="god-zoom" (click)="openGodLightbox(god)">⛶</span>
           <div class="god-head-content">
             <div class="number">{{ formatNum(god.number) }} / IV</div>
             <div class="god-sigil-wrap">
@@ -75,10 +77,11 @@ import type { ChaosGod } from '../../core/models/models';
               <h3 class="section-title">Daemons notables</h3>
               <div class="notable-grid">
                 @for (d of god.daemons.notable; track d.name) {
-                  <div class="notable-card">
+                  <button class="notable-card" type="button" (click)="openDaemonLightbox(god, d)">
                     <div class="notable-name">{{ d.name }}</div>
                     <p>{{ d.description }}</p>
-                  </div>
+                    <span class="notable-zoom">⛶</span>
+                  </button>
                 }
               </div>
             }
@@ -135,6 +138,8 @@ import type { ChaosGod } from '../../core/models/models';
         <a routerLink="/lore" class="cta-link secondary">Retour Lore Hub</a>
       </div>
     </section>
+
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
   `,
   styles: [`
     :host { display: block; }
@@ -242,7 +247,30 @@ import type { ChaosGod } from '../../core/models/models';
       background-position: center;
       opacity: 0.32;
       filter: grayscale(0.2) contrast(1.05);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.2s;
     }
+    .god-bg:hover { opacity: 0.5; }
+    .god-zoom {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+      z-index: 2;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,7,6,0.7);
+      border: 1px solid var(--god-color, rgba(201,162,74,0.4));
+      color: var(--god-color, var(--gold-soft));
+      font-size: 14px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .god-zoom:hover { opacity: 1; transform: scale(1.08); }
     .god-bg-overlay {
       position: absolute;
       inset: 0;
@@ -359,10 +387,29 @@ import type { ChaosGod } from '../../core/models/models';
       gap: 12px;
     }
     .notable-card {
+      position: relative;
       padding: 14px 16px 16px;
       border: 1px solid var(--border);
       background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+      width: 100%;
+      transition: border-color 0.15s, transform 0.15s;
     }
+    .notable-card:hover {
+      border-color: var(--god-color, var(--gold-soft));
+      transform: translateY(-2px);
+    }
+    .notable-zoom {
+      position: absolute;
+      top: 8px; right: 10px;
+      color: var(--god-color, var(--gold-soft));
+      font-size: 12px;
+      opacity: 0.5;
+      transition: opacity 0.15s;
+    }
+    .notable-card:hover .notable-zoom { opacity: 1; }
     .notable-name {
       color: var(--god-color, var(--gold));
       font-family: var(--serif);
@@ -476,6 +523,7 @@ export class LoreChaosGodsComponent {
   private readonly service = inject(WarhammerService);
   readonly gods = toSignal(this.service.chaosGods$, { initialValue: [] as ChaosGod[] });
   readonly godImages = signal<Map<string, string>>(new Map());
+  readonly lightbox = signal<LightboxState | null>(null);
 
   constructor() {
     this.service.chaosGods$.subscribe(list => {
@@ -501,4 +549,79 @@ export class LoreChaosGodsComponent {
   formatNum(n: number): string {
     return ['I', 'II', 'III', 'IV'][n - 1] ?? String(n);
   }
+
+  openGodLightbox(g: ChaosGod): void {
+    const baseUrl = this.godImages().get(g.id);
+    if (!baseUrl) return;
+    this.lightbox.set({
+      title: g.name,
+      subtitle: `${g.title} — ${g.sphere}`,
+      description: g.description,
+      contextName: 'Panthéon Chaos',
+      contextColor: g.color,
+      contextSigil: g.sigil,
+      searchQuery: g.name,
+      mainUrl: baseUrl,
+      thumbUrls: [baseUrl],
+      selectedIdx: 0,
+    });
+    const variants = [
+      `${g.wikiQuery} art`,
+      `${g.name} chaos god`,
+      `${g.name} daemon`,
+      `${g.name} warhammer 40k`,
+      `${g.name} concept art`,
+    ];
+    for (const q of variants) this.fetchVariant(q, g.name);
+  }
+
+  openDaemonLightbox(g: ChaosGod, d: ChaosGodDaemon): void {
+    const query = d.wikiQuery ?? d.name;
+    // Fetch base image first since daemons don't have pre-cached image
+    this.service.getWikiImage(query).subscribe(r => {
+      if (!r.imageUrl) return;
+      this.lightbox.set({
+        title: d.name,
+        subtitle: `Daemon de ${g.name}`,
+        description: d.description,
+        contextName: 'Panthéon Chaos',
+        contextColor: g.color,
+        contextSigil: g.sigil,
+        searchQuery: d.name,
+        mainUrl: r.imageUrl,
+        thumbUrls: [r.imageUrl],
+        selectedIdx: 0,
+      });
+      const variants = [
+        `${query} art`,
+        `${d.name} ${g.name}`,
+        `${query} concept art`,
+        `${query} warhammer 40k`,
+      ];
+      for (const q of variants) this.fetchVariant(q, d.name);
+    });
+  }
+
+  private fetchVariant(query: string, expectedTitle: string): void {
+    this.service.getWikiImage(query).subscribe({
+      next: r => {
+        if (!r.imageUrl) return;
+        const cur = this.lightbox();
+        if (!cur || cur.title !== expectedTitle) return;
+        if (cur.thumbUrls.includes(r.imageUrl)) return;
+        this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+      },
+      error: () => {},
+    });
+  }
+
+  selectThumb(idx: number): void {
+    const cur = this.lightbox();
+    if (!cur) return;
+    const url = cur.thumbUrls[idx];
+    if (!url) return;
+    this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
+  }
+
+  closeLightbox(): void { this.lightbox.set(null); }
 }

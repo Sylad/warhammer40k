@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
+import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -32,7 +33,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 @Component({
   selector: 'app-lore-primarchs',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -72,11 +73,12 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
     <section class="grid">
       @for (p of filtered(); track p.id) {
         <article class="card" [attr.data-allegiance]="p.allegiance" [attr.data-status]="p.status">
-          <div class="card-img" [style.background-image]="primarchImg(p.id)" [style.background-color]="p.primaryColor || '#3a3a3a'">
+          <button class="card-img" type="button" [style.background-image]="primarchImg(p.id)" [style.background-color]="p.primaryColor || '#3a3a3a'" (click)="openLightbox(p)" aria-label="Voir en grand">
             <div class="card-img-overlay"></div>
             <span class="number">{{ formatNumber(p.number) }}</span>
             <span class="status" [style.color]="statusColor(p.status)">{{ statusLabel(p.status) }}</span>
-          </div>
+            <span class="card-zoom">⛶</span>
+          </button>
           <div class="card-body">
             <div class="card-head">
               <h2>{{ p.name }}</h2>
@@ -96,6 +98,8 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
         </article>
       }
     </section>
+
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
 
     <section class="cta-bottom">
       <div class="ornament"><span class="line"></span><span class="aigle">⚜</span><span class="line"></span></div>
@@ -196,8 +200,32 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
     .card-img {
       position: relative;
       height: 200px;
+      width: 100%;
       background-size: cover;
       background-position: center;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
+      display: block;
+    }
+    .card-zoom {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,7,6,0.7);
+      border: 1px solid rgba(201,162,74,0.32);
+      color: var(--gold-soft);
+      font-size: 13px;
+      opacity: 0.6;
+      transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .card-img:hover .card-zoom {
+      opacity: 1;
+      color: var(--gold-bright);
+      border-color: var(--gold);
     }
     .card-img-overlay {
       position: absolute;
@@ -325,6 +353,7 @@ export class LorePrimarchsComponent {
   readonly primarchs = toSignal(this.service.primarchs$, { initialValue: [] as Primarch[] });
   readonly filterAllegiance = signal<'all' | PrimarchAllegiance>('all');
   readonly primarchImages = signal<Map<string, string>>(new Map());
+  readonly lightbox = signal<LightboxState | null>(null);
 
   readonly filtered = computed(() => {
     const all = this.primarchs();
@@ -370,4 +399,54 @@ export class LorePrimarchsComponent {
   allegianceLabel(a: PrimarchAllegiance): string { return ALLEGIANCE_LABEL[a]; }
   statusLabel(s: PrimarchStatus): string { return STATUS_LABEL[s]; }
   statusColor(s: PrimarchStatus): string { return STATUS_COLOR[s]; }
+
+  openLightbox(p: Primarch): void {
+    const baseUrl = this.primarchImages().get(p.id);
+    if (!baseUrl) return;
+    const subtitle = p.legion
+      ? `${p.legion} — ${ALLEGIANCE_LABEL[p.allegiance]}`
+      : ALLEGIANCE_LABEL[p.allegiance];
+    this.lightbox.set({
+      title: p.name,
+      subtitle,
+      description: p.statusDetail || p.description,
+      contextName: 'Les Primarques',
+      contextColor: p.primaryColor || '#c9a24a',
+      contextSigil: '⚜',
+      searchQuery: p.name,
+      mainUrl: baseUrl,
+      thumbUrls: [baseUrl],
+      selectedIdx: 0,
+    });
+    const baseQuery = p.wikiQuery ?? p.name;
+    const variants = [
+      `${baseQuery} primarch`,
+      `${baseQuery} art`,
+      `${baseQuery} Horus Heresy`,
+      `${p.legion ?? baseQuery} cover`,
+      `${baseQuery} concept art`,
+    ];
+    for (const q of variants) {
+      this.service.getWikiImage(q).subscribe({
+        next: r => {
+          if (!r.imageUrl) return;
+          const cur = this.lightbox();
+          if (!cur || cur.title !== p.name) return;
+          if (cur.thumbUrls.includes(r.imageUrl)) return;
+          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+        },
+        error: () => {},
+      });
+    }
+  }
+
+  selectThumb(idx: number): void {
+    const cur = this.lightbox();
+    if (!cur) return;
+    const url = cur.thumbUrls[idx];
+    if (!url) return;
+    this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
+  }
+
+  closeLightbox(): void { this.lightbox.set(null); }
 }
