@@ -117,9 +117,9 @@ Viewer fullscreen modal : image HD centrée + fond noir profond + infos titre/ar
 
 ## État actuel (à mettre à jour à chaque session)
 
-**Date dernière mise à jour** : 2026-05-02 (session 11 — Audit V2)
-**Phase active** : aucune — **V1 + F4-F10 + Tweaks UX + Audit V2 toutes ✅ TERMINÉES** 🎉
-**Prochaine phase potentielle** : F3 résiduelle (enrichir notableUnits xenos), 14 datasheets manquantes, ou auth multi-rôles.
+**Date dernière mise à jour** : 2026-05-02 (session 12 — V2 complète : équipement, lightbox, Hérésie)
+**Phase active** : aucune — **V1 + V2 toutes ✅ TERMINÉES** 🎉
+**Prochaine phase potentielle** : auth multi-rôles (read public / write authentifié), polish UX (lightbox sur /lore/equipment et /lore/concepts).
 
 ## ⭐ État cumulé après session 11 (2026-05-02)
 
@@ -533,3 +533,75 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 - Series xénos (Drukhari/GK/Votann/Genestealer Cults absents).
 - Auth multi-rôles (read public / write authentifié).
 - Rafraîchir `WARHAMMER_PROGRESS.md` et `WARHAMMER_ROADMAP.md` après chaque grosse session pour éviter dérive.
+
+### 2026-05-02 session 12 (V2 complète — F3 résiduelle, équipement, lightbox)
+
+**F3 résiduelle (8 agents parallèles)** :
+- Aeldari +6 notableUnits (Asurmen, Karandras, Fuegan, Baharroth, Jain Zar, Wild Riders, Spiritseer)
+- Tyranides +5 (Old One Eye, Hive Tyrant Behemoth, Norn Emissary, Tervigon, Broodlord)
+- Necrons +8 (Orikan, Szarekh, Triarch Stalker, Lychguards, Doomsday Ark, Lokhust Destroyers, Anrakyr, Plasmancer)
+- Orks +7 (Kaptin Badrukk, Big Mek, Buzzgob, Lootas, Painboy, Squiggoths, Boss Zagstruk, Stormboyz)
+- Sœurs +13 (Morvenn Vahl, Junith Eruita, Triumph of Saint Katherine, Seraphim, Mistress of Repentance, Repentia, Cassia Orsinio, Sebastian Thor, Imagifier, Hospitaller, Dialogus, Mortifier)
+- T'au +13 (Shadowsun, Aun'Va, Coldstar, Crisis XV8, Fire Warriors, Riptide, Stormsurge, Pathfinders, Kroot, Vespid, Hammerhead, Farsight, O'Vesa, The Eight)
+- AdMech +12 (Cawl, Skitarii Rangers, Tech-Priest Manipulus, Tech-Priest Dominus, Onager Dunecrawler, Knight Households, Magos Biologis, Kastelan Robots, Sicarian Infiltrators, Skitarii Marshal, Kataphron Destroyers, Vanguards)
+- Total : **+70 notableUnits xenos**.
+
+**+5 séries Black Library xenos** (Path of the Dark Eldar, Grey Knights Trilogy, Castellan Crowe, Cult of the Spiral Dawn, The Bookkeeper's Skull). series.json : 33 → 38.
+
+**+3 imperial-orgs (10 → 13)** :
+- Imperial Navy (Battlefleet par Segmentum, classes vaisseaux Cobra→Lunar→Retribution→Emperor 12km)
+- Collegia Titanica (Légions Titanica, classes Warhound 12m → Imperator 55m, Princeps Senioris)
+- Conseil du Sigillite (Malcador, Constantin Valdor, Knights-Errant, Trône d'Or)
+
+**52 personnages Hérésie d'Horus (2 agents parallèles)** :
+- Loyalistes (24) : Sigismund, Camba Diaz, Pollux, Boreas, Marius Gage, Remus Ventanus, Tarasha Euten, Artellus Numeon, Azkaellon, Raldoron, Mkani Kano, Corswain, Holguin, Nemiel, Astelan, Gunnar Gunnhilt, Othere Wyrdmake, Geigor Fell-Hand, Shiban Khan, Targutai Yesugei, Torghun Khan, Shadrak Meduson, Branne Nev, Alvarex Maun
+- Traîtres (28) : Lhorke, Skane, Garro, Calas Typhon, Caipha Morarg, Vorx, Hathor Maat, Phosis T'kar, Khalophis, Yeb, Saul Tarvitz (loyaliste tragique), Eidolon, Marius Vairosean, Fabius Bile, Loken (loyaliste), Torgaddon (loyaliste), Iacton Qruze (loyaliste), Ezekyle Abaddon, Horus Aximand, Argel Tal, Kor Phaeron, Forrix, Kroeger, Ingo Pech, Mathias Herzog, Sheed Ranko, Krieg Acerbus, Variel le Faucheur
+
+**Page /lore/equipment (NOUVEAU)** :
+- 4 agents parallèles ont produit 69 pièces : 26 ranged (bolter, plasma, melta, las, flame, volkite, graviton), 16 melee (power, force, chain, eviscerator), 15 armures (Mark IV-X, Cataphractii, Tartaros, Indomitus, Custodes Auramite, Flak, Carapace, Aspect, Mega Armour, XV8 Crisis), 12 reliques (Drach'nyen, Talon of Horus, Worldbreaker, Lash of Slaanesh, Black Staff, Black Sword Sigismund, Mjalnar, Spear of Vulkan, Blade Encarmine, Sword of Secrets, Emperor's Sword, Spear of Telesto, Chaos Power Armour, Armour of the Chosen).
+- Backend : Equipment interface ajoutée à `lore-feed.model.ts`, endpoints `/api/lore/equipment[/:id]`.
+- Frontend : `LoreEquipmentComponent` avec hero + filtres (type + faction + recherche) + grid de cards image-first cliquables avec expansion inline (specs, notable, citation).
+- Card "Armement & Reliques" ajoutée au hub `/lore` (7 cards désormais).
+
+**14 datasheets unités manquantes pourvues** :
+- 12 via wiki direct (Sanguinius, Leman Russ Primarque, Hellbrute, Horus Lupercal, Fulgrim, Yarrick, Macharius, Magos Biologis, Ravenor, Valeria, Henchmen, Primaris Intercessor)
+- 2 via Lexicanum (Makari Lucky Grot, Colonel Colm Corbec) — pages dédiées que Fandom EN n'a pas
+- **133/133 unités** ont désormais un visuel local bundlé.
+
+**Lightbox plein écran (FigureLightboxComponent shared)** :
+- Click sur figure-card → modal full-screen avec image + mini-galerie de thumbs + lien `/gallery?q=` filtré
+- Appliqué sur `/lore/civilians`, `/lore/primarchs`, `/lore/chaos-gods`
+- Variantes wiki dérivées fetched async pour enrichir la mini-galerie
+- ESC + clic-out + bouton ✕ pour fermer
+
+**Wiki queries ciblées 40K-spécifiques** :
+- chaos-gods : "Khorne Chaos God" → "Bloodthirster", "Tzeentch Chaos God" → "Lord of Change", etc. (les images génériques pan-Warhammer remplacées par les Greater Daemons 40K canoniques)
+- primarchs : tous les `<name> primarch` simplifiés en `<name>` (les pages directes du wiki sont mieux trouvées sans le suffixe). Magnus le Rouge → "Magnus the Red".
+
+**Page À propos enrichie** : ajout de Lexicanum + Omnis Bibliotheca dans la section "Inspirations & sources" (8 cards).
+
+**Fix infra critique** : nginx décodait `%2F` en `/` avant proxy → 404 sur les images importées (URL/Reddit).
+- Solution : endpoint dédié `GET /api/images/imported/:filename` (pas de slash dans le param).
+- Frontend `imageUrl()` route selon le préfixe.
+- Mémoire `nginx_proxy_slash_decode.md` créée pour l'écosystème.
+
+**Recherche `/gallery` filtre dynamiquement les cards de catégorie** :
+- Computed `searchedArtworks` (tous filtres SAUF catégorie) ; `availableCategories` et `categoryCount` se basent dessus.
+- Test "Khorne" : 11 cards → 1 card "Chaos · 1 œuvre".
+
+**Bonus card "Voir toutes les unités"** sur faction-detail révèle réellement les unités masquées (signal `showAllUnits()` au lieu de juste reset des filtres).
+
+**Commits GitHub V2** :
+- `354204f Audit V2 + datasheet locale prioritaire + enrichissement seeds`
+- `9706704 14 datasheets locales manquantes`
+- `b569114 ork-makari + am-corbec via Lexicanum`
+- `7d112da F3 résiduelle (+70 notableUnits xenos + 5 séries BL xenos)`
+- `c3a2c32 imperial-orgs +3 (Imperial Navy, Collegia Titanica, Conseil du Sigillite)`
+- `20f3a74 +52 personnages Hérésie d'Horus`
+- `2c385e0 codex de l'arsenal — page /lore/equipment + fix images Civils`
+- `0a9b912 lightbox plein écran sur figures notables`
+- `1f68936 lightbox extrait en shared component + appliqué à 3 surfaces lore`
+- `1b673e5 chaos-gods images 40K-spécifiques`
+- `c1c2a6f primarch wikiQuery simplifiés`
+- `e34e428 imports URL — endpoint dédié /images/imported/:filename`
+- `bca4c55 gallery — recherche filtre cards de catégorie`

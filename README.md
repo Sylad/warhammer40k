@@ -17,14 +17,16 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 
 ## Fonctionnalités
 
-- **14 pages** : Dashboard, Factions, Faction Detail, SubFaction Detail, Unit Detail, Romans, Vidéos, Galerie, Lore Hub, Empereur, Primarques, Panthéon Chaos, Civils Impériaux, Concepts (Trône d'Or, Astronomican, Œil de la Terreur, Cadia, Baal, etc.), Carte galactique, À propos
-- **Hiérarchie faction → sous-faction → unité** : 17 factions principales, 113 sous-factions (Ultramarines, Iron Hands, World Eaters, Krieg, Drukhari Kabales, Necron Dynasties, Tyranid Hive Fleets, etc.) avec successeurs, primarques, leaders actuels, notable units inline
-- **Galerie 1500+ images** avec multi-catégorisation user (chips), import depuis Wikipedia Fandom / Reddit r/Warhammer40k / URL directe, catégories dynamiques (built-in + factions + customs)
-- **Datasheets locales** : 119 unités sur 133 ont un visuel curé bundlé dans l'image Docker (HEAD-check + fallback wiki proxy)
-- **Wiki-image proxy** (Wikipedia Fandom EN) pour fetch les illustrations à la volée + cache in-memory
-- **Black Library** — 33 séries de romans avec progression de lecture, badges et tags
+- **15 pages** : Dashboard, Factions, Faction Detail, SubFaction Detail, Unit Detail, Romans, Vidéos, Galerie, Lore Hub, Empereur, Primarques, Panthéon Chaos, Civils Impériaux, Concepts (Trône d'Or, Astronomican, Œil de la Terreur, Cadia, Baal, etc.), Carte galactique, **Armement & Reliques**, À propos
+- **Hiérarchie faction → sous-faction → unité** : 17 factions principales, 113 sous-factions (Ultramarines, Iron Hands, World Eaters, Krieg, Drukhari Kabales, Necron Dynasties, Tyranid Hive Fleets, etc.) — chacune avec ses notableUnits enrichies (52 personnages Hérésie d'Horus loyalistes/traîtres, +70 figures xenos)
+- **Galerie 1500+ images** avec multi-catégorisation user (chips), import depuis Wikipedia Fandom / Reddit r/Warhammer40k / URL directe, catégories dynamiques (built-in + factions + customs) — **la recherche filtre aussi les cards de catégorie**
+- **Datasheets locales** : **133/133 unités** ont un visuel curé bundlé dans l'image Docker (HEAD-check + fallback wiki proxy)
+- **Lightbox plein écran** sur les figures notables (Civils, Primarques, Panthéon Chaos) avec mini-galerie multi-thumbs + lien vers /gallery filtré
+- **Wiki-image proxy** (Wikipedia Fandom EN) pour fetch les illustrations à la volée + cache in-memory + Lexicanum en fallback dédié
+- **Black Library** — 38 séries de romans (incluant Drukhari, Grey Knights, Genestealer Cults) avec progression de lecture, badges et tags
 - **Vidéos lore** — chaînes YT (officielles + créateurs) catégorisées
-- **Lore narratif** : 6 sections Empereur, 20 fiches Primarques, 4 dieux Chaos, 10 organisations civiles, 15 concepts (Trône d'Or, Astronomican, Webway, Cicatrix, etc.), carte galactique SVG calibrée
+- **Lore narratif** : 6 sections Empereur, 20 fiches Primarques, 4 dieux Chaos, **13 organisations civiles** (incluant Imperial Navy avec classes de vaisseaux, Collegia Titanica avec classes de Titans, Conseil du Sigillite — Malcador & Valdor), 15 concepts (Trône d'Or, Astronomican, Webway, Cicatrix, etc.), carte galactique SVG calibrée
+- **Codex de l'arsenal** (`/lore/equipment`) : 69 pièces (26 armes ranged, 16 mêlée, 15 armures, 12 reliques nommées dont Drach'nyen, Black Sword Sigismund, Mjalnar)
 - **Brèves du 41ᵉ millénaire** : ticker dashboard de 40 entrées atmosphériques (Croisade Indomitus, Cicatrix, Chute de Cadia, Plague Wars, etc.)
 - **Breadcrumb global** + fragment scroll + fil narratif central
 - Cosmétique : design tokens custom (or sur fond noir, Cinzel/Inter), pas de Bootstrap/Material-default
@@ -68,19 +70,20 @@ Frontend disponible sur `http://localhost:4201`.
 
 `backend/seed/` contient les fichiers JSON commités comme état initial :
 - `factions.json` (17 factions principales)
-- `subfactions.json` (113 sous-factions enrichies)
+- `subfactions.json` (113 sous-factions enrichies, 200+ notableUnits avec personnages Hérésie d'Horus)
 - `units.json` (133 unités)
-- `series.json` (33 séries Black Library)
+- `series.json` (38 séries Black Library)
 - `videos.json` + `channels.json` (vidéos + 8 chaînes YT)
 - `artworks.json` + `artwork-collections.json` (35 artworks + collections)
 - `lore-feed.json` (40 entrées atmosphériques ticker)
 - `emperor.json` (6 sections narratives)
 - `primarchs.json` (20 fiches : 9 loyalistes / 9 traîtres / 2 expurgés)
-- `chaos-gods.json` (4 dieux + 8 daemons notables)
-- `imperial-orgs.json` (10 organisations civiles)
+- `chaos-gods.json` (4 dieux + 8 daemons notables — Bloodthirster, Lord of Change, GUO, Keeper of Secrets en visuels)
+- `imperial-orgs.json` (13 organisations : Administratum, Ministorum, Arbites, Rogue Traders, Schola, Navigators, Astropaths, Sœurs du Silence, Knights, Remembrancers, **Imperial Navy** avec classes de vaisseaux, **Collegia Titanica** avec classes de Titans, **Conseil du Sigillite** — Malcador & Valdor)
 - `lore-concepts.json` (15 concepts : Trône d'Or, Astronomican, Webway, Cicatrix, Cadia, Baal, etc.)
+- `equipment.json` (69 pièces : armes ranged/mêlée, armures Mark IV-X + Terminator, daemon weapons, reliques impériales)
 
-`backend/public/datasheets/` contient 119 JPEGs d'unités (curés à la main, bundlés dans l'image Docker), servis via `/api/images/datasheets/:unitId`.
+`backend/public/datasheets/` contient **133 JPEGs d'unités** (curés à la main, bundlés dans l'image Docker), servis via `/api/images/datasheets/:unitId`.
 
 Au premier lancement, copie ces fichiers dans `data/` (cf instructions ci-dessus). Ensuite `data/` n'est plus rejoué — tes catégorisations et imports persistent.
 

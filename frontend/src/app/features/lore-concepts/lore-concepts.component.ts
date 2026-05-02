@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { LoreConcept, LoreConceptCategory } from '../../core/models/models';
+import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
   imperial: 'Impérial',
@@ -22,7 +23,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 @Component({
   selector: 'app-lore-concepts',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -61,8 +62,9 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
       @for (c of filtered(); track c.id) {
         <article class="concept" [id]="c.id" [style.--c-color]="c.color">
           <header class="concept-head">
-            <div class="concept-bg" [style.background-image]="conceptImg(c.id)"></div>
+            <button class="concept-bg" type="button" [style.background-image]="conceptImg(c.id)" (click)="openLightbox(c)" aria-label="Voir en grand"></button>
             <div class="concept-bg-overlay"></div>
+            <span class="concept-zoom" (click)="openLightbox(c)" [style.color]="c.color">⛶</span>
             <div class="concept-head-content">
               <div class="concept-meta">
                 <span class="number">{{ formatNum(c.number) }}</span>
@@ -136,6 +138,8 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
         <a routerLink="/lore" class="cta-link">Retour aux archives lore →</a>
       </div>
     </section>
+
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
   `,
   styles: [`
     :host { display: block; }
@@ -249,11 +253,33 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
     .concept-bg {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center;
       opacity: 0.28;
       filter: grayscale(0.25) contrast(1.05);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      transition: opacity 0.2s;
     }
+    .concept-bg:hover { opacity: 0.45; }
+    .concept-zoom {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+      z-index: 2;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,7,6,0.7);
+      border: 1px solid var(--c-color, rgba(201,162,74,0.4));
+      font-size: 14px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .concept-zoom:hover { opacity: 1; transform: scale(1.08); }
     .concept-bg-overlay {
       position: absolute;
       inset: 0;
@@ -459,6 +485,7 @@ export class LoreConceptsComponent {
   readonly filterCategory = signal<'all' | LoreConceptCategory>('all');
   readonly conceptImages = signal<Map<string, string>>(new Map());
   readonly heroImg = signal<string>('');
+  readonly lightbox = signal<LightboxState | null>(null);
 
   readonly categories: LoreConceptCategory[] = ['imperial', 'warp', 'world', 'doctrine'];
 
@@ -523,4 +550,50 @@ export class LoreConceptsComponent {
 
   categoryLabel(c: LoreConceptCategory): string { return CATEGORY_LABEL[c]; }
   categoryColor(c: LoreConceptCategory): string { return CATEGORY_COLOR[c]; }
+
+  openLightbox(c: LoreConcept): void {
+    const baseUrl = this.conceptImages().get(c.id);
+    if (!baseUrl) return;
+    this.lightbox.set({
+      title: c.name,
+      subtitle: c.title,
+      description: c.description,
+      contextName: CATEGORY_LABEL[c.category],
+      contextColor: c.color,
+      contextSigil: c.sigil,
+      searchQuery: c.name,
+      mainUrl: baseUrl,
+      thumbUrls: [baseUrl],
+      selectedIdx: 0,
+    });
+    const baseQuery = c.wikiQuery;
+    const variants = [
+      `${baseQuery} art`,
+      `${baseQuery} concept art`,
+      `${c.name} warhammer 40k`,
+      `${baseQuery} illustration`,
+    ];
+    for (const q of variants) {
+      this.service.getWikiImage(q).subscribe({
+        next: r => {
+          if (!r.imageUrl) return;
+          const cur = this.lightbox();
+          if (!cur || cur.title !== c.name) return;
+          if (cur.thumbUrls.includes(r.imageUrl)) return;
+          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+        },
+        error: () => {},
+      });
+    }
+  }
+
+  selectThumb(idx: number): void {
+    const cur = this.lightbox();
+    if (!cur) return;
+    const url = cur.thumbUrls[idx];
+    if (!url) return;
+    this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
+  }
+
+  closeLightbox(): void { this.lightbox.set(null); }
 }

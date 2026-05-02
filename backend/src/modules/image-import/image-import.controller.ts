@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Query, BadRequestException } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, BadRequestException, UseGuards } from '@nestjs/common';
 import { ImageImportService } from './image-import.service.js';
+import { PinGuard } from '../../guards/pin.guard.js';
 
 @Controller('image-import')
 export class ImageImportController {
@@ -13,6 +14,7 @@ export class ImageImportController {
   }
 
   @Post('save')
+  @UseGuards(PinGuard)
   async save(@Body() body: { url?: string }) {
     if (!body?.url) throw new BadRequestException('url required');
     return this.service.saveFromUrl(body.url);

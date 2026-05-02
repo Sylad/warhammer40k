@@ -1,7 +1,8 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { UnitsService } from './units.service.js';
 import { FactionsService } from '../factions/factions.service.js';
 import { ClaudeService } from './claude.service.js';
+import { PinGuard } from '../../guards/pin.guard.js';
 
 @Controller('units')
 export class UnitsController {
@@ -22,6 +23,7 @@ export class UnitsController {
   }
 
   @Post(':id/description')
+  @UseGuards(PinGuard)
   async generateDescription(@Param('id') id: string) {
     const cached = this.unitsService.getCachedDescription(id);
     if (cached) {

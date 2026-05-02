@@ -192,42 +192,66 @@ Modifier la galerie : les **noms de toutes les factions** doivent apparaître da
 8. ✅ **Phase F8** : Galaxy map SVG (8 hot zones calibrées — session 10, 2026-05-01)
 9. ✅ **Phase F10** : Intégration galerie ↔ factions (catégories dynamiques — session 11, 2026-05-02)
 10. ✅ **Tweaks UX** : breadcrumb, primarque overlay, fragment scroll, /galerie redirect (session 10, 2026-05-01)
-11. ✅ **Audit V2** : cleanup mort code (cards/onglets/panneaux placeholders) + datasheet locale prioritaire (HEAD-check) + enrichissement seeds (series 11→33, lore-feed 10→40, subfactions xenos +11, artworks 10→35) (session 11, 2026-05-02)
-12. 🟡 **Phase F3 résiduelle** : compléter Aeldari (Eldrad détaillé/Phoenix Lords notableUnits), Necrons (Trazyn déjà ✅, Anrakyr/Szarekh/Crypteks à pousser), Tyranides (Swarmlord/Old One Eye), Orks (Mad Dok/Big Mek/Wazdakka), Sœurs (Celestine/Stern), Tau (Shadowsun/Aun'Shi), AdMech (Cawl déjà ✅, Skitarii Marshal). Lourd mais data-only.
-13. 🟡 **Datasheets manquantes** : 14 unités sans visuel local (Sanguinius, Horus, Fulgrim, Yarrick, Macharius, Corbec, Ravenor, Valeria, Magos Biologis, Hellbrute, Henchmen, Makari, Leman Russ Primarch, Primaris Intercessor) — wiki fallback OK mais inconsistant.
-14. 🟡 **Series xénos** : Drukhari, Grey Knights, Votann, Genestealer Cults absents (corpus BL maigre, à étoffer si BL publie).
-15. 🟡 **Auth multi-rôles** : read public / write authentifié — chantier mentionné post-push initial, jamais entamé.
+11. ✅ **Audit V2** : cleanup mort code + datasheet locale prioritaire + enrichissement seeds (session 11, 2026-05-02)
+12. ✅ **Phase F3 résiduelle** : +70 notableUnits xenos + 52 personnages Hérésie d'Horus (session 12, 2026-05-02)
+13. ✅ **Datasheets manquantes** : 14 unités pourvues (12 wiki, 2 Lexicanum) — **133/133 couvert** (session 12)
+14. ✅ **Series xénos** : +5 séries (Drukhari/GK ×2/Genestealer Cults ×2 ; Votann reste absent — corpus BL maigre) (session 12)
+15. ✅ **Imperial-orgs +3** : Imperial Navy, Collegia Titanica, Conseil du Sigillite (Malcador, Valdor) (session 12)
+16. ✅ **Page /lore/equipment** : 69 pièces (armes, armures, reliques) avec backend + frontend complet (session 12)
+17. ✅ **Lightbox shared** : modal plein écran sur /lore/civilians + /lore/primarchs + /lore/chaos-gods avec mini-galerie + lien vers /gallery (session 12)
+18. ✅ **Wiki queries 40K-spécifiques** : chaos-gods et primarchs, Lexicanum dans À propos (session 12)
+19. ✅ **Fix infra** : nginx %2F decode → endpoint /images/imported/:filename (session 12)
+20. ✅ **Gallery search filtre cats** : recherche filtre dynamiquement les cards de catégorie (session 12)
+21. 🟡 **Auth multi-rôles** : read public / write authentifié — chantier infra séparé, jamais entamé.
+22. 🟡 **Lightbox extension** : appliquer à /lore/equipment et /lore/concepts (polish optionnel).
 
 ---
 
 ## Sauvegardes utiles
 - Données : `/volume2/docker/developpeur/data/warhammer/`
   - `factions.json` (**17 factions** — toutes lore enrichies post-F4)
-  - `subfactions.json` (**113 entrées** — F4 + xenos enrichis V2)
-  - `units.json` (**133 unités**)
-  - `series.json` (**33 séries** — V2)
-  - `lore-feed.json` (**40 entrées** — V2)
-  - `artworks.json` (**35 entrées** — V2)
+  - `subfactions.json` (**113 entrées** — F4 + xenos V2 + 52 personnages Hérésie V2)
+  - `units.json` (**133 unités**, **133/133 datasheets locales** post-V2)
+  - `series.json` (**38 séries** — +5 xenos V2)
+  - `lore-feed.json` (**40 entrées** ticker)
+  - `artworks.json` (**35 entrées**)
   - `lore-concepts.json` (**15 concepts** dont Baal)
+  - `equipment.json` (**69 pièces** — NOUVEAU V2)
   - `emperor.json` (6 sections + 5 stats)
-  - `primarchs.json` (20 entrées : 9 loyalistes + 9 traîtres + 2 expurgés)
-  - `chaos-gods.json` (4 dieux + 8 daemons notables)
-  - `imperial-orgs.json` (10 organisations civiles)
+  - `primarchs.json` (20 entrées — wikiQuery simplifiés V2)
+  - `chaos-gods.json` (4 dieux — wikiQuery → Greater Daemons V2)
+  - `imperial-orgs.json` (**13 organisations** — +3 V2 : Imperial Navy, Collegia Titanica, Conseil du Sigillite)
   - `image-meta.json`, `imported/`, `artwork-collections.json`, `channels.json`, `videos.json`
-- Datasheets locales : `warhammer40k/backend/public/datasheets/<unit-id>.jpg` (119 fichiers, bundled Docker)
-- Code backend : `warhammer40k/backend/src/modules/` (15+ modules dont subfactions, image-import, image-meta, lore-feed étendu)
+- Datasheets locales : `warhammer40k/backend/public/datasheets/<unit-id>.jpg` (133 fichiers, bundled Docker)
+- Code backend : `warhammer40k/backend/src/modules/` (15+ modules dont subfactions, image-import, image-meta, lore-feed étendu avec equipment + endpoint dédié `/api/images/imported/:filename`)
 - Code frontend : `warhammer40k/frontend/src/app/features/` :
   - V1 : dashboard, factions, faction-detail, subfaction-detail, unit-detail, series, videos, gallery, about
   - F5-F9 : lore-hub, lore-emperor, lore-primarchs, lore-chaos-gods, lore-civilians, lore-concepts, lore-galaxy
-  - Shared : breadcrumb (global)
+  - V2 : lore-equipment (NOUVEAU)
+  - Shared : breadcrumb (global), figure-lightbox (V2 — modal plein écran réutilisable)
 
 ## Commits GitHub
 
-- `b91cb30 feat: Phase F4 + F5 + F6 + Dashboard refonte` (2026-05-01)
-- `1ac2ef6 feat: Phase F9 — Civils impériaux` (2026-05-01)
-- `18b3d4f feat: tweak UX — breadcrumb global` (2026-05-01)
-- `46502b0 feat: tweaks UX — primarque mini-portrait + galaxy clean` (2026-05-01)
-- `3c7f196 chore: cleanup mort code + fix liens cassés post-audit` (2026-05-01)
-- `354204f feat: enrichissement seeds + datasheet locale prioritaire + cleanup audit V2` (2026-05-02)
+V1 (2026-05-01) :
+- `b91cb30 feat: Phase F4 + F5 + F6 + Dashboard refonte`
+- `1ac2ef6 feat: Phase F9 — Civils impériaux`
+- `18b3d4f feat: tweak UX — breadcrumb global`
+- `46502b0 feat: tweaks UX — primarque mini-portrait + galaxy clean`
+- `3c7f196 chore: cleanup mort code + fix liens cassés post-audit`
+
+V2 (2026-05-02) :
+- `354204f feat: enrichissement seeds + datasheet locale prioritaire + cleanup audit V2`
+- `9706704 feat: 14 datasheets locales manquantes (133/133 couvert)`
+- `b569114 fix: ork-makari + am-corbec via Lexicanum (visuels dédiés)`
+- `7d112da feat: F3 résiduelle — +70 notableUnits xenos + 5 séries BL xenos`
+- `c3a2c32 feat: imperial-orgs +3 — Imperial Navy, Collegia Titanica, Conseil du Sigillite`
+- `20f3a74 feat: +52 personnages Hérésie d'Horus dans subfactions xenos/SM/CSM`
+- `2c385e0 feat: codex de l'arsenal — page /lore/equipment (69 pièces) + fix images Civils`
+- `0a9b912 feat: lightbox plein écran sur les figures notables`
+- `1f68936 refactor: lightbox extrait en shared component + appliqué à 3 surfaces lore`
+- `1b673e5 fix: chaos-gods images 40k-spécifiques`
+- `c1c2a6f fix: primarch wikiQuery simplifiés vers le nom direct`
+- `e34e428 fix: images importées via URL — endpoint dédié /images/imported/:filename`
+- `bca4c55 feat: gallery — la recherche filtre aussi les cards de catégorie`
 
 Repo : https://github.com/Sylad/warhammer40k (privé)

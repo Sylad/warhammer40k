@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, BadRequestException } from '@nestjs/common';
+import { Body, Controller, Get, Post, BadRequestException, UseGuards } from '@nestjs/common';
 import { ImageMetaService } from './image-meta.service.js';
+import { PinGuard } from '../../guards/pin.guard.js';
 
 interface CategorizeBody {
   filename: string;
@@ -25,6 +26,7 @@ export class ImageMetaController {
   }
 
   @Post()
+  @UseGuards(PinGuard)
   set(@Body() body: CategorizeBody) {
     if (!body?.filename || typeof body.filename !== 'string') {
       throw new BadRequestException('filename required');

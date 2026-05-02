@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Equipment, EquipmentType, Faction } from '../../core/models/models';
+import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Armes à distance',
@@ -30,7 +31,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
 @Component({
   selector: 'app-lore-equipment',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -83,6 +84,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
         <article class="card" [class.expanded]="expandedId() === item.id" [style.--t-color]="typeColor(item.type)" (click)="toggle(item.id)">
           <div class="card-bg" [style.background-image]="itemImg(item.id)"></div>
           <div class="card-overlay"></div>
+          <button class="card-zoom" type="button" (click)="$event.stopPropagation(); openLightbox(item)" aria-label="Voir en grand">⛶</button>
           <div class="card-head">
             <span class="card-sigil" [style.color]="typeColor(item.type)">{{ item.sigil || typeSigil(item.type) }}</span>
             <span class="card-type">{{ subCategoryLabel(item) }}</span>
@@ -133,6 +135,8 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
         <div class="empty">Aucune pièce ne correspond aux filtres sélectionnés.</div>
       }
     </section>
+
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
   `,
   styles: [`
     :host { display: block; padding-bottom: 60px; }
@@ -351,6 +355,25 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
     }
     .card-arrow.flipped { transform: rotate(90deg); color: var(--t-color, var(--gold-bright)); }
 
+    .card-zoom {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      z-index: 2;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,7,6,0.78);
+      border: 1px solid rgba(201,162,74,0.4);
+      color: var(--t-color, var(--gold-soft));
+      font-size: 13px;
+      cursor: pointer;
+      opacity: 0.6;
+      font-family: inherit;
+      transition: opacity 0.15s, transform 0.15s, border-color 0.15s;
+    }
+    .card:hover .card-zoom { opacity: 1; }
+    .card-zoom:hover { transform: scale(1.1); border-color: var(--t-color, var(--gold)); }
+
     .card-detail {
       margin-top: 16px;
       padding-top: 16px;
@@ -429,6 +452,7 @@ export class LoreEquipmentComponent {
   readonly filterFaction = signal<string>('all');
   readonly searchQuery = signal('');
   readonly expandedId = signal<string | null>(null);
+  readonly lightbox = signal<LightboxState | null>(null);
 
   readonly heroImage = signal<string | null>(null);
   private readonly imgCache = signal<Record<string, string>>({});
@@ -484,6 +508,53 @@ export class LoreEquipmentComponent {
   toggle(id: string): void {
     this.expandedId.set(this.expandedId() === id ? null : id);
   }
+
+  openLightbox(item: Equipment): void {
+    const baseUrl = this.imgCache()[`eq:${item.id}`];
+    if (!baseUrl) return;
+    const subtitle = `${this.subCategoryLabel(item)} — ${TYPE_LABEL[item.type]}`;
+    this.lightbox.set({
+      title: item.name,
+      subtitle,
+      description: item.description,
+      contextName: 'Codex de l\'Arsenal',
+      contextColor: TYPE_COLOR[item.type],
+      contextSigil: item.sigil || TYPE_SIGIL[item.type],
+      searchQuery: item.nameVO || item.name,
+      mainUrl: baseUrl,
+      thumbUrls: [baseUrl],
+      selectedIdx: 0,
+    });
+    const baseQuery = item.wikiQuery;
+    const variants = [
+      `${baseQuery} art`,
+      `${baseQuery} concept art`,
+      `${item.nameVO || item.name} warhammer 40k`,
+      `${baseQuery} miniature`,
+    ];
+    for (const q of variants) {
+      this.service.getWikiImage(q).subscribe({
+        next: r => {
+          if (!r.imageUrl) return;
+          const cur = this.lightbox();
+          if (!cur || cur.title !== item.name) return;
+          if (cur.thumbUrls.includes(r.imageUrl)) return;
+          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+        },
+        error: () => {},
+      });
+    }
+  }
+
+  selectThumb(idx: number): void {
+    const cur = this.lightbox();
+    if (!cur) return;
+    const url = cur.thumbUrls[idx];
+    if (!url) return;
+    this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
+  }
+
+  closeLightbox(): void { this.lightbox.set(null); }
 
   itemImg(id: string): string {
     const url = this.imgCache()[`eq:${id}`];

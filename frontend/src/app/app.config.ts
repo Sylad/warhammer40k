@@ -4,6 +4,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { quotaInterceptor } from './core/interceptors/quota.interceptor';
+import { pinInterceptor } from './core/interceptors/pin.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([quotaInterceptor])),
+    provideHttpClient(withInterceptors([pinInterceptor, quotaInterceptor])),
   ],
 };
