@@ -1,12 +1,16 @@
 name: warhammer40k
 
+# Mode "image-only" : les sources ne sont plus sur le NAS.
+# Pipeline build : `./scripts/build-deploy.sh [backend|frontend|all]`
+# (depuis WSL — tar le context et stream via SSH au daemon Docker du NAS).
+# Le compose ne fait que tirer les images locales taggées :latest.
+
 services:
   warhammer-backend:
-    build:
-      context: ./backend
+    image: warhammer40k-backend:latest
     ports:
       - "3001:3001"
-    env_file: ./backend/.env
+    env_file: /volume2/docker/developpeur/warhammer40k/.env
     environment:
       NODE_ENV: production
       PORT: "3001"
@@ -20,8 +24,7 @@ services:
     restart: unless-stopped
 
   warhammer-frontend:
-    build:
-      context: ./frontend
+    image: warhammer40k-frontend:latest
     ports:
       - "4201:80"
     depends_on:
