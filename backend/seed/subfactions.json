@@ -46,6 +46,24 @@
         "role": "Garde du Primarque",
         "description": "Garde personnelle de Guilliman, équipée d'armes-relique.",
         "wikiQuery": "Victrix Guard Ultramarines"
+      },
+      {
+        "name": "Marius Gage",
+        "role": "Premier Maître de Chapitre",
+        "description": "Premier Maître de la XIIIe Légion durant l'Hérésie d'Horus, Marius Gage servit aux côtés de Roboute Guilliman lors du Massacre de Calth et de la Croisade Ténébreuse de l'Imperium Secundus. Stratège émérite et rempart de la Légion, il porta la voix de son Primarque sur d'innombrables champs de bataille et coordonna la reconstruction des Ultramarines après les catastrophes orchestrées par les Word Bearers.",
+        "wikiQuery": "Marius Gage Ultramarines"
+      },
+      {
+        "name": "Remus Ventanus",
+        "role": "Capitaine de la 4e Compagnie",
+        "description": "Capitaine héros du Massacre de Calth, Remus Ventanus mena la résistance désespérée des Ultramarines contre la trahison des Word Bearers de Kor Phaeron. Sa défense de la cité fortifiée de Leptius Numinus et sa contre-attaque tactique sauvèrent des millions de vies impériales et lui valurent le titre de Hero of Calth, gravé dans les annales de la Légion.",
+        "wikiQuery": "Remus Ventanus Ultramarines"
+      },
+      {
+        "name": "Tarasha Euten",
+        "role": "Chamberlain Princeps de Macragge",
+        "description": "Mortelle de confiance et Chamberlain Princeps de Macragge, Tarasha Euten éleva Roboute Guilliman dès l'enfance et demeura à ses côtés durant les heures sombres de l'Hérésie. Voix de la sagesse civile dans une époque de fureur martiale, elle incarna l'idéal ultramarien d'une civilisation où l'art de gouverner valait l'art de la guerre.",
+        "wikiQuery": "Tarasha Euten Ultramarines"
       }
     ]
   },
@@ -96,6 +114,24 @@
         "role": "High Chaplain",
         "description": "Le Grand Chapelain, exécuteur miséricordieux des frères perdus.",
         "wikiQuery": "Astorath Blood Angels"
+      },
+      {
+        "name": "Azkaellon",
+        "role": "Capitaine de la Sanguinary Guard",
+        "description": "Capitaine de la Sanguinary Guard durant l'Hérésie, Azkaellon fut le garde le plus fidèle de Sanguinius et combattit aux côtés du Grand Ange jusqu'aux portes mêmes du Vengeful Spirit. Survivant rare du Siège de Terra parmi les chevaliers ailés dorés, il porta le deuil de son Primarque et veilla sur l'héritage du Sanguinor jusqu'à ses dernières heures.",
+        "wikiQuery": "Azkaellon Sanguinary Guard"
+      },
+      {
+        "name": "Raldoron",
+        "role": "Premier Capitaine, Chapter Master",
+        "description": "Premier Capitaine et Chapter Master de la IXe Légion, Raldoron fut le bras droit martial de Sanguinius durant la Grande Croisade et l'Hérésie d'Horus. Vétéran des campagnes contre les Nephilim et témoin du Massacre de Signus, il survécut au Siège de Terra et devint le premier Maître de Chapitre des Blood Angels post-Codex, garant de la mémoire de leur Primarque assassiné.",
+        "wikiQuery": "Raldoron Blood Angels"
+      },
+      {
+        "name": "Mkani Kano",
+        "role": "Codicier, Frère de la Bibliothèque",
+        "description": "Psyker des Blood Angels durant l'Hérésie, Mkani Kano combattit la corruption psychique semée par les démons de Slaanesh lors du Massacre de Signus. Témoin de la première manifestation de la Soif Rouge et de la Rage Noire, il consigna les premières descriptions de la double malédiction génétique qui hanterait les fils de Sanguinius pour les dix millénaires à venir.",
+        "wikiQuery": "Mkani Kano Blood Angels"
       }
     ]
   },
@@ -152,6 +188,30 @@
         "role": "Élite motorisée",
         "description": "Cavaliers d'élite chassant les Tombés.",
         "wikiQuery": "Ravenwing Black Knights"
+      },
+      {
+        "name": "Corswain",
+        "role": "Equerry du Lion, Paladin de la Première Légion",
+        "description": "Equerry du Primarque Lion El'Jonson et chevalier-paladin de la Ire Légion, Corswain incarna l'idéal chevaleresque des Dark Angels durant l'Hérésie d'Horus. Combattant légendaire à la Bataille de Perditus et lors de la défense de Terra, il porta seul la bannière de la Légion lorsque le Lion s'enfonça dans ses brumes silencieuses, et devint la conscience publique d'une fraternité dévorée par ses secrets.",
+        "wikiQuery": "Corswain Dark Angels"
+      },
+      {
+        "name": "Holguin",
+        "role": "Master of the Deathwing, Chevalier d'Hiver",
+        "description": "Master of the Deathwing durant l'Hérésie, Holguin commanda l'élite vétéran de la Ire Légion vêtue d'armures d'os blanc en mémoire des chevaliers tombés de Caliban. Compagnon d'armes du Lion El'Jonson lors d'innombrables guerres de la Grande Croisade, il établit les rites de deuil chevaleresque qui survécurent dans la Deathwing du M41.",
+        "wikiQuery": "Holguin Deathwing"
+      },
+      {
+        "name": "Nemiel",
+        "role": "Chapelain Interrogateur",
+        "description": "Chapelain de la Ire Légion durant l'Hérésie, Nemiel fut l'un des premiers Interrogator-Chaplains des Dark Angels, gardien de la foi et de la pureté doctrinale. Cousin et rival de Zahariel, il périt dans des circonstances troubles alors qu'il tentait d'exposer les premières fissures de la Chute de Caliban, devenant l'un des secrets enfouis des Hunting Lords.",
+        "wikiQuery": "Nemiel Dark Angels Chaplain"
+      },
+      {
+        "name": "Astelan",
+        "role": "Chapter Master, Premier Fallen",
+        "description": "Chapter Master des Dark Angels durant l'Hérésie et figure controversée de la Ire Légion, Merir Astelan combattit nominalement pour l'Imperium mais sa loyauté vacilla lors de la Chute de Caliban. Devenu l'un des premiers et plus anciens Fallen, il fut capturé puis interrogé pendant des millénaires, gardien obstiné de vérités hérétiques sur les véritables motifs du Lion.",
+        "wikiQuery": "Astelan Fallen Dark Angels"
       }
     ]
   },
@@ -208,6 +268,24 @@
         "role": "Rune Priest légendaire",
         "description": "Plus puissant Rune Priest du chapitre.",
         "wikiQuery": "Njal Stormcaller"
+      },
+      {
+        "name": "Gunnar Gunnhilt",
+        "role": "Wolf Lord, Jarl du Rout",
+        "description": "Wolf Lord et Jarl de l'une des Grandes Compagnies de la VIe Légion durant l'Hérésie, Gunnar Gunnhilt mena ses meutes aux côtés de Leman Russ lors de la Bataille de Prospero contre Magnus le Rouge. Guerrier brutal mais juste, il incarna l'idéal du Vlka Fenryka pré-Codex où la fureur tribale de Fenris se mêlait à la discipline impériale.",
+        "wikiQuery": "Gunnar Gunnhilt Space Wolves"
+      },
+      {
+        "name": "Othere Wyrdmake",
+        "role": "Rune Priest",
+        "description": "Rune Priest de la VIe Légion durant la Grande Croisade, Othere Wyrdmake fut un proche compagnon spirituel d'Ahriman des Thousand Sons avant la rupture entre les deux Légions. Son rôle ambigu dans la dénonciation de Magnus auprès du Sigillite et de Russ alimenta la tragédie qui mena au Brûlage de Prospero et à l'éternelle inimitié des fils de Fenris envers ceux de Tizca.",
+        "wikiQuery": "Othere Wyrdmake Rune Priest"
+      },
+      {
+        "name": "Geigor Fell-Hand",
+        "role": "Wolf Guard, Frère-Captain",
+        "description": "Wolf Guard d'élite de la VIe Légion durant l'Hérésie, Geigor Fell-Hand combattit aux côtés de Bjorn et Russ lors des grandes campagnes du Rout. Survivant de Prospero et de la chasse aux Légions traîtresses, sa mémoire fut consignée dans les sagas fenrisiennes comme exemple de la fureur disciplinée des premiers Vlka Fenryka.",
+        "wikiQuery": "Geigor Fell-Hand Space Wolves"
       }
     ]
   },
@@ -246,6 +324,30 @@
         "role": "Vétérans d'élite",
         "description": "Compagnie de vétérans portant des bolters spéciaux et munitions exotiques.",
         "wikiQuery": "Sternguard Veterans Imperial Fists"
+      },
+      {
+        "name": "Sigismund",
+        "role": "Premier Capitaine, Champion de l'Empereur",
+        "description": "Premier Capitaine de la VIIe Légion durant l'Hérésie d'Horus, Sigismund fut désigné Champion de l'Empereur par Rogal Dorn lui-même et combattit aux portes du Palais Impérial avec une ferveur fanatique. Duelliste sans égal, il terrassa nombre de champions traîtres lors du Siège de Terra et fonda plus tard les Black Templars en s'éloignant des décrets du Codex Astartes. Sa lame, le Black Sword, devint l'arme rituelle de tous les Champions de l'Éternelle Croisade.",
+        "wikiQuery": "Sigismund Black Templars"
+      },
+      {
+        "name": "Camba Diaz",
+        "role": "Capitaine du Quatrième",
+        "description": "Capitaine vétéran des Imperial Fists durant l'Hérésie, Camba Diaz commanda les forces loyalistes lors de défenses acharnées contre les Iron Warriors de Perturabo. Tacticien méthodique formé à l'école de Dorn, il incarna la doctrine défensive de la VIIe Légion et tomba en martyr lors de campagnes oubliées de la Grande Croisade trahie.",
+        "wikiQuery": "Camba Diaz Imperial Fists"
+      },
+      {
+        "name": "Pollux Demeter",
+        "role": "Capitaine, Maître de Phall",
+        "description": "Capitaine de la 22e Compagnie, Alexis Pollux survécut à la trahison de la flotte de Phall où les Iron Warriors massacrèrent les vaisseaux loyalistes. Rejoignant le Palais Impérial avec les survivants, il combattit aux côtés de Dorn lors du Siège de Terra et devint l'un des derniers gardiens de la mémoire des Imperial Fists pré-Hérésie.",
+        "wikiQuery": "Alexis Pollux Imperial Fists"
+      },
+      {
+        "name": "Boreas",
+        "role": "Tower Master, Maître des Bastions",
+        "description": "Tower Master des Imperial Fists, Boreas dirigea la fortification des points stratégiques du Palais Impérial durant le Siège de Terra. Architecte autant que guerrier, il transforma les murailles dornianes en pièges mortels pour les hordes traîtresses, perpétuant l'art du siège enseigné par le Primarque lui-même.",
+        "wikiQuery": "Boreas Imperial Fists Tower Master"
       }
     ]
   },
@@ -290,6 +392,12 @@
         "role": "Élite Terminator",
         "description": "1ère compagnie en armure Terminator, lance-flammes lourds.",
         "wikiQuery": "Firedrake Terminator Salamanders"
+      },
+      {
+        "name": "Artellus Numeon",
+        "role": "Equerry de Vulkan, Capitaine Pyre Guard",
+        "description": "Equerry du Primarque Vulkan et capitaine de la Pyre Guard, Artellus Numeon survécut au Massacre du Drop Site d'Isstvan V et porta le corps présumé mort de son père génétique à travers la galaxie en flammes. Croyant fermement au retour de Vulkan, il devint l'âme spirituelle des Salamanders dispersés et tomba en martyr en accomplissant sa quête de résurrection.",
+        "wikiQuery": "Artellus Numeon Salamanders"
       }
     ]
   },
@@ -322,6 +430,24 @@
         "role": "Bibliothécaires nomades",
         "description": "Psykers liés aux esprits des steppes et aux tempêtes psychiques.",
         "wikiQuery": "Stormseer White Scars"
+      },
+      {
+        "name": "Shiban Khan",
+        "role": "Khan de la 4e Brotherhood",
+        "description": "Khan des White Scars durant l'Hérésie d'Horus, Shiban Tachseer incarna la pureté de l'idéal chogorien du chasseur des steppes stellaires. Mutilé puis renaissant lors des guerres clandestines contre l'Alpha Legion, il combattit aux côtés de Jaghatai Khan jusqu'aux portes du Palais Impérial, gardien de l'âme tribale de la Ve Légion face à la corruption galactique.",
+        "wikiQuery": "Shiban Khan White Scars"
+      },
+      {
+        "name": "Targutai Yesugei",
+        "role": "Stormseer Suprême, Chief Librarian",
+        "description": "Stormseer suprême des White Scars et conseiller le plus écouté de Jaghatai Khan, Targutai Yesugei fut l'un des plus puissants psykers loyalistes de l'Hérésie. Maître des vents et des présages, il guida la Ve Légion à travers le Warp tortueux de la trahison et tomba en martyr en couvrant la retraite de son Primarque, sacrifice qui scella la loyauté définitive des Chogoriens à l'Empereur.",
+        "wikiQuery": "Targutai Yesugei Stormseer"
+      },
+      {
+        "name": "Torghun Khan",
+        "role": "Khan de la Brotherhood Terran",
+        "description": "Khan des White Scars d'origine terrane durant l'Hérésie, Torghun Khan dirigea les guerriers de la Ve Légion qui n'étaient pas nés sur Chogoris. Tenté par les promesses de Horus à travers les agents de l'Alpha Legion, il représenta la fracture identitaire entre Terrans et Chogoriens et paya cher son moment de doute lors des purges fratricides qui frappèrent la flotte de Jaghatai.",
+        "wikiQuery": "Torghun Khan White Scars"
       }
     ]
   },
@@ -354,6 +480,12 @@
         "role": "Hybride Techmarine-Chaplain",
         "description": "Rôle unique aux Iron Hands : prêtre et techmarine.",
         "wikiQuery": "Iron Father Iron Hands"
+      },
+      {
+        "name": "Shadrak Meduson",
+        "role": "Warleader, Architecte de la résistance loyaliste",
+        "description": "Capitaine de la 10e Compagnie de la Xe Légion et survivant du Massacre du Drop Site d'Isstvan V, Shadrak Meduson devint l'architecte de la guérilla loyaliste qui tourmenta les Légions traîtresses pendant des années après la mort de Ferrus Manus. Tactiquement brillant et froidement vengeur, il unifia les survivants brisés des Iron Hands, Salamanders et Raven Guard en une force de représailles mortelle, incarnant le serment du Mont Deluge avant d'être assassiné par les Sons of Horus.",
+        "wikiQuery": "Shadrak Meduson Iron Hands"
       }
     ]
   },
@@ -386,6 +518,18 @@
         "role": "Spécialistes assaut sauteur",
         "description": "Vétérans en jump packs, frappe verticale.",
         "wikiQuery": "Vanguard Veterans Raven Guard"
+      },
+      {
+        "name": "Branne Nev",
+        "role": "Commandant de la Garde Corbeau",
+        "description": "Commandant de la XIXe Légion durant l'Hérésie d'Horus, Branne Nev dirigea les forces de réserve qui sauvèrent Corvus Corax lors de l'extraction d'Isstvan V. Loyaliste indéfectible et tacticien furtif, il reconstruisit ce qu'il put de la Raven Guard décimée et combattit dans l'ombre des Légions traîtresses jusqu'au Siège de Terra.",
+        "wikiQuery": "Branne Nev Raven Guard"
+      },
+      {
+        "name": "Alvarex Maun",
+        "role": "Commandant, Maître des Ombres",
+        "description": "Commandant de la XIXe Légion durant l'Hérésie, Alvarex Maun incarna la doctrine de la guerre de l'ombre prêchée par Corvus Corax. Spécialiste des opérations clandestines et des frappes décapitantes, il harassa les arrières des Légions traîtresses durant la longue guerre civile et transmit aux successeurs de la Raven Guard l'art de la libération par l'invisible.",
+        "wikiQuery": "Alvarex Maun Raven Guard"
       }
     ]
   },
@@ -616,6 +760,18 @@
         "role": "Possédés-gladiateurs",
         "description": "Marines fusionnés avec démons mineurs de Khorne.",
         "wikiQuery": "Eightbound World Eaters"
+      },
+      {
+        "name": "Lhorke",
+        "role": "Premier Maître de Chapitre (Contemptor Dreadnought)",
+        "description": "Premier commandant de la XIIe Légion avant la redécouverte d'Angron sur Nuceria, Lhorke fut grièvement blessé et internement scellé dans un sarcophage Contemptor Dreadnought. Témoin amer de la chute de ses fils sous les Clous du Boucher, il assiste impuissant à la mutation de la Légion en horde berzerker pendant l'Hérésie, lucide jusque dans la fureur démentielle qui consume les War Hounds devenus World Eaters.",
+        "wikiQuery": "Lhorke World Eaters"
+      },
+      {
+        "name": "Skane",
+        "role": "Sergent de la 8e Compagnie",
+        "description": "Vétéran des War Hounds devenu officier sous Khârn pendant la Grande Croisade, Skane incarne la brutalité froide d'avant les Clous du Boucher universalisés. Il combat à Isstvan V puis durant les campagnes de Shadow Crusade aux côtés des Word Bearers, témoin direct de la descente d'Angron dans la démence sanguinaire qui livrera la Légion au Dieu du Sang.",
+        "wikiQuery": "Skane World Eaters Heresy"
       }
     ]
   },
@@ -658,6 +814,30 @@
         "role": "Garde personnelle de Mortarion",
         "description": "Garde Terminator du primarque, faux énergétiques.",
         "wikiQuery": "Deathshroud Terminators"
+      },
+      {
+        "name": "Nathaniel Garro",
+        "role": "Capitaine de Bataillon, futur Chevalier-Errant (loyaliste défecteur)",
+        "description": "Capitaine de la 7e Grande Compagnie de la Death Guard, Garro flaire la trahison à bord de l'Eisenstein et défie Mortarion en arrachant sa frégate à la flotte traîtresse pour porter à Terra l'avertissement de la chute d'Horus. Loyaliste jusqu'à la moelle, il devient l'un des premiers Chevaliers-Errants de Malcador le Sigillite, errant désormais sans Légion ni primarque, hanté par les frères qu'il a dû abandonner à la pourriture.",
+        "wikiQuery": "Nathaniel Garro"
+      },
+      {
+        "name": "Calas Typhon",
+        "role": "Premier Capitaine de la 1ère Grande Compagnie",
+        "description": "Avant de devenir le Hérault des Mouches Typhus, Calas Typhon commandait la 1ère Compagnie de la Death Guard et entretenait dans l'ombre de Mortarion un commerce occulte avec les puissances du Chaos. Architecte secret de la malédiction qui frappa la flotte dans le Warp, il livra ses propres frères aux Pouvoirs de la Peste pour offrir la Légion à Nurgle, scellant son destin de Seigneur des Hôtes Putrides.",
+        "wikiQuery": "Calas Typhon"
+      },
+      {
+        "name": "Caipha Morarg",
+        "role": "Equerry de Mortarion",
+        "description": "Ecuyer personnel du Primarque-Faucheur, Morarg sert d'ombre fidèle à Mortarion durant la Grande Croisade et l'Hérésie, témoin silencieux des doutes de son maître face aux mutations qui rongent la Légion. Sa loyauté à l'homme — et non au Primordial — fait de lui une figure tragique, voix raisonnable noyée dans la marée de spores qui transforme les Death Guard en Plague Marines.",
+        "wikiQuery": "Caipha Morarg"
+      },
+      {
+        "name": "Vorx",
+        "role": "Maître Siège de la 14e Grande Compagnie",
+        "description": "Officier vétéran de la Death Guard durant l'Hérésie, Vorx commande sa Grande Compagnie avec une discipline glaciale et survit à la transformation de la Légion en serviteurs putrides de Nurgle. Endurant des millénaires dans l'Œil de la Terreur, il deviendra l'une des dernières voix de la Légion ancienne, fidèle au Faucheur jusqu'à la nausée pestilentielle de l'éternité.",
+        "wikiQuery": "Vorx Death Guard"
       }
     ]
   },
@@ -700,6 +880,30 @@
         "role": "Élite Terminator",
         "description": "1ère compagnie en armure Cataphractii.",
         "wikiQuery": "Scarab Occult Terminators"
+      },
+      {
+        "name": "Hathor Maat",
+        "role": "Capitaine du Pavoni Fellowship",
+        "description": "Maître du Pavoni — la discipline psychique de la chair et du sang —, Hathor Maat incarne la vanité fatale des Thousand Sons : un esprit brillant obsédé par la perfection corporelle alors même que le Mal de la Chair dévore ses frères. Lors du Brûlement de Prospero, il combat les Space Wolves jusqu'à ce qu'Ahriman scelle son âme dans une armure vide par le Rubric, condamné à l'éternité comme spectre poussiéreux.",
+        "wikiQuery": "Hathor Maat"
+      },
+      {
+        "name": "Phosis T'kar",
+        "role": "Capitaine du Raptora Fellowship",
+        "description": "Maître du Raptora — la discipline de la télékinésie —, Phosis T'kar est le plus martial des Capitaines de la XVe Légion, défendant Tizca contre Russ aux côtés de Magnus. Sa fierté guerrière et son refus des chaînes d'Édit de Nikée font de lui une figure tragique, abattu lors du Brûlement de Prospero avant même que le Rubric ne puisse le sauver de l'oubli.",
+        "wikiQuery": "Phosis T'kar"
+      },
+      {
+        "name": "Khalophis",
+        "role": "Capitaine du Pyrae Fellowship",
+        "description": "Maître du Pyrae — la discipline du feu psychique —, Khalophis commande l'Ordo Reductor des Thousand Sons et brûle des cités entières au nom de l'Imperium durant la Grande Croisade. Son obsession pyromaniaque trouve son terme dans les cendres mêmes de Tizca, consumé par les flammes de Prospero qu'il avait tant aimées.",
+        "wikiQuery": "Khalophis Thousand Sons"
+      },
+      {
+        "name": "Yeb",
+        "role": "Frère cadet de Magnus, érudit psyker",
+        "description": "Frère de sang et confident de Magnus le Rouge, Yeb veille sur les bibliothèques de Tizca et partage les visions de son primarque sur le destin sombre des psykers humains. Effacé du canon par la dévastation de Prospero, il symbolise la perte de l'innocence intellectuelle des Thousand Sons avant que le Rubric d'Ahriman ne réduise la Légion à de la poussière hurlante.",
+        "wikiQuery": "Yeb Thousand Sons"
       }
     ]
   },
@@ -736,6 +940,30 @@
         "role": "Squad signature",
         "description": "Marines avec armes soniques, instruments-armes ravageurs.",
         "wikiQuery": "Noise Marines Emperor's Children"
+      },
+      {
+        "name": "Saul Tarvitz",
+        "role": "Capitaine du 10e Compagnie (loyaliste)",
+        "description": "Capitaine respecté des Emperor's Children resté fidèle à l'Empereur, Tarvitz est l'homme qui transmet l'avertissement du bombardement virique d'Isstvan III aux Astartes loyalistes piégés en surface. Héros tragique du Choral City, il mène la résistance désespérée des loyalistes contre Eidolon et Lucius avant d'être trahi et exécuté par ses propres frères devenus les premiers Noise Marines.",
+        "wikiQuery": "Saul Tarvitz"
+      },
+      {
+        "name": "Eidolon",
+        "role": "Lord Commander de la IIIe Légion",
+        "description": "Lord Commander arrogant et ambitieux des Emperor's Children, Eidolon ouvre l'Hérésie en bombardant Isstvan III de virus et trahit ses frères loyalistes sans hésitation. Tué par Garviel Loken puis ramené à une non-vie blasphématoire par les apothicaires de Fabius Bile, il survit comme une caricature gémissante de lui-même, voix démesurée d'un Slaanesh moqueur.",
+        "wikiQuery": "Eidolon Emperor's Children"
+      },
+      {
+        "name": "Marius Vairosean",
+        "role": "Capitaine, premier Maître Cacophoniste",
+        "description": "Capitaine fidèle à Fulgrim, Marius Vairosean reçoit la bénédiction de Slaanesh sous forme d'une fusion blasphématoire entre son corps et son bolter sonique, devenant le premier vrai Noise Marine de la Légion. Pendant l'Hérésie, il transforme la guerre en symphonie discordante, archétype de la chute des Enfants de l'Empereur dans l'extase auditive et la perfection corrompue.",
+        "wikiQuery": "Marius Vairosean"
+      },
+      {
+        "name": "Fabius Bile",
+        "role": "Apothicaire-Chef, Chirurgien-Primogéniteur",
+        "description": "Apothicaire-Chef de la IIIe Légion, Fabius Bile transgresse toutes les lois de la chair durant l'Hérésie pour percer les secrets de la création des Astartes. Ses expérimentations sur les survivants d'Isstvan III, sa résurrection d'Eidolon et son obsession pour la perfection génétique font de lui le Primogéniteur, savant fou éternel qui survivra dix mille ans à cloner sa propre folie.",
+        "wikiQuery": "Fabius Bile"
       }
     ]
   },
@@ -766,6 +994,36 @@
         "role": "Élite vétérane",
         "description": "Vétérans choisis du Warmaster.",
         "wikiQuery": "Chosen Black Legion"
+      },
+      {
+        "name": "Garviel Loken",
+        "role": "Capitaine du 10e Compagnie des Luna Wolves (loyaliste, futur Chevalier-Errant)",
+        "description": "Capitaine emblématique des Luna Wolves et favori d'Horus avant la chute, Loken refuse la trahison et survit miraculeusement au virus-bombardement d'Isstvan III. Brisé puis recueilli par Malcador, il devient l'un des premiers Chevaliers-Errants, fantôme erratique de la Légion avant la Légion, témoin vivant de ce que furent les Sons of Horus avant qu'ils ne deviennent les damnés de la Black Legion.",
+        "wikiQuery": "Garviel Loken"
+      },
+      {
+        "name": "Tarik Torgaddon",
+        "role": "Capitaine du 2e Compagnie des Luna Wolves (loyaliste)",
+        "description": "Frère d'armes inséparable de Loken et lame de la Mournival, Torgaddon refuse la trahison de son primarque et combat à ses côtés sur Isstvan III. Tué par Horus Aximand au sommet du Choral City, son rire fauché par la trahison fraternelle devient l'un des symboles les plus déchirants de la chute des Luna Wolves.",
+        "wikiQuery": "Tarik Torgaddon"
+      },
+      {
+        "name": "Iacton Qruze",
+        "role": "Capitaine vétéran (loyaliste, Le Demi-Entendu)",
+        "description": "Plus vieux des Luna Wolves, surnommé Le Demi-Entendu pour ses radotages ignorés, Qruze est le seul de la Mournival ancienne à survivre à l'Hérésie. Évacué par l'Eisenstein avec Garro, il rejoint les Chevaliers-Errants et porte sur ses épaules la mémoire de la Légion telle qu'elle fut sous l'Empereur, avant qu'Horus ne la précipite dans l'abîme.",
+        "wikiQuery": "Iacton Qruze"
+      },
+      {
+        "name": "Ezekyle Abaddon",
+        "role": "Premier Capitaine, membre de la Mournival",
+        "description": "Premier Capitaine des Luna Wolves et frère adoptif d'Horus, le jeune Abaddon est le glaive le plus aiguisé de la Mournival traîtresse, exécutant fanatiquement la volonté du Maître de Guerre durant toute l'Hérésie. De Davin à Terra, il forge sur les ossements de ses frères loyalistes la légende meurtrière qui le mènera, dix millénaires plus tard, à devenir Warmaster de la Black Legion.",
+        "wikiQuery": "Ezekyle Abaddon"
+      },
+      {
+        "name": "Horus Aximand",
+        "role": "Capitaine du 5e Compagnie, membre de la Mournival (Little Horus)",
+        "description": "Surnommé Little Horus pour sa ressemblance frappante avec le Maître de Guerre, Aximand est le membre le plus pensif et tourmenté de la Mournival traîtresse. C'est lui qui exécute Tarik Torgaddon sur Isstvan III, geste qui le hantera jusqu'à la fin de l'Hérésie, son visage tailladé étant la cicatrice extérieure d'une âme rongée par le remords du fratricide.",
+        "wikiQuery": "Horus Aximand"
       }
     ]
   },
@@ -802,6 +1060,18 @@
         "role": "Chapelains chaotiques",
         "description": "Prêcheurs des Dieux Sombres menant les rituels.",
         "wikiQuery": "Dark Apostle Word Bearers"
+      },
+      {
+        "name": "Argel Tal",
+        "role": "Capitaine de la Gal Vorbak (Damnés de Lorgar)",
+        "description": "Capitaine de la Serrated Sun Chapter, Argel Tal est envoyé par Lorgar dans l'Œil de la Terreur où son corps devient la première coquille de la Gal Vorbak — les Damnés, possédés volontaires partagés avec un démon. Tragique martyr du Pèlerinage des Damnés, il combat à Isstvan V et lors du massacre de Calth, déchiré entre l'amour pour son primarque et l'horreur de ce qu'il est devenu.",
+        "wikiQuery": "Argel Tal"
+      },
+      {
+        "name": "Kor Phaeron",
+        "role": "Black Cardinal, Premier Capitaine, père adoptif de Lorgar",
+        "description": "Mentor humain de Lorgar sur Colchis avant la rencontre avec l'Empereur, Kor Phaeron survit à l'augmentation tardive en Astartes diminué et fanatique, devenant le Black Cardinal de la Légion. Architecte spirituel de la corruption des Word Bearers, il commande la flotte traîtresse durant le massacre de Calth, jouant son rôle d'apôtre des Quatre dans l'ombre tutélaire de Lorgar.",
+        "wikiQuery": "Kor Phaeron"
       }
     ]
   },
@@ -832,6 +1102,18 @@
         "role": "Spécialistes du siège",
         "description": "Officiers ingénieurs commandant les opérations de siège.",
         "wikiQuery": "Warsmith Iron Warriors"
+      },
+      {
+        "name": "Forrix",
+        "role": "Triarche, Premier Capitaine (Warsmith vétéran)",
+        "description": "Le plus ancien des trois Triarches commandant les Iron Warriors sous Perturabo, Forrix incarne la doctrine de siège brutale et l'endurance stoïque de la IVe Légion. Vétéran de mille sièges depuis la Grande Croisade jusqu'à Tallarn et au-delà, son nom devient synonyme du génie tactique froid qui érige les fils de l'Olympe en bourreaux infatigables de la galaxie.",
+        "wikiQuery": "Forrix Iron Warriors"
+      },
+      {
+        "name": "Kroeger",
+        "role": "Triarche (Warsmith)",
+        "description": "Membre de la triade originelle des Triarches d'Iron Warriors aux côtés de Forrix et Berossus, Kroeger commande ses Grandes Compagnies avec une violence directe qui tranche avec la patience méthodique de Perturabo. Sa rage devient une faille que les Pouvoirs du Chaos exploitent, le menant peu à peu à la corruption qui consume la Légion durant et après l'Hérésie.",
+        "wikiQuery": "Kroeger Iron Warriors"
       }
     ]
   },
@@ -854,6 +1136,24 @@
         "role": "Primarque (un des deux jumeaux)",
         "description": "Jumeau-primarque, un d'eux a été 'tué' par Guilliman mais lequel ?",
         "wikiQuery": "Alpharius primarch"
+      },
+      {
+        "name": "Ingo Pech",
+        "role": "Premier Capitaine de la XXe Légion",
+        "description": "Premier Capitaine officiel des Alpha Legion sous le double primarque Alpharius-Omegon, Ingo Pech orchestre les opérations clandestines de la Légion durant la Grande Croisade et l'Hérésie. Maître du subterfuge, il incarne la doctrine cellulaire des Hydra : un nom, mille visages, et l'allégeance ultime à un dessein que seuls les jumeaux connaissent vraiment.",
+        "wikiQuery": "Ingo Pech"
+      },
+      {
+        "name": "Mathias Herzog",
+        "role": "Capitaine, Maître de Flotte",
+        "description": "Capitaine de la XXe Légion et commandant naval de confiance, Mathias Herzog dirige les manœuvres orbitales des Alpha Legion lors de leurs campagnes les plus retorses durant l'Hérésie. Tireur de ficelles dans l'ombre, il efface autant de preuves de son existence qu'il en laisse, fidèle au principe selon lequel un guerrier de l'Hydra ne doit jamais être le visage qu'il porte.",
+        "wikiQuery": "Mathias Herzog"
+      },
+      {
+        "name": "Sheed Ranko",
+        "role": "Capitaine de la 1ère Compagnie de Lernaean Terminators",
+        "description": "Capitaine de l'élite Lernaean — les Terminators d'Alpha Legion —, Sheed Ranko mène les frappes décapitantes les plus audacieuses de la XXe Légion durant l'Hérésie. Son nom même est un masque potentiel, son existence un piège : qui le tue n'a peut-être tué qu'un guerrier portant ce nom, et la Légion continue, indifférente, à tisser sa toile sur la galaxie.",
+        "wikiQuery": "Sheed Ranko"
       }
     ]
   },
@@ -890,6 +1190,18 @@
         "role": "Sauteurs d'élite",
         "description": "Marines en jump packs, frappes nocturnes verticales.",
         "wikiQuery": "Raptors Night Lords"
+      },
+      {
+        "name": "Krieg Acerbus",
+        "role": "Capitaine, le Boucher d'Atlas",
+        "description": "Capitaine sanguinaire des Night Lords durant l'Hérésie, Krieg Acerbus se taille une réputation de boucher au sein même d'une Légion qui en compte des milliers. Hache-bourreau à deux mains à la main, il représente la pure expression de la terreur incarnée que Konrad Curze a fait de son héritage : non plus la justice par la peur, mais la peur pour elle-même.",
+        "wikiQuery": "Krieg Acerbus"
+      },
+      {
+        "name": "Variel le Faucheur",
+        "role": "Apothicaire-Chef de la 10e Compagnie",
+        "description": "Apothicaire de la VIIIe Légion détaché auprès du Premier Sergent Sevatar, Variel allie compétence médicale froide et goût pour la dissection que son surnom — Le Faucheur — résume sans équivoque. Son intelligence clinique le distingue parmi les Night Lords, marqué par une lucidité presque inhumaine sur la dégénérescence de sa propre Légion durant l'Hérésie et l'Âge des Ténèbres.",
+        "wikiQuery": "Variel the Reaper Night Lords"
       }
     ]
   },
