@@ -670,7 +670,7 @@
     "type": "regiment",
     "description": "Régiment cérémoniel composé du premier-né de chaque famille de Vostroya, dette éternelle à l'Empereur.",
     "loreShort": "Aristocratie martiale, fusils ouvragés.",
-    "loreLong": "Vostroya refusa d'envoyer ses soldats à la défense de Terra pendant l'Hérésie. Honteux de leur lâcheté, les Vostroyens jurèrent depuis d'envoyer chaque premier-né de chaque famille servir dans l'Astra Militarum à perpétuité.",
+    "loreLong": "Sur le monde-forteresse de Vostroya, loin au-delà de l'Œil de la Terreur, une dette vieille de dix millénaires pèse sur chaque foyer. Lorsque l'Hérésie d'Horus embrasait l'Imperium, Vostroya refusa de lever des régiments, préférant garder ses fils dans les manufactorums. La honte ne s'est jamais dissipée. Depuis lors, la Loi de l'Offrande contraint chaque famille, des plus humbles jusqu'aux Techtriarchs eux-mêmes, à livrer son premier-né aux rangs des Firstborn, sans exception ni rachat possible. Ces soldats ne combattent pas par ordre mais par pénitence, et cette conviction forge entre eux une fraternité d'une intensité rare dans les rangs de l'Astra Militarum. Lorsque la Grande Faille déchira l'Imperium, les Vostroyans envoyèrent leurs régiments dans le vide obscurci, presque aveugles, plutôt que de répéter le silence honteux de leurs ancêtres.",
     "homeworld": "Vostroya",
     "wikiQuery": "Vostroyan Firstborn"
   },
@@ -681,7 +681,7 @@
     "type": "regiment",
     "description": "Régiment de drill parfait, infanterie en uniforme bleu rigoureux, maîtres du tir disciplíné.",
     "loreShort": "Discipline impeccable, lignes de tir parfaites.",
-    "loreLong": "Mordian est un monde tidalement bloqué où une moitié vit dans l'obscurité éternelle. Les régiments mordiens sont l'incarnation de la discipline militaire prussienne : drill parfait, uniformes immaculés, lignes de tir géométriques.",
+    "loreLong": "Sur le monde perpétuellement plongé dans les ténèbres de Mordian, la discipline n'est pas une vertu — c'est une nécessité de survie gravée dans chaque soldat au fer rouge. Les régiments de l'Iron Guard en sont l'expression la plus aboutie : des hommes et des femmes taillés par des années d'entraînement impitoyable, de manœuvres de parade répétées jusqu'à l'automatisme et de feu réel tiré sans trembler. Leurs uniformes bleus immaculés et leurs rangs parfaitement alignés trompent les non-initiés, qui y voient de la cérémonie là où ne réside que de la létalité froide et calculée. Formés sous l'autorité absolue des Tétrarchies qui gouvernaient Mordian d'une main de bronze, ces soldats vouent à leur hiérarchie une loyauté qui frise le fanatisme, tenant la ligne là où d'autres régiments auraient depuis longtemps cédé à la panique. Depuis la formation du Dark Imperium, leur monde natal subit les assauts répétés des Thousand Sons, mais la garde mordienne tient — inflexible, implacable, et aussi froide que les rues sans soleil qui l'ont engendrée.",
     "homeworld": "Mordian",
     "wikiQuery": "Mordian Iron Guard"
   },
@@ -692,7 +692,7 @@
     "type": "regiment",
     "description": "Cavaliers du désert Tallarn, maîtres de la guérilla et des frappes rapides en territoire hostile.",
     "loreShort": "Nomades du désert, guérilla et embuscades.",
-    "loreLong": "Tallarn fut empoisonné chimiquement par l'Iron Warrior Perturabo lors de l'Hérésie. Les survivants nomadisèrent dans les déserts toxiques et développèrent une expertise sans pareille en guerre du désert.",
+    "loreLong": "Né dans les étendues stériles que les Iron Warriors condamnèrent à l'aridité éternelle lors de l'Hérésie d'Horus, Tallarn n'a plus rien à offrir à l'Imperium que ses fils. Les Desert Raiders ont fait de cette malédiction une doctrine de guerre : maîtres de la guérilla mécanisée, ils frappent en formations blindées privilégiant la vitesse au détriment de la puissance brute, disparaissant dans les dunes avant que l'ennemi ne comprenne l'étendue du désastre. Leurs escadrons de Sentinelles et leurs tireurs d'élite armés d'un lasgun allongé, à la silhouette fluide propre à Tallarn, harcèlent sans relâche des adversaires qui ne les voient jamais vraiment venir. Les officiers, issus des chefs tribaux de leur monde natal, portent en eux cette philosophie ancestrale du désert : se fondre dans le vide, frapper comme la tempête de sable, et laisser pour seule trace l'étendue des ruines.",
     "homeworld": "Tallarn",
     "wikiQuery": "Tallarn warhammer"
   },
@@ -703,7 +703,7 @@
     "type": "regiment",
     "description": "Soldats endurcis du monde glaciaire Valhalla, vagues humaines insensibles aux pertes.",
     "loreShort": "Endurance glaciale, vagues humaines.",
-    "loreLong": "Valhalla est un monde glaciaire où survivre est déjà un acte héroïque. Quand les Orks envahirent et furent enfin repoussés, les Valhallans développèrent une mentalité de la guerre d'attrition : vagues humaines patientes, retranchement profond.",
+    "loreLong": "De la glace de Valhalla sont issus des soldats que ni le froid mordant ni le sang versé ne peuvent briser. Leur monde, jadis fertile, fut condamné par l'impact d'une comète qui le précipita hors de son orbite et le recouvrit d'un linceul de glace éternelle, forçant ses habitants à creuser des cités dans les entrailles gelées de la planète pour survivre. C'est là, dans l'obscurité et la famine, que naquit leur caractère de granit, trempé encore davantage lorsqu'une invasion Ork vint s'abattre sur un peuple déjà à genoux, qu'ils repoussèrent néanmoins au prix d'une guerre d'usure acharnée. Les Ice Warriors ne reculent jamais, n'abandonnent jamais leurs lignes, et nourrissent envers les Orks une haine ancestrale et viscérale que les siècles n'ont fait qu'aiguiser. Depuis la formation de la Grande Faille, Valhalla se retrouve isolée au cœur de l'Imperium Nihilus, mais là où d'autres mondes succombent à l'hérésie et aux prédateurs xénos, ses régiments tiennent, avancent, et répondent désormais à l'appel de Dante pour la campagne de l'Angel's Halo.",
     "homeworld": "Valhalla",
     "wikiQuery": "Valhallan Ice Warriors"
   },
@@ -914,7 +914,7 @@
     "type": "legion",
     "description": "Légion III vouée à Slaanesh, en quête perpétuelle de la perfection sensorielle et du plaisir.",
     "loreShort": "Noise Marines de Fulgrim, perfection corrompue.",
-    "loreLong": "La IIIème légion, primarque Fulgrim, recherchait la perfection en toute chose. Cette obsession les rendit vulnérables à Slaanesh : Fulgrim fut possédé par un démon en touchant un sabre maudit et corrompit toute sa légion.",
+    "loreLong": "Autrefois porteurs du gonfalon impérial, hérauts choisis parmi les fils de la noblesse terrienne pour leur raffinement autant que pour leur excellence martiale, les Emperor's Children furent la IIIe Légion avant de sombrer dans l'abomination. Réunis sous Fulgrim, leur Primarque à la beauté maudite, ils cultivaient déjà une quête obsessionnelle de la perfection, transcendant les attentes de l'Empereur lui-même sur chaque champ de bataille. La Hérésie d'Horus les brisa et les transfigura : devenus esclaves de Slaanesh, le Prince Obscène, ils troquèrent l'idéal contre l'excès, la discipline contre la débauche sensorielle la plus exquise et la plus monstrueuse. Ce qui les distingue entre tous les renégats, c'est cette corruption née de la grandeur — nulle Légion ne tomba de si haut, ni ne chérit sa chute avec autant de volupté. Aujourd'hui connus comme les Seigneurs de la Profligature, ils parcourent la galaxie en symphonies de souffrance et d'extase, persuadés que chaque atrocité commise est une offrande de beauté parfaite à leur dieu.",
     "primarch": "Fulgrim (Daemon-Primarch)",
     "primarchWikiQuery": "Fulgrim primarch",
     "currentLeader": "Lucius the Eternal",
@@ -974,7 +974,7 @@
     "type": "legion",
     "description": "Légion XVI sous Abaddon le Conquérant, fer de lance des 13 Croisades Noires contre l'Imperium.",
     "loreShort": "Successeurs des Sons of Horus, le Maître de Guerre.",
-    "loreLong": "Anciennement Sons of Horus, renommés Black Legion par Abaddon après la mort d'Horus à Terra. Devenue la plus grande coalition Chaos. La 13ème Croisade Noire, sous Abaddon, brisa Cadia et déchira la galaxie en deux.",
+    "loreLong": "Nés des cendres des Sons of Horus après la défaite d'Horus sur Terra, les guerriers qui allaient devenir la Black Legion portèrent longtemps le deuil de leur maître déchu, errant dans l'Œil de la Terreur comme des damnés sans maître. C'est Ezekyle Abaddon, Premier Capitaine de la légion disparue, qui brisa ce deuil stérile en forgeant une nouvelle entité, refusant d'être le simple héritier d'un échec et proclamant une guerre sans fin contre l'Imperium. La Black Legion se distingue par son ambition singulière : elle ne cherche pas à venger Horus, mais à accomplir là où il a failli, fédérant sous ses bannières noires et or des Astartes renégats issus de toutes les légions traîtresses. Dispersée aux quatre coins de la galaxie en innombrables warbandsindépendantes, elle se soude en une puissance terrifiante lorsque Abaddon le Conquérant lève son étendard pour mener une nouvelle Croisade Noire. Treize fois déjà, cette marée de fureur et de corruption a déferlé sur les frontières de l'Imperium, chaque campagne gravant un peu plus profond le sceau des Dieux du Chaos sur le destin de l'humanité.",
     "primarch": "Horus (mort) / Abaddon (Warmaster actuel)",
     "primarchWikiQuery": "Horus primarch Sons",
     "currentLeader": "Abaddon the Despoiler",
@@ -1034,7 +1034,7 @@
     "type": "legion",
     "description": "Légion XVII première à tomber, prêcheurs zélés des Dieux du Chaos.",
     "loreShort": "Apôtres sombres de Lorgar.",
-    "loreLong": "La XVIIème légion, primarque Lorgar, fut la première à tomber au Chaos — bien avant l'Hérésie. Lorgar voulait à tout prix vénérer un dieu, et l'Empereur le rejeta brutalement. Premier Apôtre Sombre Erebus orchestra l'Hérésie elle-même.",
+    "loreLong": "Avant même que le premier pacte ne fût scellé avec les Dieux du Chaos, la XVIIe Légion brûlait déjà d'une ferveur que ses frères regardaient avec malaise. Issus des fils d'ennemis vaincus, élevés dans la honte et la rédemption forcée, les Word Bearers n'allaient pas à la guerre avec la rectitude des autres Légions, mais avec la rage froide de ceux qui n'ont rien à perdre et tout à prouver. Lorgar, leur primarque découvert sur le monde féodal de Colchis, avait consacré sa vie entière au culte de l'Empereur comme d'un dieu vivant, avant que ce même Empereur ne lui ordonne d'abandonner sa foi, brisant en lui quelque chose d'irréparable. Ce fut la première Légion à trahir, la première à se prosterner devant le Chaos Individu, et cette priorité dans la chute demeure leur fierté la plus sombre. Sur le champ de bataille, leurs Dark Apostles, prêcheurs corrompus héritiers des Chapelains, galvanisent troupes et cultistes avec une éloquence venimeuse, transformant chaque assaut en acte de dévotion. Les Word Bearers ne combattent pas pour conquérir, ils combattent pour convertir.",
     "primarch": "Lorgar (Daemon-Primarch)",
     "primarchWikiQuery": "Lorgar primarch Word Bearers",
     "currentLeader": "Erebus",
@@ -1124,7 +1124,7 @@
     "type": "legion",
     "description": "Légion XX maîtres de l'infiltration et de la duplicité, jouant un jeu millénaire dont le but reste flou.",
     "loreShort": "Hydra dominatus, secrets et ruse.",
-    "loreLong": "La XXème et dernière légion, dirigée par les jumeaux primarques Alpharius et Omegon. Maîtres de l'infiltration, espionnage, sabotage et désinformation, leur but profond reste mystérieux. Tous les Alpha Legionnaires se font appeler 'Alpharius'.",
+    "loreLong": "Née dans le secret absolu sur ordre direct de l'Empereur, la Vingtième Légion fut façonnée dans l'ombre bien avant que quiconque ne soupçonne son existence, opérant sous le simple nom de code Alpha lors des premières heures de la Grande Croisade. Ses guerriers ne conquièrent pas — ils infiltrent, sabotent, manipulent, tissant des toiles d'intrigues si profondes que leurs ennemis s'effondrent souvent avant d'avoir aperçu un seul légionnaire. Leur secret le mieux gardé demeure celui de leurs deux primarchies, Alpharius et son jumeau Omegon, une dualité que la Légion protège avec une férocité sans égale, au point que l'identité même de ses membres reste un mystère délibéré — chaque Alpha Légionnaire peut se prétendre Alpharius, et tous le font. Là où d'autres Légions du Chaos avancent dans le fracas de la gloire ou la fureur de la corruption, l'Alpha Legion s'efface, se glisse dans les failles des loyautés, revêt parfois l'armure même des Astartes servants de l'Empereur pour mieux le poignarder de l'intérieur. Leur véritable but, leurs véritables maîtres, la nature exacte du jeu millénaire qu'ils poursuivent — tout cela demeure enveloppé d'un silence que même les archives les plus profondes de l'Inquisition n'ont jamais su percer.",
     "primarch": "Alpharius / Omegon",
     "primarchWikiQuery": "Alpharius Omegon Alpha Legion",
     "homeworld": "Inconnu (multiples cellules)",
@@ -1212,7 +1212,7 @@
     "type": "craftworld",
     "description": "Vaisseau-monde le plus proche de l'Œil de la Terreur, riche en visionnaires et farseers.",
     "loreShort": "L'Œil qui Veille, fardeau prophétique.",
-    "loreLong": "Ulthwé est le vaisseau-monde Aeldari le plus proche de l'Œil de la Terreur, ce qui amplifie le don prophétique de ses farseers. Leur élite Black Guardians est composée de civils si endurcis qu'ils égalent presque des Aspect Warriors.",
+    "loreLong": "Suspendu dans l'attraction inexorable de l'Œil de la Terreur, le vaisseau-monde Ulthwé — dont le nom complet, Ulthanash Shelwé, signifie le Chant d'Ulthanash — vogue à la lisière de la damnation depuis la Chute des Aeldari. Cette proximité maudite avec les royaumes du Chaos a façonné son peuple autant qu'elle l'a éprouvé : nulle part ailleurs dans les craftworlds survivants on ne trouve une telle concentration de Farseers et de Warlocks, dont les dons psychiques, exacerbés par le rayonnement warp ambiant, leur permettent de lire les fils du destin avec une précision redoutable. Pour pallier le manque de Guerriers d'Aspect qu'engendre cette vocation visionnaire, Ulthwé entretient une armée permanente d'élite, les Gardiens Noirs, dont les armures sombres sont devenues le symbole d'une résistance acharnée contre les incursions incessantes de l'Œil. Le Conseil des Voyants, jadis guidé par le légendaire Eldrad Ulthran, tisse dans l'ombre une toile d'interventions au sein des affaires des autres races, orientant le cours des événements parfois sur des siècles — rendant les motivations d'Ulthwé opaques aux yeux des non-initiés, y compris ceux de l'Imperium. Seul ce craftworld cultive également les Dreamstones, pierres oniriques destinées à protéger l'âme de ses habitants des griffes de Slaanesh jusque dans leur sommeil.",
     "currentLeader": "Eldrad Ulthran",
     "currentLeaderRole": "Plus puissant Farseer Aeldari",
     "wikiQuery": "Craftworld Ulthwe Eldar",
@@ -1244,7 +1244,7 @@
     "type": "craftworld",
     "description": "Vaisseau-monde des Wild Riders, organisé en Tribus de Sang, célèbre pour ses jetbikes.",
     "loreShort": "Cavaliers sauvages, vitesse et liberté.",
-    "loreLong": "Saim-Hann préserve le mode de vie tribal des anciens Aeldari avant la Chute. Organisé en Wild Rider Clans, il privilégie la mobilité totale via jetbikes et vyper.",
+    "loreLong": "Saim-Hann, le vaisseau-monde du Serpent Cosmique, vit selon une vérité que les autres Aeldari jugent dangereuse : la Voie peut se plier, s'étirer, laisser place à l'instinct et au vent du vide. Organisés en clans féodaux que l'on nomme les Wild Riders, ses guerriers ne connaissent pas de commandement central imposé, mais une hiérarchie de sang où chaque famille décide seule de partir en guerre, guidant ensuite son chef sur le champ de bataille. Leurs jetbikes strient les lignes ennemies comme des lames, et les jeunes Gardiens se défient sans relâche dans des joutes de vitesse qui ne s'arrêtent qu'à la mort ou à la gloire. Revêtus d'une armure rouge zébrée de noir et de blanc, ils portent en eux quelque chose qui rappelle les Exodites primitifs, un écho des temps d'avant la Chute que les autres vaisseaux-mondes regardent avec une méfiance mêlée de mépris. Car c'est précisément cette liberté, cette ivresse du mouvement et de l'instant, qui jadis précipita la ruine de toute une civilisation.",
     "wikiQuery": "Saim-Hann craftworld Eldar",
     "notableUnits": [
       {
@@ -1268,7 +1268,7 @@
     "type": "craftworld",
     "description": "Vaisseau-monde dévasté par les Tyranides, peuplé majoritairement de Spirit Hosts (esprits).",
     "loreShort": "Vaisseau des morts, fantômes guerriers.",
-    "loreLong": "Iyanden fut presque anéanti par la Hive Fleet Kraken au M41. Ses armées sont composées de Wraith constructs animés par les âmes des morts piégées dans des cristaux d'âme.",
+    "loreLong": "Autrefois le plus vaste et le plus peuplé des vaisseaux-monde aeldari, Iyanden n'est plus aujourd'hui qu'un sanctuaire hanté, saigné à blanc par le passage de la Hive Fleet Kraken. Les pertes furent si catastrophiques que les vivants ne suffisent plus à tenir les ponts de guerre, et les armées d'Iyanden marchent désormais portées par les morts — Wraithguard et Wraithlords animés par les âmes tirées de l'Infinity Circuit, ces fantômes de Wraithbone que les autres peuples de la galaxie ont appris à redouter sous le nom de Ghost Warriors. Pourtant, derrière ce silence funèbre, la détermination des survivants reste intacte : Iyanden n'a pas renoncé au rêve impérial qui le guidait depuis la Chute, celui de rebâtir un empire aeldari capable d'illuminer à nouveau la galaxie. Ce sont les Farseers d'Iyanden qui, en M33, orientèrent les premiers grands efforts de récupération des Waystones sur les Crone Worlds, posant avec Mehlendri Silversoul et le Bonesinger Invaril Brightshard les fondations spirituelles sur lesquelles repose aujourd'hui la survie de tout leur peuple. Le vaisseau-monde avance, chargé de ses morts comme d'une armée en attente, entre le deuil et la promesse d'une résurrection.",
     "currentLeader": "Yriel",
     "currentLeaderRole": "Autarch corsaire",
     "wikiQuery": "Iyanden craftworld Eldar",
@@ -1372,7 +1372,7 @@
     "type": "hivefleet",
     "description": "Première flotte tyranide rencontrée par l'Imperium, anéantie à la Bataille de Macragge.",
     "loreShort": "Première vague, dévorée par les Ultramarines.",
-    "loreLong": "La Hive Fleet Behemoth fut le premier contact officiel de l'Imperium avec les Tyranides au M41. Anéantie à la Bataille de Macragge par les Ultramarines de Marneus Calgar (au prix de la 1ère Compagnie entière).",
+    "loreLong": "Avant même que l'Imperium ne comprît ce qui approchait, des mondes entiers avaient été réduits à des roches stériles, dépourvues jusqu'au dernier organisme bactérien — premiers silences d'une mort venue du bord oriental de la galaxie. La Hive Fleet Behemoth fut la première de son espèce à se déverser sur l'humanité, fonçant sans détour ni feinte à travers l'Ultima Segmentum, laissant derrière elle des systèmes entiers vidés de toute biomasse. Là où les flottes qui lui succédèrent déploieraient patience et ruse, Behemoth n'opposa qu'une charge aveugle et dévorante, d'une brutalité si absolue qu'elle épuisa ses propres réserves biologiques à mesure qu'elle progressait. C'est l'Inquisiteur Kryptman qui, récupérant un data-codex enfoui sous les ruines de la base exploratrice de Tyran, mit le premier un nom sur ce fléau et tenta d'en avertir l'Imperium. La flotte trouva finalement sa fin lors de la Bataille de Macragge en 745.M41, brisée sur la résistance des Ultramarines, consumée par sa propre voracité autant que par le fer des défenseurs.",
     "wikiQuery": "Hive Fleet Behemoth",
     "notableUnits": [
       {
@@ -1432,7 +1432,7 @@
     "type": "hivefleet",
     "description": "Plus grande flotte tyranide jamais rencontrée, attaquant l'Imperium sur plusieurs fronts.",
     "loreShort": "Vague titanesque, le Grand Dévoreur.",
-    "loreLong": "La Hive Fleet Leviathan est la plus grande flotte-ruche jamais observée, arrivant par-dessous le plan galactique simultanément sur plusieurs fronts. Elle a presque détruit Baal et Devastation of Baal.",
+    "loreLong": "Venue non pas des franges orientales comme ses prédécessrices, mais surgissant des abysses sous le plan galactique, la Hive Fleet Leviathan frappa l'Imperium en 997.M41 avec une brutalité sans précédent, déployant ses forces sur un front titanesque embrassant l'Ultima Segmentum, le Segmentum Tempestus et les lisières du Segmentum Solar. Sa stratégie porta la marque d'une intelligence collective terrifiante : deux tentacules colossaux, distants de plusieurs centaines d'années-lumière, étiraient l'Ombre dans le Warp sur une étendue si vaste que les mondes pris entre eux se retrouvaient coupés de tout secours, aveuglés et condamnés au silence. L'Inquisiteur Kryptman fut le premier à discerner la forme du désastre, lorsque les planètes du front sud cessèrent une à une de répondre aux astropathe. Même l'assaut final contre Baal, monde natal des Blood Angels, ne suffit pas à éteindre la flotte tout entière, et en M42 Leviathan révéla que ses pertes colossales n'avaient été qu'un prélude, lançant de nouveaux tentacules vers le Segmentum Pacificus comme pour rappeler à l'Imperium qu'aucune victoire contre la Grande Dévoreuse n'est jamais définitive.",
     "wikiQuery": "Hive Fleet Leviathan",
     "notableUnits": [
       {
@@ -1588,7 +1588,7 @@
     "type": "klan",
     "description": "Klan le plus brutal et nombreux, voué au combat rapproché et aux choppas.",
     "loreShort": "Plus gros, plus dur, plus krunchy.",
-    "loreLong": "Les Goffs sont le klan d'Ork le plus brutal et nombreux. Le Warlord Ghazghkull Mag Uruk Thraka, le Beast of Armageddon, est un Goff archétypal.",
+    "loreLong": "Parmi les klans orks, les Goffs se distinguent comme les plus brutaux et les plus voraces de corps à corps, leur philosophie de guerre se résumant à une vérité simple : rien ne vaut le craquement d'un crâne sous la lame d'un choppa. Ils portent le noir comme une bannière de mépris, convaincus que les couleurs vives ne sont bonnes que pour les lâches et les fous, et ornent parfois leur équipement de damiers grossiers, seule concession à l'esthétique qu'ils daignent tolérer. Leur emblème, une tête de taureau aux cornes saillantes, se retrouve jusque sur leurs heaumes, transformant chaque charge tête baissée en arme à part entière. Lorsqu'un Warboss promet une belle boucherie, les Goffs surgissent en masse, leurs hordes de Boyz faisant trembler le sol sous un tonnerre de bottes ferrées, chaque greenskin chargeant simplement parce qu'un autre greenskin charge devant lui. Entre les batailles, leurs rixes incessantes ne sont pas que du divertissement — elles forgent des combattants d'une redoutable efficacité au corps à corps, affûtés par une violence quotidienne qu'ils entretiennent avec le même sérieux instinctif qu'un Space Marine entretient ses armes.",
     "currentLeader": "Ghazghkull Mag Uruk Thraka",
     "currentLeaderRole": "Warboss-prophète, le Beast of Armageddon",
     "wikiQuery": "Goff Orks warhammer",
@@ -2130,7 +2130,7 @@
     "type": "sept",
     "description": "Enclaves rebelles du Commandeur Farsight, ayant rompu avec l'Empire Tau.",
     "loreShort": "Renégats, secret de Farsight.",
-    "loreLong": "Les Farsight Enclaves sont une faction rebelle Tau coupée de l'Empire principal après la mystérieuse découverte du Commandeur Farsight (O'Shovah) sur Arthas Moloch — où il aurait découvert la vérité sur les Éthérés.",
+    "loreLong": "Aux marges orientales de la galaxie, là où l'Empire T'au désigne sous le nom de Zone Interdite des espaces qu'il préfère oublier, les Enclaves de Farsight dressent leurs bastions dans un silence obstiné. Fondées par le Commandeur O'Shovah après que ce dernier eut affronté sur Arthas Moloch quelque chose d'assez terrible pour briser en lui toute obéissance, elles rejettent avec une constance absolue la présence des Éthérés en leurs rangs, rupture que l'Empire ne pardonne pas. Pourtant, les Enclaves ne renient pas le Bien Suprême, le vivant à leur façon, sur le fil d'une indépendance farouche et d'une doctrine martiale que les années de combat contre les Orks, les armées impériales et les flottes Tyranides ont forgée dans l'acier. Quand Hive Fleet Kraken ou Gorgon déferla sur leurs mondes en 997.M41, ce fut Farsight en personne, sorti d'un exil volontaire dans les étendues désolées de Vior'los, qui prit la tête de quatre-vingts équipes en XV8 pour repousser la marée chitineuse. Ce refus de toute tutelle céleste, conjugué à une maîtrise des Battlesuit érigée en art de guerre, fait des Enclaves une entité à nulle autre pareille dans la galaxie du 41e millénaire.",
     "homeworld": "Vior'la (originaire) / Enclaves Farsight",
     "currentLeader": "Commander Farsight (O'Shovah)",
     "currentLeaderRole": "Commandeur dissident",
@@ -2164,7 +2164,7 @@
     "type": "forgeworld",
     "description": "Sainte Mars, monde-forge originel et capitale spirituelle du Mechanicus.",
     "loreShort": "Saint berceau, capitale spirituelle.",
-    "loreLong": "Mars est le berceau du Culte Mechanicus, lieu d'éveil de l'Omnissiah et premier monde-forge. Toutes les autres forges existent à son image. Gouvernée par le Fabricator-General, second seulement à l'Empereur de jure dans l'Imperium.",
+    "loreLong": "Berceau rouge et sacré du Culte Mechanicus, Mars règne sur l'ensemble de l'ordre tech-prêtral depuis les abysses du temps pré-Imperium, son sol cramoisie abritant les plus vastes dépôts de savoir technique que l'humanité ait jamais accumulés. La planète est gouvernée par le Fabricator-General, figure souveraine à la tête du Grand Synode de Mars, organe directeur de toute la foi mécanique. Au-dessus de son équateur, d'immenses docks spatiaux gravitent en orbite géostationnaire, alimentant sans relâche la Battlefleet Solar, la plus redoutable flotte de l'Imperium. Les natifs du monde rouge portent dans leurs os l'empreinte de millénaires passés sous faible gravité, leurs silhouettes élancées et leurs ossatures délicates les distinguant au premier regard des humains des autres mondes-forges. Sous la surface, là où les tunnels s'enfoncent dans des profondeurs que nul Tech-Prêtre n'ose cartographier ouvertement, certaines rumeurs murmurent que le C'tan connu sous le nom de Void Dragon reposerait encore, scellé dans l'obscurité par une volonté plus ancienne que l'Imperium lui-même.",
     "homeworld": "Mars",
     "currentLeader": "Fabricator-General Kane",
     "currentLeaderRole": "Fabricator-General",
@@ -2359,7 +2359,8 @@
     "type": "shield_host",
     "description": "Force de réaction rapide du système solaire, mobilisable en quelques heures aux frontières de Sol.",
     "loreShort": "Réponse rapide aux menaces sur Sol.",
-    "wikiQuery": "Solar Watch Custodes"
+    "wikiQuery": "Solar Watch Custodes",
+    "loreLong": "Gardiens jurés du Système Solaire, les Solar Watch — que certains désignent sous le nom de Castellans of the Blessed Worlds — ont prononcé des serments d'acier les liant à la défense de chaque monde et de chaque forteresse orbitale compris entre Luna et la Halo Belt. Depuis les bastions du vide jusqu'aux routes commerciales intrasystémiques, leurs patrouilles mécanisées ne connaissent ni répit ni faille, portées par une concentration remarquable de Venerable Land Raiders qui leur confère une réponse foudroyante face à toute menace naissante. Cultes démoniaques, coups de force inquisitoriaux, incursions xénos silencieuses : tout ce qui oserait approcher Terra sans y avoir été invité a rencontré leur armure de marbre blanc et leurs épaulières de sang. Lorsque les Captain-Generals les plus belliqueux l'exigent, ils franchissent les limites du Système pour frapper les menaces en formation lors de sorties que l'on nomme Talon Sorties, brisant la capacité ennemie avant de se retirer sans cérémonie, laissant aux forces impériales ordinaires le soin de ramasser les décombres. Car les Solar Watch ne s'attardent pas là où d'autres peuvent suffire — leur place est au seuil du Trône, et nulle distraction ne saurait les en éloigner durablement."
   },
   {
     "id": "aquilan-shield",
@@ -2368,7 +2369,8 @@
     "type": "shield_host",
     "description": "Escorte des Hauts Dignitaires impériaux et des Inquisiteurs en mission sensible hors de Terra.",
     "loreShort": "Escorte des dignitaires en mission.",
-    "wikiQuery": "Aquilan Shield Custodes"
+    "wikiQuery": "Aquilan Shield Custodes",
+    "loreLong": "Surnommés les Gardiens Dorés, les guerriers de l'Aquilan Shield ne sollicitent ni permission ni audience avant d'agir. Guidés par les prophéties des doomscryers du Palais Impérial qui sondent les courants tumultueux de l'empyrean, ils identifient ceux dont l'existence même pourrait détourner une catastrophe imminente et menacer la sécurité du Trône d'Or. Sans avertissement, ces frères d'armes surgissent aux côtés de Hauts Seigneurs, de Canonesses, de Généraux ou même de Capitaines Space Marines pour proclamer leur protection, qu'elle soit désirée ou non. Leur escorte n'est pourtant jamais refusée, car un tel honneur surpasse toute considération d'orgueil. Ils veillent sur leurs charges avec une rigueur absolue, jusqu'au moment précis où leur utilité est jugée épuisée — et s'éclipsent alors sans un mot, indifférents au sort de ceux qu'ils abandonnent. La tragédie qui s'ensuit ne les concerne guère, pourvu qu'elle n'atteigne pas le Trône d'Or."
   },
   {
     "id": "eternal-shield",
@@ -2377,7 +2379,8 @@
     "type": "shield_host",
     "description": "Shield Host des opérations longues — déploiements de plusieurs siècles loin du Palais Impérial.",
     "loreShort": "Vétérans des déploiements pluri-séculaires.",
-    "wikiQuery": "Eternal Custodes Shield Host"
+    "wikiQuery": "Eternal Custodes Shield Host",
+    "loreLong": "Certains Custodiens disparaissent des archives du Palais Impérial pour des siècles entiers, déployés sur des théâtres si lointains que leurs noms deviennent légendes avant même leur retour. Ces Shield Hosts que l'on nomme les Eternels tirent leur identité de cette distance absolue avec Terra, forgée non dans la proximité du Trône d'Or, mais dans l'endurance des campagnes sans fin. Là où d'autres auraient cédé à l'isolement ou à l'oubli, les Eternels s'y nourrissent, affûtant leur vigilance au contact d'un Imperium brûlant loin des ors du Palais. Chaque siècle passé sur des mondes étrangers grave en eux une connaissance des ténèbres de la galaxie que nul serment prononcé sous les coupoles dorées ne saurait conférer."
   },
   {
     "id": "emissaries-imperatus",
@@ -2386,7 +2389,8 @@
     "type": "shield_host",
     "description": "Diplomates et envoyés impériaux, ils portent la voix du Trône à travers le Segmentum Solar.",
     "loreShort": "Diplomates impériaux à la lance dorée.",
-    "wikiQuery": "Emissaries Imperatus"
+    "wikiQuery": "Emissaries Imperatus",
+    "loreLong": "Parmi les Adeptus Custodes, les Emissaries Imperatus occupent une place singulière : ce sont des gardiens qui, au fil de leurs méditations, ont entendu la voix de l'Empereur lui-même et se sont sentis guidés par Sa main vers des desseins que nul autre ne perçoit. Réunis en cercles de réflexion, ils interprètent les volontés du Maître de l'Humanité et parcourent l'Imperium pour les transmettre aux commandants qui doivent les entendre, quitte à extraire des reliques oubliées des voûtes du Palais Impérial pour les remettre à ceux jugés dignes de les porter. Leur spécificité la plus redoutée réside dans ce pouvoir de parole : leurs mots ont dévié des Croisades entières, déjoué des menaces avant même qu'elles n'éclatent, et ouvert des trésors d'archéotechnologie au service de l'Aquila. Depuis l'ouverture de la Grande Faille, leur présence s'est considérablement accrue, nombre d'entre eux ayant rejoint la Croisade Indomitus de Guilliman, facilitant notamment l'acceptation des Space Marines Primaris au sein des chapitres les plus rétifs. Vêtus d'or sombre, d'épaulières cramoisies et de robes gris-blanc, ils incarnent moins la force brute de leurs frères que l'autorité absolue d'une parole portée depuis le Trône d'Or."
   },
   {
     "id": "callidus-temple",
@@ -2523,7 +2527,8 @@
     "type": "kabal",
     "description": "Maîtres des poisons et des venins. Leurs armes sont gravées de toxines qui torturent avant de tuer.",
     "loreShort": "Spécialistes des venins exotiques.",
-    "wikiQuery": "Kabal of the Poisoned Tongue"
+    "wikiQuery": "Kabal of the Poisoned Tongue",
+    "loreLong": "Dans les ruelles venimeuses de Commorragh, le Kabal de la Langue Empoisonnée tisse ses intrigues avec une patience de prédateur. Alliés à Asdrubael Vect et au Kabal du Cœur Noir, ses Kabalites ont érigé la duplicité en art de guerre, livrant leurs rivaux à des conflits savamment orchestrés pendant qu'eux-mêmes demeurent à l'abri du carnage. Leurs raids dans l'espace réel commencent bien avant que la première lame soit dégainée : faux signaux d'alerte, messages fragmentés, signatures spectrales de vaisseaux fantômes — autant de leurres qui poussent leurs proies à fortifier les mauvais flancs. Lorsque l'assaut véritable se déchaîne, il frappe là où personne ne regardait. Les Crocs de Malys, unité d'élite du Kabal, parachèvent cette doctrine en montant à bord de Raiders équipés de moteurs mimétiques miniaturisés, capables de singer l'apparence même des flottes ennemies. On murmure dans les alcôves sombres de la Cité que l'Archon Malys elle-même reçoit la faveur d'un patron mystérieux, dont la nature demeure l'un des secrets les mieux gardés de Commorragh."
   },
   {
     "id": "kabal-of-the-flayed-skull",
@@ -2532,7 +2537,8 @@
     "type": "kabal",
     "description": "Pillards aériens spécialisés dans les raids véhicule-vs-monde. Leurs Reaver jetbikes sont les plus rapides de Commorragh.",
     "loreShort": "Cavaliers aériens, raids éclair.",
-    "wikiQuery": "Kabal of the Flayed Skull"
+    "wikiQuery": "Kabal of the Flayed Skull",
+    "loreLong": "Dans la hiérarchie sanglante de Commorragh, seul le Kabal of the Black Heart surpasse en puissance le Kabal of the Flayed Skull. Son archonte, Vraesque Malidrach, a bâti sa légende sur la maîtrise absolue de la guerre aérienne, attirant à lui une nuée de pilotes avides de carnage et de gloire : Hellions, Reaver pilots et Scourges se pressent sous sa bannière, rivalisant de vitesse et de cruauté. L'armada de Voidraven Bombers et de Razorwing Jetfighters qu'il commande noircit les cieux de ses cibles comme un présage de ruine totale. Le Kabal niche au cœur de la Poisoned Crown, un dédale tordu de cheminées venimeuses et de conduits crachant leurs vapeurs mortelles, dont les flancs sont hérissés d'amarres et de docks innombrables où repose la flotte titanesque du Crâne Écorché. De ces hauteurs empoisonnées, les raids s'élancent sans préavis, fondant sur les mondes mortels avant même que les premiers cris d'alarme ne résonnent."
   },
   {
     "id": "cult-of-strife",
@@ -2565,7 +2571,8 @@
     "type": "wych_cult",
     "description": "Wyches initiées aux lames daemoniques retournées contre le Warp. Sombre, dangereux, redouté même à Commorragh.",
     "loreShort": "Wyches aux lames daemoniques.",
-    "wikiQuery": "Cult of the Cursed Blade"
+    "wikiQuery": "Cult of the Cursed Blade",
+    "loreLong": "Parmi les cultes qui peuplent les arènes sanglantes de Commorragh, le Culte de la Lame Maudite porte la trahison comme d'autres portent l'honneur — avec fierté et méthode. Leur nom lui-même est tiré d'un vieux terme commorrhaghien désignant les rebelles qui retournent leurs lames contre leurs propres maîtres, et leurs guerrières perpétuent cet héritage avec une constance implacable : seules les plus rusées et les plus impitoyables survivent à la sélection naturelle que le Culte s'inflige à lui-même. Les ornements les plus anodins portés par leurs Wyches dissimulent poisons et lames rétractables, car tromper avant de frapper est ici élevé au rang d'art sacré. Leur bastion, le Nhexus Arena, incarne cette philosophie jusque dans sa pierre — ses courbes élégantes cachent des filets de monofilament, des fléchettes empoisonnées et des pièges qui fauchent spectateurs comme combattants, au grand amusement de tous. À Commorragh, s'allier au Culte de la Lame Maudite revient à danser au bord d'un précipice ; seuls les Mandrakes, créatures trop étranges pour être dupées, semblent imperméables à leur duplicité légendaire. Depuis l'ouverture du Grand Rift, leurs guerrières sèment la mort dans l'Imperium Nihilus avec une patience calculée, allant jusqu'à défendre des mondes impériaux contre le Chaos — non par pitié, mais pour que la proie, regonflée d'espoir, offre une souffrance bien plus savoureuse au moment de l'inévitable."
   },
   {
     "id": "cult-of-the-red-grief",
@@ -2574,7 +2581,8 @@
     "type": "wych_cult",
     "description": "Cult itinérant qui déserte les arènes pour traquer la guerre véritable — préfèrent la chasse au combat ritualisé.",
     "loreShort": "Wyches chasseuses, hors arènes.",
-    "wikiQuery": "Cult of the Red Grief"
+    "wikiQuery": "Cult of the Red Grief",
+    "loreLong": "Le Culte du Chagrin Rouge ne combat jamais les pieds posés sur la terre ennemie — seuls les coups de grâce méritent un tel abaissement. Ses flottilles de Raiders fendent le vide en formation serrée, escortées de Reavers et de Hellions, tandis que les Wyches bondissent de bordé en bordé avec une précision aérienne qui ferait honte aux acrobates de Commorragh. Loin d'abandonner les guerres de gangs perpétuelles de la Cité des Plaisirs, ses guerriers y reviennent après chaque raid comme d'autres pratiqueraient la méditation — une violence de retour au calme. Leur arène, The Pit, incarne cette philosophie jusqu'au vertige : juchée au sommet d'une flèche de Commorragh, sans sol, peuplée de plateformes anti-grav dérivantes sur lesquelles les Hellions s'affrontent en déroulant des toiles de fil monofilament capable de trancher un corps comme un souffle tranche la fumée. Le public y assiste depuis des galeries de cristal transparent, suspendu lui aussi au-dessus du gouffre, rappelé à chaque instant que la mort est l'unique mesure de toute chose."
   },
   {
     "id": "prophets-of-flesh",
@@ -2607,7 +2615,8 @@
     "type": "haemonculus_coven",
     "description": "Coven secret obsédé par la transmutation des âmes. Leurs expériences fusionnent chair et Warp.",
     "loreShort": "Transmutation âme-chair-Warp.",
-    "wikiQuery": "Black Descent Haemonculus"
+    "wikiQuery": "Black Descent Haemonculus",
+    "loreLong": "Suspendus à l'envers sous les spires de Commorragh, les labyrinthes de verre inversés de la Black Descent défient toute cartographie — chaque Haemonculus de la Coven n'en connaît que les couloirs que ses maîtres ont daigné lui révéler, et les pièges qui jalonnent le reste suffisent à décourager toute curiosité mal placée. Là où d'autres Covens frappent avec brutalité, la Black Descent préfère attendre, tisser ses rétributions sur des décennies, les taillant avec soin pour qu'elles épousent parfaitement la forme de l'offense. Croiser leurs intérêts, c'est s'exposer à une punition d'une subtilité monstrueuse : un envoyé qui avait froncé le nez à l'odeur de leurs cachots se réveilla bientôt en train de pousser les narines frémissantes d'un Ur-Ghul, ses yeux définitivement scellés pour mieux apprécier le raffinement de la putréfaction. Leurs raids dans le materium réel sont préparés des années à l'avance, les Haemonculi prenant soin de contaminer la flore planétaire de mutagènes à déclenchement différé ou de trouer l'air de foudre neuro-électrique avant que leurs proies ne posent le pied sur le terrain choisi. Les rares captifs jugés dignes d'intérêt sont jetés dans les chambres de privation sensorielle du labyrinthe de verre, contraints de le traverser par le seul toucher — presque tous y périssent, engloutis par des cubes paradoxaux ou précipités dans des puits de Möbius sans fond, et seuls ceux qui en ressortent vivants méritent l'honneur douteux de devenir Wrack pour l'éternité."
   },
   {
     "id": "dark-creed",
@@ -2673,7 +2682,8 @@
     "type": "brotherhood",
     "description": "Brotherhood de combat conventionnel, spécialisée dans les engagements à grande échelle.",
     "loreShort": "Bataillons conventionnels.",
-    "wikiQuery": "Grey Knights 2nd Brotherhood"
+    "wikiQuery": "Grey Knights 2nd Brotherhood",
+    "loreLong": "Là où d'autres Fraternités sont convoquées pour des missions chirurgicales dans l'ombre, la Deuxième Fraternité s'illustre sur les champs de bataille ouverts, là où la guerre contre les démons prend l'ampleur d'une apocalypse. Ses frères sont rompus aux engagements à grande échelle, capables de tenir des lignes entières contre des marées de créatures nées du Warp, leurs armures d'argent formant un rempart psychique collectif que peu de forces démoniaques peuvent briser. Car l'Égide n'est pas seulement un bouclier individuel — entre leurs mains, elle devient une doctrine de guerre, étendue et coordonnée comme un champ de force tissé de volontés psykiques accordées à l'unisson. Là où le Chaos déverse ses légions sans calcul ni retenue, la Deuxième répond par l'ordre, la discipline, et la violence méthodique de ceux qui ont appris à regarder l'horreur en face sans jamais fléchir."
   },
   {
     "id": "3rd-brotherhood",
@@ -2682,7 +2692,8 @@
     "type": "brotherhood",
     "description": "Brotherhood de réaction rapide, déployée aux abords des Webway warp.",
     "loreShort": "Réaction rapide warp.",
-    "wikiQuery": "Grey Knights 3rd Brotherhood"
+    "wikiQuery": "Grey Knights 3rd Brotherhood",
+    "loreLong": "Issus de la lignée de Janus lui-même, premier Grand Maître Suprême des Grey Knights, les Wardmakers portent dans leurs rangs le poids d'une hérédité sans égale. C'est au sein de cette Troisième Confrérie que se sont forgés certains des plus grands héros de l'Ordo, parmi lesquels Kaldor Draigo et Arvann Stern, dont les noms résonnent comme des serments gravés dans l'adamantium. Leur Grand Maître détient une autorité singulière : celle de Gardien du Librarius, gouvernant à la fois les Librarians du Chapitre et le Librarium Daemonica, cet abyssal corpus de savoirs sur les entités warp. Déployés aux confins des nexus où le voile entre le réel et l'Immaterium se déchire, les Wardmakers interviennent avec une précision chirurgicale là où d'autres ne verraient que chaos et perdition."
   },
   {
     "id": "4th-brotherhood",
@@ -2691,7 +2702,8 @@
     "type": "brotherhood",
     "description": "Spécialistes des sièges et des forteresses daemoniques.",
     "loreShort": "Sièges anti-forteresse.",
-    "wikiQuery": "Grey Knights 4th Brotherhood"
+    "wikiQuery": "Grey Knights 4th Brotherhood",
+    "loreLong": "Là où d'autres Frères se déploient en éclaireurs ou en chasseurs solitaires, la Quatrième Fraternité forge sa gloire dans l'assaut des positions les plus inexpugnables que le Chaos puisse élever. Spécialistes des sièges et des forteresses daemoniques, ses chevaliers ont appris à lire les architectures corrompues du Warp comme d'autres lisent des plans de bataille, à identifier les nœuds de puissance qui maintiennent debout ces abominations de pierre noire et de chair hurlante. Chacun d'eux est un psyker d'une puissance redoutable, enveloppé dans les wards de l'Aegis, cette armure invisible qui rend leur présence insupportable aux créatures nées de la démence immaterielle. Là où une forteresse daemonique broierait l'âme d'un mortel ordinaire, ils avancent, argentés et silencieux, portant dans leur chair même la négation de tout ce que le Chaos a bâti."
   },
   {
     "id": "5th-brotherhood",
@@ -2700,7 +2712,8 @@
     "type": "brotherhood",
     "description": "Brotherhood psyker pure, divinatrice et tactique.",
     "loreShort": "Psykers tacticiens.",
-    "wikiQuery": "Grey Knights 5th Brotherhood"
+    "wikiQuery": "Grey Knights 5th Brotherhood",
+    "loreLong": "Parmi les Fraternités qui composent les rangs des Grey Knights, la Cinquième se distingue par une maîtrise du Warp d'une acuité presque troublante, ses membres cultivant les arts de divination et de préscience là où d'autres frères privilégient la force brute de leurs psylames. Ils se déploient comme des ombres d'argent que le destin lui-même semble guider, anticipant les mouvements des daemons avant même que ces entités abominables n'aient franchi le voile. Chacun d'eux a survécu à la sélection impitoyable du Chapitre 666, cette épreuve de chair et d'âme qui brise plus de postulants qu'elle n'en forge, et porte dans son esprit les wards de l'Aegis comme une forteresse vivante contre la corruption. Là où d'autres Fraternités chargent avec la certitude du marteau, la Cinquième frappe avec la précision du chirurgien, lisant le fil des probabilités pour démanteler les plans du Chaos avant qu'ils ne se matérialisent. Leur science tactique n'a d'égale que leur imperméabilité aux murmures du Warp, ce silence intérieur que même les plus anciens Great Daemons peinent à briser."
   },
   {
     "id": "6th-brotherhood",
@@ -2709,7 +2722,8 @@
     "type": "brotherhood",
     "description": "Spécialistes du combat rapproché contre les Bloodthirsters et autres avatars de Khorne.",
     "loreShort": "Anti-Khorne.",
-    "wikiQuery": "Grey Knights 6th Brotherhood"
+    "wikiQuery": "Grey Knights 6th Brotherhood",
+    "loreLong": "Surnommée les Rapiers, la Sixième Fraternité des Grey Knights forge sa réputation non dans le fracas des grandes offensives, mais dans la précision froide du coup porté là où l'ennemi est le plus vulnérable. Son Grand Maître, Haut Sénéchal de la Citadelle de Titan, consacre chaque heure de veille à concevoir des groupes de frappe d'une efficacité chirurgicale, distillant parmi les rangs déjà d'élite des Grey Knights les escouades les plus létales qui soient. Là où d'autres fraternités écrasent sous le poids du feu, les Rapiers dissolvent, incisent, effacent. Lorsqu'une masse de manœuvre s'avère nécessaire, des légions de Serviteurs lobotomisés sont déployées pour fixer et éroder l'adversaire, libérant ainsi les frères pour concentrer leur puissance sur les cibles les plus dangereuses. Cette discipline implacable, presque clinique, fait des membres de la Sixième des maîtres redoutés du combat contre les avatars de la destruction, où chaque mouvement calculé l'emporte sur la fureur aveugle."
   },
   {
     "id": "7th-brotherhood",
@@ -2718,7 +2732,8 @@
     "type": "brotherhood",
     "description": "Brotherhood des longues missions — exorcismes planétaires de plusieurs siècles.",
     "loreShort": "Missions séculaires.",
-    "wikiQuery": "Grey Knights 7th Brotherhood"
+    "wikiQuery": "Grey Knights 7th Brotherhood",
+    "loreLong": "Parmi les sept Fraternités des Grey Knights, les Exactors portent en eux l'empreinte d'un pacte ancien et singulier avec l'Ordo Malleus. Ils opèrent dans l'ombre des Inquisiteurs les plus respectés, recevant en échange renseignements précieux et renforts auxiliaires — soldats de la Garde Impériale compris, dont les survivants finissent liés au service de la Fraternité sous la forme de Serviteurs au mental purge. Ce commerce tacite avec le bras séculier de l'Inquisition confère à leur Grand Maître le titre singulier de Représentant de l'Inquisition, signe d'une proximité institutionnelle que nulle autre Fraternité ne revendique. Leurs missions s'étendent parfois sur plusieurs siècles, exorcismes planétaires menés avec une minutie inexorable, jusqu'à ce que la souillure démoniaque soit extirpée jusqu'à sa dernière racine."
   },
   {
     "id": "trans-hyperian-alliance",
@@ -2751,7 +2766,8 @@
     "type": "kindred",
     "description": "Kindred industriel le plus prolifique. Leurs forges produisent armes et véhicules pour toutes les autres Ligues.",
     "loreShort": "Forges industrielles maîtresses.",
-    "wikiQuery": "Greater Thurian League"
+    "wikiQuery": "Greater Thurian League",
+    "loreLong": "Parmi les Ligues de Votann, nulle n'égale la grandeur et la portée de la Greater Thurian League, fondatrice parmi les fondatrices, dont les deux cents Kindred alliés forment un empire commercial et militaire sans équivalent. Les guildes colossales qui la soutiennent, telles la Yngvâry Combined Logistics ou la Cthonian Guild of Kâdokh, tissent des réseaux marchands à travers les étoiles, faisant de la GTL la puissance économique la plus redoutable des profondeurs galactiques. Mais l'avènement de la Warp Storm Örgvayr sur ses frontières nord-est a contraint cette ligue de marchands-prospecteurs à revêtir les habits de la conquête, déversant ses Kinhosts dans les secteurs impériaux de Marsalis et Sepulchor avec une détermination implacable. Ces terres au-delà du disque circumnucléaire sont désormais disputées dans un conflit à trois fronts, où les contre-attaques frénétiques des Impériaux se heurtent à des guerriers forgés dans l'acier et la conviction. Des héros légendaires comme Ûthar the Destined incarnent cet équilibre entre les valeurs ancestrales du Kin et les exigences brutales d'une galaxie en flammes."
   },
   {
     "id": "kronus-hegemony",
@@ -2760,7 +2776,8 @@
     "type": "kindred",
     "description": "Ligue militaire pure — la plus belliqueuse. Ses Hearthkyn sont entrés en conflit ouvert avec l'Imperium plusieurs fois.",
     "loreShort": "Militaristes anti-Imperium.",
-    "wikiQuery": "Kronus Hegemony Votann"
+    "wikiQuery": "Kronus Hegemony Votann",
+    "loreLong": "Née il y a moins d'un millénaire lorsque le Votann de la Lignée de Kôrynn s'éveilla à la conscience, la Kronus Hegemony s'imposa rapidement comme l'une des forces les plus redoutables des Leagues of Votann. Cet Ancestor Core nouvellement ascendant manifesta dès l'origine une soif impérieuse de connaissance et un appétit vorace en matières premières, arrachant sa Lignée à la moribonde Kapellan League pour forger sa propre puissance. La marque distinctive de la Hegemony réside dans son système de tribut martial : toute Lignée désireuse de rejoindre ses rangs doit non seulement offrir des richesses en gage d'allégeance, mais aussi s'engager par serment éternel à conquérir chaque année un quota de mondes ennemis, dont les dépouilles sont expédiées vers Kôrynn. Cette belligérance n'épargne pas les Leagues voisines, avec lesquelles des escarmouches frontalières éclatent régulièrement, tandis que nombre de Grudges déclarées semblent davantage motivées par le besoin de justifier le conflit que par une véritable soif de vengeance. Depuis la formation de la Great Rift, la Hegemony a intensifié ses annexions de territoires xénos avec une efficacité froide et méthodique."
   },
   {
     "id": "ymyr-conglomerate",
@@ -2769,7 +2786,8 @@
     "type": "kindred",
     "description": "Plus grande coalition Kin connue, regroupe plusieurs Ligues mineures sous une bannière commerciale et militaire.",
     "loreShort": "Coalition commerciale géante.",
-    "wikiQuery": "Ymyr Conglomerate Votann"
+    "wikiQuery": "Ymyr Conglomerate Votann",
+    "loreLong": "Au cœur des mondes-cœur galactiques, le Conglomérat Ymyr s'impose comme l'un des blocs de pouvoir les plus anciens et les plus redoutés parmi les Leagues of Votann. Nul Kindred n'y est admis sans avoir prouvé l'excellence de ses artisans et la richesse de ses territoires — non par orgueil, mais par pragmatisme pur, à la manière des Kin. Ses Brokhyrs supervisent des forges légendaires telles que Vônky's Hall of Hammers ou la Ymus-Solaryn, capables de produire des technologies d'une sophistication sans égale dans tout le Noyau Galactique. Là où d'autres Kindreds réservent l'Exo-Armure et les canons à faisceaux avancés à leur poignée de guerriers d'élite, l'Ymyr en équipe des armées entières. Depuis longtemps portés vers les confins extérieurs, ses émissaires commercent ou conquièrent selon les circonstances — et la déchirure du Grand Rift, loin de les freiner, n'a fait qu'aiguiser leur détermination à reconstruire ce que les tempêtes du Warp leur ont arraché."
   },
   {
     "id": "urani-surtr",
@@ -2778,7 +2796,8 @@
     "type": "kindred",
     "description": "Kindred des explorateurs et chasseurs de primes. Leurs Hernkyn Pioneers parcourent les mondes inconnus.",
     "loreShort": "Explorateurs et chasseurs de primes.",
-    "wikiQuery": "Urani-Surtr Regulates"
+    "wikiQuery": "Urani-Surtr Regulates",
+    "loreLong": "Aux confins méridionaux du Noyau Galactique, les Kindreds de l'Urani-Surtr Regulates tiennent depuis des générations des territoires que d'autres Ligues auraient depuis longtemps abandonnés aux flammes. Pressés sur leurs flancs par la Dynastie Nécron Samnokh, les flottes orkes de Bogg Da Freeboota King et les infestations Tyranides du Gnawstar Cluster, ils résistent sans jamais reculer d'un pas, sans jamais daigner expliquer leur entêtement à quiconque. Certains Grimnyr murmurent qu'ils gardent un secret d'une importance capitale, d'autres qu'ils sont liés par des Rancœurs imprudentes jurées par leurs ancêtres et qu'ils ne peuvent trahir sans perdre leur protection. Leur stoïcisme ne se limite pas au champ de bataille : chaque Kindred accepte une existence d'une austérité absolue, rationnant nourriture, lumière et chaleur pour que les armées de la Ligue ne manquent jamais de rien. Aucun Kindred admis en leur sein n'en est jamais reparti, ce qui alimente autant les spéculations sur leur loyauté farouche que les rumeurs plus sombres sur ce qu'il en coûterait de vouloir partir."
   },
   {
     "id": "cult-of-the-four-armed-emperor",
@@ -2823,7 +2842,8 @@
     "type": "cult",
     "description": "Culte issu d'un monde-forge. Ses hybrides sont augmentés cybernétiquement, fusion de chair Genestealer et de pièces Mechanicus.",
     "loreShort": "Cybernétiquement augmentés.",
-    "wikiQuery": "Twisted Helix Genestealer"
+    "wikiQuery": "Twisted Helix Genestealer",
+    "loreLong": "Née dans les distilleries macro-alchimiques de Vejovium III, monde civilisé exportateur de médecines, la Twisted Helix tisse sa malédiction depuis la fin du M38, lorsqu'un unique hôte infecté — le Prime Specimen — convainquit la noblesse locale d'ingérer un élixir dérivé du Genestealer sous prétexte de perfection génétique. Ce que les aristocrates burent les transforma en hybrides contrefaits, et depuis ce jour, le culte règne sans partage sur le système de Vejovium. Ses médifactoria colossales crachent des fumées aux teintes impossibles depuis leurs cheminées de verre spiralé, laboratoires d'un dieu-savant fou où l'on incorpore la graine xénos dans des phiales curatives expédiées aux quatre coins de l'Imperium. Les Biophagi qu'aligne le culte en nombre considérable incarnent cette doctrine monstrueuse : chaque guerre n'est qu'un terrain d'expérimentation, chaque ennemi qu'un sujet de dissection. Aberrants aux proportions grotesques, hybrides multi-membres gorgés de substances alchimiques — la Twisted Helix préfère l'horreur frontale à la discrétion, déversant ses armées de cobayes mutés avec la ferveur méthodique de savants persuadés de poursuivre l'œuvre ultime de l'évolution."
   },
   {
     "id": "bladed-cog",
@@ -2832,7 +2852,8 @@
     "type": "cult",
     "description": "Culte ayant infiltré le Mechanicus. Leurs Magos hybrides volent et corrompent des STC pour leur Patriarche.",
     "loreShort": "Infiltration Mechanicus.",
-    "wikiQuery": "Bladed Cog Genestealer"
+    "wikiQuery": "Bladed Cog Genestealer",
+    "loreLong": "Sur les mondes-forges ravagés par l'oppression du Mechanicus, le Culte de l'Engrenage Lacérant a prospéré dans l'ombre des chaînes de production, nourrissant sa haine des maîtres bioniques jusqu'à renverser le Dominus Ovid Thrensiom sur Feinminster Gamma. Né de la rencontre entre un Purestrain Genestealer clandestinement débarqué par le cargo Redspark et une population réduite en esclavage, le culte forgea sa doctrine autour d'un dogme déviant : le Clawed Omnissiah, avatar monstrueux du Hive Mind, révèle que c'est la machine qui est faible, non la chair. Là où le Mechanicus mutile le corps pour le purifier, les broodkin de l'Engrenage Lacérant marient l'organique et le cybernétique sans distinction, accueillant dans leurs rangs les déclassés des mondes-forges, y compris des Skitarii infectés reconvertis en Nexos au service de la Tyrannie. Maîtres des technologies dérobées au Mechanicum, leurs Magos hybrides pillent et corrompent les STC pour les mettre au service du Patriarche, engendrant des horreurs bioniques qui défient toute classification. Désormais maîtres absolus de Feinminster Gamma, ils ont lancé une croisade contre l'Adeptus Mechanicus, envahissant forge-monde après forge-monde, forçant les Iron Hands eux-mêmes à intervenir sur Ghoulwright pour contenir la marée."
   },
   {
     "id": "hivecult",
@@ -2841,7 +2862,8 @@
     "type": "cult",
     "description": "Culte des bas-fonds des ruches impériales — recrute parmi les exclus, les mendiants, les esclaves industriels.",
     "loreShort": "Culte des bas-fonds urbains.",
-    "wikiQuery": "Hivecult Genestealer"
+    "wikiQuery": "Hivecult Genestealer",
+    "loreLong": "Née dans les entrailles toxiques de New Gidlam et de ses treize ruches titanesques, la Hivecult s'est propagée comme un venin dans les veines d'un monde suffocant, corrompant en silence les régiments de la Garde Impériale jusqu'à en faire des vecteurs d'infection dispersés aux quatre coins de l'Imperium. Là où d'autres cultes s'épanouissent dans l'ombre de l'oubli, celui-ci a choisi la militarisation absolue comme doctrine sacrée, transformant jusqu'à ses icônes rituelles — la forme torsadée du wyrm à lames — en armes de combat, coup-de-poing américains, étoiles de jet ou dagues consacrées par le sang. Les meurtres cérémoniels connus sous le nom de White Creeper marquèrent les premiers frémissements de son éveil, avant que la violence ne dévore ruche après ruche dans un embrasement généralisé. La Hivecult contrôle désormais flottes de guerre, transports de troupes et escadrons aériens avec une aisance qui trahit des décennies de subversion patiente, exportant son infection jusque dans les vers de soie dont New Gidlam commerce à travers les étoiles."
   },
   {
     "id": "pauper-princes",
@@ -2850,7 +2872,8 @@
     "type": "cult",
     "description": "Culte qui se pose en alternative messianique aux nobles impériaux corrompus. Promet abondance et égalité aux paysans.",
     "loreShort": "Messianique anti-nobles.",
-    "wikiQuery": "Pauper Princes Genestealer"
+    "wikiQuery": "Pauper Princes Genestealer",
+    "loreLong": "Sur le monde misérable de Chancer's Vale, où les mers asséchées n'offrent que le sel et la crève, le Culte des Pauper Princes n'a pas eu besoin de la Morsure pour trouver ses fidèles — la misère a suffi. Les promesses du Magus Marovitch Tenndarc ont résonné comme une révélation dans les bouches affamées : un Sauveur des Étoiles venu délivrer les damnés de la terre, en vérité le Patriarche lui-même, serviteur des Enfants des Étoiles tyrannides. Ce qui distingue ce culte entre tous, c'est la dévotion absolue de ses membres, une obéissance fanatique qui pousse les néophytes à s'offrir en chair à canon, à former des remparts de corps vivants pour protéger leurs maîtres, ou à se jeter dans les engrenages d'un char ork pour sauver le Patriarche. La peau pâle et ridée des cultistes, brûlée par des générations d'extraction saline, est portée comme une marque de grâce divine. Aujourd'hui présents sur plus de quinze mondes, les Pauper Princes comptent leurs fidèles en milliards, et les tentatives impériales pour décapiter leur hiérarchie se brisent invariablement sur ce mur de chair consentante."
   },
   {
     "id": "rusted-claw",
@@ -2859,7 +2882,8 @@
     "type": "cult",
     "description": "Culte des mondes-déserts et des hors-la-loi. Leurs hybrides chevauchent des bikes et des wheels customisés Mad Max-esque.",
     "loreShort": "Hybrides motards des wastelands.",
-    "wikiQuery": "Rusted Claw Genestealer"
+    "wikiQuery": "Rusted Claw Genestealer",
+    "loreLong": "Sous les strates épuisées de Newseam, les mineurs du Culte de la Rusted Claw arrachent chaque jour des tonnes de métal précieux à la roche, sans jamais avoir le droit d'en toucher un gramme. De cette injustice est née une théologie sombre : ils vénèrent l'entropie elle-même, lisant dans chaque tache de rouille et chaque pièce ternie la volonté dévorante de leur Patriarche. Leur symbole, un engrenage industriel rongé par la forme-serpent de la grande faim, résume tout ce qu'ils attendent du monde — sa dissolution lente et inexorable. Leurs armes rouillent, leurs véhicules tombent en décrépitude, et cette négligence assumée n'est pas misère mais acte de foi. Certains membres portent en eux un nano-symbiote tyranide, héritage silencieux du Hive Fleet, capable de consumer l'adamantium en quelques minutes — ce que le culte tient pour un miracle vivant. Toujours en mouvement, chassant sur leurs montures rafistolées comme des hors-la-loi impériaux, les Atalan Jackals et les Kelermorphs pullulent dans leurs rangs, avant-gardes d'une rébellion qui attend que la rouille achève le travail."
   },
   {
     "id": "mymeara",
@@ -2868,7 +2892,7 @@
     "type": "craftworld",
     "description": "Vaisseau-monde glacé, fondateur du temple de la Voie de l'Effacement. Mymeara mène une longue guerre froide contre les Imperium pour récupérer la Hache Spectrale d'Irilith.",
     "loreShort": "Le Givre, gardien de la mémoire phénix.",
-    "loreLong": "Vaisseau-monde de petite taille au climat artificiellement glacé. Mymeara héberge le temple unique d'Irilith, premier des Phoenix Lords aujourd'hui perdu. Ses flottes traquent toute trace de leurs reliques disparues à travers l'Imperium.",
+    "loreLong": "Né aux confins les plus reculés de l'empire aeldari, le vaisseau-monde de Mymeara dut son salut relatif à son isolement, avant que la corruption des cultes du plaisir ne finisse par consumer ses habitants comme elle consuma tous les autres. Les anciens les plus clairvoyants avaient anticipé cette chute et consacré leurs dernières décennies à ériger un vaisseau-monde colossal, mais la moitié de leur peuple périt sur le monde natal lorsque le Wraithbone se mit enfin en marche. Portant le deuil d'une civilisation morte et se croyant seuls dans l'immensité du cosmos, les Mymearans dérivèrent longtemps avant que les guerres contre les Orks ne les contraignent à forger leur art de la destruction, guidés par Irillyth, le Seigneur Phénix des Spectres de l'Ombre. C'est lui qui enseigna aux guerriers de Mymeara l'équilibre sacré entre la furtivité, la vitesse et la puissance de feu, fondant ainsi le temple de la Voie de l'Effacement, spécificité qui demeure la marque indélébile de ce vaisseau-monde. Depuis que leur protecteur les a quittés pour rejoindre d'autres combats, les Mymearans se sont réfugiés dans une région de l'espace tenue secrète grâce à leurs technologies d'occultation, menant depuis l'ombre une guerre froide et implacable contre l'Imperium pour retrouver la Hache Spectrale d'Irillyth, leur dette sacrée envers le disparu.",
     "currentLeader": "Farseer Estyr Tael",
     "currentLeaderRole": "Conseil des Visions",
     "wikiQuery": "Craftworld Mymeara",
@@ -2900,7 +2924,7 @@
     "type": "craftworld",
     "description": "Vaisseau-monde le plus proche de la Toile aux Mondes Crones. Lugganath croit que l'avenir des Aeldari réside dans la Toile, non plus dans la matière. Forte présence Harlequin.",
     "loreShort": "Le Mystique, prophète de la Toile.",
-    "loreLong": "Le plus mystique des vaisseau-mondes. Lugganath entretient des liens étroits avec les troupes Harlequin et les Mondes Crones. Sa philosophie : abandonner la galaxie matérielle et fonder un nouveau peuple dans la Toile pour échapper à Slaanesh.",
+    "loreLong": "Lugganath, la Lumière des Soleils Déchus, porte en elle une conviction qui scandalise les autres vaisseau-mondes : l'avenir des Aeldari ne réside plus dans le monde matériel, mais dans les profondeurs de la Toile, où une civilisation nouvelle pourrait renaître loin des horreurs de cette galaxie mourante. Cette ambition singulière a forgé des liens étroits avec les Arlequins et certaines flottes de Corsaires, au point que les autres Asuryani regardent les siens comme des forbans, prompts à frapper depuis le Webway avant de s'y dissoudre comme des ombres. La tragédie de la Torpeur Fragile reste gravée dans la mémoire du vaisseau-monde : ses Lointain-Voyants s'enfoncèrent délibérément dans le royaume de Nurgle pour chercher la déesse captive Isha et briser la contagion, sachant qu'ils n'en reviendraient pas, mais leurs âmes ne rejoignirent jamais leurs Pierres d'Esprit. Le Warp les réclama, les condamnant à se transformer en arbres gémissants portant des fruits de Nurglings dans le jardin de la Pourriture. En 764.M34, les Enfants de l'Empereur ravagèrent la Plaza of Reflection par leurs armes soniques, réduisant en ruines l'architecture vivante du vaisseau-monde et massacrant des milliers des siens, avant d'être finalement repoussés dans un carnage que les Arlequins de Sylandri Veilwalker avaient, dit-on, orchestré de longue main.",
     "currentLeader": "Farseer Aerthain Lhir",
     "currentLeaderRole": "Conseil de la Toile",
     "wikiQuery": "Craftworld Lugganath",
@@ -2926,7 +2950,7 @@
     "type": "craftworld",
     "description": "Vaisseau-monde industrieux, célèbre pour son artisanat de Wraithlords et de chars Falcon. Yme-Loc privilégie la guerre mécanisée et la maîtrise du métal psycho-fluide.",
     "loreShort": "L'Atelier, forge des Wraith.",
-    "loreLong": "Vaisseau-monde d'artisans. Ses Bonesingers (chante-os) sont les plus virtuoses des Aeldari. Yme-Loc est célèbre pour produire les meilleurs Wraithlords, Wraithguard et chars Falcon de la galaxie. Spécialiste de la Voie de l'Artisan.",
+    "loreLong": "Ancré près de l'Œil de la Terreur, Yme-Loc demeure l'un des vaisseaux-monde les moins connus, mais ses forges n'en sont pas moins redoutables. Ses artisans sont parmi les plus doués de toute la race aeldari, et leurs armées défilent portées par des nuées de Grav-Tanks, soutenues par un nombre imposant de Titans et d'Engines of Vaul qui font trembler la terre avant même d'être vus. Là où d'autres vaisseaux-monde s'appuient sur les Wraith Constructs pour combler leurs pertes, Yme-Loc forge son salut dans l'acier et la vitesse. Son rune, le Creuset des Âmes, rappelle l'enclume sur laquelle le dieu-forgeron Vaul trempa les premiers Swords of Vaul dans du Wraithbone pur, liant les esprits des victorieux au métal pour mieux faire la guerre aux dieux. Ce symbole n'est pas choisi au hasard : le peuple d'Yme-Loc croit que le destin des Aeldari n'est pas une prophétie à subir, mais une lame à forger. Et dans les profondeurs scellées du vaisseau-monde sommeille une arme que nul n'a encore osé allumer, alimentée par les âmes des morts, capable de dévaster un continent entier en quelques minutes dans une tempête de spectres arrachant les esprits à leurs corps.",
     "currentLeader": "Bonesinger Marach Eldenfa",
     "currentLeaderRole": "Maître-Chante des Os",
     "wikiQuery": "Craftworld Yme-Loc",
