@@ -2,6 +2,7 @@ import { Component, inject, signal, computed, effect, HostListener } from '@angu
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { WarhammerService, ImageMeta, RedditPost } from '../../core/services/warhammer.service';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
@@ -1356,6 +1357,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 })
 export class GalleryComponent {
   private readonly service = inject(WarhammerService);
+  private readonly route = inject(ActivatedRoute);
 
   readonly categories = CATEGORIES;
 
@@ -1534,6 +1536,12 @@ export class GalleryComponent {
   readonly canLoadMore = computed(() => this.pagedArtworks().length < this.filteredArtworks().length);
 
   constructor() {
+    // Read ?q= or ?search= query param to pre-fill search (links from /lore figures)
+    this.route.queryParamMap.subscribe(params => {
+      const q = params.get('q') ?? params.get('search');
+      if (q) this.searchQuery.set(q);
+    });
+
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
       if (r.imageUrl) this.heroBgUrl.set(`url('${r.imageUrl}')`);
     });
