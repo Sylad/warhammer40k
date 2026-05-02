@@ -566,11 +566,11 @@ export class LoreChaosGodsComponent {
       selectedIdx: 0,
     });
     const variants = [
-      `${g.wikiQuery} art`,
-      `${g.name} chaos god`,
-      `${g.name} daemon`,
-      `${g.name} warhammer 40k`,
-      `${g.name} concept art`,
+      `${g.wikiQuery} 40k`,
+      `${g.wikiQuery} greater daemon`,
+      `${g.name} daemon prince warhammer 40k`,
+      `${g.name} legion chaos space marines`,
+      `${g.wikiQuery} art warhammer`,
     ];
     for (const q of variants) this.fetchVariant(q, g.name);
   }
