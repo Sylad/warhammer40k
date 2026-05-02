@@ -27,6 +27,13 @@ export class ImagesController {
     res.sendFile(fullPath);
   }
 
+  @Get('imported/:filename')
+  serveImported(@Param('filename') filename: string, @Res() res: Response) {
+    const fullPath = this.service.resolveFile(`imported/${decodeURIComponent(filename)}`);
+    if (!fullPath) throw new NotFoundException(`Imported image ${filename} not found`);
+    res.sendFile(fullPath);
+  }
+
   @Get('datasheets/:unitId')
   serveDatasheet(@Param('unitId') unitId: string, @Res() res: Response) {
     const safeName = path.basename(unitId).replace(/[^a-z0-9\-]/g, '');

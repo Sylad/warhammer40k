@@ -83,6 +83,9 @@ export class WarhammerService {
     .pipe(shareReplay({ bufferSize: 1, refCount: true }));
 
   imageUrl(filename: string): string {
+    if (filename.startsWith('imported/')) {
+      return `${this.base}/images/imported/${encodeURIComponent(filename.slice('imported/'.length))}`;
+    }
     return `${this.base}/images/file/${encodeURIComponent(filename)}`;
   }
 
