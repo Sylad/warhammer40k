@@ -190,7 +190,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                 </div>
               </header>
               <div class="featured-grid">
-                @for (v of featuredVideos(); track v.id; let i = $index) {
+                @for (v of displayedFeatured(); track v.id; let i = $index) {
                   <article class="video-card"
                     [class.large]="i === 0"
                     [style.--thumb]="thumbStyle(v)"
@@ -212,6 +212,13 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                   </article>
                 }
               </div>
+              @if (featuredVideos().length > displayedFeatured().length) {
+                <div class="load-more-row">
+                  <button class="load-more" type="button" (click)="loadMoreFeatured()">
+                    Charger plus d'incontournables ({{ featuredVideos().length - displayedFeatured().length }} restantes) ▾
+                  </button>
+                </div>
+              }
             </section>
           }
 
@@ -224,7 +231,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               </div>
             </header>
             <div class="channel-grid">
-              @for (ch of channels(); track ch.id) {
+              @for (ch of displayedChannels(); track ch.id) {
                 <button class="channel-card" type="button" (click)="openExternal(ch.url)">
                   <span class="avatar">{{ ch.avatar }}</span>
                   <span class="ch-info">
@@ -235,6 +242,13 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                 </button>
               }
             </div>
+            @if (channels().length > displayedChannels().length) {
+              <div class="load-more-row">
+                <button class="load-more" type="button" (click)="loadMoreChannels()">
+                  Charger plus de chaînes ({{ channels().length - displayedChannels().length }} restantes) ▾
+                </button>
+              </div>
+            }
           </section>
 
           <!-- TOUTES LES VIDEOS -->
@@ -250,7 +264,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               <div class="empty">Aucune vidéo ne correspond à ces filtres.</div>
             } @else {
               <div class="video-grid">
-                @for (v of filteredVideos(); track v.id) {
+                @for (v of displayedAll(); track v.id) {
                   <article class="video-card"
                     [style.--thumb]="thumbStyle(v)"
                     (click)="openModal(v)">
@@ -271,6 +285,13 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                   </article>
                 }
               </div>
+              @if (filteredVideos().length > displayedAll().length) {
+                <div class="load-more-row">
+                  <button class="load-more" type="button" (click)="loadMoreAll()">
+                    Charger plus de vidéos ({{ filteredVideos().length - displayedAll().length }} restantes) ▾
+                  </button>
+                </div>
+              }
             }
           </section>
         </div>
@@ -991,6 +1012,31 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
       background: rgba(8, 7, 6, 0.4);
     }
 
+    /* LOAD MORE */
+    .load-more-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .load-more {
+      padding: 12px 28px;
+      border: 1px solid var(--gold-soft);
+      background: rgba(8, 7, 6, 0.55);
+      color: var(--gold);
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .load-more:hover {
+      background: rgba(201, 162, 74, 0.08);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
     /* FOOTER */
     .page-footer {
       margin-top: 42px;
@@ -1107,6 +1153,14 @@ export class VideosComponent {
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
 
   // Add Video modal state
+  // Pagination par section (3 sections indépendantes)
+  static readonly PAGE_FEATURED = 3;
+  static readonly PAGE_CHANNELS = 6;
+  static readonly PAGE_ALL = 9;
+  readonly featuredLimit = signal(VideosComponent.PAGE_FEATURED);
+  readonly channelsLimit = signal(VideosComponent.PAGE_CHANNELS);
+  readonly allLimit = signal(VideosComponent.PAGE_ALL);
+
   readonly addVideoOpen = signal(false);
   readonly addUrl = signal('');
   readonly addLoading = signal(false);
@@ -1123,6 +1177,8 @@ export class VideosComponent {
   private readonly thumbInflight = new Set<string>();
 
   readonly featuredVideos = computed(() => this.videos().filter(v => v.featured));
+  readonly displayedFeatured = computed(() => this.featuredVideos().slice(0, this.featuredLimit()));
+  readonly displayedChannels = computed(() => this.channels().slice(0, this.channelsLimit()));
 
   readonly counts = computed(() => {
     const list = this.videos();
@@ -1135,6 +1191,7 @@ export class VideosComponent {
   });
 
   readonly recentVideos = computed(() => this.videos().slice(-3).reverse());
+  readonly displayedAll = computed(() => this.filteredVideos().slice(0, this.allLimit()));
 
   readonly filteredVideos = computed(() => {
     const q = this.searchQuery().trim().toLowerCase();
@@ -1193,6 +1250,14 @@ export class VideosComponent {
       }
     });
 
+    // Reset pagination "Toutes les vidéos" quand search/filter/sort change
+    effect(() => {
+      void this.searchQuery();
+      void this.activeFilter();
+      void this.sortOrder();
+      this.allLimit.set(VideosComponent.PAGE_ALL);
+    });
+
     effect(() => {
       const list = this.videos();
       const cache = this.thumbCache();
@@ -1233,6 +1298,17 @@ export class VideosComponent {
     const set = new Set(this.sidebarFilters());
     if (set.has(key)) set.delete(key); else set.add(key);
     this.sidebarFilters.set(set);
+    this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
+  }
+
+  loadMoreFeatured(): void {
+    this.featuredLimit.update(n => n + VideosComponent.PAGE_FEATURED);
+  }
+  loadMoreChannels(): void {
+    this.channelsLimit.update(n => n + VideosComponent.PAGE_CHANNELS);
+  }
+  loadMoreAll(): void {
+    this.allLimit.update(n => n + VideosComponent.PAGE_ALL);
   }
 
   openModal(v: Video): void { this.selectedVideo.set(v); }
