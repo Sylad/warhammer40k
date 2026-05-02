@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { WarhammerService } from '../../core/services/warhammer.service';
+import { WarhammerService, VideoPreview, VideoImportBody } from '../../core/services/warhammer.service';
 import type { Video, Channel } from '../../core/models/models';
 
 type FilterKey = 'all' | 'lore' | 'animation' | 'official' | 'FR' | 'EN';
@@ -84,7 +84,97 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           <option value="channel">Chaîne</option>
           <option value="recent">Récentes</option>
         </select>
+        <button class="add-btn" type="button" (click)="openAddVideo()">+ Ajouter une vidéo</button>
       </section>
+
+      <!-- ADD VIDEO MODAL -->
+      @if (addVideoOpen()) {
+        <div class="add-modal" (click)="closeAddVideo()">
+          <div class="add-stage" (click)="$event.stopPropagation()">
+            <button class="add-close" type="button" (click)="closeAddVideo()" aria-label="Fermer">✕</button>
+            <h2>Ajouter une vidéo YouTube</h2>
+            <p class="add-lede">Colle l'URL d'une vidéo YouTube. La chaîne sera détectée et ajoutée si nouvelle.</p>
+
+            <div class="add-form">
+              <label class="add-label">URL YouTube</label>
+              <div class="add-row">
+                <input class="add-input" type="text" [ngModel]="addUrl()" (ngModelChange)="addUrl.set($event)"
+                       placeholder="https://youtu.be/... ou https://www.youtube.com/watch?v=..." />
+                <button class="add-action" type="button" [disabled]="!addUrl() || addLoading()" (click)="previewVideo()">
+                  {{ addLoading() ? '…' : 'Aperçu' }}
+                </button>
+              </div>
+              @if (addError()) { <div class="add-error">⚠ {{ addError() }}</div> }
+            </div>
+
+            @if (preview(); as p) {
+              <div class="add-preview">
+                <div class="preview-thumb" [style.background-image]="'url(\\'' + p.thumbnailUrl + '\\')'"></div>
+                <div class="preview-info">
+                  <div class="preview-title">{{ p.title }}</div>
+                  <div class="preview-author">par <strong>{{ p.authorName }}</strong></div>
+
+                  @if (p.matchedChannel) {
+                    <div class="preview-chan match">
+                      <span class="chan-tag">✓ Chaîne déjà présente</span>
+                      <span>{{ p.matchedChannel.name }} ({{ p.matchedChannel.language }})</span>
+                    </div>
+                  } @else {
+                    <div class="preview-chan new">
+                      <span class="chan-tag">+ Nouvelle chaîne</span>
+                      <span>« {{ p.authorName }} » sera créée avec id <code>{{ p.suggestedChannelId }}</code></span>
+                      <div class="chan-lang">
+                        <label><input type="radio" name="lang" value="FR" [checked]="newChannelLang() === 'FR'" (change)="newChannelLang.set('FR')" /> FR</label>
+                        <label><input type="radio" name="lang" value="EN" [checked]="newChannelLang() === 'EN'" (change)="newChannelLang.set('EN')" /> EN</label>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <div class="add-extras">
+                <label class="add-label">Description (optionnel)</label>
+                <textarea class="add-textarea" rows="3" [ngModel]="addDesc()" (ngModelChange)="addDesc.set($event)"
+                          placeholder="Décris brièvement la vidéo (lore traité, ton, format)"></textarea>
+
+                <div class="add-grid">
+                  <div>
+                    <label class="add-label">Catégorie</label>
+                    <select [ngModel]="addCategory()" (ngModelChange)="addCategory.set($event)">
+                      <option value="lore">Lore</option>
+                      <option value="animation">Animation</option>
+                      <option value="official">Officiel</option>
+                      <option value="other">Autre</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="add-label">Type</label>
+                    <select [ngModel]="addType()" (ngModelChange)="addType.set($event)">
+                      <option value="Chaîne lore">Chaîne lore</option>
+                      <option value="Animation fan">Animation fan</option>
+                      <option value="Parodie">Parodie</option>
+                      <option value="Série officielle">Série officielle</option>
+                      <option value="Chaîne officielle">Chaîne officielle</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="add-label">
+                      <input type="checkbox" [checked]="addFeatured()" (change)="addFeatured.set($any($event.target).checked)" />
+                      Incontournable
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="add-cta-row">
+                <button class="add-cta" type="button" [disabled]="addSaving()" (click)="confirmAdd()">
+                  {{ addSaving() ? 'Enregistrement…' : 'Ajouter au codex' }}
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      }
 
       <!-- LAYOUT MAIN + SIDEBAR -->
       <section class="layout">
@@ -390,11 +480,195 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
     /* TOOLBAR */
     .toolbar {
       display: grid;
-      grid-template-columns: minmax(260px, 420px) 1fr auto;
+      grid-template-columns: minmax(260px, 420px) 1fr auto auto;
       gap: 14px;
       align-items: center;
       margin-bottom: 26px;
     }
+    .add-btn {
+      height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--gold);
+      background: rgba(8, 7, 6, 0.78);
+      color: var(--gold);
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .add-btn:hover { background: rgba(201, 162, 74, 0.08); color: var(--gold-bright); border-color: var(--gold-bright); }
+
+    .add-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      background: rgba(2, 1, 1, 0.92);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      animation: fade 0.18s ease-out;
+    }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    .add-stage {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
+      background: #050403;
+      border: 1px solid rgba(201, 162, 74, 0.4);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 162, 74, 0.18);
+      padding: 32px 32px 24px;
+    }
+    .add-stage h2 {
+      margin: 0 0 6px;
+      font-family: var(--serif);
+      color: var(--gold-bright);
+      font-size: 22px;
+      letter-spacing: 0.04em;
+    }
+    .add-lede { color: var(--muted); font-size: 13px; margin: 0 0 20px; }
+    .add-close {
+      position: absolute; top: 12px; right: 12px;
+      width: 36px; height: 36px;
+      background: rgba(8,7,6,0.78);
+      border: 1px solid rgba(201,162,74,0.4);
+      color: var(--gold-bright);
+      font-size: 16px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .add-close:hover { background: rgba(123,17,19,0.6); border-color: var(--gold); }
+    .add-form { margin-bottom: 16px; }
+    .add-label {
+      display: block;
+      color: var(--gold);
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .add-row { display: flex; gap: 8px; }
+    .add-input, .add-textarea, .add-stage select {
+      flex: 1;
+      min-width: 0;
+      height: 40px;
+      border: 1px solid rgba(201,162,74,0.32);
+      background: rgba(5,4,3,0.78);
+      color: var(--text);
+      padding: 0 12px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+    .add-textarea { height: auto; padding: 10px 12px; resize: vertical; min-height: 60px; }
+    .add-input:focus, .add-textarea:focus, .add-stage select:focus { border-color: var(--gold); }
+    .add-action {
+      height: 40px;
+      padding: 0 18px;
+      border: 1px solid var(--gold);
+      background: rgba(8,7,6,0.78);
+      color: var(--gold-bright);
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .add-action:hover:not(:disabled) { background: rgba(201,162,74,0.08); }
+    .add-action:disabled { opacity: 0.5; cursor: not-allowed; }
+    .add-error {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-left: 3px solid var(--red);
+      background: rgba(123,17,19,0.18);
+      color: #ff8a8a;
+      font-size: 12px;
+    }
+
+    .add-preview {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 18px;
+      padding: 16px;
+      border: 1px solid rgba(201,162,74,0.24);
+      background: rgba(8,7,6,0.55);
+      margin-bottom: 18px;
+    }
+    @media (max-width: 600px) { .add-preview { grid-template-columns: 1fr; } }
+    .preview-thumb {
+      aspect-ratio: 16/9;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid var(--border);
+    }
+    .preview-info { display: flex; flex-direction: column; gap: 6px; }
+    .preview-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--gold-bright);
+      line-height: 1.3;
+    }
+    .preview-author { color: var(--muted); font-size: 12px; }
+    .preview-author strong { color: var(--text); }
+    .preview-chan {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .preview-chan.match { border-color: rgba(95,201,122,0.45); background: rgba(95,201,122,0.08); }
+    .preview-chan.new { border-color: rgba(201,162,74,0.45); background: rgba(201,162,74,0.08); }
+    .chan-tag {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .preview-chan.match .chan-tag { color: #5fc97a; }
+    .preview-chan code { font-family: ui-monospace, monospace; color: var(--gold-soft); font-size: 11px; }
+    .chan-lang { display: flex; gap: 14px; margin-top: 4px; font-size: 12px; color: var(--text); }
+    .chan-lang label { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+
+    .add-extras { margin-bottom: 18px; }
+    .add-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 600px) { .add-grid { grid-template-columns: 1fr; } }
+    .add-grid label input[type="checkbox"] { margin-right: 6px; }
+
+    .add-cta-row { display: flex; justify-content: flex-end; }
+    .add-cta {
+      padding: 12px 22px;
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: #050403;
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .add-cta:hover:not(:disabled) { background: var(--gold-bright); border-color: var(--gold-bright); }
+    .add-cta:disabled { opacity: 0.5; cursor: not-allowed; }
     .search, .select {
       height: 44px;
       border: 1px solid rgba(201, 162, 74, 0.32);
@@ -812,6 +1086,19 @@ export class VideosComponent {
   readonly selectedVideo = signal<Video | null>(null);
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
 
+  // Add Video modal state
+  readonly addVideoOpen = signal(false);
+  readonly addUrl = signal('');
+  readonly addLoading = signal(false);
+  readonly addSaving = signal(false);
+  readonly addError = signal<string | null>(null);
+  readonly preview = signal<VideoPreview | null>(null);
+  readonly newChannelLang = signal<'FR' | 'EN'>('EN');
+  readonly addDesc = signal('');
+  readonly addCategory = signal<string>('lore');
+  readonly addType = signal<string>('Chaîne lore');
+  readonly addFeatured = signal(false);
+
   private readonly thumbCache = signal<Record<string, string>>({});
   private readonly thumbInflight = new Set<string>();
 
@@ -938,10 +1225,85 @@ export class VideosComponent {
   }
 
   @HostListener('document:keydown.escape')
-  onEscape(): void { if (this.selectedVideo()) this.closeModal(); }
+  onEscape(): void {
+    if (this.selectedVideo()) this.closeModal();
+    else if (this.addVideoOpen()) this.closeAddVideo();
+  }
 
   openExternal(url: string): void {
     window.open(url, '_blank', 'noopener');
+  }
+
+  // === Add Video flow ===
+  openAddVideo(): void {
+    this.addVideoOpen.set(true);
+  }
+
+  closeAddVideo(): void {
+    this.addVideoOpen.set(false);
+    this.addUrl.set('');
+    this.preview.set(null);
+    this.addError.set(null);
+    this.addDesc.set('');
+    this.addFeatured.set(false);
+  }
+
+  previewVideo(): void {
+    const url = this.addUrl().trim();
+    if (!url) return;
+    this.addError.set(null);
+    this.preview.set(null);
+    this.addLoading.set(true);
+    this.service.previewVideo(url).subscribe({
+      next: p => {
+        this.preview.set(p);
+        if (p.matchedChannel) {
+          this.newChannelLang.set(p.matchedChannel.language);
+        }
+        this.addLoading.set(false);
+      },
+      error: err => {
+        this.addError.set(err?.error?.message ?? 'URL YouTube invalide ou inaccessible');
+        this.addLoading.set(false);
+      },
+    });
+  }
+
+  confirmAdd(): void {
+    const p = this.preview();
+    if (!p) return;
+    this.addSaving.set(true);
+    this.addError.set(null);
+
+    const body: VideoImportBody = {
+      url: this.addUrl(),
+      description: this.addDesc().trim() || undefined,
+      type: this.addType(),
+      category: this.addCategory(),
+      incontournable: this.addFeatured(),
+      langue: this.newChannelLang(),
+    };
+    if (p.matchedChannel) {
+      body.channelId = p.matchedChannel.id;
+    } else {
+      body.channel = {
+        id: p.suggestedChannelId,
+        name: p.authorName,
+        language: this.newChannelLang(),
+        url: p.authorUrl,
+      };
+    }
+
+    this.service.importVideo(body).subscribe({
+      next: () => {
+        // Reload videos & channels via service
+        window.location.reload();
+      },
+      error: err => {
+        this.addError.set(err?.error?.message ?? 'Erreur lors de l\'enregistrement');
+        this.addSaving.set(false);
+      },
+    });
   }
 
   shortDesc(d: string): string {

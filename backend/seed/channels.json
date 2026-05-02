@@ -79,5 +79,14 @@
     "url": "https://www.youtube.com/@ImperialIterator",
     "avatar": "II",
     "priority": true
+  },
+  {
+    "id": "skylord-luke",
+    "name": "Skylord Luke",
+    "description": "EN · animations fan-made et lore",
+    "language": "EN",
+    "url": "https://www.youtube.com/@SkylordLuke",
+    "avatar": "SL",
+    "priority": false
   }
 ]

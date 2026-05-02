@@ -181,6 +181,15 @@ export class WarhammerService {
     return this.http.get<Equipment>(`${this.base}/lore/equipment/${id}`);
   }
 
+  // === Vidéos : preview + import via oEmbed YouTube ===
+  previewVideo(url: string): Observable<VideoPreview> {
+    return this.http.get<VideoPreview>(`${this.base}/videos/preview?url=${encodeURIComponent(url)}`);
+  }
+
+  importVideo(body: VideoImportBody): Observable<{ video: Video; channel: Channel }> {
+    return this.http.post<{ video: Video; channel: Channel }>(`${this.base}/videos/import`, body);
+  }
+
   // === Image meta (catégorisation user) ===
   getImageMeta(): Observable<Record<string, ImageMeta>> {
     return this.http.get<Record<string, ImageMeta>>(`${this.base}/image-meta`);
@@ -210,6 +219,31 @@ export interface ImageMeta {
   title?: string;
   faction?: string;
   artist?: string;
+}
+
+export interface VideoPreview {
+  videoId: string;
+  title: string;
+  authorName: string;
+  authorUrl: string;
+  thumbnailUrl: string;
+  suggestedVideoId: string;
+  suggestedChannelId: string;
+  matchedChannel: Channel | null;
+}
+
+export interface VideoImportBody {
+  url: string;
+  videoId?: string;
+  titre?: string;
+  description?: string;
+  type?: string;
+  langue?: string;
+  category?: string;
+  tags?: string[];
+  incontournable?: boolean;
+  channelId?: string;
+  channel?: Partial<Channel>;
 }
 
 export interface RedditPost {

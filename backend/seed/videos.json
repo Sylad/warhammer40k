@@ -390,5 +390,29 @@
     "channelId": "imperial-iterator",
     "language": "EN",
     "featured": true
+  },
+  {
+    "id": "siege-of-the-imperium-skylord-luke",
+    "titre": "Siege of the Imperium",
+    "createur": "Skylord Luke",
+    "description": "Animation fan-made retraçant un fragment du Siège de Terra. Vue cinématique et brutale du conflit qui scella l'Imperium.",
+    "url": "https://youtu.be/lnNijP6PwPM",
+    "embedId": "lnNijP6PwPM",
+    "embedType": "video",
+    "type": "Animation",
+    "langue": "EN",
+    "tags": [
+      "Animation",
+      "Siège de Terra",
+      "Hérésie",
+      "Fan-made"
+    ],
+    "incontournable": false,
+    "thumbnail": "Siege of Terra Horus Heresy animation",
+    "duration": "—",
+    "category": "animations",
+    "language": "EN",
+    "featured": false,
+    "channelId": "skylord-luke"
   }
 ]
