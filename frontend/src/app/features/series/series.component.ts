@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Serie, SerieBadge } from '../../core/models/models';
+import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
 const SERIES_WIKI: Record<string, string> = {
   'heresie-horus':    'Horus Heresy Warhammer 40k',
@@ -51,7 +52,7 @@ const PAGE_SIZE = 8;
 @Component({
   selector: 'app-series',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FigureLightboxComponent],
   template: `
     <section class="romans-page">
 
@@ -130,10 +131,12 @@ const PAGE_SIZE = 8;
           <div class="grid">
             @for (s of visibleSeries(); track s.id) {
               <article class="serie-card">
-                <div class="card-image"
-                     [style.background-image]="wikiImages().get(s.id) ? 'url(' + wikiImages().get(s.id) + ')' : ''">
+                <button class="card-image" type="button"
+                     [style.background-image]="wikiImages().get(s.id) ? 'url(' + wikiImages().get(s.id) + ')' : ''"
+                     (click)="openLightbox(s)" aria-label="Voir cover en grand">
                   <div class="card-overlay"></div>
-                </div>
+                  <span class="card-zoom">⛶</span>
+                </button>
                 <div class="card-body">
                   <h3 class="card-title">{{ s.titre }}</h3>
                   <div class="card-author">{{ formatAuthors(s.auteurs) }}</div>
@@ -253,6 +256,8 @@ const PAGE_SIZE = 8;
         </aside>
       </div>
     </section>
+
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
   `,
   styles: [`
     :host {
@@ -525,13 +530,33 @@ const PAGE_SIZE = 8;
     }
     .card-image {
       position: relative;
+      width: 100%;
       height: 150px;
       background-color: #0c0805;
       background-size: cover;
       background-position: center 30%;
       transition: transform 0.4s ease;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: block;
     }
     .serie-card:hover .card-image { transform: scale(1.04); }
+    .card-zoom {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      z-index: 2;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8, 7, 6, 0.78);
+      border: 1px solid rgba(201, 162, 74, 0.4);
+      color: var(--gold-soft);
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .serie-card:hover .card-zoom { opacity: 1; color: var(--gold-bright); border-color: var(--gold); }
     .card-overlay {
       position: absolute;
       inset: 0;
@@ -909,6 +934,7 @@ export class SeriesComponent {
 
   readonly series = toSignal(this.service.series$, { initialValue: [] as Serie[] });
   readonly wikiImages = signal(new Map<string, string>());
+  readonly lightbox = signal<LightboxState | null>(null);
   readonly heroImageUrl = signal<string | null>(null);
 
   readonly activeTab = signal<TabKey>('all');
@@ -1055,6 +1081,52 @@ export class SeriesComponent {
       case 'EN':                return 'b-en';
     }
   }
+
+  openLightbox(s: Serie): void {
+    const baseUrl = this.wikiImages().get(s.id);
+    if (!baseUrl) return;
+    this.lightbox.set({
+      title: s.titre,
+      subtitle: this.formatAuthors(s.auteurs ?? []) + ' · ' + (s.epoque ?? ''),
+      description: s.description,
+      contextName: 'Black Library',
+      contextColor: '#c9a24a',
+      contextSigil: '▤',
+      searchQuery: s.titreVO || s.titre,
+      mainUrl: baseUrl,
+      thumbUrls: [baseUrl],
+      selectedIdx: 0,
+    });
+    const baseQuery = s.titreVO || s.titre;
+    const variants = [
+      `${baseQuery} cover`,
+      `${baseQuery} Black Library`,
+      `${s.premierLivre || baseQuery} novel`,
+      `${baseQuery} art warhammer 40k`,
+    ];
+    for (const q of variants) {
+      this.service.getWikiImage(q).subscribe({
+        next: r => {
+          if (!r.imageUrl) return;
+          const cur = this.lightbox();
+          if (!cur || cur.title !== s.titre) return;
+          if (cur.thumbUrls.includes(r.imageUrl)) return;
+          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+        },
+        error: () => {},
+      });
+    }
+  }
+
+  selectThumb(idx: number): void {
+    const cur = this.lightbox();
+    if (!cur) return;
+    const url = cur.thumbUrls[idx];
+    if (!url) return;
+    this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
+  }
+
+  closeLightbox(): void { this.lightbox.set(null); }
 }
 
 function stripPrefix(t: string): string {

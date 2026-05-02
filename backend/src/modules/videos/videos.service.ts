@@ -35,4 +35,12 @@ export class VideosService {
     fs.writeFileSync(FILE_PATH, JSON.stringify(this.videos, null, 2), 'utf-8');
     return video;
   }
+
+  remove(id: string): boolean {
+    const idx = this.videos.findIndex(v => v.id === id);
+    if (idx < 0) return false;
+    this.videos.splice(idx, 1);
+    fs.writeFileSync(FILE_PATH, JSON.stringify(this.videos, null, 2), 'utf-8');
+    return true;
+  }
 }

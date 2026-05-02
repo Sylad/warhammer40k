@@ -256,6 +256,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                     (click)="openModal(v)">
                     <span class="duration">{{ v.duration }}</span>
                     <span class="play">▶</span>
+                    <button class="vc-delete" type="button" (click)="deleteVideo(v, $event)" aria-label="Supprimer la vidéo">✕</button>
                     <div class="video-content">
                       <div class="tags">
                         @if (v.language === 'FR') { <span class="tag fr">FR</span> }
@@ -753,6 +754,25 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
+    .vc-delete {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8, 7, 6, 0.78);
+      border: 1px solid rgba(170, 45, 45, 0.45);
+      color: #ff8a8a;
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .video-card:hover .vc-delete { opacity: 0.9; }
+    .vc-delete:hover { background: rgba(123, 17, 19, 0.85); opacity: 1 !important; }
+
     .video-card {
       position: relative;
       min-height: 245px;
@@ -1296,13 +1316,24 @@ export class VideosComponent {
 
     this.service.importVideo(body).subscribe({
       next: () => {
-        // Reload videos & channels via service
-        window.location.reload();
+        this.service.refreshVideos();
+        this.service.refreshChannels();
+        this.addSaving.set(false);
+        this.closeAddVideo();
       },
       error: err => {
         this.addError.set(err?.error?.message ?? 'Erreur lors de l\'enregistrement');
         this.addSaving.set(false);
       },
+    });
+  }
+
+  deleteVideo(v: Video, event: Event): void {
+    event.stopPropagation();
+    if (!confirm(`Supprimer la vidéo « ${v.titre} » du codex ?`)) return;
+    this.service.deleteVideo(v.id).subscribe({
+      next: () => this.service.refreshVideos(),
+      error: err => alert(err?.error?.message ?? 'Suppression refusée'),
     });
   }
 

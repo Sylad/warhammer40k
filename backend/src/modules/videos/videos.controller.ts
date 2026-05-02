@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query, BadRequestException, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Query, Param, BadRequestException, NotFoundException, UseGuards } from '@nestjs/common';
 import { VideosService } from './videos.service.js';
 import { YouTubeOEmbedService } from './youtube-oembed.service.js';
 import { ChannelsService } from '../channels/channels.service.js';
@@ -134,5 +134,13 @@ export class VideosController {
 
     const saved = this.videos.add(video);
     return { video: saved, channel };
+  }
+
+  @Delete(':id')
+  @UseGuards(PinGuard)
+  remove(@Param('id') id: string): { deleted: string } {
+    const ok = this.videos.remove(id);
+    if (!ok) throw new NotFoundException(`Video ${id} not found`);
+    return { deleted: id };
   }
 }

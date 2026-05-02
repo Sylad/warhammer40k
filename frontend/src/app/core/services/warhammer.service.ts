@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay, switchMap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
   Faction, Unit, DescriptionResponse, Serie, Video,
@@ -74,9 +74,13 @@ export class WarhammerService {
     );
   }
 
-  readonly videos$: Observable<Video[]> = this.http
-    .get<Video[]>(`${this.base}/videos`)
-    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+  private readonly videosRefresh$ = new BehaviorSubject<void>(undefined);
+  readonly videos$: Observable<Video[]> = this.videosRefresh$.pipe(
+    switchMap(() => this.http.get<Video[]>(`${this.base}/videos`)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
+
+  refreshVideos(): void { this.videosRefresh$.next(); }
 
   readonly images$: Observable<string[]> = this.http
     .get<string[]>(`${this.base}/images`)
@@ -98,13 +102,18 @@ export class WarhammerService {
   }
 
   // === Channels (YouTube) ===
-  readonly channels$: Observable<Channel[]> = this.http
-    .get<Channel[]>(`${this.base}/channels`)
-    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+  private readonly channelsRefresh$ = new BehaviorSubject<void>(undefined);
+  readonly channels$: Observable<Channel[]> = this.channelsRefresh$.pipe(
+    switchMap(() => this.http.get<Channel[]>(`${this.base}/channels`)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
 
-  readonly channelsPriority$: Observable<Channel[]> = this.http
-    .get<Channel[]>(`${this.base}/channels?priority=true`)
-    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+  readonly channelsPriority$: Observable<Channel[]> = this.channelsRefresh$.pipe(
+    switchMap(() => this.http.get<Channel[]>(`${this.base}/channels?priority=true`)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
+
+  refreshChannels(): void { this.channelsRefresh$.next(); }
 
   // === Artworks (Galerie) ===
   readonly artworks$: Observable<Artwork[]> = this.http
@@ -188,6 +197,10 @@ export class WarhammerService {
 
   importVideo(body: VideoImportBody): Observable<{ video: Video; channel: Channel }> {
     return this.http.post<{ video: Video; channel: Channel }>(`${this.base}/videos/import`, body);
+  }
+
+  deleteVideo(id: string): Observable<{ deleted: string }> {
+    return this.http.delete<{ deleted: string }>(`${this.base}/videos/${encodeURIComponent(id)}`);
   }
 
   // === Image meta (catégorisation user) ===
