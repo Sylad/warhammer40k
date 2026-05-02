@@ -12,7 +12,7 @@
     "loreLong": "Lion El'Jonson tomba sur Caliban, monde-forêt sauvage. Élevé seul, il devint le plus grand chevalier du monde avant que les Dark Angels ne soient redécouverts par l'Empereur. Pendant l'Hérésie d'Horus, son frère adoptif Luther se rebella et Caliban explosa dans une tempête psychique. Lion fut placé en stase grièvement blessé. Il est ressorti au M42, et chasse désormais les Fallen — les anciens Dark Angels qui ont survécu au cataclysme — à travers la galaxie.",
     "homeworld": "Caliban (détruite)",
     "primaryColor": "#1a4f2a",
-    "wikiQuery": "Lion El'Jonson primarch",
+    "wikiQuery": "Lion El'Jonson",
     "citation": "Le secret est notre seconde armure."
   },
   {
@@ -39,7 +39,7 @@
     "loreLong": "Fulgrim était l'incarnation de la perfection martiale, artistique et physique. Sa Légion — les Emperor's Children — fut la seule officiellement honorée de porter l'aigle palatin. Pendant l'Hérésie, une lame daemonique recueillie sur Laeran le corrompit lentement. Il assassina Ferrus Manus à Isstvan V, puis sombra entièrement dans le culte de Slaanesh. Aujourd'hui Daemon-Prince à six bras et torse de serpent, il erre dans l'Œil de la Terreur entre orgies et tueries esthétiques.",
     "homeworld": "Chemos",
     "primaryColor": "#9c2680",
-    "wikiQuery": "Fulgrim primarch",
+    "wikiQuery": "Fulgrim",
     "citation": "La perfection est insuffisante. Il faut transcender."
   },
   {
@@ -54,7 +54,7 @@
     "description": "Génie de la siège-guerre. Maître inégalé de la fortification et de l'artillerie. Devint Daemon-Prince après le Massacre de l'Iron Cage.",
     "homeworld": "Olympia",
     "primaryColor": "#6a6a72",
-    "wikiQuery": "Perturabo primarch",
+    "wikiQuery": "Perturabo",
     "citation": "Aucune muraille ne tient. Pas devant moi."
   },
   {
@@ -69,7 +69,7 @@
     "description": "Le Khan, primarque cavalier des steppes de Chogoris. Maître de la guerre éclair, des frappes obliques et de la vitesse pure.",
     "homeworld": "Chogoris (Mundus Planus)",
     "primaryColor": "#c93232",
-    "wikiQuery": "Jaghatai Khan primarch",
+    "wikiQuery": "Jaghatai Khan",
     "citation": "La vitesse est notre prière."
   },
   {
@@ -85,7 +85,7 @@
     "loreLong": "Leman Russ tomba sur Fenris, monde-glacier de loups. Élevé par une meute, il devint le plus grand des berserkers humains. Loyal jusqu'à la moelle mais réfractaire au Codex Astartes, il refusa de scinder sa Légion en chapitres. Après l'Hérésie, il quitta Fenris en quête d'une dernière chasse — la prophétie de la Wolftime annonce qu'il reviendra le jour où l'Imperium chancelle pour sa dernière bataille.",
     "homeworld": "Fenris",
     "primaryColor": "#8090a0",
-    "wikiQuery": "Leman Russ primarch",
+    "wikiQuery": "Leman Russ",
     "citation": "Hurlons ensemble une dernière fois."
   },
   {
@@ -100,7 +100,7 @@
     "description": "Architecte du Siège de Terra. Maître de la fortification défensive, il transforma le Palais Impérial en forteresse imprenable.",
     "homeworld": "Inwit",
     "primaryColor": "#d4a017",
-    "wikiQuery": "Rogal Dorn primarch",
+    "wikiQuery": "Rogal Dorn",
     "citation": "Mes murs tiendront."
   },
   {
@@ -116,7 +116,7 @@
     "loreLong": "Konrad Curze tomba sur Nostramo, monde-ruche plongé dans la nuit perpétuelle. Il devint le terroriste-sériel qui pacifia sa planète par la peur — ses victimes nobles, criminels et corrompus laissés en exemple. Quand l'Empereur le retrouva, il avait des visions de sa propre fin : violente, méritée. Pendant l'Hérésie, il se vautra dans la cruauté psychologique. À la fin, il invita ouvertement l'assassinat. M'Shen, Vindicare, le tua dans son trône. Curze sourit en mourant.",
     "homeworld": "Nostramo (détruite)",
     "primaryColor": "#1a1a26",
-    "wikiQuery": "Konrad Curze primarch",
+    "wikiQuery": "Konrad Curze",
     "citation": "Je l'avais vue. Je l'attendais. Tu es en retard."
   },
   {
@@ -132,7 +132,7 @@
     "loreLong": "Sanguinius tomba sur Baal Secundus, monde irradié. Né avec des ailes vertes-blanches, il était à la fois prophète et guerrier. Pendant le Siège de Terra, il pénétra seul à bord du Vengeful Spirit pour affronter Horus, sachant qu'il y mourrait. Sa mort affaiblit Horus juste assez pour permettre à l'Empereur de l'abattre. Les Blood Angels portent son sang depuis — et leur Soif Rouge est la malédiction transmise par sa mort tragique.",
     "homeworld": "Baal Secundus",
     "primaryColor": "#c9302c",
-    "wikiQuery": "Sanguinius primarch",
+    "wikiQuery": "Sanguinius",
     "citation": "Père. Pardonne-leur. Ils ne savent pas ce qu'ils font."
   },
   {
@@ -174,7 +174,7 @@
     "loreLong": "Angron tomba sur Nuceria, où des esclavagistes lui implantèrent les Butcher's Nails — circuits de torture cérébrale qui le maintenaient en rage permanente. L'Empereur le sauva de l'arène mais ne put retirer les Nails sans le tuer. Sa colère, déjà immense contre l'Empereur qui l'avait abandonné une fois, fit de lui un traître facile. Il devint Daemon-Prince de Khorne pendant l'Hérésie. Au M42, il revint dans le matériel — première manifestation primarchique daemoniaque depuis dix mille ans.",
     "homeworld": "Nuceria",
     "primaryColor": "#8b1a1a",
-    "wikiQuery": "Angron primarch",
+    "wikiQuery": "Angron",
     "citation": "DU SANG ! POUR LE TRÔNE DE SANG !"
   },
   {
@@ -205,7 +205,7 @@
     "description": "Le Faucheur. Primarque pâle, élevé sur Barbarus par un seigneur xenos sorcier. Embrassa Nurgle pendant l'Hérésie pour échapper à la maladie warp dont il souffrait.",
     "homeworld": "Barbarus",
     "primaryColor": "#6a6a30",
-    "wikiQuery": "Mortarion primarch",
+    "wikiQuery": "Mortarion",
     "citation": "La maladie est libération. La pourriture est vérité."
   },
   {
@@ -252,7 +252,7 @@
     "description": "Le prêcheur. Premier primarque à embrasser le Chaos. Architecte religieux de l'Hérésie d'Horus.",
     "homeworld": "Colchis",
     "primaryColor": "#6a4f2a",
-    "wikiQuery": "Lorgar primarch",
+    "wikiQuery": "Lorgar",
     "citation": "Vous voulez un dieu ? Voici quatre dieux."
   },
   {
@@ -267,7 +267,7 @@
     "description": "Le Forgeron. Né sur Nocturne, planète volcanique. Primarque-Perpetual : ne meurt jamais définitivement. Symbole de compassion humaine entre les guerriers transhumains.",
     "homeworld": "Nocturne",
     "primaryColor": "#1a5f3a",
-    "wikiQuery": "Vulkan primarch",
+    "wikiQuery": "Vulkan",
     "citation": "L'humain reste humain — c'est notre force et notre devoir."
   },
   {
@@ -282,7 +282,7 @@
     "description": "L'ombre, le libérateur. Maître de la guerre clandestine, héros des Drop Site Massacre où sa Légion fut presque anéantie.",
     "homeworld": "Lycaeus / Deliverance",
     "primaryColor": "#0f1a26",
-    "wikiQuery": "Corvus Corax primarch",
+    "wikiQuery": "Corvus Corax",
     "citation": "Une seule victoire suffit. Mais il en faut mille."
   },
   {
@@ -298,7 +298,7 @@
     "loreLong": "Alpharius et Omegon furent les seuls primarques jumeaux. Leur Alpha Legion masquait leur dualité : tout marine de la Légion pouvait prétendre 'I AM ALPHARIUS'. Pendant l'Hérésie, ils choisirent du côté des traîtres — ou prétendirent le faire. Roboute Guilliman tua Alpharius en duel sur Eskrador. Mais Omegon ? Personne ne sait. Au M42, des Alpha Legion claim agir en sous-marin pour préserver l'Imperium. La vérité ? 'I AM ALPHARIUS.' Tout le monde l'est.",
     "homeworld": "Inconnu",
     "primaryColor": "#1a4a4a",
-    "wikiQuery": "Alpharius Omegon primarch",
+    "wikiQuery": "Alpharius Omegon",
     "citation": "I AM ALPHARIUS."
   }
 ]
