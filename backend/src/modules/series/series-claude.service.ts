@@ -4,14 +4,25 @@ import Anthropic from '@anthropic-ai/sdk';
 import { Serie } from './series.model.js';
 import { ClaudeUsageService } from '../claude-usage/claude-usage.service.js';
 
-function isQuotaError(err: unknown): boolean {
-  if (err instanceof Anthropic.RateLimitError) return true;
-  if (err instanceof Anthropic.AuthenticationError) return true;
+type ClaudeErrorKind = 'auth' | 'rate' | 'quota' | null;
+
+function classifyClaudeError(err: unknown): ClaudeErrorKind {
+  if (err instanceof Anthropic.AuthenticationError) return 'auth';
+  if (err instanceof Anthropic.RateLimitError) return 'rate';
   if (err instanceof Anthropic.APIError) {
     const msg = (err.message ?? '').toLowerCase();
-    return err.status === 402 || msg.includes('credit') || msg.includes('quota');
+    if (err.status === 402 || msg.includes('credit') || msg.includes('quota') || msg.includes('insufficient')) {
+      return 'quota';
+    }
   }
-  return false;
+  return null;
+}
+
+function toHttpException(kind: ClaudeErrorKind): HttpException | null {
+  if (kind === 'auth') return new HttpException('CLAUDE_AUTH_FAILED', HttpStatus.UNAUTHORIZED);
+  if (kind === 'rate') return new HttpException('CLAUDE_RATE_LIMITED', HttpStatus.TOO_MANY_REQUESTS);
+  if (kind === 'quota') return new HttpException('CLAUDE_QUOTA_EXCEEDED', HttpStatus.PAYMENT_REQUIRED);
+  return null;
 }
 
 @Injectable()
@@ -56,9 +67,8 @@ Développe en 4-5 paragraphes : l'atmosphère générale, les personnages princi
       if (!textBlock || textBlock.type !== 'text') throw new Error('Réponse Claude invalide');
       return textBlock.text;
     } catch (err) {
-      if (isQuotaError(err)) {
-        throw new HttpException('CLAUDE_QUOTA_EXCEEDED', HttpStatus.PAYMENT_REQUIRED);
-      }
+      const httpEx = toHttpException(classifyClaudeError(err));
+      if (httpEx) throw httpEx;
       throw err;
     }
   }

@@ -43,8 +43,22 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
 
     @if (quota.hasError()) {
       <div class="quota-banner">
-        ⚠ Quota Claude épuisé — rechargez des crédits sur
-        <a href="https://console.anthropic.com" target="_blank" rel="noopener">anthropic.com</a>
+        @switch (quota.errorKind()) {
+          @case ('auth') {
+            <span>⚠ Clé Claude invalide — régénère une clé sur
+              <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>
+              et mets-la dans <code>backend/.env</code>.
+            </span>
+          }
+          @case ('rate') {
+            <span>⏳ Rate-limit Claude atteint — réessaye dans quelques secondes.</span>
+          }
+          @default {
+            <span>⚠ Quota Claude épuisé — rechargez des crédits sur
+              <a href="https://console.anthropic.com" target="_blank" rel="noopener">anthropic.com</a>
+            </span>
+          }
+        }
         <button class="quota-dismiss" (click)="quota.dismiss()">✕</button>
       </div>
     }
