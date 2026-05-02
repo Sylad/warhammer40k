@@ -1403,9 +1403,32 @@ export class GalleryComponent {
     return Array.from(set).sort();
   });
 
+  // Œuvres filtrées par TOUS les filtres SAUF la catégorie — base pour
+  // calculer dynamiquement les catégories pertinentes à la recherche en cours.
+  readonly searchedArtworks = computed(() => {
+    const q = this.searchQuery().trim().toLowerCase();
+    const fac = this.filterFaction();
+    const artist = this.filterArtist();
+    const coll = this.filterCollection();
+    let list = this.artworks().slice();
+    if (q) {
+      list = list.filter(a =>
+        a.title.toLowerCase().includes(q) ||
+        a.artist.toLowerCase().includes(q) ||
+        (a.faction ?? '').toLowerCase().includes(q) ||
+        (a.category ?? '').toLowerCase().includes(q) ||
+        (a.extraCategories ?? []).some(c => c.toLowerCase().includes(q))
+      );
+    }
+    if (fac) list = list.filter(a => a.faction === fac);
+    if (artist) list = list.filter(a => a.artist === artist);
+    if (coll) list = list.filter(a => a.collectionId === coll);
+    return list;
+  });
+
   readonly availableCategories = computed<{ key: string; label: string }[]>(() => {
     const counts = new Map<string, number>();
-    for (const a of this.artworks()) {
+    for (const a of this.searchedArtworks()) {
       const tags = [a.category, ...(a.extraCategories ?? [])].filter(Boolean) as string[];
       for (const t of tags) counts.set(t, (counts.get(t) ?? 0) + 1);
     }
@@ -1502,27 +1525,9 @@ export class GalleryComponent {
   );
 
   readonly filteredArtworks = computed(() => {
-    const q = this.searchQuery().trim().toLowerCase();
     const cat = this.filterCategory();
-    const fac = this.filterFaction();
-    const artist = this.filterArtist();
-    const coll = this.filterCollection();
-
-    let list = this.artworks().slice();
-
-    if (q) {
-      list = list.filter(a =>
-        a.title.toLowerCase().includes(q) ||
-        a.artist.toLowerCase().includes(q) ||
-        (a.faction ?? '').toLowerCase().includes(q) ||
-        (a.category ?? '').toLowerCase().includes(q) ||
-        (a.extraCategories ?? []).some(c => c.toLowerCase().includes(q))
-      );
-    }
+    let list = this.searchedArtworks().slice();
     if (cat) list = list.filter(a => a.category === cat || (a.extraCategories ?? []).includes(cat));
-    if (fac) list = list.filter(a => a.faction === fac);
-    if (artist) list = list.filter(a => a.artist === artist);
-    if (coll) list = list.filter(a => a.collectionId === coll);
 
     const sort = this.sortBy();
     if (sort === 'popular') list.sort((a, b) => (b.likes ?? 0) - (a.likes ?? 0));
@@ -1608,7 +1613,7 @@ export class GalleryComponent {
   }
 
   categoryCount(key: string): number {
-    return this.artworks().filter(a => a.category === key || (a.extraCategories ?? []).includes(key)).length;
+    return this.searchedArtworks().filter(a => a.category === key || (a.extraCategories ?? []).includes(key)).length;
   }
 
   toggleCategoryFilter(key: string): void {
