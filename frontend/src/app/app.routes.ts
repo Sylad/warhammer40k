@@ -88,6 +88,11 @@ export const routes: Routes = [
           .then(m => m.LoreGalaxyComponent)
       },
       {
+        path: 'lore/equipment',
+        loadComponent: () => import('./features/lore-equipment/lore-equipment.component')
+          .then(m => m.LoreEquipmentComponent)
+      },
+      {
         path: 'about',
         loadComponent: () => import('./features/about/about.component')
           .then(m => m.AboutComponent)

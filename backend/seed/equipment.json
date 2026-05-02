@@ -1,0 +1,1407 @@
+[
+  {
+    "id": "boltgun-astartes",
+    "name": "Bolter Astartes",
+    "nameVO": "Astartes Boltgun",
+    "type": "ranged",
+    "subCategory": "bolt",
+    "factionIds": [
+      "space-marines",
+      "chaos-space-marines"
+    ],
+    "description": "Arme emblématique des Space Marines, le bolter projette des obus-fusées explosifs capables de pulvériser un homme en une rafale.",
+    "loreLong": "Conçu durant la Grande Croisade et perfectionné au fil de dix mille ans, le bolter est le symbole même de l'Adeptus Astartes. Chaque obus est en réalité un missile autopropulsé miniature : la cartouche propulsive l'expulse du canon, puis un statoréacteur prend le relais avant que la charge creuse à pénétrateur de masse n'explose à l'intérieur de la cible. Les patterns Godwyn, Phobos et Tigrus diffèrent par la cadence et le calibre, mais tous partagent ce rugissement caractéristique qui glace le sang des hérétiques. Forgé sur les mondes-forges les plus pieux, chaque bolter est une relique semi-sacrée, baptisée d'huiles saintes et nommée par son porteur. Tenir un bolter, c'est porter le poids de la Vigilance Éternelle de l'Empereur.",
+    "specs": "Calibre .75, obus à fusée perforants, portée effective 100m, semi-auto/rafale, ~7kg",
+    "notable": [
+      "Le bolter sacré de Bjorn le Griffu",
+      "Pattern Godwyn (standard Astartes)",
+      "Pattern Tigrus (cadence accrue)"
+    ],
+    "citation": "Ce n'est qu'une fois ton bolter chargé que ton existence prend un sens.",
+    "wikiQuery": "Bolter Warhammer 40k",
+    "sigil": "⌖"
+  },
+  {
+    "id": "bolt-pistol",
+    "name": "Pistolet Bolter",
+    "nameVO": "Bolt Pistol",
+    "type": "ranged",
+    "subCategory": "bolt",
+    "factionIds": [
+      "space-marines",
+      "chaos-space-marines",
+      "inquisition",
+      "adeptus-mechanicus",
+      "soeurs-de-bataille"
+    ],
+    "description": "Version réduite du bolter, le pistolet bolter est l'arme de poing des officiers, des sergents Astartes et des champions de l'Imperium.",
+    "loreLong": "Le pistolet bolter conserve la philosophie meurtrière de son grand frère sous une forme compacte adaptée au combat rapproché. Pensé pour être manié d'une seule main, il accompagne presque toujours une arme de mêlée, transformant chaque assaut en une danse de plomb et de chaîne crantée. Les sergents Tactiques l'utilisent pour signaler une charge ou exécuter un officier ennemi à bout portant. Dans les mains des Sœurs de Bataille et des Inquisiteurs, il devient un instrument de jugement, expulsant des obus bénis qui purifient autant qu'ils détruisent. Sa portée réduite est compensée par sa puissance d'arrêt brute, capable de pulvériser un casque en un seul coup.",
+    "specs": "Calibre .75, chargeur 8-12 obus, portée effective 30m, semi-auto, ~2kg",
+    "notable": [
+      "Le pistolet bolter de Sergent Telion",
+      "Modèle Maximus utilisé par les Custodes mineures"
+    ],
+    "citation": "Bénie soit la main qui presse la détente.",
+    "wikiQuery": "Bolt pistol Warhammer 40k",
+    "sigil": "⌖"
+  },
+  {
+    "id": "storm-bolter",
+    "name": "Bolter d'Assaut",
+    "nameVO": "Storm Bolter",
+    "type": "ranged",
+    "subCategory": "bolt",
+    "factionIds": [
+      "space-marines",
+      "grey-knights",
+      "chaos-space-marines",
+      "inquisition"
+    ],
+    "description": "Double-bolter à cadence élevée, l'arme de prédilection des Terminators et des héros de l'Imperium.",
+    "loreLong": "Le storm bolter associe deux canons de bolter standard sur un mécanisme de chargement commun, doublant la cadence de tir pour saturer une zone d'obus explosifs. Conçu à l'origine pour équiper l'armure Terminator, il est devenu le symbole des unités d'élite et des champions impériaux. Sa précision modérée est compensée par un volume de feu dévastateur, capable de hacher une charge ork ou une vague de cultistes en quelques secondes. Les Grey Knights y gravent souvent des litanies de bannissement directement sur les chargeurs, transformant chaque rafale en exorcisme. Manier un storm bolter, c'est rugir au nom de l'Empereur en deux voix simultanées.",
+    "specs": "Double canon calibre .75, chargeurs jumelés 60 obus, portée effective 80m, full-auto, ~10kg",
+    "notable": [
+      "Le storm bolter de Lysander des Imperial Fists",
+      "Modèle Aegis des Grey Knights"
+    ],
+    "citation": "Deux canons. Une seule sentence.",
+    "wikiQuery": "Storm bolter Warhammer 40k",
+    "sigil": "⌖"
+  },
+  {
+    "id": "heavy-bolter",
+    "name": "Bolter Lourd",
+    "nameVO": "Heavy Bolter",
+    "type": "ranged",
+    "subCategory": "bolt",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "soeurs-de-bataille",
+      "chaos-space-marines"
+    ],
+    "description": "Mitrailleuse à obus-fusées, pilier des escouades de soutien et des Devastators Astartes.",
+    "loreLong": "Le bolter lourd est l'incarnation de la suprématie de feu impériale au niveau escouade. Tirant des obus de calibre supérieur à cadence soutenue, il transforme l'infanterie ennemie en charpie et menace même les véhicules légers. Monté sur trépied par la Garde Impériale ou porté à l'épaule par les Devastators Astartes, il est l'arme de ceux qui font payer chaque mètre de terrain cédé. Les patterns Hellfire intègrent des obus à charge mutagène conçus spécifiquement contre les Tyranides. Sur les murailles des forteresses impériales, le rugissement continu du heavy bolter est souvent la seule chose qui sépare l'humanité de la submersion.",
+    "specs": "Calibre .998, chargeur boîte 60 obus, portée effective 180m, full-auto, ~20kg",
+    "notable": [
+      "Pattern Hellfire (obus mutagènes anti-Tyranides)",
+      "Heavy bolters jumelés des Land Raider"
+    ],
+    "citation": "Tant qu'il rugit, le mur tient.",
+    "wikiQuery": "Heavy bolter Warhammer 40k",
+    "sigil": "⌖"
+  },
+  {
+    "id": "stalker-bolter",
+    "name": "Bolter Stalker",
+    "nameVO": "Stalker Pattern Boltgun",
+    "type": "ranged",
+    "subCategory": "bolt",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Variante de précision du bolter, équipée d'un long canon et d'une lunette télescopique pour les tirs à longue portée.",
+    "loreLong": "Le Stalker Pattern Boltgun est la réponse Astartes à la nécessité du tir précis sans sacrifier la puissance d'arrêt du bolt. Doté d'un canon allongé, d'un compensateur de recul et d'une lunette à imagerie multispectrale, il permet d'éliminer les officiers ennemis et les cibles prioritaires à plus de cinq cents mètres. Les Scouts Astartes en font un usage particulier, tapis dans les ruines, attendant des heures durant que la cible idéale apparaisse. Le pattern est également privilégié par les Sergents vétérans qui souhaitent maintenir leur escouade à distance tout en désignant les menaces. Chaque obus tiré est un acte de patience autant que de violence.",
+    "specs": "Calibre .75, canon long 700mm, optique x6, portée effective 500m, semi-auto, ~9kg",
+    "notable": [
+      "L'arme de prédilection du Sergent Telion (Ultramarines)"
+    ],
+    "citation": "Un seul obus. Un seul officier hérétique en moins.",
+    "wikiQuery": "Stalker pattern boltgun",
+    "sigil": "⌖"
+  },
+  {
+    "id": "plasma-pistol",
+    "name": "Pistolet à Plasma",
+    "nameVO": "Plasma Pistol",
+    "type": "ranged",
+    "subCategory": "plasma",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-mechanicus",
+      "inquisition",
+      "soeurs-de-bataille"
+    ],
+    "description": "Arme énergétique de poing projetant un bolide de plasma à matière stellaire — instable mais foudroyante.",
+    "loreLong": "Le pistolet à plasma comprime de l'hydrogène en plasma à plusieurs millions de degrés avant de l'expulser dans un faisceau magnétiquement contenu. Une seule décharge peut faire fondre une céramite Astartes ou trouer un blindage de Rhino. Mais cette puissance se paie : la moindre défaillance des bobines de confinement provoque une surcharge cataclysmique capable d'arracher le bras du tireur, voire de le réduire en cendres. Les officiers de la Garde et les Capitaines Astartes acceptent ce risque pour l'argument décisif que l'arme représente. Les artisans-magos du Mechanicus passent des décennies à entretenir chaque exemplaire, car la connaissance de leur fabrication s'est largement perdue.",
+    "specs": "Cellule plasma 6 charges, refroidisseur passif, portée effective 30m, surchauffe critique, ~3kg",
+    "notable": [
+      "Pistolets à plasma jumeaux du Capitaine Cato Sicarius"
+    ],
+    "citation": "Un soleil dans la paume — qu'il brûle l'hérétique avant qu'il ne brûle la mienne.",
+    "wikiQuery": "Plasma pistol Warhammer 40k",
+    "sigil": "✧"
+  },
+  {
+    "id": "plasma-gun",
+    "name": "Fusil à Plasma",
+    "nameVO": "Plasma Gun",
+    "type": "ranged",
+    "subCategory": "plasma",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-mechanicus",
+      "inquisition"
+    ],
+    "description": "Arme à plasma d'épaule, capable de réduire en vapeur l'infanterie en armure lourde et les blindés légers.",
+    "loreLong": "Le fusil à plasma est l'arme spéciale de prédilection des escouades anti-élite de l'Imperium. Il propulse une bille de plasma magnétiquement confiné qui explose à l'impact en libérant une chaleur stellaire. Une seule décharge bien placée peut percer une armure Terminator ou faire fondre le toit d'un APC ennemi. Ses cellules à hydrogène doivent être préchauffées rituellement avant chaque combat, et les tireurs apprennent à privilégier le tir prudent au tir surchargé — sauf en cas d'urgence absolue. Le pattern Ryza, fabriqué sur le monde-forge éponyme, est réputé le plus stable, tandis que le pattern Belisarius, redécouvert par Cawl, augmente la cadence au prix d'une chauffe accrue.",
+    "specs": "Cellule plasma 10 charges, mode standard/surchargé, portée effective 80m, refroidissement actif, ~8kg",
+    "notable": [
+      "Pattern Ryza (référence de stabilité)",
+      "Pattern Belisarius (redécouvert par Cawl)"
+    ],
+    "citation": "Préchauffe les bobines. Récite le canticum. Vise l'hérésie.",
+    "wikiQuery": "Plasma gun Warhammer 40k",
+    "sigil": "✧"
+  },
+  {
+    "id": "plasma-cannon",
+    "name": "Canon à Plasma",
+    "nameVO": "Plasma Cannon",
+    "type": "ranged",
+    "subCategory": "plasma",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-mechanicus"
+    ],
+    "description": "Variante lourde du fusil à plasma projetant une sphère de plasma à explosion de zone.",
+    "loreLong": "Le canon à plasma est un monstre de soutien : ses chambres de confinement surdimensionnées génèrent une sphère de plasma qui, à l'impact, libère une déflagration thermique sur plusieurs mètres. Idéal contre les concentrations d'infanterie d'élite ou les véhicules légers, il est porté à dos par les Devastators Astartes ou monté sur les Dreadnoughts et certains chars Leman Russ. Sa cadence est faible, son risque de surchauffe élevé, mais son impact tactique justifie tous les sacrifices. Sur Cadia comme sur Armageddon, on raconte des escouades entières de Terminators du Chaos vaporisées par un seul tir bien ajusté.",
+    "specs": "Cellule plasma haute capacité, tir à effet de zone (rayon 3-5m), portée effective 100m, refroidisseur double, ~25kg",
+    "notable": [
+      "Armement de Dreadnoughts Mk IV-Mk VIII",
+      "Variante Conversion Beamer Mechanicus (rare)"
+    ],
+    "citation": "Une sphère. Une escouade entière de plus à inscrire au registre des morts.",
+    "wikiQuery": "Plasma cannon Warhammer 40k",
+    "sigil": "✧"
+  },
+  {
+    "id": "meltagun",
+    "name": "Fusil à Fusion",
+    "nameVO": "Meltagun",
+    "type": "ranged",
+    "subCategory": "melta",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-mechanicus",
+      "inquisition",
+      "soeurs-de-bataille"
+    ],
+    "description": "Arme thermique à courte portée projetant un faisceau capable de liquéfier le métal et la chair en un instant.",
+    "loreLong": "Le meltagun, parfois surnommé « cookoff » par les vétérans de la Garde, fonctionne par fusion sub-atomique d'un noyau de pyrum-petrol comprimé. Il libère un faisceau microondes thermique d'une telle intensité que la matière organique se vaporise et les blindages les plus épais coulent comme de la cire. Sa portée extrêmement courte oblige le porteur à s'approcher dangereusement de sa cible — souvent un char ennemi ou un démon majeur — mais à cette distance, peu de choses survivent. Les escouades d'assaut Astartes en font une arme signature lors des frappes de précision contre les véhicules de commandement. Une seule décharge bien placée peut décider de l'issue d'une bataille de cuirassés terrestres.",
+    "specs": "Noyau pyrum-petrol 6 charges, faisceau thermique fusionnel, portée effective 18m, recul faible, ~10kg",
+    "notable": [
+      "Frappes anti-Titans des Sœurs de Bataille de l'Ordre du Sépulcre Argenté"
+    ],
+    "citation": "S'il faut s'approcher à dix pas, alors j'irai à neuf.",
+    "wikiQuery": "Meltagun Warhammer 40k",
+    "sigil": "☄"
+  },
+  {
+    "id": "multi-melta",
+    "name": "Multi-Fuseur",
+    "nameVO": "Multi-melta",
+    "type": "ranged",
+    "subCategory": "melta",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-mechanicus"
+    ],
+    "description": "Version lourde et bi-canon du meltagun, conçue pour anéantir les blindés et les forteresses.",
+    "loreLong": "Le multi-fuseur double la puissance destructrice du meltagun grâce à deux canons jumeaux et à un noyau de pyrum-petrol haute capacité. Arme de prédilection des Devastators Astartes et des escouades de soutien lourdes, il est l'un des seuls outils d'infanterie capable de menacer un Land Raider ou un Soul Grinder à courte portée. Les artisans du monde-forge Lucius en produisent les meilleurs exemplaires, gravés de litanies de fusion. Les Eradicators Primaris, intégralement équipés de multi-fuseurs, ont été conçus par Cawl spécifiquement pour la guerre anti-blindée. Là où passe un multi-fuseur, il ne reste qu'une carcasse fumante et un souvenir.",
+    "specs": "Bi-canon, noyau pyrum-petrol haute capacité, portée effective 36m, refroidisseur actif, ~22kg",
+    "notable": [
+      "Armement standard des Eradicators Primaris",
+      "Variante intégrée aux Land Speeders d'attaque"
+    ],
+    "citation": "Le char ennemi ne fume plus — il coule.",
+    "wikiQuery": "Multi-melta Warhammer 40k",
+    "sigil": "☄"
+  },
+  {
+    "id": "lasgun",
+    "name": "Fusil Laser",
+    "nameVO": "Lasgun",
+    "type": "ranged",
+    "subCategory": "las",
+    "factionIds": [
+      "astra-militarum"
+    ],
+    "description": "Fusil laser standard de la Garde Impériale, surnommé « flashlight » par les troupes mais omniprésent sur dix millions de mondes.",
+    "loreLong": "Le lasgun est l'arme la plus produite de l'histoire humaine. Robuste, fiable, simple à entretenir et à recharger via n'importe quelle source d'énergie — une cellule au feu de camp suffit à régénérer un chargeur partiellement —, il équipe les milliards de soldats de l'Astra Militarum sur tous les fronts de la Galaxie. Si une seule décharge peine à transpercer une armure lourde, des centaines de millions de tirs simultanés noient l'ennemi sous une mer de cohérence rouge. Les Cadiens y voient une extension de leur bras, les Catachans s'en servent pour cuire la viande sauvage. De Vostroya à Tallarn, chaque pattern reflète la culture de son monde d'origine, mais tous portent le même nom redouté par les hérétiques : la flashlight de l'Empereur.",
+    "specs": "Faisceau laser cohérent, cellule rechargeable 60 tirs, portée effective 150m, semi-auto/full-auto, ~4kg",
+    "notable": [
+      "Pattern Kantrael (Cadia)",
+      "Pattern Mars-Galaxy (production de masse)",
+      "Pattern Lucius (Death Korps de Krieg)"
+    ],
+    "citation": "On l'appelle flashlight. Mais dix milliards de flashlights ont fait taire dix milliards d'hérétiques.",
+    "wikiQuery": "Lasgun Warhammer 40k",
+    "sigil": "⌖"
+  },
+  {
+    "id": "hellgun",
+    "name": "Fusil Hellgun",
+    "nameVO": "Hellgun",
+    "type": "ranged",
+    "subCategory": "las",
+    "factionIds": [
+      "astra-militarum",
+      "inquisition"
+    ],
+    "description": "Version surchargée du lasgun, équipement signature des Tempestus Scions et des Stormtroopers.",
+    "loreLong": "Le hellgun, parfois appelé hot-shot lasgun, sacrifie l'autonomie du lasgun standard au profit d'une puissance accrue capable de transpercer la céramite Astartes ou l'armure d'un Terminator du Chaos. Alimenté par un sac à dos générateur indépendant, il offre des décharges concentrées qui transforment chaque tireur en sniper d'élite. Les Tempestus Scions, élevés depuis l'enfance dans les Scholas Progenium, en font leur arme de prédilection lors des frappes orbitales et des extractions à haute valeur. Les agents de l'Inquisition l'apprécient pour sa capacité à abattre proprement un suspect sans détruire les preuves. Sa portée est longue, sa précision chirurgicale, et son rugissement aigu trahit une létalité que le lasgun standard ne pourra jamais égaler.",
+    "specs": "Faisceau laser haute densité, sac générateur dorsal, portée effective 200m, semi-auto, ~6kg + 8kg dorsal",
+    "notable": [
+      "Hot-shot lasgun des Militarum Tempestus Scions"
+    ],
+    "citation": "Le lasgun chuchote. Le hellgun tonne.",
+    "wikiQuery": "Hot-shot lasgun hellgun",
+    "sigil": "⌖"
+  },
+  {
+    "id": "lascannon",
+    "name": "Canon Laser",
+    "nameVO": "Lascannon",
+    "type": "ranged",
+    "subCategory": "las",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-mechanicus",
+      "soeurs-de-bataille"
+    ],
+    "description": "Pièce d'artillerie laser anti-blindé, capable de transpercer le flanc d'un Land Raider à un kilomètre.",
+    "loreLong": "Le canon laser est la réponse impériale aux blindés les plus lourds de la Galaxie. Concentrant une charge énergétique massive en un faisceau cohérent étroit, il vaporise littéralement la matière à l'impact. Les escouades de Devastators Astartes et les pelotons de soutien lourd de la Garde Impériale en font leur outil principal pour briser les chars ennemis, les Soul Grinders, ou même certains Walkers gréco-titaniques. Sa cadence de tir est faible — la charge des condensateurs prend de longues secondes — mais chaque décharge est presque toujours décisive. Sur les murailles des Mondes-Forteresses, des batteries de canons laser jumelés veillent en permanence, prêtes à frapper toute incursion blindée hostile.",
+    "specs": "Faisceau laser haute énergie, condensateurs lourds, portée effective 1500m, tir simple, ~50kg",
+    "notable": [
+      "Armement principal des Predator Annihilator",
+      "Canons laser jumelés des Land Raider"
+    ],
+    "citation": "Une seule décharge. Un seul char. Toujours.",
+    "wikiQuery": "Lascannon Warhammer 40k",
+    "sigil": "⌖"
+  },
+  {
+    "id": "flamer",
+    "name": "Lance-Flammes",
+    "nameVO": "Flamer",
+    "type": "ranged",
+    "subCategory": "flame",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "soeurs-de-bataille",
+      "adeptus-mechanicus",
+      "inquisition"
+    ],
+    "description": "Arme de purification par le feu projetant un cône de promethium enflammé sur les hérétiques et les xenos.",
+    "loreLong": "Le lance-flammes est bien plus qu'une simple arme : c'est un instrument liturgique. Il projette un cône de promethium liquide enflammé qui adhère aux surfaces, aux armures et aux chairs, brûlant à plusieurs milliers de degrés et étouffant ses victimes par dépression d'oxygène. Particulièrement redouté contre les Tyranides, les Orks et les nuées d'infanterie légère, il est l'arme signature des Sœurs de Bataille — chaque réservoir béni transforme la flamme en sacrement purificateur. Les escouades Astartes l'emploient pour nettoyer les bunkers et les tranchées, là où aucun ennemi caché ne peut survivre à la marée incandescente. Un seul cri, un seul rugissement, et l'hérésie se consume.",
+    "specs": "Réservoir promethium 6-8 décharges, cône de feu 8m, portée effective 12m, mode continu, ~12kg + réservoir",
+    "notable": [
+      "Lance-flammes bénis de la Sororité (réservoirs gravés)",
+      "Pattern Castigator des Black Templars"
+    ],
+    "citation": "Que la flamme connaisse son devoir. Que la chair connaisse son péché.",
+    "wikiQuery": "Flamer Warhammer 40k",
+    "sigil": "✧"
+  },
+  {
+    "id": "heavy-flamer",
+    "name": "Lance-Flammes Lourd",
+    "nameVO": "Heavy Flamer",
+    "type": "ranged",
+    "subCategory": "flame",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "soeurs-de-bataille",
+      "adeptus-custodes",
+      "grey-knights"
+    ],
+    "description": "Version lourde du lance-flammes, projetant un torrent de promethium suralimenté capable de stériliser des structures entières.",
+    "loreLong": "Le lance-flammes lourd multiplie la portée et le débit de son cousin standard, transformant le porteur en avatar de purgation absolue. Son réservoir surdimensionné et sa buse renforcée permettent de saturer un cône large, brûlant non seulement la chair mais l'air lui-même. Les Sœurs de Bataille des ordres Pyriques en font une icône de leur foi, tandis que les Custodes l'utilisent dans les couloirs du Palais Impérial pour repousser les incursions warp. Les Grey Knights y ajoutent des huiles bénies et des sels d'argent pour brûler les démons mineurs jusque dans le Warp. Quand un heavy flamer s'allume, la prière a déjà cessé d'être nécessaire — il ne reste plus que le jugement.",
+    "specs": "Réservoir promethium haute capacité, cône 12m, portée effective 16m, mode continu, ~25kg + réservoir dorsal",
+    "notable": [
+      "Heavy flamer des Retributor Squads (Sororitas)",
+      "Variante Incinérateur sacré des Grey Knights"
+    ],
+    "citation": "Là où la flamme passe, le doute ne survit pas.",
+    "wikiQuery": "Heavy flamer Warhammer 40k",
+    "sigil": "✧"
+  },
+  {
+    "id": "volkite-charger",
+    "name": "Volkite Charger",
+    "nameVO": "Volkite Charger",
+    "type": "ranged",
+    "subCategory": "volkite",
+    "factionIds": [
+      "adeptus-mechanicus",
+      "space-marines",
+      "adeptus-custodes"
+    ],
+    "description": "Arme à rayon thermique d'origine pré-Hérésie, redécouverte par Cawl, qui désintègre la chair par résonance moléculaire.",
+    "loreLong": "Les armes volkites sont parmi les plus anciennes technologies de l'Imperium, perfectionnées durant l'Âge de la Technologie puis utilisées massivement lors des Légions de la Grande Croisade. Elles projettent un rayon thermique pulsé qui excite les molécules de la cible jusqu'à provoquer une combustion spontanée — un seul tir transforme un homme en torche, et les corps continuent souvent de brûler après la mort. Considérées comme perdues durant des millénaires, elles ont été redécouvertes et reproduites par Belisarius Cawl pour équiper certaines unités Custodes et Mechanicus. Le Volkite Charger est la variante de poing : compact, létal, et incroyablement précis. Pour les Custodes Sagittarum, c'est l'arme de la Garde de l'Empereur faite arme de poing.",
+    "specs": "Rayon thermique pulsé, cellule volkite 8 charges, portée effective 50m, semi-auto, ~4kg",
+    "notable": [
+      "Armement secondaire des Custodian Guard",
+      "Réintroduit par Belisarius Cawl pour le Mechanicus"
+    ],
+    "citation": "L'arme des fils de l'Empereur, jadis. L'arme de Ses gardiens, encore.",
+    "wikiQuery": "Volkite charger Warhammer 40k",
+    "sigil": "☄"
+  },
+  {
+    "id": "volkite-culverin",
+    "name": "Volkite Culverin",
+    "nameVO": "Volkite Culverin",
+    "type": "ranged",
+    "subCategory": "volkite",
+    "factionIds": [
+      "adeptus-mechanicus",
+      "adeptus-custodes"
+    ],
+    "description": "Variante lourde de l'arme volkite, tirant des rafales thermiques capables de balayer des escouades entières.",
+    "loreLong": "Le Volkite Culverin est la version d'appui-feu lourd des armes volkites, conçu pour saturer une zone de rayons thermiques en cadence soutenue. Chaque pulsation moléculaire transforme la cible en flambeau humain, et les rafales successives provoquent souvent des chaînes de combustion qui se propagent d'un soldat à l'autre. Réservé aux Skitarii Vanguard d'élite et aux Custodes les plus vénérables, il est produit en quantités infimes sur les mondes-forges les plus sacrés. Ses entrailles sont un mystère que seuls les Magos Volkanos osent contempler. Voir un Culverin tirer, c'est assister à la résurrection d'une époque où l'humanité maîtrisait des arts oubliés depuis dix mille ans.",
+    "specs": "Rayon thermique pulsé en rafale, cellule volkite haute capacité, portée effective 90m, full-auto, ~18kg",
+    "notable": [
+      "Armement signature de certains Allarus Custodians",
+      "Variante intégrée aux Kastelan Robots Mechanicus"
+    ],
+    "citation": "Une rafale, et la ligne ennemie s'embrase tout entière.",
+    "wikiQuery": "Volkite culverin",
+    "sigil": "☄"
+  },
+  {
+    "id": "grav-cannon",
+    "name": "Canon Grav",
+    "nameVO": "Grav-cannon",
+    "type": "ranged",
+    "subCategory": "graviton",
+    "factionIds": [
+      "adeptus-mechanicus",
+      "space-marines"
+    ],
+    "description": "Arme à manipulation gravitationnelle écrasant les cibles sous le poids démultiplié de leur propre armure.",
+    "loreLong": "Le canon grav exploite l'une des sciences les plus ésotériques héritées de l'Âge Sombre : la manipulation localisée du champ gravitationnel. À l'impact, le projectile invisible démultiplie soudainement la masse perçue de la cible par un facteur monstrueux, écrasant les soldats sous le poids de leur propre armure et faisant exploser les os comme du verre. Plus la cible est lourde, plus l'effet est dévastateur — un Terminator s'effondre littéralement sur lui-même. Conçu et produit exclusivement par l'Adeptus Mechanicus, il est confié aux Centurions Astartes les plus expérimentés et aux unités Skitarii d'élite. Les artisans-magos le considèrent comme une arme presque sacrée : peu en comprennent le fonctionnement, et nul n'ose en altérer la conception.",
+    "specs": "Émetteur graviton triple canon, cellule à champs polarisés, portée effective 60m, semi-auto, ~30kg",
+    "notable": [
+      "Armement des Centurion Devastator Squads",
+      "Variante Grav-flux Bombard des Mechanicus"
+    ],
+    "citation": "Sa propre armure, devenue son tombeau.",
+    "wikiQuery": "Grav cannon Warhammer 40k",
+    "sigil": "✧"
+  },
+  {
+    "id": "power-sword",
+    "name": "Épée énergétique",
+    "nameVO": "Power Sword",
+    "type": "melee",
+    "subCategory": "power",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "soeurs-de-bataille",
+      "adeptus-custodes",
+      "grey-knights"
+    ],
+    "description": "Lame ceinte d'un champ de force disruptif capable de trancher armures céramite et chair xeno avec une égale facilité. Symbole de commandement et d'honneur dans tout l'Imperium.",
+    "loreLong": "L'épée énergétique projette une enveloppe d'énergie polarisée le long de son fil, désintégrant la matière à l'échelle moléculaire au contact. Forgées dans des aciers rituels souvent issus de Mars ou des mondes-forges majeurs, leurs poignées renferment générateur de champ et batterie capacitive. Réservées aux officiers, sergents vétérans et Sœurs Supérieures, elles transmettent le poids du grade autant que la lettre du Codex Astartes. Certaines lames sont relliques honorifiques portant des noms millénaires et bénies par l'Ecclésiarchie. D'autres patterns existent : sabre Cavalero, gladius Tigrus, tulwar Raïg. Au combat rapproché contre Terminators chaotiques ou Tyranid synapses, elles font la différence entre survivre et finir éviscéré.",
+    "specs": "Poids 2,1 kg — Longueur 1,1 m — Champ disruptif (capacitor 30 sec soutenu) — Source : pile à conversion plasma intégrée poignée",
+    "notable": [
+      "Glaive d'Honneur du Capitaine Cato Sicarius",
+      "Épée du Lion d'El'Jonson"
+    ],
+    "citation": "Nul casque ne protège du jugement quand l'officier dégaine.",
+    "wikiQuery": "Power Sword Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "power-fist",
+    "name": "Gantelet énergétique",
+    "nameVO": "Power Fist",
+    "type": "melee",
+    "subCategory": "power",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "adeptus-custodes"
+    ],
+    "description": "Énorme gantelet blindé entouré d'un champ énergétique, capable de broyer véhicules et créatures monstrueuses d'un seul impact. Arme de prédilection des sergents Astartes.",
+    "loreLong": "Le power fist convertit la force démultipliée d'un servomoteur en une frappe à laquelle s'ajoute la décharge disruptive d'un champ énergétique enveloppant la totalité du gantelet. Lourd et lent, il échange la finesse contre une puissance brute capable d'arracher la coupole d'un Land Raider ou de réduire une carapace tyranide en bouillie. Les sergents tactiques Astartes en sont fréquemment équipés, tout comme certains officiers de la Garde et capitaines de chapitre. Ses variantes incluent le Crozius Arcanum des Chapelains et le seismic hammer ork dans une logique parallèle. Manier un power fist demande des années d'entraînement pour compenser sa lenteur naturelle, et beaucoup de novices sous-estiment l'énergie cinétique restituée au porteur lui-même.",
+    "specs": "Poids 18 kg — Renforcement servomoteur — Champ énergétique pulsé — Compatible bras gauche/droit Mk IV+",
+    "notable": [
+      "Forgebreaker (Vulkan He'stan)",
+      "Gantelet du Sergent Telion"
+    ],
+    "wikiQuery": "Power Fist Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "thunder-hammer",
+    "name": "Marteau-tonnerre",
+    "nameVO": "Thunder Hammer",
+    "type": "melee",
+    "subCategory": "power",
+    "factionIds": [
+      "space-marines",
+      "adeptus-custodes",
+      "grey-knights"
+    ],
+    "description": "Marteau de guerre qui libère une décharge cinétique foudroyante à l'impact. Arme symbolique des champions et des escouades terminator d'assaut.",
+    "loreLong": "Le marteau-tonnerre concentre dans sa tête massive un générateur de champ disruptif accumulant l'énergie pendant la course de la frappe pour la libérer en explosion électromagnétique au moment de l'impact. La décharge accompagnée d'un tonnerre caractéristique renverse les véhicules, fracasse les os et désorganise les systèmes électroniques alentours. Souvent porté en duo avec un storm shield, il définit la silhouette des Terminators d'Assaut et de nombreux Capitaines. Sa lenteur reste son défaut majeur : la première frappe pardonne rarement un raté. Certains marteaux relliques ont écrasé des seigneurs démons et leur réputation suit le porteur sur des théâtres entiers.",
+    "specs": "Poids 22 kg — Tête tungstène-adamantium — Décharge cinétique 2-3 MJ par impact — Délai recharge 1,2 sec",
+    "notable": [
+      "Marteau de Caïn (Marneus Calgar)",
+      "Glaive de Cassor le Damné"
+    ],
+    "citation": "Au tonnerre du marteau répond le silence des hérétiques.",
+    "wikiQuery": "Thunder Hammer Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "lightning-claws",
+    "name": "Griffes-éclair",
+    "nameVO": "Lightning Claws",
+    "type": "melee",
+    "subCategory": "power",
+    "factionIds": [
+      "space-marines",
+      "adeptus-custodes"
+    ],
+    "description": "Paire de gantelets prolongés de quatre griffes énergétiques permettant d'éviscérer un ennemi en une rafale de coups. Arme rituelle des assaut companies.",
+    "loreLong": "Chaque griffe-éclair se compose d'un gantelet servomécanique surmonté de trois ou quatre lames adamantium ceintes d'un champ énergétique identique à celui des épées de force. Toujours portées en paire, elles transforment leur porteur en machine à dilacérer capable de poursuivre une frappe par une autre sans temps mort. Les Compagnies de la Mort des Blood Angels et les Terminators d'Assaut en font un usage rituel, leur élégance meurtrière contrastant avec la massivité du marteau-tonnerre. Maîtriser les griffes implique d'accepter que la moindre parade est offensive, jamais défensive. Les chapitres successeurs ont conservé bien des paires antiques nommées et bénies.",
+    "specs": "Poids 6 kg par main — 4 lames adamantium ondulées — Champ disruptif synchrone — Servomoteurs poignets renforcés",
+    "notable": [
+      "Griffes du Maître Astorath",
+      "Talons de Mephiston"
+    ],
+    "wikiQuery": "Lightning Claws Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "power-axe-maul",
+    "name": "Hache & masse énergétiques",
+    "nameVO": "Power Axe / Power Maul",
+    "type": "melee",
+    "subCategory": "power",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum"
+    ],
+    "description": "Variantes de l'arme énergétique privilégiant la frappe lourde plutôt que la finesse de l'épée. La hache fend les armures, la masse écrase et choque.",
+    "loreLong": "La power axe condense l'énergie disruptive sur un fil unique massif idéal pour fendre les armures lourdes ou les carapaces tyranides ; les Space Wolves et les Salamanders en perpétuent l'esthétique tribale. Le power maul (ou shock maul) privilégie quant à lui une tête bulbeuse délivrant à l'impact une décharge électrique pulsée incapacitante, raison pour laquelle Adeptus Arbites et commissaires l'utilisent volontiers en mode contrôle de foule. Les deux armes partagent générateur, batterie et poignée mais polarisent l'énergie différemment selon la mission. Statistiquement plus lentes qu'une épée énergétique, elles compensent par un seuil de pénétration accru et un effet psychologique massif. Beaucoup de chapitres considèrent la hache comme arme cérémonielle de Crozius pour leurs chapelains.",
+    "specs": "Hache 4 kg, fil adamantium 35 cm, champ axial — Masse 3,5 kg, tête shock cap 100 kV pulsé",
+    "notable": [
+      "Hache de Logan Grimnar (Belaq's Bite)"
+    ],
+    "wikiQuery": "Power Axe Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "force-sword",
+    "name": "Épée de force",
+    "nameVO": "Force Sword",
+    "type": "melee",
+    "subCategory": "force",
+    "factionIds": [
+      "grey-knights",
+      "space-marines",
+      "soeurs-de-bataille"
+    ],
+    "description": "Lame psychiquement attunée capable de transformer la volonté du porteur en arme tranchant les âmes. Réservée aux Bibliothécaires et Chevaliers Gris.",
+    "loreLong": "L'épée de force ressemble extérieurement à une épée énergétique mais intègre un cristal psychoréactif au cœur de la garde, capable de canaliser la psyché du porteur dans la lame elle-même. Lorsque ce dernier libère sa volonté, la lame frappe au-delà de la chair pour atteindre l'âme, anéantir un démon ou rompre un sortilège. Les Bibliothécaires Astartes l'élèvent en focus rituel ; les Chevaliers Gris en font l'arme étalon de la Chambre Militante de l'Ordo Malleus, gravée de hexagrammes anti-warp. Sans psyker pour la nourrir, elle reste une excellente épée énergétique, mais son potentiel véritable ne s'exprime qu'entre des mains attunées. Forger une nouvelle force sword exige des décennies sur Titan ou les mondes-chapitres habilités.",
+    "specs": "Poids 2,3 kg — Cristal psychoréactif (saphir Titan) — Compatible inscriptions hexagrammiques — Effet anti-démon majeur",
+    "notable": [
+      "Titansword (Kaldor Draigo)",
+      "Lame d'Argent de Mephiston"
+    ],
+    "wikiQuery": "Force Sword Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "nemesis-force-halberd",
+    "name": "Hallebarde de force Nemesis",
+    "nameVO": "Nemesis Force Halberd",
+    "type": "melee",
+    "subCategory": "force",
+    "factionIds": [
+      "grey-knights"
+    ],
+    "description": "Hallebarde rituelle des Chevaliers Gris combinant allonge martiale et focus psychique optimisé pour exterminer les démons.",
+    "loreLong": "Chaque arme Nemesis est forgée sur Titan dans des fours bénis aux invocations hexagrammiques par les Techmarines de la Chambre Militante. La hallebarde Nemesis privilégie l'allonge et la frappe à deux mains, idéale contre les créatures warp de grande taille où l'épée de force serait trop courte. Le manche en silvanus blindé contient batterie et résonateur psy-amplificateur ; la lame en argent rituel inscrit chaque coup de runes répressives. Toutes les armes Nemesis (épée, hallebarde, masse, force halberd, falchions, dreadknight greatsword) partagent un point commun : leur lame n'a de sens qu'entre des mains psychiquement éveillées. Les Chevaliers Gris alternent entre profils selon la cible : hallebarde pour les Grands Démons, falchions pour les hordes.",
+    "specs": "Poids 4,2 kg — Longueur 2,1 m — Lame argent rituel hexagrammique — Manche silvanus renforcé adamantium",
+    "notable": [
+      "Hallebarde du Grand Maître Voldus"
+    ],
+    "wikiQuery": "Nemesis Force Halberd",
+    "sigil": "⚔"
+  },
+  {
+    "id": "chainsword",
+    "name": "Tronçonneuse de combat",
+    "nameVO": "Chainsword",
+    "type": "melee",
+    "subCategory": "chain",
+    "factionIds": [
+      "space-marines",
+      "astra-militarum",
+      "soeurs-de-bataille"
+    ],
+    "description": "Épée à dents motorisées tournant sur un rail. Symbole iconique du Space Marine, elle déchiquette chair et os dans un rugissement de moteur.",
+    "loreLong": "La chainsword est une lame mono-acier sur laquelle court une chaîne de dents adamantium à grande vitesse, propulsée par un petit moteur à combustion ou électrique logé dans la garde. Bruyante, gourmande, terrifiante, elle est devenue un emblème visuel des Astartes au point d'être déclinée en variantes Eviscerator, Chainfist, Chainaxe ou Chainglaive. Son entretien exige carburant promethium ou cellules d'énergie, lubrifiant rituel et remplacement régulier des dents brisées. Au combat, son rugissement seul brise le moral des recrues hérétiques avant même la première frappe. Chaque chapitre développe un rituel d'allumage propre, et beaucoup d'entre elles portent un nom transmis de héros en héros.",
+    "specs": "Poids 5 kg — Lame 70 cm — Chaîne dents adamantium 8000 RPM — Moteur promethium 2T",
+    "notable": [
+      "Teeth of Terra (Lysander)",
+      "Chainsword des Sœurs Battle Sister"
+    ],
+    "wikiQuery": "Chainsword Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "eviscerator",
+    "name": "Éviscérateur",
+    "nameVO": "Eviscerator",
+    "type": "melee",
+    "subCategory": "chain",
+    "factionIds": [
+      "soeurs-de-bataille"
+    ],
+    "description": "Énorme tronçonneuse à deux mains munie d'un champ disruptif. Arme rituelle des Sœurs Repentia et des prêtres-guerriers de l'Ecclésiarchie.",
+    "loreLong": "L'éviscérateur est une chainsword géante à deux mains, surdimensionnée jusqu'au grotesque, dont la lame est ceinte d'un champ énergétique semblable à celui des armes power. Combinaison de la sauvagerie tronçonneuse et de la pénétration énergétique, elle peut éventrer un Carnifex ou trancher la coupole d'un Rhino. Son maniement épuise un humain normal en quelques minutes, raison pour laquelle elle est traditionnellement réservée aux Sœurs Repentia cherchant la rédemption par le martyre, et aux Confessors fanatisés de l'Ecclésiarchie. Sa charge symbolique est immense : porter un Eviscerator, c'est annoncer qu'on ne reculera plus. La maintenance liturgique exige bénédictions hebdomadaires et purification de la chaîne de dents.",
+    "specs": "Poids 14 kg — Longueur 1,9 m — Chaîne dents adamantium + champ disruptif — Manche cuir tanné renforcé",
+    "notable": [
+      "Lame de la Repentance (Mistress of Repentia anonyme, Ordo Bloody Rose)"
+    ],
+    "citation": "Que mes péchés s'effacent dans le rugissement de la lame.",
+    "wikiQuery": "Eviscerator Warhammer 40k",
+    "sigil": "⚔"
+  },
+  {
+    "id": "power-armor-mk4-maximus",
+    "name": "Armure Énergétique Mk IV « Maximus »",
+    "nameVO": "Mark IV Maximus Power Armour",
+    "type": "armor",
+    "subCategory": "mark-iv",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Pattern de la Grande Croisade conçu pour pallier les défauts du Mk III. Esthétique épurée, casque arrondi, encore portée en relique par certains vétérans.",
+    "loreLong": "Conçue durant la fin de la Grande Croisade par les Magos de Mars en réponse aux retours du front, la Mk IV « Maximus » corrige les vulnérabilités d'articulations identifiées sur la Mk III en intégrant un système intégré de servomoteurs scellés et un casque pleinement enveloppant. Elle restera longtemps considérée comme l'un des sommets de l'ergonomie céramite. La pénurie de matériel post-Heresy en a fait un modèle rare et vénéré dans le M41, principalement porté par vétérans, sergents et fonctions d'apparat. Beaucoup de chapitres la conservent en suite réservée à leurs reliques humaines. Sa silhouette ronde et minimaliste reste l'emblème des Legiones Astartes pré-Hérésie dans la mémoire impériale.",
+    "specs": "Masse 110 kg — Céramite-3 plaques scellées — Servomoteurs intégrés — Backpack auxiliaire fission portable",
+    "notable": [
+      "Armures de la Première Compagnie des Sons of Horus (pré-Heresy)"
+    ],
+    "wikiQuery": "Mark IV Maximus Power Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "power-armor-mk6-corvus",
+    "name": "Armure Énergétique Mk VI « Corvus »",
+    "nameVO": "Mark VI Corvus Power Armour",
+    "type": "armor",
+    "subCategory": "mark-iv",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Armure de fin d'Hérésie, casque caractéristique en bec de corbeau. Conçue pour la mobilité des opérations de raid.",
+    "loreLong": "Développée à la requête du Primarque Corvus Corax durant l'Hérésie d'Horus pour reconstituer rapidement une Légion saignée à blanc, la Mk VI « Corvus » privilégie production rapide, légèreté et mobilité. Son casque emblématique au bec arrondi, conçu pour intégrer les nouvelles auspex compactes, est devenu indissociable de la silhouette des Raven Guard. Bien qu'éclipsée plus tard par la Mk VII, beaucoup d'unités d'éclaireurs et de chapitres successeurs Raven Guard la conservent volontiers pour les missions infiltration. Plus légère et silencieuse, elle accepte facilement les patterns Mk VII pour les pièces remplacées au fil des décennies, donnant naissance à des armures hybrides courantes dans le M41.",
+    "specs": "Masse 102 kg — Céramite-3 — Casque Corvus auspex intégré — Genoux renforcés mobilité",
+    "notable": [
+      "Armures de la Légion Raven Guard durant la Bataille de Yarant"
+    ],
+    "wikiQuery": "Mark VI Corvus Power Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "power-armor-mk7-aquila",
+    "name": "Armure Énergétique Mk VII « Aquila »",
+    "nameVO": "Mark VII Aquila Power Armour",
+    "type": "armor",
+    "subCategory": "mark-vii",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Pattern iconique du M41 reconnaissable à l'aigle impérial moulé sur le plastron. La silhouette par excellence du Space Marine.",
+    "loreLong": "Conçue dans les ultimes années de l'Hérésie par le Magos Arkhan Land en réponse à des décennies de guerre civile, la Mk VII « Aquila » harmonise les acquis des patterns précédents en standardisant le plastron orné de l'aigle bicéphale impérial. Elle apportait essentiellement une meilleure intégration des systèmes de communication et de visée, et un casque ergonomique compatible avec la vox impériale renforcée. Dix mille ans plus tard, elle reste le modèle le plus produit dans le M41 et l'image mentale par défaut du « Space Marine » pour l'humanité ordinaire. Quasiment chaque pièce Mk VII existe en variantes innombrables selon les forge worlds. Son entretien repose sur des techmarines formés par l'Adeptus Mechanicus et des bénédictions rituelles précises.",
+    "specs": "Masse 115 kg — Céramite-3 plastron Aquila moulé — Vox-link impérial intégré — Compatible bolter Mk Vb/c",
+    "notable": [
+      "Armure du Capitaine Sicarius (Ultramarines)"
+    ],
+    "wikiQuery": "Mark VII Aquila Power Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "power-armor-mk10-tacticus",
+    "name": "Armure Énergétique Mk X « Tacticus »",
+    "nameVO": "Mark X Tacticus Power Armour",
+    "type": "armor",
+    "subCategory": "mark-x",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Armure modulaire des Primaris Marines. Trois configurations : Tacticus polyvalente, Gravis lourde, Phobos furtive.",
+    "loreLong": "La Mk X est née du programme de réarmement Belisarius Cawl à la fin du M41 pour équiper les nouveaux Primaris Marines. Modulaire par conception, elle se décline en trois familles principales : Tacticus, équilibrée pour la majorité des escouades ; Gravis, surblindée pour les Aggressors et autres unités de choc ; Phobos, allégée et furtive pour Reivers et Eliminators. Sous chaque variante, les composants restent partiellement compatibles, simplifiant la logistique. Les capacités servo-musculaires améliorées exploitent enfin pleinement le gabarit Primaris. Beaucoup de chapitres traditionnels ont mis du temps à l'accepter, considérant les armures Heresy comme plus dignes ; d'autres l'ont adoptée immédiatement comme bénédiction de l'Imperator par la main du Mécanicum.",
+    "specs": "Masse 130 kg (Tacticus) — Céramite-4 modulaire — Compatible bolt rifle / heavy bolt rifle — Auspex Mk X",
+    "notable": [
+      "Premières dotations Indomitus Crusade"
+    ],
+    "wikiQuery": "Mark X Power Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "cataphractii-terminator",
+    "name": "Armure Terminator Cataphractii",
+    "nameVO": "Cataphractii Terminator Armour",
+    "type": "armor",
+    "subCategory": "cataphractii",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Pattern de Terminator antique de l'Hérésie. Surblindée au prix de la mobilité, reconnaissable à ses pauldrons gigantesques.",
+    "loreLong": "Premier pattern de Terminator véritablement standardisé, la Cataphractii fut développée à la fin de la Grande Croisade pour les abordages et opérations en environnement hostile. Ses massifs pauldrons stratifiés et ses plates de poitrine renforcées la rendent quasiment invulnérable aux armes de petit calibre, mais sa lourdeur impose des servomoteurs surdimensionnés et des téléportations rapprochées plutôt que de longues marches. Son casque encastré au heaume rabattu lui donne une silhouette inimitable, considérée comme l'archétype même du Terminator pré-Hérésie. Rarissime dans le M41, elle survit dans quelques Premières Compagnies en relique vénérée. Son entretien réclame des prêtres techmarines de niveau Magos.",
+    "specs": "Masse 580 kg — Céramite-4 stratifiée — Servomoteurs lourds Mk II — Compatible téléportation Strike Cruiser",
+    "notable": [
+      "Justaerin (Sons of Horus pré-Hérésie)",
+      "Catulan Reaver Squad"
+    ],
+    "wikiQuery": "Cataphractii Terminator Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "tartaros-terminator",
+    "name": "Armure Terminator Tartaros",
+    "nameVO": "Tartaros Terminator Armour",
+    "type": "armor",
+    "subCategory": "tartaros",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Évolution Hérésie tardive de la Cataphractii. Mobilité améliorée, silhouette plus fine, équilibre entre protection et agilité.",
+    "loreLong": "Conçue durant l'Hérésie à partir des leçons tirées de la Cataphractii, la Tartaros offre une silhouette plus svelte permettant une mobilité quasi-comparable à celle d'une armure énergétique standard tout en conservant l'essentiel de la protection terminator. Ses pauldrons légèrement réduits laissent place à des dispositifs auspex plus avancés. Beaucoup de Légions adoptèrent la Tartaros pour les opérations de manœuvre tandis que la Cataphractii restait dédiée aux abordages purs. Dans le M41, la Tartaros est presque aussi rare que sa devancière, et chaque chapitre n'en conserve qu'un nombre infime de suites complètes. Son ergonomie facilite l'usage de chainfists et de paires de griffes-éclair.",
+    "specs": "Masse 510 kg — Céramite-4 allégée — Servomoteurs Mk III mobilité — Auspex avancé multispectre",
+    "notable": [
+      "Templiers Pretoriens (Ultramarines pré-Hérésie)"
+    ],
+    "wikiQuery": "Tartaros Terminator Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "indomitus-terminator",
+    "name": "Armure Terminator Indomitus",
+    "nameVO": "Indomitus Pattern Terminator Armour",
+    "type": "armor",
+    "subCategory": "indomitus",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Pattern Terminator standard du M41 et au-delà. Profil massif aux épaules carrées, équipement Première Compagnie.",
+    "loreLong": "Apparue à la fin du M32, l'Indomitus est devenue le pattern Terminator standard de l'ère M41 et l'arme symbolique des Premières Compagnies des chapitres Astartes. Ses épaules carrées massives, son heaume bas et son rétrofit modulaire la rendent identifiable au premier coup d'œil. Pensée pour la téléportation tactique et l'abordage, elle équilibre robustesse et compatibilité avec une vaste palette d'armes : assault cannon, cyclone missile launcher, chainfist, thunder hammer, lightning claws. Chaque suite compte plusieurs siècles d'usage et porte des noms dans la Geste du chapitre. Avec l'arrivée de la Mk X Gravis, certains chapitres ont commencé à transitionner, mais l'Indomitus reste pour beaucoup l'image du Terminator par excellence.",
+    "specs": "Masse 540 kg — Céramite-4 — Téléportation matrice intégrée — Slots arme distale modulaires",
+    "notable": [
+      "Lysander (Imperial Fists)",
+      "Gabriel Seth (Flesh Tearers)"
+    ],
+    "wikiQuery": "Indomitus Pattern Terminator Armour",
+    "sigil": "⛨"
+  },
+  {
+    "id": "custodian-armor",
+    "name": "Armure Custodes Auramite",
+    "nameVO": "Custodian Armour",
+    "type": "armor",
+    "subCategory": "aegis",
+    "factionIds": [
+      "adeptus-custodes"
+    ],
+    "description": "Armure dorée des Adeptus Custodes, forgée en auramite. Plus protectrice et plus prestigieuse que toute power armour Astartes.",
+    "loreLong": "L'armure Custodes, forgée dans l'auramite – alliage d'or psychoréactif rarissime – sur Terre même, est l'une des merveilles techno-arcaniques de l'Imperium. Chaque suite est conçue pour son porteur, mariant servomoteurs ultra-fins, plaques épaisses et résonateurs psy-protecteurs intégrés à la coiffure ouvragée. Sa finition rituelle peut prendre des décennies. Plus protectrice qu'une terminator armour tout en conservant l'agilité d'une power armour, elle est en outre liée psychiquement à son porteur, qu'elle apprend à servir. Aucun Custodes n'est inhumé sans son armure ; et aucune n'est jamais transmise telle quelle, mais reforgée pour le successeur. C'est l'incarnation matérielle de la promesse faite par l'Imperator à Sa garde personnelle.",
+    "specs": "Masse 180 kg — Auramite ouvragé — Servomoteurs psychoréactifs — Champ aegis intégré faible",
+    "notable": [
+      "Suites de Garde Praesidius — Trône d'Or"
+    ],
+    "wikiQuery": "Custodian Armour Adeptus Custodes",
+    "sigil": "⛨"
+  },
+  {
+    "id": "flak-armor",
+    "name": "Armure Flak",
+    "nameVO": "Flak Armour",
+    "type": "armor",
+    "subCategory": "flak",
+    "factionIds": [
+      "astra-militarum"
+    ],
+    "description": "Armure standard du Garde Impérial. Plaques de tissu balistique et plates rigides offrant une protection minimale contre les éclats.",
+    "loreLong": "Produite par milliards sur les mondes-forges et les mondes-manufactures, l'armure flak équipe l'écrasante majorité des soldats de l'Astra Militarum. Elle se compose de panneaux de fibres balistiques tissées renforcés par des inserts céramiques rigides au torse, aux cuisses et aux épaules. Sa protection contre les éclats d'obus et les armes de petit calibre est correcte, sa résistance aux coups directs de fusils-laser ou d'armes lourdes quasi nulle. Elle est conçue pour être produite vite, réparée vite et oubliée vite – car l'Empereur a beaucoup de gardes à équiper et peu de regrets à consentir. Chaque régiment l'adapte à son climat et à ses traditions : peintures, paddings, capes, manteaux longs en font la diversité visuelle.",
+    "specs": "Masse 8 kg — Fibres balistiques + inserts céramiques — Production de masse forge worlds — Casque vox basique compatible",
+    "notable": [
+      "Cadian Shock Troops",
+      "Catachan Jungle Fighters"
+    ],
+    "wikiQuery": "Flak Armour Imperial Guard",
+    "sigil": "⛨"
+  },
+  {
+    "id": "carapace-armor",
+    "name": "Armure Carapace",
+    "nameVO": "Carapace Armour",
+    "type": "armor",
+    "subCategory": "carapace",
+    "factionIds": [
+      "astra-militarum"
+    ],
+    "description": "Plates rigides moulées portées par les troupes d'élite de la Garde et les Militarum Tempestus. Beaucoup plus protectrice que la flak.",
+    "loreLong": "L'armure carapace est constituée de plates moulées rigides en alliage léger ou matériaux composites, couvrant intégralement torse, dos, bras et jambes. Son poids et son coût en limitent la production aux unités d'élite : Stormtroopers / Militarum Tempestus, Veteran Squads, Grenadiers, certains officiers du Commissariat. Plus rigide à porter qu'une armure flak et nécessitant un padding interne soigné, elle offre en contrepartie une protection significativement supérieure aux armes de petit et moyen calibre. Souvent peinte en noir sur les Tempestus, elle accompagne hot-shot lasguns et grenades spéciales. Quelques régiments planétaires riches en équipent leurs unités de choc ; pour la majorité de la Garde, en porter signifie qu'on a survécu assez longtemps pour que l'Empereur veuille préserver l'investissement.",
+    "specs": "Masse 14 kg — Plates moulées polymère blindé — Casque intégré vox + auspex passif — Compatible respirateur",
+    "notable": [
+      "Militarum Tempestus Scions",
+      "Kasrkin (Cadia)"
+    ],
+    "wikiQuery": "Carapace Armour Warhammer 40k",
+    "sigil": "⛨"
+  },
+  {
+    "id": "shuriken-catapult",
+    "name": "Catapulte Shuriken",
+    "nameVO": "Shuriken Catapult",
+    "type": "ranged",
+    "subCategory": "shuriken",
+    "factionIds": [
+      "aeldari"
+    ],
+    "description": "Arme de poing emblématique des Aspects Dire Avengers et des Guardians, projetant des disques monomoléculaires à vitesse hypersonique.",
+    "loreLong": "La catapulte shuriken est l'archétype de la philosophie martiale Aeldari : élégance létale, précision chirurgicale, économie de matière. Le mécanisme accélère par champ gravitationnel des disques de plastacier monomoléculaire prélevés sur un noyau solide cristallin, sans poudre ni propulseur chimique. Chaque disque tournoie à plusieurs milliers de tours par seconde et tranche céramite, chair et os avec la même indifférence qu'une lame de rasoir traverse une feuille de soie. La cadence est cyclique et silencieuse, trahie seulement par un sifflement aigu propre aux armes psycho-réactives Aeldari. Les variantes incluent le pistolet shuriken, le shuriken cannon monté sur jetbike ou Wave Serpent, et le catapulte de poing intégré aux gantelets des Dire Avengers Exarques. Les Mon-keigh n'ont jamais réussi à reproduire la métallurgie ni la cadence sans rétro-ingénierie d'épaves capturées.",
+    "specs": "Disques monomoléculaires plastacier · accélération gravitique · cadence ~30 disques/s · noyau solide ~100 disques · silencieux · létal sur armure lourde par effet de coupe",
+    "notable": [
+      "Dire Avengers (Aspect)",
+      "Guardians de Craftworld",
+      "Wave Serpents (cannon)",
+      "Saim-Hann jetbikes"
+    ],
+    "wikiQuery": "Shuriken Catapult",
+    "sigil": "✧"
+  },
+  {
+    "id": "witchblade",
+    "name": "Lame-Sorcière",
+    "nameVO": "Witchblade",
+    "type": "melee",
+    "subCategory": "wraithbone",
+    "factionIds": [
+      "aeldari"
+    ],
+    "description": "Lame de wraithbone conductrice psychique portée par les Farseers et les Warlocks, qui canalise la volonté de son porteur pour fendre l'âme avant la chair.",
+    "loreLong": "Forgée dans l'os-spectre — wraithbone — psychiquement réactif, la Witchblade ne tranche pas par son fil mais par la pensée de celui qui la tient. Au contact, l'arme déverse l'énergie warp du psyker directement dans la matière de la cible, contournant blindages et boucliers énergétiques pour faire bouillir le sang, fissurer les âmes ou déstructurer les liaisons moléculaires d'un Dreadnought. Sa version étendue, la Singing Spear (Lance Chantante), est une arme de jet qui retourne d'elle-même à la main de son porteur après l'impact, guidée par un fragment de conscience tissé dans le bois-os. Les Farseers ne la dégainent que rarement : elle est l'arme du dernier recours, celle qu'on porte quand les fils du destin n'offrent plus d'autre voie. Le wraithbone qui la compose chante doucement quand un grand danger approche.",
+    "specs": "Wraithbone psycho-réactif · canalise force du psyker à l'impact · ignore armures conventionnelles · Singing Spear : jet retour automatique · résonance auditive faible",
+    "notable": [
+      "Eldrad Ulthran (Farseer)",
+      "Warlock Conclave Ulthwé",
+      "Asurmen (variante mythique)"
+    ],
+    "wikiQuery": "Witchblade Eldar",
+    "sigil": "✧"
+  },
+  {
+    "id": "aspect-armor",
+    "name": "Armure d'Aspect",
+    "nameVO": "Aspect Armor",
+    "type": "armor",
+    "subCategory": "aspect",
+    "factionIds": [
+      "aeldari"
+    ],
+    "description": "Harnais cérémoniel et martial des Guerriers de l'Aspect, chaque variante incarnant une facette du dieu de la guerre Khaine.",
+    "loreLong": "L'Aspect Armor n'est ni simplement une armure ni un uniforme : c'est l'incarnation matérielle d'une Voie. Forgée par les Exarques de chaque Sanctuaire d'Aspect — Dire Avengers, Striking Scorpions, Howling Banshees, Fire Dragons, Swooping Hawks, Warp Spiders, Dark Reapers, Shining Spears — elle combine plaques de wraithbone densifié, matrices psycho-conductrices et systèmes d'ancrage spirituel qui amplifient les capacités martiales propres à l'Aspect. Une Banshee y trouve la vitesse surnaturelle qui fait de son cri l'arme suprême ; un Striking Scorpion y dissimule sa forme jusqu'au moment de la frappe ; un Fire Dragon y résiste aux retours de flamme de son fusion gun. L'armure est aussi un piège : porter trop longtemps une même Aspect Armor conduit l'Aeldari à se perdre dans la Voie du Guerrier et devenir Exarque, prisonnier de la guerre éternelle.",
+    "specs": "Wraithbone densifié + plaques céramique psycho-active · matrice de résonance Aspect · masque cérémoniel · capteurs holo · ancrage spirituel à l'Aspect",
+    "notable": [
+      "Asurmen (Premier Phoenix Lord)",
+      "Jain Zar (Howling Banshees)",
+      "Karandras (Striking Scorpions)",
+      "Fuegan (Fire Dragons)"
+    ],
+    "wikiQuery": "Aspect Warrior Armour",
+    "sigil": "✧"
+  },
+  {
+    "id": "scorpion-chainsword",
+    "name": "Mandiblasters & Scorpion Chainsword",
+    "nameVO": "Scorpion Chainsword",
+    "type": "melee",
+    "subCategory": "wraithbone",
+    "factionIds": [
+      "aeldari"
+    ],
+    "description": "Lame tronçonneuse miniaturisée des Striking Scorpions, doublée d'un essaim de mandiblasters frontaux qui foudroient la cible avant l'estoc.",
+    "loreLong": "Là où la philosophie Aeldari rejette généralement la grossièreté de la chainsword Impériale, les Striking Scorpions de Karandras ont fait de cette lame dentelée leur signature paradoxale : une arme brutale, presque barbare, manipulée avec l'élégance d'un duelliste. La lame est en wraithbone tressé, ses dents sont de petits cristaux psycho-affamés qui découpent l'armure au lieu de la déchirer. À l'avant du masque-Aspect, les mandiblasters projettent un essaim de micro-décharges laser qui aveuglent et foudroient l'adversaire dans la microseconde précédant l'impact. Combinée au camouflage psychique de l'Aspect, l'arme transforme chaque Striking Scorpion en assassin silencieux : la cible est paralysée, frappée, et morte avant d'avoir compris que l'ombre derrière elle bougeait.",
+    "specs": "Lame wraithbone à dents cristallines · couplée à mandiblasters laser frontaux · cadence dentition ~10000 rpm · attaque combinée stun + estoc",
+    "notable": [
+      "Karandras (Phoenix Lord)",
+      "Striking Scorpions (Aspect)",
+      "Sanctuaire d'Arhra (mythe)"
+    ],
+    "wikiQuery": "Striking Scorpion Chainsword",
+    "sigil": "✧"
+  },
+  {
+    "id": "splinter-rifle",
+    "name": "Fusil-Éclats",
+    "nameVO": "Splinter Rifle",
+    "type": "ranged",
+    "subCategory": "splinter",
+    "factionIds": [
+      "drukhari"
+    ],
+    "description": "Arme à projectiles cristallins toxiques, signature des Kabalite Warriors de Commorragh, dont chaque éclat injecte un poison neuro-paralysant.",
+    "loreLong": "Le Splinter Rifle ne tue pas par l'impact : il tue par la souffrance lente. Le canon est creusé dans un cristal monobloc dont le réservoir abrite des centaines d'éclats acérés, chacun trempé dans des composés toxiques d'une variété telle qu'aucun antidote impérial ne fonctionne. Une impulsion électromagnétique propulse les éclats à vitesse hypersonique ; ils traversent la peau, se brisent à l'intérieur, libèrent leur charge venimeuse. La victime succombe dans des convulsions qui peuvent durer de quelques secondes à plusieurs heures, selon la variante de poison choisie par le Kabalite. Pour les Drukhari, cette agonie n'est pas un défaut : c'est la moisson. Chaque cri prolonge leur fuite devant Slaanesh. Les Kabales rivalisent dans la sophistication des poisons, certains réservés aux Archons, d'autres encore aux jeux de l'arène.",
+    "specs": "Canon cristallin · projectiles en éclats à pointe creuse · charge neuro-toxique modulable · cadence rafale haute · létalité différée par poison",
+    "notable": [
+      "Kabalite Warriors",
+      "Trueborn (Kabale Black Heart)",
+      "Asdrubael Vect (escorte)"
+    ],
+    "wikiQuery": "Splinter Rifle Drukhari",
+    "sigil": "✧"
+  },
+  {
+    "id": "klaive",
+    "name": "Klaive",
+    "nameVO": "Klaive",
+    "type": "melee",
+    "subCategory": "splinter",
+    "factionIds": [
+      "drukhari"
+    ],
+    "description": "Lame d'élite des Incubi, taillée en alliage drukhari et enrichie de circuits de champ disrupteur, capable de fendre une armure Terminator.",
+    "loreLong": "Le Klaive est l'arme rituelle des Incubi, ces gladiateurs-ascètes voués au culte de Khaine sous sa forme la plus sombre. Pesante, asymétrique, sa lame est nervurée d'un champ disrupteur permanent qui désintègre la matière au contact moléculaire. Là où un power sword Astartes désagrège la matière par décharge, le klaive tranche dans une cohérence chirurgicale qui laisse des plaies nettes, presque polies. Les Incubi s'entraînent des décennies à manier l'arme à deux mains avec la grâce d'une danse mortuaire, un art transmis dans les Temples Shrines de Commorragh. Aucun ennemi n'a jamais vu deux fois un Klaive : la première fois, c'est la dernière. Les variantes Demiklaive permettent un combat duelliste à deux lames, signature des Klaivex (chefs Incubi).",
+    "specs": "Alliage drukhari trempé · champ disrupteur permanent · maniement deux mains · variante Demiklaive double-lame · ignore armures lourdes",
+    "notable": [
+      "Drazhar (Maître des Lames)",
+      "Incubi (Hekatarii)",
+      "Klaivex de Hekatarii"
+    ],
+    "wikiQuery": "Klaive Incubi",
+    "sigil": "✧"
+  },
+  {
+    "id": "agonizer",
+    "name": "Agoniseur",
+    "nameVO": "Agonizer",
+    "type": "melee",
+    "subCategory": "splinter",
+    "factionIds": [
+      "drukhari"
+    ],
+    "description": "Fouet ou cravache neuro-active qui ne perce pas la chair mais court-circuite directement les centres de douleur du système nerveux.",
+    "loreLong": "L'Agoniseur ignore l'armure parce qu'il ignore la matière : il frappe l'esprit. À chaque impact — même léger, même à travers une plaque de céramite — l'arme libère une décharge sur le système nerveux central qui simule la sensation d'être brûlé vif, écorché et démembré simultanément. Aucun blindage connu n'isole les nerfs de l'effet. Les Wyches s'en servent dans l'arène pour prolonger les combats à l'infini, les Succubi pour briser les volontés rivales, les Haemonculi pour calibrer la souffrance dans leurs expériences. L'arme existe en plusieurs variantes : agoniser-fouet (Wych), agoniser-mace (Sybarite), agoniser-cravache pour Reaver Jetbike. Une cible touchée ne meurt pas du choc — elle meurt de la conviction absolue qu'elle est en train d'être tuée, encore et encore, jusqu'à ce que son cœur cède.",
+    "specs": "Décharge neuro-cortex à travers blindage · pas de pénétration matérielle · létalité par choc nerveux · variantes fouet / mace / cravache",
+    "notable": [
+      "Lelith Hesperax (Succubus, variantes rituelles)",
+      "Wych Cult",
+      "Sybarites Kabalites"
+    ],
+    "wikiQuery": "Agonizer Drukhari",
+    "sigil": "✧"
+  },
+  {
+    "id": "pulse-rifle",
+    "name": "Fusil à Impulsion",
+    "nameVO": "Pulse Rifle",
+    "type": "ranged",
+    "subCategory": "pulse",
+    "factionIds": [
+      "tau"
+    ],
+    "description": "Arme standard de l'infanterie Fire Warrior T'au, projetant des particules induites à haute énergie capables de surclasser un boltgun en portée et puissance.",
+    "loreLong": "Le Pulse Rifle est la fierté technologique de l'Empire T'au et le symbole du Greater Good sur le champ de bataille. Plutôt que d'utiliser un projectile solide, il accélère électromagnétiquement une charge induite qui ionise dans le canon avant d'être projetée à vitesse relativiste. L'impact provoque une détonation cinétique-thermique combinée qui pulvérise l'armure carapace et liquéfie les tissus sous-jacents. Sa portée effective dépasse celle du bolter Astartes, ce qui scandalise les Space Marines qui se sont accoutumés depuis dix mille ans à dominer la portée engagée. Les Fire Warriors de la Cadre Shas'la l'utilisent en formation disciplinée : volées synchronisées, suppression coordonnée, retraite en ordre. La variante Pulse Carbine sacrifie la portée pour l'ajout d'un lance-grenades intégré ; la Pulse Blaster (Breachers) écrase tout à courte portée par effet de souffle.",
+    "specs": "Accélération électromagnétique · charge induite ionisée · portée effective ~30 pouces (jeu) / ~1500 m (lore) · variantes Carbine + Blaster · impact cinétique-thermique",
+    "notable": [
+      "Fire Warriors (Shas'la)",
+      "Shadowsun (couplée seekers)",
+      "Strike Teams (Sept T'au)"
+    ],
+    "wikiQuery": "Pulse Rifle Tau",
+    "sigil": "✧"
+  },
+  {
+    "id": "xv8-crisis-battlesuit",
+    "name": "XV8 Crisis",
+    "nameVO": "XV8 Crisis Battlesuit",
+    "type": "armor",
+    "subCategory": "battlesuit",
+    "factionIds": [
+      "tau"
+    ],
+    "description": "Exo-armure de combat polyvalente, pilotée par les vétérans Shas'vre, capable de bonds anti-grav et de configurations d'armes modulaires.",
+    "loreLong": "Le XV8 Crisis Battlesuit incarne la doctrine T'au de la mobilité absolue : frapper depuis là où l'ennemi ne peut riposter, disparaître avant qu'il ne réagisse. Pilotée par un Shas'vre vétéran qui s'y interface via un harnais neuronal, l'armure mesure environ trois mètres et combine blindage nano-cristallin, propulseurs anti-grav pour bonds tactiques, et trois rails de fixation modulaires sur lesquels le pilote choisit sa configuration : Burst Cannon de saturation, Plasma Rifle anti-élite, Fusion Blaster anti-blindé, Missile Pod longue portée, Cyclic Ion Blaster expérimental. Le Crisis n'est pas un char : c'est un fantassin lourd qui se déplace en jump-shoot-jump, infligeant des coups dévastateurs avant de s'extraire d'un bond. Les Commanders (XV85 Enforcer, XV86 Coldstar) en sont des évolutions personnalisées, souvent dotées d'IA d'assistance Drone.",
+    "specs": "Exo-armure ~3 m · interface neurale Shas'vre · 3 rails modulaires d'armes · propulseurs anti-grav (jump pack) · blindage nano-cristallin · drone-link",
+    "notable": [
+      "Commander Farsight (variante O'Shovah)",
+      "Shadowsun (XV22 puis XV86)",
+      "Cadre Fireblade Shas'vre"
+    ],
+    "wikiQuery": "XV8 Crisis Battlesuit",
+    "sigil": "✧"
+  },
+  {
+    "id": "markerlight",
+    "name": "Markerlight",
+    "nameVO": "Markerlight",
+    "type": "ranged",
+    "subCategory": "pulse",
+    "factionIds": [
+      "tau"
+    ],
+    "description": "Désignateur laser tactique qui marque une cible pour la coordination du tir cadre, augmentant la précision et débloquant des frappes guidées.",
+    "loreLong": "Le Markerlight n'est pas une arme létale en soi : c'est l'incarnation de la doctrine Mont'ka du Greater Good. Un faisceau laser invisible à l'œil nu mais codé sur fréquence T'au est projeté sur la cible et reste accroché par sa réflexion sur la matière. Tous les systèmes d'arme alliés à portée de communication — missiles seekers, Hammerheads, Crisis Battlesuits, Pulse Rifles équipés de visée connectée — reçoivent en temps réel le tracking et corrigent leur tir. Une cible peinte par plusieurs Markerlights devient virtuellement intouchable par le hasard balistique : chaque salve T'au converge avec une précision chirurgicale. L'arme est portée par les Pathfinders éclaireurs, intégrée aux drones Marker, ou montée sur certaines Battlesuits. Pour les Astartes, voir le faisceau s'allumer sur sa propre armure est généralement le dernier signal qu'on perçoit avant la salve coordonnée.",
+    "specs": "Laser désignateur fréquence T'au · effet réflexion accrochée · partage tracking réseau cadre · débloque seeker missiles · usage non-létal direct",
+    "notable": [
+      "Pathfinders Shas'la",
+      "Marker Drones MV31",
+      "Sky Ray (multi-Markerlight)"
+    ],
+    "wikiQuery": "Markerlight Tau",
+    "sigil": "✧"
+  },
+  {
+    "id": "choppa-slugga",
+    "name": "Choppa & Slugga",
+    "nameVO": "Choppa and Slugga",
+    "type": "melee",
+    "subCategory": "choppa",
+    "factionIds": [
+      "orks"
+    ],
+    "description": "Le combo orkoïde par excellence : une lame brute dans une main, un pistolet bricolé dans l'autre, et la conviction absolue que ça suffira.",
+    "loreLong": "Le Choppa n'est pas une arme : c'est une catégorie. Hache, machette, lame de scie circulaire montée sur un manche, fragment de coque de Killa Kan affûté au meuleur — tout ce qui tranche et qui fait krump est un Choppa. La seule règle est qu'il doit être assez gros pour ouvrir une boîte de conserve impériale, et le Mek qui l'a forgé doit y croire. Le Slugga est son partenaire : un pistolet orkoïde bricolé qui tire de gros calibres avec une précision approximative compensée par un volume de feu joyeux. La logique tactique des Boyz tient en deux gestes : tirer Slugga en chargeant, frapper Choppa en arrivant. La technologie orkoïde fonctionne en grande partie parce que les Orks croient qu'elle fonctionne — un Slugga rouillé qui devrait s'enrayer tire encore parce qu'aucun Boy ne lui a donné la permission de tomber en panne. C'est le Greenskin Way.",
+    "specs": "Choppa : lame lourde manuelle, varie selon le Mek · Slugga : pistolet gros calibre, précision faible / cadence haute · combo standard Boyz / Nobz · technologie psycho-réactive Gestalt-Field",
+    "notable": [
+      "Ork Boyz (infanterie standard)",
+      "Nobz (versions choppa-spéciales)",
+      "Ghazghkull (variante mega-choppa)"
+    ],
+    "wikiQuery": "Choppa Slugga Ork",
+    "sigil": "✧"
+  },
+  {
+    "id": "shoota-big-shoota",
+    "name": "Shoota & Big Shoota",
+    "nameVO": "Shoota / Big Shoota",
+    "type": "ranged",
+    "subCategory": "choppa",
+    "factionIds": [
+      "orks"
+    ],
+    "description": "Mitraillette orkoïde brute, surdimensionnée et imprécise, qui compense la dispersion par la rage et la cadence assourdissante.",
+    "loreLong": "La Shoota est l'arme automatique des Orks qui ont décidé que tirer de loin pouvait aussi être amusant. Mécaniquement, c'est un canon court chambré pour de gros projectiles solides, alimenté par bandes de munitions où chaque cartouche est légèrement différente parce qu'aucun Mek ne fabrique deux fois la même chose. Le résultat : une dispersion catastrophique, une cadence brutale, et un nuage de plomb qui finit toujours par toucher quelque chose. La Big Shoota est sa version surdimensionnée, montée sur Trukk, Battlewagon, Killa Kan ou portée par un Ork Lourd décidé à compenser sa lenteur par du volume. Comme tout équipement orkoïde, plus elle est peinte en rouge plus elle tire vite (les Orks le croient, donc c'est vrai), et plus elle est jaune plus elle frappe fort. Le bruit qu'elle produit est partie intégrante de son efficacité martiale.",
+    "specs": "Calibre lourd · alimentation bande · cadence haute / précision basse · variante Big Shoota = jumelée stabilisée · psycho-bonus rouge = vitesse",
+    "notable": [
+      "Lootas (multi-Shoota)",
+      "Tankbustas (anti-blindé)",
+      "Battlewagon (Big Shoota tourelle)"
+    ],
+    "wikiQuery": "Shoota Ork",
+    "sigil": "✧"
+  },
+  {
+    "id": "mega-armour",
+    "name": "Mega Armour",
+    "nameVO": "Mega Armour",
+    "type": "armor",
+    "subCategory": "mega-armour",
+    "factionIds": [
+      "orks"
+    ],
+    "description": "Gigantesque armure-suit boulonnée des Meganobz et Warbosses, équivalent orkoïde du Terminator Astartes — plus lente, plus massive, plus orange.",
+    "loreLong": "La Mega Armour est ce qui se passe quand un Big Mek décide que son Warboss préféré a besoin d'être plus difficile à tuer, et qu'il prend tout ce qui traîne — plaques de coque, vérins hydrauliques d'épaves, servomoteurs récupérés, tôle martelée — pour l'assembler en une carapace ambulante de deux mètres et demi. À l'intérieur, le Nob ou le Warboss bouge avec une lenteur majestueuse mais frappe avec la force d'un véhicule. Les bras intègrent généralement une Power Klaw (pince énergétique qui broie les Dreadnoughts) et une Kustom Shoota ou Kombi-weapon. L'armure n'a aucune élégance, aucune ergonomie, et un coefficient de fiabilité qui dépend directement du nombre de glyphes peints dessus. Elle est néanmoins capable d'encaisser des tirs de plasma et de marcher à travers un mur de Cadians sans ralentir. Les Meganobz forment la garde rapprochée des Warbosses ; voir une vague d'orange massif s'avancer signifie qu'on a probablement déjà perdu.",
+    "specs": "Plaques boulonnées 100mm+ · servomoteurs hydrauliques récupérés · Power Klaw intégré · Kombi-Shoota / Skorcha intégré · ralentit le porteur · psycho-fiabilité par glyphes",
+    "notable": [
+      "Ghazghkull Mag Uruk Thraka",
+      "Meganobz (garde Warboss)",
+      "Mega-Armoured Warbosses Goff"
+    ],
+    "wikiQuery": "Mega Armour Ork",
+    "sigil": "✧"
+  },
+  {
+    "id": "gauss-flayer",
+    "name": "Gauss Flayer",
+    "nameVO": "Gauss Flayer",
+    "type": "ranged",
+    "subCategory": "gauss",
+    "factionIds": [
+      "necrons"
+    ],
+    "description": "Arme standard du Necron Warrior, qui désintègre la matière atome par atome via un faisceau de particules à effet d'écorchage moléculaire.",
+    "loreLong": "Le Gauss Flayer ne tire pas un projectile — il déchaîne une réaction. Le canon en alliage necrodermique contient un système de particules qui, à l'activation, projette un faisceau d'énergie verdâtre dont les propriétés violent la physique connue. Au contact, le faisceau dépouille la cible de ses couches matérielles strate par strate, atome par atome, à une vitesse exponentielle : armure céramite, peau, muscle, os, organes, tout est défait dans l'ordre inverse de l'assemblage. Les survivants — il y en a peu — décrivent une morsure froide qui se propage vers l'intérieur, comme si la matière elle-même se rendait compte qu'elle n'a plus le droit d'exister. La technologie est un héritage de la guerre contre les C'tan, conçue pour blesser même les dieux stellaires. Pour les Necron Warriors, simples gardes-soldats automates, c'est une arme de poing standard. Pour l'Imperium, c'est un cauchemar théologique : aucune relique n'arrête le Gauss.",
+    "specs": "Faisceau particulaire écorchage moléculaire · alliage necrodermique · effet stripping atomique progressif · ignore armures conventionnelles · pas de munitions consommables",
+    "notable": [
+      "Necron Warriors (infanterie standard)",
+      "Trazyn (collection variantes)",
+      "Gauss Reaper (variante shock)"
+    ],
+    "wikiQuery": "Gauss Flayer Necron",
+    "sigil": "✧"
+  },
+  {
+    "id": "tesla-carbine",
+    "name": "Carabine Tesla",
+    "nameVO": "Tesla Carbine",
+    "type": "ranged",
+    "subCategory": "tesla",
+    "factionIds": [
+      "necrons"
+    ],
+    "description": "Arme à arc électrique des Triarch Praetorians et des Immortels, qui décharge des éclairs d'énergie capables de sauter d'une cible à une autre.",
+    "loreLong": "La technologie Tesla est une variante alternative à la doctrine Gauss : là où le Gauss désintègre, la Tesla foudroie. Le canon condense une charge électromagnétique surcritique qui, libérée, génère un arc d'énergie ramifiée capable de chercher activement les cibles voisines par conductivité atmosphérique et résonance bio-électrique. Une seule décharge bien placée peut foudroyer une escouade entière en cascade, l'arc sautant d'un fantassin à l'autre dans un crépitement bleu-blanc qui laisse les survivants désorientés et les morts carbonisés de l'intérieur. Les Triarch Praetorians, gardes du Triarcat, en font usage comme symbole de leur autorité légale ; les Immortels en font une arme de tir disciplinée. Sur les véhicules, les Tesla Destructor montés sur Annihilation Barge transforment chaque salve en orage portable. La Tesla est imprévisible, théâtrale, et profondément démoralisante.",
+    "specs": "Charge électromagnétique surcritique · arc auto-ramifié · effet chain lightning multi-cibles · conductivité atmosphérique · démoralisation visuelle",
+    "notable": [
+      "Triarch Praetorians",
+      "Immortels Sautekh",
+      "Annihilation Barge (Tesla Destructor)"
+    ],
+    "wikiQuery": "Tesla Carbine Necron",
+    "sigil": "✧"
+  },
+  {
+    "id": "warscythe",
+    "name": "Faux de Guerre",
+    "nameVO": "Warscythe",
+    "type": "melee",
+    "subCategory": "warscythe",
+    "factionIds": [
+      "necrons"
+    ],
+    "description": "Arme cérémonielle et martiale des Overlords et Lychguards, lame en alliage de phase qui tranche à travers la réalité elle-même.",
+    "loreLong": "La Warscythe est l'insigne du commandement Necron et l'arme la plus tranchante connue dans la galaxie. La lame, en alliage hyperphasique, n'est pas faite de matière au sens conventionnel : elle existe dans un état quantique partiellement extrait du continuum, ce qui signifie qu'elle ignore l'existence de la matière qu'elle traverse. Aucun blindage — pas même un Land Raider, pas même la coque d'un Titan — ne peut prétendre arrêter une Warscythe. Le coup ne s'inflige pas : il décide simplement que la cible est désormais en deux morceaux. Portée à deux mains par les Overlords et certains Phaerons, ou en simple main avec bouclier dispersion par les Lychguards, l'arme est associée à l'autorité dynastique : la frapper revient à recevoir un jugement millénaire. Les Lords mineurs portent des Hyperphase Swords, variantes amoindries ; mais la Warscythe complète reste l'apanage des seigneurs.",
+    "specs": "Lame alliage hyperphasique · existence quantique semi-extraite · ignore tout blindage · maniement deux mains (Overlord) ou main+bouclier (Lychguard) · symbole d'autorité",
+    "notable": [
+      "Imotekh le Stormlord",
+      "Anrakyr le Voyageur",
+      "Lychguard (gardes royales)"
+    ],
+    "wikiQuery": "Warscythe Necron",
+    "sigil": "✧"
+  },
+  {
+    "id": "fleshborer",
+    "name": "Fleshborer",
+    "nameVO": "Fleshborer / Devourer",
+    "type": "ranged",
+    "subCategory": "bio-weapon",
+    "factionIds": [
+      "tyranides"
+    ],
+    "description": "Bio-arme symbiotique vivante portée par les Termagants et Hormagaunts, projetant des larves carnivores qui rongent la cible de l'intérieur.",
+    "loreLong": "Le Fleshborer n'est pas une arme : c'est un organisme. Greffé chair contre chair sur l'avant-bras du Termagant qui le porte, il se nourrit du même flux sanguin que son hôte et lui obéit par lien synaptique direct. Sa cavité interne contient des dizaines de Borer Beetles — créatures larvaires de la taille d'un poing, dotées de mandibules acides — que l'arme projette par contraction musculaire à vitesse balistique. Au contact de la cible, le scarabée perfore l'armure, s'enfouit dans la chair, et entreprend de dévorer son hôte de l'intérieur en quelques secondes. La variante Devourer, plus grosse, propulse des larves alimentées au plasma neurotoxique qui décèrent la cohérence neuronale avant la dissolution corporelle. Les Hive Fleets ne fabriquent rien : elles cultivent. Chaque Fleshborer est unique, croît avec son porteur, et meurt avec lui — ou est réabsorbée par les Capillary Towers à la fin du cycle de digestion planétaire.",
+    "specs": "Bio-symbiose avec porteur · projectiles vivants Borer Beetles · contraction musculaire balistique · larves perforantes carnivores · variante Devourer = neurotoxique",
+    "notable": [
+      "Termagants (Fleshborer)",
+      "Hormagaunts (variantes courtes)",
+      "Carnifex (Devourer cannons jumelés)"
+    ],
+    "wikiQuery": "Fleshborer Tyranid",
+    "sigil": "✧"
+  },
+  {
+    "id": "bonesword-lashwhip",
+    "name": "Bonesword & Lashwhip",
+    "nameVO": "Bonesword and Lashwhip",
+    "type": "melee",
+    "subCategory": "bio-weapon",
+    "factionIds": [
+      "tyranides"
+    ],
+    "description": "Combo signature des Hive Tyrants et Tyranid Warriors : une lame osseuse psycho-active dans une main, un fouet vivant qui paralyse dans l'autre.",
+    "loreLong": "La Bonesword est une lame en chitine évoluée, calcifiée à un degré tel qu'elle rivalise avec le carbure des Astartes, et nervurée d'un réseau psycho-conducteur qui canalise la volonté du Hive Mind directement dans la chair de la cible. Une seule entaille suffit : la victime n'est pas seulement coupée, elle est jugée par l'organisme galactique tout entier, et son âme — si tant est qu'elle en ait une selon la métaphysique tyranide — est aspirée dans le flux psychique de la Flotte. Le Lashwhip qui complète l'arme est un long appendice musculaire ondulant, parsemé de sphincters préhensiles qui agrippent et déforment la chair. Frappé par un Lashwhip, un Space Marine voit son arme arrachée, son bras déboîté, son armure tordue ; le coup suivant de la Bonesword vient terminer le travail. Ce combo est l'arme préférée des Hive Tyrants, mais aussi des Tyranid Warriors d'élite — les Prime — qui en font la signature de leur supériorité martiale.",
+    "specs": "Bonesword : chitine calcifiée + canal psychique Hive Mind · Lashwhip : appendice musculaire préhensile · combo désarme + tranche · létalité psychique-physique combinée",
+    "notable": [
+      "Hive Tyrants (Swarmlord variante)",
+      "Tyranid Warriors Prime",
+      "Swarmlord (Boneswords jumelés mythiques)"
+    ],
+    "wikiQuery": "Bonesword Lashwhip Tyranid",
+    "sigil": "✧"
+  },
+  {
+    "id": "drachnyen",
+    "name": "Drach'nyen",
+    "nameVO": "Drach'nyen",
+    "type": "relic",
+    "subCategory": "daemon-weapon",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Épée démone d'Abaddon le Fléau, premier murmure du Chaos, lame qui chante dans la langue des cauchemars.",
+    "loreLong": "Drach'nyen serait le premier mot prononcé dans le néant primordial — la première pensée meurtrière de l'humanité faite chair et acier. Capturée jadis dans les profondeurs maudites du Black Library par les Chevaliers Gris, l'épée fut scellée par les Eldars dans une prison sans nom. Abaddon le Fléau l'arracha de sa geôle au cours de sa Quête des Daemonkeys, perdant des compagnons et son humanité dans les couloirs du Labyrinthe Eternel. Depuis, la lame susurre à son porteur les secrets des âges futurs, dévorant les âmes de ceux qu'elle frappe pour nourrir l'ambition du Seigneur de la Black Legion. Quiconque entend son chant trop longtemps perd jusqu'au souvenir de son propre nom. Drach'nyen ne tue pas seulement la chair : elle efface l'existence même de ses victimes de la trame du temps. C'est dit-on le poignard qui ouvrira la gorge de l'Empereur, à la fin de tous les âges.",
+    "specs": "Épée démone liée à un Greater Daemon innommé. Effaçe les âmes, traverse les armures les plus sacrées, murmure des prophéties d'apocalypse à son porteur.",
+    "notable": [
+      "Abaddon the Despoiler"
+    ],
+    "citation": "« La première pensée du meurtre — telle que prononcée avant les étoiles. »",
+    "wikiQuery": "Drach'nyen",
+    "sigil": "✠"
+  },
+  {
+    "id": "talon-of-horus",
+    "name": "La Serre d'Horus",
+    "nameVO": "Talon of Horus",
+    "type": "relic",
+    "subCategory": "daemon-weapon",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Gantelet maudit du Maître de Guerre Horus, héritage damné porté désormais par Abaddon le Fléau.",
+    "loreLong": "Forgée à l'aube de la Grande Croisade par les artisans de Cthonia, la Serre fut offerte à Horus Lupercal par l'Empereur lui-même en gage de leur amour filial. Quand Horus tomba dans la corruption, la Serre but son sang et celui de l'Empereur lors du duel final à bord du Vengeful Spirit, scellant en elle un fragment du Maître de Guerre déchu. Abandonnée dans la coque dérivante du vaisseau amiral durant des siècles, elle fut récupérée par Abaddon, alors Premier Capitaine désabusé, lors du raid mythique connu sous le nom de Reclamation. Le gantelet murmura à son nouveau porteur les souvenirs d'Horus, transformant Ezekyle en l'Héritier maudit de la Black Legion. La Serre intègre un canon Maxim Bolter et des griffes énergétiques capables d'éventrer le ceramite le plus épais. Tant qu'Abaddon la portera, l'ombre d'Horus ne mourra jamais.",
+    "specs": "Power claw avec bolter intégré (Maxim Pattern). Lien psychique avec Horus, immunise partiellement aux pouvoirs psychiques.",
+    "notable": [
+      "Horus Lupercal",
+      "Abaddon the Despoiler"
+    ],
+    "citation": "« Le Maître de Guerre est mort. Vive le Maître de Guerre. »",
+    "wikiQuery": "Talon of Horus",
+    "sigil": "✠"
+  },
+  {
+    "id": "worldbreaker",
+    "name": "Worldbreaker",
+    "nameVO": "Worldbreaker",
+    "type": "relic",
+    "subCategory": "daemon-weapon",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Marteau colossal d'Angron, le Primarque déchu — chaque coup ébranle le squelette du monde.",
+    "loreLong": "Worldbreaker n'est pas seulement une arme : c'est l'extension de la rage incarnée d'Angron, primarque des World Eaters. Forgé d'un alliage que nul ne sait reproduire, infusé du sang versé sur les plaines gladiatoriales de Nuceria, le marteau résonne d'une fureur perpétuelle. Avant la Trahison, Angron en frappait les murs des forteresses ennemies et les faisait s'effondrer comme des châteaux de sable. Après son ascension en Daemon-Primarque sur Armatura, Worldbreaker devint un objet véritablement infernal, brûlant d'un feu noir qui consume l'âme autant que la chair. Chaque coup porté résonne à travers la Warp comme une cloche funèbre. Quand Angron parcourt à nouveau les champs de bataille du M42, c'est ce marteau qui annonce le retour du Boucher Rouge, et les mondes tremblent à son approche. Aucune armure, aucun rempart, aucune montagne ne peut résister à Worldbreaker.",
+    "specs": "Marteau démoniaque immense. Brise tout en une frappe — bâtiments, Titans, Primarques. Aura de rage qui pousse les alliés à charger.",
+    "notable": [
+      "Angron, Primarque déchu des World Eaters"
+    ],
+    "citation": "« KILL ! MAIM ! BURN ! »",
+    "wikiQuery": "Worldbreaker Angron",
+    "sigil": "✠"
+  },
+  {
+    "id": "lash-of-slaanesh",
+    "name": "Le Fouet de Slaanesh",
+    "nameVO": "Lash of Slaanesh",
+    "type": "relic",
+    "subCategory": "daemon-weapon",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Fouet daemon que portait Fulgrim avant sa chute — instrument de plaisir et de souffrance.",
+    "loreLong": "Le Fouet de Slaanesh fut découvert par Fulgrim, primarque des Emperor's Children, sur la tombe-monde de Laeran. Ce qui semblait être une simple lame ornementée abritait en vérité un Greater Daemon de Slaanesh, qui susurra au primarque parfait les secrets de la perfection au-delà du mortel. La possession fut lente, exquise, voluptueuse — Fulgrim succombait à chaque instant un peu plus aux promesses du Prince des Plaisirs. C'est avec cette lame qu'il trancha la gorge de son frère Ferrus Manus sur Isstvan V, accomplissement ultime d'une amitié dévorée par la corruption. Le Fouet, sous sa forme étendue, devient une lanière psychique capable d'arracher les âmes hors des corps mortels, les contraignant à danser jusqu'à l'épuisement final. Chaque caresse de son cuir spectral grave dans la chair des arabesques de douleur insupportable. Les Sorciers de Slaanesh la considèrent comme le don le plus pur de leur dieu : une promesse de transcendance par l'excès.",
+    "specs": "Fouet psychique daemon. Inflige douleur extatique, peut soulever et lacérer plusieurs ennemis simultanément. Source de corruption pour son porteur.",
+    "notable": [
+      "Fulgrim, Primarque déchu des Emperor's Children"
+    ],
+    "citation": "« Goûte la perfection, ne serait-ce qu'un instant — tu en redemanderas pour l'éternité. »",
+    "wikiQuery": "Lash of Slaanesh Fulgrim",
+    "sigil": "✠"
+  },
+  {
+    "id": "black-staff-of-ahriman",
+    "name": "Le Sceptre Noir d'Ahriman",
+    "nameVO": "Black Staff of Ahriman",
+    "type": "relic",
+    "subCategory": "daemon-weapon",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Bâton de sorcier d'Ahzek Ahriman, conduit aux savoirs interdits de Tzeentch.",
+    "loreLong": "Le Sceptre Noir fut taillé dans le bois fossilisé d'un arbre de Prospero, ce monde-bibliothèque que Russ réduisit en cendres. Ahzek Ahriman, Premier Capitaine des Thousand Sons et plus grand sorcier de l'Imperium déchu, le porta lors du lancement du Rubric, ce sortilège catastrophique destiné à sauver ses frères de la mutation et qui ne fit qu'enfermer leurs âmes dans des armures vides. Depuis son exil prononcé par Magnus, Ahriman erre à travers les âges, le Sceptre toujours en main, en quête des fragments du Livre Noir d'Ahriman et des secrets nécessaires pour défaire le Rubric. Le bâton concentre les flux du Warp en faisceaux capables de désintégrer un Land Raider ou de réécrire l'esprit d'un Inquisiteur. Tzeentch lui-même, dit-on, ricane à travers la pointe ouvragée de l'objet, soufflant à Ahriman les énigmes qui le mèneront, peut-être, à la rédemption — ou à la ruine définitive.",
+    "specs": "Force staff de sorcier de niveau maître. Décuple les pouvoirs psychiques de Tzeentch, abrite des grimoires enchâssés dans le bois.",
+    "notable": [
+      "Ahzek Ahriman, Premier Capitaine des Thousand Sons"
+    ],
+    "citation": "« Tout savoir mérite d'être connu, quel qu'en soit le prix. »",
+    "wikiQuery": "Ahriman Black Staff",
+    "sigil": "✠"
+  },
+  {
+    "id": "black-sword-sigismund",
+    "name": "L'Épée Noire de Sigismund",
+    "nameVO": "The Black Sword",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Épée bénie portée par chaque Champion d'Empereur des Black Templars depuis Sigismund le Premier.",
+    "loreLong": "Forgée dans l'acier sacré du Phalanx durant les heures les plus sombres du Siège de Terra, l'Épée Noire fut bénie par l'Empereur lui-même, dit-on, avant d'être confiée à Sigismund, premier Champion d'Empereur et fondateur des Black Templars. Sigismund jura sur cette lame de poursuivre éternellement les ennemis de l'Imperium, serment qui devint le credo du Chapitre tout entier. Depuis le Second Fondement, l'Épée Noire passe de Champion en Champion : seul l'Astartes le plus pieux et le plus martial du Chapitre est jugé digne de la porter. Chaque Champion qui tombe au combat le fait avec l'épée encore au poing, et la lame est récupérée par ses frères pour être remise au successeur lors d'une cérémonie austère. Maréchal Helbrecht considère l'arme comme la véritable âme des Templars, plus précieuse que n'importe quelle relique dorée. Quand l'Épée Noire frappe un hérétique, dit-on, la voix de Sigismund se fait entendre dans le bruit du sang versé.",
+    "specs": "Épée énergétique à deux mains. Tranche le ceramite, bénédiction du Chapitre amplifiant sa résonance contre les daemons.",
+    "notable": [
+      "Sigismund, Premier Champion d'Empereur",
+      "tous les Champions d'Empereur successifs"
+    ],
+    "citation": "« Aucune pitié ! Aucun répit ! Aucune peur ! »",
+    "wikiQuery": "Black Sword Black Templars",
+    "sigil": "✠"
+  },
+  {
+    "id": "mjalnar-hammer-russ",
+    "name": "Mjalnar, le Marteau de Russ",
+    "nameVO": "Mjalnar, the Hammer of Russ",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Marteau-tonnerre légendaire du Primarque Leman Russ, transmis aux plus grands Wolf Lords.",
+    "loreLong": "Mjalnar fut forgé dans les Forges de Fenris à partir d'un fragment de comète tombé sur l'île d'Asaheim, refroidi dans le sang de la Grande Wyrm que Leman Russ chassa lors de sa première année parmi les hommes. Le Primarque le portait à sa ceinture lors de la Bataille de Prospero, et c'est avec ce marteau qu'il abattit les défenses des Thousand Sons et défia son frère Magnus le Rouge. Quand Russ disparut dans le Warp à la recherche du Wolftime, il laissa derrière lui Mjalnar, qui passa ensuite entre les mains des Wolf Lords les plus dignes — Bulveye, Harek Ironhelm, et plus récemment Logan Grimnar lui-même. Le marteau résonne d'une foudre primordiale, libérant à chaque frappe une décharge capable de pulvériser un Dreadnought. Les Skalds chantent qu'au jour du Wolftime, quand Russ reviendra mener la Compagnie de la Mort, Mjalnar appellera son maître à travers les hurlements du Warp.",
+    "specs": "Marteau-tonnerre primarchique. Décharge fulgurante à chaque impact, nul Astartes ordinaire ne peut le soulever.",
+    "notable": [
+      "Leman Russ, Primarque des Space Wolves",
+      "Logan Grimnar, Grand Loup"
+    ],
+    "citation": "« Quand le ciel hurle, c'est Mjalnar qui répond. »",
+    "wikiQuery": "Hammer of Russ Mjalnar",
+    "sigil": "✠"
+  },
+  {
+    "id": "spear-of-vulkan",
+    "name": "La Lance de Vulkan",
+    "nameVO": "Spear of Vulkan",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Lance forgée par le Primarque Vulkan dans les feux de Nocturne, l'une des Neuf Reliques perdues.",
+    "loreLong": "Avant de disparaître à la fin de la Grande Croisade, le Primarque Vulkan dissémina à travers la galaxie neuf reliques sacrées, chacune cachée dans un lieu de péril extrême. La Lance de Vulkan, Gauntlet, Eye, Chalice, Engine, Spear, Hammer, Song et Obsidian Chariot — la Promesse de Vulkan stipule que lorsque les neuf seront réunies par un porteur digne, le Primarque reviendra parmi son Chapitre. La Lance fut forgée par Vulkan lui-même au cœur du Mont Deathfire, trempée neuf fois dans la lave de Nocturne et bénie de neuf serments. Sa pointe, taillée dans une dent de Drake noir, transperce les armures les plus épaisses comme du papier. Le Forgeur Tu'Shan, Maître du Chapitre des Salamanders, l'a brièvement portée durant la défense de Armageddon contre les forces de Ghazghkull. Chaque Salamander qui aperçoit la Lance ressent dans sa chair la chaleur des forges paternelles et entend le marteau de Vulkan résonner dans les profondeurs du Warp.",
+    "specs": "Lance énergétique primarchique. Forgée par Vulkan, bénie par neuf serments. Une des Neuf Reliques perdues.",
+    "notable": [
+      "Vulkan, Primarque des Salamanders",
+      "Tu'Shan, Forgeur des Salamanders"
+    ],
+    "citation": "« Quand les neuf seront réunies, je reviendrai. »",
+    "wikiQuery": "Spear of Vulkan",
+    "sigil": "✠"
+  },
+  {
+    "id": "blade-encarmine",
+    "name": "Blade Encarmine",
+    "nameVO": "Blade Encarmine",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Épées sacrées des Blood Angels, forgées dans le sang et la mémoire de Sanguinius.",
+    "loreLong": "Les Blade Encarmine sont des épées énergétiques d'une élégance funèbre, forgées dans les Sanctums Vermillions de Baal par les Techmarines les plus dévoués. Chaque lame est trempée dans une infusion de sang sacré recueilli dans les veines des plus grands héros du Chapitre des Blood Angels avant leur dernier souffle. La légende veut que la première Blade Encarmine ait été ciselée à partir d'un fragment de l'épée brisée de Sanguinius lors du duel final contre Horus à bord du Vengeful Spirit. Portées exclusivement par les guerriers de la Sanguinary Guard et les Capitaines les plus illustres, les Blade Encarmine semblent danser entre les mains de leurs porteurs, gracieuses comme des ailes d'ange et létales comme la sentence d'un dieu. Quand un Blood Angel tombe sous l'emprise de la Black Rage, sa Blade Encarmine devient une extension de sa fureur sanguinienne, fendant l'air avec un sifflement qui rappelle les psaumes de la Chute du Primarque. Une Blade Encarmine perdue est un deuil pour tout le Chapitre.",
+    "specs": "Épées énergétiques cérémonielles. Forgées avec sang et mémoire des héros, équilibrage parfait permettant des frappes d'une beauté tragique.",
+    "notable": [
+      "Sanguinary Guard",
+      "Mephiston, Seigneur de la Mort"
+    ],
+    "citation": "« Pour Sanguinius ! Pour l'Empereur ! »",
+    "wikiQuery": "Blade Encarmine Blood Angels",
+    "sigil": "✠"
+  },
+  {
+    "id": "sword-of-secrets",
+    "name": "L'Épée des Secrets",
+    "nameVO": "Sword of Secrets",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "space-marines"
+    ],
+    "description": "Lame ancienne du Primarque Lion El'Jonson, gardée par les Suprêmes Grand Maîtres des Dark Angels.",
+    "loreLong": "L'Épée des Secrets, lame personnelle de Lion El'Jonson durant les Heresies, est une arme dont l'histoire véritable est connue seulement du Cercle Intérieur des Dark Angels. Forgée dans les forêts de Caliban avant l'arrivée de l'Empereur, infusée des énergies primordiales de cette planète maudite, elle a tranché la chair des Dark Angels traîtres lors de la destruction de Caliban et a goûté au sang de Luther lui-même lors du duel fratricide qui condamna le Lion à un sommeil de dix mille ans. Depuis le réveil récent du Primarque, des rumeurs persistent : Lion El'Jonson l'aurait reprise à un Suprême Grand Maître interloqué, sans un mot, avant de s'éloigner vers de nouvelles batailles. La lame elle-même semble cacher un secret terrible — quand on l'observe trop longtemps, on jurerait apercevoir, dans les reflets de son tranchant, des visages d'Astartes vêtus de noir, hurlant des malédictions étouffées. Sword of Secrets : car elle sait, et ne dit rien.",
+    "specs": "Épée énergétique primarchique caliban. Tranchant inégalé, lien psychique avec le Cercle Intérieur, garde les secrets du Chapitre.",
+    "notable": [
+      "Lion El'Jonson, Primarque des Dark Angels",
+      "Suprêmes Grands Maîtres successifs"
+    ],
+    "citation": "« Ce que la lame sait, la lame le garde. »",
+    "wikiQuery": "Sword of Secrets Lion El'Jonson",
+    "sigil": "✠"
+  },
+  {
+    "id": "emperors-sword",
+    "name": "L'Épée de l'Empereur",
+    "nameVO": "The Emperor's Sword",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "adeptus-custodes"
+    ],
+    "description": "Lame portée par l'Empereur Lui-même durant le Siège de Terra — la plus sacrée des reliques.",
+    "loreLong": "L'Épée de l'Empereur n'a pas de nom car nul nom mortel ne saurait la qualifier. Forgée par les artisans inconnus de l'âge d'or de l'humanité, peut-être par l'Empereur Lui-même au matin des temps, elle resta gainée durant la majeure partie de la Grande Croisade, l'Empereur préférant des armes moins extravagantes. Mais lorsque le Maître de Guerre Horus baissa ses boucliers vortex et invita son père à monter à bord du Vengeful Spirit, l'Empereur dégaina la Lame. Dans le duel final, l'arme brilla d'un feu doré si pur que les daemons hurlèrent de douleur depuis le Warp. Elle perça le ceramite corrompu d'Horus, mais l'Empereur, par amour paternel, hésita un instant — et c'est dans cet instant qu'Horus le frappa mortellement. Depuis, la Lame demeure auprès du Trône d'Or, gardée par les Companions des Custodes, attendant — peut-être — le retour du Maître de l'Humanité. Certains disent qu'elle frémit imperceptiblement, comme si elle savait que sa main véritable la reprendra bientôt.",
+    "specs": "Lame impériale d'origine inconnue, peut-être pré-Imperium. Pouvoir psychique colossal, anti-daemon absolu, considérée comme la plus sacrée des reliques.",
+    "notable": [
+      "L'Empereur de l'Humanité"
+    ],
+    "citation": "« Mon fils… Je t'ai aimé. »",
+    "wikiQuery": "Emperor's Sword Horus Heresy",
+    "sigil": "✠"
+  },
+  {
+    "id": "spear-of-telesto",
+    "name": "La Lance de Telesto",
+    "nameVO": "Spear of Telesto",
+    "type": "relic",
+    "subCategory": "imperial-relic",
+    "factionIds": [
+      "adeptus-custodes"
+    ],
+    "description": "Lance gardienne légendaire des Custodes, infusée d'une flamme qui ne s'éteint jamais.",
+    "loreLong": "La Lance de Telesto est l'une des trois lances sacrées portées par les premiers Custodes, gardes personnels de l'Empereur lors de l'Unification de Terra. Elle est nommée d'après son premier porteur, Telesto, Custode tombé en défendant la Porte Eternelle contre les hordes du Maître de Guerre. La pointe de la Lance est enchâssée d'un fragment d'auramite pur qui, dit-on, contient une étincelle de la volonté de l'Empereur lui-même. Quand la Lance frappe, elle libère un trait de feu doré incandescent capable de réduire en cendres un Bloodthirster ou de fendre la coque d'un Land Raider. Depuis dix mille ans, la Lance demeure dans l'armurerie sacrée du Palais Impérial, sortie seulement lors des plus grandes crises — la Guerre des Bestiaux, la Treizième Croisade Noire, la défense récente du Système Sol contre l'avancée d'Abaddon. Trajann Valoris, Capitaine-Général actuel des Custodes, en est le porteur désigné. Le feu de la Lance, dit-on, ne s'éteindra qu'à la mort véritable de l'Empereur — ce qui rassure infiniment ceux qui veillent au Trône.",
+    "specs": "Guardian Spear de relique. Tir de plasma incandescent infusé de l'auramite impériale, anti-daemon majeur.",
+    "notable": [
+      "Telesto, Custode légendaire",
+      "Trajann Valoris, Capitaine-Général"
+    ],
+    "citation": "« Tant que la Lance brûle, l'Empereur veille. »",
+    "wikiQuery": "Spear of Telesto Custodes",
+    "sigil": "✠"
+  },
+  {
+    "id": "chaos-power-armour",
+    "name": "Armure Énergétique du Chaos",
+    "nameVO": "Chaos Power Armour",
+    "type": "armor",
+    "subCategory": "chaos-armor",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Armure des Heretic Astartes, autrefois sacrée, désormais corrompue par dix mille ans de damnation.",
+    "loreLong": "Les armures énergétiques des Chaos Space Marines sont les mêmes que celles que portaient leurs frères loyalistes durant la Grande Croisade — mais après dix mille ans à voguer dans les tempêtes du Warp, elles ne sont plus tout à fait des objets matériels. Le ceramite a fondu et reformé selon les rêveries cauchemardesques de leurs porteurs, les jonctions sont scellées de runes d'invocations, les heaumes hurlent en silence des malédictions à chaque mouvement. Certaines armures ont fusionné avec leur porteur au point que l'Astartes ne peut plus les retirer sans perdre une partie de sa chair. Les Iron Warriors gravent leurs trophées de bataille directement dans le métal, les Word Bearers y inscrivent des passages du Book of Lorgar en une encre qui suinte du sang authentique. Les armures plus anciennes, datant de la Grande Croisade, sont devenues des reliques noires — chacune abritant un fragment de daemon mineur lié au Mark de leur Chaos God. Une telle armure ne se transmet pas : elle se gagne en survivant à son ancien porteur.",
+    "specs": "Power armor pattern Mk II-VII corrompu. Souvent fusionnée à daemon mineur, runes de protection contre la Warp, modifications mutagènes.",
+    "notable": [
+      "Tous les Heretic Astartes des Long War"
+    ],
+    "citation": "« L'armure se souvient de chaque trahison. »",
+    "wikiQuery": "Chaos Power Armour",
+    "sigil": "✠"
+  },
+  {
+    "id": "armour-of-the-chosen",
+    "name": "Armure des Élus",
+    "nameVO": "Armour of the Chosen",
+    "type": "armor",
+    "subCategory": "chaos-armor",
+    "factionIds": [
+      "chaos-space-marines"
+    ],
+    "description": "Armure des Élus des Sombres Dieux — démon-fer qui pense, complote et hurle contre son porteur.",
+    "loreLong": "L'Armure des Élus est conférée aux champions les plus prometteurs de la Black Legion et autres légions hérétiques par les seigneurs du Chaos eux-mêmes, en récompense de leurs hauts faits. Chaque pièce est une œuvre de damnation : forgée dans les forteresses-forges des Daemonsmiths du Warp, trempée dans le sang de cent prisonniers loyalistes, infusée d'un esprit daemoniaque mineur qui sert et tourmente son porteur en parts égales. L'armure se déplace presque toute seule dans les moments cruciaux du combat, anticipant les coups, parant les pouvoirs psychiques, mais elle exige en contrepartie un paiement constant — sang, sacrifices, blasphèmes — sans quoi elle se met à dévorer son porteur de l'intérieur. Les Chosen qui la portent finissent toujours par devenir Chaos Lords ou par mourir étouffés par leur propre cuirasse. Abaddon le Fléau lui-même ne porte pas l'Armure des Élus : ses Chosen, eux, sont les seuls à la mériter. Quand un Chosen tombe, son armure devient un trophée plus précieux que sa tête.",
+    "specs": "Power armor de relique chaos. Daemon-bound, capacités prédictives en combat, exige tribut sanguinaire constant.",
+    "notable": [
+      "Chosen de la Black Legion",
+      "Champions des Sombres Dieux"
+    ],
+    "citation": "« L'armure veut du sang. Toujours plus de sang. »",
+    "wikiQuery": "Armour of the Chosen Chaos",
+    "sigil": "✠"
+  }
+]

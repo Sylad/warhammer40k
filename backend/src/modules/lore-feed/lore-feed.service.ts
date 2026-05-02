@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import type { LoreEvent, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept } from './lore-feed.model.js';
+import type { LoreEvent, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept, Equipment } from './lore-feed.model.js';
 
 function loadJson<T>(file: string, fallback: T): T {
   const filePath = path.resolve(process.cwd(), 'data', file);
@@ -18,6 +18,7 @@ export class LoreFeedService {
   private readonly chaosGods: ChaosGod[];
   private readonly imperialOrgs: ImperialOrganization[];
   private readonly concepts: LoreConcept[];
+  private readonly equipment: Equipment[];
 
   constructor() {
     this.events = loadJson<LoreEvent[]>('lore-feed.json', []);
@@ -26,6 +27,7 @@ export class LoreFeedService {
     this.chaosGods = loadJson<ChaosGod[]>('chaos-gods.json', []);
     this.imperialOrgs = loadJson<ImperialOrganization[]>('imperial-orgs.json', []);
     this.concepts = loadJson<LoreConcept[]>('lore-concepts.json', []);
+    this.equipment = loadJson<Equipment[]>('equipment.json', []);
   }
 
   findAll(): LoreEvent[] { return this.events; }
@@ -60,5 +62,11 @@ export class LoreFeedService {
 
   getLoreConcept(id: string): LoreConcept | undefined {
     return this.concepts.find(c => c.id === id);
+  }
+
+  getEquipment(): Equipment[] { return this.equipment; }
+
+  getEquipmentItem(id: string): Equipment | undefined {
+    return this.equipment.find(e => e.id === id);
   }
 }

@@ -263,5 +263,15 @@ export class LoreHubComponent {
       meta: '11 hot zones · 3 failles warp',
       available: true,
     },
+    {
+      route: '/lore/equipment',
+      ico: '⚒',
+      eyebrow: 'Codex de l\'arsenal',
+      title: 'Armement & Reliques',
+      description:
+        'Bolters, plasma, melta, marteaux-tonnerre, wraithbone, gauss, daemon weapons, Mark IV-X, Cataphractii, reliques nommées (Drach\'nyen, Black Sword, Mjalnar)… armes, armures, et objets sacrés ou damnés.',
+      meta: '69 pièces · 4 types',
+      available: true,
+    },
   ];
 }

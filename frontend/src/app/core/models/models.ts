@@ -390,3 +390,22 @@ export interface LoreConcept {
   keyFacts: string[];
   relatedConcepts: LoreConceptRelated[];
 }
+
+// === Équipement ===
+export type EquipmentType = 'ranged' | 'melee' | 'armor' | 'relic';
+
+export interface Equipment {
+  id: string;
+  name: string;
+  nameVO?: string;
+  type: EquipmentType;
+  subCategory: string;
+  factionIds: string[];
+  description: string;
+  loreLong: string;
+  specs?: string;
+  notable?: string[];
+  citation?: string;
+  wikiQuery: string;
+  sigil?: string;
+}

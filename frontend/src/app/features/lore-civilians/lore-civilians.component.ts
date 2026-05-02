@@ -96,12 +96,15 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
                 <h3 class="section-title">Figures notables</h3>
                 <div class="figures-grid">
                   @for (f of org.notableFigures; track f.name) {
-                    <div class="figure-card">
-                      <div class="figure-name">{{ f.name }}</div>
-                      <div class="figure-role">{{ f.role }}</div>
-                      @if (f.description) {
-                        <p>{{ f.description }}</p>
-                      }
+                    <div class="figure-card" [style.--fig-bg]="figureImg(org.id, f.name)">
+                      <div class="figure-card-overlay"></div>
+                      <div class="figure-card-content">
+                        <div class="figure-name">{{ f.name }}</div>
+                        <div class="figure-role">{{ f.role }}</div>
+                        @if (f.description) {
+                          <p>{{ f.description }}</p>
+                        }
+                      </div>
                     </div>
                   }
                 </div>
@@ -349,34 +352,62 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
 
     .figures-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
     }
     .figure-card {
-      padding: 12px 14px;
+      position: relative;
+      min-height: 200px;
+      padding: 0;
       border: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.3);
+      background:
+        var(--fig-bg, linear-gradient(135deg, #1a0a08 0%, #050403 100%));
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .figure-card:hover {
+      border-color: var(--org-color, var(--gold-soft));
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+    }
+    .figure-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.78) 60%, rgba(0,0,0,0.95) 100%);
+    }
+    .figure-card-content {
+      position: relative;
+      z-index: 1;
+      padding: 14px 14px 14px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
     .figure-name {
-      color: var(--org-color, var(--gold));
+      color: var(--org-color, var(--gold-bright));
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 14px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 3px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.85);
     }
     .figure-role {
       font-size: 10px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--gold-soft);
       margin-bottom: 6px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
     }
     .figure-card p {
       font-size: 11.5px;
       color: var(--text);
       line-height: 1.55;
       margin: 0;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
     }
 
     .org-side { display: flex; flex-direction: column; gap: 14px; }
@@ -448,6 +479,7 @@ export class LoreCiviliansComponent {
   readonly orgs = toSignal(this.service.imperialOrgs$, { initialValue: [] as ImperialOrganization[] });
   readonly filterCategory = signal<'all' | ImperialOrgCategory>('all');
   readonly orgImages = signal<Map<string, string>>(new Map());
+  readonly figureImages = signal<Map<string, string>>(new Map());
   readonly heroImg = signal<string>('');
 
   readonly categories: ImperialOrgCategory[] = [
@@ -483,7 +515,7 @@ export class LoreCiviliansComponent {
       if (r.imageUrl) this.heroImg.set(`url('${r.imageUrl}')`);
     });
 
-    // Per-org images
+    // Per-org + per-figure images
     this.service.imperialOrgs$.subscribe(list => {
       list.forEach(org => {
         if (org.wikiQuery) {
@@ -495,8 +527,25 @@ export class LoreCiviliansComponent {
             }
           });
         }
+        for (const fig of org.notableFigures) {
+          const q = fig.wikiQuery ?? fig.name;
+          if (!q) continue;
+          this.service.getWikiImage(q).subscribe(r => {
+            if (r.imageUrl) {
+              const key = `${org.id}::${fig.name}`;
+              const m = new Map(this.figureImages());
+              m.set(key, r.imageUrl);
+              this.figureImages.set(m);
+            }
+          });
+        }
       });
     });
+  }
+
+  figureImg(orgId: string, figureName: string): string {
+    const url = this.figureImages().get(`${orgId}::${figureName}`);
+    return url ? `url('${url}')` : 'linear-gradient(135deg, #1a0a08 0%, #050403 100%)';
   }
 
   setFilter(c: 'all' | ImperialOrgCategory) {

@@ -960,6 +960,7 @@ export class FactionDetailComponent {
   readonly typeFilters = TYPE_FILTERS;
   readonly typeFilter = signal<UnitType | 'Tous'>('Tous');
   readonly searchQuery = signal('');
+  readonly showAllUnits = signal(false);
   readonly heroImage = signal<string | null>(null);
   readonly loreImage = signal<string | null>(null);
   readonly unitImages = signal(new Map<string, string>());
@@ -1043,8 +1044,12 @@ export class FactionDetailComponent {
     return out;
   });
 
-  readonly displayedUnits = computed(() => this.visibleUnits().slice(0, 7));
-  readonly extraUnitCount = computed(() => Math.max(0, this.visibleUnits().length - 7));
+  readonly displayedUnits = computed(() =>
+    this.showAllUnits() ? this.visibleUnits() : this.visibleUnits().slice(0, 7),
+  );
+  readonly extraUnitCount = computed(() =>
+    this.showAllUnits() ? 0 : Math.max(0, this.visibleUnits().length - 7),
+  );
 
   readonly featuredVideo = computed(() => {
     const vids = this.videos();
@@ -1057,6 +1062,7 @@ export class FactionDetailComponent {
       if (!f) return;
       this.heroImage.set(null);
       this.loreImage.set(null);
+      this.showAllUnits.set(false);
 
       const heroQ = FACTION_WIKI[f.id] ?? f.nom;
       this.service.getWikiImage(heroQ).subscribe({
@@ -1136,6 +1142,7 @@ export class FactionDetailComponent {
   resetUnitFilters() {
     this.typeFilter.set('Tous');
     this.searchQuery.set('');
+    this.showAllUnits.set(true);
   }
 
   heroImg(): string {
