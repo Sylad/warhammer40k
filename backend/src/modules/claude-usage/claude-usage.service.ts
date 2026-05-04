@@ -1,3 +1,10 @@
+/**
+ * ⚠ DUPLICATED across 3 backends (finance-tracker, warhammer40k, ol-companion).
+ *
+ * Canonical source : `finance-tracker/backend/src/modules/claude-usage/claude-usage.service.ts`.
+ * This copy diverges only by `.js` import extensions (NodeNext requirement).
+ * When you update the canonical, sync this copy before pushing.
+ */
 import { Injectable, Logger, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
