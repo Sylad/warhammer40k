@@ -1,15 +1,19 @@
-import { Body, Controller, Get, Post, BadRequestException, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { z } from 'zod';
 import { ImageMetaService } from './image-meta.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { ZodValidationPipe } from '../../common/zod-validation.pipe.js';
 
-interface CategorizeBody {
-  filename: string;
-  categories?: string[];
-  category?: string; // legacy single
-  title?: string;
-  faction?: string;
-  artist?: string;
-}
+const CategorizeBodySchema = z.object({
+  filename: z.string().min(1, 'filename required'),
+  categories: z.array(z.string()).optional(),
+  category: z.string().optional(),
+  title: z.string().optional(),
+  faction: z.string().optional(),
+  artist: z.string().optional(),
+});
+
+type CategorizeBody = z.infer<typeof CategorizeBodySchema>;
 
 @Controller('image-meta')
 export class ImageMetaController {
@@ -27,10 +31,7 @@ export class ImageMetaController {
 
   @Post()
   @UseGuards(PinGuard)
-  set(@Body() body: CategorizeBody) {
-    if (!body?.filename || typeof body.filename !== 'string') {
-      throw new BadRequestException('filename required');
-    }
+  set(@Body(new ZodValidationPipe(CategorizeBodySchema)) body: CategorizeBody) {
     return this.service.set(body.filename, body);
   }
 }
