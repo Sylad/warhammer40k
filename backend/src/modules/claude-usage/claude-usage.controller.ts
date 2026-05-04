@@ -1,6 +1,10 @@
 import { Controller, Get, Put, Body, UseGuards } from '@nestjs/common';
+import { z } from 'zod';
 import { ClaudeUsageService } from './claude-usage.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { ZodValidationPipe } from '../../common/zod-validation.pipe.js';
+
+const BalanceSchema = z.object({ balanceUsd: z.number().nonnegative() });
 
 @Controller('claude')
 export class ClaudeUsageController {
@@ -13,7 +17,7 @@ export class ClaudeUsageController {
 
   @Put('balance')
   @UseGuards(PinGuard)
-  setBalance(@Body() body: { balanceUsd: number }) {
+  setBalance(@Body(new ZodValidationPipe(BalanceSchema)) body: { balanceUsd: number }) {
     this.service.setBalance(body.balanceUsd);
     return this.service.getUsage();
   }
