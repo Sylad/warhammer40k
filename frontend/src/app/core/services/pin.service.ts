@@ -9,7 +9,8 @@ export class PinService {
   private read(): string | null {
     try {
       return sessionStorage.getItem(STORAGE_KEY);
-    } catch {
+    } catch (err) {
+      console.warn('[PinService] sessionStorage read failed', err);
       return null;
     }
   }
@@ -17,14 +18,18 @@ export class PinService {
   set(value: string): void {
     try {
       sessionStorage.setItem(STORAGE_KEY, value);
-    } catch {}
+    } catch (err) {
+      console.warn('[PinService] sessionStorage write failed', err);
+    }
     this.pin.set(value);
   }
 
   clear(): void {
     try {
       sessionStorage.removeItem(STORAGE_KEY);
-    } catch {}
+    } catch (err) {
+      console.warn('[PinService] sessionStorage clear failed', err);
+    }
     this.pin.set(null);
   }
 
