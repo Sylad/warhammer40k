@@ -2,7 +2,19 @@
 
 > Codex personnel immersif lore-first sur l'univers de Warhammer 40000 : factions, sous-factions (chapitres SM, légions Chaos, régiments AM, etc.), unités, romans Black Library, vidéos lore, galerie d'art.
 
-![Codex — dashboard](./docs/screenshots/dashboard.png)
+![Codex — dashboard](./docs/screenshots/dashboard.jpeg)
+
+## Aperçu
+
+| | |
+|---|---|
+| ![Faction — Space Marines](./docs/screenshots/faction-space-marines.jpeg) | ![Lore — les 20 Primarques](./docs/screenshots/primarchs.jpeg) |
+| **Faction Detail** — hero image-first, breadcrumb, lore en sections | **Les 20 Primarques** — 9 loyalistes / 9 traîtres / 2 expurgés |
+| ![Galerie Impériale](./docs/screenshots/gallery.jpeg) | ![Archives Cinématiques](./docs/screenshots/videos.jpeg) |
+| **Galerie Impériale** — 1500+ œuvres, catégories, multi-tag user | **Archives Cinématiques** — chaînes prioritaires, filtres, import oEmbed |
+
+![Romans Black Library](./docs/screenshots/romans.jpeg)
+*Romans Black Library — 38 séries, progression de lecture, ordre canonique*
 
 ## Pourquoi
 
