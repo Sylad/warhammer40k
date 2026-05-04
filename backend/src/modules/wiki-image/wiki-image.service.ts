@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 export interface WikiImageResult {
   imageUrl: string | null;
@@ -11,6 +11,7 @@ const CACHE = new Map<string, WikiImageResult>();
 
 @Injectable()
 export class WikiImageService {
+  private readonly logger = new Logger(WikiImageService.name);
 
   async getImage(query: string): Promise<WikiImageResult> {
     const key = query.toLowerCase().trim();
@@ -49,7 +50,8 @@ export class WikiImageService {
       CACHE.set(key, empty);
       return empty;
 
-    } catch {
+    } catch (err: unknown) {
+      this.logger.warn(`Wiki image lookup failed for "${query}": ${(err as Error)?.message ?? err}`);
       const empty = { imageUrl: null, pageTitle: null, pageUrl: null };
       CACHE.set(key, empty);
       return empty;

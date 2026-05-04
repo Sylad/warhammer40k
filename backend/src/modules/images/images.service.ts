@@ -1,12 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const IMAGES_DIR = process.env['IMAGES_DIR'] ?? 'E:\\Mes images\\Jeux\\Warhammer 40K';
+const IMAGES_DIR = process.env['IMAGES_DIR'] ?? path.resolve(process.cwd(), 'data', 'images');
 const IMPORTED_DIR = path.resolve(process.cwd(), 'data', 'imported');
 
 @Injectable()
 export class ImagesService {
+  private readonly logger = new Logger(ImagesService.name);
   readonly imagesDir = IMAGES_DIR;
   readonly importedDir = IMPORTED_DIR;
 
@@ -24,7 +25,8 @@ export class ImagesService {
             .map(f => `imported/${f}`)
         : [];
       this.cached = [...imported, ...main];
-    } catch {
+    } catch (err: unknown) {
+      this.logger.warn(`Failed to scan images dirs (${IMAGES_DIR} / ${IMPORTED_DIR}): ${(err as Error)?.message ?? err}`);
       this.cached = [];
     }
     return this.cached;

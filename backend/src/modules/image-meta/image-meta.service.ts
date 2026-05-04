@@ -24,7 +24,8 @@ export class ImageMetaService {
         migrated[k] = this.migrate(v);
       }
       return migrated;
-    } catch {
+    } catch (err: unknown) {
+      this.logger.warn(`Failed to read ${META_FILE}: ${(err as Error)?.message ?? err}`);
       return {};
     }
   }
