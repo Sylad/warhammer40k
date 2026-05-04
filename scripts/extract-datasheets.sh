@@ -1,11 +1,27 @@
 #!/bin/bash
 # Pipeline: télécharge les PDFs faction, extrait les pages-artwork de chaque unité
 # et les sauvegarde dans backend/public/datasheets/{unit-id}.jpg
+#
+# Pré-requis : poppler installé (pdfinfo, pdftotext, pdftoppm).
+#   Linux/macOS : `apt install poppler-utils` ou `brew install poppler`
+#   Windows     : https://github.com/oschwartz10612/poppler-windows/releases
+#
+# Variables d'env :
+#   POPPLER_BIN  → dossier contenant pdfinfo/pdftotext/pdftoppm (vide = $PATH)
+#   PDF_DIR      → dossier de cache des PDFs téléchargés (défaut : ./tmp/wh40k-pdfs)
+#   CACHE_DIR    → dossier de cache des index de pages    (défaut : ./tmp/wh40k-page-cache)
+#   OUT_DIR      → dossier de sortie des JPEGs            (défaut : backend/public/datasheets)
 
-POPPLER="/c/Users/Sylvain Ladoire/AppData/Local/Microsoft/WinGet/Packages/oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe/poppler-25.07.0/Library/bin"
-PDF_DIR="/c/Temp/wh40k-pdfs"
-OUT_DIR="/c/Developpeur/warhammer40k/backend/public/datasheets"
-CACHE_DIR="/c/Temp/wh40k-page-cache"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+POPPLER_BIN="${POPPLER_BIN:-}"
+PDF_DIR="${PDF_DIR:-$ROOT/tmp/wh40k-pdfs}"
+OUT_DIR="${OUT_DIR:-$ROOT/backend/public/datasheets}"
+CACHE_DIR="${CACHE_DIR:-$ROOT/tmp/wh40k-page-cache}"
+
+# Si POPPLER_BIN est vide, on s'attend à ce que pdfinfo/pdftotext/pdftoppm soient dans le $PATH.
+PDFINFO_BIN="${POPPLER_BIN:+$POPPLER_BIN/}pdfinfo"
+PDFTOTEXT_BIN="${POPPLER_BIN:+$POPPLER_BIN/}pdftotext"
+PDFTOPPM_BIN="${POPPLER_BIN:+$POPPLER_BIN/}pdftoppm"
 
 mkdir -p "$PDF_DIR" "$OUT_DIR" "$CACHE_DIR"
 
@@ -35,11 +51,11 @@ build_page_cache() {
   fi
   echo "  [scan]  $base.pdf ..."
   local pages
-  pages=$("$POPPLER/pdfinfo.exe" "$pdf" 2>/dev/null | grep "^Pages:" | awk '{print $2}')
+  pages=$("$PDFINFO_BIN" "$pdf" 2>/dev/null | grep "^Pages:" | awk '{print $2}')
   > "$cache_file"
   for p in $(seq 1 "$pages"); do
     local first
-    first=$("$POPPLER/pdftotext.exe" -f "$p" -l "$p" "$pdf" - 2>/dev/null | grep -m1 ".")
+    first=$("$PDFTOTEXT_BIN" -f "$p" -l "$p" "$pdf" - 2>/dev/null | grep -m1 ".")
     printf '%s|%s\n' "$p" "$first" >> "$cache_file"
   done
   echo "         → $pages pages indexées"
@@ -58,7 +74,7 @@ find_unit_page() {
 render_page() {
   local pdf="$1" page="$2" unit_id="$3"
   local prefix="$OUT_DIR/.tmp_${unit_id}"
-  "$POPPLER/pdftoppm.exe" -jpeg -r 120 -f "$page" -l "$page" "$pdf" "$prefix" 2>/dev/null
+  "$PDFTOPPM_BIN" -jpeg -r 120 -f "$page" -l "$page" "$pdf" "$prefix" 2>/dev/null
   local tmp
   tmp=$(ls "${prefix}"-*.jpg 2>/dev/null | head -1)
   if [ -n "$tmp" ]; then
@@ -91,9 +107,9 @@ extract_unit() {
 # ════════════════════════════════════════════════════════════════════════════
 echo "=== Téléchargement des PDFs ==="
 
-if [ -f "/c/Temp/sm-rules.pdf" ] && [ ! -f "$PDF_DIR/space-marines.pdf" ]; then
-  cp /c/Temp/sm-rules.pdf "$PDF_DIR/space-marines.pdf"
-  echo "  [ok]   space-marines.pdf (copié)"
+if [ -n "$SPACE_MARINES_PDF" ] && [ -f "$SPACE_MARINES_PDF" ] && [ ! -f "$PDF_DIR/space-marines.pdf" ]; then
+  cp "$SPACE_MARINES_PDF" "$PDF_DIR/space-marines.pdf"
+  echo "  [ok]   space-marines.pdf (copié depuis \$SPACE_MARINES_PDF)"
 fi
 
 download_pdf "chaos-space-marines"  "https://thimi-games.com/wp-content/uploads/2023/06/regle-armee-chaos-space-marines_compressed.pdf"
