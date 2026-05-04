@@ -3,6 +3,9 @@ import { VideosService } from './videos.service.js';
 import { YouTubeOEmbedService } from './youtube-oembed.service.js';
 import { ChannelsService } from '../channels/channels.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { ZodValidationPipe } from '../../common/zod-validation.pipe.js';
+import { ImportVideoBodySchema } from './videos.schemas.js';
+import type { ImportVideoBody } from './videos.schemas.js';
 import type { Video, Channel } from './video.model.js';
 
 interface PreviewResponse {
@@ -14,23 +17,6 @@ interface PreviewResponse {
   suggestedVideoId: string;
   suggestedChannelId: string;
   matchedChannel: Channel | null;
-}
-
-interface ImportBody {
-  url: string;
-  /** Override de l'id vidéo (si l'utilisateur veut customiser) */
-  videoId?: string;
-  /** Override des champs vidéo */
-  titre?: string;
-  description?: string;
-  type?: Video['type'];
-  langue?: string;
-  category?: Video['category'];
-  tags?: string[];
-  incontournable?: boolean;
-  /** Si une chaîne existe déjà, son id ; sinon, fournir le bloc channel pour création */
-  channelId?: string;
-  channel?: Partial<Channel>;
 }
 
 @Controller('videos')
@@ -78,8 +64,9 @@ export class VideosController {
 
   @Post('import')
   @UseGuards(PinGuard)
-  async import(@Body() body: ImportBody): Promise<{ video: Video; channel: Channel }> {
-    if (!body?.url) throw new BadRequestException('url required');
+  async import(
+    @Body(new ZodValidationPipe(ImportVideoBodySchema)) body: ImportVideoBody,
+  ): Promise<{ video: Video; channel: Channel }> {
     const meta = await this.oembed.fetchVideoMeta(body.url);
 
     // Resolve / create channel
