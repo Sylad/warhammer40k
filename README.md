@@ -120,6 +120,8 @@ Warhammer 40000, ses factions, personnages et art sont la propriété de **Games
 - **[Claude Code](https://claude.com/claude-code)** (Anthropic) — code frontend, backend, infra Docker
 - **[ChatGPT](https://chat.openai.com)** (OpenAI) — premières maquettes UX, schémas de pages, propositions visuelles
 
+Pour le détail honnête de qui fait quoi (humain / Claude / ChatGPT / code déterministe), voir [HOW-IT-WORKS.md](./HOW-IT-WORKS.md).
+
 Sources lore : [Warhammer 40k Wiki](https://warhammer40k.fandom.com), [Lexicanum](https://wh40k.lexicanum.com), [2d4chan](https://2d4chan.org/wiki/Warhammer_40,000), [Black Library](https://www.blacklibrary.com/), PDF *WH40K Fluff Bible*.
 UX : codex 2D-print + cards image-first à la Diablo III / Destiny grimoire.
 Principes UX : [refactoringui.com](https://refactoringui.com/), [lawsofux.com](https://lawsofux.com/).
