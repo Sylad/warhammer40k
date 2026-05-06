@@ -26,6 +26,8 @@ const STATIC_LABELS: Record<string, string> = {
   civilians: 'Civils Impériaux',
   concepts: 'Concepts & Lieux',
   galaxy: 'La Galaxie',
+  equipment: 'Armement & Reliques',
+  timeline: 'Chronologie',
 };
 
 function slugToLabel(slug: string): string {

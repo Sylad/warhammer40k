@@ -1,0 +1,408 @@
+[
+  {
+    "id": "old-night",
+    "title": "L'Ère du Conflit — La Vieille Nuit",
+    "date": "M-30 → M30",
+    "era": "pre-imperium",
+    "shortDescription": "Tempêtes warp insondables coupent toute route stellaire. L'humanité s'éparpille, retombe en barbarie, oublie son nom.",
+    "longDescription": "Au cours de la longue Ère du Conflit, les tempêtes du Warp se déchaînent sur la galaxie et brisent la Diaspora humaine. Les routes interstellaires se ferment, l'Astronomican n'existe pas encore, et chaque monde colonisé sombre dans l'isolement. Famines, guerres civiles et mutations psychiques ravagent les colonies orphelines. Sur Terra, les Tribus Techno-Barbares se livrent une guerre sans fin pour les ruines de l'Âge d'Or. C'est dans ce crépuscule que l'humanité oublie son histoire, ses sciences, ses dieux — préparant le terrain pour la venue d'un Maître unique.",
+    "tags": ["humanity", "terra", "warp"],
+    "image": "Old Night Warhammer 40k",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Age_of_Strife",
+      "https://warhammer40k.fandom.com/wiki/Age_of_Strife"
+    ]
+  },
+  {
+    "id": "emperor-genesis",
+    "title": "La Naissance de l'Empereur",
+    "date": "~M-30",
+    "era": "pre-imperium",
+    "shortDescription": "Selon la tradition, des chamans humains immolent leurs âmes pour donner naissance à un avatar unique de l'humanité.",
+    "longDescription": "Aux premières heures de la civilisation, les chamans psychiques de la Terre antique constatent que les âmes de leurs morts sont dévorées par une présence émergente du Warp. Pour préserver la lumière de l'humanité, ils choisissent l'auto-immolation collective : leurs esprits convergent en un seul enfant, né en Anatolie au tournant des millénaires. Cet enfant, qui prendra cent identités au fil des âges, deviendra l'Empereur de l'Humanité. Sa naissance est la première arme de l'humanité contre le Chaos — un dieu humain destiné à unifier l'espèce avant la longue nuit.",
+    "tags": ["emperor", "terra", "warp"],
+    "image": "The Emperor of Mankind origin",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Emperor_of_Mankind",
+      "https://warhammer40k.fandom.com/wiki/Emperor_of_Mankind"
+    ]
+  },
+  {
+    "id": "unification-wars",
+    "title": "Guerres d'Unification de Terra",
+    "date": "~700.M30 → 800.M30",
+    "era": "pre-imperium",
+    "shortDescription": "L'Empereur dévoile son pouvoir, brise les Techno-Barbares un à un et impose la paix à la planète mère.",
+    "longDescription": "L'Empereur émerge enfin de l'ombre et entreprend la pacification de Terra. À la tête de ses Custodes, de ses Légio Cybernetica et des premiers Thunder Warriors — proto-Astartes faits pour la guerre puis voués à l'extinction —, il écrase les seigneurs de guerre du dernier âge. Les Pan-Pacific, les Yndonésiens, les Albien rouges, les Roi-Sorciers de Maulland Sen tombent en cascade. Lorsque la Pax Imperialis s'étend sur le berceau de l'humanité, Terra est saignée à blanc mais unifiée pour la première fois depuis des millénaires. Le pacte de Mars scellera l'alliance avec le Mechanicum.",
+    "tags": ["emperor", "terra", "thunder-warriors", "mechanicum"],
+    "image": "Unification Wars Terra Thunder Warriors",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Unification_Wars",
+      "https://warhammer40k.fandom.com/wiki/Unification_Wars"
+    ]
+  },
+  {
+    "id": "primarchs-scattering",
+    "title": "Le Vol des Primarques",
+    "date": "~822.M30",
+    "era": "pre-imperium",
+    "shortDescription": "Avant leur libération, les vingt fils génétiques de l'Empereur sont arrachés à leur capsule par les Dieux du Chaos et dispersés.",
+    "longDescription": "Dans les laboratoires secrets sous les Montagnes Himalaziennes, l'Empereur achève la création des vingt Primarques — fils transhumains conçus pour mener ses Légions. Au moment de leur éveil, les Quatre Puissances Ruineuses unissent leur volonté et déchirent la chambre de gestation. Les capsules génétiques sont projetées à travers le Warp et s'échouent sur des mondes éloignés où chaque Primarque grandira en exil, marqué par un destin hors du commun. L'Empereur, blessé dans son projet le plus secret, jure de retrouver ses fils.",
+    "tags": ["primarchs", "chaos", "emperor"],
+    "image": "Primarchs scattering Chaos Gods",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Primarchs",
+      "https://warhammer40k.fandom.com/wiki/Primarchs"
+    ]
+  },
+  {
+    "id": "great-crusade",
+    "title": "La Grande Croisade",
+    "date": "~830.M30 → 005.M31",
+    "era": "pre-imperium",
+    "shortDescription": "L'Empereur lance ses Légions Astartes à la conquête de la galaxie pour réunir l'humanité sous son Imperium naissant.",
+    "longDescription": "Depuis Terra reconquise, l'Empereur lance la plus grande entreprise militaire de l'Histoire : la Grande Croisade. Vingt Légions de Space Marines, soutenues par l'Imperial Army, le Mechanicum et la flotte expéditionnaire, traversent la Voie Lactée pour rallier les colonies humaines isolées. Une à une, l'Empereur retrouve ses fils Primarques sur les mondes où ils ont été projetés et leur confie leur Légion. La galaxie est cartographiée, les Xenos pacifiés ou exterminés, les religions interdites au nom de la Vérité Impériale rationaliste. C'est l'aube éphémère d'un Imperium éclairé.",
+    "tags": ["primarchs", "great-crusade", "space-marines"],
+    "image": "Great Crusade Warhammer 40k",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Great_Crusade",
+      "https://warhammer40k.fandom.com/wiki/Great_Crusade"
+    ]
+  },
+  {
+    "id": "council-of-nikaea",
+    "title": "Le Concile de Nikaea",
+    "date": "~M31",
+    "era": "pre-imperium",
+    "shortDescription": "L'Empereur rend son verdict : les sorciers psykers Astartes sont interdits, les Bibliothécaires bannis dans la plupart des Légions.",
+    "longDescription": "Sur la lune sacrée de Nikaea, l'Empereur préside l'un des plus grands procès de la Croisade. Magnus le Rouge, primarque des Thousand Sons, défend la sorcellerie comme outil de connaissance ; Mortarion et Russ exigent son interdiction. Le verdict tombe : la pratique des arts psychiques au-delà de l'Astropathie est bannie. Magnus, persuadé d'avoir raison, continuera ses expériences en secret — préparant involontairement la trahison qui ouvrira la porte à l'Hérésie d'Horus. Nikaea est l'instant où l'Imperium se fend en silence, avant de se briser publiquement.",
+    "tags": ["psykers", "primarchs", "magnus", "horus-heresy"],
+    "image": "Council of Nikaea Magnus the Red",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Council_of_Nikaea",
+      "https://warhammer40k.fandom.com/wiki/Council_of_Nikaea"
+    ]
+  },
+  {
+    "id": "horus-heresy-isstvan-iii",
+    "title": "Hérésie d'Horus — Massacre d'Isstvan III",
+    "date": "~005.M31",
+    "era": "horus-heresy",
+    "shortDescription": "Horus Lupercal, Maître de Guerre, ordonne le bombardement viral de ses propres Légions loyalistes. La galaxie bascule.",
+    "longDescription": "Sur le monde rebelle d'Isstvan III, le Maître de Guerre Horus dévoile sa traîtrise au reste de la galaxie. Pour purger ses Légions des éléments fidèles à l'Empereur, il fait larguer le Bombardement Vital sur ses propres frères Astartes massés à la surface. Saul Tarvitz parvient à donner l'alerte, mais des dizaines de milliers de Space Marines périssent sous le poison. C'est le premier acte ouvert de l'Hérésie : la guerre civile la plus ravageuse jamais menée vient de commencer. Quatre Légions traîtresses se révèlent — Sons of Horus, World Eaters, Death Guard, Emperor's Children.",
+    "tags": ["horus-heresy", "horus", "space-marines"],
+    "image": "Isstvan III Massacre Horus Heresy",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Battle_of_Isstvan_III",
+      "https://warhammer40k.fandom.com/wiki/Isstvan_III_Atrocity"
+    ]
+  },
+  {
+    "id": "isstvan-v-dropsite-massacre",
+    "title": "Le Massacre du Site de Largage — Isstvan V",
+    "date": "006.M31",
+    "era": "horus-heresy",
+    "shortDescription": "Sept Légions traîtresses tendent un piège mortel à leurs frères loyalistes. Trois Légions sont brisées en quelques heures.",
+    "longDescription": "L'Empereur dépêche sept Légions sur Isstvan V pour écraser l'insurrection naissante. Les Iron Hands, Salamanders et Raven Guard frappent en première vague — sans savoir que la seconde vague, conduite par Alpha Legion, Iron Warriors, Word Bearers et Night Lords, est elle-même traîtresse. Pris sous deux feux, les loyalistes sont décimés. Ferrus Manus, primarque des Iron Hands, est décapité par son frère Fulgrim. Vulkan disparaît, Corax s'enfuit. Trois Légions ne s'en relèveront jamais. La galaxie comprend que l'Hérésie est totale.",
+    "tags": ["horus-heresy", "primarchs", "space-marines"],
+    "image": "Isstvan V Dropsite Massacre",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Drop_Site_Massacre",
+      "https://warhammer40k.fandom.com/wiki/Drop_Site_Massacre"
+    ]
+  },
+  {
+    "id": "battle-of-prospero",
+    "title": "La Bataille de Prospero",
+    "date": "~007.M31",
+    "era": "horus-heresy",
+    "shortDescription": "Leman Russ et ses Space Wolves brûlent la cité-bibliothèque de Tizca. Magnus, désespéré, scelle son pacte avec Tzeentch.",
+    "longDescription": "Pour punir Magnus le Rouge d'avoir transgressé l'édit de Nikaea — sa vision warp-soufflée vers Terra a démoli les défenses psychiques du Palais —, l'Empereur envoie Leman Russ. Les Space Wolves, accompagnés de Custodes et de Sœurs du Silence, descendent sur Prospero et incendient la bibliothèque éternelle de Tizca. Magnus, comprenant trop tard la manipulation de Tzeentch, se laisse corrompre pour sauver les survivants de sa Légion. Le Premier Maléfice est consommé. Les Thousand Sons fuiront la Planète des Sorciers à jamais.",
+    "tags": ["horus-heresy", "magnus", "tzeentch", "space-wolves"],
+    "image": "Battle of Prospero Magnus Russ",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Burning_of_Prospero",
+      "https://warhammer40k.fandom.com/wiki/Battle_of_Prospero"
+    ]
+  },
+  {
+    "id": "siege-of-terra",
+    "title": "Le Siège de Terra",
+    "date": "014.M31",
+    "era": "horus-heresy",
+    "shortDescription": "Horus jette ses légions sur le Palais Impérial. Sanguinius tombe, l'Empereur affronte son fils favori. Tous deux meurent à demi.",
+    "longDescription": "Au terme de sept années de guerre civile, la flotte du Maître de Guerre franchit le système solaire. Le Siège de Terra commence : Pertubarabo perce les murs, le Légio Mortis pulvérise les portes, et démons et Astartes traîtres déferlent dans le Palais Impérial. Sanguinius, l'Ange de Baal, défie Horus et tombe. Enfin, l'Empereur se téléporte à bord de la Vengeful Spirit. Dans un duel apocalyptique, il abat son fils — au prix d'une blessure mortelle. Son corps est ramené sur le Trône d'Or, où il agonise depuis dix mille ans.",
+    "tags": ["horus-heresy", "horus", "emperor", "sanguinius", "terra"],
+    "image": "Siege of Terra Horus Heresy",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Battle_of_Terra",
+      "https://warhammer40k.fandom.com/wiki/Battle_of_Terra"
+    ]
+  },
+  {
+    "id": "great-scouring",
+    "title": "Le Grand Châtiment",
+    "date": "014.M31 → ~M32",
+    "era": "horus-heresy",
+    "shortDescription": "Guilliman, Russ, Khan et Dorn pourchassent les Légions traîtres jusque dans l'Œil de la Terreur.",
+    "longDescription": "Après la mort d'Horus, les Légions loyalistes lancent le Grand Châtiment. Roboute Guilliman, désormais Lord Commander de l'Imperium, organise la traque des renégats : Iron Warriors, Word Bearers, Death Guard, World Eaters, Thousand Sons, Sons of Horus, Alpha Legion et Night Lords sont chassés à travers la galaxie. Beaucoup se réfugient dans l'Œil de la Terreur, où le temps se distord et où le Chaos règne sans partage. Ainsi naît un sanctuaire éternel pour les hérétiques — et la menace la plus persistante de l'Imperium.",
+    "tags": ["horus-heresy", "primarchs", "chaos", "eye-of-terror"],
+    "image": "Great Scouring Horus Heresy aftermath",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Great_Scouring",
+      "https://warhammer40k.fandom.com/wiki/Great_Scouring"
+    ]
+  },
+  {
+    "id": "codex-astartes",
+    "title": "La Promulgation du Codex Astartes",
+    "date": "~M31",
+    "era": "time-of-rebirth",
+    "shortDescription": "Guilliman démantèle les Légions de mille mondes en Chapitres de mille frères. L'Imperium ne sera plus jamais vulnérable à un seul fils prodigue.",
+    "longDescription": "Roboute Guilliman, primarque des Ultramarines et nouveau régent de l'Imperium, rédige le Codex Astartes. Il y dissout les vieilles Légions colossales en Chapitres de mille Space Marines, autonomes, dispersés dans la galaxie. Aucun Primarque ne pourra plus jamais soulever des armées entières contre Terra. Le document fixe aussi la doctrine, l'organisation, l'armement, jusqu'aux héraldiques de chaque compagnie. Beaucoup s'y plieront ; d'autres — Space Wolves, Black Templars — refuseront, gardant leur singularité. Le Second Founding voit naître les Chapitres successeurs.",
+    "tags": ["primarchs", "guilliman", "space-marines"],
+    "image": "Codex Astartes Roboute Guilliman",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Codex_Astartes",
+      "https://warhammer40k.fandom.com/wiki/Codex_Astartes"
+    ]
+  },
+  {
+    "id": "war-of-the-beast",
+    "title": "La Guerre de la Bête",
+    "date": "544.M32",
+    "era": "m32-m40",
+    "shortDescription": "Une horde Ork sans précédent, menée par un seigneur de guerre démesuré, manque de submerger Terra elle-même.",
+    "longDescription": "Mille ans après la Hérésie, les Orks reviennent en force comme jamais. Dirigée par un Warboss colossal de plus de cent mètres — la Bête —, une vague xeno engloutit des secteurs entiers et frappe directement le système solaire. Vingt Chapitres Astartes sont engagés, l'Imperial Fists sont décimés, le Haut Seigneur Vangorich finira par assassiner les autres Hauts Seigneurs corrompus. Cette guerre laisse une cicatrice durable : on apprend que l'Imperium reste mortel, et qu'il faudra reforger la coopération entre Terra, Mars et les Chapitres pour survivre aux siècles à venir.",
+    "tags": ["orks", "imperial-fists", "terra"],
+    "image": "War of the Beast Warhammer 40k",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/War_of_the_Beast",
+      "https://warhammer40k.fandom.com/wiki/War_of_the_Beast"
+    ]
+  },
+  {
+    "id": "reign-of-blood",
+    "title": "L'Âge de l'Apostasie — Goge Vandire",
+    "date": "~M36",
+    "era": "m32-m40",
+    "shortDescription": "Le tyran ecclésiarque massacre des milliards au nom de l'Empereur, jusqu'à la révolte des Sœurs et des Custodes.",
+    "longDescription": "Goge Vandire, Haut Seigneur et Ecclésiarque, cumule les deux plus hautes magistratures de l'Imperium. Sa folie paranoïaque déclenche le Reign of Blood : pogroms, autodafés, exécutions massives ravagent les mondes impériaux. Les Filles de l'Empereur, qu'il avait corrompues comme garde personnelle, finissent par retourner leurs armes contre lui après que la Custode Aleya leur révèle la vérité. Vandire est exécuté par Alicia Dominica. De ses cendres naissent les Adepta Sororitas. La doctrine impériale se durcit : aucun mortel ne pourra plus jamais cumuler tant de pouvoir.",
+    "tags": ["ecclesiarchy", "sororitas", "imperium"],
+    "image": "Goge Vandire Reign of Blood Sororitas",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Reign_of_Blood",
+      "https://warhammer40k.fandom.com/wiki/Reign_of_Blood"
+    ]
+  },
+  {
+    "id": "sebastian-thor-crusade",
+    "title": "La Croisade de Sébastien Thor",
+    "date": "~M36",
+    "era": "m32-m40",
+    "shortDescription": "Le confesseur Sébastien Thor lève une armée de fidèles et restaure la foi impériale après l'Apostasie.",
+    "longDescription": "Au lendemain de la chute de Vandire, le confesseur Sébastien Thor unit les pèlerins, les Sororitas naissantes et les régiments loyaux dans une Croisade de purification. Sa parole — humble, sévère, miséricordieuse envers les fidèles — apaise les mondes meurtris, restaure la liturgie de l'Imperial Cult et reforme l'Ecclésiarchie en interdisant à ses prêtres de porter les armes (le Décret Passif). Thor sera vénéré comme le plus grand confesseur de l'histoire, et son nom donné à des cathédrales et des classes de croiseurs.",
+    "tags": ["ecclesiarchy", "sororitas", "imperium"],
+    "image": "Sebastian Thor Confessor Imperium",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Sebastian_Thor",
+      "https://warhammer40k.fandom.com/wiki/Sebastian_Thor"
+    ]
+  },
+  {
+    "id": "macharian-crusade",
+    "title": "La Croisade Macharienne",
+    "date": "392.M41 → 399.M41",
+    "era": "m41",
+    "shortDescription": "Le Lord Solar Macharius reconquiert mille mondes en sept ans avant que ses propres généraux ne se déchirent.",
+    "longDescription": "Solar Macharius, héritier moderne d'Alexandre, lance la plus grande Croisade depuis l'Empereur. En sept ans, il reprend mille mondes perdus de la Frange Orientale au Halo Stars. Son armée est inarrêtable — jusqu'à ce que ses propres généraux refusent de continuer au-delà de la galaxie. Macharius meurt prématurément, et ses lieutenants se déchirent dans les Macharian Heresy Wars. Mille mondes nouvellement libérés sombrent dans le chaos. La leçon est durable : même les plus grands conquérants ne valent que par la loyauté de leurs subordonnés.",
+    "tags": ["imperial-guard", "imperium", "macharius"],
+    "image": "Lord Solar Macharius Crusade",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Solar_Macharius",
+      "https://warhammer40k.fandom.com/wiki/Macharian_Crusade"
+    ]
+  },
+  {
+    "id": "first-armageddon-war",
+    "title": "Première Guerre pour Armageddon",
+    "date": "444.M41",
+    "era": "m41",
+    "shortDescription": "Le démon-primarque Angron déchaîne ses World Eaters sur Armageddon. Les Grey Knights sont engagés en secret.",
+    "longDescription": "Angron, primarque-démon de Khorne, mène une invasion de daemons et de World Eaters sur la planète-forge Armageddon. La Garde Impériale est dépassée, le Commissar Yarrick devient légende en organisant la défense d'Hades Hive. L'arrivée des Grey Knights renverse la balance : Angron est rebanni dans le Warp. Mais le coût est terrible — les régiments témoins de l'invasion démonique sont mind-wiped voire exterminés pour préserver le secret. Armageddon devient un nom maudit que les Orks reviendront tester deux fois encore.",
+    "tags": ["chaos", "khorne", "imperial-guard", "grey-knights", "armageddon"],
+    "image": "First Armageddon War Angron",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/First_War_for_Armageddon",
+      "https://warhammer40k.fandom.com/wiki/First_War_for_Armageddon"
+    ]
+  },
+  {
+    "id": "second-third-armageddon-war",
+    "title": "Deuxième et Troisième Guerres pour Armageddon",
+    "date": "941.M41 — 998.M41",
+    "era": "m41",
+    "shortDescription": "Ghazghkull Mag Uruk Thraka, le Beast Reborn, pose sa Waaagh! sur Armageddon. Yarrick devient le bourreau immortel des Orks.",
+    "longDescription": "Ghazghkull Mag Uruk Thraka, plus grand Warboss de l'histoire récente, choisit Armageddon comme champ de gloire. La Deuxième Guerre voit ses hordes ravager les hives malgré la résistance acharnée du Commissar Yarrick et des Salamanders. Bien des décennies plus tard, la Troisième Guerre éclate juste avant la Cicatrix : Ghazghkull revient avec une Waaagh! encore plus colossale, et la planète est saignée à blanc. Yarrick poursuit son ennemi juré jusqu'aux confins, gravant son nom dans la mémoire impériale comme l'égal des Primarques.",
+    "tags": ["orks", "imperial-guard", "armageddon", "ghazghkull"],
+    "image": "Second War for Armageddon Yarrick Ghazghkull",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Second_War_for_Armageddon",
+      "https://warhammer40k.fandom.com/wiki/Third_War_for_Armageddon"
+    ]
+  },
+  {
+    "id": "battle-of-macragge",
+    "title": "Bataille de Macragge — Hive Fleet Behemoth",
+    "date": "745.M41",
+    "era": "m41",
+    "shortDescription": "La première Hive Fleet tyranide est brisée au-dessus de Macragge. L'Imperium découvre une menace galactique nouvelle.",
+    "longDescription": "Une masse biologique inconnue émerge des marches galactiques : la Hive Fleet Behemoth. Elle dévore système après système, jusqu'à atteindre Macragge, capitale des Ultramarines. Marneus Calgar livre la défense la plus désespérée de sa vie. La 1ère Compagnie est anéantie en orbite, mais leurs sacrifices permettent à la flotte impériale de détruire la nef-mère synaptique. La Behemoth s'effondre. L'Imperium comprend qu'une force xeno d'une ampleur inédite vient des ténèbres extra-galactiques, et que d'autres Hive Fleets suivront.",
+    "tags": ["tyranids", "ultramarines", "calgar", "macragge"],
+    "image": "Battle of Macragge Hive Fleet Behemoth",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Battle_for_Macragge",
+      "https://warhammer40k.fandom.com/wiki/Battle_for_Macragge"
+    ]
+  },
+  {
+    "id": "damocles-gulf-crusade",
+    "title": "Croisade du Gouffre de Damoclès",
+    "date": "742.M41",
+    "era": "m41",
+    "shortDescription": "Premier choc impérial contre l'Empire T'au. L'Imperium découvre une jeune race xeno technologiquement supérieure.",
+    "longDescription": "Quand la Croisade du Gouffre de Damoclès est lancée, l'Imperium pense écraser une faction xeno émergente comme tant d'autres. Il découvre l'Empire T'au — jeune mais doté d'une technologie suprasonique, d'une cohésion idéologique implacable et d'allies Kroot. La campagne s'enlise, les pertes s'accumulent, et la Cicatrix Maledictum interrompra plus tard les hostilités. Le Greater Good restera l'un des défis les plus singuliers du 41e millénaire, ni démon ni Ork — une vision rivale de la civilisation galactique.",
+    "tags": ["tau", "imperium"],
+    "image": "Damocles Gulf Crusade Tau",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Damocles_Gulf_Crusade",
+      "https://warhammer40k.fandom.com/wiki/Damocles_Gulf_Crusade"
+    ]
+  },
+  {
+    "id": "fall-of-cadia",
+    "title": "La Chute de Cadia — 13ème Croisade Noire",
+    "date": "999.M41",
+    "era": "m41",
+    "shortDescription": "Abaddon le Despoiler abat le pylône cadien. La Œil de la Terreur déborde sur la galaxie.",
+    "longDescription": "Pendant douze Croisades Noires, Abaddon le Despoiler a tâté la défense impériale. Pour la treizième, il sacrifie un Blackstone Fortress et précipite son projectile sur Cadia. La planète-bastion, dont les pylônes maintenaient l'Œil de la Terreur partiellement clos, est brisée. La forteresse-monde s'effondre dans un cataclysme planétaire, et le Warp s'épanche sur la moitié de la galaxie. Sur les ruines de Cadia, Eldrad Ulthran murmure : « Cadia est tombée — mais Cadia tient encore. » Le Saint Celestine et les Cadiens survivants entament l'exode.",
+    "tags": ["chaos", "cadia", "abaddon", "imperium"],
+    "image": "Fall of Cadia 13th Black Crusade",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Fall_of_Cadia",
+      "https://warhammer40k.fandom.com/wiki/13th_Black_Crusade"
+    ]
+  },
+  {
+    "id": "cicatrix-maledictum",
+    "title": "La Cicatrix Maledictum",
+    "date": "~999.M41",
+    "era": "m42",
+    "shortDescription": "Une plaie warp coupe la galaxie en deux. L'Imperium Nihilus est plongé dans une nuit sans Astronomican.",
+    "longDescription": "Quand Cadia tombe, le Warp se déverse en une cicatrice colossale qui balafre la galaxie d'est en ouest. La Cicatrix Maledictum coupe l'Imperium en deux : à l'ouest, Imperium Sanctus, encore éclairé par l'Astronomican ; à l'est, Imperium Nihilus, plongé dans une nuit perpétuelle où les flottes errent à l'aveugle. Des mondes entiers basculent dans le Chaos sans qu'aucun secours ne puisse les atteindre. Beaucoup parlent de la Fin des Temps. C'est aussi le moment où Roboute Guilliman, ressuscité, lèvera son glaive pour la première fois depuis dix mille ans.",
+    "tags": ["chaos", "warp", "imperium-nihilus", "imperium-sanctus"],
+    "image": "Cicatrix Maledictum Great Rift",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Cicatrix_Maledictum",
+      "https://warhammer40k.fandom.com/wiki/Cicatrix_Maledictum"
+    ]
+  },
+  {
+    "id": "indomitus-crusade",
+    "title": "La Croisade Indomitus",
+    "date": "~999.M41 → 012.M42",
+    "era": "m42",
+    "shortDescription": "Roboute Guilliman, ressuscité, conduit cent flottes Primaris à travers la galaxie pour stabiliser l'Imperium fracturé.",
+    "longDescription": "Réveillé par les rituels conjoints de Cawl et de Yvraine, Roboute Guilliman quitte Macragge avec un cœur de fureur et de chagrin. Il découvre l'Imperium qu'il avait laissé : déformé, fanatique, agonisant. Il lance la Croisade Indomitus — cent flottes, des millions de Primaris Marines forgés pendant dix mille ans par Belisarius Cawl, des reliques Mechanicum, des Sœurs et des Custodes. La Croisade ramène la lumière sur des milliers de mondes, retisse les routes entre Sanctus et Nihilus, et impose la doctrine du Renouveau. Mais Guilliman le sait : le temps joue contre eux.",
+    "tags": ["primarchs", "guilliman", "primaris", "imperium"],
+    "image": "Indomitus Crusade Guilliman",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Indomitus_Crusade",
+      "https://warhammer40k.fandom.com/wiki/Indomitus_Crusade"
+    ]
+  },
+  {
+    "id": "devastation-of-baal",
+    "title": "La Dévastation de Baal — Hive Fleet Leviathan",
+    "date": "~999.M41",
+    "era": "m42",
+    "shortDescription": "Hive Fleet Leviathan déferle sur Baal. Les Blood Angels et leurs successeurs livrent leur dernière bataille.",
+    "longDescription": "Hive Fleet Leviathan, la plus monstrueuse des flottes-ruches connues, fond sur le système Baal — patrie des Blood Angels et de tous leurs Chapitres successeurs. Dante, Commandeur Suprême et seigneur de Baal, rappelle chaque fils de Sanguinius dispersé dans la galaxie pour la dernière défense. Les lunes-ruches Tyranides sont brisées par des vagues d'Astartes au prix d'un quasi-suicide collectif. Au plus noir, les Necrons d'Imotekh interviennent, brûlant la flotte avant de disparaître. Baal survit, exsangue. Dante murmure que c'est peut-être la fin du sang de l'Ange.",
+    "tags": ["tyranids", "blood-angels", "dante", "necrons"],
+    "image": "Devastation of Baal Tyranids Blood Angels",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Devastation_of_Baal",
+      "https://warhammer40k.fandom.com/wiki/Devastation_of_Baal"
+    ]
+  },
+  {
+    "id": "plague-wars",
+    "title": "Les Guerres de la Peste — Plague War d'Ultramar",
+    "date": "M42",
+    "era": "m42",
+    "shortDescription": "Mortarion ressuscité revient sur Ultramar avec sa Légion Death Guard. L'Empire ultramarin est ravagé par les pestes de Nurgle.",
+    "longDescription": "Mortarion, primarque-démon de Nurgle, profite de l'ouverture de la Cicatrix pour invoquer l'invasion d'Ultramar. Les sept pestes du Grand-Père Pourriture déferlent sur les mondes-frères de Macragge. Les Death Guard, plus odieux que jamais, retrouvent enfin l'occasion d'affronter Guilliman. Le Lord Commander d'Imperium revient en hâte, jure le combat fraternel sur le terrain qu'il a tant aimé, et finit par repousser Mortarion — sans jamais l'achever. Ultramar saigne, mais tient. La haine entre les deux frères est devenue cosmique.",
+    "tags": ["chaos", "nurgle", "death-guard", "guilliman", "ultramar"],
+    "image": "Plague War Mortarion Ultramar",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Plague_Wars",
+      "https://warhammer40k.fandom.com/wiki/Plague_Wars"
+    ]
+  },
+  {
+    "id": "psychic-awakening",
+    "title": "Le Réveil Psychique",
+    "date": "M42",
+    "era": "m42",
+    "shortDescription": "La Cicatrix démultiplie l'énergie warp. Une nouvelle génération de psykers émerge, et Yvraine fonde les Ynnari.",
+    "longDescription": "L'ouverture de la Grande Faille décuple les courants warp à travers la galaxie. De nouvelles générations de psykers humains émergent par millions ; les Aeldari sentent les vibrations d'Ynnead, le dieu de la mort prophétisé. Yvraine, prêtresse réunissant Craftworlders, Drukhari et Harlequins, fonde les Ynnari pour précipiter la naissance d'Ynnead et défaire Slaanesh. Le réveil ne profite pas qu'aux fidèles : Genestealer Cults, sorciers traîtres, hérétiques de toutes obédiences voient leurs pouvoirs croître. La galaxie devient un champ d'énergie psychique instable.",
+    "tags": ["aeldari", "ynnari", "psykers", "warp"],
+    "image": "Psychic Awakening Yvraine",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Psychic_Awakening",
+      "https://warhammer40k.fandom.com/wiki/Psychic_Awakening"
+    ]
+  },
+  {
+    "id": "pariah-nexus",
+    "title": "Le Nexus du Paria",
+    "date": "M42",
+    "era": "m42",
+    "shortDescription": "Le Silent King active les machines pylônes Necron pour figer le Warp. L'Imperium et les Necrons s'opposent à grande échelle.",
+    "longDescription": "Szarekh, le Silent King, est revenu de son exil hors-galactique. Pour combattre la marée chaotique qui menace tout être vivant, il active le réseau de Pariah Pylons — capable de faire taire le Warp dans des secteurs entiers. Mais le silence Necron est aussi mortel pour les Astropathes que pour les démons : sans Astronomican, l'Imperium devient aveugle dans les zones du Nexus. Guilliman et Szarekh ouvrent une guerre froide d'une ampleur inédite, mêlée de paradoxales tractations alors que Trazyn collectionne et que les Aeldari murmurent dans l'ombre.",
+    "tags": ["necrons", "silent-king", "imperium", "warp"],
+    "image": "Pariah Nexus Necrons Silent King",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Pariah_Nexus",
+      "https://warhammer40k.fandom.com/wiki/Pariah_Nexus"
+    ]
+  },
+  {
+    "id": "arks-of-omen",
+    "title": "Les Arches de l'Augure — Reconquête de Vigilus",
+    "date": "M42",
+    "era": "m42",
+    "shortDescription": "Abaddon convoque ses lieutenants par les Arks of Omen. Vigilus brûle, mais l'Imperium reforge ses lignes.",
+    "longDescription": "Abaddon, retiré dans son Vengeful Spirit, déploie ses Arks of Omen pour rassembler les chefs du Chaos autour d'un nouveau plan obscur. Une à une, les forteresses-mondes loyalistes sont prises pour cibles ; Vigilus, ce monde-rocher déjà saigné par la Guerre Hive, brûle à nouveau. Mais l'Imperium, désormais soutenu par les Croisades Indomitus successives, l'Adeptus Custodes hors de Terra, les Sœurs Templières et les Aeldari Ynnari, contre-attaque. Chaque Ark of Omen devient une bataille mythique. Un nouveau cycle d'apocalypse s'amorce — et personne, pas même les dieux, n'en connaît la fin.",
+    "tags": ["chaos", "abaddon", "vigilus", "imperium", "custodes"],
+    "image": "Arks of Omen Abaddon Vigilus",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Arks_of_Omen",
+      "https://warhammer40k.fandom.com/wiki/Arks_of_Omen"
+    ]
+  },
+  {
+    "id": "leviathan-tenth-edition",
+    "title": "Tyranid Leviathan — Réveil Galactique",
+    "date": "M42",
+    "era": "m42",
+    "shortDescription": "Hive Fleet Leviathan rejoint Hive Fleet Kraken et Behemoth. La Voie Lactée toute entière devient leur garde-manger.",
+    "longDescription": "Là où la Cicatrix Maledictum a ouvert des plaies dans le tissu galactique, la Hive Fleet Leviathan a déposé des essaims dormants. Au tournant du M42, ils s'éveillent en synchronie avec d'autres flottes Tyranides — Kraken, Hydra, Jormungandr — et coordonnent leur dévoration. Aucun secteur n'est plus à l'abri ; la Garde Impériale lève les Astra Militarum Defence Force. Les Adeptus Astartes Tyrannic War Veterans, formés depuis Macragge, deviennent les premières lignes. La galaxie comprend qu'il n'y a peut-être pas assez de chair pour rassasier le Grand Dévorateur.",
+    "tags": ["tyranids", "imperium", "hive-fleets"],
+    "image": "Hive Fleet Leviathan Tenth Edition",
+    "sources": [
+      "https://wh40k.lexicanum.com/wiki/Hive_Fleet_Leviathan",
+      "https://warhammer40k.fandom.com/wiki/Hive_Fleet_Leviathan"
+    ]
+  }
+]

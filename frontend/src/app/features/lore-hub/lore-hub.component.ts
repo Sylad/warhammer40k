@@ -142,5 +142,15 @@ export class LoreHubComponent {
       meta: '69 pièces · 4 types',
       available: true,
     },
+    {
+      route: '/lore/timeline',
+      ico: '⌬',
+      eyebrow: 'Codex chronologique',
+      title: 'Chronologie',
+      description:
+        'De la Vieille Nuit à la Cicatrix Maledictum, les jalons gravés dans la pierre des reliquaires impériaux. Trente millénaires d\'agonie, de conquête et de foi — Hérésie, Croisades, Chutes de Cadia et Indomitus.',
+      meta: '29 événements · 6 ères',
+      available: true,
+    },
   ];
 }

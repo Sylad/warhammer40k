@@ -6,6 +6,7 @@ import {
   Faction, Unit, DescriptionResponse, Serie, Video,
   Channel, Artwork, ArtworkCollection, ArtworkArtist, LoreEvent,
   SubFaction, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept, Equipment,
+  TimelineEvent,
 } from '../models/models';
 
 export interface WikiImageResult {
@@ -188,6 +189,14 @@ export class WarhammerService {
 
   getEquipmentItem(id: string): Observable<Equipment> {
     return this.http.get<Equipment>(`${this.base}/lore/equipment/${id}`);
+  }
+
+  readonly timelineEvents$: Observable<TimelineEvent[]> = this.http
+    .get<TimelineEvent[]>(`${this.base}/timeline-events`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getTimelineEvent(id: string): Observable<TimelineEvent> {
+    return this.http.get<TimelineEvent>(`${this.base}/timeline-events/${id}`);
   }
 
   // === Vidéos : preview + import via oEmbed YouTube ===
