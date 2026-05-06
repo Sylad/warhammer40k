@@ -1,0 +1,169 @@
+<a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
+
+<section class="hero">
+  <div class="hero-bg" [style.background-image]="heroImg()"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="badge">⌬ Codex chronologique impérial</div>
+    <h1>Chronologie du 41<sup>e</sup> millénaire</h1>
+    <p class="lede">
+      Des Guerres d'Unification à la Cicatrix Maledictum, voici les jalons gravés dans la
+      pierre des reliquaires terriens. Trente millénaires d'agonie, de conquête et de foi —
+      lus à la chandelle des reliques par les scribes de l'Adeptus Administratum, et réécrits
+      ici en langage des fidèles pour qui l'éternité s'achève demain.
+    </p>
+    <div class="counters">
+      <div class="counter"><strong>{{ events().length }}</strong><span>Événements consignés</span></div>
+      <div class="counter"><strong>6</strong><span>Ères distinctes</span></div>
+      <div class="counter"><strong>M30 → M42</strong><span>Couverture</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="layout">
+  <main class="main">
+    <nav class="era-nav" aria-label="Navigation par ère">
+      @for (e of eras; track e.id) {
+        <button class="era-pill"
+                [class.active]="activeEra() === e.id"
+                [disabled]="countByEra(e.id) === 0"
+                (click)="scrollToEra(e.id)">
+          <span class="pill-sigil">{{ e.sigil }}</span>
+          <span class="pill-label">{{ e.label }}</span>
+          <span class="pill-count">{{ countByEra(e.id) }}</span>
+        </button>
+      }
+    </nav>
+
+    @if (filtered().length === 0) {
+      <div class="empty">
+        Aucun événement ne correspond aux filtres sélectionnés.
+        <button class="reset" (click)="resetFilters()">Réinitialiser</button>
+      </div>
+    }
+
+    @for (group of grouped(); track group.era.id) {
+      <section class="era-section" [id]="'era-' + group.era.id">
+        <header class="era-header">
+          <span class="era-sigil">{{ group.era.sigil }}</span>
+          <div class="era-titles">
+            <h2>{{ group.era.label }}</h2>
+            <span class="era-range">{{ group.era.range }}</span>
+          </div>
+        </header>
+
+        <ol class="timeline">
+          @for (ev of group.items; track ev.id; let i = $index) {
+            <li class="t-item" [class.left]="isLeft(i)" [class.right]="!isLeft(i)">
+              <div class="t-marker">
+                <span class="t-marker-dot"></span>
+              </div>
+
+              <article class="t-card"
+                       [class.expanded]="expandedId() === ev.id"
+                       (click)="toggle(ev.id)"
+                       [attr.aria-expanded]="expandedId() === ev.id">
+                <div class="t-card-bg" [style.background-image]="eventImg(ev.id)"></div>
+                <div class="t-card-overlay"></div>
+                <div class="t-card-body">
+                  <div class="t-card-date">{{ ev.date }}</div>
+                  <h3 class="t-card-title">{{ ev.title }}</h3>
+                  <p class="t-card-short">{{ ev.shortDescription }}</p>
+                  <div class="t-card-tags">
+                    @for (t of ev.tags; track t) {
+                      <span class="t-tag">{{ tagLabel(t) }}</span>
+                    }
+                  </div>
+
+                  @if (expandedId() === ev.id) {
+                    <div class="t-card-detail" (click)="$event.stopPropagation()">
+                      <p class="t-long">{{ ev.longDescription }}</p>
+                      <div class="t-sources">
+                        <div class="t-sources-label">Sources canoniques</div>
+                        <ul>
+                          @for (s of ev.sources; track s) {
+                            <li><a [href]="s" target="_blank" rel="noopener">{{ s }}</a></li>
+                          }
+                        </ul>
+                      </div>
+                    </div>
+                  }
+                </div>
+                <div class="t-card-arrow" [class.flipped]="expandedId() === ev.id">›</div>
+              </article>
+            </li>
+          }
+        </ol>
+      </section>
+    }
+  </main>
+
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="panel-title">Filtres</div>
+      <div class="panel-body">
+        <div class="filter-group">
+          <div class="filter-label">Par ère</div>
+          <div class="filter-list">
+            <button class="filter" [class.active]="filterEra() === 'all'" (click)="filterEra.set('all')">
+              Toutes · {{ events().length }}
+            </button>
+            @for (e of eras; track e.id) {
+              <button class="filter"
+                      [class.active]="filterEra() === e.id"
+                      [disabled]="countByEra(e.id) === 0"
+                      (click)="filterEra.set(e.id)">
+                <span class="filter-sigil">{{ e.sigil }}</span>{{ e.label }} · {{ countByEra(e.id) }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Par faction / thème</div>
+          <select class="tag-select"
+                  [ngModel]="filterTag()"
+                  (ngModelChange)="filterTag.set($event)">
+            <option value="all">Tous les thèmes</option>
+            @for (t of tagOptions(); track t) {
+              <option [value]="t">{{ tagLabel(t) }} · {{ countByTag(t) }}</option>
+            }
+          </select>
+        </div>
+
+        @if (filterEra() !== 'all' || filterTag() !== 'all') {
+          <button class="reset full" (click)="resetFilters()">Réinitialiser les filtres</button>
+        }
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Lecture du codex</div>
+      <div class="panel-body lore-text">
+        <p>
+          Les dates suivent la nomenclature impériale officielle :
+          <strong>« 999.M41 »</strong> signifie 999<sup>e</sup> année du 41<sup>e</sup>
+          millénaire. Le préfixe <strong>«&nbsp;~&nbsp;»</strong> indique une approximation
+          consignée par les scribes Astropathes.
+        </p>
+        <p>
+          Cliquez sur une fiche pour déplier le texte long et consulter les sources
+          canoniques. Naviguez d'une ère à l'autre via la barre supérieure.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Citation</div>
+      <div class="panel-body">
+        <blockquote class="citation">
+          <span class="quote">«</span>
+          Pour l'humanité, l'Empereur ne meurt jamais. Il agonise, et nous portons
+          son agonie comme un étendard.
+          <span class="quote">»</span>
+          <footer class="citation-footer">— Sébastien Thor, Confessor</footer>
+        </blockquote>
+      </div>
+    </div>
+  </aside>
+</div>

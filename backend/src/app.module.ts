@@ -16,6 +16,7 @@ import { LoreFeedModule } from './modules/lore-feed/lore-feed.module.js';
 import { ImageMetaModule } from './modules/image-meta/image-meta.module.js';
 import { ImageImportModule } from './modules/image-import/image-import.module.js';
 import { SubFactionsModule } from './modules/subfactions/subfactions.module.js';
+import { TimelineModule } from './modules/timeline/timeline.module.js';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { SubFactionsModule } from './modules/subfactions/subfactions.module.js';
     ImageMetaModule,
     ImageImportModule,
     SubFactionsModule,
+    TimelineModule,
   ],
 })
 export class AppModule {}
