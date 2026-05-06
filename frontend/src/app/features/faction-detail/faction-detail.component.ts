@@ -66,7 +66,8 @@ const DEFAULT_RESOURCES = [
     @if (faction(); as f) {
       <a class="back-btn" routerLink="/factions">← RETOUR AUX FACTIONS</a>
 
-      <section class="hero" [style.--hero-img]="heroImg()">
+      <section class="hero hero-flicker" [style.--hero-img]="heroImg()">
+        <div class="dust-motes" aria-hidden="true"></div>
         <div class="hero-text">
           <span class="badge-type" [class]="'b-' + f.alignement.toLowerCase()">{{ f.alignement }}</span>
           <h1>{{ f.nom }}</h1>

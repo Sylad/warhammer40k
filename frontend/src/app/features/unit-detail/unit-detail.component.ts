@@ -65,7 +65,8 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
           </div>
         </div>
 
-        <section class="hero" [style.--hero-img]="unitImg()">
+        <section class="hero hero-flicker" [style.--hero-img]="unitImg()">
+          <div class="dust-motes" aria-hidden="true"></div>
           <div class="hero-text">
             <h1>{{ u.nom }}</h1>
             <div class="hero-badges">

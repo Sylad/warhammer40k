@@ -1,0 +1,159 @@
+/* ============================================================
+ * Grimdark Life — micro-animations subtiles pour les heroes
+ *
+ * Trois utilitaires globaux à composer sur les heroes existants :
+ *   .hero-flicker     — lumière qui vacille (cierge / plasma)
+ *   .hero-banner-wave — bannière au vent (skewX micro-déformation)
+ *   .dust-motes       — poussières d'encens flottantes
+ *
+ * Garde-fous :
+ *   - amplitudes faibles, durées longues (5-15s)
+ *   - aucun skew sur les titres / lettres (Cinzel intacte)
+ *   - prefers-reduced-motion: désactive tout
+ *   - pas de néon flashy : les variations se sentent sans se voir
+ *
+ * Les classes peuvent vivre côté global (styles.scss) parce qu'elles
+ * ne ciblent que des classes utilitaires nouvelles (pas de collision
+ * avec les styles encapsulés Angular existants).
+ * ============================================================ */
+
+
+/* === Light flicker ============================================
+ * Glow doré qui pulse en ::after par-dessus le hero.
+ * Le texte du hero (z-index >= 1) reste lisible : l'overlay est
+ * en dessous (pointer-events: none, z-index 0) et ne change pas
+ * la géométrie. */
+@keyframes grimdark-flicker-glow {
+  0%   { opacity: 0.32; }
+  18%  { opacity: 0.55; }
+  37%  { opacity: 0.28; }
+  52%  { opacity: 0.62; }
+  68%  { opacity: 0.34; }
+  82%  { opacity: 0.5;  }
+  100% { opacity: 0.32; }
+}
+
+@keyframes grimdark-flicker-tint {
+  0%, 100% { filter: brightness(1)    saturate(1); }
+  20%      { filter: brightness(1.04) saturate(1.02); }
+  45%      { filter: brightness(0.98) saturate(0.98); }
+  72%      { filter: brightness(1.03) saturate(1.01); }
+}
+
+.hero-flicker {
+  /* Le hero doit déjà avoir position: relative et overflow: hidden
+   * dans son SCSS encapsulé. On ajoute juste l'overlay flicker. */
+  position: relative;
+}
+
+.hero-flicker::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 78% 28%, hsla(43, 60%, 56%, 0.42), transparent 55%),
+    radial-gradient(circle at 22% 75%, hsla(0, 70%, 28%, 0.22), transparent 60%);
+  mix-blend-mode: screen;
+  animation: grimdark-flicker-glow 5.4s ease-in-out infinite;
+}
+
+/* Variante : pulse de luminosité globale (très léger) sur le hero
+ * lui-même. À combiner avec .hero-flicker uniquement si l'image
+ * hero le supporte (aucun texte critique flouté). */
+.hero-flicker-deep {
+  animation: grimdark-flicker-tint 6.2s ease-in-out infinite;
+}
+
+
+/* === Banner wave ==============================================
+ * Micro skewX appliqué uniquement à un élément image dédié
+ * (jamais sur du texte). À poser sur un wrapper d'image type
+ * <div class="hero-banner hero-banner-wave"><img ...></div>. */
+@keyframes grimdark-banner-wave {
+  0%   { transform: skewX(0deg)    translateX(0); }
+  50%  { transform: skewX(-1deg)   translateX(-1px); }
+  100% { transform: skewX(0.6deg)  translateX(1px); }
+}
+
+.hero-banner-wave {
+  transform-origin: top center;
+  animation: grimdark-banner-wave 8.4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  will-change: transform;
+}
+
+
+/* === Dust motes ===============================================
+ * Particules dorées qui flottent vers le haut.
+ * On utilise un seul ::after avec 5 box-shadow superposés pour
+ * éviter un DOM bloated. Animation translateY + opacité.
+ *
+ * Conteneur attendu : un parent positionné (relative) où l'on
+ * pose le fragment.  La particule de base est en bas, elle monte. */
+@keyframes grimdark-dust-rise {
+  0%   { transform: translateY(0)      translateX(0); opacity: 0; }
+  12%  { opacity: 0.35; }
+  50%  { transform: translateY(-50vh)  translateX(8px); opacity: 0.42; }
+  88%  { opacity: 0.18; }
+  100% { transform: translateY(-110vh) translateX(-6px); opacity: 0; }
+}
+
+.dust-motes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.dust-motes::before,
+.dust-motes::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: hsla(43, 70%, 65%, 0.85);
+  box-shadow:
+    /* x       y    blur color */
+       40px   0   3px hsla(43, 70%, 65%, 0.55),
+       120px -20px 4px hsla(43, 70%, 70%, 0.45),
+       210px  10px 3px hsla(43, 60%, 60%, 0.5),
+       320px -8px  4px hsla(43, 70%, 70%, 0.4),
+       430px -25px 3px hsla(43, 60%, 65%, 0.55),
+       560px  5px  4px hsla(43, 70%, 70%, 0.4),
+       680px -15px 3px hsla(43, 60%, 60%, 0.5);
+  filter: blur(0.5px);
+  animation: grimdark-dust-rise 14s linear infinite;
+}
+
+.dust-motes::after {
+  bottom: -16px;
+  left: 30%;
+  background: hsla(43, 60%, 60%, 0.7);
+  box-shadow:
+       60px   0   3px hsla(43, 60%, 65%, 0.5),
+       150px -10px 4px hsla(43, 70%, 70%, 0.4),
+       260px  20px 3px hsla(43, 60%, 60%, 0.45),
+       380px  -6px 4px hsla(43, 70%, 65%, 0.5),
+       500px  10px 3px hsla(43, 60%, 60%, 0.45);
+  filter: blur(0.6px);
+  animation: grimdark-dust-rise 18s linear infinite;
+  animation-delay: -7s;
+}
+
+
+/* === prefers-reduced-motion ===================================
+ * Désactive intégralement les trois effets. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-flicker::after,
+  .hero-flicker-deep,
+  .hero-banner-wave,
+  .dust-motes::before,
+  .dust-motes::after {
+    animation: none !important;
+  }
+  .hero-flicker::after { opacity: 0.32; }
+}
