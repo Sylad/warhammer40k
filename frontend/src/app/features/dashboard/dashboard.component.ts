@@ -28,10 +28,11 @@ const TYPE_LABEL: Record<string, string> = {
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <section class="hero">
+    <section class="hero hero-flicker">
       <div class="hero-bg" [style.background-image]="heroImg()"></div>
       <div class="hero-grad"></div>
       <div class="hero-glow"></div>
+      <div class="dust-motes" aria-hidden="true"></div>
       <div class="hero-content">
         <div class="eyebrow">Codex Numérique du 41<sup>e</sup> millénaire</div>
         <h1>Bienvenue, Initié</h1>
