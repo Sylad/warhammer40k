@@ -22,7 +22,7 @@ const CATEGORIES: CategoryDef[] = [
   { key: 'Mes images', label: 'Mes images', query: 'warhammer 40k personal collection' },
 ];
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 24;
 type SortBy = 'recent' | 'popular' | 'alpha';
 
 @Component({
@@ -139,10 +139,17 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   </article>
                 }
               </div>
-              @if (canLoadMore()) {
-                <button class="load-more" type="button" (click)="loadMore()">
-                  Charger plus d'œuvres ▾
-                </button>
+              @if (totalPages() > 1) {
+                <nav class="pagination" aria-label="Pagination galerie">
+                  <button type="button" class="page-btn" [disabled]="currentPage() === 1" (click)="goToPage(1)" aria-label="Première page">«</button>
+                  <button type="button" class="page-btn" [disabled]="currentPage() === 1" (click)="prevPage()" aria-label="Page précédente">‹</button>
+                  <span class="page-indicator">
+                    Page <strong>{{ currentPage() }}</strong> sur <strong>{{ totalPages() }}</strong>
+                    <span class="page-range">{{ pageRangeStart() }}–{{ pageRangeEnd() }} / {{ totalFiltered() }}</span>
+                  </span>
+                  <button type="button" class="page-btn" [disabled]="currentPage() === totalPages()" (click)="nextPage()" aria-label="Page suivante">›</button>
+                  <button type="button" class="page-btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(totalPages())" aria-label="Dernière page">»</button>
+                </nav>
               }
             }
           </section>
@@ -583,7 +590,8 @@ export class GalleryComponent {
   readonly filterCollection = signal<string>('');
   readonly sortBy = signal<SortBy>('recent');
   readonly bookmarks = signal<Set<string>>(new Set());
-  readonly pageCount = signal(1);
+  /** Page courante (1-indexed) — pagination numérotée plutôt que load-more. */
+  readonly currentPage = signal(1);
 
   readonly selectedArt = signal<Artwork | null>(null);
   private viewerIndex = 0;
@@ -621,8 +629,14 @@ export class GalleryComponent {
   });
 
   readonly totalFiltered = computed(() => this.filteredArtworks().length);
-  readonly pagedArtworks = computed(() => this.filteredArtworks().slice(0, this.pageCount() * PAGE_SIZE));
-  readonly canLoadMore = computed(() => this.pagedArtworks().length < this.filteredArtworks().length);
+  readonly totalPages = computed(() => Math.max(1, Math.ceil(this.totalFiltered() / PAGE_SIZE)));
+  readonly pagedArtworks = computed(() => {
+    const start = (this.currentPage() - 1) * PAGE_SIZE;
+    return this.filteredArtworks().slice(start, start + PAGE_SIZE);
+  });
+  /** Index 1-based "X-Y" pour le compteur. */
+  readonly pageRangeStart = computed(() => this.totalFiltered() === 0 ? 0 : (this.currentPage() - 1) * PAGE_SIZE + 1);
+  readonly pageRangeEnd = computed(() => Math.min(this.currentPage() * PAGE_SIZE, this.totalFiltered()));
 
   constructor() {
     // Read ?q= or ?search= query param to pre-fill search (links from /lore figures)
@@ -702,17 +716,17 @@ export class GalleryComponent {
 
   toggleCategoryFilter(key: string): void {
     this.filterCategory.set(this.filterCategory() === key ? null : key);
-    this.pageCount.set(1);
+    this.currentPage.set(1);
   }
 
   toggleArtistFilter(name: string): void {
     this.filterArtist.set(this.filterArtist() === name ? '' : name);
-    this.pageCount.set(1);
+    this.currentPage.set(1);
   }
 
   toggleCollectionFilter(id: string): void {
     this.filterCollection.set(this.filterCollection() === id ? '' : id);
-    this.pageCount.set(1);
+    this.currentPage.set(1);
   }
 
   resetFilters(): void {
@@ -721,7 +735,7 @@ export class GalleryComponent {
     this.filterFaction.set('');
     this.filterArtist.set('');
     this.filterCollection.set('');
-    this.pageCount.set(1);
+    this.currentPage.set(1);
   }
 
   toggleBookmark(id: string): void {
@@ -730,9 +744,17 @@ export class GalleryComponent {
     this.bookmarks.set(set);
   }
 
-  loadMore(): void {
-    this.pageCount.update(n => n + 1);
+  goToPage(n: number): void {
+    const total = this.totalPages();
+    this.currentPage.set(Math.max(1, Math.min(total, n)));
+    // Scroll to top of grid pour ne pas rester en bas après changement de page.
+    if (typeof window !== 'undefined') {
+      const grid = document.querySelector('.art-grid');
+      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
+  nextPage(): void { this.goToPage(this.currentPage() + 1); }
+  prevPage(): void { this.goToPage(this.currentPage() - 1); }
 
   openViewer(art: Artwork, idx: number): void {
     this.selectedArt.set(art);
