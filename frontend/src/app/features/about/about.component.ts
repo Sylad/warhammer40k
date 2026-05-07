@@ -111,6 +111,23 @@ interface Inspiration {
       }
     </section>
 
+    <section class="other-sites">
+      <h3>Mes autres sites</h3>
+      <p class="other-intro">Quatre autres apps perso vibe-codées avec Claude Code, toutes en open-source.</p>
+      <div class="other-grid">
+        @for (s of otherSites; track s.url) {
+          <a [href]="s.url" target="_blank" rel="noopener" class="other-card">
+            <span class="other-tag">{{ s.tag }}</span>
+            <span class="other-text">
+              <strong>{{ s.name }}</strong>
+              <em>{{ s.desc }}</em>
+            </span>
+            <span class="other-arrow">↗</span>
+          </a>
+        }
+      </div>
+    </section>
+
     <section class="cta">
       <div class="cta-inner">
         <p>
@@ -144,7 +161,7 @@ export class AboutComponent {
       group: 'Backend',
       ico: '⚒',
       items: [
-        'NestJS 10 + TypeScript 5',
+        'NestJS 11 + TypeScript 5',
         'Stockage JSON local (factions/units/series/videos)',
         'Anthropic SDK — claude-sonnet-4-6',
         'Server-Sent Events (badge usage live)',
@@ -215,5 +232,12 @@ export class AboutComponent {
       why: 'Wiki MediaWiki francophone — texte directement utilisable en FR pour enrichir les fiches sans passer par la traduction.',
       url: 'https://omnis-bibliotheca.com/index.php/Cat%C3%A9gorie:Imperium',
     },
+  ];
+
+  otherSites = [
+    { tag: '🦖', name: 'Evatosorus', desc: 'Codex Mésozoïque (cadeau pour Eva)', url: 'https://evatosorus.pages.dev' },
+    { tag: '⚽', name: 'OL Companion', desc: 'Suivi Olympique Lyonnais', url: 'https://github.com/Sylad/ol-companion' },
+    { tag: '💸', name: 'Finance Tracker', desc: 'Suivi finances perso (PDF Claude)', url: 'https://github.com/Sylad/finance-tracker' },
+    { tag: '🌿', name: 'Eywa', desc: 'Codex Pandora (pour Eva)', url: 'https://eywa-eywa.pages.dev' },
   ];
 }
