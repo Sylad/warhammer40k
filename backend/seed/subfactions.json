@@ -3200,15 +3200,7 @@
     "loreLong": "Issu de la Seconde Fondation, le chapitre fut confié à Lucretius Corvo, capitaine ultramarine décoré pour avoir résisté six jours sur Astagar et abattu un Warlord Battle Titan traître. Guilliman lui assigna Honourum, monde-forteresse pré-impérial marquant l'avancée la plus septentrionale de la Grande Croisade. Les Novamarines portent une armure quartelée bleu et os, et siègent dans la Forteresse Novum. Ils font partie des dix Shield Chapters d'Ultramar, jurés à la défense permanente du royaume de Guilliman.",
     "homeworld": "Honourum",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Novamarines",
-    "notableUnits": [
-      {
-        "name": "Lucretius Corvo",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Novamarines.",
-        "wikiQuery": "Lucretius Corvo Novamarines"
-      }
-    ]
+    "wikiQuery": "Novamarines"
   },
   {
     "id": "sons-of-guilliman",
@@ -3221,15 +3213,7 @@
     "loreLong": "Originaires du monde-mort cerclé de désert de Praesidia, les Sons of Guilliman traînent une réputation sulfureuse — rumeurs persistantes de frères tombés au Chaos et d'écarts par rapport au Codex. Cette réputation les pousse à combattre avec un zèle redoublé pour mériter leur nom. Leur héraldique combine l'Ultima au pair d'ailes, signature des fils du Primarque. Le rang de compagnie est inscrit en bas du pauldron, à côté du symbole, plutôt que par-dessus.",
     "homeworld": "Praesidia",
     "founding": "M33",
-    "wikiQuery": "Sons of Guilliman",
-    "notableUnits": [
-      {
-        "name": "Ansellus",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Sons of Guilliman.",
-        "wikiQuery": "Ansellus Sons of Guilliman"
-      }
-    ]
+    "wikiQuery": "Sons of Guilliman"
   },
   {
     "id": "praetors-of-orpheus",
@@ -3268,15 +3252,7 @@
     "loreLong": "Premier des Primogéniteurs, le Genesis Chapter fut levé à partir des plus nobles vétérans Ultramarines survivants de l'Hérésie. Leur première bataille leur arracha le monde de Newfound aux Word Bearers. Doctrinalement et astrographiquement les plus proches de leur chapitre-père, ils mènent fréquemment des opérations conjointes avec les Ultramarines et comblent les rangs des compagnies sous-effectif quand celles-ci tombent en-deçà de la force codex. Tout frère effectue au moins un pèlerinage au Sanctuaire du Primarque.",
     "homeworld": "Newfound",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Genesis Chapter",
-    "notableUnits": [
-      {
-        "name": "Eorloid",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Genesis Chapter.",
-        "wikiQuery": "Eorloid Genesis Chapter"
-      }
-    ]
+    "wikiQuery": "Genesis Chapter"
   },
   {
     "id": "patriarchs-of-ulixis",
@@ -3302,15 +3278,7 @@
     "loreLong": "Recrutés sur le Feral World perpétuellement obscur de Posul, les Mortifactors furent fondés par Sasebo Tezuka, guidé par le Tarot de l'Empereur. Ils suivent le Codex Astartes dans le fond mais en divergent radicalement dans la forme, par adoption de la culture funéraire Posuli. Leur Forteresse-Monastère, la Basilica Mortis, est un fort stellaire en orbite tapissé de crânes de frères tombés et d'ennemis abattus. Leurs Chapelains conduisent les rites funéraires.",
     "homeworld": "Posul (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Mortifactors",
-    "notableUnits": [
-      {
-        "name": "Lord Magyar",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Mortifactors.",
-        "wikiQuery": "Lord Magyar Mortifactors"
-      }
-    ]
+    "wikiQuery": "Mortifactors"
   },
   {
     "id": "silver-eagles",
@@ -3323,15 +3291,7 @@
     "loreLong": "Les archives sur les Silver Eagles sont laconiques. Successeur des Ultramarines créé à la Seconde Fondation, le chapitre n'est connu que par mention de son Maître Periphas et de son symbole — un aigle d'argent. Leur déploiement et leur zone d'opération restent largement inconnus dans les registres impériaux disponibles.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Silver Eagles",
-    "notableUnits": [
-      {
-        "name": "Periphas",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Silver Eagles.",
-        "wikiQuery": "Periphas Silver Eagles"
-      }
-    ]
+    "wikiQuery": "Silver Eagles"
   },
   {
     "id": "white-consuls",
@@ -3344,15 +3304,7 @@
     "loreLong": "Successeur Astartes Praeses gardant les abords de l'Œil de la Terreur, les White Consuls dérogent au Codex en alignant deux Chapter Masters simultanés — l'un commandant la défense de Sabatine et la réponse rapide à toute incursion Chaos par la Cadian Gate, l'autre supervisant les opérations en zones de guerre éloignées. Particularité plus rare encore : ils vénèrent l'Empereur en divinité et appartiennent au Culte Impérial. Leur isolement géographique d'Ultramar leur a valu une certaine indulgence.",
     "homeworld": "Sabatine",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "White Consuls",
-    "notableUnits": [
-      {
-        "name": "Borsellius",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre White Consuls.",
-        "wikiQuery": "Borsellius White Consuls"
-      }
-    ]
+    "wikiQuery": "White Consuls"
   },
   {
     "id": "black-consuls",
@@ -3365,15 +3317,7 @@
     "loreLong": "Levé peu après l'Hérésie sous Arrias Cordos, le chapitre fut l'un des plus inflexibles dans l'application du Codex. Croisade ininterrompue depuis le fort stellaire Noctis Obscurum jusqu'à ce qu'en M40 des saboteurs Dark Eldar y détonnent le Warp drive. Relocalisés sur Cyclopia, ils menèrent trois siècles de croisade vengeresse contre les Drukhari, purgeant quinze systèmes et effondrant un sous-domaine entier du Webway. Leur effectif fut réduit aux trois quarts il y a trois siècles et demi.",
     "homeworld": "Cyclopia",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Black Consuls",
-    "notableUnits": [
-      {
-        "name": "Arrias Cordos",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Black Consuls.",
-        "wikiQuery": "Arrias Cordos Black Consuls"
-      }
-    ]
+    "wikiQuery": "Black Consuls"
   },
   {
     "id": "libators",
@@ -3412,21 +3356,7 @@
     "loreLong": "Successeur de la Seconde Fondation mené par Tulian Aquila, le chapitre s'est établi sur Gathis II et y a forgé une doctrine fondée sur l'acceptation pleine de la mortalité. Là où les Ultramarines incarnent le rayonnement régalien, les Doom Eagles cultivent un détachement morbide, hostile à la gloire et à l'honneur, jugés vains face à l'éternité. Tous frères suivent une longue austérité spirituelle ; le chapitre se tient à l'écart des autres, considérant le deuil comme la seule vérité tangible du Space Marine.",
     "homeworld": "Gathis II",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Doom Eagles",
-    "notableUnits": [
-      {
-        "name": "Tulian Aquila",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Doom Eagles.",
-        "wikiQuery": "Tulian Aquila Doom Eagles"
-      },
-      {
-        "name": "Hearon",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Doom Eagles.",
-        "wikiQuery": "Hearon Doom Eagles"
-      }
-    ]
+    "wikiQuery": "Doom Eagles"
   },
   {
     "id": "howling-griffons",
@@ -3439,21 +3369,7 @@
     "loreLong": "Chapitre à l'historique long et glorieux, les Howling Griffons se considèrent comme les défenseurs de l'idéal impérial. Ils tiennent le Codex Astartes pour traité non encore surpassé plutôt que pour Écriture sacrée, et maintiennent un équilibre rigoureux entre toutes les disciplines codex sans spécialisation marquée. Leur fierté principale réside dans leurs serments — chaque vœu prononcé est un combat éternel jusqu'à son accomplissement, et chaque bataille en ajoute de nouveaux à la liste déjà longue.",
     "homeworld": "Mancora",
     "founding": "M33",
-    "wikiQuery": "Howling Griffons",
-    "notableUnits": [
-      {
-        "name": "Alvaro",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Howling Griffons.",
-        "wikiQuery": "Alvaro Howling Griffons"
-      },
-      {
-        "name": "Kenot Friche",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Howling Griffons.",
-        "wikiQuery": "Kenot Friche Howling Griffons"
-      }
-    ]
+    "wikiQuery": "Howling Griffons"
   },
   {
     "id": "marines-errant",
@@ -3492,15 +3408,7 @@
     "loreLong": "Issus de la 199ᵉ Compagnie ultramarine 'Aegida' qui défendit Sotha contre les Night Lords durant l'Hérésie, les Scythes furent honorés par Guilliman du symbole des deux faux croisées. Maintenu en compagnie fantôme à la Troisième Fondation par Rogal Dorn, le chapitre fut quasi-anéanti quand la Flotte-Ruche Kraken submergea Sotha. À l'Ère du Dark Imperium, ils ont connu une renaissance et figurent désormais parmi les dix Shield Chapters d'Ultramar.",
     "homeworld": "Sotha (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Scythes of the Emperor",
-    "notableUnits": [
-      {
-        "name": "Oberdeii",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Scythes of the Emperor.",
-        "wikiQuery": "Oberdeii Scythes of the Emperor"
-      }
-    ]
+    "wikiQuery": "Scythes of the Emperor"
   },
   {
     "id": "star-phantoms",
@@ -3552,21 +3460,7 @@
     "loreLong": "Fondés par Saur Damocles, capitaine de la 6ᵉ Compagnie ultramarine durant l'Hérésie, les Iron Snakes veillent sur la région impériale dite des Reef Stars. Leurs squads portent le nom de leurs premiers commandants, immortalisés à jamais dans la nomenclature du chapitre — chaque squad a sa propre chronique et sa gloire propre. Ils ont contribué à la Croisade des Sabbat Worlds et à la réponse impériale à la 13ᵉ Croisade Noire. Le maître actuel, Seydon, est le dix-huitième à porter ce titre.",
     "homeworld": "Ithaka",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Iron Snakes",
-    "notableUnits": [
-      {
-        "name": "Saur Damocles",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Iron Snakes.",
-        "wikiQuery": "Saur Damocles Iron Snakes"
-      },
-      {
-        "name": "Seydon",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Iron Snakes.",
-        "wikiQuery": "Seydon Iron Snakes"
-      }
-    ]
+    "wikiQuery": "Iron Snakes"
   },
   {
     "id": "sons-of-orar",
@@ -3605,15 +3499,7 @@
     "loreLong": "Au mi-M37, le chapitre fut condamné à l'Abyssal Crusade dans l'Œil de la Terreur par le Saint Basillius pour défaut de foi. Konvak Lann ramena ses frères vivants de cet exil et mena une purge contre le statut de Basillius dans l'Imperium. Lors du Cataclysme de Gheistos en M41, les Vorpal Swords stoppèrent une incursion daemonique par drop pods multi-sites, affrontant le Bloodthirster Skarbrand et refermant une faille warp majeure au port spatial de Devlan.",
     "homeworld": "Inconnu",
     "founding": "M37",
-    "wikiQuery": "Vorpal Swords",
-    "notableUnits": [
-      {
-        "name": "Konvak Lann",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Vorpal Swords.",
-        "wikiQuery": "Konvak Lann Vorpal Swords"
-      }
-    ]
+    "wikiQuery": "Vorpal Swords"
   },
   {
     "id": "knights-of-the-raven",
@@ -3652,21 +3538,7 @@
     "loreLong": "Initialement successeur loyal des Imperial Fists à la Seconde Fondation, les Soul Drinkers furent déclarés Excommunicate Traitoris à la suite d'événements complexes ayant fait basculer le chapitre dans la dissidence. À la différence de la majorité des renégats, ils n'ont pas voué leur âme au Chaos — ils détestent les Puissances Ruineuses autant qu'ils haïssent l'Imperium qui les a rejetés. Leur idéologie tient l'Imperium pour traître à l'idéal originel de l'Empereur. Ils combattent donc le Chaos tout en s'opposant à l'Imperium.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Soul Drinkers",
-    "notableUnits": [
-      {
-        "name": "Gorgoleon",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Soul Drinkers.",
-        "wikiQuery": "Gorgoleon Soul Drinkers"
-      },
-      {
-        "name": "Sarpedon",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Soul Drinkers.",
-        "wikiQuery": "Sarpedon Soul Drinkers"
-      }
-    ]
+    "wikiQuery": "Soul Drinkers"
   },
   {
     "id": "excoriators",
@@ -3679,15 +3551,7 @@
     "loreLong": "Levés à la Seconde Fondation aux côtés des Black Templars et des Crimson Fists, les Excoriators sont attritionnistes par doctrine et obstinés à l'extrême. Leur premier Maître fut le capitaine Imperial Fist Demetrius Katafalque. Leur mentalité du 'survivre malgré tout' remonte à l'Hérésie elle-même : les Marines qui devinrent les Excoriators étaient postés sur les murs du Palais Impérial par Dorn lui-même, avec une seule consigne — Ne pas céder.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Excoriators",
-    "notableUnits": [
-      {
-        "name": "Demetrius Katafalque",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Excoriators.",
-        "wikiQuery": "Demetrius Katafalque Excoriators"
-      }
-    ]
+    "wikiQuery": "Excoriators"
   },
   {
     "id": "subjugators",
@@ -3739,15 +3603,7 @@
     "loreLong": "Levés à la Seconde Fondation parmi les Imperial Fists ralliés au démantèlement codex de Guilliman, les Fists Exemplar combattirent durant la Guerre de la Bête. À la trahison d'un de leurs capitaines, leurs frères survivants furent dispersés dans l'Adeptus Astartes et le chapitre effacé de l'histoire sur ordre du Lord Commander en exercice — Maximus Thane, qui en était lui-même issu. Leur monde-mère Eidolica fut leur dernière forteresse.",
     "homeworld": "Eidolica",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Fists Exemplar",
-    "notableUnits": [
-      {
-        "name": "Maximus Thane",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Fists Exemplar.",
-        "wikiQuery": "Maximus Thane Fists Exemplar"
-      }
-    ]
+    "wikiQuery": "Fists Exemplar"
   },
   {
     "id": "sons-of-the-phoenix",
@@ -3773,21 +3629,7 @@
     "loreLong": "Successeur des Imperial Fists, les Astral Knights se sacrifièrent en 926.M41 pour détruire le World Engine, vaisseau-planète Necron capable de purger un monde de toute vie. Après douze tentatives infructueuses d'une force conjointe de quinze chapitres et de la Marine Impériale — un tiers d'une Battlefleet anéantie —, le Chapter Master Artor Amhrad ordonna à son vaisseau de percuter les boucliers du World Engine. La manœuvre suicide réussit. Le chapitre fut effacé.",
     "homeworld": "Obsidia (cédé)",
     "founding": "Inconnue",
-    "wikiQuery": "Astral Knights",
-    "notableUnits": [
-      {
-        "name": "Artor Amhrad",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Astral Knights.",
-        "wikiQuery": "Artor Amhrad Astral Knights"
-      },
-      {
-        "name": "Thade",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Astral Knights.",
-        "wikiQuery": "Thade Astral Knights"
-      }
-    ]
+    "wikiQuery": "Astral Knights"
   },
   {
     "id": "flesh-tearers",
@@ -3800,21 +3642,7 @@
     "loreLong": "Successeur de la Seconde Fondation issu du courant le plus sanguinaire de la IXe Légion, les Flesh Tearers souffrent d'une mutation gène-seed les rendant nettement plus vulnérables à la Black Rage. À ce jour aucun remède n'est connu et les chronistes prédisent l'extinction du chapitre dans les deux millénaires si rien ne change. Ils sont par ailleurs réputés pour leur sauvagerie et leur soif de sang au combat — réputation qui les a fait censurer plus d'une fois sans pour autant entraîner leur dissolution.",
     "homeworld": "Cretacia",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Flesh Tearers",
-    "notableUnits": [
-      {
-        "name": "Amit",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Flesh Tearers.",
-        "wikiQuery": "Amit Flesh Tearers"
-      },
-      {
-        "name": "Gabriel Seth",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Flesh Tearers.",
-        "wikiQuery": "Gabriel Seth Flesh Tearers"
-      }
-    ]
+    "wikiQuery": "Flesh Tearers"
   },
   {
     "id": "blood-drinkers",
@@ -3827,15 +3655,7 @@
     "loreLong": "Successeur fidèle au Codex Astartes, les Blood Drinkers ont développé des rituels de consommation de sang dérivés d'une mutation de leur zygote Omophagea. Leur incidence de Black Rage est faible et leur Death Company réduite — ce qui semble miraculeux. La vérité est plus insidieuse : ils ne combattent pas la Soif Rouge, ils s'y abandonnent. Au M37, ils étaient un chapitre mourant ; ce qui les a sauvés relève d'un secret jalousement gardé qui les rend dépendants en profondeur d'une source extérieure.",
     "homeworld": "San Guisaga",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Blood Drinkers",
-    "notableUnits": [
-      {
-        "name": "Orloc",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Blood Drinkers.",
-        "wikiQuery": "Orloc Blood Drinkers"
-      }
-    ]
+    "wikiQuery": "Blood Drinkers"
   },
   {
     "id": "angels-vermillion",
@@ -3848,15 +3668,7 @@
     "loreLong": "Là où la quasi-totalité des successeurs Blood Angels entretiennent des liens étroits avec leur chapitre-père et entre eux, les Angels Vermillion ont fait le choix de porter leur malédiction dans la solitude. Ils refusent tout contact avec leurs frères et chapitres-source. Les registres impériaux des exploits du chapitre depuis la Seconde Fondation sont irréprochables, mais l'origine de leur exil auto-imposé reste opaque — honte à porter seule, ou secret plus sombre encore que nul ne souhaite voir partagé.",
     "homeworld": "Corinal",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels Vermillion",
-    "notableUnits": [
-      {
-        "name": "Kuldoth Moar",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Angels Vermillion.",
-        "wikiQuery": "Kuldoth Moar Angels Vermillion"
-      }
-    ]
+    "wikiQuery": "Angels Vermillion"
   },
   {
     "id": "angels-encarmine",
@@ -3869,15 +3681,7 @@
     "loreLong": "Aucun chapitre n'est aussi actif que les Angels Encarmine. Leur Maître, Castellan Zargo, ne tient pas en place et cherche perpétuellement opportunité de mener ses frères en campagne. Conséquence : le chapitre est rarement à effectif plein. Ce qui leur manque en nombre, ils le compensent par une ferveur déterminée. Mais leur Death Company est en permanence inquiétante, ce qui aggrave leur problème d'effectifs et nourrit le cycle infernal de la guerre permanente.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels Encarmine",
-    "notableUnits": [
-      {
-        "name": "Castellan Zargo",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Angels Encarmine.",
-        "wikiQuery": "Castellan Zargo Angels Encarmine"
-      }
-    ]
+    "wikiQuery": "Angels Encarmine"
   },
   {
     "id": "angels-sanguine",
@@ -3890,15 +3694,7 @@
     "loreLong": "Levés à la Seconde Fondation parmi les Blood Angels jugés les plus glorieux et les plus fidèles à l'image du Primarque, les Angels Sanguine virent leurs Sanguinary Priests présentés au Red Grail des Blood Angels avant de partir forger leur propre histoire. Le Graal contenait ce qui restait du sang du Primarque. Leur devise — 'Le sang qui coule en nous est celui de Sanguinius, l'honneur que nous portons est celui des Angels' — résume leur mission : rester dignes de cette filiation directe.",
     "homeworld": "Anzyra",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels Sanguine",
-    "notableUnits": [
-      {
-        "name": "Sentikan",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Angels Sanguine.",
-        "wikiQuery": "Sentikan Angels Sanguine"
-      }
-    ]
+    "wikiQuery": "Angels Sanguine"
   },
   {
     "id": "lamenters",
@@ -3911,15 +3707,7 @@
     "loreLong": "Issus de la Cursed 21st Founding du M36, les Lamenters cumulent une malchance proverbiale. Lors de la Guerre de Badab, ils choisirent le côté rebelle des Astral Claws, mais reçurent le pardon de l'Empereur en échange d'une croisade pénitente. Cette croisade les conduisit directement dans la trajectoire de la Flotte-Ruche Kraken, qui les amena au seuil de l'extinction. Ils ont conservé maîtrise relative de leurs failles génétiques, mais leur destin reste celui d'une condamnation à vivre poursuivis.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "Cursed 21st Founding (M36)",
-    "wikiQuery": "Lamenters",
-    "notableUnits": [
-      {
-        "name": "Malakim Phoros",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Lamenters.",
-        "wikiQuery": "Malakim Phoros Lamenters"
-      }
-    ]
+    "wikiQuery": "Lamenters"
   },
   {
     "id": "knights-of-blood",
@@ -3932,15 +3720,7 @@
     "loreLong": "Successeur Blood Angel non reconnu officiellement par l'Inquisition, les Knights of Blood furent déclarés Renegatus pour défaut de discipline génétique et exil refusé. Pourtant, ils continuent à combattre pour l'Imperium contre le Chaos et les xénos, tirant gloire de défendre les mondes qui les rejettent. Leur descente dans la Black Rage est plus rapide que la moyenne Blood Angel, et leur Death Company quasi-permanente. Statut à mi-chemin entre déchéance et héroïsme, jamais véritablement absous.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Knights of Blood",
-    "notableUnits": [
-      {
-        "name": "Karlaen",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Knights of Blood.",
-        "wikiQuery": "Karlaen Knights of Blood"
-      }
-    ]
+    "wikiQuery": "Knights of Blood"
   },
   {
     "id": "blood-swords",
@@ -3966,15 +3746,7 @@
     "loreLong": "Connus à l'origine sous le nom de Swords of Haldroth (d'après leur monde-féroce de recrutement), les Carmine Blades crurent longtemps descendre des Ultramarines — jusqu'à une rencontre fortuite avec Astorath the Grim à la fin du M41 qui leur révéla leur véritable origine sanguinienne. Cette découverte expliqua enfin les symptômes étranges qu'ils dissimulaient depuis des siècles. Guerriers sauvages et insulaires, ils ont depuis constitué leur propre corps de Sanguinary Priests.",
     "homeworld": "Haldroth",
     "founding": "Inconnue",
-    "wikiQuery": "Carmine Blades",
-    "notableUnits": [
-      {
-        "name": "Hajjin",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Carmine Blades.",
-        "wikiQuery": "Hajjin Carmine Blades"
-      }
-    ]
+    "wikiQuery": "Carmine Blades"
   },
   {
     "id": "consecrators",
@@ -3987,21 +3759,7 @@
     "loreLong": "Levé en secret par le Suprême Grand Maître des Dark Angels Valafar pour rechercher et préserver l'histoire des Unforgiven, les Consecrators n'apparaissent dans aucun registre avant le 3ᵉ siècle du 40ᵉ Millénaire. Ils ont hérité des armes les plus vénérées de la Légion, qu'ils entretiennent avec une dévotion archéologique. Leur apparence et leur équipement rappellent étrangement la Ire Légion d'avant l'Hérésie, conservant l'iconographie d'origine. Ils chassent les Fallen au même titre que tous les Unforgiven.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "M40 (secret)",
-    "wikiQuery": "Consecrators",
-    "notableUnits": [
-      {
-        "name": "Valafar",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Consecrators.",
-        "wikiQuery": "Valafar Consecrators"
-      },
-      {
-        "name": "Nakir",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Consecrators.",
-        "wikiQuery": "Nakir Consecrators"
-      }
-    ]
+    "wikiQuery": "Consecrators"
   },
   {
     "id": "angels-of-absolution",
@@ -4014,15 +3772,7 @@
     "loreLong": "Successeur de la Seconde Fondation, l'Angels of Absolution partagent structure et croyances avec leur progéniteur — au point que les deux chapitres mêlent fréquemment leurs ressources dans la chasse aux Fallen. La seule divergence doctrinale notable : ils considèrent leurs propres péchés expiés par les actions loyalistes de leurs ancêtres lors de la Chute de Caliban. Cette absolution autoproclamée ne diminue en rien leur devoir de châtier les Fallen — au contraire, elle leur en fait porter la responsabilité avec plus de zèle.",
     "homeworld": "Allhallow",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels of Absolution",
-    "notableUnits": [
-      {
-        "name": "Moddren",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Angels of Absolution.",
-        "wikiQuery": "Moddren Angels of Absolution"
-      }
-    ]
+    "wikiQuery": "Angels of Absolution"
   },
   {
     "id": "angels-of-redemption",
@@ -4113,15 +3863,7 @@
     "loreLong": "Levés à la Seconde Fondation comme premier rejeton du grand plan des Sons of Russ — disposer une couronne galactique de chapitres Space Wolves autour de l'Œil de la Terreur —, les Wolf Brothers reçurent à leur fondation exactement la moitié de la flotte, des armes, de l'équipement et des prêtres Space Wolves disponibles. La dégradation rapide de leur viabilité génétique, par mutation Wulfen, rendit vite évident que le gène Russ était presque impossible à dupliquer. Le chapitre fut dissous par l'Inquisition. Le plan des Sons of Russ mourut avec eux.",
     "homeworld": "Kaeriol",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Wolf Brothers",
-    "notableUnits": [
-      {
-        "name": "Beor Arjac Grimmaesson",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Wolf Brothers.",
-        "wikiQuery": "Beor Arjac Grimmaesson Wolf Brothers"
-      }
-    ]
+    "wikiQuery": "Wolf Brothers"
   },
   {
     "id": "black-dragons",
@@ -4173,15 +3915,7 @@
     "loreLong": "Successeur du chapitre Marauders eux-mêmes issus des White Scars, les Mantis Warriors furent levés à la 8ᵉ Fondation au mi-M34 et chargés de la veille sur le Cluster Endymion. Comme beaucoup de chapitres frontaliers, ils s'habituèrent à l'autonomie et au secret. Leur isolement bascula en 587.M41 quand les High Lords les intégrèrent aux Maelstrom Warders aux côtés des Astral Claws et des Lamenters — alliance qui les conduisit à la sédition de Badab. Ils survécurent au pardon impérial mais sortirent du conflit dévastés.",
     "homeworld": "Tranquility III",
     "founding": "8ᵉ Fondation (M34)",
-    "wikiQuery": "Mantis Warriors",
-    "notableUnits": [
-      {
-        "name": "Khoisan Neotera",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Mantis Warriors.",
-        "wikiQuery": "Khoisan Neotera Mantis Warriors"
-      }
-    ]
+    "wikiQuery": "Mantis Warriors"
   },
   {
     "id": "rampagers",
@@ -4246,15 +3980,7 @@
     "loreLong": "Né d'un schisme religieux — le Moirae Schism, durant le Nova Terra Interregnum — qui affecta tout le gène Iron Hands, le chapitre des Sons of Medusa fut techniquement jamais fondé : il fut ratifié par édit 011.M37, après-coup. Ils partagent avec le chapitre-père une horreur de la faiblesse mortelle et une dépendance inhabituelle à la technologie et l'équipement. Trois groupes de bataille indépendants opèrent en flotte, supervisés par un triumvirat d'Iron Thanes plutôt que par un Chapter Master unique.",
     "homeworld": "Flotte (3 groupes de bataille)",
     "founding": "Ratifié 011.M37",
-    "wikiQuery": "Sons of Medusa",
-    "notableUnits": [
-      {
-        "name": "Triumvirat des Iron Thanes",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Sons of Medusa.",
-        "wikiQuery": "Triumvirat des Iron Thanes Sons of Medusa"
-      }
-    ]
+    "wikiQuery": "Sons of Medusa"
   },
   {
     "id": "red-talons",
@@ -4267,15 +3993,7 @@
     "loreLong": "Levés à la fin du Great Scouring durant la Seconde Fondation, les Red Talons portent depuis leur naissance une vendetta sans fin contre les Légions Traîtres. Leur fondateur, Autek Mor, capitaine Iron Hands d'origine Terran, était considéré comme paria par ses propres frères — son commandement, le Clan Morragul, était un refuge pour les autres outcasts de la Légion. Leur histoire prédate ainsi techniquement la Seconde Fondation elle-même. Le chapitre est connu pour sa férocité froide, mécanique et implacable.",
     "homeworld": "Raikan",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Red Talons",
-    "notableUnits": [
-      {
-        "name": "Autek Mor",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Red Talons.",
-        "wikiQuery": "Autek Mor Red Talons"
-      }
-    ]
+    "wikiQuery": "Red Talons"
   },
   {
     "id": "iron-lords",
@@ -4301,15 +4019,7 @@
     "loreLong": "Successeur Iron Hands codex-strict, les Brazen Claws virent leur monde-mère Talus IV détruit par une horde de daemons et durent fuir alors que la planète tombait au Chaos. Ils s'engagèrent dans une croisade vengeresse vers l'Œil de la Terreur pour gagner leur revanche et restaurer leur honneur ; ils furent rarement aperçus dans l'Imperium par la suite. La croisade fut un désastre — des centaines de frères périrent pour peu de gains. Quelques compagnies ont depuis émergé épuisées et amères.",
     "homeworld": "Talus IV (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Brazen Claws",
-    "notableUnits": [
-      {
-        "name": "Caul Engentre",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Brazen Claws.",
-        "wikiQuery": "Caul Engentre Brazen Claws"
-      }
-    ]
+    "wikiQuery": "Brazen Claws"
   },
   {
     "id": "brotherhood-of-a-thousand",
@@ -4348,15 +4058,7 @@
     "loreLong": "Successeur Raven Guard créé à la Seconde Fondation, le Black Guard descend des Shadow Wardens — élite de la XIXe Légion gravement décimée pendant l'Hérésie. Corvus Corax réorganisa personnellement les survivants en Black Guard et nomma Gherith Arendi pour les commander. Le chapitre privilégie l'application massive et opportune de la puissance de feu, en maître de l'embuscade soigneusement préparée. Au combat ils déploient des batteries entières de Thunderfire Cannons et de Vindicators pour annihiler instantanément l'ennemi — l'overkill est leur doctrine.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Black Guard",
-    "notableUnits": [
-      {
-        "name": "Gherith Arendi",
-        "role": "Notable leader",
-        "description": "Figure marquante du chapitre Black Guard.",
-        "wikiQuery": "Gherith Arendi Black Guard"
-      }
-    ]
+    "wikiQuery": "Black Guard"
   },
   {
     "id": "revilers",
