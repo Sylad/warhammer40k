@@ -14,7 +14,7 @@
     "currentLeaderRole": "Chapter Master (Lord of Macragge)",
     "homeworld": "Macragge",
     "founding": "1ʳᵉ Fondation (M30)",
-    "wikiQuery": "Ultramarines warhammer 40000",
+    "wikiQuery": "Ultramarines",
     "citation": "Théoden a Gloria.",
     "notableUnits": [
       {
@@ -150,7 +150,7 @@
     "currentLeaderRole": "Supreme Grand Master",
     "homeworld": "Caliban (détruit) / La Roche",
     "founding": "1ʳᵉ Fondation (M30)",
-    "wikiQuery": "Dark Angels warhammer 40000",
+    "wikiQuery": "Dark Angels",
     "citation": "Pour le Lion ! Repentir aux Tombés !",
     "notableUnits": [
       {
@@ -3200,7 +3200,7 @@
     "loreLong": "Issu de la Seconde Fondation, le chapitre fut confié à Lucretius Corvo, capitaine ultramarine décoré pour avoir résisté six jours sur Astagar et abattu un Warlord Battle Titan traître. Guilliman lui assigna Honourum, monde-forteresse pré-impérial marquant l'avancée la plus septentrionale de la Grande Croisade. Les Novamarines portent une armure quartelée bleu et os, et siègent dans la Forteresse Novum. Ils font partie des dix Shield Chapters d'Ultramar, jurés à la défense permanente du royaume de Guilliman.",
     "homeworld": "Honourum",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Novamarines warhammer 40000",
+    "wikiQuery": "Novamarines",
     "notableUnits": [
       {
         "name": "Lucretius Corvo",
@@ -3221,7 +3221,7 @@
     "loreLong": "Originaires du monde-mort cerclé de désert de Praesidia, les Sons of Guilliman traînent une réputation sulfureuse — rumeurs persistantes de frères tombés au Chaos et d'écarts par rapport au Codex. Cette réputation les pousse à combattre avec un zèle redoublé pour mériter leur nom. Leur héraldique combine l'Ultima au pair d'ailes, signature des fils du Primarque. Le rang de compagnie est inscrit en bas du pauldron, à côté du symbole, plutôt que par-dessus.",
     "homeworld": "Praesidia",
     "founding": "M33",
-    "wikiQuery": "Sons of Guilliman warhammer 40000",
+    "wikiQuery": "Sons of Guilliman",
     "notableUnits": [
       {
         "name": "Ansellus",
@@ -3242,7 +3242,7 @@
     "loreLong": "Stationnés sur Beta Entebes II dans la base souterraine de la Labyrinthe Orphia, les Praetors of Orpheus appliquent le Codex Astartes avec une rigueur inflexible, parfois trop littérale. Leur maîtrise technologique n'est dépassée que par celle de l'Adeptus Mechanicus, et beaucoup soupçonnent un pacte plus profond entre les deux ordres. Ils opèrent principalement dans les systèmes voisins de Pavonis. Armure blanche, liserés bleu ciel sur les pauldrons, sac à dos et aigle pectoral assortis.",
     "homeworld": "Beta Entebes II",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Praetors of Orpheus warhammer 40000"
+    "wikiQuery": "Praetors of Orpheus"
   },
   {
     "id": "aurora-chapter",
@@ -3255,7 +3255,7 @@
     "loreLong": "L'Aurora Chapter descend du 4ᵉ Chapitre des Ultramarines, les Aurorans, célèbres durant la Grande Croisade pour leurs cinq fois plus de véhicules blindés qu'un chapitre standard. À la trahison d'Ithraca sur Calth, les Aurorans subirent des pertes massives en combattant les Word Bearers et la Legio Suturvora. Ce qui restait fut reformé en chapitre indépendant à la Seconde Fondation, conservant le ruban auroran comme symbole et la couleur verte pour marquer ses vétérans, conformément à l'iconographie d'origine.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Aurora Chapter warhammer 40000"
+    "wikiQuery": "Aurora Chapter"
   },
   {
     "id": "genesis-chapter",
@@ -3268,7 +3268,7 @@
     "loreLong": "Premier des Primogéniteurs, le Genesis Chapter fut levé à partir des plus nobles vétérans Ultramarines survivants de l'Hérésie. Leur première bataille leur arracha le monde de Newfound aux Word Bearers. Doctrinalement et astrographiquement les plus proches de leur chapitre-père, ils mènent fréquemment des opérations conjointes avec les Ultramarines et comblent les rangs des compagnies sous-effectif quand celles-ci tombent en-deçà de la force codex. Tout frère effectue au moins un pèlerinage au Sanctuaire du Primarque.",
     "homeworld": "Newfound",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Genesis Chapter warhammer 40000",
+    "wikiQuery": "Genesis Chapter",
     "notableUnits": [
       {
         "name": "Eorloid",
@@ -3289,7 +3289,7 @@
     "loreLong": "Primogéniteur orgueilleux issu de la Seconde Fondation, le chapitre s'est forgé une réputation pour sa maîtrise de l'arme blanche et du tir de précision. Ses Vétérans sont si demandés qu'ils sont régulièrement détachés dans les Honour Guards des autres chapitres successeurs des Ultramarines, faisant office d'élite parmi l'élite primogéniteure.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Patriarchs of Ulixis warhammer 40000"
+    "wikiQuery": "Patriarchs of Ulixis"
   },
   {
     "id": "mortifactors",
@@ -3302,7 +3302,7 @@
     "loreLong": "Recrutés sur le Feral World perpétuellement obscur de Posul, les Mortifactors furent fondés par Sasebo Tezuka, guidé par le Tarot de l'Empereur. Ils suivent le Codex Astartes dans le fond mais en divergent radicalement dans la forme, par adoption de la culture funéraire Posuli. Leur Forteresse-Monastère, la Basilica Mortis, est un fort stellaire en orbite tapissé de crânes de frères tombés et d'ennemis abattus. Leurs Chapelains conduisent les rites funéraires.",
     "homeworld": "Posul (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Mortifactors warhammer 40000",
+    "wikiQuery": "Mortifactors",
     "notableUnits": [
       {
         "name": "Lord Magyar",
@@ -3323,7 +3323,7 @@
     "loreLong": "Les archives sur les Silver Eagles sont laconiques. Successeur des Ultramarines créé à la Seconde Fondation, le chapitre n'est connu que par mention de son Maître Periphas et de son symbole — un aigle d'argent. Leur déploiement et leur zone d'opération restent largement inconnus dans les registres impériaux disponibles.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Silver Eagles warhammer 40000",
+    "wikiQuery": "Silver Eagles",
     "notableUnits": [
       {
         "name": "Periphas",
@@ -3344,7 +3344,7 @@
     "loreLong": "Successeur Astartes Praeses gardant les abords de l'Œil de la Terreur, les White Consuls dérogent au Codex en alignant deux Chapter Masters simultanés — l'un commandant la défense de Sabatine et la réponse rapide à toute incursion Chaos par la Cadian Gate, l'autre supervisant les opérations en zones de guerre éloignées. Particularité plus rare encore : ils vénèrent l'Empereur en divinité et appartiennent au Culte Impérial. Leur isolement géographique d'Ultramar leur a valu une certaine indulgence.",
     "homeworld": "Sabatine",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "White Consuls warhammer 40000",
+    "wikiQuery": "White Consuls",
     "notableUnits": [
       {
         "name": "Borsellius",
@@ -3365,7 +3365,7 @@
     "loreLong": "Levé peu après l'Hérésie sous Arrias Cordos, le chapitre fut l'un des plus inflexibles dans l'application du Codex. Croisade ininterrompue depuis le fort stellaire Noctis Obscurum jusqu'à ce qu'en M40 des saboteurs Dark Eldar y détonnent le Warp drive. Relocalisés sur Cyclopia, ils menèrent trois siècles de croisade vengeresse contre les Drukhari, purgeant quinze systèmes et effondrant un sous-domaine entier du Webway. Leur effectif fut réduit aux trois quarts il y a trois siècles et demi.",
     "homeworld": "Cyclopia",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Black Consuls warhammer 40000",
+    "wikiQuery": "Black Consuls",
     "notableUnits": [
       {
         "name": "Arrias Cordos",
@@ -3386,7 +3386,7 @@
     "loreLong": "Parmi les plus brutaux et intransigeants des successeurs Ultramarines, les Libators tirent leur nom du rituel consistant à recueillir le sang ennemi pour l'offrir en libation au Primarque et à l'Empereur. Leur traitement des prisonniers a valu plusieurs censures impériales, mais le chapitre considère ses captifs comme la plus digne des offrandes. Armure jaune, sac à dos noir, imperialis et marques de rôle bleus.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Libators warhammer 40000"
+    "wikiQuery": "Libators"
   },
   {
     "id": "inceptors",
@@ -3399,7 +3399,7 @@
     "loreLong": "Successeur de la Seconde Fondation, les Inceptors combattirent durant la Croisade Macharienne avant de tomber en discorde avec leurs anciens alliés Doom Warriors lors de l'Hérésie Macharienne. Leur conflit prolongé dans le système Euxcine, mené sous règles d'engagement préétablies, refusa toute conclusion. Les Minotaurs, dépêchés pour y mettre fin, surprirent les Inceptors et les laminèrent jusqu'à ce qu'il en reste moins d'une centaine. Leur navire-amiral, vaisseau d'assaut datant de la Grande Croisade, fut capturé par les Minotaurs.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Inceptors warhammer 40000"
+    "wikiQuery": "Inceptors"
   },
   {
     "id": "doom-eagles",
@@ -3412,7 +3412,7 @@
     "loreLong": "Successeur de la Seconde Fondation mené par Tulian Aquila, le chapitre s'est établi sur Gathis II et y a forgé une doctrine fondée sur l'acceptation pleine de la mortalité. Là où les Ultramarines incarnent le rayonnement régalien, les Doom Eagles cultivent un détachement morbide, hostile à la gloire et à l'honneur, jugés vains face à l'éternité. Tous frères suivent une longue austérité spirituelle ; le chapitre se tient à l'écart des autres, considérant le deuil comme la seule vérité tangible du Space Marine.",
     "homeworld": "Gathis II",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Doom Eagles warhammer 40000",
+    "wikiQuery": "Doom Eagles",
     "notableUnits": [
       {
         "name": "Tulian Aquila",
@@ -3439,7 +3439,7 @@
     "loreLong": "Chapitre à l'historique long et glorieux, les Howling Griffons se considèrent comme les défenseurs de l'idéal impérial. Ils tiennent le Codex Astartes pour traité non encore surpassé plutôt que pour Écriture sacrée, et maintiennent un équilibre rigoureux entre toutes les disciplines codex sans spécialisation marquée. Leur fierté principale réside dans leurs serments — chaque vœu prononcé est un combat éternel jusqu'à son accomplissement, et chaque bataille en ajoute de nouveaux à la liste déjà longue.",
     "homeworld": "Mancora",
     "founding": "M33",
-    "wikiQuery": "Howling Griffons warhammer 40000",
+    "wikiQuery": "Howling Griffons",
     "notableUnits": [
       {
         "name": "Alvaro",
@@ -3466,7 +3466,7 @@
     "loreLong": "Chapitre flotte-basé né durant la 23ᵉ Fondation à partir des Eagle Warriors, les Marines Errant croisent aux confins galactiques. Leur statut autonome leur a fait modifier le Codex Astartes : chaque capitaine de compagnie reçoit le commandement d'un vaisseau (le plus souvent un croiseur) et opère seul des années durant. Ils figurent parmi les très rares chapitres connus à avoir mené croisade au-delà de la limite impériale et à en être revenus.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "23ᵉ Fondation",
-    "wikiQuery": "Marines Errant warhammer 40000"
+    "wikiQuery": "Marines Errant"
   },
   {
     "id": "marines-malevolent",
@@ -3479,7 +3479,7 @@
     "loreLong": "Connus pour leur brutalité, leur arrogance et un mépris pragmatique pour les pertes innocentes, les Marines Malevolent entretiennent des relations exécrables avec les autres chapitres — particulièrement les Salamanders. Lors de la Troisième Guerre d'Armageddon, ils déployèrent leurs canons Whirlwind directement sur le camp de réfugiés Emperor's Deliverance pour bombarder les Orks qui y avaient pris en otage 12 000 civils et près de 1 000 membres de l'Adeptus Ministorum. Plusieurs requêtes inquisitoriales ont visé le chapitre.",
     "homeworld": "Inconnu",
     "founding": "M32",
-    "wikiQuery": "Marines Malevolent warhammer 40000"
+    "wikiQuery": "Marines Malevolent"
   },
   {
     "id": "scythes-of-the-emperor",
@@ -3492,7 +3492,7 @@
     "loreLong": "Issus de la 199ᵉ Compagnie ultramarine 'Aegida' qui défendit Sotha contre les Night Lords durant l'Hérésie, les Scythes furent honorés par Guilliman du symbole des deux faux croisées. Maintenu en compagnie fantôme à la Troisième Fondation par Rogal Dorn, le chapitre fut quasi-anéanti quand la Flotte-Ruche Kraken submergea Sotha. À l'Ère du Dark Imperium, ils ont connu une renaissance et figurent désormais parmi les dix Shield Chapters d'Ultramar.",
     "homeworld": "Sotha (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Scythes of the Emperor warhammer 40000",
+    "wikiQuery": "Scythes of the Emperor",
     "notableUnits": [
       {
         "name": "Oberdeii",
@@ -3513,7 +3513,7 @@
     "loreLong": "Issus de la Sentinel Founding au début du 38ᵉ Millénaire pour renforcer les régions vulnérables de l'Imperium, les Star Phantoms ont vu leurs nombreuses victoires éclipsées par leur propre goût du secret. Initialement basés sur le monde-mausolée Haakoneth, ils sont devenus flotte-basés en 120.M40 après la destruction de leur monde, croisant depuis Segmentum Obscurus. Pivot loyaliste de la Guerre de Badab, ils sont aussi soupçonnés d'avoir anéanti le 17e Terrax Guard sur Thoth durant l'Hérésie Macharienne.",
     "homeworld": "Jahga",
     "founding": "Sentinel Founding (M38)",
-    "wikiQuery": "Star Phantoms warhammer 40000"
+    "wikiQuery": "Star Phantoms"
   },
   {
     "id": "storm-lords",
@@ -3526,7 +3526,7 @@
     "loreLong": "Produit de la Seconde Fondation, les Storm Lords entretiennent une rivalité toujours brûlante avec les White Scars, contre qui ils rivalisent de gloire au point de prendre des risques téméraires. Leur réputation est faite par leur acharnement à chasser les Ork-Waaagh — les murs des grandes salles de leur Forteresse-Monastère sont tendus de scalps de Warbosses abattus. Armure mi-rouge mi-blanche, aigle et sac à dos noirs, couleur de heaume désignant la compagnie.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Storm Lords warhammer 40000"
+    "wikiQuery": "Storm Lords"
   },
   {
     "id": "eagle-warriors",
@@ -3539,7 +3539,7 @@
     "loreLong": "Successeur ultramarine flotte-basé fondé durant une période d'anarchie au sein de l'Imperium, les Eagle Warriors patrouillent inlassablement les systèmes conquis par Guilliman durant la Grande Croisade. Ils sont consignés comme aïeuls des Marines Errant, sans que la raison de cet honneur soit conservée. Lors de la 13ᵉ Croisade Noire, le chapitre perdit plusieurs vaisseaux et deux compagnies entières dans le sillage de la Grande Faille. Armure mi-blanche mi-bleue, aigles pectoraux dorés.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Eagle Warriors warhammer 40000"
+    "wikiQuery": "Eagle Warriors"
   },
   {
     "id": "iron-snakes",
@@ -3552,7 +3552,7 @@
     "loreLong": "Fondés par Saur Damocles, capitaine de la 6ᵉ Compagnie ultramarine durant l'Hérésie, les Iron Snakes veillent sur la région impériale dite des Reef Stars. Leurs squads portent le nom de leurs premiers commandants, immortalisés à jamais dans la nomenclature du chapitre — chaque squad a sa propre chronique et sa gloire propre. Ils ont contribué à la Croisade des Sabbat Worlds et à la réponse impériale à la 13ᵉ Croisade Noire. Le maître actuel, Seydon, est le dix-huitième à porter ce titre.",
     "homeworld": "Ithaka",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Iron Snakes warhammer 40000",
+    "wikiQuery": "Iron Snakes",
     "notableUnits": [
       {
         "name": "Saur Damocles",
@@ -3579,7 +3579,7 @@
     "loreLong": "L'histoire des Sons of Orar a été perdue en archives, mais l'on sait qu'ils vénèrent Orar, capitaine ultramarine renommé au lendemain de l'Hérésie, comme leur patriarche spirituel. Ils figurent parmi les dix Shield Chapters d'Ultramar. Le chapitre recrute parmi les jeunes vétérans des combats en tunnel du monde-ruche Armato. Leur symbole, un oméga rouge, témoigne de la proximité héraldique avec les Ultramarines.",
     "homeworld": "Armato",
     "founding": "Inconnue",
-    "wikiQuery": "Sons of Orar warhammer 40000"
+    "wikiQuery": "Sons of Orar"
   },
   {
     "id": "brazen-consuls",
@@ -3592,7 +3592,7 @@
     "loreLong": "Le chapitre n'admet en ses rangs que des Aspirants des Maisons Nobles d'Aventinium, monde-mère opulent où les Nobles consacrent leur progéniture à un entraînement martial dès la naissance. Les Aspirants des Brazen Consuls sont escrimeurs experts et marksmen de précision avant même leur transformation Astartes, aussi chevronnés en stratégie et survie solitaire qu'en étiquette de banquet. Cette double formation produit une élite codex-stricte et raffinée à la fois.",
     "homeworld": "Aventinium",
     "founding": "Inconnue",
-    "wikiQuery": "Brazen Consuls warhammer 40000"
+    "wikiQuery": "Brazen Consuls"
   },
   {
     "id": "vorpal-swords",
@@ -3605,7 +3605,7 @@
     "loreLong": "Au mi-M37, le chapitre fut condamné à l'Abyssal Crusade dans l'Œil de la Terreur par le Saint Basillius pour défaut de foi. Konvak Lann ramena ses frères vivants de cet exil et mena une purge contre le statut de Basillius dans l'Imperium. Lors du Cataclysme de Gheistos en M41, les Vorpal Swords stoppèrent une incursion daemonique par drop pods multi-sites, affrontant le Bloodthirster Skarbrand et refermant une faille warp majeure au port spatial de Devlan.",
     "homeworld": "Inconnu",
     "founding": "M37",
-    "wikiQuery": "Vorpal Swords warhammer 40000",
+    "wikiQuery": "Vorpal Swords",
     "notableUnits": [
       {
         "name": "Konvak Lann",
@@ -3626,7 +3626,7 @@
     "loreLong": "Les Knights of the Raven ne sont connus de l'Adeptus Astartes, du Deathwatch et de l'Inquisition que par fragments. Lorsqu'ils combattent aux côtés d'autres forces impériales, ils ne communiquent qu'au strict nécessaire et entre eux usent d'un argot de bataille cryptique. Sur la seule coïncidence d'iconographie et de titre, ils sont supposés issus d'une fondation tardive en deuxième moitié du M38 utilisant le gène Raven Guard. En M42, le Chapter Master Shrike les nomma 'Frères des Raven Guard'.",
     "homeworld": "Coralax",
     "founding": "Later Founding (M38)",
-    "wikiQuery": "Knights of the Raven warhammer 40000"
+    "wikiQuery": "Knights of the Raven"
   },
   {
     "id": "praetors-of-ultramar",
@@ -3639,7 +3639,7 @@
     "loreLong": "Chapitre Primaris levé sur ordre direct de Guilliman à partir des Unnumbered Sons après la conclusion de la Croisade Indomitus. Forgés au combat aux côtés de frères de toutes lignées, ils ont développé une étude doctrinale comparative — sanctionnée par le chapitre — pour mieux appréhender le Codex Astartes dans son contexte le plus large. Engagés aux côtés de Guilliman durant les Plague Wars, ils figurent parmi les dix Shield Chapters et tiennent désormais Howsbridge.",
     "homeworld": "Howsbridge",
     "founding": "Ultima Founding (M42)",
-    "wikiQuery": "Praetors of Ultramar warhammer 40000"
+    "wikiQuery": "Praetors of Ultramar"
   },
   {
     "id": "soul-drinkers",
@@ -3652,7 +3652,7 @@
     "loreLong": "Initialement successeur loyal des Imperial Fists à la Seconde Fondation, les Soul Drinkers furent déclarés Excommunicate Traitoris à la suite d'événements complexes ayant fait basculer le chapitre dans la dissidence. À la différence de la majorité des renégats, ils n'ont pas voué leur âme au Chaos — ils détestent les Puissances Ruineuses autant qu'ils haïssent l'Imperium qui les a rejetés. Leur idéologie tient l'Imperium pour traître à l'idéal originel de l'Empereur. Ils combattent donc le Chaos tout en s'opposant à l'Imperium.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Soul Drinkers warhammer 40000",
+    "wikiQuery": "Soul Drinkers",
     "notableUnits": [
       {
         "name": "Gorgoleon",
@@ -3679,7 +3679,7 @@
     "loreLong": "Levés à la Seconde Fondation aux côtés des Black Templars et des Crimson Fists, les Excoriators sont attritionnistes par doctrine et obstinés à l'extrême. Leur premier Maître fut le capitaine Imperial Fist Demetrius Katafalque. Leur mentalité du 'survivre malgré tout' remonte à l'Hérésie elle-même : les Marines qui devinrent les Excoriators étaient postés sur les murs du Palais Impérial par Dorn lui-même, avec une seule consigne — Ne pas céder.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Excoriators warhammer 40000",
+    "wikiQuery": "Excoriators",
     "notableUnits": [
       {
         "name": "Demetrius Katafalque",
@@ -3700,7 +3700,7 @@
     "loreLong": "L'un des vingt chapitres Astartes Praeses gardant l'Œil de la Terreur et les Marches orientales, les Subjugators sont implacables dans la poursuite des ennemis de l'Humanité. Ils frappent par submersion, dédaignent les arts subtils de la guerre et détruisent ennemis, ressources et atouts indistinctement. Leurs méthodes extrêmes font hésiter de nombreux commandants impériaux à requérir leur aide — la victoire arrive, mais à grand frais en collatéraux.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Subjugators warhammer 40000"
+    "wikiQuery": "Subjugators"
   },
   {
     "id": "iron-knights",
@@ -3713,7 +3713,7 @@
     "loreLong": "Successeur croisé des Imperial Fists, les Iron Knights figurent parmi les douze chapitres qui envoient un champion au centennaire Feast of Blades — ils sont les seuls à l'avoir remporté deux fois consécutivement. À la fin du M41, un groupe interne dénommé Iron Brethren bascula au Chaos ; le chapitre entreprit volontairement une croisade pénitente pour les traduire en justice. Leur monde-mère Seheris est partagé entre tribus rivales sur déserts et plaines.",
     "homeworld": "Seheris",
     "founding": "M32 (avant 4ᵉ Fondation)",
-    "wikiQuery": "Iron Knights warhammer 40000"
+    "wikiQuery": "Iron Knights"
   },
   {
     "id": "hammers-of-dorn",
@@ -3726,7 +3726,7 @@
     "loreLong": "Successeur tardif (M41), les Hammers of Dorn vouent à leur Primarque un culte que leurs frères Imperial Fists eux-mêmes jugent excessif. Leurs Chapelains enseignent que Dorn était le fils favori de l'Empereur, ayant tenu épaule contre épaule avec lui dans les jours les plus sombres de l'Hérésie. Le chapitre projette dans son présent la rivalité ancestrale entre Dorn et Guilliman : les rapports avec les Ultramarines sont traditionnellement glaciaux.",
     "homeworld": "Inconnu",
     "founding": "M41",
-    "wikiQuery": "Hammers of Dorn warhammer 40000"
+    "wikiQuery": "Hammers of Dorn"
   },
   {
     "id": "fists-exemplar",
@@ -3739,7 +3739,7 @@
     "loreLong": "Levés à la Seconde Fondation parmi les Imperial Fists ralliés au démantèlement codex de Guilliman, les Fists Exemplar combattirent durant la Guerre de la Bête. À la trahison d'un de leurs capitaines, leurs frères survivants furent dispersés dans l'Adeptus Astartes et le chapitre effacé de l'histoire sur ordre du Lord Commander en exercice — Maximus Thane, qui en était lui-même issu. Leur monde-mère Eidolica fut leur dernière forteresse.",
     "homeworld": "Eidolica",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Fists Exemplar warhammer 40000",
+    "wikiQuery": "Fists Exemplar",
     "notableUnits": [
       {
         "name": "Maximus Thane",
@@ -3760,7 +3760,7 @@
     "loreLong": "Successeur Imperial Fist Primaris créé sur ordre direct de Guilliman durant la Croisade Indomitus. Fidèles fervents, ritualistes au combat, les Sons of the Phoenix se targuent de plonger dans les flammes du combat. Leurs croisades sont conduites par les Chapelains et ouvrent la voie à la propagation du Credo Impérial sur de nombreux mondes — souvent suivis par les missionnaires de l'Ecclesiarchy. Plus proches du Black Templars que de la moyenne Imperial Fist par leur ferveur.",
     "homeworld": "Inconnu",
     "founding": "Ultima Founding (M42)",
-    "wikiQuery": "Sons of the Phoenix warhammer 40000"
+    "wikiQuery": "Sons of the Phoenix"
   },
   {
     "id": "astral-knights",
@@ -3773,7 +3773,7 @@
     "loreLong": "Successeur des Imperial Fists, les Astral Knights se sacrifièrent en 926.M41 pour détruire le World Engine, vaisseau-planète Necron capable de purger un monde de toute vie. Après douze tentatives infructueuses d'une force conjointe de quinze chapitres et de la Marine Impériale — un tiers d'une Battlefleet anéantie —, le Chapter Master Artor Amhrad ordonna à son vaisseau de percuter les boucliers du World Engine. La manœuvre suicide réussit. Le chapitre fut effacé.",
     "homeworld": "Obsidia (cédé)",
     "founding": "Inconnue",
-    "wikiQuery": "Astral Knights warhammer 40000",
+    "wikiQuery": "Astral Knights",
     "notableUnits": [
       {
         "name": "Artor Amhrad",
@@ -3800,7 +3800,7 @@
     "loreLong": "Successeur de la Seconde Fondation issu du courant le plus sanguinaire de la IXe Légion, les Flesh Tearers souffrent d'une mutation gène-seed les rendant nettement plus vulnérables à la Black Rage. À ce jour aucun remède n'est connu et les chronistes prédisent l'extinction du chapitre dans les deux millénaires si rien ne change. Ils sont par ailleurs réputés pour leur sauvagerie et leur soif de sang au combat — réputation qui les a fait censurer plus d'une fois sans pour autant entraîner leur dissolution.",
     "homeworld": "Cretacia",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Flesh Tearers warhammer 40000",
+    "wikiQuery": "Flesh Tearers",
     "notableUnits": [
       {
         "name": "Amit",
@@ -3827,7 +3827,7 @@
     "loreLong": "Successeur fidèle au Codex Astartes, les Blood Drinkers ont développé des rituels de consommation de sang dérivés d'une mutation de leur zygote Omophagea. Leur incidence de Black Rage est faible et leur Death Company réduite — ce qui semble miraculeux. La vérité est plus insidieuse : ils ne combattent pas la Soif Rouge, ils s'y abandonnent. Au M37, ils étaient un chapitre mourant ; ce qui les a sauvés relève d'un secret jalousement gardé qui les rend dépendants en profondeur d'une source extérieure.",
     "homeworld": "San Guisaga",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Blood Drinkers warhammer 40000",
+    "wikiQuery": "Blood Drinkers",
     "notableUnits": [
       {
         "name": "Orloc",
@@ -3848,7 +3848,7 @@
     "loreLong": "Là où la quasi-totalité des successeurs Blood Angels entretiennent des liens étroits avec leur chapitre-père et entre eux, les Angels Vermillion ont fait le choix de porter leur malédiction dans la solitude. Ils refusent tout contact avec leurs frères et chapitres-source. Les registres impériaux des exploits du chapitre depuis la Seconde Fondation sont irréprochables, mais l'origine de leur exil auto-imposé reste opaque — honte à porter seule, ou secret plus sombre encore que nul ne souhaite voir partagé.",
     "homeworld": "Corinal",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels Vermillion warhammer 40000",
+    "wikiQuery": "Angels Vermillion",
     "notableUnits": [
       {
         "name": "Kuldoth Moar",
@@ -3869,7 +3869,7 @@
     "loreLong": "Aucun chapitre n'est aussi actif que les Angels Encarmine. Leur Maître, Castellan Zargo, ne tient pas en place et cherche perpétuellement opportunité de mener ses frères en campagne. Conséquence : le chapitre est rarement à effectif plein. Ce qui leur manque en nombre, ils le compensent par une ferveur déterminée. Mais leur Death Company est en permanence inquiétante, ce qui aggrave leur problème d'effectifs et nourrit le cycle infernal de la guerre permanente.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels Encarmine warhammer 40000",
+    "wikiQuery": "Angels Encarmine",
     "notableUnits": [
       {
         "name": "Castellan Zargo",
@@ -3890,7 +3890,7 @@
     "loreLong": "Levés à la Seconde Fondation parmi les Blood Angels jugés les plus glorieux et les plus fidèles à l'image du Primarque, les Angels Sanguine virent leurs Sanguinary Priests présentés au Red Grail des Blood Angels avant de partir forger leur propre histoire. Le Graal contenait ce qui restait du sang du Primarque. Leur devise — 'Le sang qui coule en nous est celui de Sanguinius, l'honneur que nous portons est celui des Angels' — résume leur mission : rester dignes de cette filiation directe.",
     "homeworld": "Anzyra",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels Sanguine warhammer 40000",
+    "wikiQuery": "Angels Sanguine",
     "notableUnits": [
       {
         "name": "Sentikan",
@@ -3911,7 +3911,7 @@
     "loreLong": "Issus de la Cursed 21st Founding du M36, les Lamenters cumulent une malchance proverbiale. Lors de la Guerre de Badab, ils choisirent le côté rebelle des Astral Claws, mais reçurent le pardon de l'Empereur en échange d'une croisade pénitente. Cette croisade les conduisit directement dans la trajectoire de la Flotte-Ruche Kraken, qui les amena au seuil de l'extinction. Ils ont conservé maîtrise relative de leurs failles génétiques, mais leur destin reste celui d'une condamnation à vivre poursuivis.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "Cursed 21st Founding (M36)",
-    "wikiQuery": "Lamenters warhammer 40000",
+    "wikiQuery": "Lamenters",
     "notableUnits": [
       {
         "name": "Malakim Phoros",
@@ -3932,7 +3932,7 @@
     "loreLong": "Successeur Blood Angel non reconnu officiellement par l'Inquisition, les Knights of Blood furent déclarés Renegatus pour défaut de discipline génétique et exil refusé. Pourtant, ils continuent à combattre pour l'Imperium contre le Chaos et les xénos, tirant gloire de défendre les mondes qui les rejettent. Leur descente dans la Black Rage est plus rapide que la moyenne Blood Angel, et leur Death Company quasi-permanente. Statut à mi-chemin entre déchéance et héroïsme, jamais véritablement absous.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Knights of Blood warhammer 40000",
+    "wikiQuery": "Knights of Blood",
     "notableUnits": [
       {
         "name": "Karlaen",
@@ -3953,7 +3953,7 @@
     "loreLong": "Chapitre Codex à la singularité notable : l'un de ses Chapter Masters fut entombé dans un Dreadnought, faisant du véhicule un avatar vivant de la mémoire chapitrale. Ils entretiennent des liens étroits avec le chapitre Star Dragons, dont les mondes-mères sont voisins. Ils servent actuellement avec la Flotte de Containment Kappa, près de l'Œil de la Terreur, dans le cadre d'une croisade pénitente continue. La nature exacte de leur faute originelle n'est pas conservée dans les archives publiques.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Blood Swords warhammer 40000"
+    "wikiQuery": "Blood Swords"
   },
   {
     "id": "carmine-blades",
@@ -3966,7 +3966,7 @@
     "loreLong": "Connus à l'origine sous le nom de Swords of Haldroth (d'après leur monde-féroce de recrutement), les Carmine Blades crurent longtemps descendre des Ultramarines — jusqu'à une rencontre fortuite avec Astorath the Grim à la fin du M41 qui leur révéla leur véritable origine sanguinienne. Cette découverte expliqua enfin les symptômes étranges qu'ils dissimulaient depuis des siècles. Guerriers sauvages et insulaires, ils ont depuis constitué leur propre corps de Sanguinary Priests.",
     "homeworld": "Haldroth",
     "founding": "Inconnue",
-    "wikiQuery": "Carmine Blades warhammer 40000",
+    "wikiQuery": "Carmine Blades",
     "notableUnits": [
       {
         "name": "Hajjin",
@@ -3987,7 +3987,7 @@
     "loreLong": "Levé en secret par le Suprême Grand Maître des Dark Angels Valafar pour rechercher et préserver l'histoire des Unforgiven, les Consecrators n'apparaissent dans aucun registre avant le 3ᵉ siècle du 40ᵉ Millénaire. Ils ont hérité des armes les plus vénérées de la Légion, qu'ils entretiennent avec une dévotion archéologique. Leur apparence et leur équipement rappellent étrangement la Ire Légion d'avant l'Hérésie, conservant l'iconographie d'origine. Ils chassent les Fallen au même titre que tous les Unforgiven.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "M40 (secret)",
-    "wikiQuery": "Consecrators warhammer 40000",
+    "wikiQuery": "Consecrators",
     "notableUnits": [
       {
         "name": "Valafar",
@@ -4014,7 +4014,7 @@
     "loreLong": "Successeur de la Seconde Fondation, l'Angels of Absolution partagent structure et croyances avec leur progéniteur — au point que les deux chapitres mêlent fréquemment leurs ressources dans la chasse aux Fallen. La seule divergence doctrinale notable : ils considèrent leurs propres péchés expiés par les actions loyalistes de leurs ancêtres lors de la Chute de Caliban. Cette absolution autoproclamée ne diminue en rien leur devoir de châtier les Fallen — au contraire, elle leur en fait porter la responsabilité avec plus de zèle.",
     "homeworld": "Allhallow",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels of Absolution warhammer 40000",
+    "wikiQuery": "Angels of Absolution",
     "notableUnits": [
       {
         "name": "Moddren",
@@ -4035,7 +4035,7 @@
     "loreLong": "Successeur de la Seconde Fondation aussi célèbre que ses progéniteurs, les Angels of Redemption se sont rendus tristement notoires pour abandonner abruptement les fronts de bataille au profit de la chasse aux Fallen, au prix lourd pour leurs alliés. La plupart des forces impériales refusent désormais leur soutien, ce qui crée des tensions avec les autres chapitres. Une censure inquisitoriale était en préparation à leur encontre, suspendue par l'ouverture de la Grande Faille qui a réinstauré la priorité absolue.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels of Redemption warhammer 40000"
+    "wikiQuery": "Angels of Redemption"
   },
   {
     "id": "angels-of-vengeance",
@@ -4048,7 +4048,7 @@
     "loreLong": "Réputés parmi les combattants les plus obstinés de l'Imperium, les Angels of Vengeance ont risqué l'avenir de leur chapitre maintes fois en s'engageant dans des situations désespérées et en refusant la retraite, même quand leurs chances de survie étaient quasi nulles. Encore moins connus que les autres chapitres Unforgiven, ils fuient gloire et célébration pour se concentrer sur leurs devoirs et leur mission. Ils incarnent la dévotion entêtée de la Ire Légion poussée à son extrême logique.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Angels of Vengeance warhammer 40000"
+    "wikiQuery": "Angels of Vengeance"
   },
   {
     "id": "disciples-of-caliban",
@@ -4061,7 +4061,7 @@
     "loreLong": "Successeur dont la fondation est entourée de mystère et de controverse. À la fin du 37ᵉ Millénaire, le Maître des Dark Angels Anaziel adressa aux High Lords of Terra une requête formelle de levée d'un nouveau chapitre — chose inouïe émanant d'un Chapter Master, d'autant qu'aucune raison claire ne fut donnée. La requête fut accordée. Le gène utilisé pour la fondation a soulevé bien des questions, jamais résolues. Les Disciples of Caliban poursuivent les Fallen avec la même obsession que leurs ancêtres.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "M37",
-    "wikiQuery": "Disciples of Caliban warhammer 40000"
+    "wikiQuery": "Disciples of Caliban"
   },
   {
     "id": "guardians-of-the-covenant",
@@ -4074,7 +4074,7 @@
     "loreLong": "D'une fondation inconnue mais d'origine Dark Angel certaine, les Guardians of the Covenant ont mené la majorité de leurs batailles dans le Segmentum Pacificus, soutenant principalement les croisades dans les Halo Stars et la Veiled Region. Le chapitre est célèbre pour sa nature monastique extrême — étude perpétuelle des enseignements de l'Empereur et du Lion. Cette dévotion se reflète sur leurs véhicules et leurs armures, recouvertes de textes religieux enluminés extraits des doctrines de la Ire Légion.",
     "homeworld": "Mortikah VII",
     "founding": "Inconnue",
-    "wikiQuery": "Guardians of the Covenant warhammer 40000"
+    "wikiQuery": "Guardians of the Covenant"
   },
   {
     "id": "blades-of-vengeance",
@@ -4087,7 +4087,7 @@
     "loreLong": "Tout premier des chapitres Primaris créés à partir du gène-seed du Lion El'Jonson, les Blades of Vengeance servirent avec distinction durant la Croisade Indomitus. Au combat, ils combinent la défense tenace caractéristique de leur Primarque à un talent particulier pour la contre-attaque brillamment exécutée. Ils sont connus pour leur empressement à libérer de nouveaux mondes — empressement qui, ignoré de presque tous, traduit en réalité un désir profond de débusquer les Fallen.",
     "homeworld": "Inconnu",
     "founding": "Ultima Founding (M42)",
-    "wikiQuery": "Blades of Vengeance warhammer 40000"
+    "wikiQuery": "Blades of Vengeance"
   },
   {
     "id": "wolfspear",
@@ -4100,7 +4100,7 @@
     "loreLong": "Issus des 500 Marines Space Wolves de l'Unnumbered Sons ayant survécu à la Bataille de Raukos, qui clôtura la Croisade Indomitus, les Wolfspear furent chargés par Guilliman de la garde de la Pit of Raukos contre toute incursion Chaos future. Cette mission frustra une partie du chapitre, qui espérait combattre en première ligne. Au cœur du débat : les Space Wolves accepteraient-ils ces Primaris comme véritables Fils de Russ ? Guilliman se rendit à Fenris en personne pour proposer la fondation. Le débat dans le Fang fut âpre.",
     "homeworld": "Pit of Raukos (gardiens)",
     "founding": "Ultima Founding (M42)",
-    "wikiQuery": "Wolfspear warhammer 40000"
+    "wikiQuery": "Wolfspear"
   },
   {
     "id": "wolf-brothers",
@@ -4113,7 +4113,7 @@
     "loreLong": "Levés à la Seconde Fondation comme premier rejeton du grand plan des Sons of Russ — disposer une couronne galactique de chapitres Space Wolves autour de l'Œil de la Terreur —, les Wolf Brothers reçurent à leur fondation exactement la moitié de la flotte, des armes, de l'équipement et des prêtres Space Wolves disponibles. La dégradation rapide de leur viabilité génétique, par mutation Wulfen, rendit vite évident que le gène Russ était presque impossible à dupliquer. Le chapitre fut dissous par l'Inquisition. Le plan des Sons of Russ mourut avec eux.",
     "homeworld": "Kaeriol",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Wolf Brothers warhammer 40000",
+    "wikiQuery": "Wolf Brothers",
     "notableUnits": [
       {
         "name": "Beor Arjac Grimmaesson",
@@ -4134,7 +4134,7 @@
     "loreLong": "Réputés successeurs Salamanders sans confirmation absolue, les Black Dragons sont nés de la Cursed 21st Founding juste avant l'Âge de l'Apostasie. Leur mutation gène-seed est unique : leur zygote Ossmodula a muté, produisant des crêtes osseuses sur le crâne et des lames jaillissant de l'avant-bras et du coude. Comme la Death Company des Blood Angels, les frères les plus mutants forment une unité distincte — les Dragon Claws — qui aiguisent leurs protubérances en armes affûtées. Le chapitre est sous surveillance inquisitoriale permanente.",
     "homeworld": "Flotte (sans monde-mère)",
     "founding": "Cursed 21st Founding (M36)",
-    "wikiQuery": "Black Dragons warhammer 40000"
+    "wikiQuery": "Black Dragons"
   },
   {
     "id": "storm-giants",
@@ -4147,7 +4147,7 @@
     "loreLong": "Longtemps présumés successeurs Salamanders, les Storm Giants n'ont vu leur lignée confirmée que récemment. Ils ont pris part à plusieurs des plus grandes guerres impériales — dont la Troisième Guerre d'Armageddon. Leur force physique est exceptionnelle, même au regard des standards Astartes, et l'on débat dans les cercles savants d'une mutation possible de leur Biscopea. Plusieurs Magos Genetors de l'Adeptus Mechanicus ont demandé à étudier leur gène-seed — chaque demande a été refusée. Armure jaune pâle.",
     "homeworld": "Inconnu",
     "founding": "M36 (ou avant)",
-    "wikiQuery": "Storm Giants warhammer 40000"
+    "wikiQuery": "Storm Giants"
   },
   {
     "id": "sons-of-vulkan",
@@ -4160,7 +4160,7 @@
     "loreLong": "Successeur Primaris Salamanders levé durant l'Ultima Founding sur ordre direct de Guilliman après l'aboutissement de la Croisade Indomitus. Comme leurs frères Salamanders, les Sons of Vulkan portent dans leur doctrine l'amour de la forge — chaque frère est artisan de sa propre armure et de son propre arsenal autant que combattant. Plus communautaire que la moyenne Astartes, ils cultivent une proximité avec les populations qu'ils défendent et tirent leur fierté du sacrifice individuel pour la sauvegarde de l'innocent.",
     "homeworld": "Inconnu",
     "founding": "Ultima Founding (M42)",
-    "wikiQuery": "Sons of Vulkan warhammer 40000"
+    "wikiQuery": "Sons of Vulkan"
   },
   {
     "id": "mantis-warriors",
@@ -4173,7 +4173,7 @@
     "loreLong": "Successeur du chapitre Marauders eux-mêmes issus des White Scars, les Mantis Warriors furent levés à la 8ᵉ Fondation au mi-M34 et chargés de la veille sur le Cluster Endymion. Comme beaucoup de chapitres frontaliers, ils s'habituèrent à l'autonomie et au secret. Leur isolement bascula en 587.M41 quand les High Lords les intégrèrent aux Maelstrom Warders aux côtés des Astral Claws et des Lamenters — alliance qui les conduisit à la sédition de Badab. Ils survécurent au pardon impérial mais sortirent du conflit dévastés.",
     "homeworld": "Tranquility III",
     "founding": "8ᵉ Fondation (M34)",
-    "wikiQuery": "Mantis Warriors warhammer 40000",
+    "wikiQuery": "Mantis Warriors",
     "notableUnits": [
       {
         "name": "Khoisan Neotera",
@@ -4194,7 +4194,7 @@
     "loreLong": "Les Rampagers se distinguent par leurs cicatrices faciales rituelles, qui marquent rang et prestige dans le chapitre. Les frères reçoivent ces scarifications lors d'une longue cérémonie nommée Blooding ; le sang recueilli alimente ensuite le festin de célébration qui suit. Le chapitre cible volontiers des Feral Worlds comme nouveaux territoires de recrutement, après tests rigoureux contre toute forme de corruption sur la population. Armure rouge, plaque de genou gauche colorée selon la compagnie.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Rampagers warhammer 40000"
+    "wikiQuery": "Rampagers"
   },
   {
     "id": "storm-reapers",
@@ -4207,7 +4207,7 @@
     "loreLong": "Premier des chapitres Primaris créés à partir du gène-seed des White Scars durant la Fondation Ultima, sur ordre direct de Guilliman, les Storm Reapers incarnent la nature vicieuse mais sage et noble de Jaghatai Khan. Ils ont revendiqué le Feral World de Jagun comme monde-mère et y ont planté leur Forteresse-Monastère. Renforcement essentiel à l'effort de guerre impérial dans la Croisade Indomitus, ils combinent la cavalerie Astartes héritée du Khan avec la doctrine d'attaque rapide modernisée par Cawl.",
     "homeworld": "Jagun",
     "founding": "Ultima Founding (M42)",
-    "wikiQuery": "Storm Reapers warhammer 40000"
+    "wikiQuery": "Storm Reapers"
   },
   {
     "id": "marauders",
@@ -4220,7 +4220,7 @@
     "loreLong": "Successeur White Scars créé à la Seconde Fondation, nommé dans l'Apocrypha of Davio. Chapitre isolationniste : prêt à combattre aux côtés d'autres forces impériales, il reste à distance et n'échange que les informations strictement nécessaires aux campagnes. Reconnu pour ses qualités de tireur d'élite, les Marauders tendent volontiers des embuscades à leurs ennemis avant de les frapper de leurs feux concentrés, puis fondent en mêlée pour achever les survivants épars. Ils sont les aïeuls connus des Mantis Warriors.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Marauders warhammer 40000"
+    "wikiQuery": "Marauders"
   },
   {
     "id": "destroyers",
@@ -4233,7 +4233,7 @@
     "loreLong": "Successeur des White Scars établi à la Seconde Fondation, les Destroyers traînent une histoire troublée. Si le chapitre a remporté de grandes victoires au nom de l'Imperium, des inquiétudes persistent quant à la stabilité de leur gène-seed et à la sauvagerie pure de leur conduite martiale. Cette réputation persiste malgré leurs faits héroïques de quasi-sacrifice durant la débâcle daemonique du sous-secteur Lhorgus. Pour leur part, les Destroyers ne se préoccupent que de la mission suivante.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Destroyers warhammer 40000"
+    "wikiQuery": "Destroyers"
   },
   {
     "id": "sons-of-medusa",
@@ -4246,7 +4246,7 @@
     "loreLong": "Né d'un schisme religieux — le Moirae Schism, durant le Nova Terra Interregnum — qui affecta tout le gène Iron Hands, le chapitre des Sons of Medusa fut techniquement jamais fondé : il fut ratifié par édit 011.M37, après-coup. Ils partagent avec le chapitre-père une horreur de la faiblesse mortelle et une dépendance inhabituelle à la technologie et l'équipement. Trois groupes de bataille indépendants opèrent en flotte, supervisés par un triumvirat d'Iron Thanes plutôt que par un Chapter Master unique.",
     "homeworld": "Flotte (3 groupes de bataille)",
     "founding": "Ratifié 011.M37",
-    "wikiQuery": "Sons of Medusa warhammer 40000",
+    "wikiQuery": "Sons of Medusa",
     "notableUnits": [
       {
         "name": "Triumvirat des Iron Thanes",
@@ -4267,7 +4267,7 @@
     "loreLong": "Levés à la fin du Great Scouring durant la Seconde Fondation, les Red Talons portent depuis leur naissance une vendetta sans fin contre les Légions Traîtres. Leur fondateur, Autek Mor, capitaine Iron Hands d'origine Terran, était considéré comme paria par ses propres frères — son commandement, le Clan Morragul, était un refuge pour les autres outcasts de la Légion. Leur histoire prédate ainsi techniquement la Seconde Fondation elle-même. Le chapitre est connu pour sa férocité froide, mécanique et implacable.",
     "homeworld": "Raikan",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Red Talons warhammer 40000",
+    "wikiQuery": "Red Talons",
     "notableUnits": [
       {
         "name": "Autek Mor",
@@ -4288,7 +4288,7 @@
     "loreLong": "Connus pour leur rigueur austère et leur xénophobie, les Iron Lords ont pour mission depuis le M38 le maintien du blocus des Grendl Stars, confinant les vils Barghesi en attendant que l'Imperium puisse rassembler les ressources nécessaires à leur annihilation totale. Ces dernières années, ils combattent les tendrils de la Flotte-Ruche Kraken qui balaie les Grendl Stars, les forçant à enchaîner les batailles désespérées. Si Kraken absorbait le potentiel génétique des Barghesi, les conséquences seraient catastrophiques.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Iron Lords warhammer 40000"
+    "wikiQuery": "Iron Lords"
   },
   {
     "id": "brazen-claws",
@@ -4301,7 +4301,7 @@
     "loreLong": "Successeur Iron Hands codex-strict, les Brazen Claws virent leur monde-mère Talus IV détruit par une horde de daemons et durent fuir alors que la planète tombait au Chaos. Ils s'engagèrent dans une croisade vengeresse vers l'Œil de la Terreur pour gagner leur revanche et restaurer leur honneur ; ils furent rarement aperçus dans l'Imperium par la suite. La croisade fut un désastre — des centaines de frères périrent pour peu de gains. Quelques compagnies ont depuis émergé épuisées et amères.",
     "homeworld": "Talus IV (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Brazen Claws warhammer 40000",
+    "wikiQuery": "Brazen Claws",
     "notableUnits": [
       {
         "name": "Caul Engentre",
@@ -4322,7 +4322,7 @@
     "loreLong": "Chapitre de fondation tardive d'origine inconnue, la Brotherhood of a Thousand suit le Codex Astartes et est loyale à l'Imperium. Son symbole — un M noir sur cercle blanc légèrement sous-dimensionné — représente le nombre mille. Les liserés des pauldrons indiquent la couleur de compagnie. Le rattachement à la Xe Légion repose sur l'analyse du gène-seed conservé. Le reste de leur histoire est consigné en archives restreintes inaccessibles publiquement.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Brotherhood of a Thousand warhammer 40000"
+    "wikiQuery": "Brotherhood of a Thousand"
   },
   {
     "id": "raptors",
@@ -4335,7 +4335,7 @@
     "loreLong": "Successeur Raven Guard de la Seconde Fondation, les Raptors sont célèbres pour leurs capacités exceptionnelles de survie et leur maîtrise de la guérilla et de l'infiltration. Beaucoup d'archives sur le chapitre sont perdues ; selon une théorie largement acceptée, les Raptors auraient été à l'origine une compagnie de la XIXe Légion composée de nouveaux initiés en formation. Au M31, durant la Seconde Fondation, ils furent constitués en chapitre indépendant, héritant et perpétuant la doctrine furtive et asymétrique de Corvus Corax.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Raptors warhammer 40000"
+    "wikiQuery": "Raptors"
   },
   {
     "id": "black-guard",
@@ -4348,7 +4348,7 @@
     "loreLong": "Successeur Raven Guard créé à la Seconde Fondation, le Black Guard descend des Shadow Wardens — élite de la XIXe Légion gravement décimée pendant l'Hérésie. Corvus Corax réorganisa personnellement les survivants en Black Guard et nomma Gherith Arendi pour les commander. Le chapitre privilégie l'application massive et opportune de la puissance de feu, en maître de l'embuscade soigneusement préparée. Au combat ils déploient des batteries entières de Thunderfire Cannons et de Vindicators pour annihiler instantanément l'ennemi — l'overkill est leur doctrine.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Black Guard warhammer 40000",
+    "wikiQuery": "Black Guard",
     "notableUnits": [
       {
         "name": "Gherith Arendi",
@@ -4369,7 +4369,7 @@
     "loreLong": "Un des rares chapitres engendrés par les Raven Guard durant la Seconde Fondation au M31, les Revilers virent leurs rangs lourdement remplis par les vétérans survivants du Drop Site Massacre. C'est de cette origine qu'ils tirent leur vendetta féroce contre les Chaos Space Marines qui trahirent les Raven Guard ce jour funeste. Leurs guerriers se sont depuis révélés héritiers dignes de l'héritage de Corax, possédant des compétences exceptionnelles en guerre furtive et tactiques d'embuscade.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Revilers warhammer 40000"
+    "wikiQuery": "Revilers"
   },
   {
     "id": "storm-heralds",
@@ -4382,6 +4382,6 @@
     "loreLong": "Successeur Raven Guard relativement peu documenté, les Storm Heralds furent engagés dans la Croisade Indomitus aux côtés des forces de Guilliman. Leur doctrine reflète l'héritage furtif de la XIXe Légion combiné à une emphase sur la frappe rapide en corps-à-corps. Le chapitre est mentionné dans plusieurs codex mais ses faits d'armes principaux restent en grande partie en archives inquisitoriales.",
     "homeworld": "Inconnu",
     "founding": "Inconnue",
-    "wikiQuery": "Storm Heralds warhammer 40000"
+    "wikiQuery": "Storm Heralds"
   }
 ]
