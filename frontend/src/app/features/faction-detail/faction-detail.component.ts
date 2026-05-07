@@ -118,8 +118,27 @@ const DEFAULT_RESOURCES = [
                 <h2 class="section-title">
                   <span class="t-flourish">✠</span>{{ subFactionLabel() }}
                 </h2>
-                <span class="sf-count">{{ subFactions().length }} {{ subFactionLabelLower() }}</span>
+                <span class="sf-count">
+                  @if (subFactionSearch().trim()) {
+                    {{ filteredSortedSubFactions().length }} / {{ subFactions().length }}
+                  } @else {
+                    {{ subFactions().length }}
+                  }
+                  {{ subFactionLabelLower() }}
+                </span>
               </div>
+              @if (subFactions().length > 12) {
+                <div class="sf-search-wrap">
+                  <input
+                    class="sf-search"
+                    type="search"
+                    placeholder="Filtrer par nom (ex: Ultramarines → ramène le chapitre + ses 26 successeurs)"
+                    [ngModel]="subFactionSearch()"
+                    (ngModelChange)="subFactionSearch.set($event)"
+                    aria-label="Filtrer les sous-factions"
+                  />
+                </div>
+              }
               <div class="sf-grid">
                 @for (sf of displayedSubFactions(); track sf.id) {
                   <a class="sf-card" [routerLink]="['/subfactions', sf.id]"
@@ -292,6 +311,10 @@ export class FactionDetailComponent {
       Marines : 113 entries dont 71 successors, sinon le DOM explose). */
   readonly subFactionsPageSize = 12;
   readonly subFactionsLimit = signal(12);
+  /** Recherche par nom de chapitre — match aussi tous les successeurs
+      d'un chapitre dont le NOM matche (taper 'Ultramarines' → Ultramarines
+      + ses 26 successeurs). */
+  readonly subFactionSearch = signal('');
 
   readonly faction = toSignal(
     this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!)))
@@ -349,12 +372,32 @@ export class FactionDetailComponent {
     return list;
   });
 
+  /**
+   * Filtre par nom : un chapitre matche directement si son nom contient
+   * la query, OU si son parent (parentSubFactionId) matche. Comme ça
+   * 'Ultramarines' ramène l'Ultramarines + ses 26 successeurs.
+   */
+  readonly filteredSortedSubFactions = computed(() => {
+    const list = this.sortedSubFactions();
+    const q = this.subFactionSearch().toLowerCase().trim();
+    if (!q) return list;
+    const byId = new Map(list.map(s => [s.id, s.name.toLowerCase()]));
+    return list.filter(s => {
+      if (s.name.toLowerCase().includes(q)) return true;
+      if (s.parentSubFactionId) {
+        const parentName = byId.get(s.parentSubFactionId);
+        if (parentName && parentName.includes(q)) return true;
+      }
+      return false;
+    });
+  });
+
   readonly displayedSubFactions = computed(() =>
-    this.sortedSubFactions().slice(0, this.subFactionsLimit()),
+    this.filteredSortedSubFactions().slice(0, this.subFactionsLimit()),
   );
 
   readonly extraSubFactionCount = computed(() =>
-    Math.max(0, this.sortedSubFactions().length - this.subFactionsLimit()),
+    Math.max(0, this.filteredSortedSubFactions().length - this.subFactionsLimit()),
   );
 
   loadMoreSubFactions(): void {
@@ -415,12 +458,20 @@ export class FactionDetailComponent {
   });
 
   constructor() {
+    // Reset la pagination des sub-factions quand la recherche change.
+    effect(() => {
+      this.subFactionSearch();
+      this.subFactionsLimit.set(this.subFactionsPageSize);
+    });
+
     effect(() => {
       const f = this.faction();
       if (!f) return;
       this.heroImage.set(null);
       this.loreImage.set(null);
       this.showAllUnits.set(false);
+      this.subFactionSearch.set('');
+      this.subFactionsLimit.set(this.subFactionsPageSize);
 
       const heroQ = FACTION_WIKI[f.id] ?? f.nom;
       this.service.getWikiImage(heroQ).subscribe({
