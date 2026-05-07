@@ -337,6 +337,31 @@
     }
     .sf-card:hover .u-arrow { opacity: 1; }
 
+    .sf-search-wrap {
+      margin-bottom: 18px;
+    }
+    .sf-search {
+      width: 100%;
+      padding: 12px 18px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 2px solid rgba(201, 162, 74, 0.35);
+      border-radius: 4px;
+      color: #f0d18a;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+    .sf-search::placeholder {
+      color: rgba(240, 209, 138, 0.5);
+      font-style: italic;
+    }
+    .sf-search:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(0, 0, 0, 0.78);
+      box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.18);
+    }
     .sf-load-more-wrap {
       display: flex;
       justify-content: center;
