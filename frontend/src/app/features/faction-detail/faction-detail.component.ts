@@ -121,7 +121,7 @@ const DEFAULT_RESOURCES = [
                 <span class="sf-count">{{ subFactions().length }} {{ subFactionLabelLower() }}</span>
               </div>
               <div class="sf-grid">
-                @for (sf of subFactions(); track sf.id) {
+                @for (sf of displayedSubFactions(); track sf.id) {
                   <a class="sf-card" [routerLink]="['/subfactions', sf.id]"
                      [style.--sf-img]="subFactionImg(sf.id)">
                     @if (primarchImgUrl(sf.id); as pImg) {
@@ -140,6 +140,13 @@ const DEFAULT_RESOURCES = [
                   </a>
                 }
               </div>
+              @if (extraSubFactionCount() > 0) {
+                <div class="sf-load-more-wrap">
+                  <button type="button" class="sf-load-more" (click)="loadMoreSubFactions()">
+                    Voir plus ({{ subFactionsPageSize }} de plus, {{ extraSubFactionCount() }} restants)
+                  </button>
+                </div>
+              }
             </section>
           }
 
@@ -281,6 +288,10 @@ export class FactionDetailComponent {
   readonly heroImage = signal<string | null>(null);
   readonly loreImage = signal<string | null>(null);
   readonly unitImages = signal(new Map<string, string>());
+  /** Pagination 12 cards par lot pour les sous-factions (utile sur Space
+      Marines : 113 entries dont 71 successors, sinon le DOM explose). */
+  readonly subFactionsPageSize = 12;
+  readonly subFactionsLimit = signal(12);
 
   readonly faction = toSignal(
     this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!)))
@@ -319,6 +330,36 @@ export class FactionDetailComponent {
   });
 
   readonly subFactionLabelLower = computed(() => this.subFactionLabel().toLowerCase());
+
+  /**
+   * Tri stable : chapitres fondateurs (sans parent) en premier, puis successeurs.
+   * Les fondateurs ont primarche / lore dense / images iconiques → on les met
+   * en avant. Les successeurs viennent après, tri alphabétique au sein de leur
+   * groupe.
+   */
+  readonly sortedSubFactions = computed(() => {
+    const list = [...this.subFactions()];
+    list.sort((a, b) => {
+      const aIsRoot = !a.parentSubFactionId;
+      const bIsRoot = !b.parentSubFactionId;
+      if (aIsRoot && !bIsRoot) return -1;
+      if (!aIsRoot && bIsRoot) return 1;
+      return a.name.localeCompare(b.name, 'fr');
+    });
+    return list;
+  });
+
+  readonly displayedSubFactions = computed(() =>
+    this.sortedSubFactions().slice(0, this.subFactionsLimit()),
+  );
+
+  readonly extraSubFactionCount = computed(() =>
+    Math.max(0, this.sortedSubFactions().length - this.subFactionsLimit()),
+  );
+
+  loadMoreSubFactions(): void {
+    this.subFactionsLimit.update(n => n + this.subFactionsPageSize);
+  }
 
   subFactionTypeLabel(type: SubFactionType): string {
     const map: Record<SubFactionType, string> = {

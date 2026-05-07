@@ -337,6 +337,32 @@
     }
     .sf-card:hover .u-arrow { opacity: 1; }
 
+    .sf-load-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .sf-load-more {
+      padding: 14px 32px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 220ms ease, color 200ms ease, background 200ms ease;
+    }
+    .sf-load-more:hover {
+      transform: translateY(-2px);
+      color: #f0d18a;
+      background: rgba(0, 0, 0, 0.78);
+      box-shadow: 0 0 0 1px #f0d18a, 0 0 28px rgba(201, 162, 74, 0.55);
+    }
+
     /* UNITS */
     .units-head { display: flex; align-items: center; justify-content: space-between; }
 
