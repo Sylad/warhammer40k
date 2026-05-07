@@ -600,6 +600,11 @@ export class GalleryComponent {
   private readonly imgCache = signal<Record<string, string>>({});
   private readonly imgInflight = new Set<string>();
 
+  /** Cap simultaneous wiki-image fetches to ease load on the NAS proxy. */
+  private static readonly FETCH_QUEUE_LIMIT = 6;
+  private fetchActive = 0;
+  private readonly fetchQueue: Array<() => void> = [];
+
   readonly factionList = computed(() => {
     const set = new Set<string>();
     for (const a of this.artworks()) {
@@ -670,13 +675,33 @@ export class GalleryComponent {
   private fetchImage(key: string, query: string): void {
     if (this.imgCache()[key] || this.imgInflight.has(key)) return;
     this.imgInflight.add(key);
-    this.service.getWikiImage(query).subscribe({
-      next: r => {
-        if (r.imageUrl) this.imgCache.update(c => ({ ...c, [key]: r.imageUrl! }));
-        this.imgInflight.delete(key);
-      },
-      error: () => { this.imgInflight.delete(key); },
+    this.fetchQueue.push(() => {
+      this.service.getWikiImage(query).subscribe({
+        next: r => {
+          if (r.imageUrl) this.imgCache.update(c => ({ ...c, [key]: r.imageUrl! }));
+          this.imgInflight.delete(key);
+          this.releaseFetchSlot();
+        },
+        error: () => {
+          this.imgInflight.delete(key);
+          this.releaseFetchSlot();
+        },
+      });
     });
+    this.pumpFetchQueue();
+  }
+
+  private pumpFetchQueue(): void {
+    while (this.fetchActive < GalleryComponent.FETCH_QUEUE_LIMIT && this.fetchQueue.length) {
+      const job = this.fetchQueue.shift()!;
+      this.fetchActive++;
+      job();
+    }
+  }
+
+  private releaseFetchSlot(): void {
+    this.fetchActive = Math.max(0, this.fetchActive - 1);
+    this.pumpFetchQueue();
   }
 
   categoryBg(key: string): string {
