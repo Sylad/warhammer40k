@@ -72,5 +72,5 @@ PORT=3001
 ## Stack précise
 
 - Angular 19, Material 19 (legacy), RxJS 7, Signals, SCSS, Cinzel + Inter
-- NestJS 11, Anthropic SDK 0.39
+- NestJS 11, Anthropic SDK 0.91
 - Docker multi-stage (`node:20-alpine` → `nginx:alpine`)

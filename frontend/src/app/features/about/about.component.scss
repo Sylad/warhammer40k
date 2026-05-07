@@ -290,3 +290,63 @@
       .hero { padding: 40px 28px 36px; min-height: 240px; }
       .hero h1 { font-size: 36px; }
     }
+
+    .other-sites {
+      margin-top: 48px;
+      padding: 28px;
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      background: rgba(8, 7, 6, 0.55);
+      border-radius: 4px;
+    }
+    .other-sites h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold-bright);
+      margin: 0 0 6px;
+    }
+    .other-intro {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 20px;
+    }
+    .other-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .other-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(201, 162, 74, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+    .other-card:hover {
+      border-color: var(--gold);
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .other-tag { font-size: 24px; flex-shrink: 0; }
+    .other-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .other-text strong {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--gold-bright);
+      font-size: 14px;
+    }
+    .other-text em {
+      font-style: normal;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .other-arrow {
+      color: rgba(201, 162, 74, 0.5);
+      font-size: 18px;
+      transition: color 150ms ease, transform 150ms ease;
+    }
+    .other-card:hover .other-arrow { color: var(--gold-bright); transform: translate(2px, -2px); }
