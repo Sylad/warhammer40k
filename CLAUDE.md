@@ -67,7 +67,7 @@ PORT=3001
 
 ## Données seed
 
-`backend/seed/` : `factions.json`, `units.json`, `series.json`, `videos.json`, `subfactions.json` (63 entrées), `channels.json` (8 chaînes YouTube), `artworks.json`, `lore-feed.json`. Voir `WARHAMMER_PROGRESS.md` et `WARHAMMER_ROADMAP.md` pour l'état des phases UX et le plan d'enrichissement futur.
+`backend/seed/` : `factions.json`, `units.json`, `series.json`, `videos.json`, `subfactions.json` (**182 entrées** dont **71 successors Space Marines** lore-ifiés via Lexicanum scraping 2026-05-06), `channels.json` (8 chaînes YouTube), `artworks.json`, `lore-feed.json`. Voir `WARHAMMER_PROGRESS.md` et `WARHAMMER_ROADMAP.md` pour l'état des phases UX et le plan d'enrichissement futur.
 
 ## Stack précise
 
