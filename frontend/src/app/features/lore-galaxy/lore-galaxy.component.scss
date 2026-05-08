@@ -1,5 +1,399 @@
     :host { display: block; }
 
+    /* === Leaflet galaxy === */
+    .leaflet-galaxy {
+      width: 100%;
+      height: clamp(520px, 75vh, 900px);
+      background: #04030a;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;  /* Force au cas où leaflet.css ne charge pas */
+    }
+    /* Override avec !important — pour une raison non-déterminée, les règles
+       de position de leaflet.css ne s'appliquent pas via Angular (probablement
+       un order-of-cascade Material/grimdark globals). Force le comportement Leaflet. */
+    :host ::ng-deep .leaflet-container { overflow: hidden !important; position: relative; }
+    :host ::ng-deep .leaflet-pane,
+    :host ::ng-deep .leaflet-tile,
+    :host ::ng-deep .leaflet-marker-icon,
+    :host ::ng-deep .leaflet-marker-shadow,
+    :host ::ng-deep .leaflet-tile-container,
+    :host ::ng-deep .leaflet-pane > svg,
+    :host ::ng-deep .leaflet-pane > canvas,
+    :host ::ng-deep .leaflet-zoom-box,
+    :host ::ng-deep .leaflet-image-layer,
+    :host ::ng-deep .leaflet-layer,
+    :host ::ng-deep .leaflet-top,
+    :host ::ng-deep .leaflet-bottom { position: absolute !important; }
+    :host ::ng-deep .leaflet-top { top: 0 !important; }
+    :host ::ng-deep .leaflet-bottom { bottom: 0 !important; }
+    :host ::ng-deep .leaflet-left { left: 0 !important; }
+    :host ::ng-deep .leaflet-right { right: 0 !important; }
+    /* Zoom anim transforms — origin top-left so transitions ne sautent pas */
+    :host ::ng-deep .leaflet-zoom-animated {
+      transform-origin: 0 0 !important;
+      will-change: transform;
+    }
+    :host ::ng-deep .leaflet-zoom-anim .leaflet-zoom-animated {
+      transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1) !important;
+    }
+    :host ::ng-deep .leaflet-zoom-anim .leaflet-tile,
+    :host ::ng-deep .leaflet-pan-anim .leaflet-tile { transition: none !important; }
+    :host ::ng-deep .leaflet-fade-anim .leaflet-tile,
+    :host ::ng-deep .leaflet-fade-anim .leaflet-popup {
+      opacity: 0;
+      transition: opacity 0.2s linear !important;
+    }
+    :host ::ng-deep .leaflet-tile-loaded { opacity: 1 !important; }
+    .map-help {
+      margin-top: 10px;
+      font-family: var(--serif);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-align: center;
+    }
+    .map-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .map-filter-btn {
+      font-family: var(--serif);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: rgba(11,9,7,0.7);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .map-filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-bright);
+      background: rgba(201,162,74,0.06);
+    }
+    .map-filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold-bright);
+      background: rgba(201,162,74,0.12);
+      box-shadow: inset 0 0 0 1px var(--gold);
+    }
+    .map-filter-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px currentColor;
+    }
+    .map-filter-count {
+      font-size: 10px;
+      opacity: 0.7;
+      margin-left: 4px;
+    }
+
+    /* Mode calibration — toolbar dev pour repositionner les markers */
+    .map-calib {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      background: rgba(11,9,7,0.7);
+      border: 1px dashed rgba(201,162,74,0.25);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      transition: border-color 0.18s, background 0.18s;
+      &.active {
+        border-color: var(--gold);
+        border-style: solid;
+        background: rgba(201,162,74,0.06);
+      }
+    }
+    .calib-toggle, .calib-export {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(11,9,7,0.95);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.18s;
+      &:hover {
+        border-color: var(--gold);
+        color: var(--gold-bright);
+        background: rgba(201,162,74,0.06);
+      }
+    }
+    .map-calib.active .calib-toggle {
+      border-color: var(--gold);
+      color: var(--gold-bright);
+      background: rgba(201,162,74,0.12);
+      box-shadow: inset 0 0 0 1px var(--gold);
+    }
+    .calib-ico { font-size: 13px; }
+    .calib-hint {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 10.5px;
+      letter-spacing: 0.02em;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    /* Leaflet container overrides — gothic dark theme */
+    :host ::ng-deep .leaflet-container {
+      background: #04030a;
+      font-family: var(--sans);
+      cursor: grab;
+    }
+    :host ::ng-deep .leaflet-container.leaflet-grab.leaflet-mouse-down {
+      cursor: grabbing;
+    }
+    :host ::ng-deep .leaflet-control-zoom {
+      border: 1px solid var(--border-strong) !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7) !important;
+      margin: 14px !important;
+    }
+    :host ::ng-deep .leaflet-bar a,
+    :host ::ng-deep .leaflet-control-zoom a {
+      background: rgba(11,9,7,0.95) !important;
+      color: var(--gold) !important;
+      border-bottom: 1px solid var(--border) !important;
+      font-family: var(--serif) !important;
+      font-size: 18px !important;
+      width: 36px !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-decoration: none !important;
+    }
+    :host ::ng-deep .leaflet-bar a:last-child {
+      border-bottom: none !important;
+    }
+    :host ::ng-deep .leaflet-bar a:hover,
+    :host ::ng-deep .leaflet-control-zoom a:hover {
+      background: rgba(201,162,74,0.15) !important;
+      color: var(--gold-bright) !important;
+    }
+    :host ::ng-deep .leaflet-bar a.leaflet-disabled {
+      background: rgba(11,9,7,0.6) !important;
+      color: var(--muted) !important;
+      cursor: not-allowed;
+    }
+    /* Hide attribution flag by default (we use credit footer in sidebar) */
+    :host ::ng-deep .leaflet-control-attribution {
+      display: none;
+    }
+
+    /* Fullscreen control button (custom) */
+    :host ::ng-deep .lf-fs-control {
+      border: 1px solid var(--border-strong) !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7) !important;
+      margin: 14px !important;
+    }
+    :host ::ng-deep .lf-fs-btn {
+      width: 36px !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      font-size: 18px !important;
+    }
+    :host ::ng-deep .leaflet-galaxy:fullscreen,
+    :host ::ng-deep .leaflet-galaxy.lf-is-fullscreen {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-height: none !important;
+      background: #04030a;
+    }
+    /* Vendor prefix for older browsers */
+    :host ::ng-deep .leaflet-galaxy:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+    }
+
+    /* Hot zone markers — bigger, more visible */
+    :host ::ng-deep .lf-zone-icon {
+      background: transparent !important;
+      border: none !important;
+    }
+    :host ::ng-deep .lf-zone {
+      position: relative;
+      width: var(--size);
+      height: var(--size);
+      cursor: pointer;
+    }
+    :host ::ng-deep .lf-zone-glow {
+      position: absolute; inset: -50%;
+      background: radial-gradient(circle, var(--c) 0%, transparent 70%);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    :host ::ng-deep .lf-zone-core {
+      position: absolute;
+      inset: 15%;
+      background: var(--c);
+      border: 2.5px solid #fff;
+      border-radius: 50%;
+      box-shadow:
+        0 0 16px var(--c),
+        0 0 6px var(--c),
+        inset 0 0 6px rgba(255,255,255,0.9),
+        0 0 0 1px rgba(0,0,0,0.6);
+      transition: transform 0.18s;
+    }
+    :host ::ng-deep .lf-rift .lf-zone-core {
+      animation: lf-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes lf-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 12px var(--c); }
+      50% { transform: scale(1.15); box-shadow: 0 0 24px var(--c); }
+    }
+    :host ::ng-deep .lf-zone:hover .lf-zone-core {
+      transform: scale(1.25);
+    }
+    :host ::ng-deep .lf-zone:hover .lf-zone-glow {
+      opacity: 0.7;
+    }
+    :host ::ng-deep .lf-zone-label {
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--serif);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #fff;
+      white-space: nowrap;
+      text-shadow: 0 0 6px #000, 0 0 3px #000;
+      pointer-events: none;
+    }
+
+    /* Cicatrix Maledictum label */
+    :host ::ng-deep .lf-cicatrix-label-wrap {
+      background: transparent;
+      border: none;
+    }
+    :host ::ng-deep .lf-cicatrix-label {
+      font-family: var(--serif);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f0d276;
+      text-align: center;
+      text-shadow: 0 0 8px #000, 0 0 4px #000, 0 0 12px #9c2680;
+      pointer-events: none;
+      white-space: nowrap;
+      transform: rotate(-8deg);
+      font-style: italic;
+    }
+
+    /* Popups */
+    :host ::ng-deep .lf-popup-wrapper .leaflet-popup-content-wrapper {
+      background: rgba(11,9,7,0.97);
+      border: 1px solid var(--border-strong);
+      border-radius: 0;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+      color: var(--text);
+    }
+    :host ::ng-deep .lf-popup-wrapper .leaflet-popup-tip {
+      background: rgba(11,9,7,0.97);
+      border: 1px solid var(--border-strong);
+    }
+    :host ::ng-deep .lf-popup-wrapper .leaflet-popup-close-button {
+      color: var(--gold) !important;
+      font-size: 22px !important;
+      padding: 4px 8px !important;
+    }
+    :host ::ng-deep .lf-popup {
+      padding: 0;
+      width: 320px;
+      max-width: 320px;
+      margin: -1px;
+    }
+    :host ::ng-deep .lf-popup-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #1a1208 0%, #0a0805 100%);
+      background-size: cover;
+      background-position: center top;
+      border-bottom: 1px solid var(--border-strong);
+      filter: contrast(1.08) saturate(1.05) brightness(0.92);
+      transition: filter 0.3s, opacity 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    :host ::ng-deep .lf-popup-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 100%, transparent 30%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+    }
+    :host ::ng-deep .lf-popup-img.loaded {
+      filter: contrast(1.12) saturate(1.08) brightness(0.96);
+    }
+    :host ::ng-deep .lf-popup-img.no-image {
+      aspect-ratio: 32 / 5;
+      background: linear-gradient(90deg, transparent, rgba(201,162,74,0.06), transparent);
+    }
+    :host ::ng-deep .lf-popup-body {
+      padding: 14px 16px 14px;
+    }
+    :host ::ng-deep .lf-popup-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    :host ::ng-deep .lf-popup-type {
+      font-family: var(--serif);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    :host ::ng-deep .lf-popup p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #d8d0bf;
+      margin: 0 0 12px;
+    }
+    :host ::ng-deep .lf-popup-cta {
+      display: inline-block;
+      font-family: var(--serif);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      border: 1px solid var(--gold);
+      padding: 6px 12px;
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    :host ::ng-deep .lf-popup-cta:hover {
+      background: rgba(201,162,74,0.15);
+      color: var(--gold-bright);
+    }
+    /* === End Leaflet === */
+
     .back-link {
       display: inline-block;
       margin-bottom: 18px;
@@ -57,6 +451,8 @@
     .layout {
       display: grid;
       grid-template-columns: 1fr 320px;
+      grid-auto-rows: min-content;
+      align-items: start;
       gap: 22px;
       margin-bottom: 32px;
     }
@@ -64,10 +460,7 @@
 
     .map-wrap {
       position: relative;
-      border: 1px solid var(--border);
-      background: #050403;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      align-self: start;
     }
 
     .galaxy-map {
@@ -286,3 +679,41 @@
       border: 1px solid var(--gold-soft);
     }
     .cta-link:hover { border-color: var(--gold-bright); background: rgba(201, 162, 74, 0.08); }
+
+    /* Sectors — wedge fills + gold borders */
+    :host ::ng-deep path.lf-sector {
+      cursor: help;
+      transition: fill-opacity 0.18s ease;
+    }
+    :host ::ng-deep path.lf-sector:hover {
+      fill-opacity: 0.34 !important;
+    }
+    :host ::ng-deep path.lf-sector-border {
+      pointer-events: none;
+    }
+    :host ::ng-deep .lf-sector-tooltip {
+      background: rgba(11, 9, 7, 0.96);
+      border: 1px solid var(--border-strong);
+      border-radius: 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      padding: 0;
+    }
+    :host ::ng-deep .lf-sector-tooltip::before { display: none; }
+    :host ::ng-deep .lf-sector-tip {
+      padding: 8px 12px;
+      max-width: 280px;
+    }
+    :host ::ng-deep .lf-sector-tip .lf-sector-name {
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    :host ::ng-deep .lf-sector-tip p {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 0;
+    }
