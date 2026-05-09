@@ -38,6 +38,12 @@ export type PrimarchStatus =
   | 'daemon-prince'
   | 'expunged';
 
+export interface PrimarchBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
 export interface Primarch {
   id: string;
   number: number;
@@ -53,6 +59,17 @@ export interface Primarch {
   primaryColor?: string;
   wikiQuery?: string;
   citation?: string;
+  epithet?: string;
+  personality?: string;
+  earlyLife?: string;
+  greatCrusade?: string;
+  heresy?: string;
+  finalFate?: string;
+  legacy?: string;
+  notableBattles?: PrimarchBattle[];
+  quotes?: string[];
+  galleryQueries?: string[];
+  relatedPrimarchIds?: string[];
 }
 
 // === Le Panthéon Chaos (4 Dieux) ===
@@ -166,4 +183,82 @@ export interface Equipment {
   citation?: string;
   wikiQuery: string;
   sigil?: string;
+}
+
+// === Saints (Living, Canonized) ===
+export type SaintCategory = 'living-saint' | 'saint-canonized' | 'ecclesiarch-canonized';
+
+export interface SaintBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface Saint {
+  id: string;
+  name: string;
+  epithet?: string;
+  category: SaintCategory;
+  ordoOrChapter: string;
+  era: string;
+  color: string;
+  wikiQuery: string;
+  description: string;
+  longHistory?: string;
+  miracles?: string[];
+  notableBattles?: SaintBattle[];
+  quotes?: string[];
+  galleryQueries?: string[];
+}
+
+// === Knights, Titans & War Machines ===
+export type GodMachineCategory = 'titan' | 'knight' | 'war-machine';
+
+export interface GodMachineExample {
+  name: string;
+  context: string;
+}
+
+export interface GodMachine {
+  id: string;
+  name: string;
+  epithet?: string;
+  category: GodMachineCategory;
+  scoutClass: string;
+  size: string;
+  factionId: string;
+  factionName: string;
+  color: string;
+  wikiQuery: string;
+  description: string;
+  longHistory?: string;
+  specs?: string[];
+  notableExamples?: GodMachineExample[];
+  galleryQueries?: string[];
+}
+
+// === Vaisseaux légendaires ===
+export interface ShipBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface LegendaryShip {
+  id: string;
+  name: string;
+  epithet?: string;
+  class: string;
+  factionId: string;
+  factionName: string;
+  color: string;
+  captainOrLord?: string;
+  currentStatus: string;
+  wikiQuery: string;
+  description: string;
+  longHistory?: string;
+  specs?: string[];
+  notableBattles?: ShipBattle[];
+  galleryQueries?: string[];
+  relatedPrimarchId?: string;
 }

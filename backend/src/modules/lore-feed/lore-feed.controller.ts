@@ -1,6 +1,6 @@
 import { Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
 import { LoreFeedService } from './lore-feed.service.js';
-import type { ChaosGod, Emperor, ImperialOrganization, LoreConcept, LoreEvent, Primarch, Equipment } from './lore-feed.model.js';
+import type { ChaosGod, Emperor, ImperialOrganization, LoreConcept, LoreEvent, Primarch, Equipment, LegendaryShip, GodMachine, Saint } from './lore-feed.model.js';
 
 @Controller('lore')
 export class LoreFeedController {
@@ -81,5 +81,41 @@ export class LoreFeedController {
     const e = this.service.getEquipmentItem(id);
     if (!e) throw new NotFoundException(`Equipment ${id} not found`);
     return e;
+  }
+
+  @Get('ships')
+  ships(): LegendaryShip[] {
+    return this.service.getShips();
+  }
+
+  @Get('ships/:id')
+  ship(@Param('id') id: string): LegendaryShip {
+    const s = this.service.getShip(id);
+    if (!s) throw new NotFoundException(`Ship ${id} not found`);
+    return s;
+  }
+
+  @Get('god-machines')
+  godMachines(): GodMachine[] {
+    return this.service.getGodMachines();
+  }
+
+  @Get('god-machines/:id')
+  godMachine(@Param('id') id: string): GodMachine {
+    const g = this.service.getGodMachine(id);
+    if (!g) throw new NotFoundException(`God Machine ${id} not found`);
+    return g;
+  }
+
+  @Get('saints')
+  saints(): Saint[] {
+    return this.service.getSaints();
+  }
+
+  @Get('saints/:id')
+  saint(@Param('id') id: string): Saint {
+    const s = this.service.getSaint(id);
+    if (!s) throw new NotFoundException(`Saint ${id} not found`);
+    return s;
   }
 }

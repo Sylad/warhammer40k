@@ -1,0 +1,258 @@
+[
+  {
+    "id": "warhound-titan",
+    "name": "Titan Warhound",
+    "epithet": "Le Chasseur · Scout Titan",
+    "category": "titan",
+    "scoutClass": "Scout Titan",
+    "size": "12 mètres · 410 tonnes",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Collegia Titanica",
+    "color": "#7a2020",
+    "wikiQuery": "Warhound Titan Adeptus Titanicus",
+    "description": "Le plus petit Titan de la Collegia Titanica. Chasseur agile, déployé en meute pour reconnaissance et flanking.",
+    "longHistory": "Le Warhound est le plus petit des Titans Imperial — Scout Titan. Construit dans les Forge Worlds depuis l'âge des Ténèbres, il opère en meute (deux à trois Warhounds) pour exploration, reconnaissance, et frappes de flanc. Son équipage : un Princeps lié à la machine via Manifold (interface psy-mécanique) et trois Moderati (officiers techniques). Chaque Warhound est une entité quasi-vivante — son esprit-machine (Spirit) accumule expérience à travers des décennies, parfois siècles, de bataille. Quand son Princeps meurt, le Spirit garde mémoire — un nouveau Princeps doit s'accommoder à l'esprit existant.",
+    "specs": [
+      "Hauteur : ~12 mètres",
+      "Poids : ~410 tonnes",
+      "Équipage : 1 Princeps + 3 Moderati",
+      "Armement : Vulcan mega-bolter, plasma blastgun, turbo laser destructor",
+      "Particularité : entité semi-consciente, Manifold psy-mécanique"
+    ],
+    "notableExamples": [
+      { "name": "Lupercal Slayer", "context": "Warhound mythique du Legio Mortis, célèbre pour avoir détruit un Daemon-Engin pendant l'Hérésie." },
+      { "name": "Wrath of Cthonia", "context": "Warhound traître du Legio Mortis basculé pendant l'Hérésie." }
+    ],
+    "galleryQueries": ["Warhound Titan", "Adeptus Titanicus Warhound", "Scout Titan", "Titan Legio Imperial"]
+  },
+  {
+    "id": "reaver-titan",
+    "name": "Titan Reaver",
+    "epithet": "Le Faucheur · Battle Titan",
+    "category": "titan",
+    "scoutClass": "Battle Titan",
+    "size": "21 mètres · 1200 tonnes",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Collegia Titanica",
+    "color": "#7a2020",
+    "wikiQuery": "Reaver Titan Adeptus Titanicus",
+    "description": "Battle Titan moyen — épine dorsale des Légions Titanica. Polyvalent, robustement blindé.",
+    "longHistory": "Le Reaver est le Titan le plus commun des Légions Titanica. Battle Titan moyen, il combine puissance de feu, blindage adamantine, et mobilité raisonnable. Son équipage : Princeps + 5 Moderati. Sa carapace porte les sigils de sa Légion Titanica — Legio Astorum, Legio Gryphonicus, Legio Mortis, Legio Crucius. Pendant l'Hérésie, plusieurs Reavers basculèrent du côté du Chaos (notamment dans la Legio Mortis 'la Légion Morte').",
+    "specs": [
+      "Hauteur : ~21 mètres",
+      "Poids : ~1 200 tonnes",
+      "Équipage : 1 Princeps + 5 Moderati",
+      "Armement : 2 bras d'armes (apocalypse missile launcher, gatling blaster, laser blaster) + carapace épaule",
+      "Particularité : standard Battle Titan, Spirit-Machine permanent"
+    ],
+    "notableExamples": [
+      { "name": "Pater Mortis", "context": "Reaver chef de la Legio Mortis pendant l'Hérésie. Combattit pour Horus à Terra." },
+      { "name": "Aquila Augusta", "context": "Reaver loyaliste légendaire de la Legio Astorum. Survécut aux 13 Croisades Noires." }
+    ],
+    "galleryQueries": ["Reaver Titan", "Battle Titan Imperial", "Legio Mortis", "Adeptus Titanicus Reaver"]
+  },
+  {
+    "id": "warlord-titan",
+    "name": "Titan Warlord",
+    "epithet": "Le Seigneur de Guerre · Heavy Battle Titan",
+    "category": "titan",
+    "scoutClass": "Heavy Battle Titan",
+    "size": "33 mètres · 2500 tonnes",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Collegia Titanica",
+    "color": "#7a2020",
+    "wikiQuery": "Warlord Titan Adeptus Titanicus",
+    "description": "Heavy Battle Titan — symbole de puissance suprême du Mechanicus. Capable de raser des villes entières.",
+    "longHistory": "Le Warlord est le grand Battle Titan du Mechanicus. 33 mètres de hauteur, équipé de macro-canons spinaux et d'armes énergétiques cosmiques. Chaque Warlord est rare et précieux — sa construction prend des décennies, et chaque pièce est rituellement bénie par les Tech-Prêtres. Son Spirit-Machine est ancien, parfois millénaire, accumulé par chaque Princeps qui l'a piloté. Pendant la Grande Croisade, des centaines de Warlords servaient. Pendant l'Hérésie, environ la moitié bascula avec le Mechanicus rebelle. Aujourd'hui, environ 200 Warlords actifs dans la galaxie.",
+    "specs": [
+      "Hauteur : ~33 mètres",
+      "Poids : ~2 500 tonnes",
+      "Équipage : 1 Princeps Senioris + 8 Moderati + serviteurs",
+      "Armement : volcano cannon, plasma annihilator, sunfury plasma annihilator, apocalypse missile launcher",
+      "Particularité : Spirit-Machine ancien, parfois pluri-millénaire"
+    ],
+    "notableExamples": [
+      { "name": "Imperator Somnium", "context": "Warlord légendaire de la Legio Astorum, célèbre pour avoir tenu pendant 30 jours sans renforts." },
+      { "name": "Conquest Eternal", "context": "Warlord traître de la Legio Vulcanum 1ère, brûlé par les loyalistes à Terra." }
+    ],
+    "galleryQueries": ["Warlord Titan", "Heavy Battle Titan", "Legio Astorum Warlord", "Imperator Somnium"]
+  },
+  {
+    "id": "imperator-titan",
+    "name": "Titan Imperator",
+    "epithet": "Le Dieu-Machine · Emperor-Class Titan",
+    "category": "titan",
+    "scoutClass": "Emperor Titan",
+    "size": "55 mètres · 8000+ tonnes",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Collegia Titanica",
+    "color": "#7a2020",
+    "wikiQuery": "Imperator Titan Emperor class",
+    "description": "Le plus grand Titan jamais construit. Cathédrale-machine ambulante, 55 mètres de hauteur. Très rare, très sacré.",
+    "longHistory": "L'Imperator (ou Emperor-Class Titan) est le Dieu-Machine ultime du Mechanicus. Cathédrale-machine ambulante de 55 mètres, hébergeant chapelles complètes, équipages de plus d'une centaine, dortoirs, salles de génie. Très rare — moins de 50 actifs dans la galaxie. Chaque Imperator est lié à une Forge World qui le maintient. Sa puissance de feu est astronomique : son macro-canon spinal peut raser une ville entière en un coup. Pendant l'Hérésie, plusieurs Imperators basculèrent — l'événement le plus traumatique du conflit.",
+    "specs": [
+      "Hauteur : ~55 mètres",
+      "Poids : ~8 000+ tonnes",
+      "Équipage : 1 Princeps Maxima + 20+ Moderati + 100+ serviteurs",
+      "Armement : Hellstorm cannon, plasma annihilator, plasma-storm cannon, apocalypse missile launcher massive, batteries de macro-canons spinaux",
+      "Particularité : cathédrale ambulante, chapelles intégrées, équipage massif"
+    ],
+    "notableExamples": [
+      { "name": "Dies Irae", "context": "Imperator traître célèbre de la Legio Mortis. Combattit à Terra pour Horus." },
+      { "name": "Mortis Praetor", "context": "Imperator loyaliste détruit pendant la défense de Terra. Sacrifice sacré." }
+    ],
+    "galleryQueries": ["Imperator Titan", "Emperor Class Titan", "Legio Mortis Imperator", "Dies Irae Titan"]
+  },
+  {
+    "id": "knight-paladin",
+    "name": "Knight Paladin",
+    "epithet": "Le Chevalier Errant",
+    "category": "knight",
+    "scoutClass": "Standard Knight",
+    "size": "8 mètres · 60 tonnes",
+    "factionId": "imperial-knights",
+    "factionName": "Imperial Knights",
+    "color": "#3a4a8e",
+    "wikiQuery": "Imperial Knight Paladin",
+    "description": "Knight standard. Chevalier mécanisé piloté par un noble humain. Symbole de l'aristocratie martiale.",
+    "longHistory": "Les Imperial Knights sont les chevaliers-machines de l'Imperium — descendants de l'âge des Ténèbres avant la Grande Croisade. Chaque Knight est piloté par un noble humain de l'une des Knight Houses, qui possèdent leurs propres planètes féodales. Le Paladin est le Knight standard — armes mêlée énergétiques (Reaper chainsword) + canon thermique. Plus rapide qu'un Titan, plus blindé qu'un walker régulier. Une Lance de Knights (3-5) déployée sur le terrain est terrifiante.",
+    "specs": [
+      "Hauteur : ~8 mètres",
+      "Poids : ~60 tonnes",
+      "Équipage : 1 noble pilote (Throne Mechanicum)",
+      "Armement : Reaper chainsword, thermal cannon ou rapid-fire battle cannon",
+      "Particularité : Throne Mechanicum lie le pilote à la machine, parfois mortellement"
+    ],
+    "notableExamples": [
+      { "name": "Knight de House Terryn", "context": "Lance de Knights Terryn participe régulièrement aux Croisades impériales." },
+      { "name": "Knight de House Hawkshroud", "context": "Maison loyaliste, allies des Imperial Fists." }
+    ],
+    "galleryQueries": ["Imperial Knight Paladin", "Imperial Knight Walker", "Knight House Imperial", "Adeptus Mechanicus Knight"]
+  },
+  {
+    "id": "knight-errant",
+    "name": "Knight Errant",
+    "epithet": "Le Chevalier Solitaire",
+    "category": "knight",
+    "scoutClass": "Skirmisher Knight",
+    "size": "8 mètres · 60 tonnes",
+    "factionId": "imperial-knights",
+    "factionName": "Imperial Knights",
+    "color": "#3a4a8e",
+    "wikiQuery": "Imperial Knight Errant",
+    "description": "Knight Errant — variante anti-tank, équipée d'un thermal cannon meltagun-pattern.",
+    "longHistory": "L'Errant est la variante anti-tank du Paladin standard. Son thermal cannon massive est capable de fendre Land Raiders et Titans légers. Préféré par les Maisons qui privilégient la chasse de proies blindées plutôt que l'infanterie.",
+    "specs": [
+      "Hauteur : ~8 mètres",
+      "Poids : ~60 tonnes",
+      "Équipage : 1 noble pilote",
+      "Armement : Reaper chainsword + thermal cannon",
+      "Particularité : spécialiste anti-tank"
+    ],
+    "notableExamples": [
+      { "name": "Knight Errant de House Cadmus", "context": "Maison spécialisée dans la chasse de Daemon-Engines." }
+    ],
+    "galleryQueries": ["Imperial Knight Errant", "Knight thermal cannon", "Imperial Knight anti-tank"]
+  },
+  {
+    "id": "questoris-mechanicus",
+    "name": "Questoris Knight",
+    "epithet": "Le Chevalier-Mechanicus",
+    "category": "knight",
+    "scoutClass": "Mechanicus Knight",
+    "size": "8 mètres · 60 tonnes",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Adeptus Mechanicus (Questor Mechanicus)",
+    "color": "#7a2020",
+    "wikiQuery": "Questoris Knight Mechanicus",
+    "description": "Knights affiliés directement au Mechanicus. Pilotés par Tech-Prêtres augmentés cybernétiquement.",
+    "longHistory": "Les Questoris Mechanicus sont les Knights qui ont accepté la suzeraineté du Mechanicus plutôt que celle de l'Imperium. Leurs pilotes sont Tech-Prêtres augmentés cybernétiquement — fusion homme-machine plus poussée. Plus rares mais plus déchaînés en combat. Souvent vus sur les Forge Worlds de Mars, Lucius, Stygies.",
+    "specs": [
+      "Hauteur : ~8 mètres",
+      "Poids : ~60 tonnes",
+      "Équipage : 1 Tech-Prêtre cybernétiquement augmenté",
+      "Armement : variant — Reaper chainsword + thermal cannon ou stub gun",
+      "Particularité : pilote 80% machine, lien Manifold profond"
+    ],
+    "notableExamples": [
+      { "name": "Knight de House Taranis", "context": "Maison Mechanicus la plus ancienne, fondée pendant l'âge des Ténèbres." }
+    ],
+    "galleryQueries": ["Questoris Knight Mechanicus", "Mechanicus Knight", "Tech-Priest Knight", "Knight Taranis"]
+  },
+  {
+    "id": "knight-castellan",
+    "name": "Knight Castellan",
+    "epithet": "La Forteresse Mobile",
+    "category": "knight",
+    "scoutClass": "Heavy Knight",
+    "size": "12 mètres · 95 tonnes",
+    "factionId": "imperial-knights",
+    "factionName": "Imperial Knights",
+    "color": "#3a4a8e",
+    "wikiQuery": "Knight Castellan",
+    "description": "Heavy Knight — gros que les Paladins standard. Forteresse mobile équipée d'armement lourd.",
+    "longHistory": "Le Castellan est l'évolution heavy du Knight Paladin. 12 mètres au lieu de 8, plus blindé, équipé d'un volcano lance et de batteries de missiles. Souvent utilisé comme Knight de commandement par une Maison. Symbole de prestige et puissance.",
+    "specs": [
+      "Hauteur : ~12 mètres",
+      "Poids : ~95 tonnes",
+      "Équipage : 1 noble pilote senior",
+      "Armement : volcano lance, plasma decimator, missile launchers",
+      "Particularité : Knight de commandement, héraldique rituelle"
+    ],
+    "notableExamples": [
+      { "name": "Castellan Maximus", "context": "Knight Castellan légendaire de House Raven." }
+    ],
+    "galleryQueries": ["Knight Castellan", "Heavy Imperial Knight", "Imperial Knight commander"]
+  },
+  {
+    "id": "kastelan-robot",
+    "name": "Robot Kastelan",
+    "epithet": "Le Garde Robotique",
+    "category": "war-machine",
+    "scoutClass": "Combat Robot",
+    "size": "4 mètres · 8 tonnes",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Adeptus Mechanicus",
+    "color": "#7a2020",
+    "wikiQuery": "Kastelan Robot Mechanicus",
+    "description": "Robot cybernétique sans pilote. Programmé directement par un Datasmith. Plus petit qu'un Titan mais plus mobile.",
+    "longHistory": "Le Robot Kastelan est l'unité cybernétique signature de l'Adeptus Mechanicus. 4 mètres de hauteur, sans pilote — programmé directement par un Datasmith via codes binaires. Belisarius Cawl a relancé leur production avec améliorations programmatiques modernes. Déployé en escouades de 2-6, ils accompagnent les Skitarii.",
+    "specs": [
+      "Hauteur : ~4 mètres",
+      "Poids : ~8 tonnes",
+      "Équipage : 0 (programmé par Datasmith)",
+      "Armement : heavy phosphor blasters, fist combat",
+      "Particularité : programmation cybernétique, pas de Spirit-Machine"
+    ],
+    "notableExamples": [
+      { "name": "Kastelan-MX-7 'Belisarius'", "context": "Prototype Cawl, le premier des nouveaux Kastelans." }
+    ],
+    "galleryQueries": ["Kastelan Robot", "Mechanicus robot", "Adeptus Mechanicus combat robot", "Datasmith Kastelan"]
+  },
+  {
+    "id": "stompa",
+    "name": "Stompa",
+    "epithet": "Le Walker WAAAGH! Géant",
+    "category": "war-machine",
+    "scoutClass": "Ork Walker",
+    "size": "20 mètres · variable",
+    "factionId": "orks",
+    "factionName": "Orks (Mékaniks)",
+    "color": "#3a5c1a",
+    "wikiQuery": "Ork Stompa",
+    "description": "Le walker Ork géant — 20 mètres de hauteur. Bricolage Mékanik colossal, puissance brute.",
+    "longHistory": "Le Stompa est le walker Ork géant — équivalent Ork d'un Titan Imperial. 20 mètres de hauteur (parfois plus, selon le Mékanik), bricolé sur le terrain à partir de débris, motoswheelz, canons pillés. Son armement varie : klaws énergétiques, big shootas custom, lance-flammes, parfois canons humains détournés. Le pilote est un Big Mek qui chante des incantations Ork pour le faire fonctionner. Sa foi (et celle de la horde proche) suffit à l'animer.",
+    "specs": [
+      "Hauteur : ~20 mètres (variable)",
+      "Poids : variable selon Mékanik",
+      "Équipage : 1 Big Mek + 5-10 Greenskins gunners",
+      "Armement : klaw géant, big shootas, supa-rokkits, lance-flammes",
+      "Particularité : pas de manuel, chaque Stompa est unique"
+    ],
+    "notableExamples": [
+      { "name": "Stompa de Ghazghkull", "context": "Le Stompa personnel de Ghazghkull, plus de 30 mètres." },
+      { "name": "Mega-Gargant Mork", "context": "Variante super-lourde, équivalent d'un Imperator Titan en termes de hauteur." }
+    ],
+    "galleryQueries": ["Ork Stompa", "Greenskins walker", "Ork Gargant", "Big Mek warhammer 40k"]
+  }
+]

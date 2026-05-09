@@ -32,7 +32,85 @@
       "Carte galactique",
       "Bibliothèque des archives",
       "Voir les romans liés"
-    ]
+    ],
+    "epithet": "L'Astartes Sacré · Le Rempart de l'Humanité",
+    "motto": "« Pour l'Empereur ! »",
+    "longHistory": "Créés durant les derniers jours de la Grande Croisade par le génie psy-génétique de l'Empereur, les Space Marines furent le couronnement du projet impérial. Vingt Légions originelles, chacune dirigée par un Primarque — fils génétique de l'Empereur — incarnèrent la perfection martiale de l'Humanité. Lors de l'Hérésie d'Horus (014.M31), neuf Légions trahirent. À l'issue du conflit, Roboute Guilliman rédigea le Codex Astartes — fragmentation des Légions survivantes en Chapitres de mille Astartes chacun, prévention de toute future Hérésie. Pendant dix mille ans, les Successor Chapters ont multiplié à plus de mille Chapitres, chacun maintenant la lignée génétique d'un Primarque originel. Au M42, le retour de Guilliman et la création des Astartes Primaris (par Belisarius Cawl) ont relancé le potentiel originel. Chaque Chapitre est désormais doublé : Firstborn (lignée originale) + Primaris (génome enrichi).",
+    "notableWars": [
+      {
+        "name": "Grande Croisade",
+        "summary": "Expansion de l'Imperium par les vingt Légions originelles, environ 200 ans de conquête galactique.",
+        "date": "M30"
+      },
+      {
+        "name": "Hérésie d'Horus",
+        "summary": "Guerre civile catastrophique. Neuf Légions traîtresses contre onze loyalistes. Siège de Terra. Mort de l'Empereur (presque).",
+        "date": "M31"
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "Abaddon attaqua Cadia. Les Astartes loyalistes (notamment Black Templars, Imperial Fists, Ultramarines) défendirent. Cadia tomba. Galaxie déchirée.",
+        "date": "999.M41"
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "Guilliman lança une croisade massive de Primaris pour repousser les ténèbres après la chute de Cadia.",
+        "date": "999.M41-010.M42"
+      },
+      {
+        "name": "Pacification d'Octarius",
+        "summary": "Astartes loyalistes pris dans la guerre Tyranides-Orks orchestrée par l'Inquisition.",
+        "date": "M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Roboute Guilliman",
+        "summary": "Primarque ressuscité, Lord Commander de l'Imperium, architecte du Codex Astartes.",
+        "primarchId": "guilliman"
+      },
+      {
+        "name": "Marneus Calgar",
+        "summary": "Maître de Chapitre des Ultramarines.",
+        "unitId": "sm-calgar"
+      },
+      {
+        "name": "Sanguinius",
+        "summary": "Primarque mort des Blood Angels — incarnation du sacrifice héroïque.",
+        "primarchId": "sanguinius"
+      },
+      {
+        "name": "Dante",
+        "summary": "Maître de Chapitre des Blood Angels, plus de 1100 ans d'âge.",
+        "unitId": "sm-dante"
+      },
+      {
+        "name": "Mephiston",
+        "summary": "Seigneur de la Mort des Blood Angels.",
+        "unitId": "sm-mephiston"
+      },
+      {
+        "name": "Lion El'Jonson",
+        "summary": "Primarque ressuscité des Dark Angels.",
+        "primarchId": "lion-eljonson"
+      },
+      {
+        "name": "Lemartes",
+        "summary": "Gardien des Death Company.",
+        "unitId": "sm-lemartes"
+      }
+    ],
+    "currentState": "Au M42, les Space Marines sont la force loyaliste principale de l'Indomitus Crusade. Plus de 1000 Chapitres actifs. Roboute Guilliman commande directement. Les Primaris dominent désormais les nouvelles compagnies — beaucoup de Firstborn vétérans acceptent le Rubicon Primaris pour transition.",
+    "legacy": "Les Space Marines incarnent l'idéal impérial dix mille ans après leur création. Sans eux, l'Imperium serait tombé cent fois. Leur Codex Astartes structure mille Chapitres. Leur gène-graine (gene-seed) issu des Primarques continue à faire des miracles biologiques.",
+    "galleryQueries": [
+      "Space Marines Astartes battle",
+      "Ultramarines diorama",
+      "Imperial Fists battle",
+      "Blood Angels battle",
+      "Codex Astartes",
+      "Astartes Primaris"
+    ],
+    "loreImageQuery": "Space Marines Astartes battle scene"
   },
   {
     "id": "chaos-space-marines",
@@ -67,7 +145,90 @@
       "Cartographie de l'Œil de la Terreur",
       "Codex de l'Hérésie",
       "Voir les romans de la Black Library"
-    ]
+    ],
+    "epithet": "Les Légions Renégates · Les Damnés Éternels",
+    "motto": "« Pour les Quatre Dieux ! » / « Que tout brûle ! »",
+    "longHistory": "Lors de l'Hérésie d'Horus, neuf des vingt Légions Astartes originelles trahirent l'Empereur pour suivre Horus le Maître de Guerre — corrompu sur Davin par les Quatre Dieux du Chaos. Black Legion (originelle Sons of Horus), Word Bearers, Death Guard, Thousand Sons, Emperor's Children, Iron Warriors, Night Lords, World Eaters, Alpha Legion. Vaincus à Terra (014.M31), ils se réfugièrent dans l'Œil de la Terreur — région warp où le temps et la réalité se distordent. Dix mille ans plus tard, ils en émergent à peine vieillis d'une vie d'homme — mais infiniment plus corrompus. Daemon Princes ascendus, Astartes possédés, armures fusionnées à la chair. Abaddon, ancien Premier Capitaine de Horus, fonda la Légion Noire en réunissant les neuf Légions sous une bannière unique : la haine. Treize Croisades Noires depuis lors — la dernière brisant Cadia.",
+    "notableWars": [
+      {
+        "name": "Hérésie d'Horus",
+        "summary": "Guerre civile catastrophique. Neuf Légions traîtresses marchèrent sur Terra.",
+        "date": "M31"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Les neuf Légions traîtresses massacrèrent les loyalistes Iron Hands, Salamanders, Raven Guard.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra",
+        "summary": "55 jours d'enfer. Sanguinius mort. Horus mort. Empereur sur le Trône d'Or.",
+        "date": "014.M31"
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "Abaddon utilisa la Lame Drach'nyen et le Planet Killer. Cadia brisée. Galaxie déchirée par la Cicatrix Maledictum.",
+        "date": "999.M41"
+      },
+      {
+        "name": "Bataille de Vraks",
+        "summary": "Apostasie planétaire majeure. Astartes traîtres et impériaux loyaux s'affrontèrent pendant 17 ans.",
+        "date": "M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Abaddon le Destructeur",
+        "summary": "Maître de Guerre de la Légion Noire.",
+        "unitId": "csm-abaddon"
+      },
+      {
+        "name": "Horus Lupercal",
+        "summary": "Premier Maître de Guerre, traître originel.",
+        "primarchId": "horus"
+      },
+      {
+        "name": "Khârn le Traître",
+        "summary": "Champion Éternel de Khorne.",
+        "unitId": "csm-kharn"
+      },
+      {
+        "name": "Magnus le Rouge",
+        "summary": "Daemon-Primarque de Tzeentch.",
+        "primarchId": "magnus"
+      },
+      {
+        "name": "Mortarion",
+        "summary": "Daemon-Primarque de Nurgle.",
+        "primarchId": "mortarion"
+      },
+      {
+        "name": "Fulgrim",
+        "summary": "Daemon-Primarque de Slaanesh.",
+        "primarchId": "fulgrim"
+      },
+      {
+        "name": "Angron",
+        "summary": "Daemon-Primarque de Khorne.",
+        "primarchId": "angron"
+      },
+      {
+        "name": "Ahriman",
+        "summary": "Archi-Sorcier des Mille Fils, exilé.",
+        "unitId": "csm-ahriman"
+      }
+    ],
+    "currentState": "Au M42, après la 13ᵉ Croisade Noire, les Légions Renégates dominent l'Imperium Nihilus (la moitié de la galaxie séparée par la Cicatrix Maledictum). Bandes de guerre innombrables, chaque Daemon-Primarque commande sa propre faction.",
+    "legacy": "Les Renégats incarnent la nuance qui hante l'Imperium : les meilleurs de hier sont devenus les pires d'aujourd'hui. Chaque Astartes loyaliste sait que sa Légion pourrait basculer en une nuit — c'est ce qui justifie le Codex Astartes.",
+    "galleryQueries": [
+      "Chaos Space Marines battle",
+      "Black Legion warband",
+      "Death Guard plague",
+      "World Eaters berzerker",
+      "Word Bearers ritual",
+      "Iron Warriors siege"
+    ],
+    "loreImageQuery": "Chaos Space Marines battle scene"
   },
   {
     "id": "aeldari",
@@ -76,7 +237,95 @@
     "description": "Race antique aux pouvoirs psychiques insondables, dernière relique d'un empire déchu par sa propre décadence.",
     "couleurThematique": "#1a5c3a",
     "symbole": "◈",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/9/96/EldarRaceRune.png/revision/latest/scale-to-width-down/80?cb=20180214075644"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/9/96/EldarRaceRune.png/revision/latest/scale-to-width-down/80?cb=20180214075644",
+    "sousTitre": "Asuryani · Drukhari · Harlequins · Ynnari",
+    "citation": "Vous voyez en nous une race agonisante. Nous voyons en vous des enfants jouant avec des couteaux.",
+    "lore": {
+      "origine": "Race antique forgée par les Anciens, les Aeldari régnaient sur la galaxie il y a soixante-cinq millions d'années. Leur empire psychique s'effondra dans la Chute, lorsque leur décadence donna naissance à Slaanesh — la Dieuse-Sombre dévoreuse d'âmes. Le berceau aeldari fut englouti, créant l'Œil de la Terreur. Quelques rescapés fuirent à bord des immenses Mondes-Vaisseaux (Craftworlds), tandis que d'autres se réfugièrent dans la Cité-Sombre de Commorragh.",
+      "organisation": "Les Asuryani vivent sur les Craftworlds — Iyanden, Saim-Hann, Biel-Tan, Ulthwé, Alaitoc — sous la tutelle des Voyantes. Les Drukhari hantent Commorragh dans le Webway, gouvernés par les Kabales et la Souffrance comme monnaie. Les Harlequins servent le Dieu-Rieur Cegorach. Les Ynnari, nouveaux disciples d'Ynnead, cherchent à ressusciter le panthéon défunt. Tous craignent le jour où leurs âmes nourriront Slaanesh.",
+      "doctrine": "Chaque guerrier aeldari emprunte une Voie — Dragon, Faucheur Sombre, Spectre Hurleur, Banshee — qui canalise une émotion mortelle. Leur technologie est psychoplastique : la Wraithbone répond à la pensée. Au combat, ils frappent avec une précision chirurgicale, ne combattent jamais sans une prophétie favorable, et abandonnent le terrain plutôt que de mourir pour une cause perdue. Leur arrogance est totale ; leur survie, fragile."
+    },
+    "stats": {
+      "craftworldsConnus": "5 majeurs · 17 mineurs survivants",
+      "effectifs": "Quelques millions par Craftworld",
+      "mondeOrigine": "Crone Worlds (Œil de la Terreur)",
+      "allegiance": "Le Panthéon brisé · Ynnead"
+    },
+    "liensRapides": [
+      "Les Voies de l'Aeldari",
+      "Mondes-Vaisseaux & Cité Sombre",
+      "Slaanesh & la Chute",
+      "Le Webway",
+      "Phoenix Lords"
+    ],
+    "resources": [
+      "Lexique Aeldari",
+      "Carte des Craftworlds",
+      "Mythes du Panthéon",
+      "Romans Black Library"
+    ],
+    "epithet": "Les Asuryani · Les Enfants des Étoiles",
+    "motto": "« Que les Voyants tissent. Que la lame frappe. »",
+    "longHistory": "Race antique forgée par les Anciens il y a soixante-cinq millions d'années, les Aeldari régnaient sur la galaxie au sommet de leur puissance. Leur empire psychique s'effondra dans la Chute (M30), lorsque leur décadence donna naissance à Slaanesh — la Dieuse-Sombre dévoreuse d'âmes. Le berceau aeldari fut englouti, créant l'Œil de la Terreur. Quelques rescapés fuirent à bord des immenses Mondes-Vaisseaux (Craftworlds : Iyanden, Saim-Hann, Biel-Tan, Ulthwé, Alaitoc), tandis que d'autres se réfugièrent dans la Cité-Sombre de Commorragh (Drukhari). Les Harlequins servent le Dieu-Rieur Cegorach. Les Ynnari, nouveaux disciples d'Ynnead, cherchent à ressusciter le panthéon défunt.",
+    "notableWars": [
+      {
+        "name": "La Guerre dans le Ciel",
+        "summary": "Aeldari (Anciens) contre Necrons et C'tan. Massacre cosmique.",
+        "date": "60M ans avant"
+      },
+      {
+        "name": "La Chute",
+        "summary": "Décadence aeldari donna naissance à Slaanesh. Empire détruit.",
+        "date": "M30"
+      },
+      {
+        "name": "Manipulations contre l'Imperium",
+        "summary": "Eldrad Ulthran tissa des fils du destin pour préserver les Aeldari.",
+        "date": "M30-M42"
+      },
+      {
+        "name": "Résurrection d'Ynnead",
+        "summary": "Yvraine et les Ynnari ramenèrent Guilliman. Tentative de ressusciter le panthéon.",
+        "date": "999.M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Eldrad Ulthran",
+        "summary": "Grand Voyant d'Ulthwé, manipulateur des fils du destin.",
+        "unitId": "eld-eldrad"
+      },
+      {
+        "name": "Asurmen",
+        "summary": "Premier Phoenix Lord, fondateur des Voies du Guerrier.",
+        "unitId": "eld-asurmen"
+      },
+      {
+        "name": "Jain Zar",
+        "summary": "Phoenix Lord des Banshees Hurlantes.",
+        "unitId": "eld-jain-zar"
+      },
+      {
+        "name": "Prince Yriel",
+        "summary": "Capitaine d'Iyanden, exilé Corsaire.",
+        "unitId": "eld-yriel"
+      },
+      {
+        "name": "Yvraine",
+        "summary": "Première disciple d'Ynnead, fondatrice des Ynnari."
+      }
+    ],
+    "currentState": "Au M42, les Aeldari sont en survie active. Iyanden a survécu aux Tyranides. Saim-Hann lutte contre les pirates. Ulthwé tisse des destins. Les Ynnari grandissent. Mais chaque jour, une âme aeldari nourrit Slaanesh.",
+    "legacy": "Les Aeldari sont la mémoire d'un empire mort. Leur civilisation est une leçon : l'arrogance précipite la chute.",
+    "galleryQueries": [
+      "Aeldari Craftworld art",
+      "Eldar Aspect Warrior",
+      "Aeldari battle scene",
+      "Eldar Farseer",
+      "Iyanden Craftworld",
+      "Aeldari Phoenix Lord"
+    ],
+    "loreImageQuery": "Aeldari battle scene Craftworld"
   },
   {
     "id": "orks",
@@ -85,7 +334,89 @@
     "description": "Horde brutale et exubérante vivant uniquement pour le combat. Leur foi collective rend leur technologie réelle.",
     "couleurThematique": "#3a5c1a",
     "symbole": "☠",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/36/Orks_symbol.png/revision/latest/scale-to-width-down/80?cb=20101021112013"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/36/Orks_symbol.png/revision/latest/scale-to-width-down/80?cb=20101021112013",
+    "sousTitre": "Greenskinz · Goffs · Evil Sunz · Bad Moons · Snakebites · Deathskulls",
+    "citation": "Si y'a pas une bonne baston, c'est qu'on l'a pas cherchée assez fort. WAAAGH!",
+    "lore": {
+      "origine": "Race fongique conçue par les Brainboyz dans une ère oubliée pour combattre les Necrontyrs et les Anciens, les Orks sont les guerriers parfaits de l'univers. Ils se reproduisent par spores libérées à leur mort, infectant chaque planète où ils tombent. Toute défaite plante les germes d'une nouvelle invasion. Pour un Ork, vivre c'est se battre, et se battre c'est exister.",
+      "organisation": "Société tribale et brutalement méritocratique : le plus gros et le plus fort domine, jusqu'à ce qu'un plus gros et plus fort ne le dégomme. Les six clans majeurs — Goffs, Evil Sunz, Bad Moons, Snakebites, Deathskulls, Blood Axes — divergent par leur philosophie du carnage. Quand un Ork particulièrement charismatique rassemble suffisamment de soldats et de moral, sa horde devient un WAAAGH! galactique : marée verte capable d'engloutir des secteurs entiers.",
+      "doctrine": "La technologie Ork ne devrait pas fonctionner — pistolets enrayés, motoswheelz tenant aux clous tordus — mais l'inconscient collectif gretchin fait fonctionner ce que les Orks croient fonctionner. Plus ils croient fort, plus ça marche. Au combat : pas de stratégie, pas de retraite, pas de doute. Charge frontale, hurlements, plaisir simple de la baston. Les Mékaniks bricolent, les Sorciers Boyz canalisent l'énergie psychique brute du WAAAGH!, les Painboyz amputent au hasard."
+    },
+    "stats": {
+      "clansConnus": "6 majeurs + dizaines de tribus",
+      "effectifs": "Innombrable — chaque mort en crée dix",
+      "mondeOrigine": "Aucun (essaiment partout)",
+      "allegiance": "Gork (ou peut-être Mork)"
+    },
+    "liensRapides": [
+      "Les six clans Orks",
+      "Anatomie d'un WAAAGH!",
+      "Mékaniks & sorcellerie verte",
+      "Beast Snagga & Nobz",
+      "Légendaires Warlords"
+    ],
+    "resources": [
+      "Lexique Ork",
+      "Anciens WAAAGH! historiques",
+      "Glossaire Da Wurld",
+      "Romans Black Library"
+    ],
+    "epithet": "La Marée Verte · Le WAAAGH! Éternel",
+    "motto": "« WAAAAAGH! »",
+    "longHistory": "Race fongique conçue par les Brainboyz dans une ère oubliée pour combattre les Necrontyrs et les Anciens, les Orks sont les guerriers parfaits de l'univers. Ils se reproduisent par spores libérées à leur mort, infectant chaque planète où ils tombent. Toute défaite plante les germes d'une nouvelle invasion. Pour un Ork, vivre c'est se battre, et se battre c'est exister. Société tribale méritocratique-brutale.",
+    "notableWars": [
+      {
+        "name": "Guerre dans le Ciel",
+        "summary": "Brainboyz combattirent les Necrontyrs aux côtés des Anciens.",
+        "date": "60M ans avant"
+      },
+      {
+        "name": "Compliance d'Ullanor",
+        "summary": "Plus grande compliance de la Grande Croisade. Horus reçut le titre de Maître de Guerre.",
+        "date": "M30"
+      },
+      {
+        "name": "Trois Guerres d'Armageddon",
+        "summary": "Ghazghkull contre Yarrick. Bataille de Hades.",
+        "date": "M41"
+      },
+      {
+        "name": "Bataille d'Octarius",
+        "summary": "Tyranides vs Orks. Inquisition orchestra le conflit pour épuiser les deux races.",
+        "date": "M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Ghazghkull Mag Uruk Thraka",
+        "summary": "Plus grand Warboss vivant, Prophète de Gork.",
+        "unitId": "ork-ghazghkull"
+      },
+      {
+        "name": "Makari",
+        "summary": "Gretchin légendaire, Porte-Drapeau de Ghazghkull.",
+        "unitId": "ork-makari"
+      },
+      {
+        "name": "Mad Dok Grotsnik",
+        "summary": "Painboy fou, créateur de Ghazghkull augmenté."
+      },
+      {
+        "name": "Wazdakka Gutsmek",
+        "summary": "Speed Freek, légende des motos."
+      }
+    ],
+    "currentState": "Au M42, les Orks pullulent. Ghazghkull grandit constamment. Beasts en hausse. WAAAGH! galactiques en multiplication.",
+    "legacy": "Les Orks incarnent l'éternel ennemi. Ils ne disparaissent jamais — chaque mort les multiplie. Ce sont les seuls qui peuvent même s'amuser de leur extinction.",
+    "galleryQueries": [
+      "Ork warhammer 40k art",
+      "Ork Boyz battle",
+      "Ghazghkull Warboss",
+      "WAAAGH battle scene",
+      "Ork warband",
+      "Greenskins art"
+    ],
+    "loreImageQuery": "Ork WAAAGH battle scene"
   },
   {
     "id": "tyranides",
@@ -94,7 +425,91 @@
     "description": "Nuée extra-galactique consumant toute biomasse sur son passage. La Ruche-Mère pense pour des trillions d'organismes.",
     "couleurThematique": "#4a1a5c",
     "symbole": "⌬",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/cb/TyranidsIcon.jpg/revision/latest/scale-to-width-down/80?cb=20230331182929"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/cb/TyranidsIcon.jpg/revision/latest/scale-to-width-down/80?cb=20230331182929",
+    "sousTitre": "Hive Fleet · Esprit Ruche · Genestealer Cults",
+    "citation": "Ils ne ressentent ni peur, ni pitié. Ils n'ont qu'une seule pulsion : consommer.",
+    "lore": {
+      "origine": "Marée extragalactique surgie des ténèbres au-delà de la Voie Lactée, les Tyranides arrivèrent en M41 sous forme de Flottes-Ruches : Behemoth, Kraken, Leviathan, Hydra, Gorgon, Tiamet… Chaque flotte est un essaim biologique de plusieurs millions de vaisseaux vivants, guidés par un Esprit-Ruche unique qui pense à travers le Warp. Ils dévorent toute biomasse — chair, plantes, atmosphère — et la convertissent en nouvelles bio-formes adaptées à la prochaine bataille.",
+      "organisation": "Aucune individualité. La Synapse — réseau psychique invisible — relie chaque créature à l'Esprit-Ruche via les Tyrans des Ruches, Magus, Carnifex synaptiques. En dehors de la Synapse, les bio-formes mineures redeviennent des bêtes féroces sans direction. Le sommet absolu est l'Esprit-Ruche lui-même, intelligence titanesque inconcevable, dont la pensée déborde dans l'Empyrée et étouffe le contact astropathique sur des secteurs entiers — l'Ombre dans le Warp.",
+      "doctrine": "Adaptation, prédation, consommation. Chaque planète tombée alimente la flotte ; chaque chair goûtée enseigne. Les Genestealers infiltrent en éclaireurs depuis des décennies, créant des Cultes qui sapent les défenses planétaires avant l'arrivée. Les Ravagers voilent les planètes de spores. Les Lictors traquent les commandeurs ennemis. Puis vient la Marée — Hormagaunts, Termagants, Carnifex, Trygons, Hierophants — et la planète disparaît, réduite à une coquille morte recouverte de bio-essence aspirée vers les vaisseaux-ruches affamés."
+    },
+    "stats": {
+      "flottesRuchesConnues": "10+ majeures (Behemoth, Kraken, Leviathan, Hydra…)",
+      "effectifs": "Trillions d'organismes par flotte",
+      "mondeOrigine": "Au-delà du Halo de la Galaxie",
+      "allegiance": "L'Esprit-Ruche"
+    },
+    "liensRapides": [
+      "Les flottes-ruches majeures",
+      "Anatomie de la Synapse",
+      "Bio-formes & adaptation",
+      "Genestealer Cults",
+      "Ombre dans le Warp"
+    ],
+    "resources": [
+      "Catalogue des bio-formes",
+      "Carte des routes prédatoires",
+      "Récits de mondes consumés",
+      "Romans Black Library"
+    ],
+    "epithet": "L'Esprit-Ruche · La Marée Affamée",
+    "motto": "[ pas de devise — communication psychique pure ]",
+    "longHistory": "Marée extragalactique surgie des ténèbres au-delà de la Voie Lactée, les Tyranides arrivèrent en M41 sous forme de Flottes-Ruches : Behemoth, Kraken, Leviathan, Hydra, Gorgon, Tiamet… Chaque flotte est essaim biologique de plusieurs millions de vaisseaux vivants, guidés par un Esprit-Ruche unique qui pense à travers le Warp. Ils dévorent toute biomasse — chair, plantes, atmosphère — et la convertissent en nouvelles bio-formes.",
+    "notableWars": [
+      {
+        "name": "Première Tyranide War",
+        "summary": "Behemoth attaqua Macragge. Marneus Calgar défendit. Tactique défensive éternelle.",
+        "date": "745.M41"
+      },
+      {
+        "name": "Kraken Wars",
+        "summary": "Flotte Kraken envahit beaucoup de mondes.",
+        "date": "M41"
+      },
+      {
+        "name": "Leviathan Wars",
+        "summary": "Plus grande flotte tyranide jamais vue. Indomitus la repoussa.",
+        "date": "999.M41"
+      },
+      {
+        "name": "Devastation of Baal",
+        "summary": "Leviathan consuma presque Baal. Dante défendit jusqu'au bout.",
+        "date": "999.M41"
+      },
+      {
+        "name": "Bataille d'Octarius",
+        "summary": "Tyranides vs Orks orchestrée par l'Inquisition.",
+        "date": "M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Le Swarmlord",
+        "summary": "Bio-forme suprême, manifestation tactique du Hive Mind.",
+        "unitId": "tyr-swarmlord"
+      },
+      {
+        "name": "Hive Tyrants",
+        "summary": "Bio-forme commandeuse principale.",
+        "unitId": "tyr-hive-tyrant"
+      },
+      {
+        "name": "Broodlords",
+        "summary": "Patriarches Genestealer.",
+        "unitId": "tyr-broodlord"
+      }
+    ],
+    "currentState": "Au M42, après la Devastation of Baal, Leviathan continue d'avancer. L'Imperium vit avec la menace permanente. Octarius continue.",
+    "legacy": "Les Tyranides incarnent l'extinction extragalactique. Sans tactique, sans haine — juste faim.",
+    "galleryQueries": [
+      "Tyranid Hive Fleet",
+      "Tyranid bio-form",
+      "Hive Mind warhammer",
+      "Tyranid invasion",
+      "Genestealer Cult",
+      "Swarmlord art"
+    ],
+    "loreImageQuery": "Tyranid Hive Fleet invasion"
   },
   {
     "id": "necrons",
@@ -103,7 +518,101 @@
     "description": "Anciens êtres de chair devenus machines immortelles. Ils dormaient depuis soixante millions d'années.",
     "couleurThematique": "#1a4a1a",
     "symbole": "⊗",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/5/55/AnkhoftheTriarch9thEdition.jpg/revision/latest/scale-to-width-down/80?cb=20200925173557"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/5/55/AnkhoftheTriarch9thEdition.jpg/revision/latest/scale-to-width-down/80?cb=20200925173557",
+    "sousTitre": "Dynasties · Triarques · Phaeron",
+    "citation": "Vous traversez la galaxie comme des étincelles dans la nuit. Nous étions là quand l'univers vibrait encore de sa naissance.",
+    "lore": {
+      "origine": "Avant l'Humanité, avant les Aeldari, régnaient les Necrontyrs — race mortelle dévorée par leur étoile mourante. Leur Phaeron Suprême, Szarekh, conclut un pacte avec les C'tan, les Étoiles-Dieux : transférer leur conscience dans des corps de necrodermis indestructibles en échange de leur servitude. Le Biotransfert leur ôta leur âme, leurs émotions, leur lien au Warp — mais leur donna l'éternité. Après la Guerre dans le Ciel contre les Anciens et le Massacre des C'tan, les Necrons s'enfermèrent dans le Grand Sommeil, attendant 60 millions d'années sous les Mondes-Tombeaux.",
+      "organisation": "Hiérarchie féodale gravée dans la pierre numérique : chaque Dynastie est dirigée par un Phaeron, soutenu par des Overlords, des Lords, des Crypteks (sciences interdites) et des Triarques (loi de l'Empire). Sautekh d'Imotekh, Sarnekh, Nephrekh, Mephrit, Nihilakh, Novokh… Chaque dynastie possède ses propres rituels, ses guerres ancestrales, ses Mondes-Tombeaux dispersés dans la galaxie. Le Cri du Réveil retentit en M41 : les tombes s'ouvrent, et les Phaerons réclament leur empire perdu.",
+      "doctrine": "Précision, attrition, supériorité technologique absolue. La necrodermis se répare seule ; les armes Gauss désagrègent la matière atome par atome ; les Cryptek manipulent la quantique pour téléporter des phalanges entières. Beaucoup de Phaerons négocient — ils se considèrent comme rois légitimes de la galaxie, et accordent parfois leur protection à des servants humains. D'autres, dont l'esprit a été corrompu par les millénaires de stase, ne perçoivent plus l'ennemi que comme du minerai à exterminer."
+    },
+    "stats": {
+      "dynastiesConnues": "Sautekh, Sarnekh, Nephrekh, Mephrit, Nihilakh, Novokh… +13 mineures",
+      "effectifs": "Milliards de Necrons en hibernation",
+      "mondeOrigine": "Mondes-Tombeaux dispersés dans toute la galaxie",
+      "allegiance": "Le Triarcat (effondré) · Phaerons individuels"
+    },
+    "liensRapides": [
+      "Les Dynasties Necron",
+      "Les C'tan & le Massacre",
+      "Crypteks & sciences interdites",
+      "Mondes-Tombeaux",
+      "Le Grand Sommeil"
+    ],
+    "resources": [
+      "Lexique Necron",
+      "Cartographie des Mondes-Tombeaux",
+      "Annales du Biotransfert",
+      "Romans Black Library"
+    ],
+    "epithet": "Les Anciens Endormis · Les Étoiles-Dieux Liés",
+    "motto": "« Le silence est patience. La patience est éternité. »",
+    "longHistory": "Avant l'Humanité, avant les Aeldari, régnaient les Necrontyrs — race mortelle dévorée par leur étoile mourante. Leur Phaeron Suprême, Szarekh, conclut un pacte avec les C'tan, les Étoiles-Dieux : transférer leur conscience dans des corps de necrodermis indestructibles en échange de leur servitude. Le Biotransfert leur ôta leur âme, leurs émotions, leur lien au Warp — mais leur donna l'éternité. Après la Guerre dans le Ciel et le Massacre des C'tan, les Necrons s'enfermèrent dans le Grand Sommeil, attendant 60 millions d'années sous les Mondes-Tombeaux.",
+    "notableWars": [
+      {
+        "name": "Guerre Necrontyr-Anciens",
+        "summary": "Avant le Biotransfert. Dévastation cosmique.",
+        "date": "65M ans avant"
+      },
+      {
+        "name": "Biotransfert",
+        "summary": "Pacte Necrontyr-C'tan. Conversion en machines.",
+        "date": "60M ans avant"
+      },
+      {
+        "name": "Guerre dans le Ciel",
+        "summary": "Necrons-C'tan contre Anciens-Aeldari. Devastation de la galaxie.",
+        "date": "60M ans avant"
+      },
+      {
+        "name": "Massacre des C'tan",
+        "summary": "Necrons fragmentèrent les C'tan en Shards, refusant la servitude.",
+        "date": "60M ans avant"
+      },
+      {
+        "name": "Grand Sommeil",
+        "summary": "Necrons s'enfermèrent dans Mondes-Tombeaux pendant 60 millions d'années.",
+        "date": "60M-M41"
+      },
+      {
+        "name": "Réveil des Tombeaux",
+        "summary": "M41-M42, les Tombeaux s'éveillent un par un.",
+        "date": "M41+"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Szarekh, le Roi Silencieux",
+        "summary": "Triarque Suprême, Phaeron suprême originel.",
+        "unitId": "nec-szarekh"
+      },
+      {
+        "name": "Imotekh le Seigneur des Tempêtes",
+        "summary": "Phaeron Sautekh, stratège suprême.",
+        "unitId": "nec-imotekh"
+      },
+      {
+        "name": "Trazyn l'Infini",
+        "summary": "Phaeron de Solemnace, collectionneur cosmique.",
+        "unitId": "nec-trazyn"
+      },
+      {
+        "name": "Le Nightbringer",
+        "summary": "C'tan Shard, incarnation de la Mort.",
+        "unitId": "nec-nightbringer"
+      }
+    ],
+    "currentState": "Au M42, beaucoup de Tombeaux Necron sont éveillés. Sautekh marche. Solemnace collecte. Triarcat reformé sous Szarekh.",
+    "legacy": "Les Necrons sont la civilisation la plus ancienne survivante. Leur science quantique défie tout humain. Ils observent l'Imperium comme un enfant joue avec des bâtons.",
+    "galleryQueries": [
+      "Necron art warhammer",
+      "Tomb World Necron",
+      "Necron Lord",
+      "Necron Phaeron",
+      "Necron Dynasty",
+      "Necron warrior battle"
+    ],
+    "loreImageQuery": "Necron Tomb World awakening"
   },
   {
     "id": "tau",
@@ -112,7 +621,95 @@
     "description": "Empire technologique guidé par la philosophie du Bien Commun. La diplomatie, puis les armes à plasma.",
     "couleurThematique": "#1a4a5c",
     "symbole": "◎",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/f/f0/T%27au_Empire_Icon.png/revision/latest/scale-to-width-down/80?cb=20230512074501"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/f/f0/T%27au_Empire_Icon.png/revision/latest/scale-to-width-down/80?cb=20230512074501",
+    "sousTitre": "T'au'va · Bien Commun · Cinq Castes",
+    "citation": "Pour le Bien Suprême. Servir, c'est être libre.",
+    "lore": {
+      "origine": "Race jeune, semi-nomade, les T'au furent guidés vers la civilisation en M35 par les Éthérés, leur caste suprême au charisme presque psychique. Sur leur monde-mère T'au, les premiers Éthérés unirent les cinq castes guerrières — Feu, Terre, Eau, Air, et eux-mêmes — autour de la philosophie du T'au'va, le Bien Suprême. En quelques millénaires (extraordinairement rapide à l'échelle galactique), ils colonisèrent un secteur entier, baptisé l'Empire T'au, en évitant prudemment les zones-Warp et les territoires Imperium puissants.",
+      "organisation": "Société rigidement compartimentée par caste, sans mobilité verticale : la Caste du Feu (Shas) combat, la Caste de la Terre (Fio) construit et fabrique, la Caste de l'Eau (Por) négocie et diplomatise, la Caste de l'Air (Kor) navigue et commande la flotte. Au-dessus, les Éthérés (Aun) — Aun'Va, Aun'Shi, Aun'O — prennent les décisions politiques et inspirent une dévotion absolue (rumeurs de manipulation phéromonale jamais confirmées). Trois Sphères d'Expansion ont étendu l'Empire ; la Quatrième prépare l'avenir.",
+      "doctrine": "D'abord la diplomatie — la Caste de l'Eau offre intégration, prospérité, protection. Si refus, la Caste du Feu intervient avec la doctrine de la Tempête de Fer : cuirasses Crisis, drones de soutien, fusils à induction de plasma, Riptides et Stormsurge cracheurs de plasma surchauffé. Les T'au refusent les engagements rapprochés ; ils tirent à distance, mobiles, coordonnés par le réseau de communication. Leur infanterie auxiliaire — Kroot, Vespid, Gue'vesa humains ralliés — apporte la mêlée. Foi inébranlable dans la science, méfiance envers le psychisme."
+    },
+    "stats": {
+      "sphereExpansion": "3 achevées · 4ᵉ en cours",
+      "effectifs": "Inconnu — Empire centralisé en croissance",
+      "mondeOrigine": "T'au (Système T'au)",
+      "allegiance": "Le T'au'va · les Éthérés"
+    },
+    "liensRapides": [
+      "Les cinq Castes",
+      "Le T'au'va — philosophie",
+      "Les Sphères d'Expansion",
+      "Battlesuits & technologie",
+      "Auxiliaires Kroot & Vespid"
+    ],
+    "resources": [
+      "Lexique T'au",
+      "Carte de l'Empire T'au",
+      "Discours d'Aun'Va",
+      "Romans Black Library"
+    ],
+    "epithet": "L'Empire T'au · Les Jeunes Étoiles",
+    "motto": "« Pour le Bien Suprême ! »",
+    "longHistory": "Race jeune, semi-nomade, les T'au furent guidés vers la civilisation en M35 par les Éthérés, leur caste suprême au charisme presque psychique. Sur leur monde-mère T'au, les premiers Éthérés unirent les cinq castes — Feu, Terre, Eau, Air, et eux-mêmes — autour de la philosophie du T'au'va, le Bien Suprême. En quelques millénaires, ils colonisèrent un secteur entier, baptisé l'Empire T'au.",
+    "notableWars": [
+      {
+        "name": "Damocles Crusade",
+        "summary": "Imperium attaque les T'au. Les T'au repoussent.",
+        "date": "M41"
+      },
+      {
+        "name": "Damocles Gulf War",
+        "summary": "Première rencontre majeure avec l'Imperium.",
+        "date": "M41"
+      },
+      {
+        "name": "3ème Sphère d'Expansion",
+        "summary": "Shadowsun mena la reconquête de la frontière.",
+        "date": "M41"
+      },
+      {
+        "name": "Trahison de Farsight",
+        "summary": "Farsight refusa l'autorité Aun. Fonda les Enclaves.",
+        "date": "M41"
+      },
+      {
+        "name": "4ème Sphère d'Expansion",
+        "summary": "Quatrième vague d'expansion en cours.",
+        "date": "M42"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Aun'Va",
+        "summary": "Maître Éthéré Suprême, voix officielle du T'au'va.",
+        "unitId": "tau-aun-va"
+      },
+      {
+        "name": "Commandante Shadowsun",
+        "summary": "Pragmatique, leader actuelle.",
+        "unitId": "tau-shadowsun"
+      },
+      {
+        "name": "Commander Farsight",
+        "summary": "Le rebelle, chef des Enclaves indépendantes.",
+        "unitId": "tau-farsight"
+      },
+      {
+        "name": "Commander Puretide",
+        "summary": "Mentor légendaire de la Caste du Feu."
+      }
+    ],
+    "currentState": "Au M42, l'Empire T'au est en pleine croissance. La 4ème Sphère d'Expansion vise les frontières d'Imperium Sanctus. Tensions avec Farsight Enclaves.",
+    "legacy": "Les T'au sont la jeunesse galactique. Leur foi en science et coopération contraste avec la décadence des autres races.",
+    "galleryQueries": [
+      "Tau Empire art",
+      "Tau Crisis Suit battle",
+      "Caste du Feu",
+      "Tau Battlesuit",
+      "Tau Empire Shadowsun",
+      "Tau warhammer 40k"
+    ],
+    "loreImageQuery": "Tau Empire battle scene"
   },
   {
     "id": "astra-militarum",
@@ -147,7 +744,89 @@
       "Carte galactique des fronts",
       "Manuels du Tactica Imperialis",
       "Voir les romans liés (Cain, Gaunt's Ghosts)"
-    ]
+    ],
+    "epithet": "La Garde Impériale · Le Marteau de l'Empereur",
+    "motto": "« Pour l'Empereur ! La fournaise du courage humain ! »",
+    "longHistory": "Plus grande armée de l'humanité — environ un trillion de soldats actifs à tout moment, distribués sur des millions de mondes. Issue des armées planétaires unifiées par l'Empereur pendant la Grande Croisade, la Garde Impériale est la force de combat de masse de l'Imperium. Là où les Astartes sont quelques milliers, la Garde est un trillion. Chaque monde-Imperium fournit un tribut régimentaire — pourcentage fixe de jeunes adultes envoyés combattre, jamais retournés. Régiments légendaires : Cadiens (Cadia, monde-forteresse), Catachans (Catachan II, monde-jungle), Mordians (Mordian, monde-planète sous siège permanent), Tallarns, Vostroyans, Krieg, Tanith, Valhallan. Chacun avec ses propres traditions, équipements, doctrines.",
+    "notableWars": [
+      {
+        "name": "Grande Croisade",
+        "summary": "Garde Impériale fut levée massivement, occupant les mondes Compliance après les Astartes.",
+        "date": "M30"
+      },
+      {
+        "name": "Hérésie d'Horus",
+        "summary": "La Garde combattit aux côtés des Légions loyalistes. Tallarn, Macharian, beaucoup de pertes.",
+        "date": "M31"
+      },
+      {
+        "name": "Trois Guerres d'Armageddon",
+        "summary": "Ghazghkull contre Yarrick. Garde + Astartes vs Orks. Trois conflits massifs.",
+        "date": "M41"
+      },
+      {
+        "name": "Croisade Macharian",
+        "summary": "Solar Macharius conquit 1000 mondes en 7 ans. Ensuite Hérésie Macharian éclata.",
+        "date": "M41"
+      },
+      {
+        "name": "Bataille de Tallarn",
+        "summary": "Plus grande bataille de chars de l'histoire impériale. Iron Warriors vs Garde.",
+        "date": "M31"
+      },
+      {
+        "name": "Croisade Sabbat Worlds",
+        "summary": "Ibram Gaunt et les Tanith First contre Chaos. Roman Black Library central.",
+        "date": "M41"
+      },
+      {
+        "name": "13ᵉ Croisade Noire — Cadia",
+        "summary": "Cadians défendirent leur monde. Cadia tomba. Survivants dispersés.",
+        "date": "999.M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Solar Macharius",
+        "summary": "Lord-Général Militant, conquérant de mille mondes en sept ans.",
+        "unitId": "am-macharius"
+      },
+      {
+        "name": "Commissaire Yarrick",
+        "summary": "Héros de Hades, némésis personnelle de Ghazghkull.",
+        "unitId": "am-yarrick"
+      },
+      {
+        "name": "Ursarkar Creed",
+        "summary": "Lord-Castellan de Cadia, génie tactique légendaire.",
+        "unitId": "am-creed"
+      },
+      {
+        "name": "Ibram Gaunt",
+        "summary": "Commissaire-Colonel des Tanith First, héros de la Sabbat Worlds Crusade.",
+        "unitId": "am-gaunt"
+      },
+      {
+        "name": "Colm Corbec",
+        "summary": "Colonel des Tanith First, second de Gaunt.",
+        "unitId": "am-corbec"
+      },
+      {
+        "name": "Lord-Solar Leontus",
+        "summary": "Lord-Solar suprême Cadien, succession de Creed après Cadia."
+      }
+    ],
+    "currentState": "Au M42, la Garde Impériale est plus active que jamais. Les Cadiens dispersés forment l'Astra Militarum Cadian Excubitae. La Krieg gagne en importance après les sièges de l'Indomitus Crusade. Catachan, Tallarn, Mordian, Vostroyan continuent à fournir leurs régiments.",
+    "legacy": "Sans la Garde Impériale, l'Imperium ne pourrait pas tenir. Chaque planète défendue par cette armée massive d'humains ordinaires — pas Astartes, pas Custodes — montre la résilience de l'Humanité brute. Trois millions de soldats meurent par jour dans la galaxie ; un million de plus sont levés.",
+    "galleryQueries": [
+      "Imperial Guard battle",
+      "Cadian Shock Troops",
+      "Catachan Jungle Fighters",
+      "Krieg Death Korps",
+      "Astra Militarum diorama",
+      "Imperial Guardsmen"
+    ],
+    "loreImageQuery": "Imperial Guard battle scene"
   },
   {
     "id": "adeptus-mechanicus",
@@ -156,7 +835,84 @@
     "description": "Prêtres-machines vénérant l'Omnimessie, gardiens des secrets technologiques de l'Humanité.",
     "couleurThematique": "#5c1a1a",
     "symbole": "⚙",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/c6/MechanicusLogo.jpg/revision/latest/scale-to-width-down/80?cb=20181128190539"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/c6/MechanicusLogo.jpg/revision/latest/scale-to-width-down/80?cb=20181128190539",
+    "sousTitre": "Cult Mechanicus · Mars · Forge Worlds",
+    "citation": "La chair est faible. La machine est éternelle. Loué soit l'Omnimessie.",
+    "lore": {
+      "origine": "Avant que l'Empereur ne franchisse les murs de Terra, sur Mars régnait le Cult Mechanicus — survivance de l'Âge des Ténèbres où l'humanité avait atteint le sommet de sa technologie. Les Tech-Prêtres vénéraient (et vénèrent toujours) le Dieu-Machine, l'Omnimessie, fragment d'une vérité plus vaste qu'ils espèrent reconstituer. Lors du Pacte de Mars en M30, ils reconnurent l'Empereur comme avatar de leur Dieu-Machine, et l'Adeptus Mechanicus devint l'allié technologique de l'Imperium naissant.",
+      "organisation": "Mars demeure le Saint des Saints. Chaque Forge World — Lucius, Stygies VIII, Metalica, Graia, Ryza, Agripinaa — est une planète-usine gouvernée par un Fabricator-Locum sous l'autorité du Fabricator-General de Mars. La hiérarchie sacerdotale s'étage des Tech-Initiés aux Magos Dominus, Magos Biologis, Magos Genetor, jusqu'aux Tech-Magos siégeant au Conseil Suprême. Les Skitarii forment l'armée régulière, les Cohortes Cybernetica déploient des Kastelan et Kataphron, et les Légions Titanica de la Collegia Titanica déchaînent les Dieux-Machines.",
+      "doctrine": "Doctrina Imperatoris. Toute connaissance est sacrée et dangereuse. Aucune nouvelle technologie ne doit être développée — seulement redécouverte par l'étude des Standard Template Constructs perdus. L'innovation est hérésie ; la chair est faiblesse ; remplacer membres et organes par des augmentations mécaniques est ascension spirituelle. Au combat, les Skitarii Vanguards et Rangers chargent en formation rituelle. Les Magos chantent des hymnes binaires aux esprits-machines. Tout est rite, calcul, dévotion glaciale."
+    },
+    "stats": {
+      "forgeWorlds": "Mars + 200+ planètes-forges",
+      "effectifs": "Milliards de Tech-Prêtres et Skitarii",
+      "mondeOrigine": "Mars",
+      "allegiance": "Omnimessie · Empereur (par convention)"
+    },
+    "liensRapides": [
+      "Les Forge Worlds majeurs",
+      "Hiérarchie sacerdotale",
+      "Standard Template Constructs",
+      "Collegia Titanica",
+      "Skitarii & Kataphron"
+    ],
+    "resources": [
+      "Lexique Mechanicus",
+      "Schémas STC connus",
+      "Hymnes binaires sacrés",
+      "Romans Black Library"
+    ],
+    "epithet": "Le Cult Mechanicus · Les Prêtres-Machines de Mars",
+    "motto": "« La chair est faible. La machine est éternelle. »",
+    "longHistory": "Avant l'Empereur, sur Mars, régnait le Cult Mechanicus — survivance technologique de l'Âge des Ténèbres où l'humanité avait atteint le sommet de sa science. Les Tech-Prêtres vénéraient (et vénèrent toujours) le Dieu-Machine, l'Omnimessie. Lors du Pacte de Mars en M30, ils reconnurent l'Empereur comme avatar de leur Dieu-Machine, et l'Adeptus Mechanicus devint l'allié technologique de l'Imperium naissant. Mars demeure leur Saint des Saints. Chaque Forge World — Lucius, Stygies VIII, Metalica, Graia, Ryza, Agripinaa — est planète-usine gouvernée par un Fabricator-Locum sous l'autorité du Fabricator-General de Mars.",
+    "notableWars": [
+      {
+        "name": "Pacte de Mars",
+        "summary": "Mars reconnut l'Empereur comme Omnimessie. Imperium et Mechanicus alliés.",
+        "date": "M30"
+      },
+      {
+        "name": "Schisme du Mechanicus",
+        "summary": "Pendant l'Hérésie, plusieurs Forge Worlds basculèrent vers le Chaos.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Mars (Hérésie)",
+        "summary": "Mars elle-même fut déchirée. Une partie suivit Horus.",
+        "date": "M31"
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "Belisarius Cawl révèle les Astartes Primaris. Production massive démarre.",
+        "date": "999.M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Belisarius Cawl",
+        "summary": "Archmagos Dominus, créateur des Astartes Primaris.",
+        "unitId": "admech-cawl"
+      },
+      {
+        "name": "Kelbor-Hal",
+        "summary": "Fabricator-General qui bascula vers le Chaos pendant l'Hérésie."
+      },
+      {
+        "name": "Sebastian Thor",
+        "summary": "Fabricator-General loyaliste qui maintint Mars dans l'orbite impériale."
+      }
+    ],
+    "currentState": "Au M42, le Mechanicus est plus puissant que jamais — les Primaris produits massivement, les flottes Indomitus dépendent du Mechanicus. Tensions internes entre puristes et expérimentateurs (Cawl-faction).",
+    "legacy": "Le Mechanicus est la mémoire technologique de l'humanité. Les Standard Template Constructs perdus, partiellement redécouverts, structurent toute la production militaire. Sans Mars, l'Imperium n'aurait pas d'armes.",
+    "galleryQueries": [
+      "Adeptus Mechanicus art",
+      "Tech-Priest battle",
+      "Skitarii artwork",
+      "Mars forge world",
+      "Mechanicus warhammer 40k",
+      "Cawl Mechanicus"
+    ],
+    "loreImageQuery": "Adeptus Mechanicus battle scene"
   },
   {
     "id": "soeurs-de-bataille",
@@ -165,7 +921,85 @@
     "description": "Fanatiques religieuses de l'Adepta Sororitas. Leur foi absolue dans l'Empereur génère de véritables miracles.",
     "couleurThematique": "#4a1a1a",
     "symbole": "✝",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/d/dc/Adeptus_Sororitas_Icon.jpg/revision/latest/scale-to-width-down/80?cb=20110820063406"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/d/dc/Adeptus_Sororitas_Icon.jpg/revision/latest/scale-to-width-down/80?cb=20110820063406",
+    "sousTitre": "Adepta Sororitas · Ecclésiarchie",
+    "citation": "Que ma foi soit l'épée. Que ma colère soit le bouclier. Empereur, prends mon âme.",
+    "lore": {
+      "origine": "Au lendemain de la Guerre de Foi en M36, l'Inquisition élimina Goge Vandire et démantela l'armée privée de l'Ecclésiarque, les Frères de Bataille. La Décrétale de Loi de l'Hégémonie de Saint Sébastien Thor interdit à l'Église de l'Empereur de posséder « des hommes en armes ». Les Filles de l'Empereur — gardes du corps personnelles de Vandire — devinrent les premières Adepta Sororitas. La nuance est jésuitique : ce sont des femmes en armes, donc le décret est respecté à la lettre.",
+      "organisation": "Six Ordres Majeurs — Notre Martyre Dame, Notre Cri Sacré, Notre Fleur Argentée, Notre Rose Sanglante, Notre Gémissement Saint, Notre Vengeance Vermillon — répartis sur les principaux mondes-couvents. Chaque Ordre se subdivise en Préceptories d'environ mille Sœurs, commandées par une Canoness. Les Ordres Mineurs (médicaux, dialogus, hospitaliers) appuient les Ordres Militants. Au sommet, l'Abbesse Sanctorum siège à l'Ecclésiarchie. Les Sœurs Repentantes purgent leurs fautes en chargeant à demi-nues, hurlant, eviscerator au poing.",
+      "doctrine": "Foi pure, Acta Saint, et bolters bénis. Chaque Sœur est élevée depuis l'enfance dans les Schola Progenium, conditionnée à la conviction absolue que l'Empereur est dieu. Cette foi génère parfois des Actes de Foi tangibles — bolts qui frappent au-delà du possible, blessures cicatrisant à mi-bataille, voix de l'Empereur résonnant sur le champ. Les Saints Vivants — Celestine, Katherine — sont les manifestations physiques de cette grâce. Au combat : avancée stoïque, prière constante, lance-flammes purgateurs, et conviction qu'aucune mort au service de l'Empereur n'est inutile."
+    },
+    "stats": {
+      "ordresMilitants": "6 Majeurs (Notre Martyre Dame, Notre Cri Sacré…)",
+      "effectifs": "~10 000 Sœurs par Ordre Majeur",
+      "mondeOrigine": "Mondes-Couvents (Ophelia VII, San Leor, Mars Rouge…)",
+      "allegiance": "Ecclésiarchie · Empereur"
+    },
+    "liensRapides": [
+      "Les six Ordres Majeurs",
+      "Saintes Vivantes & Martyres",
+      "Acta Saint — miracles",
+      "Schola Progenium",
+      "Ecclésiarchie"
+    ],
+    "resources": [
+      "Lexique Sororitas",
+      "Litanies & cantiques",
+      "Vies des Saintes",
+      "Romans Black Library"
+    ],
+    "epithet": "L'Adepta Sororitas · Les Filles de l'Empereur",
+    "motto": "« Que ma foi soit l'épée. »",
+    "longHistory": "Au lendemain de la Guerre de Foi en M36, l'Inquisition élimina Goge Vandire (Ecclésiarque corrompu) et démantela les Frères de Bataille — armée privée de l'Église. La Décrétale de Loi de l'Hégémonie de Saint Sébastien Thor interdit à l'Église de l'Empereur de posséder « des hommes en armes ». Les Filles de l'Empereur — gardes du corps personnelles de Vandire — devinrent les premières Adepta Sororitas. La nuance est jésuitique : ce sont des femmes en armes, donc le décret est respecté à la lettre. Six Ordres Majeurs furent fondés, chacun avec ses propres rites, ses propres mondes-couvents, ses propres Saints.",
+    "notableWars": [
+      {
+        "name": "Guerre de Foi",
+        "summary": "Goge Vandire dirigea l'Église dans une dictature sanglante. L'Inquisition l'élimina avec les Custodes.",
+        "date": "M36"
+      },
+      {
+        "name": "Croisade Eleusis",
+        "summary": "Saint Celestine apparut pour la première fois, faisant ressusciter foi militante massive.",
+        "date": "M40"
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "Saint Celestine prêtée à Guilliman pour inspirer les Astartes Primaris.",
+        "date": "999.M41"
+      },
+      {
+        "name": "Bataille de Sanctus Lin",
+        "summary": "Apparition de Saint Celestine. Convertis Hérétiques en masse.",
+        "date": "M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Saint Celestine",
+        "summary": "Sainte Vivante, ressuscitée trois fois.",
+        "unitId": "sob-celestine"
+      },
+      {
+        "name": "Saint Katherine",
+        "summary": "Première Sainte des Sœurs, fondatrice de l'Ordre Notre Dame Martyre.",
+        "unitId": "sob-katherine"
+      },
+      {
+        "name": "Abbesse Sanctorum",
+        "summary": "Chef suprême de l'Adepta Sororitas, autorité ecclésiastique."
+      }
+    ],
+    "currentState": "Au M42, les Adepta Sororitas sont plus actives que jamais. Saint Celestine accompagne l'Indomitus. Les Sœurs Repentantes sont fournies en abondance par les guerres incessantes.",
+    "legacy": "Les Sœurs incarnent la foi militante impériale. Leurs Acta Saint montrent que la foi peut effectivement déclencher miracles — argument central de l'Imperial Cult.",
+    "galleryQueries": [
+      "Adepta Sororitas battle",
+      "Sister of Battle artwork",
+      "Saint Celestine art",
+      "Sororitas warhammer 40k",
+      "Battle Sisters",
+      "Sororitas Repentia"
+    ],
+    "loreImageQuery": "Adepta Sororitas battle scene"
   },
   {
     "id": "inquisition",
@@ -174,7 +1008,100 @@
     "description": "Les agents secrets de l'Imperium traquant l'hérésie, la mutation et l'alien. Leurs pouvoirs sont illimités, leur jugement final.",
     "couleurThematique": "#2a1a4a",
     "symbole": "Ψ",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/34/InquisitionIconBW.png/revision/latest/scale-to-width-down/80?cb=20240508133600"
+    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/3/34/InquisitionIconBW.png/revision/latest/scale-to-width-down/80?cb=20240508133600",
+    "sousTitre": "Ordo Hereticus · Ordo Malleus · Ordo Xenos",
+    "citation": "L'innocence ne prouve rien.",
+    "lore": {
+      "origine": "Dans les cendres de l'Hérésie d'Horus, Malcador le Sigillite et l'Empereur agonisant savaient que l'Imperium ne survivrait qu'avec des gardiens secrets, libres de toute hiérarchie, capables d'ordonner la destruction d'un monde entier sur un simple soupçon. Malcador convoqua douze candidats — leurs noms perdus à l'histoire — et fonda l'Inquisition. Dix mille ans plus tard, l'institution s'est démultipliée en Ordos spécialisés, en Conclaves régionaux, et en factions philosophiques inconciliables.",
+      "organisation": "Trois Ordos Majeurs : l'**Ordo Hereticus** (Malleus Hereticus) traque l'hérésie humaine ; l'**Ordo Malleus** (Marteau du Daemon) chasse le Warp et commande aux Chevaliers Gris ; l'**Ordo Xenos** étudie et extermine les races aliens. Plus secrets : Ordo Sicarius, Ordo Chronos, Ordo Originatus, Ordo Sepulturum. Chaque Inquisiteur travaille seul ou avec sa retinue (Acolytes, Interrogateurs, Sanctioned Psykers, savants, mercenaires, parfois Astartes). Trois philosophies rivalisent : les Puritains (Monodominantes, Thoriens, Amalathiens) prônent l'extermination préventive ; les Radicaux (Recongregateurs, Istvaaniens, Xanthites) acceptent d'utiliser le Chaos contre lui-même ; entre eux, mille nuances secrètes.",
+      "doctrine": "Pouvoir absolu et déni plausible. L'Inquisitorial Sceau ouvre toutes les portes, requisitionne flottes Astartes et Garde Impériale, déchaîne l'Exterminatus. Mais l'Inquisiteur opère seul, sans escouade visible, sans hiérarchie consultée. Il peut tuer sans procès, sacrifier des planètes, conclure des pactes infâmes — et un autre Inquisiteur peut le déclarer hérétique le lendemain. Cette souplesse est le génie comme la malédiction de l'Inquisition : c'est l'œil ouvert qui veille jamais, et qui doute toujours."
+    },
+    "stats": {
+      "ordresMajeurs": "Hereticus · Malleus · Xenos",
+      "effectifs": "~Inconnu (≈ quelques milliers d'Inquisiteurs)",
+      "mondeOrigine": "Terra (siège du Conclave Suprême)",
+      "allegiance": "Empereur — directement"
+    },
+    "liensRapides": [
+      "Les trois Ordos Majeurs",
+      "Puritains vs Radicaux",
+      "Inquisitors célèbres",
+      "Sceau Inquisitorial",
+      "Exterminatus"
+    ],
+    "resources": [
+      "Lexique Inquisition",
+      "Cas notables",
+      "Manifestes idéologiques",
+      "Romans Black Library (Eisenhorn, Ravenor)"
+    ],
+    "epithet": "L'Œil Suprême de l'Imperium · Les Juges Cachés",
+    "motto": "« L'innocence ne prouve rien. »",
+    "longHistory": "Dans les cendres de l'Hérésie d'Horus, Malcador le Sigillite et l'Empereur agonisant savaient que l'Imperium ne survivrait qu'avec des gardiens secrets, libres de toute hiérarchie, capables d'ordonner la destruction d'un monde entier sur un simple soupçon. Malcador convoqua douze candidats — leurs noms perdus à l'histoire — et fonda l'Inquisition. Dix mille ans plus tard, l'institution s'est démultipliée en Ordos spécialisés (Hereticus, Malleus, Xenos, et Ordos mineurs : Sicarius, Chronos, Originatus, Sepulturum), en Conclaves régionaux, et en factions philosophiques inconciliables (Puritains vs Radicaux).",
+    "notableWars": [
+      {
+        "name": "Fondation par Malcador",
+        "summary": "Malcador le Sigillite convoqua les Douze Originels.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Guerre de Foi",
+        "summary": "L'Inquisition élimina Vandire, démontrant son autorité supérieure à toute hiérarchie.",
+        "date": "M36"
+      },
+      {
+        "name": "Schisme Inquisitorial",
+        "summary": "Conflits internes Puritains-Radicaux qui déchirent encore l'Inquisition.",
+        "date": "M40-M42"
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "L'Inquisition coordina la défense de Cadia — sans succès.",
+        "date": "999.M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Gregor Eisenhorn",
+        "summary": "Inquisiteur Ordo Xenos, héros des romans de Dan Abnett.",
+        "unitId": "inq-eisenhorn"
+      },
+      {
+        "name": "Gideon Ravenor",
+        "summary": "Inquisiteur Ordo Hereticus, ancien Acolyte d'Eisenhorn.",
+        "unitId": "inq-ravenor"
+      },
+      {
+        "name": "Torquemada Coteaz",
+        "summary": "Grand-Maître de l'Ordo Malleus.",
+        "unitId": "inq-coteaz"
+      },
+      {
+        "name": "Fyodor Karamazov",
+        "summary": "Inquisitor Lord Hereticus, fanatique zélé.",
+        "unitId": "inq-karamazov"
+      },
+      {
+        "name": "Inquisitrice Valeria",
+        "summary": "Ordo Hereticus, traque d'hérésie au sein des Sororitas.",
+        "unitId": "inq-valeria"
+      },
+      {
+        "name": "Malcador le Sigillite",
+        "summary": "Fondateur, conseiller suprême de l'Empereur, mort sur le Trône."
+      }
+    ],
+    "currentState": "Au M42, l'Inquisition est divisée entre Puritains (Monodominantes Imperialement-fanatiques) et Radicaux (acceptent compromission tactique avec Chaos/xenos). Tension permanente. Beaucoup d'Inquisiteurs opèrent en cellules autonomes.",
+    "legacy": "L'Inquisition est l'œil ouvert qui veille jamais. Sans elle, l'Imperium serait effondré dix mille fois — par hérésie interne. Mais elle est aussi la source de mille tragédies : Exterminatus injustifié, persécution de mutants innocents, alliances daemoniaques par négligence Radicale.",
+    "galleryQueries": [
+      "Inquisition warhammer 40k",
+      "Inquisitor Eisenhorn art",
+      "Ordo Hereticus",
+      "Daemon Hunter",
+      "Inquisitorial Sceau",
+      "Imperium agent"
+    ],
+    "loreImageQuery": "Inquisition warhammer 40k investigation"
   },
   {
     "id": "adeptus-custodes",
@@ -209,7 +1136,57 @@
       "Bibliothèque des archives",
       "Voir les romans liés",
       "Chronologie de la Grande Croisade"
-    ]
+    ],
+    "epithet": "Les Custodes Dorés · Les Compagnons de l'Empereur",
+    "motto": "« Le Trône, toujours. »",
+    "longHistory": "Avant les Space Marines, il y avait les Adeptus Custodes — les premiers Astartes-équivalents créés par l'Empereur, individuellement par Sa main. Chaque Custode est un demi-Primarque mineur — combat-suprême, sagesse politique, présence physique surhumaine. Ils sont environ dix mille au total, tous gardiens du Trône d'Or sur Terra. Pendant la Grande Croisade, ils furent les compagnons personnels de l'Empereur ; pendant l'Hérésie, ils défendirent le Palais Impérial avec une efficacité légendaire (dont aucun ne mourut sans avoir tué cent ennemis). Après le Trône d'Or, ils restèrent enfermés dans Terra — conservatoires immortels, refusant de quitter leur poste. Pendant dix mille ans, ils observèrent. En 999.M41, après les visions de l'Empereur évoquées dans la mort de Sanguinius, les Custodes sortirent de leurs murs. Ils combattent désormais ouvertement — Indomitus Crusade aux côtés des Astartes. Trajann Valoris, Captain-General actuel, est le visage public de cette nouvelle ère.",
+    "notableWars": [
+      {
+        "name": "Compagnons de Terra",
+        "summary": "Pendant la Grande Croisade, accompagnèrent l'Empereur en personne.",
+        "date": "M30"
+      },
+      {
+        "name": "Siège de Terra",
+        "summary": "Défense du Palais Impérial. Aucun Custode mort sans avoir tué cent traîtres.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Garde du Trône",
+        "summary": "Pendant 10 000 ans, gardèrent silencieusement le Trône d'Or.",
+        "date": "M31-M41"
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "Sortirent de Terra. Combattirent Magnus, Mortarion, daemons en plein champ.",
+        "date": "999.M41-010.M42"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Trajann Valoris",
+        "summary": "Captain-General des Adeptus Custodes au M42, pratiquement immortel."
+      },
+      {
+        "name": "Constantin Valdor",
+        "summary": "Premier Captain-General, compagnon original de l'Empereur."
+      },
+      {
+        "name": "Aleya",
+        "summary": "Sister of Silence à la mémoire de la Compagnie Suprême Custodes."
+      }
+    ],
+    "currentState": "Les Custodes sortent désormais de Terra — opérations Indomitus, défense de mondes-monastères, traque de Daemon Princes. Toujours liés à Trônes d'Or par lien spirituel.",
+    "legacy": "Les Custodes sont ce que les Astartes auraient pu être avec plus de ressources. Modèle d'élite suprême, ils incarnent la vision originelle de l'Empereur : une humanité augmentée mais éclairée.",
+    "galleryQueries": [
+      "Adeptus Custodes battle",
+      "Custodian Guard art",
+      "Trajann Valoris",
+      "Custodes Terra defense",
+      "Custodes warhammer 40k",
+      "Adeptus Custodes elite"
+    ],
+    "loreImageQuery": "Adeptus Custodes battle scene"
   },
   {
     "id": "officio-assassinorum",
@@ -244,7 +1221,64 @@
       "Bibliothèque des archives",
       "Voir les romans liés",
       "Personnages historiques"
-    ]
+    ],
+    "epithet": "L'Officio Assassinorum · Les Lames de l'Imperium",
+    "motto": "« La vie meilleure est celle qui s'éteint au moment optimal. »",
+    "longHistory": "Avant l'Hérésie d'Horus, Malcador le Sigillite préparait des outils ultimes pour des situations où aucune autre ne suffirait. L'Officio Assassinorum fut son projet : six Temples spécialisés, chacun produisant un type d'Assassin différent, chacun destiné à une mission singulière. Vindicare (sniper), Eversor (bête de combat-frenzy), Callidus (métamorphe-infiltratrice), Culexus (psyker-null), Venenum (empoisonneuse), Officia Cabinet (informaticien). Aucun ne sait l'identité des autres. Chacun opère seul. Pendant l'Hérésie et dans les dix mille ans qui suivirent, l'Officio resta secret — une arme rare déployée seulement quand la situation l'exige.",
+    "notableWars": [
+      {
+        "name": "Fondation par Malcador",
+        "summary": "Six Temples créés. Vindicare, Eversor, Callidus, Culexus, Venenum, Cabinet.",
+        "date": "M30"
+      },
+      {
+        "name": "Hérésie d'Horus",
+        "summary": "L'Officio servit Malcador. Plusieurs Primarques traîtres survécurent à des tentatives.",
+        "date": "M31"
+      },
+      {
+        "name": "Mort de Konrad Curze",
+        "summary": "M'Shen, Assassin Callidus, exécuta Konrad Curze sur Tsagualsa (sur la prophétie même de Curze).",
+        "date": "M31"
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "L'Officio déploya massivement contre Abaddon et ses warbands.",
+        "date": "999.M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "M'Shen",
+        "summary": "Assassin Callidus qui élimina Konrad Curze. Identité ultime mystérieuse."
+      },
+      {
+        "name": "Vindicare générique",
+        "summary": "Tireur d'élite suprême.",
+        "unitId": "inq-vindicare"
+      },
+      {
+        "name": "Eversor générique",
+        "summary": "Bête de combat-frenzy.",
+        "unitId": "inq-eversor"
+      },
+      {
+        "name": "Callidus générique",
+        "summary": "Métamorphe-infiltratrice.",
+        "unitId": "inq-callidus"
+      }
+    ],
+    "currentState": "Au M42, l'Officio fonctionne pleinement. Les Temples envoient régulièrement leurs spécialistes — à des Inquisiteurs autorisés ou directement par ordre suprême du Senatorum.",
+    "legacy": "Les Assassins sont le rappel que l'Imperium peut être impitoyable. Pas de procès, pas de bataille rangée — juste une mort silencieuse dans la nuit.",
+    "galleryQueries": [
+      "Vindicare assassin art",
+      "Eversor assassin warhammer",
+      "Callidus assassin",
+      "Officio Assassinorum",
+      "Imperial assassin",
+      "Astropath warhammer"
+    ],
+    "loreImageQuery": "Officio Assassinorum assassin"
   },
   {
     "id": "drukhari",
@@ -279,7 +1313,52 @@
       "Carte du Webway",
       "Bibliothèque des archives",
       "Voir les romans liés"
-    ]
+    ],
+    "epithet": "Les Eldars Noirs · Les Pirates du Webway",
+    "motto": "« La douleur est mon offrande. La souffrance est mon don. »",
+    "longHistory": "Pendant la Chute aeldari (M30), une fraction des Aeldari refusa de fuir vers les Craftworlds. Ils choisirent un chemin différent : se réfugier dans la Cité-Sombre de Commorragh, cachée dans les profondeurs du Webway. Là, ils survivent en pillant la souffrance des autres races — chaque âme qu'ils torturent les nourrit, retardant leur consumation par Slaanesh. Société brutale gouvernée par les Kabales (familles aristocratiques), les Wych Cults (gladiateurs), les Haemonculi Covens (chirurgiens fous).",
+    "notableWars": [
+      {
+        "name": "Refuge à Commorragh",
+        "summary": "Pendant la Chute, fuite vers la Cité-Sombre.",
+        "date": "M30"
+      },
+      {
+        "name": "Raids éternels",
+        "summary": "Pillages constants sur Imperium, Aeldari Craftworlds, Tau, Tyranides.",
+        "date": "M30-M42"
+      },
+      {
+        "name": "Bataille de Commorragh",
+        "summary": "Civil war kabalique régulière.",
+        "date": "M40+"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Asdrubael Vect",
+        "summary": "Suprême Arconte de Commorragh, manipulateur cosmique."
+      },
+      {
+        "name": "Lelith Hesperax",
+        "summary": "Reine des Wych Cults, gladiatrice suprême."
+      },
+      {
+        "name": "Urien Rakarth",
+        "summary": "Grand Haemonculus, savant fou."
+      }
+    ],
+    "currentState": "Commorragh prospère, raids permanents. Vect manipule politique galactique.",
+    "legacy": "Les Drukhari sont le côté sombre des Aeldari. Leur survie par la souffrance dénonce la nature même du Warp.",
+    "galleryQueries": [
+      "Drukhari Dark Eldar art",
+      "Commorragh art",
+      "Lelith Hesperax",
+      "Wych Cult",
+      "Dark Eldar Kabal",
+      "Haemonculus Coven"
+    ],
+    "loreImageQuery": "Drukhari raid scene"
   },
   {
     "id": "grey-knights",
@@ -314,7 +1393,57 @@
       "Bibliothèque des archives",
       "Voir les romans liés",
       "Liste des daemons majeurs"
-    ]
+    ],
+    "epithet": "Les Démon-Chasseurs · Le Chapitre Ultra-Secret",
+    "motto": "« Le Daemon ne nous chassera plus. »",
+    "longHistory": "Chapitre Astartes ultra-secret fondé par Malcador le Sigillite avant l'Hérésie d'Horus. Spécialisés exclusivement dans la chasse aux daemons et aux psy-corruptions. Chaque Grey Knight est psyker exceptionnel. Leurs vaisseaux sont exclusivement basés sur Titan — lune sacrée de Saturne. Ils servent à l'Inquisition Ordo Malleus uniquement. Leurs opérations sont secrètes — chaque survivant humain en contact avec eux est exécuté pour préserver le secret.",
+    "notableWars": [
+      {
+        "name": "Fondation par Malcador",
+        "summary": "Pendant l'Hérésie. Premier Chapitre psy-pur.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Mournival",
+        "summary": "Combat against Daemon-Primarques. Légendaire.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille d'Armageddon",
+        "summary": "Combat secret contre Bloodthirster pendant les Wars d'Armageddon.",
+        "date": "M41"
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "Soutien Inquisition Ordo Malleus.",
+        "date": "999.M41"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Kaldor Draigo",
+        "summary": "Suprême Grand Master, légendaire pour sa survie dans le Warp."
+      },
+      {
+        "name": "Mordrak",
+        "summary": "Un Brother Captain mort qui revint dans le Warp."
+      },
+      {
+        "name": "Brother-Captain Stern",
+        "summary": "Hero des Indomitus."
+      }
+    ],
+    "currentState": "Au M42, les Grey Knights sont actifs comme jamais — daemons partout. Cooperation accrue avec l'Inquisition.",
+    "legacy": "Les Grey Knights sont la dernière ligne de défense contre la possession daemonique. Sans eux, l'Imperium aurait succombé spirituellement depuis longtemps.",
+    "galleryQueries": [
+      "Grey Knights battle",
+      "Daemon Hunter art",
+      "Titan Grey Knights",
+      "Grey Knights warhammer 40k",
+      "Grey Knights Strike Force",
+      "Daemon-Primarque combat"
+    ],
+    "loreImageQuery": "Grey Knights daemon hunting battle"
   },
   {
     "id": "leagues-of-votann",
@@ -349,7 +1478,42 @@
       "Atlas Kin",
       "Bibliothèque des archives",
       "Voir les romans liés"
-    ]
+    ],
+    "epithet": "Les Squats Réunis · Les Mineurs Cosmiques",
+    "motto": "« La Lignée. La Mémoire. La Force. »",
+    "longHistory": "Issus de l'Âge des Ténèbres avant la Grande Croisade, les Squats fuirent vers les régions galactiques les plus reculées. Ils se sont installés dans des Worlds-Holds — mondes-monastères miniers très blindés. Pendant 10 000 ans, ils survécurent indépendamment de l'Imperium, qui ignora leur existence. En M41, ils émergèrent enfin — Leagues of Votann, fédération de Holds.",
+    "notableWars": [
+      {
+        "name": "Premier Contact Imperium-Votann",
+        "summary": "M41, contacts diplomatiques. Méfiance mutuelle.",
+        "date": "M41"
+      },
+      {
+        "name": "Bataille des Tyran-Holds",
+        "summary": "Tyranides menacent. Votann combat aux côtés (parfois) de l'Imperium.",
+        "date": "M42"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Ūthar le Destinataire",
+        "summary": "Hero-warrior légendaire des Votann."
+      },
+      {
+        "name": "Grimnyr (Sage)",
+        "summary": "Conseiller suprême des Votann."
+      }
+    ],
+    "currentState": "Au M42, les Votann réémergent. Coopérations ponctuelles avec Imperium et Aeldari. Indépendance jalousement gardée.",
+    "legacy": "Les Votann sont la mémoire archéologique de l'humanité — une lignée préservée dans le silence pendant 10 000 ans.",
+    "galleryQueries": [
+      "Leagues of Votann art",
+      "Votann warriors",
+      "Squat warhammer 40k",
+      "Votann Hold",
+      "Votann battle"
+    ],
+    "loreImageQuery": "Leagues of Votann battle scene"
   },
   {
     "id": "genestealer-cults",
@@ -384,6 +1548,46 @@
       "Bibliothèque des archives",
       "Voir les romans liés (Genestealer Cults)",
       "Symptomatologie de l'infestation"
-    ]
+    ],
+    "epithet": "Les Cultes Précurseurs · Les Patriarches Cachés",
+    "motto": "« Le Patriarche nous guide. La Ruche nous attend. »",
+    "longHistory": "Avant l'arrivée d'une Flotte-Ruche tyranide, les Genestealers infiltrent. Un Genestealer s'introduit sur la planète, embrasse psychiquement un humain, l'infecte. Les enfants nés de cet humain sont Hybrides — humains avec génome xenos. Au fil des générations, le Cult grandit en cellules clandestines : Patriarche (Genestealer évolué) au centre, Magus (psyker hybride), Primus (commandeur militaire), masses d'Hybrides et de civils convertis. Ils opèrent en secret pendant des décennies, sapent les défenses planétaires. Quand la Flotte-Ruche arrive, le Cult émerge en masse.",
+    "notableWars": [
+      {
+        "name": "Tous les fronts Tyranide",
+        "summary": "Chaque Hive Fleet a ses Cults précurseurs.",
+        "date": "M41-M42"
+      },
+      {
+        "name": "Bataille de Vigilus",
+        "summary": "Cult majeur lors d'Indomitus.",
+        "date": "M42"
+      }
+    ],
+    "notableHeroes": [
+      {
+        "name": "Patriarches divers",
+        "summary": "Genestealers évolués qui dirigent les Cults."
+      },
+      {
+        "name": "Magus",
+        "summary": "Psykers hybrides leadership."
+      },
+      {
+        "name": "Acolyte Iconward",
+        "summary": "Champions Hybrides légendaires."
+      }
+    ],
+    "currentState": "Au M42, dizaines de mondes Imperium sont infiltrés. Le Cult de Vigilus a déjà éclaté.",
+    "legacy": "Les Cults Genestealer sont l'ennemi intérieur. Chaque planète Imperium pourrait en abriter un.",
+    "galleryQueries": [
+      "Genestealer Cult art",
+      "Hive precursor",
+      "Patriarche genestealer",
+      "Genestealer infestation",
+      "Cult Magus",
+      "Imperial city corrupted"
+    ],
+    "loreImageQuery": "Genestealer Cult uprising"
   }
 ]

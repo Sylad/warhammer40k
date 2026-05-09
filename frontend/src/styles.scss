@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use 'styles/grimdark-life';
+/* Leaflet CSS chargé via angular.json styles[] (node_modules/leaflet/dist/leaflet.css) */
 
 :root {
   --bg: #050403;

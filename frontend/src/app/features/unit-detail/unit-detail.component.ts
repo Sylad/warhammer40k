@@ -41,13 +41,6 @@ const DEFAULT_RESOURCES = [
 
 const KEY_ICONS = ['⚜', '✠', '⚔'];
 
-const DEFAULT_CAPACITIES = [
-  'Polyvalent dans toutes les situations de combat.',
-  'Équilibré entre offensive et défense.',
-  'Idéal pour tenir des objectifs stratégiques.',
-  'Efficace à moyenne portée.',
-];
-
 const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 
 @Component({
@@ -117,38 +110,47 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                     <p class="panel-text">{{ u.loreLong || u.description || u.loreCourt || fallbackDesc(u, f) }}</p>
                   </article>
 
-                  <article class="panel">
-                    <h2 class="panel-title">Capacités principales</h2>
-                    <ul class="cap-list">
-                      @for (c of capacities(u); track c) {
-                        <li>
-                          <span class="cap-ico">⚜</span>
-                          <span>{{ c }}</span>
-                        </li>
-                      }
-                    </ul>
+                  @if (u.capacities?.length) {
+                    <article class="panel">
+                      <h2 class="panel-title">Capacités principales</h2>
+                      <ul class="cap-list">
+                        @for (c of u.capacities; track c) {
+                          <li>
+                            <span class="cap-ico">⚜</span>
+                            <span>{{ c }}</span>
+                          </li>
+                        }
+                      </ul>
+                    </article>
+                  }
+                }
+
+                @if (u.equipment?.length) {
+                  <article class="panel panel-equip">
+                    <h2 class="panel-title">Équipement standard</h2>
+                    <div class="equip-grid">
+                      <div class="equip-figure" [style.--fig-img]="unitImg()"></div>
+                      <ul class="equip-list">
+                        @for (e of u.equipment; track e.name; let i = $index) {
+                          <li class="equip-item">
+                            <span class="eq-ico">{{ e.icon || equipIcon(i) }}</span>
+                            <div>
+                              <strong>{{ e.name }}</strong>
+                              <span>{{ e.description || '—' }}</span>
+                            </div>
+                          </li>
+                        }
+                      </ul>
+                    </div>
+                  </article>
+                } @else if (activeTab() === 'equipement') {
+                  <article class="panel panel-empty">
+                    <h2 class="panel-title">Équipement</h2>
+                    <p class="panel-text">L'arsenal détaillé de cette unité n'est pas encore consigné dans nos archives. Consulte la fiche faction ou la galerie pour le contexte visuel.</p>
                   </article>
                 }
 
-                <article class="panel panel-equip">
-                  <h2 class="panel-title">Équipement standard</h2>
-                  <div class="equip-grid">
-                    <div class="equip-figure" [style.--fig-img]="unitImg()"></div>
-                    <ul class="equip-list">
-                      @for (e of equipment(u); track e.name; let i = $index) {
-                        <li>
-                          <span class="eq-ico">{{ e.icon || equipIcon(i) }}</span>
-                          <div>
-                            <strong>{{ e.name }}</strong>
-                            <span>{{ e.description || '—' }}</span>
-                          </div>
-                        </li>
-                      }
-                    </ul>
-                  </div>
-                </article>
-
-                @if (activeTab() === 'apercu') {
+                @if (activeTab() === 'apercu' && u.stats) {
                   <article class="panel panel-stats">
                     <h2 class="panel-title">Stats (approx.)</h2>
                     <div class="stats-list">
@@ -187,6 +189,20 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                   <blockquote class="inline-quote">« {{ u.citation }} »</blockquote>
                 }
               </article>
+
+              @if (galleryImages().length > 0) {
+                <article class="panel panel-iconography">
+                  <h2 class="panel-title">Iconographie</h2>
+                  <p class="panel-sub-text">Le personnage à travers les illustrations canoniques.</p>
+                  <div class="iconography-grid">
+                    @for (g of galleryImages(); track g) {
+                      <a class="iconography-card" routerLink="/gallery"
+                         [style.--g-img]="'url(' + g + ')'"
+                         aria-label="Voir dans la galerie"></a>
+                    }
+                  </div>
+                </article>
+              }
             }
 
             <!-- VARIANTES -->
@@ -316,6 +332,7 @@ export class UnitDetailComponent {
   readonly loreImage = signal<string | null>(null);
   readonly relatedImages = signal(new Map<string, string>());
   readonly variantImages = signal(new Map<string, string>());
+  readonly galleryImages = signal<string[]>([]);
 
   readonly unit = toSignal(
     this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!))),
@@ -369,12 +386,27 @@ export class UnitDetailComponent {
         });
       });
 
-      const loreQ = `${f.nom} battle warhammer`;
+      const loreQ = u.loreImageQuery ?? `${f.nom} battle warhammer`;
       this.service.getWikiImage(loreQ).subscribe({
         next: r => { if (r.imageUrl) this.loreImage.set(r.imageUrl); },
         error: () => {},
       });
+
+      // Galerie liée — résout galleryQueries (max 6) en parallèle
+      const queries = (u.galleryQueries ?? []).slice(0, 6);
+      this.galleryImages.set([]);
+      queries.forEach(q => {
+        this.service.getWikiImage(q).subscribe({
+          next: r => {
+            if (r.imageUrl) {
+              this.galleryImages.update(arr => [...arr, r.imageUrl!]);
+            }
+          },
+          error: () => {},
+        });
+      });
     });
+
 
     effect(() => {
       const list = this.relatedUnits();
@@ -485,20 +517,6 @@ export class UnitDetailComponent {
     return 'ub-xenos';
   }
 
-  capacities(u: Unit): string[] {
-    if (u.capacities?.length) return u.capacities;
-    return DEFAULT_CAPACITIES;
-  }
-
-  equipment(u: Unit): { name: string; description?: string; icon?: string }[] {
-    if (u.equipment?.length) return u.equipment;
-    return [
-      { name: 'Arme principale', description: 'Équipement standard du modèle.', icon: '⌖' },
-      { name: 'Arme de mêlée',   description: 'Couteau, épée, ou équivalent selon la doctrine.', icon: '⚔' },
-      { name: 'Armure',          description: 'Protection adaptée au rôle de combat.', icon: '◈' },
-      { name: 'Équipement supplémentaire', description: 'Grenades, équipement tactique, vox.', icon: '※' },
-    ];
-  }
 
   equipIcon(i: number): string {
     return DEFAULT_EQUIPMENT_ICONS[i % DEFAULT_EQUIPMENT_ICONS.length];

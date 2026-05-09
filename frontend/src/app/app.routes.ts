@@ -68,6 +68,11 @@ export const routes: Routes = [
           .then(m => m.LorePrimarchsComponent)
       },
       {
+        path: 'lore/primarchs/:id',
+        loadComponent: () => import('./features/primarch-detail/primarch-detail.component')
+          .then(m => m.PrimarchDetailComponent)
+      },
+      {
         path: 'lore/chaos-gods',
         loadComponent: () => import('./features/lore-chaos-gods/lore-chaos-gods.component')
           .then(m => m.LoreChaosGodsComponent)
@@ -96,6 +101,46 @@ export const routes: Routes = [
         path: 'lore/timeline',
         loadComponent: () => import('./features/lore-timeline/lore-timeline.component')
           .then(m => m.LoreTimelineComponent)
+      },
+      {
+        path: 'lore/ships',
+        loadComponent: () => import('./features/lore-ships/lore-ships.component')
+          .then(m => m.LoreShipsComponent)
+      },
+      {
+        path: 'lore/ships/:id',
+        loadComponent: () => import('./features/ship-detail/ship-detail.component')
+          .then(m => m.ShipDetailComponent)
+      },
+      {
+        path: 'lore/titans',
+        loadComponent: () => import('./features/lore-titans/lore-titans.component')
+          .then(m => m.LoreTitansComponent)
+      },
+      {
+        path: 'lore/titans/:id',
+        loadComponent: () => import('./features/titan-detail/titan-detail.component')
+          .then(m => m.TitanDetailComponent)
+      },
+      {
+        path: 'lore/saints',
+        loadComponent: () => import('./features/lore-saints/lore-saints.component')
+          .then(m => m.LoreSaintsComponent)
+      },
+      {
+        path: 'lore/saints/:id',
+        loadComponent: () => import('./features/saint-detail/saint-detail.component')
+          .then(m => m.SaintDetailComponent)
+      },
+      {
+        path: 'lore/timeline/:id',
+        loadComponent: () => import('./features/timeline-event-detail/timeline-event-detail.component')
+          .then(m => m.TimelineEventDetailComponent)
+      },
+      {
+        path: 'lore/equipment/:id',
+        loadComponent: () => import('./features/equipment-detail/equipment-detail.component')
+          .then(m => m.EquipmentDetailComponent)
       },
       {
         path: 'about',

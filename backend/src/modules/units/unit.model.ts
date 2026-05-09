@@ -20,6 +20,8 @@ export interface UnitEquipment {
   name: string;
   description?: string;
   icon?: string;
+  image?: string;
+  wikiQuery?: string;
 }
 
 export interface Unit {
@@ -45,4 +47,6 @@ export interface Unit {
   citation?: string;              // citation italique sidebar
   apparition?: string;            // 'Indomitus Crusade'
   tailleUnite?: string;           // '5 - 10 modèles'
+  loreImageQuery?: string;        // wikiQuery dédié pour image du panel Lore
+  galleryQueries?: string[];      // wikiQueries supplémentaires sidebar Galerie liée
 }

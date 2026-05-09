@@ -152,5 +152,35 @@ export class LoreHubComponent {
       meta: '29 événements · 6 ères',
       available: true,
     },
+    {
+      route: '/lore/ships',
+      ico: '⛴',
+      eyebrow: 'Codex naval',
+      title: 'Vaisseaux Légendaires',
+      description:
+        'Phalanx, Vengeful Spirit, Macragge\'s Honour, Endurance, Eternal Crusader, Ark Mechanicus Speranza… les vaisseaux qui portent les Primarques, transportent les Légions, et déchirent les flottes ennemies.',
+      meta: '15 vaisseaux · toutes factions',
+      available: true,
+    },
+    {
+      route: '/lore/titans',
+      ico: '⚙',
+      eyebrow: 'Codex titanique',
+      title: 'Titans, Chevaliers & Dieux-Machines',
+      description:
+        'Warhound, Reaver, Warlord, Imperator. Knights Paladin, Errant, Castellan. Robots Kastelan. Stompas Orks. Cathédrales-machines de 12 à 55 mètres, bénies par les Tech-Prêtres, pilotées par la noblesse martiale.',
+      meta: '10 dieux-machines · 3 catégories',
+      available: true,
+    },
+    {
+      route: '/lore/saints',
+      ico: '✠',
+      eyebrow: 'Codex hagiographique',
+      title: 'Saintes & Saints',
+      description:
+        'Saint Celestine, Saint Katherine, Saint Sabbat, Saint Drusus, Sebastian Thor, Saint Silvana, Saint Praxedes, Saint Sanguinaire. Les figures qui galvanisent un trillion de fidèles à travers la galaxie. Acta Saint, miracles, martyres.',
+      meta: '8 figures · 3 catégories',
+      available: true,
+    },
   ];
 }

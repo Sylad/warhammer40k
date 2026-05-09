@@ -76,7 +76,13 @@ const DEFAULT_RESOURCES = [
               {{ f.sousTitre }}<span class="sub-line"></span>
             </div>
           }
+          @if (f.epithet) {
+            <p class="hero-epithet">{{ f.epithet }}</p>
+          }
           <p class="hero-desc">{{ f.description }}</p>
+          @if (f.motto) {
+            <p class="hero-motto"><span class="motto-mark">✠</span> {{ f.motto }}</p>
+          }
           <button class="cta" (click)="scrollToUnits()">
             <span class="cta-ico">⚔</span>EXPLORER LES UNITÉS
           </button>
@@ -89,9 +95,21 @@ const DEFAULT_RESOURCES = [
         </div>
       </section>
 
+      <nav class="anchor-nav">
+        <a href="#histoire" (click)="scrollTo($event, 'histoire')">Histoire & Lore</a>
+        @if (f.longHistory) { <a href="#chronique" (click)="scrollTo($event, 'chronique')">Chronique Complète</a> }
+        @if (f.notableWars?.length) { <a href="#guerres" (click)="scrollTo($event, 'guerres')">Guerres Notables</a> }
+        @if (f.notableHeroes?.length) { <a href="#heros" (click)="scrollTo($event, 'heros')">Héros</a> }
+        @if (subFactions().length > 0) { <a href="#subfactions" (click)="scrollTo($event, 'subfactions')">{{ subFactionLabel() }}</a> }
+        @if (units().length > 0) { <a href="#units" (click)="scrollTo($event, 'units')">Unités</a> }
+        @if (f.currentState) { <a href="#etat" (click)="scrollTo($event, 'etat')">État Actuel</a> }
+        @if (f.legacy) { <a href="#heritage" (click)="scrollTo($event, 'heritage')">Héritage</a> }
+        @if (galleryImages().length > 0) { <a href="#iconographie" (click)="scrollTo($event, 'iconographie')">Iconographie</a> }
+      </nav>
+
       <section class="layout">
         <div class="main">
-          <section class="lore" [style.--lore-img]="loreImg()">
+          <section class="lore" id="histoire" [style.--lore-img]="loreImg()">
             <h2 class="section-title"><span class="t-flourish">✠</span>Histoire & Lore</h2>
             <div class="lore-grid">
               <div class="lore-cols">
@@ -111,6 +129,52 @@ const DEFAULT_RESOURCES = [
               <div class="lore-image"></div>
             </div>
           </section>
+
+          @if (f.longHistory) {
+            <section class="bible-panel" id="chronique">
+              <h2 class="section-title"><span class="t-flourish">✠</span>Chronique Complète</h2>
+              <p class="bible-text">{{ f.longHistory }}</p>
+            </section>
+          }
+
+          @if (f.notableWars?.length) {
+            <section class="bible-panel" id="guerres">
+              <h2 class="section-title"><span class="t-flourish">✠</span>Guerres Notables</h2>
+              <ul class="bible-battles">
+                @for (w of f.notableWars; track w.name) {
+                  <li>
+                    <div class="bible-battle-head">
+                      <strong>{{ w.name }}</strong>
+                      @if (w.date) { <span class="bible-battle-date">{{ w.date }}</span> }
+                    </div>
+                    <p>{{ w.summary }}</p>
+                  </li>
+                }
+              </ul>
+            </section>
+          }
+
+          @if (f.notableHeroes?.length) {
+            <section class="bible-panel" id="heros">
+              <h2 class="section-title"><span class="t-flourish">✠</span>Héros Marquants</h2>
+              <div class="bible-heroes">
+                @for (h of f.notableHeroes; track h.name) {
+                  <article class="bible-hero">
+                    <h3>{{ h.name }}</h3>
+                    <p>{{ h.summary }}</p>
+                    <div class="bible-hero-links">
+                      @if (h.unitId) {
+                        <a [routerLink]="['/units', h.unitId]">Voir l'unité →</a>
+                      }
+                      @if (h.primarchId) {
+                        <a [routerLink]="['/lore/primarchs', h.primarchId]">Fiche Primarque →</a>
+                      }
+                    </div>
+                  </article>
+                }
+              </div>
+            </section>
+          }
 
           @if (subFactions().length > 0) {
             <section class="subfactions" id="subfactions">
@@ -214,6 +278,33 @@ const DEFAULT_RESOURCES = [
               </div>
             }
           </section>
+
+          @if (f.currentState) {
+            <section class="bible-panel" id="etat">
+              <h2 class="section-title"><span class="t-flourish">✠</span>État Actuel · M42</h2>
+              <p class="bible-text">{{ f.currentState }}</p>
+            </section>
+          }
+
+          @if (f.legacy) {
+            <section class="bible-panel" id="heritage">
+              <h2 class="section-title"><span class="t-flourish">✠</span>Héritage</h2>
+              <p class="bible-text">{{ f.legacy }}</p>
+            </section>
+          }
+
+          @if (galleryImages().length > 0) {
+            <section class="bible-panel" id="iconographie">
+              <h2 class="section-title"><span class="t-flourish">✠</span>Iconographie</h2>
+              <div class="iconography-grid">
+                @for (g of galleryImages(); track g) {
+                  <a class="iconography-card" routerLink="/gallery"
+                     [style.--g-img]="'url(' + g + ')'"
+                     aria-label="Voir dans la galerie"></a>
+                }
+              </div>
+            </section>
+          }
         </div>
 
         <aside class="sidebar">
@@ -307,6 +398,7 @@ export class FactionDetailComponent {
   readonly heroImage = signal<string | null>(null);
   readonly loreImage = signal<string | null>(null);
   readonly unitImages = signal(new Map<string, string>());
+  readonly galleryImages = signal<string[]>([]);
   /** Pagination 12 cards par lot pour les sous-factions (utile sur Space
       Marines : 113 entries dont 71 successors, sinon le DOM explose). */
   readonly subFactionsPageSize = 12;
@@ -479,10 +571,22 @@ export class FactionDetailComponent {
         error: () => {},
       });
 
-      const loreQ = FACTION_LORE_IMG[f.id] ?? f.nom + ' battle';
+      const loreQ = f.loreImageQuery ?? FACTION_LORE_IMG[f.id] ?? f.nom + ' battle';
       this.service.getWikiImage(loreQ).subscribe({
         next: r => { if (r.imageUrl) this.loreImage.set(r.imageUrl); },
         error: () => {},
+      });
+
+      // Iconographie — galleryQueries character-focused
+      this.galleryImages.set([]);
+      const queries = (f.galleryQueries ?? []).slice(0, 6);
+      queries.forEach(q => {
+        this.service.getWikiImage(q).subscribe({
+          next: r => {
+            if (r.imageUrl) this.galleryImages.update(arr => [...arr, r.imageUrl!]);
+          },
+          error: () => {},
+        });
       });
     });
 
@@ -633,5 +737,11 @@ export class FactionDetailComponent {
     const first = arts[0];
     if (first?.image) return `url('${first.image}')`;
     return 'linear-gradient(135deg, #2a1c10, #050403)';
+  }
+
+  scrollTo(e: Event, id: string): void {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

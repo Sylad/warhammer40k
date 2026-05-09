@@ -13,6 +13,19 @@ export interface FactionLore {
   doctrine?: string;
 }
 
+export interface FactionWar {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface FactionHero {
+  name: string;
+  unitId?: string;          // lien vers units/:id si Hero unit existe
+  primarchId?: string;      // lien vers lore/primarchs/:id
+  summary: string;
+}
+
 export interface Faction {
   id: string;
   nom: string;
@@ -20,14 +33,23 @@ export interface Faction {
   description: string;
   couleurThematique: string;
   symbole: string;
-  // optionnels (étendus pour les pages selon nouvelles specs)
   iconUrl?: string;
-  sousTitre?: string;          // ex: "Adeptus Astartes"
-  imageHero?: string;          // image dominante du hero faction-detail
-  citation?: string;           // citation lore en encart
-  unitCount?: number;          // override (sinon dérivé via /units)
-  lore?: FactionLore;          // 3 colonnes Origine/Organisation/Doctrine
-  stats?: FactionStats;        // sidebar Statistiques
-  liensRapides?: string[];     // sidebar Liens (Chronologie, Personnages, ...)
-  resources?: string[];        // sidebar Ressources externes
+  sousTitre?: string;
+  imageHero?: string;
+  citation?: string;
+  unitCount?: number;
+  lore?: FactionLore;
+  stats?: FactionStats;
+  liensRapides?: string[];
+  resources?: string[];
+  // Bible-tier extensions
+  epithet?: string;            // "L'Astartes Sacré", "La Marée Verte"
+  motto?: string;              // devise gothique
+  longHistory?: string;        // 3-5 paragraphes d'histoire complète
+  notableWars?: FactionWar[];  // 4-6 guerres clés
+  notableHeroes?: FactionHero[]; // 4-8 héros marquants
+  currentState?: string;       // état actuel M42
+  legacy?: string;             // impact dans l'Imperium / la galaxie
+  galleryQueries?: string[];   // 6-8 wikiQuery character/scene focus
+  loreImageQuery?: string;     // image inline panel histoire
 }

@@ -39,3 +39,12 @@ desktop.ini
 
 # Lore PDF (peuvent être copyrighted GW)
 fluff/
+
+# Python virtualenv (galaxy / segmenta scripts)
+.venv/
+__pycache__/
+*.pyc
+
+# Local debug artifacts
+debug-*.jpg
+debug-*.png

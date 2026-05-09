@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Segmenta editor</title>
+<style>
+  :root {
+    --bg: #0b0907;
+    --panel: rgba(15, 12, 8, 0.92);
+    --gold: #c9a24a;
+    --gold-bright: #f0d276;
+    --text: #e3d6b1;
+    --muted: #8a7c5a;
+    --border: rgba(201, 162, 74, 0.25);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 13px/1.45 system-ui, sans-serif; height: 100%; overflow: hidden; }
+  body { display: grid; grid-template-columns: 1fr 320px; }
+  main { position: relative; overflow: hidden; }
+  svg { width: 100%; height: 100%; cursor: crosshair; background: #050403; }
+  aside { background: var(--panel); border-left: 1px solid var(--border); padding: 14px; overflow-y: auto; }
+  h1 { font-family: Cinzel, serif; font-size: 16px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-bright); margin: 0 0 10px; }
+  h2 { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 18px 0 6px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0; }
+  button { background: rgba(0, 0, 0, 0.4); color: var(--text); border: 1px solid var(--border); padding: 6px 10px; cursor: pointer; font: 11px/1.2 system-ui; letter-spacing: 0.05em; }
+  button:hover { border-color: var(--gold); color: var(--gold-bright); }
+  button.active { background: rgba(201, 162, 74, 0.18); border-color: var(--gold-bright); color: var(--gold-bright); }
+  .seg-row { display: flex; align-items: center; gap: 6px; margin: 4px 0; padding: 4px 6px; border: 1px solid transparent; }
+  .seg-row.active { background: rgba(201, 162, 74, 0.08); border-color: var(--border); }
+  .seg-color { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.2); }
+  .seg-name { flex: 1; font-size: 12px; }
+  .seg-count { font-size: 10px; color: var(--muted); }
+  .help { font-size: 11px; color: var(--muted); line-height: 1.55; }
+  kbd { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 1px 5px; font: 10px monospace; color: var(--gold); }
+  textarea { width: 100%; min-height: 80px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: var(--text); font: 10px monospace; padding: 6px; resize: vertical; }
+  .vertex { fill: var(--gold-bright); stroke: #000; stroke-width: 1; cursor: grab; }
+  .vertex.selected { fill: #ff5; stroke: #000; stroke-width: 2; r: 9; }
+  .vertex:hover { fill: #ff5; }
+  .anchor { fill: #6cf; stroke: #000; stroke-width: 1; cursor: grab; opacity: 0.85; }
+  .anchor:hover { fill: #afc; }
+  .seg-line { stroke-width: 3; fill: none; cursor: pointer; }
+  .seg-line:hover { stroke-width: 5; }
+  .ghost-line { stroke: var(--gold); stroke-width: 1; stroke-dasharray: 4 4; fill: none; pointer-events: none; opacity: 0.6; }
+  .terra-mark { fill: var(--gold-bright); stroke: #000; stroke-width: 2; pointer-events: none; }
+  .terra-ring { fill: none; stroke: var(--gold); stroke-width: 1; opacity: 0.18; stroke-dasharray: 3 3; pointer-events: none; }
+  .terra-ray { fill: none; stroke: var(--gold); stroke-width: 1; opacity: 0.10; pointer-events: none; }
+  .mode-info { padding: 6px 8px; background: rgba(201,162,74,0.08); border-left: 2px solid var(--gold); font-size: 11px; color: var(--gold-bright); }
+  details { margin: 8px 0; }
+  summary { cursor: pointer; color: var(--gold); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  label.toggle { display: flex; align-items: center; gap: 6px; font-size: 11px; cursor: pointer; }
+</style>
+</head>
+<body>
+<main>
+  <svg id="canvas" viewBox="0 0 3740 2300" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <pattern id="bg-pattern" patternUnits="userSpaceOnUse" width="3740" height="2300">
+        <image id="bg-image" href="" width="3740" height="2300"></image>
+      </pattern>
+    </defs>
+    <rect width="3740" height="2300" fill="url(#bg-pattern)" id="bg-rect"></rect>
+    <g id="terra-guides"></g>
+    <g id="polygons"></g>
+    <g id="overlay"></g>
+  </svg>
+</main>
+
+<aside>
+  <h1>Segmenta editor</h1>
+  <div class="mode-info" id="mode-info">Click sur la carte pour ajouter un vertex</div>
+
+  <h2>Mode</h2>
+  <div class="row">
+    <button data-mode="add" class="active">+ Vertex</button>
+    <button data-mode="edit">Drag</button>
+    <button data-mode="bezier">Courbe</button>
+    <button data-mode="delete">−</button>
+  </div>
+
+  <h2>Segmenta</h2>
+  <div id="seg-list"></div>
+
+  <h2>Guides Terra</h2>
+  <label class="toggle"><input type="checkbox" id="show-rays" checked> Rayons (tous les 15°)</label>
+  <label class="toggle"><input type="checkbox" id="show-rings" checked> Cercles (350/700/1100/1500/2200/3000 px)</label>
+  <label class="toggle"><input type="checkbox" id="snap-rays"> Snap radial (5° prox.)</label>
+  <label class="toggle"><input type="checkbox" id="snap-rings"> Snap arc (15 px prox.)</label>
+
+  <h2>Carte</h2>
+  <div class="row">
+    <button id="bg-base">Fond canon GW</button>
+    <button id="bg-user">Fond user (segmenta.jpg)</button>
+    <button id="bg-none">Aucun fond</button>
+  </div>
+
+  <h2>Import / Export</h2>
+  <div class="row">
+    <button id="export">📋 Export JSON</button>
+    <button id="import-btn">📥 Import JSON</button>
+    <button id="reset" style="margin-left:auto">Reset</button>
+  </div>
+  <textarea id="json" placeholder='Coller un JSON ici, puis cliquer "Import"'></textarea>
+
+  <details>
+    <summary>Aide</summary>
+    <p class="help">
+      • <kbd>+ Vertex</kbd> : click sur la carte ajoute un point au polygon actif. Le polygon se ferme automatiquement.<br>
+      • <kbd>Drag</kbd> : drag un vertex (rond or) ou un anchor (rond bleu) pour le déplacer.<br>
+      • <kbd>Courbe</kbd> : click sur un côté droit du polygon → ajoute un anchor au milieu, le côté devient une courbe Bézier quadratique. Re-click pour redresser.<br>
+      • <kbd>−</kbd> : click sur un vertex pour le supprimer.<br>
+      • <kbd>Snap</kbd> : si activé, chaque déplacement se snap au rayon ou au cercle Terra le plus proche (prox = 5°/15px).<br>
+      • Sélectionne le segmentum actif dans la liste avant de commencer.
+    </p>
+  </details>
+</aside>
+
+<script>
+const TERRA = { x: 967, y: 1255 };
+const SVG = document.getElementById('canvas');
+const SEGMENTA = [
+  { id: 'solar',     name: 'Solar',     color: '#c9a24a' },
+  { id: 'pacificus', name: 'Pacificus', color: '#3c7d80' },
+  { id: 'tempestus', name: 'Tempestus', color: '#a3322c' },
+  { id: 'ultima',    name: 'Ultima',    color: '#3559a0' },
+  { id: 'obscurus',  name: 'Obscurus',  color: '#7e3d8e' },
+];
+// Polygon state : par Segmentum, liste de vertices {x, y, bezier?: {ax, ay}}
+// Le segment qui suit le vertex i (vers i+1) est courbe si vertex[i].bezier existe.
+const state = {
+  active: 'solar',
+  polygons: Object.fromEntries(SEGMENTA.map(s => [s.id, []])),
+  mode: 'add',
+};
+
+// ---- Background image ----
+function setBackground(src) {
+  document.getElementById('bg-image').setAttribute('href', src || '');
+  document.getElementById('bg-rect').setAttribute('fill', src ? 'url(#bg-pattern)' : '#050403');
+}
+document.getElementById('bg-base').onclick = () => setBackground('galaxy-map.jpg');
+document.getElementById('bg-user').onclick = () => setBackground('galaxy-map-segmenta.jpg');
+document.getElementById('bg-none').onclick = () => setBackground('');
+setBackground('galaxy-map.jpg');  // default
+
+// ---- Mode buttons ----
+document.querySelectorAll('button[data-mode]').forEach(btn => {
+  btn.onclick = () => {
+    state.mode = btn.dataset.mode;
+    document.querySelectorAll('button[data-mode]').forEach(b => b.classList.toggle('active', b === btn));
+    updateModeInfo();
+  };
+});
+function updateModeInfo() {
+  const txt = {
+    add: 'Click sur la carte = nouveau vertex',
+    edit: 'Drag les vertices (or) et anchors (bleu)',
+    bezier: 'Click sur un côté droit → courbure Bézier (re-click = redresser)',
+    delete: 'Click sur un vertex = supprime',
+  }[state.mode];
+  document.getElementById('mode-info').textContent = txt;
+}
+
+// ---- Segmentum list ----
+const segListEl = document.getElementById('seg-list');
+function renderSegList() {
+  segListEl.innerHTML = '';
+  for (const s of SEGMENTA) {
+    const row = document.createElement('div');
+    row.className = 'seg-row' + (state.active === s.id ? ' active' : '');
+    row.innerHTML = `<span class="seg-color" style="background:${s.color}"></span>
+      <span class="seg-name">${s.name}</span>
+      <span class="seg-count">${state.polygons[s.id].length} vtx</span>`;
+    row.onclick = () => { state.active = s.id; renderSegList(); render(); };
+    segListEl.appendChild(row);
+  }
+}
+renderSegList();
+
+// ---- SVG coordinates from mouse ----
+function svgPoint(evt) {
+  const pt = SVG.createSVGPoint();
+  pt.x = evt.clientX;
+  pt.y = evt.clientY;
+  return pt.matrixTransform(SVG.getScreenCTM().inverse());
+}
+
+// ---- Snap to Terra rays / rings ----
+const RAYS = [];
+for (let a = 0; a < 360; a += 5) RAYS.push(a);
+const RINGS = [350, 700, 1100, 1500, 2200, 3000];
+
+function snap(p) {
+  let { x, y } = p;
+  const dx = x - TERRA.x, dy = y - TERRA.y;
+  const r = Math.hypot(dx, dy);
+  let theta = Math.atan2(dy, dx) * 180 / Math.PI;
+  if (theta < 0) theta += 360;
+  if (document.getElementById('snap-rays').checked) {
+    let best = theta, bestD = Infinity;
+    for (const a of RAYS) {
+      const d = Math.min(Math.abs(theta - a), 360 - Math.abs(theta - a));
+      if (d < bestD) { bestD = d; best = a; }
+    }
+    if (bestD < 5) {
+      const rad = best * Math.PI / 180;
+      x = TERRA.x + r * Math.cos(rad);
+      y = TERRA.y + r * Math.sin(rad);
+    }
+  }
+  if (document.getElementById('snap-rings').checked) {
+    const dxn = x - TERRA.x, dyn = y - TERRA.y;
+    const rn = Math.hypot(dxn, dyn);
+    let best = rn, bestD = Infinity;
+    for (const rr of RINGS) {
+      const d = Math.abs(rn - rr);
+      if (d < bestD) { bestD = d; best = rr; }
+    }
+    if (bestD < 15) {
+      const k = best / rn;
+      x = TERRA.x + dxn * k;
+      y = TERRA.y + dyn * k;
+    }
+  }
+  return { x, y };
+}
+
+// ---- Polygon path with optional bezier sides ----
+function pathD(verts) {
+  if (!verts.length) return '';
+  const n = verts.length;
+  let d = `M ${verts[0].x} ${verts[0].y} `;
+  for (let i = 0; i < n; i++) {
+    const cur = verts[i];
+    const nxt = verts[(i + 1) % n];
+    if (cur.bezier) {
+      d += `Q ${cur.bezier.ax} ${cur.bezier.ay} ${nxt.x} ${nxt.y} `;
+    } else {
+      d += `L ${nxt.x} ${nxt.y} `;
+    }
+  }
+  d += 'Z';
+  return d;
+}
+
+// ---- Render ----
+function render() {
+  // Guides Terra
+  const guides = document.getElementById('terra-guides');
+  guides.innerHTML = '';
+  const showRays = document.getElementById('show-rays').checked;
+  const showRings = document.getElementById('show-rings').checked;
+  if (showRays) {
+    for (let a = 0; a < 360; a += 15) {
+      const rad = a * Math.PI / 180;
+      const x2 = TERRA.x + 3000 * Math.cos(rad);
+      const y2 = TERRA.y + 3000 * Math.sin(rad);
+      const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('x1', TERRA.x); l.setAttribute('y1', TERRA.y);
+      l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      l.setAttribute('class', 'terra-ray');
+      guides.appendChild(l);
+    }
+  }
+  if (showRings) {
+    for (const r of RINGS) {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', TERRA.x); c.setAttribute('cy', TERRA.y);
+      c.setAttribute('r', r);
+      c.setAttribute('class', 'terra-ring');
+      guides.appendChild(c);
+    }
+  }
+  const terra = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  terra.setAttribute('cx', TERRA.x); terra.setAttribute('cy', TERRA.y);
+  terra.setAttribute('r', 18); terra.setAttribute('class', 'terra-mark');
+  guides.appendChild(terra);
+
+  // Polygons
+  const polys = document.getElementById('polygons');
+  polys.innerHTML = '';
+  for (const s of SEGMENTA) {
+    const verts = state.polygons[s.id];
+    if (!verts.length) continue;
+    const isActive = state.active === s.id;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathD(verts));
+    path.setAttribute('fill', s.color);
+    path.setAttribute('fill-opacity', isActive ? 0.32 : 0.18);
+    path.setAttribute('stroke', s.color);
+    path.setAttribute('stroke-width', isActive ? 4 : 2);
+    polys.appendChild(path);
+
+    // Drawn segments (clickable for bezier toggle in bezier mode)
+    if (isActive) {
+      for (let i = 0; i < verts.length; i++) {
+        const cur = verts[i];
+        const nxt = verts[(i + 1) % verts.length];
+        const seg = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const sd = cur.bezier
+          ? `M ${cur.x} ${cur.y} Q ${cur.bezier.ax} ${cur.bezier.ay} ${nxt.x} ${nxt.y}`
+          : `M ${cur.x} ${cur.y} L ${nxt.x} ${nxt.y}`;
+        seg.setAttribute('d', sd);
+        seg.setAttribute('class', 'seg-line');
+        seg.setAttribute('stroke', s.color);
+        seg.setAttribute('stroke-opacity', 0);  // invisible but clickable
+        seg.dataset.idx = i;
+        seg.addEventListener('click', (e) => onSegmentClick(e, i));
+        polys.appendChild(seg);
+      }
+
+      // Vertices
+      for (let i = 0; i < verts.length; i++) {
+        const v = verts[i];
+        const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', v.x); c.setAttribute('cy', v.y);
+        c.setAttribute('r', 7);
+        c.setAttribute('class', 'vertex');
+        c.dataset.idx = i;
+        c.addEventListener('mousedown', (e) => onVertexMousedown(e, i));
+        c.addEventListener('click', (e) => onVertexClick(e, i));
+        polys.appendChild(c);
+      }
+      // Anchors
+      for (let i = 0; i < verts.length; i++) {
+        const v = verts[i];
+        if (!v.bezier) continue;
+        const nxt = verts[(i + 1) % verts.length];
+        const ghost1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        ghost1.setAttribute('x1', v.x); ghost1.setAttribute('y1', v.y);
+        ghost1.setAttribute('x2', v.bezier.ax); ghost1.setAttribute('y2', v.bezier.ay);
+        ghost1.setAttribute('class', 'ghost-line');
+        polys.appendChild(ghost1);
+        const ghost2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        ghost2.setAttribute('x1', nxt.x); ghost2.setAttribute('y1', nxt.y);
+        ghost2.setAttribute('x2', v.bezier.ax); ghost2.setAttribute('y2', v.bezier.ay);
+        ghost2.setAttribute('class', 'ghost-line');
+        polys.appendChild(ghost2);
+        const a = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        a.setAttribute('cx', v.bezier.ax); a.setAttribute('cy', v.bezier.ay);
+        a.setAttribute('r', 7);
+        a.setAttribute('class', 'anchor');
+        a.dataset.idx = i;
+        a.addEventListener('mousedown', (e) => onAnchorMousedown(e, i));
+        polys.appendChild(a);
+      }
+    }
+  }
+  for (const s of SEGMENTA) {
+    const cnt = document.querySelectorAll(`.seg-row .seg-name`);
+    // Update counts
+  }
+  renderSegList();
+}
+
+function onSegmentClick(e, idx) {
+  if (state.mode !== 'bezier') return;
+  e.stopPropagation();
+  const verts = state.polygons[state.active];
+  const cur = verts[idx];
+  const nxt = verts[(idx + 1) % verts.length];
+  if (cur.bezier) {
+    delete cur.bezier;
+  } else {
+    // Anchor au milieu, perpendiculaire au segment, à 30 px.
+    const mx = (cur.x + nxt.x) / 2;
+    const my = (cur.y + nxt.y) / 2;
+    const dx = nxt.x - cur.x, dy = nxt.y - cur.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const px = -dy / len * 60;
+    const py = dx / len * 60;
+    cur.bezier = { ax: mx + px, ay: my + py };
+  }
+  render();
+}
+
+function onVertexClick(e, idx) {
+  if (state.mode !== 'delete') return;
+  e.stopPropagation();
+  state.polygons[state.active].splice(idx, 1);
+  render();
+}
+
+let dragState = null;
+
+function onVertexMousedown(e, idx) {
+  // Drag des vertices : possible en mode 'edit' ou par défaut en 'add'
+  // (drag immédiat après pose). Désactivé en delete pour pas confondre.
+  if (state.mode === 'delete') return;
+  e.stopPropagation();
+  e.preventDefault();
+  dragState = { type: 'vertex', idx };
+}
+
+function onAnchorMousedown(e, idx) {
+  // Drag des anchors : toujours possible sauf delete.
+  if (state.mode === 'delete') return;
+  e.stopPropagation();
+  e.preventDefault();
+  dragState = { type: 'anchor', idx };
+}
+
+document.addEventListener('mousemove', (e) => {
+  if (!dragState) return;
+  const p = snap(svgPoint(e));
+  const verts = state.polygons[state.active];
+  if (dragState.type === 'vertex') {
+    verts[dragState.idx].x = p.x;
+    verts[dragState.idx].y = p.y;
+  } else {
+    verts[dragState.idx].bezier.ax = p.x;
+    verts[dragState.idx].bezier.ay = p.y;
+  }
+  render();
+});
+
+document.addEventListener('mouseup', () => { dragState = null; });
+
+SVG.addEventListener('click', (e) => {
+  if (state.mode !== 'add') return;
+  const p = snap(svgPoint(e));
+  state.polygons[state.active].push({ x: Math.round(p.x), y: Math.round(p.y) });
+  render();
+});
+
+// ---- Toggles re-render ----
+['show-rays', 'show-rings'].forEach(id => {
+  document.getElementById(id).onchange = render;
+});
+
+// ---- Export / Import ----
+document.getElementById('export').onclick = () => {
+  const out = {
+    terra: [TERRA.x, TERRA.y],
+    imageSize: [3740, 2300],
+    segmenta: state.polygons,
+  };
+  const txt = JSON.stringify(out, null, 2);
+  document.getElementById('json').value = txt;
+  navigator.clipboard?.writeText(txt).then(
+    () => alert('Copié dans le presse-papier !'),
+    () => alert('Voir la zone JSON ci-dessous (clipboard refusé).')
+  );
+};
+
+document.getElementById('import-btn').onclick = () => {
+  const txt = document.getElementById('json').value;
+  if (!txt.trim()) return;
+  try {
+    const data = JSON.parse(txt);
+    if (data.segmenta) {
+      for (const k of Object.keys(state.polygons)) {
+        state.polygons[k] = data.segmenta[k] || [];
+      }
+      render();
+    }
+  } catch (err) {
+    alert('JSON invalide : ' + err.message);
+  }
+};
+
+document.getElementById('reset').onclick = () => {
+  if (!confirm('Effacer tout le polygon actif ?')) return;
+  state.polygons[state.active] = [];
+  render();
+};
+
+// Initial render
+render();
+updateModeInfo();
+</script>
+</body>
+</html>
