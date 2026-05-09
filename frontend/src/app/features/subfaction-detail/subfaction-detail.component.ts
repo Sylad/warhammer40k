@@ -47,7 +47,14 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
             <p class="hero-desc">{{ d.subfaction.description }}</p>
             <div class="key-info">
               @if (d.subfaction.primarch) {
-                <div><span class="ki-label">Primarque</span><span class="ki-val">{{ d.subfaction.primarch }}</span></div>
+                <div>
+                  <span class="ki-label">Primarque</span>
+                  @if (d.subfaction.primarchId) {
+                    <a class="ki-val ki-link" [routerLink]="['/lore/primarchs', d.subfaction.primarchId]">{{ d.subfaction.primarch }} →</a>
+                  } @else {
+                    <span class="ki-val">{{ d.subfaction.primarch }}</span>
+                  }
+                </div>
               }
               @if (d.subfaction.homeworld) {
                 <div><span class="ki-label">Monde-mère</span><span class="ki-val">{{ d.subfaction.homeworld }}</span></div>
@@ -73,6 +80,30 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
               } @else {
                 <p>{{ d.subfaction.loreShort }}</p>
               }
+            </section>
+          }
+
+          @if (d.subfaction.currentState) {
+            <section class="block">
+              <h2>État Actuel · M42</h2>
+              <p>{{ d.subfaction.currentState }}</p>
+            </section>
+          }
+
+          @if (d.subfaction.notableBattles?.length) {
+            <section class="block">
+              <h2>Batailles Notables</h2>
+              <ul class="battles-list">
+                @for (b of d.subfaction.notableBattles; track b.name) {
+                  <li>
+                    <div class="battle-head">
+                      <strong>{{ b.name }}</strong>
+                      @if (b.date) { <span class="battle-date">{{ b.date }}</span> }
+                    </div>
+                    <p>{{ b.summary }}</p>
+                  </li>
+                }
+              </ul>
             </section>
           }
 
@@ -119,7 +150,16 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
             <h3>Informations clés</h3>
             <dl>
               <dt>Type</dt><dd>{{ typeLabel(d.subfaction.type) }}</dd>
-              @if (d.subfaction.primarch) { <dt>Primarque</dt><dd>{{ d.subfaction.primarch }}</dd> }
+              @if (d.subfaction.primarch) {
+                <dt>Primarque</dt>
+                <dd>
+                  @if (d.subfaction.primarchId) {
+                    <a class="dd-link" [routerLink]="['/lore/primarchs', d.subfaction.primarchId]">{{ d.subfaction.primarch }} →</a>
+                  } @else {
+                    {{ d.subfaction.primarch }}
+                  }
+                </dd>
+              }
               @if (d.subfaction.homeworld) { <dt>Monde-mère</dt><dd>{{ d.subfaction.homeworld }}</dd> }
               @if (d.subfaction.founding) { <dt>Fondation</dt><dd>{{ d.subfaction.founding }}</dd> }
               <dt>Faction parente</dt><dd>

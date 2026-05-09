@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { ClaudeUsageBadgeComponent } from '../../shared/components/claude-usage-badge/claude-usage-badge.component';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
+import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ClaudeUsageBadgeComponent, BreadcrumbComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, BreadcrumbComponent, CommandPaletteComponent],
   template: `
     <header class="topbar">
       <a class="brand" routerLink="/">
@@ -31,14 +31,43 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         <a routerLink="/gallery" routerLinkActive="active">
           <span class="nav-ico">▦</span>Galerie
         </a>
-        <a routerLink="/lore" routerLinkActive="active">
-          <span class="nav-ico">✠</span>Lore
-        </a>
+        <div class="nav-dropdown">
+          <a routerLink="/lore" routerLinkActive="active">
+            <span class="nav-ico">✠</span>Lore<span class="nav-caret">▾</span>
+          </a>
+          <div class="mega-menu">
+            <div class="mega-col">
+              <h4>Origines</h4>
+              <a routerLink="/lore/emperor">L'Empereur</a>
+              <a routerLink="/lore/primarchs">Primarques</a>
+              <a routerLink="/lore/saints">Saints & Saintes</a>
+            </div>
+            <div class="mega-col">
+              <h4>Cosmologie</h4>
+              <a routerLink="/lore/chaos-gods">Dieux du Chaos</a>
+              <a routerLink="/lore/galaxy">Galaxie</a>
+              <a routerLink="/lore/concepts">Concepts</a>
+              <a routerLink="/lore/civilians">Imperial Orgs</a>
+            </div>
+            <div class="mega-col">
+              <h4>Guerre & Histoire</h4>
+              <a routerLink="/lore/timeline">Chronologie</a>
+              <a routerLink="/lore/equipment">Armement</a>
+              <a routerLink="/lore/ships">Vaisseaux</a>
+              <a routerLink="/lore/titans">Titans & Knights</a>
+            </div>
+          </div>
+        </div>
         <a routerLink="/about" routerLinkActive="active">
           <span class="nav-ico">⚜</span>À propos
         </a>
-        <app-claude-usage-badge />
+        <button class="nav-search-btn" type="button" (click)="palette.open()" title="Recherche globale (Ctrl+K)" aria-label="Recherche">
+          <span class="nav-ico">⌕</span>
+          <span class="nav-search-kbd">⌘K</span>
+        </button>
       </nav>
+
+      <app-command-palette #palette />
     </header>
 
     @if (quota.hasError()) {
@@ -151,6 +180,83 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       opacity: 1;
       border-bottom-color: var(--gold);
       text-shadow: 0 0 12px rgba(201, 162, 74, 0.35);
+    }
+
+    /* Search button + Cmd+K */
+    .nav-search-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--gold); padding: 6px 10px; cursor: pointer;
+      font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.1em;
+      transition: all 0.18s; margin-left: 8px;
+    }
+    .nav-search-btn:hover {
+      border-color: var(--gold); color: var(--gold-bright);
+      background: rgba(201,162,74,0.06);
+    }
+    .nav-search-kbd {
+      font-size: 0.62rem; opacity: 0.7; letter-spacing: 0.08em;
+      border-left: 1px solid var(--border); padding-left: 6px;
+    }
+
+    /* Mega-menu Lore */
+    .nav-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-caret {
+      margin-left: 4px;
+      font-size: 0.65rem;
+      opacity: 0.6;
+    }
+    .mega-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 540px;
+      background: rgba(11, 9, 7, 0.97);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      padding: 22px 24px;
+      display: none;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 22px;
+      z-index: 100;
+    }
+    .nav-dropdown:hover .mega-menu,
+    .nav-dropdown:focus-within .mega-menu {
+      display: grid;
+    }
+    .mega-col h4 {
+      font-family: var(--serif);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--gold-bright);
+      margin: 0 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+    .mega-col a {
+      display: block;
+      padding: 7px 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      opacity: 0.78;
+      text-decoration: none;
+      text-transform: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(201, 162, 74, 0.08);
+    }
+    .mega-col a:last-child { border-bottom: none; }
+    .mega-col a:hover {
+      color: var(--gold-bright);
+      opacity: 1;
+    }
+    @media (max-width: 900px) {
+      .mega-menu { display: none !important; }
     }
     .nav-ico { font-size: 1rem; line-height: 1; }
 

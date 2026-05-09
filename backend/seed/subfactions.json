@@ -65,7 +65,39 @@
         "description": "Mortelle de confiance et Chamberlain Princeps de Macragge, Tarasha Euten éleva Roboute Guilliman dès l'enfance et demeura à ses côtés durant les heures sombres de l'Hérésie. Voix de la sagesse civile dans une époque de fureur martiale, elle incarna l'idéal ultramarien d'une civilisation où l'art de gouverner valait l'art de la guerre.",
         "wikiQuery": "Tarasha Euten Ultramarines"
       }
-    ]
+    ],
+    "epithet": "Le Premier Chapitre · Les Fils de Macragge",
+    "currentState": "Au M42, les Ultramarines sont la plus grande lignée Astartes (~5000 Successor Chapters). Macragge est centre de l'Imperium Sanctus. Marneus Calgar commande sous l'autorité directe de Roboute Guilliman ressuscité. Cinq cents mondes Ultramar protégés. Programme Primaris massivement déployé.",
+    "notableBattles": [
+      {
+        "name": "Calth Underworld War",
+        "summary": "M31",
+        "date": "25 ans de guerre souterraine contre les Word Bearers traîtres."
+      },
+      {
+        "name": "Bataille de Macragge",
+        "summary": "745.M41",
+        "date": "Défense contre Hive Fleet Behemoth. Tactique de défense légendaire."
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "999.M41-010.M42",
+        "date": "Vaisseau-amiral Macragge's Honour. Reconquête galactique."
+      },
+      {
+        "name": "Bataille de Vigilus",
+        "summary": "M42",
+        "date": "Combat contre Genestealer Cult majeur."
+      }
+    ],
+    "galleryQueries": [
+      "Ultramarines battle",
+      "Macragge",
+      "Calgar Ultramarines",
+      "Guilliman Ultramarines",
+      "Ultramarines Astartes"
+    ],
+    "primarchId": "guilliman"
   },
   {
     "id": "blood-angels",
@@ -133,7 +165,39 @@
         "description": "Psyker des Blood Angels durant l'Hérésie, Mkani Kano combattit la corruption psychique semée par les démons de Slaanesh lors du Massacre de Signus. Témoin de la première manifestation de la Soif Rouge et de la Rage Noire, il consigna les premières descriptions de la double malédiction génétique qui hanterait les fils de Sanguinius pour les dix millénaires à venir.",
         "wikiQuery": "Mkani Kano Blood Angels"
       }
-    ]
+    ],
+    "epithet": "Les Fils de Sanguinius · Les Anges Pleureurs",
+    "currentState": "Au M42, après la Devastation of Baal contre Hive Fleet Leviathan, les Blood Angels sont profondément réduits. Dante commande à 1100 ans d'âge. La Soif Rouge et la Rage Noire menacent toujours. Mephiston, premier à maîtriser la Rage Noire, est leur lumière. Lemartes guide les Death Company.",
+    "notableBattles": [
+      {
+        "name": "Massacre de Signus Prime",
+        "summary": "M31",
+        "date": "Sanguinius vainquit Ka'Bandha. Soif Rouge ancrée."
+      },
+      {
+        "name": "Première Bataille d'Armageddon",
+        "summary": "444.M41",
+        "date": "Tu'shan Maître de Chapitre tomba face à un Greater Daemon."
+      },
+      {
+        "name": "Devastation of Baal",
+        "summary": "999.M41",
+        "date": "Hive Fleet Leviathan presque victorieuse. Dante commanda la défense."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Saint Celestine et Dante combattent côte-à-côte."
+      }
+    ],
+    "galleryQueries": [
+      "Blood Angels battle",
+      "Sanguinius Blood Angels",
+      "Dante Blood Angels",
+      "Mephiston warhammer 40k",
+      "Death Company"
+    ],
+    "primarchId": "sanguinius"
   },
   {
     "id": "dark-angels",
@@ -213,7 +277,39 @@
         "description": "Chapter Master des Dark Angels durant l'Hérésie et figure controversée de la Ire Légion, Merir Astelan combattit nominalement pour l'Imperium mais sa loyauté vacilla lors de la Chute de Caliban. Devenu l'un des premiers et plus anciens Fallen, il fut capturé puis interrogé pendant des millénaires, gardien obstiné de vérités hérétiques sur les véritables motifs du Lion.",
         "wikiQuery": "Astelan Fallen Dark Angels"
       }
-    ]
+    ],
+    "epithet": "Le Premier Chapitre · Les Chevaliers Cachés",
+    "currentState": "Au M42, Lion El'Jonson est de retour de stase. Il dirige depuis The Rock — mystérieux et distant. Les Dark Angels chassent toujours les Fallen, secret transmissé de Maître Suprême en Maître Suprême. Beaucoup de Successor Chapters partagent ce secret (Angels of Vengeance, Consecrators, Disciples of Caliban...).",
+    "notableBattles": [
+      {
+        "name": "Croisade Calibanique",
+        "summary": "Pre-M30",
+        "date": "Lion mena la purge des Bêtes Warp avant l'Empereur."
+      },
+      {
+        "name": "Caliban Heresy",
+        "summary": "M31",
+        "date": "Lion combattit Luther. Caliban se déchira. The Rock survécut."
+      },
+      {
+        "name": "Chasse aux Fallen",
+        "summary": "M31-M42",
+        "date": "10 000 ans de chasse secrète. Aucun Maître ne connaît tous les Fallen."
+      },
+      {
+        "name": "Réveil de Lion",
+        "summary": "999.M41",
+        "date": "Lion émerge de stase. Marche aux côtés de Guilliman."
+      }
+    ],
+    "galleryQueries": [
+      "Dark Angels battle",
+      "Lion El'Jonson",
+      "The Rock Dark Angels",
+      "Deathwing terminator",
+      "Ravenwing"
+    ],
+    "primarchId": "lion-eljonson"
   },
   {
     "id": "space-wolves",
@@ -287,7 +383,39 @@
         "description": "Wolf Guard d'élite de la VIe Légion durant l'Hérésie, Geigor Fell-Hand combattit aux côtés de Bjorn et Russ lors des grandes campagnes du Rout. Survivant de Prospero et de la chasse aux Légions traîtresses, sa mémoire fut consignée dans les sagas fenrisiennes comme exemple de la fureur disciplinée des premiers Vlka Fenryka.",
         "wikiQuery": "Geigor Fell-Hand Space Wolves"
       }
-    ]
+    ],
+    "epithet": "Les Fils de Russ · La Meute Éternelle",
+    "currentState": "Au M42, les Space Wolves veillent toujours sur Fenris. Logan Grimnar commande comme Great Wolf depuis des siècles. Les Wolfblade gardent le Trône d'Or à Terra. Wolftime — prophétie de retour de Russ — semble se rapprocher.",
+    "notableBattles": [
+      {
+        "name": "Burning of Prospero",
+        "summary": "M31",
+        "date": "Russ mena le massacre des Mille Fils de Magnus. Bibliothèque détruite."
+      },
+      {
+        "name": "Premières Guerres d'Armageddon",
+        "summary": "M41",
+        "date": "Logan Grimnar combattit Ghazghkull aux côtés de Yarrick."
+      },
+      {
+        "name": "Bataille de Cadia",
+        "summary": "999.M41",
+        "date": "Space Wolves envoyés en renfort. Cadia perdit malgré tout."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Marche aux côtés de Guilliman, sans pour autant l'accepter formellement."
+      }
+    ],
+    "galleryQueries": [
+      "Space Wolves battle",
+      "Leman Russ Space Wolves",
+      "Logan Grimnar",
+      "Fenris warhammer 40k",
+      "Wolves Astartes"
+    ],
+    "primarchId": "leman-russ"
   },
   {
     "id": "imperial-fists",
@@ -349,7 +477,39 @@
         "description": "Tower Master des Imperial Fists, Boreas dirigea la fortification des points stratégiques du Palais Impérial durant le Siège de Terra. Architecte autant que guerrier, il transforma les murailles dornianes en pièges mortels pour les hordes traîtresses, perpétuant l'art du siège enseigné par le Primarque lui-même.",
         "wikiQuery": "Boreas Imperial Fists Tower Master"
       }
-    ]
+    ],
+    "epithet": "Les Praétoriens de Terra · Les Constructeurs",
+    "currentState": "Au M42, les Imperial Fists demeurent gardiens du Phalanx. Eldrad Sigismund a vu plusieurs Maîtres de Chapitre. Beaucoup de Successors actifs (Crimson Fists, Black Templars, Fire Lords, Soul Drinkers, Excoriators). La main de Dorn est relique sacrée du Phalanx.",
+    "notableBattles": [
+      {
+        "name": "Construction du Phalanx",
+        "summary": "M30",
+        "date": "Dorn supervisa lui-même."
+      },
+      {
+        "name": "Fortification de Terra",
+        "summary": "M31",
+        "date": "55 jours de siège tenus."
+      },
+      {
+        "name": "Bataille de Yusran",
+        "summary": "M31",
+        "date": "Mort de Dorn. Main récupérée."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Phalanx coordonne flottes d'Indomitus."
+      }
+    ],
+    "galleryQueries": [
+      "Imperial Fists battle",
+      "Phalanx Imperial",
+      "Rogal Dorn",
+      "Imperial Fists siege",
+      "Yellow Astartes"
+    ],
+    "primarchId": "rogal-dorn"
   },
   {
     "id": "salamanders",
@@ -399,7 +559,34 @@
         "description": "Equerry du Primarque Vulkan et capitaine de la Pyre Guard, Artellus Numeon survécut au Massacre du Drop Site d'Isstvan V et porta le corps présumé mort de son père génétique à travers la galaxie en flammes. Croyant fermement au retour de Vulkan, il devint l'âme spirituelle des Salamanders dispersés et tomba en martyr en accomplissant sa quête de résurrection.",
         "wikiQuery": "Artellus Numeon Salamanders"
       }
-    ]
+    ],
+    "epithet": "Les Fils de Vulkan · Les Forgerons",
+    "currentState": "Au M42, les Salamanders demeurent humanistes parmi les Astartes. Tu'shan a transmis le commandement après sa mort en Première Guerre d'Armageddon. Les sept Reliques de Vulkan : 4 réunies, 3 disparues. Quand toutes le seront, Vulkan reviendrait selon prophétie.",
+    "notableBattles": [
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "M31",
+        "date": "Salamanders décimés. Vulkan tué et revenu."
+      },
+      {
+        "name": "Première Guerre d'Armageddon",
+        "summary": "M41",
+        "date": "Tu'shan combattit Daemon Prince Bloodthirster."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Recherche des Reliques continue."
+      }
+    ],
+    "galleryQueries": [
+      "Salamanders battle",
+      "Vulkan Salamanders",
+      "Nocturne warhammer 40k",
+      "Salamanders artwork",
+      "Tu'shan Salamander"
+    ],
+    "primarchId": "vulkan"
   },
   {
     "id": "white-scars",
@@ -449,7 +636,39 @@
         "description": "Khan des White Scars d'origine terrane durant l'Hérésie, Torghun Khan dirigea les guerriers de la Ve Légion qui n'étaient pas nés sur Chogoris. Tenté par les promesses de Horus à travers les agents de l'Alpha Legion, il représenta la fracture identitaire entre Terrans et Chogoriens et paya cher son moment de doute lors des purges fratricides qui frappèrent la flotte de Jaghatai.",
         "wikiQuery": "Torghun Khan White Scars"
       }
-    ]
+    ],
+    "epithet": "Les Cavaliers Galactiques · Les Fils de Jaghatai",
+    "currentState": "Au M42, les White Scars demeurent indépendants. Maître de Chapitre Kor'sarro Khan continue les chasses légendaires. Beaucoup de Successors (Mantis Warriors, Marauders, Storm Lords, Rampagers). Jaghatai Khan reste disparu — recherche dans le Webway.",
+    "notableBattles": [
+      {
+        "name": "Compliance de Chondax",
+        "summary": "M30",
+        "date": "Jaghatai défit les Orks par charge cavalerie surprise."
+      },
+      {
+        "name": "Voyage Webway",
+        "summary": "M30",
+        "date": "Jaghatai voyagea seul deux ans."
+      },
+      {
+        "name": "Bataille de Catallus",
+        "summary": "M31",
+        "date": "White Scars confrontèrent Iron Warriors."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Kor'sarro Khan accompagne Indomitus aux côtés des Ultramarines."
+      }
+    ],
+    "galleryQueries": [
+      "White Scars battle",
+      "Jaghatai Khan",
+      "Chogoris steppe",
+      "White Scars cavalry",
+      "Stormhawk White Scars"
+    ],
+    "primarchId": "jaghatai-khan"
   },
   {
     "id": "iron-hands",
@@ -487,7 +706,34 @@
         "description": "Capitaine de la 10e Compagnie de la Xe Légion et survivant du Massacre du Drop Site d'Isstvan V, Shadrak Meduson devint l'architecte de la guérilla loyaliste qui tourmenta les Légions traîtresses pendant des années après la mort de Ferrus Manus. Tactiquement brillant et froidement vengeur, il unifia les survivants brisés des Iron Hands, Salamanders et Raven Guard en une force de représailles mortelle, incarnant le serment du Mont Deluge avant d'être assassiné par les Sons of Horus.",
         "wikiQuery": "Shadrak Meduson Iron Hands"
       }
-    ]
+    ],
+    "epithet": "Les Fils de Ferrus · La Chair-Faiblesse",
+    "currentState": "Au M42, les Iron Hands sont parmi les Légions les plus cybernétiques. Leur doctrine 'la chair est traîtresse' (héritage direct de la mort de Ferrus) reste centrale. Iron Father Kardan Stronos commande. Beaucoup de Successors (Sons of Medusa, Brazen Claws, Red Talons).",
+    "notableBattles": [
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "M31",
+        "date": "Décimation. Mort de Ferrus à mains de Fulgrim."
+      },
+      {
+        "name": "Bataille de Medusa V",
+        "summary": "M41",
+        "date": "Combat contre Tyranides Hive Fleet Behemoth."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Stronos accompagne Indomitus avec ses Cohortes Cybernetica."
+      }
+    ],
+    "galleryQueries": [
+      "Iron Hands battle",
+      "Ferrus Manus",
+      "Medusa Iron Hands",
+      "Iron Hands cyborg",
+      "Iron Hands Astartes"
+    ],
+    "primarchId": "ferrus-manus"
   },
   {
     "id": "raven-guard",
@@ -531,7 +777,34 @@
         "description": "Commandant de la XIXe Légion durant l'Hérésie, Alvarex Maun incarna la doctrine de la guerre de l'ombre prêchée par Corvus Corax. Spécialiste des opérations clandestines et des frappes décapitantes, il harassa les arrières des Légions traîtresses durant la longue guerre civile et transmit aux successeurs de la Raven Guard l'art de la libération par l'invisible.",
         "wikiQuery": "Alvarex Maun Raven Guard"
       }
-    ]
+    ],
+    "epithet": "Les Liberateurs · Les Fils de Corvus",
+    "currentState": "Au M42, les Raven Guard demeurent indépendants. Maître de Chapitre Kayvaan Shrike commande après la mort de Corvus Corax (disparu). Doctrine d'embuscade et de libération préservée. Successors notables : Carcharodons Astra, Black Guard, Raptors. Génome reste instable depuis l'Hérésie.",
+    "notableBattles": [
+      {
+        "name": "Massacre du Drop Pod",
+        "summary": "M31",
+        "date": "Décimation à 75%. Corvus survécut."
+      },
+      {
+        "name": "Mission Terra (génome)",
+        "summary": "M31",
+        "date": "Corvus tenta de reformer la Légion. Échec partiel."
+      },
+      {
+        "name": "Bataille de Vigilus",
+        "summary": "M42",
+        "date": "Shrike mena opérations clandestines."
+      }
+    ],
+    "galleryQueries": [
+      "Raven Guard battle",
+      "Corvus Corax",
+      "Kayvaan Shrike",
+      "Raven Guard Astartes",
+      "Lycaeus warhammer 40k"
+    ],
+    "primarchId": "corvus-corax"
   },
   {
     "id": "black-templars",
@@ -569,6 +842,32 @@
         "description": "Vétérans de la Croisade Éternelle.",
         "wikiQuery": "Sword Brethren Black Templars"
       }
+    ],
+    "epithet": "Les Templiers Noirs · La Croisade Éternelle",
+    "currentState": "Au M42, Black Templars est l'un des plus grands Successors Imperial Fists. Croisade éternelle — ils ne s'arrêtent jamais. Vaisseau-amiral Eternal Crusader croise constamment. Haut-Marshal Helbrecht commande. Refus du Codex Astartes (taille variable). Beaucoup combattent en Indomitus aux côtés de Guilliman.",
+    "notableBattles": [
+      {
+        "name": "Croisade Bordel",
+        "summary": "M31",
+        "date": "Sigismund mena la première Croisade Éternelle après l'Hérésie."
+      },
+      {
+        "name": "Croisade Sabbat Worlds",
+        "summary": "M41",
+        "date": "Black Templars en force majeure."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Helbrecht accompagne Guilliman."
+      }
+    ],
+    "galleryQueries": [
+      "Black Templars battle",
+      "Helbrecht Black Templars",
+      "Black Templar Crusade",
+      "Eternal Crusader",
+      "Sigismund Black Templars"
     ]
   },
   {
@@ -595,6 +894,32 @@
         "description": "Sauveur du chapitre après la Catastrophe de Rynn's World.",
         "wikiQuery": "Pedro Kantor Crimson Fists"
       }
+    ],
+    "epithet": "Les Poings Cramoisis · Les Survivants de Rynn's World",
+    "currentState": "Au M42, Crimson Fists ont quasi-disparu après la destruction de Rynn's World (M41) par invasion Ork. Pedro Cantor commande quelques centaines de Marines survivants — moins d'un Chapitre complet. Reconstruction lente avec Primaris d'Indomitus. Cantor reste légende vivante.",
+    "notableBattles": [
+      {
+        "name": "Destruction de Rynn's World",
+        "summary": "989.M41",
+        "date": "Roquette Ork explosa l'arsenal du Chapitre. 95% du Chapitre détruit."
+      },
+      {
+        "name": "Défense de New Rynn",
+        "summary": "989.M41",
+        "date": "Pedro Cantor mena la défense désespérée. Survie miraculeuse."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Reconstruction avec Primaris."
+      }
+    ],
+    "galleryQueries": [
+      "Crimson Fists battle",
+      "Pedro Cantor",
+      "Rynn's World",
+      "Crimson Fists Chapter",
+      "Crimson Fists Astartes"
     ]
   },
   {
@@ -621,6 +946,32 @@
         "description": "Squads composées de frères de plusieurs chapitres.",
         "wikiQuery": "Deathwatch Kill Team"
       }
+    ],
+    "epithet": "Les Chasseurs de Xenos · Le Chapitre Inquisitorial",
+    "currentState": "Au M42, le Deathwatch est plus actif que jamais. Chaque Astartes loyaliste de tout Chapitre peut être détaché temporairement au Deathwatch — service souvent permanent en pratique. L'Indomitus a multiplié les opérations Deathwatch contre les xenos.",
+    "notableBattles": [
+      {
+        "name": "Fondation par l'Inquisition",
+        "summary": "M31",
+        "date": "Créé pour traquer xenos durant l'Hérésie."
+      },
+      {
+        "name": "Bataille de Macragge (Tyranides)",
+        "summary": "745.M41",
+        "date": "Deathwatch infiltra une Hive Tyrant pendant la défense."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Opérations clandestines anti-xenos."
+      }
+    ],
+    "galleryQueries": [
+      "Deathwatch battle",
+      "Deathwatch Astartes",
+      "Inquisition Astartes",
+      "Xenos hunters",
+      "Deathwatch armor"
     ]
   },
   {
@@ -635,7 +986,38 @@
     "currentLeader": "Marshal",
     "currentLeaderRole": "Maréchaux des Korps",
     "wikiQuery": "Death Korps of Krieg",
-    "citation": "Per Sanguinis, Per Sacrificium."
+    "citation": "Per Sanguinis, Per Sacrificium.",
+    "epithet": "La Légion de la Mort · Les Soldats-Pénitents",
+    "currentState": "Au M42, Death Korps of Krieg est l'unité de siège suprême de l'Imperium. Recrutés sur Krieg — monde quasi-mort post-apostasie nucléaire, atmosphère toxique, où chaque soldat naît comme un pénitent expiant l'apostasie passée de leur monde. Les Krieg acceptent la mort comme libération. Leur discipline en tranchée est inégalée. Plus actifs que jamais avec Indomitus Crusade. L'Inquisition les apprécie particulièrement — ils n'argumentent jamais.",
+    "notableBattles": [
+      {
+        "name": "Apostasie de Krieg",
+        "summary": "M37",
+        "date": "Krieg se rebella. Auto-bombardement nucléaire d'expiation. Survie du peuple par mutation génétique."
+      },
+      {
+        "name": "Siège de Vraks",
+        "summary": "M41",
+        "date": "Krieg tint le siège pendant 17 ans. 14 millions tués. Plus grande bataille de tranchée de l'Imperium."
+      },
+      {
+        "name": "Bataille de Hydraphur",
+        "summary": "M41",
+        "date": "Krieg défit une invasion Genestealer Cult majeure."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Krieg envoyés sur tous les sièges majeurs. Spécialistes guerre statique."
+      }
+    ],
+    "galleryQueries": [
+      "Death Korps of Krieg",
+      "Krieg warhammer 40k",
+      "Krieg trench warfare",
+      "Imperial Guard Krieg",
+      "Krieg regiment siege"
+    ]
   },
   {
     "id": "cadian-shock-troops",
@@ -649,7 +1031,38 @@
     "currentLeader": "Lord Castellan Creed",
     "currentLeaderRole": "Lord Castellan (légendaire)",
     "wikiQuery": "Cadian Shock Troops",
-    "citation": "Cadia tient — pour toujours."
+    "citation": "Cadia tient — pour toujours.",
+    "epithet": "Le Berceau · Les Soldats Parfaits",
+    "currentState": "Au M42, après la chute de Cadia (999.M41) sous Abaddon, les Cadians sont dispersés à travers la galaxie. Lord-Solar Leontus commande l'Astra Militarum Cadian Excubitae — successeur post-mortem du Lord-Castellan Creed. Les Cadians dispersés forment encore l'élite de la Garde Impériale ; ils sont reconnaissables par leur uniforme gris-vert distinctif et leur discipline supérieure. Recrutement maintenu via les enfants Cadians évacués. La Cadian Excubitae regroupe environ 50 régiments répartis sur Indomitus.",
+    "notableBattles": [
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "999.M41",
+        "date": "Cadia tomba après plusieurs Croisades Noires d'Abaddon. Lord-Castellan Creed disparut. Cadia explosa en débris orbiteurs."
+      },
+      {
+        "name": "Bataille de Vigilus",
+        "summary": "M42",
+        "date": "Cadian Excubitae mena la défense de Vigilus aux côtés de Marneus Calgar."
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "999.M41-010.M42",
+        "date": "Cadians dispersés rejoignent Indomitus, élite reconnue."
+      },
+      {
+        "name": "Bataille de Hera",
+        "summary": "M42",
+        "date": "Cadian Excubitae sous Leontus repoussa une invasion Death Guard."
+      }
+    ],
+    "galleryQueries": [
+      "Cadian Shock Troops",
+      "Cadia Imperial Guard",
+      "Cadian regiment",
+      "Cadia warhammer 40k",
+      "Lord Solar Leontus"
+    ]
   },
   {
     "id": "catachan-jungle-fighters",
@@ -661,7 +1074,38 @@
     "loreLong": "Catachan est un monde mortel où la flore tente de vous tuer chaque jour. Les humains qui y survivent grandissent musclés, gigantesques, brutaux et résistants. Surnommés Catachan Devils, ils excellent en guerre asymétrique, démolition et survie en milieu hostile.",
     "homeworld": "Catachan",
     "wikiQuery": "Catachan Jungle Fighters",
-    "citation": "Si vous y survivez, c'est que vous êtes Catachan."
+    "citation": "Si vous y survivez, c'est que vous êtes Catachan.",
+    "epithet": "Les Démons Verts · Les Combattants de la Jungle",
+    "currentState": "Au M42, les Catachans sont les vétérans de jungle de l'Imperium. Recrutés sur Catachan II — monde-jungle hostile où chaque plante peut tuer, chaque animal est prédateur, et chaque humain qui survit jusqu'à 14 ans est déjà guerrier vétéran. Plus de 200 régiments Catachan actifs. Sergent Harker est légende vivante. Souvent envoyés sur les fronts les plus brutaux : jungles xenos, forêts daemoniaques, Tyranides en milieu boisé.",
+    "notableBattles": [
+      {
+        "name": "Bataille d'Octarius",
+        "summary": "M41",
+        "date": "Catachans piégés entre Tyranides et Orks dans guerre orchestrée par l'Inquisition. Énormes pertes."
+      },
+      {
+        "name": "Croisade Sabbat Worlds",
+        "summary": "M41",
+        "date": "Catachans en soutien de la Croisade. Combat en milieu jungle."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Catachans envoyés sur fronts Indomitus jungle/forêt. Spécialistes anti-Tyranide en milieu boisé."
+      },
+      {
+        "name": "Bataille de Catachan I",
+        "summary": "M41",
+        "date": "Défense du monde-mère contre raid Eldar Noir."
+      }
+    ],
+    "galleryQueries": [
+      "Catachan Jungle Fighters",
+      "Catachan warhammer 40k",
+      "Sergeant Harker",
+      "Imperial Guard Catachan",
+      "Catachan veteran"
+    ]
   },
   {
     "id": "vostroyan-firstborn",
@@ -719,7 +1163,38 @@
     "currentLeader": "Colonel-Commissar Ibram Gaunt",
     "currentLeaderRole": "Colonel-Commissar (héros culte)",
     "wikiQuery": "Tanith First and Only Gaunt's Ghosts",
-    "citation": "Du néant, des Fantômes."
+    "citation": "Du néant, des Fantômes.",
+    "epithet": "Les Fantômes de Tanith · Première et Dernière",
+    "currentState": "Au M42, la Tanith First and Only est l'unité légendaire de la Croisade Sabbat Worlds. Tanith — monde forestier — fut détruit par les Chaos Marines au moment même où le régiment se levait. Quelques milliers de Tanith Riflemen évacués par Commissaire-Colonel Ibram Gaunt sont devenus le 'Premier et Dernier' régiment d'un monde mort. Le 'Père des Fantômes' protégea ses hommes avec une humanité commissariale rare. Aujourd'hui, leurs descendants continuent la Croisade Sabbat Worlds.",
+    "notableBattles": [
+      {
+        "name": "Anéantissement de Tanith",
+        "summary": "M41",
+        "date": "Chaos Marines détruisirent Tanith. Gaunt évacua quelques milliers de survivants. Tanith devint monde mort."
+      },
+      {
+        "name": "Bataille de Voltis Watergate",
+        "summary": "M41",
+        "date": "Tanith First sous Gaunt attaqua une cathédrale Chaos. Bataille étudiée comme cas de tactique d'infiltration."
+      },
+      {
+        "name": "Croisade Sabbat Worlds",
+        "summary": "M41-M42",
+        "date": "Tanith First continua la Croisade en l'honneur de leurs morts."
+      },
+      {
+        "name": "Bataille de Salvation",
+        "summary": "M41",
+        "date": "Tanith First aux côtés de Saint Sabbat's Beati."
+      }
+    ],
+    "galleryQueries": [
+      "Tanith First and Only",
+      "Gaunt's Ghosts",
+      "Ibram Gaunt",
+      "Tanith Riflemen",
+      "Sabbat Worlds Crusade"
+    ]
   },
   {
     "id": "world-eaters",
@@ -773,7 +1248,34 @@
         "description": "Vétéran des War Hounds devenu officier sous Khârn pendant la Grande Croisade, Skane incarne la brutalité froide d'avant les Clous du Boucher universalisés. Il combat à Isstvan V puis durant les campagnes de Shadow Crusade aux côtés des Word Bearers, témoin direct de la descente d'Angron dans la démence sanguinaire qui livrera la Légion au Dieu du Sang.",
         "wikiQuery": "Skane World Eaters Heresy"
       }
-    ]
+    ],
+    "epithet": "Les Mangeurs de Mondes · La Légion d'Angron",
+    "currentState": "Au M42, les World Eaters sont des bandes Khornates en frenzy permanent. Pas d'organisation centrale — chaque guerrier suit la rage. Khârn le Traître rallie quand il est présent. Angron, Daemon-Primarque, manifeste rarement mais catastrophiquement. Bandes de guerre se déchirent souvent entre elles avant de trouver l'ennemi.",
+    "notableBattles": [
+      {
+        "name": "Massacre de Skalathrax",
+        "summary": "M31",
+        "date": "Khârn tua ses propres Frères et gagna le titre 'le Traître'."
+      },
+      {
+        "name": "Manifestation d'Angron sur Vraks",
+        "summary": "M42",
+        "date": "Daemon-Primarque manifesté physiquement. Catastrophe galactique."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "999.M41",
+        "date": "World Eaters chargèrent en frenzy aux côtés d'Abaddon."
+      }
+    ],
+    "galleryQueries": [
+      "World Eaters battle",
+      "Angron World Eaters",
+      "Khorne berzerker",
+      "Kharn Traitor",
+      "World Eaters Legion"
+    ],
+    "primarchId": "angron"
   },
   {
     "id": "death-guard",
@@ -839,7 +1341,34 @@
         "description": "Officier vétéran de la Death Guard durant l'Hérésie, Vorx commande sa Grande Compagnie avec une discipline glaciale et survit à la transformation de la Légion en serviteurs putrides de Nurgle. Endurant des millénaires dans l'Œil de la Terreur, il deviendra l'une des dernières voix de la Légion ancienne, fidèle au Faucheur jusqu'à la nausée pestilentielle de l'éternité.",
         "wikiQuery": "Vorx Death Guard"
       }
-    ]
+    ],
+    "epithet": "La Garde de la Mort · La Légion de Mortarion",
+    "currentState": "Au M42, la Death Guard sème pestilence à travers la galaxie. Plague Wars actives. Mortarion erre dans le Warp ; Typhus commande sur le terrain. Plague Marines immortels. Vaisseau-amiral Endurance corrupé. Plague Planet dans l'Œil sert de base.",
+    "notableBattles": [
+      {
+        "name": "Voyage Endurance (Hérésie)",
+        "summary": "M31",
+        "date": "Death Guard piégée dans Warp. Pacte avec Nurgle."
+      },
+      {
+        "name": "Siège de Terra",
+        "summary": "014.M31",
+        "date": "Mortarion déchaîna pestes contre défenseurs."
+      },
+      {
+        "name": "Plague Wars (M42)",
+        "summary": "M42",
+        "date": "Mortarion attaqua Ultramar avec succès partiel."
+      }
+    ],
+    "galleryQueries": [
+      "Death Guard battle",
+      "Mortarion Death Guard",
+      "Plague Marines",
+      "Typhus Death Guard",
+      "Nurgle warband"
+    ],
+    "primarchId": "mortarion"
   },
   {
     "id": "thousand-sons",
@@ -905,7 +1434,39 @@
         "description": "Frère de sang et confident de Magnus le Rouge, Yeb veille sur les bibliothèques de Tizca et partage les visions de son primarque sur le destin sombre des psykers humains. Effacé du canon par la dévastation de Prospero, il symbolise la perte de l'innocence intellectuelle des Thousand Sons avant que le Rubric d'Ahriman ne réduise la Légion à de la poussière hurlante.",
         "wikiQuery": "Yeb Thousand Sons"
       }
-    ]
+    ],
+    "epithet": "Les Mille Fils · La Légion de Magnus",
+    "currentState": "Au M42, les Mille Fils sont les Astartes-mages. Le Rubric d'Ahriman maintient les non-psykers en armures animées sans conscience. Ahriman, exilé, opère séparément à la recherche de la guérison du Rubric. Magnus dirige depuis la Tour Fluctuante au cœur du Webway. Tzeentch utilise les Mille Fils comme agents de manipulation.",
+    "notableBattles": [
+      {
+        "name": "Burning of Prospero",
+        "summary": "M31",
+        "date": "Russ détruisit la bibliothèque, massacre Mille Fils. Magnus s'enfuit à Tzeentch."
+      },
+      {
+        "name": "Rubric d'Ahriman",
+        "summary": "M31",
+        "date": "Ahriman composa le Rubric. Sauvant les âmes en sacrifiant la conscience."
+      },
+      {
+        "name": "Bataille de Fenris",
+        "summary": "M41",
+        "date": "Mille Fils attaquèrent Fenris pour la vengeance. Repoussés par Logan Grimnar."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Mille Fils manipulés via Tzeentch contre Indomitus."
+      }
+    ],
+    "galleryQueries": [
+      "Thousand Sons battle",
+      "Magnus Thousand Sons",
+      "Rubric Marine",
+      "Ahriman Thousand Sons",
+      "Tzeentch Sorcerer"
+    ],
+    "primarchId": "magnus"
   },
   {
     "id": "emperors-children",
@@ -965,7 +1526,8 @@
         "description": "Apothicaire-Chef de la IIIe Légion, Fabius Bile transgresse toutes les lois de la chair durant l'Hérésie pour percer les secrets de la création des Astartes. Ses expérimentations sur les survivants d'Isstvan III, sa résurrection d'Eidolon et son obsession pour la perfection génétique font de lui le Primogéniteur, savant fou éternel qui survivra dix mille ans à cloner sa propre folie.",
         "wikiQuery": "Fabius Bile"
       }
-    ]
+    ],
+    "primarchId": "fulgrim"
   },
   {
     "id": "black-legion",
@@ -1025,7 +1587,39 @@
         "description": "Surnommé Little Horus pour sa ressemblance frappante avec le Maître de Guerre, Aximand est le membre le plus pensif et tourmenté de la Mournival traîtresse. C'est lui qui exécute Tarik Torgaddon sur Isstvan III, geste qui le hantera jusqu'à la fin de l'Hérésie, son visage tailladé étant la cicatrice extérieure d'une âme rongée par le remords du fratricide.",
         "wikiQuery": "Horus Aximand"
       }
-    ]
+    ],
+    "epithet": "La Légion Noire · L'Héritage de Horus",
+    "currentState": "Au M42, la Légion Noire est l'union des neuf Légions Renégates sous Abaddon. La plus organisée et active des Légions du Chaos. Treize Croisades Noires lancées. Cadia brisée à la 13ᵉ. Coordonne les autres Légions.",
+    "notableBattles": [
+      {
+        "name": "Hérésie d'Horus",
+        "summary": "M31",
+        "date": "Originellement Sons of Horus, sous Horus."
+      },
+      {
+        "name": "Fondation de la Légion Noire",
+        "summary": "M32",
+        "date": "Abaddon réunit les Légions sous une bannière."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "999.M41",
+        "date": "Cadia brisée. Galaxie déchirée par la Cicatrix."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Combat permanent contre Indomitus Crusade."
+      }
+    ],
+    "galleryQueries": [
+      "Black Legion battle",
+      "Abaddon Black Legion",
+      "Black Legion warband",
+      "Chaos Legions",
+      "Black Legion Astartes"
+    ],
+    "primarchId": "horus"
   },
   {
     "id": "word-bearers",
@@ -1073,7 +1667,39 @@
         "description": "Mentor humain de Lorgar sur Colchis avant la rencontre avec l'Empereur, Kor Phaeron survit à l'augmentation tardive en Astartes diminué et fanatique, devenant le Black Cardinal de la Légion. Architecte spirituel de la corruption des Word Bearers, il commande la flotte traîtresse durant le massacre de Calth, jouant son rôle d'apôtre des Quatre dans l'ombre tutélaire de Lorgar.",
         "wikiQuery": "Kor Phaeron"
       }
-    ]
+    ],
+    "epithet": "Les Porteurs de la Parole · Les Théologiens du Chaos",
+    "currentState": "Au M42, les Word Bearers demeurent la Légion la plus zélée du Chaos. Lorgar dirige depuis Sicarus. Chaque opération est rituel daemonique. Beaucoup de Lesser Daemons invoqués massivement.",
+    "notableBattles": [
+      {
+        "name": "Burning of Khur",
+        "summary": "M30",
+        "date": "L'Empereur ordonna la destruction de leur cité-temple."
+      },
+      {
+        "name": "Davin",
+        "summary": "M31",
+        "date": "Erebus Word Bearer planta le piège qui corrompit Horus."
+      },
+      {
+        "name": "Bataille de Calth",
+        "summary": "M31",
+        "date": "Word Bearers attaquèrent Ultramarines par surprise."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Word Bearers déchaînent rituels daemoniaques massifs."
+      }
+    ],
+    "galleryQueries": [
+      "Word Bearers battle",
+      "Lorgar Word Bearers",
+      "Sicarus Lorgar",
+      "Word Bearers ritual",
+      "Chaos Apostle"
+    ],
+    "primarchId": "lorgar"
   },
   {
     "id": "iron-warriors",
@@ -1115,7 +1741,34 @@
         "description": "Membre de la triade originelle des Triarches d'Iron Warriors aux côtés de Forrix et Berossus, Kroeger commande ses Grandes Compagnies avec une violence directe qui tranche avec la patience méthodique de Perturabo. Sa rage devient une faille que les Pouvoirs du Chaos exploitent, le menant peu à peu à la corruption qui consume la Légion durant et après l'Hérésie.",
         "wikiQuery": "Kroeger Iron Warriors"
       }
-    ]
+    ],
+    "epithet": "Les Maîtres des Sièges · La Hammer de Perturabo",
+    "currentState": "Au M42, les Iron Warriors opèrent depuis Medrengard, monde-forteresse de Perturabo dans l'Œil de la Terreur. Spécialistes des sièges. Bandes de guerre disciplinées (rare chez Chaos), commandées par Warsmiths. Haine éternelle envers Imperial Fists et leurs Successors. Production de Daemon Engines + bombardement orbital.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Tallarn",
+        "summary": "M31",
+        "date": "Plus grande bataille de chars de l'histoire impériale. Iron Warriors libérèrent virus."
+      },
+      {
+        "name": "Siège de Terra (stratégie)",
+        "summary": "014.M31",
+        "date": "Perturabo dirigea les opérations de siège du Palais Impérial."
+      },
+      {
+        "name": "Bataille des Trois Forteresses",
+        "summary": "M42",
+        "date": "Affrontement avec Imperial Fists Successors. Destruction mutuelle quasi-totale."
+      }
+    ],
+    "galleryQueries": [
+      "Iron Warriors battle",
+      "Perturabo Iron Warriors",
+      "Iron Warriors siege",
+      "Medrengard fortress",
+      "Iron Warriors Legion"
+    ],
+    "primarchId": "perturabo"
   },
   {
     "id": "alpha-legion",
@@ -1155,7 +1808,34 @@
         "description": "Capitaine de l'élite Lernaean — les Terminators d'Alpha Legion —, Sheed Ranko mène les frappes décapitantes les plus audacieuses de la XXe Légion durant l'Hérésie. Son nom même est un masque potentiel, son existence un piège : qui le tue n'a peut-être tué qu'un guerrier portant ce nom, et la Légion continue, indifférente, à tisser sa toile sur la galaxie.",
         "wikiQuery": "Sheed Ranko"
       }
-    ]
+    ],
+    "epithet": "L'Hydre · La Légion des Jumeaux",
+    "currentState": "Au M42, l'Alpha Legion est la plus dispersée et infiltrée des Légions Renégates. Pas de centralisation visible — cellules clandestines partout dans l'Imperium. Beaucoup d'agents Inquisitoriaux suspectent (à raison) être Alpha Legion infiltrés sans le savoir. 'Hydra Dominatus' — chaque tête coupée en repousse dix.",
+    "notableBattles": [
+      {
+        "name": "Sabotage de Tallarn",
+        "summary": "M31",
+        "date": "Alpha Legion infiltra logistique Iron Warriors, ralentit l'opération virale."
+      },
+      {
+        "name": "Bataille d'Eskrador",
+        "summary": "M31",
+        "date": "Alpharius (l'un des deux) tué par Rogal Dorn."
+      },
+      {
+        "name": "Manipulations Indomitus",
+        "summary": "M42",
+        "date": "Alpha Legion soupçonnée d'avoir infiltré l'Indomitus Crusade."
+      }
+    ],
+    "galleryQueries": [
+      "Alpha Legion battle",
+      "Alpharius Omegon",
+      "Alpha Legion warband",
+      "Hydra Dominatus",
+      "Alpha Legion Astartes"
+    ],
+    "primarchId": "alpharius-omegon"
   },
   {
     "id": "night-lords",
@@ -1203,7 +1883,39 @@
         "description": "Apothicaire de la VIIIe Légion détaché auprès du Premier Sergent Sevatar, Variel allie compétence médicale froide et goût pour la dissection que son surnom — Le Faucheur — résume sans équivoque. Son intelligence clinique le distingue parmi les Night Lords, marqué par une lucidité presque inhumaine sur la dégénérescence de sa propre Légion durant l'Hérésie et l'Âge des Ténèbres.",
         "wikiQuery": "Variel the Reaper Night Lords"
       }
-    ]
+    ],
+    "epithet": "Les Seigneurs de la Nuit · La Légion de Curze",
+    "currentState": "Au M42, les Night Lords sont la Légion la plus dispersée — pas de Daemon-Primarque (Curze refusa l'ascension), pas de Légion organisée. Pure terreur en cellules de guerre. Spécialistes du flux psychologique : éviscérations publiques, vox-cast de cris, raids de terreur. Beaucoup d'opérations contre les mondes-cathédrales Imperial.",
+    "notableBattles": [
+      {
+        "name": "Pacification de Nostramo",
+        "summary": "Pre-M30",
+        "date": "Curze fit régner la terreur sur son monde-mère."
+      },
+      {
+        "name": "Massacre du Drop Pod",
+        "summary": "M31",
+        "date": "Night Lords trahirent et massacrèrent Salamanders, Iron Hands, Raven Guard."
+      },
+      {
+        "name": "Bataille de Thramas Crusade",
+        "summary": "M31",
+        "date": "Curze affronta Lion El'Jonson personnellement."
+      },
+      {
+        "name": "Apparitions Hantise (M42)",
+        "summary": "M42",
+        "date": "Sur certains mondes, on dit que Curze marche encore."
+      }
+    ],
+    "galleryQueries": [
+      "Night Lords battle",
+      "Konrad Curze",
+      "Night Haunter",
+      "Night Lords Legion",
+      "Night Lords terror"
+    ],
+    "primarchId": "konrad-curze"
   },
   {
     "id": "ulthwe",
@@ -1327,6 +2039,32 @@
         "description": "Le Pèlerin du Feu, dernier des Phoenix Lords à n'avoir jamais été vaincu, mène les Fire Dragons dans une croisade brûlante pour purifier la galaxie de ses indignes occupants. Sa philosophie de feu rédempteur épouse parfaitement la doctrine martiale de Biel-Tan, le craftworld qui rêve de reconquérir l'empire Aeldari par la lance et la flamme.",
         "wikiQuery": "Fuegan Phoenix Lord"
       }
+    ],
+    "epithet": "Le Mur Vert · Le Craftworld Militant",
+    "currentState": "Au M42, après la Cicatrix Maledictum, Biel-Tan est gravement endommagé — perforé et démembré, certains diraient mort. Mais des fragments survivent et continuent à combattre, désormais ralliés aux Ynnari. Yvraine commande indirectement de nombreux survivants Biel-Tan.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Iyanden (soutien)",
+        "summary": "M41",
+        "date": "Biel-Tan envoyé secourir Iyanden contre Hive Fleet Kraken."
+      },
+      {
+        "name": "Cicatrix Maledictum",
+        "summary": "999.M41",
+        "date": "Biel-Tan brisé par tempêtes warp. Survivants éparpillés."
+      },
+      {
+        "name": "Indomitus (Ynnari)",
+        "summary": "M42",
+        "date": "Yvraine rallie les survivants. Coopération avec Imperium."
+      }
+    ],
+    "galleryQueries": [
+      "Biel-Tan Craftworld",
+      "Aeldari Biel-Tan",
+      "Eldar Aspect Warrior",
+      "Biel-Tan rangers",
+      "Eldar Avengers"
     ]
   },
   {
@@ -1363,6 +2101,27 @@
         "description": "Tempête du Silence et première des Howling Banshees, Jain Zar voyage seule entre les craftworlds pour réveiller le sanctuaire de son Aspect lorsque la guerre approche. Alaitoc, peuplé de Rangers et de chasseurs solitaires, vénère sa discipline féline et son Silent Death, miroir guerrier de leur propre culte du tireur isolé patient et invisible.",
         "wikiQuery": "Jain Zar Phoenix Lord"
       }
+    ],
+    "epithet": "Le Craftworld Solitaire · Les Rangers Errants",
+    "currentState": "Au M42, Alaitoc est l'un des Craftworlds les plus indépendants. Beaucoup de ses Aeldari deviennent Rangers — éclaireurs psy-vagabonds qui combattent en cellules à travers la galaxie. Communications Alaitoc-Webway sont intenses.",
+    "notableBattles": [
+      {
+        "name": "Bataille du Sun-Eater",
+        "summary": "M41",
+        "date": "Alaitoc défit un Daemon majeur dans le Webway."
+      },
+      {
+        "name": "Indomitus (manipulations)",
+        "summary": "M42",
+        "date": "Voyants Alaitoc tissent destins parallèles à Imperium."
+      }
+    ],
+    "galleryQueries": [
+      "Alaitoc Craftworld",
+      "Aeldari Rangers",
+      "Eldar Pathfinder",
+      "Alaitoc warhammer 40k",
+      "Aeldari ranger"
     ]
   },
   {
@@ -1387,6 +2146,33 @@
         "description": "Première manifestation impériale d'un Hive Tyrant, ces commandants de bataille dirigèrent l'assaut Tyranide sur Macragge en 745.M41. Leurs gènes de combat brutaux, optimisés par l'Esprit-Ruche après la défaite contre les Ultramarines, persistent dans toutes les flottes-ruches qui suivirent.",
         "wikiQuery": "Hive Tyrant Tyranid"
       }
+    ],
+    "epithet": "Le Premier Behémoth · Le Devorer Pionnier",
+    "currentState": "Au M42, Hive Fleet Behemoth est techniquement détruite — son Hive Mind a été décapité à la Bataille de Macragge en M41.745. Cependant, des splinters de Behemoth subsistent dans plusieurs zones de l'Ultima Segmentum, et la souche génétique sert de matrice à de nombreux Lictor et Genestealer infestations. Le souvenir de Behemoth hante toujours Macragge, et Calgar lui-même garde l'épée Gauntlets of Ultramar imbibée de chitine xénos.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Macragge",
+        "date": "M41.745",
+        "summary": "Marneus Calgar et la Première Compagnie Ultramarines décapitent Behemoth, sacrifiant la First Company entière."
+      },
+      {
+        "name": "Massacre de Tyran",
+        "date": "M41.745",
+        "summary": "Le Hive Mind dévore le monde-archive Tyran, donnant son nom aux Tyranides."
+      },
+      {
+        "name": "Cleanse de Prandium",
+        "date": "M41.745",
+        "summary": "Behemoth annihile le monde-jardin Prandium, transformant un paradis ultramarin en boule de pierre stérile."
+      }
+    ],
+    "galleryQueries": [
+      "Hive Tyrant Behemoth",
+      "Tyranid swarm red",
+      "Carnifex charge",
+      "Tyranid Lictor stalking",
+      "Hive Fleet swarm space",
+      "Tyranid Warrior brood"
     ]
   },
   {
@@ -1423,6 +2209,33 @@
         "description": "Genestealer alpha à l'intelligence affûtée, dirigeant les couvées d'infiltration qui précèdent chaque vague de Kraken. Capable de coordonner des cultes dormants et d'orchestrer des sabotages stellaires des décennies avant l'arrivée des splinter fleets, il incarne la tactique de dispersion fulgurante propre à Kraken.",
         "wikiQuery": "Broodlord Genestealer"
       }
+    ],
+    "epithet": "Le Kraken · Le Démembreur",
+    "currentState": "Au M42, Hive Fleet Kraken reste fragmentée mais persistante — sa caractéristique de fragmenter ses propres flottes en swarms autonomes la rend presque impossible à exterminer. Des splinters de Kraken infestent la moitié de l'est galactique, et les Ultramarines ont passé deux générations à les traquer. Le Hive Fleet est une menace d'érosion constante, avec des Lictor et Genestealer particulièrement agressifs et intelligents.",
+    "notableBattles": [
+      {
+        "name": "Bataille d'Ichar IV",
+        "date": "M41.992",
+        "summary": "Eldar d'Iyanden et Ultramarines repoussent l'avant-garde Kraken après six mois de guerre planétaire."
+      },
+      {
+        "name": "Massacre de Devlan",
+        "date": "M41.993",
+        "summary": "Kraken dévore le monde-ruche Devlan en six semaines, ne laissant aucun survivant."
+      },
+      {
+        "name": "Splinter de Kraken Mu",
+        "date": "M42.011",
+        "summary": "Un splinter Kraken redevient menace majeure dans le Pariah Nexus, combiné aux pressions Necron."
+      }
+    ],
+    "galleryQueries": [
+      "Hive Tyrant Kraken",
+      "Tyranid Lictor purple",
+      "Genestealer Patriarch",
+      "Tyranid Warriors brood",
+      "Carnifex Hive Fleet Kraken",
+      "Tyranid Ravener"
     ]
   },
   {
@@ -1447,6 +2260,33 @@
         "description": "Bioforme matriarcale gestante générant en continu des couvées de Termagants à même le champ de bataille. Pilier logistique de la flotte la plus massive jamais observée, le Tervigon de Leviathan permet aux essaims de se régénérer plus vite que les armes impériales ne peuvent les faucher.",
         "wikiQuery": "Tervigon Tyranid"
       }
+    ],
+    "epithet": "Le Leviathan · La Marée Finale",
+    "currentState": "Au M42, Hive Fleet Leviathan est la plus grande Hive Fleet jamais enregistrée — elle attaque la galaxie en multiples vecteurs simultanés depuis le sud galactique. Elle a dévoré Baal Secundus partiellement, frappé Sanguinius's homeworld, et continue de descendre. Le Cardinal Morbid et les Black Legion surveillent sa progression. Tigurius des Ultramarines a vu Leviathan détruire un Vaisseau-Monde Eldar en pleine vision.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Baal",
+        "date": "M42.000",
+        "summary": "Blood Angels et leurs Successor Chapters défendent Baal et son système — Sanguinor manifeste sa lumière, mais le système est dévasté."
+      },
+      {
+        "name": "Octarius War (mode pinces)",
+        "date": "M41.999",
+        "summary": "Leviathan attaque les Orks d'Octarius, transformant la guerre Imperium-Ork en mode pinces tyranides."
+      },
+      {
+        "name": "Bataille de Vigilus",
+        "date": "M42.012",
+        "summary": "Splinters de Leviathan frappent Vigilus durant la défense, ouvrant un troisième front contre Marneus Calgar."
+      }
+    ],
+    "galleryQueries": [
+      "Hive Tyrant Leviathan",
+      "Swarmlord",
+      "Tyranid Hierophant Bio-Titan",
+      "Tyranid Trygon emerging",
+      "Genestealer Broodlord",
+      "Tyranid Hive Crone"
     ]
   },
   {
@@ -1495,6 +2335,32 @@
         "description": "Vestige des anciennes légions des Triarches, le Triarch Stalker arpente le champ de bataille en désignant ses cibles à des armes arcanes qui frappent simultanément depuis toute la phalange. Sa présence rappelle aux warriors la gloire perdue de l'ancien Empire.",
         "wikiQuery": "Triarch Stalker"
       }
+    ],
+    "epithet": "La Dynastie Souveraine · La Première Réveillée",
+    "currentState": "Au M42, Sautekh est la dynastie Necron la plus active militairement. Imotekh le Seigneur des Tempêtes commande. Reconquête de plusieurs systèmes Imperium. Coopération forcée avec Mephrit pour campagnes communes.",
+    "notableBattles": [
+      {
+        "name": "Réveil du Tombeau Khepri",
+        "summary": "M41",
+        "date": "Première activation Sautekh majeure."
+      },
+      {
+        "name": "Bataille de Damnos",
+        "summary": "M41",
+        "date": "Conquête contre Ultramarines. Drago vainquit (presque)."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "summary": "999.M41",
+        "date": "Sautekh prit Vandred et Bashar pendant que l'Imperium combattait Abaddon."
+      }
+    ],
+    "galleryQueries": [
+      "Sautekh Dynasty",
+      "Imotekh Necron",
+      "Necron Dynasty Sautekh",
+      "Necron Lord",
+      "Sautekh warriors"
     ]
   },
   {
@@ -1525,6 +2391,26 @@
         "description": "Char antigravitationnel armé du redoutable canon Doomsday, capable de raser des cités entières d'une seule décharge. La dynastie Mephrit, célèbre pour son obsession de la suprématie technologique solaire, en fit l'épine dorsale de ses guerres de conquête.",
         "wikiQuery": "Doomsday Ark"
       }
+    ],
+    "epithet": "La Dynastie de l'Étoile-Mère",
+    "currentState": "Au M42, Mephrit lutte contre Sautekh pour suprématie. Phaeron Mephritar commande. Manipulation politique des autres dynasties. Coopération limitée avec Imperium dans certains secteurs.",
+    "notableBattles": [
+      {
+        "name": "Réveil partiel",
+        "summary": "M41",
+        "date": "Plusieurs Tombeaux Mephrit éveillés."
+      },
+      {
+        "name": "Conflit Sautekh-Mephrit",
+        "summary": "M41-M42",
+        "date": "Tensions inter-Necron continues."
+      }
+    ],
+    "galleryQueries": [
+      "Mephrit Dynasty",
+      "Necron Phaeron",
+      "Mephrit warhammer 40k",
+      "Necron warriors"
     ]
   },
   {
@@ -1555,6 +2441,26 @@
         "description": "Là où d'autres dynasties cachent leurs Flayed Ones par honte, la Novokh embrasse leur folie sanglante comme rite de guerre, drapant ses warriors de peaux fraîches avant la bataille. Cette pratique macabre alimente la réputation cauchemardesque de la dynastie à travers la galaxie.",
         "wikiQuery": "Flayed Ones"
       }
+    ],
+    "epithet": "La Dynastie des Lames Sang",
+    "currentState": "Au M42, Novokh est la plus belliqueuse des dynasties Necron — ils privilégient combat de mêlée à attrition. Phaeron Annihylo commande. Bandes de guerre Lychguard quasi-fanatiques.",
+    "notableBattles": [
+      {
+        "name": "Réveil Novokh",
+        "summary": "M41",
+        "date": "Cohortes éveillées en mode bataille immédiate."
+      },
+      {
+        "name": "Croisades de Lames",
+        "summary": "M41-M42",
+        "date": "Campagne agressive contre Imperium et T'au."
+      }
+    ],
+    "galleryQueries": [
+      "Novokh Dynasty",
+      "Necron Lychguard",
+      "Necron warriors melee",
+      "Necron Phaeron"
     ]
   },
   {
@@ -1579,6 +2485,26 @@
         "description": "Variante Canoptek spécialisée dans les sauts dimensionnels, les Tomb Sentinels Nephrekh exploitent la maîtrise dynastique de la translocation pour apparaître sans préavis derrière les lignes ennemies. La dynastie Nephrekh, vénérant le Dieu-Soleil, a perfectionné l'art de voyager par les rayons photoniques eux-mêmes.",
         "wikiQuery": "Canoptek Tomb Sentinel"
       }
+    ],
+    "epithet": "La Dynastie de l'Or · Les Téléporteurs",
+    "currentState": "Au M42, Nephrekh privilégie technologie quantique et téléportation. Phaeron Sahtah-net commande. Nombreuses opérations clandestines, infiltrations, raid orbital. Coopération avec Sautekh.",
+    "notableBattles": [
+      {
+        "name": "Réveil Nephrekh",
+        "summary": "M41",
+        "date": "Tombeaux dorés éveillés."
+      },
+      {
+        "name": "Raid sur Cadia (post-chute)",
+        "summary": "M42",
+        "date": "Nephrekh pilla planètes ravagées par Abaddon."
+      }
+    ],
+    "galleryQueries": [
+      "Nephrekh Dynasty",
+      "Necron golden warriors",
+      "Necron Cryptek",
+      "Necron quantum"
     ]
   },
   {
@@ -1611,6 +2537,33 @@
         "description": "Bizarrerie du clan Goff, les Stormboyz sont des jeunes Orks fascinés par la discipline militaire, qui s'entraînent en formation et marchent au pas avant de charger. Équipés de rokkit packs instables qui explosent presque autant qu'ils décollent, ils plongent depuis les cieux en hurlant pour s'écraser sur les lignes ennemies. Les autres Orks les considèrent comme des excentriques, mais leur efficacité brutale est indéniable.",
         "wikiQuery": "Ork Stormboyz"
       }
+    ],
+    "epithet": "Le Klan Noir · Les Tueurs en Armure",
+    "currentState": "Au M42, le Klan Goff est le plus brutal et le plus nombreux des grands klans Orks. Ghazghkull Mag Uruk Thraka, Goff lui-même, mène la plus grande Waaagh! de l'histoire récente, sa Waaagh! Beast réveillée à Octarius débordant maintenant sur la Cicatrix Maledictum. Charadon, Vigilus et Armageddon brûlent sous leurs choppas.",
+    "notableBattles": [
+      {
+        "name": "Troisième Guerre d'Armageddon",
+        "date": "M41.941",
+        "summary": "Ghazghkull lance sa première grande Waaagh! contre Armageddon. Yarrick le repousse mais le Warboss s'évade."
+      },
+      {
+        "name": "Guerre d'Octarius",
+        "date": "M41.999",
+        "summary": "Ghazghkull résiste au piège tyranide tendu par Kryptman, sa Waaagh! grandit en absorbant les Hive Fleets."
+      },
+      {
+        "name": "Bataille de Vigilus",
+        "date": "M42.012",
+        "summary": "L'avant-garde Goff tente d'écraser le bastion impérial du Nachmund Gauntlet, repoussée par Calgar."
+      }
+    ],
+    "galleryQueries": [
+      "Ghazghkull Thraka",
+      "Goff Nob",
+      "Goff Boyz charge",
+      "Makari Grot",
+      "Beastboss Goff",
+      "Goff warboss"
     ]
   },
   {
@@ -1647,6 +2600,33 @@
         "description": "Les Bad Moons abritent les plus opulents Big Meks de la galaxie, capables de financer leurs inventions les plus délirantes grâce à leurs dents repoussant sans cesse. Armés de Kustom Force Fields ou de Shokk Attack Guns, ils érigent des forteresses mobiles et bricolent des engins de guerre toujours plus monstrueux. Leur génie chaotique transforme la ferraille en machines de mort dignes des plus grandes WAAAGH!.",
         "wikiQuery": "Ork Big Mek"
       }
+    ],
+    "epithet": "Les Riches · Les Klans Dorés",
+    "currentState": "Au M42, les Bad Moons sont les Orks les plus riches : leurs dents (teef) poussent vite, leur faisant la monnaie ork la plus abondante. Ils possèdent les meilleures pétoires, les plus belles armures peintes en jaune, et engagent souvent des mercenaires des autres klans. Présents sur tous les fronts orks majeurs, du Charadon Sector à Octarius.",
+    "notableBattles": [
+      {
+        "name": "Siège de Rynn's World",
+        "date": "M41.989",
+        "summary": "Snagrod le Pillard, Warboss Bad Moons, dévaste les Crimson Fists et manque de détruire le Chapitre."
+      },
+      {
+        "name": "Guerre de Piscina IV",
+        "date": "M41.992",
+        "summary": "Bad Moons mercenaires combattent aux côtés des Goffs contre les Dark Angels."
+      },
+      {
+        "name": "Raid sur le Charadon Sector",
+        "date": "M42.012",
+        "summary": "Snagrod menace Badab et toute la marche sud de l'Imperium Nihilus."
+      }
+    ],
+    "galleryQueries": [
+      "Snagrod Bad Moons",
+      "Bad Moons warboss",
+      "Bad Moons Flash Git",
+      "Bad Moons Mek",
+      "Ork Big Mek yellow",
+      "Bad Moons Nob"
     ]
   },
   {
@@ -1671,6 +2651,33 @@
         "description": "Spécialiste des assassinats furtifs derrière les lignes ennemies. Apparaît partout, n'est jamais vu.",
         "wikiQuery": "Boss Snikrot"
       }
+    ],
+    "epithet": "Les Haches Sanglantes · Les Traîtres",
+    "currentState": "Au M42, les Blood Axes sont les Orks les plus 'humains' — méprisés des autres klans pour avoir étudié les tactiques impériales. Ils portent treillis camouflage, négocient parfois avec les humains, embauchent même comme mercenaires. Le Warboss Killboss Kaptin Badrukk loue ses Freebooterz aux deux camps de la Cicatrix. Considérés traîtres mais redoutablement efficaces.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Big Toof River",
+        "date": "M41.998",
+        "summary": "Blood Axes flanquent la Catachan Jungle Fighters avec embuscades de style commando, presque rompant les lignes."
+      },
+      {
+        "name": "Pacte de Vigilus",
+        "date": "M42.011",
+        "summary": "Kaptin Badrukk négocie cessez-le-feu temporaire avec les Drukhari pour piller un convoi commun."
+      },
+      {
+        "name": "Guerre du Sapphire King",
+        "date": "M42.013",
+        "summary": "Blood Axes Freebooterz vendent leurs services à plusieurs Imperial Guard regiments du Imperium Nihilus."
+      }
+    ],
+    "galleryQueries": [
+      "Kaptin Badrukk",
+      "Blood Axes Kommando",
+      "Ork Freebooter",
+      "Blood Axes warboss",
+      "Ork camo Boyz",
+      "Ork Stormboy"
     ]
   },
   {
@@ -1701,6 +2708,33 @@
         "description": "Iconiques chez les Death Skulls, les Lootas sont des Boyz obsédés par les armes ennemies les plus grosses et bruyantes. Ils traînent sur les champs de bataille leurs Deffguns improvisés, assemblages instables d'armes lourdes pillées et boulonnées sur n'importe quel support. Leur joie pure à arroser l'ennemi de tirs erratiques en fait la pire cauchemar de toute ligne de défense.",
         "wikiQuery": "Ork Lootas"
       }
+    ],
+    "epithet": "Les Crânes Bleus · Les Pillards",
+    "currentState": "Au M42, les Death Skulls sont les pillards et les voleurs des klans — peints en bleu (couleur chanceuse de Mork), ils suivent toutes les guerres Orks pour piller le butin. Ils se considèrent comme les plus chanceux, et leurs Looted Wagons (chars impériaux ou eldar volés) en sont la preuve. Présents en Krew dans chaque Waaagh!, sans loyauté, juste appétit.",
+    "notableBattles": [
+      {
+        "name": "Pillage de Pavonis",
+        "date": "M41.997",
+        "summary": "Death Skulls 'récupèrent' les épaves de la guerre civile pavonienne, repartant avec un Titan Reaver looté."
+      },
+      {
+        "name": "Bataille de Big Toof River",
+        "date": "M41.998",
+        "summary": "Death Skulls volent les chenillettes Catachan en pleine bataille contre les Snakebites rivaux."
+      },
+      {
+        "name": "Raid sur le Cadia Sector",
+        "date": "M42.010",
+        "summary": "Krew Death Skulls écument l'épave Cadia post-13ᵉ Croisade, ramenant artefacts impériaux et chaotiques."
+      }
+    ],
+    "galleryQueries": [
+      "Death Skulls warboss",
+      "Ork Kommando blue",
+      "Death Skulls Looter",
+      "Ork Mek scavenger",
+      "Death Skulls Nob",
+      "Ork Lootas"
     ]
   },
   {
@@ -1725,6 +2759,33 @@
         "description": "Boss Evil Sunz devenu mythique pour son ambition : encercler la galaxie en une chevauchée orbitale. A déjà couvert plusieurs systèmes solaires en tournoi de bike.",
         "wikiQuery": "Wazdakka Gutsmek"
       }
+    ],
+    "epithet": "Les Fils du Soleil · Les Vitesseurs",
+    "currentState": "Au M42, les Evil Sunz sont obsédés par la vitesse — Mork (ou Gork) est rapide, et la peinture rouge va plus vite. Leurs Speed Freeks dominent les guerres ork avec warbikes, traks, et trukks. Le Warboss Wazdakka Gutsmek rêve toujours de tracer la Mekorka Highway à travers la galaxie. Présents dans toutes les Waaaghs! mécanisées du M42.",
+    "notableBattles": [
+      {
+        "name": "Première Guerre d'Armageddon",
+        "date": "M41.444",
+        "summary": "Hordes Evil Sunz menées par Ugulhard l'Écraseur ravagent les Equatorial Jungles avant l'arrivée d'Angron."
+      },
+      {
+        "name": "Speed Waaagh! de Wazdakka",
+        "date": "M41.998",
+        "summary": "Wazdakka Gutsmek mène une croisade motorisée à travers le Segmentum Solar."
+      },
+      {
+        "name": "Bataille de Speed Freeks",
+        "date": "M42.013",
+        "summary": "Les Speed Freeks Evil Sunz percent les lignes Imperium dans le Pariah Nexus, exploitant l'ouverture Necron."
+      }
+    ],
+    "galleryQueries": [
+      "Wazdakka Gutsmek",
+      "Evil Sunz Speed Freeks",
+      "Ork warbiker",
+      "Evil Sunz warboss",
+      "Ork Trukk Boyz",
+      "Speed Freek Kaptin"
     ]
   },
   {
@@ -1755,6 +2816,33 @@
         "description": "Monture totémique des Snakebites, le Squiggoth est un squig géant de la taille d'un éléphant cuirassé, monté en hurlant par les Boyz les plus traditionalistes du clan. Là où les autres Orks préfèrent les Battlewagons crachant la fumée, les Snakebites chevauchent ces colosses bestiaux qui piétinent l'infanterie et encornent les blindés. Leur survivance illustre le mépris du clan pour la technologie au profit de la chair brute.",
         "wikiQuery": "Squiggoth"
       }
+    ],
+    "epithet": "Les Mordeurs de Serpent · Les Vieux Krochus",
+    "currentState": "Au M42, les Snakebites sont les Orks les plus arriérés et les plus traditionnalistes — méfiants des dakka modernes et des engins. Ils élèvent squigs, montent sangliers, vénèrent les Weirdboyz et les Painboyz tribaux. Présents partout où une Waaagh! se forme, fournissant cavalerie squig et infanterie brute. Le Warboss Drazgol mène la plus grande horde Snakebite du M42.",
+    "notableBattles": [
+      {
+        "name": "Conflit de Calderis",
+        "date": "M41.998",
+        "summary": "Tribu Snakebite menée par les Sangliers de Mork attaque les Dark Angels lors d'une chasse rituelle."
+      },
+      {
+        "name": "Guerre des Béhémoths",
+        "date": "M42.005",
+        "summary": "Snakebites montant des Squiggoths défoncent les lignes T'au sur Dal'yth secondaire."
+      },
+      {
+        "name": "Waaagh! de Drazgol",
+        "date": "M42.014",
+        "summary": "Drazgol unifie 30 tribus Snakebites contre la Black Templars Crusade in Vigilus Defiant."
+      }
+    ],
+    "galleryQueries": [
+      "Snakebites warboss",
+      "Ork Squig rider",
+      "Ork Weirdboy",
+      "Ork Painboy",
+      "Snakebites boar boyz",
+      "Squiggoth herd"
     ]
   },
   {
@@ -1803,6 +2891,32 @@
         "description": "Procession sacrée portant les reliques des six grandes saintes des Adepta Sororitas, le Triumph of Saint Katherine est un autel mouvant dont la simple présence enflamme la dévotion des fidèles. Aucun Ordo ne possède ce reliquaire en propre : il appartient à toute l'Ecclesiarchia, mais ses gardiennes sont traditionnellement choisies parmi Our Martyred Lady.",
         "wikiQuery": "Triumph of Saint Katherine"
       }
+    ],
+    "epithet": "L'Ordre de Notre Martyre Dame · Le Premier Ordre",
+    "currentState": "Au M42, Our Martyred Lady est le plus prestigieux des Ordres Sororitas. Saint Celestine est leur figure vivante. Abbesse Sanctorum issue récemment de leurs rangs. Plus de 10 000 Sœurs actives.",
+    "notableBattles": [
+      {
+        "name": "Croisade Eleusis",
+        "summary": "M40",
+        "date": "Saint Celestine apparut pour la première fois."
+      },
+      {
+        "name": "Bataille de Sanctus Lin",
+        "summary": "M41",
+        "date": "Saint Celestine convertit Hérétiques en masse."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Celestine prêtée à Guilliman."
+      }
+    ],
+    "galleryQueries": [
+      "Our Martyred Lady",
+      "Saint Celestine",
+      "Adepta Sororitas",
+      "Sister of Battle",
+      "Sororitas Saint"
     ]
   },
   {
@@ -1833,6 +2947,26 @@
         "description": "Voix discrète mais inflexible de chaque escouade Argent Shroud, la Sister Superior mène ses Sœurs par l'exemple plutôt que par la harangue. Son combi-arme et son épée énergétique frappent là où les hérétiques croyaient l'ombre sûre.",
         "wikiQuery": "Sister Superior Adepta Sororitas"
       }
+    ],
+    "epithet": "L'Ordre du Linceul d'Argent · Les Sœurs Silencieuses",
+    "currentState": "Au M42, Argent Shroud est l'Ordre le plus discret. Sœurs de la Voix Silencieuse — elles communiquent presque sans paroles, par signes rituels. Plus de 8 000 Sœurs actives.",
+    "notableBattles": [
+      {
+        "name": "Sanctification de Saint Silvana",
+        "summary": "M37",
+        "date": "Argent Shroud canonisa Saint Silvana."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Mission de purification de mondes corrompus."
+      }
+    ],
+    "galleryQueries": [
+      "Argent Shroud Sororitas",
+      "Sister of Battle silver",
+      "Sororitas Order",
+      "Adepta Sororitas Argent"
     ]
   },
   {
@@ -1869,6 +3003,31 @@
         "description": "Repentia déchue et héroïne d'une saga Black Library, Cassia Orsinio cherche sa rédemption à travers les mondes ravagés de l'Imperium, son eviscerator pour seul écho à ses prières. Sa quête d'expiation est devenue un chant murmuré dans les chapelles du Bloody Rose.",
         "wikiQuery": "Cassia Orsinio Sister Repentia"
       }
+    ],
+    "epithet": "L'Ordre de la Rose Sanglante · Les Furies Saintes",
+    "currentState": "Au M42, Bloody Rose est l'Ordre le plus militant. Sœurs Repentantes nombreuses — chaque génération produit beaucoup de pénitentes. Combat-frenzy religieux. Plus de 9 000 Sœurs actives.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Vraks",
+        "summary": "M41",
+        "date": "Bloody Rose mena assauts furieux contre Cultes du Chaos."
+      },
+      {
+        "name": "Devastation of Baal",
+        "summary": "999.M41",
+        "date": "Bloody Rose secourut Blood Angels."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Combat-frenzy déchaîné contre Daemons."
+      }
+    ],
+    "galleryQueries": [
+      "Bloody Rose Sororitas",
+      "Sororitas Repentia",
+      "Sister of Battle frenzy",
+      "Adepta Sororitas crimson"
     ]
   },
   {
@@ -1899,6 +3058,31 @@
         "description": "Au sein de l'Ebon Chalice, l'Imagifier porte les Simulacra Imperialis, statues sacrées des saintes et des martyrs dont la simple vision restaure la foi vacillante. Plus ancien Ordre des Sœurs, l'Ebon Chalice garde les plus précieuses de ces icônes.",
         "wikiQuery": "Imagifier Adepta Sororitas"
       }
+    ],
+    "epithet": "L'Ordre du Calice d'Ébène · Les Premières",
+    "currentState": "Au M42, Ebon Chalice est le plus ancien Ordre Majeur. Conservation des traditions originelles de l'Adepta Sororitas. Souvent décrit comme l'Ordre conservateur. Plus de 8 500 Sœurs actives.",
+    "notableBattles": [
+      {
+        "name": "Fondation Sororitas",
+        "summary": "M36",
+        "date": "Ebon Chalice fondé par Alicia Dominica elle-même."
+      },
+      {
+        "name": "Cathédrale Mendalion",
+        "summary": "M40",
+        "date": "Défense majeure contre raid Word Bearers."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Soutien à Indomitus, conservation du dogme."
+      }
+    ],
+    "galleryQueries": [
+      "Ebon Chalice",
+      "Sororitas Order",
+      "Sister of Battle ancient",
+      "Adepta Sororitas dark"
     ]
   },
   {
@@ -1929,6 +3113,26 @@
         "description": "Gardienne de la parole pure et des chants liturgiques, la Dialogus du Sacred Rose amplifie les hymnes de bataille jusqu'à ce que le champ de guerre devienne cathédrale. Son verbe cristallise la foi et fait trembler les hérésies les plus retorses.",
         "wikiQuery": "Dialogus Adepta Sororitas"
       }
+    ],
+    "epithet": "L'Ordre de la Rose Sacrée · Les Cœurs Purifiés",
+    "currentState": "Au M42, Sacred Rose est l'Ordre le plus contemplatif — moins militant, plus religieusement profond. Sœurs Imagifiers nombreuses. Plus de 7 500 Sœurs actives. Souvent envoyées en pèlerinage à Terra.",
+    "notableBattles": [
+      {
+        "name": "Croisade Sabbat Worlds",
+        "summary": "M41",
+        "date": "Sacred Rose accompagna les forces impériales."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Mission contemplative et combat mêlés."
+      }
+    ],
+    "galleryQueries": [
+      "Sacred Rose Sororitas",
+      "Sororitas Order",
+      "Sister of Battle contemplative",
+      "Adepta Sororitas pink"
     ]
   },
   {
@@ -1959,6 +3163,31 @@
         "description": "Au sein du Valorous Heart, la Sister Superior incarne la résilience faite femme : taciturne, marquée par les visions du Warp qu'elle a affrontées, elle mène ses Sœurs avec une foi inébranlable face aux pires corruptions du Chaos.",
         "wikiQuery": "Sister Superior Adepta Sororitas"
       }
+    ],
+    "epithet": "L'Ordre du Cœur Valeureux · Les Endurantes",
+    "currentState": "Au M42, Valorous Heart est l'Ordre des grands sièges et défenses. Sœurs spécialisées dans tenir-jusqu'au-bout. Plus de 8 000 Sœurs actives. Coopération étroite avec Garde Impériale dans missions de siège.",
+    "notableBattles": [
+      {
+        "name": "Siège de Vraks",
+        "summary": "M41",
+        "date": "Valorous Heart tint position pendant 17 ans de siège."
+      },
+      {
+        "name": "Cadia (M41)",
+        "summary": "999.M41",
+        "date": "Valorous Heart évacua civils Cadians."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Spécialisation grands sièges."
+      }
+    ],
+    "galleryQueries": [
+      "Valorous Heart Sororitas",
+      "Sororitas siege",
+      "Sister of Battle endurance",
+      "Adepta Sororitas defense"
     ]
   },
   {
@@ -1995,6 +3224,33 @@
         "description": "Évolution du XV85 Enforcer dotée de réacteurs haute-altitude, le Coldstar permet aux Commandeurs T'au de traverser un champ de bataille en quelques secondes. Doctrine privilégiée du Sept-capital pour coordonner les fronts dispersés.",
         "wikiQuery": "XV86 Coldstar Battlesuit"
       }
+    ],
+    "epithet": "Le Sept Premier · Le Cœur de l'Empire",
+    "currentState": "Au M42, T'au Sept est le cœur politique et culturel de l'Empire T'au — la planète T'au elle-même, foyer de l'Aun'Va et de l'Ethereal Council. Ses cadres sont les plus disciplinés et les plus orthodoxes, suivant le Tau'va sans question. Le Commander Shadowsun, héritière spirituelle de Farsight (avant sa rupture), dirige la Quatrième Sphere of Expansion depuis ce sept. Bastion de l'orthodoxie spirituelle T'au.",
+    "notableBattles": [
+      {
+        "name": "Damocles Gulf Crusade",
+        "date": "M41.742",
+        "summary": "T'au Sept résiste à la croisade impériale, repoussant les forces d'Aun'Va malgré pertes lourdes."
+      },
+      {
+        "name": "Troisième Sphere of Expansion",
+        "date": "M41.998",
+        "summary": "Cadres T'au Sept conquièrent Agrellan (Mu'Gulath Bay) sous Shadowsun et Longstrike."
+      },
+      {
+        "name": "Quatrième Sphere",
+        "date": "M42.005",
+        "summary": "Shadowsun et la flotte T'au Sept sortent de la Cicatrix Maledictum, tenant tête à l'Imperium Nihilus."
+      }
+    ],
+    "galleryQueries": [
+      "Commander Shadowsun",
+      "Aun'Va Ethereal",
+      "T'au Fire Warrior",
+      "Aun'Shi Ethereal",
+      "T'au Crisis Battlesuit Commander",
+      "T'au Pathfinder squad"
     ]
   },
   {
@@ -2025,6 +3281,33 @@
         "description": "Cœur des armées T'au, ces guerriers Shas'la armés de pulse rifles incarnent la discipline de feu de la Caste du Feu. Vior'la, monde des Soleils Jumeaux, produit les bataillons les plus martiaux de l'Empire — leurs cadets connaissent la guerre avant le doute.",
         "wikiQuery": "Fire Warrior"
       }
+    ],
+    "epithet": "Le Sept Brûlant · Les Fanatiques de la Greater Good",
+    "currentState": "Au M42, Vior'la (le 'Hot-Blooded') est le sept le plus militariste et le plus passionné de l'Empire T'au. Ses Fire Warriors chargent au lieu de tenir des positions, ce qui est presque hérétique pour la doctrine T'au standard. Berceau de Commander Farsight avant son exil, Vior'la garde une certaine sympathie idéologique pour les Enclaves dissidentes. Engagés massivement dans la Quatrième Sphere.",
+    "notableBattles": [
+      {
+        "name": "Damocles Gulf Crusade",
+        "date": "M41.742",
+        "summary": "Vior'la mène les contre-attaques les plus agressives contre Macragge — Farsight gagne sa renommée ici."
+      },
+      {
+        "name": "Bataille d'Arkunasha",
+        "date": "M41.701",
+        "summary": "Le jeune Farsight, Cadet Commander Vior'la, sauve le sept d'une invasion Ork avec doctrines hérétiques."
+      },
+      {
+        "name": "Quatrième Sphere — Vior'la Vanguard",
+        "date": "M42.005",
+        "summary": "Vior'la fournit l'avant-garde la plus agressive de la Quatrième Sphere, perçant les Imperial Guard au-delà de la Cicatrix."
+      }
+    ],
+    "galleryQueries": [
+      "Vior'la Fire Warrior",
+      "Tau Commander Farsight young",
+      "Vior'la Crisis Battlesuit",
+      "T'au Ethereal red robes",
+      "T'au Breacher Team",
+      "Vior'la Pathfinder"
     ]
   },
   {
@@ -2061,6 +3344,33 @@
         "description": "Shas'la volontaires équipés de markerlights, les Pathfinders illuminent les cibles ennemies pour guider tirs guidés et frappes orbitales. Bork'an déploie des variantes équipées de pulse sniper rifles longue portée, expression élégante de la doctrine Kauyon — le piège patient.",
         "wikiQuery": "Pathfinder Team Tau"
       }
+    ],
+    "epithet": "Le Sept Savant · Les Architectes du Tau'va",
+    "currentState": "Au M42, Bork'an Sept est le centre académique et scientifique de l'Empire T'au — ses universités forment les meilleurs ingénieurs Earth Caste, et ses prototypes d'armes (Longstrike's Hammerhead, ion weapons avancés) y sont conçus. Bork'an évite la guerre directe quand possible, préférant fournir technologie aux autres septs. Le scandale du 'mystérieux exode' de Bork'an scientifiques vers Farsight reste un secret d'État.",
+    "notableBattles": [
+      {
+        "name": "Défense de Bork'an",
+        "date": "M41.781",
+        "summary": "Bork'an fait face à une raid Eldar majeur, repoussé grâce aux prototypes ion canon de l'Earth Caste."
+      },
+      {
+        "name": "Mu'Gulath Bay Campaign",
+        "date": "M41.999",
+        "summary": "Bork'an fournit des Riptides expérimentaux pour la conquête d'Agrellan."
+      },
+      {
+        "name": "Quatrième Sphere — Soutien Logistique",
+        "date": "M42.005",
+        "summary": "Bork'an équipe les forces de Shadowsun avec drone-tech et battlesuits modifiés."
+      }
+    ],
+    "galleryQueries": [
+      "Bork'an Earth Caste scientist",
+      "T'au Riptide Battlesuit",
+      "Bork'an Fire Warrior",
+      "T'au Longstrike",
+      "Bork'an Ethereal",
+      "T'au Stormsurge crew"
     ]
   },
   {
@@ -2360,7 +3670,34 @@
     "description": "Force de réaction rapide du système solaire, mobilisable en quelques heures aux frontières de Sol.",
     "loreShort": "Réponse rapide aux menaces sur Sol.",
     "wikiQuery": "Solar Watch Custodes",
-    "loreLong": "Gardiens jurés du Système Solaire, les Solar Watch — que certains désignent sous le nom de Castellans of the Blessed Worlds — ont prononcé des serments d'acier les liant à la défense de chaque monde et de chaque forteresse orbitale compris entre Luna et la Halo Belt. Depuis les bastions du vide jusqu'aux routes commerciales intrasystémiques, leurs patrouilles mécanisées ne connaissent ni répit ni faille, portées par une concentration remarquable de Venerable Land Raiders qui leur confère une réponse foudroyante face à toute menace naissante. Cultes démoniaques, coups de force inquisitoriaux, incursions xénos silencieuses : tout ce qui oserait approcher Terra sans y avoir été invité a rencontré leur armure de marbre blanc et leurs épaulières de sang. Lorsque les Captain-Generals les plus belliqueux l'exigent, ils franchissent les limites du Système pour frapper les menaces en formation lors de sorties que l'on nomme Talon Sorties, brisant la capacité ennemie avant de se retirer sans cérémonie, laissant aux forces impériales ordinaires le soin de ramasser les décombres. Car les Solar Watch ne s'attardent pas là où d'autres peuvent suffire — leur place est au seuil du Trône, et nulle distraction ne saurait les en éloigner durablement."
+    "loreLong": "Gardiens jurés du Système Solaire, les Solar Watch — que certains désignent sous le nom de Castellans of the Blessed Worlds — ont prononcé des serments d'acier les liant à la défense de chaque monde et de chaque forteresse orbitale compris entre Luna et la Halo Belt. Depuis les bastions du vide jusqu'aux routes commerciales intrasystémiques, leurs patrouilles mécanisées ne connaissent ni répit ni faille, portées par une concentration remarquable de Venerable Land Raiders qui leur confère une réponse foudroyante face à toute menace naissante. Cultes démoniaques, coups de force inquisitoriaux, incursions xénos silencieuses : tout ce qui oserait approcher Terra sans y avoir été invité a rencontré leur armure de marbre blanc et leurs épaulières de sang. Lorsque les Captain-Generals les plus belliqueux l'exigent, ils franchissent les limites du Système pour frapper les menaces en formation lors de sorties que l'on nomme Talon Sorties, brisant la capacité ennemie avant de se retirer sans cérémonie, laissant aux forces impériales ordinaires le soin de ramasser les décombres. Car les Solar Watch ne s'attardent pas là où d'autres peuvent suffire — leur place est au seuil du Trône, et nulle distraction ne saurait les en éloigner durablement.",
+    "epithet": "La Garde du Soleil · Les Messagers du Trône",
+    "currentState": "Au M42, le Solar Watch est le Shield Host le plus mobile du Adeptus Custodes — son rôle traditionnel est de patrouiller le Sol System et le Throneworld, intervenant rapidement où la menace est urgente. Avec la fissuration du Cicatrix Maledictum, le Solar Watch a été dispatched en force pour les missions extérieures, accompagnant la Indomitus Crusade. Trajann Valoris fait régulièrement appel à eux pour les opérations rapides à enjeu galactique.",
+    "notableBattles": [
+      {
+        "name": "Défense du Throneworld",
+        "date": "M41.999",
+        "summary": "Solar Watch repousse une incursion daemonique majeure aux portes de Terra durant la 13ᵉ Croisade Noire."
+      },
+      {
+        "name": "Indomitus Crusade",
+        "date": "M42.000+",
+        "summary": "Solar Watch escorte Roboute Guilliman lors des phases initiales de la croisade, garde personnelle du Primarque."
+      },
+      {
+        "name": "Bataille du Pariah Nexus",
+        "date": "M42.012",
+        "summary": "Solar Watch frappe le Cœur Necron du Pariah Nexus aux côtés des Sisters of Silence, infiltration légendaire."
+      }
+    ],
+    "galleryQueries": [
+      "Solar Watch Custodian",
+      "Trajann Valoris",
+      "Custodes Shield-Captain",
+      "Custodes Vertus Praetor",
+      "Custodes Allarus Terminator",
+      "Solar Watch Shield Host"
+    ]
   },
   {
     "id": "aquilan-shield",
@@ -2390,7 +3727,34 @@
     "description": "Diplomates et envoyés impériaux, ils portent la voix du Trône à travers le Segmentum Solar.",
     "loreShort": "Diplomates impériaux à la lance dorée.",
     "wikiQuery": "Emissaries Imperatus",
-    "loreLong": "Parmi les Adeptus Custodes, les Emissaries Imperatus occupent une place singulière : ce sont des gardiens qui, au fil de leurs méditations, ont entendu la voix de l'Empereur lui-même et se sont sentis guidés par Sa main vers des desseins que nul autre ne perçoit. Réunis en cercles de réflexion, ils interprètent les volontés du Maître de l'Humanité et parcourent l'Imperium pour les transmettre aux commandants qui doivent les entendre, quitte à extraire des reliques oubliées des voûtes du Palais Impérial pour les remettre à ceux jugés dignes de les porter. Leur spécificité la plus redoutée réside dans ce pouvoir de parole : leurs mots ont dévié des Croisades entières, déjoué des menaces avant même qu'elles n'éclatent, et ouvert des trésors d'archéotechnologie au service de l'Aquila. Depuis l'ouverture de la Grande Faille, leur présence s'est considérablement accrue, nombre d'entre eux ayant rejoint la Croisade Indomitus de Guilliman, facilitant notamment l'acceptation des Space Marines Primaris au sein des chapitres les plus rétifs. Vêtus d'or sombre, d'épaulières cramoisies et de robes gris-blanc, ils incarnent moins la force brute de leurs frères que l'autorité absolue d'une parole portée depuis le Trône d'Or."
+    "loreLong": "Parmi les Adeptus Custodes, les Emissaries Imperatus occupent une place singulière : ce sont des gardiens qui, au fil de leurs méditations, ont entendu la voix de l'Empereur lui-même et se sont sentis guidés par Sa main vers des desseins que nul autre ne perçoit. Réunis en cercles de réflexion, ils interprètent les volontés du Maître de l'Humanité et parcourent l'Imperium pour les transmettre aux commandants qui doivent les entendre, quitte à extraire des reliques oubliées des voûtes du Palais Impérial pour les remettre à ceux jugés dignes de les porter. Leur spécificité la plus redoutée réside dans ce pouvoir de parole : leurs mots ont dévié des Croisades entières, déjoué des menaces avant même qu'elles n'éclatent, et ouvert des trésors d'archéotechnologie au service de l'Aquila. Depuis l'ouverture de la Grande Faille, leur présence s'est considérablement accrue, nombre d'entre eux ayant rejoint la Croisade Indomitus de Guilliman, facilitant notamment l'acceptation des Space Marines Primaris au sein des chapitres les plus rétifs. Vêtus d'or sombre, d'épaulières cramoisies et de robes gris-blanc, ils incarnent moins la force brute de leurs frères que l'autorité absolue d'une parole portée depuis le Trône d'Or.",
+    "epithet": "Les Émissaires du Trône · Les Diplomates Mortels",
+    "currentState": "Au M42, les Emissaries Imperatus sont le Shield Host diplomatique du Adeptus Custodes — leur rôle est de représenter l'autorité directe du Empereur lors de négociations galactiques sensibles. Avec le retour de Guilliman, ils sont devenus indispensables : ils accompagnent les négociations avec les Ynnari, les T'au septs frontaliers, et même certains Eldar Vaisseaux-Mondes. Leurs paroles portent le poids du Trône, et leur lance peut suivre.",
+    "notableBattles": [
+      {
+        "name": "Pacte du Cataclysme",
+        "date": "M41.999",
+        "summary": "Emissaries négocient avec un Vaisseau-Monde Eldar pour défendre conjointement un secteur menacé par Slaanesh."
+      },
+      {
+        "name": "Mission Indomitus",
+        "date": "M42.001",
+        "summary": "Les Emissaries escortent Guilliman lors d'une rencontre tendue avec Yvraine, prévenant un incident diplomatique fatal."
+      },
+      {
+        "name": "Bataille de Klaisus",
+        "date": "M42.011",
+        "summary": "Une délégation Emissaries devient combattante sur Klaisus quand les négociations T'au tournent mal."
+      }
+    ],
+    "galleryQueries": [
+      "Emissaries Imperatus Custodian",
+      "Custodes Shield-Captain ornate",
+      "Custodes Vexilla",
+      "Custodes Allarus Caladius",
+      "Emissary Custodian gold",
+      "Custodes Prosecutor Sister"
+    ]
   },
   {
     "id": "callidus-temple",
@@ -2502,6 +3866,27 @@
         "description": "Les rares Drukhari nés naturellement (et non clonés) — les plus pures lignées nobles, les meilleures armes.",
         "wikiQuery": "Kabalite Trueborn"
       }
+    ],
+    "epithet": "La Kabale du Cœur Noir · La Suprême",
+    "currentState": "Au M42, Kabal of the Black Heart est la plus puissante des Kabales Drukhari. Asdrubael Vect, Suprême Arconte, gouverne Commorragh depuis des millénaires. Manipule politique galactique entière — ses agents infiltrent Imperium, T'au, même les Aeldari Craftworlds.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Commorragh",
+        "summary": "M40",
+        "date": "Vect renversa son maître précédent par coup d'État."
+      },
+      {
+        "name": "Raids éternels",
+        "summary": "M30-M42",
+        "date": "Pillage continu sur Imperium et Aeldari."
+      }
+    ],
+    "galleryQueries": [
+      "Black Heart Kabal",
+      "Vect Drukhari",
+      "Drukhari Kabal",
+      "Commorragh",
+      "Dark Eldar"
     ]
   },
   {
@@ -2518,7 +3903,22 @@
     "homeworld": "Commorragh (Webway)",
     "founding": "M30",
     "wikiQuery": "Kabal of the Obsidian Rose",
-    "citation": "Mes balles sont des poèmes. Apprécie la rime avant de mourir."
+    "citation": "Mes balles sont des poèmes. Apprécie la rime avant de mourir.",
+    "epithet": "La Kabale de la Rose Noire · Les Marchands d'Armes",
+    "currentState": "Au M42, Obsidian Rose est la Kabale armurière. Spécialistes en armement Drukhari hautement raffiné — fournit armes à toutes les autres Kabales (et même certains agents Imperium clandestins). Riche, raffinée, plus subtile que les autres.",
+    "notableBattles": [
+      {
+        "name": "Marchés d'armes",
+        "summary": "M30-M42",
+        "date": "Commerce illégal d'armes interstellaire."
+      }
+    ],
+    "galleryQueries": [
+      "Obsidian Rose Kabal",
+      "Drukhari Kabal",
+      "Dark Eldar weapons",
+      "Commorragh"
+    ]
   },
   {
     "id": "kabal-of-the-poisoned-tongue",
@@ -2528,7 +3928,34 @@
     "description": "Maîtres des poisons et des venins. Leurs armes sont gravées de toxines qui torturent avant de tuer.",
     "loreShort": "Spécialistes des venins exotiques.",
     "wikiQuery": "Kabal of the Poisoned Tongue",
-    "loreLong": "Dans les ruelles venimeuses de Commorragh, le Kabal de la Langue Empoisonnée tisse ses intrigues avec une patience de prédateur. Alliés à Asdrubael Vect et au Kabal du Cœur Noir, ses Kabalites ont érigé la duplicité en art de guerre, livrant leurs rivaux à des conflits savamment orchestrés pendant qu'eux-mêmes demeurent à l'abri du carnage. Leurs raids dans l'espace réel commencent bien avant que la première lame soit dégainée : faux signaux d'alerte, messages fragmentés, signatures spectrales de vaisseaux fantômes — autant de leurres qui poussent leurs proies à fortifier les mauvais flancs. Lorsque l'assaut véritable se déchaîne, il frappe là où personne ne regardait. Les Crocs de Malys, unité d'élite du Kabal, parachèvent cette doctrine en montant à bord de Raiders équipés de moteurs mimétiques miniaturisés, capables de singer l'apparence même des flottes ennemies. On murmure dans les alcôves sombres de la Cité que l'Archon Malys elle-même reçoit la faveur d'un patron mystérieux, dont la nature demeure l'un des secrets les mieux gardés de Commorragh."
+    "loreLong": "Dans les ruelles venimeuses de Commorragh, le Kabal de la Langue Empoisonnée tisse ses intrigues avec une patience de prédateur. Alliés à Asdrubael Vect et au Kabal du Cœur Noir, ses Kabalites ont érigé la duplicité en art de guerre, livrant leurs rivaux à des conflits savamment orchestrés pendant qu'eux-mêmes demeurent à l'abri du carnage. Leurs raids dans l'espace réel commencent bien avant que la première lame soit dégainée : faux signaux d'alerte, messages fragmentés, signatures spectrales de vaisseaux fantômes — autant de leurres qui poussent leurs proies à fortifier les mauvais flancs. Lorsque l'assaut véritable se déchaîne, il frappe là où personne ne regardait. Les Crocs de Malys, unité d'élite du Kabal, parachèvent cette doctrine en montant à bord de Raiders équipés de moteurs mimétiques miniaturisés, capables de singer l'apparence même des flottes ennemies. On murmure dans les alcôves sombres de la Cité que l'Archon Malys elle-même reçoit la faveur d'un patron mystérieux, dont la nature demeure l'un des secrets les mieux gardés de Commorragh.",
+    "epithet": "La Langue Empoisonnée · Les Maîtres du Venin",
+    "currentState": "Au M42, le Kabal de la Langue Empoisonnée règne sur les recoins ouest de Commorragh sous le commandement de l'Archonte Lady Malys, rivale historique d'Asdrubael Vect. Spécialistes du poison, du chantage et de la trahison, ils mènent réseaux d'espionnage et empoisonnent même leurs alliés. Lady Malys tisse une trame qui pourrait défier Vect — peut-être avec l'aide de Slaanesh elle-même.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Commorragh",
+        "date": "M41.999",
+        "summary": "Lady Malys orchestre une coalition de Kabals contre Vect, presque le tuant avant la trahison interne."
+      },
+      {
+        "name": "Raid sur Tranch",
+        "date": "M42.001",
+        "summary": "Le Kabal mène une grande razzia sur le monde-jungle Tranch, capturant des milliers d'esclaves Catachan."
+      },
+      {
+        "name": "Pacte de la Tour Mortelle",
+        "date": "M42.011",
+        "summary": "Lady Malys négocie avec Yvraine un pacte temporaire — ses motivations restent insondables."
+      }
+    ],
+    "galleryQueries": [
+      "Lady Malys Archon",
+      "Drukhari Archon female",
+      "Poisoned Tongue Wych",
+      "Drukhari Sslyth bodyguard",
+      "Drukhari Incubi",
+      "Commorragh court"
+    ]
   },
   {
     "id": "kabal-of-the-flayed-skull",
@@ -2538,7 +3965,34 @@
     "description": "Pillards aériens spécialisés dans les raids véhicule-vs-monde. Leurs Reaver jetbikes sont les plus rapides de Commorragh.",
     "loreShort": "Cavaliers aériens, raids éclair.",
     "wikiQuery": "Kabal of the Flayed Skull",
-    "loreLong": "Dans la hiérarchie sanglante de Commorragh, seul le Kabal of the Black Heart surpasse en puissance le Kabal of the Flayed Skull. Son archonte, Vraesque Malidrach, a bâti sa légende sur la maîtrise absolue de la guerre aérienne, attirant à lui une nuée de pilotes avides de carnage et de gloire : Hellions, Reaver pilots et Scourges se pressent sous sa bannière, rivalisant de vitesse et de cruauté. L'armada de Voidraven Bombers et de Razorwing Jetfighters qu'il commande noircit les cieux de ses cibles comme un présage de ruine totale. Le Kabal niche au cœur de la Poisoned Crown, un dédale tordu de cheminées venimeuses et de conduits crachant leurs vapeurs mortelles, dont les flancs sont hérissés d'amarres et de docks innombrables où repose la flotte titanesque du Crâne Écorché. De ces hauteurs empoisonnées, les raids s'élancent sans préavis, fondant sur les mondes mortels avant même que les premiers cris d'alarme ne résonnent."
+    "loreLong": "Dans la hiérarchie sanglante de Commorragh, seul le Kabal of the Black Heart surpasse en puissance le Kabal of the Flayed Skull. Son archonte, Vraesque Malidrach, a bâti sa légende sur la maîtrise absolue de la guerre aérienne, attirant à lui une nuée de pilotes avides de carnage et de gloire : Hellions, Reaver pilots et Scourges se pressent sous sa bannière, rivalisant de vitesse et de cruauté. L'armada de Voidraven Bombers et de Razorwing Jetfighters qu'il commande noircit les cieux de ses cibles comme un présage de ruine totale. Le Kabal niche au cœur de la Poisoned Crown, un dédale tordu de cheminées venimeuses et de conduits crachant leurs vapeurs mortelles, dont les flancs sont hérissés d'amarres et de docks innombrables où repose la flotte titanesque du Crâne Écorché. De ces hauteurs empoisonnées, les raids s'élancent sans préavis, fondant sur les mondes mortels avant même que les premiers cris d'alarme ne résonnent.",
+    "epithet": "Le Crâne Écorché · Les Chasseurs Skyborne",
+    "currentState": "Au M42, le Kabal du Crâne Écorché est l'élite aérienne de Commorragh — pilotes Reavers, Razorwings et Voidravens sans égal. Leur Archonte Vorl-Xoelanth dirige la flotte de raiders volants la plus rapide du Dark City. Ils prélèvent souvent les visages de leurs victimes vivantes, considérant les expressions de terreur comme un art. Souvent vus accompagnant les expéditions de Vect.",
+    "notableBattles": [
+      {
+        "name": "Raid sur Lyx",
+        "date": "M41.997",
+        "summary": "Le Kabal écorche entière une cité-ruche Lyx en une nuit, ne laissant que cadavres sans visage."
+      },
+      {
+        "name": "Embuscade de la Trompeuse",
+        "date": "M42.005",
+        "summary": "Reavers Flayed Skull terrorisent un convoi Adeptus Mechanicus dans le Octarius Sub-sector."
+      },
+      {
+        "name": "Bataille de Vigilus Defiant",
+        "date": "M42.012",
+        "summary": "Le Kabal frappe la flotte impériale d'Imperial Navy de Vigilus, démantelant trois croiseurs avant fuite."
+      }
+    ],
+    "galleryQueries": [
+      "Flayed Skull Archon",
+      "Drukhari Reaver jetbike",
+      "Drukhari Razorwing pilot",
+      "Vorl-Xoelanth",
+      "Drukhari Scourge",
+      "Drukhari Hellions"
+    ]
   },
   {
     "id": "cult-of-strife",
@@ -2562,6 +4016,22 @@
         "description": "La plus mortelle gladiatrice de toute Commorragh. Combat sans armure, ses lames-ongles tranchent à travers tout.",
         "wikiQuery": "Lelith Hesperax"
       }
+    ],
+    "epithet": "Le Culte de la Discorde · Les Gladiatrices",
+    "currentState": "Au M42, Cult of Strife est le Wych Cult majeur de Commorragh. Spectacles gladiatoriaux pour Drukhari nobles. Lelith Hesperax, Reine des Wych Cults, en émerge. Combats publics pour amusement Drukhari + drainage souffrance.",
+    "notableBattles": [
+      {
+        "name": "Arènes de Commorragh",
+        "summary": "M30-M42",
+        "date": "Spectacles continus pour la noblesse Drukhari."
+      }
+    ],
+    "galleryQueries": [
+      "Cult of Strife",
+      "Lelith Hesperax",
+      "Drukhari Wych",
+      "Wych Cult",
+      "Drukhari arena"
     ]
   },
   {
@@ -2572,7 +4042,34 @@
     "description": "Wyches initiées aux lames daemoniques retournées contre le Warp. Sombre, dangereux, redouté même à Commorragh.",
     "loreShort": "Wyches aux lames daemoniques.",
     "wikiQuery": "Cult of the Cursed Blade",
-    "loreLong": "Parmi les cultes qui peuplent les arènes sanglantes de Commorragh, le Culte de la Lame Maudite porte la trahison comme d'autres portent l'honneur — avec fierté et méthode. Leur nom lui-même est tiré d'un vieux terme commorrhaghien désignant les rebelles qui retournent leurs lames contre leurs propres maîtres, et leurs guerrières perpétuent cet héritage avec une constance implacable : seules les plus rusées et les plus impitoyables survivent à la sélection naturelle que le Culte s'inflige à lui-même. Les ornements les plus anodins portés par leurs Wyches dissimulent poisons et lames rétractables, car tromper avant de frapper est ici élevé au rang d'art sacré. Leur bastion, le Nhexus Arena, incarne cette philosophie jusque dans sa pierre — ses courbes élégantes cachent des filets de monofilament, des fléchettes empoisonnées et des pièges qui fauchent spectateurs comme combattants, au grand amusement de tous. À Commorragh, s'allier au Culte de la Lame Maudite revient à danser au bord d'un précipice ; seuls les Mandrakes, créatures trop étranges pour être dupées, semblent imperméables à leur duplicité légendaire. Depuis l'ouverture du Grand Rift, leurs guerrières sèment la mort dans l'Imperium Nihilus avec une patience calculée, allant jusqu'à défendre des mondes impériaux contre le Chaos — non par pitié, mais pour que la proie, regonflée d'espoir, offre une souffrance bien plus savoureuse au moment de l'inévitable."
+    "loreLong": "Parmi les cultes qui peuplent les arènes sanglantes de Commorragh, le Culte de la Lame Maudite porte la trahison comme d'autres portent l'honneur — avec fierté et méthode. Leur nom lui-même est tiré d'un vieux terme commorrhaghien désignant les rebelles qui retournent leurs lames contre leurs propres maîtres, et leurs guerrières perpétuent cet héritage avec une constance implacable : seules les plus rusées et les plus impitoyables survivent à la sélection naturelle que le Culte s'inflige à lui-même. Les ornements les plus anodins portés par leurs Wyches dissimulent poisons et lames rétractables, car tromper avant de frapper est ici élevé au rang d'art sacré. Leur bastion, le Nhexus Arena, incarne cette philosophie jusque dans sa pierre — ses courbes élégantes cachent des filets de monofilament, des fléchettes empoisonnées et des pièges qui fauchent spectateurs comme combattants, au grand amusement de tous. À Commorragh, s'allier au Culte de la Lame Maudite revient à danser au bord d'un précipice ; seuls les Mandrakes, créatures trop étranges pour être dupées, semblent imperméables à leur duplicité légendaire. Depuis l'ouverture du Grand Rift, leurs guerrières sèment la mort dans l'Imperium Nihilus avec une patience calculée, allant jusqu'à défendre des mondes impériaux contre le Chaos — non par pitié, mais pour que la proie, regonflée d'espoir, offre une souffrance bien plus savoureuse au moment de l'inévitable.",
+    "epithet": "La Lame Maudite · Les Bourreaux Sacrés",
+    "currentState": "Au M42, le Wych Cult of the Cursed Blade compte parmi les arènes les plus prestigieuses de Commorragh. Leur Succubus Lelith Hesperax, la Reine des Witches, n'a jamais perdu un combat en arène. Les guerrières du Cult sont quasi-divines pour les Drukhari amateurs des jeux. Présents sur les expéditions hors Webway pour 'la chasse', leur cri de guerre — la Lame Maudite — résonne dans les arènes du Dark City.",
+    "notableBattles": [
+      {
+        "name": "Le Massacre des Mille",
+        "date": "M41.998",
+        "summary": "Lelith Hesperax exécute mille gladiateurs Aeldari en une seule arène, scellant son rang de Succubus suprême."
+      },
+      {
+        "name": "Raid sur Tranch",
+        "date": "M42.001",
+        "summary": "Le Cult fournit l'élite Wych pour la grande razzia, capturant 5000 esclaves combattants."
+      },
+      {
+        "name": "Duel sur Crucible",
+        "date": "M42.010",
+        "summary": "Lelith Hesperax affronte une Howling Banshee Phoenix Lord exilée — la Banshee meurt en trois mouvements."
+      }
+    ],
+    "galleryQueries": [
+      "Lelith Hesperax",
+      "Drukhari Succubus",
+      "Drukhari Wych warrior",
+      "Wych arena fight",
+      "Cursed Blade Hekatrix",
+      "Drukhari Reavers female"
+    ]
   },
   {
     "id": "cult-of-the-red-grief",
@@ -2606,6 +4103,22 @@
         "description": "Le plus ancien et talentueux Haemonculi. Possède les Talos qu'il a sculpté lui-même il y a mille ans.",
         "wikiQuery": "Urien Rakarth"
       }
+    ],
+    "epithet": "Les Prophètes de la Chair · Les Haemonculi",
+    "currentState": "Au M42, Prophets of Flesh est le Coven Haemonculus le plus respecté de Commorragh. Chirurgiens fous, sculpteurs de chair vivante, créateurs de monstres et de prothèses. Urien Rakarth est leur figure de proue. Travaux interdits dans toute la galaxie.",
+    "notableBattles": [
+      {
+        "name": "Expérimentations sur Coronus",
+        "summary": "M41",
+        "date": "Haemonculi capturèrent prisoniers d'une planète entière pour expérimentations."
+      }
+    ],
+    "galleryQueries": [
+      "Prophets of Flesh",
+      "Urien Rakarth",
+      "Haemonculus Coven",
+      "Drukhari Coven",
+      "Dark Eldar surgeon"
     ]
   },
   {
@@ -2843,7 +4356,34 @@
     "description": "Culte issu d'un monde-forge. Ses hybrides sont augmentés cybernétiquement, fusion de chair Genestealer et de pièces Mechanicus.",
     "loreShort": "Cybernétiquement augmentés.",
     "wikiQuery": "Twisted Helix Genestealer",
-    "loreLong": "Née dans les distilleries macro-alchimiques de Vejovium III, monde civilisé exportateur de médecines, la Twisted Helix tisse sa malédiction depuis la fin du M38, lorsqu'un unique hôte infecté — le Prime Specimen — convainquit la noblesse locale d'ingérer un élixir dérivé du Genestealer sous prétexte de perfection génétique. Ce que les aristocrates burent les transforma en hybrides contrefaits, et depuis ce jour, le culte règne sans partage sur le système de Vejovium. Ses médifactoria colossales crachent des fumées aux teintes impossibles depuis leurs cheminées de verre spiralé, laboratoires d'un dieu-savant fou où l'on incorpore la graine xénos dans des phiales curatives expédiées aux quatre coins de l'Imperium. Les Biophagi qu'aligne le culte en nombre considérable incarnent cette doctrine monstrueuse : chaque guerre n'est qu'un terrain d'expérimentation, chaque ennemi qu'un sujet de dissection. Aberrants aux proportions grotesques, hybrides multi-membres gorgés de substances alchimiques — la Twisted Helix préfère l'horreur frontale à la discrétion, déversant ses armées de cobayes mutés avec la ferveur méthodique de savants persuadés de poursuivre l'œuvre ultime de l'évolution."
+    "loreLong": "Née dans les distilleries macro-alchimiques de Vejovium III, monde civilisé exportateur de médecines, la Twisted Helix tisse sa malédiction depuis la fin du M38, lorsqu'un unique hôte infecté — le Prime Specimen — convainquit la noblesse locale d'ingérer un élixir dérivé du Genestealer sous prétexte de perfection génétique. Ce que les aristocrates burent les transforma en hybrides contrefaits, et depuis ce jour, le culte règne sans partage sur le système de Vejovium. Ses médifactoria colossales crachent des fumées aux teintes impossibles depuis leurs cheminées de verre spiralé, laboratoires d'un dieu-savant fou où l'on incorpore la graine xénos dans des phiales curatives expédiées aux quatre coins de l'Imperium. Les Biophagi qu'aligne le culte en nombre considérable incarnent cette doctrine monstrueuse : chaque guerre n'est qu'un terrain d'expérimentation, chaque ennemi qu'un sujet de dissection. Aberrants aux proportions grotesques, hybrides multi-membres gorgés de substances alchimiques — la Twisted Helix préfère l'horreur frontale à la discrétion, déversant ses armées de cobayes mutés avec la ferveur méthodique de savants persuadés de poursuivre l'œuvre ultime de l'évolution.",
+    "epithet": "L'Hélice Tordue · Les Mutants Forge-World",
+    "currentState": "Au M42, le Twisted Helix Cult infeste les Forge Worlds Adeptus Mechanicus, parasitant la science même qui devrait les détruire. Leurs aberrants (Aberrants en VO) sont surdimensionnés, fruits d'expérimentations génétiques rituelles. Le Patriarche conduit ses fidèles à percer les chambres de stase Mechanicus pour libérer technologies xénos cachées. Présent sur Stygies VIII, Anvilus, et plusieurs forge worlds Imperium Nihilus.",
+    "notableBattles": [
+      {
+        "name": "Soulèvement d'Anvilus",
+        "date": "M41.995",
+        "summary": "Le Twisted Helix prend partiellement le contrôle de la forge world Anvilus IX, libérant un STC interdit."
+      },
+      {
+        "name": "Pacte avec Haarken",
+        "date": "M42.005",
+        "summary": "Le Cult négocie temporairement avec les Black Legion pour saboter une cathédrale impériale."
+      },
+      {
+        "name": "Purge de Stygies VIII",
+        "date": "M42.011",
+        "summary": "Adeptus Mechanicus traque le Cult dans les sous-niveaux, mais le Patriarche reste insaisissable."
+      }
+    ],
+    "galleryQueries": [
+      "Twisted Helix Patriarch",
+      "Genestealer Aberrant",
+      "Genestealer Magus",
+      "Genestealer Cult Acolyte",
+      "Twisted Helix Primus",
+      "Genestealer hybrid mutant"
+    ]
   },
   {
     "id": "bladed-cog",
@@ -2853,7 +4393,34 @@
     "description": "Culte ayant infiltré le Mechanicus. Leurs Magos hybrides volent et corrompent des STC pour leur Patriarche.",
     "loreShort": "Infiltration Mechanicus.",
     "wikiQuery": "Bladed Cog Genestealer",
-    "loreLong": "Sur les mondes-forges ravagés par l'oppression du Mechanicus, le Culte de l'Engrenage Lacérant a prospéré dans l'ombre des chaînes de production, nourrissant sa haine des maîtres bioniques jusqu'à renverser le Dominus Ovid Thrensiom sur Feinminster Gamma. Né de la rencontre entre un Purestrain Genestealer clandestinement débarqué par le cargo Redspark et une population réduite en esclavage, le culte forgea sa doctrine autour d'un dogme déviant : le Clawed Omnissiah, avatar monstrueux du Hive Mind, révèle que c'est la machine qui est faible, non la chair. Là où le Mechanicus mutile le corps pour le purifier, les broodkin de l'Engrenage Lacérant marient l'organique et le cybernétique sans distinction, accueillant dans leurs rangs les déclassés des mondes-forges, y compris des Skitarii infectés reconvertis en Nexos au service de la Tyrannie. Maîtres des technologies dérobées au Mechanicum, leurs Magos hybrides pillent et corrompent les STC pour les mettre au service du Patriarche, engendrant des horreurs bioniques qui défient toute classification. Désormais maîtres absolus de Feinminster Gamma, ils ont lancé une croisade contre l'Adeptus Mechanicus, envahissant forge-monde après forge-monde, forçant les Iron Hands eux-mêmes à intervenir sur Ghoulwright pour contenir la marée."
+    "loreLong": "Sur les mondes-forges ravagés par l'oppression du Mechanicus, le Culte de l'Engrenage Lacérant a prospéré dans l'ombre des chaînes de production, nourrissant sa haine des maîtres bioniques jusqu'à renverser le Dominus Ovid Thrensiom sur Feinminster Gamma. Né de la rencontre entre un Purestrain Genestealer clandestinement débarqué par le cargo Redspark et une population réduite en esclavage, le culte forgea sa doctrine autour d'un dogme déviant : le Clawed Omnissiah, avatar monstrueux du Hive Mind, révèle que c'est la machine qui est faible, non la chair. Là où le Mechanicus mutile le corps pour le purifier, les broodkin de l'Engrenage Lacérant marient l'organique et le cybernétique sans distinction, accueillant dans leurs rangs les déclassés des mondes-forges, y compris des Skitarii infectés reconvertis en Nexos au service de la Tyrannie. Maîtres des technologies dérobées au Mechanicum, leurs Magos hybrides pillent et corrompent les STC pour les mettre au service du Patriarche, engendrant des horreurs bioniques qui défient toute classification. Désormais maîtres absolus de Feinminster Gamma, ils ont lancé une croisade contre l'Adeptus Mechanicus, envahissant forge-monde après forge-monde, forçant les Iron Hands eux-mêmes à intervenir sur Ghoulwright pour contenir la marée.",
+    "epithet": "L'Engrenage Tranchant · Les Cultistes Mécaniques",
+    "currentState": "Au M42, le Bladed Cog Cult mime les rituels de l'Adeptus Mechanicus pour mieux les corrompre. Ses cultistes portent robes rouges, chantent binharic, et croient (à tort) que la Star-Children sera un dieu-machine. Le Patriarche est dissimulé dans les sous-niveaux d'une forge world non révélée, et ses Magus tiennent rang dans les hiérarchies Mechanicus. Très dangereux car presque indétectable.",
+    "notableBattles": [
+      {
+        "name": "Trahison de Velchanos Magna",
+        "date": "M41.998",
+        "summary": "Le Bladed Cog révèle son emprise sur la forge world Velchanos Magna lors d'un raid Astra Militarum."
+      },
+      {
+        "name": "Bataille de Heliosa",
+        "date": "M42.003",
+        "summary": "Cult Magi déguisés en Tech-Priests sabotent les défenses Skitarii avant l'arrivée des Tyranides."
+      },
+      {
+        "name": "Soulèvement de Vigilus",
+        "date": "M42.012",
+        "summary": "Le Bladed Cog déclenche une révolte synchronisée durant la bataille de Vigilus, avec des Acolytes infiltrés depuis 30 ans."
+      }
+    ],
+    "galleryQueries": [
+      "Bladed Cog Magus",
+      "Genestealer Cult Tech-Priest",
+      "Genestealer hybrid Acolyte",
+      "Bladed Cog Primus",
+      "Cult Patriarch shadow",
+      "Genestealer Cult Iconward"
+    ]
   },
   {
     "id": "hivecult",
@@ -2883,7 +4450,34 @@
     "description": "Culte des mondes-déserts et des hors-la-loi. Leurs hybrides chevauchent des bikes et des wheels customisés Mad Max-esque.",
     "loreShort": "Hybrides motards des wastelands.",
     "wikiQuery": "Rusted Claw Genestealer",
-    "loreLong": "Sous les strates épuisées de Newseam, les mineurs du Culte de la Rusted Claw arrachent chaque jour des tonnes de métal précieux à la roche, sans jamais avoir le droit d'en toucher un gramme. De cette injustice est née une théologie sombre : ils vénèrent l'entropie elle-même, lisant dans chaque tache de rouille et chaque pièce ternie la volonté dévorante de leur Patriarche. Leur symbole, un engrenage industriel rongé par la forme-serpent de la grande faim, résume tout ce qu'ils attendent du monde — sa dissolution lente et inexorable. Leurs armes rouillent, leurs véhicules tombent en décrépitude, et cette négligence assumée n'est pas misère mais acte de foi. Certains membres portent en eux un nano-symbiote tyranide, héritage silencieux du Hive Fleet, capable de consumer l'adamantium en quelques minutes — ce que le culte tient pour un miracle vivant. Toujours en mouvement, chassant sur leurs montures rafistolées comme des hors-la-loi impériaux, les Atalan Jackals et les Kelermorphs pullulent dans leurs rangs, avant-gardes d'une rébellion qui attend que la rouille achève le travail."
+    "loreLong": "Sous les strates épuisées de Newseam, les mineurs du Culte de la Rusted Claw arrachent chaque jour des tonnes de métal précieux à la roche, sans jamais avoir le droit d'en toucher un gramme. De cette injustice est née une théologie sombre : ils vénèrent l'entropie elle-même, lisant dans chaque tache de rouille et chaque pièce ternie la volonté dévorante de leur Patriarche. Leur symbole, un engrenage industriel rongé par la forme-serpent de la grande faim, résume tout ce qu'ils attendent du monde — sa dissolution lente et inexorable. Leurs armes rouillent, leurs véhicules tombent en décrépitude, et cette négligence assumée n'est pas misère mais acte de foi. Certains membres portent en eux un nano-symbiote tyranide, héritage silencieux du Hive Fleet, capable de consumer l'adamantium en quelques minutes — ce que le culte tient pour un miracle vivant. Toujours en mouvement, chassant sur leurs montures rafistolées comme des hors-la-loi impériaux, les Atalan Jackals et les Kelermorphs pullulent dans leurs rangs, avant-gardes d'une rébellion qui attend que la rouille achève le travail.",
+    "epithet": "La Griffe Rouillée · Les Mutants des Steppes",
+    "currentState": "Au M42, le Rusted Claw infeste les mondes désertiques et agri-mondes — leurs Acolytes montent quad-bikes (Atalan Jackals) et battent la campagne en raids éclair. Présent sur Dust et Hammerhal Aqsha, ils ressemblent à des bandits du désert mais cachent leur vraie nature génétique. Ils sont les plus mobiles des Cults et les plus difficiles à localiser sans intervention de l'Inquisition.",
+    "notableBattles": [
+      {
+        "name": "Soulèvement de Dust",
+        "date": "M41.997",
+        "summary": "Atalan Jackals Rusted Claw conquièrent un quart de la planète désertique Dust en six mois, ne laissant que ruines impériales."
+      },
+      {
+        "name": "Raid sur Hammerhal Aqsha",
+        "date": "M42.004",
+        "summary": "Cult Bikers menés par le Locus terrorisent les caravanes commerciales, exécutant la noblesse marchande."
+      },
+      {
+        "name": "Bataille de la Steppe Brûlée",
+        "date": "M42.013",
+        "summary": "Sisters of Battle déploient une croisade entière pour purger le Rusted Claw — succès partiel, le Patriarche s'échappe."
+      }
+    ],
+    "galleryQueries": [
+      "Rusted Claw Patriarch",
+      "Atalan Jackal biker",
+      "Genestealer Cult desert",
+      "Rusted Claw Acolyte Iconward",
+      "Genestealer Magus desert",
+      "Cult Locus"
+    ]
   },
   {
     "id": "mymeara",
@@ -2915,6 +4509,33 @@
         "description": "Le Chasseur des Ombres, second et actuel maître des Striking Scorpions, succéda à Arhra le Traître après que celui-ci eut sombré dans les Voies Sombres. Mymeara, craftworld glacial dont les guerriers chassent en silence dans la neige et le brouillard, partage avec Karandras une histoire intime : c'est là qu'il fut perdu, retrouvé, et que sa relique servit de catalyseur à la défense ultime du craftworld.",
         "wikiQuery": "Karandras Phoenix Lord"
       }
+    ],
+    "epithet": "Le Vaisseau-Monde Hivernal · Les Gardiens d'Iyanna",
+    "currentState": "Au M42, Mymeara erre près du Halo Stars, son cristal infranéant recouvert de glace éternelle. Le Vaisseau-Monde a perdu près de la moitié de sa population lors de la Bataille de Betalis III contre le Space Wolves. Iyanden et Saim-Hann sont leurs alliés réticents post-Ynnead. Le Wraithlord Irillyth, leur Phoenix Lord ressuscité, est revenu d'entre les morts pour les guider.",
+    "notableBattles": [
+      {
+        "name": "Chute du Phoenix Lord Irillyth",
+        "date": "M32",
+        "summary": "Irillyth, fondateur des Shadow Spectres, tombe en défendant Mymeara contre un raid Tyranide précoce."
+      },
+      {
+        "name": "Bataille de Betalis III",
+        "date": "M41.994",
+        "summary": "Mymeara affronte les Space Wolves de Logan Grimnar pour récupérer l'armure d'Irillyth — défaite tactique mais récupération réussie."
+      },
+      {
+        "name": "Le Réveil d'Irillyth",
+        "date": "M42.008",
+        "summary": "Le Phoenix Lord est ramené à la vie via l'Ynnari, première résurrection d'un Phoenix Lord depuis la Chute."
+      }
+    ],
+    "galleryQueries": [
+      "Irillyth Phoenix Lord",
+      "Shadow Spectres Aspect Warriors",
+      "Mymeara Farseer",
+      "Mymeara Wraithlord",
+      "Aeldari winter craftworld",
+      "Shadow Spectre Exarch"
     ]
   },
   {
@@ -2941,6 +4562,33 @@
         "description": "Pilotes virtuoses des Voidweavers, exploitant les chemins de la Toile en combat.",
         "wikiQuery": "Voidweaver Harlequin"
       }
+    ],
+    "epithet": "Le Vaisseau Pirate · Les Marauders Eldar",
+    "currentState": "Au M42, Lugganath est unique : son Conseil prêche l'union avec les Harlequins et le rejet du chemin orthodoxe. Les Corsaires y sont nombreux, leurs flottes formant le plus grand contingent corsaire de la galaxie. Lugganath croit que l'avenir Aeldari réside dans la Webway plutôt que la matière, et accueille volontiers Yvraine et les Ynnari. Allié de premier rang du Laughing God.",
+    "notableBattles": [
+      {
+        "name": "Raid de Port Demesnus",
+        "date": "M41.989",
+        "summary": "Corsaires Lugganath dévastent un port impérial du Damocles Gulf, capturant trois croiseurs."
+      },
+      {
+        "name": "Bataille du Portal Sombre",
+        "date": "M41.999",
+        "summary": "Lugganath affronte les Drukhari Kabal of the Black Heart pour le contrôle d'un nœud Webway clé."
+      },
+      {
+        "name": "Pacte du Yncarne",
+        "date": "M42.005",
+        "summary": "Lugganath rejoint massivement les Ynnari, fournissant flotte corsaire et Harlequin troupes à Yvraine."
+      }
+    ],
+    "galleryQueries": [
+      "Lugganath Farseer",
+      "Eldar Corsair Prince",
+      "Aeldari Voidraven pirates",
+      "Harlequin Solitaire",
+      "Eldar Corsair fleet",
+      "Lugganath Autarch"
     ]
   },
   {
@@ -2967,6 +4615,33 @@
         "description": "Char Falcon évolué, signature d'Yme-Loc, équipé d'armes psycho-modulables.",
         "wikiQuery": "Falcon Grav Tank Eldar"
       }
+    ],
+    "epithet": "Le Vaisseau Forge · Les Maîtres de Guerre",
+    "currentState": "Au M42, Yme-Loc est le Vaisseau-Monde le plus militarisé et le plus mécanisé. Ses Bonesingers produisent des Wraith-engines en masse, et ses formations Titanesques (Phantom et Revenant) sont sans égales chez les Aeldari. Yme-Loc privilégie l'artillerie et la guerre mécanisée, fournissant souvent ses Vipères et Falcons aux autres Vaisseaux-Mondes. Allié pragmatique d'Iyanden après la guerre de Baal.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Anaris",
+        "date": "M41.987",
+        "summary": "Yme-Loc déploie un Phantom Titan pour repousser une incursion Necron Mephrit, première utilisation publique du Titan."
+      },
+      {
+        "name": "Défense de Klainsdóttir",
+        "date": "M41.999",
+        "summary": "Yme-Loc et Iyanden combinent forces pour repousser une Hive Fleet Kraken splinter."
+      },
+      {
+        "name": "Guerre de Vaul",
+        "date": "M42.011",
+        "summary": "Yme-Loc envoie sa flotte titanesque pour soutenir Yvraine sur Belial IV — bataille inconclusive contre Slaanesh's daemons."
+      }
+    ],
+    "galleryQueries": [
+      "Yme-Loc Farseer",
+      "Aeldari Phantom Titan",
+      "Eldar Revenant Titan",
+      "Yme-Loc Bonesinger",
+      "Aeldari Wraithknight",
+      "Yme-Loc Warlock"
     ]
   },
   {
@@ -3097,6 +4772,26 @@
         "description": "Garde élite à hampes-de-foudre, ultime ligne de défense de Solemnace.",
         "wikiQuery": "Triarch Praetorian Necron"
       }
+    ],
+    "epithet": "La Dynastie Verte · Les Gardiens des Mondes-Tombeaux",
+    "currentState": "Au M42, Nihilakh défend ses Mondes-Tombeaux avec férocité. Trazyn l'Infini siège sur Solemnace, leur capitale. Stratégie défensive plutôt qu'offensive.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Solemnace",
+        "summary": "M41",
+        "date": "Trazyn défendit son musée contre Imperium. Capture étrange de Saint Celestine en stase pendant 6 minutes."
+      },
+      {
+        "name": "13ᵉ Croisade Noire (observation)",
+        "summary": "999.M41",
+        "date": "Nihilakh n'intervint pas — collectionna les batailles à distance."
+      }
+    ],
+    "galleryQueries": [
+      "Nihilakh Dynasty",
+      "Trazyn Infinite",
+      "Solemnace Necron",
+      "Necron Cryptek"
     ]
   },
   {
@@ -3135,6 +4830,33 @@
         "description": "Maîtres de l'énergie plasmique pure, les Plasmanciers Thokt manipulent des soleils miniatures qu'ils projettent sur leurs ennemis. Cette caste savante incarne l'audace expérimentale de la dynastie, n'hésitant jamais à canaliser des forces que les autres dynasties jugent trop instables.",
         "wikiQuery": "Necron Plasmancer Cryptek"
       }
+    ],
+    "epithet": "La Dynastie Cendre · Les Vampires Énergétiques",
+    "currentState": "Au M42, la Dynastie Thokt est la plus arrogante des dynasties Necron — elle se considère scientifiquement supérieure, spécialisée dans les armes énergétiques exotiques et les particules tachyoniques. Son Crownworld Ulkara s'est réveillé partiellement, et ses légions explorent avec hostilité tous les voisins galactiques. Allié temporaire de Trazyn pour la collecte de spécimens, Thokt est techniquement vassale de Sautekh mais agit en franc-tireur.",
+    "notableBattles": [
+      {
+        "name": "Réveil d'Ulkara",
+        "date": "M41.996",
+        "summary": "Phaeron Tovac Sun-Killer émerge de stase et purge les xenos colons d'Ulkara en sept jours."
+      },
+      {
+        "name": "Bataille de Damnos",
+        "date": "M41.999",
+        "summary": "Légions Thokt soutiennent Sautekh dans la conquête de Damnos contre les Ultramarines."
+      },
+      {
+        "name": "Guerre du Pariah Nexus",
+        "date": "M42.012",
+        "summary": "Thokt fournit ses tachyon arrows pour le Pariah Nexus, frappant flottes impériales en orbite."
+      }
+    ],
+    "galleryQueries": [
+      "Thokt Phaeron",
+      "Necron Overlord",
+      "Necron Lord blue",
+      "Thokt Cryptek",
+      "Necron Triarch Praetorian",
+      "Necron Lychguard"
     ]
   },
   {
@@ -3161,6 +4883,33 @@
         "description": "Drone-prédateur capable de phaser à travers la matière pour exécuter à courte portée.",
         "wikiQuery": "Canoptek Wraith Necron"
       }
+    ],
+    "epithet": "Les Voleurs d'Étoiles · Les Pillards Éternels",
+    "currentState": "Au M42, la Dynastie Charnovokh est dirigée par le Phaeron Iset, et possède une réputation de ressources inépuisables — leurs Crownworlds dispersés à travers le Segmentum Pacificus regorgent de matériaux blackstone. Ils ont collaboré (à reculons) avec les Ultramarines lors de la bataille de Macragge, leur ennemi commun étant la Hive Fleet Behemoth. Toujours opportunistes, ils négocient et trahissent selon le profit.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Macragge",
+        "date": "M41.745",
+        "summary": "Charnovokh émerge brièvement pour aider à anéantir la queue de Hive Fleet Behemoth, puis se retire."
+      },
+      {
+        "name": "Réveil de Tasun",
+        "date": "M41.998",
+        "summary": "Phaeron Iset réveille le Crownworld Tasun et expulse une colonie Tau du Damocles Gulf."
+      },
+      {
+        "name": "Raid de Naogeddon",
+        "date": "M42.011",
+        "summary": "Légions Charnovokh pillent les vaults blackstone d'un Forge World Adeptus Mechanicus."
+      }
+    ],
+    "galleryQueries": [
+      "Charnovokh Phaeron",
+      "Necron Overlord blue",
+      "Necron Cryptek scientist",
+      "Necron Immortals",
+      "Necron Warriors phalanx",
+      "Necron Triarch"
     ]
   },
   {
@@ -3200,7 +4949,27 @@
     "loreLong": "Issu de la Seconde Fondation, le chapitre fut confié à Lucretius Corvo, capitaine ultramarine décoré pour avoir résisté six jours sur Astagar et abattu un Warlord Battle Titan traître. Guilliman lui assigna Honourum, monde-forteresse pré-impérial marquant l'avancée la plus septentrionale de la Grande Croisade. Les Novamarines portent une armure quartelée bleu et os, et siègent dans la Forteresse Novum. Ils font partie des dix Shield Chapters d'Ultramar, jurés à la défense permanente du royaume de Guilliman.",
     "homeworld": "Honourum",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Novamarines"
+    "wikiQuery": "Novamarines",
+    "epithet": "Les Novamarines · Les Pacificateurs",
+    "currentState": "Au M42, Novamarines opèrent essentiellement dans le secteur Macragge — alliés directs des Ultramarines. Pacification de mondes nouvellement découverts. Forte coopération avec l'Adeptus Mechanicus.",
+    "notableBattles": [
+      {
+        "name": "Pacifications post-Hérésie",
+        "summary": "M32+",
+        "date": "Reconquête de mondes perdus."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Force standard sous Guilliman direct."
+      }
+    ],
+    "galleryQueries": [
+      "Novamarines Chapter",
+      "Novamarines Astartes",
+      "Ultramarines Successor",
+      "Codex Chapter"
+    ]
   },
   {
     "id": "sons-of-guilliman",
@@ -3213,7 +4982,27 @@
     "loreLong": "Originaires du monde-mort cerclé de désert de Praesidia, les Sons of Guilliman traînent une réputation sulfureuse — rumeurs persistantes de frères tombés au Chaos et d'écarts par rapport au Codex. Cette réputation les pousse à combattre avec un zèle redoublé pour mériter leur nom. Leur héraldique combine l'Ultima au pair d'ailes, signature des fils du Primarque. Le rang de compagnie est inscrit en bas du pauldron, à côté du symbole, plutôt que par-dessus.",
     "homeworld": "Praesidia",
     "founding": "M33",
-    "wikiQuery": "Sons of Guilliman"
+    "wikiQuery": "Sons of Guilliman",
+    "epithet": "Les Fils de Guilliman · Les Plus Fidèles",
+    "currentState": "Au M42, Sons of Guilliman sont parmi les Successors les plus respectueux du Primarque retourné. Beaucoup de leurs Marines acceptent immédiatement le Rubicon Primaris pour servir leur père génétique. Cooperation totale avec l'Indomitus.",
+    "notableBattles": [
+      {
+        "name": "Croisades post-M41",
+        "summary": "M41",
+        "date": "Sons of Guilliman maintinrent l'orthodoxie ultramarines."
+      },
+      {
+        "name": "Indomitus (premier soutien)",
+        "summary": "999.M41",
+        "date": "Premiers à soutenir Guilliman au réveil."
+      }
+    ],
+    "galleryQueries": [
+      "Sons of Guilliman",
+      "Ultramarines Successor",
+      "Guilliman supporters",
+      "Codex Chapter"
+    ]
   },
   {
     "id": "praetors-of-orpheus",
@@ -3239,7 +5028,27 @@
     "loreLong": "L'Aurora Chapter descend du 4ᵉ Chapitre des Ultramarines, les Aurorans, célèbres durant la Grande Croisade pour leurs cinq fois plus de véhicules blindés qu'un chapitre standard. À la trahison d'Ithraca sur Calth, les Aurorans subirent des pertes massives en combattant les Word Bearers et la Legio Suturvora. Ce qui restait fut reformé en chapitre indépendant à la Seconde Fondation, conservant le ruban auroran comme symbole et la couleur verte pour marquer ses vétérans, conformément à l'iconographie d'origine.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Aurora Chapter"
+    "wikiQuery": "Aurora Chapter",
+    "epithet": "Aurora · Les Astartes de l'Aube",
+    "currentState": "Au M42, Aurora Chapter opère dans les régions galactiques sud. Spécialistes en guerre de désert (leur monde Firenze est aride). Maître de Chapitre actuel proche de Calgar. Coopération étroite avec Tallarn Desert Raiders.",
+    "notableBattles": [
+      {
+        "name": "Pacifications Firenze",
+        "summary": "M37",
+        "date": "Aurora pacifia plusieurs mondes désertiques."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Force standard sous Indomitus."
+      }
+    ],
+    "galleryQueries": [
+      "Aurora Chapter",
+      "Aurora Astartes",
+      "Ultramarines Successor",
+      "Firenze Aurora"
+    ]
   },
   {
     "id": "genesis-chapter",
@@ -3252,7 +5061,27 @@
     "loreLong": "Premier des Primogéniteurs, le Genesis Chapter fut levé à partir des plus nobles vétérans Ultramarines survivants de l'Hérésie. Leur première bataille leur arracha le monde de Newfound aux Word Bearers. Doctrinalement et astrographiquement les plus proches de leur chapitre-père, ils mènent fréquemment des opérations conjointes avec les Ultramarines et comblent les rangs des compagnies sous-effectif quand celles-ci tombent en-deçà de la force codex. Tout frère effectue au moins un pèlerinage au Sanctuaire du Primarque.",
     "homeworld": "Newfound",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Genesis Chapter"
+    "wikiQuery": "Genesis Chapter",
+    "epithet": "Genesis · Les Premiers-Nés Reformés",
+    "currentState": "Au M42, Genesis Chapter est l'un des Chapitres les plus orthodoxes du Codex Astartes. Strict respect de la doctrine guilliman. Maître de Chapitre actuel allié direct à Calgar. Beaucoup de Successors Genesis.",
+    "notableBattles": [
+      {
+        "name": "Croisades de Reconquête",
+        "summary": "M41",
+        "date": "Genesis mena plusieurs croisades contre xenos."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Force Codex standard."
+      }
+    ],
+    "galleryQueries": [
+      "Genesis Chapter",
+      "Ultramarines Successor",
+      "Codex Chapter",
+      "Genesis Astartes"
+    ]
   },
   {
     "id": "patriarchs-of-ulixis",
@@ -3278,7 +5107,27 @@
     "loreLong": "Recrutés sur le Feral World perpétuellement obscur de Posul, les Mortifactors furent fondés par Sasebo Tezuka, guidé par le Tarot de l'Empereur. Ils suivent le Codex Astartes dans le fond mais en divergent radicalement dans la forme, par adoption de la culture funéraire Posuli. Leur Forteresse-Monastère, la Basilica Mortis, est un fort stellaire en orbite tapissé de crânes de frères tombés et d'ennemis abattus. Leurs Chapelains conduisent les rites funéraires.",
     "homeworld": "Posul (détruit)",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Mortifactors"
+    "wikiQuery": "Mortifactors",
+    "epithet": "Les Mortifactors · Les Chasseurs de Tyranides",
+    "currentState": "Au M42, Mortifactors sont spécialistes anti-Tyranide — leur monde Posul a été visité par plusieurs Hive Fleets et survécu grâce à leur expérience. Cult of Death-funéraire ; chaque Marine porte une partie d'un guerrier mort dans son armure. Coopération régulière avec Inquisition Ordo Xenos.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Posul",
+        "summary": "M41",
+        "date": "Première rencontre majeure avec Hive Fleet Behemoth."
+      },
+      {
+        "name": "Indomitus (anti-Tyranide)",
+        "summary": "M42",
+        "date": "Mortifactors envoyés sur tous les fronts Tyranide."
+      }
+    ],
+    "galleryQueries": [
+      "Mortifactors battle",
+      "Mortifactors Chapter",
+      "Anti-Tyranid Astartes",
+      "Posul Mortifactors"
+    ]
   },
   {
     "id": "silver-eagles",
@@ -3291,7 +5140,27 @@
     "loreLong": "Les archives sur les Silver Eagles sont laconiques. Successeur des Ultramarines créé à la Seconde Fondation, le chapitre n'est connu que par mention de son Maître Periphas et de son symbole — un aigle d'argent. Leur déploiement et leur zone d'opération restent largement inconnus dans les registres impériaux disponibles.",
     "homeworld": "Inconnu",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Silver Eagles"
+    "wikiQuery": "Silver Eagles",
+    "epithet": "Les Aigles d'Argent · Les Astartes Diplomates",
+    "currentState": "Au M42, Silver Eagles maintiennent un Chapitre traditionnel — Codex Astartes strict, hiérarchie classique. Connus pour diplomatie et coopération avec Garde Impériale. Maître de Chapitre actuel commandé directement par Guilliman.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Damnos",
+        "summary": "M41",
+        "date": "Silver Eagles intervinrent contre invasion Necron Sautekh."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Force Indomitus standard."
+      }
+    ],
+    "galleryQueries": [
+      "Silver Eagles Chapter",
+      "Silver Eagles Astartes",
+      "Imperial Astartes",
+      "Codex Chapter"
+    ]
   },
   {
     "id": "white-consuls",
@@ -3356,7 +5225,27 @@
     "loreLong": "Successeur de la Seconde Fondation mené par Tulian Aquila, le chapitre s'est établi sur Gathis II et y a forgé une doctrine fondée sur l'acceptation pleine de la mortalité. Là où les Ultramarines incarnent le rayonnement régalien, les Doom Eagles cultivent un détachement morbide, hostile à la gloire et à l'honneur, jugés vains face à l'éternité. Tous frères suivent une longue austérité spirituelle ; le chapitre se tient à l'écart des autres, considérant le deuil comme la seule vérité tangible du Space Marine.",
     "homeworld": "Gathis II",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Doom Eagles"
+    "wikiQuery": "Doom Eagles",
+    "epithet": "Les Aigles du Destin · Les Gardiens du Mort",
+    "currentState": "Au M42, Doom Eagles maintiennent un culte funéraire profond — chaque Marine est considéré déjà mort, libéré de la peur. Forte présence Indomitus aux côtés des Ultramarines. Couleurs grises ; recrutent sur Gathis II.",
+    "notableBattles": [
+      {
+        "name": "Croisade Sabbat Worlds",
+        "summary": "M41",
+        "date": "Doom Eagles soutinrent la Croisade."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Force Indomitus."
+      }
+    ],
+    "galleryQueries": [
+      "Doom Eagles Chapter",
+      "Doom Eagles Astartes",
+      "Gathis II",
+      "Codex Chapter"
+    ]
   },
   {
     "id": "howling-griffons",
@@ -3642,7 +5531,28 @@
     "loreLong": "Successeur de la Seconde Fondation issu du courant le plus sanguinaire de la IXe Légion, les Flesh Tearers souffrent d'une mutation gène-seed les rendant nettement plus vulnérables à la Black Rage. À ce jour aucun remède n'est connu et les chronistes prédisent l'extinction du chapitre dans les deux millénaires si rien ne change. Ils sont par ailleurs réputés pour leur sauvagerie et leur soif de sang au combat — réputation qui les a fait censurer plus d'une fois sans pour autant entraîner leur dissolution.",
     "homeworld": "Cretacia",
     "founding": "2ᵉ Fondation (M31)",
-    "wikiQuery": "Flesh Tearers"
+    "wikiQuery": "Flesh Tearers",
+    "epithet": "Les Déchireurs de Chair · Les Plus Maudits des Blood Angels",
+    "currentState": "Au M42, Flesh Tearers sont les plus affligés par la Soif Rouge et la Rage Noire — mutation génétique amplifiée par siècles de combats. Maître de Chapitre Gabriel Seth refuse d'admettre la condition. Cretacia est leur monde — toujours en guerre. Nombre de Marines stable mais en limite de viabilité génétique.",
+    "notableBattles": [
+      {
+        "name": "Devastation of Baal",
+        "summary": "999.M41",
+        "date": "Flesh Tearers sauvèrent Blood Angels en sacrifiant beaucoup de leur effectif."
+      },
+      {
+        "name": "Indomitus",
+        "summary": "M42",
+        "date": "Flesh Tearers Primaris atténuent partiellement la malédiction."
+      }
+    ],
+    "galleryQueries": [
+      "Flesh Tearers battle",
+      "Gabriel Seth",
+      "Cretacia Flesh Tearers",
+      "Flesh Tearers Chapter",
+      "Blood Angels Successor"
+    ]
   },
   {
     "id": "blood-drinkers",

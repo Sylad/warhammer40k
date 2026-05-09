@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import type { LoreEvent, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept, Equipment } from './lore-feed.model.js';
+import type { LoreEvent, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept, Equipment, LegendaryShip, GodMachine, Saint } from './lore-feed.model.js';
 
 function loadJson<T>(file: string, fallback: T): T {
   const filePath = path.resolve(process.cwd(), 'data', file);
@@ -19,6 +19,9 @@ export class LoreFeedService {
   private readonly imperialOrgs: ImperialOrganization[];
   private readonly concepts: LoreConcept[];
   private readonly equipment: Equipment[];
+  private readonly ships: LegendaryShip[];
+  private readonly godMachines: GodMachine[];
+  private readonly saints: Saint[];
 
   constructor() {
     this.events = loadJson<LoreEvent[]>('lore-feed.json', []);
@@ -28,6 +31,9 @@ export class LoreFeedService {
     this.imperialOrgs = loadJson<ImperialOrganization[]>('imperial-orgs.json', []);
     this.concepts = loadJson<LoreConcept[]>('lore-concepts.json', []);
     this.equipment = loadJson<Equipment[]>('equipment.json', []);
+    this.ships = loadJson<LegendaryShip[]>('legendary-ships.json', []);
+    this.godMachines = loadJson<GodMachine[]>('god-machines.json', []);
+    this.saints = loadJson<Saint[]>('living-saints.json', []);
   }
 
   findAll(): LoreEvent[] { return this.events; }
@@ -68,5 +74,23 @@ export class LoreFeedService {
 
   getEquipmentItem(id: string): Equipment | undefined {
     return this.equipment.find(e => e.id === id);
+  }
+
+  getShips(): LegendaryShip[] { return this.ships; }
+
+  getShip(id: string): LegendaryShip | undefined {
+    return this.ships.find(s => s.id === id);
+  }
+
+  getGodMachines(): GodMachine[] { return this.godMachines; }
+
+  getGodMachine(id: string): GodMachine | undefined {
+    return this.godMachines.find(g => g.id === id);
+  }
+
+  getSaints(): Saint[] { return this.saints; }
+
+  getSaint(id: string): Saint | undefined {
+    return this.saints.find(s => s.id === id);
   }
 }

@@ -610,6 +610,49 @@
     }
     .report-btn:hover { border-color: var(--gold-bright); background: rgba(201, 162, 74, 0.08); }
 
+    /* ICONOGRAPHIE — main panel, character art prominent */
+    .panel-iconography .panel-sub-text {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 16px;
+      font-style: italic;
+    }
+    .iconography-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .iconography-card {
+      aspect-ratio: 3 / 4;
+      background-image: var(--g-img);
+      background-size: cover;
+      background-position: center top;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      filter: contrast(1.1) saturate(0.95) brightness(0.9);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: filter 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      display: block;
+      position: relative;
+    }
+    .iconography-card:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+    }
+    .iconography-card:hover {
+      filter: contrast(1.18) saturate(1.08) brightness(1.05);
+      border-color: var(--gold-bright);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.7), inset 0 0 0 1px var(--gold);
+    }
+    @media (max-width: 760px) {
+      .iconography-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     .loading {
       padding: 60px;
       text-align: center;

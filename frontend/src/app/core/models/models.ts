@@ -29,6 +29,12 @@ export interface NotableUnit {
   wikiQuery?: string;
 }
 
+export interface SubFactionBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
 export interface SubFaction {
   id: string;
   factionId: string;
@@ -40,6 +46,7 @@ export interface SubFaction {
   loreLong?: string;
   motto?: string;
   primarch?: string;
+  primarchId?: string;
   primarchWikiQuery?: string;
   currentLeader?: string;
   currentLeaderRole?: string;
@@ -52,6 +59,11 @@ export interface SubFaction {
   unitIds?: string[];
   notableUnits?: NotableUnit[];
   citation?: string;
+  // Bible-tier extensions
+  epithet?: string;
+  currentState?: string;
+  notableBattles?: SubFactionBattle[];
+  galleryQueries?: string[];
 }
 export type UnitType = 'Infanterie' | 'Véhicule' | 'Héros' | 'Monstre' | 'Psyker';
 
@@ -66,6 +78,19 @@ export interface FactionLore {
   origine?: string;
   organisation?: string;
   doctrine?: string;
+}
+
+export interface FactionWar {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface FactionHero {
+  name: string;
+  unitId?: string;
+  primarchId?: string;
+  summary: string;
 }
 
 export interface Faction {
@@ -84,6 +109,16 @@ export interface Faction {
   stats?: FactionStats;
   liensRapides?: string[];
   resources?: string[];
+  // Bible-tier extensions
+  epithet?: string;
+  motto?: string;
+  longHistory?: string;
+  notableWars?: FactionWar[];
+  notableHeroes?: FactionHero[];
+  currentState?: string;
+  legacy?: string;
+  galleryQueries?: string[];
+  loreImageQuery?: string;
 }
 
 export interface UnitStats {
@@ -106,6 +141,8 @@ export interface UnitEquipment {
   name: string;
   description?: string;
   icon?: string;
+  image?: string;       // URL directe (statique ou wiki)
+  wikiQuery?: string;   // requête /api/wiki-image pour résoudre dynamiquement
 }
 
 export interface Unit {
@@ -130,6 +167,8 @@ export interface Unit {
   citation?: string;
   apparition?: string;
   tailleUnite?: string;
+  loreImageQuery?: string;     // wikiQuery override pour image inline du panel Lore
+  galleryQueries?: string[];   // 2-4 wikiQueries supplémentaires pour la sidebar Galerie liée
 }
 
 export interface DescriptionResponse {
@@ -280,6 +319,87 @@ export type PrimarchStatus =
   | 'daemon-prince'
   | 'expunged';
 
+export interface PrimarchBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface ShipBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface LegendaryShip {
+  id: string;
+  name: string;
+  epithet?: string;
+  class: string;
+  factionId: string;
+  factionName: string;
+  color: string;
+  captainOrLord?: string;
+  currentStatus: string;
+  wikiQuery: string;
+  description: string;
+  longHistory?: string;
+  specs?: string[];
+  notableBattles?: ShipBattle[];
+  galleryQueries?: string[];
+  relatedPrimarchId?: string;
+}
+
+export type SaintCategory = 'living-saint' | 'saint-canonized' | 'ecclesiarch-canonized';
+
+export interface SaintBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
+export interface Saint {
+  id: string;
+  name: string;
+  epithet?: string;
+  category: SaintCategory;
+  ordoOrChapter: string;
+  era: string;
+  color: string;
+  wikiQuery: string;
+  description: string;
+  longHistory?: string;
+  miracles?: string[];
+  notableBattles?: SaintBattle[];
+  quotes?: string[];
+  galleryQueries?: string[];
+}
+
+export type GodMachineCategory = 'titan' | 'knight' | 'war-machine';
+
+export interface GodMachineExample {
+  name: string;
+  context: string;
+}
+
+export interface GodMachine {
+  id: string;
+  name: string;
+  epithet?: string;
+  category: GodMachineCategory;
+  scoutClass: string;
+  size: string;
+  factionId: string;
+  factionName: string;
+  color: string;
+  wikiQuery: string;
+  description: string;
+  longHistory?: string;
+  specs?: string[];
+  notableExamples?: GodMachineExample[];
+  galleryQueries?: string[];
+}
+
 export interface Primarch {
   id: string;
   number: number;
@@ -295,6 +415,18 @@ export interface Primarch {
   primaryColor?: string;
   wikiQuery?: string;
   citation?: string;
+  // Bible-tier extras
+  epithet?: string;            // "Le Roi des Ombres", "L'Ange"
+  personality?: string;        // 1-2 paragraphes de caractère
+  earlyLife?: string;          // origines, monde natal, retrouvailles avec l'Empereur
+  greatCrusade?: string;       // rôle pendant la Grande Croisade
+  heresy?: string;             // rôle pendant l'Hérésie d'Horus (loyaliste ou traître)
+  finalFate?: string;          // mort, disparition, retour
+  legacy?: string;             // impact durable sur l'Imperium ou le Chaos
+  notableBattles?: PrimarchBattle[];
+  quotes?: string[];           // 3-5 citations canoniques
+  galleryQueries?: string[];   // 6-8 wikiQuery character-focused
+  relatedPrimarchIds?: string[];
 }
 
 // === Chaos Pantheon ===

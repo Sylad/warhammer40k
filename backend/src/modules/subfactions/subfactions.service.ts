@@ -31,6 +31,12 @@ export interface NotableUnit {
   wikiQuery?: string;
 }
 
+export interface SubFactionBattle {
+  name: string;
+  date?: string;
+  summary: string;
+}
+
 export interface SubFaction {
   id: string;
   factionId: string;
@@ -42,6 +48,7 @@ export interface SubFaction {
   loreLong?: string;
   motto?: string;
   primarch?: string;
+  primarchId?: string;
   primarchWikiQuery?: string;
   currentLeader?: string;
   currentLeaderRole?: string;
@@ -54,6 +61,10 @@ export interface SubFaction {
   unitIds?: string[];
   notableUnits?: NotableUnit[];
   citation?: string;
+  epithet?: string;
+  currentState?: string;
+  notableBattles?: SubFactionBattle[];
+  galleryQueries?: string[];
 }
 
 const SEED_FILE = path.resolve(process.cwd(), 'data', 'subfactions.json');

@@ -125,6 +125,9 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
                     <span class="quote">«</span> {{ item.citation }} <span class="quote">»</span>
                   </blockquote>
                 }
+                <a class="fiche-link" [routerLink]="['/lore/equipment', item.id]" (click)="$event.stopPropagation()">
+                  Lire la fiche complète →
+                </a>
               </div>
             }
           </div>

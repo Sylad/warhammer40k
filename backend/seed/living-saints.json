@@ -1,0 +1,206 @@
+[
+  {
+    "id": "saint-celestine",
+    "name": "Sainte Célestine",
+    "epithet": "La Vivante-Sainte · Trois Fois Ressuscitée",
+    "category": "living-saint",
+    "ordoOrChapter": "Ordre de Notre Martyre Dame",
+    "era": "M40-Présent",
+    "color": "#f0d276",
+    "wikiQuery": "Saint Celestine Living Saint",
+    "description": "Sainte Vivante de l'Adepta Sororitas, ressuscitée trois fois — manifestation tangible de la grâce de l'Empereur sur le champ de bataille.",
+    "longHistory": "Saint Celestine fut Sœur Bataille de l'Ordre de Notre Martyre Dame, tuée pendant la Croisade Eleusis. Mais devant son couvent, alors que ses sœurs préparaient son enterrement, son corps s'illumina d'une lumière dorée — et elle se releva. Cette première résurrection fit d'elle une Sainte officielle. Elle continua à servir, mourut deux fois encore, ressuscita deux fois encore. Sa présence sur un champ de bataille suffit à galvaniser les armées impériales.\n\nElle apparut à Ophelia VII, à Sanctus Lin, à Vigilus, à Cadia. Elle fut prêtée à Guilliman pendant l'Indomitus pour servir d'inspiration vivante. Personne ne sait si elle peut mourir une dernière fois — ou si la lumière de l'Empereur l'a rendue immortelle de fait.",
+    "miracles": [
+      "Résurrection — ressuscitée trois fois (et possiblement plus)",
+      "Vol angélique — ailes lumineuses d'énergie pure",
+      "Acta Saint — sa foi déclenche miracles tangibles",
+      "Geminae Superia — deux Sœurs ressuscitées la protègent à vie"
+    ],
+    "notableBattles": [
+      { "name": "Croisade Eleusis", "date": "M40", "summary": "Première résurrection. Apparition publique." },
+      { "name": "Bataille de Sanctus Lin", "date": "M41", "summary": "Convertit Hérétiques en masse." },
+      { "name": "Bataille de Vigilus", "date": "M42", "summary": "Combat à grande échelle." },
+      { "name": "Indomitus Crusade", "date": "999.M41-010.M42", "summary": "Prêtée à Guilliman pour inspirer Astartes Primaris." }
+    ],
+    "quotes": [
+      "« L'Empereur n'a pas de mains, sauf les nôtres. L'Empereur n'a pas de lances, sauf les miennes. »",
+      "« Sœurs ! L'Empereur regarde ! L'Empereur juge ! Que vos lames soient dignes de Lui ! »"
+    ],
+    "galleryQueries": ["Saint Celestine art", "Living Saint warhammer 40k", "Adepta Sororitas Saint", "Celestine wings"]
+  },
+  {
+    "id": "saint-katherine",
+    "name": "Sainte Katherine",
+    "epithet": "Première Sainte · Fondatrice de l'Ordre",
+    "category": "living-saint",
+    "ordoOrChapter": "Ordre de Notre Martyre Dame (fondatrice)",
+    "era": "M36-M37 (martyre)",
+    "color": "#f0d276",
+    "wikiQuery": "Saint Katherine Sororitas",
+    "description": "Première Sainte officiellement canonisée des Sœurs de Bataille, fondatrice de l'Ordre Notre Martyre Dame. Sa lance Hammer of Faith perfora un Daemon-Primarque.",
+    "longHistory": "Saint Katherine fut la première Sainte officiellement canonisée des Sœurs de Bataille. Avant elle, les Adepta Sororitas étaient une organisation militaire encore en formation. C'est Katherine qui prouva qu'une Sœur de Bataille pouvait déclencher l'Acta Saint au même niveau qu'une Saint Vivante humaine — son halo doré brilla sur le champ de bataille de Volupus, et trois Légions du Chaos furent repoussées.\n\nSa lance Hammer of Faith, pouvoir-amplifier de pure foi, perfora un Daemon-Primarque mineur pendant la même bataille. Reconnue comme Sainte par l'Église, elle continua à servir, mourant en martyre vingt ans plus tard sur Mahon Eight. L'Ordre Notre Martyre Dame fut fondé pour préserver son héritage. Sa lance est désormais transmise de Canoness en Canoness.",
+    "miracles": [
+      "Acta Saint mythique — déclenche miracles à grande échelle",
+      "Halo doré — manifestation visible de la foi",
+      "Charisme légendaire — Sœurs combattent jusqu'à la mort",
+      "Régénération de foi — blessures cicatrisent par grâce divine"
+    ],
+    "notableBattles": [
+      { "name": "Bataille de Volupus", "date": "M36", "summary": "Trois Légions Chaos repoussées par halo doré." },
+      { "name": "Bataille du Daemon-Primarque", "date": "M36", "summary": "Hammer of Faith perfora un Daemon-Primarque mineur." },
+      { "name": "Mahon Eight", "date": "M37", "summary": "Mort en martyre. Canonisée." }
+    ],
+    "quotes": [
+      "« L'Empereur n'a pas de hommes, sauf nous. L'Empereur n'a pas de lances, sauf les miennes. Frappons. »"
+    ],
+    "galleryQueries": ["Saint Katherine art", "Sororitas Saint", "Adepta Sororitas first saint", "Hammer of Faith"]
+  },
+  {
+    "id": "saint-sabbat",
+    "name": "Sainte Sabbat",
+    "epithet": "La Bergère des Mondes Sabbat",
+    "category": "saint-canonized",
+    "ordoOrChapter": "Saint canonisée (Croisade Sabbat Worlds)",
+    "era": "M35 (vivante) / M40-M41 (croisades en son nom)",
+    "color": "#c9a44a",
+    "wikiQuery": "Saint Sabbat Sabbat Worlds",
+    "description": "Sainte canonisée de l'Imperium, fondatrice spirituelle de la Croisade des Mondes Sabbat. Sa relique Beati protège la Cruisade.",
+    "longHistory": "Saint Sabbat fut une simple bergère sur un monde isolé du secteur qui porte aujourd'hui son nom. Pendant les Apostasies de M35, elle reçut visions de l'Empereur Lui-même et mena une révolte qui libéra son monde. Ses miracles incluent la guérison des blessés par contact, la résurrection de morts récents, et la pacification des bêtes. Tuée par les Hérétiques, elle fut canonisée à titre posthume.\n\nLes Sabbat Worlds — neuf cents mondes liés à son nom — ont été perdus aux Hérétiques pendant des millénaires. La Sabbat Worlds Crusade (M41) lancée par Warmaster Slaydo et continuée par Macaroth visait à reconquérir ces mondes en son nom. Ibram Gaunt et les Tanith First sont au centre de cette croisade. Sa Beati (relique-bannière) accompagne la croisade et déclenche miracles tangibles.",
+    "miracles": [
+      "Guérison par contact — soignait blessés à mains nues",
+      "Résurrection mineure — récents morts",
+      "Pacification animale — bêtes acceptaient sa présence",
+      "Beati post-mortem — sa relique-bannière déclenche miracles"
+    ],
+    "notableBattles": [
+      { "name": "Révolte de Hagia", "date": "M35", "summary": "Saint Sabbat libéra son monde-mère." },
+      { "name": "Croisade Sabbat Worlds (post-mortem)", "date": "M41", "summary": "Slaydo puis Macaroth lancèrent la croisade en son nom." }
+    ],
+    "quotes": [
+      "« L'Empereur entend même les bergères. L'Empereur les écoute particulièrement. »"
+    ],
+    "galleryQueries": ["Saint Sabbat art", "Sabbat Worlds Crusade", "Beati Sabbat", "Imperial Saint shepherdess"]
+  },
+  {
+    "id": "saint-drusus",
+    "name": "Sainte Drusus",
+    "epithet": "Le Saint Crusader · Conquérant du Calixis",
+    "category": "saint-canonized",
+    "ordoOrChapter": "Saint canonisé (Calixis Sector)",
+    "era": "M39 (vivant) / M40-Présent (vénération)",
+    "color": "#c9a44a",
+    "wikiQuery": "Saint Drusus Calixis Sector",
+    "description": "Saint canonisé de l'Imperium, conquérant du Calixis Sector pendant la Croisade Calixis. Patron du secteur Calixis (Dark Heresy RPG).",
+    "longHistory": "Saint Drusus fut Lord-Général Imperial pendant la Croisade Calixis (M39). Il conquit le Calixis Sector — secteur de centaines de mondes — en quelques décennies, malgré opposition Hérétique massive et plusieurs assassinats raté. Il survécut à six tentatives d'assassinat — chaque fois sa survie fut considérée miraculeuse. Tué finalement par poison rituel, il fut canonisé à titre posthume.\n\nSon corps est embaumé sur Scintilla, capitale du Calixis. Pèlerinage annuel attire des milliards. L'Inquisition Calixis (Dark Heresy) le considère comme leur patron spirituel. Plusieurs ordres religieux se réclament de sa lignée spirituelle.",
+    "miracles": [
+      "Survie aux assassinats — six tentatives ratées",
+      "Présence inspirante — armées sous son commandement combattaient deux fois plus efficacement",
+      "Guérison de blessures — pèlerinages à son tombeau"
+    ],
+    "notableBattles": [
+      { "name": "Croisade Calixis", "date": "M39", "summary": "Conquête du secteur Calixis." },
+      { "name": "Assassinat sur Scintilla", "date": "M39", "summary": "Mort par poison rituel." }
+    ],
+    "quotes": [
+      "« Calixis est aux Hérétiques. Calixis sera aux fidèles. Et je ne mourrai pas avant ce jour. »  — Apocryphe avant son assassinat"
+    ],
+    "galleryQueries": ["Saint Drusus", "Calixis Sector", "Imperial Saint general", "Saint canonized warhammer"]
+  },
+  {
+    "id": "sebastian-thor",
+    "name": "Sebastian Thor",
+    "epithet": "Le Réformateur · L'Apostasie Inverse",
+    "category": "ecclesiarch-canonized",
+    "ordoOrChapter": "Ecclésiarchie (post-mortem)",
+    "era": "M36 (vivant) / M37-Présent (vénéré)",
+    "color": "#c9a44a",
+    "wikiQuery": "Sebastian Thor Reform Imperium",
+    "description": "Ecclésiarque qui réforma l'Église après la dictature de Goge Vandire. Sauveur spirituel de l'Imperium.",
+    "longHistory": "Sebastian Thor fut un confesseur ordinaire pendant les Apostasies de Vandire — où l'Ecclésiarque Goge Vandire dirigea l'Imperium dans une dictature sanglante (M35-M36). Thor commença par prêcher en secret contre Vandire, puis publiquement après l'élimination de Vandire par l'Inquisition. Il devint Ecclésiarque post-Vandire et entreprit la Réforme : décrétale interdisant à l'Église de posséder hommes en armes (créant les Adepta Sororitas), reconstruction de l'autorité papale, restauration des doctrines pré-Vandire.\n\nIl est canonisé à titre posthume. Plusieurs Ordres Sororitas se réclament de sa lignée spirituelle.",
+    "miracles": [
+      "Charisme post-Vandire — convertit fanatiques Vandire à la doctrine pré-Vandire",
+      "Réforme institutionnelle — restructura entièrement l'Ecclésiarchie"
+    ],
+    "notableBattles": [
+      { "name": "Apostasies de Vandire", "date": "M35-M36", "summary": "Période de dictature ecclésiastique." },
+      { "name": "Réforme Thor", "date": "M36", "summary": "Restructuration de l'Ecclésiarchie." }
+    ],
+    "quotes": [
+      "« L'Église doit servir l'Empereur. Pas l'inverse. Pas Vandire. Pas n'importe qui. L'Empereur seul. »"
+    ],
+    "galleryQueries": ["Sebastian Thor", "Ecclesiarchy reform", "Sororitas creation", "Imperial Cult"]
+  },
+  {
+    "id": "saint-silvana",
+    "name": "Sainte Silvana",
+    "epithet": "La Sainte Silencieuse · Patronne des Argent Shroud",
+    "category": "saint-canonized",
+    "ordoOrChapter": "Ordre du Linceul d'Argent (patronne)",
+    "era": "M37 (martyre)",
+    "color": "#c0c0c0",
+    "wikiQuery": "Saint Silvana Argent Shroud Sororitas",
+    "description": "Sainte canonisée patronne de l'Argent Shroud. Mit fin à la possession Daemon massive sur un monde-couvent par auto-sacrifice.",
+    "longHistory": "Saint Silvana fut Canoness de l'Argent Shroud lors d'une crisis daemonique massive sur Magdaline — monde-couvent infiltré par Cultes Slaanesh. Pour empêcher la possession totale du couvent, elle se sacrifia dans un rituel de scellement : son âme fut consumée pour fermer le portail Warp. Mort en silence, elle est devenue la patronne du Linceul d'Argent.\n\nLes Sœurs Argent Shroud honorent sa mémoire par leur Voix Silencieuse — communication par signes rituels plutôt que parole, hommage à son sacrifice silencieux.",
+    "miracles": [
+      "Sacrifice rituel — son âme ferma un portail Daemon",
+      "Voix Silencieuse — Argent Shroud communique presque sans paroles",
+      "Sa relique (le Voile Silencieux) repousse manifestations Daemon"
+    ],
+    "notableBattles": [
+      { "name": "Magdaline Possession Crisis", "date": "M37", "summary": "Sacrifice rituel de Silvana." }
+    ],
+    "quotes": [
+      "[ Silence — son sacrifice fut sans dernières paroles. ]"
+    ],
+    "galleryQueries": ["Saint Silvana", "Argent Shroud", "Sororitas Daemon-fight", "Sister of Battle silver"]
+  },
+  {
+    "id": "saint-praxedes",
+    "name": "Sainte Praxedes",
+    "epithet": "La Suaire de Cadia · Sainte Combattante",
+    "category": "saint-canonized",
+    "ordoOrChapter": "Sainte canonisée (Cadian)",
+    "era": "M40 (martyre)",
+    "color": "#c9a44a",
+    "wikiQuery": "Saint Praxedes Cadian",
+    "description": "Sainte canonisée Cadienne. Combattit aux côtés de Cadians durant les premières guerres Abaddon. Martyre lors d'une 12ᵉ Croisade Noire.",
+    "longHistory": "Saint Praxedes fut Sœur de Bataille Sororitas affectée à Cadia pendant les premières Croisades Noires (M40). Elle combattit aux côtés des Cadian Shock Troops pendant 8ᵉ, 9ᵉ, 10ᵉ Croisades Noires. Sa Voix de Foi galvanisa les Cadians dans des moments critiques. Tuée pendant la 12ᵉ Croisade Noire, elle fut canonisée à titre posthume.\n\nSon corps fut embaumé à Cadia — perdu lors de la chute de Cadia en 999.M41. Beaucoup de Cadians dispersés portent encore une icône de Saint Praxedes.",
+    "miracles": [
+      "Voix de Foi — Cadians combattaient comme un seul homme",
+      "Présence visible — son halo apparaissait pendant batailles critiques",
+      "Survie aux frappes daemoniaques — survécut à plusieurs Daemon Princes"
+    ],
+    "notableBattles": [
+      { "name": "8ᵉ-12ᵉ Croisades Noires", "date": "M40", "summary": "Combat répété contre Abaddon." },
+      { "name": "Mort sur Cadia", "date": "M40", "summary": "Tuée par Daemon Prince. Canonisée." }
+    ],
+    "quotes": [
+      "« Cadia tient. Cadia tient toujours. Cadia tiendra encore. »"
+    ],
+    "galleryQueries": ["Saint Praxedes", "Cadian Sororitas", "Cadia warhammer 40k", "Imperial Saint Cadia"]
+  },
+  {
+    "id": "saint-sanguinaire",
+    "name": "Sainte Sanguinaire",
+    "epithet": "La Mère du Sang · Patronne des Blood Angels",
+    "category": "saint-canonized",
+    "ordoOrChapter": "Sainte canonisée (Blood Angels lineage)",
+    "era": "M37 (vivante) / M38-Présent (vénérée)",
+    "color": "#a02020",
+    "wikiQuery": "Saint Sanguinaire Blood Angels",
+    "description": "Sainte canonisée vénérée par les Blood Angels et leurs Successor Chapters. Sa Tear of Sanguinius (relique) protège du Black Rage temporairement.",
+    "longHistory": "Saint Sanguinaire fut une mortelle née sur Baal Secundus, descendante directe d'une lignée recueillie par Sanguinius lui-même pendant la Grande Croisade. Elle reçut visions du Primarque mort, et entreprit pèlerinage à travers les mondes Blood Angels Successor. Sur Cretacia (Flesh Tearers homeworld), elle apporta réconfort spirituel aux Successors souffrant intensément du Black Rage.\n\nLes Blood Angels la considèrent patronne mineure (Sanguinius reste leur patron principal). Sa Tear of Sanguinius — petite relique ovoïde — apaise temporairement le Black Rage chez un Astartes affligé. Elle est passée de Maître de Chapitre en Maître de Chapitre.",
+    "miracles": [
+      "Tear of Sanguinius — apaise temporairement le Black Rage",
+      "Visions du Primarque — communiquait avec Sanguinius mort",
+      "Charisme — calmait Astartes affligés de Soif Rouge"
+    ],
+    "notableBattles": [
+      { "name": "Pèlerinage à Cretacia", "date": "M37", "summary": "Réconfort aux Flesh Tearers et autres Successors." }
+    ],
+    "quotes": [
+      "« Mon père-Primarque pleure encore dans le Warp. Je l'écoute. Je le porte. »"
+    ],
+    "galleryQueries": ["Saint Sanguinaire", "Blood Angels Saint", "Sanguinius tear", "Blood Angels lineage"]
+  }
+]

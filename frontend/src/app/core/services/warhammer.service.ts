@@ -6,7 +6,7 @@ import {
   Faction, Unit, DescriptionResponse, Serie, Video,
   Channel, Artwork, ArtworkCollection, ArtworkArtist, LoreEvent,
   SubFaction, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept, Equipment,
-  TimelineEvent,
+  TimelineEvent, LegendaryShip, GodMachine, Saint,
 } from '../models/models';
 
 export interface WikiImageResult {
@@ -189,6 +189,30 @@ export class WarhammerService {
 
   getEquipmentItem(id: string): Observable<Equipment> {
     return this.http.get<Equipment>(`${this.base}/lore/equipment/${id}`);
+  }
+
+  readonly ships$: Observable<LegendaryShip[]> = this.http
+    .get<LegendaryShip[]>(`${this.base}/lore/ships`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getShip(id: string): Observable<LegendaryShip> {
+    return this.http.get<LegendaryShip>(`${this.base}/lore/ships/${id}`);
+  }
+
+  readonly godMachines$: Observable<GodMachine[]> = this.http
+    .get<GodMachine[]>(`${this.base}/lore/god-machines`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getGodMachine(id: string): Observable<GodMachine> {
+    return this.http.get<GodMachine>(`${this.base}/lore/god-machines/${id}`);
+  }
+
+  readonly saints$: Observable<Saint[]> = this.http
+    .get<Saint[]>(`${this.base}/lore/saints`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  getSaint(id: string): Observable<Saint> {
+    return this.http.get<Saint>(`${this.base}/lore/saints/${id}`);
   }
 
   readonly timelineEvents$: Observable<TimelineEvent[]> = this.http

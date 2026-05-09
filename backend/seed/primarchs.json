@@ -13,7 +13,60 @@
     "homeworld": "Caliban (détruite)",
     "primaryColor": "#1a4f2a",
     "wikiQuery": "Lion El'Jonson",
-    "citation": "Le secret est notre seconde armure."
+    "citation": "Le secret est notre seconde armure.",
+    "epithet": "Le Lion · Le Roi des Ombres",
+    "personality": "Énigmatique, secret, profondément stratégique — Lion El'Jonson était le maître absolu de la guerre clandestine. Sa froideur calculée masquait une rage profonde née de la trahison de Caliban. Il pardonnait peu, oubliait jamais, et préférait la solitude du commandement à la chaleur de la fraternité. Les autres primarques le respectaient, peu l'aimaient ; lui-même semblait préférer ainsi. Sa quête perpétuelle de la perfection chevaleresque cachait un doute existentiel : l'Empereur l'avait-il vraiment aimé, ou seulement utilisé ?",
+    "earlyLife": "Caliban était un monde-mort de forêts mortelles infestées de Bêtes Warp — créatures cauchemardesques nées de la corruption. Lion El'Jonson tomba dans cette jungle hostile, un nourrisson primarchique abandonné, et survécut. Élevé seul par les loups et les ombres pendant ses premières années, il fut découvert adulte par les Chevaliers de Caliban, ordre monastique dirigé par le seigneur Luther. Luther adopta Lion comme un frère et lui enseigna le code chevaleresque, la stratégie militaire, l'érudition. Ensemble, ils menèrent la Grande Croisade Calibanique : extermination des Bêtes Warp, unification du monde, transformation de Caliban en haut lieu chevaleresque. Lorsque l'Empereur arriva sur Caliban, il reconnut son fils prodigue — et dévoila à Lion sa nature de Primarque.",
+    "greatCrusade": "Première Légion devint Dark Angels sous la main de Lion. Pendant la Grande Croisade, ils étaient l'épée de prédilection de l'Empereur pour les missions impossibles : campagnes dans la Wing of Devastation, purges secrètes, embuscades en territoires hostiles. Lion développa la doctrine des Wing — Deathwing pour assauts terminator, Ravenwing pour cavalerie rapide. Sa force tactique était la patience absolue : Dark Angels frappaient quand l'ennemi était épuisé, jamais avant. Lion fut le premier primarque à recevoir le titre honorifique 'Maître Premier' (First Lord) — reconnaissance que sa Légion avait été retrouvée la première.",
+    "heresy": "Lion El'Jonson fit fortune ambiguë pendant l'Hérésie. Quand Horus se rebella, Lion ne se positionna ni clairement loyaliste ni traître pendant des mois — étudiant les renseignements, calculant les moments. Beaucoup l'accusèrent de tergiverser. Il choisit finalement la loyauté à l'Empereur, mais arriva trop tard pour participer au Siège de Terra. À son retour sur Caliban, il découvrit l'horreur : Luther, consumé par l'amertume d'avoir été laissé en arrière (Lion l'avait trouvé indigne de devenir Astartes), avait basculé vers le Chaos. Caliban se rebella. Lion descendit en personne combattre Luther en duel. Le combat fut mortel pour les deux, mais Caliban explosa dans une tempête psychique à leur fin — une part de la planète survivit, une part fut détruite. Les Watchers in the Dark — entités énigmatiques liées aux Anciens — placèrent Lion en stase profonde au cœur du fragment survivant, la forteresse-monastère The Rock.",
+    "finalFate": "Pendant dix mille ans, Lion dormit. Ses fils Dark Angels chassèrent les Fallen — anciens Astartes Calibanique qui avaient survécu à Luther — à travers la galaxie, dans une honte cachée que jamais aucun autre Chapitre ne devait apprendre. En 999.M41, le Lion s'éveilla. Sans explication. Il marche désormais à nouveau. Ses motivations restent secrètes : qui pardonner parmi les Fallen ? Quels Successors Dark Angels sont dignes ? Il opère aux côtés de Guilliman par convenance, jamais par chaleur.",
+    "legacy": "Lion incarna le doute parmi les Primarques loyalistes — son ambivalence pendant l'Hérésie laissa une trace permanente. Le Code Chevaleresque calibanique survit dans la culture des Dark Angels et de leurs Successor Chapters (~5 Chapitres comptés, beaucoup probablement secrètement plus). La Chasse aux Fallen continue dix mille ans après — chaque Maître Suprême reçoit l'Inquisition's Veil, secret du Chapitre. Sa réveil en M42 est l'un des événements politiques majeurs de l'Indomitus Era.",
+    "notableBattles": [
+      {
+        "name": "Croisade Calibanique",
+        "summary": "Avant l'arrivée de l'Empereur, Lion mena la Croisade qui purgea Caliban des Bêtes Warp en moins d'une vie d'homme — démontrant un génie militaire inégalé.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Bataille du Système Diamat",
+        "summary": "Pendant la Grande Croisade, Lion captura le système Diamat avec une précision chirurgicale, sauvant un trésor de chars Mars-pattern qui équiperaient plus tard les Imperial Fists au siège de Terra.",
+        "date": "M30"
+      },
+      {
+        "name": "Bataille de Perditus",
+        "summary": "Lion attaqua le Compliance perditien à mains nues quand son armure fut endommagée — exploit qui cimenta sa réputation de combattant supérieur.",
+        "date": "M30"
+      },
+      {
+        "name": "Le Réveil sur Caliban",
+        "summary": "Lion descendit personnellement pour combattre Luther et les Fallen. Le combat dura des jours. Caliban se déchira psy-cosmiquement à leur fin.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Réveil — Imperium Nihilus",
+        "summary": "Émergeant de stase en 999.M41, Lion combattit immédiatement aux côtés des Dark Angels Successors contre une invasion daemonique imminente.",
+        "date": "999.M41"
+      }
+    ],
+    "quotes": [
+      "« Je ne pardonne pas. Je n'oublie pas. Je n'attends pas non plus. »",
+      "« Mon père, où étais-tu pendant ces dix mille ans ? Mon frère, où étais-tu pendant ces dix mille ans ? Eh bien... me voici. »",
+      "« Caliban est tombée. Calibian survivra dans la mémoire seule. La Première Légion ne tombera pas deux fois. »",
+      "« Le pardon vient à ceux qui le méritent. Le jugement vient à tous les autres. Je décide qui est qui. »"
+    ],
+    "galleryQueries": [
+      "Lion El'Jonson primarch",
+      "Dark Angels primarch",
+      "Caliban Lion",
+      "The Rock Dark Angels",
+      "First Legion Astartes",
+      "Deathwing Lion"
+    ],
+    "relatedPrimarchIds": [
+      "horus",
+      "guilliman",
+      "sanguinius"
+    ]
   },
   {
     "id": "primarch-ii",
@@ -24,7 +77,34 @@
     "statusDetail": "Effacé des archives — son nom et sa légion ne sont plus.",
     "description": "Le 2ᵉ primarque a été expurgé des registres impériaux durant ou avant l'Hérésie d'Horus. Aucun nom, aucune image, aucune trace. Quelques-uns murmurent qu'il aurait été détruit par décret de l'Empereur Lui-même.",
     "primaryColor": "#3a3a3a",
-    "wikiQuery": "Lost primarchs Warhammer"
+    "wikiQuery": "Lost primarchs Warhammer",
+    "epithet": "Primarque-Perdu · Le Banni",
+    "personality": "Inconnue. Effacée des archives officielles par décret de l'Empereur lui-même au lendemain d'un événement jamais documenté. Les rares fragments survivants évoquent un être brillant et instable — peut-être trop indépendant, peut-être hérétique avant l'heure, peut-être tombé en désaccord profond avec son père. La vérité reste l'un des secrets les mieux gardés de l'Imperium.",
+    "earlyLife": "Comme tous les Primarques, le Second fut conçu dans le laboratoire impérial sous Terra. Lors de la Catastrophe Warp qui les dispersa à travers la galaxie, le Second tomba sur un monde inconnu. L'Empereur le retrouva — et le déclara prêt à mener une Légion. La Seconde Légion fut formée. Puis, à un moment précis de la Grande Croisade, le Second et sa Légion entière furent effacés des archives.",
+    "greatCrusade": "Aucun document officiel ne subsiste. Quelques annales fragmentaires d'autres Légions évoquent un Primarque commandant des opérations sur la frontière galactique nord, victorieux de plusieurs mondes Compliance. Puis silence absolu. Les archives officielles à partir de cette période sautent du Premier au Troisième Primarque, ignorant les espaces vides laissés par les II et XI.",
+    "heresy": "Le Second n'apparaît dans aucun récit de l'Hérésie. Il était déjà effacé des registres avant le déclenchement du conflit. Certaines hypothèses suggèrent qu'il aurait été éliminé pour avoir prophétisé la rébellion à venir, ou pour avoir refusé d'obéir à un ordre direct. D'autres l'imaginent toujours en vie, exilé dans une dimension parallèle ou un Webway secret.",
+    "finalFate": "Effacé. Aucune dépouille, aucun reliquaire, aucun nom prononçable dans les Schola Progenium impériales. La Seconde Légion fut dispersée parmi les autres Chapitres — ses Astartes acceptés silencieusement dans les ranks des autres Légions, leurs blasons effacés, leurs noms changés. Toute mention publique du Second Primarque est passible d'exécution.",
+    "legacy": "L'absence du Second Primarque (avec celle du Onzième) est l'une des plus grandes énigmes de l'Imperium. Les Inquisiteurs de l'Ordo Originatus étudient secrètement ce mystère. Les Dark Angels prétendent en savoir plus mais n'en parlent jamais. Pour le citoyen impérial moyen, ils n'ont jamais existé.",
+    "notableBattles": [
+      {
+        "name": "[ARCHIVES SUPPRIMÉES]",
+        "summary": "Toute information concernant les batailles du Second Primarque a été expurgée par décret M30.751-A."
+      }
+    ],
+    "quotes": [
+      "« [PROPOS EXPURGÉS PAR DÉCRET IMPÉRIAL] »",
+      "« Ils ne savent même plus mon nom. C'est, peut-être, la pire forme de mort. »  — Apocryphe attribué"
+    ],
+    "galleryQueries": [
+      "Lost Primarchs warhammer",
+      "Imperium expunged",
+      "Censored archives warhammer",
+      "Black void primarch"
+    ],
+    "relatedPrimarchIds": [
+      "primarch-xi"
+    ],
+    "loreLong": "Aucun nom subsiste. Aucune image. Aucun blason. Le Second Primarque fut effacé des registres impériaux à un moment précis de la Grande Croisade — quelque part avant 002.M31, mais après le retour de Corvus Corax. Les Inquisiteurs les plus érudits suspectent une rébellion précoce, ou un prophétisme dangereux : peut-être avait-il vu venir la trahison d'Horus et tenté de prévenir l'Empereur, qui refusa l'avertissement et préféra effacer le messager. D'autres théories : sa Seconde Légion aurait été infectée par une mutation génétique chaotique, et l'Empereur aurait ordonné sa dissolution. D'autres encore : il serait retourné dans le Webway des Anciens, exilé volontairement, et y vivrait encore aujourd'hui. Les Dark Angels prétendent en savoir plus mais n'en parlent jamais — leur silence sur les Primarques Perdus est l'un des secrets les mieux gardés du Cercle Inner. Aucune Légion n'hérita ouvertement des survivants. Ils furent dispersés. Leurs blasons, brûlés. Les Astartes Seconds qui survécurent furent réincorporés dans d'autres Légions, leur passé effacé, leurs noms changés. Pour le citoyen impérial moyen, le Second n'a jamais existé. Pour les historiens patentés du Codex Imperialis, il est la « Lacune A » — l'absence qui ne peut être interrogée. Pour les Inquisiteurs Originatus, il est la chose qui doit rester dans les ombres."
   },
   {
     "id": "fulgrim",
@@ -40,7 +120,60 @@
     "homeworld": "Chemos",
     "primaryColor": "#9c2680",
     "wikiQuery": "Fulgrim",
-    "citation": "La perfection est insuffisante. Il faut transcender."
+    "citation": "La perfection est insuffisante. Il faut transcender.",
+    "epithet": "Le Phoenician · Le Monarque Parfait",
+    "personality": "Fulgrim était la perfection incarnée. Beauté physique surnaturelle, voix de soprano, esprit affûté comme un rasoir, technique de duelliste inégalée. Mais sa quête de perfection devint son piège : chaque accomplissement n'était jamais assez, chaque triomphe creusait un vide plus profond. Sa fierté était colossale, sa vanité dévorante. Slaanesh le trouva mûr.",
+    "earlyLife": "Fulgrim atterrit sur Chemos, monde-usine en déclin où les enfants travaillaient les mines depuis l'âge de cinq ans, où la durée de vie moyenne ne dépassait pas trente. Adopté par une équipe minière, Fulgrim grandit dans l'austérité industrielle. Il transforma sa colonie en cinquante ans : réformes industrielles, éducation universelle, abolition du travail des enfants. Lorsque l'Empereur arriva, Chemos prospérait — un miracle. Fulgrim accepta sans hésitation l'héritage primarchique.",
+    "greatCrusade": "La Troisième Légion fut renommée Emperor's Children — seule Légion à porter directement le titre de l'Empereur. Fulgrim sélectionnait personnellement chaque Astartes, exigeant la perfection physique et intellectuelle. Sa Légion devint la plus prestigieuse, la plus raffinée — chaque bataille était une œuvre d'art tactique. Fulgrim développa des liens étroits avec Ferrus Manus (Iron Hands) et les Imperial Fists. Il fut sur Mars négocier avec les Mechanicus, sur le palais Terran apprendre l'étiquette aristocratique. Tout le monde l'admirait. Il commençait à le savoir.",
+    "heresy": "Sur Laer, monde aquatique, Fulgrim trouva un sabre xenos antique consacré à un Greater Daemon de Slaanesh. Il le porta — pas par malveillance, par curiosité esthétique. Le daemon prenait progressivement contrôle. Fulgrim devint le visiteur d'Horus, le messager qui convainquit le Maître de Guerre de basculer. Il offrit son frère Ferrus Manus à l'Hérésie — et lorsque Ferrus refusa, Fulgrim le tua sur Isstvan V dans le 'Massacre des Drop Pod'. Fulgrim ne ressentit aucun remords — il ressentait juste un nouveau plaisir. Le Daemon en lui s'épanouissait. À la Vengeful Spirit, mourant, Fulgrim porta le coup final à Sanguinius (déjà blessé mortellement par Horus). Slaanesh ascend Fulgrim en Daemon-Primarque.",
+    "finalFate": "Fulgrim erre désormais dans le Webway et l'Œil de la Terreur. Sa silhouette gracile, ailée, fluctuante, est l'une des manifestations de Slaanesh — il représente le Désir absolu, capable de séduire un Primarque loyaliste à seule force de présence. Il combattit récemment dans la Galaxie Sud, manifestant pour aider les Emperor's Children Renégats. Sa mort physique est inenvisageable : Slaanesh ne lâche pas son trésor.",
+    "legacy": "Les Emperor's Children divisés perdurent : certains servent Fulgrim, d'autres errent en bandes de guerre Slaanesh-loyales, d'autres encore en Renégats indépendants. La quête de la perfection — devenue obsession Slaanesh-corrompue — reste leur signature. Le sigil Aquila inversé que Fulgrim porte aujourd'hui est l'un des emblèmes les plus haïs de l'Imperium.",
+    "notableBattles": [
+      {
+        "name": "Bataille de Laer",
+        "summary": "Combat aquatique majeur où Fulgrim trouva la lame possédée par un daemon de Slaanesh — début de sa corruption.",
+        "date": "M30"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Fulgrim trahit ses frères loyalistes Ferrus Manus, Vulkan, Corvus Corax. Tua personnellement Ferrus Manus en duel.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra",
+        "summary": "Fulgrim combattit aux côtés d'Horus, infiltrant le Palais Imperial, séduisant des défenseurs avec ses Noise Marines avant les frapper.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Vengeful Spirit — Mort de Sanguinius",
+        "summary": "Fulgrim porta le coup final à Sanguinius (déjà mourant), gagnant la faveur ultime de Slaanesh.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Manifestation Bataille des Eyrines",
+        "summary": "Manifestation Daemon-Primarque récente, Fulgrim apparu pour mener une bande de guerre Slaanesh contre une planète Imperium.",
+        "date": "M42"
+      }
+    ],
+    "quotes": [
+      "« La perfection. Toujours. À tout prix. Même le mien. »",
+      "« Mon frère m'a refusé. Mon frère est mort. C'est ainsi que je perfectionne la fraternité. »",
+      "« Slaanesh me dit : tu es beau. Slaanesh me dit : tu es éternel. Je l'écoute parce qu'il a raison. »",
+      "« Je suis devenu ce que les autres craignent de devenir. Et je trouve cela merveilleux. »"
+    ],
+    "galleryQueries": [
+      "Fulgrim Daemon Primarch",
+      "Fulgrim primarch Phoenician",
+      "Emperor's Children primarch",
+      "Slaanesh primarch",
+      "Fulgrim Daemon",
+      "Phoenix Conqueror"
+    ],
+    "relatedPrimarchIds": [
+      "ferrus-manus",
+      "horus",
+      "magnus"
+    ]
   },
   {
     "id": "perturabo",
@@ -55,7 +188,61 @@
     "homeworld": "Olympia",
     "primaryColor": "#6a6a72",
     "wikiQuery": "Perturabo",
-    "citation": "Aucune muraille ne tient. Pas devant moi."
+    "citation": "Aucune muraille ne tient. Pas devant moi.",
+    "epithet": "Le Maître des Sièges · Le Hammer de l'Olympie",
+    "personality": "Perturabo était amer, brillant, mésestimé — et il le savait. Génie de l'ingénierie et du siège militaire, il fut systématiquement assigné aux missions ingrates : tenir des planètes mortelles, construire des forteresses, recevoir des moqueries de ses frères qui le traitaient comme l'ouvrier de l'Imperium. Sa rage couvait. Il aimait Olympia, son monde natal, plus que toute chose. Quand l'Imperium lui ordonna de pacifier brutalement Olympia rebelle, quelque chose en lui se brisa.",
+    "earlyLife": "Perturabo grandit sur Olympia, monde-cité aux gilds d'ingénieurs. Adopté par le seigneur Dammekos, il fit déjà preuve à neuf ans de capacités tactiques surhumaines. Il devint Tyran d'Olympie, puis Roi par succession, puis fut découvert par l'Empereur. Les autres Primarques l'accueillirent avec un mélange de respect (pour son génie) et de mépris (pour son origine industrielle). Perturabo s'en souvint.",
+    "greatCrusade": "Iron Warriors étaient la Légion de siège — assaut frontal, bunkers fortifiés, sapping souterrain. Perturabo fut systematiquement envoyé aux missions impossibles : Hadre Maximae, Khariza, Qumran. Sa Légion saigna constantly. À chaque retour à Olympia, il apportait des trophées de batailles dont les autres Primarques ignoraient l'existence. Il ressentait l'humiliation : il portait les pertes que les autres ne voulaient pas porter, sans gloire ni tribut.",
+    "heresy": "Quand Olympia rebellée fut purgée brutalement par Perturabo lui-même (après la trahison de Dammekos), les Iron Warriors massacrèrent les civils — geste cathartique. Mais Perturabo ne se le pardonna pas, et l'Imperium ne le récompensa pas non plus. Quand Horus appela à la rébellion, Perturabo répondit oui. Sur Tallarn, il déclencha une guerre virale contre l'humanité — l'opération la plus horrible de l'Hérésie. Au siège de Terra, c'est lui qui dirigea la stratégie d'assaut sur le Palais Impérial — sans ses tactiques de siège, Horus n'aurait pas pénétré aussi loin. Mais à la fin, la victoire échappa à Horus, et Perturabo dut fuir vers l'Œil de la Terreur.",
+    "finalFate": "Dans l'Œil, Perturabo construit Medrengard, le monde-forteresse des Iron Warriors. C'est l'une des planètes les plus impénétrables de la galaxie — tout est piège, tout est obstacle. Slaanesh ascend Perturabo en Daemon-Primarque pour services rendus. Aujourd'hui, il commande les Iron Warriors Légion-Renégate depuis sa forteresse, lance périodiquement des Croisades de siège contre l'Imperium. Sa rage envers ses frères loyalistes (et envers son père qui ne l'a jamais reconnu) reste vive après dix mille ans.",
+    "legacy": "Les Iron Warriors restent l'une des Légions les plus organisées et meurtrières du Chaos. Leur doctrine de siège est étudiée par tous — y compris les Imperial Fists, qui développent leurs forteresses en réaction directe aux Iron Warriors. La haine entre les deux Légions est le drame héréditaire central : à chaque génération, à chaque Successor Chapter, ils se reconnaissent, ils se haïssent, ils se tuent.",
+    "notableBattles": [
+      {
+        "name": "Pacification d'Olympia",
+        "summary": "Olympia rebellée. Perturabo descendit avec sa Légion. Le bain de sang fut total. Olympia fut détruite — devant son propre regard.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Tallarn",
+        "summary": "Plus grande bataille de chars de l'histoire impériale. Perturabo libéra une arme virale, Tallarn fut transformée en désert toxique permanent.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra — Stratégie",
+        "summary": "Perturabo dirigea les opérations de siège du Palais Impérial — son génie tactique faillit emporter la victoire.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Construction de Medrengard",
+        "summary": "Forteresse-monde dans l'Œil de la Terreur. Cinq mille ans de construction, devenue l'une des planètes les plus impénétrables de la galaxie.",
+        "date": "M32"
+      },
+      {
+        "name": "Bataille des Trois Forteresses",
+        "summary": "Affrontement avec Imperial Fists Successors récents — destruction mutuelle quasi-totale.",
+        "date": "M42"
+      }
+    ],
+    "quotes": [
+      "« Je suis l'ouvrier que l'Imperium ne voulait pas. Je suis le bourreau qu'Olympia avait. Je suis ce que je suis devenu. »",
+      "« Olympia. Mon monde. Détruit par moi-même. Et personne ne pleure avec moi. »",
+      "« Le Hammer ne brise jamais. Le Hammer écrase. Le Hammer continue. »",
+      "« Mon frère Dorn et moi sommes les ingénieurs jumeaux de cette galaxie. Lui construit. Je détruis. »"
+    ],
+    "galleryQueries": [
+      "Perturabo Daemon Primarch",
+      "Iron Warriors primarch",
+      "Iron Warriors siege",
+      "Perturabo Hammer",
+      "Medrengard fortress",
+      "Iron Warriors Legion"
+    ],
+    "relatedPrimarchIds": [
+      "rogal-dorn",
+      "horus",
+      "fulgrim"
+    ],
+    "loreLong": "Perturabo fut sans doute l'âme la plus brisée des vingt fils de l'Empereur. Né sur Olympia, monde-cité d'ingénieurs et de tyrans dynastiques, il fut adopté par le seigneur Dammekos après avoir été trouvé dans un cratère encore fumant. À neuf ans, il résolvait des théorèmes que les Adeptes Mécaniques de Mars n'auraient pas reconnus ; à seize, il commandait les armées de la Tyrannie d'Olympia. Sa Légion — la IVème — fut la machine à siège de l'Empereur. Pendant deux siècles, il enchaîna les fronts les plus sanglants : Hadre Maximae, Khariza, le Trophée d'Os de Gugann, Gholghis. Là où Dorn érigeait des murs, Perturabo les abattait. Là où Horus paradait sous la couronne du Maître de Guerre, Perturabo enterrait ses fils par dizaines de milliers dans des tranchées oubliées. Le mépris fut la blessure. Quand Olympia se rebella et qu'on lui ordonna de la pacifier, il le fit — exterminant cinq millions de ses concitoyens, brûlant la cité où Dammekos l'avait élevé, gravant son nom dans la haine éternelle. L'Empereur ne le remercia pas. Il le réprimanda. Cette nuit-là, Perturabo bascula. À l'Hérésie, il libéra sur Tallarn la pire arme bactériologique jamais conçue, transformant un monde-désert en charnier-virus pour deux décennies. Au Siège de Terra, c'est lui qui dessina les sapping souterrains qui éventrèrent le Palais Imperial. Lorsque la rébellion s'effondra, il s'enfuit dans l'Œil de la Terreur et y forgea Medrengard — planète-bunker, monde-piège, citadelle où chaque pierre est calculée pour tuer l'intrus. Slaanesh, dit-on, lui offrit la Daemonisation par dérision : Perturabo est plein de fureur, mais sa rage est froide, calculée, géométrique. Il continue à attendre."
   },
   {
     "id": "jaghatai-khan",
@@ -70,7 +257,61 @@
     "homeworld": "Chogoris (Mundus Planus)",
     "primaryColor": "#c93232",
     "wikiQuery": "Jaghatai Khan",
-    "citation": "La vitesse est notre prière."
+    "citation": "La vitesse est notre prière.",
+    "epithet": "Le Khan · Le Cavalier Galactique",
+    "personality": "Jaghatai Khan était l'âme libre des Primarques. Cavalier-roi, philosophe, guerrier de la chasse, il refusait toute soumission qui ne fût pas chosen. Loyal à l'Empereur par amour, jamais par obligation. Il valorisait la rapidité, l'indépendance, la fraternité informelle. Ses White Scars naviguaient seuls — ne se mêlaient ni au Codex Astartes (qu'il méprisait), ni à la fraternité formaliste des Imperial Fists. Pendant l'Hérésie, il prit le temps de réfléchir avant de se battre — décision qui faillit le faire passer pour traître.",
+    "earlyLife": "Jaghatai grandit dans Chogoris, monde-steppe glacial. Adopté par les Talskar, peuple nomade, il devint Khan d'une horde, puis Khan-de-Khans après avoir uni les peuples. Lorsque l'Empereur arriva, Chogoris était sous siège par les Palatines — armée envahisseuse. Jaghatai défit les Palatines en utilisant la cavalerie des steppes. L'Empereur le découvrit pendant cette bataille. La Légion XV fut renommée White Scars (cicatrices blanches sur la peau, marquées par le code des steppes).",
+    "greatCrusade": "White Scars étaient la cavalerie de l'Empire — vitesse, frappe-éclair, raids profonds. Ils portaient les motoswheelz et les Stormhawks, frappaient depuis l'orbital, disparaissaient. Jaghatai fut envoyé sur les frontières les plus lointaines — il aimait l'isolement. Il perdit le sens du temps, voyageant seul dans le Webway aeldari pendant des années avec sa Légion. Quand il rentrait, les autres Primarques le trouvaient changé. Il s'éloignait.",
+    "heresy": "Jaghatai prit son temps avant de choisir camp pendant l'Hérésie. Quand Horus se rebella, Jaghatai cherchait à comprendre — était-ce vraiment Horus qui parlait, ou un esprit corrompu ? Il consulta des philosophes, médita, refusa les ordres d'Horus comme ceux du Mechanicus loyaliste. Pendant des mois, il fut considéré suspect par les deux camps. Il choisit finalement la loyauté — son honneur de Khan-de-Khans le commandait. Il rejoignit Terra à temps pour participer au Siège, frappant les positions chaos depuis l'orbital. Dans les derniers jours, lors d'une frappe Webway tactique, il disparut — son vaisseau perdu dans une tempête Warp.",
+    "finalFate": "Disparu pendant la dernière bataille à proximité de Terra. Aucun corps. Aucun reliquaire. Les White Scars ont continué à le chercher pendant dix mille ans — refusant officiellement de lui dédier un mausolée tant qu'aucune confirmation de mort n'est obtenue. Beaucoup de prophéties suggèrent qu'il erre toujours dans le Webway aeldari, attendant le bon moment pour revenir.",
+    "legacy": "Les White Scars demeurent l'une des Légions les plus indépendantes — beaucoup de leurs Successors Chapters refusent le strict Codex Astartes, préférant la doctrine cavalerie rapide de Jaghatai. Le code de la stèpe — fraternité informelle, respect pour la nature, philosophie de la chasse — survit. Les White Scars sont les rares Astartes à s'alliés ponctuellement aux Aeldari sans condition, héritage des voyages de Jaghatai dans le Webway.",
+    "notableBattles": [
+      {
+        "name": "Unification de Chogoris",
+        "summary": "Jaghatai unifia les peuples des steppes en moins de dix ans, transformant les hordes ennemies en alliés.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Bataille de Mundus Planus",
+        "summary": "White Scars défirent une race xenos par le biais d'une charge cavalerie surprise — devenue case d'étude.",
+        "date": "M30"
+      },
+      {
+        "name": "Voyage Webway",
+        "summary": "Jaghatai disparut deux ans dans le Webway, voyage controversé qui le marqua profondément.",
+        "date": "M30"
+      },
+      {
+        "name": "Bataille de Catallus",
+        "summary": "White Scars attaquèrent Iron Warriors loyalistes-douteux pendant l'Hérésie. Jaghatai prit le temps de questionner les motivations.",
+        "date": "M31"
+      },
+      {
+        "name": "Frappe Finale du Webway",
+        "summary": "Lors du Siège de Terra, Jaghatai mena un raid Webway — son vaisseau disparut dans le retour.",
+        "date": "014.M31"
+      }
+    ],
+    "quotes": [
+      "« La rapidité est la mère de la victoire. La patience est sa grand-mère. Je porte les deux dans mon sang. »",
+      "« Je ne suis loyaliste que par amour. Personne ne me commande. »",
+      "« Le Webway aeldari m'a appris des vérités que les humains craignent. Je porte ces vérités sans peur. »",
+      "« Le Khan-de-Khans choisit son chemin. Il choisit ses ennemis. Il choisit l'instant. »"
+    ],
+    "galleryQueries": [
+      "Jaghatai Khan primarch",
+      "White Scars primarch",
+      "White Scars Legion",
+      "Khan warhammer 40k",
+      "Chogoris steppe",
+      "White Scars cavalry"
+    ],
+    "relatedPrimarchIds": [
+      "leman-russ",
+      "corvus-corax",
+      "guilliman"
+    ],
+    "loreLong": "Jaghatai Khan tomba sur Chogoris, monde-steppe d'aigles et de tribus nomades. Élevé par les Talskar, peuple chassé sur les hauts plateaux par l'Empereur Khagan, il fit ce que tout enfant des steppes rêve de faire : il monta à cheval, sabre au poing, et déclencha une guerre. À vingt ans, il était devenu le Khagan ultime, ayant uni cinq cents tribus sous une seule bannière de guerre — la Foudre Blanche. L'Empereur arriva. Il reconnut son fils. Jaghatai accepta la Légion sans résistance, à condition qu'on lui laisse sa façon de combattre : la cavalerie céleste, la frappe foudroyante, jamais le siège, jamais la garnison. Les White Scars devinrent les chasseurs de l'Empereur — vitesse, flexibilité, désengagement, jamais figés. Pendant la Grande Croisade, Jaghatai parcourut plus de mondes que tout autre Primarque. Il était l'aile non-tendue, celui qui pouvait rejoindre n'importe quel front en jours, jamais en mois. Quand l'Hérésie d'Horus éclata, le Khan fut indéterminé. Pas par ambivalence — par méthode. Il interrogeait, il calculait, il refusait de juger sur ouï-dire. Quand il choisit la loyauté, il fit ce que personne n'attendait : il chevaucha à travers le Webway lui-même, par la Porte des Ténèbres, traçant à la chaîne d'or et de sang un chemin entre Terra et le Front. Il arriva sur Terra à temps pour le Siège, combattit avec une fureur feutrée, et survécut. À la mort d'Horus, Jaghatai disparut. Il chevauche, dit-on, dans le Webway depuis dix mille ans, traquant les derniers Slaaneshites qui osent souiller les routes des Anciens. Aucun de ses fils Successors n'a vu son visage depuis l'apothéose. Mais ceux qui chassent les Drukhari le plus loin dans la Toile rapportent parfois avoir entendu un cheval blanc galoper dans le brouillard psychique."
   },
   {
     "id": "leman-russ",
@@ -86,7 +327,60 @@
     "homeworld": "Fenris",
     "primaryColor": "#8090a0",
     "wikiQuery": "Leman Russ",
-    "citation": "Hurlons ensemble une dernière fois."
+    "citation": "Hurlons ensemble une dernière fois.",
+    "epithet": "Le Roi-Loup · L'Exécuteur Sacré",
+    "personality": "Leman Russ était sauvage, impulsif, fraternel — l'archétype du Primarque-guerrier. Il aimait le combat, le rire des frères, la vodka glacée de Fenris. Mais il était aussi profondément stratégique : sous l'apparence brute, un esprit calculateur. L'Empereur le considérait comme son Bourreau Sacré — exécuteur des purges quand les autres Légions hésiteraient. Russ accepta ce rôle avec une fierté sombre. Il portait le poids des massacres avec dignité, sachant que son père seul comprenait.",
+    "earlyLife": "Leman Russ tomba sur Fenris, monde de glace et de tempêtes. Élevé par les loups eux-mêmes — il devint membre d'une meute, communiquait par hurlements. Lorsque l'âge dispersa les loups, il fut adopté par le Roi Thengir des Fenrisiens. Il devint Roi-Loup à 25 ans, défit le Wolftime — légende fenrissienne. L'Empereur arriva. Les Fenrisiens, ne reconnaissant pas la divinité, défièrent l'Empereur en combat. Russ accepta — et perdit. Trois fois. Après la troisième défaite, il appela l'Empereur 'père'.",
+    "greatCrusade": "Space Wolves furent renommés ainsi — XVI Légion. Pendant la Grande Croisade, ils étaient les Bourreaux Sacrés — utilisés pour purges quand d'autres Légions refusaient. La Wolfen Curse — mutation lupine génétique — toucha certains Astartes. Russ refusa de les éliminer ; il les protégea. Cela le rapprocha de son père. La 'Wolftime' — prophétie fenrisienne — circulait : un jour, Russ partirait chasser un loup encore plus grand. Russ y croyait.",
+    "heresy": "Russ fut désigné par l'Empereur pour purger les Mille Fils de Magnus à Prospero — l'Empereur considérait Magnus hérétique pour avoir continué la sorcellerie post-Nikaea. Russ obéit. Le Burning of Prospero fut total. Magnus s'enfuit à Tzeentch. Russ continuait à combattre dans l'Hérésie — toujours loyaliste, toujours fraternel mais distant des autres Primarques. À la fin de l'Hérésie, après le triomphe à Terra et le décès de l'Empereur, Russ disparut.",
+    "finalFate": "Russ partit à la chasse — sa Wolftime promised. Il dit à ses fils : 'Je vais chasser un loup encore plus grand. Je reviendrai au moment de Wolftime.' Aucun message depuis dix mille ans. Sa Mjalnar (marteau-tonnerre) reste à Fenris dans la Faim — la salle royale du Chapitre. Les Space Wolves savent : il reviendra. À la prophétie. Pas avant.",
+    "legacy": "Les Space Wolves demeurent l'une des Légions les plus indépendantes — refus du Codex Astartes, fraternité informelle, peu de Successor Chapters (le seul, les Wolfspear, est secret et rarement mentionné). La Wolftime reste prophétie centrale du Chapitre — chaque Wolf Lord espère vivre pour la voir. La haine entre Space Wolves et Thousand Sons reste éternelle, gravée dans le génome des deux Légions.",
+    "notableBattles": [
+      {
+        "name": "Première Rencontre avec l'Empereur",
+        "summary": "Russ défia l'Empereur en duel trois fois et perdit trois fois — c'est ainsi qu'il l'appela père.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Purge de Dulan",
+        "summary": "Russ exécuta personnellement le Tyran Dulan pour avoir insulté l'Empereur. Bain de sang qui définit la doctrine du Bourreau Sacré.",
+        "date": "M30"
+      },
+      {
+        "name": "Burning of Prospero",
+        "summary": "Russ descendit avec les Space Wolves sur Prospero. Bibliothèque de Magnus brûlée. Mille Fils massacrés. Magnus s'enfuit à Tzeentch.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Yarant",
+        "summary": "Russ et Lion El'Jonson combattirent côte-à-côte (rare alliance). Première fois où les deux Primarques se respectèrent.",
+        "date": "M31"
+      },
+      {
+        "name": "Disparition vers la Wolftime",
+        "summary": "Après l'Hérésie, Russ disparut — chassant un loup encore plus grand. Aucune nouvelle depuis 10 000 ans.",
+        "date": "M31"
+      }
+    ],
+    "quotes": [
+      "« Père, je tuerai ce que tu me commandes. Mais je dormirai mal après. »",
+      "« Je reviendrai. Quand le ciel rougira, quand les flots monteront, quand la Faim hurlera. Pas avant. »",
+      "« La fureur du loup. Voilà ce que je suis. Pas plus, pas moins. »",
+      "« J'ai brûlé Prospero. J'en porte la honte. Je l'aurais refait s'il avait fallu. »"
+    ],
+    "galleryQueries": [
+      "Leman Russ primarch",
+      "Space Wolves primarch",
+      "Fenris Wolf King",
+      "Mjalnar hammer",
+      "Space Wolves Legion",
+      "Wolfen Russ"
+    ],
+    "relatedPrimarchIds": [
+      "magnus",
+      "lion-eljonson",
+      "horus"
+    ]
   },
   {
     "id": "rogal-dorn",
@@ -101,7 +395,61 @@
     "homeworld": "Inwit",
     "primaryColor": "#d4a017",
     "wikiQuery": "Rogal Dorn",
-    "citation": "Mes murs tiendront."
+    "citation": "Mes murs tiendront.",
+    "epithet": "Le Praétorien de Terra · Le Hammer Loyaliste",
+    "personality": "Rogal Dorn était la pierre angulaire du loyalisme. Stoique, droit, infiniment fiable — quand l'Empereur voulait quelqu'un qui tiendrait Terra contre l'enfer, Dorn était le choix. Il valorisait la vérité brutale, la fortification éternelle, la défense sacrée. Il méprisait les manigances. Il pleura ouvertement la mort de son père. Il porta le cercueil de l'Empereur jusqu'au Trône d'Or — geste qui défit son cœur. Il était le frère préféré de Sanguinius.",
+    "earlyLife": "Dorn tomba sur Inwit, monde glacé d'astéroïdes. Adopté par les House Inwit — clan technocratique. Il découvrit jeune sa nature primarchique : à 12 ans, il commandait déjà des forteresses spatiales. Lorsque l'Empereur arriva, Dorn dirigeait la flotte de Inwit. La transition fut lisse : Dorn accepta avec dévotion absolue. Il aima son père comme rare Primarque. Cette dévotion fut sa force et sa malédiction.",
+    "greatCrusade": "Imperial Fists, VII Légion, étaient les Praétoriens de l'Empereur. Spécialistes du siège défensif, fortification, ingénierie militaire. Dorn supervisa personnellement la construction du Phalanx — vaisseau-monde-forteresse de la taille d'une lune. Pendant la Grande Croisade, il accompagnait souvent l'Empereur en campagne — choisi pour rôle protecteur. Cette proximité était envie pour Perturabo, qui en garda longue rancœur.",
+    "heresy": "Dorn fut le grand architecte de la défense de Terra. L'Empereur lui ordonna de fortifier le Palais Impérial — Dorn fit transformer en quelques années Terra en forteresse-monde. Il prévit chaque angle d'attaque, plaça chaque batterie, calcula chaque champ de feu. Quand Horus assaillit, le siège dura 55 jours — temps gagné par Dorn pour permettre l'arrivée des renforts loyalistes (Lion El'Jonson, etc., trop tard mais pas vraiment). Quand l'Empereur abattit Horus, c'est Dorn qui descendit à la Vengeful Spirit chercher le corps de l'Empereur. Il porta le cercueil jusqu'au Trône d'Or et l'y plaça lui-même. Geste qui le brisa.",
+    "finalFate": "Dorn tomba en M31 dans une dernière mission contre les Iron Warriors traîtres dans le système Yusran. Sa main gantelée fut récupérée par les Imperial Fists comme relique sacrée. Le corps lui-même ne fut jamais retrouvé. Beaucoup pensent qu'il fut capturé et exécuté secrètement par Perturabo — ultime vengeance de son frère rival.",
+    "legacy": "Les Imperial Fists demeurent les Praétoriens de Terra. Leurs Successors Chapters (Crimson Fists, Black Templars, Soul Drinkers, etc.) sont nombreux. Le Phalanx croise éternellement aux confins du système Solar — vaisseau-monde-forteresse qui défend Terra physiquement. La haine entre Imperial Fists et Iron Warriors persiste — chaque génération, à chaque combat. La main de Dorn reste relique du Chapitre — gardée dans le Phalanx.",
+    "notableBattles": [
+      {
+        "name": "Construction du Phalanx",
+        "summary": "Dorn supervisa la construction du Phalanx — vaisseau-monde-forteresse de la taille d'une lune.",
+        "date": "M30"
+      },
+      {
+        "name": "Fortification de Terra",
+        "summary": "Dorn transforma Terra en forteresse-monde en quelques années. Le siège qui suivit dura 55 jours grâce à ses fortifications.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra",
+        "summary": "Dorn dirigea la défense personnellement. Il combattit dans tous les secteurs critiques. Sans lui, Horus aurait pris Terra.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Récupération du Corps de l'Empereur",
+        "summary": "Dorn descendit à la Vengeful Spirit, récupéra l'Empereur mourant, le porta jusqu'au Trône d'Or.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Bataille de Yusran",
+        "summary": "Dorn fut tué (probablement par Perturabo) lors d'une opération anti-Iron Warriors. Sa main fut récupérée comme relique.",
+        "date": "M31"
+      }
+    ],
+    "quotes": [
+      "« Mon Empereur. Mon père. J'ai tenu ta porte aussi longtemps qu'il fallait. »",
+      "« Les fortifications ne sont pas des murs. Ce sont des promesses. »",
+      "« Je suis Rogal Dorn. Je suis Praétorien. Je tiens. Toujours. »",
+      "« Perturabo, mon frère, mon rival éternel. Toi qui détruis ce que je construis. Le combat continue. »"
+    ],
+    "galleryQueries": [
+      "Rogal Dorn primarch",
+      "Imperial Fists primarch",
+      "Phalanx fortress",
+      "Imperial Fists Legion",
+      "Praetorian Terra",
+      "Dorn Astartes"
+    ],
+    "relatedPrimarchIds": [
+      "perturabo",
+      "sanguinius",
+      "horus"
+    ],
+    "loreLong": "Rogal Dorn fut le bouclier de l'Empereur. Né dans le cluster de glace d'Inwit, sur un monde mort où survivaient seules les plus dures cités-forteresses, il fut élevé par son grand-père comme un seigneur-glacier — austère, méthodique, indomptable. À vingt ans, Dorn commandait Inwit. À trente, il avait unifié l'amas. L'Empereur le retrouva à bord du Phalanx — vaisseau-citadelle de cinq cents kilomètres, gigantesque sphère d'acier appartenant à la dynastie d'Inwit — et reconnut en cet homme aux yeux de cobalt et au cœur de granit le maître absolu de la fortification. Dorn ne sourit jamais. Il ne plaisantait jamais. Il construisait. Pendant la Grande Croisade, ses Imperial Fists devinrent les bâtisseurs de l'Imperium : à chaque Compliance, ils élevaient une forteresse, garnison, citadelle administrative. Quand la rébellion d'Horus éclata et que l'Empereur ordonna le repli vers Terra, c'est à Dorn qu'il confia le Palais lui-même. Pendant deux ans, en huis clos avec ses Mécaniciens, il transforma le Palais Impérial en la plus grande forteresse de l'histoire humaine : trois ceintures concentriques, des murs de cent mètres, des bunkers profonds de kilomètres, des champs de mines plasma, le Lion's Gate, l'Eternity Gate. Lorsque les sept légions traîtres assaillirent, le Palais tint. Dorn combattit en personne sur les murs jusqu'au dernier jour. Après la mort d'Horus, il refusa la Régence — Guilliman l'aurait acceptée, lui jamais. Au M31, durant l'Iron Cage, Perturabo le piégea pendant vingt jours dans une géhenne d'obus et de barbelés ; Dorn perdit la moitié de sa Légion mais émergea, vivant. Il disparut au M32 lors de la Croisade des Eyes of Vengeance, embarqué dans une Black Crusade dont seuls les serviteurs Astartes Dorn-loyaux entendaient la trace. Sa main droite tranchée fut récupérée. Reliquaire vivant, elle saigne encore."
   },
   {
     "id": "konrad-curze",
@@ -117,7 +465,60 @@
     "homeworld": "Nostramo (détruite)",
     "primaryColor": "#1a1a26",
     "wikiQuery": "Konrad Curze",
-    "citation": "Je l'avais vue. Je l'attendais. Tu es en retard."
+    "citation": "Je l'avais vue. Je l'attendais. Tu es en retard.",
+    "epithet": "Le Hantise · Le Roi de la Nuit",
+    "personality": "Konrad Curze était la victime cosmique. Doté de visions précognitives terrifiantes — il voyait les meurtres, les viols, sa propre mort —, il devint sociopathe par nécessité de survie. Sur Nostramo, il fit régner la terreur pour purifier le crime. Lorsque cela ne suffit pas, il devint la terreur lui-même : Hantise. Sa folie tactique terrifiait Astartes loyalistes ET traîtres. Il savait qu'il mourrait avant la fin de l'Hérésie. Il accepta sa mort comme prophétie inévitable.",
+    "earlyLife": "Curze tomba sur Nostramo, monde-cité aux abîmes éclairés artificiellement. Survivant seul dans les ruelles, il développa précognition née de la souffrance constante. Il commença par tuer les criminels : un par un, méthodiquement. Sa silhouette ailée — costume customisé — devint la Hantise. Il fit régner la terreur quasi-justice. Lorsque l'Empereur arriva, Curze accepta — mais avec amertume. Sa Légion, VIII, fut renommée Night Lords.",
+    "greatCrusade": "Night Lords étaient les terroristes de l'Empire. Sur les mondes-Compliance, ils ne combattaient pas : ils écorchaient des civils, les empilaient en pyramides, projetaient les supplices en vox-cast galactique. La planète se rendait avant que les Astartes ne descendent. C'était efficace. C'était horrible. Les autres Primarques (notamment Sanguinius et Vulkan) étaient horrifiés. L'Empereur ne réprimanda pas Curze — assistant à ses propres rationalisations. Curze sentait son père distant.",
+    "heresy": "Curze prévit l'Hérésie. Il rejoignit Horus avec une logique froide : si la prophétie le disait, alors c'était. Il continua la terreur — mais cette fois, sans rationalisation morale. Il était devenu pure obscurité. Il sentit qu'il mourrait. Il chercha activement sa mort. Sur Tsagualsa, il invita un Assassin Callidus — l'Inquisitorial M'Shen — à venir l'assassiner. Il l'attendit en méditation. Il mourut sans résistance.",
+    "finalFate": "Konrad Curze fut assassiné par M'Shen, Assassin Callidus, sur Tsagualsa en M31. Il ne se défendit pas — sa propre prophétie l'avait commandé. Sa dépouille fut récupérée par les Night Lords loyalistes (oui, certains existent), mais cachée — ils ne voulaient pas l'utiliser comme relique politique. La Légion Night Lords demeure dispersée en bandes de guerre depuis sa mort.",
+    "legacy": "Les Night Lords demeurent une des Légions les plus haïes de l'Imperium — terreur pure comme doctrine. Pas de Daemon-Primarque pour les guider, pas de Primarque vivant. Ils se déchirent entre warbands. La Hantise est devenue mythe : sur des centaines de mondes Imperium, on dit encore que Curze marche dans les ruelles, vivant, réincarné. Probablement faux. Probablement.",
+    "notableBattles": [
+      {
+        "name": "Pacification de Nostramo",
+        "summary": "Curze fit régner la terreur sur Nostramo en tant que Hantise. Les criminels disparaissaient un par un, épinglés au mur de la cité.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Compliance de Cheraut",
+        "summary": "Curze écorcha 5 000 civils et empila les corps. La planète se rendit avant l'arrivée des Night Lords.",
+        "date": "M30"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Curze trahit ses frères loyalistes. Il combattit aux côtés de Fulgrim, Mortarion, Angron, Lorgar.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Thramas Crusade",
+        "summary": "Curze affronta Lion El'Jonson personnellement. Le combat dura des semaines. Curze fut blessé, mais survécut.",
+        "date": "M31"
+      },
+      {
+        "name": "Assassinat sur Tsagualsa",
+        "summary": "Curze accepta sa mort par la main de M'Shen, Assassin Callidus. Ne se défendit pas.",
+        "date": "M31"
+      }
+    ],
+    "quotes": [
+      "« Je vois ma mort. Je l'ai vue depuis l'enfance. Je marche vers elle sans hésitation. »",
+      "« La terreur est la seule justice. La terreur est la seule paix. »",
+      "« Mon père m'a fabriqué pour ce rôle. Je ne lui pardonne pas. »",
+      "« Hantise. Je suis Hantise. Et je suis fatigué. »"
+    ],
+    "galleryQueries": [
+      "Konrad Curze primarch",
+      "Night Lords primarch",
+      "Night Haunter",
+      "Night Lords Legion",
+      "Curze warhammer 40k",
+      "Nostramo dark city"
+    ],
+    "relatedPrimarchIds": [
+      "sanguinius",
+      "lion-eljonson",
+      "horus"
+    ]
   },
   {
     "id": "sanguinius",
@@ -133,7 +534,60 @@
     "homeworld": "Baal Secundus",
     "primaryColor": "#c9302c",
     "wikiQuery": "Sanguinius",
-    "citation": "Père. Pardonne-leur. Ils ne savent pas ce qu'ils font."
+    "citation": "Père. Pardonne-leur. Ils ne savent pas ce qu'ils font.",
+    "epithet": "Le Grand Ange · Le Sublime",
+    "personality": "Sanguinius était la grâce incarnée. Beau au-delà du naturel, ailé, doux, sage. Il était le frère préféré de presque tous les autres Primarques — Dorn, Vulkan, Guilliman l'aimaient profondément. Il savait sa propre mort à venir. Il l'embrassait. Sa précognition lui montrait son destin sur la Vengeful Spirit, face à Horus possédé. Il choisit de marcher vers cette mort en connaissance complète. Cette dignité fit pleurer l'Empereur lui-même.",
+    "earlyLife": "Sanguinius tomba sur Baal Secundus, monde irradié par une ancienne guerre nucléaire. Mutant — deux ailes blanches émergeaient de ses omoplates — il fut considéré ange descendu par les nomades baalites. Adopté, vénéré, il devint roi des tribus à l'âge adulte. Il refusait de tuer sans nécessité. L'Empereur arriva. Le bond fut immédiat — Sanguinius reconnut son père dans la divinité. La IXe Légion devint Blood Angels.",
+    "greatCrusade": "Blood Angels étaient l'élite — beauté, technique, foi. Sanguinius les choisissait personnellement. Sa Légion combattait avec une grâce qui ressemblait à de l'art. Ils étaient envoyés sur les fronts les plus prestigieux. Sanguinius était le diplomate des Primarques — médiateur des disputes, conseiller de l'Empereur. Sa précognition limitée lui montrait des visions de l'avenir : la Hérésie, sa mort. Il continuait. Il portait ce poids seul.",
+    "heresy": "Sanguinius survécut au Massacre de Signus Prime — où sa Légion entière fut piégée dans une trap-combat des Slaaneshi-Daemons. Il combattit personnellement Ka'Bandha, Greater Daemon de Khorne, et l'expulsa au Warp. Cela révéla la malédiction Blood Angels : la Soif Rouge et la Rage Noire — héritage du Genome de Sanguinius. Lors du Siège de Terra, Sanguinius commandait la défense de la Porte Éternelle pendant dix nuits avant de monter seul à la Vengeful Spirit. Il savait. Il volait. Il défia Horus possédé. Il perdit. Mais il blessa Horus — assez pour que l'Empereur frappe le coup décisif un jour plus tard.",
+    "finalFate": "Sanguinius mourut à la Vengeful Spirit, à la fin du Siège de Terra. Son corps fut récupéré par Dorn, ramené à Baal, enseveli dans les Catacombes Sanguinaire. Sa mort est l'événement le plus pleuré de l'histoire impériale. Ses fils Blood Angels portent la Soif Rouge depuis — possession daemonique latente, vampirique, qui consume des Astartes en bataille. Ils combattent toujours, espérant rendre hommage à leur père-ange.",
+    "legacy": "Sanguinius est le mythe central de l'Imperium loyaliste. Sa silhouette ailée orne les blasons partout. Son corps embaumé est le pélerinage le plus sacré pour les Astartes Blood Angels. Saint Sanguinaire est invoqué dans les batailles. Sa mort fut l'acte qui permit la victoire de l'Empereur — sacrifice cosmique. Aucun Primarque mort n'est plus aimé.",
+    "notableBattles": [
+      {
+        "name": "Pacification de Baal Secundus",
+        "summary": "Sanguinius unifia les tribus de Baal en un seul royaume — premier acte primarchique.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Massacre de Signus Prime",
+        "summary": "Sa Légion entière piégée par les Slaaneshi-Daemons. Sanguinius émergea seul, ses Astartes sauvés.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille contre Ka'Bandha",
+        "summary": "Sanguinius combattit le Bloodthirster en duel et l'expulsa au Warp. Une des bataillesons-Daemon les plus célèbres.",
+        "date": "M31"
+      },
+      {
+        "name": "Défense de la Porte Éternelle de Terra",
+        "summary": "Sanguinius commandait la défense de la Porte. Pendant dix nuits, il tint contre les hordes daemoniaques.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Bataille avec Horus à la Vengeful Spirit",
+        "summary": "Sanguinius monta seul. Combattit Horus possédé. Mourut. Mais blessa Horus assez pour permettre la frappe finale de l'Empereur.",
+        "date": "014.M31"
+      }
+    ],
+    "quotes": [
+      "« Si je dois tomber, que ce soit en regardant l'Empereur droit dans les yeux. Pas autrement. »",
+      "« J'ai vu ma mort. C'est belle. Je ne la fuirai pas. »",
+      "« Mon frère Horus. Je t'aimais. Je t'aimerai jusqu'à la fin. »",
+      "« Père, je viens à toi. La porte est tenue. Maintenant frappe. »"
+    ],
+    "galleryQueries": [
+      "Sanguinius primarch",
+      "Blood Angels primarch",
+      "Sanguinius angel",
+      "Blood Angels Legion",
+      "Sanguinius Vengeful Spirit",
+      "Great Angel"
+    ],
+    "relatedPrimarchIds": [
+      "horus",
+      "rogal-dorn",
+      "guilliman"
+    ]
   },
   {
     "id": "ferrus-manus",
@@ -148,7 +602,56 @@
     "homeworld": "Medusa",
     "primaryColor": "#4a4a4a",
     "wikiQuery": "Ferrus Manus",
-    "citation": "La chair est faiblesse. L'acier est éternel."
+    "citation": "La chair est faiblesse. L'acier est éternel.",
+    "epithet": "Le Gorgon · Mains-de-Fer",
+    "personality": "Ferrus Manus était la fierté du métal. Né avec des mains-d'argent organiques — résultat d'avoir vaincu un dragon-serpent métallique sur Medusa — il symbolisait la force pure, la résilience inflexible, l'orgueil industriel. Son meilleur ami était Fulgrim. Cette amitié fut sa perte. Quand Fulgrim fut corrompu par Slaanesh et tenta de convaincre Ferrus de basculer, Ferrus refusa. Fulgrim lui trancha la tête.",
+    "earlyLife": "Ferrus Manus tomba sur Medusa, monde de tempêtes magnétiques où les Avernii (peuple natal) survivaient en troupes guerrières clannish. Adopté par le clan Vatten Stormcaller, il combattit le Asirnoth — dragon-serpent métallique cracheur de feu. Il vainquit en plongeant ses mains dans le magma volcanique pour saisir le serpent — ses mains se transformèrent en argent vivant. Il devint Ironheart, premier chef-Astartes des Avernii. L'Empereur arriva, le reconnut.",
+    "greatCrusade": "Iron Hands, Xe Légion, étaient l'industrie martiale. Ferrus considérait la chair faiblesse — chaque Astartes Iron Hand remplaçait progressivement ses membres par des augmentations cybernétiques. La Légion ressemblait à des cyborgs. Ferrus combattit aux côtés de Fulgrim sur d'innombrables fronts. Fulgrim était le frère qu'il avait choisi.",
+    "heresy": "Quand Fulgrim, déjà corrompu par Slaanesh, vint visiter Ferrus pour le convaincre de rejoindre Horus, Ferrus refusa avec une violence verbal extreme. Fulgrim partit, blessé. Lors du Massacre du Drop Pod sur Isstvan V, Fulgrim chargea Ferrus en duel personnel. Le combat dura plusieurs heures. Ferrus était plus fort. Mais Fulgrim avait une lame xenos possédée — et Ferrus baissa sa garde un moment. Fulgrim trancha la tête de Ferrus d'un coup. La main d'argent de Ferrus glissa au sol, libre. La tête fut emportée par Fulgrim — geste de victoire daemonique.",
+    "finalFate": "Ferrus Manus est mort sur Isstvan V, décapité par Fulgrim. Son corps repose dans les catacombes de Medusa. Sa tête, volée par Fulgrim, n'a jamais été récupérée — beaucoup pensent qu'elle sert encore de talisman au Daemon-Primarque. Les Iron Hands gardent l'une de ses mains-argent comme relique du Chapitre.",
+    "legacy": "Iron Hands sont l'une des Légions les plus zélées dans l'augmentation cybernétique — chair faible, machine sacrée. Leur doctrine 'la chair est traîtresse' s'inspire directement de la mort de Ferrus (chair = faiblesse qui a permis Fulgrim de le tuer). Beaucoup d'Iron Hands modernes sont 80%+ machine. Iron Hands éprouvent une haine éternelle envers Emperor's Children, dont l'écho continue dans tous leurs Successor Chapters.",
+    "notableBattles": [
+      {
+        "name": "Combat contre l'Asirnoth",
+        "summary": "Ferrus plongea ses mains dans le magma pour vaincre le dragon-serpent métallique. Mains transformées en argent vivant.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Bataille de One Hundred Worlds",
+        "summary": "Ferrus et Fulgrim cooperent dans une campagne légendaire — symbole de leur fraternité.",
+        "date": "M30"
+      },
+      {
+        "name": "Confrontation avec Fulgrim sur Isstvan III",
+        "summary": "Fulgrim, déjà corrompu, tenta de convaincre Ferrus de rejoindre Horus. Ferrus refusa avec violence verbale.",
+        "date": "M31"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Ferrus chargea Fulgrim en duel personnel. Combat de plusieurs heures. Fulgrim utilisa la lame xenos. Ferrus décapité.",
+        "date": "M31"
+      }
+    ],
+    "quotes": [
+      "« Mon ami. Mon frère. Tu me trahis. La chair est traîtresse, et tu l'es devenu. »",
+      "« Mes mains sont d'argent. Mon coeur est de fer. Mon esprit est de glace. Je suis Ferrus Manus. »",
+      "« La chair faillit. La machine endure. Voilà notre voie. »",
+      "« Fulgrim. Tu seras vu pour ce que tu es. Le miroir te montrera. »"
+    ],
+    "galleryQueries": [
+      "Ferrus Manus primarch",
+      "Iron Hands primarch",
+      "Ferrus Manus mains argent",
+      "Iron Hands Legion",
+      "Medusa Iron Hands",
+      "Gorgon Astartes"
+    ],
+    "relatedPrimarchIds": [
+      "fulgrim",
+      "rogal-dorn",
+      "horus"
+    ],
+    "loreLong": "Ferrus Manus fut peut-être le primarque le plus visiblement non-humain : ses bras à mi-coude étaient devenus de l'argent vif liquide — du Necrodermis, métal vivant des Anciens — qu'il pouvait modeler à volonté. Il tomba sur Medusa, monde-volcan en proie aux tempêtes ferreuses où la vie même est une rébellion contre la matière. Élevé par les clans guerriers de la Toundra de Cendre, il acquit jeune une réputation de chasseur de monstres — culminant avec la traque légendaire d'Asirnoth, le serpent d'argent dont les écailles devinrent ses bras. L'Empereur le retrouva sur Medusa et reconnut en lui la rage et la pureté de la matière brute. La Xème Légion devint Iron Hands — fanatiques de l'augmentation cybernétique, doctrine « Faiblesse de la Chair », adeptes d'une perfection mécanique. Ferrus était ami absolu de Fulgrim, son antithèse esthétique. Quand Fulgrim arriva sur Iydris — déjà corrompu par la lame Slaaneshie — pour le convaincre de basculer, Ferrus refusa avec dédain. Sur Isstvan V, lors du fameux Massacre des Drop Pod, sept Légions tombèrent dans le piège d'Horus : Iron Hands, Salamanders, Raven Guard pour les loyalistes ; Emperor's Children, Iron Warriors, Word Bearers, Night Lords pour les traîtres. Au paroxysme du combat, Ferrus chargea Fulgrim. Le duel dura cinq heures. La lame daemonique fit ce que Fulgrim ne pouvait pas faire seul. Ferrus tomba, décapité par son propre frère. Sa tête disparut dans les ruines. Son corps fut récupéré in extremis par les Iron Hands survivants. Au M42, lors de la Réveil de Guilliman, des rumeurs courent : un guerrier-cyborg massif, bras d'argent vif, traverserait le Maelstrom de Damocles pour traquer le Phoenician. Aucune confirmation. Mais les Iron Hands de Clan Avernii ne demandent rien d'autre que de chercher."
   },
   {
     "id": "primarch-xi",
@@ -159,7 +662,34 @@
     "statusDetail": "Effacé des registres — au même titre que le IIᵉ.",
     "description": "Le 11ᵉ primarque, lui aussi expurgé. Aucun récit, aucun témoin n'a survécu. Certains conspirationnistes lient ces disparitions au sceau du Webway.",
     "primaryColor": "#3a3a3a",
-    "wikiQuery": "Lost primarchs Warhammer"
+    "wikiQuery": "Lost primarchs Warhammer",
+    "epithet": "Primarque-Perdu · Le Banni Second",
+    "personality": "Comme le Second, l'Onzième Primarque a été expurgé. Aucune information personnelle ne subsiste.",
+    "earlyLife": "Conçu sous Terra avec ses 19 frères. Lors de la Catastrophe Warp, projeté sur un monde inconnu. Retrouvé par l'Empereur. Légion XI formée. Puis, à un moment précis de la Grande Croisade — vraisemblablement avant l'Hérésie d'Horus — le Onzième et sa Légion entière disparurent des registres officiels.",
+    "greatCrusade": "[ARCHIVES SUPPRIMÉES] — aucun document officiel ne mentionne le rôle de la Onzième Légion durant la Grande Croisade. Quelques annales fragmentaires d'autres Légions (notamment des Iron Hands) suggèrent un Primarque ayant commandé des opérations dans les confins galactiques sud avant son effacement.",
+    "heresy": "Le Onzième n'apparaît dans aucun récit de l'Hérésie. Comme le Second, il était déjà expurgé avant le déclenchement du conflit. Hypothèses : élimination préventive (par crainte de prophétie), refus d'ordre, conflit doctrinal majeur avec l'Empereur.",
+    "finalFate": "Effacé. Comme le Second. La Légion XI fut dispersée parmi les autres Chapitres, ses Astartes acceptés silencieusement, leurs blasons effacés, leurs noms changés.",
+    "legacy": "Mystère. Avec le Second, l'Onzième est l'une des plus grandes énigmes de l'Imperium. Ordo Originatus de l'Inquisition étudie en secret. Les Dark Angels prétendent en savoir plus que ce qu'ils n'ont jamais révélé.",
+    "notableBattles": [
+      {
+        "name": "[ARCHIVES SUPPRIMÉES]",
+        "summary": "Toute information concernant les batailles du Onzième Primarque a été expurgée par décret M30.751-A."
+      }
+    ],
+    "quotes": [
+      "« [PROPOS EXPURGÉS PAR DÉCRET IMPÉRIAL] »",
+      "« Mon nom est silence. Mon visage est ombre. Mon Légion est dispersée. Et même cette phrase est apocryphe. »"
+    ],
+    "galleryQueries": [
+      "Lost Primarchs warhammer",
+      "Imperium expunged",
+      "Censored archives warhammer",
+      "Black void primarch"
+    ],
+    "relatedPrimarchIds": [
+      "primarch-ii"
+    ],
+    "loreLong": "Comme le Second, le Onzième Primarque fut effacé. L'Onzième Légion n'apparaît dans aucun roll-call officiel après le milieu de la Grande Croisade. Le silence officiel est total. Mais les théories abondent : le Onzième aurait été un primarque mystique, peut-être psychique trop puissant, peut-être dévoué à des entités daemoniaques avant l'heure. Une autre théorie suggère qu'il aurait été un primarque-femme — réalité que l'Imperium aurait censurée pour préserver la cohérence dogmatique de la mâle-fraternité primarchique. Une troisième théorie : il aurait été le primarque le plus rebelle, ouvertement ennemi de la doctrine impériale, et l'Empereur l'aurait fait exécuter. Comme pour le Second, les Astartes Onzièmes survivants furent réincorporés ailleurs, leur passé effacé. Les Dark Angels — encore eux — sont soupçonnés de garder une partie des archives. Le Sigillite Malcador, avant de disparaître, aurait laissé un parchemin dans la Cathédrale du Trône d'Or comportant les noms exacts des Deux Primarques Perdus. Aucun Inquisiteur n'a accédé à ce parchemin depuis le M32. Pour l'humanité ordinaire : ils n'existent pas. Mais sur certains mondes lointains, tribus obscures, des fresques montrent vingt frères. Pas dix-huit."
   },
   {
     "id": "angron",
@@ -175,7 +705,60 @@
     "homeworld": "Nuceria",
     "primaryColor": "#8b1a1a",
     "wikiQuery": "Angron",
-    "citation": "DU SANG ! POUR LE TRÔNE DE SANG !"
+    "citation": "DU SANG ! POUR LE TRÔNE DE SANG !",
+    "epithet": "Le Roi du Sang · Le Massacreur Rouge",
+    "personality": "Angron était la rage incarnée. Implanté avec les Butcher's Nails — clous neuronaux qui transformaient toute émotion en fureur — il vécut sa vie dans la douleur. Lorsqu'il riait, les Nails punissaient. Lorsqu'il aimait, les Nails punissaient. Seule la rage était soulagement. Il fit l'Hérésie sans illusion : l'Empereur l'avait sauvé sans guérir les Nails (peut-être impossible). Sa colère envers son père ne fut jamais oubliée. Khorne lui offrit l'éternité de la rage. Il accepta avec gratitude féroce.",
+    "earlyLife": "Angron tomba sur Nuceria, monde-empire d'esclaves. Capturé enfant, vendu comme gladiateur. Implanté avec les Butcher's Nails — torture neurologique. Il survécut, devint Champion des Gladiateurs, mena une révolte d'esclaves. La révolte allait gagner — quand l'Empereur arriva. L'Empereur le sauva à un moment où ses compagnons gladiateurs allaient mourir au combat. Angron ne pardonna jamais. L'Empereur n'était pas venu pour eux ; il était venu pour le Primarque.",
+    "greatCrusade": "World Eaters, XII Légion, étaient les Astartes-gladiateurs. Angron fit implanter à chaque Astartes les Butcher's Nails — partage de la malédiction. La Légion combattait sans tactique, juste rage pure. Sur les Compliance, ils massacraient civils sans distinction. Les autres Primarques — Sanguinius, Vulkan, Roboute Guilliman — étaient horrifiés. L'Empereur sentait l'effondrement venir. Il essaya de retirer les Nails à Angron. Échec.",
+    "heresy": "Angron rejoignit Horus avec joie froide. Sur Isstvan III, il participa au massacre. Sur Armatura, dans la galaxie, il combattit Khorne-frenzy permanent. À la Vengeful Spirit, après la mort d'Horus, Angron tenait à peine debout — Nails enflammées. Khorne lui offrit l'éternité. Angron accepta. Ascendu Daemon-Primarque, son corps gigantesque (15 mètres) émergea du Warp.",
+    "finalFate": "Angron erre désormais dans le Warp et l'Œil de la Terreur. Ses manifestations physiques sur la galaxie sont rares mais catastrophiques — chaque apparition tue des millions. Sa rage est son éternité. Il ne ressent plus la douleur des Butcher's Nails — Khorne l'a guéri par la grâce divine du Sang. Mais il garde la haine.",
+    "legacy": "Les World Eaters demeurent la plus brutale Légion-Renégate. Pas de stratégie, pas de hiérarchie sauf force brute. Beaucoup combattent en bandes minuscules, déchirant Imperium par chaque planète. Khârn le Traître les commande quand il est présent. Angron lui-même est invoqué par rituel sanglant — chaque manifestation est un événement galactique majeur.",
+    "notableBattles": [
+      {
+        "name": "Révolte des Gladiateurs sur Nuceria",
+        "summary": "Angron mena ses compagnons gladiateurs dans une révolte d'esclaves. Allait gagner avant l'arrivée de l'Empereur.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Massacre de Isstvan III",
+        "summary": "Angron participa au bombardement virus de la Légion loyaliste sur Isstvan III. Massacre clé du début de l'Hérésie.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Armatura",
+        "summary": "Angron combattit en frenzy permanent. Tua personnellement plusieurs Astartes loyalistes.",
+        "date": "M31"
+      },
+      {
+        "name": "Vengeful Spirit — Ascension Daemon",
+        "summary": "Khorne ascendit Angron en Daemon-Primarque pendant les derniers jours de la Hérésie. Corps gigantesque.",
+        "date": "M31"
+      },
+      {
+        "name": "Manifestation sur Vraks",
+        "summary": "Récente manifestation physique. Détruisit une planète Imperium en quelques jours. Catastrophe galactique.",
+        "date": "M42"
+      }
+    ],
+    "quotes": [
+      "« TUER ! TUER ! TUER ! POUR KHORNE ! POUR LE SANG ! POUR LA RAGE ! »",
+      "« Mon père m'a sauvé pour mieux me damner. Sans Nails, je serais mort heureux. »",
+      "« Khorne m'a guéri. Ma rage est désormais éternelle. C'est la libération que mon père m'avait refusée. »",
+      "« Mes compagnons gladiateurs sont morts. Je vis. C'est ma honte. »"
+    ],
+    "galleryQueries": [
+      "Angron Daemon Primarch",
+      "World Eaters primarch",
+      "Khorne primarch",
+      "Angron rage",
+      "World Eaters Legion",
+      "Butcher's Nails"
+    ],
+    "relatedPrimarchIds": [
+      "horus",
+      "fulgrim",
+      "mortarion"
+    ]
   },
   {
     "id": "guilliman",
@@ -191,7 +774,60 @@
     "homeworld": "Macragge",
     "primaryColor": "#1d4ba0",
     "wikiQuery": "Roboute Guilliman primarch",
-    "citation": "Je gagne du temps. Quelqu'un d'autre devra gagner la victoire."
+    "citation": "Je gagne du temps. Quelqu'un d'autre devra gagner la victoire.",
+    "epithet": "L'Avenging Son · Le Législateur",
+    "personality": "Roboute Guilliman était le politique des Primarques. Stratège supérieur, administrateur visionnaire, doté d'un sens diplomatique aigu. Il rédigea le Codex Astartes — bible militaire de tous les Astartes pendant 10 000 ans. Mais il portait aussi le poids du doute : était-ce nécessaire ? L'Imperium qu'il créait était-il le meilleur possible ? Il fut le frère le plus pragmatique — Sanguinius l'aimait, Dorn l'admirait. Magnus le respectait sans réserve. Au retour de stase, il regarda l'Imperium qu'il n'avait pas vu depuis 10 000 ans, et fut horrifié de la dégénérescence — religiosité fanatique, brutalité de l'Inquisition, perte de la science.",
+    "earlyLife": "Guilliman tomba sur Macragge, monde aristocratique. Adopté par Konor Guilliman, frère du dirigeant. Roboute était brillant dès son enfance — à 12 ans, il commandait les armées de Macragge. À 20 ans, il était co-Consul de Macragge. Lorsque l'Empereur arriva, Roboute prit immédiatement le commandement des Ultramarines. Pas de drama, pas de résistance — juste accomplissement.",
+    "greatCrusade": "Ultramarines devinrent la plus grande Légion (en effectifs) — 250 000+ Astartes au pic. Roboute construisit l'Ultramar — empire dans l'empire, 500 mondes administrés directement par les Ultramarines. Sa doctrine : pacification d'abord, intégration ensuite. Il combattait avec stratégie chirurgicale — pas de massacre inutile. L'Empereur le considérait son fils le plus fiable. Lorsque l'Hérésie éclata, Guilliman fut presque coupé de Terra par les Iron Warriors et les Word Bearers — il fonda l'Imperium Secundus, empire de remplacement où Sanguinius fut Empereur dépressivement.",
+    "heresy": "Guilliman commandait depuis Imperium Secundus tout en marchant pour rejoindre Terra. Il arriva trop tard pour participer au Siège — ses fils Ultramarines le faisaient pour lui. Il combattit Iron Warriors et Word Bearers dans le système Calth (Underworld War). Lorsque Horus mourut, Guilliman entra en Terra. Il y trouva l'Empereur sur le Trône d'Or — au-delà de la mort mais non-mort. Il accepta la régence de l'Imperium et passa le restant de l'Hérésie à structurer le Codex Astartes — division des Légions en Chapitres de 1 000 Astartes chacun, prévention de toute future Hérésie. Lors du Schism du Mechanicus en M31, Guilliman fut blessé mortellement par Fulgrim avec la Lame de Laer (sabre xenos possédée). Placé en stase à Macragge.",
+    "finalFate": "Pendant 10 000 ans, Guilliman dormit sur Macragge dans un champ de stase. En 999.M41, Belisarius Cawl (Adeptus Mechanicus) et Yvraine (Aeldari Ynnari) se réunirent pour le ressusciter. Le Sacré-Cœur d'Aeldari guérit ses blessures, le Cawl Inferior contint sa blessure psychique. Guilliman s'éveilla. Confronté à l'Imperium qu'il avait créé devenu fanatique-religieux, il fut horrifié. Il commande aujourd'hui l'Indomitus Crusade — repoussant les ténèbres, stabilisant l'Imperium Sanctus, recevant aux côtés de Cawl les nouveaux Astartes Primaris.",
+    "legacy": "Guilliman est l'architect de l'Imperium qu'on connaît. Le Codex Astartes structure 1000+ Chapitres pendant 10 000 ans. L'Ultramar reste le coeur structuré de l'Imperium. Les Ultramarines et leurs Successor Chapters (~5000 Chapitres) sont la plus grande lignée Astartes. Son retour est l'événement qui sauva probablement l'Imperium en M42 — sans lui, Cadia aurait pu déclencher l'effondrement total.",
+    "notableBattles": [
+      {
+        "name": "Compliance d'Ultramar",
+        "summary": "Guilliman pacifia 500 mondes en quelques décennies, créant l'Ultramar — empire dans l'empire.",
+        "date": "M30"
+      },
+      {
+        "name": "Battle of Calth",
+        "summary": "Word Bearers attaquèrent le système Calth par surprise. Guilliman dirigea la défense brillante. Plus de 25 ans de guerre sous-terraine s'ensuivirent.",
+        "date": "M31"
+      },
+      {
+        "name": "Imperium Secundus",
+        "summary": "Guilliman, coupé de Terra, fonda Imperium Secundus avec Sanguinius comme Empereur. Tentative désespérée mais structurée.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra (arrivée tardive)",
+        "summary": "Guilliman arriva trop tard pour participer directement au Siège. Ses fils Ultramarines combattaient pour lui.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Indomitus Crusade",
+        "summary": "Au réveil en 999.M41, Guilliman lança l'Indomitus — 11 ans de campagne pour repousser les ténèbres après la chute de Cadia.",
+        "date": "999.M41-010.M42"
+      }
+    ],
+    "quotes": [
+      "« Tant que je vivrai, l'Imperium tiendra. Tant que je penserai, il s'étendra. »",
+      "« J'ai dormi pendant 10 000 ans. Quand je me suis réveillé, j'ai vu un Imperium fanatique qui adore mon père comme dieu. Mon père qui détestait la religion. C'est ironique. C'est tragique. C'est ce que nous avons. »",
+      "« Le Codex Astartes me sauve, et m'enferme. Comme tout codex militaire. »",
+      "« Je suis le Législateur. Je suis aussi celui qui doute. Les deux ne s'opposent pas. »"
+    ],
+    "galleryQueries": [
+      "Roboute Guilliman primarch",
+      "Ultramarines primarch",
+      "Guilliman Hand of Dominion",
+      "Ultramarines Legion",
+      "Indomitus Crusade",
+      "Avenging Son"
+    ],
+    "relatedPrimarchIds": [
+      "sanguinius",
+      "horus",
+      "rogal-dorn"
+    ]
   },
   {
     "id": "mortarion",
@@ -206,7 +842,61 @@
     "homeworld": "Barbarus",
     "primaryColor": "#6a6a30",
     "wikiQuery": "Mortarion",
-    "citation": "La maladie est libération. La pourriture est vérité."
+    "citation": "La maladie est libération. La pourriture est vérité.",
+    "epithet": "Le Pâle Roi · Le Reaper of Men",
+    "personality": "Mortarion était l'amer indépendant. Adopté serf par les nécromants xenos sur Barbarus, il développa résistance physique surhumaine et haine viscérale envers la magie/psy. Il refusa toujours la psy à ses Astartes — paradoxe puisqu'il dut accepter le pacte daemonique de Nurgle pour les sauver. Sa relation avec l'Empereur fut compliquée : l'Empereur dut intervenir personnellement pour vaincre le maître nécromant de Mortarion, humiliation que Mortarion ne pardonna pas.",
+    "earlyLife": "Mortarion grandit serf sur Barbarus, monde toxique où les nécromants xenos régnaient sur les serfs humains. Adopté par un nécromant comme spectacle (le maître voulait voir l'enfant primarchique grandir et briser). Mortarion développa résistance immunitaire surhumaine — pollutions, toxines, asphyxie. Il rebella, mena une révolte des serfs. Lorsque l'Empereur arriva, Mortarion proposa un défi : vaincre seul son maître nécromant. L'Empereur dut intervenir pour ne pas voir Mortarion mourir. Mortarion accepta la primarchie, mais avec ressentiment.",
+    "greatCrusade": "Death Guard, XIV Légion, étaient les sentinelles toxiques. Mortarion choisissait Astartes capable de supporter conditions toxiques. Sa Légion combattait sur les pires mondes — atmosphères corrompues, planètes empoisonnées. Il refusa toujours psykers dans sa Légion — méfiance envers le Warp.",
+    "heresy": "Mortarion choisit la rébellion par fraternité avec Horus, par rancœur envers l'Empereur. Mais sa Légion fut catastrophiquement piégée dans le Warp lors de leur transit vers Terra. Le navire Endurance fut envahi par la Peste de l'Espèce — fléau de Nurgle. Mortarion désespéré accepta le pacte avec Nurgle : ses hommes survivraient mais transformés en porteurs immortels de pestes. Plague Marines naquirent. Mortarion fut ascendu Daemon-Primarque par Nurgle. Il combattit ensuite à Terra avec sa Légion pestilent.",
+    "finalFate": "Mortarion erre dans le Warp et l'Œil de la Terreur. Sa Plague Fleet — flotte de vaisseaux putréfiés — frappe périodiquement les mondes Imperium, propageant la Peste Nurgle. Mortarion lui-même est invoqué par rituel pestilent. Sa rage envers son père Empereur reste vive après dix mille ans.",
+    "legacy": "Death Guard reste l'une des Légions Renégates les plus structurées — paradoxe puisque chaque Astartes est porteur de pestilence. Leur doctrine : patience, pourriture, pestilence. Beaucoup d'opérations sont des sièges biologiques de mondes — pestes lancées avant l'attaque conventionnelle. Typhus commande sur le terrain quand Mortarion erre.",
+    "notableBattles": [
+      {
+        "name": "Révolte des Serfs sur Barbarus",
+        "summary": "Mortarion mena la révolte des serfs contre les nécromants xenos. Allait gagner — l'Empereur intervint au dernier moment.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Mortarion participa à la trahison massacrant Iron Hands, Salamanders, Raven Guard.",
+        "date": "M31"
+      },
+      {
+        "name": "Voyage vers Terra et Pact avec Nurgle",
+        "summary": "Death Guard piégée dans le Warp. Plague de Nurgle. Mortarion accepta le pacte. Plague Marines créés.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra",
+        "summary": "Mortarion combattit aux côtés d'Horus, déchaînant pestes sur les défenseurs.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Bataille du Plague Planet",
+        "summary": "Construction du Plague Planet dans l'Œil de la Terreur. Sanctuaire Death Guard.",
+        "date": "M32"
+      }
+    ],
+    "quotes": [
+      "« Mon père m'a sauvé. Mon père m'a humilié. Je ne sais pas lequel de ces deux choses est pire. »",
+      "« Je suis mort mille fois. Je vis encore. Mon souffle est votre fin. »",
+      "« Nurgle m'a offert l'éternité. Une éternité pourrie, mais éternité quand même. »",
+      "« Le Pâle Roi marche encore. Et il vous apporte le don de la pourriture. »"
+    ],
+    "galleryQueries": [
+      "Mortarion Daemon Primarch",
+      "Death Guard primarch",
+      "Mortarion scythe Silence",
+      "Death Guard Legion",
+      "Nurgle primarch",
+      "Plague Marines"
+    ],
+    "relatedPrimarchIds": [
+      "typhus",
+      "horus",
+      "magnus"
+    ],
+    "loreLong": "Mortarion fut élevé par un cauchemar. Il tomba sur Barbarus — monde-marais empoisonné où les hauteurs étaient tenues par des sorciers immortels nourris de souffrance, et les plaines par les humains-esclaves qui étouffaient lentement dans les vapeurs toxiques. Le bébé-primarque fut trouvé par le sorcier-tyran Necare, le plus puissant des seigneurs de Barbarus, qui le baptisa Mortarion — « celui qui apporte la mort » — et entreprit de l'élever comme arme. Mortarion grandit en captivité, regardant chaque jour ses frères humains mourir aux pieds de son maître. Quand il eut l'âge, il s'enfuit, descendit dans les plaines empoisonnées, retrouva sa famille adoptive humaine, et apprit ce que les sorciers ne savaient pas : la haine. Pendant deux décennies, Mortarion construisit l'armée des Plaines — humains gazés, jeunes filles vengeresses, hommes-fauves — et entreprit l'extermination méthodique des sorciers de Barbarus. Lorsque seul Necare survivait, dans la plus haute citadelle de la planète, Mortarion entama l'ascension finale. Il aurait gagné — il aurait tué Necare seul à mains nues — si l'Empereur n'était arrivé à ce moment précis et n'avait téléporté son fils, devenu inconscient sous les vapeurs trop denses, à bord du Bucephalus. Cette interruption fut, pour Mortarion, la première trahison de son père. Il ne pardonna jamais. Lorsque l'Hérésie éclata, Mortarion bascula avec une rage froide. Sa Légion — Death Guard — fut frappée d'une plague Slaaneshie/Nurglesque dans le Warp, et Mortarion offrit ses fils à Nurgle pour les sauver de la dissolution. Il devint Daemon-Primarque de Nurgle, immense, gris-vert, gangrené, suspendu dans une cape de mouches. Aujourd'hui, depuis le Plague Planet dans l'Œil, il commande les Plague Marines et les Death Guard Renégats. Récemment, lors de la Plague War sur Ultramar (M42), il revint en personne attaquer Guilliman — le seul de ses frères qui le hait personnellement."
   },
   {
     "id": "magnus",
@@ -222,7 +912,60 @@
     "homeworld": "Prospero (rasée)",
     "primaryColor": "#c43a26",
     "wikiQuery": "Magnus the Red primarch",
-    "citation": "Le savoir est puissance. Et la puissance corrompt."
+    "citation": "Le savoir est puissance. Et la puissance corrompt.",
+    "epithet": "Magnus le Rouge · Le Cyclope",
+    "personality": "Magnus le Rouge était le savant des Primarques. Le plus grand psyker mortel jamais né, doté d'un cyclope-œil unique manifestation de son pouvoir, il était fasciné par le Warp et les mystères psy. Sa Bibliothèque sur Prospero contenait tout le savoir psy de l'humanité. Mais sa hubris fut sa perte — il refusa l'interdit de l'Empereur, pensant que son intellect lui permettait d'éviter la corruption. Tzeentch attendait. Quand Magnus essaya d'avertir son père de la rébellion d'Horus par psy-projection, le sortilège détruisit le portail psy de Terra et déclencha la séquence catastrophique qui mena à la chute des défenses contre Khaine et la perte de la stabilité psy de l'Imperium.",
+    "earlyLife": "Magnus tomba sur Prospero, monde-cité de bibliothèques. Adopté par les psy-savants prosperan, il développa précognition supérieure jeune. À 8 ans, il commandait des bibliothèques psy. À 20 ans, il était reconnu comme le plus grand psyker prosperan. Lorsque l'Empereur arriva, Magnus reconnut son père — partage du Don psy. La Légion XV devint Mille Fils.",
+    "greatCrusade": "Mille Fils étaient la Légion psy. Chaque Astartes était psyker initié. Sur les Compliance, ils utilisaient pyromancie, télépathie, divination. Magnus enrichit la Bibliothèque Prosperan avec textes Aeldari, fragments de Standard Template Constructs, secrets Cthonian. Il fut au Concile de Nikaea où l'Empereur interdit la psy aux Astartes (sauf Bibliothécaires sanctionnés). Magnus accepta publiquement, mais continua secrètement les disciplines avancées.",
+    "heresy": "Quand Horus se rebella, Magnus essayé d'avertir son père par psy-projection — projetant son astral à travers l'Empereur. La force psychique brisa le portail psy de Terra. L'Empereur, furieux, ordonna à Russ d'arrêter Magnus. Russ descendit sur Prospero avec les Space Wolves. Le Burning of Prospero fut total. Bibliothèque détruite. Mille Fils massacrés. Magnus, désespéré, accepta le pacte avec Tzeentch : il sauva les âmes de ses Fils en les transformant en armures animées (Rubric of Ahriman composé par Ahriman, son apprenti). Magnus ascend Daemon-Primarque.",
+    "finalFate": "Magnus dirige aujourd'hui la Tour Fluctuante — citadelle daemonique au cœur du Webway, sanctuaire Tzeentch. Il commande les Mille Fils Légion-Renégate, surveille tous les psykers de la galaxie via précognition Tzeentch-augmentée. Sa relation avec Tzeentch est ambivalente : il sait que Tzeentch le manipule, mais accepte parce qu'il a perdu autre option. Il n'a jamais vraiment renoncé à l'Imperium — seulement à l'Empereur. Si l'Empereur revient un jour, Magnus pourrait reverser.",
+    "legacy": "Mille Fils restent dispersés en bandes de guerre Tzeentch-loyales. Le Rubric d'Ahriman maintient les non-psykers en armures animées (sans conscience). Ahriman lui-même opère séparément, cherchant à corriger le Rubric. Tzeentch utilise Magnus comme l'un de ses agents principaux dans la galaxie matérielle. Sa Tour Fluctuante est l'un des secrets les mieux gardés du Webway.",
+    "notableBattles": [
+      {
+        "name": "Pacification de Prospero",
+        "summary": "Magnus unifia les bibliothèques de Prospero en une seule cité-monde de savoir.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Concile de Nikaea",
+        "summary": "Magnus acceptа publiquement l'interdit, mais continua secrètement les disciplines psy avancées.",
+        "date": "M30"
+      },
+      {
+        "name": "Avertissement à l'Empereur",
+        "summary": "Magnus essaya d'avertir son père par psy-projection. Détruisit le portail psy de Terra.",
+        "date": "M31"
+      },
+      {
+        "name": "Burning of Prospero",
+        "summary": "Russ descendit avec les Space Wolves. Bibliothèque brûlée. Légion massacrée. Magnus enfui à Tzeentch.",
+        "date": "M31"
+      },
+      {
+        "name": "Construction de la Tour Fluctuante",
+        "summary": "Magnus construisit sa citadelle daemonique au cœur du Webway. Sanctuaire Tzeentch.",
+        "date": "M32"
+      }
+    ],
+    "quotes": [
+      "« Mon savoir n'est pas faiblesse. Mon savoir est mon âme. Et je l'ai perdue pour la sauver. »",
+      "« J'ai vu mille avenirs. Tous se terminent avec moi triomphant. Vous ne pouvez pas l'éviter. »",
+      "« Tzeentch me trompe. Je le sais. C'est pourquoi je le sers — pour comprendre comment il me trompe. »",
+      "« Père, je voulais te sauver. J'ai détruit Terra à la place. Que mon arrogance soit ma punition. »"
+    ],
+    "galleryQueries": [
+      "Magnus the Red Daemon Primarch",
+      "Thousand Sons primarch",
+      "Magnus Cyclope",
+      "Thousand Sons Legion",
+      "Tzeentch Magnus",
+      "Prospero burning"
+    ],
+    "relatedPrimarchIds": [
+      "leman-russ",
+      "horus",
+      "fulgrim"
+    ]
   },
   {
     "id": "horus",
@@ -238,7 +981,60 @@
     "homeworld": "Cthonia",
     "primaryColor": "#3a4f2a",
     "wikiQuery": "Horus Lupercal primarch",
-    "citation": "Père. Tu es plus faible qu'eux."
+    "citation": "Père. Tu es plus faible qu'eux.",
+    "epithet": "Le Maître de Guerre · Lupercal",
+    "personality": "Horus Lupercal était le frère préféré de l'Empereur, le plus charismatique des Primarques, un orateur capable de convaincre n'importe qui. Sa loyauté à son père semblait absolue. Mais il portait des blessures secrètes : la peur d'être écarté après la Grande Croisade, le doute envers le projet impérial, la fatigue du commandement éternel. Sur Davin, ces blessures s'ouvrirent. Erebus (Word Bearer) y planta les graines de la corruption. Horus succomba — pas par méchanceté pure, par tragédie d'homme blessé que les Quatre Dieux ont saisi.",
+    "earlyLife": "Horus tomba sur Cthonia, monde-cité minier d'Astéroïdes proche de Terra. Premier Primarque retrouvé, Horus fut élevé par des gangs minières. Adopté par les Cthonian Hunters, il devint chef-jeune. Lorsque l'Empereur arriva, Horus le reconnut immédiatement — premier Primarque à appeler l'Empereur 'père'. Cette proximité immédiate les lia profondément.",
+    "greatCrusade": "Luna Wolves devinrent Horus's Légion — XVI. Pendant la Grande Croisade, Horus fut le bras droit de l'Empereur. Il accomplit autant que toutes les autres Légions combinées. Sa Mournival — quatre conseillers — devint un cercle d'amitiés profondes. Il était modèle des autres Primarques. L'Empereur le désigna Maître de Guerre en 002.M31 — chef suprême de toutes les Légions Astartes — quand l'Empereur retourna sur Terra travailler au Webway humain.",
+    "heresy": "Sur Davin, Horus fut blessé presque mortellement par une lame chaos. Emporté dans le Temple du Serpent Lodge par Erebus (Word Bearers), il fut placé dans une cuve de guérison qui était en réalité un piège des Quatre Dieux du Chaos. Là, il vit visions : son père l'aurait abandonné après la Grande Croisade ; les Astartes seraient remplacés ; l'Empereur deviendrait dieu et oublierait ses fils. Horus crut. Il accepta les dons des Quatre. Il revint à la vie corrompu. Il rassembla neuf Légions et déclencha l'Hérésie. Pendant 7 ans, il marcha sur Terra. Au Siège, il invita son père sur la Vengeful Spirit. Le combat dura des heures. Horus tortura l'Empereur, sur le point de le tuer. Mais sa vision de son père comme adversaire vacilla — un fragment de l'amour primordial. L'Empereur saisit l'occasion. Il libéra une fraction de Sa puissance — pulvérisant Horus âme et corps.",
+    "finalFate": "Horus mourut à la fin du Siège de Terra. Son corps fut ramené à Terra et incinéré pour que personne ne puisse jamais le ressusciter. Les Quatre Dieux n'ont pas oublié — ils essayèrent plusieurs fois de ressusciter Horus, mais la pyre impériale empêche. Aujourd'hui, ses Astartes traîtres errent sans Maître de Guerre — Abaddon le Destructeur, son ancien Premier Capitaine, a hérité du leadership.",
+    "legacy": "Horus est le mythe central de l'Hérésie — son nom seul est blasphème dans l'Imperium loyaliste. Sa Légion (Sons of Horus, ex-Luna Wolves) éclata après sa mort en bandes Renégates. Aucune ne porte plus son nom officiellement. Abaddon refuse le titre de Primarque — il commande la Légion Noire (réunion des neuf Légions Renégates). Le Trône d'Or, où l'Empereur agonise éternellement, est le résultat direct du combat avec Horus. Sans Horus, l'Imperium n'existerait pas tel qu'on le connaît.",
+    "notableBattles": [
+      {
+        "name": "Compliance de Cthonia",
+        "summary": "Horus pacifia Cthonia avant l'arrivée des Astartes. Son monde natal fut intégré sans bain de sang.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Compliance d'Ullanor",
+        "summary": "Plus grande compliance de la Grande Croisade. Horus reçut le titre de Maître de Guerre après cette victoire.",
+        "date": "M30"
+      },
+      {
+        "name": "Davin — Tournant Tragique",
+        "summary": "Horus blessé presque mortellement. Erebus mena rituels chaos. Horus corrompu.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille d'Isstvan III",
+        "summary": "Horus déclencha la Hérésie en bombardant ses propres fils loyalistes par bombe virale.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra et Mort à la Vengeful Spirit",
+        "summary": "Horus assiégea Terra. Sur la Vengeful Spirit, combattit l'Empereur. Tué.",
+        "date": "014.M31"
+      }
+    ],
+    "quotes": [
+      "« Mon père. Je t'aime. Et c'est pourquoi je me dois de te tuer — pour libérer la galaxie de toi. »",
+      "« Pour rien le sacrifice. Pour rien le sang. Mon père m'oublierait à l'instant où la Croisade serait finie. »",
+      "« Je suis Horus. Je suis Lupercal. Je suis le Maître de Guerre. Je suis aussi l'homme blessé que vous n'avez pas vu. »",
+      "« Père. La fin est venue. Frappe. »  — Apocryphe, dernières paroles supposées"
+    ],
+    "galleryQueries": [
+      "Horus Lupercal primarch",
+      "Horus warmaster",
+      "Horus Heresy primarch",
+      "Sons of Horus",
+      "Horus duel Emperor",
+      "Vengeful Spirit"
+    ],
+    "relatedPrimarchIds": [
+      "sanguinius",
+      "rogal-dorn",
+      "guilliman"
+    ]
   },
   {
     "id": "lorgar",
@@ -253,7 +1049,61 @@
     "homeworld": "Colchis",
     "primaryColor": "#6a4f2a",
     "wikiQuery": "Lorgar",
-    "citation": "Vous voulez un dieu ? Voici quatre dieux."
+    "citation": "Vous voulez un dieu ? Voici quatre dieux.",
+    "epithet": "Le Hérétique de l'Empereur · Le Word Bearer",
+    "personality": "Lorgar était le théologien des Primarques. Convaincu que l'Empereur était un dieu, il essaya de fonder une religion impériale officielle — l'Empereur lui-même refusa, ne voulant pas être adoré. Cette frustration permanente le tournera vers le Chaos — paradoxal puisqu'il découvrit que les Quatre Dieux du Chaos étaient les seuls dieux réels (selon sa lecture). Il devint le théologien des Quatre. Sa rancœur envers son père ne fut jamais vraiment satisfaite — même après le pacte chaos, il chercha toujours validation cosmique.",
+    "earlyLife": "Lorgar grandit sur Colchis, monde-temple aux écritures sacrées. Adopté par le Cardinal Kor Phaeron — fanatique religieux — il fut élevé dans la dévotion totale. Quand l'Empereur arriva, Lorgar reconnut son père comme dieu vivant et lui voua un culte religieux. La XVII Légion devint Word Bearers — porteurs de la parole.",
+    "greatCrusade": "Word Bearers étaient la Légion missionnaire — sur chaque Compliance, ils érigeaient cathédrales en l'honneur de l'Empereur, prêchaient la divinité impériale. L'Empereur, voyant cela, fit débarquer la Légion. Sur Khur, il ordonna le Burning of Khur — destruction de la cité-temple Word Bearers. Il punit Lorgar publiquement, lui ordonna d'arrêter le culte impérial. Lorgar fut profondément humilié. Cette humiliation ouvrit la porte au Chaos.",
+    "heresy": "Lorgar voyaeua secrètement dans l'Eye of Terror cinquante années — communant avec les Quatre Dieux du Chaos. Quand il revint, il était théologien Chaos. Il convertit Word Bearers entière à la dévotion daemonique. Il fut le premier à comploter contre l'Empereur — prélude à l'Hérésie. Il suggéra à Erebus de planter le piège sur Davin pour Horus. C'est lui, fondamentalement, qui déclencha l'Hérésie. Il combattit aux côtés des Légions Renégates. Lors du Siège de Terra, il mena rituels daemoniaques massive. Survécut à l'Hérésie. Ascendu Daemon-Primarque par les Quatre Dieux.",
+    "finalFate": "Lorgar dirige aujourd'hui Sicarus — citadelle daemonique au cœur de l'Œil de la Terreur. Il étudie les Quatre, écrit textes théologiques (Book of Lorgar — bible Renégate). Il évolue rarement physiquement sur le matériel. Quand il le fait, c'est pour des rituels majeurs. Sa relation avec les Quatre est étroite mais ambivalente — il reste un théologien qui essaie de comprendre, pas un disciple aveugle.",
+    "legacy": "Word Bearers sont la Légion la plus zélée du Chaos — chaque opération est rituel daemonique. Ils déchaînent Lesser Daemons, Greater Daemons, Daemon Princes. Beaucoup de Inquisitorial chasses majeures cibent Word Bearers. Le Book of Lorgar est étudié par Word Bearers Successors et par les Inquisiteurs Hereticus — chacun cherchant comprendre l'autre.",
+    "notableBattles": [
+      {
+        "name": "Burning of Khur",
+        "summary": "L'Empereur ordonna la destruction de la cité-temple Word Bearers. Humilliation publique de Lorgar.",
+        "date": "M30"
+      },
+      {
+        "name": "Pèlerinage dans l'Œil de la Terreur",
+        "summary": "Lorgar voyaeua secrètement, communant avec les Quatre Dieux. Cinquante ans.",
+        "date": "M30-M31"
+      },
+      {
+        "name": "Davin — Manipulation d'Horus",
+        "summary": "Lorgar suggéra à Erebus de tendre le piège qui corrompit Horus. Catalyseur de la Hérésie.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Calth (Word Bearers)",
+        "summary": "Word Bearers attaquèrent par surprise Ultramarines. Plus grande bataille single-system de la Hérésie.",
+        "date": "M31"
+      },
+      {
+        "name": "Construction de Sicarus",
+        "summary": "Citadelle daemonique de Lorgar dans l'Œil de la Terreur. Sanctuaire Word Bearers.",
+        "date": "M32"
+      }
+    ],
+    "quotes": [
+      "« Mon père. Tu m'as appris à adorer. Puis tu m'as puni pour adorer. Que devais-je faire d'autre ? »",
+      "« Les Quatre Dieux existent. Mon père voulait nier cela. Il avait tort. Je le prouve par chaque rituel. »",
+      "« Je suis le théologien du Chaos. Mes textes sont étudiés par mes ennemis comme par mes frères. Cela me suffit. »",
+      "« Karma. Sicarus. Mon foyer pour l'éternité. Et c'est mieux que je ne mérite peut-être. »"
+    ],
+    "galleryQueries": [
+      "Lorgar Daemon Primarch",
+      "Word Bearers primarch",
+      "Lorgar warhammer 40k",
+      "Word Bearers Legion",
+      "Chaos Apostle",
+      "Sicarus Lorgar"
+    ],
+    "relatedPrimarchIds": [
+      "horus",
+      "magnus",
+      "fulgrim"
+    ],
+    "loreLong": "Lorgar Aurelian fut le premier prophète. Né sur Colchis, monde-théocratique gouverné par les Covenants — caste sacerdotale dévouée à un panthéon d'Anciens Dieux — il fut adopté par le prophète Kor Phaeron, qui reconnut immédiatement dans cet enfant tombé du ciel l'incarnation prédite. Lorgar grandit dans les ziggourats colchisiennes, étudiant les textes sacrés, les rituels d'invocation, les mystères. À vingt ans, il prêchait dans les places ; à trente, il avait converti la moitié de Colchis ; à quarante, il avait déposé l'ancien Conclave dans un coup d'État sacré qui fit de lui le « Roi-Pont entre les Hommes et les Dieux ». L'Empereur arriva. Il vit ce que Kor Phaeron voyait : un esprit immense, une foi totale, une intelligence dévorante. Il fit de Lorgar le Maître de la XVIIème Légion. Mais l'Empereur exigea, à l'inverse de tous ses autres fils, une chose précise : pas de culte. Pas de religion. L'humanité doit se gouverner par la Raison Imperiale, pas par l'adoration. Lorgar, dont chaque cellule était dévouée à une déité quelconque, accepta — et trahit immédiatement. Pendant cent ans, ses Word Bearers Compliance-rallièrent les mondes en érigeant des temples à l'Empereur-Dieu. Quand l'Empereur découvrit Monarchia — cathédrale-monde de cent kilomètres consacrée à sa figure — il fit raser la planète sous les yeux de Lorgar pour l'humilier. Lorgar pleura. Puis il chercha. Avec son ami Magnus, il explora le Warp, et trouva les Quatre Pouvoirs — Khorne, Tzeentch, Nurgle, Slaanesh. Ce furent les Word Bearers qui révélèrent le Chaos à Horus, à Angron, à Fulgrim. Lorgar fut l'architecte de l'Hérésie, plus que Horus lui-même. Au Siège de Terra, il combattit dans les ombres. Aujourd'hui Daemon-Prince de tous les Quatre Dieux (Chaos Undivided), il médite dans la Cathédrale de Sicarus, dictant les Évangiles Daemoniaques. Sa Légion est immense, fanatique, théologienne. Ils ne se battent pas pour eux — ils se battent pour les Dieux."
   },
   {
     "id": "vulkan",
@@ -268,7 +1118,61 @@
     "homeworld": "Nocturne",
     "primaryColor": "#1a5f3a",
     "wikiQuery": "Vulkan",
-    "citation": "L'humain reste humain — c'est notre force et notre devoir."
+    "citation": "L'humain reste humain — c'est notre force et notre devoir.",
+    "epithet": "Le Père · Le Forgeron Sacré",
+    "personality": "Vulkan était la chaleur des Primarques. Compassionate, paternel, attentionné aux enfants et aux civils — il refusait massacre inutile sur les Compliance, même quand les autres Primarques l'acceptaient. Lui-même perpétuel — tout simplement, il ne mourait pas. Tué de la mort la plus brutale, son corps réémergeait quelques jours plus tard. Lorsque les Salamanders en eurent confirmation après dix ou vingt morts apparentes, ils acceptèrent : leur père était immortel par grâce inexpliquée. Sa quête principale : trouver les sept Reliques sacrées qu'il avait dispersées — chacune un test de fraternité Salamanders.",
+    "earlyLife": "Vulkan tomba sur Nocturne, monde volcanique aux tempêtes de cendres. Adopté par les peuples Salamanders, il grandit forgeron — il forgait des armes plus belles et plus mortelles que toute autre. Lorsque les Drukhari (Eldars Noirs) attaquèrent Nocturne pour piller les enfants, Vulkan mena la résistance. Il combattit Drukhari mortellement, mais ses jeunes Astartes furent capturés. L'Empereur arriva pour sauver les enfants restants. Vulkan voua reconnaissance éternelle.",
+    "greatCrusade": "Salamanders étaient la Légion forgeronne. Vulkan exigeait de chaque Astartes qu'il forge ses propres armes. Sur les Compliance, ils étaient les plus humanitaires — protégeant civils, refusant brutalité inutile. Vulkan fut ami proche de Ferrus Manus (Iron Hands) malgré différences philosophiques. Quand Vulkan apparut mort plusieurs fois pendant des batailles puis revenait à la vie, l'Empereur ordonna le secret absolu — phénomène jamais expliqué publiquement.",
+    "heresy": "Vulkan combattit aux côtés des loyalistes pendant l'Hérésie. Sur Isstvan V (Massacre du Drop Pod), il combattit avec Ferrus Manus, Corvus Corax. Il fut blessé mortellement plusieurs fois — chaque fois revenu à la vie. Les Salamanders furent décimés mais survécurent. Vulkan participa au Siège de Terra. Lors d'une mission post-Siège, il disparut. Aucun corps. Aucune confirmation de mort. Beaucoup pensent qu'il erre encore — sa nature d'immortel le permet.",
+    "finalFate": "Vulkan disparut après l'Hérésie. Les Salamanders ont 7 Reliques Sacrées qu'il a dispersées avant sa disparition — chacune mène à un trésor (savoir, technologie, secret) selon les rituels du Chapitre. Le Maître de Chapitre actuel possède 4 des 7 Reliques. Quand les 7 seront réunies, Vulkan reviendra (selon prophétie Salamanders). Sa nature immortelle suggère qu'il est vraiment toujours en vie quelque part.",
+    "legacy": "Salamanders demeurent la Légion la plus humaniste — ils protègent civils dans toutes leurs opérations. Petit Chapitre (3 Compagnies, ~3000 Astartes), peu de Successor Chapters, mais profondément respectés. Vulkan reste un mystère théologique — son immortalité non-Daemon-induite défie toute explication scientifique. L'Inquisition Ordo Originatus étudie cela en secret.",
+    "notableBattles": [
+      {
+        "name": "Bataille contre les Drukhari sur Nocturne",
+        "summary": "Vulkan défendit Nocturne contre raid eldar noir. Beaucoup d'enfants Salamanders capturés. Vulkan jura vengeance éternelle.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Vulkan combattit aux côtés de Ferrus Manus, Corvus Corax. Tué plusieurs fois. Revenu à la vie chaque fois.",
+        "date": "M31"
+      },
+      {
+        "name": "Bataille de Caldera Solar",
+        "summary": "Vulkan affronta Konrad Curze en duel personnel. Apparemment tué. Revint à la vie deux jours plus tard.",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra (Défense)",
+        "summary": "Vulkan combattit dans la défense des secteurs sud du Palais. Armes-relique Salamanders contribuèrent à la victoire.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Disparition Post-Hérésie",
+        "summary": "Vulkan disparut sans explication. Aucun corps. 7 Reliques dispersées comme tests pour ses fils.",
+        "date": "M31-M32"
+      }
+    ],
+    "quotes": [
+      "« La vie est sacrée. Pas seulement la vôtre. La leur aussi. C'est pourquoi je combats. »",
+      "« Père. Je suis revenu à la vie tant de fois que je ne sais plus si je suis fils ou fantôme. »",
+      "« Forge tes armes. Forge ton âme. Forge ta cause. Telle est la voie Salamanders. »",
+      "« Je reviendrai. Quand les sept Reliques seront réunies. Pas avant. »"
+    ],
+    "galleryQueries": [
+      "Vulkan primarch",
+      "Salamanders primarch",
+      "Vulkan warhammer 40k",
+      "Salamanders Legion",
+      "Nocturne Salamanders",
+      "Vulkan father"
+    ],
+    "relatedPrimarchIds": [
+      "ferrus-manus",
+      "corvus-corax",
+      "sanguinius"
+    ],
+    "loreLong": "Vulkan fut le primarque-père. Né sur Nocturne — monde-volcan où le sol entier tremble tous les soixante ans, où les éruptions cycliques tuent un quart de la population à chaque « Time of Trial » — il fut découvert dans une forge d'un village perdu de la chaîne des Pyres. Sa famille adoptive le baptisa Vulkan, comme le forgeron-héros de leur folklore. Il grandit comme tout enfant nocturnien : forgeron, chasseur, défenseur. Quand l'Empereur arriva, il trouva Vulkan engagé dans un duel d'endurance avec lui-même — un défi de marteau-forge où père et fils tapaient sur l'enclume jusqu'à ce que l'un cède. L'Empereur cogna sept jours et sept nuits. Vulkan cogna huit. À la fin, l'Empereur sourit pour la seule fois mémorisée par la chronique. La XVIIIème Légion devint Salamanders — fanatiques de la flamme, du marteau, de l'humanité-sauve. Vulkan fit de l'humanité civile non-Astartes une priorité éternelle : ses fils protégeaient les Imperial Citoyens comme aucune autre Légion ne le faisait. Pendant la Grande Croisade, Vulkan n'avait pas de quête personnelle — il existait pour servir l'Empereur et le peuple. Sur Isstvan V, dans le Massacre des Drop Pod, Vulkan tomba aux côtés de Ferrus Manus et Corvus Corax. Mais Vulkan était particulier : il était Perpetual — un être doté d'immortalité naturelle, qui ne pouvait pas mourir définitivement. Capturé par les Night Lords, torturé par Konrad Curze pendant des années — Curze trouvait fascinant de tuer Vulkan sept fois par jour pour étudier ses résurrections — Vulkan endura. Il s'évada finalement, ravagea, et regagna Nocturne. Pendant le M31, il forgea les Sept Artefacts Salamander — armes-relics dispersées dans la galaxie, dont la réunion seule pourra signaler son retour. Vulkan disparut. Mais à chaque génération, ses fils Salamanders cherchent les Sept. À ce jour, on en a retrouvé six. Vulkan reviendra. C'est promis."
   },
   {
     "id": "corvus-corax",
@@ -283,7 +1187,61 @@
     "homeworld": "Lycaeus / Deliverance",
     "primaryColor": "#0f1a26",
     "wikiQuery": "Corvus Corax",
-    "citation": "Une seule victoire suffit. Mais il en faut mille."
+    "citation": "Une seule victoire suffit. Mais il en faut mille.",
+    "epithet": "Le Liberateur · Le Corbeau",
+    "personality": "Corvus Corax était l'âme de la liberté. Élevé esclave dans une dystopie, il libéra son peuple par révolte. Son cœur pleura pour chaque opprimé. Sa Légion ne combattit pas pour la conquête — elle libérait. Il refusait l'asservissement même au sein de l'Imperium. Cette indépendance le rendait admirable et difficile — il refusait souvent d'obéir aux ordres impériaux qui violaient sa philosophie. Pendant l'Hérésie, sa Légion fut décimée à 75% à Isstvan V. Il jura sa vengeance contre Konrad Curze (qui orchestra le piège).",
+    "earlyLife": "Corvus tomba sur Lycaeus, lune prison de Kiavahr. Élevé comme un esclave parmi des esclaves, il développa intelligence aigue et compassion vive. À 14 ans, il commença à conspirer pour libérer Lycaeus. À 18 ans, il déclencha la révolte. Lycaeus se libera. Kiavahr fut envahie. Corvus, Liberateur de Lycaeus-Kiavahr, devint mythe planétaire. L'Empereur arriva. Corvus accepta la primarchie sans hésitation — l'Empereur libérait des mondes, mission compatible avec celle de Corvus.",
+    "greatCrusade": "Raven Guard, XIX Légion, étaient les libérateurs. Sur les Compliance, ils libéraient esclaves, abolissaient hiérarchies oppressives, créaient sociétés équitables. Doctrines : guerre clandestine, embuscade, infiltration, libération. Corvus refusait souvent ordres impériaux qui visaient sociétés non-oppressives. Il était souvent en conflit avec les autres Primarques pour cette raison. Mais sa Légion accomplissait beaucoup, par tactique discrète.",
+    "heresy": "Lors du Massacre du Drop Pod sur Isstvan V, Raven Guard furent décimés à 75%. Corvus survécut, blessé. Il fuit avec une fraction de Légion. Il chercha à reformer rapidement la Légion — alla même sur Terra rencontrer l'Empereur, qui lui offrit accès à des secrets génétiques (potentiellement les fondements de Primaris ou similaire). Corvus essaya. Échec. Les nouveaux Astartes étaient instables (Raptors). Il décida d'abandonner cette voie. Pendant le Siège, il combattit avec techniques d'embuscade. Il survécut au Siège.",
+    "finalFate": "Après l'Hérésie, Corvus partit à la chasse contre les traîtres — notamment Konrad Curze. Il erra avec sa Légion réduite. Quelque part dans le Maelstrom (région Warp), il disparut. Aucune confirmation. Les Raven Guard continuent à le chercher. Beaucoup pensent qu'il erre encore, traquant Curze (ou son ombre) dans le Webway et l'Œil.",
+    "legacy": "Raven Guard demeurent la Légion la plus indépendante — refus du strict Codex Astartes, doctrine d'infiltration, peu de Successor Chapters mais influents (Carcharodons Astra, etc.). Leur philosophie de libération influence partout — beaucoup de mondes Imperium ne savent pas que les Raven Guard les ont libérés en secret pendant la Compliance.",
+    "notableBattles": [
+      {
+        "name": "Révolte de Lycaeus",
+        "summary": "Corvus déclencha la révolte des esclaves de Lycaeus. Liberation de la lune prison.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Massacre du Drop Pod (Isstvan V)",
+        "summary": "Raven Guard décimés à 75%. Corvus survit blessé.",
+        "date": "M31"
+      },
+      {
+        "name": "Mission sur Terra",
+        "summary": "Corvus chercha à reformer rapidement la Légion. L'Empereur lui offrit secrets génétiques (potentiel Primaris).",
+        "date": "M31"
+      },
+      {
+        "name": "Siège de Terra (Embuscade)",
+        "summary": "Corvus combattit par embuscades. Frappa positions chaos critiques.",
+        "date": "014.M31"
+      },
+      {
+        "name": "Chasse Post-Hérésie",
+        "summary": "Corvus chassa Konrad Curze à travers le Maelstrom. Disparu en chasse.",
+        "date": "M31-M32"
+      }
+    ],
+    "quotes": [
+      "« Tous les hommes sont nés libres. Aucun maître. Aucun dieu. Aucun trône. »",
+      "« J'étais esclave. Je ne le suis plus. Je libérerai chaque esclave que je trouverai. »",
+      "« Père, ne me commande pas de soumettre des libres. Je préfère désobéir. »",
+      "« Curze, mon frère traître. Je te chasserai jusqu'à ce que la galaxie soit consumée. »"
+    ],
+    "galleryQueries": [
+      "Corvus Corax primarch",
+      "Raven Guard primarch",
+      "Corax Liberator",
+      "Raven Guard Legion",
+      "Raven Guard Astartes",
+      "Corvus shadow"
+    ],
+    "relatedPrimarchIds": [
+      "konrad-curze",
+      "vulkan",
+      "jaghatai-khan"
+    ],
+    "loreLong": "Corvus Corax tomba sur Lycaeus, lune-prison du monde-aristocratique de Kiavahr. Là, des millions d'esclaves humains travaillaient dans les mines à perpétuité — punition dynastique pour les crimes de leurs ancêtres lointains. Corax fut adopté par les esclaves, élevé dans les ténèbres permanentes, et apprit, dès l'enfance, l'art primordial de l'insurrection. À quarante ans, Corax avait formé le Raven Guard — armée souterraine clandestine d'esclaves entraînés en secret. Il déclencha la Révolution. Lycaeus fut libérée en cinquante-deux jours d'insurrection acharnée ; Kiavahr fut conquise dans les six mois suivants. Corax rebaptisa la lune Deliverance. L'Empereur arriva. Il reconnut son fils. Corax accepta la Légion à condition que ses fils restent des libérateurs, pas des conquérants. La XIXème Légion devint Raven Guard — guerre asymétrique, infiltration, frappes décapitantes, libération des opprimés. Corax était physiquement remarquable : peau d'albâtre, yeux noirs, cheveux noirs, capacité psychique légère lui permettant de se déplacer dans les ombres comme s'il en faisait partie. Sur Isstvan V, il survécut au massacre — l'un des trois loyalistes traqués qui s'échappèrent — et passa des années à reconstruire sa Légion décimée à 1% de ses effectifs. Désespéré, il persuada l'Empereur de lui confier les laboratoires-secrets de Terra où les Primarques avaient été créés. Il tenta de cloner ses fils en quantité — résultat : monstres, mutants, abominations. Effondré moralement, il ordonna l'exécution miséricordieuse de ses propres créations, puis se retira sur Deliverance. Au début du M32, il disparut dans l'Œil de la Terreur, parti chasser Lorgar et les Word Bearers en Raid Solo. Aucun signe de son retour. Mais ses fils Raven Guard, infiltrés dans toutes les dixaines de Successor Chapters, attendent. Le silence et l'ombre sont leurs armes. Un jour, Corax rentrera de l'Œil. Un jour. C'est leur foi."
   },
   {
     "id": "alpharius-omegon",
@@ -299,6 +1257,59 @@
     "homeworld": "Inconnu",
     "primaryColor": "#1a4a4a",
     "wikiQuery": "Alpharius Omegon",
-    "citation": "I AM ALPHARIUS."
+    "citation": "I AM ALPHARIUS.",
+    "epithet": "Les Jumeaux · Les Hydre",
+    "personality": "Alpharius et Omegon étaient les Primarques jumeaux — phénomène unique. L'Empereur le savait dès la dispersion ; il garda le secret, présentant Alpharius comme Primarque solo. Alpharius était l'extraverti — visible, charismatique, manipulateur. Omegon était l'introverti — opérations clandestines, surveillance des Primarques, infiltration. Les deux pensaient ensemble, agissaient ensemble, chacun couvrant l'autre. Leur Légion était la plus discrète, opérant surtout dans l'ombre. Leur loyauté pendant l'Hérésie reste ambiguë — peut-être loyalistes par mission secrète de l'Empereur, peut-être traîtres par conviction Cabal.",
+    "earlyLife": "Les jumeaux tombèrent ensemble sur la même planète — adoptés par les Cabal, secte Eldar liée aux Aeldari Cabal des Pre-Fall. Les Cabal voyaient l'Hérésie d'Horus comme événement nécessaire pour empêcher catastrophe galactique pire. Ils éduquèrent les jumeaux dans cette mission. L'Empereur les retrouva — accepta les jumeaux mais imposa silence sur la dualité.",
+    "greatCrusade": "Alpha Legion, XX Légion, étaient les infiltrators ultimes. Chaque opération était cellule clandestine — agents infiltrés dans les armées ennemies, sabotage économique, manipulation politique. Les autres Primarques les méfiaient — Alpha Legion semblait toujours savoir des secrets qu'ils n'auraient pas dû savoir. Alpharius était présenté comme Primarque solo. Omegon agissait dans l'ombre permanente, occasionnellement remplacé par Alpharius pour confondre les regards.",
+    "heresy": "Les jumeaux choisirent — ou semblèrent choisir — l'Hérésie côté Horus. Mais leurs opérations étaient ambiguës : sabotage des forces traîtres ailleurs ? Service caché à l'Empereur ? Conviction Cabal d'éviter pire ? Sur l'Bataille d'Eskrador, Alpharius mourut — tué par Rogal Dorn (?). Mais Omegon continua à opérer. Pendant tout l'Hérésie, l'Alpha Legion fut omniprésente sans être identifiable — la signature d'Omegon. Quand Horus mourut, l'Alpha Legion disparut presque entièrement — réfugiée dans l'Œil de la Terreur ou dans la galaxie comme cellules dormantes.",
+    "finalFate": "Le statut des jumeaux est un mystère. Alpharius est officiellement mort à Eskrador. Mais 'Alpharius' est aussi un nom utilisé par tous les agents senior Alpha Legion — chacun se présente comme 'Alpharius' pour confondre. Omegon pourrait être encore en vie, opérant en cellules dormantes. Beaucoup d'agents Alpha Legion contemporains se présentent comme 'Alpharius lui-même' — vérité ou mythe collectif.",
+    "legacy": "Alpha Legion est l'une des Légions les plus craintes — pas par puissance brute, par capacité d'infiltration. Beaucoup d'opérations clandestines impériales-Catastrophiques sont attribuées à eux. Leur mantra 'Hydra Dominatus' rappelle leur multi-tête. L'Inquisition Ordo Hereticus considère Alpha Legion comme menace existentielle — un Inquisiteur loyaliste pourrait être Alpha Legion infiltré, sans même le savoir.",
+    "notableBattles": [
+      {
+        "name": "Recrutement par les Cabal",
+        "summary": "Les jumeaux furent éduqués par les Cabal Aeldari, secte millénariste prophétique.",
+        "date": "Pre-M30"
+      },
+      {
+        "name": "Compliance de Pelegron",
+        "summary": "Alpha Legion infiltra Pelegron pendant 8 ans avant l'arrivée des Astartes. Compliance achevée sans bataille.",
+        "date": "M30"
+      },
+      {
+        "name": "Bataille d'Eskrador",
+        "summary": "Alpharius (l'un des deux) fut tué par Rogal Dorn (?). Mort officielle. Omegon continua.",
+        "date": "M31"
+      },
+      {
+        "name": "Sabotage des Iron Warriors sur Tallarn",
+        "summary": "Alpha Legion infiltra logistique Iron Warriors, ralentit leur opération virale.",
+        "date": "M31"
+      },
+      {
+        "name": "Disparition Post-Hérésie",
+        "summary": "Alpha Legion disparut presque entièrement. Réfugiée dans l'Œil ou cellules dormantes.",
+        "date": "M31-M32"
+      }
+    ],
+    "quotes": [
+      "« Hydra Dominatus. Coupez une tête, dix repoussent. »",
+      "« Je suis Alpharius. — Et toi aussi. — Et lui aussi. — Nous sommes tous Alpharius. »",
+      "« Les Cabal nous ont enseigné une vérité. L'Empereur a accepté cette vérité en silence. Les autres Primarques ne savent pas. »",
+      "« Mon frère et moi pensons ensemble. Mes ennemis ne sauront jamais lequel des deux les a tués. »"
+    ],
+    "galleryQueries": [
+      "Alpharius primarch",
+      "Alpha Legion primarch",
+      "Alpharius Omegon",
+      "Alpha Legion Hydra",
+      "Alpha Legion Astartes",
+      "Hydra Dominatus"
+    ],
+    "relatedPrimarchIds": [
+      "horus",
+      "rogal-dorn",
+      "lorgar"
+    ]
   }
 ]

@@ -1,0 +1,647 @@
+[
+  {
+    "id": "phalanx",
+    "name": "Phalanx",
+    "epithet": "La Forteresse-Lune des Imperial Fists",
+    "class": "Vaisseau-Forteresse · Star Fort",
+    "factionId": "space-marines",
+    "factionName": "Imperial Fists",
+    "color": "#c9a44a",
+    "captainOrLord": "Maître de Chapitre des Imperial Fists",
+    "currentStatus": "Actif — Système Solar",
+    "wikiQuery": "Star Fort Imperial",
+    "description": "Vaisseau-monde-forteresse de la taille d'une lune. Vaisseau-amiral des Imperial Fists et plus grand vaisseau humain de la galaxie après l'Ark Mechanicus.",
+    "longHistory": "Le Phalanx fut construit pendant la Grande Croisade sous la supervision personnelle de Rogal Dorn. Vaisseau-monde-forteresse à l'origine inconnue (peut-être Standard Template Construct retrouvé pendant les premières années de la Croisade), il fut adapté par Dorn et le Mechanicus en forteresse mobile pour la Légion VII. Pendant l'Hérésie d'Horus, il servit de quartier-général loyaliste pour le siège du Phalanx Heresy. Après l'Hérésie, il devint vaisseau-amiral permanent des Imperial Fists. Le Phalanx croise éternellement aux confins du système Solar, gardant Terra par sa simple présence dissuasive. Il porte des batteries spinales capables de raser des planètes. Il transporte la Compagnie 1ère complète plus une force expéditionnaire mineure. Sa coque blindée adamantine peut résister à un Exterminatus mineur.",
+    "specs": [
+      "Taille : ~150 km de longueur (taille d'une lune)",
+      "Coque : adamantine 60-mètre épais en zones critiques",
+      "Armement : 200+ batteries spinales, 1000+ macro-canons, 50+ lance-torpilles",
+      "Équipage : ~10 millions (compagnies + serviteurs + esclaves de bataille)",
+      "Manœuvrabilité : minimale — n'est pas un vaisseau de chasse"
+    ],
+    "notableBattles": [
+      {
+        "name": "Phalanx Heresy",
+        "date": "M31",
+        "summary": "Pendant l'Hérésie, le Phalanx fut quartier-général loyaliste. Repoussa plusieurs assauts traîtres."
+      },
+      {
+        "name": "Bataille de Sotha",
+        "date": "M40",
+        "summary": "Le Phalanx engagea une Flotte-Ruche tyranide majeure. Réduisit l'avant-garde de moitié."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "date": "999.M41",
+        "summary": "Le Phalanx coordonna la défense de Cadia depuis l'orbite. Évacuation des survivants Cadians."
+      },
+      {
+        "name": "Indomitus Crusade",
+        "date": "999.M41-010.M42",
+        "summary": "Vaisseau-amiral de la Croisade Indomitus dans plusieurs secteurs."
+      }
+    ],
+    "galleryQueries": [
+      "Phalanx Imperial Fists art",
+      "Star Fort Imperial",
+      "Imperial Fists fleet",
+      "Rogal Dorn ship"
+    ],
+    "relatedPrimarchId": "rogal-dorn"
+  },
+  {
+    "id": "vengeful-spirit",
+    "name": "Vengeful Spirit",
+    "epithet": "Le Vaisseau de Horus · Le Tombeau du Maître de Guerre",
+    "class": "Battleship · Gloriana-class",
+    "factionId": "chaos-space-marines",
+    "factionName": "Sons of Horus (Black Legion)",
+    "color": "#1a1a1a",
+    "captainOrLord": "Horus Lupercal (mort) → Abaddon le Destructeur",
+    "currentStatus": "Actif dans l'Œil de la Terreur",
+    "wikiQuery": "Vengeful Spirit Horus battleship",
+    "description": "Vaisseau-amiral de Horus Lupercal pendant la Grande Croisade et l'Hérésie d'Horus. Lieu de la mort d'Horus aux mains de l'Empereur. Repris par Abaddon après l'Hérésie.",
+    "longHistory": "Le Vengeful Spirit fut le vaisseau-amiral personnel d'Horus Lupercal — Battleship Gloriana-class, classe construite spécifiquement pour les Maîtres de Guerre. Pendant la Grande Croisade, il commandait la flotte de la Légion XVI (Luna Wolves puis Sons of Horus). Pendant l'Hérésie, il servit de QG mobile à Horus dans toutes ses opérations majeures. Sur Davin, c'est dans la cuve médicale du Vengeful Spirit que Horus fut corrompu par les Quatre Dieux. À la fin de l'Hérésie, le 14 août 014.M31, l'Empereur monta seul à bord pour confronter son fils. Le combat dura des heures. Sanguinius monta avant l'Empereur et fut tué. L'Empereur frappa Horus, le tuant définitivement. Le vaisseau, lourdement endommagé, fut sauvé par Abaddon — alors Premier Capitaine — et emmené dans l'Œil de la Terreur. Aujourd'hui, il sert de vaisseau-amiral à la Légion Noire.",
+    "specs": [
+      "Taille : ~7 km de longueur",
+      "Classe : Gloriana — battleship suprême de la Grande Croisade",
+      "Armement : 80 macro-canons, lance-torpilles nova, lance-bombardement orbitial",
+      "Équipage : ~250 000 (Astartes + serviteurs)",
+      "Particularité : Lieu de mort d'Horus + Sanguinius — significant Warp-imprint"
+    ],
+    "notableBattles": [
+      {
+        "name": "Compliance d'Ullanor",
+        "date": "M30",
+        "summary": "Bataille majeure où Horus reçut le titre de Maître de Guerre."
+      },
+      {
+        "name": "Davin",
+        "date": "M31",
+        "summary": "Lieu de la corruption de Horus dans le Temple du Serpent Lodge."
+      },
+      {
+        "name": "Bataille de la Vengeful Spirit",
+        "date": "014.M31",
+        "summary": "Mort de Sanguinius. Mort de Horus. Quasi-mort de l'Empereur."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "date": "999.M41",
+        "summary": "Vaisseau-amiral d'Abaddon. Coordonna la chute de Cadia."
+      }
+    ],
+    "galleryQueries": [
+      "Vengeful Spirit Horus",
+      "Horus battleship",
+      "Gloriana battleship",
+      "Black Legion fleet"
+    ],
+    "relatedPrimarchId": "horus"
+  },
+  {
+    "id": "macragges-honour",
+    "name": "Macragge's Honour",
+    "epithet": "L'Honneur de Macragge · Le Vaisseau de Guilliman",
+    "class": "Battleship · Gloriana-class",
+    "factionId": "space-marines",
+    "factionName": "Ultramarines",
+    "color": "#2a4f8e",
+    "captainOrLord": "Roboute Guilliman",
+    "currentStatus": "Actif — Vaisseau-amiral Indomitus Crusade",
+    "wikiQuery": "Macragge Honour ship Ultramarines",
+    "description": "Vaisseau-amiral personnel de Roboute Guilliman pendant la Grande Croisade et l'Hérésie. Réveillé pour l'Indomitus Crusade en 999.M41.",
+    "longHistory": "Construit comme Battleship Gloriana-class pour Roboute Guilliman, le Macragge's Honour servit pendant toute la Grande Croisade. Pendant l'Hérésie, il fut vaisseau-amiral de l'Imperium Secundus. Après le placement de Guilliman en stase, le vaisseau fut placé en réserve à Macragge — gardé pendant 10 000 ans dans des docks orbitaux pour le retour du Primarque. En 999.M41, lors de la résurrection de Guilliman par Cawl et Yvraine, le vaisseau fut activé. Il sert désormais de vaisseau-amiral à l'Indomitus Crusade.",
+    "specs": [
+      "Taille : ~7 km",
+      "Classe : Gloriana",
+      "Armement : full Gloriana-tier, macro-canons spinaux, lance-torpilles",
+      "Équipage : ~200 000 Ultramarines + serviteurs",
+      "Particularité : Stase 10 000 ans, technologie M30 préservée"
+    ],
+    "notableBattles": [
+      {
+        "name": "Compliance d'Ultramar",
+        "date": "M30",
+        "summary": "Vaisseau-amiral de la pacification de l'Ultramar."
+      },
+      {
+        "name": "Calth Underworld",
+        "date": "M31",
+        "summary": "Coordonna la résistance Ultramarines pendant l'attaque Word Bearers."
+      },
+      {
+        "name": "Indomitus Crusade",
+        "date": "999.M41-010.M42",
+        "summary": "Vaisseau-amiral de la plus grande Croisade depuis l'Hérésie."
+      }
+    ],
+    "galleryQueries": [
+      "Macragge's Honour",
+      "Guilliman battleship",
+      "Ultramarines fleet",
+      "Gloriana Ultramarines"
+    ],
+    "relatedPrimarchId": "guilliman"
+  },
+  {
+    "id": "endurance",
+    "name": "Endurance",
+    "epithet": "Le Vaisseau-Plague de Mortarion",
+    "class": "Battleship · Gloriana-class (Plague-corrupted)",
+    "factionId": "chaos-space-marines",
+    "factionName": "Death Guard",
+    "color": "#5a6a3a",
+    "captainOrLord": "Mortarion (Daemon-Primarque)",
+    "currentStatus": "Actif dans le Warp",
+    "wikiQuery": "Endurance Mortarion warship",
+    "description": "Vaisseau-amiral de Mortarion. Lieu de la corruption de la Death Guard par Nurgle pendant l'Hérésie d'Horus.",
+    "longHistory": "Battleship Gloriana-class du Primarque Mortarion pendant la Grande Croisade. Pendant l'Hérésie, l'Endurance fut piégé dans une tempête Warp pendant le voyage vers Terra. La Plague de l'Espèce — fléau de Nurgle — infecta tout l'équipage. Mortarion désespéré accepta le pacte avec Nurgle : ses hommes survivraient mais transformés en Plague Marines immortels. Aujourd'hui, l'Endurance est un vaisseau pourri infesté de mouches daemoniaques. Quand il émerge du Warp, il propage la pestilence sur les planètes qu'il croise.",
+    "specs": [
+      "Taille : ~7 km (modifié, taches biologiques surajoutées)",
+      "Classe : Gloriana corrompu",
+      "Armement : ralenti par corruption, mais lance-bombes-pestes",
+      "Équipage : ~150 000 Plague Marines + spores daemoniaques",
+      "Particularité : émet aura warp pestilent constante"
+    ],
+    "notableBattles": [
+      {
+        "name": "Voyage vers Terra (Hérésie)",
+        "date": "M31",
+        "summary": "Piégé dans une tempête Warp. Plague de Nurgle."
+      },
+      {
+        "name": "Siège de Terra",
+        "date": "014.M31",
+        "summary": "Combat dans les flottilles traîtres assiégeant Terra."
+      },
+      {
+        "name": "Plague Wars (M42)",
+        "date": "M42",
+        "summary": "Vaisseau-amiral des invasions Plague Fleet."
+      }
+    ],
+    "galleryQueries": [
+      "Endurance Mortarion",
+      "Death Guard fleet",
+      "Plague battleship",
+      "Nurgle warship"
+    ],
+    "relatedPrimarchId": "mortarion"
+  },
+  {
+    "id": "indomitable-will",
+    "name": "Indomitable Will",
+    "epithet": "Le Vaisseau-Cathédrale de Sanguinius",
+    "class": "Battleship · Gloriana-class",
+    "factionId": "space-marines",
+    "factionName": "Blood Angels",
+    "color": "#a02020",
+    "captainOrLord": "Sanguinius (mort) → Dante",
+    "currentStatus": "Actif",
+    "wikiQuery": "Imperial Navy battleship",
+    "description": "Vaisseau-amiral des Blood Angels. Lieu d'origine ailée. Aujourd'hui propriété cérémonielle du Maître de Chapitre Dante.",
+    "longHistory": "Le Indomitable Will fut le vaisseau-amiral personnel de Sanguinius pendant la Grande Croisade. Cathédrale aérienne, lourdement décorée d'aigles dorés et d'aigles blancs, il transportait la Compagnie 1ère des Blood Angels. Pendant l'Hérésie, il participa au Massacre de Signus Prime, à la Bataille de Pluto, à la défense de la Porte Éternelle de Terra. Après la mort de Sanguinius, il fut ramené à Baal et transformé en mausolée mobile — vaisseau-cathédrale gardant les reliques sanguinaires. Aujourd'hui, il sert de vaisseau-amiral à Dante.",
+    "specs": [
+      "Taille : ~7 km",
+      "Classe : Gloriana",
+      "Armement : full Gloriana, lance-torpilles, batteries spinales",
+      "Équipage : ~150 000 Blood Angels + serviteurs",
+      "Particularité : décoration cathédrale, ailes en or véritable"
+    ],
+    "notableBattles": [
+      {
+        "name": "Massacre de Signus Prime",
+        "date": "M31",
+        "summary": "Sanguinius vainquit Ka'Bandha dans une bataille épique partiellement à bord."
+      },
+      {
+        "name": "Défense de la Porte Éternelle",
+        "date": "014.M31",
+        "summary": "Combat orbital pendant le Siège de Terra."
+      },
+      {
+        "name": "Devastation of Baal",
+        "date": "999.M41",
+        "summary": "Combat contre Hive Fleet Leviathan."
+      }
+    ],
+    "galleryQueries": [
+      "Blood Angels battleship",
+      "Sanguinius ship",
+      "Blood Angels fleet",
+      "Dante warhammer 40k"
+    ],
+    "relatedPrimarchId": "sanguinius"
+  },
+  {
+    "id": "iron-blood",
+    "name": "Iron Blood",
+    "epithet": "Le Sang de Fer · Vaisseau de Perturabo",
+    "class": "Battleship · Gloriana-class (Iron Warriors-pattern)",
+    "factionId": "chaos-space-marines",
+    "factionName": "Iron Warriors",
+    "color": "#4a4a4a",
+    "captainOrLord": "Perturabo (Daemon-Primarque)",
+    "currentStatus": "Actif dans l'Œil de la Terreur",
+    "wikiQuery": "Gloriana battleship",
+    "description": "Vaisseau-amiral de Perturabo. Forteresse mobile pendant la Grande Croisade, devenue vaisseau-monde dans l'Œil après l'Hérésie.",
+    "longHistory": "Le Iron Blood est le vaisseau-amiral de Perturabo. Battleship Gloriana modifié par les Iron Warriors avec des sur-fortifications, des batteries supplémentaires, des sas blindés. Sur le siège de Terra, il bombarda le Palais Impérial pendant 55 jours. Après l'Hérésie, fut emmené dans l'Œil et continua à être modifié pendant 10 000 ans — il est désormais une forteresse-vaisseau de niveau démentiel.",
+    "specs": [
+      "Taille : ~8 km (élargi)",
+      "Classe : Gloriana modifié Iron Warriors",
+      "Armement : 1.5x batteries Gloriana standard, lance-bombes Vraks-style",
+      "Équipage : ~180 000 Iron Warriors + esclaves",
+      "Particularité : forteresse intégrée, peut atterrir en partie sur planète"
+    ],
+    "notableBattles": [
+      {
+        "name": "Siège de Terra",
+        "date": "014.M31",
+        "summary": "Bombardement orbital du Palais Impérial pendant 55 jours."
+      },
+      {
+        "name": "Bataille de Tallarn",
+        "date": "M31",
+        "summary": "Plus grande bataille de chars de l'histoire."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "date": "999.M41",
+        "summary": "Soutien à Abaddon dans la chute de Cadia."
+      }
+    ],
+    "galleryQueries": [
+      "Iron Warriors fleet",
+      "Perturabo ship",
+      "Iron Warriors battleship",
+      "Iron Warriors siege"
+    ],
+    "relatedPrimarchId": "perturabo"
+  },
+  {
+    "id": "eternal-crusader",
+    "name": "Eternal Crusader",
+    "epithet": "Le Croisé Éternel · Forteresse-Cathédrale Black Templars",
+    "class": "Battle Barge · Modifié",
+    "factionId": "space-marines",
+    "factionName": "Black Templars",
+    "color": "#000000",
+    "captainOrLord": "Haut-Marshal des Black Templars",
+    "currentStatus": "Actif — Croisade Éternelle",
+    "wikiQuery": "Adeptus Astartes Battle Barge",
+    "description": "Vaisseau-amiral des Black Templars. Cathédrale-forteresse mobile, croise éternellement, ne connaît pas de quartier-général permanent.",
+    "longHistory": "Le Eternal Crusader fut construit pendant la Croisade Bordel sur ordre du premier Haut-Marshal Sigismund. Battle Barge transformée en cathédrale-forteresse, avec ornements gothiques, immenses cloches sacrées, vitraux de céramique-énergie. Le vaisseau ne connaît pas de quartier-général permanent — il croise éternellement à travers la galaxie, un exemple de la nature même des Black Templars. Le Haut-Marshal vit à bord en permanence. Plus de mille Astartes Black Templars y résident. Sigismund lui-même y est enterré dans la chapelle centrale.",
+    "specs": [
+      "Taille : ~5 km",
+      "Classe : Battle Barge modifiée Black Templars",
+      "Armement : batteries cérémonielles, lance-torpilles multi-warhead",
+      "Équipage : ~50 000 Black Templars + équipage régulier",
+      "Particularité : tombe de Sigismund + cathédrale active"
+    ],
+    "notableBattles": [
+      {
+        "name": "Croisade Bordel",
+        "date": "M31",
+        "summary": "Sigismund mena la première Croisade Éternelle. Vaisseau-amiral lui-même."
+      },
+      {
+        "name": "Croisade Sabbat Worlds",
+        "date": "M41",
+        "summary": "Croisade contre Chaos. Bataille majeure dans l'espace Sabbat."
+      },
+      {
+        "name": "Indomitus",
+        "date": "010.M42",
+        "summary": "Coordination avec Guilliman dans Indomitus Crusade."
+      }
+    ],
+    "galleryQueries": [
+      "Black Templars fleet",
+      "Eternal Crusader ship",
+      "Black Templars Battle Barge",
+      "Sigismund tomb"
+    ]
+  },
+  {
+    "id": "khaine",
+    "name": "Khaine",
+    "epithet": "Vaisseau-Monde Iyanden",
+    "class": "Craftworld",
+    "factionId": "aeldari",
+    "factionName": "Iyanden Craftworld",
+    "color": "#d4a020",
+    "captainOrLord": "Conseil d'Iyanden",
+    "currentStatus": "Actif — partiellement décimé par Tyranides",
+    "wikiQuery": "Iyanden Craftworld",
+    "description": "Vaisseau-Monde Aeldari. Une des cinq planètes-vaisseaux mineures qui survécurent à la Chute. Maison de millions d'Aeldari.",
+    "longHistory": "Iyanden, comme tous les Craftworlds, fut construit pendant les derniers siècles avant la Chute aeldari. À l'origine simple vaisseau-monde de transit, il devint refuge permanent pour ses millions d'habitants quand le berceau aeldari fut englouti dans l'Œil de la Terreur. Pendant 10 000 ans, Iyanden navigua dans la galaxie. En M41, la Flotte-Ruche Kraken arriva sur Iyanden — bataille catastrophique. Une grande partie de la population aeldari fut tuée. Iyanden, désormais semi-vide, ramène ses morts à la vie via Wraithguards et Wraithlords — armures wraithbone animées par les âmes. Le Prince Yriel défendit Iyanden contre Kraken et est désormais légende.",
+    "specs": [
+      "Taille : ~1000 km de longueur",
+      "Classe : Craftworld aeldari",
+      "Population : ~5-10 millions d'Aeldari (post-Kraken, originellement 50+ millions)",
+      "Wraithbone : technologie psy-active, répond à la pensée",
+      "Particularité : partiellement Wraith-construct (peuplé d'âmes plus que de chair)"
+    ],
+    "notableBattles": [
+      {
+        "name": "Chute de l'Empire Aeldari",
+        "date": "M30",
+        "summary": "Iyanden fuit le berceau aeldari avant l'engloutissement."
+      },
+      {
+        "name": "Bataille contre Kraken",
+        "date": "M41",
+        "summary": "Décimation par Hive Fleet Kraken. Yriel défendit."
+      },
+      {
+        "name": "Coopération Indomitus",
+        "date": "999.M41",
+        "summary": "Yvraine Ynnari coopéra avec Guilliman pour ressusciter le Primarque."
+      }
+    ],
+    "galleryQueries": [
+      "Iyanden Craftworld",
+      "Aeldari Craftworld",
+      "Wraithguard Iyanden",
+      "Iyanden Wraithlord"
+    ]
+  },
+  {
+    "id": "blackstone-fortress",
+    "name": "Blackstone Fortresses",
+    "epithet": "Les Six Forteresses Cosmiques",
+    "class": "Forteresse Stellaire · Origine inconnue (Anciens ?)",
+    "factionId": "chaos-space-marines",
+    "factionName": "Black Legion (capturées)",
+    "color": "#1a0a0a",
+    "captainOrLord": "Abaddon (3 utilisées sur 6)",
+    "currentStatus": "3 détruites · 3 actives (Abaddon)",
+    "wikiQuery": "Blackstone Fortress",
+    "description": "Six forteresses cosmiques antiques d'origine inconnue (probablement Anciens). Capables de détruire des étoiles. Trois capturées par Abaddon pour la 13ᵉ Croisade Noire.",
+    "longHistory": "Les six Blackstone Fortresses furent découvertes au début de l'Imperium par les Astartes. Origine inconnue — possiblement construites par les Anciens il y a 60 millions d'années pendant la Guerre dans le Ciel. Chaque Fortress est sphère de pierre noire (Blackstone), ~20 km de diamètre, capable d'amplifier l'énergie psychique. Pendant la 12ᵉ Croisade Noire, Abaddon en captura plusieurs. Les Imperials détruisirent trois Fortresses pour empêcher Abaddon. Trois restent. Abaddon les utilisa pendant la 13ᵉ pour réduire les étoiles à des trous noirs — détruisant des systèmes Imperium entiers, dont une étape critique de la chute de Cadia.",
+    "specs": [
+      "Taille : ~20 km de diamètre par Fortress",
+      "Classe : sphère cosmique antique",
+      "Armement : amplificateurs psy capables de détruire des étoiles",
+      "Équipage : automatisé (gardiens daemon dans certaines)",
+      "Particularité : technologie Anciens irrépliquable"
+    ],
+    "notableBattles": [
+      {
+        "name": "12ᵉ Croisade Noire",
+        "date": "M41",
+        "summary": "Abaddon capture plusieurs Fortresses."
+      },
+      {
+        "name": "13ᵉ Croisade Noire",
+        "date": "999.M41",
+        "summary": "Abaddon utilise les Fortresses pour briser Cadia."
+      }
+    ],
+    "galleryQueries": [
+      "Blackstone Fortress",
+      "Abaddon Black Crusade",
+      "Cadia destruction",
+      "Anciens warhammer 40k"
+    ]
+  },
+  {
+    "id": "ark-mechanicus",
+    "name": "Ark Mechanicus 'Speranza'",
+    "epithet": "Le Vaisseau-Monde du Mechanicus",
+    "class": "Ark Mechanicus",
+    "factionId": "adeptus-mechanicus",
+    "factionName": "Adeptus Mechanicus",
+    "color": "#7a2020",
+    "captainOrLord": "Magos Lexell Kotov",
+    "currentStatus": "Actif — Expédition Halo Stars",
+    "wikiQuery": "Ark Mechanicus Speranza",
+    "description": "Plus grand vaisseau d'exploration du Mechanicus. Vaisseau-laboratoire mobile, transport de Forge entière.",
+    "longHistory": "Construit sur Mars il y a plusieurs millénaires, le Speranza est l'une des cinq Arks Mechanicus actives. C'est un vaisseau-laboratoire mobile, transport de Forge complet — capable de produire des STC fragments, d'élever des Astartes Primaris (avec autorisation Mechanicus), de cataloguer des espèces xenos. Le Magos Lexell Kotov mène actuellement une expédition vers les Halo Stars (régions galactiques lointaines), à la recherche d'un Standard Template Construct perdu. Le Speranza héberge également des cellules de chercheurs Mechanicus rivaux — Belisarius Cawl y a passé des années avant de retourner à Mars.",
+    "specs": [
+      "Taille : ~10 km de longueur",
+      "Classe : Ark Mechanicus",
+      "Armement : modéré, mais batteries Mechanicus de qualité supérieure",
+      "Équipage : ~500 000 (Tech-Prêtres + Skitarii + serviteurs)",
+      "Particularité : Forge mobile complète + équipage Mechanicus mixte"
+    ],
+    "notableBattles": [
+      {
+        "name": "Expédition Halo Stars",
+        "date": "M41",
+        "summary": "Recherche d'un STC perdu, en cours."
+      },
+      {
+        "name": "Bataille de Servus",
+        "date": "M41",
+        "summary": "Combat contre Eldars Drukhari pirates."
+      },
+      {
+        "name": "Indomitus Production",
+        "date": "010.M42",
+        "summary": "Production de Primaris pour l'Indomitus Crusade."
+      }
+    ],
+    "galleryQueries": [
+      "Ark Mechanicus Speranza",
+      "Mechanicus fleet",
+      "Tech-Priest ship",
+      "Mars warhammer 40k"
+    ]
+  },
+  {
+    "id": "remembrance",
+    "name": "Remembrance",
+    "epithet": "Le Vaisseau Mémoire de Mortarion",
+    "class": "Cruiser modifié",
+    "factionId": "chaos-space-marines",
+    "factionName": "Death Guard",
+    "color": "#5a6a3a",
+    "captainOrLord": "Typhus",
+    "currentStatus": "Actif",
+    "wikiQuery": "Death Guard Plague Fleet",
+    "description": "Vaisseau-amiral de Typhus, second en command de la Death Guard.",
+    "longHistory": "Le Remembrance est un Cruiser de l'âge Heresy modifié progressivement. Sous le commandement de Typhus, il a subi corruption Nurgle progressive — coque pourrie, équipage Plague Marines transformés. Vaisseau-amiral des opérations Death Guard mineures quand Mortarion erre dans le Warp. Typhus utilise le Remembrance pour ses propres campagnes de pestilence.",
+    "specs": [
+      "Taille : ~3 km",
+      "Classe : Cruiser corrompu",
+      "Armement : modéré, mais lance-bombes-pestes spécialisées",
+      "Équipage : ~30 000 Plague Marines + spores",
+      "Particularité : émet aura de pestilence visible"
+    ],
+    "notableBattles": [
+      {
+        "name": "Plague Wars",
+        "date": "M42",
+        "summary": "Vaisseau-amiral des opérations pestilence Death Guard."
+      }
+    ],
+    "galleryQueries": [
+      "Death Guard ship",
+      "Typhus warhammer 40k",
+      "Plague Marine fleet"
+    ]
+  },
+  {
+    "id": "stormbird",
+    "name": "Stormbird",
+    "epithet": "Le Transport Sacré des Astartes",
+    "class": "Transport Inter-Stellaire",
+    "factionId": "space-marines",
+    "factionName": "Space Marines (générique)",
+    "color": "#6a7a8a",
+    "captainOrLord": "Capitaine Astartes (variable)",
+    "currentStatus": "Largement remplacé par Thunderhawks (M41+)",
+    "wikiQuery": "Stormbird Astartes",
+    "description": "Transport Inter-Stellaire des Astartes pendant la Grande Croisade et l'Hérésie. Précurseur des Thunderhawks.",
+    "longHistory": "Le Stormbird était le transport principal des Astartes pendant la Grande Croisade et l'Hérésie d'Horus. Plus grand, plus lourd, plus armé qu'un Thunderhawk. Capable de transporter une compagnie complète sur de longues distances inter-systèmes. Production arrêtée après l'Hérésie en faveur du Thunderhawk plus efficace. Quelques Stormbirds antiques survivent dans les Chapitres Vénérable. Pendant l'Indomitus, certains ont été ressuscités pour les opérations Primaris.",
+    "specs": [
+      "Taille : ~150 m",
+      "Classe : Transport-bombardier",
+      "Armement : batteries lascannons + missiles + bolters lourds",
+      "Équipage : 1 Compagnie complète Astartes + équipage",
+      "Particularité : précurseur des Thunderhawks"
+    ],
+    "notableBattles": [
+      {
+        "name": "Tous fronts Grande Croisade",
+        "date": "M30",
+        "summary": "Transport Astartes principal."
+      },
+      {
+        "name": "Hérésie d'Horus",
+        "date": "M31",
+        "summary": "Engagement massif sur tous les fronts."
+      },
+      {
+        "name": "Indomitus",
+        "date": "M42",
+        "summary": "Quelques Stormbirds ressuscités pour Primaris ops."
+      }
+    ],
+    "galleryQueries": [
+      "Stormbird Astartes",
+      "Space Marines transport",
+      "Astartes ship",
+      "Heresy era ship"
+    ]
+  },
+  {
+    "id": "spectre-of-eternity",
+    "name": "Spectre of Eternity",
+    "epithet": "Le Vaisseau-Voyant des Necrons",
+    "class": "Cairn-class Tomb Ship",
+    "factionId": "necrons",
+    "factionName": "Sautekh Dynasty",
+    "color": "#1a4a1a",
+    "captainOrLord": "Imotekh le Seigneur des Tempêtes",
+    "currentStatus": "Actif",
+    "wikiQuery": "Necron Tomb Ship Cairn",
+    "description": "Vaisseau-amiral d'Imotekh, Phaeron Sautekh. Tomb Ship Cairn-class, vaisseau-monde Necron.",
+    "longHistory": "Le Spectre of Eternity est un Tomb Ship Cairn-class — la plus grande classe de vaisseau Necron. Construit avant le Biotransfert, il porte les marques nécrologiques. Pendant le Grand Sommeil, il dormait en orbite autour d'un Monde-Tombeau. En M41, lors du réveil de Sautekh, il fut activé. Il sert désormais de vaisseau-amiral à Imotekh dans ses campagnes de reconquête.",
+    "specs": [
+      "Taille : ~5 km",
+      "Classe : Cairn-class Tomb Ship",
+      "Armement : gauss particle whips, gauss flux arc",
+      "Équipage : automatisé Necron + Triarchic Praetorians",
+      "Particularité : technologie quantique surpassant Imperium"
+    ],
+    "notableBattles": [
+      {
+        "name": "Réveil du Tombeau Khepri",
+        "date": "M41",
+        "summary": "Première activation depuis 60 millions d'années."
+      },
+      {
+        "name": "Reconquête Sautekh",
+        "date": "M41-M42",
+        "summary": "Vaisseau-amiral des opérations Sautekh."
+      }
+    ],
+    "galleryQueries": [
+      "Necron Tomb Ship",
+      "Necron Cairn warship",
+      "Imotekh ship",
+      "Necron fleet"
+    ]
+  },
+  {
+    "id": "hammerhead-tau",
+    "name": "Or'es Tash'var",
+    "epithet": "L'Étoile-Vague Tau",
+    "class": "Battleship Tau",
+    "factionId": "tau",
+    "factionName": "Tau Empire",
+    "color": "#1a4a5c",
+    "captainOrLord": "Caste de l'Air (Kor)",
+    "currentStatus": "Actif",
+    "wikiQuery": "Tau battleship Empire fleet",
+    "description": "Vaisseau-amiral d'une flotte Tau majeure. Symbole de la puissance technologique de l'Empire T'au.",
+    "longHistory": "Construit en M41, le Or'es Tash'var (« Étoile-Vague ») est un battleship Tau — plus petit qu'un Imperial Gloriana mais plus moderne. Port de propulsion gravitique avancée, batteries plasma-rail, drones de défense automatisés. Sert de vaisseau-amiral pendant la 4ème Sphère d'Expansion. Capable de manœuvres impossibles pour un vaisseau Imperial.",
+    "specs": [
+      "Taille : ~3-4 km",
+      "Classe : Battleship Tau",
+      "Armement : railguns plasma-jumelés, drones de défense",
+      "Équipage : ~30 000 (multi-castes Tau)",
+      "Particularité : propulsion gravitique sans moteur Warp"
+    ],
+    "notableBattles": [
+      {
+        "name": "Damocles Crusade",
+        "date": "M41",
+        "summary": "Combat contre flotte Imperium."
+      },
+      {
+        "name": "4ème Sphère d'Expansion",
+        "date": "M42",
+        "summary": "Vaisseau-amiral de l'expansion vers Imperium Sanctus."
+      }
+    ],
+    "galleryQueries": [
+      "Tau battleship",
+      "Tau Empire fleet",
+      "Tau warship",
+      "Empire T'au ship"
+    ]
+  },
+  {
+    "id": "warp-skull",
+    "name": "Warp Skull",
+    "epithet": "Le Vaisseau Furtif des Alpha Legion",
+    "class": "Cruiser modifié furtif",
+    "factionId": "chaos-space-marines",
+    "factionName": "Alpha Legion",
+    "color": "#1a3a3a",
+    "captainOrLord": "Alpharius (l'un des deux)",
+    "currentStatus": "Statut inconnu",
+    "wikiQuery": "Astartes Strike Cruiser",
+    "description": "Vaisseau-cellule de l'Alpha Legion. Capable de devenir invisible aux scanners. Probablement plusieurs vaisseaux portant le même nom (signature Alpha Legion).",
+    "longHistory": "L'Alpha Legion utilise des vaisseaux modifiés pour la furtivité — coques absorbantes, signatures réduites, équipage minimal. Le Warp Skull (un nom utilisé par plusieurs vaisseaux différents — méthode Alpha Legion classique pour confondre l'Imperium) opère en cellules clandestines. Pendant l'Hérésie, plusieurs furent vus à différents fronts. Aujourd'hui, des vaisseaux portant ce nom ré-apparaissent périodiquement, jamais identifiés.",
+    "specs": [
+      "Taille : ~2-3 km",
+      "Classe : Cruiser furtif modifié",
+      "Armement : modéré, optimisé pour ambushes courte distance",
+      "Équipage : ~20 000 Alpha Legion + cellules infiltrées",
+      "Particularité : multiple vaisseaux portant ce nom (confusion Alpha Legion)"
+    ],
+    "notableBattles": [
+      {
+        "name": "Multiples opérations Hérésie",
+        "date": "M31",
+        "summary": "Vu sur plusieurs fronts simultanément (impossible pour un seul vaisseau)."
+      },
+      {
+        "name": "Sabotage Tallarn",
+        "date": "M31",
+        "summary": "Possiblement impliqué dans le sabotage logistique Iron Warriors."
+      }
+    ],
+    "galleryQueries": [
+      "Alpha Legion ship",
+      "Hydra warhammer 40k",
+      "Alpha Legion fleet",
+      "Stealth warship"
+    ]
+  }
+]

@@ -236,6 +236,48 @@
       color: var(--muted);
     }
 
+    .ki-link, .dd-link {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .ki-link:hover, .dd-link:hover {
+      color: var(--gold-bright);
+      text-decoration: underline;
+    }
+
+    .battles-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .battles-list li {
+      border-left: 2px solid var(--gold-soft);
+      padding: 8px 0 10px 16px;
+    }
+    .battles-list .battle-head {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .battles-list .battle-head strong {
+      font-family: var(--serif);
+      font-size: 15px;
+      color: var(--gold-bright);
+    }
+    .battles-list .battle-date {
+      font-family: var(--serif);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+    .battles-list li p { margin: 0; font-size: 14px; line-height: 1.6; color: #c8c0ad; }
+
     @media (max-width: 1024px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: auto; }

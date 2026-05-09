@@ -73,26 +73,41 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
     <section class="grid">
       @for (p of filtered(); track p.id) {
         <article class="card" [attr.data-allegiance]="p.allegiance" [attr.data-status]="p.status">
-          <button class="card-img" type="button" [style.background-image]="primarchImg(p.id)" [style.background-color]="p.primaryColor || '#3a3a3a'" (click)="openLightbox(p)" aria-label="Voir en grand">
+          <a class="card-img" [routerLink]="['/lore/primarchs', p.id]" [style.background-image]="primarchImg(p.id)" [style.background-color]="p.primaryColor || '#3a3a3a'" aria-label="Lire le lore complet">
             <div class="card-img-overlay"></div>
             <span class="number">{{ formatNumber(p.number) }}</span>
             <span class="status" [style.color]="statusColor(p.status)">{{ statusLabel(p.status) }}</span>
-            <span class="card-zoom">⛶</span>
-          </button>
+            <span class="card-zoom">↗</span>
+          </a>
           <div class="card-body">
             <div class="card-head">
-              <h2>{{ p.name }}</h2>
+              <a class="card-name-link" [routerLink]="['/lore/primarchs', p.id]"><h2>{{ p.name }}</h2></a>
+              @if (p.epithet) {
+                <div class="epithet">{{ p.epithet }}</div>
+              }
               @if (p.legion) {
                 <div class="legion">{{ p.legion }}</div>
               }
             </div>
             <p class="desc">{{ p.description }}</p>
+            @if (p.citation) {
+              <blockquote class="card-citation">« {{ p.citation }} »</blockquote>
+            }
+            <div class="card-stats">
+              @if (p.notableBattles?.length) {
+                <span class="stat"><span class="stat-ico">⚔</span>{{ p.notableBattles!.length }} batailles canon</span>
+              }
+              @if (p.quotes?.length) {
+                <span class="stat"><span class="stat-ico">❝</span>{{ p.quotes!.length }} citations</span>
+              }
+              @if (p.homeworld) {
+                <span class="stat homeworld" [title]="'Monde natal — ' + p.homeworld"><span class="stat-ico">⊙</span>{{ p.homeworld }}</span>
+              }
+            </div>
             <div class="status-detail">{{ p.statusDetail }}</div>
             <div class="card-foot">
               <span class="allegiance" [class]="'a-' + p.allegiance">{{ allegianceLabel(p.allegiance) }}</span>
-              @if (p.legionId) {
-                <a class="legion-link" [routerLink]="['/factions', p.legionId]">Voir Légion →</a>
-              }
+              <a class="legion-link" [routerLink]="['/lore/primarchs', p.id]">Lire la fiche →</a>
             </div>
           </div>
         </article>

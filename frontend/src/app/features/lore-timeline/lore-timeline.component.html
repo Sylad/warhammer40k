@@ -87,6 +87,9 @@
                           }
                         </ul>
                       </div>
+                      <a class="t-fiche-link" [routerLink]="['/lore/timeline', ev.id]" (click)="$event.stopPropagation()">
+                        Lire la fiche complète →
+                      </a>
                     </div>
                   }
                 </div>
