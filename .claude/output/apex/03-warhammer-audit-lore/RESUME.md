@@ -1,6 +1,12 @@
 # P5 — RESUME context
 
-État au 2026-05-07 (pause user, à reprendre).
+État au 2026-05-10 (audit + reprise).
+
+## Mise à jour 2026-05-10
+
+- ✅ **P5b — 71/71 héros enrichis full data** (loreLong 750-910 chars + role + citation + apparition + wikiQuery + galleryQueries). Livré à un moment entre 2026-05-07 et 2026-05-10 (le memo précédent ne reflétait pas l'état). Audit confirme : tous les 57 héros listés ci-dessous + les 14 déjà fait en P4 = 71/71 OK.
+- ✅ **P5d** Visual-first structure livré commit `3213547` (UnitEquipment.image + sidebar Galerie liée + lazy artwork resolution).
+- ⚠️ **P5c — 1/62 generics enrichis**, 61 restent à attaquer (lightweight : description + role + 2-3 capacités + image).
 
 ## Ce qui est livré (P1-P4)
 

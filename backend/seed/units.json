@@ -15,7 +15,15 @@
       "Codex Astartes",
       "Astartes battle scene",
       "Ultramarines diorama"
-    ]
+    ],
+    "description": "Cinq à dix Astartes en MK X power armour, bolters au poing — l'unité fondamentale du Codex Astartes, capable de tenir, d'avancer ou de couvrir une retraite.",
+    "capacities": [
+      "Polyvalents toutes doctrines — tenue d'objectif, avancée, repli couvert",
+      "Bolter discipliné — feu de saturation à moyenne portée",
+      "Sergent Astartes en commandement, vox tactique pour coordination de Compagnie"
+    ],
+    "wikiQuery": "Tactical Squad warhammer 40k",
+    "loreImageQuery": "Space Marines tactical squad battle"
   },
   {
     "id": "sm-assault",
@@ -33,7 +41,15 @@
       "Blood Angels assault",
       "Astartes battle scene",
       "Ultramarines diorama"
-    ]
+    ],
+    "description": "Astartes équipés de jump packs, chainswords et bolt pistols — ils bondissent par-dessus les lignes ennemies pour frapper en mêlée au cœur de la formation adverse.",
+    "capacities": [
+      "Saut tactique — jump pack pour franchir terrain et lignes ennemies",
+      "Mêlée brutale — chainsword et bolt pistol au contact",
+      "Doctrine Codex de percée rapide, favorite des Blood Angels"
+    ],
+    "wikiQuery": "Assault Squad warhammer 40k",
+    "loreImageQuery": "Space Marines assault squad jump pack charge"
   },
   {
     "id": "sm-devastator",
@@ -51,7 +67,15 @@
       "Ultramarines diorama",
       "Space Marines artwork",
       "Imperial Fists battle"
-    ]
+    ],
+    "description": "Quatre Marines portant heavy bolter, lascannon, missile launcher ou multi-melta sous les ordres d'un Sergent — l'artillerie mobile qui couvre l'avancée du Chapitre.",
+    "capacities": [
+      "Feu de suppression à longue portée — heavy bolter, missile, lascannon",
+      "Position fixée, signum-link au Sergent pour précision augmentée",
+      "Capacité anti-blindage et anti-infanterie modulable selon mission"
+    ],
+    "wikiQuery": "Devastator Squad warhammer 40k",
+    "loreImageQuery": "Space Marines devastator squad heavy weapons"
   },
   {
     "id": "sm-scouts",
@@ -68,7 +92,15 @@
       "Sniper Astartes",
       "Tenth Company Scouts",
       "Space Marine recon"
-    ]
+    ],
+    "description": "Initiés Astartes en armure scout légère, sniper rifle ou shotgun à la main — reconnaissance, embuscade et infiltration avant l'arrivée des frères en power armour.",
+    "capacities": [
+      "Infiltration et camouflage — déploiement avancé hors des lignes",
+      "Tir de précision — sniper rifle pour décapiter le commandement adverse",
+      "Embuscade rapprochée — shotgun et combat blade en zone urbaine"
+    ],
+    "wikiQuery": "Scout Squad warhammer 40k",
+    "loreImageQuery": "Space Marines scouts reconnaissance forest"
   },
   {
     "id": "sm-terminators",
@@ -86,7 +118,15 @@
       "First Company Astartes",
       "Astartes battle scene",
       "Ultramarines diorama"
-    ]
+    ],
+    "description": "Vétérans du 1ᵉʳ Compagnie en Terminator Armour — Tartaros, Cataphractii ou Indomitus — capables de téléportation tactique et déployés là où aucun Marine ordinaire ne survivrait.",
+    "capacities": [
+      "Terminator Armour — protection énergétique la plus lourde de l'Imperium",
+      "Téléportation tactique — déploiement direct sur vaisseau ennemi ou point clé",
+      "Storm Bolter et Power Fist — saturation et mêlée écrasante"
+    ],
+    "wikiQuery": "Terminator Squad warhammer 40k",
+    "loreImageQuery": "Space Marines terminators teleport assault"
   },
   {
     "id": "sm-captain",
@@ -308,7 +348,15 @@
       "Furioso Dreadnought",
       "Venerable Dreadnought",
       "Contemptor Dreadnought"
-    ]
+    ],
+    "description": "Sarcophage cybernétique scellé dans un châssis marche-blindé — un Astartes mortellement blessé continue à servir, parfois pendant des millénaires entre deux batailles.",
+    "capacities": [
+      "Sarcophage cybernétique — pilote Astartes vétéran, parfois millénaire",
+      "Armement modulable — assault cannon, multi-melta, plasma cannon, dreadnought close combat weapon",
+      "Mémoire vivante du Chapitre — porte le savoir et la rage de campagnes oubliées"
+    ],
+    "wikiQuery": "Dreadnought warhammer 40k",
+    "loreImageQuery": "Space Marines dreadnought walker battle"
   },
   {
     "id": "sm-land-raider",
@@ -325,7 +373,15 @@
       "Land Raider Crusader",
       "Astartes tank",
       "Imperial Fists Land Raider"
-    ]
+    ],
+    "description": "Char d'assaut adamantine — transporte une escouade de Terminators tout en couvrant l'avancée avec ses lascannons jumelés et heavy bolters frontaux.",
+    "capacities": [
+      "Blindage adamantine — résiste aux tirs anti-char standards",
+      "Lascannons jumelés — anti-blindage à longue portée",
+      "Transport assigné — dépose Terminators ou escouade vétéran au contact"
+    ],
+    "wikiQuery": "Land Raider warhammer 40k",
+    "loreImageQuery": "Space Marines Land Raider battle tank"
   },
   {
     "id": "sm-guilliman",
@@ -867,7 +923,15 @@
       "Black Legion",
       "Iron Warriors",
       "Word Bearers"
-    ]
+    ],
+    "description": "Astartes des neuf Légions Traîtresses, dix mille ans à mariner dans l'Œil de la Terreur — armures fusionnées à la chair, bolters bénis par les Quatre.",
+    "capacities": [
+      "Endurance Astartes amplifiée par les mutations du Warp",
+      "Bolters bénis — munitions corrompues perforent la prière",
+      "Cohésion de Légion — millénaires de raids partagés"
+    ],
+    "wikiQuery": "Chaos Space Marines",
+    "loreImageQuery": "Chaos Space Marines battle line Eye of Terror"
   },
   {
     "id": "csm-cultistes",
@@ -884,7 +948,15 @@
       "Heretic warband",
       "Iron Warriors cultists",
       "Word Bearers cultists"
-    ]
+    ],
+    "description": "Civils corrompus par un Dark Apostle ou un sorcier de warband — armes rudimentaires, fanatisme suicidaire, parfois sacrifiés pour invoquer un Lesser Daemon.",
+    "capacities": [
+      "Vagues humaines — submergent par le nombre",
+      "Fanatisme — ne fuient pas tant que le champion tient",
+      "Sacrifice rituel — leur mort peut ouvrir un portail"
+    ],
+    "wikiQuery": "Chaos Cultists",
+    "loreImageQuery": "Chaos cultists horde charging ruined hive city"
   },
   {
     "id": "csm-obliterators",
@@ -901,7 +973,15 @@
       "Chaos bio-machine",
       "Daemon Engine",
       "Iron Warriors Obliterator"
-    ]
+    ],
+    "description": "Astartes du Chaos infectés par un virus daemonique — leur chair fusionne avec leurs armes, bras devenus melta, plasma, lance-flamme à volonté.",
+    "capacities": [
+      "Morphogenèse d'armes — chair se reconfigure en melta, plasma, lance-flamme",
+      "Régénération virale — corps se reforme à partir de chair latente",
+      "Endurance massive — armure-chair fusionnée bloque les coups Astartes"
+    ],
+    "wikiQuery": "Obliterators",
+    "loreImageQuery": "Obliterator cult Chaos Space Marines firing plasma"
   },
   {
     "id": "csm-hellbrute",
@@ -918,7 +998,15 @@
       "Chaos Dreadnought",
       "Daemon Engine",
       "Possessed Dreadnought"
-    ]
+    ],
+    "description": "Dreadnought corrompu — Astartes possédé par un Lesser Daemon, hurlant à travers son sarcophage, frappant alliés et ennemis quand sa rage déborde.",
+    "capacities": [
+      "Possession daemonique — frappe en frenzy aléatoire",
+      "Armes lourdes Astartes — multi-melta, lance-missiles, power scourge",
+      "Carcasse Dreadnought — encaisse l'artillerie"
+    ],
+    "wikiQuery": "Helbrute",
+    "loreImageQuery": "Helbrute Chaos dreadnought rampaging battlefield"
   },
   {
     "id": "csm-daemon-prince",
@@ -1680,7 +1768,15 @@
       "Craftworld Guardians",
       "Aeldari Craftworld",
       "Eldar artwork"
-    ]
+    ],
+    "description": "Civils aeldari — artistes, savants, philosophes — mobilisés pour défendre le Craftworld quand la nécessité l'exige. Leur nombre compense leur manque de discipline guerrière.",
+    "capacities": [
+      "Catapulte shuriken — tir saturant à monofilament",
+      "Plate-forme lourde — canon shuriken ou scatter laser tracté",
+      "Mobilisation de masse — la milice du Craftworld"
+    ],
+    "wikiQuery": "Guardian Defender",
+    "loreImageQuery": "Aeldari Guardians defending Craftworld"
   },
   {
     "id": "eld-dire-avengers",
@@ -1698,7 +1794,15 @@
       "Asurmen Phoenix Lord",
       "Aeldari Craftworld",
       "Eldar artwork"
-    ]
+    ],
+    "description": "Aspect Warriors fondés par Asurmen sur la Voie de la Vengeance. Discipline méthodique, fusil shuriken catapult amélioré, frappe précise sans flamboyance.",
+    "capacities": [
+      "Avenger shuriken catapult — cadence et portée supérieures",
+      "Discipline d'Asurmen — tir massé en formation serrée",
+      "Exarch — vétéran piégé sur la Voie, mène la troupe"
+    ],
+    "wikiQuery": "Dire Avengers",
+    "loreImageQuery": "Dire Avengers shuriken volley Asurmen aspect"
   },
   {
     "id": "eld-banshees",
@@ -1716,7 +1820,15 @@
       "Aeldari mêlée",
       "Aeldari Craftworld",
       "Eldar artwork"
-    ]
+    ],
+    "description": "Aspect Warriors féminines de la Voie de la Banshee, fondée par Jain Zar. Cri psychique paralysant, lame puissance, frappes plus rapides que la pensée.",
+    "capacities": [
+      "Cri de la Banshee — masque psychique paralyse l'ennemi avant la charge",
+      "Lame puissance & shuriken pistol — exécution rapprochée",
+      "Vitesse surnaturelle — toujours frapper en premier"
+    ],
+    "wikiQuery": "Howling Banshees",
+    "loreImageQuery": "Howling Banshees charge psychic scream"
   },
   {
     "id": "eld-scorpions",
@@ -1733,7 +1845,15 @@
       "Karandras Phoenix Lord",
       "Aeldari ambush",
       "Scorpion Aspect"
-    ]
+    ],
+    "description": "Aspect Warriors masculins de la Voie du Scorpion, fondée par Karandras. Embuscade silencieuse, armure plus lourde, mandibles psychiques attachées au heaume.",
+    "capacities": [
+      "Mandibules Scorpion — décharges psychiques au contact",
+      "Chainsword & shuriken pistol — corps-à-corps massif",
+      "Infiltration — surgissent du couvert sans bruit"
+    ],
+    "wikiQuery": "Striking Scorpions",
+    "loreImageQuery": "Striking Scorpions ambush Karandras forest"
   },
   {
     "id": "eld-farseer",
@@ -1889,7 +2009,15 @@
       "Iyanden Wraith",
       "Aeldari Craftworld",
       "Eldar artwork"
-    ]
+    ],
+    "description": "Géant de wraithbone de huit mètres, animé par l'âme d'un Aeldari mort piégée dans la pierre spirituelle synaptique. Knight aeldari, choix tragique d'Iyanden.",
+    "capacities": [
+      "Heavy wraithcannon ou ghostglaive — contre Knights et titans",
+      "Suncannon & scattershield — saturation et protection énergétique",
+      "Pilote spirituel — l'âme défunte guide chaque pas"
+    ],
+    "wikiQuery": "Wraithknight",
+    "loreImageQuery": "Wraithknight Iyanden battle giant wraithbone"
   },
   {
     "id": "eld-avatar",
@@ -2244,7 +2372,15 @@
       "Greenskins",
       "Goff Boyz",
       "Ork choppa"
-    ]
+    ],
+    "description": "Ork standard du clan — gros bras, choppa, shoota improvisé. Charge en horde, frappe pour la baston, pas pour la victoire.",
+    "capacities": [
+      "Choppa — hache brutale, démembre infanterie légère",
+      "Shoota — mitrailleuse improvisée, précision nulle",
+      "Mob Rule — plus ils sont nombreux, plus ils tiennent"
+    ],
+    "wikiQuery": "Ork Boyz",
+    "loreImageQuery": "Ork Boyz charge battlefield"
   },
   {
     "id": "ork-nobz",
@@ -2261,7 +2397,15 @@
       "Mega Nob",
       "Greenskins elite",
       "Ork warband"
-    ]
+    ],
+    "description": "Ork plus gros, plus vieux, plus mauvais — sergent qui mène les Boyz à la baston, équipé en bric-à-brac Mékanik.",
+    "capacities": [
+      "Power Klaw — pince énergétique, broie power armor",
+      "Big Choppa — hache à deux mains, tranche infanterie lourde",
+      "Bossing Boyz — discipline les Boyz à coups de poing"
+    ],
+    "wikiQuery": "Ork Nobz",
+    "loreImageQuery": "Ork Nobz power klaw warband"
   },
   {
     "id": "ork-gretchin",
@@ -2279,7 +2423,15 @@
       "Greenskins servant",
       "Ork Boyz artwork",
       "WAAAGH battle"
-    ]
+    ],
+    "description": "Petit gretchin lâche, haut d'un mètre — sert de bouclier, creuse les tranchées, fuit dès la première salve.",
+    "capacities": [
+      "Pistolet pourri — tire panique, touche par accident",
+      "Bouclier vivant — encaisse les balles à la place des Boyz",
+      "Travail forcé — creuse, transporte, nettoie sous le fouet"
+    ],
+    "wikiQuery": "Gretchin Warhammer",
+    "loreImageQuery": "Gretchin Grots Ork servants"
   },
   {
     "id": "ork-lootas",
@@ -2297,7 +2449,15 @@
       "Ork Boyz artwork",
       "WAAAGH battle",
       "Ork warband"
-    ]
+    ],
+    "description": "Ork mékanik avec une arme lourde pillée, customisée en deffgun cracheur — tire debout, pleine cadence, sans visée.",
+    "capacities": [
+      "Deffgun — autocannon pillé, cadence absurde",
+      "Spotting Grot — gretchin attaché qui pointe les cibles",
+      "More Dakka — plus on tire, mieux ça marche"
+    ],
+    "wikiQuery": "Ork Lootas",
+    "loreImageQuery": "Ork Lootas deffgun heavy weapons"
   },
   {
     "id": "ork-warboss",
@@ -2451,7 +2611,15 @@
       "Ork Walker",
       "Morkanaut",
       "Greenskins titan"
-    ]
+    ],
+    "description": "Walker bipède Ork de dix mètres — idole bricolée du dieu Gork, poings énergétiques, lance-roquettes intégrés, fierté du clan.",
+    "capacities": [
+      "Klaw of Gork — poing énergétique, écrase un tank",
+      "Deffstorm Mega-Shoota — gatling massif",
+      "Skorcha Missiles — salve de roquettes incendiaires"
+    ],
+    "wikiQuery": "Gorkanaut",
+    "loreImageQuery": "Gorkanaut Ork walker battlefield"
   },
   {
     "id": "ork-deff-dread",
@@ -2469,7 +2637,15 @@
       "Greenskins walker",
       "Ork Boyz artwork",
       "WAAAGH battle"
-    ]
+    ],
+    "description": "Dreadnought Ork bricolé à quatre bras — chaque bras une arme différente, klampteur fou aux commandes, joie pure de Mékanik.",
+    "capacities": [
+      "Quatre bras armés — klaws, big shootas, lance-flammes mixés",
+      "Klaw + Big Shoota — combo mêlée et tir de saturation",
+      "Pilote bridé — Ork fou enchaîné au cockpit"
+    ],
+    "wikiQuery": "Ork Deff Dread",
+    "loreImageQuery": "Ork Deff Dread walker assault"
   },
   {
     "id": "ork-weirdboy",
@@ -2682,7 +2858,15 @@
       "Hive bio-form",
       "Tyranid Hive Fleet",
       "Tyranid bio-form"
-    ]
+    ],
+    "description": "Bio-forme légère du Hive Mind — petite, agile, armée de bio-canon vivant. Submerge par la masse sous la direction d'un Tyran.",
+    "capacities": [
+      "Fleshborer — bio-canon lançant des vers parasites",
+      "Devourer — essaim de spores carnivores",
+      "Synapse Link — coordonné par un Warrior ou Tyran"
+    ],
+    "wikiQuery": "Tyranid Termagant",
+    "loreImageQuery": "Tyranid Termagants swarm planetary invasion"
   },
   {
     "id": "tyr-hormagaunts",
@@ -2700,7 +2884,15 @@
       "Hive bio-form",
       "Tyranid Hive Fleet",
       "Tyranid bio-form"
-    ]
+    ],
+    "description": "Bio-forme Tyranide spécialisée en assaut rapide — quatre membres équipés de scything talons, frappe avant que la défense ne réagisse.",
+    "capacities": [
+      "Scything Talons — quatre faux biologiques tranchantes",
+      "Vitesse de course — dépasse l'infanterie en terrain ouvert",
+      "Bondissement — saute par-dessus obstacles bas"
+    ],
+    "wikiQuery": "Tyranid Hormagaunt",
+    "loreImageQuery": "Tyranid Hormagaunts charging swarm"
   },
   {
     "id": "tyr-genestealers",
@@ -2717,7 +2909,15 @@
       "Tyranid Genestealer Cult",
       "Genestealer infestation",
       "Hive precursor"
-    ]
+    ],
+    "description": "Bio-forme infiltratrice Tyranide — quatre lames courbes, baiser psychique infectant. Plante les Cults Genestealer avant la flotte-ruche.",
+    "capacities": [
+      "Rending Claws — lames courbes traversant céramite",
+      "Baiser Génétique — infecte humains, crée Hybrides",
+      "Infiltration — pénètre coques de vaisseaux et bunkers"
+    ],
+    "wikiQuery": "Tyranid Genestealer",
+    "loreImageQuery": "Tyranid Genestealers boarding ship"
   },
   {
     "id": "tyr-warriors",
@@ -2735,7 +2935,15 @@
       "Hive bio-form",
       "Tyranid Hive Fleet",
       "Tyranid bio-form"
-    ]
+    ],
+    "description": "Bio-forme synaptique secondaire — relaie la volonté du Hive Mind sur un secteur, coordonne les Gaunts. Sa mort coupe le lien.",
+    "capacities": [
+      "Synapse Relay — coordonne bio-formes mineures alentour",
+      "Bone Swords — lames biologiques perforant armure",
+      "Devourer — bio-canon à essaim parasite"
+    ],
+    "wikiQuery": "Tyranid Warriors",
+    "loreImageQuery": "Tyranid Warriors synapse battle"
   },
   {
     "id": "tyr-hive-tyrant",
@@ -2821,7 +3029,15 @@
       "Hive monster",
       "Tyranid Hive Fleet",
       "Tyranid bio-form"
-    ]
+    ],
+    "description": "Bio-machine massive de quatre à cinq mètres — blindage biologique épais, scything talons géants. Bélier qui défonce les lignes.",
+    "capacities": [
+      "Scything Talons géants — fauchent infanterie en masse",
+      "Carapace épaisse — encaisse tirs de canon lourd",
+      "Biomorphes adaptables — équipement modulé selon mission"
+    ],
+    "wikiQuery": "Tyranid Carnifex",
+    "loreImageQuery": "Tyranid Carnifex charging line"
   },
   {
     "id": "tyr-lictor",
@@ -2838,7 +3054,15 @@
       "Hive infiltrator",
       "Tyranid stealth",
       "Bio-form stalker"
-    ]
+    ],
+    "description": "Bio-forme infiltratrice — camouflage chromatic, mâchoires couvertes de tendrils sensoriels. Traque les commandeurs, exécute en silence.",
+    "capacities": [
+      "Camouflage Chromatic — fond avec n'importe quel décor",
+      "Flesh Hooks — projette grappins biologiques",
+      "Pheromone Trail — guide essaim vers position ennemie"
+    ],
+    "wikiQuery": "Tyranid Lictor",
+    "loreImageQuery": "Tyranid Lictor stalking jungle"
   },
   {
     "id": "tyr-trygon",
@@ -2855,7 +3079,15 @@
       "Hive tunneller",
       "Bio-form serpent",
       "Tyranid burrow"
-    ]
+    ],
+    "description": "Énorme serpent biologique de dix mètres — creuse sous les défenses, émerge au cœur des fortifications, frappe par l'intérieur.",
+    "capacities": [
+      "Burrow Strike — émerge au sein des lignes ennemies",
+      "Bio-electric Pulse — décharge zone à l'émergence",
+      "Scything Talons massifs — fauchent infanterie autour"
+    ],
+    "wikiQuery": "Tyranid Trygon",
+    "loreImageQuery": "Tyranid Trygon emerging from ground"
   },
   {
     "id": "tyr-zoanthrope",
@@ -2873,7 +3105,15 @@
       "Bio-form synapse",
       "Tyranid Hive Fleet",
       "Tyranid bio-form"
-    ]
+    ],
+    "description": "Bio-forme psychique — petit corps, cerveau-bulbe géant. Amplifie le réseau synaptique, projette warp blast, relaie aux Cults.",
+    "capacities": [
+      "Warp Blast — projection psychique perforante",
+      "Synapse Beacon — étend la portée du lien Hive",
+      "Pont Génétique — relaie ordres aux Genestealer Cults"
+    ],
+    "wikiQuery": "Tyranid Zoanthrope",
+    "loreImageQuery": "Tyranid Zoanthrope warp blast battlefield"
   },
   {
     "id": "tyr-broodlord",
@@ -3028,7 +3268,15 @@
       "Necron Lord artwork",
       "Tomb World scene",
       "Necron Dynasty"
-    ]
+    ],
+    "description": "Squelettes necrodermis verts portant le gauss flayer — fusil qui désintègre la matière atome par atome. Marche rigide, sans peur, régénération constante.",
+    "capacities": [
+      "Reanimation Protocols — guerriers tombés se relèvent",
+      "Gauss Flayer — désintègre la matière couche par couche",
+      "Programmation millénaire — refusent moralité, peur, fatigue"
+    ],
+    "wikiQuery": "Necron Warriors",
+    "loreImageQuery": "Necron Warriors phalanx advancing tomb world"
   },
   {
     "id": "nec-immortals",
@@ -3046,7 +3294,15 @@
       "Necron Lord artwork",
       "Tomb World scene",
       "Necron Dynasty"
-    ]
+    ],
+    "description": "Necrons d'élite plus blindés que les Guerriers — gauss blasters perforants ou tesla carbines à chaîne d'éclair. Beaucoup sont des vétérans de la Guerre dans le Ciel, mémoire intacte.",
+    "capacities": [
+      "Reanimation Protocols renforcés — necrodermis plus dense",
+      "Gauss Blaster ou Tesla Carbine — choix selon doctrine de dynastie",
+      "Mémoire intacte — accès direct aux tactiques War in Heaven"
+    ],
+    "wikiQuery": "Necron Immortals",
+    "loreImageQuery": "Necron Immortals firing tesla carbines green energy"
   },
   {
     "id": "nec-lychguard",
@@ -3064,7 +3320,15 @@
       "Necron Phaeron guard",
       "Necron Lord artwork",
       "Tomb World scene"
-    ]
+    ],
+    "description": "Garde rapprochée des Phaerons et Overlords — hyperphase swords qui frappent sans toucher l'armure et dispersion shields déflecteurs. Ne quittent jamais leur seigneur.",
+    "capacities": [
+      "Hyperphase Sword — lame phase ignore armure",
+      "Dispersion Shield — déflecteur qui renvoie tirs lourds",
+      "Loyauté absolue — interception physique des coups visant le seigneur"
+    ],
+    "wikiQuery": "Lychguard",
+    "loreImageQuery": "Lychguard royal court Necron Overlord throne"
   },
   {
     "id": "nec-deathmarks",
@@ -3082,7 +3346,15 @@
       "Necron teleport",
       "Necron Lord artwork",
       "Tomb World scene"
-    ]
+    ],
+    "description": "Snipers Necron téléportés depuis le Monde-Tombeau au moment optimal — synaptic disintegrator marque la cible d'une rune nécrologique avant de désintégrer son âme.",
+    "capacities": [
+      "Téléportation tactique — apparaissent depuis dimensionnel quand la cible se découvre",
+      "Synaptic Disintegrator — désintègre l'âme avant le corps",
+      "Hunter's Mark — verrouillage runique sur cible désignée"
+    ],
+    "wikiQuery": "Deathmarks",
+    "loreImageQuery": "Necron Deathmark sniper teleporting battlefield green light"
   },
   {
     "id": "nec-overlord",
@@ -3237,7 +3509,16 @@
       "Necron portal",
       "Necron Lord artwork",
       "Tomb World scene"
-    ]
+    ],
+    "description": "Pyramide tronquée flottante de necrodermis, particle whip et gauss flux arcs aux quatre angles, portail dimensionnel intégré qui téléporte des escouades à travers la pyramide.",
+    "capacities": [
+      "Eternity Gate — portail qui téléporte unités Necron sur le champ",
+      "Particle Whip — arc d'éclairs balayant l'infanterie",
+      "Gauss Flux Arc — quatre canons gauss aux angles",
+      "Coque necrodermis — auto-réparation, ignore la plupart des armes anti-char"
+    ],
+    "wikiQuery": "Necron Monolith",
+    "loreImageQuery": "Necron Monolith pyramid hovering battlefield green portal"
   },
   {
     "id": "nec-nightbringer",
@@ -3509,7 +3790,15 @@
       "Tau Empire artwork",
       "Tau battle scene",
       "Caste du Feu"
-    ]
+    ],
+    "description": "Infanterie standard de la Caste du Feu, équipée de pulse rifles ou pulse carbines. Doctrine Mont'ka et Kauyon — frapper à distance, garder la mobilité, éviter la mêlée.",
+    "capacities": [
+      "Pulse rifle / pulse carbine — feu à induction longue portée",
+      "Photon grenades — neutralise la charge ennemie",
+      "Shas'ui — sergent vétéran coordonne la cadence"
+    ],
+    "wikiQuery": "Tau Fire Warriors",
+    "loreImageQuery": "Tau Fire Warriors pulse rifle volley urban warfare"
   },
   {
     "id": "tau-pathfinders",
@@ -3526,7 +3815,15 @@
       "Markerlight",
       "Tau Empire scouts",
       "Caste du Feu reconnaissance"
-    ]
+    ],
+    "description": "Éclaireurs Tau opérant en avant des lignes. Markerlights laser désignent les cibles pour les Crisis, Riptides et Hammerheads — colonne vertébrale du système de visée Tau.",
+    "capacities": [
+      "Markerlight — désigne la cible pour les tirs lourds alliés",
+      "Pulse carbine — armement léger pour défense rapprochée",
+      "Recon drones — relais d'observation avancé"
+    ],
+    "wikiQuery": "Tau Pathfinders",
+    "loreImageQuery": "Tau Pathfinders markerlight scouting battlefield"
   },
   {
     "id": "tau-stealth",
@@ -3543,7 +3840,15 @@
       "XV25 battlesuit",
       "Tau Empire stealth",
       "Caste du Feu camouflage"
-    ]
+    ],
+    "description": "Battlesuit XV25 équipée d'un champ de camouflage actif. Frappes courte portée invisibles aux scanners, repli avant la riposte — coordination étroite avec les Pathfinders.",
+    "capacities": [
+      "Stealth field generator — invisibilité partielle aux capteurs",
+      "Burst cannon — saturation à courte portée",
+      "Jet pack — repli rapide après la frappe"
+    ],
+    "wikiQuery": "XV25 Stealth Suit",
+    "loreImageQuery": "Tau XV25 Stealth Suit ambush burst cannon"
   },
   {
     "id": "tau-commander",
@@ -3698,7 +4003,15 @@
       "Tau Empire heavy",
       "Tau Empire artwork",
       "Tau battle scene"
-    ]
+    ],
+    "description": "Battlesuit lourde de cinq mètres, pilotée par un vétéran Caste du Feu épaulé par des drones. Pierre angulaire du soutien lourd Tau, équivalent fonctionnel d'un Knight léger.",
+    "capacities": [
+      "Heavy burst cannon ou ion accelerator (mode surchargé)",
+      "Nova Reactor — boost surchargé au prix du pilote",
+      "Jet pack géant — mobilité tactique malgré la masse"
+    ],
+    "wikiQuery": "Riptide Battlesuit",
+    "loreImageQuery": "Tau Riptide XV104 ion accelerator overcharge"
   },
   {
     "id": "tau-broadside",
@@ -3716,7 +4029,15 @@
       "Tau Empire anti-tank",
       "Tau Empire artwork",
       "Tau battle scene"
-    ]
+    ],
+    "description": "Battlesuit Tau lourde spécialisée anti-char. Heavy rail rifles ou high-yield missile pods — fend les Land Raiders et menace les Knights depuis la ligne arrière.",
+    "capacities": [
+      "Heavy rail rifle — perfore le blindage le plus lourd",
+      "High-yield missile pod — saturation anti-infanterie",
+      "Sensor cluster — verrouillage longue portée"
+    ],
+    "wikiQuery": "XV88 Broadside Battlesuit",
+    "loreImageQuery": "Tau Broadside XV88 rail rifle anti-tank salvo"
   },
   {
     "id": "tau-hammerhead",
@@ -3734,7 +4055,15 @@
       "Tau Empire artwork",
       "Tau battle scene",
       "Caste du Feu"
-    ]
+    ],
+    "description": "Char antigrav principal de l'Empire Tau, plate-forme rapide même en terrain accidenté. Railgun anti-char ou ion cannon anti-infanterie — l'unité véhicule iconique du Septième Cadre.",
+    "capacities": [
+      "Railgun — coup unique perforant capable de détruire un Land Raider",
+      "Ion cannon — variante anti-infanterie en mode surchargé",
+      "Plate-forme antigrav — vitesse constante en terrain accidenté"
+    ],
+    "wikiQuery": "Tau Hammerhead Gunship",
+    "loreImageQuery": "Tau Hammerhead railgun gunship desert battle"
   },
   {
     "id": "tau-shadowsun",
@@ -3949,7 +4278,15 @@
       "Cadian Shock Troops",
       "Catachan Jungle Fighters",
       "Imperial Guardsmen"
-    ]
+    ],
+    "description": "Escouade d'Infanterie standard de la Garde — dix soldats, lasguns, dévotion. L'épine dorsale humaine de l'Imperium.",
+    "capacities": [
+      "Lasgun standard — fiable, simple, produite à la chaîne",
+      "Discipline régimentaire — obéit jusqu'à la mort",
+      "Numérosité écrasante — un million de régiments à travers l'Imperium"
+    ],
+    "wikiQuery": "Imperial Guard Infantry Squad",
+    "loreImageQuery": "Cadian Shock Troops trench warfare battle line lasguns"
   },
   {
     "id": "am-veterans",
@@ -3966,7 +4303,15 @@
       "Imperial Guard Veterans",
       "Stormtroopers Imperial",
       "Tempestus Scions"
-    ]
+    ],
+    "description": "Soldats expérimentés ayant survécu à des dizaines de batailles, équipés d'armes spécialisées et opérant en escouades d'élite.",
+    "capacities": [
+      "Armes spécialisées — plasma, melta, sniper, lance-flamme",
+      "Armure carapace renforcée — encaisse plus que la flak",
+      "Expérience du front — sang-froid sous pression extrême"
+    ],
+    "wikiQuery": "Militarum Tempestus Scions",
+    "loreImageQuery": "Imperial Guard veterans plasma squad assault urban"
   },
   {
     "id": "am-ogryns",
@@ -3984,7 +4329,15 @@
       "Bullgryn",
       "Imperial Guard battle",
       "Cadian Shock Troops"
-    ]
+    ],
+    "description": "Abhumans massifs (3m, 350 kg), force surhumaine et intelligence rudimentaire — bélier d'assaut de la Garde Impériale.",
+    "capacities": [
+      "Force surhumaine — écrase l'infanterie au corps-à-corps",
+      "Ripper Gun — fusil-d'assaut massif à munitions explosives",
+      "Loyauté absolue à leur Bone'ead et au commissaire"
+    ],
+    "wikiQuery": "Ogryn Astra Militarum",
+    "loreImageQuery": "Ogryn charge battlefield rippergun trench assault"
   },
   {
     "id": "am-ratlings",
@@ -4001,7 +4354,15 @@
       "Imperial Guard Ratling",
       "Sniper Imperial Guard",
       "Abhuman Ratling"
-    ]
+    ],
+    "description": "Abhumans miniatures (1m), tireurs d'élite-nés équipés de sniper rifles. Précis, patients, et notoirement chapardeurs.",
+    "capacities": [
+      "Sniper rifle — précision chirurgicale sur officiers ennemis",
+      "Petite taille — infiltration et camouflage trivial",
+      "Joviaux mais voleurs — gloutons et chapardeurs notoires"
+    ],
+    "wikiQuery": "Ratling Astra Militarum",
+    "loreImageQuery": "Ratling sniper hidden ruins scope abhuman"
   },
   {
     "id": "am-commissar",
@@ -4156,7 +4517,15 @@
       "Leman Russ Demolisher",
       "Imperial Guard battle",
       "Cadian Shock Troops"
-    ]
+    ],
+    "description": "Char d'assaut iconique de la Garde Impériale — canon de bataille, blindage adamantium, des dizaines de variantes.",
+    "capacities": [
+      "Battle Cannon — pilier anti-infanterie longue portée",
+      "Variantes nombreuses — Demolisher, Vanquisher, Executioner, Punisher",
+      "Blindage adamantium frontal — encaisse les coups directs"
+    ],
+    "wikiQuery": "Leman Russ Battle Tank",
+    "loreImageQuery": "Leman Russ tank column dusty advance battle smoke"
   },
   {
     "id": "am-sentinel",
@@ -4173,7 +4542,15 @@
       "Sentinel walker",
       "Imperial Guard Walker",
       "Cadian Sentinel"
-    ]
+    ],
+    "description": "Walker bipède léger (4m), idéal recon et soutien tout terrain — jungle, désert ou ruines urbaines.",
+    "capacities": [
+      "Tout-terrain — bipède agile en jungle, désert, ruines",
+      "Armement modulaire — autocannon, multilas, lance-flamme",
+      "Variantes Scout, Armoured, Powerlifter selon mission"
+    ],
+    "wikiQuery": "Sentinel Imperial Guard walker",
+    "loreImageQuery": "Imperial Sentinel walker patrol jungle scout multilaser"
   },
   {
     "id": "am-basilisk",
@@ -4190,7 +4567,15 @@
       "Imperial Earthshaker",
       "Imperial Guard artillery",
       "Cadian Basilisk"
-    ]
+    ],
+    "description": "Artillerie auto-propulsée sur châssis Chimera — Earthshaker cannon frappant à 60 km, support arrière indispensable.",
+    "capacities": [
+      "Earthshaker Cannon — bombardement à 60 km",
+      "Châssis Chimera — mobilité opérationnelle",
+      "Frappe préparatoire — pilonne avant l'assaut blindé"
+    ],
+    "wikiQuery": "Basilisk Imperial Guard artillery",
+    "loreImageQuery": "Basilisk artillery firing earthshaker shell night barrage"
   },
   {
     "id": "am-gaunt",
@@ -4542,7 +4927,15 @@
       "Mechanicus augmented",
       "Adeptus Mechanicus artwork",
       "Forge World scene"
-    ]
+    ],
+    "description": "Soldats Mechanicus massivement augmentés cybernétiquement, armés de radium carbines à rayonnement délétère.",
+    "capacities": [
+      "Radium Carbine — rayonnement qui désintègre la chair",
+      "Cybernétique massive — chair remplacée, optiques multi-spectrum",
+      "Doctrina Imperatives — protocoles tactiques téléchargés"
+    ],
+    "wikiQuery": "Skitarii Vanguard",
+    "loreImageQuery": "Skitarii Vanguard advance Forge World radium carbine red robes"
   },
   {
     "id": "admech-rangers",
@@ -4560,7 +4953,15 @@
       "Adeptus Mechanicus elite",
       "Adeptus Mechanicus artwork",
       "Forge World scene"
-    ]
+    ],
+    "description": "Skitarii spécialistes du tir longue portée — galvanic rifles, optiques multi-spectrum, embuscade tactique.",
+    "capacities": [
+      "Galvanic Rifle — perforation longue portée et précision",
+      "Optiques multi-spectrum — voient à travers brouillard et obscurité",
+      "Stoïcisme augmenté — patience d'embuscade absolue"
+    ],
+    "wikiQuery": "Skitarii Rangers",
+    "loreImageQuery": "Skitarii Rangers sniping ruined cathedral galvanic rifle"
   },
   {
     "id": "admech-electro",
@@ -4577,7 +4978,15 @@
       "Adeptus Mechanicus penitent",
       "Fulgurite Mars",
       "Mechanicus energy"
-    ]
+    ],
+    "description": "Pénitents Mechanicus chargés d'énergie électrique, frappant l'ennemi à mains nues en arcs destructeurs.",
+    "capacities": [
+      "Décharge électrique — arcs énergétiques au contact",
+      "Sans armure — la foudre est leur seule armure",
+      "Frénésie religieuse — chargent en chantant les Litanies de Mars"
+    ],
+    "wikiQuery": "Fulgurite Electro-Priest",
+    "loreImageQuery": "Fulgurite Electro-Priests lightning charge battlefield robed"
   },
   {
     "id": "admech-dominus",
@@ -4732,7 +5141,15 @@
       "Mechanicus walker",
       "Neutron Laser",
       "Adeptus Mechanicus tank"
-    ]
+    ],
+    "description": "Walker tripode tout-terrain Mechanicus — neutron laser, eradication beam, ou icarus rocket pod selon variante.",
+    "capacities": [
+      "Neutron Laser — désintègre les chars lourds",
+      "Trois jambes — stabilité en tout terrain hostile",
+      "Variantes anti-char, anti-infanterie, anti-air"
+    ],
+    "wikiQuery": "Onager Dunecrawler",
+    "loreImageQuery": "Onager Dunecrawler advance dust Forge World neutron laser"
   },
   {
     "id": "admech-kastelan",
@@ -4750,7 +5167,15 @@
       "Adeptus Mechanicus cybernetic",
       "Adeptus Mechanicus artwork",
       "Forge World scene"
-    ]
+    ],
+    "description": "Robot bipède cybernétique massif (4m), sans pilote, programmé directement par un Datasmith.",
+    "capacities": [
+      "Heavy Phosphor Blaster — feu chimique brûlant l'armure",
+      "Power Fists — broie l'infanterie lourde au corps-à-corps",
+      "Datasmith required — protocoles programmés à la voix"
+    ],
+    "wikiQuery": "Kastelan Robot",
+    "loreImageQuery": "Kastelan Robots advance Forge World phosphor blaster Datasmith"
   },
   {
     "id": "admech-ironstrider",
@@ -4767,7 +5192,15 @@
       "Mechanicus walker",
       "Adeptus Mechanicus mobile",
       "Ironstrider"
-    ]
+    ],
+    "description": "Walker bipède léger Mechanicus combinant rapidité et armement anti-char — autocannon ou twin cognis lascannon.",
+    "capacities": [
+      "Twin Cognis Lascannon — précision anti-blindage",
+      "Bipède agile — plus rapide qu'un Onager, plus blindé qu'un Sentinel",
+      "Cognis tracking — visée augmentée par le Mechanicus"
+    ],
+    "wikiQuery": "Ironstrider Ballistarius",
+    "loreImageQuery": "Ironstrider Ballistarius walker stride Forge World lascannon"
   },
   {
     "id": "admech-cawl",
@@ -4843,7 +5276,15 @@
       "Adepta Sororitas artwork",
       "Sister of Battle",
       "Sororitas battle"
-    ]
+    ],
+    "description": "Cinq à dix Sœurs en power armour, bolters bénis ou lance-flammes — elles avancent en formation, scandant les Litanies, sous le commandement d'une Sœur Supérieure.",
+    "capacities": [
+      "Bolter béni et lance-flammes — feu sacré contre l'hérétique",
+      "Litanies de Foi — moral inébranlable et déclenchement d'Acta Saint",
+      "Formation disciplinée sous Sœur Supérieure"
+    ],
+    "wikiQuery": "Battle Sisters warhammer 40k",
+    "loreImageQuery": "Adepta Sororitas battle sisters formation"
   },
   {
     "id": "sob-seraphim",
@@ -4860,7 +5301,15 @@
       "Sororitas jump pack",
       "Sister of Battle Seraphim",
       "Adepta Sororitas assault"
-    ]
+    ],
+    "description": "Sœurs avec jump packs et deux pistolets bolter — leur silhouette ailée incarne la fureur angélique des Adepta Sororitas, frappant au cœur des formations ennemies.",
+    "capacities": [
+      "Jump pack — franchissement vertical et déploiement chirurgical",
+      "Pistolets bolter jumelés — feu rapide à courte portée",
+      "Foi et Vélocité — combine les deux Actes pour double-tap dévastateur"
+    ],
+    "wikiQuery": "Seraphim Adepta Sororitas",
+    "loreImageQuery": "Sororitas Seraphim jump pack angels battle"
   },
   {
     "id": "sob-repentia",
@@ -4878,7 +5327,15 @@
       "Sisters of Battle Repentia",
       "Adepta Sororitas artwork",
       "Sister of Battle"
-    ]
+    ],
+    "description": "Sœurs ayant commis une faute morale, dépouillées de leur power armour, chargeant demi-nues avec eviscerator hurlant — elles cherchent la mort glorieuse comme absolution.",
+    "capacities": [
+      "Eviscerator — chainsword géant à deux mains, tranche power armour",
+      "Frenzy de pénitence — ignorent la peur, cherchent activement le martyre",
+      "Mistress Repentia mène la charge à coups de fouet sacré"
+    ],
+    "wikiQuery": "Sisters Repentia warhammer 40k",
+    "loreImageQuery": "Sisters Repentia eviscerator charge battle"
   },
   {
     "id": "sob-canoness",
@@ -5101,7 +5558,15 @@
       "Sororitas walker",
       "Sister of Battle Engine",
       "Adepta Sororitas penitent"
-    ]
+    ],
+    "description": "Walker bipède d'expiation — une Sœur condamnée est rivée à jamais à la machine, pilotant en pénitence avec eviscerators géants et lance-flammes jumelés. Sa mort est l'absolution.",
+    "capacities": [
+      "Pilote rivé à vie — Sœur condamnée, libération impossible hors la mort",
+      "Eviscerators jumelés — bras-tronçonneuses géantes pour mêlée",
+      "Lance-flammes lourds — purification par le feu sacré"
+    ],
+    "wikiQuery": "Penitent Engine warhammer 40k",
+    "loreImageQuery": "Penitent Engine walker battle adepta sororitas"
   },
   {
     "id": "sob-exorcist",
@@ -5118,7 +5583,15 @@
       "Sororitas tank",
       "Sister of Battle Exorcist",
       "Adepta Sororitas artillery"
-    ]
+    ],
+    "description": "Châssis Rhino surmonté d'orgues de Cathédrale — les notes sacrées des hymnes lancent les missiles bénis, et l'artillerie joue ses cantiques avant de pulvériser l'hérétique.",
+    "capacities": [
+      "Orgues missiles — salve de roquettes bénies à longue portée",
+      "Cantique de tir — chaque salve accompagnée d'hymnes liturgiques",
+      "Châssis Rhino blindé — mobilité et protection éprouvées de l'Imperium"
+    ],
+    "wikiQuery": "Exorcist tank warhammer 40k",
+    "loreImageQuery": "Exorcist tank Sororitas missile organ pipes"
   },
   {
     "id": "sob-celestine",
@@ -5600,7 +6073,15 @@
       "Inquisitor retinue",
       "Schola Progenium agent",
       "Imperial Inquisition agent"
-    ]
+    ],
+    "description": "Apprentis d'un Inquisiteur, recrutés parmi les meilleurs Schola Progenium — combat, infiltration, recherche, négociation. Le survivant le plus capable devient Interrogateur, puis un jour Inquisiteur.",
+    "capacities": [
+      "Polyvalence — combat, infiltration, érudition, interrogatoire",
+      "Sceau inquisitorial délégué — accès à toutes les ressources Imperium",
+      "Formation Schola Progenium — discipline et foi inflexibles"
+    ],
+    "wikiQuery": "Inquisitorial Acolyte",
+    "loreImageQuery": "Inquisitorial retinue acolytes investigating heretical shrine"
   },
   {
     "id": "inq-henchmen",
@@ -5618,7 +6099,15 @@
       "Inquisition Daemonhost",
       "Inquisition artwork",
       "Inquisitor warhammer"
-    ]
+    ],
+    "description": "Mercenaires sans statut formel d'Acolyte — anciens Astartes déserteurs, gardes Impériaux, savants exilés, mutants tolérés, parfois ex-cultistes retournés. Disposables, plus faciles à brûler après mission.",
+    "capacities": [
+      "Talents spécialisés — sniper, démolition, psyker non-déclaré, savant",
+      "Loyauté contractuelle — tient tant que la solde et la peur tiennent",
+      "Disposable — sacrifié sans remords pour le bien de la mission"
+    ],
+    "wikiQuery": "Inquisitorial Henchmen",
+    "loreImageQuery": "Inquisitorial warband henchmen entering xenos ruin"
   },
   {
     "id": "inq-vindicare",
