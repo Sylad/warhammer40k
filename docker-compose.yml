@@ -17,6 +17,12 @@ services:
       CORS_ORIGIN: "http://nas:4201"
       IMAGES_DIR: /app/images
       SHARED_DATA_DIR: /app/shared-data
+      # Comma-separated list of host substrings forced into locked-demo mode.
+      # Any request whose Host (or X-Forwarded-Host) contains one of these is
+      # treated as public showcase: PIN is bypassé, writes return 403, the
+      # frontend shows a "Mode démo verrouillée" badge.
+      # Default covers Cloudflare quick tunnels.
+      DEMO_FORCED_HOSTS: "trycloudflare.com,cfargotunnel.com"
     volumes:
       - "/volume2/photo/Jeux/Warhammer 40K:/app/images:ro"
       - /volume2/docker/developpeur/data/warhammer:/app/data

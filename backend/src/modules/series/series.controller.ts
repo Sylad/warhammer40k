@@ -2,6 +2,7 @@ import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { SeriesService } from './series.service.js';
 import { SeriesClaudeService } from './series-claude.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { DemoWriteGuard } from '../../guards/demo-write.guard.js';
 
 @Controller('series')
 export class SeriesController {
@@ -17,7 +18,7 @@ export class SeriesController {
   findOne(@Param('id') id: string) { return this.seriesService.findOne(id); }
 
   @Post(':id/description')
-  @UseGuards(PinGuard)
+  @UseGuards(DemoWriteGuard, PinGuard)
   async generateDescription(@Param('id') id: string) {
     const cached = this.seriesService.getCachedDescription(id);
     if (cached) return { description: cached, fromCache: true };

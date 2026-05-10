@@ -3,6 +3,7 @@ import { UnitsService } from './units.service.js';
 import { FactionsService } from '../factions/factions.service.js';
 import { ClaudeService } from './claude.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { DemoWriteGuard } from '../../guards/demo-write.guard.js';
 
 @Controller('units')
 export class UnitsController {
@@ -23,7 +24,7 @@ export class UnitsController {
   }
 
   @Post(':id/description')
-  @UseGuards(PinGuard)
+  @UseGuards(DemoWriteGuard, PinGuard)
   async generateDescription(@Param('id') id: string) {
     const cached = this.unitsService.getCachedDescription(id);
     if (cached) {

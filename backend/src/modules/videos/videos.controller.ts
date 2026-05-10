@@ -3,6 +3,7 @@ import { VideosService } from './videos.service.js';
 import { YouTubeOEmbedService } from './youtube-oembed.service.js';
 import { ChannelsService } from '../channels/channels.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { DemoWriteGuard } from '../../guards/demo-write.guard.js';
 import { ZodValidationPipe } from '../../common/zod-validation.pipe.js';
 import { ImportVideoBodySchema } from './videos.schemas.js';
 import type { ImportVideoBody } from './videos.schemas.js';
@@ -63,7 +64,7 @@ export class VideosController {
   }
 
   @Post('import')
-  @UseGuards(PinGuard)
+  @UseGuards(DemoWriteGuard, PinGuard)
   async import(
     @Body(new ZodValidationPipe(ImportVideoBodySchema)) body: ImportVideoBody,
   ): Promise<{ video: Video; channel: Channel }> {
@@ -124,7 +125,7 @@ export class VideosController {
   }
 
   @Delete(':id')
-  @UseGuards(PinGuard)
+  @UseGuards(DemoWriteGuard, PinGuard)
   remove(@Param('id') id: string): { deleted: string } {
     const ok = this.videos.remove(id);
     if (!ok) throw new NotFoundException(`Video ${id} not found`);

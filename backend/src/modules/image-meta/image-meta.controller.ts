@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { z } from 'zod';
 import { ImageMetaService } from './image-meta.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { DemoWriteGuard } from '../../guards/demo-write.guard.js';
 import { ZodValidationPipe } from '../../common/zod-validation.pipe.js';
 
 const CategorizeBodySchema = z.object({
@@ -35,7 +36,7 @@ export class ImageMetaController {
   }
 
   @Post()
-  @UseGuards(PinGuard)
+  @UseGuards(DemoWriteGuard, PinGuard)
   set(@Body(new ZodValidationPipe(CategorizeBodySchema)) body: CategorizeBody) {
     return this.service.set(body.filename, body);
   }
