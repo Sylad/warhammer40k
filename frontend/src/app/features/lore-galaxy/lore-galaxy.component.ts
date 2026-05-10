@@ -3,6 +3,18 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import * as L from 'leaflet';
+import {
+  buildPopupHtml as utilBuildPopupHtml,
+  categoryLabel as utilCategoryLabel,
+  clipToRect as utilClipToRect,
+  countByType as utilCountByType,
+  findZoneById as utilFindZoneById,
+  linkToPath as utilLinkToPath,
+  popupCtaLabel as utilPopupCtaLabel,
+  popupCtaUrl as utilPopupCtaUrl,
+  sampleArc as utilSampleArc,
+  typeLabel as utilTypeLabel,
+} from './lore-galaxy.utils';
 
 interface Segmentum {
   id: string;
@@ -399,14 +411,7 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
    * theta2 < theta1 (e.g. Ultima 336° → 21°) by adding 360 to theta2 internally.
    */
   private sampleArc(theta1Deg: number, theta2Deg: number, r: number, samples: number): [number, number][] {
-    const t2 = theta2Deg < theta1Deg ? theta2Deg + 360 : theta2Deg;
-    const span = t2 - theta1Deg;
-    const out: [number, number][] = [];
-    for (let i = 0; i <= samples; i++) {
-      const t = ((theta1Deg + (span * i) / samples) * Math.PI) / 180;
-      out.push([this.TERRA_X + r * Math.cos(t), this.TERRA_Y + r * Math.sin(t)]);
-    }
-    return out;
+    return utilSampleArc(this.TERRA_X, this.TERRA_Y, theta1Deg, theta2Deg, r, samples);
   }
 
   /** Build a wedge polygon between rMin and rMax (inner arc + outer arc reversed). */
@@ -421,37 +426,7 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
    * Output stays a closed convex polygon (or empty if fully outside).
    */
   private clipToRect(poly: [number, number][], W: number, H: number): [number, number][] {
-    type Edge = 'L' | 'R' | 'T' | 'B';
-    const inside = (p: [number, number], e: Edge): boolean =>
-      e === 'L' ? p[0] >= 0 :
-      e === 'R' ? p[0] <= W :
-      e === 'T' ? p[1] >= 0 :
-                  p[1] <= H;
-    const intersect = (a: [number, number], b: [number, number], e: Edge): [number, number] => {
-      const [ax, ay] = a, [bx, by] = b;
-      if (e === 'L') { const t = (0 - ax) / (bx - ax); return [0, ay + t * (by - ay)]; }
-      if (e === 'R') { const t = (W - ax) / (bx - ax); return [W, ay + t * (by - ay)]; }
-      if (e === 'T') { const t = (0 - ay) / (by - ay); return [ax + t * (bx - ax), 0]; }
-      const t = (H - ay) / (by - ay); return [ax + t * (bx - ax), H];
-    };
-    const clipEdge = (subj: [number, number][], e: Edge): [number, number][] => {
-      if (!subj.length) return subj;
-      const out: [number, number][] = [];
-      for (let i = 0; i < subj.length; i++) {
-        const cur = subj[i];
-        const prev = subj[(i - 1 + subj.length) % subj.length];
-        const cIn = inside(cur, e);
-        const pIn = inside(prev, e);
-        if (cIn) {
-          if (!pIn) out.push(intersect(prev, cur, e));
-          out.push(cur);
-        } else if (pIn) {
-          out.push(intersect(prev, cur, e));
-        }
-      }
-      return out;
-    };
-    return clipEdge(clipEdge(clipEdge(clipEdge(poly, 'L'), 'R'), 'T'), 'B');
+    return utilClipToRect(poly, W, H);
   }
 
   /**
@@ -510,9 +485,7 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
   }
 
   hoveredZone(): HotZone | null {
-    const id = this.hoveredId();
-    if (!id) return null;
-    return this.hotZones.find(z => z.id === id) ?? null;
+    return utilFindZoneById(this.hotZones, this.hoveredId());
   }
 
   goTo(hz: HotZone) {
@@ -532,53 +505,29 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
    * Build the route path for a typed lore link. Mirrors app.routes.ts.
    */
   private linkToPath(link: NonNullable<HotZone['linkTo']>): string {
-    switch (link.type) {
-      case 'primarch': return `/lore/primarchs/${link.id}`;
-      case 'timeline': return `/lore/timeline/${link.id}`;
-      case 'saint':    return `/lore/saints/${link.id}`;
-      case 'ship':     return `/lore/ships/${link.id}`;
-    }
+    return utilLinkToPath(link);
   }
 
   /** Returns the CTA href for a hot zone popup. */
   popupCtaUrl(hz: HotZone): string {
-    if (hz.linkTo) return this.linkToPath(hz.linkTo);
-    if (hz.conceptId) return `/lore/concepts#${hz.conceptId}`;
-    return '/lore/concepts';
+    return utilPopupCtaUrl(hz);
   }
 
   /** Returns the CTA label for a hot zone popup. */
   popupCtaLabel(hz: HotZone): string {
-    if (!hz.linkTo) return 'Explorer le lore →';
-    switch (hz.linkTo.type) {
-      case 'primarch': return 'Voir le primarque →';
-      case 'timeline': return 'Voir l\'événement →';
-      case 'saint':    return 'Voir la sainte →';
-      case 'ship':     return 'Voir le vaisseau →';
-    }
+    return utilPopupCtaLabel(hz);
   }
 
   typeLabel(t: HotZone['type']): string {
-    return t === 'rift' ? 'Faille warp' : t === 'nexus' ? 'Nexus xenos' : 'Monde-clé';
+    return utilTypeLabel(t);
   }
 
   categoryLabel(c: NonNullable<HotZone['category']>): string {
-    const labels: Record<NonNullable<HotZone['category']>, string> = {
-      'primarch-homeworld': 'Monde natal primarque',
-      'segmentum-hq': 'Capitale Segmentum',
-      'shrine-world': 'Monde-sanctuaire',
-      'forge-world': 'Forge World',
-      'death-world': 'Death World',
-      'fortress-world': 'Monde-forteresse',
-      'eldar-craftworld': 'Vaisseau-monde Eldar',
-      'war-zone': 'Zone de guerre',
-      'standard': '',
-    };
-    return labels[c] || '';
+    return utilCategoryLabel(c);
   }
 
   countByType(t: 'world' | 'rift' | 'nexus'): number {
-    return this.hotZones.filter(hz => hz.type === t).length;
+    return utilCountByType(this.hotZones, t);
   }
 
   ngAfterViewInit(): void {
@@ -711,22 +660,7 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
         // eslint-disable-next-line no-console
         console.log(`[drag ${hz.id}] cx: ${cx}, cy: ${cy}`);
       });
-      const ctaUrl = this.popupCtaUrl(hz);
-      const ctaLabel = this.popupCtaLabel(hz);
-      const linkType = hz.linkTo?.type ?? (hz.conceptId ? 'concept' : 'concept-fallback');
-      const linkId = hz.linkTo?.id ?? hz.conceptId ?? '';
-      const cta = `<a class="lf-popup-cta" href="${ctaUrl}" data-link-type="${linkType}" data-link-id="${linkId}">${ctaLabel}</a>`;
-      const subtypeLabel = hz.category ? ` · ${this.categoryLabel(hz.category)}` : '';
-      const popupHtml = `
-        <div class="lf-popup">
-          <div class="lf-popup-img" data-name="${hz.name.replace(/"/g, '&quot;')}"></div>
-          <div class="lf-popup-body">
-            <div class="lf-popup-name" style="color:${hz.color}">${hz.name}</div>
-            <div class="lf-popup-type">${this.typeLabel(hz.type)}${subtypeLabel}</div>
-            <p>${hz.description}</p>
-            ${cta}
-          </div>
-        </div>`;
+      const popupHtml = utilBuildPopupHtml(hz);
       marker.bindPopup(popupHtml, { maxWidth: 340, className: 'lf-popup-wrapper' });
       marker.on('popupopen', (e: L.PopupEvent) => {
         const node = e.popup.getElement();
