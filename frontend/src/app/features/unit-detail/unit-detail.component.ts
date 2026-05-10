@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
-import { Faction, Unit, UnitType } from '../../core/models/models';
+import { Faction, Unit, UnitType, Artwork } from '../../core/models/models';
 
 type TabKey = 'apercu' | 'equipement' | 'lore' | 'variantes';
 
@@ -132,8 +132,12 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                       <div class="equip-figure" [style.--fig-img]="unitImg()"></div>
                       <ul class="equip-list">
                         @for (e of u.equipment; track e.name; let i = $index) {
-                          <li class="equip-item">
-                            <span class="eq-ico">{{ e.icon || equipIcon(i) }}</span>
+                          <li class="equip-item" [class.equip-item-with-image]="!!e.image">
+                            @if (e.image) {
+                              <span class="eq-thumb" [style.background-image]="'url(' + e.image + ')'" aria-hidden="true"></span>
+                            } @else {
+                              <span class="eq-ico">{{ e.icon || equipIcon(i) }}</span>
+                            }
                             <div>
                               <strong>{{ e.name }}</strong>
                               <span>{{ e.description || '—' }}</span>
@@ -282,6 +286,26 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               </section>
             }
 
+            @if (factionArtworks().length) {
+              <section class="sp">
+                <h3>Galerie liée</h3>
+                <div class="art-grid">
+                  @for (a of factionArtworks(); track a.id) {
+                    <a class="art-thumb"
+                       routerLink="/gallery"
+                       [queryParams]="{ q: a.title }"
+                       [style.background-image]="artworkBg(a)"
+                       [attr.aria-label]="a.title">
+                      <span class="art-thumb-title">{{ a.title }}</span>
+                    </a>
+                  }
+                </div>
+                <a class="cta cta-outline cta-block" routerLink="/gallery">
+                  VOIR LA GALERIE
+                </a>
+              </section>
+            }
+
             @if (u.citation) {
               <section class="sp sp-quote">
                 <h3>Citation</h3>
@@ -334,6 +358,12 @@ export class UnitDetailComponent {
   readonly variantImages = signal(new Map<string, string>());
   readonly galleryImages = signal<string[]>([]);
 
+  // Catalog artworks (shared replay) — utilisé par la sidebar "Galerie liée"
+  // pour proposer les œuvres de la même faction que l'unit courant.
+  private readonly allArtworks = toSignal(this.service.artworks$, { initialValue: [] as Artwork[] });
+  // Cache des URLs résolues via wiki pour les artworks de la sidebar.
+  readonly artworkImageCache = signal(new Map<string, string>());
+
   readonly unit = toSignal(
     this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!))),
   );
@@ -360,6 +390,14 @@ export class UnitDetailComponent {
     ),
     { initialValue: [] as Unit[] },
   );
+
+  /** Œuvres du catalog de la faction courante — sidebar "Galerie liée". */
+  readonly factionArtworks = computed<Artwork[]>(() => {
+    const f = this.faction();
+    if (!f) return [];
+    const all = this.allArtworks();
+    return all.filter(a => a.faction === f.id).slice(0, 4);
+  });
 
   constructor() {
     effect(() => {
@@ -430,6 +468,22 @@ export class UnitDetailComponent {
       });
     });
 
+    // Sidebar "Galerie liée" : lazy-résolution des wikiQuery du catalog
+    effect(() => {
+      const arts = this.factionArtworks();
+      arts.forEach(a => {
+        if (!a.wikiQuery || this.artworkImageCache().has(a.id)) return;
+        this.service.getWikiImage(a.wikiQuery).subscribe({
+          next: r => {
+            if (r.imageUrl) {
+              this.artworkImageCache.update(m => new Map(m).set(a.id, r.imageUrl!));
+            }
+          },
+          error: () => {},
+        });
+      });
+    });
+
     effect(() => {
       const u = this.unit();
       if (!u?.variants?.length) return;
@@ -476,6 +530,13 @@ export class UnitDetailComponent {
 
   relatedImg(r: Unit): string {
     const url = this.relatedImages().get(r.id);
+    if (url) return `url('${url}')`;
+    const f = this.faction();
+    return `linear-gradient(135deg, ${f?.couleurThematique ?? '#1a3a6e'}aa, #050403)`;
+  }
+
+  artworkBg(a: Artwork): string {
+    const url = this.artworkImageCache().get(a.id);
     if (url) return `url('${url}')`;
     const f = this.faction();
     return `linear-gradient(135deg, ${f?.couleurThematique ?? '#1a3a6e'}aa, #050403)`;
