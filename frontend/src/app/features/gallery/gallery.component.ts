@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { WarhammerService, ImageMeta, RedditPost } from '../../core/services/warhammer.service';
+import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
 interface CategoryDef {
@@ -285,7 +285,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <h3>Catégoriser l'image</h3>
           <p class="cat-hint">Assigne plusieurs catégories, un titre, un artiste ou une faction. Tape une nouvelle catégorie et appuie sur Entrée.</p>
 
-          <div class="cat-row">
+          <div class="cat-row cat-combo-row">
             <label>Catégories <span class="opt">({{ catSelectedTags().length }})</span></label>
             <div class="chip-input">
               @for (tag of catSelectedTags(); track tag) {
@@ -296,21 +296,42 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               }
               <input
                 type="text"
-                list="cat-suggestions"
-                placeholder="Tape ou choisis…"
+                placeholder="Tape pour filtrer ou choisir…"
                 [ngModel]="catInput()"
-                (ngModelChange)="catInput.set($event)"
+                (ngModelChange)="catInput.set($event); catDropdownOpen.set(true)"
+                (focus)="catDropdownOpen.set(true)"
                 (keydown.enter)="$event.preventDefault(); addCatTag()"
-                (keydown.tab)="catInput().trim() && addCatTag()" />
-              <datalist id="cat-suggestions">
-                @for (c of allCategories(); track c) {
-                  <option [value]="c"></option>
-                }
-              </datalist>
+                (keydown.escape)="catDropdownOpen.set(false)" />
               @if (catInput().trim()) {
                 <button type="button" class="chip-add" (click)="addCatTag()" aria-label="Ajouter">+</button>
               }
             </div>
+
+            @if (catDropdownOpen() && catSections().length > 0) {
+              <div class="cat-dropdown" (click)="$event.stopPropagation()">
+                @for (section of catSections(); track section.key) {
+                  <div class="cat-section">
+                    <div class="cat-section-header">
+                      {{ section.label }}
+                      <span class="cat-section-count">{{ section.items.length }}</span>
+                    </div>
+                    <ul class="cat-section-items">
+                      @for (item of section.items; track item) {
+                        <li
+                          class="cat-section-item"
+                          [class.selected]="catSelectedTags().includes(item)"
+                          (click)="toggleCatFromSuggestion(item)">
+                          <span class="cat-item-name">{{ item }}</span>
+                          @if (catSelectedTags().includes(item)) {
+                            <span class="cat-item-check">✓</span>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
+              </div>
+            }
           </div>
 
           <div class="cat-row">
@@ -570,6 +591,36 @@ export class GalleryComponent {
   readonly catTitle = signal('');
   readonly catArtist = signal('');
   readonly catFaction = signal('');
+  // Suggested categories (sectioned) loaded from backend at init
+  readonly suggestedCategories = signal<SuggestedCategories | null>(null);
+  // Combobox popover state
+  readonly catDropdownOpen = signal(false);
+  // Sections sectionnées + filtrées dynamiquement par catInput()
+  readonly catSections = computed<{ key: string; label: string; items: string[] }[]>(() => {
+    const filter = this.catInput().trim().toLowerCase();
+    const data = this.suggestedCategories();
+    const matches = (item: string) =>
+      filter === '' || item.toLowerCase().includes(filter);
+    const all: { key: string; label: string; items: string[] }[] = [
+      // Built-in du frontend (visuels globaux) — toujours en tête
+      {
+        key: 'builtin',
+        label: 'Catégories de base',
+        items: CATEGORIES.filter(c => c.key !== 'Mes images').map(c => c.key as string),
+      },
+    ];
+    if (data) {
+      all.push(
+        { key: 'factions', label: 'Factions', items: data.factions },
+        { key: 'subfactions', label: 'Sous-factions / Chapitres / Légions', items: data.subfactions },
+        { key: 'primarchs', label: 'Primarques', items: data.primarchs },
+        { key: 'custom', label: 'Tes catégories', items: data.custom },
+      );
+    }
+    return all
+      .map(s => ({ ...s, items: s.items.filter(matches) }))
+      .filter(s => s.items.length > 0);
+  });
 
   // Import modal state
   readonly importModalOpen = signal(false);
@@ -655,6 +706,7 @@ export class GalleryComponent {
     });
 
     this.service.getImageMeta().subscribe(meta => this.imageMeta.set(meta));
+    this.service.getSuggestedCategories().subscribe(s => this.suggestedCategories.set(s));
 
     for (const cat of CATEGORIES) {
       this.fetchImage(`cat:${cat.key}`, cat.query);
@@ -830,10 +882,32 @@ export class GalleryComponent {
     this.catArtist.set(a.artist === 'Collection personnelle' ? '' : a.artist);
     this.catFaction.set(a.faction ?? '');
     this.catModalOpen.set(true);
+    this.catDropdownOpen.set(false);
   }
 
   closeCategorize(): void {
     this.catModalOpen.set(false);
+    this.catDropdownOpen.set(false);
+  }
+
+  /** Toggle add/remove d'une suggestion via le dropdown sectionné. */
+  toggleCatFromSuggestion(item: string): void {
+    const list = this.catSelectedTags();
+    if (list.includes(item)) {
+      this.catSelectedTags.set(list.filter(t => t !== item));
+    } else {
+      this.catSelectedTags.set([...list, item]);
+    }
+    this.catInput.set('');
+  }
+
+  /** Click hors du combobox (mais dans la modal) ferme le dropdown. */
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.catDropdownOpen()) return;
+    const target = event.target as HTMLElement;
+    if (target.closest('.cat-combo-row')) return;
+    this.catDropdownOpen.set(false);
   }
 
   onCatBackdrop(event: MouseEvent): void {

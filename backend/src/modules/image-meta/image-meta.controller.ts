@@ -29,6 +29,11 @@ export class ImageMetaController {
     return this.service.getCustomCategories();
   }
 
+  @Get('suggested-categories')
+  getSuggestedCategories() {
+    return this.service.getSuggestedCategories();
+  }
+
   @Post()
   @UseGuards(PinGuard)
   set(@Body(new ZodValidationPipe(CategorizeBodySchema)) body: CategorizeBody) {
