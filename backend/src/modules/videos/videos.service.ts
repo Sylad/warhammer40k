@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 import type { Video } from './video.model.js';
 
 const FILE_PATH = path.resolve(process.cwd(), 'data', 'videos.json');
@@ -32,7 +33,7 @@ export class VideosService {
       throw new BadRequestException(`Video ${video.id} already exists`);
     }
     this.videos.push(video);
-    fs.writeFileSync(FILE_PATH, JSON.stringify(this.videos, null, 2), 'utf-8');
+    atomicWriteJsonSync(FILE_PATH, this.videos);
     return video;
   }
 
@@ -40,7 +41,7 @@ export class VideosService {
     const idx = this.videos.findIndex(v => v.id === id);
     if (idx < 0) return false;
     this.videos.splice(idx, 1);
-    fs.writeFileSync(FILE_PATH, JSON.stringify(this.videos, null, 2), 'utf-8');
+    atomicWriteJsonSync(FILE_PATH, this.videos);
     return true;
   }
 }

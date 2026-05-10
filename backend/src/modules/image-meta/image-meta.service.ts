@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 
 export interface ImageMeta {
   categories?: string[];
@@ -72,8 +73,7 @@ export class ImageMetaService {
     } else {
       all[filename] = cleaned;
     }
-    fs.mkdirSync(path.dirname(META_FILE), { recursive: true });
-    fs.writeFileSync(META_FILE, JSON.stringify(all, null, 2));
+    atomicWriteJsonSync(META_FILE, all);
     this.logger.log(`Updated meta for ${filename}: ${JSON.stringify(cleaned)}`);
     return all;
   }
