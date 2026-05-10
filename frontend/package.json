@@ -5,7 +5,9 @@
   "scripts": {
     "start": "ng serve --port 4201",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@angular/animations": "^19.0.0",
@@ -27,6 +29,8 @@
     "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
     "@types/node": "^18.18.0",
-    "typescript": "~5.6.0"
+    "jsdom": "^25.0.1",
+    "typescript": "~5.6.0",
+    "vitest": "^2.1.9"
   }
 }
