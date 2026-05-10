@@ -1,10 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { Request } from 'express';
 
 /**
  * Garde-PIN pour les endpoints d'écriture du codex.
  * - Si APP_PIN n'est pas défini dans l'environnement → tout passe (mode dev/local).
+ *   Warning loggé. En production (NODE_ENV=production), boot refusé sauf si
+ *   ALLOW_NO_PIN=true (opt-in explicite pour éviter le fail-open silencieux).
  * - Sinon, le client doit envoyer un header `Authorization: Bearer <pin>`.
  * - Routes en lecture publique (GET) ne sont pas concernées : ce guard est appliqué
  *   sélectivement sur les controllers/methods d'écriture (POST/PUT/PATCH/DELETE).
@@ -14,12 +16,27 @@ import type { Request } from 'express';
  */
 @Injectable()
 export class PinGuard implements CanActivate {
+  private readonly logger = new Logger(PinGuard.name);
   private readonly pin: string;
   private readonly forcedHosts: string[];
 
   constructor(config: ConfigService) {
     this.pin = config.get<string>('appPin') ?? '';
     this.forcedHosts = config.get<string[]>('demoForcedHosts') ?? [];
+
+    if (!this.pin) {
+      const allowNoPin = (config.get<string>('allowNoPin') ?? process.env.ALLOW_NO_PIN) === 'true';
+      const isProd = (config.get<string>('nodeEnv') ?? process.env.NODE_ENV) === 'production';
+      if (isProd && !allowNoPin) {
+        throw new Error(
+          'APP_PIN is empty in production. Set APP_PIN, or pass ALLOW_NO_PIN=true to opt into the unprotected mode explicitly.',
+        );
+      }
+      this.logger.warn(
+        '⚠️  APP_PIN is empty — ALL WRITE ENDPOINTS ARE UNPROTECTED. '
+        + 'Set APP_PIN env var to enable PIN guard, or set ALLOW_NO_PIN=true to silence this warning.',
+      );
+    }
   }
 
   canActivate(ctx: ExecutionContext): boolean {
