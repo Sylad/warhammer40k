@@ -1,4 +1,3 @@
-@use '@angular/material' as mat;
 @use 'styles/grimdark-life';
 /* Leaflet CSS chargé via angular.json styles[] (node_modules/leaflet/dist/leaflet.css) */
 
@@ -25,18 +24,6 @@
 html {
   height: 100%;
   color-scheme: dark;
-
-  @include mat.theme((
-    color: (
-      theme-type: dark,
-      primary: mat.$red-palette,
-    ),
-    typography: (
-      plain-family: 'Inter, Roboto, sans-serif',
-      brand-family: 'Cinzel, Georgia, serif',
-    ),
-    density: 0,
-  ));
 }
 
 * { box-sizing: border-box; }
