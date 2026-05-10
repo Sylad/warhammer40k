@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { LegendaryShip } from '../../core/models/models';
+import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
 const ALIGNMENT_BY_FACTION: Record<string, string> = {
   'space-marines': 'Imperium',
@@ -28,7 +29,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
 @Component({
   selector: 'app-lore-ships',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-btn" routerLink="/lore">← RETOUR AU CODEX</a>
 
@@ -51,6 +52,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
       @for (s of filtered(); track s.id) {
         <a class="card" [routerLink]="['/lore/ships', s.id]" [style.--card-color]="s.color">
           <div class="card-img" [style.background-image]="shipImg(s.id)" [style.background-color]="s.color"></div>
+          <button class="card-zoom" type="button" (click)="$event.stopPropagation(); $event.preventDefault(); openLightbox(s)" aria-label="Voir en grand">⛶</button>
           <div class="card-overlay">
             <div class="card-class">{{ s.class }}</div>
             <h2>{{ s.name }}</h2>
@@ -63,6 +65,8 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
         </a>
       }
     </section>
+
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
   `,
   styleUrls: ['./lore-ships.component.scss'],
 })
@@ -72,6 +76,7 @@ export class LoreShipsComponent {
   readonly ships = toSignal(this.service.ships$, { initialValue: [] as LegendaryShip[] });
   readonly filter = signal<'all' | 'Imperium' | 'Chaos' | 'Xenos'>('all');
   readonly shipImages = signal(new Map<string, string>());
+  readonly lightbox = signal<LightboxState | null>(null);
 
   readonly filtered = computed(() => {
     const f = this.filter();
@@ -105,4 +110,50 @@ export class LoreShipsComponent {
   alignmentClass(factionId: string): string {
     return this.alignment(factionId).toLowerCase();
   }
+
+  openLightbox(s: LegendaryShip): void {
+    const baseUrl = this.shipImages().get(s.id);
+    if (!baseUrl) return;
+    this.lightbox.set({
+      title: s.name,
+      subtitle: `${s.class} — ${s.factionName}`,
+      description: s.epithet || undefined,
+      contextName: 'Vaisseaux Légendaires',
+      contextColor: s.color,
+      contextSigil: '⚓',
+      searchQuery: s.name,
+      mainUrl: baseUrl,
+      thumbUrls: [baseUrl],
+      selectedIdx: 0,
+    });
+    const baseQuery = s.wikiQuery ?? s.name;
+    const variants = [
+      `${baseQuery} warhammer 40k`,
+      `${baseQuery} starship art`,
+      `${baseQuery} Imperial Navy`,
+      `${baseQuery} concept art`,
+    ];
+    for (const q of variants) {
+      this.service.getWikiImage(q).subscribe({
+        next: r => {
+          if (!r.imageUrl) return;
+          const cur = this.lightbox();
+          if (!cur || cur.title !== s.name) return;
+          if (cur.thumbUrls.includes(r.imageUrl)) return;
+          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+        },
+        error: () => {},
+      });
+    }
+  }
+
+  selectThumb(idx: number): void {
+    const cur = this.lightbox();
+    if (!cur) return;
+    const url = cur.thumbUrls[idx];
+    if (!url) return;
+    this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
+  }
+
+  closeLightbox(): void { this.lightbox.set(null); }
 }
