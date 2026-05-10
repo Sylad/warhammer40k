@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 import type { Channel } from '../videos/video.model.js';
 
 const FILE_PATH = path.resolve(process.cwd(), 'data', 'channels.json');
@@ -47,7 +48,7 @@ export class ChannelsService {
       throw new BadRequestException(`Channel ${channel.id} already exists`);
     }
     this.channels.push(channel);
-    fs.writeFileSync(FILE_PATH, JSON.stringify(this.channels, null, 2), 'utf-8');
+    atomicWriteJsonSync(FILE_PATH, this.channels);
     return channel;
   }
 }
