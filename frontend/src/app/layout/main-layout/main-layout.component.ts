@@ -2,13 +2,15 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
+import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, BreadcrumbComponent, CommandPaletteComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent],
   template: `
+    <app-demo-banner />
     <header class="topbar">
       <a class="brand" routerLink="/">
         <span class="aigle">⚜</span>

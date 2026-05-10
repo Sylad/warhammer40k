@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration.js';
+import { DemoModule } from './modules/demo/demo.module.js';
+import { DemoModeMiddleware } from './modules/demo/demo-mode.middleware.js';
 import { HealthModule } from './modules/health/health.module.js';
 import { FactionsModule } from './modules/factions/factions.module.js';
 import { UnitsModule } from './modules/units/units.module.js';
@@ -21,6 +23,7 @@ import { TimelineModule } from './modules/timeline/timeline.module.js';
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
+    DemoModule,
     EventsModule,
     ClaudeUsageModule,
     HealthModule,
@@ -39,4 +42,14 @@ import { TimelineModule } from './modules/timeline/timeline.module.js';
     TimelineModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // Apply DemoModeMiddleware on EVERYTHING (including /api/demo/*) so the
+    // forced-by-host detection populates the ALS context before the demo
+    // status endpoint reads it. Health endpoint is excluded (probe lightweight).
+    consumer
+      .apply(DemoModeMiddleware)
+      .exclude({ path: 'health', method: RequestMethod.ALL })
+      .forRoutes('*');
+  }
+}

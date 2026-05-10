@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { z } from 'zod';
 import { ImageImportService } from './image-import.service.js';
 import { PinGuard } from '../../guards/pin.guard.js';
+import { DemoWriteGuard } from '../../guards/demo-write.guard.js';
 import { ZodValidationPipe } from '../../common/zod-validation.pipe.js';
 
 const SaveBodySchema = z.object({ url: z.string().url('URL invalide') });
@@ -18,7 +19,7 @@ export class ImageImportController {
   }
 
   @Post('save')
-  @UseGuards(PinGuard)
+  @UseGuards(DemoWriteGuard, PinGuard)
   async save(@Body(new ZodValidationPipe(SaveBodySchema)) body: { url: string }) {
     return this.service.saveFromUrl(body.url);
   }
