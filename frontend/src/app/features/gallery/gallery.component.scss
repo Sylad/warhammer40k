@@ -822,6 +822,76 @@
     }
     .chip-add:hover { background: rgba(201, 162, 74, 0.22); }
 
+    /* Combobox sectionné — dropdown popover sous le chip-input */
+    .cat-combo-row { position: relative; }
+    .cat-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      max-height: 320px;
+      overflow-y: auto;
+      z-index: 5;
+      border: 1px solid rgba(201, 162, 74, 0.5);
+      background: rgba(8, 6, 4, 0.98);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(2px);
+    }
+    .cat-section {
+      border-bottom: 1px solid rgba(201, 162, 74, 0.12);
+    }
+    .cat-section:last-child { border-bottom: 0; }
+    .cat-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(201, 162, 74, 0.08);
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+    }
+    .cat-section-count {
+      color: rgba(201, 162, 74, 0.55);
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0;
+    }
+    .cat-section-items {
+      list-style: none;
+      margin: 0;
+      padding: 4px 0;
+    }
+    .cat-section-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.08s ease;
+    }
+    .cat-section-item:hover {
+      background: rgba(201, 162, 74, 0.14);
+      color: var(--gold-bright);
+    }
+    .cat-section-item.selected {
+      background: rgba(201, 162, 74, 0.22);
+      color: var(--gold-bright);
+      font-weight: 600;
+    }
+    .cat-item-check {
+      color: var(--gold-bright);
+      font-size: 12px;
+    }
+
     /* Import modal */
     .import-modal { z-index: 110; }
     .import-box {

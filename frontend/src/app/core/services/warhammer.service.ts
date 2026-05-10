@@ -248,6 +248,12 @@ export class WarhammerService {
     });
   }
 
+  /** Catégories pré-remplies depuis les seeds (factions, sous-factions,
+   *  primarques) + custom (saisies par l'user). Sectionné pour combobox. */
+  getSuggestedCategories(): Observable<SuggestedCategories> {
+    return this.http.get<SuggestedCategories>(`${this.base}/image-meta/suggested-categories`);
+  }
+
   // === Image import ===
   searchReddit(subreddit = 'Warhammer40k', limit = 25): Observable<RedditPost[]> {
     return this.http.get<RedditPost[]>(
@@ -265,6 +271,13 @@ export interface ImageMeta {
   title?: string;
   faction?: string;
   artist?: string;
+}
+
+export interface SuggestedCategories {
+  factions: string[];
+  subfactions: string[];
+  primarchs: string[];
+  custom: string[];
 }
 
 export interface VideoPreview {
