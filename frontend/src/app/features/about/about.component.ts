@@ -154,6 +154,7 @@ export class AboutComponent {
         'RxJS 7 + Signals (toSignal interop)',
         'SCSS custom — tokens gothiques',
         'Polices : Cinzel (titres) + Inter (corps)',
+        'Leaflet 1.9 (carte galactique SVG calibrée)',
         'Material 19 (legacy, retiré progressivement)',
       ],
     },
@@ -166,7 +167,7 @@ export class AboutComponent {
         'Anthropic SDK — claude-sonnet-4-6',
         'Server-Sent Events (badge usage live)',
         'Image proxy wiki (Wikipedia FR/EN async)',
-        'Modules NestJS : factions, units, series, videos, gallery, channels, lore',
+        'Modules NestJS : factions, units, subfactions, series, videos, artworks, gallery, lore-feed, timeline, wiki-image, image-import, image-meta, channels, events, claude-usage',
       ],
     },
     {

@@ -1,0 +1,50 @@
+# .claudeignore — warhammer40k (Angular 19 + NestJS)
+
+# --- Node / Angular ---
+node_modules/
+**/node_modules/
+.angular/
+**/.angular/
+frontend/.angular/
+frontend/.angular/cache/
+dist/
+**/dist/
+build/
+**/build/
+coverage/
+**/coverage/
+
+# --- Git ---
+.git/
+.svn/
+
+# --- Logs / temp ---
+*.log
+*.tmp
+*.swp
+*.bak
+logs/
+
+# --- IDE ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Data images binaires (119+ JPEG datasheets, debug-detected.jpg multi-MB) ---
+debug-detected.jpg
+backend/public/*.jpg
+backend/public/*.png
+data/cache/
+data/images/
+
+# --- Fluff PDF (Lexicanum scraping cache) ---
+fluff/*.pdf
+fluff/cache/
+
+# --- Claude state ---
+~/.claude/
+.claude/cache/
+
+# --- Lockfiles ---
+package-lock.json
