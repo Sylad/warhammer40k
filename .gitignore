@@ -48,3 +48,4 @@ __pycache__/
 # Local debug artifacts
 debug-*.jpg
 debug-*.png
+.token-savior-cache.json
