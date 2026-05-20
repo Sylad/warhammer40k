@@ -6321,21 +6321,21 @@
     "type": "Infanterie",
     "pointsCost": 90,
     "est_hero": false,
-    "role": "Infanterie de ligne",
+    "role": "Infanterie de ligne · Intercessor Primaris",
     "badges": [
       "Infanterie",
       "Ligne",
       "Imperium"
     ],
-    "description": "Épine dorsale des Chapitres Space Marines. Les Intercessors Primaris constituent la force de ligne polyvalente de l'Adeptus Astartes.",
+    "description": "Astartes Primaris en armure MK X Tacticus, bolt rifle au poing — nouvelle génération née du programme Cawl, déployée lors de la Croisade Indomitus pour reforger des Chapitres saignés par dix mille ans de guerre.",
     "loreCourt": "L'épine dorsale des Chapitres. Polyvalents et fiables en toutes circonstances.",
     "loreLong": "Les Intercessors Primaris furent déployés pour la première fois lors de la Croisade Indomitus, lorsque Roboute Guilliman revint au 41e millénaire. Ils représentent la nouvelle génération de Space Marines, conçus pour renforcer les Chapitres face aux menaces grandissantes qui pèsent sur l'Imperium.",
     "capacities": [
-      "Polyvalents dans toutes les situations de combat",
-      "Équilibrés en offensive et en défense",
-      "Idéaux pour tenir des objectifs stratégiques",
-      "Efficaces à moyenne portée avec leur bolter auto"
+      "Bolt rifle Cawl-pattern — portée et impact supérieurs au bolter classique, trois variantes (auto, stalker, assault)",
+      "Armure MK X Tacticus — protection renforcée et endurance Primaris pour tenir les objectifs sous le feu",
+      "Sergent Intercessor en commandement — vox tactique, polyvalence Codex toutes doctrines"
     ],
+    "wikiQuery": "Primaris Intercessor",
     "equipment": [
       {
         "name": "Bolter auto",
