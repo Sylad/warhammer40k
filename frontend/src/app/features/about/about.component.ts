@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 interface StackGroup {
   group: string;
@@ -18,7 +17,7 @@ interface Inspiration {
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   template: `
     <section class="hero">
       <div class="hero-overlay"></div>
@@ -27,7 +26,8 @@ interface Inspiration {
         <h1>Le Scribe et son Daemon</h1>
         <p class="lede">
           Un codex Warhammer 40,000 imaginé, conçu et façonné en duo —
-          un humain curieux et un agent IA appelé <strong>Claude Code</strong>.
+          un humain curieux, <strong>Claude Code</strong> et des renforts ponctuels
+          de <strong>Codex</strong>.
         </p>
       </div>
     </section>
@@ -66,6 +66,12 @@ interface Inspiration {
           a généré les logos, les premières maquettes UX et les schémas de pages
           (visibles dans le dossier <code>/UX/</code> du projet). Une vraie collab à trois :
           humain + ChatGPT (visuels) + Claude Code (implémentation).
+        </p>
+        <p>
+          Depuis, <strong>Codex</strong> intervient comme compagnon de maintenance :
+          revue des garde-fous, vérification des builds, petites passes UI, et verrouillage
+          du mode démo public pour que le codex reste consultable sans exposer les actions
+          d'administration.
         </p>
         <p class="quote">
           « Une collaboration humain ⇄ IA, pas du tout-IA. La machine pense

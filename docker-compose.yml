@@ -13,6 +13,10 @@ services:
     env_file: /volume2/docker/developpeur/warhammer40k/.env
     environment:
       NODE_ENV: production
+      # LAN admin mode: APP_PIN is intentionally empty on the NAS, so this
+      # explicit opt-in keeps local writes available. Public hosts are still
+      # locked by DEMO_FORCED_HOSTS below.
+      ALLOW_NO_PIN: "true"
       PORT: "3001"
       CORS_ORIGIN: "http://nas:4201"
       IMAGES_DIR: /app/images
@@ -21,8 +25,8 @@ services:
       # Any request whose Host (or X-Forwarded-Host) contains one of these is
       # treated as public showcase: PIN is bypassé, writes return 403, the
       # frontend shows a "Mode démo verrouillée" badge.
-      # Default covers Cloudflare quick tunnels.
-      DEMO_FORCED_HOSTS: "trycloudflare.com,cfargotunnel.com"
+      # Default covers Cloudflare quick tunnels and the public showcase domain.
+      DEMO_FORCED_HOSTS: "trycloudflare.com,cfargotunnel.com,warhammer.sladoire.dev"
     volumes:
       - "/volume2/photo/Jeux/Warhammer 40K:/app/images:ro"
       - /volume2/docker/developpeur/data/warhammer:/app/data

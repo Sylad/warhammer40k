@@ -8,8 +8,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors({
     origin: config.get<string>('corsOrigin'),
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Accept'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
   });
   const port = config.get<number>('port') ?? 3001;
   await app.listen(port, '0.0.0.0');
