@@ -600,11 +600,18 @@
       gap: 12px;
       padding: 9px 0;
       border-top: 1px solid rgba(201, 162, 74, 0.12);
+      color: inherit;
       cursor: pointer;
+      text-decoration: none;
       transition: opacity 0.2s;
     }
     .row-link:first-of-type { border-top: 0; padding-top: 2px; }
     .row-link:hover { opacity: 0.78; }
+    .row-link.static {
+      cursor: default;
+      opacity: 0.78;
+    }
+    .row-link.static:hover { opacity: 0.78; }
     .rl-ico {
       width: 28px;
       height: 28px;
@@ -619,6 +626,11 @@
       color: #d6cdb6;
       font-size: 12.5px;
       letter-spacing: 0.04em;
+    }
+    .rl-arrow {
+      margin-left: auto;
+      color: rgba(201, 162, 74, 0.45);
+      font-size: 15px;
     }
 
     .row-stat {

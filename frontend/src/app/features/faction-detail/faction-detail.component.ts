@@ -43,6 +43,13 @@ const TYPE_FILTERS: { key: UnitType | 'Tous'; label: string }[] = [
   { key: 'Psyker',     label: 'Psyker' },
 ];
 
+interface SidebarLink {
+  ico: string;
+  label: string;
+  route?: string;
+  fragment?: string;
+}
+
 const DEFAULT_LIENS = [
   { ico: '⌚', label: 'Chronologie' },
   { ico: '☗', label: 'Personnages célèbres' },
@@ -316,10 +323,24 @@ const DEFAULT_RESOURCES = [
           <section class="sp">
             <h3>Liens rapides</h3>
             @for (l of liensRapides(); track l.label) {
-              <div class="row-link">
-                <span class="rl-ico">{{ l.ico }}</span>
-                <span class="rl-label">{{ l.label }}</span>
-              </div>
+              @if (l.route) {
+                <a class="row-link" [routerLink]="l.route" [fragment]="l.fragment">
+                  <span class="rl-ico">{{ l.ico }}</span>
+                  <span class="rl-label">{{ l.label }}</span>
+                  <span class="rl-arrow">›</span>
+                </a>
+              } @else if (l.fragment) {
+                <a class="row-link" [routerLink]="[]" [fragment]="l.fragment">
+                  <span class="rl-ico">{{ l.ico }}</span>
+                  <span class="rl-label">{{ l.label }}</span>
+                  <span class="rl-arrow">›</span>
+                </a>
+              } @else {
+                <div class="row-link static">
+                  <span class="rl-ico">{{ l.ico }}</span>
+                  <span class="rl-label">{{ l.label }}</span>
+                </div>
+              }
             }
           </section>
 
@@ -365,10 +386,24 @@ const DEFAULT_RESOURCES = [
           <section class="sp">
             <h3>Ressources</h3>
             @for (r of ressources(); track r.label) {
-              <div class="row-link">
-                <span class="rl-ico">{{ r.ico }}</span>
-                <span class="rl-label">{{ r.label }}</span>
-              </div>
+              @if (r.route) {
+                <a class="row-link" [routerLink]="r.route" [fragment]="r.fragment">
+                  <span class="rl-ico">{{ r.ico }}</span>
+                  <span class="rl-label">{{ r.label }}</span>
+                  <span class="rl-arrow">›</span>
+                </a>
+              } @else if (r.fragment) {
+                <a class="row-link" [routerLink]="[]" [fragment]="r.fragment">
+                  <span class="rl-ico">{{ r.ico }}</span>
+                  <span class="rl-label">{{ r.label }}</span>
+                  <span class="rl-arrow">›</span>
+                </a>
+              } @else {
+                <div class="row-link static">
+                  <span class="rl-ico">{{ r.ico }}</span>
+                  <span class="rl-label">{{ r.label }}</span>
+                </div>
+              }
             }
           </section>
 
@@ -690,26 +725,50 @@ export class FactionDetailComponent {
     }
   }
 
-  liensRapides() {
+  liensRapides(): SidebarLink[] {
     const f = this.faction();
-    if (f?.liensRapides?.length) {
-      return f.liensRapides.map((label, i) => ({
-        ico: DEFAULT_LIENS[i % DEFAULT_LIENS.length].ico,
-        label,
-      }));
-    }
-    return DEFAULT_LIENS;
+    const labels = f?.liensRapides?.length ? f.liensRapides : DEFAULT_LIENS.map(l => l.label);
+    return labels.map((label, i) => this.toQuickLink(label, DEFAULT_LIENS[i % DEFAULT_LIENS.length].ico));
   }
 
-  ressources() {
+  ressources(): SidebarLink[] {
     const f = this.faction();
-    if (f?.resources?.length) {
-      return f.resources.map((label, i) => ({
-        ico: DEFAULT_RESOURCES[i % DEFAULT_RESOURCES.length].ico,
-        label,
-      }));
+    const labels = f?.resources?.length ? f.resources : DEFAULT_RESOURCES.map(r => r.label);
+    return labels.map((label, i) => this.toResourceLink(label, DEFAULT_RESOURCES[i % DEFAULT_RESOURCES.length].ico));
+  }
+
+  private toQuickLink(label: string, ico: string): SidebarLink {
+    const l = label.toLowerCase();
+    if (l.includes('chronologie') || l.includes('hérésie') || l.includes('heresie') || l.includes('croisade')) {
+      return { ico, label, route: '/lore/timeline' };
     }
-    return DEFAULT_RESOURCES;
+    if (l.includes('personnage') || l.includes('héros') || l.includes('heros') || l.includes('warlord') || l.includes('champion')) {
+      return { ico, label, fragment: 'heros' };
+    }
+    if (l.includes('monde') || l.includes('craftworld') || l.includes('oeil') || l.includes('œil') || l.includes('webway') || l.includes('carte')) {
+      return { ico, label, route: '/lore/galaxy' };
+    }
+    if (l.includes('héraldique') || l.includes('symbol') || l.includes('clan') || l.includes('légion') || l.includes('legion') || l.includes('chapitre')) {
+      return { ico, label, fragment: 'subfactions' };
+    }
+    if (l.includes('relation') || l.includes('alliance') || l.includes('bio-forme') || l.includes('anatomie')) {
+      return { ico, label, fragment: 'heritage' };
+    }
+    return { ico, label };
+  }
+
+  private toResourceLink(label: string, ico: string): SidebarLink {
+    const l = label.toLowerCase();
+    if (l.includes('roman') || l.includes('black library') || l.includes('bibliothèque') || l.includes('archives') || l.includes('hérésie')) {
+      return { ico, label, route: '/romans' };
+    }
+    if (l.includes('carte') || l.includes('galactique') || l.includes('craftworld') || l.includes('œil') || l.includes('oeil')) {
+      return { ico, label, route: '/lore/galaxy' };
+    }
+    if (l.includes('lexique') || l.includes('glossaire') || l.includes('catalogue') || l.includes('mythe')) {
+      return { ico, label, route: '/lore/concepts' };
+    }
+    return { ico, label };
   }
 
   hasStats(): boolean {
