@@ -88,7 +88,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
             @if (e.nameVO) { <div class="info-row"><strong>Nom VO</strong><span>{{ e.nameVO }}</span></div> }
           </section>
 
-          @if (e.factionIds?.length) {
+          @if (e.factionIds.length) {
             <section class="sp">
               <h3>Factions liées</h3>
               @for (fid of e.factionIds; track fid) {

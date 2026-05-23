@@ -42,7 +42,7 @@ const ERA_LABEL: Record<TimelineEra, string> = {
             <p class="bible-text">{{ e.longDescription }}</p>
           </article>
 
-          @if (e.tags?.length) {
+          @if (e.tags.length) {
             <article class="panel">
               <h2>Tags</h2>
               <div class="tags">
@@ -53,7 +53,7 @@ const ERA_LABEL: Record<TimelineEra, string> = {
             </article>
           }
 
-          @if (e.sources?.length) {
+          @if (e.sources.length) {
             <article class="panel">
               <h2>Sources</h2>
               <ul class="sources-list">
