@@ -321,15 +321,6 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               </button>
             }
           </section>
-          <section class="side-panel">
-            <h3>Règle UX</h3>
-            <div class="recent-row static">
-              <span class="rr-title">Une vidéo = thumbnail dominante + bouton play visible.</span>
-            </div>
-            <div class="recent-row static">
-              <span class="rr-title">Pas de liste texte YouTube brute.</span>
-            </div>
-          </section>
         </aside>
       </section>
 

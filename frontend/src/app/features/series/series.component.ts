@@ -117,10 +117,6 @@ const PAGE_SIZE = 8;
           </div>
         </div>
 
-        <button class="advanced-btn">
-          <span class="adv-ico">⚙</span>
-          Filtres avancés
-        </button>
       </div>
 
       <!-- LAYOUT (main + sidebar) -->
@@ -159,10 +155,6 @@ const PAGE_SIZE = 8;
                       }
                     </div>
                   }
-                  <button class="card-cta">
-                    Voir la collection
-                    <span class="cta-arrow">›</span>
-                  </button>
                 </div>
               </article>
             }
@@ -221,10 +213,16 @@ const PAGE_SIZE = 8;
           <div class="panel">
             <h4 class="panel-title">Actions rapides</h4>
             <ul class="link-list">
-              <li><span class="li-ico">≡</span>Voir l'ordre de lecture<span class="li-arrow">›</span></li>
-              <li><span class="li-ico">▶</span>Continuer ma lecture<span class="li-arrow">›</span></li>
-              <li><span class="li-ico">♡</span>Ma liste de souhaits<span class="li-arrow">›</span></li>
-              <li><span class="li-ico">⤓</span>Téléchargements<span class="li-arrow">›</span></li>
+              <li>
+                <button type="button" (click)="showReadingOrder()">
+                  <span class="li-ico">≡</span>Voir l'ordre de lecture<span class="li-arrow">›</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" (click)="showInProgress()">
+                  <span class="li-ico">▶</span>Continuer ma lecture<span class="li-arrow">›</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -392,6 +390,19 @@ export class SeriesComponent {
 
   loadMore() {
     this.visibleCount.update(n => n + PAGE_SIZE);
+  }
+
+  showReadingOrder(): void {
+    this.activeTab.set('order');
+    this.selectedLetter.set(null);
+    this.visibleCount.set(PAGE_SIZE);
+  }
+
+  showInProgress(): void {
+    this.activeTab.set('library');
+    this.sort.set('progression');
+    this.selectedLetter.set(null);
+    this.visibleCount.set(PAGE_SIZE);
   }
 
   formatAuthors(authors: string[]): string {

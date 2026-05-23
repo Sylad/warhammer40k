@@ -25,20 +25,6 @@ const STAT_ROWS: { key: keyof NonNullable<Unit['stats']>; label: string }[] = [
   { key: 'soutien',      label: 'Soutien' },
 ];
 
-const DEFAULT_LIENS = [
-  { ico: '⚜', key: 'faction',     label: 'Voir la faction' },
-  { ico: '⚔', key: 'all-units',   label: 'Voir toutes les unités' },
-  { ico: '▤', key: 'lore',        label: 'Histoire & contexte' },
-  { ico: '☖', key: 'codex',       label: 'Codex de référence' },
-];
-
-const DEFAULT_RESOURCES = [
-  { ico: '▤', label: 'Lexique Warhammer 40,000' },
-  { ico: '⊛', label: 'Carte galactique' },
-  { ico: '☖', label: 'Bibliothèque des archives' },
-  { ico: '✎', label: 'Voir les romans liés' },
-];
-
 const KEY_ICONS = ['⚜', '✠', '⚔'];
 
 const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
@@ -53,8 +39,9 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
         <div class="topbar">
           <a class="back-btn" [routerLink]="['/factions', f.id]">← RETOUR AUX UNITÉS</a>
           <div class="topbar-actions">
-            <button class="iconbtn" type="button" title="Bookmark"><span>☖</span></button>
-            <button class="iconbtn" type="button" title="Partager"><span>↗</span></button>
+            <button class="iconbtn" type="button" [title]="shareCopied() ? 'Lien copié' : 'Partager'" (click)="shareUnit(u)">
+              <span>{{ shareCopied() ? '✓' : '↗' }}</span>
+            </button>
           </div>
         </div>
 
@@ -256,16 +243,6 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                 <span class="rl-label">Voir toutes les unités</span>
                 <span class="rl-arrow">›</span>
               </a>
-              <a class="row-link" routerLink="/romans">
-                <span class="rl-ico">▤</span>
-                <span class="rl-label">Histoire de l'unité</span>
-                <span class="rl-arrow">›</span>
-              </a>
-              <a class="row-link" routerLink="/romans">
-                <span class="rl-ico">☖</span>
-                <span class="rl-label">Codex {{ f.nom }}</span>
-                <span class="rl-arrow">›</span>
-              </a>
             </section>
 
             @if (relatedUnits().length) {
@@ -318,19 +295,6 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               </section>
             }
 
-            <section class="sp">
-              <h3>Ressources</h3>
-              @for (r of resources; track r.label) {
-                <div class="row-link">
-                  <span class="rl-ico">{{ r.ico }}</span>
-                  <span class="rl-label">{{ r.label }}</span>
-                </div>
-              }
-            </section>
-
-            <button class="report-btn" type="button">
-              <span>⚠</span>SIGNALER UNE ERREUR
-            </button>
           </aside>
         </section>
       } @else {
@@ -348,9 +312,9 @@ export class UnitDetailComponent {
   private readonly router = inject(Router);
 
   readonly tabs = TABS;
-  readonly resources = DEFAULT_RESOURCES;
   readonly KEY_ICONS = KEY_ICONS;
   readonly activeTab = signal<TabKey>('apercu');
+  readonly shareCopied = signal(false);
 
   readonly heroImage = signal<string | null>(null);
   readonly loreImage = signal<string | null>(null);
@@ -612,5 +576,21 @@ export class UnitDetailComponent {
 
   fallbackLore(u: Unit, f: Faction): string {
     return `Au sein des ${f.nom}, les ${u.nom} jouent un rôle déterminant. Leur histoire se confond avec celle de leur faction et de la guerre éternelle qui ravage la galaxie.`;
+  }
+
+  async shareUnit(unit: Unit): Promise<void> {
+    const url = window.location.href;
+    const title = `${unit.nom} — Codex Warhammer 40,000`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      this.shareCopied.set(true);
+      window.setTimeout(() => this.shareCopied.set(false), 1600);
+    } catch {
+      this.shareCopied.set(false);
+    }
   }
 }

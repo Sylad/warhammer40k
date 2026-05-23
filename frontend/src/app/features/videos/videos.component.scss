@@ -629,8 +629,6 @@
       background: var(--gold);
       box-shadow: 0 0 10px rgba(201, 162, 74, 0.6);
     }
-    .recent-row.static { cursor: default; }
-    .recent-row.static:hover { color: #c9beaa; }
     .recent-row .rr-title {
       flex: 1;
       min-width: 0;
