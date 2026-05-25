@@ -86,6 +86,17 @@ docker compose up -d --build
 
 Frontend disponible sur `http://localhost:4201`.
 
+### Backoffice Ollama
+
+Ollama peut proposer un enrichissement lore sans modifier les seeds :
+
+```bash
+OLLAMA_BASE_URL=http://localhost:11434 npm run ollama:lore -- --unit=sm-tactique
+```
+
+La sortie est écrite dans `../tmp/` pour relecture humaine avant toute édition
+des données.
+
 ## Données seed
 
 `backend/seed/` contient les fichiers JSON commités comme état initial :
