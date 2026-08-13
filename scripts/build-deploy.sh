@@ -5,9 +5,9 @@
 # Usage : ./scripts/build-deploy.sh [backend|frontend|all]
 set -euo pipefail
 
-# Surcharger via env si besoin ; le port SSH vient de ~/.ssh/config (Host nas).
-NAS_USER="${NAS_USER:-admin}"
-NAS_HOST="${NAS_HOST:-nas}"
+# Cible SSH : user/port/identité viennent de ~/.ssh/config (Host nas).
+# Surcharger via NAS_SSH_TARGET (ex: "monuser@mon-nas") si besoin.
+NAS_SSH="${NAS_SSH_TARGET:-nas}"
 COMPOSE_PATH=/volume2/docker/developpeur/warhammer40k/docker-compose.yml
 TAG=$(date +%Y%m%d-%H%M%S)
 
@@ -21,7 +21,7 @@ build_one() {
 
   echo "▶ Build ${img}:${TAG} from ${ctx}/ (context streamé)"
   tar --exclude-from="${ROOT}/${ctx}/.dockerignore" -C "${ROOT}/${ctx}" -czf - . \
-    | ssh "${NAS_USER}@${NAS_HOST}" \
+    | ssh "${NAS_SSH}" \
         "docker build -t ${img}:${TAG} -t ${img}:latest -"
   echo "✓ ${img}:${TAG} pushed to NAS daemon"
 }
@@ -29,18 +29,18 @@ build_one() {
 case "${TARGET}" in
   backend)
     build_one warhammer-backend backend
-    ssh "${NAS_USER}@${NAS_HOST}" \
+    ssh "${NAS_SSH}" \
       "docker compose -f ${COMPOSE_PATH} up -d --no-deps --force-recreate warhammer-backend"
     ;;
   frontend)
     build_one warhammer-frontend frontend
-    ssh "${NAS_USER}@${NAS_HOST}" \
+    ssh "${NAS_SSH}" \
       "docker compose -f ${COMPOSE_PATH} up -d --no-deps --force-recreate warhammer-frontend"
     ;;
   all|*)
     build_one warhammer-backend backend
     build_one warhammer-frontend frontend
-    ssh "${NAS_USER}@${NAS_HOST}" \
+    ssh "${NAS_SSH}" \
       "docker compose -f ${COMPOSE_PATH} up -d --force-recreate"
     ;;
 esac
