@@ -8,6 +8,16 @@ export interface WikiImageResult {
 
 const BASE = 'https://warhammer40k.fandom.com/api.php';
 const CACHE = new Map<string, WikiImageResult>();
+// Cap : le cache est keyé par query arbitraire sur un endpoint public (démo)
+// — sans borne, une boucle de q aléatoires fait OOM le process.
+const CACHE_MAX = 2000;
+function cacheSet(key: string, value: WikiImageResult): void {
+  if (CACHE.size >= CACHE_MAX) {
+    const oldest = CACHE.keys().next().value;
+    if (oldest !== undefined) CACHE.delete(oldest);
+  }
+  CACHE.set(key, value);
+}
 
 @Injectable()
 export class WikiImageService {
@@ -21,19 +31,19 @@ export class WikiImageService {
       // 1. Try direct page lookup first (finds character pages, not book pages)
       const directResult = await this.fetchPageImage(query);
       if (directResult.imageUrl) {
-        CACHE.set(key, directResult);
+        cacheSet(key, directResult);
         return directResult;
       }
 
       // 2. Fall back to search (for faction terms, generic units, etc.)
       const searchUrl = `${BASE}?action=query&list=search&srsearch=${encodeURIComponent(query + ' warhammer 40k')}&srlimit=5&format=json&origin=*`;
-      const searchRes = await fetch(searchUrl, { headers: { 'User-Agent': 'Warhammer40kLoreApp/1.0' } });
+      const searchRes = await fetch(searchUrl, { headers: { 'User-Agent': 'Warhammer40kLoreApp/1.0' }, signal: AbortSignal.timeout(8_000) });
       const searchData = await searchRes.json() as any;
 
       const results: any[] = searchData?.query?.search ?? [];
       if (!results.length) {
         const empty = { imageUrl: null, pageTitle: null, pageUrl: null };
-        CACHE.set(key, empty);
+        cacheSet(key, empty);
         return empty;
       }
 
@@ -41,26 +51,26 @@ export class WikiImageService {
       for (const r of results) {
         const result = await this.fetchPageImage(r.title as string);
         if (result.imageUrl) {
-          CACHE.set(key, result);
+          cacheSet(key, result);
           return result;
         }
       }
 
       const empty = { imageUrl: null, pageTitle: null, pageUrl: null };
-      CACHE.set(key, empty);
+      cacheSet(key, empty);
       return empty;
 
     } catch (err: unknown) {
+      // Échec transitoire (réseau, 429 fandom) : ne PAS mettre en cache —
+      // sinon l'image reste morte jusqu'au restart du process.
       this.logger.warn(`Wiki image lookup failed for "${query}": ${(err as Error)?.message ?? err}`);
-      const empty = { imageUrl: null, pageTitle: null, pageUrl: null };
-      CACHE.set(key, empty);
-      return empty;
+      return { imageUrl: null, pageTitle: null, pageUrl: null };
     }
   }
 
   private async fetchPageImage(pageTitle: string): Promise<WikiImageResult> {
     const imgUrl = `${BASE}?action=query&titles=${encodeURIComponent(pageTitle)}&prop=pageimages&format=json&pithumbsize=700&origin=*`;
-    const imgRes = await fetch(imgUrl, { headers: { 'User-Agent': 'Warhammer40kLoreApp/1.0' } });
+    const imgRes = await fetch(imgUrl, { headers: { 'User-Agent': 'Warhammer40kLoreApp/1.0' }, signal: AbortSignal.timeout(8_000) });
     const imgData = await imgRes.json() as any;
 
     const pages = imgData?.query?.pages ?? {};

@@ -8,7 +8,11 @@ export class LoreFeedController {
 
   @Get()
   random(@Query('count') count?: string): LoreEvent[] {
-    return this.service.random(count ? Number(count) : 3);
+    // ?count=abc donnait NaN → slice(0, NaN) → [] silencieux ; ?count=0
+    // retombait sur 3 (falsy) ; négatif passait tel quel dans slice.
+    const parsed = count !== undefined ? Number(count) : 3;
+    const n = Number.isFinite(parsed) ? Math.min(50, Math.max(0, Math.floor(parsed))) : 3;
+    return this.service.random(n);
   }
 
   @Get('all')

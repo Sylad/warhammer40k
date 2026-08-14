@@ -182,10 +182,10 @@ export class AboutComponent {
       items: [
         'Docker multi-stage (node:20-alpine → nginx:alpine)',
         'docker-compose Synology NAS',
-        'Volumes persistants /volume2/docker',
+        'Volumes persistants montés côté NAS',
         'nginx proxy /api → backend NestJS',
         'env_file .env (clés API isolées)',
-        'Hostname réseau : nas:4201',
+        'Servi en LAN + démo publique verrouillée',
       ],
     },
   ];

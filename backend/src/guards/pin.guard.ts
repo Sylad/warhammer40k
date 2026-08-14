@@ -63,10 +63,14 @@ export class PinGuard implements CanActivate {
     const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
 
     // timingSafeEqual : protection contre attaques timing-based.
-    if (token.length !== this.pin.length) {
+    // Comparaison en OCTETS : un token multi-octets de même longueur string
+    // faisait lever RangeError → 500 au lieu de 401 (même fix que finance).
+    const tokenBuf = Buffer.from(token);
+    const pinBuf = Buffer.from(this.pin);
+    if (tokenBuf.length !== pinBuf.length) {
       throw new UnauthorizedException('PIN invalide');
     }
-    const ok = timingSafeEqual(Buffer.from(token), Buffer.from(this.pin));
+    const ok = timingSafeEqual(tokenBuf, pinBuf);
     if (ok) return true;
     throw new UnauthorizedException('PIN invalide');
   }

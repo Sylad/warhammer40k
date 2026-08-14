@@ -51,8 +51,13 @@ export class ClaudeUsageService implements OnModuleInit, OnModuleDestroy {
   constructor(private readonly bus: EventBusService) {}
 
   onModuleInit() {
-    if (fs.existsSync(this.filePath)) {
-      this.data = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
+    try {
+      if (fs.existsSync(this.filePath)) {
+        this.data = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
+      }
+    } catch {
+      // Fichier tronqué (bind-mount créé vide, restore partiel) : repartir du
+      // défaut plutôt que d'avorter le bootstrap Nest.
     }
     this.startWatcher();
   }
@@ -146,7 +151,9 @@ export class ClaudeUsageService implements OnModuleInit, OnModuleDestroy {
       const remainingUsd = Math.max(0, shared.balanceUsd - consumed);
       estimatedRemainingEur = Math.round(remainingUsd * USD_TO_EUR * 100) / 100;
       configuredBalanceEur = Math.round(shared.balanceUsd * USD_TO_EUR * 100) / 100;
-      remainingPercent = Math.round((remainingUsd / shared.balanceUsd) * 100);
+      // balanceUsd=0 est accepté par le schema (« crédits épuisés ») : 0/0
+      // donnait NaN → null en JSON → jauge cassée côté UI.
+      remainingPercent = shared.balanceUsd > 0 ? Math.round((remainingUsd / shared.balanceUsd) * 100) : 0;
     }
 
     return { month, ...u, estimatedCostEur, budgetEur: BUDGET_EUR, percent, hasBalance, estimatedRemainingEur, configuredBalanceEur, remainingPercent };

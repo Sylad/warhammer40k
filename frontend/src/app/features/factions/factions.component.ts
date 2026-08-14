@@ -162,7 +162,11 @@ export class FactionsComponent {
     const q = this.searchQuery().toLowerCase().trim();
     const sort = this.sortKey();
     let out = f;
-    if (filter !== 'all' && filter !== 'autres') {
+    if (filter === 'autres') {
+      // « Autres » = tout ce qui n'est pas un des 3 alignements principaux
+      // (le bouton était un no-op qui rendait la liste complète).
+      out = out.filter(x => !['imperium', 'chaos', 'xenos'].includes(x.alignement));
+    } else if (filter !== 'all') {
       out = out.filter(x => x.alignement === filter);
     }
     if (q) {

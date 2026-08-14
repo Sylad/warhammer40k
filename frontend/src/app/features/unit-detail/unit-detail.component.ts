@@ -371,7 +371,7 @@ export class UnitDetailComponent {
       this.heroImage.set(null);
       this.loreImage.set(null);
 
-      const datasheetUrl = `/api/images/datasheets/${u.id}`;
+      const datasheetUrl = this.service.datasheetUrl(u.id);
       fetch(datasheetUrl, { method: 'HEAD' }).then(r => {
         if (r.ok) {
           this.heroImage.set(datasheetUrl);
@@ -414,7 +414,7 @@ export class UnitDetailComponent {
       const list = this.relatedUnits();
       list.forEach(r => {
         if (this.relatedImages().has(r.id)) return;
-        const datasheetUrl = `/api/images/datasheets/${r.id}`;
+        const datasheetUrl = this.service.datasheetUrl(r.id);
         fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
           if (head.ok) {
             this.relatedImages.update(m => new Map(m).set(r.id, datasheetUrl));

@@ -11,7 +11,16 @@ export class VideosService {
   private videos: Video[];
 
   constructor() {
-    this.videos = JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) as Video[];
+    // Garde existsSync + try/catch comme tous les services frères : un
+    // videos.json manquant/tronqué faisait crash-looper TOUT le backend
+    // (throw dans le constructor = bootstrap Nest avorté). Review 2026-08-14.
+    try {
+      this.videos = fs.existsSync(FILE_PATH)
+        ? (JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) as Video[])
+        : [];
+    } catch {
+      this.videos = [];
+    }
   }
 
   findAll(type?: string, langue?: string): Video[] {

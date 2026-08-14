@@ -61,14 +61,14 @@ describe('ClaudeService.generateUnitDescription', () => {
     expect(ctx.create).toHaveBeenCalledOnce();
   });
 
-  it('throws 401 CLAUDE_AUTH_FAILED on Anthropic.AuthenticationError', async () => {
+  it('throws 502 CLAUDE_AUTH_FAILED on Anthropic.AuthenticationError', async () => {
     ctx.create.mockRejectedValueOnce(makeAuthError());
 
     await expect(ctx.service.generateUnitDescription(unit, faction))
       .rejects.toMatchObject({
         constructor: HttpException,
         message: 'CLAUDE_AUTH_FAILED',
-        status: HttpStatus.UNAUTHORIZED,
+        status: HttpStatus.BAD_GATEWAY,
       });
   });
 

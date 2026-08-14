@@ -49,7 +49,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <input
                   type="text"
                   [ngModel]="searchQuery()"
-                  (ngModelChange)="searchQuery.set($event)"
+                  (ngModelChange)="onSearchChange($event)"
                   placeholder="Rechercher une œuvre, un artiste, une faction…" />
               </div>
               <button type="button" class="import-btn-hero" (click)="openImport()">
@@ -166,7 +166,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             </div>
             <div class="filter-row">
               <label>Faction</label>
-              <select [ngModel]="filterFaction()" (ngModelChange)="filterFaction.set($event)">
+              <select [ngModel]="filterFaction()" (ngModelChange)="onFactionChange($event)">
                 <option value="">Toutes</option>
                 @for (f of factionList(); track f) {
                   <option [value]="f">{{ f }}</option>
@@ -803,6 +803,16 @@ export class GalleryComponent {
 
   toggleCollectionFilter(id: string): void {
     this.filterCollection.set(this.filterCollection() === id ? '' : id);
+    this.currentPage.set(1);
+  }
+
+  onSearchChange(q: string): void {
+    this.searchQuery.set(q);
+    this.currentPage.set(1); // page 5 + recherche → grille vide sans ça
+  }
+
+  onFactionChange(f: string): void {
+    this.filterFaction.set(f);
     this.currentPage.set(1);
   }
 

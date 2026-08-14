@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal , untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -424,6 +424,13 @@ const DEFAULT_RESOURCES = [
 })
 export class FactionDetailComponent {
   private readonly service = inject(WarhammerService);
+  // Gardes in-flight : les effects ci-dessous lisaient le signal qu'ils
+  // écrivent (unitImages/subFactionImages/primarchImages) → chaque réponse
+  // relançait l'effect entier et re-fanait ~N requêtes (O(n²), ~6000 calls
+  // sur une faction à 113 sous-factions). Review 2026-08-14.
+  private readonly unitImgInflight = new Set<string>();
+  private readonly subFactionImgInflight = new Set<string>();
+  private readonly primarchImgInflight = new Set<string>();
   private readonly route = inject(ActivatedRoute);
 
   readonly typeFilters = TYPE_FILTERS;
@@ -629,8 +636,9 @@ export class FactionDetailComponent {
       const list = this.units();
       if (!list.length) return;
       list.forEach(u => {
-        if (this.unitImages().has(u.id)) return;
-        const datasheetUrl = `/api/images/datasheets/${u.id}`;
+        if (this.unitImgInflight.has(u.id) || untracked(() => this.unitImages()).has(u.id)) return;
+        this.unitImgInflight.add(u.id);
+        const datasheetUrl = this.service.datasheetUrl(u.id);
         fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
           if (head.ok) {
             this.unitImages.update(m => new Map(m).set(u.id, datasheetUrl));
@@ -652,7 +660,8 @@ export class FactionDetailComponent {
       const list = this.subFactions();
       if (!list.length) return;
       list.forEach(s => {
-        if (this.subFactionImages().has(s.id)) return;
+        if (this.subFactionImgInflight.has(s.id) || untracked(() => this.subFactionImages()).has(s.id)) return;
+        this.subFactionImgInflight.add(s.id);
         const q = s.wikiQuery ?? `${s.name} warhammer`;
         this.service.getWikiImage(q).subscribe({
           next: r => {
@@ -670,7 +679,8 @@ export class FactionDetailComponent {
       const list = this.subFactions();
       if (!list.length) return;
       list.forEach(s => {
-        if (!s.primarchWikiQuery || this.primarchImages().has(s.id)) return;
+        if (!s.primarchWikiQuery || this.primarchImgInflight.has(s.id) || untracked(() => this.primarchImages()).has(s.id)) return;
+        this.primarchImgInflight.add(s.id);
         this.service.getWikiImage(s.primarchWikiQuery).subscribe({
           next: r => {
             if (r.imageUrl) {

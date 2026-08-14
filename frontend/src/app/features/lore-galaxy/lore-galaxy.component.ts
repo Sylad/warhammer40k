@@ -598,6 +598,12 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
     };
     document.addEventListener('fullscreenchange', onFsChange);
     document.addEventListener('webkitfullscreenchange', onFsChange);
+    // Retirés au destroy — chaque visite ajoutait 2 listeners permanents
+    // fermant sur une map Leaflet morte (fuite + TypeError sur F11).
+    this.fsCleanup = () => {
+      document.removeEventListener('fullscreenchange', onFsChange);
+      document.removeEventListener('webkitfullscreenchange', onFsChange);
+    };
 
     // Bounds standard Leaflet : SW=[0,0] NE=[H,W]. Image overlay place l'image
     // de lat=0 (bas) à lat=H (haut). Pour utiliser des coords pixel-image-space
@@ -767,7 +773,11 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  private fsCleanup: (() => void) | null = null;
+
   ngOnDestroy(): void {
+    this.fsCleanup?.();
+    this.fsCleanup = null;
     this.map?.remove();
     this.map = undefined;
   }

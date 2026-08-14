@@ -22,14 +22,14 @@ export class ImagesController {
 
   @Get('file/:filename')
   serveFile(@Param('filename') filename: string, @Res() res: Response) {
-    const fullPath = this.service.resolveFile(decodeURIComponent(filename));
+    const fullPath = this.service.resolveFile(filename);
     if (!fullPath) throw new NotFoundException(`Image ${filename} not found`);
     res.sendFile(fullPath);
   }
 
   @Get('imported/:filename')
   serveImported(@Param('filename') filename: string, @Res() res: Response) {
-    const fullPath = this.service.resolveFile(`imported/${decodeURIComponent(filename)}`);
+    const fullPath = this.service.resolveFile(`imported/${filename}`);
     if (!fullPath) throw new NotFoundException(`Imported image ${filename} not found`);
     res.sendFile(fullPath);
   }

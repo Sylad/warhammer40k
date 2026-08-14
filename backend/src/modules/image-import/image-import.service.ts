@@ -92,9 +92,25 @@ export class ImageImportService {
     }
   }
 
+  /** Anti-SSRF minimal : refuse loopback/LAN/link-local en littéral (le
+   *  backend tourne sur le NAS — sans ce garde, l'import par URL sert de
+   *  scanner du réseau local, redirections comprises). */
+  private static isForbiddenHost(u: string): boolean {
+    try {
+      const host = new URL(u).hostname.toLowerCase();
+      if (host === 'localhost' || host === '::1' || host.endsWith('.local')) return true;
+      return /^(127\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|0\.)/.test(host);
+    } catch {
+      return true;
+    }
+  }
+
   async saveFromUrl(url: string): Promise<SaveResult> {
     if (!url || !/^https?:\/\//.test(url)) {
       throw new BadRequestException('url must be http(s)');
+    }
+    if (ImageImportService.isForbiddenHost(url)) {
+      throw new BadRequestException('URL non autorisée');
     }
 
     let res: Response;
@@ -105,6 +121,11 @@ export class ImageImportService {
       });
     } catch (err) {
       throw new BadRequestException(`Failed to fetch: ${(err as Error).message}`);
+    }
+    // res.url = URL finale après redirections — re-vérifier (une 302 vers le
+    // LAN contournait le check initial).
+    if (ImageImportService.isForbiddenHost(res.url || url)) {
+      throw new BadRequestException('URL non autorisée');
     }
     if (!res.ok) throw new BadRequestException(`Source returned HTTP ${res.status}`);
 

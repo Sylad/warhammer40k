@@ -20,7 +20,10 @@ function classifyClaudeError(err: unknown): ClaudeErrorKind {
 }
 
 function toHttpException(kind: ClaudeErrorKind): HttpException | null {
-  if (kind === 'auth') return new HttpException('CLAUDE_AUTH_FAILED', HttpStatus.UNAUTHORIZED);
+  // 502 et pas 401 : un 401 sur une route write déclenche le re-prompt PIN
+  // du pin.interceptor et efface un PIN valide alors que c'est la clé
+  // Anthropic (upstream) qui est en cause. Review 2026-08-14.
+  if (kind === 'auth') return new HttpException('CLAUDE_AUTH_FAILED', HttpStatus.BAD_GATEWAY);
   if (kind === 'rate') return new HttpException('CLAUDE_RATE_LIMITED', HttpStatus.TOO_MANY_REQUESTS);
   if (kind === 'quota') return new HttpException('CLAUDE_QUOTA_EXCEEDED', HttpStatus.PAYMENT_REQUIRED);
   return null;
