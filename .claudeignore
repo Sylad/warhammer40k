@@ -48,3 +48,4 @@ fluff/cache/
 
 # --- Lockfiles ---
 package-lock.json
+.token-savior-cache.json
