@@ -45,13 +45,15 @@ CORS_ORIGIN=http://localhost:4201
 PORT=3001
 APP_PIN=                     # vide → permissif (lecture+écriture sans auth)
 DEMO_FORCED_HOSTS=trycloudflare.com,cfargotunnel.com
+DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (off par défaut)
 ```
 
 `IMAGES_DIR` et `SHARED_DATA_DIR` sont définis dans `docker-compose.yml`.
 
 ### PIN guard + mode démo verrouillé (Cloudflare)
 - `APP_PIN` (vide → permissif) protège les endpoints write : `POST /units/:id/description`, `POST /series/:id/description`, `POST /image-import/save`, `POST /image-meta`, `PUT /claude/balance`, `POST /videos/import`, `DELETE /videos/:id`. SSE `/api/events` toujours bypass.
-- `DEMO_FORCED_HOSTS` (default `trycloudflare.com,cfargotunnel.com`) : si le `Host`/`X-Forwarded-Host` matche, le PIN est bypassé MAIS les écritures retournent 403 (`DemoWriteGuard`). Le frontend affiche la bannière "Mode démo verrouillée" via `/api/demo/status` (`DemoStatusService` + `<app-demo-banner>`).
+- `DEMO_FORCED_HOSTS` (default `trycloudflare.com,cfargotunnel.com`) : si le `Host` matche (jamais `X-Forwarded-Host`, que le client forge librement — L22, `modules/demo/forced-demo.ts`), le PIN est bypassé MAIS les écritures retournent 403 (`DemoWriteGuard`). Le frontend affiche la bannière "Mode démo verrouillée" via `/api/demo/status` (`DemoStatusService` + `<app-demo-banner>`).
+- `DEMO_FORCED=true` : toute l'instance est en démo verrouillée, sans dépendre d'aucun en-tête (même décision partagée par `DemoModeMiddleware` et `PinGuard`).
 - Pour exposer une démo publique : `ssh nas "cloudflared tunnel --url http://localhost:4201"` → URL random `https://*.trycloudflare.com` automatiquement en mode démo verrouillée. Pour ajouter un domaine perso : append au compose `DEMO_FORCED_HOSTS: "trycloudflare.com,cfargotunnel.com,demo.tonsite.fr"` puis recreate backend.
 - Voir `forced_demo_host_pattern.md` (mémoire user) pour le pattern complet, partagé avec finance-tracker et ol-companion.
 

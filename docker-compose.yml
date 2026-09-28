@@ -22,7 +22,7 @@ services:
       IMAGES_DIR: /app/images
       SHARED_DATA_DIR: /app/shared-data
       # Comma-separated list of host substrings forced into locked-demo mode.
-      # Any request whose Host (or X-Forwarded-Host) contains one of these is
+      # Any request whose Host (never X-Forwarded-Host, client-forgeable) contains one of these is
       # treated as public showcase: PIN is bypassé, writes return 403, the
       # frontend shows a "Mode démo verrouillée" badge.
       # Default covers Cloudflare quick tunnels and the public showcase domain.

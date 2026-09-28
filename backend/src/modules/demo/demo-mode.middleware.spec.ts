@@ -3,13 +3,16 @@ import type { ConfigService } from '@nestjs/config';
 import { DemoModeMiddleware } from './demo-mode.middleware.js';
 import { RequestContextService } from './request-context.service.js';
 
-type ReqLike = { header: (name: string) => string | undefined };
+type ReqLike = {
+  headers: Record<string, string>;
+  header: (name: string) => string | undefined;
+};
 
 function makeReq(headers: Record<string, string>): ReqLike {
   const lower = Object.fromEntries(
     Object.entries(headers).map(([k, v]) => [k.toLowerCase(), v]),
   );
-  return { header: (name: string) => lower[name.toLowerCase()] };
+  return { headers: lower, header: (name: string) => lower[name.toLowerCase()] };
 }
 
 describe('DemoModeMiddleware', () => {
@@ -44,7 +47,9 @@ describe('DemoModeMiddleware', () => {
     expect(captured).toEqual({ demoMode: true, forced: true });
   });
 
-  it('forces demo when X-Forwarded-Host matches (reverse proxy)', () => {
+  // L22 : X-Forwarded-Host vient du client (ni cloudflared ni nginx ne le
+  // réécrivent) — il ne doit JAMAIS forcer la démo.
+  it('does NOT force demo when only X-Forwarded-Host matches (forgeable, L22)', () => {
     build(['demo.example.com']);
     const req = makeReq({
       host: 'localhost:3001',
@@ -54,7 +59,7 @@ describe('DemoModeMiddleware', () => {
     middleware.use(req as never, {} as never, () => {
       captured = { demoMode: ctx.isDemoMode(), forced: ctx.isForced() };
     });
-    expect(captured).toEqual({ demoMode: true, forced: true });
+    expect(captured).toEqual({ demoMode: false, forced: false });
   });
 
   it('matches case-insensitively', () => {

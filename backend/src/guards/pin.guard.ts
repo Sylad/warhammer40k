@@ -2,6 +2,7 @@ import { CanActivate, ExecutionContext, Injectable, Logger, UnauthorizedExceptio
 import { ConfigService } from '@nestjs/config';
 import { timingSafeEqual } from 'crypto';
 import type { Request } from 'express';
+import { isForcedDemoRequest } from '../modules/demo/forced-demo.js';
 
 /**
  * Garde-PIN pour les endpoints d'écriture du codex.
@@ -11,7 +12,8 @@ import type { Request } from 'express';
  * - Sinon, le client doit envoyer un header `Authorization: Bearer <pin>`.
  * - Routes en lecture publique (GET) ne sont pas concernées : ce guard est appliqué
  *   sélectivement sur les controllers/methods d'écriture (POST/PUT/PATCH/DELETE).
- * - Sur un host forcé en mode démo (DEMO_FORCED_HOSTS) le guard est bypassé :
+ * - Sur un host forcé en mode démo (DEMO_FORCED_HOSTS, Host seul — jamais
+ *   X-Forwarded-Host, cf. forced-demo.ts, L22 — ou DEMO_FORCED=true) le guard est bypassé :
  *   le visiteur est de toute façon verrouillé en lecture-only par DemoWriteGuard,
  *   et exiger un PIN l'empêcherait juste d'utiliser la démo publique.
  */
@@ -20,10 +22,12 @@ export class PinGuard implements CanActivate {
   private readonly logger = new Logger(PinGuard.name);
   private readonly pin: string;
   private readonly forcedHosts: string[];
+  private readonly forcedAll: boolean;
 
   constructor(config: ConfigService) {
     this.pin = config.get<string>('appPin') ?? '';
     this.forcedHosts = config.get<string[]>('demoForcedHosts') ?? [];
+    this.forcedAll = config.get<boolean>('demoForcedAll') ?? false;
 
     if (!this.pin) {
       const allowNoPin = (config.get<string>('allowNoPin') ?? process.env.ALLOW_NO_PIN) === 'true';
@@ -48,14 +52,8 @@ export class PinGuard implements CanActivate {
     if (req.url.startsWith('/api/events')) return true;
 
     // Bypass entirely on forced-demo hosts (Cloudflare quick tunnels, etc.).
-    const hostHeader = (
-      (req.headers['x-forwarded-host'] as string | undefined) ??
-      (req.headers.host as string | undefined) ??
-      ''
-    ).toLowerCase();
-    if (this.forcedHosts.some((p) => p && hostHeader.includes(p.toLowerCase()))) {
-      return true;
-    }
+    // Same decision as DemoModeMiddleware: Host only, never X-Forwarded-Host.
+    if (isForcedDemoRequest(req, this.forcedHosts, this.forcedAll)) return true;
 
     if (!this.pin) return true;
 

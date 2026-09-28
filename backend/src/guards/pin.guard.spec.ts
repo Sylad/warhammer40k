@@ -62,12 +62,12 @@ describe('PinGuard', () => {
     expect(guard.canActivate(ctx)).toBe(true);
   });
 
-  it('bypasses on a forced-demo X-Forwarded-Host even without PIN', () => {
+  it('does NOT bypass on a forged X-Forwarded-Host (L22)', () => {
     const guard = buildGuard({ pin: '1234', forcedHosts: ['demo.example.com'] });
     const ctx = makeCtx({
       headers: { host: 'localhost:3001', 'x-forwarded-host': 'demo.example.com' },
     });
-    expect(guard.canActivate(ctx)).toBe(true);
+    expect(() => guard.canActivate(ctx)).toThrow(UnauthorizedException);
   });
 
   it('still rejects regular hosts when PIN is required', () => {
