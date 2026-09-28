@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import Anthropic from '@anthropic-ai/sdk';
 import { Unit } from './unit.model.js';
 import { Faction } from '../factions/faction.model.js';
-import { ClaudeUsageService } from '../claude-usage/claude-usage.service.js';
 
 type ClaudeErrorKind = 'auth' | 'rate' | 'quota' | null;
 
@@ -36,7 +35,6 @@ export class ClaudeService {
 
   constructor(
     private config: ConfigService,
-    private usage: ClaudeUsageService,
   ) {
     this.client = new Anthropic({
       apiKey: this.config.get<string>('anthropicApiKey'),
@@ -65,7 +63,6 @@ Décris son histoire, son rôle sur le champ de bataille, ses capacités caract�
         }],
       });
 
-      this.usage.recordUsage(response.usage.input_tokens, response.usage.output_tokens);
       const textBlock = response.content.find(b => b.type === 'text');
       if (!textBlock || textBlock.type !== 'text') {
         throw new Error('Réponse Claude invalide');

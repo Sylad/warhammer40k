@@ -36,7 +36,7 @@ Tout le reste (browsing, filtres, recherche, lightbox, import images, vidéos, l
 
 Les descriptions sont **mises en cache** dans `data/units.json` et `data/series.json` après génération : une description n'est calculée qu'une seule fois, puis ressert pour tous les visiteurs.
 
-**Coût estimé** : ~0,005-0,01 € par description (Sonnet 4.6, ~1k tokens input + 500-1000 tokens output, prompt court). Le solde Anthropic restant est tracké côté backend via le module `claude-usage` et affiché en haut à droite du codex (badge "CLAUDE — N €").
+**Coût estimé** : ~0,005-0,01 € par description (Sonnet 4.6, ~1k tokens input + 500-1000 tokens output, prompt court).
 
 **Distinction d'erreurs** : le backend distingue 3 modes d'échec côté API Anthropic (cf `backend/src/modules/units/claude.service.ts`) :
 - `401 CLAUDE_AUTH_FAILED` — clé révoquée ou invalide

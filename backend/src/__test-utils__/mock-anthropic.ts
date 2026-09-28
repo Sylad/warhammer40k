@@ -26,11 +26,6 @@ export function fakeConfig() {
   return { get: vi.fn().mockReturnValue('test-key') };
 }
 
-/** ClaudeUsageService stub — only `recordUsage` is called by the services. */
-export function fakeUsage() {
-  return { recordUsage: vi.fn() };
-}
-
 /**
  * Replace `service.client.messages.create` with a vi.fn().
  * Returns the spy so callers can configure resolved/rejected values.

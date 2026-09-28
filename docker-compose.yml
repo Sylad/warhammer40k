@@ -20,7 +20,6 @@ services:
       PORT: "3001"
       CORS_ORIGIN: "http://nas:4201"
       IMAGES_DIR: /app/images
-      SHARED_DATA_DIR: /app/shared-data
       # Comma-separated list of host names forced into locked-demo mode.
       # Any request whose Host (never X-Forwarded-Host, client-forgeable) is one of these
       # or a subdomain of one (exact or dot-preceded suffix, never a substring) is
@@ -31,7 +30,6 @@ services:
     volumes:
       - "/volume2/photo/Jeux/Warhammer 40K:/app/images:ro"
       - /volume2/docker/developpeur/data/warhammer:/app/data
-      - /volume2/docker/developpeur/data/shared:/app/shared-data
     restart: unless-stopped
 
   warhammer-frontend:

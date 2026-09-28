@@ -342,7 +342,6 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 - `features/series/series.component.ts` — ANCIEN, route `/romans` (à refondre phase 7)
 - `features/videos/videos.component.ts` — ANCIEN (à refondre phase 8)
 - `features/galerie/galerie.component.ts` — ANCIEN (à refondre phase 9, renommer en gallery)
-- `shared/components/claude-usage-badge/` — réutilisable
 
 ### Backend (`warhammer40k/backend/src/`)
 - À auditer phase 1 (modules factions/units/series/videos/images/wiki)
@@ -360,7 +359,6 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 - **Permissions Synology** : commandes `docker` OK sans sudo (groupe docker).
 - **Build Docker** : `docker compose -f .../warhammer40k/docker-compose.yml up -d --build warhammer-frontend` reconstruit en ~16s.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (genre `@Body() body: MonType` → `import type { MonType }`).
-- **claude-usage-badge** : SSE déjà branché (phase précédente, finance). Ne pas casser.
 - **Données seed** : au premier lancement après changement de model, copier les JSON seed dans `data/warhammer/` sinon ENOENT crash-loop.
 
 ---

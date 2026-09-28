@@ -4,10 +4,8 @@ import type { ConfigService } from '@nestjs/config';
 
 import { SeriesClaudeService } from './series-claude.service.js';
 import type { Serie } from './series.model.js';
-import type { ClaudeUsageService } from '../claude-usage/claude-usage.service.js';
 import {
   fakeConfig,
-  fakeUsage,
   fakeTextResponse,
   stubMessagesCreate,
   makeAuthError,
@@ -30,14 +28,12 @@ const serie: Serie = {
 };
 
 function buildService() {
-  const usage = fakeUsage();
   const config = fakeConfig();
   const service = new SeriesClaudeService(
     config as unknown as ConfigService,
-    usage as unknown as ClaudeUsageService,
   );
   const create = stubMessagesCreate(service);
-  return { service, create, usage };
+  return { service, create };
 }
 
 describe('SeriesClaudeService.generateSerieDescription', () => {
@@ -47,13 +43,12 @@ describe('SeriesClaudeService.generateSerieDescription', () => {
     ctx = buildService();
   });
 
-  it('returns the text from a successful Claude response and records usage', async () => {
+  it('returns the text from a successful Claude response', async () => {
     ctx.create.mockResolvedValueOnce(fakeTextResponse('Une saga grimdark incontournable.'));
 
     const out = await ctx.service.generateSerieDescription(serie);
 
     expect(out).toBe('Une saga grimdark incontournable.');
-    expect(ctx.usage.recordUsage).toHaveBeenCalledWith(10, 20);
   });
 
   it('throws 502 CLAUDE_AUTH_FAILED on Anthropic.AuthenticationError', async () => {

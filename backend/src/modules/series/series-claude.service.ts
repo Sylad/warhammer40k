@@ -2,7 +2,6 @@ import { Injectable, Logger, HttpException, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Anthropic from '@anthropic-ai/sdk';
 import { Serie } from './series.model.js';
-import { ClaudeUsageService } from '../claude-usage/claude-usage.service.js';
 
 type ClaudeErrorKind = 'auth' | 'rate' | 'quota' | null;
 
@@ -35,7 +34,6 @@ export class SeriesClaudeService {
 
   constructor(
     private config: ConfigService,
-    private usage: ClaudeUsageService,
   ) {
     this.client = new Anthropic({ apiKey: this.config.get<string>('anthropicApiKey') });
   }
@@ -65,7 +63,6 @@ Développe en 4-5 paragraphes : l'atmosphère générale, les personnages princi
         }],
       });
 
-      this.usage.recordUsage(response.usage.input_tokens, response.usage.output_tokens);
       const textBlock = response.content.find(b => b.type === 'text');
       if (!textBlock || textBlock.type !== 'text') throw new Error('Réponse Claude invalide');
       return textBlock.text;

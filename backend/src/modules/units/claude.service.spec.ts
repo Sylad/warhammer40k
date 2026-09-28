@@ -5,10 +5,8 @@ import type { ConfigService } from '@nestjs/config';
 import { ClaudeService } from './claude.service.js';
 import type { Unit } from './unit.model.js';
 import type { Faction } from '../factions/faction.model.js';
-import type { ClaudeUsageService } from '../claude-usage/claude-usage.service.js';
 import {
   fakeConfig,
-  fakeUsage,
   fakeTextResponse,
   stubMessagesCreate,
   makeAuthError,
@@ -34,14 +32,12 @@ const faction: Faction = {
 };
 
 function buildService() {
-  const usage = fakeUsage();
   const config = fakeConfig();
   const service = new ClaudeService(
     config as unknown as ConfigService,
-    usage as unknown as ClaudeUsageService,
   );
   const create = stubMessagesCreate(service);
-  return { service, create, usage };
+  return { service, create };
 }
 
 describe('ClaudeService.generateUnitDescription', () => {
@@ -51,13 +47,12 @@ describe('ClaudeService.generateUnitDescription', () => {
     ctx = buildService();
   });
 
-  it('returns the text from a successful Claude response and records usage', async () => {
+  it('returns the text from a successful Claude response', async () => {
     ctx.create.mockResolvedValueOnce(fakeTextResponse('Au nom de l Empereur.'));
 
     const out = await ctx.service.generateUnitDescription(unit, faction);
 
     expect(out).toBe('Au nom de l Empereur.');
-    expect(ctx.usage.recordUsage).toHaveBeenCalledWith(10, 20);
     expect(ctx.create).toHaveBeenCalledOnce();
   });
 

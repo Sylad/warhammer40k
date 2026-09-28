@@ -10,7 +10,6 @@ import { SeriesModule } from './modules/series/series.module.js';
 import { VideosModule } from './modules/videos/videos.module.js';
 import { ImagesModule } from './modules/images/images.module.js';
 import { WikiImageModule } from './modules/wiki-image/wiki-image.module.js';
-import { ClaudeUsageModule } from './modules/claude-usage/claude-usage.module.js';
 import { EventsModule } from './modules/events/events.module.js';
 import { ChannelsModule } from './modules/channels/channels.module.js';
 import { ArtworksModule } from './modules/artworks/artworks.module.js';
@@ -25,7 +24,6 @@ import { TimelineModule } from './modules/timeline/timeline.module.js';
     ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
     DemoModule,
     EventsModule,
-    ClaudeUsageModule,
     HealthModule,
     FactionsModule,
     UnitsModule,

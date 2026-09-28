@@ -171,9 +171,8 @@ export class AboutComponent {
         'NestJS 11 + TypeScript 5',
         'Stockage JSON local (factions/units/series/videos)',
         'Anthropic SDK — claude-sonnet-4-6',
-        'Server-Sent Events (badge usage live)',
         'Image proxy wiki (Wikipedia FR/EN async)',
-        'Modules NestJS : factions, units, subfactions, series, videos, artworks, gallery, lore-feed, timeline, wiki-image, image-import, image-meta, channels, events, claude-usage',
+        'Modules NestJS : factions, units, subfactions, series, videos, artworks, gallery, lore-feed, timeline, wiki-image, image-import, image-meta, channels, events',
       ],
     },
     {
