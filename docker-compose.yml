@@ -21,8 +21,9 @@ services:
       CORS_ORIGIN: "http://nas:4201"
       IMAGES_DIR: /app/images
       SHARED_DATA_DIR: /app/shared-data
-      # Comma-separated list of host substrings forced into locked-demo mode.
-      # Any request whose Host (never X-Forwarded-Host, client-forgeable) contains one of these is
+      # Comma-separated list of host names forced into locked-demo mode.
+      # Any request whose Host (never X-Forwarded-Host, client-forgeable) is one of these
+      # or a subdomain of one (exact or dot-preceded suffix, never a substring) is
       # treated as public showcase: PIN is bypassé, writes return 403, the
       # frontend shows a "Mode démo verrouillée" badge.
       # Default covers Cloudflare quick tunnels and the public showcase domain.

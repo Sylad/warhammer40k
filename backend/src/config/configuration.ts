@@ -7,10 +7,11 @@ export default () => ({
   // dépendre d'aucun en-tête HTTP (cf. modules/demo/forced-demo.ts, L22).
   // Off par défaut.
   demoForcedAll: (process.env['DEMO_FORCED'] ?? '').trim().toLowerCase() === 'true',
-  // Comma-separated list of host substrings that ALWAYS run in demo (locked)
+  // Comma-separated list of host names that ALWAYS run in demo (locked)
   // mode. Any request whose Host header (never X-Forwarded-Host, which the
-  // client controls) contains one of
-  // these substrings is forced into demo mode: writes are blocked, the badge
+  // client controls) is one of these names or a subdomain of one (exact or
+  // dot-preceded suffix match, port and trailing dot ignored, never a mere
+  // substring — L22) is forced into demo mode: writes are blocked, the badge
   // "Mode démo verrouillée" is shown, and PIN auth is bypassed.
   // Default covers Cloudflare quick tunnels and the public showcase domain.
   demoForcedHosts: (process.env['DEMO_FORCED_HOSTS'] ?? 'trycloudflare.com,cfargotunnel.com,warhammer.sladoire.dev')
