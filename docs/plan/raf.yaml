@@ -114,3 +114,10 @@ lots:
     status: todo
     estimate: 0.25
     created: 2026-09-28
+  - id: L22
+    title: "Sécurité : mode démo et PIN décidés sur X-Forwarded-Host forgeable ? (même motif que finance-tracker L1) — auditer puis corriger"
+    status: todo
+    estimate: 0.5
+    created: 2026-09-28
+    notes:
+      - { date: 2026-09-28, text: "vu par l'agent L1 de finance-tracker le 28-09 : warhammer a son propre mode démo et une copie de claude-usage.service" }
