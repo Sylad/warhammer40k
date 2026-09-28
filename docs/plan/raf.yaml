@@ -124,3 +124,17 @@ lots:
       - { date: 2026-09-28, text: "prod : APP_PIN était ABSENT du Secret + ALLOW_NO_PIN=true → écritures publiques ouvertes. 28-09 : PIN aléatoire 8 chiffres posé dans warhammer40k-secrets (hors git), ALLOW_NO_PIN retiré (gitops edc026c), 401 sans PIN vérifié en prod. Décisions Sylvain : pas de démo verrouillée (PIN seul) ; suivi usage/solde Claude à supprimer." }
     started: 2026-09-28
     finished: 2026-09-28
+  - id: L23
+    title: Page Nouveautés branchée sur cadence news (raf news → page), signature commune des apps
+    status: todo
+    estimate: 0.5
+    visible: true
+    created: 2026-09-28
+  - id: L24
+    title: Retirer le flux SSE /api/events et SseService, orphelins depuis la suppression du suivi d'usage Claude (L22)
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    created: 2026-09-28
+    notes:
+      - { date: 2026-09-28, text: "relecture L22 : plus aucun émetteur ni consommateur ; PinGuard garde un bypass /api/events à retirer avec" }
