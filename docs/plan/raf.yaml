@@ -116,8 +116,11 @@ lots:
     created: 2026-09-28
   - id: L22
     title: "Sécurité : mode démo et PIN décidés sur X-Forwarded-Host forgeable ? (même motif que finance-tracker L1) — auditer puis corriger"
-    status: todo
+    status: done
     estimate: 0.5
     created: 2026-09-28
     notes:
       - { date: 2026-09-28, text: "vu par l'agent L1 de finance-tracker le 28-09 : warhammer a son propre mode démo et une copie de claude-usage.service" }
+      - { date: 2026-09-28, text: "prod : APP_PIN était ABSENT du Secret + ALLOW_NO_PIN=true → écritures publiques ouvertes. 28-09 : PIN aléatoire 8 chiffres posé dans warhammer40k-secrets (hors git), ALLOW_NO_PIN retiré (gitops edc026c), 401 sans PIN vérifié en prod. Décisions Sylvain : pas de démo verrouillée (PIN seul) ; suivi usage/solde Claude à supprimer." }
+    started: 2026-09-28
+    finished: 2026-09-28
