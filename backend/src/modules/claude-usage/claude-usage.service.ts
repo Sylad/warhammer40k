@@ -4,12 +4,20 @@
  * Canonical source : `finance-tracker/backend/src/modules/claude-usage/claude-usage.service.ts`.
  * This copy diverges only by `.js` import extensions (NodeNext requirement).
  * When you update the canonical, sync this copy before pushing.
+ *
+ * ⚠ Exception warhammer40k (L22, 2026-09-28) : pas de dossier de données démo
+ * dans cette app (le codex n'a qu'un jeu de données, et toute écriture est
+ * refusée en démo par DemoWriteGuard). L'équivalent de l'isolation démo de
+ * finance-tracker L1 est donc : en mode démo, getUsage ne lit NI le vrai
+ * claude-shared.json NI les vrais compteurs (réponse neutre, sans solde), et
+ * setBalance / recordUsage ne font rien. Hors démo, comportement inchangé.
  */
 import { Injectable, Logger, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 import { EventBusService } from '../events/event-bus.service.js';
+import { RequestContextService } from '../demo/request-context.service.js';
 
 export interface UsageResponse {
   month: string;
@@ -60,7 +68,14 @@ export class ClaudeUsageService implements OnModuleInit, OnModuleDestroy {
   private watcher: fs.FSWatcher | null = null;
   private emitTimer: NodeJS.Timeout | null = null;
 
-  constructor(private readonly bus: EventBusService) {}
+  constructor(
+    private readonly bus: EventBusService,
+    private readonly requestContext: RequestContextService,
+  ) {}
+
+  private isDemo(): boolean {
+    return this.requestContext.isDemoMode();
+  }
 
   onModuleInit() {
     try {
@@ -162,6 +177,7 @@ export class ClaudeUsageService implements OnModuleInit, OnModuleDestroy {
 
 
   recordUsage(inputTokens: number, outputTokens: number): void {
+    if (this.isDemo()) return; // L22 : jamais les vrais compteurs en démo
     const month = this.currentMonth();
     if (!this.data[month]) {
       this.data[month] = { inputTokens: 0, outputTokens: 0, calls: 0 };
@@ -179,6 +195,7 @@ export class ClaudeUsageService implements OnModuleInit, OnModuleDestroy {
   }
 
   setBalance(balanceUsd: number): void {
+    if (this.isDemo()) return; // L22 : jamais le vrai solde partagé en démo
     this.withSharedLock(() => {
       const shared = this.loadShared();
       shared.balanceUsd = balanceUsd;
@@ -190,12 +207,16 @@ export class ClaudeUsageService implements OnModuleInit, OnModuleDestroy {
 
   getUsage(): UsageResponse {
     const month = this.currentMonth();
-    const u = this.data[month] ?? { inputTokens: 0, outputTokens: 0, calls: 0 };
+    const demo = this.isDemo();
+    const u = (demo ? undefined : this.data[month]) ?? { inputTokens: 0, outputTokens: 0, calls: 0 };
     const costUsd = u.inputTokens * INPUT_USD_PER_TOKEN + u.outputTokens * OUTPUT_USD_PER_TOKEN;
     const estimatedCostEur = Math.round(costUsd * USD_TO_EUR * 100) / 100;
     const percent = Math.min(100, Math.round((estimatedCostEur / BUDGET_EUR) * 100));
 
-    const shared = this.loadShared();
+    // L22 : en démo, le vrai solde partagé n'est jamais lu.
+    const shared: SharedData = demo
+      ? { balanceUsd: null, balanceSetAt: null, totalConsumedUsdAtConfig: 0, totalConsumedUsd: 0 }
+      : this.loadShared();
     const hasBalance = shared.balanceUsd !== null;
     let estimatedRemainingEur: number | null = null;
     let configuredBalanceEur: number | null = null;
