@@ -53,6 +53,11 @@ describe('isForcedDemoRequest (L22)', () => {
     expect(isForcedDemoRequest(req({ host: 'mytrycloudflare.com:443' }), ['trycloudflare.com'], false)).toBe(false);
   });
 
+  it('accepts a pattern written with a leading dot (L22)', () => {
+    expect(isForcedDemoRequest(req({ host: 'x.trycloudflare.com' }), ['.trycloudflare.com'], false)).toBe(true);
+    expect(isForcedDemoRequest(req({ host: 'evil-trycloudflare.com' }), ['.trycloudflare.com'], false)).toBe(false);
+  });
+
   it('is not forced without a Host and without the server-side flag', () => {
     expect(isForcedDemoRequest(req({}), HOSTS, false)).toBe(false);
     expect(isForcedDemoRequest(req({ host: 'x' }), ['', ' '], false)).toBe(false);

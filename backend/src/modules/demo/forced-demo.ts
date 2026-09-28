@@ -29,7 +29,7 @@ export function isForcedDemoRequest(
   const host = normalizeHost(String(req.headers?.host ?? ''));
   if (!host) return false;
   return forcedHosts.some((p) => {
-    const pattern = normalizeHost(p);
+    const pattern = normalizeHost(p).replace(/^\.+/, ''); // `.trycloudflare.com` = même motif
     return pattern !== '' && (host === pattern || host.endsWith(`.${pattern}`));
   });
 }

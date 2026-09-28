@@ -8,7 +8,7 @@ import { isForcedDemoRequest } from './forced-demo.js';
  * Detects whether the current request is being served from a "forced demo"
  * host (e.g. a Cloudflare quick tunnel) by comparing the Host header — never
  * X-Forwarded-Host, which the client controls — against a configurable list
- * of substrings, or whether the whole instance is forced (DEMO_FORCED=true).
+ * of host names (exact match or dot-preceded suffix), or whether the whole instance is forced (DEMO_FORCED=true).
  * See forced-demo.ts (L22).
  *
  * When forced=true, the request runs with demoMode=true → write endpoints
