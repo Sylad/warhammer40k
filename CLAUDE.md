@@ -11,11 +11,12 @@ Codex numérique fan Warhammer 40,000. Frontend Angular 19 (custom gothique noir
 | Stockage | JSON dans `data/` + seed `backend/seed/*.json` |
 | AI | Anthropic SDK — descriptions narratives unités/séries (claude-sonnet-4-6, max 1024 tokens) |
 | Wiki proxy | `/api/wiki-image?q=...` → Warhammer 40k Fandom + cache in-memory |
-| Live | SSE `/api/events` (plus aucun émetteur depuis le retrait du suivi d'usage Claude, L22) |
 
 ## Modules backend
 
-`factions`, `units`, `series`, `videos`, `artworks`, `subfactions`, `images`, `image-import`, `image-meta`, `wiki-image`, `channels`, `lore-feed`, `timeline`, `events`, `demo`, `health`.
+`factions`, `units`, `series`, `videos`, `artworks`, `subfactions`, `images`, `image-import`, `image-meta`, `wiki-image`, `channels`, `lore-feed`, `timeline`, `demo`, `health`.
+
+Le flux SSE `/api/events` (module `events`, `SseService` côté frontend, bloc nginx dédié et exemption dans `PinGuard`) a été **supprimé** le 2026-09-29 (L24) : il n'avait plus ni émetteur ni consommateur.
 
 Le suivi d'usage / solde Claude (`claude-usage`, `/api/claude/usage`, `/api/claude/balance`, `claude-shared.json`) a été **supprimé** le 2026-09-28 (L22, décision de Sylvain) ; la génération de descriptions par Claude reste.
 
@@ -25,7 +26,6 @@ Endpoints clés :
 - `GET /api/wiki-image?q=NAME` — proxy images Wiki avec cache
 - `GET /api/images?category=X` — galerie utilisateur (1468 images perso)
 - `POST /api/image-import` — import depuis Reddit/URL externe
-- `@Sse() /api/events` — flux SSE temps réel
 
 ## Frontend features (10 pages)
 
@@ -53,7 +53,7 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 `IMAGES_DIR` est défini dans `docker-compose.yml`.
 
 ### PIN guard + mode démo verrouillé (Cloudflare)
-- `APP_PIN` (vide → permissif) protège les endpoints write : `POST /units/:id/description`, `POST /series/:id/description`, `POST /image-import/save`, `POST /image-meta`, `POST /videos/import`, `DELETE /videos/:id`. SSE `/api/events` toujours bypass.
+- `APP_PIN` (vide → permissif) protège les endpoints write : `POST /units/:id/description`, `POST /series/:id/description`, `POST /image-import/save`, `POST /image-meta`, `POST /videos/import`, `DELETE /videos/:id`. Plus aucune exemption par route (seule la démo forcée ci-dessous contourne le PIN).
 - `DEMO_FORCED_HOSTS` (default `trycloudflare.com,cfargotunnel.com`) : si le `Host` est l'un de ces noms ou un de leurs sous-domaines (appariement exact ou suffixe précédé d'un point, port et point final ignorés — jamais en sous-chaîne ; jamais `X-Forwarded-Host`, que le client forge librement — L22, `modules/demo/forced-demo.ts`), le PIN est bypassé MAIS les écritures retournent 403 (`DemoWriteGuard`). Le frontend affiche la bannière "Mode démo verrouillée" via `/api/demo/status` (`DemoStatusService` + `<app-demo-banner>`).
 - `DEMO_FORCED=true` : toute l'instance est en démo verrouillée, sans dépendre d'aucun en-tête (même décision partagée par `DemoModeMiddleware` et `PinGuard`).
 - Pour exposer une démo publique : `ssh nas "cloudflared tunnel --url http://localhost:4201"` → URL random `https://*.trycloudflare.com` automatiquement en mode démo verrouillée. Pour ajouter un domaine perso : append au compose `DEMO_FORCED_HOSTS: "trycloudflare.com,cfargotunnel.com,demo.tonsite.fr"` puis recreate backend.
