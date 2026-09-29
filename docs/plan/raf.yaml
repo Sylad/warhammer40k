@@ -134,12 +134,13 @@ lots:
       - { date: 2026-09-28, text: "Sylvain 28-09 : ordre DÉCROISSANT, la nouveauté la plus récente en haut (départage à date égale corrigé dans cadence news)" }
   - id: L24
     title: Retirer le flux SSE /api/events et SseService, orphelins depuis la suppression du suivi d'usage Claude (L22)
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     created: 2026-09-28
     notes:
       - { date: 2026-09-28, text: "relecture L22 : plus aucun émetteur ni consommateur ; PinGuard garde un bypass /api/events à retirer avec" }
+    started: 2026-09-29
   - id: L25
     title: "Versionner le skill .claude/skills/angular adapté à Angular 19 (retirer/marquer le v20+ : Zoneless, etc.)"
     status: todo
