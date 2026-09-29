@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0-ng19",
+  "organization": "Antigravity Awesome Skills",
+  "date": "February 2026",
+  "adapted": "2026-09-29 — adapté à Angular 19 (19.2.21, zone.js, sans SSR) pour warhammer40k ; le v20+ est retiré ou marqué non applicable",
+  "abstract": "Guide to modern Angular development adapted to Angular 19 for the warhammer40k frontend. Covers Signals, Standalone Components, signal inputs and queries, routing, dependency injection, forms, @defer and testing. Zoneless, SSR/hydration and Signal Forms (v20+) are marked as not applicable.",
+  "references": [
+    "https://v19.angular.dev",
+    "https://v19.angular.dev/guide/signals",
+    "https://v19.angular.dev/guide/components",
+    "https://v19.angular.dev/guide/templates/defer"
+  ]
+}
