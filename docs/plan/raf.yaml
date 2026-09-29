@@ -140,3 +140,11 @@ lots:
     created: 2026-09-28
     notes:
       - { date: 2026-09-28, text: "relecture L22 : plus aucun émetteur ni consommateur ; PinGuard garde un bypass /api/events à retirer avec" }
+  - id: L25
+    title: "Versionner le skill .claude/skills/angular adapté à Angular 19 (retirer/marquer le v20+ : Zoneless, etc.)"
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    created: 2026-09-29
+    notes:
+      - { date: 2026-09-29, text: "Sylvain 29-09 : option (a) retenue — versionner et adapter à Angular 19, pas de montée en v20" }
