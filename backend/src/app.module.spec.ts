@@ -28,3 +28,10 @@ describe('AppModule — suivi d’usage Claude retiré (L22)', () => {
     expect(paths.filter((p) => p === 'claude' || p.startsWith('claude/'))).toEqual([]);
   });
 });
+
+describe('AppModule — flux SSE /api/events retiré (L24)', () => {
+  it('ne monte plus aucun contrôleur sous /api/events', () => {
+    const paths = controllerPaths(AppModule).map((p) => p.replace(/^\/+/, ''));
+    expect(paths.filter((p) => p === 'events' || p.startsWith('events/'))).toEqual([]);
+  });
+});

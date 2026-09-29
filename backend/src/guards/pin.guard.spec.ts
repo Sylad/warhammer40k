@@ -28,11 +28,15 @@ function buildGuard(opts: { pin?: string; forcedHosts?: string[] } = {}): PinGua
 }
 
 describe('PinGuard', () => {
-  it('always lets /api/events through (SSE cannot send Authorization)', () => {
-    const guard = buildGuard({ pin: '1234' });
-    const ctx = makeCtx({ url: '/api/events' });
-    expect(guard.canActivate(ctx)).toBe(true);
-  });
+  // L24 : le flux SSE /api/events est retiré ; plus aucune exemption de PIN
+  // ne doit subsister pour lui (ni pour une URL qui commence pareil).
+  it.each(['/api/events', '/api/events/', '/api/events?x=1', '/api/eventsfoo'])(
+    'no longer exempts %s from the PIN',
+    (url) => {
+      const guard = buildGuard({ pin: '1234' });
+      expect(() => guard.canActivate(makeCtx({ url }))).toThrow(UnauthorizedException);
+    },
+  );
 
   it('passes when no PIN is configured (dev/permissive mode)', () => {
     const guard = buildGuard({ pin: '' });

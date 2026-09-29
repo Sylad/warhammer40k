@@ -47,10 +47,6 @@ export class PinGuard implements CanActivate {
   canActivate(ctx: ExecutionContext): boolean {
     const req = ctx.switchToHttp().getRequest<Request>();
 
-    // Le flux SSE ne peut pas porter le header Authorization (EventSource standard
-    // n'a pas d'API pour les headers custom). Bypass pour préserver le push live.
-    if (req.url.startsWith('/api/events')) return true;
-
     // Bypass entirely on forced-demo hosts (Cloudflare quick tunnels, etc.).
     // Same decision as DemoModeMiddleware: Host only, never X-Forwarded-Host.
     if (isForcedDemoRequest(req, this.forcedHosts, this.forcedAll)) return true;

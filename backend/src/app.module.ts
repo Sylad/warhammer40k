@@ -10,7 +10,6 @@ import { SeriesModule } from './modules/series/series.module.js';
 import { VideosModule } from './modules/videos/videos.module.js';
 import { ImagesModule } from './modules/images/images.module.js';
 import { WikiImageModule } from './modules/wiki-image/wiki-image.module.js';
-import { EventsModule } from './modules/events/events.module.js';
 import { ChannelsModule } from './modules/channels/channels.module.js';
 import { ArtworksModule } from './modules/artworks/artworks.module.js';
 import { LoreFeedModule } from './modules/lore-feed/lore-feed.module.js';
@@ -23,7 +22,6 @@ import { TimelineModule } from './modules/timeline/timeline.module.js';
   imports: [
     ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
     DemoModule,
-    EventsModule,
     HealthModule,
     FactionsModule,
     UnitsModule,
