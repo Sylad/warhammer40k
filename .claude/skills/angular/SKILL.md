@@ -632,8 +632,8 @@ import { NgOptimizedImage } from '@angular/common';
       width="200"
       height="150"
       loading="lazy"
-      placeholder="blur"
     />
+    <!-- placeholder exige un image loader : ce projet n'en a pas, ne pas l'ajouter -->
   `
 })
 ```
