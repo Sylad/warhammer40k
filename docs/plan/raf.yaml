@@ -143,9 +143,10 @@ lots:
     started: 2026-09-29
   - id: L25
     title: "Versionner le skill .claude/skills/angular adapté à Angular 19 (retirer/marquer le v20+ : Zoneless, etc.)"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     created: 2026-09-29
     notes:
       - { date: 2026-09-29, text: "Sylvain 29-09 : option (a) retenue — versionner et adapter à Angular 19, pas de montée en v20" }
+    started: 2026-09-29
