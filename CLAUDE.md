@@ -29,7 +29,11 @@ Endpoints clés :
 
 ## Frontend features (10 pages)
 
-`dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `about` (/about). Redirect `/galerie` → `/gallery`.
+`dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `nouveautes` (/nouveautes), `about` (/about). Redirect `/galerie` → `/gallery`.
+
+Navigation : barre du haut à partir de 1280 px ; en dessous, bouton **Menu** → tiroir
+`#menu-telephone` (inerte quand il est fermé, Échap le ferme, Tab y boucle). Toute nouvelle
+page s'ajoute aux DEUX listes de `main-layout.component.ts` (barre et tiroir).
 
 ## Workflow dev
 
@@ -150,6 +154,20 @@ Modal "Importer une image" (frontend) supporte 3 modes : Wiki Fandom, Reddit r/W
 - Angular 19, Material 19 (legacy), RxJS 7, Signals, SCSS, Cinzel + Inter
 - NestJS 11, Anthropic SDK 0.91
 - Docker multi-stage (`node:20-alpine` → `nginx:alpine`), images sur GHCR, k3s dark-blue via ArgoCD
+
+## Nouveautés (cadence news, L23)
+
+Chaque lot `--visible` a une entrée dans `docs/nouveautes/` (`cadence news new <lot>`, texte pour
+le visiteur, guillemets « … » avec U+202F, au moins une capture ; téléphone à 390 px,
+jamais plus de 6:1). Puis `cd frontend && npm run news` régénère `frontend/public/nouveautes-data/`
+(JSON + captures + `tailles.json`, sans l'`index.html` de cadence), **versionné** : la CI construit
+l'image sans cadence. La page `/nouveautes` lit ce JSON (ordre de cadence : la plus récente en haut) ;
+pastille des nouveautés non vues (localStorage `wh40k.news.seen-v1`) et lien permanent
+`/nouveautes#<slug>`. `nouveautes-data.spec.ts` échoue si le JSON n'est plus à jour.
+
+Tests de composants : `src/testing/angular-testbed.ts` (TestBed JIT sous Vitest/jsdom, `styleUrl`
+résolues à vide, `<dialog>` simulé). Les requêtes-signaux `viewChild()` n'y marchent pas (transformation
+AOT absente) : `@ViewChild` dans les composants testés ainsi.
 
 ## Plan, sessions et revue UX (cadence)
 
