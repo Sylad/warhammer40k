@@ -126,7 +126,7 @@ lots:
     finished: 2026-09-28
   - id: L23
     title: Page Nouveautés branchée sur cadence news (raf news → page), signature commune des apps
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-09-28
@@ -134,6 +134,8 @@ lots:
       - { date: 2026-09-28, text: "Sylvain 28-09 : ordre DÉCROISSANT, la nouveauté la plus récente en haut (départage à date égale corrigé dans cadence news)" }
       - { date: 2026-10-01, text: "Inclure d'emblée : pastille non-vues + lien permanent par entrée (modèle AetherWX/ccc L13) ; visionneuse au téléphone à largeur naturelle avec défilement horizontal (leçon ol L13) ; inert sur le tiroir fermé (leçon avatar L14)" }
     started: 2026-10-01
+    ux: { date: 2026-10-01, verdict: "OK avec réserves levées — visionneuse ajustée (≤15 %), en-tête 1280 px testé avec pastille 9+ (34 px de marge), focus sur le h1 après le tiroir, page inert sous le tiroir ouvert ; seuils 1280/1700 px validés ; hors lot → L31–L33" }
+    finished: 2026-10-01
   - id: L24
     title: Retirer le flux SSE /api/events et SseService, orphelins depuis la suppression du suivi d'usage Claude (L22)
     status: done
@@ -197,5 +199,26 @@ lots:
     title: "Page « Plan de travail » : ce qui est prévu, en cours et récemment livré, généré au build depuis docs/plan/raf.yaml (titres et états seulement, jamais les notes) — inspirée de la page « À venir » d'AetherWX"
     status: todo
     estimate: 0.5
+    visible: true
+    created: 2026-10-01
+  - id: L31
+    title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
+    status: todo
+    estimate: 0.1
+    quickwin: true
+    visible: true
+    created: 2026-10-01
+  - id: L32
+    title: "Reflow : texte coupé dans les bandeaux de l'accueil (390 px) et de la galerie (320 px) (WCAG 1.4.10)"
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    visible: true
+    created: 2026-10-01
+  - id: L33
+    title: "Bouton recherche : afficher Ctrl+K hors Mac et porter le contraste de l'indication à ≥ 4,5:1 (mesuré 4,05:1)"
+    status: todo
+    estimate: 0.1
+    quickwin: true
     visible: true
     created: 2026-10-01
