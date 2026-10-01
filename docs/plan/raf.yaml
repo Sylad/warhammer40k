@@ -181,3 +181,10 @@ lots:
     notes:
       - { date: 2026-10-01, text: "Attente bornée des runs CI d'ancêtres + échec sur build rouge non remplacé (job à moitié rouge pris en compte, panne gh = échec) ; test-deploy.sh 26/26 en CI (test-scripts.yml) ; 2 relectures Opus, 2 défauts corrigés. Même bloc à reporter dans finance L46 / ol L21." }
     finished: 2026-10-01
+  - id: L29
+    title: "Budgets CSS ng build : gallery 18,18 kB et faction-detail 16,62 kB > 16 kB — mesurer ce qui pèse, factoriser les styles dupliqués vers le global ; relever le seuil seulement si le reste est justifié"
+    status: doing
+    estimate: 0.5
+    quickwin: true
+    created: 2026-10-01
+    started: 2026-10-01
