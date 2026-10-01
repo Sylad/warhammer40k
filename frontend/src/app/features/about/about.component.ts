@@ -172,7 +172,7 @@ export class AboutComponent {
         'Stockage JSON local (factions/units/series/videos)',
         'Anthropic SDK — claude-sonnet-4-6',
         'Image proxy wiki (Wikipedia FR/EN async)',
-        'Modules NestJS : factions, units, subfactions, series, videos, artworks, gallery, lore-feed, timeline, wiki-image, image-import, image-meta, channels, events',
+        'Modules NestJS : factions, units, subfactions, series, videos, artworks, gallery, lore-feed, timeline, wiki-image, image-import, image-meta, channels',
       ],
     },
     {
