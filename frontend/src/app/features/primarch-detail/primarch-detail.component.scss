@@ -197,33 +197,10 @@ h1 {
    ANCHOR NAV
    ========================= */
 .anchor-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding: 14px 18px;
-  margin-bottom: 24px;
+  /* Base commune : partiel global styles/_anchor-nav.scss (L29) ;
+   * le primarque garde un fond plus opaque et un flou plus fort. */
   background: rgba(11, 9, 7, 0.92);
-  border: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 5;
   backdrop-filter: blur(8px);
-  a {
-    font-family: var(--serif);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    padding: 6px 12px;
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: all 0.18s;
-    &:hover {
-      color: var(--gold-bright);
-      border-color: var(--border-strong);
-      background: rgba(201, 162, 74, 0.06);
-    }
-  }
 }
 
 /* =========================
