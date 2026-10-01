@@ -21,7 +21,7 @@ export class ImagesService {
 
   listImages(): string[] {
     // Invalidation par mtime des dossiers : la façon documentée d'ajouter des
-    // images est de les déposer dans le montage NAS — le cache process-lifetime
+    // images est de les déposer dans IMAGES_DIR — le cache process-lifetime
     // ne les voyait jamais (review 2026-08-14).
     const stamp = this.dirStamp();
     if (this.cached && stamp === this.cachedStamp) return this.cached;

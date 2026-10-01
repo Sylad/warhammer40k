@@ -651,7 +651,7 @@ export class GalleryComponent {
   private readonly imgCache = signal<Record<string, string>>({});
   private readonly imgInflight = new Set<string>();
 
-  /** Cap simultaneous wiki-image fetches to ease load on the NAS proxy. */
+  /** Cap simultaneous wiki-image fetches to ease load on the backend proxy. */
   private static readonly FETCH_QUEUE_LIMIT = 6;
   private fetchActive = 0;
   private readonly fetchQueue: Array<() => void> = [];

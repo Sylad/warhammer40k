@@ -93,7 +93,7 @@ export class ImageImportService {
   }
 
   /** Anti-SSRF minimal : refuse loopback/LAN/link-local en littéral (le
-   *  backend tourne sur le NAS — sans ce garde, l'import par URL sert de
+   *  backend tourne dans le cluster — sans ce garde, l'import par URL sert de
    *  scanner du réseau local, redirections comprises). */
   private static isForbiddenHost(u: string): boolean {
     try {

@@ -10,7 +10,7 @@ export interface Artwork {
   id: string;
   title: string;
   artist: string;
-  image: string;                   // URL ou nom fichier (NAS images dir)
+  image: string;                   // URL ou nom fichier (dossier IMAGES_DIR)
   category: ArtworkCategory;
   faction?: string;                // 'space-marines', 'chaos-space-marines', ...
   likes?: number;                  // affiché sur la card

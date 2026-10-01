@@ -142,7 +142,7 @@ interface Inspiration {
           Tu seras surpris de ce qu'on peut bâtir en quelques sessions.
         </p>
         <div class="cta-meta">
-          <span>Forgé avec curiosité · Hébergé sur Synology NAS · v1.0</span>
+          <span>Forgé avec curiosité · Hébergé sur Kubernetes (k3s) · v1.0</span>
         </div>
       </div>
     </section>
@@ -180,11 +180,11 @@ export class AboutComponent {
       ico: '⛯',
       items: [
         'Docker multi-stage (node:20-alpine → nginx:alpine)',
-        'docker-compose Synology NAS',
-        'Volumes persistants montés côté NAS',
+        'Images publiées sur GHCR par la CI GitHub Actions',
+        'Kubernetes k3s, déployé par ArgoCD (GitOps, chart Helm)',
+        'Volume persistant Kubernetes pour les données JSON',
         'nginx proxy /api → backend NestJS',
-        'env_file .env (clés API isolées)',
-        'Servi en LAN + démo publique verrouillée',
+        'Exposé via un tunnel Cloudflare (aucun port ouvert)',
       ],
     },
   ];
