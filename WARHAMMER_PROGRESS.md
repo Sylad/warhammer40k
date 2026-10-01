@@ -8,12 +8,10 @@
 ## Comment reprendre une session (5 min)
 
 1. Lire ce fichier en entier (jusqu'à "Décisions UX figées").
-2. Lire la spec de la phase active dans `/volume2/docker/developpeur/UX/`.
+2. Lire la spec de la phase active dans `~/projects/developpeur/UX/`.
 3. Regarder le mockup correspondant (PNG ou HTML).
-4. Vérifier que le site tourne : http://nas:4201 — si KO :
-   ```bash
-   docker compose -f /volume2/docker/developpeur/warhammer40k/docker-compose.yml up -d --build warhammer-frontend
-   ```
+4. Lancer le site en local : `npm run dev:backend` + `npm run dev:frontend` → http://localhost:4201
+   (prod : https://warhammer.sladoire.dev, k3s dark-blue, livrée par `cadence deliver`).
 5. Continuer la phase active dans le tableau ci-dessous.
 
 ---
@@ -23,7 +21,7 @@
 Codex Warhammer 40K **immersif lore-first**, type produit AAA / plateforme premium.
 **Pas un outil de stats** — une expérience visuelle gothique narrative.
 
-Specs canoniques dans `/volume2/docker/developpeur/UX/` (fichiers `warhammer - *`) :
+Specs canoniques dans `~/projects/developpeur/UX/` (fichiers `warhammer - *`) :
 - `consignes.txt` — sources YouTube FR/EN, ton, footer légal, philosophie
 - `spec global.md` — règles transverses + hiérarchie Faction→SubFaction (post-MVP)
 - `factions - spec.txt`, `Faction detail - spec.md`, `Faction unit detail.md`, `Romans.md`, `Video.md`, `Galerie.md`
@@ -346,7 +344,7 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 ### Backend (`warhammer40k/backend/src/`)
 - À auditer phase 1 (modules factions/units/series/videos/images/wiki)
 
-### Specs UX (`/volume2/docker/developpeur/UX/`)
+### Specs UX (`~/projects/developpeur/UX/`)
 - 7 specs `.md`/`.txt` — voir liste plus haut
 - 6 mockups PNG (factions, dashboard, faction detail, unit detail, romans, galerie)
 - 1 mockup HTML : `Video.html`
@@ -356,8 +354,7 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 ## Pièges connus
 
 - **PinGuard finance** ≠ warhammer (pas de PIN sur warhammer).
-- **Permissions Synology** : commandes `docker` OK sans sudo (groupe docker).
-- **Build Docker** : `docker compose -f .../warhammer40k/docker-compose.yml up -d --build warhammer-frontend` reconstruit en ~16s.
+- **Build Docker** : les images sont construites par la CI GitHub (`.github/workflows/build.yml`) et poussées sur GHCR ; plus de build sur un hôte de prod.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (genre `@Body() body: MonType` → `import type { MonType }`).
 - **Données seed** : au premier lancement après changement de model, copier les JSON seed dans `data/warhammer/` sinon ENOENT crash-loop.
 
@@ -471,7 +468,7 @@ Spec : `Galerie.md` + `Galerie.png`. Route renommée `/galerie` → `/gallery` a
 - **F10 (Intégration galerie ↔ factions)** : suggestions catégorie image-meta = 6 built-in + 17 noms de factions + custom. Léger.
 - **Tweaks UX** : breadcrumb (Factions › Space Marines › Ultramarines › Marneus Calgar), combobox catégorize CSS custom (au lieu de datalist natif), primarque image dans sous-faction card.
 
-**Specs à charger en froid pour F7/F3/F8** : `warhammer_vision`, `warhammer_specs_location`, `warhammer_ux_lessons`, `warhammer_subfactions_pattern`, `warhammer_lore_sources` + ce tracker. Le Fluff Bible PDF (`/volume2/docker/developpeur/warhammer40k/fluff/1400214179388.pdf` + `pdftotext` dispo NAS) reste source canonique pour F7.
+**Specs à charger en froid pour F7/F3/F8** : `warhammer_vision`, `warhammer_specs_location`, `warhammer_ux_lessons`, `warhammer_subfactions_pattern`, `warhammer_lore_sources` + ce tracker. Le Fluff Bible PDF (`fluff/1400214179388.pdf`, dépôt local non versionné, lu avec `pdftotext`) reste source canonique pour F7.
 
 ### 2026-05-01 session 10 (F7 + F8 + F10 + Tweaks UX)
 

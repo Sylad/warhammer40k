@@ -17,7 +17,7 @@ Ce projet est un cas d'école de **pair-programming humain + IA**. Pour les visi
 | Choix produit, UX, ton | Humain | « Codex immersif lore-first, gothique noir/or, image-first » |
 | Code Angular (frontend) | Claude Code | Composants standalone, signals, routes, theming SCSS |
 | Code NestJS (backend) | Claude Code | Modules, controllers, services, guards, validation Zod |
-| Infra Docker + scripts | Claude Code | Multi-stage builds, pipeline `tar | ssh nas docker build` |
+| Infra Docker + scripts | Claude Code | Multi-stage builds, CI GitHub → images GHCR, chart Helm déployé par ArgoCD (k3s), `cadence deliver` |
 | Seed lore (factions, primarques, etc.) | Humain + Claude Code | Humain trouve les sources, Claude structure et reformule |
 | Datasheets unités (133 JPEGs) | Humain | Cure manuelle depuis les PDFs Games Workshop officiels |
 | Images galerie (1500+) | Humain (via UI) | Import dynamique depuis Wikipedia/Reddit/URL au runtime |
@@ -53,7 +53,7 @@ Workflow type :
 
 1. Je décris en français ce que je veux : *« ajoute une page primarques avec des cards image-first, 9 loyalistes / 9 traîtres / 2 expurgés, lightbox au clic »*
 2. Claude pose le squelette : composant Angular, route, seed JSON minimal, styles SCSS
-3. Je valide visuellement dans le navigateur (`http://nas:4201`), je redirige sur ce qui ne va pas (« le hero est trop petit », « l'image se coupe », « manque le breadcrumb »)
+3. Je valide visuellement dans le navigateur (`http://localhost:4201`), je redirige sur ce qui ne va pas (« le hero est trop petit », « l'image se coupe », « manque le breadcrumb »)
 4. Claude itère par diff précis sur les fichiers concernés
 5. Quand c'est bon, on commit (avec trailer `Co-Authored-By: Claude` pour la traçabilité)
 

@@ -61,12 +61,12 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 | Storage | JSON local (pas de DB) |
 | Sources externes | Wikipedia Fandom EN (wiki-image proxy), Reddit JSON public, 40k.gallery |
 | Build | Docker multi-stage (node:20-alpine → nginx:alpine) |
-| Déploiement | docker-compose (testé Synology NAS DSM) |
+| Déploiement | Images sur GHCR (CI GitHub), chart Helm sur k3s via ArgoCD (GitOps), exposé par un tunnel Cloudflare |
 
 ## Setup local
 
 ### Prérequis
-- Docker 24+
+- Node.js 20+
 - Une [clé API Anthropic](https://console.anthropic.com/settings/keys)
 
 ### Lancement
@@ -78,10 +78,12 @@ cp backend/.env.example backend/.env
 # Édite ANTHROPIC_API_KEY
 
 # Bootstrap des données seed (premier lancement uniquement)
-mkdir -p data/imported
-cp backend/seed/*.json data/
+mkdir -p backend/data/imported
+cp backend/seed/*.json backend/data/
 
-docker compose up -d --build
+(cd backend && npm install) && (cd frontend && npm install)
+npm run dev:backend    # API NestJS sur http://localhost:3001
+npm run dev:frontend   # dans un autre terminal
 ```
 
 Frontend disponible sur `http://localhost:4201`.
@@ -116,7 +118,7 @@ des données.
 
 `backend/public/datasheets/` contient **119 JPEGs d'unités** (curés à la main, bundlés dans l'image Docker), servis via `/api/images/datasheets/:unitId`.
 
-Au premier lancement, copie ces fichiers dans `data/` (cf instructions ci-dessus). Ensuite `data/` n'est plus rejoué — tes catégorisations et imports persistent.
+Au premier lancement, copie ces fichiers dans `backend/data/` (cf instructions ci-dessus). Ensuite `backend/data/` n'est plus rejoué — tes catégorisations et imports persistent.
 
 ## Roadmap
 

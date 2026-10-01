@@ -208,7 +208,7 @@ Modifier la galerie : les **noms de toutes les factions** doivent apparaître da
 ---
 
 ## Sauvegardes utiles
-- Données : `/volume2/docker/developpeur/data/warhammer/`
+- Données : `data/` du backend (PVC `warhammer-backend-data` en prod sur dark-blue, `backend/data/` en local)
   - `factions.json` (**17 factions** — toutes lore enrichies post-F4)
   - `subfactions.json` (**113 entrées** — F4 + xenos V2 + 52 personnages Hérésie V2)
   - `units.json` (**133 unités**, **133/133 datasheets locales** post-V2)
