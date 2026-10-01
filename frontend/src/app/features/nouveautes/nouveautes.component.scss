@@ -1,0 +1,103 @@
+// L23 — page Nouveautés. Identité gothique noir/or (tokens de styles.scss), aucun texte
+// posé sur une image. Les règles du HTML de cadence passent par :host ::ng-deep (innerHTML).
+.news { max-width: 860px; margin: 0 auto; }
+
+.news-head { margin-bottom: 28px; }
+.news-eyebrow {
+  margin: 0 0 8px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.news-head h1 { font-size: clamp(1.7rem, 5vw, 2.6rem); margin-bottom: 10px; overflow-wrap: anywhere; }
+.news-lede { margin: 0; color: var(--text); max-width: 640px; line-height: 1.6; }
+
+.news-empty, .news-since { color: var(--text); }
+.news-since { margin: 0 0 18px; color: var(--gold-bright); font-size: 0.9rem; &:empty { display: none; } }
+
+.news-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 26px; }
+
+.news-entry {
+  scroll-margin-top: 90px; // barre du haut collante (70 px)
+  padding: 22px 24px; background: var(--panel); border: 1px solid var(--border);
+  &:focus { outline: none; }
+  &.is-target { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+}
+
+.news-date {
+  margin: 0 0 8px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.news-new {
+  margin-left: 10px; padding: 2px 8px; border-radius: 999px;
+  background: var(--gold); color: var(--bg); letter-spacing: 0.08em;
+}
+
+.news-entry h2 { font-size: clamp(1.05rem, 3.4vw, 1.35rem); margin: 0 0 4px; overflow-wrap: anywhere; }
+.news-permalink {
+  color: inherit;
+  &:hover { text-decoration: underline; text-underline-offset: 5px; }
+  &:hover::after, &:focus-visible::after { content: ' #'; color: var(--gold-bright); }
+}
+.news-permalink, .news-capture, .news-viewer-close, .news-viewer-zone {
+  &:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+}
+.news-link-status { margin: 0 0 10px; min-height: 1.1em; color: var(--gold-bright); font-size: 0.8rem; }
+
+.news-body {
+  color: var(--text); line-height: 1.7; overflow-wrap: anywhere;
+  ::ng-deep {
+    p, ul { margin: 0 0 12px; }
+    ul { padding-left: 1.3rem; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--gold); }
+    strong { color: var(--gold-bright); font-weight: 600; }
+    a { text-decoration: underline; }
+    code { font-size: 0.9em; padding: 0 4px; background: rgba(201, 162, 74, 0.1); }
+    > :last-child { margin-bottom: 0; }
+  }
+}
+
+// Place réservée AVANT chargement : largeur en ligne, image à ses proportions (aspect-ratio).
+.news-captures { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; }
+.news-capture {
+  display: block; flex: 0 1 auto; min-width: 0; max-width: 100%; line-height: 0;
+  img {
+    display: block; width: 100%; height: auto; cursor: zoom-in;
+    border: 1px solid var(--border-strong); background: var(--panel-2);
+  }
+  &:hover img { border-color: var(--gold); }
+}
+
+.news-seen-sep {
+  display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.06em;
+  &::before, &::after { content: ''; flex: 1; border-top: 1px solid var(--border); }
+}
+
+// Visionneuse : « Fermer » hors de la zone qui défile, toujours visible.
+.news-viewer {
+  width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 12px;
+  border: 0; background: transparent; overflow: hidden; color: var(--text);
+  &::backdrop { background: rgba(3, 3, 2, 0.93); }
+}
+.news-viewer-inner { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.news-viewer-close {
+  align-self: flex-end; flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 0 14px; border: 1px solid var(--border-strong); background: var(--panel);
+  color: var(--gold-bright); font: 600 0.85rem var(--sans); letter-spacing: 0.08em; cursor: pointer;
+  &:hover { border-color: var(--gold); }
+}
+.news-viewer-zone {
+  min-height: 0; max-width: 100%; overflow: auto; overscroll-behavior: contain;
+  border: 1px solid var(--border-strong);
+  img { display: block; height: auto; max-width: none; } // téléphone : largeur posée en ligne (≤ 2 écrans)
+}
+
+@media (min-width: 640px) {
+  .news-viewer { padding: 24px; }
+  .news-viewer[data-mode='fit'] .news-viewer-zone img {
+    width: auto; max-width: calc(100vw - 3rem - 2px); max-height: calc(100dvh - 6.5rem);
+  }
+}
+
+@media (max-width: 680px) {
+  .news-entry { padding: 18px 16px; }
+}

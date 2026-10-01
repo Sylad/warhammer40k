@@ -19,6 +19,7 @@ const STATIC_LABELS: Record<string, string> = {
   gallery: 'Galerie',
   galerie: 'Galerie',
   about: 'À propos',
+  nouveautes: 'Nouveautés',
   lore: 'Lore',
   emperor: 'L\'Empereur',
   primarchs: 'Les Primarques',
