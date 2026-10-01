@@ -40,10 +40,10 @@
 .news-permalink, .news-capture, .news-viewer-close, .news-viewer-zone {
   &:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
 }
-.news-link-status { margin: 0 0 10px; min-height: 1.1em; color: var(--gold-bright); font-size: 0.8rem; }
+.news-link-status { margin: 4px 0 0; color: var(--gold-bright); font-size: 0.8rem; }
 
 .news-body {
-  color: var(--text); line-height: 1.7; overflow-wrap: anywhere;
+  margin-top: 12px; color: var(--text); line-height: 1.7; overflow-wrap: anywhere;
   ::ng-deep {
     p, ul { margin: 0 0 12px; }
     ul { padding-left: 1.3rem; }
