@@ -67,6 +67,9 @@ h1, h2, h3 {
 
 h1 { text-shadow: 0 0 35px rgba(201, 162, 74, 0.22); }
 
+/* L23 : cibles de focus posées par le code (arrivée depuis le menu du téléphone) — pas d'anneau. */
+main[tabindex='-1']:focus, main h1[tabindex='-1']:focus { outline: none; }
+
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--gold-bright); }
 

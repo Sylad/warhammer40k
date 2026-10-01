@@ -2,6 +2,7 @@
 // nouveautés non vues, menu du téléphone (tiroir) inerte quand il est fermé.
 import { setupTestBed, stubFetch } from '../../../testing/angular-testbed';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { Component } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
@@ -11,6 +12,9 @@ import { resolve } from 'node:path';
 import { MainLayoutComponent } from './main-layout.component';
 import { NEWS_SEEN_KEY } from '../../features/nouveautes/news-badge';
 import { routes } from '../../app.routes';
+
+@Component({ standalone: true, template: `<h1>Page d’arrivée</h1><p>contenu</p>` })
+class ArrivalPage {}
 
 const NEWS = {
   project: 'warhammer40k', generated: '',
@@ -35,7 +39,10 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     localStorage.clear();
     document.body.style.overflow = '';
     stubFetch({ '/nouveautes-data/nouveautes.json': NEWS, '/nouveautes-data/tailles.json': {} });
-    await setupTestBed([MainLayoutComponent], [provideRouter([]), provideHttpClient(), provideHttpClientTesting()]);
+    await setupTestBed([MainLayoutComponent], [
+      provideRouter([{ path: 'about', component: ArrivalPage }, { path: '', component: ArrivalPage }]),
+      provideHttpClient(), provideHttpClientTesting(),
+    ]);
   });
 
   it('la route /nouveautes charge la page Nouveautés', async () => {
@@ -98,6 +105,44 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     const back = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true });
     document.activeElement!.dispatchEvent(back);
     expect(document.activeElement).toBe(focusables[focusables.length - 1]);
+  });
+
+  it('tiroir ouvert : le reste de la page est inerte (en-tête hors bouton Menu, fil d’Ariane, main, pied) ; rendu à la fermeture', async () => {
+    const f = await render();
+    const outside = ['.brand', 'nav.nav', '.nav-search-btn', 'app-demo-banner', 'app-breadcrumb', 'main', 'footer'];
+    const button = el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!;
+    button.click();
+    f.detectChanges();
+    for (const sel of outside) expect(el(f).querySelector(sel)!.hasAttribute('inert'), sel).toBe(true);
+    expect(button.hasAttribute('inert')).toBe(false);
+    expect(button.closest('[inert]')).toBeNull();
+    expect(el(f).querySelector('#menu-telephone')!.closest('[inert]')).toBeNull();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    f.detectChanges();
+    for (const sel of outside) expect(el(f).querySelector(sel)!.hasAttribute('inert'), sel).toBe(false);
+  });
+
+  it('lien du tiroir : à l’arrivée, le focus va au titre h1 de la page (pas sur BODY)', async () => {
+    const f = await render();
+    el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!.click();
+    f.detectChanges();
+    el(f).querySelector<HTMLAnchorElement>('#menu-telephone a[href="/about"]')!.click();
+    await f.whenStable();
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    const h1 = el(f).querySelector('main h1')!;
+    expect(document.activeElement).toBe(h1);
+    expect(h1.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('navigation hors tiroir : le focus n’est pas déplacé', async () => {
+    const f = await render();
+    const button = el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!;
+    button.focus();
+    await TestBed.inject(Router).navigateByUrl('/about');
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(document.activeElement).toBe(button);
   });
 
   it('le menu se referme après un changement de page', async () => {

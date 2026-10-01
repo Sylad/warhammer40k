@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, DestroyRef, ElementRef, HostListener, OnInit, ViewChild, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, NavigationSkipped, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../../features/nouveautes/news.service';
 import { badgeLabel, unseenLabel } from '../../features/nouveautes/news-badge';
@@ -14,14 +14,14 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent],
   template: `
-    <app-demo-banner />
+    <app-demo-banner [attr.inert]="pageInert()" />
     <header class="topbar">
-      <a class="brand" routerLink="/">
+      <a class="brand" routerLink="/" [attr.inert]="pageInert()">
         <span class="aigle">⚜</span>
         <strong>Warhammer 40,000</strong>
         <span class="brand-sub">Codex numérique</span>
       </a>
-      <nav class="nav">
+      <nav class="nav" [attr.inert]="pageInert()">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <span class="nav-ico">⌂</span>Accueil
         </a>
@@ -76,7 +76,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       </nav>
 
       <div class="topbar-actions">
-        <button class="nav-search-btn" type="button" (click)="palette.open()" title="Recherche globale (Ctrl+K)" aria-label="Recherche">
+        <button class="nav-search-btn" type="button" [attr.inert]="pageInert()" (click)="palette.open()" title="Recherche globale (Ctrl+K)" aria-label="Recherche">
           <span class="nav-ico">⌕</span>
           <span class="nav-search-kbd">⌘K</span>
         </button>
@@ -101,23 +101,23 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           <span aria-hidden="true">✕</span> Fermer
         </button>
       </div>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
-      <a routerLink="/factions" routerLinkActive="active">Factions</a>
-      <a routerLink="/romans" routerLinkActive="active">Romans</a>
-      <a routerLink="/videos" routerLinkActive="active">Vidéos</a>
-      <a routerLink="/gallery" routerLinkActive="active">Galerie</a>
-      <a routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
-      <a routerLink="/nouveautes" routerLinkActive="active">
+      <a (click)="fromDrawer = true" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+      <a (click)="fromDrawer = true" routerLink="/factions" routerLinkActive="active">Factions</a>
+      <a (click)="fromDrawer = true" routerLink="/romans" routerLinkActive="active">Romans</a>
+      <a (click)="fromDrawer = true" routerLink="/videos" routerLinkActive="active">Vidéos</a>
+      <a (click)="fromDrawer = true" routerLink="/gallery" routerLinkActive="active">Galerie</a>
+      <a (click)="fromDrawer = true" routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
+      <a (click)="fromDrawer = true" routerLink="/nouveautes" routerLinkActive="active">
         Nouveautés
         @if (badge()) {
           <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
         }
       </a>
-      <a routerLink="/about" routerLinkActive="active">À propos</a>
+      <a (click)="fromDrawer = true" routerLink="/about" routerLinkActive="active">À propos</a>
     </nav>
 
     @if (quota.hasError()) {
-      <div class="quota-banner">
+      <div class="quota-banner" [attr.inert]="pageInert()">
         @switch (quota.errorKind()) {
           @case ('auth') {
             <span>⚠ Clé Claude invalide — régénère une clé sur
@@ -138,13 +138,13 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       </div>
     }
 
-    <app-breadcrumb />
+    <app-breadcrumb [attr.inert]="pageInert()" />
 
-    <main class="wrap">
+    <main #main class="wrap" tabindex="-1" [attr.inert]="pageInert()">
       <router-outlet />
     </main>
 
-    <footer class="legal">
+    <footer class="legal" [attr.inert]="pageInert()">
       <div class="ornament">
         <span class="line"></span>
         <span class="aigle">⚜</span>
@@ -478,11 +478,38 @@ export class MainLayoutComponent implements OnInit {
   readonly badge = computed(() => badgeLabel(this.news.unseen()));
   readonly unseenText = computed(() => unseenLabel(this.news.unseen()));
   readonly menuOpen = signal(false);
+  /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
+  readonly pageInert = computed(() => (this.menuOpen() ? '' : null));
+  /** La navigation en cours vient d'un lien du tiroir (focus à placer à l'arrivée). */
+  fromDrawer = false;
+
+  @ViewChild('main', { static: true }) private main?: ElementRef<HTMLElement>;
 
   constructor() {
     inject(Router).events
-      .pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed())
-      .subscribe(() => this.closeMenu());
+      .pipe(filter((e) => e instanceof NavigationEnd || e instanceof NavigationSkipped), takeUntilDestroyed())
+      .subscribe(() => {
+        const fromDrawer = this.fromDrawer;
+        this.fromDrawer = false;
+        this.closeMenu();
+        if (fromDrawer) this.focusArrival();
+      });
+  }
+
+  /**
+   * Après un lien du tiroir, le focus irait sur BODY (le lien disparaît avec le tiroir) :
+   * il va au titre h1 de la page d'arrivée, ou à défaut à <main> (revue UX L23).
+   */
+  private focusArrival(): void {
+    this.cdr.detectChanges(); // retire `inert` de <main> avant d'y placer le focus
+    setTimeout(() => {
+      const main = this.main?.nativeElement;
+      if (!main) return;
+      const h1 = main.querySelector<HTMLElement>('h1');
+      const target = h1 ?? main;
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    });
   }
 
   ngOnInit(): void {
