@@ -1,5 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { ChangeDetectorRef, Component, DestroyRef, ElementRef, HostListener, OnInit, ViewChild, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { NewsService } from '../../features/nouveautes/news.service';
+import { badgeLabel, unseenLabel } from '../../features/nouveautes/news-badge';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
 import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
@@ -60,17 +64,57 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
             </div>
           </div>
         </div>
+        <a routerLink="/nouveautes" routerLinkActive="active">
+          <span class="nav-ico">✦</span>Nouveautés
+          @if (badge()) {
+            <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
+          }
+        </a>
         <a routerLink="/about" routerLinkActive="active">
           <span class="nav-ico">⚜</span>À propos
         </a>
+      </nav>
+
+      <div class="topbar-actions">
         <button class="nav-search-btn" type="button" (click)="palette.open()" title="Recherche globale (Ctrl+K)" aria-label="Recherche">
           <span class="nav-ico">⌕</span>
           <span class="nav-search-kbd">⌘K</span>
         </button>
-      </nav>
+        <!-- L23 : sous 1280 px, la navigation passe dans un tiroir (inerte quand il est fermé). -->
+        <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone"
+                [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : null"
+                (click)="toggleMenu()">
+          <span aria-hidden="true">☰</span> Menu
+          @if (badge()) { <span class="news-badge" aria-hidden="true">{{ badge() }}</span> }
+        </button>
+      </div>
 
       <app-command-palette #palette />
     </header>
+
+    <div class="drawer-backdrop" [class.open]="menuOpen()" aria-hidden="true" (click)="closeMenu()"></div>
+    <nav #drawer id="menu-telephone" class="drawer" [class.open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''"
+         aria-label="Menu principal" (keydown)="trapTab($event)">
+      <div class="drawer-head">
+        <span class="drawer-title">Menu</span>
+        <button #drawerClose type="button" class="drawer-close" (click)="closeMenu(true)">
+          <span aria-hidden="true">✕</span> Fermer
+        </button>
+      </div>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+      <a routerLink="/factions" routerLinkActive="active">Factions</a>
+      <a routerLink="/romans" routerLinkActive="active">Romans</a>
+      <a routerLink="/videos" routerLinkActive="active">Vidéos</a>
+      <a routerLink="/gallery" routerLinkActive="active">Galerie</a>
+      <a routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
+      <a routerLink="/nouveautes" routerLinkActive="active">
+        Nouveautés
+        @if (badge()) {
+          <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
+        }
+      </a>
+      <a routerLink="/about" routerLinkActive="active">À propos</a>
+    </nav>
 
     @if (quota.hasError()) {
       <div class="quota-banner">
@@ -336,18 +380,160 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       max-width: 720px;
     }
 
-    @media (max-width: 900px) {
+    /* L23 : pastille des nouveautés non vues, menu du téléphone (tiroir). */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .news-badge {
+      display: inline-block; min-width: 1.35em; padding: 1px 5px; border-radius: 999px;
+      background: var(--gold); color: var(--bg); font-size: 0.66rem; line-height: 1.35;
+      letter-spacing: 0; text-align: center; text-shadow: none;
+    }
+    .nav a { white-space: nowrap; }
+    .topbar { gap: 16px; }
+    .brand { margin-right: auto; }
+    .topbar > app-command-palette { position: absolute; }
+    .topbar-actions { display: flex; align-items: center; gap: 10px; }
+    .menu-toggle, .drawer-close {
+      display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+      background: transparent; border: 1px solid var(--border-strong); color: var(--gold);
+      font: 700 0.72rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+    }
+    .menu-toggle:hover, .drawer-close:hover { border-color: var(--gold); color: var(--gold-bright); }
+    .drawer-close { display: inline-flex; }
+    :is(.nav a, .menu-toggle, .drawer a, .drawer-close, .nav-search-btn, .brand):focus-visible {
+      outline: 2px solid var(--gold-bright); outline-offset: 2px;
+    }
+    .drawer-backdrop {
+      position: fixed; inset: 0; z-index: 110; background: rgba(0, 0, 0, 0.7);
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 120; width: min(320px, 86vw);
+      display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain;
+      padding: 14px 20px 28px; background: var(--panel); border-left: 1px solid var(--border-strong);
+      transform: translateX(100%); visibility: hidden;
+      transition: transform 0.2s ease, visibility 0s linear 0.2s;
+    }
+    .drawer.open { transform: none; visibility: visible; transition: transform 0.2s ease, visibility 0s; }
+    .drawer-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 12px; margin-bottom: 6px; border-bottom: 1px solid var(--border);
+    }
+    .drawer-title {
+      font-family: var(--serif); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .drawer a {
+      display: flex; align-items: center; gap: 10px; min-height: 48px;
+      border-bottom: 1px solid rgba(201, 162, 74, 0.12); color: var(--text);
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .drawer a.active { color: var(--gold); }
+    @media (prefers-reduced-motion: reduce) {
+      .drawer, .drawer.open, .drawer-backdrop { transition: none; }
+    }
+
+    @media (max-width: 1699px) {
+      .brand .brand-sub, .nav-ico { display: none; }
+      .nav { gap: 20px; }
+      .nav-search-btn .nav-ico { display: inline; }
+    }
+    @media (max-width: 1279px) {
       .topbar { padding: 0 18px; }
-      .brand .brand-sub { display: none; }
-      .nav { gap: 14px; font-size: 0.7rem; }
-      .nav-ico { display: none; }
+      .nav { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .nav-search-btn { min-height: 44px; margin-left: 0; }
+    }
+    @media (min-width: 1280px) {
+      .brand { white-space: nowrap; }
+      .drawer, .drawer-backdrop { display: none; }
     }
     @media (max-width: 680px) {
-      .nav a:not(.active) span:not(.nav-ico) { display: none; }
       .wrap { padding: 22px 16px 40px; }
+    }
+    @media (max-width: 420px) {
+      .topbar { padding: 0 12px; gap: 8px; }
+      .topbar-actions { gap: 6px; }
+      .nav-search-btn { padding: 0 12px; }
+      .brand { gap: 8px; }
+      .brand strong { font-size: 1.05rem; }
+      .nav-search-kbd { display: none; }
+      .menu-toggle { padding: 0 10px; }
     }
   `],
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
   readonly quota = inject(QuotaAlertService);
+  private readonly news = inject(NewsService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroyRef = inject(DestroyRef);
+
+  @ViewChild('menuButton', { static: true }) private menuButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('drawer', { static: true }) private drawer?: ElementRef<HTMLElement>;
+  @ViewChild('drawerClose', { static: true }) private drawerClose?: ElementRef<HTMLButtonElement>;
+
+  /** L23 : nouveautés parues depuis la dernière visite de /nouveautes. */
+  readonly badge = computed(() => badgeLabel(this.news.unseen()));
+  readonly unseenText = computed(() => unseenLabel(this.news.unseen()));
+  readonly menuOpen = signal(false);
+
+  constructor() {
+    inject(Router).events
+      .pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed())
+      .subscribe(() => this.closeMenu());
+  }
+
+  ngOnInit(): void {
+    void this.news.load();
+    // Passage au bureau (≥ 1280 px) menu ouvert : le tiroir disparaît, la page doit redéfiler.
+    const desktop = window.matchMedia?.('(min-width: 1280px)');
+    if (desktop) {
+      const onChange = (e: MediaQueryListEvent) => { if (e.matches) this.closeMenu(); };
+      desktop.addEventListener('change', onChange);
+      this.destroyRef.onDestroy(() => desktop.removeEventListener('change', onChange));
+    }
+  }
+
+  toggleMenu(): void {
+    if (this.menuOpen()) this.closeMenu(true);
+    else this.openMenu();
+  }
+
+  openMenu(): void {
+    this.menuOpen.set(true);
+    document.body.style.overflow = 'hidden';
+    // Rendu immédiat (tiroir visible et plus inerte) pour pouvoir y placer le focus.
+    this.cdr.detectChanges();
+    this.drawerClose?.nativeElement.focus();
+  }
+
+  /** Ferme le tiroir ; `returnFocus` : le focus revient au bouton Menu (Échap, Fermer). */
+  closeMenu(returnFocus = false): void {
+    if (!this.menuOpen()) return;
+    this.menuOpen.set(false);
+    document.body.style.overflow = '';
+    if (returnFocus) this.menuButton?.nativeElement.focus();
+  }
+
+  /** Tiroir ouvert : Tab et Maj+Tab bouclent entre ses liens (le voile couvre la page). */
+  trapTab(event: KeyboardEvent): void {
+    if (event.key !== 'Tab' || !this.drawer) return;
+    const items = Array.from(this.drawer.nativeElement.querySelectorAll<HTMLElement>('a, button'));
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.menuOpen()) this.closeMenu(true);
+  }
 }
