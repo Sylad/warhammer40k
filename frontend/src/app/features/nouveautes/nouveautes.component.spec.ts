@@ -192,6 +192,17 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     expect(zone.getAttribute('role')).toBe('region');
   });
 
+  it('au téléphone : capture à peine plus large que la zone (≤ 15 %) → ajustée à la zone, défilement vertical seul', async () => {
+    vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(390);
+    vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(844);
+    const f = await render();
+    $$(f, 'a.news-capture')[0].dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
+    f.detectChanges();
+    const dialog = $(f, 'dialog.news-viewer');
+    expect(dialog.hasAttribute('data-fill')).toBe(true);
+    expect((dialog.querySelector('.news-viewer-zone img') as HTMLElement).style.width).toBe('100%');
+  });
+
   it('au bureau : capture haute à sa largeur naturelle, défilement vertical', async () => {
     vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1440);
     vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(900);

@@ -17,6 +17,8 @@ interface Viewing {
   capture: Capture;
   mode: 'scroll' | 'fit' | 'natural';
   width: string | null;
+  /** Téléphone : capture ajustée à la largeur de la zone (défilement vertical seul). */
+  fill: boolean;
   opener: HTMLElement;
 }
 
@@ -99,7 +101,7 @@ interface Viewing {
 
     <!-- Visionneuse des captures : « Fermer » hors de la zone qui défile, toujours visible. -->
     <dialog #viewer class="news-viewer" [attr.aria-label]="viewing()?.capture?.alt ?? 'Capture agrandie'"
-            [attr.data-mode]="viewing()?.mode ?? null"
+            [attr.data-mode]="viewing()?.mode ?? null" [attr.data-fill]="viewing()?.fill ? '' : null"
             (keydown)="onViewerKeydown($event)" (click)="onViewerClick($event)" (close)="onViewerClosed()">
       <div class="news-viewer-inner">
         <button #closeButton type="button" class="news-viewer-close" (click)="closeViewer()">
@@ -210,9 +212,14 @@ export class NouveautesComponent implements OnInit, OnDestroy {
     const viewport = { width: window.innerWidth, height: window.innerHeight };
     const mode = viewerMode(capture.size, viewport);
     let width: string | null = null;
-    if (capture.size && mode === 'scroll') width = `${viewerPhoneWidth(capture.size, viewport.width)}px`;
+    let fill = false;
+    if (capture.size && mode === 'scroll') {
+      const w = viewerPhoneWidth(capture.size, viewport.width);
+      fill = w === 'zone';
+      width = fill ? '100%' : `${w}px`;
+    }
     if (capture.size && mode === 'natural') width = `min(${capture.size[0]}px, calc(100vw - 3rem - 2px))`;
-    this.viewing.set({ capture, mode, width, opener: event.currentTarget as HTMLElement });
+    this.viewing.set({ capture, mode, width, fill, opener: event.currentTarget as HTMLElement });
     document.body.style.overflow = 'hidden';
     this.dialogRef?.nativeElement.showModal();
     this.closeRef?.nativeElement.focus();

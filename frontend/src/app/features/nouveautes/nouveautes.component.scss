@@ -91,6 +91,10 @@
   img { display: block; height: auto; max-width: none; } // téléphone : largeur posée en ligne (≤ 2 écrans)
 }
 
+// Téléphone, capture à peine plus large que la zone : la zone prend toute la largeur, la
+// capture s'y ajuste (100 % de la zone, barre de défilement verticale comprise).
+.news-viewer[data-fill] .news-viewer-zone { width: 100%; overflow-x: hidden; }
+
 @media (min-width: 640px) {
   .news-viewer { padding: 24px; }
   .news-viewer[data-mode='fit'] .news-viewer-zone img {

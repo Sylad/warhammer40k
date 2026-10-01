@@ -1,7 +1,7 @@
 // L23 — page Nouveautés : fonctions pures (dates, place réservée des captures, visionneuse).
 import { describe, expect, it } from 'vitest';
 import {
-  captureAlt, captureBoxWidth, formatDay, separatorIndex, viewerMode, viewerPhoneWidth,
+  captureAlt, captureBoxWidth, formatDay, PHONE_ZONE_INSET, separatorIndex, viewerMode, viewerPhoneWidth,
 } from './nouveautes.utils';
 
 describe('page Nouveautés — utilitaires (L23)', () => {
@@ -23,8 +23,19 @@ describe('page Nouveautés — utilitaires (L23)', () => {
   it('visionneuse au téléphone (< 640 px) : défilement, largeur naturelle au plus 2 écrans', () => {
     expect(viewerMode([1440, 900], { width: 390, height: 844 })).toBe('scroll');
     expect(viewerPhoneWidth([1440, 900], 390)).toBe(780);
-    expect(viewerPhoneWidth([390, 844], 390)).toBe(390);
     expect(viewerPhoneWidth([300, 600], 390)).toBe(300);
+    // Zone à 390 px : 364 px (marges 12 px + bordures). Capture de 390 px à 320 px d'écran
+    // (zone 294, +33 %) : largeur naturelle, défilement horizontal assumé.
+    expect(viewerPhoneWidth([390, 844], 320)).toBe(390);
+  });
+
+  it('visionneuse au téléphone : capture qui dépasse la zone de 15 % au plus → ajustée à la zone (revue UX L23)', () => {
+    expect(PHONE_ZONE_INSET).toBe(26);
+    // 390 dans 364 (+7 %) : ajustée, plus de défilement horizontal.
+    expect(viewerPhoneWidth([390, 844], 390)).toBe('zone');
+    expect(viewerPhoneWidth([418, 844], 390)).toBe('zone'); // 418 / 364 = 1,148
+    expect(viewerPhoneWidth([420, 844], 390)).toBe(420); // 1,154 : largeur naturelle
+    expect(viewerPhoneWidth([364, 844], 390)).toBe(364); // tient déjà
   });
 
   it('visionneuse au bureau : entière à l’écran, sauf une capture haute qui y perdrait plus de 20 %', () => {

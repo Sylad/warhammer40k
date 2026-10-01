@@ -46,8 +46,19 @@ export function viewerMode(
   return scale < 0.8 ? 'natural' : 'fit';
 }
 
-/** Largeur de la capture dans la visionneuse au téléphone : naturelle, au plus 2 écrans. */
-export function viewerPhoneWidth(size: CaptureSize, viewportWidth: number): number {
+/** Au téléphone, la zone de la visionneuse = écran − marges (2 × 12 px) − bordures (2 × 1 px). */
+export const PHONE_ZONE_INSET = 26;
+
+/**
+ * Largeur de la capture dans la visionneuse au téléphone :
+ * - `'zone'` si elle dépasse la zone de 15 % au plus : ajustée à la zone, défilement
+ *   vertical seul (revue UX L23 : 390 px dans 364 px défilait dans les deux sens pour
+ *   26 px, et coupait le bouton « Menu », sujet de la capture) ;
+ * - sinon sa largeur naturelle, au plus deux écrans.
+ */
+export function viewerPhoneWidth(size: CaptureSize, viewportWidth: number): number | 'zone' {
+  const zone = viewportWidth - PHONE_ZONE_INSET;
+  if (size[0] > zone && size[0] <= zone * 1.15) return 'zone';
   return Math.min(size[0], 2 * viewportWidth);
 }
 
