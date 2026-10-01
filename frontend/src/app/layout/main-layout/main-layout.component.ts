@@ -437,7 +437,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
 
     @media (max-width: 1699px) {
       .brand .brand-sub, .nav-ico { display: none; }
-      .nav { gap: 20px; }
+      .nav { gap: 16px; } /* 1280 px + pastille « 9+ » : barre sans débordement (topbar.e2e.spec.ts) */
       .nav-search-btn .nav-ico { display: inline; }
     }
     @media (max-width: 1279px) {
