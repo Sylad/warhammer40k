@@ -190,12 +190,8 @@
     .lc-ico {
       width: 30px;
       height: 30px;
-      display: grid;
-      place-items: center;
       border: 1px solid rgba(201, 162, 74, 0.4);
-      color: var(--gold);
       background: rgba(201, 162, 74, 0.08);
-      font-size: 14px;
     }
     .lc-head strong {
       color: var(--gold-bright);
@@ -316,6 +312,9 @@
       font-size: 13px;
       line-height: 1.45;
       margin: 0 0 6px;
+    }
+    /* Résumé tronqué à 2 lignes — cartes sous-faction et unité. */
+    .sf-content p, .unit-content p {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -510,10 +509,6 @@
       color: #c3baaa;
       font-size: 12px;
       line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
     .u-arrow {
       align-self: flex-end;
@@ -605,22 +600,24 @@
       text-decoration: none;
       transition: opacity 0.2s;
     }
-    .row-link:first-of-type { border-top: 0; padding-top: 2px; }
+    .row-link:first-of-type, .row-stat:first-of-type { border-top: 0; padding-top: 2px; }
     .row-link:hover { opacity: 0.78; }
     .row-link.static {
       cursor: default;
       opacity: 0.78;
     }
-    .row-link.static:hover { opacity: 0.78; }
     .rl-ico {
       width: 28px;
       height: 28px;
+      border: 1px solid rgba(201, 162, 74, 0.3);
+      background: rgba(201, 162, 74, 0.05);
+    }
+    /* Pastille d'icône centrée — en-têtes du lore et liens de la barre latérale. */
+    .lc-ico, .rl-ico {
       display: grid;
       place-items: center;
-      border: 1px solid rgba(201, 162, 74, 0.3);
       color: var(--gold);
       font-size: 14px;
-      background: rgba(201, 162, 74, 0.05);
     }
     .rl-label {
       color: #d6cdb6;
@@ -640,7 +637,6 @@
       padding: 9px 0;
       border-top: 1px solid rgba(201, 162, 74, 0.1);
     }
-    .row-stat:first-of-type { border-top: 0; padding-top: 2px; }
     .row-stat span {
       color: var(--muted);
       font-size: 11.5px;

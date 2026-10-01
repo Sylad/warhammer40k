@@ -494,9 +494,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "cursor": "default",
     "opacity": "0.78",
   },
-  ".row-link.static:hover": {
-    "opacity": "0.78",
-  },
   ".row-link:first-of-type": {
     "border-top": "0",
     "padding-top": "2px",
