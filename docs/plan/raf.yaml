@@ -183,8 +183,11 @@ lots:
     finished: 2026-10-01
   - id: L29
     title: "Budgets CSS ng build : gallery 18,18 kB et faction-detail 16,62 kB > 16 kB — mesurer ce qui pèse, factoriser les styles dupliqués vers le global ; relever le seuil seulement si le reste est justifié"
-    status: doing
+    status: done
     estimate: 0.5
     quickwin: true
     created: 2026-10-01
     started: 2026-10-01
+    notes:
+      - { date: 2026-10-01, text: "Galerie : seuil anyComponentStyle relevé à 17,5 kB (reste = 3 modales, tout utilisé) ; extraction des modales en composants = lot à part si voulu. faction-detail à 31 o du seuil." }
+    finished: 2026-10-01
