@@ -20,8 +20,8 @@ git -C "$GITOPS" diff --quiet && git -C "$GITOPS" diff --cached --quiet ||
 # poussé juste après un commit backend/frontend, son run (vide) finit avant
 # celui qui construit l'image, et sans cette attente on concluait « rien à
 # livrer » (vécu 01-10). Borné par DEPLOY_CI_TIMEOUT (sous le deployTimeout
-# de cadence, 1800 s) ; un run qui finit en échec est simplement ignoré
-# ci-dessous, comme avant.
+# de cadence, 1800 s) ; un run qui finit en échec bloque plus bas tant qu'il
+# n'est pas remplacé.
 deadline=$(( $(date +%s) + ${DEPLOY_CI_TIMEOUT:-1200} ))
 while :; do
   pending_runs=$(gh run list --workflow build.yml --limit 100 --json databaseId,headSha,status \
