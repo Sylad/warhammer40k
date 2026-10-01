@@ -132,6 +132,7 @@ lots:
     created: 2026-09-28
     notes:
       - { date: 2026-09-28, text: "Sylvain 28-09 : ordre DÉCROISSANT, la nouveauté la plus récente en haut (départage à date égale corrigé dans cadence news)" }
+      - { date: 2026-10-01, text: "Inclure d'emblée : pastille non-vues + lien permanent par entrée (modèle AetherWX/ccc L13) ; visionneuse au téléphone à largeur naturelle avec défilement horizontal (leçon ol L13) ; inert sur le tiroir fermé (leçon avatar L14)" }
   - id: L24
     title: Retirer le flux SSE /api/events et SseService, orphelins depuis la suppression du suivi d'usage Claude (L22)
     status: done
@@ -191,3 +192,9 @@ lots:
     notes:
       - { date: 2026-10-01, text: "Galerie : seuil anyComponentStyle relevé à 17,5 kB (reste = 3 modales, tout utilisé) ; extraction des modales en composants = lot à part si voulu. faction-detail à 31 o du seuil." }
     finished: 2026-10-01
+  - id: L30
+    title: "Page « Plan de travail » : ce qui est prévu, en cours et récemment livré, généré au build depuis docs/plan/raf.yaml (titres et états seulement, jamais les notes) — inspirée de la page « À venir » d'AetherWX"
+    status: todo
+    estimate: 0.5
+    visible: true
+    created: 2026-10-01
