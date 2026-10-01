@@ -1,9 +1,10 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as sass from 'sass';
 import postcss from 'postcss';
+import { transform } from 'esbuild';
 
 /**
  * L29 : factorisation des styles de composants (budget `anyComponentStyle`).
@@ -66,6 +67,30 @@ describe('styles de composants — déclarations effectives inchangées (L29)', 
   for (const [file, partials] of Object.entries(GUARDED)) {
     it(file, () => {
       expect(effective(file, partials)).toMatchSnapshot();
+    });
+  }
+});
+
+/** Feuilles .scss des composants (même mesure que ng build : SCSS compilé puis minifié). */
+function componentSheets(dir: string): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory()
+      ? componentSheets(resolve(dir, e.name))
+      : e.name.endsWith('.component.scss') ? [resolve(dir, e.name)] : [],
+  );
+}
+
+describe('budget anyComponentStyle de angular.json (L29)', () => {
+  const angular = JSON.parse(readFileSync(resolve(frontend, 'angular.json'), 'utf8'));
+  const budgets = Object.values<any>(angular.projects)[0].architect.build.configurations.production.budgets;
+  const warning = budgets.find((b: any) => b.type === 'anyComponentStyle').maximumWarning as string;
+  const limit = parseFloat(warning) * 1000; // ng build : 1 kB = 1000 octets
+
+  for (const file of componentSheets(resolve(src, 'app'))) {
+    it(`${file.slice(src.length + 1)} ≤ ${warning}`, async () => {
+      const css = sass.compile(file, { loadPaths: [src] }).css;
+      const min = (await transform(css, { loader: 'css', minify: true })).code;
+      expect(min.length).toBeLessThanOrEqual(limit);
     });
   }
 });

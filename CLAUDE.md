@@ -80,7 +80,7 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 ## Pièges connus
 
 - **Seed JSON manquants au premier lancement** → `ENOENT` crash-loop. Toujours copier les `backend/seed/*.json` vers `backend/data/` au premier lancement local.
-- **Budget CSS Angular** : `anyComponentStyle` relevé à 12kB warning / 20kB error dans `angular.json` (cards AAA premium).
+- **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (`@Body() body: MonType` → `import type { MonType }`).
 
 ## Données seed
