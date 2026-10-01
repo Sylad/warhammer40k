@@ -1,5 +1,19 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-01 22:49",
-  "entries": []
+  "generated": "2026-10-01 23:02",
+  "entries": [
+    {
+      "slug": "2026-10-01-une-page-nouveautes-et-un-menu-au-telephone",
+      "title": "Une page Nouveautés, et un menu au téléphone",
+      "date": "2026-10-01",
+      "lots": [
+        "L23"
+      ],
+      "captures": [
+        "captures/L23-page-nouveautes-telephone.png",
+        "captures/L23-menu-telephone.png"
+      ],
+      "html": "<p>Le codex a désormais sa page <strong>Nouveautés</strong> : chaque évolution visible y est décrite en quelques lignes, avec une capture d'écran, la plus récente en haut. On la trouve dans la barre du haut, juste avant « À propos », et dans la recherche rapide (Ctrl+K).</p>\n<p>Une capture s'agrandit au clic ou avec la touche Entrée, et Échap la referme. Au téléphone, elle garde une taille lisible et se fait défiler avec le doigt ; le bouton <strong>Fermer</strong> reste toujours visible.</p>\n<p>Le titre de chaque nouveauté est un lien : un clic copie l'adresse qui mène directement à elle, pour la partager.</p>\n<p>Après une première visite, une pastille sur le lien <strong>Nouveautés</strong> compte ce qui est paru depuis. Sur la page, les nouvelles portent la marque <strong>Nouveau</strong>, et un trait « Déjà vu lors de votre visite du… » les sépare de celles que vous aviez déjà lues.</p>\n<p>Au téléphone et sur les écrans de moins de 1280 px de large, la navigation passe dans un bouton <strong>Menu</strong> : la barre du haut ne déborde plus de l'écran.</p>"
+    }
+  ]
 }
