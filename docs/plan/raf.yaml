@@ -161,3 +161,9 @@ lots:
       - { date: 2026-10-01, text: "Sylvain 01-10 : plus rien en prod sur le NAS ; garder ce qui sert au dev local" }
     started: 2026-10-01
     finished: 2026-10-01
+  - id: L27
+    title: "Page À propos : retirer le module events/SSE supprimé (lots SSE) de la liste Backend"
+    status: todo
+    estimate: 0.1
+    quickwin: true
+    created: 2026-10-01
