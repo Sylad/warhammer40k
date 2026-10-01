@@ -163,15 +163,21 @@ lots:
     finished: 2026-10-01
   - id: L27
     title: "Page À propos : retirer le module events/SSE supprimé (lots SSE) de la liste Backend"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-01
     started: 2026-10-01
+    notes:
+      - { date: 2026-10-01, text: "Page À propos : events retiré, liste des modules NestJS alignée sur backend/src/modules (test d'égalité exacte)." }
+    finished: 2026-10-01
   - id: L28
     title: "deploy.sh : attendre aussi les runs CI EN COURS des ancêtres poussés dans le même push (sinon « rien à livrer » à tort quand le dernier commit ne touche que le plan — vécu warhammer 01-10)"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     created: 2026-10-01
     started: 2026-10-01
+    notes:
+      - { date: 2026-10-01, text: "Attente bornée des runs CI d'ancêtres + échec sur build rouge non remplacé (job à moitié rouge pris en compte, panne gh = échec) ; test-deploy.sh 26/26 en CI (test-scripts.yml) ; 2 relectures Opus, 2 défauts corrigés. Même bloc à reporter dans finance L46 / ol L21." }
+    finished: 2026-10-01
