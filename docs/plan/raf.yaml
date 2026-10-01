@@ -126,13 +126,14 @@ lots:
     finished: 2026-09-28
   - id: L23
     title: Page Nouveautés branchée sur cadence news (raf news → page), signature commune des apps
-    status: todo
+    status: doing
     estimate: 0.5
     visible: true
     created: 2026-09-28
     notes:
       - { date: 2026-09-28, text: "Sylvain 28-09 : ordre DÉCROISSANT, la nouveauté la plus récente en haut (départage à date égale corrigé dans cadence news)" }
       - { date: 2026-10-01, text: "Inclure d'emblée : pastille non-vues + lien permanent par entrée (modèle AetherWX/ccc L13) ; visionneuse au téléphone à largeur naturelle avec défilement horizontal (leçon ol L13) ; inert sur le tiroir fermé (leçon avatar L14)" }
+    started: 2026-10-01
   - id: L24
     title: Retirer le flux SSE /api/events et SseService, orphelins depuis la suppression du suivi d'usage Claude (L22)
     status: done
