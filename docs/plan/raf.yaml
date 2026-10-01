@@ -152,3 +152,11 @@ lots:
       - { date: 2026-09-29, text: "Sylvain 29-09 : option (a) retenue — versionner et adapter à Angular 19, pas de montée en v20" }
     started: 2026-09-29
     finished: 2026-09-29
+  - id: L26
+    title: Retirer les traces du déploiement NAS (docker-compose, scripts, doc, page À propos) — prod = dark-blue (k3s) ou Cloudflare Pages ; NAS = médias et sauvegardes
+    status: doing
+    estimate: 0.25
+    created: 2026-10-01
+    notes:
+      - { date: 2026-10-01, text: "Sylvain 01-10 : plus rien en prod sur le NAS ; garder ce qui sert au dev local" }
+    started: 2026-10-01
