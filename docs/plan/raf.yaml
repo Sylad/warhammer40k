@@ -163,13 +163,15 @@ lots:
     finished: 2026-10-01
   - id: L27
     title: "Page À propos : retirer le module events/SSE supprimé (lots SSE) de la liste Backend"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-01
+    started: 2026-10-01
   - id: L28
     title: "deploy.sh : attendre aussi les runs CI EN COURS des ancêtres poussés dans le même push (sinon « rien à livrer » à tort quand le dernier commit ne touche que le plan — vécu warhammer 01-10)"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     created: 2026-10-01
+    started: 2026-10-01
