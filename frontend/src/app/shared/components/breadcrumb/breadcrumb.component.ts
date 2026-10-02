@@ -55,12 +55,15 @@ import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
     }
     .bc-item { display: flex; align-items: center; gap: 8px; }
     /* L39 : --gold-soft donnait 3,7:1 sur ce fond ; --gold dépasse 4,5:1. */
+    /* Revue UX L39 (WCAG 1.4.1) : un lien se reconnaît sans la couleur — souligné au repos ;
+       survol / focus : trait épaissi et texte clair, jamais l'aspect de l'élément courant. */
     .bc-link {
       color: var(--gold);
-      text-decoration: none;
+      text-decoration: underline 1px;
+      text-underline-offset: 3px;
       transition: color 0.15s;
     }
-    .bc-link:hover { color: var(--gold-bright); }
+    .bc-link:hover, .bc-link:focus-visible { color: var(--text); text-decoration-thickness: 2px; }
     .bc-sep { color: var(--gold-soft); opacity: 0.65; font-weight: 400; }
     .bc-text { color: var(--muted); }
     .bc-current { color: var(--gold-bright); }
