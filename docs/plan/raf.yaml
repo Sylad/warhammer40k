@@ -273,6 +273,8 @@ lots:
     visible: true
     created: 2026-10-02
     started: 2026-10-02
+    notes:
+      - { date: 2026-10-02, text: "Audit fait (docs/liens/audit-2026-10-02.md) : internes cassés 7 statiques / 328 liens rendus + 34 images → 0 ; garde Vitest scripts/liens.test.mjs ; externes 131 : 75 ok, 2 redirigés, 17 morts à décider (6 chaînes YouTube, 5 pages Fandom, 6 icônes), 37 invérifiables (Lexicanum Cloudflare). Prod : volume data/ à mettre à jour pour primarchs/videos/timeline-events (pages tolérantes en attendant). Capture tmp/wh-news-L39-390.png." }
   - id: L40
     title: "Campagne UX densité : les pages du site sont très denses (consigne Sylvain 02-10, « un gros travail ») — avant les revues page par page, mesurer la densité de chaque gabarit (longueur, nombre de blocs et de liens par écran, hiérarchie des titres), fixer des règles communes (sommaire de page, repli des sections, largeur de lecture, pagination des listes) et les maquetter sur 2 pages pilotes (fiche faction, fiche Lore) ; les revues L2 à L21 s'appuient ensuite sur ces règles et sont à réestimer"
     status: todo
