@@ -196,6 +196,16 @@ function parseCommands(expr) {
 }
 
 /**
+ * Chemin d'un tableau de commandes : segments littéraux (« 'orks' ») substitués — vérifiés contre
+ * les données comme un lien écrit en dur —, segments calculés remplacés par « :param ».
+ */
+function commandsPath(c) {
+  const segs = c.params.map((p) => /^'([^']*)'$/.exec(p)?.[1] ?? ':param');
+  const dyn = c.params.filter((p) => !/^'[^']*'$/.test(p));
+  return { path: c.base + segs.map((x) => '/' + x).join(''), dynamic: dyn.length ? dyn.join(', ') : null };
+}
+
+/**
  * Liens trouvés dans le code de l'application. Chaque lien : { cls, target, source, ... }.
  * - route : `target` = chemin (gabarit « /x/:param » si construit depuis une donnée).
  * - anchor : `target` = « chemin#ancre » (« ~#ancre » = même page que le composant).
@@ -226,10 +236,8 @@ export function codeLinks(files = sourceFiles()) {
         if (quoted) path = quoted[1];
         else if (cmds && cmds.base === '' && cmds.params.length === 0) path = '~';
         else if (/^\s*\[\s*\]\s*$/.test(bound)) path = '~';
-        else if (cmds) {
-          path = cmds.base + cmds.params.map(() => '/:param').join('');
-          dynamic = cmds.params.join(', ');
-        } else dynamic = bound.trim();
+        else if (cmds) ({ path, dynamic } = commandsPath(cmds));
+        else dynamic = bound.trim();
       }
       if (path != null || dynamic != null) {
         const p = path ?? '?';
@@ -259,13 +267,28 @@ export function codeLinks(files = sourceFiles()) {
     for (const m of src.matchAll(/\b(?:route|link):\s*'(\/[^']*)'/g)) push({ cls: 'route', target: m[1], source: source(m.index) });
     for (const m of src.matchAll(/routerLink:\s*(\[[^\]]*\])/g)) {
       const c = parseCommands(m[1]);
-      if (c) push({ cls: 'route', target: c.base + c.params.map(() => '/:param').join(''), source: source(m.index), dynamic: c.params.join(', ') || null });
+      if (c) {
+        const { path, dynamic } = commandsPath(c);
+        push({ cls: 'route', target: path, source: source(m.index), dynamic });
+      }
     }
-    for (const m of src.matchAll(/\.navigate\(\s*\[\s*(?:'([^']*)'|`([^`]*)`)\s*\](?:\s*,\s*\{\s*fragment:\s*([^}]+?)\s*\})?/g)) {
-      const raw = m[1] ?? m[2];
-      const target = raw.replace(/\$\{[^}]+\}/g, ':param');
-      push({ cls: 'route', target, source: source(m.index), dynamic: raw.includes('${') ? raw : null });
-      if (m[3]) push({ cls: 'anchor', target: `${target}#{${m[3]}}`, source: source(m.index), dynamic: m[3] });
+    // router.navigate([...]) : un élément (chaîne, gabarit `…${x}`, variable) ou plusieurs.
+    for (const m of src.matchAll(/\.navigate\(\s*(\[[^\]]*\])(?:\s*,\s*\{\s*fragment:\s*([^}]+?)\s*\})?/g)) {
+      const arr = m[1];
+      const tpl = /^\[\s*`([^`]*)`\s*\]$/.exec(arr)?.[1];
+      const c = parseCommands(arr);
+      let target;
+      let dynamic = null;
+      if (tpl != null) {
+        target = tpl.replace(/\$\{[^}]+\}/g, ':param');
+        dynamic = tpl.includes('${') ? tpl : null;
+      } else if (c) ({ path: target, dynamic } = commandsPath(c));
+      else {
+        target = '?';
+        dynamic = arr.replace(/^\[\s*|\s*\]$/g, '');
+      }
+      push({ cls: 'route', target, source: source(m.index), dynamic });
+      if (m[2]) push({ cls: 'anchor', target: `${target}#{${m[2]}}`, source: source(m.index), dynamic: m[2], routeExpr: target === '?' ? dynamic : null });
     }
     for (const m of src.matchAll(/\bfragment:\s*'([^']+)'/g)) push({ cls: 'anchor', target: `~#${m[1]}`, source: source(m.index) });
     for (const m of src.matchAll(/'(https?:\/\/[^'\s$]+)'/g)) {
@@ -302,15 +325,52 @@ export function dataLinks(data) {
 }
 
 /** Zones cliquables de la carte galactique (données embarquées dans le composant). */
-export function galaxyLinks(file = join(APP, 'features/lore-galaxy/lore-galaxy.component.ts')) {
+export function galaxyLinks(
+  file = join(APP, 'features/lore-galaxy/lore-galaxy.component.ts'),
+  utils = join(APP, 'features/lore-galaxy/lore-galaxy.utils.ts'),
+) {
   const src = readFileSync(file, 'utf8');
   const out = [];
-  const paths = { primarch: '/lore/primarchs/', timeline: '/lore/timeline/', saint: '/lore/saints/', ship: '/lore/ships/' };
+  const paths = linkToPaths(utils);
   for (const m of src.matchAll(/linkTo:\s*\{\s*type:\s*'(\w+)',\s*id:\s*'([^']+)'\s*\}/g)) {
-    out.push({ cls: 'route', target: (paths[m[1]] ?? `/?${m[1]}/`) + m[2], source: `${rel(file)}:${lineOf(src, m.index)}` });
+    const prefix = paths[m[1]];
+    const source = `${rel(file)}:${lineOf(src, m.index)}`;
+    // Type sans chemin dans linkToPath : lien vers « ? », signalé comme cassé.
+    out.push({ cls: 'route', target: prefix ? prefix + m[2] : `?type-inconnu-${m[1]}`, source, ...(prefix ? {} : { dynamic: `type « ${m[1]} » absent de linkToPath` }) });
   }
   for (const m of src.matchAll(/conceptId:\s*'([^']+)'/g)) {
     out.push({ cls: 'anchor', target: `/lore/concepts#${m[1]}`, source: `${rel(file)}:${lineOf(src, m.index)}` });
+  }
+  return out;
+}
+
+/** Chemins de linkToPath (lore-galaxy.utils.ts) : « case 'x': return `/chemin/${link.id}` ». */
+export function linkToPaths(utils = join(APP, 'features/lore-galaxy/lore-galaxy.utils.ts')) {
+  const src = readFileSync(utils, 'utf8');
+  const body = /function linkToPath\([^)]*\)[^{]*\{([\s\S]*?)\n\}/.exec(src)?.[1] ?? '';
+  const out = {};
+  for (const m of body.matchAll(/case\s+'(\w+)':\s*return\s*`([^`$]*)\$\{link\.id\}`/g)) out[m[1]] = m[2];
+  return out;
+}
+
+/** Liens du HTML des Nouveautés (rendu par [innerHTML] sur /nouveautes, donc lus sur le JSON construit). */
+export function newsLinks(news = readNews()) {
+  const out = [];
+  for (const e of news?.entries ?? []) {
+    for (const m of (e.html ?? '').matchAll(/<a\b[^>]*?\shref="([^"]*)"/g)) {
+      const h = m[1].replace(/&amp;/g, '&');
+      const source = `frontend/public/nouveautes-data/nouveautes.json#${e.slug}`;
+      if (/^https?:\/\//.test(h)) out.push({ cls: 'external', target: h, source });
+      else if (h.startsWith('#')) out.push({ cls: 'anchor', target: `/nouveautes${h}`, source, bare: true, click: null });
+      else if (h.startsWith('/')) {
+        const [p, frag] = h.split('#');
+        if (/\.[a-z0-9]{2,5}$/i.test(p)) out.push({ cls: 'asset', target: p, source });
+        else {
+          out.push({ cls: 'route', target: p.split('?')[0], source });
+          if (frag) out.push({ cls: 'anchor', target: `${p.split('?')[0]}#${frag}`, source });
+        }
+      } else out.push({ cls: 'route', target: h, source, dynamic: `adresse relative « ${h} »` });
+    }
   }
   return out;
 }
@@ -355,7 +415,7 @@ export function apiAssets(data) {
 
 /** Inventaire complet. */
 export function inventory({ data = loadSeed(), files = sourceFiles() } = {}) {
-  return [...codeLinks(files), ...dataLinks(data), ...galaxyLinks(), ...seedExternals(data), ...apiAssets(data)];
+  return [...codeLinks(files), ...dataLinks(data), ...galaxyLinks(), ...newsLinks(), ...seedExternals(data), ...apiAssets(data)];
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -397,6 +457,7 @@ export function existsCaseSensitive(base, relPath) {
  * lien calculé fait échouer le test de garde tant qu'il n'est pas déclaré ici.
  */
 export const COVERED = {
+  'frontend/src/app/features/lore-galaxy/lore-galaxy.component.ts|path': 'linkToPath(hz.linkTo) : zones vérifiées par galaxyLinks, chemins lus dans linkToPath',
   'frontend/src/app/features/dashboard/dashboard.component.ts|s.route': 'littéraux « route: » du même fichier',
   'frontend/src/app/features/lore-hub/lore-hub.component.ts|c.route': 'littéraux « route: » du même fichier',
   'frontend/src/app/features/faction-detail/faction-detail.component.ts|l.route': 'littéraux « route: » de toQuickLink',
@@ -434,7 +495,7 @@ export function checkInternal(links, { routes = readRoutes(), data = loadSeed(),
     if (l.cls === 'route') {
       if (l.target === '~') continue;
       if (l.dynamic && !l.target.startsWith('/')) {
-        const key = `${rel(l.file)}|${l.dynamic}`;
+        const key = `${l.file ? rel(l.file) : ''}|${l.dynamic}`;
         if (!COVERED[key]) fail(`destination calculée sans vérification déclarée (${l.dynamic}) : l'ajouter à COVERED avec ce qui la vérifie`);
         continue;
       }

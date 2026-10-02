@@ -7,7 +7,8 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import {
-  checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, inventory, loadSeed, readRoutes,
+  checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, galaxyLinks, inventory, loadSeed, newsLinks,
+  readRoutes,
 } from './liens-lib.mjs';
 
 const routes = readRoutes();
@@ -72,6 +73,45 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     const f = page(`@Component({template: \`<a [routerLink]="['/units', u.id]">a</a><a [routerLink]="['/unites', u.id]">b</a>\`})`);
     const broken = checkInternal(codeLinks([f]), { routes, data, news: { entries: [] } });
     expect(broken.map((b) => b.target)).toEqual(['/unites/:param']);
+  });
+
+  it('identifiant LITTÉRAL dans un tableau de commandes : vérifié contre les données', () => {
+    const f = page(`@Component({template: \`<a [routerLink]="['/factions', 'nope']">a</a><a [routerLink]="['/factions', 'orks']">b</a>\`})`);
+    const broken = checkInternal(codeLinks([f]), { routes, data, news: { entries: [] } });
+    expect(broken.map((b) => b.target)).toEqual(['/factions/nope']);
+    expect(broken[0].cause).toMatch(/absent des données/);
+  });
+
+  it('router.navigate avec plusieurs éléments : inventorié et vérifié', () => {
+    const f = page(`class X { go() { this.router.navigate(['/unites', x.id]); this.router.navigate(['/factions', 'nope']); } }`);
+    const links = codeLinks([f]).filter((l) => l.cls === 'route');
+    expect(links.map((l) => l.target)).toEqual(['/unites/:param', '/factions/nope']);
+    const broken = checkInternal(links, { routes, data, news: { entries: [] } });
+    expect(broken.map((b) => b.target)).toEqual(['/unites/:param', '/factions/nope']);
+  });
+
+  it('carte galactique : les chemins viennent de linkToPath (lore-galaxy.utils.ts), pas d’une copie', () => {
+    const utils = tmpFile('lore-galaxy.utils.ts', `export function linkToPath(link: HotZoneLink): string {
+  switch (link.type) {
+    case 'primarch': return \`/lore/primarques/\${link.id}\`;
+    case 'saint':    return \`/lore/saints/\${link.id}\`;
+    case 'ship':     return \`/lore/ships/\${link.id}\`;
+  }
+}
+`);
+    const links = galaxyLinks(undefined, utils).filter((l) => l.cls === 'route');
+    const broken = checkInternal(links, { routes, data, news: { entries: [] } });
+    expect(broken.some((b) => b.target.startsWith('/lore/primarques/'))).toBe(true); // chemin faux
+    expect(broken.some((b) => /type « timeline »/.test(b.cause))).toBe(true); // type sans chemin
+    expect(checkInternal(galaxyLinks(), { routes, data, news: { entries: [] } })).toEqual([]);
+  });
+
+  it('HTML des Nouveautés : liens internes inventoriés et vérifiés', () => {
+    const news = { entries: [{ slug: 'n', html: '<p><a href="/units">a</a> <a href="#plus-bas">b</a> <a href="/factions/orks">c</a> <a href="https://example.org/">d</a></p>' }] };
+    const links = newsLinks(news);
+    expect(links.map((l) => `${l.cls} ${l.target}`)).toEqual(['route /units', 'anchor /nouveautes#plus-bas', 'route /factions/orks', 'external https://example.org/']);
+    const broken = checkInternal(links, { routes, data, news });
+    expect(broken.map((b) => b.target)).toEqual(['/units', '/nouveautes#plus-bas']);
   });
 
   it('fichiers : la casse compte (la prod est sous Linux)', () => {
