@@ -103,6 +103,14 @@ describe('page Plan de travail (/plan) — L30', () => {
     expect($(f, '#L31 [role="progressbar"]')).toBeNull();
   });
 
+  it('lot pas encore livré dont toutes les étapes sont faites : « prêt, en attente de livraison » (texte et progressbar)', async () => {
+    stubFetch({ '/plan-data/plan.json': { ...PLAN, lots: [{ id: 'L32', title: 'Des bandeaux lisibles', status: 'doing', tasks: { done: 2, total: 2 } }] }, '/nouveautes-data/nouveautes.json': NEWS });
+    const f = await render();
+    expect(text($(f, '#L32 .plan-progress-text'))).toBe('2 étapes faites sur 2 : prêt, en attente de livraison');
+    expect($(f, '#L32 [role="progressbar"]').getAttribute('aria-valuetext')).toBe('2 étapes faites sur 2 : prêt, en attente de livraison');
+    expect(text($(f, '.plan-summary'))).toContain('1 évolution en cours, rien de prévu, rien de livré ces 30 derniers jours.');
+  });
+
   it('un lot livré renvoie à son entrée des Nouveautés (ancre), nom accessible distinct', async () => {
     const f = await render();
     const a = $(f, '#L23 a.plan-news');

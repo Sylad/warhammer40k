@@ -73,14 +73,35 @@ export function dateLine(lot: PlanLot): { day: string; text: string } | null {
 
 const plural = (n: number, one: string, many: string) => `${n} ${n > 1 ? many : one}`;
 
-export function progressText(p: PlanProgress): string {
-  return `${plural(p.done, 'étape faite', 'étapes faites')} sur ${p.total}`;
+/**
+ * Avancement en mots. Toutes les étapes faites d'un lot pas encore livré : « prêt, en
+ * attente de livraison » (sinon « 3 sur 3 » laisse croire que c'est en ligne).
+ */
+export function progressText(p: PlanProgress, status?: PlanStatus): string {
+  const base = `${plural(p.done, 'étape faite', 'étapes faites')} sur ${p.total}`;
+  return status && status !== 'done' && p.total > 0 && p.done === p.total ? `${base} : prêt, en attente de livraison` : base;
 }
 
-/** Résumé « en ce moment », une phrase (« évolution », féminin). */
+/**
+ * Résumé « en ce moment », une phrase sans compte à zéro : « rien de prévu » plutôt que
+ * « 0 prévue » ; le premier nombre porte le nom (« 2 évolutions prévues »).
+ */
 export function summary(g: PlanGroups): string {
-  const doing = g.doing.length === 0 ? 'Rien en cours' : plural(g.doing.length, 'évolution en cours', 'évolutions en cours');
-  return `${doing}, ${plural(g.todo.length, 'prévue', 'prévues')}, ${plural(g.done.length, 'livrée', 'livrées')} ces ${RECENT_DAYS} derniers jours.`;
+  const parts: [number, string, string, string][] = [
+    [g.doing.length, 'en cours', 'en cours', 'rien en cours'],
+    [g.todo.length, 'prévue', 'prévues', 'rien de prévu'],
+    [g.done.length, `livrée ces ${RECENT_DAYS} derniers jours`, `livrées ces ${RECENT_DAYS} derniers jours`, `rien de livré ces ${RECENT_DAYS} derniers jours`],
+  ];
+  let named = false;
+  const text = parts
+    .map(([n, one, many, none]) => {
+      if (n === 0) return none;
+      const noun = named ? '' : n > 1 ? 'évolutions ' : 'évolution ';
+      named = true;
+      return `${n} ${noun}${n > 1 ? many : one}`;
+    })
+    .join(', ');
+  return `${text.charAt(0).toUpperCase()}${text.slice(1)}.`;
 }
 
 /** Lot → slug de son entrée Nouveautés la plus récente (entrées de la plus récente à la plus ancienne). */

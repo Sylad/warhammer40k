@@ -57,10 +57,22 @@ describe('libellés', () => {
     expect(progressText({ done: 2, total: 3 })).toBe('2 étapes faites sur 3');
   });
 
+  it('toutes les étapes faites d’un lot pas encore livré : « prêt, en attente de livraison »', () => {
+    expect(progressText({ done: 3, total: 3 }, 'doing')).toBe('3 étapes faites sur 3 : prêt, en attente de livraison');
+    expect(progressText({ done: 1, total: 1 }, 'todo')).toBe('1 étape faite sur 1 : prêt, en attente de livraison');
+    expect(progressText({ done: 3, total: 3 }, 'done')).toBe('3 étapes faites sur 3');
+    expect(progressText({ done: 2, total: 3 }, 'doing')).toBe('2 étapes faites sur 3');
+  });
+
   it('résumé en une phrase', () => {
     const g = groupPlan([lot({ id: 'L1', status: 'doing' }), lot({ id: 'L2', status: 'todo' }), lot({ id: 'L3', status: 'todo' })], TODAY);
-    expect(summary(g)).toBe(`1 évolution en cours, 2 prévues, 0 livrée ces ${RECENT_DAYS} derniers jours.`);
-    expect(summary(groupPlan([], TODAY))).toBe(`Rien en cours, 0 prévue, 0 livrée ces ${RECENT_DAYS} derniers jours.`);
+    expect(summary(g)).toBe(`1 évolution en cours, 2 prévues, rien de livré ces ${RECENT_DAYS} derniers jours.`);
+    expect(summary(groupPlan([], TODAY))).toBe(`Rien en cours, rien de prévu, rien de livré ces ${RECENT_DAYS} derniers jours.`);
+    const onlyTodo = groupPlan([lot({ id: 'L2', status: 'todo' }), lot({ id: 'L3', status: 'todo' })], TODAY);
+    expect(summary(onlyTodo)).toBe(`Rien en cours, 2 évolutions prévues, rien de livré ces ${RECENT_DAYS} derniers jours.`);
+    const onlyDone = groupPlan([lot({ id: 'L4', status: 'done', finished: '2026-10-01' })], TODAY);
+    expect(summary(onlyDone)).toBe(`Rien en cours, rien de prévu, 1 évolution livrée ces ${RECENT_DAYS} derniers jours.`);
+    for (const t of [summary(g), summary(onlyTodo), summary(onlyDone)]) expect(t).not.toMatch(/\b0 /);
   });
 });
 

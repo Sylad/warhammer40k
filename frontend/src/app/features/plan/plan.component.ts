@@ -80,10 +80,10 @@ interface Group {
                           <div class="plan-progress">
                             <div class="plan-bar" role="progressbar" aria-valuemin="0"
                                  [attr.aria-valuemax]="p.total" [attr.aria-valuenow]="p.done"
-                                 [attr.aria-valuetext]="progressText(p)" [attr.aria-label]="'Avancement : ' + lot.title">
+                                 [attr.aria-valuetext]="progressText(p, lot.status)" [attr.aria-label]="'Avancement : ' + lot.title">
                               <span [style.width.%]="(100 * p.done) / p.total"></span>
                             </div>
-                            <span class="plan-progress-text" aria-hidden="true">{{ progressText(p) }}</span>
+                            <span class="plan-progress-text" aria-hidden="true">{{ progressText(p, lot.status) }}</span>
                           </div>
                         }
                         @if (lot.status === 'done' && slugs().get(lot.id); as slug) {
