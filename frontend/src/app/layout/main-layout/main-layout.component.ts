@@ -148,7 +148,8 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       </div>
       <!-- L30 : les pages du codex à une action de chaque page, à toute largeur. -->
       <nav class="legal-nav" aria-label="Le codex">
-        <a routerLink="/nouveautes">Nouveautés</a><span aria-hidden="true">·</span><a routerLink="/plan">Plan de travail</a><span aria-hidden="true">·</span><a routerLink="/about">À propos</a>
+        <!-- Écart porté par le gap flex, sans « · » : rien d'orphelin au retour à la ligne (320 px). -->
+        <a routerLink="/nouveautes">Nouveautés</a><a routerLink="/plan">Plan de travail</a><a routerLink="/about">À propos</a>
       </nav>
       <div class="legal-text">
         Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
@@ -371,10 +372,9 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       line-height: 1;
     }
     .legal-nav {
-      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 6px;
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 18px;
       font-size: 0.78rem; letter-spacing: 0.08em;
     }
-    .legal-nav span { color: var(--muted); }
     .legal-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; color: var(--gold); }
     .legal-nav a:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 4px; }
     .legal-nav a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }

@@ -71,6 +71,8 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(footer.querySelector('nav.legal-nav')!.getAttribute('aria-label')).toBe('Le codex');
     expect(links.map((a) => a.getAttribute('href'))).toEqual(['/nouveautes', '/plan', '/about']);
     expect(links.map((a) => a.textContent!.trim())).toEqual(['Nouveautés', 'Plan de travail', 'À propos']);
+    // Écart porté par le gap flex, sans « · » : rien d'orphelin au retour à la ligne (320 px).
+    expect(footer.querySelector('nav.legal-nav')!.textContent).not.toContain('·');
     await TestBed.inject(Router).navigateByUrl('/about');
     f.detectChanges();
     expect(el(f).querySelectorAll('footer nav.legal-nav a')).toHaveLength(3);

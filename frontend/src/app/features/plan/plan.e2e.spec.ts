@@ -114,6 +114,13 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) â€
       expect(box.x).toBeGreaterThanOrEqual(0);
       expect(box.x + box.width).toBeLessThanOrEqual(width);
     }
+    // Chaque ligne du pied commence et finit par un lien (aucun sÃ©parateur orphelin).
+    const rows = await page.evaluate(() => [...document.querySelectorAll('footer nav.legal-nav > *')].map((e) => ({ tag: e.tagName, top: Math.round(e.getBoundingClientRect().top) })));
+    for (const top of new Set(rows.map((r) => r.top))) {
+      const line = rows.filter((r) => r.top === top);
+      expect(line[0].tag).toBe('A');
+      expect(line[line.length - 1].tag).toBe('A');
+    }
     await page.locator('footer nav.legal-nav a[href="/plan"]').click();
     await page.waitForSelector('li.plan-lot');
     await page.close();
