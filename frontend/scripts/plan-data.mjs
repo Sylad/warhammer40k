@@ -4,7 +4,7 @@
 // finance-tracker L48), avec les leçons de ses revues : sous-tâches réduites à
 // l'avancement n/m (aucun titre de sous-tâche publié), abandonnées hors du compte.
 //
-//   node scripts/plan-data.mjs [--in ../docs/plan/raf.yaml] [--news ../docs/nouveautes]
+//   node scripts/plan-data.mjs [--in ../docs/plan/raf.yaml] [--news public/nouveautes-data/nouveautes.json]
 //        [--out public/plan-data/plan.json] [--check]
 //   node scripts/plan-data.mjs --leaks dist/frontend/browser   (fin de npm run build)
 //   node scripts/plan-data.mjs --hidden   (lots visibles masqués faute de titre public)
@@ -142,23 +142,20 @@ export function hiddenVisibleLots(raf, { newsTitles = new Map() } = {}) {
 }
 
 /**
- * Entrées Nouveautés (`docs/nouveautes/*.md`, front-matter cadence) → titre de
- * l'entrée la plus récente de chaque lot. Dossier absent = carte vide.
+ * Journal des Nouveautés compilé (`public/nouveautes-data/nouveautes.json`, `npm run news`)
+ * → titre de la PREMIÈRE entrée de chaque lot. C'est le fichier et l'ordre que lit la
+ * page : le titre publié et le lien « Voir la nouveauté » (newsSlugByLot, première entrée
+ * du lot) viennent donc de la même entrée, même à date égale (départage de cadence par
+ * `created`). Fichier absent ou illisible = carte vide.
  */
-export function readNewsTitles(dir) {
+export function readNewsTitles(file) {
   const m = new Map();
-  let files = [];
-  try { files = readdirSync(dir).filter((f) => f.endsWith('.md')); } catch { return m; }
-  const entries = [];
-  for (const f of files) {
-    const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(join(dir, f), 'utf8'));
-    if (!fm) continue;
-    const meta = parse(fm[1]) ?? {};
-    if (!meta.title || !Array.isArray(meta.lots)) continue;
-    entries.push({ key: `${day(meta.date) ?? ''} ${f}`, title: String(meta.title), lots: meta.lots.map(String) });
+  let entries;
+  try { entries = JSON.parse(readFileSync(file, 'utf8')).entries; } catch { return m; }
+  for (const e of Array.isArray(entries) ? entries : []) {
+    if (typeof e?.title !== 'string' || !Array.isArray(e.lots)) continue;
+    for (const id of e.lots.map(String)) if (!m.has(id)) m.set(id, e.title);
   }
-  entries.sort((a, b) => (a.key < b.key ? 1 : a.key > b.key ? -1 : 0));
-  for (const e of entries) for (const id of e.lots) if (!m.has(id)) m.set(id, e.title);
   return m;
 }
 
@@ -255,7 +252,7 @@ function main(argv) {
   };
   const input = arg('--in', '../docs/plan/raf.yaml');
   const output = arg('--out', 'public/plan-data/plan.json');
-  const newsDir = arg('--news', '../docs/nouveautes');
+  const newsDir = arg('--news', 'public/nouveautes-data/nouveautes.json');
   if (argv.includes('--leaks')) {
     const dir = arg('--leaks', 'dist/frontend/browser');
     if (!existsSync(input)) {

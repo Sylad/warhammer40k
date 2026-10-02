@@ -24,7 +24,7 @@ import {
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const RAF = `${root}/docs/plan/raf.yaml`;
-const NEWS = `${root}/docs/nouveautes`;
+const NEWS = `${root}/frontend/public/nouveautes-data/nouveautes.json`;
 const PLAN_JSON = `${root}/frontend/public/plan-data/plan.json`;
 const DIST = `${root}/frontend/dist/frontend/browser`;
 
@@ -280,17 +280,22 @@ describe('isProcessLot', () => {
 });
 
 describe('readNewsTitles', () => {
-  it('lit le titre de la Nouveauté la plus récente de chaque lot', () => {
+  it('lit nouveautes.json (ordre de cadence, celui de la page) : titre de la PREMIÈRE entrée de chaque lot', () => {
     const dir = mkdtempSync(join(tmpdir(), 'news-'));
-    writeFileSync(join(dir, '2026-09-01-a.md'), '---\ntitle: "Ancien titre"\ndate: 2026-09-01\nlots: [L1, L2]\n---\nTexte.\n');
-    writeFileSync(join(dir, '2026-09-10-b.md'), '---\ntitle: Nouveau titre\ndate: 2026-09-10\nlots: [L1]\n---\nTexte.\n');
-    writeFileSync(join(dir, 'README.txt'), 'pas une entrée');
-    const m = readNewsTitles(dir);
-    expect(m.get('L1')).toBe('Nouveau titre');
-    expect(m.get('L2')).toBe('Ancien titre');
+    const file = join(dir, 'nouveautes.json');
+    // Deux entrées le même jour pour L1 : cadence a départagé par `created`, la page lie la première.
+    writeFileSync(file, JSON.stringify({ entries: [
+      { slug: '2026-09-10-b', title: 'Créée en dernier', date: '2026-09-10', lots: ['L1'] },
+      { slug: '2026-09-10-a', title: 'Créée en premier', date: '2026-09-10', lots: ['L1', 'L2'] },
+      { slug: '2026-09-01-c', title: 'Ancienne', date: '2026-09-01', lots: ['L2', 'L3'] },
+    ] }));
+    const m = readNewsTitles(file);
+    expect(m.get('L1')).toBe('Créée en dernier');
+    expect(m.get('L2')).toBe('Créée en premier');
+    expect(m.get('L3')).toBe('Ancienne');
   });
-  it('dossier absent = aucune Nouveauté', () => {
-    expect(readNewsTitles(join(tmpdir(), 'n-existe-pas-l30')).size).toBe(0);
+  it('fichier absent ou illisible = aucune Nouveauté', () => {
+    expect(readNewsTitles(join(tmpdir(), 'n-existe-pas-l30.json')).size).toBe(0);
   });
 });
 
@@ -315,6 +320,12 @@ describe('isDenied (filet de sécurité)', () => {
 
 // ── Le vrai plan du dépôt ─────────────────────────────────────────────────────
 describe('plan publié (docs/plan/raf.yaml → public/plan-data/plan.json)', () => {
+  it('titre d’un lot et lien « Voir la nouveauté » viennent de la même entrée (première du lot dans nouveautes.json)', () => {
+    const { entries } = JSON.parse(readFileSync(NEWS, 'utf8'));
+    const titles = readNewsTitles(NEWS);
+    for (const [lot, title] of titles) expect(entries.find((e) => e.lots.includes(lot)).title).toBe(title);
+  });
+
   const realRaf = readPlan(RAF);
   const committedText = () => readFileSync(PLAN_JSON, 'utf8');
   const committed = () => JSON.parse(committedText());

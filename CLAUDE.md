@@ -176,8 +176,9 @@ AOT absente) : `@ViewChild` dans les composants testés ainsi.
 
 La page `/plan` montre ce qui est en cours, prévu et livré ces 30 derniers jours, depuis
 `frontend/public/plan-data/plan.json`, **versionné** (le build Docker n'a pas `docs/`) et généré
-par `cd frontend && npm run plan` (`scripts/plan-data.mjs`) depuis `docs/plan/raf.yaml` et
-`docs/nouveautes/`. **Après toute commande `raf` qui touche un lot `visible`** (start, done, drop,
+par `cd frontend && npm run plan` (`scripts/plan-data.mjs`) depuis `docs/plan/raf.yaml` et le
+journal compilé `public/nouveautes-data/nouveautes.json` (même entrée que le lien « Voir la
+nouveauté » : `npm run news` AVANT `npm run plan`). **Après toute commande `raf` qui touche un lot `visible`** (start, done, drop,
 add, sous-tâche…) ou toute nouvelle entrée Nouveautés : `npm run plan`, puis commiter `plan.json`
 dans le même commit. Sinon `scripts/plan-data.test.mjs` et le workflow « Contrôles frontend »
 (`.github/workflows/frontend-checks.yml`, à chaque push, séparé de `build.yml` que lit `deploy.sh`)
