@@ -92,7 +92,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         </button>
       </div>
 
-      <app-command-palette #palette />
+      <app-command-palette #palette (navigated)="focusOnArrival = true" />
     </header>
 
     <div class="drawer-backdrop" [class.open]="menuOpen()" aria-hidden="true" (click)="closeMenu()"></div>
@@ -104,20 +104,20 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           <span aria-hidden="true">✕</span> Fermer
         </button>
       </div>
-      <a (click)="fromDrawer = true" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
-      <a (click)="fromDrawer = true" routerLink="/factions" routerLinkActive="active">Factions</a>
-      <a (click)="fromDrawer = true" routerLink="/romans" routerLinkActive="active">Romans</a>
-      <a (click)="fromDrawer = true" routerLink="/videos" routerLinkActive="active">Vidéos</a>
-      <a (click)="fromDrawer = true" routerLink="/gallery" routerLinkActive="active">Galerie</a>
-      <a (click)="fromDrawer = true" routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
-      <a (click)="fromDrawer = true" routerLink="/nouveautes" routerLinkActive="active">
+      <a (click)="focusOnArrival = true" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+      <a (click)="focusOnArrival = true" routerLink="/factions" routerLinkActive="active">Factions</a>
+      <a (click)="focusOnArrival = true" routerLink="/romans" routerLinkActive="active">Romans</a>
+      <a (click)="focusOnArrival = true" routerLink="/videos" routerLinkActive="active">Vidéos</a>
+      <a (click)="focusOnArrival = true" routerLink="/gallery" routerLinkActive="active">Galerie</a>
+      <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
+      <a (click)="focusOnArrival = true" routerLink="/nouveautes" routerLinkActive="active">
         Nouveautés
         @if (badge()) {
           <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
         }
       </a>
-      <a (click)="fromDrawer = true" routerLink="/plan" routerLinkActive="active">Plan de travail</a>
-      <a (click)="fromDrawer = true" routerLink="/about" routerLinkActive="active">À propos</a>
+      <a (click)="focusOnArrival = true" routerLink="/plan" routerLinkActive="active">Plan de travail</a>
+      <a (click)="focusOnArrival = true" routerLink="/about" routerLinkActive="active">À propos</a>
     </nav>
 
     @if (quota.hasError()) {
@@ -491,8 +491,11 @@ export class MainLayoutComponent implements OnInit {
   readonly menuOpen = signal(false);
   /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
   readonly pageInert = computed(() => (this.menuOpen() ? '' : null));
-  /** La navigation en cours vient d'un lien du tiroir (focus à placer à l'arrivée). */
-  fromDrawer = false;
+  /**
+   * La navigation en cours vient d'un lien du tiroir ou d'un résultat de la recherche rapide
+   * (L30) : l'élément cliqué disparaît, le focus est à placer à l'arrivée.
+   */
+  focusOnArrival = false;
 
   @ViewChild('main', { static: true }) private main?: ElementRef<HTMLElement>;
 
@@ -500,15 +503,15 @@ export class MainLayoutComponent implements OnInit {
     inject(Router).events
       .pipe(filter((e) => e instanceof NavigationEnd || e instanceof NavigationSkipped), takeUntilDestroyed())
       .subscribe(() => {
-        const fromDrawer = this.fromDrawer;
-        this.fromDrawer = false;
+        const focus = this.focusOnArrival;
+        this.focusOnArrival = false;
         this.closeMenu();
-        if (fromDrawer) this.focusArrival();
+        if (focus) this.focusArrival();
       });
   }
 
   /**
-   * Après un lien du tiroir, le focus irait sur BODY (le lien disparaît avec le tiroir) :
+   * Après un lien du tiroir ou de la recherche rapide, le focus irait sur BODY (le lien disparaît) :
    * il va au titre h1 de la page d'arrivée, ou à défaut à <main> (revue UX L23).
    */
   private focusArrival(): void {

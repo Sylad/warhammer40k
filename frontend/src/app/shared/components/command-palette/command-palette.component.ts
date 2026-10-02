@@ -1,4 +1,4 @@
-import { Component, computed, HostListener, inject, signal } from '@angular/core';
+import { Component, computed, EventEmitter, HostListener, inject, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -84,7 +84,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
                 class="cmdk-item"
                 [class.active]="selectedIndex() === i"
                 [routerLink]="r.routerLink"
-                (click)="close()"
+                (click)="navigated.emit(); close()"
                 (mouseenter)="selectedIndex.set(i)">
                 <span class="cmdk-type">{{ typeLabel(r.type) }}</span>
                 <span class="cmdk-label">{{ r.label }}</span>
@@ -225,6 +225,12 @@ export class CommandPaletteComponent {
     return 0;
   }
 
+  /**
+   * L30 : un résultat choisi (Entrée ou clic) — la palette se ferme, son champ disparaît :
+   * la mise en page place le focus sur le titre de la page d'arrivée (comme le tiroir).
+   */
+  @Output() readonly navigated = new EventEmitter<void>();
+
   open(): void {
     this.isOpen.set(true);
     this.query = '';
@@ -257,6 +263,7 @@ export class CommandPaletteComponent {
       e.preventDefault();
       const sel = r[this.selectedIndex()];
       if (sel) {
+        this.navigated.emit();
         this.router.navigate(sel.routerLink);
         this.close();
       }

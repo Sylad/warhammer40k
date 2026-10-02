@@ -9,7 +9,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { By } from '@angular/platform-browser';
 import { MainLayoutComponent } from './main-layout.component';
+import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
 import { NEWS_SEEN_KEY } from '../../features/nouveautes/news-badge';
 import { routes } from '../../app.routes';
 
@@ -40,7 +42,7 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     document.body.style.overflow = '';
     stubFetch({ '/nouveautes-data/nouveautes.json': NEWS, '/nouveautes-data/tailles.json': {} });
     await setupTestBed([MainLayoutComponent], [
-      provideRouter([{ path: 'about', component: ArrivalPage }, { path: '', component: ArrivalPage }]),
+      provideRouter([{ path: 'about', component: ArrivalPage }, { path: 'plan', component: ArrivalPage }, { path: '', component: ArrivalPage }]),
       provideHttpClient(), provideHttpClientTesting(),
     ]);
   });
@@ -156,6 +158,38 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     const h1 = el(f).querySelector('main h1')!;
     expect(document.activeElement).toBe(h1);
     expect(h1.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('recherche rapide : Ctrl+K → « Plan de travail » → Entrée : le focus va au titre h1 de la page (L30)', async () => {
+    const f = await render();
+    const palette = f.debugElement.query(By.directive(CommandPaletteComponent)).componentInstance as CommandPaletteComponent;
+    palette.open();
+    f.detectChanges();
+    palette.query = 'plan de';
+    palette.onQueryChange('plan de');
+    f.detectChanges();
+    expect(palette.results()[0].label).toBe('Plan de travail');
+    palette.onKeyDown(new KeyboardEvent('keydown', { key: 'Enter' }));
+    await f.whenStable();
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(TestBed.inject(Router).url).toBe('/plan');
+    const h1 = el(f).querySelector('main h1')!;
+    expect(document.activeElement).toBe(h1);
+  });
+
+  it('recherche rapide : clic sur un résultat → même arrivée sur le h1 (L30)', async () => {
+    const f = await render();
+    const palette = f.debugElement.query(By.directive(CommandPaletteComponent)).componentInstance as CommandPaletteComponent;
+    palette.open();
+    palette.query = 'plan de';
+    palette.onQueryChange('plan de');
+    f.detectChanges();
+    el(f).querySelector<HTMLAnchorElement>('.cmdk-item')!.click();
+    await f.whenStable();
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(document.activeElement).toBe(el(f).querySelector('main h1'));
   });
 
   it('navigation hors tiroir : le focus n’est pas déplacé', async () => {
