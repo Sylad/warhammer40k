@@ -46,8 +46,14 @@
     {
       "id": "L39",
       "title": "Liens internes réparés : fil d'Ariane, ancres et images vérifiés",
-      "status": "doing",
-      "started": "2026-10-02"
+      "status": "done",
+      "started": "2026-10-02",
+      "finished": "2026-10-02"
+    },
+    {
+      "id": "L42",
+      "title": "Pages faction : des vidéos et des images de la bonne faction",
+      "status": "todo"
     }
   ]
 }

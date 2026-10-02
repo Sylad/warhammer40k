@@ -268,15 +268,35 @@ lots:
   - id: L39
     title: "Liens morts : audit automatique de tous les liens du site (internes : routes, ancres, images et datasheets ; externes : wiki, vidéos, boutiques) — rapport, corrections, puis test qui échoue sur un lien interne cassé (consigne Sylvain 02-10 : « potentiellement des liens morts »)"
     public: "Liens internes réparés : fil d'Ariane, ancres et images vérifiés"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-10-02
     started: 2026-10-02
     notes:
       - { date: 2026-10-02, text: "Audit fait (docs/liens/audit-2026-10-02.md) : internes cassés 7 statiques / 328 liens rendus + 34 images → 0 ; garde Vitest scripts/liens.test.mjs ; externes 131 : 75 ok, 2 redirigés, 17 morts à décider (6 chaînes YouTube, 5 pages Fandom, 6 icônes), 37 invérifiables (Lexicanum Cloudflare). Prod : volume data/ à mettre à jour pour primarchs/videos/timeline-events (pages tolérantes en attendant). Capture tmp/wh-news-L39-390.png." }
+    ux: { date: 2026-10-02, verdict: "Revue ux-reviewer 02-10 (1440, 390, 320 ; Chromium) : conforme avec réserves, levées — liens du fil d'Ariane soulignés (plus distingués par la seule couleur), ancres à 10 px sous la barre collante (étaient masquées de 70 px), glyphes décoratifs masqués aux lecteurs d'écran. 15 liens sur 17 suivis à la main mènent à une vraie page ; vignettes sans décalage ; repli d'icône d'allure voulue. Non vérifié : lecteur d'écran réel, 2 liens de pages de liste, ancres à 320 px." }
+    finished: 2026-10-02
   - id: L40
     title: "Campagne UX densité : les pages du site sont très denses (consigne Sylvain 02-10, « un gros travail ») — avant les revues page par page, mesurer la densité de chaque gabarit (longueur, nombre de blocs et de liens par écran, hiérarchie des titres), fixer des règles communes (sommaire de page, repli des sections, largeur de lecture, pagination des listes) et les maquetter sur 2 pages pilotes (fiche faction, fiche Lore) ; les revues L2 à L21 s'appuient ensuite sur ces règles et sont à réestimer"
     status: todo
     estimate: 2
+    created: 2026-10-02
+  - id: L41
+    title: "Liens externes morts (audit du 02-10, docs/liens/audit-2026-10-02.md) : 6 chaînes YouTube introuvables, 5 pages Fandom disparues, 6 icônes de faction — remplacer ou retirer, décision de Sylvain lien par lien ; page faction Imperial Knights jamais écrite (à écrire ou non) ; volume data/ de la prod à réaligner sur les fichiers source (primarchs, videos, timeline-events)"
+    status: todo
+    estimate: 0.5
+    created: 2026-10-02
+  - id: L42
+    title: "Bloc Médias des pages faction : vidéo et galerie filtrées par faction (aujourd'hui le même contenu partout — la page Nécrons montre une vidéo sur l'Empereur et un bouclier Ultramarines), ou visuel neutre faute de correspondance (revue UX des liens)"
+    public: "Pages faction : des vidéos et des images de la bonne faction"
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    visible: true
+    created: 2026-10-02
+  - id: L43
+    title: "Fil d'Ariane : dernier élément = titre de la page et non l'identifiant de l'URL (« Sm Calgar », « War In Heaven ») — avec le lot des titres par route ; libellés de liens exacts (Légion Death Guard → sa sous-faction, Collegia Titanica) ; titre « L'ASTRONOMICAN » coupé à 390 px sur Concepts (revue UX des liens)"
+    status: todo
+    estimate: 0.5
     created: 2026-10-02
