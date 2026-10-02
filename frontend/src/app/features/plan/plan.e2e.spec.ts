@@ -177,8 +177,8 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) �
     expect(low.out).toEqual([]);
   });
 
-  it('arrivée sur /plan#L23 (plan réel de dist) : la carte visée reçoit le focus et est à l’écran', async () => {
-    const page = await open(390, '/plan#L23', null);
+  it('arrivée sur /plan#L23 (plan simulé, dates relatives : indépendant du jour) : la carte visée reçoit le focus et est à l’écran', async () => {
+    const page = await open(390, '/plan#L23');
     await page.waitForSelector('li.plan-lot.is-target');
     const m = await page.evaluate(() => {
       const el = document.getElementById('L23')!;
