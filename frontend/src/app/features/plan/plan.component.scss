@@ -15,6 +15,7 @@ a:focus-visible, .plan-retry:focus-visible { outline: 2px solid var(--gold-brigh
 
 .plan-box { margin: 0; padding: 18px 22px; background: var(--panel); border: 1px solid var(--border); color: var(--text); }
 .plan-summary { margin-bottom: 34px; line-height: 1.6; }
+.plan-box:focus { outline: none; } // cibles de focus posées par le code (tabindex -1)
 .plan-summary-label, .plan-meta {
   display: block; margin-bottom: 4px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
@@ -57,7 +58,7 @@ a:focus-visible, .plan-retry:focus-visible { outline: 2px solid var(--gold-brigh
 .plan-older { margin: 14px 0 0; color: var(--text); font-size: 0.9rem; }
 
 .plan-error p { margin: 0 0 10px; }
-.plan-error-title { color: var(--gold-bright); font-weight: 600; }
+.plan-error-title, .plan-retry-failed { color: var(--gold-bright); font-weight: 600; }
 .plan-retry {
   min-height: 44px; padding: 0 16px; border: 1px solid var(--border-strong); background: transparent;
   color: var(--gold-bright); font: 600 0.85rem var(--sans); letter-spacing: 0.08em; cursor: pointer;

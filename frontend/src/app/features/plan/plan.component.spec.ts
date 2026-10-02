@@ -166,17 +166,47 @@ describe('page Plan de travail (/plan) — L30', () => {
     expect(text($(f, '.plan-empty'))).toBe('Aucun plan publié pour l’instant.');
   });
 
-  it('panne : alerte et bouton « Réessayer » qui recharge', async () => {
+  const settle = async (f: ComponentFixture<unknown>) => {
+    for (let i = 0; i < 3; i++) {
+      await f.whenStable();
+      await new Promise((r) => setTimeout(r, 0));
+      f.detectChanges();
+    }
+  };
+
+  it('panne : alerte et bouton « Réessayer » ; succès → focus sur le résumé « En ce moment » (WCAG 2.4.3)', async () => {
     globalThis.fetch = (async () => { throw new TypeError('réseau'); }) as typeof fetch;
     const f = await render();
     const alert = $(f, '[role="alert"]');
     expect(text(alert)).toContain('Le plan n’a pas pu être chargé');
+    expect(alert.querySelector('.plan-retry-failed')).toBeNull(); // premier échec : pas de « nouvel essai »
     stubFetch({ '/plan-data/plan.json': PLAN, '/nouveautes-data/nouveautes.json': NEWS });
-    (alert.querySelector('button') as HTMLButtonElement).click();
-    await f.whenStable();
-    await new Promise((r) => setTimeout(r, 0));
-    f.detectChanges();
+    const button = alert.querySelector('button') as HTMLButtonElement;
+    button.focus();
+    button.click();
+    await settle(f);
     expect($$(f, 'li.plan-lot')).toHaveLength(3);
+    const summary = $(f, '.plan-summary');
+    expect(summary.getAttribute('tabindex')).toBe('-1');
+    expect(document.activeElement).toBe(summary);
+  });
+
+  it('nouvel échec après « Réessayer » : focus sur le nouveau bouton, échec annoncé avec l’heure', async () => {
+    globalThis.fetch = (async () => { throw new TypeError('réseau'); }) as typeof fetch;
+    const f = await render();
+    const first = $(f, '.plan-retry') as HTMLButtonElement;
+    first.focus();
+    first.click();
+    await settle(f);
+    const again = $(f, '.plan-retry');
+    expect(document.activeElement).toBe(again);
+    expect(document.activeElement).not.toBe(document.body);
+    expect(text($(f, '[role="alert"] .plan-retry-failed'))).toMatch(/^Nouvel essai à \d{2}:\d{2} : échec\.$/);
+  });
+
+  it('premier chargement réussi : le focus n’est pas déplacé', async () => {
+    const f = await render();
+    expect(document.activeElement).not.toBe($(f, '.plan-summary'));
   });
 
   it('pendant le chargement : statut annoncé', () => {

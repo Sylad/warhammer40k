@@ -45,19 +45,20 @@ interface Group {
           <div class="plan-box plan-error" role="alert">
             <p class="plan-error-title">Le plan n’a pas pu être chargé</p>
             <p>Vérifiez la connexion, puis réessayez.</p>
-            <button type="button" class="plan-retry" (click)="load()">Réessayer</button>
+            @if (retryFailedAt(); as at) { <p class="plan-retry-failed">Nouvel essai à {{ at }} : échec.</p> }
+            <button type="button" class="plan-retry" (click)="retry()">Réessayer</button>
           </div>
         }
         @case ('none') {
-          <p class="plan-box plan-empty">Aucun plan publié pour l’instant.</p>
+          <p class="plan-box plan-empty" tabindex="-1">Aucun plan publié pour l’instant.</p>
         }
         @case ('ready') {
           @if (empty()) {
-            <p class="plan-box plan-empty">
+            <p class="plan-box plan-empty" tabindex="-1">
               Rien en préparation pour l’instant. <a routerLink="/nouveautes">Voir les Nouveautés</a>
             </p>
           } @else {
-            <p class="plan-box plan-summary"><span class="plan-summary-label">En ce moment</span>{{ summaryText() }}</p>
+            <p class="plan-box plan-summary" tabindex="-1"><span class="plan-summary-label">En ce moment</span>{{ summaryText() }}</p>
             @for (g of groups(); track g.key) {
               <section class="plan-group" [id]="'plan-' + g.key + '-groupe'" [attr.aria-labelledby]="'plan-' + g.key">
                 <h2 [id]="'plan-' + g.key">{{ g.title }} <span class="plan-count">({{ g.lots.length }})</span></h2>
@@ -154,6 +155,24 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     window.removeEventListener('hashchange', this.onHashChange);
+  }
+
+  /** Heure (HH:MM) du dernier « Réessayer » en échec, annoncée dans l'alerte. */
+  readonly retryFailedAt = signal<string | null>(null);
+
+  /**
+   * « Réessayer » : le bouton disparaît pendant le chargement, le focus ne doit pas tomber sur
+   * BODY (WCAG 2.4.3). Échec → nouveau bouton focalisé, échec annoncé avec l'heure ;
+   * succès → résumé « En ce moment » (ou message d'état) focalisé.
+   */
+  async retry(): Promise<void> {
+    await this.load();
+    const ok = this.state() !== 'error';
+    this.retryFailedAt.set(ok ? null : new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }));
+    setTimeout(() => {
+      const sel = ok ? '.plan-summary, .plan-empty' : '.plan-retry';
+      this.host.nativeElement.querySelector<HTMLElement>(sel)?.focus();
+    });
   }
 
   async load(): Promise<void> {
