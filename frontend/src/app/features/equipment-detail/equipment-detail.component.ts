@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Equipment, EquipmentType } from '../../core/models/models';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
@@ -111,12 +112,13 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
 })
 export class EquipmentDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
 
   readonly equipment = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getEquipmentItem(p.get('id')!))),
+    this.route.paramMap.pipe(switchMap(p => this.service.getEquipmentItem(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
   );
 
   constructor() {

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { LegendaryShip } from '../../core/models/models';
 
 @Component({
@@ -135,13 +136,14 @@ import type { LegendaryShip } from '../../core/models/models';
 })
 export class ShipDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
   readonly galleryImages = signal<string[]>([]);
 
   readonly ship = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getShip(p.get('id')!))),
+    this.route.paramMap.pipe(switchMap(p => this.service.getShip(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
   );
 
   constructor() {

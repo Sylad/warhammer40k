@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { TimelineEvent, TimelineEra } from '../../core/models/models';
 
 const ERA_LABEL: Record<TimelineEra, string> = {
@@ -83,12 +84,13 @@ const ERA_LABEL: Record<TimelineEra, string> = {
 })
 export class TimelineEventDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
 
   readonly event = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getTimelineEvent(p.get('id')!))),
+    this.route.paramMap.pipe(switchMap(p => this.service.getTimelineEvent(p.get('id')!).pipe(namedPage(this.pages, x => x.title)))),
   );
 
   constructor() {

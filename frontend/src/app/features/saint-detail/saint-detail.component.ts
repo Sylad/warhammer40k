@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Saint, SaintCategory } from '../../core/models/models';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
@@ -125,13 +126,14 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 })
 export class SaintDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
   readonly galleryImages = signal<string[]>([]);
 
   readonly saint = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getSaint(p.get('id')!))),
+    this.route.paramMap.pipe(switchMap(p => this.service.getSaint(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
   );
 
   constructor() {

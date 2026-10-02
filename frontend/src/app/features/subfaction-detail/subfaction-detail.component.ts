@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, map, of, catchError, combineLatest } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { SubFaction, SubFactionType, Unit, Faction } from '../../core/models/models';
 
 const TYPE_LABEL: Record<SubFactionType, string> = {
@@ -197,6 +198,7 @@ export class SubFactionDetailComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
 
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
   private readonly unitImgCache = signal<Record<string, string>>({});
@@ -211,6 +213,7 @@ export class SubFactionDetailComponent {
         this.loading.set(true);
         this.notFound.set(false);
         return this.service.getSubFaction(id).pipe(
+          namedPage(this.pages, sub => sub.name),
           switchMap(sub =>
             combineLatest([
               of(sub),

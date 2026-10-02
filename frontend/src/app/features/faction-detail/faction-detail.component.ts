@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
 import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
 
@@ -425,6 +426,7 @@ const DEFAULT_RESOURCES = [
 })
 export class FactionDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   // Gardes in-flight : les effects ci-dessous lisaient le signal qu'ils
   // écrivent (unitImages/subFactionImages/primarchImages) → chaque réponse
   // relançait l'effect entier et re-fanait ~N requêtes (O(n²), ~6000 calls
@@ -452,7 +454,7 @@ export class FactionDetailComponent {
   readonly subFactionSearch = signal('');
 
   readonly faction = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!)))
+    this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!).pipe(namedPage(this.pages, f => f.nom))))
   );
   readonly units = toSignal(
     this.route.paramMap.pipe(switchMap(p => this.service.getUnits(p.get('id')!))),

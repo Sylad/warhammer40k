@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
+import { PageTitleStrategy } from './core/services/page-title.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -16,6 +17,8 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ),
+    // L36 : un titre de document par page (WCAG 2.4.2).
+    { provide: TitleStrategy, useClass: PageTitleStrategy },
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([pinInterceptor, quotaInterceptor])),
   ],

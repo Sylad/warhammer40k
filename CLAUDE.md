@@ -31,6 +31,12 @@ Endpoints clés :
 
 `dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `nouveautes` (/nouveautes), `plan` (/plan, « Plan de travail »), `about` (/about). Redirect `/galerie` → `/gallery`.
 
+Titre de page (L36, `core/services/page-title.service.ts`) : « <page> — Warhammer 40 000 ». Page
+fixe : libellé du fil d'Ariane (`STATIC_LABELS`) ; fiche : `title:` de sa route (« Faction »…) en
+attendant, puis le nom de l'entité via l'opérateur `namedPage` (« … introuvable » sur erreur), repris
+par le dernier élément du fil d'Ariane et annoncé dans la région live de la mise en page (sauf
+quand le focus va au h1). Une nouvelle fiche : `title:` sur la route + `namedPage` sur son flux.
+
 Navigation (L23, L30 option b) — seuils en **em** (suivent la taille de police par défaut du
 navigateur) : sous `80em` (1280 px à 16 px), bouton **Menu** → tiroir `#menu-telephone` (inerte
 quand il est fermé, Échap le ferme, Tab y boucle), liens à plat ; dès `80em`, barre compacte :

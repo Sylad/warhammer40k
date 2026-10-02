@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, Artwork } from '../../core/models/models';
 
 type TabKey = 'apercu' | 'equipement' | 'lore' | 'variantes';
@@ -308,6 +309,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 })
 export class UnitDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
@@ -335,7 +337,7 @@ export class UnitDetailComponent {
   readonly artworkImageCache = signal(new Map<string, string>());
 
   readonly unit = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!))),
+    this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)))),
   );
 
   readonly faction = toSignal<Faction | undefined>(

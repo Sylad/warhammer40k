@@ -4,6 +4,7 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs/operators';
 import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
+import { PageTitleService } from '../../../core/services/page-title.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -71,6 +72,7 @@ import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
 })
 export class BreadcrumbComponent {
   private readonly router = inject(Router);
+  private readonly pages = inject(PageTitleService);
 
   private readonly url = toSignal(
     this.router.events.pipe(
@@ -89,5 +91,11 @@ export class BreadcrumbComponent {
       .map(r => r.path!),
   );
 
-  readonly crumbs = computed<Crumb[]>(() => crumbsFor(this.url() ?? '/', this.isPage));
+  /** L36 : le dernier élément porte le nom de la page (titre du document) dès qu'il est connu. */
+  readonly crumbs = computed<Crumb[]>(() => {
+    const list = crumbsFor(this.url() ?? '/', this.isPage);
+    const name = this.pages.entityName();
+    if (name && list.length > 1) list[list.length - 1] = { ...list[list.length - 1], label: name };
+    return list;
+  });
 }

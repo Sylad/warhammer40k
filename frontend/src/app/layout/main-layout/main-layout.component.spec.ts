@@ -4,7 +4,8 @@ import { setupTestBed, stubFetch } from '../../../testing/angular-testbed';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { Component } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter, Router, TitleStrategy } from '@angular/router';
+import { PageTitleStrategy } from '../../core/services/page-title.service';
 import { slugToLabel } from '../../shared/components/breadcrumb/breadcrumb.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -45,6 +46,7 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     await setupTestBed([MainLayoutComponent], [
       provideRouter([{ path: 'about', component: ArrivalPage }, { path: 'plan', component: ArrivalPage }, { path: '', component: ArrivalPage }]),
       provideHttpClient(), provideHttpClientTesting(),
+      { provide: TitleStrategy, useClass: PageTitleStrategy },
     ]);
   });
 
@@ -244,6 +246,34 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     f.detectChanges();
     await new Promise((r) => setTimeout(r, 20));
     expect(document.activeElement).toBe(button);
+  });
+
+  it('L36 : changement de page annoncé (région live polie, visuellement masquée) quand le focus n’est pas déplacé', async () => {
+    await TestBed.inject(Router).navigateByUrl('/'); // chargement initial : rien à annoncer
+    const f = await render();
+    const live = el(f).querySelector('[aria-live="polite"]')!;
+    expect(live.classList.contains('sr-only')).toBe(true);
+    expect(live.textContent!.trim()).toBe('');
+    await TestBed.inject(Router).navigateByUrl('/about');
+    f.detectChanges();
+    expect(live.textContent!.trim()).toBe('À propos');
+  });
+
+  it('L36 : lien du tiroir → focus sur le h1, donc PAS d’annonce en plus (lue deux fois sinon)', async () => {
+    await TestBed.inject(Router).navigateByUrl('/');
+    const f = await render();
+    await TestBed.inject(Router).navigateByUrl('/plan');
+    f.detectChanges();
+    const live = el(f).querySelector('[aria-live="polite"]')!;
+    expect(live.textContent!.trim()).toBe('Plan de travail');
+    el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!.click();
+    f.detectChanges();
+    el(f).querySelector<HTMLAnchorElement>('#menu-telephone a[href="/about"]')!.click();
+    await f.whenStable();
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(document.activeElement).toBe(el(f).querySelector('main h1'));
+    expect(live.textContent!.trim()).toBe('Plan de travail');
   });
 
   it('le menu se referme après un changement de page', async () => {

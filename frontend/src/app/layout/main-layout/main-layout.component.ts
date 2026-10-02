@@ -10,6 +10,7 @@ import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcru
 import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
 import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
+import { PageTitleService } from '../../core/services/page-title.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -136,6 +137,8 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
     }
 
     <app-breadcrumb [attr.inert]="pageInert()" />
+    <!-- L36 : changement de page annoncé aux lecteurs d'écran, sauf quand le focus va au h1. -->
+    <p class="sr-only" aria-live="polite" aria-atomic="true">{{ pages.announcement() }}</p>
 
     <main #main class="wrap" tabindex="-1" [attr.inert]="pageInert()">
       <router-outlet />
@@ -479,6 +482,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
 })
 export class MainLayoutComponent implements OnInit {
   readonly quota = inject(QuotaAlertService);
+  readonly pages = inject(PageTitleService);
   private readonly news = inject(NewsService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
@@ -511,10 +515,12 @@ export class MainLayoutComponent implements OnInit {
     inject(ViewportScroller).setOffset(() => [0, Math.round(this.host.nativeElement.querySelector('.topbar')?.getBoundingClientRect().bottom ?? 70) + 10]);
     inject(Router).events
       .pipe(filter((e) => e instanceof NavigationEnd || e instanceof NavigationSkipped), takeUntilDestroyed())
-      .subscribe(() => {
+      .subscribe((e) => {
         const focus = this.focusOnArrival;
         this.focusOnArrival = false;
         this.closeMenu();
+        // Émis avant la mise à jour du titre (routeur) : le h1 recevra le focus, pas d'annonce en plus.
+        if (focus && e instanceof NavigationEnd) this.pages.skipNextAnnouncement();
         if (focus) this.focusArrival();
       });
   }

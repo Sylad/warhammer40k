@@ -29,6 +29,10 @@ const STATIC_LABELS: Record<string, string> = {
   galaxy: 'La Galaxie',
   equipment: 'Armement & Reliques',
   timeline: 'Chronologie',
+  // L36 : ces libellés sont aussi le titre des pages (PageTitleService) — plus de « Ships ».
+  ships: 'Vaisseaux légendaires',
+  titans: 'Titans & Chevaliers',
+  saints: 'Saints & Saintes',
 };
 
 export function slugToLabel(slug: string): string {

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, of, switchMap, forkJoin, map } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
@@ -349,6 +350,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 })
 export class PrimarchDetailComponent {
   private readonly service = inject(WarhammerService);
+  private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
@@ -357,7 +359,7 @@ export class PrimarchDetailComponent {
   readonly lightbox = signal<LightboxState | null>(null);
 
   readonly primarch = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getPrimarch(p.get('id')!))),
+    this.route.paramMap.pipe(switchMap(p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
   );
 
   readonly related = toSignal(

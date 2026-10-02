@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
+/**
+ * L36 — `title` d'une fiche = son type, titre d'attente avant le nom de l'entité (voir
+ * PageTitleService) ; les pages fixes tirent leur titre de la table du fil d'Ariane.
+ */
 export const routes: Routes = [
   {
     path: '',
@@ -19,11 +23,13 @@ export const routes: Routes = [
       },
       {
         path: 'factions/:id',
+        title: 'Faction',
         loadComponent: () => import('./features/faction-detail/faction-detail.component')
           .then(m => m.FactionDetailComponent)
       },
       {
         path: 'units/:id',
+        title: 'Unité',
         loadComponent: () => import('./features/unit-detail/unit-detail.component')
           .then(m => m.UnitDetailComponent)
       },
@@ -33,6 +39,7 @@ export const routes: Routes = [
       },
       {
         path: 'subfactions/:id',
+        title: 'Sous-faction',
         loadComponent: () => import('./features/subfaction-detail/subfaction-detail.component')
           .then(m => m.SubFactionDetailComponent)
       },
@@ -69,6 +76,7 @@ export const routes: Routes = [
       },
       {
         path: 'lore/primarchs/:id',
+        title: 'Primarque',
         loadComponent: () => import('./features/primarch-detail/primarch-detail.component')
           .then(m => m.PrimarchDetailComponent)
       },
@@ -109,6 +117,7 @@ export const routes: Routes = [
       },
       {
         path: 'lore/ships/:id',
+        title: 'Vaisseau',
         loadComponent: () => import('./features/ship-detail/ship-detail.component')
           .then(m => m.ShipDetailComponent)
       },
@@ -119,6 +128,7 @@ export const routes: Routes = [
       },
       {
         path: 'lore/titans/:id',
+        title: 'Machine de guerre',
         loadComponent: () => import('./features/titan-detail/titan-detail.component')
           .then(m => m.TitanDetailComponent)
       },
@@ -129,16 +139,19 @@ export const routes: Routes = [
       },
       {
         path: 'lore/saints/:id',
+        title: 'Saint',
         loadComponent: () => import('./features/saint-detail/saint-detail.component')
           .then(m => m.SaintDetailComponent)
       },
       {
         path: 'lore/timeline/:id',
+        title: 'Événement',
         loadComponent: () => import('./features/timeline-event-detail/timeline-event-detail.component')
           .then(m => m.TimelineEventDetailComponent)
       },
       {
         path: 'lore/equipment/:id',
+        title: 'Équipement',
         loadComponent: () => import('./features/equipment-detail/equipment-detail.component')
           .then(m => m.EquipmentDetailComponent)
       },

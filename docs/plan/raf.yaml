@@ -210,27 +210,30 @@ lots:
   - id: L31
     title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
     public: "Page faction : un en-tête qui tient sur les petits téléphones"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-01
+    started: 2026-10-02
   - id: L32
     title: "Reflow : texte coupé dans les bandeaux de l'accueil (390 px) et de la galerie (320 px) (WCAG 1.4.10)"
     public: "Accueil et galerie : des bandeaux lisibles en entier au téléphone"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-01
+    started: 2026-10-02
   - id: L33
     title: "Bouton recherche : afficher Ctrl+K hors Mac et porter le contraste de l'indication à ≥ 4,5:1 (mesuré 4,05:1)"
     public: "Recherche : le bon raccourci clavier, une indication plus lisible"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-01
+    started: 2026-10-02
   - id: L34
     title: "Nouveautés : pastille aussi pour le visiteur qui n'ouvre jamais la page (base de référence à la première visite) ; bouton « Copier le lien » visible au toucher, le titre ne copie plus, sans défilement ni décalage (revue UX L30)"
     public: "Nouveautés : la pastille pour tous, un bouton pour copier le lien"
@@ -251,10 +254,11 @@ lots:
     created: 2026-10-02
   - id: L36
     title: "Titre de page par route (WCAG 2.4.2) : toutes les routes s'appellent « Warhammer 40 000 — Codex Numérique » (revue UX L30)"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     created: 2026-10-02
+    started: 2026-10-02
   - id: L37
     title: "Méga-menu Lore : bouton à divulgation, ses 11 liens hors de l'ordre de tabulation tant qu'il est fermé (20 tabulations pour atteindre la suite, revue UX L30)"
     status: todo
@@ -290,11 +294,12 @@ lots:
   - id: L42
     title: "Bloc Médias des pages faction : vidéo et galerie filtrées par faction (aujourd'hui le même contenu partout — la page Nécrons montre une vidéo sur l'Empereur et un bouclier Ultramarines), ou visuel neutre faute de correspondance (revue UX des liens)"
     public: "Pages faction : des vidéos et des images de la bonne faction"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-02
+    started: 2026-10-02
   - id: L43
     title: "Fil d'Ariane : dernier élément = titre de la page et non l'identifiant de l'URL (« Sm Calgar », « War In Heaven ») — avec le lot des titres par route ; libellés de liens exacts (Légion Death Guard → sa sous-faction, Collegia Titanica) ; titre « L'ASTRONOMICAN » coupé à 390 px sur Concepts (revue UX des liens)"
     status: todo
