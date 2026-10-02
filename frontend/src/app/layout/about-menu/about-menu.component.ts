@@ -52,7 +52,7 @@ const GROUP = ['/nouveautes', '/plan', '/about'];
       text-shadow: 0 0 12px rgba(201, 162, 74, 0.35);
     }
     .nav-ico { font-size: 1rem; line-height: 1; }
-    .nav-caret { margin-left: -4px; font-size: 0.65rem; opacity: 0.6; }
+    .nav-caret { margin-left: 4px; font-size: 0.65rem; opacity: 0.6; } /* = Lore ▾ (écart 8 + 4 px) */
     .news-badge {
       display: inline-block; min-width: 1.35em; padding: 1px 5px; border-radius: 999px;
       background: var(--gold); color: var(--bg); font-size: 0.66rem; line-height: 1.35;

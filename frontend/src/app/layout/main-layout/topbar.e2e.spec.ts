@@ -218,4 +218,22 @@ describe.skipIf(!built || !chromium)('barre du haut, seuils en em ±1 px, pastil
     expect((await both()).about).toBe(false);
     await page.close();
   });
+
+  it.each([1440, 1920])('%i px : écart texte → chevron de « À propos ▾ » identique à celui de « Lore ▾ »', async (width) => {
+    const page = await browser.newPage({ viewport: { width, height: 900 } });
+    await page.goto(`${base}/about`);
+    await page.waitForSelector('button.about-toggle');
+    const gaps = await page.evaluate(() => {
+      const gap = (caret: Element) => {
+        let t = caret.previousSibling;
+        while (t && !(t.nodeType === 3 && t.textContent!.trim())) t = t.previousSibling;
+        const r = document.createRange();
+        r.selectNodeContents(t!);
+        return Math.round(caret.getBoundingClientRect().left - r.getBoundingClientRect().right);
+      };
+      return { lore: gap(document.querySelector('.nav-dropdown .nav-caret')!), about: gap(document.querySelector('.about-toggle .nav-caret')!) };
+    });
+    await page.close();
+    expect(gaps.about).toBe(gaps.lore);
+  });
 });
