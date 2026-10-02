@@ -8,6 +8,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
 import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
+import { longestWord } from '../../shared/longest-word';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -79,7 +80,7 @@ const DEFAULT_RESOURCES = [
         <div class="dust-motes" aria-hidden="true"></div>
         <div class="hero-text">
           <span class="badge-type" [class]="'b-' + f.alignement.toLowerCase()">{{ f.alignement }}</span>
-          <h1>{{ f.nom }}</h1>
+          <h1 [style.--longest-word]="longestWord(f.nom)">{{ f.nom }}</h1>
           @if (f.sousTitre) {
             <div class="hero-sub">
               {{ f.sousTitre }}<span class="sub-line"></span>
@@ -437,6 +438,7 @@ export class FactionDetailComponent {
   private readonly route = inject(ActivatedRoute);
 
   readonly typeFilters = TYPE_FILTERS;
+  readonly longestWord = longestWord;
   readonly typeFilter = signal<UnitType | 'Tous'>('Tous');
   readonly searchQuery = signal('');
   readonly showAllUnits = signal(false);

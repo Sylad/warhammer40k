@@ -1,0 +1,12 @@
+// L31/L32 (WCAG 1.4.10) — taille d'un titre bornée pour que son mot le plus long tienne dans le
+// conteneur de requête le plus proche (`container-type: inline-size`), sans jamais le rogner ni le
+// couper. `--longest-word` (caractères) est posé par le gabarit (`longestWord()`), ou en dur pour
+// un texte fixe. `$per-char` : avance d'une capitale Cinzel par caractère, interlettrage compris,
+// en em — mesurée de 0,61 à 0,81 sur les mots des titres de faction (2026-10-02), d'où 0,85 de
+// marge. Sans `cqi`, la taille de base reste.
+@mixin fit-title($size, $per-char: 0.85) {
+  font-size: $size;
+  @supports (width: 1cqi) {
+    font-size: min(#{$size}, calc(100cqi / (var(--longest-word, 1) * #{$per-char})));
+  }
+}

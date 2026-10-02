@@ -222,6 +222,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "background": "#080706",
     "border": "1px solid var(--border)",
     "box-shadow": "var(--shadow), inset 0 0 110px rgba(201, 162, 74, 0.045)",
+    "container-type": "inline-size",
     "display": "flex",
     "margin-bottom": "36px",
     "min-height": "480px",
@@ -932,6 +933,8 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".units-head": {
     "align-items": "center",
     "display": "flex",
+    "flex-wrap": "wrap",
+    "gap": "4px 16px",
     "justify-content": "space-between",
   },
   ":host": {
@@ -946,6 +949,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 1280px) .sidebar": {
     "position": "relative",
     "top": "auto",
+  },
+  "@media (max-width: 760px) .bible-heroes": {
+    "grid-template-columns": "minmax(0, 1fr)",
   },
   "@media (max-width: 760px) .hero": {
     "padding": "26px 22px",
@@ -965,6 +971,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 900px) .lore-image": {
     "min-height": "180px",
+  },
+  "@supports (width: 1cqi) .hero h1": {
+    "font-size": "min(clamp(48px, 5.5vw, 92px), 100cqi / (var(--longest-word, 1) * 0.85))",
   },
 }
 `;
