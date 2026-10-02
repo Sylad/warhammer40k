@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -96,7 +96,7 @@ import type { GodMachine } from '../../core/models/models';
             <div class="info-row"><strong>Faction</strong><span>{{ m.factionName }}</span></div>
           </section>
 
-          @if (m.factionId) {
+          @if (m.factionId && factionIds().has(m.factionId)) {
             <section class="sp">
               <h3>Liens</h3>
               <a class="row-link" [routerLink]="['/factions', m.factionId]">
@@ -121,6 +121,10 @@ export class TitanDetailComponent {
 
   readonly heroImage = signal<string | null>(null);
   readonly galleryImages = signal<string[]>([]);
+
+  /** L39 : on ne lie que les factions qui ont une fiche (« imperial-knights » n'en a pas). */
+  private readonly factions = toSignal(this.service.factions$, { initialValue: [] });
+  readonly factionIds = computed(() => new Set(this.factions().map(f => f.id)));
 
   readonly machine = toSignal(
     this.route.paramMap.pipe(switchMap(p => this.service.getGodMachine(p.get('id')!))),
