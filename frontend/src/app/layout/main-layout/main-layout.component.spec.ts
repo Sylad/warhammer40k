@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { Component } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
+import { slugToLabel } from '../../shared/components/breadcrumb/breadcrumb.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { readFileSync } from 'node:fs';
@@ -95,8 +96,8 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
   });
 
   it('fil d’Ariane : « Plan de travail » pour /plan (L30)', () => {
-    const src = readFileSync(resolve(__dirname, '../../shared/components/breadcrumb/breadcrumb.component.ts'), 'utf8');
-    expect(src).toMatch(/plan: 'Plan de travail'/);
+    // L39 : les libellés vivent dans breadcrumb.utils.ts.
+    expect(slugToLabel('plan')).toBe('Plan de travail');
   });
 
   it('menu du téléphone : bouton « Menu » relié au tiroir, tiroir inerte et caché quand il est fermé', async () => {
