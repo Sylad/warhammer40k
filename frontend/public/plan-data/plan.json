@@ -35,6 +35,11 @@
       "title": "Nouveautés : la pastille pour tous, un bouton pour copier le lien",
       "status": "doing",
       "started": "2026-10-02"
+    },
+    {
+      "id": "L35",
+      "title": "Une page Jeux vidéo : les jeux existants et ceux qui arrivent",
+      "status": "todo"
     }
   ]
 }
