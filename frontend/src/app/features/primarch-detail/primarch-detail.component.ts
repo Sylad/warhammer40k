@@ -1,6 +1,7 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, isDevMode, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, of, switchMap, forkJoin, map } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -366,9 +367,16 @@ export class PrimarchDetailComponent {
         if (!prim?.relatedPrimarchIds?.length) return of([] as Primarch[]);
         // L39 : un identifiant absent des données (« typhus » en prod) est ignoré, au lieu de
         // faire échouer toute la section (forkJoin propage la première erreur).
+        // Filtrer AVANT de couper à 3 : un inconnu en tête ne raccourcit pas la liste. Seule une 404
+        // est tue ; toute autre erreur est signalée en console (mode développement).
         return forkJoin(
-          prim.relatedPrimarchIds.slice(0, 3).map(id => this.service.getPrimarch(id).pipe(catchError(() => of(null))))
-        ).pipe(map(list => list.filter((r): r is Primarch => !!r)));
+          prim.relatedPrimarchIds.map(id => this.service.getPrimarch(id).pipe(catchError((err: unknown) => {
+            if (!(err instanceof HttpErrorResponse && err.status === 404) && isDevMode()) {
+              console.warn(`Primarque apparenté « ${id} » non chargé`, err);
+            }
+            return of(null);
+          })))
+        ).pipe(map(list => list.filter((r): r is Primarch => !!r).slice(0, 3)));
       }),
     ),
     { initialValue: [] as Primarch[] },
