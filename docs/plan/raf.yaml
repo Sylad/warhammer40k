@@ -207,6 +207,7 @@ lots:
       - { date: 2026-10-02, text: "Modèle ol L23 : sous-tâches réduites à n/m (aucun titre publié), --check/--leaks, CI frontend-checks à chaque push (deploy.sh intact). Barre du haut : complète dès 1920 (au lieu de 1700), resserrée 1280–1439 ; mesurée 1280–2560 avec 9+. Lots visibles masqués faute de public: L31, L32, L33. Reste : entrée Nouveautés L30 + revue UX." }
   - id: L31
     title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
+    public: "Page faction : un en-tête qui tient sur les petits téléphones"
     status: todo
     estimate: 0.1
     quickwin: true
@@ -214,6 +215,7 @@ lots:
     created: 2026-10-01
   - id: L32
     title: "Reflow : texte coupé dans les bandeaux de l'accueil (390 px) et de la galerie (320 px) (WCAG 1.4.10)"
+    public: "Accueil et galerie : des bandeaux lisibles en entier au téléphone"
     status: todo
     estimate: 0.25
     quickwin: true
@@ -221,8 +223,18 @@ lots:
     created: 2026-10-01
   - id: L33
     title: "Bouton recherche : afficher Ctrl+K hors Mac et porter le contraste de l'indication à ≥ 4,5:1 (mesuré 4,05:1)"
+    public: "Recherche : le bon raccourci clavier, une indication plus lisible"
     status: todo
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-01
+  - id: L34
+    title: "Nouveautés : pastille aussi pour le visiteur qui n'ouvre jamais la page (base de référence à la première visite) ; bouton « Copier le lien » visible au toucher, le titre ne copie plus, sans défilement ni décalage (revue UX L30)"
+    public: "Nouveautés : la pastille pour tous, un bouton pour copier le lien"
+    status: doing
+    estimate: 0.25
+    quickwin: true
+    visible: true
+    created: 2026-10-02
+    started: 2026-10-02

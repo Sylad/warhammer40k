@@ -14,6 +14,27 @@
       "title": "Une page Plan de travail : ce qui se prépare",
       "status": "doing",
       "started": "2026-10-02"
+    },
+    {
+      "id": "L31",
+      "title": "Page faction : un en-tête qui tient sur les petits téléphones",
+      "status": "todo"
+    },
+    {
+      "id": "L32",
+      "title": "Accueil et galerie : des bandeaux lisibles en entier au téléphone",
+      "status": "todo"
+    },
+    {
+      "id": "L33",
+      "title": "Recherche : le bon raccourci clavier, une indication plus lisible",
+      "status": "todo"
+    },
+    {
+      "id": "L34",
+      "title": "Nouveautés : la pastille pour tous, un bouton pour copier le lien",
+      "status": "doing",
+      "started": "2026-10-02"
     }
   ]
 }
