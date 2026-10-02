@@ -14,7 +14,7 @@ const FRONTEND = resolve(__dirname, '../../../..');
 const DIST = join(FRONTEND, 'dist/frontend/browser');
 const SOURCES = [
   'src/app/features/plan/plan.component.ts', 'src/app/features/plan/plan.component.scss',
-  'src/app/layout/main-layout/main-layout.component.ts', 'src/styles.scss',
+  'src/app/layout/main-layout/main-layout.component.ts', 'src/app/layout/about-menu/about-menu.component.ts', 'src/styles.scss',
 ];
 const TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css',
@@ -57,7 +57,12 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) �
   beforeAll(async () => {
     server = createServer((req, res) => {
       const path = normalize(decodeURIComponent(new URL(req.url!, 'http://x').pathname));
-      if (path.startsWith('/api/')) { res.writeHead(404).end(); return; }
+      // API simulée vide : une page dont l'API répond en erreur interrompt la détection de
+      // changements de toute l'application (défaut antérieur, signalé), et avec elle la barre.
+      if (path.startsWith('/api/')) {
+        res.writeHead(200, { 'content-type': 'application/json' }).end(path.startsWith('/api/demo') ? '{}' : '[]');
+        return;
+      }
       let file = join(DIST, path);
       if (path.includes('..') || !existsSync(file) || statSync(file).isDirectory()) file = join(DIST, 'index.html');
       res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
@@ -83,13 +88,34 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) �
     expect(stale, 'dist plus ancien que la page ou la barre : relancer ng build').toBe(false);
   });
 
-  it('1440 px, depuis l’accueil : Nouveautés et Plan de travail dans la barre du haut ; le lien mène à la page', async () => {
+  it('1440 px, depuis l’accueil : « À propos ▾ » montre Nouveautés et Plan de travail ; le lien mène à la page (focus sur le h1 non requis : clic souris)', async () => {
     const page = await open(1440, '/');
-    for (const href of ['/nouveautes', '/plan']) expect(await page.locator(`nav.nav a[href="${href}"]`).isVisible()).toBe(true);
-    await page.locator('nav.nav a[href="/plan"]').click();
+    const toggle = page.locator('nav.nav button.about-toggle');
+    expect(await toggle.isVisible()).toBe(true);
+    expect(await page.locator('#menu-a-propos').isVisible()).toBe(false);
+    await toggle.click();
+    await page.waitForSelector('button.about-toggle[aria-expanded="true"]'); // détection regroupée : image suivante
+    for (const href of ['/nouveautes', '/plan', '/about']) expect(await page.locator(`#menu-a-propos a[href="${href}"]`).isVisible()).toBe(true);
+    await page.locator('#menu-a-propos a[href="/plan"]').click();
     await page.waitForSelector('li.plan-lot');
     expect(new URL(page.url()).pathname).toBe('/plan');
-    expect((await page.locator('h1').textContent())?.trim()).toBe('Ce qui se prépare');
+    await page.waitForSelector('button.about-toggle.active[aria-expanded="false"]');
+    await page.close();
+  });
+
+  it.each([1440, 390, 320])('%i px, depuis l’accueil : pied de page « Nouveautés · Plan de travail · À propos », cibles ≥ 44 px dans la largeur', async (width) => {
+    const page = await open(width, '/');
+    for (const href of ['/nouveautes', '/plan', '/about']) {
+      const a = page.locator(`footer nav.legal-nav a[href="${href}"]`);
+      await a.scrollIntoViewIfNeeded();
+      expect(await a.isVisible()).toBe(true);
+      const box = (await a.boundingBox())!;
+      expect(box.height).toBeGreaterThanOrEqual(44);
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+    }
+    await page.locator('footer nav.legal-nav a[href="/plan"]').click();
+    await page.waitForSelector('li.plan-lot');
     await page.close();
   });
 
@@ -160,7 +186,7 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) �
         return bg;
       };
       const out: string[] = [];
-      const els = document.querySelectorAll<HTMLElement>('.plan *');
+      const els = document.querySelectorAll<HTMLElement>('.plan *, footer .legal-nav *');
       for (const el of els) {
         const own = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent!.trim());
         if (!own || el.closest('.sr-only')) continue;

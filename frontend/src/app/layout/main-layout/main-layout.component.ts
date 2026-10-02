@@ -4,6 +4,7 @@ import { NavigationEnd, NavigationSkipped, Router, RouterOutlet, RouterLink, Rou
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../../features/nouveautes/news.service';
 import { badgeLabel, unseenLabel } from '../../features/nouveautes/news-badge';
+import { AboutMenuComponent } from '../about-menu/about-menu.component';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
 import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
@@ -12,7 +13,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent],
   template: `
     <app-demo-banner [attr.inert]="pageInert()" />
     <header class="topbar">
@@ -64,18 +65,8 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
             </div>
           </div>
         </div>
-        <a routerLink="/nouveautes" routerLinkActive="active">
-          <span class="nav-ico">✦</span>Nouveautés
-          @if (badge()) {
-            <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
-          }
-        </a>
-        <a routerLink="/plan" routerLinkActive="active">
-          <span class="nav-ico">⚒</span>Plan de travail
-        </a>
-        <a routerLink="/about" routerLinkActive="active">
-          <span class="nav-ico">⚜</span>À propos
-        </a>
+        <!-- L30 (option b) : Nouveautés, Plan de travail et À propos regroupés sous un bouton à divulgation. -->
+        <app-about-menu [badge]="badge()" [unseenText]="unseenText()" />
       </nav>
 
       <div class="topbar-actions">
@@ -83,7 +74,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           <span class="nav-ico">⌕</span>
           <span class="nav-search-kbd">⌘K</span>
         </button>
-        <!-- L23 : sous 1280 px, la navigation passe dans un tiroir (inerte quand il est fermé). -->
+        <!-- L23 : sous 80em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
         <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone"
                 [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : null"
                 (click)="toggleMenu()">
@@ -154,6 +145,10 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         <span class="aigle">⚜</span>
         <span class="line"></span>
       </div>
+      <!-- L30 : les pages du codex à une action de chaque page, à toute largeur. -->
+      <nav class="legal-nav" aria-label="Le codex">
+        <a routerLink="/nouveautes">Nouveautés</a><span aria-hidden="true">·</span><a routerLink="/plan">Plan de travail</a><span aria-hidden="true">·</span><a routerLink="/about">À propos</a>
+      </nav>
       <div class="legal-text">
         Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
       </div>
@@ -305,9 +300,6 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       color: var(--gold-bright);
       opacity: 1;
     }
-    @media (max-width: 900px) {
-      .mega-menu { display: none !important; }
-    }
     .nav-ico { font-size: 1rem; line-height: 1; }
 
     .quota-banner {
@@ -376,6 +368,14 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       text-shadow: 0 0 14px rgba(201, 162, 74, 0.45);
       line-height: 1;
     }
+    .legal-nav {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 6px;
+      font-size: 0.78rem; letter-spacing: 0.08em;
+    }
+    .legal-nav span { color: var(--muted); }
+    .legal-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; color: var(--gold); }
+    .legal-nav a:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 4px; }
+    .legal-nav a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
     .legal-text {
       color: var(--muted);
       font-size: 0.72rem;
@@ -439,32 +439,29 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       .drawer, .drawer.open, .drawer-backdrop { transition: none; }
     }
 
-    /* L30 : avec « Plan de travail », la barre complète (icônes, sous-titre) ne tient qu'à partir
-       de 1920 px, la barre compacte à partir de 1440 px ; entre 1280 et 1439 px, lettres un peu
-       moins espacées et logo un peu plus petit (barre mesurée par topbar.e2e.spec.ts). */
-    @media (max-width: 1919px) {
+    /* L30 (option b) : seuils de la barre en em (suivent la taille de police par défaut du
+       navigateur) — barre complète (icônes, sous-titre) dès 106,25em (1700 px à 16 px),
+       compacte en dessous, tiroir sous 80em (1280 px à 16 px). Mesurés par topbar.e2e.spec.ts. */
+    .nav { min-width: 0; }
+    @media (width < 106.25em) {
       .brand .brand-sub, .nav-ico { display: none; }
-      .nav { gap: 16px; } /* 1280 px + pastille « 9+ » : barre sans débordement (topbar.e2e.spec.ts) */
+      .nav { gap: 16px; }
       .nav-search-btn .nav-ico { display: inline; }
     }
-    @media (min-width: 1280px) and (max-width: 1439px) {
-      .nav { letter-spacing: 0.05em; }
-      .brand strong { font-size: 1.05rem; letter-spacing: 0.06em; } /* = téléphone */
-    }
-    @media (max-width: 1279px) {
+    @media (width < 80em) {
       .topbar { padding: 0 18px; }
       .nav { display: none; }
       .menu-toggle { display: inline-flex; }
       .nav-search-btn { min-height: 44px; margin-left: 0; }
     }
-    @media (min-width: 1280px) {
-      .brand { white-space: nowrap; }
+    @media (width >= 80em) {
+      .brand { white-space: nowrap; flex-shrink: 0; } /* au téléphone, le logo garde le droit de passer sur deux lignes */
       .drawer, .drawer-backdrop { display: none; }
     }
     @media (max-width: 680px) {
       .wrap { padding: 22px 16px 40px; }
     }
-    @media (max-width: 420px) {
+    @media (width <= 26.25em) {
       .topbar { padding: 0 12px; gap: 8px; }
       .topbar-actions { gap: 6px; }
       .nav-search-btn { padding: 0 12px; }
@@ -528,8 +525,8 @@ export class MainLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     void this.news.load();
-    // Passage au bureau (≥ 1280 px) menu ouvert : le tiroir disparaît, la page doit redéfiler.
-    const desktop = window.matchMedia?.('(min-width: 1280px)');
+    // Passage au bureau (≥ 80em) menu ouvert : le tiroir disparaît, la page doit redéfiler.
+    const desktop = window.matchMedia?.('(min-width: 80em)');
     if (desktop) {
       const onChange = (e: MediaQueryListEvent) => { if (e.matches) this.closeMenu(); };
       desktop.addEventListener('change', onChange);

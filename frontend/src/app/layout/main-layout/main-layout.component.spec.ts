@@ -54,16 +54,26 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(component.name).toBe('NouveautesComponent');
   });
 
-  it('liens « Nouveautés » puis « Plan de travail » dans la barre du bureau, juste avant « À propos » (L23, L30)', async () => {
+  it('barre du bureau (option b) : Accueil … Lore, puis le bouton « À propos ▾ » qui regroupe Nouveautés, Plan de travail, À propos du codex (L30)', async () => {
     const f = await render();
-    const links = [...el(f).querySelectorAll<HTMLAnchorElement>('nav.nav > a')];
-    const labels = links.map((a) => a.textContent!.replace(/\s+/g, ' ').trim());
-    const i = labels.findIndex((l) => l.includes('Nouveautés'));
-    expect(i).toBeGreaterThan(-1);
-    expect(links[i].getAttribute('href')).toBe('/nouveautes');
-    expect(labels[i + 1]).toMatch(/Plan de travail$/);
-    expect(links[i + 1].getAttribute('href')).toBe('/plan');
-    expect(labels[i + 2]).toContain('À propos');
+    const nav = el(f).querySelector('nav.nav')!;
+    const top = [...nav.querySelectorAll<HTMLAnchorElement>(':scope > a, :scope > .nav-dropdown > a')].map((a) => a.getAttribute('href'));
+    expect(top).toEqual(['/', '/factions', '/romans', '/videos', '/gallery', '/lore']);
+    const menu = nav.lastElementChild!;
+    expect(menu.tagName.toLowerCase()).toBe('app-about-menu');
+    expect([...menu.querySelectorAll('#menu-a-propos a')].map((a) => a.getAttribute('href'))).toEqual(['/nouveautes', '/plan', '/about']);
+  });
+
+  it('pied de page : « Nouveautés · Plan de travail · À propos » sur chaque page (L30)', async () => {
+    const f = await render();
+    const footer = el(f).querySelector('footer')!;
+    const links = [...footer.querySelectorAll<HTMLAnchorElement>('nav.legal-nav a')];
+    expect(footer.querySelector('nav.legal-nav')!.getAttribute('aria-label')).toBe('Le codex');
+    expect(links.map((a) => a.getAttribute('href'))).toEqual(['/nouveautes', '/plan', '/about']);
+    expect(links.map((a) => a.textContent!.trim())).toEqual(['Nouveautés', 'Plan de travail', 'À propos']);
+    await TestBed.inject(Router).navigateByUrl('/about');
+    f.detectChanges();
+    expect(el(f).querySelectorAll('footer nav.legal-nav a')).toHaveLength(3);
   });
 
   it('la route /plan charge la page Plan de travail (L30)', async () => {

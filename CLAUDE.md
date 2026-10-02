@@ -31,12 +31,17 @@ Endpoints clés :
 
 `dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `nouveautes` (/nouveautes), `plan` (/plan, « Plan de travail »), `about` (/about). Redirect `/galerie` → `/gallery`.
 
-Navigation : barre du haut à partir de 1280 px ; en dessous, bouton **Menu** → tiroir
-`#menu-telephone` (inerte quand il est fermé, Échap le ferme, Tab y boucle). Toute nouvelle
-page s'ajoute aux DEUX listes de `main-layout.component.ts` (barre et tiroir). Barre complète
-(icônes, sous-titre du logo) à partir de 1920 px, compacte en dessous, resserrée entre 1280 et
-1439 px (L30) : `topbar.e2e.spec.ts` la mesure de 1280 à 2560 px avec la pastille « 9+ » —
-relancer `ng build` puis ce test après tout lien ajouté à la barre.
+Navigation (L23, L30 option b) — seuils en **em** (suivent la taille de police par défaut du
+navigateur) : sous `80em` (1280 px à 16 px), bouton **Menu** → tiroir `#menu-telephone` (inerte
+quand il est fermé, Échap le ferme, Tab y boucle), liens à plat ; dès `80em`, barre compacte :
+Accueil · Factions · Romans · Vidéos · Galerie · Lore ▾ · **« À propos ▾ »**, bouton à divulgation
+(`layout/about-menu/`, pas un `role=menu`) qui montre Nouveautés (pastille), Plan de travail et
+À propos du codex ; dès `106.25em` (1700 px), barre complète (icônes, sous-titre du logo). Le pied
+de page porte « Nouveautés · Plan de travail · À propos » sur chaque page. Une nouvelle page
+s'ajoute au tiroir ET à la barre (ou au panneau « À propos ▾ ») de `main-layout.component.ts`.
+`topbar.e2e.spec.ts` mesure chaque seuil ±1 px avec la pastille « 9+ » dans quatre configurations
+(polices web, polices bloquées, police par défaut 18 et 20 px) : relancer `ng build` puis ce test
+après tout changement de la barre.
 
 ## Workflow dev
 
