@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { catchError, filter, map, of, type Observable } from 'rxjs';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
@@ -498,12 +498,26 @@ export class GalleryComponent {
   readonly categories = CATEGORIES;
 
   private readonly catalogArtworks = toSignal(this.service.artworks$, { initialValue: [] as Artwork[] });
-  private readonly localImages = toSignal(this.service.images$, { initialValue: [] as string[] });
+  // 2e relecture : images perso en échec → liste vide (toSignal relancerait l'erreur à chaque lecture).
+  private readonly localImages = toSignal(this.service.images$.pipe(catchError(() => of([] as string[]))), { initialValue: [] as string[] });
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
   readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
   readonly factions = toSignal(this.service.factions$, { initialValue: [] as Faction[] });
-  private readonly catalogLoaded = toSignal(this.service.artworks$.pipe(map(() => true)), { initialValue: false });
-  private readonly factionsLoaded = toSignal(this.service.factions$.pipe(map(() => true)), { initialValue: false });
+  /** Vrai dès la première valeur OU l'échec d'une source (une source en échec ne bloque rien). */
+  private static settled(source: Observable<unknown>) {
+    return toSignal(source.pipe(map(() => true), catchError(() => of(true))), { initialValue: false });
+  }
+  private readonly catalogLoaded = GalleryComponent.settled(this.service.artworks$);
+  private readonly factionsLoaded = GalleryComponent.settled(this.service.factions$);
+  private readonly imagesLoaded = GalleryComponent.settled(this.service.images$);
+  private readonly metaLoaded = signal(false);
+  /**
+   * 2e relecture : toutes les sources qui peuvent rendre une faction valide ou illustrée sont là
+   * (ou en échec) — codex, catalogue, images perso et leurs métadonnées (faction en texte libre).
+   * Avant elles, aucun verdict « inconnue » / « aucune illustration » (annoncé puis démenti).
+   */
+  private readonly factionSourcesSettled = computed(() =>
+    this.factionsLoaded() && this.catalogLoaded() && this.imagesLoaded() && this.metaLoaded());
 
   readonly imageMeta = signal<Record<string, ImageMeta>>({});
 
@@ -709,11 +723,11 @@ export class GalleryComponent {
 
   /**
    * L42 (revue UX R3) : faction active connue mais sans aucune illustration → son nom, pour un
-   * message dédié. Rien tant que le catalogue n'est pas chargé (pas de message prématuré).
+   * message dédié. Rien avant factionSourcesSettled (pas de message prématuré).
    */
   readonly emptyFactionName = computed<string | null>(() => {
     const f = this.filterFaction();
-    if (!f || this.unknownFaction() || !this.catalogLoaded()) return null;
+    if (!f || this.unknownFaction() || !this.factionSourcesSettled()) return null;
     if (this.artworks().some(a => a.faction === f)) return null;
     return this.factionName(f);
   });
@@ -721,11 +735,11 @@ export class GalleryComponent {
   /**
    * L42 (relecture) : ?faction= qui n'est ni l'identifiant d'une faction du codex ni une valeur
    * `faction` d'une illustration (catalogue ou images perso, factionList) → nommé à l'écran, filtre
-   * non appliqué. Rien tant que les factions ne sont pas chargées (pas de message prématuré).
+   * non appliqué. Rien avant factionSourcesSettled (pas de message prématuré).
    */
   readonly unknownFaction = computed<string | null>(() => {
     const f = this.filterFaction();
-    if (!f || !this.factionsLoaded()) return null;
+    if (!f || !this.factionSourcesSettled()) return null;
     if (this.factions().some(x => x.id === f) || this.factionList().includes(f)) return null;
     return f;
   });
@@ -800,7 +814,10 @@ export class GalleryComponent {
       if (r.imageUrl) this.heroBgUrl.set(`url('${r.imageUrl}')`);
     });
 
-    this.service.getImageMeta().subscribe(meta => this.imageMeta.set(meta));
+    this.service.getImageMeta().subscribe({
+      next: meta => { this.imageMeta.set(meta); this.metaLoaded.set(true); },
+      error: () => this.metaLoaded.set(true),
+    });
     this.service.getSuggestedCategories().subscribe(s => this.suggestedCategories.set(s));
 
     for (const cat of CATEGORIES) {

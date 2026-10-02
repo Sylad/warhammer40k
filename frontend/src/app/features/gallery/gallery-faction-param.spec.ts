@@ -9,7 +9,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, convertToParamMap, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { NEVER, of, type Observable } from 'rxjs';
+import { NEVER, Subject, of, throwError, type Observable } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { GalleryComponent } from './gallery.component';
 import { Component } from '@angular/core';
@@ -199,6 +199,64 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     release();
     expect(await leaving, 'navigation de sortie supplantée').toBe(true);
     expect(router.url).toBe('/videos');
+  });
+
+  // 2e relecture de code : une faction peut n'être valide (ou illustrée) QUE par les images perso
+  // (images$ + getImageMeta(), faction en texte libre de la modale « Catégoriser »). Factions
+  // arrivées avant elles → « Faction inconnue » annoncé à tort, ou « Aucune illustration » à tort.
+  async function withSources(images$: Observable<unknown>, meta$: Observable<unknown>) {
+    await setupTestBed([GalleryComponent], [
+      provideRouter([{ path: 'gallery', component: GalleryComponent }]),
+      { provide: WarhammerService, useValue: fakeWarhammerService({
+        artworks$: of(ARTWORKS), factions$: of(FACTIONS), images$,
+        getImageMeta: () => meta$,
+        getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
+      }) },
+    ]);
+    const h = await RouterTestingHarness.create();
+    const go = async (url: string) => { const c = await h.navigateByUrl(url, GalleryComponent); h.detectChanges(); return c; };
+    const settle = async (ms = 0) => { await wait(ms); h.detectChanges(); };
+    return { h, go, settle };
+  }
+
+  it('faction perso (« Foo », images perso seulement) : rien d’annoncé tant que images et métadonnées ne sont pas là, puis filtre appliqué', async () => {
+    const images$ = new Subject<string[]>();
+    const meta$ = new Subject<Record<string, unknown>>();
+    const { h, go, settle } = await withSources(images$, meta$);
+    const c = await go('/gallery?faction=Foo');
+    await settle(250);
+    expect(notice(h), '« Faction inconnue » annoncé avant les images perso').toBeNull();
+    images$.next(['foo.jpg']);
+    await settle(50);
+    expect(notice(h), '« Faction inconnue » annoncé avant les métadonnées').toBeNull();
+    meta$.next({ 'foo.jpg': { categories: [], faction: 'Foo' } });
+    await settle(50);
+    expect(notice(h)).toBeNull();
+    expect(ids(c)).toEqual(['local-0']);
+  });
+
+  it('faction du codex illustrée seulement par une image perso : pas de « Aucune illustration » prématuré', async () => {
+    const images$ = new Subject<string[]>();
+    const meta$ = new Subject<Record<string, unknown>>();
+    const { h, go, settle } = await withSources(images$, meta$);
+    const c = await go('/gallery?faction=grey-knights');
+    await settle(250);
+    expect(h.routeNativeElement!.textContent).not.toContain('Aucune illustration de la faction');
+    images$.next(['gk.jpg']);
+    meta$.next({ 'gk.jpg': { categories: [], faction: 'grey-knights' } });
+    await settle(50);
+    expect(h.routeNativeElement!.textContent).not.toContain('Aucune illustration de la faction');
+    expect(ids(c)).toEqual(['local-0']);
+  });
+
+  it('images perso et métadonnées en échec : les messages finissent par s’afficher (une source en échec ne bloque pas)', async () => {
+    const { h, go, settle } = await withSources(throwError(() => new Error('500')), throwError(() => new Error('500')));
+    await go('/gallery?faction=Foo');
+    await settle(250);
+    expect(notice(h)?.textContent).toContain('« Foo »');
+    await go('/gallery?faction=grey-knights');
+    await settle(50);
+    expect(h.routeNativeElement!.textContent).toContain('Aucune illustration de la faction Grey Knights');
   });
 
   it('identifiant inconnu : message visible qui le nomme, galerie entière affichée, liste sur « Toutes »', async () => {
