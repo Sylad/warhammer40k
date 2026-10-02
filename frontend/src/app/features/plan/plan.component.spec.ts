@@ -86,7 +86,7 @@ describe('page Plan de travail (/plan) — L30', () => {
     expect(meta.textContent).not.toContain('·');
     const time = meta.querySelector('time')!;
     expect(time.getAttribute('datetime')).toBe(day(1));
-    expect(text(time)).toMatch(/^Livré le \d+ \S+ \d{4}$/);
+    expect(text(time)).toMatch(/^Livré le \d+(er)? \S+ \d{4}$/);
     expect(text($(f, '#L30 .plan-meta time'))).toMatch(/^Démarré le /);
     expect($(f, '#L31 .plan-meta time')).toBeNull();
   });

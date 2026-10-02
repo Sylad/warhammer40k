@@ -6,10 +6,12 @@
 export type CaptureSize = [number, number];
 
 /** Jour (YYYY-MM-DD) en toutes lettres, sans décalage de fuseau. */
+/** « 1er octobre 2026 », « 28 septembre 2026 » (ordinal du premier du mois, usage français). */
 export function formatDay(day: string): string {
-  return new Date(`${day}T12:00:00Z`).toLocaleDateString('fr-FR', {
+  const text = new Date(`${day}T12:00:00Z`).toLocaleDateString('fr-FR', {
     day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
   });
+  return text.replace(/^1 /, '1er ');
 }
 
 export function captureAlt(title: string, index: number, count: number): string {

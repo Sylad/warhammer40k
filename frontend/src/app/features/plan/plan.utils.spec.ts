@@ -45,7 +45,7 @@ describe('libellés', () => {
   });
 
   it('ligne de date : livré le / démarré le / rien pour un lot prévu', () => {
-    expect(dateLine(lot({ id: 'L1', status: 'done', finished: '2026-10-01' }))).toEqual({ day: '2026-10-01', text: 'Livré le 1 octobre 2026' });
+    expect(dateLine(lot({ id: 'L1', status: 'done', finished: '2026-10-01' }))).toEqual({ day: '2026-10-01', text: 'Livré le 1er octobre 2026' });
     expect(dateLine(lot({ id: 'L1', status: 'doing', started: '2026-09-28' }))).toEqual({ day: '2026-09-28', text: 'Démarré le 28 septembre 2026' });
     expect(dateLine(lot({ id: 'L1', status: 'todo', started: '2026-09-28' }))).toBeNull();
     expect(dateLine(lot({ id: 'L1', status: 'doing' }))).toBeNull();

@@ -6,7 +6,10 @@ import {
 
 describe('page Nouveautés — utilitaires (L23)', () => {
   it('date du jour en français, sans décalage de fuseau', () => {
-    expect(formatDay('2026-10-01')).toBe('1 octobre 2026');
+    expect(formatDay('2026-10-01')).toBe('1er octobre 2026');
+    expect(formatDay('2026-11-01')).toBe('1er novembre 2026');
+    expect(formatDay('2026-10-11')).toBe('11 octobre 2026');
+    expect(formatDay('2026-10-21')).toBe('21 octobre 2026');
     expect(formatDay('2026-09-28')).toBe('28 septembre 2026');
   });
 

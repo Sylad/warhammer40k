@@ -57,7 +57,7 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     const articles = $$(f, 'article.news-entry');
     expect(articles.map((a) => a.id)).toEqual(['2026-10-01-recente', '2026-09-28-ancienne']);
     expect(articles[0].querySelector('time')!.getAttribute('datetime')).toBe('2026-10-01');
-    expect(articles[0].querySelector('time')!.textContent).toBe('1 octobre 2026');
+    expect(articles[0].querySelector('time')!.textContent).toBe('1er octobre 2026');
     expect(articles[0].querySelector('h2')!.textContent).toContain('La plus récente');
     expect(articles[0].querySelector('.news-body strong')!.textContent).toBe('gras');
   });
