@@ -91,7 +91,7 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     const f = await render();
     expect($$(f, '.news-new')).toHaveLength(0);
     expect($$(f, '.news-seen-sep')).toHaveLength(0);
-    expect(JSON.parse(localStorage.getItem(NEWS_SEEN_KEY)!).slugs).toEqual(['2026-10-01-recente']);
+    expect(JSON.parse(localStorage.getItem(NEWS_SEEN_KEY)!).slugs).toEqual(['2026-09-28-ancienne', '2026-10-01-recente']);
     expect(TestBed.inject(NewsService).unseen()).toBe(0);
   });
 

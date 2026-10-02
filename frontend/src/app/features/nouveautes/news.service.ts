@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { browserStorage, countUnseen, markAllSeen, readSeen, type NewsSeen } from './news-badge';
+import { browserStorage, countUnseen, markAllSeen, readSeen, recordBaseline, type NewsSeen } from './news-badge';
 import type { CaptureSize } from './nouveautes.utils';
 
 /**
@@ -58,6 +58,10 @@ export class NewsService {
       }
       this.entries.set(news.entries);
       this.sizes.set(sizes ?? {});
+      // L34 : premier chargement sur n'importe quelle page, rien de mémorisé → base de
+      // référence (tout est vu), pour qu'une entrée publiée ensuite allume la pastille même
+      // chez qui n'ouvre jamais /nouveautes.
+      this.seen.set(recordBaseline(browserStorage(), news.entries) ?? this.seen());
       this.state.set('ready');
     });
     return this.pending;

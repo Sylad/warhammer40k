@@ -16,8 +16,13 @@ export const NEWS_SEEN_EVENT = 'wh40k:news-seen';
 export interface NewsSeen {
   /** Date (YYYY-MM-DD) ou instant (YYYY-MM-DDTHH:MM[:SS]Z) de l'entrée la plus récente vue. */
   date: string;
-  /** Slugs vus portant cette date. */
+  /**
+   * Slugs vus : ceux de cette date (mémoires écrites avant L34), ou TOUS les slugs vus
+   * quand `all` est vrai (L34) — ce qui permet de reconnaître une entrée antidatée.
+   */
   slugs: string[];
+  /** L34 : `slugs` liste toutes les entrées vues, pas seulement celles de `date`. */
+  all?: true;
   /** Instant de la visite (ISO), pour le séparateur « Déjà vu lors de votre visite du … ». */
   at?: string;
 }
@@ -47,11 +52,12 @@ export function readSeen(storage: StorageLike | null): NewsSeen | null {
     if (!raw) return null;
     const parsed: unknown = JSON.parse(raw);
     if (typeof parsed !== 'object' || parsed === null) return null;
-    const { date, slugs, at } = parsed as { date?: unknown; slugs?: unknown; at?: unknown };
+    const { date, slugs, all, at } = parsed as { date?: unknown; slugs?: unknown; all?: unknown; at?: unknown };
     if (typeof date !== 'string' || Number.isNaN(instant(date)) || !Array.isArray(slugs)) return null;
     return {
       date,
       slugs: slugs.filter((s): s is string => typeof s === 'string'),
+      ...(all === true ? { all: true as const } : {}),
       ...(typeof at === 'string' && !Number.isNaN(Date.parse(at)) ? { at } : {}),
     };
   } catch {
@@ -59,31 +65,61 @@ export function readSeen(storage: StorageLike | null): NewsSeen | null {
   }
 }
 
-/** Marque toutes les entrées comme vues ; retourne ce qui a été mémorisé. */
+/** Tout le journal marqué vu (date la plus récente, tous les slugs) ; `at` = instant de visite. */
+function allSeen(entries: readonly DatedEntry[], at?: Date): NewsSeen {
+  const date = entries.reduce((max, e) => (instant(e.date) > instant(max) ? e.date : max), entries[0].date);
+  return {
+    date,
+    slugs: [...new Set(entries.map((e) => e.slug))].sort(),
+    all: true,
+    ...(at ? { at: at.toISOString() } : {}),
+  };
+}
+
+function store(storage: StorageLike | null, seen: NewsSeen): void {
+  try {
+    storage?.setItem(NEWS_SEEN_KEY, JSON.stringify(seen));
+  } catch {
+    /* stockage indisponible : la pastille restera */
+  }
+}
+
+/** Visite de /nouveautes : marque toutes les entrées comme vues ; retourne ce qui a été mémorisé. */
 export function markAllSeen(
   storage: StorageLike | null,
   entries: readonly DatedEntry[],
   now: Date = new Date(),
 ): NewsSeen | null {
   if (!entries.length) return null;
-  const date = entries.reduce((max, e) => (instant(e.date) > instant(max) ? e.date : max), entries[0].date);
-  const seen: NewsSeen = {
-    date,
-    slugs: entries.filter((e) => instant(e.date) === instant(date)).map((e) => e.slug).sort(),
-    at: now.toISOString(),
-  };
-  try {
-    storage?.setItem(NEWS_SEEN_KEY, JSON.stringify(seen));
-  } catch {
-    /* stockage indisponible : la pastille restera */
-  }
+  const seen = allSeen(entries, now);
+  store(storage, seen);
   return seen;
 }
 
-/** Entrée non vue lors de la visite `seen` ; premier visiteur (null) : rien n'est nouveau. */
+/**
+ * L34 — base de référence posée au premier chargement de N'IMPORTE quelle page quand rien
+ * n'est mémorisé : tout le journal publié compte comme vu (première visite sans pastille),
+ * sans heure de visite (`at`) puisque /nouveautes n'a pas été ouverte. Une mémoire existante
+ * (visite ou base) n'est jamais réécrite. Retourne la mémoire en vigueur.
+ */
+export function recordBaseline(storage: StorageLike | null, entries: readonly DatedEntry[]): NewsSeen | null {
+  if (!storage) return null;
+  const current = readSeen(storage);
+  if (current || !entries.length) return current;
+  const seen = allSeen(entries);
+  store(storage, seen);
+  return seen;
+}
+
+/**
+ * Entrée non vue lors de la visite `seen` ; rien de mémorisé (null) : rien n'est nouveau.
+ * Mémoire complète (`all`, L34) : nouvelle = slug jamais vu, même antidatée. Mémoire
+ * d'avant L34 (slugs du dernier jour seulement) : règle d'origine, par la date.
+ */
 export function isUnseen(entry: DatedEntry, seen: NewsSeen | null): boolean {
   if (!seen) return false;
-  return !seen.slugs.includes(entry.slug) && instant(entry.date) >= instant(seen.date);
+  if (seen.slugs.includes(entry.slug)) return false;
+  return seen.all === true || instant(entry.date) >= instant(seen.date);
 }
 
 export function countUnseen(entries: readonly DatedEntry[], seen: NewsSeen | null): number {
