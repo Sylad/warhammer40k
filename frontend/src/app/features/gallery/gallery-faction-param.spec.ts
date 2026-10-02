@@ -163,6 +163,27 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     expect(c.searchQuery()).toBe('Eis');
   });
 
+  // 2e relecture de code : l'écho de notre propre réécriture n'était couvert par aucun test.
+  it('écho de sa propre réécriture ignoré : « ab » écrit dans l’adresse, « abc » tapé avant qu’elle aboutisse → reste « abc », adresse finale ?q=abc', async () => {
+    const { go, settle, router } = await harness();
+    const c = await go('/gallery');
+    vi.useFakeTimers();
+    try {
+      c.onSearchChange('ab');
+      vi.advanceTimersByTime(400); // la réécriture ?q=ab part
+    } finally {
+      vi.useRealTimers();
+    }
+    c.onSearchChange('abc'); // avant qu'elle aboutisse (même tâche, minuteur réel)
+    await settle(); // l'écho ?q=ab arrive
+    expect(router.url).toBe('/gallery?q=ab');
+    expect(c.searchQuery()).toBe('abc');
+    await wait(500);
+    await settle();
+    expect(c.searchQuery()).toBe('abc');
+    expect(router.url).toBe('/gallery?q=abc');
+  });
+
   it('saisie puis départ de la page avant l’anti-rebond : aucune navigation de retour vers la galerie', async () => {
     const { h, go, router } = await harness();
     const c = await go('/gallery');
