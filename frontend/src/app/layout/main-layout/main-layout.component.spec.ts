@@ -214,6 +214,25 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(document.activeElement).toBe(el(f).querySelector('main h1'));
   });
 
+  it('« À propos ▾ » et le méga-menu Lore jamais ouverts ensemble : survol ou focus de Lore referme « À propos » ; « À propos » ouvert masque Lore (L30)', async () => {
+    const f = await render();
+    const toggle = el(f).querySelector<HTMLButtonElement>('button.about-toggle')!;
+    const lore = el(f).querySelector<HTMLElement>('.nav-dropdown')!;
+    const nav = el(f).querySelector('nav.nav')!;
+    toggle.click();
+    f.detectChanges();
+    expect(nav.classList.contains('about-open')).toBe(true); // règle CSS : .about-open .mega-menu masqué
+    lore.dispatchEvent(new Event('pointerenter'));
+    f.detectChanges();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    expect(nav.classList.contains('about-open')).toBe(false);
+    toggle.click();
+    f.detectChanges();
+    lore.querySelector('a')!.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    f.detectChanges();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+  });
+
   it('navigation hors tiroir : le focus n’est pas déplacé', async () => {
     const f = await render();
     const button = el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!;

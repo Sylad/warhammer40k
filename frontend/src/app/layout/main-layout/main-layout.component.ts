@@ -22,7 +22,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         <strong>Warhammer 40,000</strong>
         <span class="brand-sub">Codex numérique</span>
       </a>
-      <nav class="nav" [attr.inert]="pageInert()">
+      <nav class="nav" [class.about-open]="aboutOpen()" [attr.inert]="pageInert()">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <span class="nav-ico">⌂</span>Accueil
         </a>
@@ -38,7 +38,8 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
         <a routerLink="/gallery" routerLinkActive="active">
           <span class="nav-ico">▦</span>Galerie
         </a>
-        <div class="nav-dropdown">
+        <!-- L30 : Lore et « À propos ▾ » jamais ouverts ensemble (le panneau couvrait « Guerre & Histoire »). -->
+        <div class="nav-dropdown" (pointerenter)="aboutMenu.close()" (focusin)="aboutMenu.close()">
           <a routerLink="/lore" routerLinkActive="active">
             <span class="nav-ico">✠</span>Lore<span class="nav-caret">▾</span>
           </a>
@@ -66,7 +67,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           </div>
         </div>
         <!-- L30 (option b) : Nouveautés, Plan de travail et À propos regroupés sous un bouton à divulgation. -->
-        <app-about-menu [badge]="badge()" [unseenText]="unseenText()" (navigated)="focusOnArrival = true" />
+        <app-about-menu #aboutMenu [badge]="badge()" [unseenText]="unseenText()" (navigated)="focusOnArrival = true" (openChange)="aboutOpen.set($event)" />
       </nav>
 
       <div class="topbar-actions">
@@ -273,6 +274,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
     .nav-dropdown:focus-within .mega-menu {
       display: grid;
     }
+    .nav.about-open .mega-menu { display: none; }
     .mega-col h4 {
       font-family: var(--serif);
       font-size: 0.62rem;
@@ -486,6 +488,8 @@ export class MainLayoutComponent implements OnInit {
   readonly badge = computed(() => badgeLabel(this.news.unseen()));
   readonly unseenText = computed(() => unseenLabel(this.news.unseen()));
   readonly menuOpen = signal(false);
+  /** Panneau « À propos ▾ » ouvert : le méga-menu Lore est masqué. */
+  readonly aboutOpen = signal(false);
   /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
   readonly pageInert = computed(() => (this.menuOpen() ? '' : null));
   /**

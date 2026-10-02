@@ -110,24 +110,38 @@ export class AboutMenuComponent {
       .pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed(inject(DestroyRef)))
       .subscribe(() => {
         update();
-        if (url !== null && this.router.url !== url) this.open.set(false);
+        if (url !== null && this.router.url !== url) this.setOpen(false);
         url = this.router.url;
       });
     update();
   }
 
+  /** Ouvert / fermé : la barre masque le méga-menu Lore pendant que le panneau est ouvert. */
+  @Output() readonly openChange = new EventEmitter<boolean>();
+
+  /** Fermeture sans déplacer le focus (survol ou focus du méga-menu Lore). */
+  close(): void {
+    this.setOpen(false);
+  }
+
+  private setOpen(v: boolean): void {
+    if (this.open() === v) return;
+    this.open.set(v);
+    this.openChange.emit(v);
+  }
+
   follow(): void {
-    this.open.set(false);
+    this.setOpen(false);
     this.navigated.emit();
   }
 
   toggle(): void {
-    this.open.update((o) => !o);
+    this.setOpen(!this.open());
   }
 
   closeAndFocus(): void {
     if (!this.open()) return;
-    this.open.set(false);
+    this.setOpen(false);
     this.toggleButton?.nativeElement.focus();
   }
 
@@ -135,11 +149,11 @@ export class AboutMenuComponent {
   onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (next && this.host.nativeElement.contains(next)) return;
-    this.open.set(false);
+    this.setOpen(false);
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    if (this.open() && !this.host.nativeElement.contains(event.target as Node)) this.open.set(false);
+    if (this.open() && !this.host.nativeElement.contains(event.target as Node)) this.setOpen(false);
   }
 }

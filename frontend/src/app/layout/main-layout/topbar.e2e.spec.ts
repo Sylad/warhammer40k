@@ -192,4 +192,30 @@ describe.skipIf(!built || !chromium)('barre du haut, seuils en em ±1 px, pastil
     expect(await page.evaluate(() => document.activeElement!.textContent!.trim())).toBe('Ce qui se prépare');
     await page.close();
   });
+
+  it('1440 px : « À propos ▾ » et le méga-menu Lore jamais visibles ensemble (souris et clavier)', async () => {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.goto(`${base}/about`);
+    await page.waitForSelector('button.about-toggle');
+    const both = () => page.evaluate(() => ({
+      about: !(document.getElementById('menu-a-propos') as HTMLElement).hidden,
+      lore: getComputedStyle(document.querySelector('.mega-menu')!).display !== 'none',
+    }));
+    await page.click('button.about-toggle');
+    await page.waitForSelector('#menu-a-propos:not([hidden])');
+    await page.hover('.nav-dropdown > a');
+    await page.waitForTimeout(80);
+    expect(await both()).toEqual({ about: false, lore: true });
+    // Pointeur resté sur Lore, « À propos » ouvert au clavier : Lore se masque.
+    await page.focus('button.about-toggle');
+    await page.keyboard.press('Enter');
+    await page.waitForSelector('#menu-a-propos:not([hidden])');
+    await page.waitForTimeout(80);
+    expect(await both()).toEqual({ about: true, lore: false });
+    // Focus clavier sur Lore : « À propos » se referme.
+    await page.focus('.nav-dropdown > a');
+    await page.waitForTimeout(80);
+    expect((await both()).about).toBe(false);
+    await page.close();
+  });
 });
