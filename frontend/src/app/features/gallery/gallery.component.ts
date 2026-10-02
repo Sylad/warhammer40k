@@ -2,7 +2,8 @@ import { Component, inject, signal, computed, effect, HostListener } from '@angu
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
@@ -80,6 +81,13 @@ type SortBy = 'recent' | 'popular' | 'alpha';
       <!-- LAYOUT MAIN + SIDEBAR -->
       <section class="layout">
         <div class="main-col">
+          <!-- L42 (relecture) : ?faction= inconnu → dit, jamais une grille vide muette. -->
+          @if (unknownFaction(); as unknown) {
+            <div class="empty" role="status" data-testid="faction-inconnue">
+              <p>Faction inconnue : « {{ unknown }} ». Ce lien ne correspond à aucune faction du codex : toute la galerie est affichée.</p>
+              <button class="see-all" type="button" (click)="onFactionChange('')">Retirer ce filtre</button>
+            </div>
+          }
 
           <!-- CATEGORIES -->
           <section class="section">
@@ -166,7 +174,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             </div>
             <div class="filter-row">
               <label>Faction</label>
-              <select [ngModel]="filterFaction()" (ngModelChange)="onFactionChange($event)">
+              <select [ngModel]="unknownFaction() ? '' : filterFaction()" (ngModelChange)="onFactionChange($event)">
                 <option value="">Toutes</option>
                 @for (f of factionList(); track f) {
                   <option [value]="f">{{ f }}</option>
@@ -470,6 +478,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 export class GalleryComponent {
   private readonly service = inject(WarhammerService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   readonly categories = CATEGORIES;
 
@@ -478,6 +487,7 @@ export class GalleryComponent {
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
   readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
   readonly factions = toSignal(this.service.factions$, { initialValue: [] as Faction[] });
+  private readonly factionsLoaded = toSignal(this.service.factions$.pipe(map(() => true)), { initialValue: false });
 
   readonly imageMeta = signal<Record<string, ImageMeta>>({});
 
@@ -532,7 +542,7 @@ export class GalleryComponent {
         (a.extraCategories ?? []).some(c => c.toLowerCase().includes(q))
       );
     }
-    if (fac) list = list.filter(a => a.faction === fac);
+    if (fac && !this.unknownFaction()) list = list.filter(a => a.faction === fac);
     if (artist) list = list.filter(a => a.artist === artist);
     if (coll) list = list.filter(a => a.collectionId === coll);
     return list;
@@ -664,6 +674,18 @@ export class GalleryComponent {
     return Array.from(set).sort();
   });
 
+  /**
+   * L42 (relecture) : ?faction= qui n'est ni l'identifiant d'une faction du codex ni une valeur de
+   * la liste (métadonnées des images perso) → nommé à l'écran, filtre non appliqué. Rien tant que
+   * les factions ne sont pas chargées (pas de message prématuré).
+   */
+  readonly unknownFaction = computed<string | null>(() => {
+    const f = this.filterFaction();
+    if (!f || !this.factionsLoaded()) return null;
+    if (this.factions().some(x => x.id === f) || this.factionList().includes(f)) return null;
+    return f;
+  });
+
   readonly topArtists = computed(() =>
     [...this.artists()].sort((a, b) => b.artworkCount - a.artworkCount).slice(0, 6),
   );
@@ -700,8 +722,13 @@ export class GalleryComponent {
       const q = params.get('q') ?? params.get('search');
       if (q) this.searchQuery.set(q);
       // L42 : ?faction=<id> (carte « Galerie » des pages faction) → galerie filtrée sur la faction.
-      const faction = params.get('faction');
-      if (faction) this.filterFaction.set(faction);
+      // Le filtre SUIT l'adresse : paramètre absent → plus de filtre (composant réutilisé de
+      // /gallery?faction=x à /gallery : le filtre restait collé).
+      const faction = params.get('faction') ?? '';
+      if (faction !== this.filterFaction()) {
+        this.filterFaction.set(faction);
+        this.currentPage.set(1);
+      }
     });
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
@@ -817,6 +844,17 @@ export class GalleryComponent {
   onFactionChange(f: string): void {
     this.filterFaction.set(f);
     this.currentPage.set(1);
+    this.syncFactionParam(f);
+  }
+
+  /** L42 (relecture) : l'adresse suit le filtre faction (sinon un rechargement le ramène). */
+  private syncFactionParam(f: string): void {
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { faction: f || null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 
   resetFilters(): void {
@@ -826,6 +864,7 @@ export class GalleryComponent {
     this.filterArtist.set('');
     this.filterCollection.set('');
     this.currentPage.set(1);
+    this.syncFactionParam('');
   }
 
   toggleBookmark(id: string): void {
