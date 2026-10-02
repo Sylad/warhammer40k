@@ -42,6 +42,11 @@
       "id": "L35",
       "title": "Une page Jeux vidéo : les jeux existants et ceux qui arrivent",
       "status": "todo"
+    },
+    {
+      "id": "L39",
+      "title": "Plus aucun lien mort : tous les liens du site vérifiés",
+      "status": "todo"
     }
   ]
 }

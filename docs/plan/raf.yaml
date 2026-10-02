@@ -265,3 +265,15 @@ lots:
     status: todo
     estimate: 0.5
     created: 2026-10-02
+  - id: L39
+    title: "Liens morts : audit automatique de tous les liens du site (internes : routes, ancres, images et datasheets ; externes : wiki, vidéos, boutiques) — rapport, corrections, puis test qui échoue sur un lien interne cassé (consigne Sylvain 02-10 : « potentiellement des liens morts »)"
+    public: "Plus aucun lien mort : tous les liens du site vérifiés"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-10-02
+  - id: L40
+    title: "Campagne UX densité : les pages du site sont très denses (consigne Sylvain 02-10, « un gros travail ») — avant les revues page par page, mesurer la densité de chaque gabarit (longueur, nombre de blocs et de liens par écran, hiérarchie des titres), fixer des règles communes (sommaire de page, repli des sections, largeur de lecture, pagination des listes) et les maquetter sur 2 pages pilotes (fiche faction, fiche Lore) ; les revues L2 à L21 s'appuient ensuite sur ces règles et sont à réestimer"
+    status: todo
+    estimate: 2
+    created: 2026-10-02
