@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal , untracked } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
+import { MediaThumbSource, mediaThumbSource } from '../../shared/media-thumb';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -366,7 +367,7 @@ const DEFAULT_RESOURCES = [
             <h3>Médias</h3>
             @if (featuredVideo(); as v) {
               <a class="media-card" [routerLink]="'/videos'">
-                <div class="media-thumb" [style.--m-img]="videoThumb(v)">
+                <div class="media-thumb" [style.--m-img]="videoThumb()">
                   <span class="play">▶</span>
                   @if (v.duration) { <span class="dur">{{ v.duration }}</span> }
                 </div>
@@ -591,7 +592,29 @@ export class FactionDetailComponent {
     return vids.find(v => v.featured) ?? vids.find(v => v.incontournable) ?? vids[0] ?? null;
   });
 
+  /** Vignettes « Médias » résolues (L39 : jamais une requête du wiki ni un nom de fichier nu dans url()). */
+  readonly videoThumbUrl = signal<string | null>(null);
+  readonly galleryThumbUrl = signal<string | null>(null);
+
+  private resolveThumb(src: MediaThumbSource, target: WritableSignal<string | null>): void {
+    target.set(src.url ?? null);
+    if (!src.wikiQuery) return;
+    this.service.getWikiImage(src.wikiQuery).subscribe({
+      next: r => { if (r.imageUrl) target.set(r.imageUrl); },
+      error: () => {},
+    });
+  }
+
   constructor() {
+    effect(() => {
+      const v = this.featuredVideo();
+      untracked(() => (v ? this.resolveThumb(mediaThumbSource(v), this.videoThumbUrl) : this.videoThumbUrl.set(null)));
+    });
+    effect(() => {
+      const a = this.artworks()[0];
+      untracked(() => (a ? this.resolveThumb(mediaThumbSource(a), this.galleryThumbUrl) : this.galleryThumbUrl.set(null)));
+    });
+
     // Reset la pagination des sub-factions quand la recherche change.
     effect(() => {
       this.subFactionSearch();
@@ -795,17 +818,14 @@ export class FactionDetailComponent {
     return fallbacks[key];
   }
 
-  videoThumb(v: { thumbnail?: string; embedId: string | null }): string {
-    if (v.thumbnail) return `url('${v.thumbnail}')`;
-    if (v.embedId) return `url('https://i.ytimg.com/vi/${v.embedId}/hqdefault.jpg')`;
-    return 'linear-gradient(135deg, #1a1612, #050403)';
+  videoThumb(): string {
+    const url = this.videoThumbUrl();
+    return url ? `url('${url}')` : 'linear-gradient(135deg, #1a1612, #050403)';
   }
 
   galleryThumb(): string {
-    const arts = this.artworks();
-    const first = arts[0];
-    if (first?.image) return `url('${first.image}')`;
-    return 'linear-gradient(135deg, #2a1c10, #050403)';
+    const url = this.galleryThumbUrl();
+    return url ? `url('${url}')` : 'linear-gradient(135deg, #2a1c10, #050403)';
   }
 
   scrollTo(e: Event, id: string): void {
