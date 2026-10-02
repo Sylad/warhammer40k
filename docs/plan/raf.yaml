@@ -210,30 +210,36 @@ lots:
   - id: L31
     title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
     public: "Page faction : un en-tête qui tient sur les petits téléphones"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-01
     started: 2026-10-02
+    ux: { date: 2026-10-02, verdict: "OK (cadence:ux-reviewer, 02-10). necrons, orks, officio-assassinorum à 320/360/390 px : scrollWidth = largeur de fenêtre, h1 non coupé. Non vérifié : vrai téléphone." }
+    finished: 2026-10-02
   - id: L32
     title: "Reflow : texte coupé dans les bandeaux de l'accueil (390 px) et de la galerie (320 px) (WCAG 1.4.10)"
     public: "Accueil et galerie : des bandeaux lisibles en entier au téléphone"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-01
     started: 2026-10-02
+    ux: { date: 2026-10-02, verdict: "OK avec réserves, levées (cadence:ux-reviewer, 02-10). Pas de défilement horizontal à / 390, /gallery 320, /lore/concepts 320/390 ; bandeaux inchangés à 1440. Réserves levées : champ de recherche de la galerie pleine largeur au téléphone (0a1a286 : 96 → 238 px à 320), pastilles des bandeaux Lore à hauteur automatique (7c9cb46, 5 bandeaux). Levées non repassées à l agent UX : mesures de l implémenteur + captures regardées par le lead. Reste : texte d aide de la recherche encore tronqué au téléphone." }
+    finished: 2026-10-02
   - id: L33
     title: "Bouton recherche : afficher Ctrl+K hors Mac et porter le contraste de l'indication à ≥ 4,5:1 (mesuré 4,05:1)"
     public: "Recherche : le bon raccourci clavier, une indication plus lisible"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-01
     started: 2026-10-02
+    ux: { date: 2026-10-02, verdict: "OK (cadence:ux-reviewer, 02-10). « Ctrl K » hors Mac, contraste 5,55:1 mesuré ; avec la pastille, aucun défilement à 419–481 px ; indication masquée sous 480 px (raccourci dans le nom accessible). Non vérifié : ⌘K sur un vrai Mac, police par défaut 18/20 px (→ L46)." }
+    finished: 2026-10-02
   - id: L34
     title: "Nouveautés : pastille aussi pour le visiteur qui n'ouvre jamais la page (base de référence à la première visite) ; bouton « Copier le lien » visible au toucher, le titre ne copie plus, sans défilement ni décalage (revue UX L30)"
     public: "Nouveautés : la pastille pour tous, un bouton pour copier le lien"
@@ -254,11 +260,13 @@ lots:
     created: 2026-10-02
   - id: L36
     title: "Titre de page par route (WCAG 2.4.2) : toutes les routes s'appellent « Warhammer 40 000 — Codex Numérique » (revue UX L30)"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     created: 2026-10-02
     started: 2026-10-02
+    ux: { date: 2026-10-02, verdict: "OK (cadence:ux-reviewer, 02-10). Titres uniques, page en premier, mis à jour à la navigation ; « … introuvable » sur identifiant inconnu." }
+    finished: 2026-10-02
   - id: L37
     title: "Méga-menu Lore : bouton à divulgation, ses 11 liens hors de l'ordre de tabulation tant qu'il est fermé (20 tabulations pour atteindre la suite, revue UX L30)"
     status: todo
@@ -294,12 +302,14 @@ lots:
   - id: L42
     title: "Bloc Médias des pages faction : vidéo et galerie filtrées par faction (aujourd'hui le même contenu partout — la page Nécrons montre une vidéo sur l'Empereur et un bouclier Ultramarines), ou visuel neutre faute de correspondance (revue UX des liens)"
     public: "Pages faction : des vidéos et des images de la bonne faction"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-02
     started: 2026-10-02
+    ux: { date: 2026-10-02, verdict: "OK avec réserves (cadence:ux-reviewer, 02-10). Lien faction → galerie filtrée, « Toutes » et « Galerie » retirent filtre et paramètre ; message d identifiant inconnu + galerie entière jugés bons. Réserves levées : faction connue sans illustration nommée (258dc59), région d état présente dès le rendu (df232a6). Réserve NON levée → L47 : la carte « Vidéo à la une » mène à la liste, pas à la vidéo. Trois relectures de code sur la liaison adresse ↔ filtres (défauts corrigés c941d63, 70e4cd0, 23763f3, 6da3576, 1706715 ; test au vrai navigateur OK) ; cas étroits restants → L48, libellés des filtres → L45. Non vérifié : lecteur d écran réel." }
+    finished: 2026-10-02
   - id: L43
     title: "Fil d'Ariane : dernier élément = titre de la page et non l'identifiant de l'URL (« Sm Calgar », « War In Heaven ») — avec le lot des titres par route ; libellés de liens exacts (Légion Death Guard → sa sous-faction, Collegia Titanica) ; titre « L'ASTRONOMICAN » coupé à 390 px sur Concepts (revue UX des liens)"
     status: todo
@@ -311,4 +321,28 @@ lots:
     status: todo
     estimate: 1
     visible: true
+    created: 2026-10-02
+  - id: L45
+    title: "Galerie : libellés associés aux filtres (Faction, Catégorie, Trier par, recherche — WCAG 1.3.1 / 4.1.2 / 3.3.2) et noms de faction lisibles dans la liste au lieu des identifiants bruts (revue UX L42)"
+    status: todo
+    estimate: 1
+    quickwin: true
+    visible: true
+    created: 2026-10-02
+  - id: L46
+    title: "Barre du haut : débordement horizontal avec une police par défaut du navigateur de 18 ou 20 px (1 px à 320 px en 18 px ; 320–371 px en 20 px) — logo + « Menu » trop larges, choix de design à faire (relecture L33)"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-10-02
+  - id: L47
+    title: "Bloc Médias : la carte « Vidéo à la une » ouvre cette vidéo — la page /videos n'a aujourd'hui ni paramètre d'adresse ni ancre pour ouvrir une vidéo précise, à créer (revue UX L42, Nielsen #2/#4)"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-10-02
+  - id: L48
+    title: "Galerie : cas étroits de la liaison adresse ↔ filtres — action pendant une navigation de sortie lente qui l'annule, clic sur « Galerie » pendant l'anti-rebond perdu, écho resté armé sur une réécriture de fragment seul, échec silencieux des images personnelles ; deux chemins de 6da3576 sans test dédié (3e relecture L42)"
+    status: todo
+    estimate: 1
     created: 2026-10-02

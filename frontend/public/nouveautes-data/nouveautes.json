@@ -1,7 +1,23 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-02 18:02",
+  "generated": "2026-10-02 22:46",
   "entries": [
+    {
+      "slug": "2026-10-02-petits-ecrans-mieux-servis-titres-d-onglet-et-galerie-par-fa",
+      "title": "Petits écrans mieux servis, titres d'onglet et galerie par faction",
+      "date": "2026-10-02",
+      "lots": [
+        "L31",
+        "L32",
+        "L33",
+        "L36",
+        "L42"
+      ],
+      "captures": [
+        "captures/L32-bandeau-accueil-telephone.png"
+      ],
+      "html": "<p>Une série de retouches issues des revues d'ergonomie, surtout pour la lecture au téléphone.</p>\n<ul><li><strong>Plus rien ne déborde sur les petits écrans</strong> : l'en-tête des pages faction, les bandeaux de l'accueil, de la galerie et des pages Lore tiennent dans la largeur, sans texte coupé ni défilement de côté. Dans la galerie, le champ de recherche prend toute la largeur.</li><li><strong>Chaque page a son titre d'onglet</strong> : « Nécrons — Warhammer 40 000 », « Galerie — Warhammer 40 000 »… au lieu du même titre partout. Plus simple pour s'y retrouver entre plusieurs onglets et dans l'historique.</li><li><strong>Le raccourci de recherche s'affiche selon votre clavier</strong> : « Ctrl K » sur PC, « ⌘K » sur Mac, avec un texte plus lisible.</li><li><strong>Le bloc Médias des pages faction mène à la galerie de cette faction.</strong> Le filtre se retrouve dans l'adresse de la page : vous pouvez la partager ou la recharger sans le perdre. Si une faction n'a pas encore d'illustration, ou si le lien ne correspond à aucune faction, la page le dit clairement.</li></ul>"
+    },
     {
       "slug": "2026-10-02-des-liens-repares-fil-d-ariane-ancres-et-images",
       "title": "Des liens réparés : fil d'Ariane, ancres et images",
