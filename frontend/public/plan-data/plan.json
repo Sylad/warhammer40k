@@ -46,7 +46,8 @@
     {
       "id": "L39",
       "title": "Plus aucun lien mort : tous les liens du site vérifiés",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-02"
     }
   ]
 }
