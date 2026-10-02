@@ -2,8 +2,8 @@
 // (route inconnue, identifiant absent des données, ancre absente de la page, ancre nue renvoyée à
 // l'accueil par <base href="/">, fichier absent ou de mauvaise casse). Statique : ni réseau ni serveur.
 // Les liens EXTERNES ne sont pas vérifiés ici (réseau) : `npm run liens:externes`, à la demande.
-import { describe, expect, it } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
+import { afterAll, describe, expect, it } from 'vitest';
+import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import {
@@ -13,13 +13,20 @@ import {
 const routes = readRoutes();
 const data = loadSeed();
 
+// Un seul dossier temporaire par exécution, supprimé à la fin (L39 : 145 restes avant correction).
+const TMP = mkdtempSync(join(tmpdir(), 'wh-liens-test-'));
+afterAll(() => rmSync(TMP, { recursive: true, force: true }));
+let n = 0;
+const tmpFile = (name, body) => {
+  const dir = join(TMP, String(n++));
+  mkdirSync(dir);
+  const f = join(dir, name);
+  writeFileSync(f, body);
+  return f;
+};
+
 describe('vérificateur de liens (cas fabriqués)', () => {
-  const page = (body) => {
-    const dir = mkdtempSync(join(tmpdir(), 'wh-liens-'));
-    const f = join(dir, 'x.component.ts');
-    writeFileSync(f, body);
-    return f;
-  };
+  const page = (body) => tmpFile('x.component.ts', body);
   const check = (links) => checkInternal(links, { routes, data, news: { entries: [] } }).map((b) => b.cause);
 
   it('route inconnue → cassé (le routeur renverrait vers /factions)', () => {
@@ -68,7 +75,8 @@ describe('vérificateur de liens (cas fabriqués)', () => {
   });
 
   it('fichiers : la casse compte (la prod est sous Linux)', () => {
-    const dir = mkdtempSync(join(tmpdir(), 'wh-liens-'));
+    const dir = join(TMP, 'casse');
+    mkdirSync(dir);
     mkdirSync(join(dir, 'a'));
     writeFileSync(join(dir, 'a/Image.jpg'), '');
     expect(existsCaseSensitive(dir, 'a/Image.jpg')).toBe(true);
