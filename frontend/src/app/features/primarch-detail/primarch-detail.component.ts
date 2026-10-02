@@ -2,7 +2,7 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { of, switchMap, forkJoin } from 'rxjs';
+import { catchError, of, switchMap, forkJoin, map } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
@@ -364,9 +364,11 @@ export class PrimarchDetailComponent {
       switchMap(p => this.service.getPrimarch(p.get('id')!)),
       switchMap(prim => {
         if (!prim?.relatedPrimarchIds?.length) return of([] as Primarch[]);
+        // L39 : un identifiant absent des données (« typhus » en prod) est ignoré, au lieu de
+        // faire échouer toute la section (forkJoin propage la première erreur).
         return forkJoin(
-          prim.relatedPrimarchIds.slice(0, 3).map(id => this.service.getPrimarch(id))
-        );
+          prim.relatedPrimarchIds.slice(0, 3).map(id => this.service.getPrimarch(id).pipe(catchError(() => of(null))))
+        ).pipe(map(list => list.filter((r): r is Primarch => !!r)));
       }),
     ),
     { initialValue: [] as Primarch[] },
