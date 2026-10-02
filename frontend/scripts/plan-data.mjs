@@ -186,22 +186,29 @@ export function privateTexts(raf, plan) {
   return [...out];
 }
 
-const escapeNonAscii = (s, upper) =>
+/**
+ * Non-ASCII échappé comme dans un littéral JS : \uHHHH, ou \xHH pour les points de
+ * code ≤ 0xFF quand `xhh` (forme écrite par esbuild : « pr\xE9pare »), hexadécimal
+ * en minuscules ou majuscules.
+ */
+const escapeNonAscii = (s, upper, xhh) =>
   s.replace(/[^\x00-\x7f]/g, (c) => {
-    const h = c.charCodeAt(0).toString(16).padStart(4, '0');
-    return `\\u${upper ? h.toUpperCase() : h}`;
+    const code = c.charCodeAt(0);
+    const hex = (n) => { const h = code.toString(16).padStart(n, '0'); return upper ? h.toUpperCase() : h; };
+    return xhh && code <= 0xff ? `\\x${hex(2)}` : `\\u${hex(4)}`;
   });
 
 /**
  * Formes sous lesquelles un texte peut apparaître dans un fichier construit :
- * brut, échappé JSON, non-ASCII en \uXXXX (minuscules ou majuscules), non-ASCII
- * en entités HTML numériques (&#NNNN;). Les entités nommées (&eacute;) ne sont pas
- * cherchées : ni Angular ni esbuild n'en produisent.
+ * brut, échappé JSON, non-ASCII en \uXXXX ou \xHH (minuscules ou majuscules),
+ * non-ASCII en entités HTML numériques (&#NNNN;). Les entités nommées (&eacute;)
+ * ne sont pas cherchées : ni Angular ni esbuild n'en produisent.
  */
 function forms(s) {
   const json = JSON.stringify(s).slice(1, -1);
   const html = s.replace(/[^\x00-\x7f]/g, (c) => `&#${c.codePointAt(0)};`);
-  return [...new Set([s, json, escapeNonAscii(json, false), escapeNonAscii(json, true), html])];
+  const escaped = [false, true].flatMap((upper) => [false, true].map((xhh) => escapeNonAscii(json, upper, xhh)));
+  return [...new Set([s, json, ...escaped, html])];
 }
 
 /** Textes privés du plan présents dans `text`. */

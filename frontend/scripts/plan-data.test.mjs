@@ -195,6 +195,20 @@ describe('textes privés et fuites', () => {
     expect(findLeaks(raf, `x=${upper}`, plan)).toEqual([note]);
   });
 
+  it('findLeaks repère une note accentuée écrite par esbuild en \\xHH (≤ 0xFF) et \\uHHHH au-delà', () => {
+    const note = 'note privée : réglage du serveur maison';
+    expect(findLeaks(raf, 'x="note priv\\xE9e : r\\xE9glage du serveur maison"', plan)).toEqual([note]);
+    expect(findLeaks(raf, 'x="note priv\\xe9e : r\\xe9glage du serveur maison"', plan)).toEqual([note]);
+    const reason = 'raison privée de l’abandon'; // é ≤ 0xFF, ’ = U+2019
+    expect(findLeaks(raf, 'x="raison priv\\xE9e de l\\u2019abandon"', plan)).toEqual([reason]);
+  });
+
+  it('scanDir trouve une note accentuée plantée en \\xHH dans un bundle JS construit', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'plan-dist-xhh-'));
+    writeFileSync(join(dir, 'main-ABC.js'), 'var e="note priv\\xE9e : r\\xE9glage du serveur maison";');
+    expect(scanDir(raf, plan, dir)).toEqual([{ file: 'main-ABC.js', text: 'note privée : réglage du serveur maison' }]);
+  });
+
   it('findLeaks repère un texte privé dont les guillemets ou apostrophes ont été échappés en entités HTML', () => {
     const reason = 'raison privée de l’abandon';
     expect(findLeaks(raf, `<p>raison priv&#233;e de l&#8217;abandon</p>`, plan)).toEqual([reason]);
