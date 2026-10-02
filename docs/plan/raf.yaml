@@ -267,7 +267,7 @@ lots:
     created: 2026-10-02
   - id: L39
     title: "Liens morts : audit automatique de tous les liens du site (internes : routes, ancres, images et datasheets ; externes : wiki, vidéos, boutiques) — rapport, corrections, puis test qui échoue sur un lien interne cassé (consigne Sylvain 02-10 : « potentiellement des liens morts »)"
-    public: "Plus aucun lien mort : tous les liens du site vérifiés"
+    public: "Liens internes réparés : fil d'Ariane, ancres et images vérifiés"
     status: doing
     estimate: 1
     visible: true
