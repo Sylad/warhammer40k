@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, DestroyRef, ElementRef, HostListener, OnInit, ViewChild, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ViewportScroller } from '@angular/common';
 import { NavigationEnd, NavigationSkipped, Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../../features/nouveautes/news.service';
@@ -502,7 +503,12 @@ export class MainLayoutComponent implements OnInit {
 
   @ViewChild('main', { static: true }) private main?: ElementRef<HTMLElement>;
 
+  private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
+
   constructor() {
+    // L39 : le défilement d'ancre du routeur (window.scrollTo) ignore scroll-margin-top ; sans
+    // décalage, la cible arrive SOUS la barre collante. Décalage = bas réel de la barre + 10 px.
+    inject(ViewportScroller).setOffset(() => [0, Math.round(this.host.nativeElement.querySelector('.topbar')?.getBoundingClientRect().bottom ?? 70) + 10]);
     inject(Router).events
       .pipe(filter((e) => e instanceof NavigationEnd || e instanceof NavigationSkipped), takeUntilDestroyed())
       .subscribe(() => {
