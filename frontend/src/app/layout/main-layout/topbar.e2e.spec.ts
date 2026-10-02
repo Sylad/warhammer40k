@@ -236,4 +236,35 @@ describe.skipIf(!built || !chromium)('barre du haut, seuils en em ±1 px, pastil
     await page.close();
     expect(gaps.about).toBe(gaps.lore);
   });
+
+  it.each([[320, true], [320, false], [390, true], [390, false]])('%i px, pastille %s : barre sans débordement, bouton Menu entier à l’écran, nom accessible complet', async (width, withBadge) => {
+    const page = await browser.newPage({ viewport: { width, height: 800 } });
+    if (withBadge) await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-09-01', slugs: [] })));
+    await page.route('**/nouveautes-data/nouveautes.json', (r) => r.fulfill({ json: NEWS }));
+    // /plan : page sans débordement propre (/about déborde de 5 px à 320 px, .other-card — défaut antérieur, hors barre).
+    await page.goto(`${base}/plan`);
+    await page.waitForSelector('button.menu-toggle');
+    if (withBadge) await page.waitForSelector('button.menu-toggle .news-badge');
+    else await page.waitForTimeout(300);
+    const m = await page.evaluate(() => {
+      const b = document.querySelector<HTMLButtonElement>('button.menu-toggle')!;
+      const r = b.getBoundingClientRect();
+      return {
+        page: document.documentElement.scrollWidth - innerWidth,
+        bar: document.querySelector('.topbar')!.scrollWidth - document.querySelector('.topbar')!.clientWidth,
+        right: r.right, width: Math.round(r.width), height: Math.round(r.height),
+        label: b.getAttribute('aria-label'), text: b.textContent!.replace(/\s+/g, ' ').trim(),
+        badge: !!b.querySelector('.news-badge'),
+      };
+    });
+    await page.close();
+    expect(m.page).toBeLessThanOrEqual(0);
+    expect(m.bar).toBeLessThanOrEqual(0);
+    expect(m.right).toBeLessThanOrEqual(width);
+    expect(m.height).toBeGreaterThanOrEqual(44);
+    expect(m.width).toBeGreaterThanOrEqual(44);
+    expect(m.badge).toBe(withBadge);
+    if (withBadge) expect(m.label).toBe('Menu, 9+ nouveautés non vues'.replace('9+', '12'));
+    else expect(m.text).toContain('Menu'); // nom accessible = texte (mot visible ou masqué visuellement)
+  });
 });

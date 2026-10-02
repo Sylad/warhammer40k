@@ -76,10 +76,10 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           <span class="nav-search-kbd">⌘K</span>
         </button>
         <!-- L23 : sous 80em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
-        <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone"
+        <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone" [class.has-badge]="badge()"
                 [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : null"
                 (click)="toggleMenu()">
-          <span aria-hidden="true">☰</span> Menu
+          <span aria-hidden="true">☰</span> <span class="menu-word">Menu</span>
           @if (badge()) { <span class="news-badge" aria-hidden="true">{{ badge() }}</span> }
         </button>
       </div>
@@ -470,7 +470,9 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       .brand { gap: 8px; }
       .brand strong { font-size: 1.05rem; }
       .nav-search-kbd { display: none; }
-      .menu-toggle { padding: 0 10px; }
+      .menu-toggle { padding: 0 10px; min-width: 44px; justify-content: center; }
+      /* L30 : avec la pastille, « ☰ + pastille » — le mot reste le nom accessible (aria-label). */
+      .menu-toggle.has-badge .menu-word { display: none; }
     }
   `],
 })
