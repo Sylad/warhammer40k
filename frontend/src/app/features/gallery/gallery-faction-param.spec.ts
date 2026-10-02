@@ -184,6 +184,21 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     expect(router.url).toBe('/gallery?q=abc');
   });
 
+  // 2e relecture de code : réécriture vers l'adresse ACTUELLE (« Réinitialiser » avec seulement une
+  // catégorie) → le routeur ignore la navigation, l'écho attendu restait armé et avalait plus tard
+  // une vraie navigation aux mêmes q/faction.
+  it('« Réinitialiser » sans changement d’adresse : une navigation ultérieure aux mêmes q/faction s’applique', async () => {
+    const { go, settle, router } = await harness();
+    const c = await go('/gallery');
+    c.filterCategory.set('Chaos');
+    c.resetFilters(); // même adresse : /gallery
+    await settle();
+    expect(router.url).toBe('/gallery');
+    c.onSearchChange('zz'); // frappe, puis l'adresse change d'ailleurs (q et faction absents)
+    await go('/gallery?sort=x');
+    expect(c.searchQuery()).toBe('');
+  });
+
   it('saisie puis départ de la page avant l’anti-rebond : aucune navigation de retour vers la galerie', async () => {
     const { h, go, router } = await harness();
     const c = await go('/gallery');

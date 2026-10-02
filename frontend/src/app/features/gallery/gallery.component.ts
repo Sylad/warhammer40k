@@ -951,9 +951,19 @@ export class GalleryComponent {
       queryParams: { faction: faction || null, q: q || null, search: null },
       queryParamsHandling: 'merge',
     });
-    this.written = { q, faction };
-    this.ownUrl = this.router.serializeUrl(target);
-    void this.router.navigateByUrl(target, { replaceUrl: true });
+    const url = this.router.serializeUrl(target);
+    // 2e relecture : adresse inchangée (« Réinitialiser » avec seulement une catégorie) → le
+    // routeur ignorerait la navigation et l'écho attendu resterait armé, prêt à avaler plus tard
+    // une vraie navigation aux mêmes q/faction. Rien à écrire — sauf si une navigation est en vol
+    // (router.url n'est pas encore l'adresse qu'elle va écrire).
+    if (url === this.router.url && !this.router.getCurrentNavigation()) return;
+    const armed = { q, faction };
+    this.written = armed;
+    this.ownUrl = url;
+    void this.router.navigateByUrl(target, { replaceUrl: true }).then(ok => {
+      // Navigation annulée ou supplantée sans écho : désarmer (sauf si une réécriture plus récente a réarmé).
+      if (!ok && this.written === armed) this.written = null;
+    });
   }
 
   resetFilters(): void {
