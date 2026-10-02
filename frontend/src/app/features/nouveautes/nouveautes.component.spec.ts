@@ -121,20 +121,50 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     expect(document.activeElement).toBe(target);
   });
 
-  it('clic sur le titre : URL copiée, « Lien copié » annoncé, ancre dans la barre d’adresse', async () => {
+  it('L34 — titre en texte simple ; bouton « Copier le lien » toujours visible près de la date, nom accessible distinct', async () => {
+    const f = await render();
+    const entry = $(f, '[id="2026-10-01-recente"]');
+    expect(entry.querySelector('h2 a')).toBeNull();
+    expect(entry.querySelector('h2')!.textContent!.trim()).toBe('La plus récente');
+    const btn = entry.querySelector<HTMLButtonElement>('.news-head-row button.news-copy')!;
+    expect(btn.getAttribute('type')).toBe('button');
+    expect(btn.querySelector('.sr-only')!.textContent).toBe('Copier le lien : La plus récente');
+    const labels = [...btn.querySelectorAll<HTMLElement>('.news-copy-labels > span')];
+    expect(labels.map((l) => l.textContent!.trim())).toEqual(['Copier le lien', 'Lien copié', 'Copie impossible']);
+    expect(labels.map((l) => l.classList.contains('is-shown'))).toEqual([true, false, false]);
+    expect(entry.querySelector('.news-link-status')).toBeNull(); // plus de ligne insérée dans la carte
+  });
+
+  it('L34 — « Copier le lien » : copie l’URL, sans toucher l’adresse ni défiler ; libellé « Lien copié » et annonce masquée', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    const scroll = vi.fn();
+    Element.prototype.scrollIntoView = scroll;
     const f = await render();
-    const a = $(f, '[id="2026-10-01-recente"] h2 a.news-permalink') as HTMLAnchorElement;
-    expect(a.getAttribute('href')).toBe('/nouveautes#2026-10-01-recente');
-    const ev = new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
-    a.dispatchEvent(ev);
-    expect(ev.defaultPrevented).toBe(true);
+    scroll.mockClear();
+    const before = location.href;
+    const btn = $(f, '[id="2026-10-01-recente"] button.news-copy') as HTMLButtonElement;
+    btn.click();
     await new Promise((r) => setTimeout(r, 0));
     f.detectChanges();
     expect(writeText).toHaveBeenCalledWith(`${location.origin}/nouveautes#2026-10-01-recente`);
-    expect($(f, '[id="2026-10-01-recente"] .news-link-status').textContent).toContain('Lien copié');
-    expect(location.hash).toBe('#2026-10-01-recente');
+    expect(location.href).toBe(before);
+    expect(scroll).not.toHaveBeenCalled();
+    const shown = [...btn.querySelectorAll<HTMLElement>('.news-copy-labels > span.is-shown')].map((l) => l.textContent!.trim());
+    expect(shown).toEqual(['Lien copié']);
+    const live = $(f, '[id="2026-10-01-recente"] [role="status"].sr-only');
+    expect(live.textContent!.trim()).toBe('Lien copié dans le presse-papiers');
+    expect($(f, '[id="2026-09-28-ancienne"] [role="status"].sr-only').textContent!.trim()).toBe('');
+  });
+
+  it('L34 — presse-papiers refusé : « Copie impossible », annonce de l’adresse à copier', async () => {
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: vi.fn().mockRejectedValue(new Error('refus')) }, configurable: true });
+    const f = await render();
+    ($(f, '[id="2026-10-01-recente"] button.news-copy') as HTMLButtonElement).click();
+    await new Promise((r) => setTimeout(r, 0));
+    f.detectChanges();
+    expect($(f, '[id="2026-10-01-recente"] .news-copy-labels > span.is-shown').textContent!.trim()).toBe('Copie impossible');
+    expect($(f, '[id="2026-10-01-recente"] [role="status"].sr-only').textContent).toContain(`${location.origin}/nouveautes#2026-10-01-recente`);
   });
 
   it('visionneuse : clic (ou Entrée sur le lien) ouvre, « Fermer » hors de la zone qui défile, page bloquée', async () => {

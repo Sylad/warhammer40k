@@ -29,7 +29,7 @@ interface Viewing {
  *
  * - pastille « Nouveau », ligne « N nouveautés depuis votre dernière visite » et
  *   séparateur « Déjà vu lors de votre visite du … » (mémoire localStorage) ;
- * - lien permanent par entrée (/nouveautes#<slug>) : le titre copie l'adresse ;
+ * - lien permanent par entrée (/nouveautes#<slug>) : bouton « Copier le lien » toujours visible (L34) ;
  * - visionneuse <dialog> : Entrée ou clic ouvre, Échap ou « Fermer » referme et rend
  *   le focus à la capture ; au téléphone la capture garde sa largeur naturelle (au plus
  *   deux écrans) dans une zone qui défile, « Fermer » reste hors de cette zone.
@@ -63,16 +63,24 @@ interface Viewing {
                 <li>
                   <article class="news-entry" [id]="e.slug" tabindex="-1"
                            [class.is-target]="target() === e.slug" [attr.aria-labelledby]="e.slug + '-titre'">
-                    <p class="news-date">
-                      <time [attr.datetime]="e.date">{{ formatDay(e.date) }}</time>
-                      @if (fresh()[i]) { <span class="news-new">Nouveau</span> }
-                    </p>
-                    <h2 [id]="e.slug + '-titre'">
-                      <a class="news-permalink" [attr.href]="'/nouveautes#' + e.slug"
-                         title="Lien vers cette nouveauté (copié au clic)"
-                         (click)="copyLink($event, e.slug)">{{ e.title }}</a>
-                    </h2>
-                    <p class="news-link-status" role="status">{{ linkStatus()[e.slug] }}</p>
+                    <div class="news-head-row">
+                      <p class="news-date">
+                        <time [attr.datetime]="e.date">{{ formatDay(e.date) }}</time>
+                        @if (fresh()[i]) { <span class="news-new">Nouveau</span> }
+                      </p>
+                      <!-- L34 : lien permanent visible sans survol (toucher). Les trois libellés partagent
+                           la même case de grille : la largeur du plus long est réservée, rien ne bouge. -->
+                      <button type="button" class="news-copy" (click)="copyLink(e.slug)">
+                        <span class="news-copy-labels" aria-hidden="true">
+                          @for (k of copyStates; track k) {
+                            <span [class.is-shown]="copyState(e.slug) === k">{{ copyLabel[k] }}</span>
+                          }
+                        </span>
+                        <span class="sr-only">Copier le lien : {{ e.title }}</span>
+                      </button>
+                    </div>
+                    <h2 [id]="e.slug + '-titre'">{{ e.title }}</h2>
+                    <p class="sr-only" role="status">{{ announce(e.slug) }}</p>
                     <!-- HTML produit par cadence depuis le Markdown du dépôt (assaini par Angular). -->
                     <div class="news-body" [innerHTML]="e.html"></div>
                     @if (e.captures.length) {
@@ -143,7 +151,7 @@ export class NouveautesComponent implements OnInit, OnDestroy {
     return before ? seenSeparatorLabel(before) : '';
   });
   readonly target = signal<string | null>(null);
-  readonly linkStatus = signal<Record<string, string>>({});
+  readonly linkStatus = signal<Partial<Record<string, 'ok' | 'ko'>>>({});
   readonly viewing = signal<Viewing | null>(null);
 
   readonly formatDay = formatDay;
@@ -177,21 +185,39 @@ export class NouveautesComponent implements OnInit, OnDestroy {
     }));
   }
 
-  /** Lien permanent : l'ancre va dans la barre d'adresse, l'URL complète est copiée. */
-  async copyLink(event: MouseEvent, slug: string): Promise<void> {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    history.replaceState(history.state, '', `${location.pathname}#${encodeURIComponent(slug)}`);
-    this.revealTarget();
-    let message: string;
+  readonly copyStates = ['idle', 'ok', 'ko'] as const;
+  readonly copyLabel = { idle: 'Copier le lien', ok: 'Lien copié', ko: 'Copie impossible' } as const;
+
+  copyState(slug: string): 'idle' | 'ok' | 'ko' {
+    return this.linkStatus()[slug] ?? 'idle';
+  }
+
+  /** Annonce masquée (role=status) après une copie, vide sinon. */
+  announce(slug: string): string {
+    const st = this.linkStatus()[slug];
+    if (st === 'ok') return 'Lien copié dans le presse-papiers';
+    if (st === 'ko') return `Copie impossible. Adresse de cette nouveauté : ${permalink(location.origin, slug)}`;
+    return '';
+  }
+
+  /**
+   * L34 — « Copier le lien » : copie seulement. L'adresse n'est pas modifiée et la page ne
+   * défile pas (le titre, qui le faisait au toucher, est redevenu du texte). Retour dans le
+   * libellé du bouton (largeur réservée) et annonce masquée, effacés après 4 s.
+   */
+  async copyLink(slug: string): Promise<void> {
+    let st: 'ok' | 'ko';
     try {
       await navigator.clipboard.writeText(permalink(location.origin, slug));
-      message = 'Lien copié dans le presse-papiers';
+      st = 'ok';
     } catch {
-      message = 'Lien affiché dans la barre d’adresse';
+      st = 'ko';
     }
-    this.linkStatus.update((s) => ({ ...s, [slug]: message }));
-    this.statusTimers.push(setTimeout(() => this.linkStatus.update((s) => ({ ...s, [slug]: '' })), 4000));
+    this.linkStatus.update((s) => ({ ...s, [slug]: st }));
+    this.statusTimers.push(setTimeout(() => this.linkStatus.update((s) => {
+      const { [slug]: _, ...rest } = s;
+      return rest;
+    }), 4000));
   }
 
   /** Entrée visée par l'ancre de l'URL : signalée, focalisée, amenée à l'écran. */
