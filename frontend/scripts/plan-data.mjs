@@ -70,9 +70,13 @@ export const PUBLIC_TITLE_MAX = 80;
  * erreur (on corrige le plan, on ne publie pas).
  */
 export function checkPublicTitle(title, where) {
-  const t = String(title ?? '').trim();
+  if (typeof title !== 'string') {
+    throw new Error(`titre public de ${where} non conforme (pas du texte : ${JSON.stringify(title) ?? String(title)})`);
+  }
+  const t = title.trim();
   const why =
     !t ? 'vide'
+      : /[\r\n\u2028\u2029]/.test(t) ? 'retour à la ligne'
       : t.length > PUBLIC_TITLE_MAX ? `${t.length} caractères (> ${PUBLIC_TITLE_MAX})`
         : /\//.test(t) ? 'contient « / »'
           : /\.(ya?ml|json|ts|mjs|js|md|scss|sh)\b/i.test(t) ? 'cite un fichier'

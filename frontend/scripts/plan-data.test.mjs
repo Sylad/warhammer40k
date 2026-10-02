@@ -258,6 +258,15 @@ describe('checkPublicTitle', () => {
   it.each(['a/b', 'raf.yaml', 'plan.json', 'localStorage', 'voir L48', 'z'.repeat(81), '', 'Mot de passe oublié'])('rejette « %s »', (t) => {
     expect(() => checkPublicTitle(t, 'L1')).toThrow(/titre public/);
   });
+  it.each(['Ligne 1\nligne 2', 'Retour\r chariot', 'Séparateur\u2028de ligne'])('rejette un retour à la ligne (%j)', (t) => {
+    expect(() => checkPublicTitle(t, 'L1')).toThrow(/titre public.*ligne/);
+  });
+  it.each([2026, true, { a: 1 }, ['x'], null, undefined])('rejette une valeur qui n’est pas du texte (%j)', (t) => {
+    expect(() => checkPublicTitle(t, 'L1')).toThrow(/titre public/);
+  });
+  it('YAML « public: 2026 » (nombre) refusé à la génération', () => {
+    expect(() => buildPlan({ project: 'x', lots: [{ id: 'L1', title: 'A', public: 2026, status: 'todo', visible: true }] })).toThrow(/pas du texte/);
+  });
   it('accepte « Une page Plan de travail : ce qui se prépare »', () => {
     expect(checkPublicTitle('  Une page Plan de travail : ce qui se prépare ', 'L30')).toBe('Une page Plan de travail : ce qui se prépare');
   });
