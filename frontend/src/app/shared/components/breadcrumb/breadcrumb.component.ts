@@ -3,42 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs/operators';
-
-interface Crumb {
-  label: string;
-  link: string | null;
-}
-
-const STATIC_LABELS: Record<string, string> = {
-  '': 'Accueil',
-  factions: 'Factions',
-  subfactions: 'Sous-Factions',
-  units: 'Unités',
-  romans: 'Romans',
-  videos: 'Vidéos',
-  gallery: 'Galerie',
-  galerie: 'Galerie',
-  about: 'À propos',
-  nouveautes: 'Nouveautés',
-  plan: 'Plan de travail',
-  lore: 'Lore',
-  emperor: 'L\'Empereur',
-  primarchs: 'Les Primarques',
-  'chaos-gods': 'Panthéon Chaos',
-  civilians: 'Civils Impériaux',
-  concepts: 'Concepts & Lieux',
-  galaxy: 'La Galaxie',
-  equipment: 'Armement & Reliques',
-  timeline: 'Chronologie',
-};
-
-function slugToLabel(slug: string): string {
-  if (STATIC_LABELS[slug] !== undefined) return STATIC_LABELS[slug];
-  return slug
-    .split('-')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-}
+import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -47,7 +12,7 @@ function slugToLabel(slug: string): string {
   template: `
     @if (crumbs().length > 1) {
       <nav class="bc" aria-label="Fil d'Ariane">
-        @for (c of crumbs(); track c.link; let last = $last) {
+        @for (c of crumbs(); track $index; let last = $last) {
           @if (c.link && !last) {
             <a class="bc-link" [routerLink]="c.link">{{ c.label }}</a>
           } @else {
@@ -98,18 +63,13 @@ export class BreadcrumbComponent {
     { initialValue: this.router.url },
   );
 
-  readonly crumbs = computed<Crumb[]>(() => {
-    const url = this.url() ?? '/';
-    const segments = url.split('?')[0].split('#')[0].split('/').filter(Boolean);
-    const out: Crumb[] = [{ label: 'Accueil', link: '/' }];
-    let acc = '';
-    for (const seg of segments) {
-      acc += '/' + seg;
-      out.push({ label: slugToLabel(seg), link: acc });
-    }
-    if (out.length > 0) {
-      out[out.length - 1] = { ...out[out.length - 1], link: null };
-    }
-    return out;
-  });
+  /** Chemins des pages (enfants de la mise en page, redirections exclues). */
+  private readonly isPage = pagePaths(
+    this.router.config
+      .flatMap(r => (r.path === '' && r.children ? r.children : [r]))
+      .filter(r => r.path !== undefined && r.path !== '**' && !r.redirectTo)
+      .map(r => r.path!),
+  );
+
+  readonly crumbs = computed<Crumb[]>(() => crumbsFor(this.url() ?? '/', this.isPage));
 }
