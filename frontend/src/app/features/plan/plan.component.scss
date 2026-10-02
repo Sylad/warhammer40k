@@ -1,0 +1,74 @@
+// L30 — page Plan de travail. Même grammaire que les Nouveautés (identité gothique
+// noir/or, tokens de styles.scss) ; l'état est toujours écrit, la couleur le souligne.
+.plan { max-width: 860px; margin: 0 auto; }
+
+.plan-head { margin-bottom: 28px; }
+.plan-eyebrow {
+  margin: 0 0 8px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.plan-head h1 { font-size: clamp(1.7rem, 5vw, 2.6rem); margin-bottom: 10px; overflow-wrap: anywhere; }
+.plan-lede { margin: 0; color: var(--text); max-width: 640px; line-height: 1.6; }
+
+a:not(.plan-news) { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible, .plan-retry:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+.plan-box { margin: 0; padding: 18px 22px; background: var(--panel); border: 1px solid var(--border); color: var(--text); }
+.plan-summary { margin-bottom: 34px; line-height: 1.6; }
+.plan-summary-label, .plan-meta {
+  display: block; margin-bottom: 4px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+
+.plan-group { margin-bottom: 38px; }
+.plan-group h2 { font-size: clamp(1.15rem, 3.6vw, 1.5rem); margin: 0; overflow-wrap: anywhere; }
+.plan-count { color: var(--text); font-weight: 400; }
+.plan-hint { margin: 6px 0 14px; color: var(--text); font-size: 0.9rem; }
+
+.plan-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.plan-lot {
+  scroll-margin-top: 90px; // barre du haut collante (70 px)
+  padding: 18px 22px; background: var(--panel); border: 1px solid var(--border); min-width: 0;
+  &:focus { outline: none; }
+  &.is-target { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+  h3 { font-size: clamp(1rem, 3.2vw, 1.2rem); margin: 0; overflow-wrap: anywhere; text-transform: none; letter-spacing: 0.03em; }
+}
+
+.plan-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 10px; }
+.plan-status {
+  padding: 2px 9px; border: 1px solid var(--border-strong); border-radius: 999px; color: var(--text);
+  letter-spacing: 0.08em;
+  &[data-status='doing'] { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+  &[data-status='done'] { border-color: var(--gold); color: var(--gold-bright); }
+}
+
+.plan-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 12px; }
+.plan-bar {
+  flex: 1 1 140px; height: 6px; background: rgba(201, 162, 74, 0.16); border-radius: 999px; overflow: hidden;
+  span { display: block; height: 100%; background: var(--gold); }
+}
+.plan-progress-text { color: var(--text); font-size: 0.82rem; }
+
+.plan-news {
+  display: inline-flex; align-items: center; min-height: 44px; margin-top: 6px;
+  color: var(--gold-bright); font-size: 0.88rem; font-weight: 600;
+  &:hover { text-decoration: underline; text-underline-offset: 4px; }
+}
+.plan-older { margin: 14px 0 0; color: var(--text); font-size: 0.9rem; }
+
+.plan-error p { margin: 0 0 10px; }
+.plan-error-title { color: var(--gold-bright); font-weight: 600; }
+.plan-retry {
+  min-height: 44px; padding: 0 16px; border: 1px solid var(--border-strong); background: transparent;
+  color: var(--gold-bright); font: 600 0.85rem var(--sans); letter-spacing: 0.08em; cursor: pointer;
+  &:hover { border-color: var(--gold); }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (max-width: 680px) {
+  .plan-box, .plan-lot { padding: 16px; }
+}
