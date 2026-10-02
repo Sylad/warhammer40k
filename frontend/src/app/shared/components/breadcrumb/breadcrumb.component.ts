@@ -12,26 +12,29 @@ import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
   template: `
     @if (crumbs().length > 1) {
       <nav class="bc" aria-label="Fil d'Ariane">
-        @for (c of crumbs(); track $index; let last = $last) {
-          @if (c.link && !last) {
-            <a class="bc-link" [routerLink]="c.link">{{ c.label }}</a>
-          } @else {
-            <span class="bc-current">{{ c.label }}</span>
+        <ol class="bc-list">
+          @for (c of crumbs(); track $index; let last = $last) {
+            <li class="bc-item">
+              @if (last) {
+                <span class="bc-current" aria-current="page">{{ c.label }}</span>
+              } @else if (c.link) {
+                <a class="bc-link" [routerLink]="c.link">{{ c.label }}</a>
+              } @else {
+                <!-- Préfixe sans page (/units, /subfactions) : texte neutre, ni lien ni « courant ». -->
+                <span class="bc-text">{{ c.label }}</span>
+              }
+              @if (!last) {
+                <span class="bc-sep" aria-hidden="true">›</span>
+              }
+            </li>
           }
-          @if (!last) {
-            <span class="bc-sep">›</span>
-          }
-        }
+        </ol>
       </nav>
     }
   `,
   styles: [`
     :host { display: block; }
     .bc {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
       padding: 10px 34px;
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -41,13 +44,25 @@ import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
       background: rgba(8, 7, 6, 0.55);
       border-bottom: 1px solid var(--border);
     }
+    .bc-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .bc-item { display: flex; align-items: center; gap: 8px; }
+    /* L39 : --gold-soft donnait 3,7:1 sur ce fond ; --gold dépasse 4,5:1. */
     .bc-link {
-      color: var(--gold-soft);
+      color: var(--gold);
       text-decoration: none;
       transition: color 0.15s;
     }
     .bc-link:hover { color: var(--gold-bright); }
     .bc-sep { color: var(--gold-soft); opacity: 0.65; font-weight: 400; }
+    .bc-text { color: var(--muted); }
     .bc-current { color: var(--gold-bright); }
   `],
 })
