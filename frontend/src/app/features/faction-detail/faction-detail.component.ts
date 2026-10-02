@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, untracked, WritableSignal } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
-import { MediaThumbSource, mediaThumbSource } from '../../shared/media-thumb';
+import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -596,23 +596,22 @@ export class FactionDetailComponent {
   readonly videoThumbUrl = signal<string | null>(null);
   readonly galleryThumbUrl = signal<string | null>(null);
 
-  private resolveThumb(src: MediaThumbSource, target: WritableSignal<string | null>): void {
-    target.set(src.url ?? null);
-    if (!src.wikiQuery) return;
-    this.service.getWikiImage(src.wikiQuery).subscribe({
-      next: r => { if (r.imageUrl) target.set(r.imageUrl); },
-      error: () => {},
-    });
-  }
+  // Une requête en cours est annulée au changement de source et à la destruction de la page.
+  private readonly videoThumbs = createThumbResolver(q => this.service.getWikiImage(q), u => this.videoThumbUrl.set(u));
+  private readonly galleryThumbs = createThumbResolver(q => this.service.getWikiImage(q), u => this.galleryThumbUrl.set(u));
 
   constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      this.videoThumbs.destroy();
+      this.galleryThumbs.destroy();
+    });
     effect(() => {
       const v = this.featuredVideo();
-      untracked(() => (v ? this.resolveThumb(mediaThumbSource(v), this.videoThumbUrl) : this.videoThumbUrl.set(null)));
+      untracked(() => this.videoThumbs.resolve(v ? mediaThumbSource(v) : {}));
     });
     effect(() => {
       const a = this.artworks()[0];
-      untracked(() => (a ? this.resolveThumb(mediaThumbSource(a), this.galleryThumbUrl) : this.galleryThumbUrl.set(null)));
+      untracked(() => this.galleryThumbs.resolve(a ? mediaThumbSource(a) : {}));
     });
 
     // Reset la pagination des sub-factions quand la recherche change.

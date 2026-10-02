@@ -1,3 +1,5 @@
+import type { Observable, Subscription } from 'rxjs';
+
 /**
  * L39 — source d'une vignette tirée des données : une URL utilisable telle quelle, ou une requête
  * à résoudre par `/api/wiki-image`, ou rien (dégradé). Les champs `thumbnail` des vidéos et
@@ -27,4 +29,31 @@ export function mediaThumbSource(m: {
   if (query) return { wikiQuery: query };
   if (m.embedType === 'video' && m.embedId) return { url: `https://i.ytimg.com/vi/${m.embedId}/hqdefault.jpg` };
   return {};
+}
+
+/**
+ * L39 — résolution d'une vignette qui ANNULE la précédente : passer de la faction A à la faction B
+ * dans le même composant ne laisse pas la réponse tardive de A écraser la vignette de B.
+ */
+export function createThumbResolver(
+  fetchWiki: (query: string) => Observable<{ imageUrl: string | null }>,
+  set: (url: string | null) => void,
+): { resolve(src: MediaThumbSource): void; destroy(): void } {
+  let current: Subscription | null = null;
+  const cancel = () => {
+    current?.unsubscribe();
+    current = null;
+  };
+  return {
+    resolve(src) {
+      cancel();
+      set(src.url ?? null);
+      if (!src.wikiQuery) return;
+      current = fetchWiki(src.wikiQuery).subscribe({
+        next: (r) => { if (r.imageUrl) set(r.imageUrl); },
+        error: () => {},
+      });
+    },
+    destroy: cancel,
+  };
 }

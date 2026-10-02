@@ -3,7 +3,7 @@
 // tel quel dans `url(...)`, le navigateur demandait « /Emperor%20of%20Mankind… » et
 // « /ultramarines-brothers.jpg » : image cassée sur les 17 fiches faction.
 import { describe, expect, it } from 'vitest';
-import { isImageUrl, mediaThumbSource } from './media-thumb';
+import { createThumbResolver, isImageUrl, mediaThumbSource } from './media-thumb';
 
 describe('isImageUrl', () => {
   it('n’accepte que les adresses absolues http(s) et les chemins de l’API', () => {
@@ -32,5 +32,46 @@ describe('mediaThumbSource', () => {
       .toEqual({ wikiQuery: 'Ultramarines brothers' });
     expect(mediaThumbSource({ image: 'ultramarines-brothers.jpg' })).toEqual({});
     expect(mediaThumbSource({ image: 'https://example.org/a.jpg' })).toEqual({ url: 'https://example.org/a.jpg' });
+  });
+});
+
+describe('createThumbResolver (L39 : réponse en retard d’une autre faction)', () => {
+  it('une réponse arrivée après un changement de fiche est ignorée', async () => {
+    const { Subject } = await import('rxjs');
+    const pending = new Map<string, InstanceType<typeof Subject<{ imageUrl: string | null }>>>();
+    const fetchWiki = (q: string) => {
+      const s = new Subject<{ imageUrl: string | null }>();
+      pending.set(q, s);
+      return s.asObservable();
+    };
+    let value: string | null = 'initial';
+    const r = createThumbResolver(fetchWiki, (v) => (value = v));
+    r.resolve({ wikiQuery: 'faction A' });
+    r.resolve({ wikiQuery: 'faction B' });
+    pending.get('faction B')!.next({ imageUrl: 'https://img/B.jpg' });
+    pending.get('faction A')!.next({ imageUrl: 'https://img/A.jpg' }); // en retard : ignorée
+    expect(value).toBe('https://img/B.jpg');
+  });
+
+  it('URL directe : posée tout de suite, et annule une requête en cours', async () => {
+    const { Subject } = await import('rxjs');
+    const s = new Subject<{ imageUrl: string | null }>();
+    let value: string | null = null;
+    const r = createThumbResolver(() => s.asObservable(), (v) => (value = v));
+    r.resolve({ wikiQuery: 'q' });
+    r.resolve({ url: 'https://img/direct.jpg' });
+    s.next({ imageUrl: 'https://img/late.jpg' });
+    expect(value).toBe('https://img/direct.jpg');
+  });
+
+  it('destroy() coupe la requête en cours', async () => {
+    const { Subject } = await import('rxjs');
+    const s = new Subject<{ imageUrl: string | null }>();
+    let value: string | null = null;
+    const r = createThumbResolver(() => s.asObservable(), (v) => (value = v));
+    r.resolve({ wikiQuery: 'q' });
+    r.destroy();
+    s.next({ imageUrl: 'https://img/late.jpg' });
+    expect(value).toBeNull();
   });
 });
