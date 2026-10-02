@@ -4,11 +4,11 @@
 // Les liens EXTERNES ne sont pas vérifiés ici (réseau) : `npm run liens:externes`, à la demande.
 import { afterAll, describe, expect, it } from 'vitest';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { tmpdir } from 'node:os';
 import {
-  checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, galaxyLinks, inventory, loadSeed, newsLinks,
-  readRoutes,
+  APP, ROOT, checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, galaxyLinks, inventory, loadSeed,
+  newsLinks, readRoutes, staleDeclarations,
 } from './liens-lib.mjs';
 
 const routes = readRoutes();
@@ -69,10 +69,32 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     expect(causes[0]).toMatch(/sans vérification déclarée/);
   });
 
-  it('gabarit paramétré : la forme est vérifiée (« /units/:param » existe, « /unites/:param » non)', () => {
+  it('gabarit paramétré : route inconnue (« /unites ») → cassé ; route connue mais lien non déclaré → cassé', () => {
     const f = page(`@Component({template: \`<a [routerLink]="['/units', u.id]">a</a><a [routerLink]="['/unites', u.id]">b</a>\`})`);
     const broken = checkInternal(codeLinks([f]), { routes, data, news: { entries: [] } });
-    expect(broken.map((b) => b.target)).toEqual(['/unites/:param']);
+    expect(broken.map((b) => [b.target, /aucune route/.test(b.cause) ? 'route' : /sans déclaration/.test(b.cause) ? 'décl' : b.cause]))
+      .toEqual([['/units/:param', 'décl'], ['/unites/:param', 'route']]);
+  });
+
+  it('couplage gabarit ↔ DATA_LINKS : un champ nouveau non déclaré → cassé ; déclaré, sa valeur « nope » → cassée', () => {
+    const f = page(`@Component({template: \`<a [routerLink]="['/units', d.subfaction.leaderUnitId]">chef</a>\`})`);
+    const planted = { ...data, subfactions: [...data.subfactions, { id: 'planted', leaderUnitId: 'nope' }] };
+    const opts = { routes, data: planted, news: { entries: [] } };
+    expect(checkInternal(codeLinks([f]), opts).map((b) => b.cause)[0]).toMatch(/sans déclaration/);
+    const key = `${relative(ROOT, f)}|d.subfaction.leaderUnitId`;
+    const defs = [{ seed: 'subfactions', field: 'leaderUnitId', to: '/units/:id', templates: [key] }];
+    const broken = checkInternal([...codeLinks([f]), ...dataLinks(planted, defs)], { ...opts, defs });
+    expect(broken.map((b) => b.target)).toEqual(['/units/nope']);
+    expect(broken[0].cause).toMatch(/absent des données/);
+  });
+
+  it('couplage : échanger le champ d’un lien existant (faction-detail, h.primarchId vers /units) → cassé', () => {
+    const file = join(APP, 'features/faction-detail/faction-detail.component.ts');
+    const swapped = { cls: 'route', target: '/units/:param', dynamic: 'h.primarchId', source: 's', file };
+    expect(checkInternal([swapped], { routes, data, news: { entries: [] } })[0].cause).toMatch(/déclaré vers \/lore\/primarchs\/:id/);
+    // … et la déclaration de h.unitId, que plus aucun lien ne lit, devient orpheline.
+    const inv = inventory().filter((l) => !(l.file === file && l.dynamic === 'h.unitId'));
+    expect(staleDeclarations(inv)).toEqual(['frontend/src/app/features/faction-detail/faction-detail.component.ts|h.unitId']);
   });
 
   it('identifiant LITTÉRAL dans un tableau de commandes : vérifié contre les données', () => {
@@ -147,5 +169,9 @@ describe('liens internes du site (garde L39)', () => {
   it('aucun lien interne cassé (route, identifiant, ancre, fichier, fiche technique)', () => {
     const broken = checkInternal(inv).map((b) => `${b.target} @ ${b.source} — ${b.cause}`);
     expect(broken).toEqual([]);
+  });
+
+  it('aucune déclaration orpheline (DATA_LINKS, SELF_LINKS, COVERED : chaque gabarit déclaré existe)', () => {
+    expect(staleDeclarations(inv)).toEqual([]);
   });
 });

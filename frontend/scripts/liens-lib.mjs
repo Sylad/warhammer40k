@@ -104,34 +104,67 @@ export function dataAnchors(data, news) {
   };
 }
 
+const T = (file, expr) => `frontend/src/app/features/${file}|${expr}`;
+
 /**
  * Références entre données que l'interface rend en LIEN — chaque entrée : fichier d'amorçage,
- * chemin du champ, gabarit de destination. Tenue à la main : un nouveau lien construit depuis
- * les données s'ajoute ici (le test de garde vérifie que chaque gabarit dynamique y est couvert).
+ * chemin du champ, route de destination, et `templates` : les liens du code (« fichier|expression »)
+ * qui lisent CE champ. Couplage vérifié dans les deux sens par checkInternal / staleDeclarations :
+ * un lien construit avec un segment non littéral doit être déclaré ici (ou dans SELF_LINKS), vers
+ * la même route ; une déclaration dont le lien a disparu échoue aussi.
  */
 export const DATA_LINKS = [
-  { seed: 'factions', field: 'notableHeroes[].unitId', to: '/units/:id', where: 'faction-detail' },
-  { seed: 'factions', field: 'notableHeroes[].primarchId', to: '/lore/primarchs/:id', where: 'faction-detail' },
-  { seed: 'primarchs', field: 'legionId', to: '/factions/:id', where: 'primarch-detail' },
-  { seed: 'primarchs', field: 'relatedPrimarchIds[]', to: '/lore/primarchs/:id', where: 'primarch-detail' },
-  { seed: 'subfactions', field: 'factionId', to: '/factions/:id', where: 'subfaction-detail' },
-  { seed: 'subfactions', field: 'primarchId', to: '/lore/primarchs/:id', where: 'subfaction-detail' },
-  { seed: 'subfactions', field: 'parentSubFactionId', to: '/subfactions/:id', where: 'subfaction-detail' },
-  { seed: 'subfactions', field: 'unitIds[]', to: '/units/:id', where: 'subfaction-detail' },
-  { seed: 'units', field: 'factionId', to: '/factions/:id', where: 'unit-detail' },
-  { seed: 'units', field: 'relatedUnitIds[]', to: '/units/:id', where: 'unit-detail' },
+  { seed: 'factions', field: 'notableHeroes[].unitId', to: '/units/:id', templates: [T('faction-detail/faction-detail.component.ts', 'h.unitId')] },
+  { seed: 'factions', field: 'notableHeroes[].primarchId', to: '/lore/primarchs/:id', templates: [T('faction-detail/faction-detail.component.ts', 'h.primarchId')] },
+  { seed: 'primarchs', field: 'legionId', to: '/factions/:id', templates: [T('primarch-detail/primarch-detail.component.ts', 'p.legionId')] },
+  // Les apparentés sont chargés un par un (`r` = fiche obtenue) : lien sur r.id, valeurs vérifiées ici.
+  { seed: 'primarchs', field: 'relatedPrimarchIds[]', to: '/lore/primarchs/:id', templates: [T('primarch-detail/primarch-detail.component.ts', 'r.id')] },
+  { seed: 'subfactions', field: 'factionId', to: '/factions/:id', templates: [T('subfaction-detail/subfaction-detail.component.ts', 'd.subfaction.factionId')] },
+  { seed: 'subfactions', field: 'primarchId', to: '/lore/primarchs/:id', templates: [T('subfaction-detail/subfaction-detail.component.ts', 'd.subfaction.primarchId')] },
+  { seed: 'subfactions', field: 'parentSubFactionId', to: '/subfactions/:id', templates: [T('subfaction-detail/subfaction-detail.component.ts', 'd.parent.id')] },
+  { seed: 'subfactions', field: 'unitIds[]', to: '/units/:id', templates: [T('subfaction-detail/subfaction-detail.component.ts', 'u.id')] },
+  { seed: 'units', field: 'factionId', to: '/factions/:id', templates: [T('unit-detail/unit-detail.component.ts', 'f.id')] },
+  { seed: 'units', field: 'relatedUnitIds[]', to: '/units/:id', templates: [T('unit-detail/unit-detail.component.ts', 'r.id')] },
   // Trois Chevaliers impériaux → « imperial-knights » : fiche jamais écrite ; la page n'affiche le
   // lien que si la faction existe (sinon le nom en texte). Le garde-fou doit rester dans le gabarit.
   {
-    seed: 'god-machines', field: 'factionId', to: '/factions/:id', where: 'titan-detail',
+    seed: 'god-machines', field: 'factionId', to: '/factions/:id', templates: [T('titan-detail/titan-detail.component.ts', 'm.factionId')],
     guard: { file: 'features/titan-detail/titan-detail.component.ts', marker: 'factionIds().has(m.factionId)' },
   },
-  { seed: 'legendary-ships', field: 'factionId', to: '/factions/:id', where: 'ship-detail' },
-  { seed: 'legendary-ships', field: 'relatedPrimarchId', to: '/lore/primarchs/:id', where: 'ship-detail' },
-  { seed: 'equipment', field: 'factionIds[]', to: '/factions/:id', where: 'lore-equipment, equipment-detail' },
-  { seed: 'chaos-gods', field: 'primarchsCorrupted[].primarchId', to: '/lore/primarchs/:id', where: 'lore-chaos-gods' },
-  { seed: 'lore-concepts', field: 'relatedConcepts[].conceptId', to: '/lore/concepts#:id', where: 'lore-concepts' },
+  { seed: 'legendary-ships', field: 'factionId', to: '/factions/:id', templates: [T('ship-detail/ship-detail.component.ts', 's.factionId')] },
+  { seed: 'legendary-ships', field: 'relatedPrimarchId', to: '/lore/primarchs/:id', templates: [T('ship-detail/ship-detail.component.ts', 's.relatedPrimarchId')] },
+  { seed: 'equipment', field: 'factionIds[]', to: '/factions/:id', templates: [T('equipment-detail/equipment-detail.component.ts', 'fid')] },
+  { seed: 'chaos-gods', field: 'primarchsCorrupted[].primarchId', to: '/lore/primarchs/:id', templates: [T('lore-chaos-gods/lore-chaos-gods.component.ts', 'p.primarchId')] },
+  { seed: 'lore-concepts', field: 'relatedConcepts[].conceptId', to: '/lore/concepts#:id', templates: [T('lore-concepts/lore-concepts.component.ts', 'r.conceptId')] },
 ];
+
+/**
+ * Liens construits sur l'identifiant d'une fiche de la collection même que sert la route (liste,
+ * suite d'une liste, palette Ctrl+K…) : l'identifiant existe par construction. `to` = route(s)
+ * admise(s) pour cette expression ; une autre route fait échouer la garde.
+ */
+export const SELF_LINKS = {
+  [T('faction-detail/faction-detail.component.ts', 'sf.id')]: { to: ['/subfactions/:id'] },
+  [T('faction-detail/faction-detail.component.ts', 'u.id')]: { to: ['/units/:id'] },
+  [T('factions/factions.component.ts', 'f.id')]: { to: ['/factions/:id'] },
+  [T('lore-equipment/lore-equipment.component.ts', 'item.id')]: { to: ['/lore/equipment/:id'] },
+  [T('lore-primarchs/lore-primarchs.component.ts', 'p.id')]: { to: ['/lore/primarchs/:id'] },
+  [T('lore-saints/lore-saints.component.ts', 's.id')]: { to: ['/lore/saints/:id'] },
+  [T('lore-ships/lore-ships.component.ts', 's.id')]: { to: ['/lore/ships/:id'] },
+  [T('lore-timeline/lore-timeline.component.html', 'ev.id')]: { to: ['/lore/timeline/:id'] },
+  [T('lore-titans/lore-titans.component.ts', 'm.id')]: { to: ['/lore/titans/:id'] },
+  [T('subfaction-detail/subfaction-detail.component.ts', 's.id')]: { to: ['/subfactions/:id'] },
+  // Popups de la carte : `id` vient de data-link-id, écrit depuis les zones vérifiées par galaxyLinks.
+  [T('lore-galaxy/lore-galaxy.component.ts', '/lore/primarchs/${id}')]: { to: ['/lore/primarchs/:id'] },
+  [T('lore-galaxy/lore-galaxy.component.ts', '/lore/timeline/${id}')]: { to: ['/lore/timeline/:id'] },
+  [T('lore-galaxy/lore-galaxy.component.ts', '/lore/saints/${id}')]: { to: ['/lore/saints/:id'] },
+  [T('lore-galaxy/lore-galaxy.component.ts', '/lore/ships/${id}')]: { to: ['/lore/ships/:id'] },
+  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|f.id': { to: ['/factions/:id'] },
+  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|p.id': { to: ['/lore/primarchs/:id'] },
+  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|s.id': { to: ['/lore/saints/:id', '/lore/ships/:id'] },
+  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|t.id': { to: ['/lore/titans/:id'] },
+  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|e.id': { to: ['/lore/timeline/:id', '/lore/equipment/:id'] },
+};
 
 /** Valeurs d'un champ « a[].b » / « a[] » / « a » d'un enregistrement. */
 export function fieldValues(rec, field) {
@@ -309,9 +342,9 @@ export function codeLinks(files = sourceFiles()) {
 }
 
 /** Liens construits depuis les données d'amorçage (DATA_LINKS) : une entrée par valeur. */
-export function dataLinks(data) {
+export function dataLinks(data, defs = DATA_LINKS) {
   const out = [];
-  for (const d of DATA_LINKS) {
+  for (const d of defs) {
     const list = data[d.seed];
     if (!Array.isArray(list)) continue;
     for (const rec of list) {
@@ -471,6 +504,20 @@ export const COVERED = {
  * `{ ...lien, cause }`. Les liens dynamiques du code (« /units/:param ») sont vérifiés sur la
  * forme (une route paramétrée existe) ; leurs valeurs le sont par les liens de données.
  */
+/**
+ * Déclarations orphelines : un gabarit déclaré (DATA_LINKS.templates, SELF_LINKS, COVERED) qui ne
+ * correspond plus à aucun lien du code — le lien a changé de champ ou a disparu.
+ */
+export function staleDeclarations(links, { defs = DATA_LINKS, self = SELF_LINKS, covered = COVERED } = {}) {
+  const present = new Set();
+  for (const l of links) {
+    if (!l.file) continue;
+    for (const e of [l.dynamic, l.routeExpr]) if (e) present.add(`${rel(l.file)}|${e}`);
+  }
+  const declared = [...defs.flatMap((d) => d.templates ?? []), ...Object.keys(self), ...Object.keys(covered)];
+  return [...new Set(declared)].filter((k) => !present.has(k));
+}
+
 /** Liens de données gardés (cible absente → texte simple) : à lister dans le rapport. */
 export function unlinkedData(links, data = loadSeed()) {
   const rids = routeIds(data);
@@ -481,7 +528,7 @@ export function unlinkedData(links, data = loadSeed()) {
   });
 }
 
-export function checkInternal(links, { routes = readRoutes(), data = loadSeed(), news = readNews() } = {}) {
+export function checkInternal(links, { routes = readRoutes(), data = loadSeed(), news = readNews(), defs = DATA_LINKS, self = SELF_LINKS } = {}) {
   const broken = [];
   const rids = routeIds(data);
   const anchors = dataAnchors(data, news);
@@ -503,6 +550,15 @@ export function checkInternal(links, { routes = readRoutes(), data = loadSeed(),
       const r = isPage(path);
       if (!r) {
         fail(`aucune route ne sert « ${path} » (le routeur renvoie vers /factions)`);
+        continue;
+      }
+      if (l.dynamic && l.file) {
+        // Segment calculé : le lien doit dire quel champ de quelles données il lit, vers cette route.
+        const key = `${rel(l.file)}|${l.dynamic}`;
+        const decl = defs.filter((d) => (d.templates ?? []).includes(key));
+        const routesOk = [...decl.map((d) => d.to.split('#')[0]), ...(self[key]?.to ?? [])];
+        if (!decl.length && !self[key]) fail(`lien construit (${l.dynamic}) sans déclaration : l'ajouter à DATA_LINKS (champ lu) ou SELF_LINKS`);
+        else if (!routesOk.includes(r.path)) fail(`lien construit (${l.dynamic}) vers ${r.path}, mais déclaré vers ${routesOk.join(', ')}`);
         continue;
       }
       if (!l.dynamic) {
