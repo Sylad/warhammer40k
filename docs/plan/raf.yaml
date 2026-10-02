@@ -203,6 +203,8 @@ lots:
     visible: true
     created: 2026-10-01
     started: 2026-10-02
+    notes:
+      - { date: 2026-10-02, text: "Modèle ol L23 : sous-tâches réduites à n/m (aucun titre publié), --check/--leaks, CI frontend-checks à chaque push (deploy.sh intact). Barre du haut : complète dès 1920 (au lieu de 1700), resserrée 1280–1439 ; mesurée 1280–2560 avec 9+. Lots visibles masqués faute de public: L31, L32, L33. Reste : entrée Nouveautés L30 + revue UX." }
   - id: L31
     title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
     status: todo
