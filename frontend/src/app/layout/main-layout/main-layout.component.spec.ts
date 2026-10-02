@@ -52,14 +52,37 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(component.name).toBe('NouveautesComponent');
   });
 
-  it('lien « Nouveautés » dans la barre du bureau, juste avant « À propos »', async () => {
+  it('liens « Nouveautés » puis « Plan de travail » dans la barre du bureau, juste avant « À propos » (L23, L30)', async () => {
     const f = await render();
     const links = [...el(f).querySelectorAll<HTMLAnchorElement>('nav.nav > a')];
     const labels = links.map((a) => a.textContent!.replace(/\s+/g, ' ').trim());
     const i = labels.findIndex((l) => l.includes('Nouveautés'));
     expect(i).toBeGreaterThan(-1);
     expect(links[i].getAttribute('href')).toBe('/nouveautes');
-    expect(labels[i + 1]).toContain('À propos');
+    expect(labels[i + 1]).toMatch(/Plan de travail$/);
+    expect(links[i + 1].getAttribute('href')).toBe('/plan');
+    expect(labels[i + 2]).toContain('À propos');
+  });
+
+  it('la route /plan charge la page Plan de travail (L30)', async () => {
+    const layout = routes.find((r) => r.component === MainLayoutComponent)!;
+    const route = layout.children!.find((r) => r.path === 'plan')!;
+    const component = await (route.loadComponent as () => Promise<{ name: string }>)();
+    expect(component.name).toBe('PlanComponent');
+  });
+
+  it('menu du téléphone : « Plan de travail » juste après « Nouveautés » (L30)', async () => {
+    const f = await render();
+    const hrefs = [...el(f).querySelectorAll<HTMLAnchorElement>('#menu-telephone a')].map((a) => a.getAttribute('href'));
+    const i = hrefs.indexOf('/nouveautes');
+    expect(i).toBeGreaterThan(-1);
+    expect(hrefs[i + 1]).toBe('/plan');
+    expect(el(f).querySelector('#menu-telephone a[href="/plan"]')!.textContent!.trim()).toBe('Plan de travail');
+  });
+
+  it('fil d’Ariane : « Plan de travail » pour /plan (L30)', () => {
+    const src = readFileSync(resolve(__dirname, '../../shared/components/breadcrumb/breadcrumb.component.ts'), 'utf8');
+    expect(src).toMatch(/plan: 'Plan de travail'/);
   });
 
   it('menu du téléphone : bouton « Menu » relié au tiroir, tiroir inerte et caché quand il est fermé', async () => {
@@ -174,5 +197,10 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
   it('la recherche rapide (Ctrl+K) propose la page Nouveautés', () => {
     const src = readFileSync(resolve(__dirname, '../../shared/components/command-palette/command-palette.component.ts'), 'utf8');
     expect(src).toMatch(/label: 'Nouveautés'.*routerLink: \['\/nouveautes'\]/);
+  });
+
+  it('la recherche rapide (Ctrl+K) propose la page Plan de travail (L30)', () => {
+    const src = readFileSync(resolve(__dirname, '../../shared/components/command-palette/command-palette.component.ts'), 'utf8');
+    expect(src).toMatch(/label: 'Plan de travail'.*routerLink: \['\/plan'\]/);
   });
 });

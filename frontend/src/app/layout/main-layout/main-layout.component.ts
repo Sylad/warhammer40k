@@ -70,6 +70,9 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
             <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
           }
         </a>
+        <a routerLink="/plan" routerLinkActive="active">
+          <span class="nav-ico">⚒</span>Plan de travail
+        </a>
         <a routerLink="/about" routerLinkActive="active">
           <span class="nav-ico">⚜</span>À propos
         </a>
@@ -113,6 +116,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
         }
       </a>
+      <a (click)="fromDrawer = true" routerLink="/plan" routerLinkActive="active">Plan de travail</a>
       <a (click)="fromDrawer = true" routerLink="/about" routerLinkActive="active">À propos</a>
     </nav>
 
@@ -435,10 +439,17 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
       .drawer, .drawer.open, .drawer-backdrop { transition: none; }
     }
 
-    @media (max-width: 1699px) {
+    /* L30 : avec « Plan de travail », la barre complète (icônes, sous-titre) ne tient qu'à partir
+       de 1920 px, la barre compacte à partir de 1440 px ; entre 1280 et 1439 px, lettres un peu
+       moins espacées et logo un peu plus petit (barre mesurée par topbar.e2e.spec.ts). */
+    @media (max-width: 1919px) {
       .brand .brand-sub, .nav-ico { display: none; }
       .nav { gap: 16px; } /* 1280 px + pastille « 9+ » : barre sans débordement (topbar.e2e.spec.ts) */
       .nav-search-btn .nav-ico { display: inline; }
+    }
+    @media (min-width: 1280px) and (max-width: 1439px) {
+      .nav { letter-spacing: 0.05em; }
+      .brand strong { font-size: 1.05rem; letter-spacing: 0.06em; } /* = téléphone */
     }
     @media (max-width: 1279px) {
       .topbar { padding: 0 18px; }

@@ -35,7 +35,7 @@ const NEWS = {
   })),
 };
 
-describe.skipIf(!built || !chromium)('barre du haut à 1280 px, pastille « 9+ » (navigateur, dist) — L23', () => {
+describe.skipIf(!built || !chromium)('barre du haut de 1280 à 2560 px, pastille « 9+ » (navigateur, dist) — L23, L30', () => {
   let server: Server;
   let browser: Browser;
   let base: string;
@@ -62,31 +62,39 @@ describe.skipIf(!built || !chromium)('barre du haut à 1280 px, pastille « 9+ �
     expect(stale, 'dist plus ancien que la barre : relancer ng build').toBe(false);
   });
 
-  it('aucun débordement ; recherche à 34 px du bord ; au moins 16 px (écart de la barre) entre le logo et le premier lien', async () => {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
-    await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-09-01', slugs: [] })));
-    await page.route('**/nouveautes-data/nouveautes.json', (r) => r.fulfill({ json: NEWS }));
-    await page.goto(`${base}/about`);
-    await page.waitForSelector('nav.nav .news-badge');
-    const m = await page.evaluate(() => {
-      const box = (s: string) => document.querySelector(s)!.getBoundingClientRect();
-      const bar = document.querySelector<HTMLElement>('.topbar')!;
-      const links = [...document.querySelectorAll<HTMLElement>('.nav > a, .nav-dropdown > a')];
-      return {
-        badge: document.querySelector('nav.nav .news-badge')!.textContent!.trim(),
-        overflow: bar.scrollWidth - bar.clientWidth,
-        page: document.documentElement.scrollWidth - innerWidth,
-        searchToEdge: innerWidth - box('.nav-search-btn').right,
-        logoToFirstLink: links[0].getBoundingClientRect().left - box('.brand').right,
-        tallestLink: Math.max(...links.map((a) => a.getBoundingClientRect().height)),
-      };
-    });
-    await page.close();
-    expect(m.badge).toBe('9+');
-    expect(m.overflow).toBeLessThanOrEqual(0);
-    expect(m.page).toBeLessThanOrEqual(0);
-    expect(m.searchToEdge).toBeGreaterThanOrEqual(33.5);
-    expect(m.logoToFirstLink).toBeGreaterThanOrEqual(16); // 18 px mesurés le 01-10
-    expect(m.tallestLink).toBeLessThan(40); // chaque lien sur une ligne
-  });
+  // L30 : « Plan de travail » ajouté ; barre complète à partir de 1920 px, compacte en dessous,
+  // resserrée entre 1280 et 1439 px. Chaque seuil est mesuré des deux côtés.
+  it.each([1280, 1366, 1439, 1440, 1699, 1700, 1919, 1920, 2560])(
+    '%i px : aucun débordement ; recherche à 34 px du bord ; au moins 16 px entre le logo et le premier lien ; « Plan de travail » visible',
+    async (width) => {
+      const page = await browser.newPage({ viewport: { width, height: 800 } });
+      await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-09-01', slugs: [] })));
+      await page.route('**/nouveautes-data/nouveautes.json', (r) => r.fulfill({ json: NEWS }));
+      await page.goto(`${base}/about`);
+      await page.waitForSelector('nav.nav .news-badge');
+      const m = await page.evaluate(() => {
+        const box = (s: string) => document.querySelector(s)!.getBoundingClientRect();
+        const bar = document.querySelector<HTMLElement>('.topbar')!;
+        const links = [...document.querySelectorAll<HTMLElement>('.nav > a, .nav-dropdown > a')];
+        const plan = document.querySelector<HTMLElement>('nav.nav a[href="/plan"]')!.getBoundingClientRect();
+        return {
+          badge: document.querySelector('nav.nav .news-badge')!.textContent!.trim(),
+          overflow: bar.scrollWidth - bar.clientWidth,
+          page: document.documentElement.scrollWidth - innerWidth,
+          searchToEdge: innerWidth - box('.nav-search-btn').right,
+          logoToFirstLink: links[0].getBoundingClientRect().left - box('.brand').right,
+          tallestLink: Math.max(...links.map((a) => a.getBoundingClientRect().height)),
+          planVisible: plan.width > 0 && plan.right <= innerWidth,
+        };
+      });
+      await page.close();
+      expect(m.badge).toBe('9+');
+      expect(m.overflow).toBeLessThanOrEqual(0);
+      expect(m.page).toBeLessThanOrEqual(0);
+      expect(m.searchToEdge).toBeGreaterThanOrEqual(33.5);
+      expect(m.logoToFirstLink).toBeGreaterThanOrEqual(16);
+      expect(m.tallestLink).toBeLessThan(40); // chaque lien sur une ligne
+      expect(m.planVisible).toBe(true);
+    },
+  );
 });

@@ -148,6 +148,11 @@ export const routes: Routes = [
           .then(m => m.NouveautesComponent)
       },
       {
+        path: 'plan',
+        loadComponent: () => import('./features/plan/plan.component')
+          .then(m => m.PlanComponent)
+      },
+      {
         path: 'about',
         loadComponent: () => import('./features/about/about.component')
           .then(m => m.AboutComponent)
