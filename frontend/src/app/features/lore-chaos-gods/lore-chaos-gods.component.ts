@@ -25,7 +25,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
         </p>
         <div class="quick-nav">
           @for (g of gods(); track g.id) {
-            <a class="quick-link" [href]="'#' + g.id" [style.color]="g.color">
+            <a class="quick-link" [routerLink]="[]" [fragment]="g.id" [style.color]="g.color">
               <span class="quick-sigil">{{ g.sigil }}</span>
               <span class="quick-name">{{ g.name }}</span>
             </a>
@@ -105,7 +105,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
                     <div class="primarch-name">{{ p.name }}</div>
                     <div class="primarch-legion">{{ p.legion }}</div>
                     @if (p.primarchId) {
-                      <a class="primarch-go" [routerLink]="['/lore/primarchs']" [fragment]="p.primarchId">
+                      <a class="primarch-go" [routerLink]="['/lore/primarchs', p.primarchId]">
                         Voir fiche →
                       </a>
                     }
