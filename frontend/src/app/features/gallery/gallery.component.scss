@@ -92,6 +92,7 @@
 
     .hero-stats {
       display: flex;
+      flex-wrap: wrap;
       gap: 18px;
     }
     .stat-card {
@@ -209,14 +210,13 @@
       box-shadow: 0 0 0 1px rgba(201, 162, 74, 0.35), 0 22px 60px rgba(0, 0, 0, 0.55), inset 0 0 60px rgba(201, 162, 74, 0.12);
     }
     .cat-name, .cat-count {
-      position: relative;
+      position: absolute;
+      left: 0; right: 0;
       z-index: 1;
       display: block;
     }
     .cat-name {
-      position: absolute;
       bottom: 32px;
-      left: 0; right: 0;
       color: var(--gold-bright);
       font-family: var(--serif);
       font-size: 14px;
@@ -226,9 +226,7 @@
       padding: 0 8px;
     }
     .cat-count {
-      position: absolute;
       bottom: 12px;
-      left: 0; right: 0;
       color: #c9beaa;
       font-size: 11px;
       letter-spacing: 0.05em;
@@ -447,8 +445,7 @@
       transition: color 0.15s ease;
     }
     .artist-row:first-of-type, .col-row:first-of-type { border-top: 0; }
-    .artist-row:hover, .col-row:hover { color: var(--gold-bright); }
-    .artist-row.active, .col-row.active { color: var(--gold-bright); }
+    .artist-row:hover, .col-row:hover, .artist-row.active, .col-row.active { color: var(--gold-bright); }
 
     /* Pastilles 32 px des listes artistes / collections. */
     .ar-avatar, .col-icon {
@@ -520,7 +517,6 @@
       gap: 16px;
     }
     .viewer-img {
-      flex: 1;
       aspect-ratio: 16/10;
       max-height: 70vh;
       background-size: contain;
@@ -616,15 +612,17 @@
       .art-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 1024px) {
-      .hero-content { grid-template-columns: 1fr; }
+      .hero-content { grid-template-columns: minmax(0, 1fr); } /* L32 : 1fr = largeur minimale du contenu */
       .hero-stats { gap: 14px; }
       .stat-num { font-size: 24px; }
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 760px) {
-      .gallery-page { width: min(100% - 28px, 1440px); }
+      .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
+      .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
+      .art-content { padding: 14px 12px; }
       .category-grid { grid-template-columns: repeat(2, 1fr); }
       .art-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .sidebar { grid-template-columns: 1fr; }
@@ -646,13 +644,11 @@
       overflow-y: auto;
     }
     .cat-box { width: min(520px, calc(100% - 32px)); }
+    /* Police, capitales et interlettrage : ceux de tous les h3 (styles.scss). */
     .cat-box h3, .import-box h3 {
       margin: 0 0 8px;
       color: var(--gold-bright);
-      font-family: var(--serif);
       font-size: 22px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
     }
     .cat-hint {
       color: var(--muted);
@@ -709,7 +705,6 @@
     .vi-btn.primary {
       background: rgba(201, 162, 74, 0.18);
       border-color: var(--gold);
-      color: var(--gold-bright);
     }
     .vi-btn.primary:hover { background: rgba(201, 162, 74, 0.28); }
     .vi-btn.ghost {
@@ -722,6 +717,7 @@
     /* Hero import button */
     .search-bar-wrap {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       align-items: center;
       max-width: 720px;

@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { longestWord } from '../../shared/longest-word';
 import type { LoreConcept, LoreConceptCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 
@@ -72,8 +73,8 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
               </div>
               <div class="concept-sigil-row">
                 <span class="concept-sigil" [style.color]="c.color">{{ c.sigil }}</span>
-                <div>
-                  <h2 [style.color]="c.color">{{ c.name }}</h2>
+                <div class="concept-names">
+                  <h2 [style.color]="c.color" [style.--longest-word]="longestWord(c.name)">{{ c.name }}</h2>
                   <div class="concept-title">{{ c.title }}</div>
                 </div>
               </div>
@@ -146,6 +147,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 export class LoreConceptsComponent {
   private readonly service = inject(WarhammerService);
   private readonly route = inject(ActivatedRoute);
+  readonly longestWord = longestWord;
   readonly concepts = toSignal(this.service.loreConcepts$, { initialValue: [] as LoreConcept[] });
   readonly filterCategory = signal<'all' | LoreConceptCategory>('all');
   readonly conceptImages = signal<Map<string, string>>(new Map());
