@@ -497,12 +497,13 @@ export class GalleryComponent {
 
   readonly categories = CATEGORIES;
 
-  private readonly catalogArtworks = toSignal(this.service.artworks$, { initialValue: [] as Artwork[] });
-  // 2e relecture : images perso en échec → liste vide (toSignal relancerait l'erreur à chaque lecture).
+  // 2e/3e relecture : source en échec → liste vide (toSignal relancerait l'erreur à chaque lecture :
+  // 0 carte, région d'état vide, erreurs console). Catalogue, images perso et factions.
+  private readonly catalogArtworks = toSignal(this.service.artworks$.pipe(catchError(() => of([] as Artwork[]))), { initialValue: [] as Artwork[] });
   private readonly localImages = toSignal(this.service.images$.pipe(catchError(() => of([] as string[]))), { initialValue: [] as string[] });
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
   readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
-  readonly factions = toSignal(this.service.factions$, { initialValue: [] as Faction[] });
+  readonly factions = toSignal(this.service.factions$.pipe(catchError(() => of([] as Faction[]))), { initialValue: [] as Faction[] });
   /** Vrai dès la première valeur OU l'échec d'une source (une source en échec ne bloque rien). */
   private static settled(source: Observable<unknown>) {
     return toSignal(source.pipe(map(() => true), catchError(() => of(true))), { initialValue: false });
@@ -511,6 +512,12 @@ export class GalleryComponent {
   private readonly factionsLoaded = GalleryComponent.settled(this.service.factions$);
   private readonly imagesLoaded = GalleryComponent.settled(this.service.images$);
   private readonly metaLoaded = signal(false);
+  /** 3e relecture : source VRAIMENT chargée (fausse en attente comme en échec). */
+  private static loadedOk(source: Observable<unknown>) {
+    return toSignal(source.pipe(map(() => true), catchError(() => of(false))), { initialValue: false });
+  }
+  private readonly catalogOk = GalleryComponent.loadedOk(this.service.artworks$);
+  private readonly factionsOk = GalleryComponent.loadedOk(this.service.factions$);
   /**
    * 2e relecture : toutes les sources qui peuvent rendre une faction valide ou illustrée sont là
    * (ou en échec) — codex, catalogue, images perso et leurs métadonnées (faction en texte libre).
@@ -728,6 +735,8 @@ export class GalleryComponent {
   readonly emptyFactionName = computed<string | null>(() => {
     const f = this.filterFaction();
     if (!f || this.unknownFaction() || !this.factionSourcesSettled()) return null;
+    // 3e relecture : catalogue en échec → on ne sait pas ; pas d'« aucune illustration » affirmé.
+    if (!this.catalogOk()) return null;
     if (this.artworks().some(a => a.faction === f)) return null;
     return this.factionName(f);
   });
@@ -740,6 +749,9 @@ export class GalleryComponent {
   readonly unknownFaction = computed<string | null>(() => {
     const f = this.filterFaction();
     if (!f || !this.factionSourcesSettled()) return null;
+    // 3e relecture : « inconnue » exige la liste des factions VRAIMENT chargée — un échec n'en est
+    // pas une preuve (le filtre s'applique alors tel quel).
+    if (!this.factionsOk()) return null;
     if (this.factions().some(x => x.id === f) || this.factionList().includes(f)) return null;
     return f;
   });

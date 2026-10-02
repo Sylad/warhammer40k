@@ -240,11 +240,11 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
   // 2e relecture de code : une faction peut n'être valide (ou illustrée) QUE par les images perso
   // (images$ + getImageMeta(), faction en texte libre de la modale « Catégoriser »). Factions
   // arrivées avant elles → « Faction inconnue » annoncé à tort, ou « Aucune illustration » à tort.
-  async function withSources(images$: Observable<unknown>, meta$: Observable<unknown>) {
+  async function withSources(images$: Observable<unknown>, meta$: Observable<unknown>, artworks$: Observable<unknown> = of(ARTWORKS), factions$: Observable<unknown> = of(FACTIONS)) {
     await setupTestBed([GalleryComponent], [
       provideRouter([{ path: 'gallery', component: GalleryComponent }]),
       { provide: WarhammerService, useValue: fakeWarhammerService({
-        artworks$: of(ARTWORKS), factions$: of(FACTIONS), images$,
+        artworks$, factions$, images$,
         getImageMeta: () => meta$,
         getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
       }) },
@@ -293,6 +293,35 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     await go('/gallery?faction=grey-knights');
     await settle(50);
     expect(h.routeNativeElement!.textContent).toContain('Aucune illustration de la faction Grey Knights');
+  });
+
+  // 3e relecture : /api/factions en 500 (observé) ou catalogue en 500 → toSignal relançait l'erreur
+  // à chaque lecture : 0 carte, région d'état vide, erreurs console. La page reste utilisable, et
+  // « Faction inconnue » exige une liste de factions VRAIMENT chargée (pas un échec).
+  it('factions en échec : illustrations affichées, filtre faction appliqué, jamais « Faction inconnue »', async () => {
+    const { h, go, settle } = await withSources(of([]), of({}), of(ARTWORKS), throwError(() => new Error('500')));
+    const c = await go('/gallery');
+    await settle(250);
+    expect(ids(c)).toEqual(['aw-001', 'aw-n']);
+    expect(h.routeNativeElement!.querySelectorAll('.art-card').length).toBe(2);
+    await go('/gallery?faction=necrons');
+    await settle(50);
+    expect(ids(c)).toEqual(['aw-n']);
+    await go('/gallery?faction=foo');
+    await settle(250);
+    expect(notice(h)).toBeNull();
+    expect(h.routeNativeElement!.textContent).not.toContain('Faction inconnue');
+  });
+
+  it('catalogue en échec : les images perso restent affichées, pas de « Aucune illustration » affirmé sur des données manquantes', async () => {
+    const { h, go, settle } = await withSources(of(['perso.jpg']), of({}), throwError(() => new Error('500')));
+    const c = await go('/gallery');
+    await settle(250);
+    expect(ids(c)).toEqual(['local-0']);
+    expect(h.routeNativeElement!.querySelectorAll('.art-card').length).toBe(1);
+    await go('/gallery?faction=necrons');
+    await settle(50);
+    expect(h.routeNativeElement!.textContent).not.toContain('Aucune illustration de la faction');
   });
 
   it('identifiant inconnu : message visible qui le nomme, galerie entière affichée, liste sur « Toutes »', async () => {
