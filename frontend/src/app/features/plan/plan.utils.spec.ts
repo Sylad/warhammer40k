@@ -93,6 +93,12 @@ describe('fetchPlan', () => {
     respond(404, null);
     await expect(fetchPlan()).resolves.toBeNull();
   });
+  it('version inconnue (ou absente) → erreur, pas un plan vide', async () => {
+    respond(200, { version: 2, project: 'p', lots: [] });
+    await expect(fetchPlan()).rejects.toThrow(/version/);
+    respond(200, { project: 'p', lots: [] });
+    await expect(fetchPlan()).rejects.toThrow(/version/);
+  });
   it('500, réponse sans liste de lots ou panne réseau → erreur', async () => {
     respond(500, null);
     await expect(fetchPlan()).rejects.toThrow();

@@ -41,6 +41,8 @@ export interface PlanGroups {
 
 export const RECENT_DAYS = 30;
 export const PLAN_URL = '/plan-data/plan.json';
+/** Version du format écrit par scripts/plan-data.mjs ; toute autre = erreur (jamais « plan vide »). */
+export const PLAN_VERSION = 1;
 const DAY = 86_400_000;
 
 const atMidnight = (day: string) => new Date(`${day}T00:00:00`);
@@ -90,7 +92,7 @@ export function newsSlugByLot(entries: readonly { slug: string; lots: readonly s
 
 /**
  * Plan publié. 404 → null (aucun plan publié) ; toute autre panne — 500, réseau,
- * réponse non JSON, JSON sans liste de lots — lève une erreur (état « Réessayer »).
+ * réponse non JSON, JSON sans liste de lots, version inconnue — lève une erreur (état « Réessayer »).
  * fetch et non HttpClient : fichier statique, hors des intercepteurs PIN / quota.
  */
 export async function fetchPlan(): Promise<PlanData | null> {
@@ -99,5 +101,6 @@ export async function fetchPlan(): Promise<PlanData | null> {
   if (!res.ok) throw new Error(`plan : HTTP ${res.status}`);
   const data = (await res.json()) as PlanData;
   if (!data || typeof data !== 'object' || !Array.isArray(data.lots)) throw new Error('plan : réponse inattendue');
+  if (data.version !== PLAN_VERSION) throw new Error(`plan : version ${String(data.version)} inconnue`);
   return data;
 }
