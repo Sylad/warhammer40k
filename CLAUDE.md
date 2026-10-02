@@ -209,11 +209,19 @@ Audit outillé de TOUS les liens (rapport du 2026-10-02 : `docs/liens/audit-2026
   la page cible, **pas d'ancre nue** `href="#x"` sans `(click)` (avec `<base href="/">` elle mène à
   l'accueil : utiliser `[routerLink]="[]" [fragment]`), fichier présent (casse comprise), fiche
   technique de chaque unité. Code 1 s'il y a un lien cassé.
-- **Garde en CI** : `scripts/liens.test.mjs` (Vitest, donc `npm test` et « Contrôles frontend »)
-  échoue sur tout lien interne cassé. Un nouveau lien construit depuis une donnée s'ajoute à
-  `DATA_LINKS` ; un lien dont la destination est une variable doit être déclaré dans `COVERED`
-  avec ce qui le vérifie, sinon le test échoue. Le fil d'Ariane ne lie que les préfixes qui sont
-  des pages (`breadcrumb.utils.ts`).
+- **Garde en CI** : `scripts/liens.test.mjs` (Vitest, donc `npm test` et « Contrôles frontend »).
+  Ce qu'elle vérifie, sans réseau : chaque lien interne écrit dans le code (gabarits, `route:`,
+  `routerLink: [...]`, `router.navigate([...])`, identifiants littéraux compris), les liens du HTML
+  des Nouveautés (`nouveautes.json` construit), les zones de la carte (chemins lus dans
+  `linkToPath`), les fiches techniques. **Tout lien construit sur un segment calculé** (`['/units',
+  h.unitId]`, `` `/lore/x/${id}` ``) doit être déclaré : dans `DATA_LINKS` (`templates` : le
+  champ de données qu'il lit, dont chaque valeur est vérifiée contre la collection cible), dans
+  `SELF_LINKS` (identifiant d'une fiche de la collection même) ou, si la route entière est une
+  variable, dans `COVERED` avec ce qui la vérifie ; sinon, ou si la déclaration vise une autre route
+  ou ne correspond plus à aucun lien, le test échoue. Les identifiants sont vérifiés contre
+  `backend/seed`, pas contre le volume de prod. Le fil d'Ariane ne lie que les préfixes qui sont des
+  pages (`breadcrumb.utils.ts`, testé à part). **Pas vérifié en CI** : les liens externes (à la
+  demande seulement, ci-dessous) et les images du wiki.
 - `npm run liens:crawl` (backend :3001 + `npm run dev:frontend` :4201 lancés) : parcours de
   l'application en marche depuis `/` et toutes les adresses de l'inventaire — redirections `**`,
   API en erreur, pages restées en chargement, images en échec (y compris une « image » servie en
