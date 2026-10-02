@@ -122,7 +122,13 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               }
             </header>
 
-            @if (totalFiltered() === 0) {
+            @if (emptyFactionName(); as name) {
+              <!-- L42 (revue UX R3) : faction connue sans illustration → nommée, avec une sortie. -->
+              <div class="empty" data-testid="faction-vide">
+                <p>Aucune illustration de la faction {{ name }} pour l’instant.</p>
+                <button class="see-all" type="button" (click)="onFactionChange('')">Retirer ce filtre</button>
+              </div>
+            } @else if (totalFiltered() === 0) {
               <div class="empty">Aucune œuvre ne correspond à ces filtres.</div>
             } @else {
               <div class="art-grid">
@@ -176,8 +182,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <label>Faction</label>
               <select [ngModel]="unknownFaction() ? '' : filterFaction()" (ngModelChange)="onFactionChange($event)">
                 <option value="">Toutes</option>
-                @for (f of factionList(); track f) {
-                  <option [value]="f">{{ f }}</option>
+                @for (f of factionOptions(); track f) {
+                  <option [value]="f">{{ f === filterFaction() ? factionName(f) : f }}</option>
                 }
               </select>
             </div>
@@ -492,6 +498,7 @@ export class GalleryComponent {
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
   readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
   readonly factions = toSignal(this.service.factions$, { initialValue: [] as Faction[] });
+  private readonly catalogLoaded = toSignal(this.service.artworks$.pipe(map(() => true)), { initialValue: false });
   private readonly factionsLoaded = toSignal(this.service.factions$.pipe(map(() => true)), { initialValue: false });
 
   readonly imageMeta = signal<Record<string, ImageMeta>>({});
@@ -680,9 +687,37 @@ export class GalleryComponent {
   });
 
   /**
-   * L42 (relecture) : ?faction= qui n'est ni l'identifiant d'une faction du codex ni une valeur de
-   * la liste (métadonnées des images perso) → nommé à l'écran, filtre non appliqué. Rien tant que
-   * les factions ne sont pas chargées (pas de message prématuré).
+   * Options de la liste « Faction » : valeurs `faction` des illustrations (catalogue ET images
+   * perso, voir factionList), plus la faction active si elle n'en a aucune (L42, revue UX R3 :
+   * /gallery?faction=grey-knights laissait la liste vide).
+   */
+  readonly factionOptions = computed(() => {
+    const list = this.factionList();
+    const f = this.filterFaction();
+    if (!f || this.unknownFaction() || list.includes(f)) return list;
+    return [...list, f].sort();
+  });
+
+  /** Nom lisible d'un identifiant de faction (« grey-knights » → « Grey Knights »), sinon tel quel. */
+  factionName(id: string): string {
+    return this.factions().find(x => x.id === id)?.nom ?? id;
+  }
+
+  /**
+   * L42 (revue UX R3) : faction active connue mais sans aucune illustration → son nom, pour un
+   * message dédié. Rien tant que le catalogue n'est pas chargé (pas de message prématuré).
+   */
+  readonly emptyFactionName = computed<string | null>(() => {
+    const f = this.filterFaction();
+    if (!f || this.unknownFaction() || !this.catalogLoaded()) return null;
+    if (this.artworks().some(a => a.faction === f)) return null;
+    return this.factionName(f);
+  });
+
+  /**
+   * L42 (relecture) : ?faction= qui n'est ni l'identifiant d'une faction du codex ni une valeur
+   * `faction` d'une illustration (catalogue ou images perso, factionList) → nommé à l'écran, filtre
+   * non appliqué. Rien tant que les factions ne sont pas chargées (pas de message prématuré).
    */
   readonly unknownFaction = computed<string | null>(() => {
     const f = this.filterFaction();

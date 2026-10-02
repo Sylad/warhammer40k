@@ -23,9 +23,9 @@ const FACTIONS = [
   { id: 'grey-knights', nom: 'Grey Knights' },
 ];
 
-function service(factions$: Observable<unknown> = of(FACTIONS)) {
+function service(factions$: Observable<unknown> = of(FACTIONS), artworks$: Observable<unknown> = of(ARTWORKS)) {
   return fakeWarhammerService({
-    artworks$: of(ARTWORKS),
+    artworks$,
     factions$,
     getImageMeta: () => of({}),
     getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
@@ -33,10 +33,10 @@ function service(factions$: Observable<unknown> = of(FACTIONS)) {
 }
 
 /** Routeur réel : /gallery?… → GalleryComponent (réutilisé d'une adresse à l'autre, comme en vrai). */
-async function harness(factions$?: Observable<unknown>) {
+async function harness(factions$?: Observable<unknown>, artworks$?: Observable<unknown>) {
   await setupTestBed([GalleryComponent], [
     provideRouter([{ path: 'gallery', component: GalleryComponent }]),
-    { provide: WarhammerService, useValue: service(factions$) },
+    { provide: WarhammerService, useValue: service(factions$, artworks$) },
   ]);
   const h = await RouterTestingHarness.create();
   const go = async (url: string) => {
@@ -185,13 +185,42 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     expect(notice(h)).toBeNull();
   });
 
-  it('identifiant connu sans illustration (Grey Knights) : pas de message « inconnue », grille vide expliquée', async () => {
-    const { h, go, settle } = await harness();
+  // Revue UX R3 : Grey Knights (connue, sans illustration) → liste vide (ses options ne
+  // viennent que des illustrations) et message générique. Désormais : nom lisible et message dédié.
+  it('identifiant connu sans illustration (Grey Knights) : liste sur « Grey Knights », message qui nomme la faction, bouton pour sortir', async () => {
+    const { h, go, settle, router } = await harness();
     const c = await go('/gallery?faction=grey-knights');
     await settle();
     expect(notice(h)).toBeNull();
     expect(ids(c)).toEqual([]);
-    expect(h.routeNativeElement!.textContent).toContain('Aucune œuvre ne correspond à ces filtres.');
+    const select = h.routeNativeElement!.querySelector<HTMLSelectElement>('.filter-row select')!;
+    expect(select.value).toBe('grey-knights');
+    expect(select.selectedOptions[0]?.textContent?.trim()).toBe('Grey Knights');
+    const text = h.routeNativeElement!.textContent!;
+    expect(text).toContain('Aucune illustration de la faction Grey Knights pour l’instant.');
+    expect(text).not.toContain('Aucune œuvre ne correspond à ces filtres.');
+    const out = [...h.routeNativeElement!.querySelectorAll('button')].find((b) => b.textContent!.trim() === 'Retirer ce filtre');
+    expect(out, 'bouton « Retirer ce filtre » absent').toBeDefined();
+    out!.click();
+    await settle();
+    expect(router.url).toBe('/gallery');
+    expect(ids(c)).toEqual(['aw-001', 'aw-n']);
+  });
+
+  it('faction active affichée par son nom lisible dans la liste (Nécrons)', async () => {
+    const { h, go, settle } = await harness();
+    await go('/gallery?faction=necrons');
+    await settle();
+    const select = h.routeNativeElement!.querySelector<HTMLSelectElement>('.filter-row select')!;
+    expect(select.value).toBe('necrons');
+    expect(select.selectedOptions[0]?.textContent?.trim()).toBe('Nécrons');
+  });
+
+  it('illustrations pas encore chargées : pas de « aucune illustration » prématuré', async () => {
+    const { h, go, settle } = await harness(undefined, NEVER);
+    await go('/gallery?faction=grey-knights');
+    await settle();
+    expect(h.routeNativeElement!.textContent).not.toContain('Aucune illustration de la faction');
   });
 
   it('factions pas encore chargées : aucun message prématuré', async () => {
