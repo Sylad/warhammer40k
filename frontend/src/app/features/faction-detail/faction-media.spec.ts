@@ -49,6 +49,19 @@ describe('artworkForFaction (L42)', () => {
     expect(artworkForFaction(artworks, 'orks')?.faction).toBe('orks');
     expect(artworkForFaction(artworks, 'leagues-of-votann')).toBeNull();
   });
+  // Relecture : aw-008 « Callidus Assassin » était étiquetée inquisition (Temple Callidus =
+  // Officio Assassinorum, factions.json) ; la page Inquisition montrait une assassine.
+  it('Callidus Assassin (aw-008) : Officio Assassinorum, pas Inquisition (Eisenhorn reste à l’Inquisition)', () => {
+    const factionIds = new Set(seed<{ id: string }[]>('factions.json').map((f) => f.id));
+    expect(factionIds.has('officio-assassinorum')).toBe(true);
+    expect(artworks.find((a) => a.id === 'aw-008')?.faction).toBe('officio-assassinorum');
+    expect(artworkForFaction(artworks, 'officio-assassinorum')?.id).toBe('aw-008');
+    expect(artworkForFaction(artworks, 'inquisition')?.id).toBe('aw-030');
+  });
+  it('chaque illustration étiquetée l’est d’un identifiant de faction existant', () => {
+    const factionIds = new Set(seed<{ id: string }[]>('factions.json').map((f) => f.id));
+    expect(artworks.filter((a) => a.faction && !factionIds.has(a.faction)).map((a) => a.id)).toEqual([]);
+  });
   it('la première de la faction dans l’ordre des données', () => {
     expect(artworkForFaction([{ id: '0', faction: 'g' }, { id: '1', faction: 'f' }, { id: '2', faction: 'f' }], 'f')?.id).toBe('1');
   });
