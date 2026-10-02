@@ -72,7 +72,7 @@ const RESOURCES = [
               @if (f.iconUrl && !brokenIcons().has(f.id)) {
                 <img [src]="f.iconUrl" [alt]="f.nom" (error)="iconFailed(f.id)" />
               } @else {
-                <span>{{ f.symbole }}</span>
+                <span aria-hidden="true">{{ f.symbole }}</span>
               }
             </div>
             <div class="card-content">

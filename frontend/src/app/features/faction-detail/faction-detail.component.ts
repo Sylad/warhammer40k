@@ -368,7 +368,7 @@ const DEFAULT_RESOURCES = [
             @if (featuredVideo(); as v) {
               <a class="media-card" [routerLink]="'/videos'">
                 <div class="media-thumb" [style.--m-img]="videoThumb()">
-                  <span class="play">▶</span>
+                  <span class="play" aria-hidden="true">▶</span>
                   @if (v.duration) { <span class="dur">{{ v.duration }}</span> }
                 </div>
                 <strong>Vidéo à la une</strong>
@@ -377,7 +377,7 @@ const DEFAULT_RESOURCES = [
             }
             <a class="media-card" routerLink="/gallery">
               <div class="media-thumb" [style.--m-img]="galleryThumb()">
-                <span class="play">▦</span>
+                <span class="play" aria-hidden="true">▦</span>
               </div>
               <strong>Galerie</strong>
               <span>Illustrations et artworks</span>

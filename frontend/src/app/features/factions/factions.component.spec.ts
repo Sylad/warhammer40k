@@ -30,5 +30,7 @@ describe('liste des factions — icône introuvable (L39)', () => {
     f.detectChanges();
     expect(imgs().map((i) => i.getAttribute('src'))).toEqual(['https://example.invalid/b.png']);
     expect(el.querySelector('.card-sigil span')?.textContent).toBe('✠');
+    // Revue UX L39 : le symbole de repli est décoratif (le nom de la faction est dans la carte).
+    expect(el.querySelector('.card-sigil span')?.getAttribute('aria-hidden')).toBe('true');
   });
 });
