@@ -75,4 +75,30 @@ describe.skipIf(!built || !chromium)('bandeaux de l’accueil, de la galerie et 
       await page.close();
     });
   }
+
+  // Revue UX R1 (L32) : à 320 px le champ de recherche de la galerie faisait 96 px (indication
+  // rognée à « Rech »), 136 px à 360, 166 px à 390 — « Importer » lui prenait la ligne.
+  it('/gallery : au téléphone, champ de recherche sur toute la largeur et « Importer » dessous ; au bureau, inchangé', async () => {
+    const page = await browser.newPage();
+    const problems: string[] = [];
+    for (const [w, h] of [[320, 700], [360, 740], [390, 844], [1440, 900]]) {
+      await page.setViewportSize({ width: w, height: h });
+      await page.goto(base + '/gallery');
+      await page.locator('.search-bar input').waitFor();
+      await page.evaluate(() => document.fonts.ready);
+      const m = await page.evaluate(() => {
+        const r = (s: string) => document.querySelector(s)!.getBoundingClientRect();
+        return { input: r('.search-bar input'), wrap: r('.search-bar-wrap'), btn: r('.import-btn-hero') };
+      });
+      if (w < 1000) {
+        if (m.input.width < m.wrap.width - 1) problems.push(`${w} px : champ de ${Math.round(m.input.width)} px sur ${Math.round(m.wrap.width)}`);
+        if (m.btn.top < m.input.bottom) problems.push(`${w} px : « Importer » pas sous le champ`);
+      } else {
+        if (Math.round(m.input.width) !== 520) problems.push(`${w} px : champ de ${m.input.width} px (520 avant)`);
+        if (m.btn.top >= m.input.bottom) problems.push(`${w} px : « Importer » n’est plus à côté du champ`);
+      }
+    }
+    await page.close();
+    expect(problems).toEqual([]);
+  });
 });

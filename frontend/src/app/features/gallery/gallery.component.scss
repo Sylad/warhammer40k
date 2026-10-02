@@ -622,6 +622,7 @@
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
       .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
+      .search-bar { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
       .art-content { padding: 14px 12px; }
       .category-grid { grid-template-columns: repeat(2, 1fr); }
       .art-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }

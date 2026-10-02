@@ -2150,6 +2150,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 760px) .nav-arrow.right": {
     "right": "8px",
   },
+  "@media (max-width: 760px) .search-bar": {
+    "flex-basis": "100%",
+    "max-width": "none",
+  },
   "@media (max-width: 760px) .sidebar": {
     "grid-template-columns": "1fr",
   },
