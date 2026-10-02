@@ -13,7 +13,8 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: false,
-    include: ['src/**/*.spec.ts'],
+    // L30 : + tests des scripts Node (générateur du Plan de travail, workflow CI).
+    include: ['src/**/*.spec.ts', 'scripts/**/*.test.mjs'],
     exclude: ['**/node_modules/**', '**/dist/**', '**/.angular/**'],
     reporters: ['default'],
   },

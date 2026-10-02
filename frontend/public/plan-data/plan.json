@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "project": "warhammer40k",
+  "lots": [
+    {
+      "id": "L23",
+      "title": "Une page Nouveautés, et un menu au téléphone",
+      "status": "done",
+      "started": "2026-10-01",
+      "finished": "2026-10-01"
+    },
+    {
+      "id": "L30",
+      "title": "Une page Plan de travail : ce qui se prépare",
+      "status": "doing",
+      "started": "2026-10-02"
+    }
+  ]
+}

@@ -197,10 +197,12 @@ lots:
     finished: 2026-10-01
   - id: L30
     title: "Page « Plan de travail » : ce qui est prévu, en cours et récemment livré, généré au build depuis docs/plan/raf.yaml (titres et états seulement, jamais les notes) — inspirée de la page « À venir » d'AetherWX"
-    status: todo
+    public: "Une page Plan de travail : ce qui se prépare"
+    status: doing
     estimate: 0.5
     visible: true
     created: 2026-10-01
+    started: 2026-10-02
   - id: L31
     title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
     status: todo
