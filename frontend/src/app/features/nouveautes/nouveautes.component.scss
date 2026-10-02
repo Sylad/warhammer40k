@@ -22,13 +22,16 @@
   &.is-target { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
 }
 
-.news-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px 14px; margin-bottom: 8px; }
+// L34 : la ligne passe à la ligne ENTRE la date, « Nouveau » et le bouton, jamais dans la date.
+.news-head-row { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 6px 14px; margin-bottom: 8px; }
 .news-date {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
   margin: 0; padding-top: 3px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
+  time { white-space: nowrap; }
 }
 .news-new {
-  margin-left: 10px; padding: 2px 8px; border-radius: 999px;
+  padding: 2px 8px; border-radius: 999px; white-space: nowrap;
   background: var(--gold); color: var(--bg); letter-spacing: 0.08em;
 }
 
