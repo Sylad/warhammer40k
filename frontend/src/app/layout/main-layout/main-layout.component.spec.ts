@@ -202,6 +202,18 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(document.activeElement).toBe(el(f).querySelector('main h1'));
   });
 
+  it('« À propos ▾ » : lien du panneau → le focus va au titre h1 de la page d’arrivée (L30, WCAG 2.4.3)', async () => {
+    const f = await render();
+    el(f).querySelector<HTMLButtonElement>('button.about-toggle')!.click();
+    f.detectChanges();
+    el(f).querySelector<HTMLAnchorElement>('#menu-a-propos a[href="/plan"]')!.click();
+    await f.whenStable();
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(TestBed.inject(Router).url).toBe('/plan');
+    expect(document.activeElement).toBe(el(f).querySelector('main h1'));
+  });
+
   it('navigation hors tiroir : le focus n’est pas déplacé', async () => {
     const f = await render();
     const button = el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!;

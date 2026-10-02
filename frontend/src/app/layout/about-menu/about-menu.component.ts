@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, HostListener, Input, ViewChild, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -27,14 +27,14 @@ const GROUP = ['/nouveautes', '/plan', '/about'];
         @if (badge) { <span class="news-badge" aria-hidden="true">{{ badge }}</span> }
       </button>
       <div id="menu-a-propos" class="about-panel" [hidden]="!open()">
-        <a routerLink="/nouveautes" routerLinkActive="active" (click)="open.set(false)">
+        <a routerLink="/nouveautes" routerLinkActive="active" (click)="follow()">
           Nouveautés
           @if (badge) {
             <span class="news-badge" aria-hidden="true">{{ badge }}</span><span class="sr-only">, {{ unseenText }}</span>
           }
         </a>
-        <a routerLink="/plan" routerLinkActive="active" (click)="open.set(false)">Plan de travail</a>
-        <a routerLink="/about" routerLinkActive="active" (click)="open.set(false)">À propos du codex</a>
+        <a routerLink="/plan" routerLinkActive="active" (click)="follow()">Plan de travail</a>
+        <a routerLink="/about" routerLinkActive="active" (click)="follow()">À propos du codex</a>
       </div>
     </div>
   `,
@@ -87,6 +87,12 @@ export class AboutMenuComponent {
   /** Texte pour lecteur d'écran (« 3 nouveautés non vues »). */
   @Input() unseenText = '';
 
+  /**
+   * Un lien du panneau est suivi : le panneau disparaît avec le lien qui avait le focus, la
+   * mise en page place le focus sur le titre de la page d'arrivée (WCAG 2.4.3).
+   */
+  @Output() readonly navigated = new EventEmitter<void>();
+
   @ViewChild('toggleButton', { static: true }) private toggleButton?: ElementRef<HTMLButtonElement>;
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -108,6 +114,11 @@ export class AboutMenuComponent {
         url = this.router.url;
       });
     update();
+  }
+
+  follow(): void {
+    this.open.set(false);
+    this.navigated.emit();
   }
 
   toggle(): void {

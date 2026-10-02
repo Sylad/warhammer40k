@@ -177,4 +177,19 @@ describe.skipIf(!built || !chromium)('barre du haut, seuils en em ±1 px, pastil
     expect(await expanded()).toBe('false');
     await page.close();
   });
+
+  it('« À propos ▾ » au clavier (1440 px) : Entrée sur « Plan de travail » → focus sur le h1 de la page, pas sur BODY', async () => {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.goto(`${base}/about`);
+    await page.waitForSelector('button.about-toggle');
+    await page.focus('button.about-toggle');
+    await page.keyboard.press('Enter');
+    await page.waitForSelector('#menu-a-propos:not([hidden])');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await page.waitForFunction(() => location.pathname === '/plan' && document.activeElement?.tagName === 'H1', null, { timeout: 5000 });
+    expect(await page.evaluate(() => document.activeElement!.textContent!.trim())).toBe('Ce qui se prépare');
+    await page.close();
+  });
 });

@@ -66,7 +66,7 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
           </div>
         </div>
         <!-- L30 (option b) : Nouveautés, Plan de travail et À propos regroupés sous un bouton à divulgation. -->
-        <app-about-menu [badge]="badge()" [unseenText]="unseenText()" />
+        <app-about-menu [badge]="badge()" [unseenText]="unseenText()" (navigated)="focusOnArrival = true" />
       </nav>
 
       <div class="topbar-actions">
@@ -489,8 +489,8 @@ export class MainLayoutComponent implements OnInit {
   /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
   readonly pageInert = computed(() => (this.menuOpen() ? '' : null));
   /**
-   * La navigation en cours vient d'un lien du tiroir ou d'un résultat de la recherche rapide
-   * (L30) : l'élément cliqué disparaît, le focus est à placer à l'arrivée.
+   * La navigation en cours vient d'un lien du tiroir, du panneau « À propos ▾ » ou d'un résultat
+   * de la recherche rapide (L30) : l'élément cliqué disparaît, le focus est à placer à l'arrivée.
    */
   focusOnArrival = false;
 
