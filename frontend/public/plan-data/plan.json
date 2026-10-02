@@ -58,6 +58,11 @@
       "title": "Pages faction : des vidéos et des images de la bonne faction",
       "status": "doing",
       "started": "2026-10-02"
+    },
+    {
+      "id": "L44",
+      "title": "Un codex tenu à jour : actualités de l'univers et pages révisées",
+      "status": "todo"
     }
   ]
 }
