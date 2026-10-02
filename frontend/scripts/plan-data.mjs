@@ -158,28 +158,37 @@ export function readNewsTitles(dir) {
   return m;
 }
 
-/** Longueur minimale d'un texte privé recherché (en deçà, coïncidences possibles). */
+/** Longueur minimale d'une note, d'un verdict ou d'une raison recherchés (en deçà, coïncidences). */
 const MIN_PRIVATE = 12;
+/**
+ * Longueur minimale d'un TITRE (brut de lot, de sous-tâche, `public:` de sous-tâche)
+ * recherché. Un titre court est une étiquette (« Plan de travail », « Revue UX — Galerie »)
+ * que l'interface peut afficher légitimement et qui ne révèle rien : la chercher ferait
+ * échouer le build sur un faux positif. Les notes, verdicts et raisons, eux, restent
+ * cherchés dès MIN_PRIVATE : ce sont eux qui portent le privé.
+ */
+const MIN_TITLE = 20;
 
 /**
  * Textes du plan qui ne doivent JAMAIS sortir : notes (lots et sous-tâches),
- * verdicts UX, raisons d'abandon, titres bruts, titres et `public:` des
- * sous-tâches — sauf s'ils sont identiques à un titre de lot effectivement publié.
+ * verdicts UX, raisons d'abandon (dès 12 caractères), titres bruts, titres et
+ * `public:` des sous-tâches (dès 20 caractères) — sauf un titre identique à un
+ * titre de lot publié ou contenu dans l'un d'eux (texte public par définition).
  */
 export function privateTexts(raf, plan) {
-  const published = new Set((plan?.lots ?? []).map((l) => l.title));
+  const published = (plan?.lots ?? []).map((l) => l.title);
   const out = new Set();
-  const add = (v) => {
+  const add = (v, min) => {
     if (v == null) return;
     const s = String(v).trim();
-    if (s.length >= MIN_PRIVATE && !published.has(s)) out.add(s);
+    if (s.length >= min && !published.some((p) => p.includes(s))) out.add(s);
   };
   const walk = (item, isTask) => {
-    add(item?.title);
-    if (isTask) add(item?.public);
-    add(item?.reason);
-    add(item?.ux?.verdict);
-    for (const n of Array.isArray(item?.notes) ? item.notes : []) add(n?.text ?? n);
+    add(item?.title, MIN_TITLE);
+    if (isTask) add(item?.public, MIN_TITLE);
+    add(item?.reason, MIN_PRIVATE);
+    add(item?.ux?.verdict, MIN_PRIVATE);
+    for (const n of Array.isArray(item?.notes) ? item.notes : []) add(n?.text ?? n, MIN_PRIVATE);
     for (const t of Array.isArray(item?.tasks) ? item.tasks : []) walk(t, true);
   };
   for (const lot of raf?.lots ?? []) walk(lot, false);

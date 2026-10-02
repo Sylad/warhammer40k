@@ -215,6 +215,34 @@ describe('textes privés et fuites', () => {
     expect(findLeaks(raf, `<p>raison priv&eacute;e de l&rsquo;abandon</p>`, plan)).toEqual([]); // entités nommées : hors portée, documenté
   });
 
+  it('faux positif évité : un titre brut ou de sous-tâche générique (« Plan de travail ») présent dans l’interface n’est pas une fuite', () => {
+    const r = {
+      project: 'x',
+      lots: [{
+        id: 'L1', title: 'Page Plan de travail', public: 'Une page Plan de travail : ce qui se prépare', status: 'doing', visible: true,
+        notes: [{ text: 'court mais privé' }], // 16 caractères : une note reste cherchée
+        tasks: [
+          { id: 't1', title: 'Plan de travail', status: 'done' },
+          { id: 't2', title: 'Une page Plan de travail', status: 'todo' }, // contenu dans le titre publié
+          { id: 't3', title: 'Lien Plan de travail dans le tiroir du téléphone', status: 'todo' },
+        ],
+      }],
+    };
+    const p = buildPlan(r);
+    const ui = '<h1>Plan de travail</h1><p>Une page Plan de travail : ce qui se prépare</p>';
+    expect(findLeaks(r, ui, p)).toEqual([]);
+    // Vraies fuites, toujours vues : titre de sous-tâche long et note, même courte.
+    expect(findLeaks(r, `${ui} "Lien Plan de travail dans le tiroir du téléphone"`, p)).toEqual(['Lien Plan de travail dans le tiroir du téléphone']);
+    expect(findLeaks(r, `${ui} court mais privé`, p)).toEqual(['court mais privé']);
+  });
+
+  it('un titre brut long est toujours une fuite ; notes, verdicts et raisons restent cherchés dès 12 caractères', () => {
+    const texts = privateTexts(raf, buildPlan(raf, { newsTitles: news }));
+    expect(texts).toContain('Page publique (route /x, localStorage)');
+    expect(texts).not.toContain('Correctif interne'); // titre brut de 17 caractères : trop générique pour être cherché
+    expect(findLeaks(raf, 'x="Page publique (route /x, localStorage)"', buildPlan(raf, { newsTitles: news }))).toEqual(['Page publique (route /x, localStorage)']);
+  });
+
   it('scanDir parcourt un dossier construit et nomme le fichier fautif', () => {
     const dir = mkdtempSync(join(tmpdir(), 'plan-dist-'));
     mkdirSync(join(dir, 'media'));
