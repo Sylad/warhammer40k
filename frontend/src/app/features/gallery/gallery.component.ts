@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect, HostListener } from '@angular/core';
+import { Component, DestroyRef, inject, signal, computed, effect, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -479,6 +479,11 @@ export class GalleryComponent {
   private readonly service = inject(WarhammerService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
+  /** Anti-rebond de la réécriture de ?q= pendant la frappe (une navigation, pas une par touche). */
+  private searchTimer: ReturnType<typeof setTimeout> | undefined;
+  /** Dernière adresse écrite par syncUrl() (pour reconnaître son écho dans queryParamMap). */
+  private written: { q: string; faction: string } | null = null;
 
   readonly categories = CATEGORIES;
 
@@ -717,19 +722,28 @@ export class GalleryComponent {
   readonly pageRangeEnd = computed(() => Math.min(this.currentPage() * PAGE_SIZE, this.totalFiltered()));
 
   constructor() {
-    // Read ?q= or ?search= query param to pre-fill search (links from /lore figures)
+    // L42 : ?q= (alias historique ?search=, liens des pages Lore) et ?faction=<id> (carte
+    // « Galerie » des pages faction) SUIVENT l'adresse : paramètre absent → recherche vide / plus
+    // de filtre (composant réutilisé de /gallery?faction=x à /gallery : le filtre restait collé).
+    // Dans l'autre sens, syncUrl() écrit les deux ensemble depuis l'état : une fusion qui gardait
+    // l'ancien ?q= le ressuscitait (« Réinitialiser » en deux clics, frappe perdue).
     this.route.queryParamMap.subscribe(params => {
-      const q = params.get('q') ?? params.get('search');
-      if (q) this.searchQuery.set(q);
-      // L42 : ?faction=<id> (carte « Galerie » des pages faction) → galerie filtrée sur la faction.
-      // Le filtre SUIT l'adresse : paramètre absent → plus de filtre (composant réutilisé de
-      // /gallery?faction=x à /gallery : le filtre restait collé).
+      const q = params.get('q') ?? params.get('search') ?? '';
       const faction = params.get('faction') ?? '';
+      const own = this.written;
+      this.written = null;
+      // Écho de notre propre réécriture : l'état est déjà juste (ou en avance, frappe en cours).
+      if (own && own.q === q && own.faction === faction) return;
+      if (q !== this.searchQuery()) {
+        this.searchQuery.set(q);
+        this.currentPage.set(1);
+      }
       if (faction !== this.filterFaction()) {
         this.filterFaction.set(faction);
         this.currentPage.set(1);
       }
     });
+    this.destroyRef.onDestroy(() => clearTimeout(this.searchTimer));
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
       if (r.imageUrl) this.heroBgUrl.set(`url('${r.imageUrl}')`);
@@ -839,19 +853,31 @@ export class GalleryComponent {
   onSearchChange(q: string): void {
     this.searchQuery.set(q);
     this.currentPage.set(1); // page 5 + recherche → grille vide sans ça
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => this.syncUrl(), GalleryComponent.SEARCH_URL_DEBOUNCE_MS);
   }
 
   onFactionChange(f: string): void {
     this.filterFaction.set(f);
     this.currentPage.set(1);
-    this.syncFactionParam(f);
+    this.syncUrl();
   }
 
-  /** L42 (relecture) : l'adresse suit le filtre faction (sinon un rechargement le ramène). */
-  private syncFactionParam(f: string): void {
+  private static readonly SEARCH_URL_DEBOUNCE_MS = 400;
+
+  /**
+   * L42 (relecture) : l'adresse suit la recherche et le filtre faction — les DEUX, écrits ensemble
+   * depuis l'état (autres paramètres conservés, historique remplacé). Sinon un rechargement ramène
+   * l'ancien filtre, et l'écho d'une fusion partielle ressuscite l'ancienne recherche.
+   */
+  private syncUrl(): void {
+    clearTimeout(this.searchTimer);
+    const q = this.searchQuery();
+    const faction = this.filterFaction();
+    this.written = { q, faction };
     void this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { faction: f || null },
+      queryParams: { faction: faction || null, q: q || null, search: null },
       queryParamsHandling: 'merge',
       replaceUrl: true,
     });
@@ -864,7 +890,7 @@ export class GalleryComponent {
     this.filterArtist.set('');
     this.filterCollection.set('');
     this.currentPage.set(1);
-    this.syncFactionParam('');
+    this.syncUrl();
   }
 
   toggleBookmark(id: string): void {
