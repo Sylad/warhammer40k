@@ -699,6 +699,9 @@ export class GalleryComponent {
     this.route.queryParamMap.subscribe(params => {
       const q = params.get('q') ?? params.get('search');
       if (q) this.searchQuery.set(q);
+      // L42 : ?faction=<id> (carte « Galerie » des pages faction) → galerie filtrée sur la faction.
+      const faction = params.get('faction');
+      if (faction) this.filterFaction.set(faction);
     });
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {

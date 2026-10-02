@@ -9,6 +9,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
 import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
 import { longestWord } from '../../shared/longest-word';
+import { artworkForFaction, videoForFaction } from './faction-media';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -365,10 +366,11 @@ const DEFAULT_RESOURCES = [
             </section>
           }
 
+          <!-- L42 : vidéo et illustration DE la faction, sinon visuel neutre (symbole de la faction). -->
           <section class="sp">
             <h3>Médias</h3>
-            @if (featuredVideo(); as v) {
-              <a class="media-card" [routerLink]="'/videos'">
+            @if (factionVideo(); as v) {
+              <a class="media-card" routerLink="/videos">
                 <div class="media-thumb" [style.--m-img]="videoThumb()">
                   <span class="play" aria-hidden="true">▶</span>
                   @if (v.duration) { <span class="dur">{{ v.duration }}</span> }
@@ -376,14 +378,32 @@ const DEFAULT_RESOURCES = [
                 <strong>Vidéo à la une</strong>
                 <span>{{ v.titre }}</span>
               </a>
+            } @else {
+              <a class="media-card" routerLink="/videos">
+                <div class="media-thumb" [style.--m-img]="neutralThumb(f)">
+                  <span class="play" aria-hidden="true">{{ f.symbole }}</span>
+                </div>
+                <strong>Vidéos</strong>
+                <span>Voir les vidéos</span>
+              </a>
             }
-            <a class="media-card" routerLink="/gallery">
-              <div class="media-thumb" [style.--m-img]="galleryThumb()">
-                <span class="play" aria-hidden="true">▦</span>
-              </div>
-              <strong>Galerie</strong>
-              <span>Illustrations et artworks</span>
-            </a>
+            @if (factionArtwork()) {
+              <a class="media-card" routerLink="/gallery" [queryParams]="{ faction: f.id }">
+                <div class="media-thumb" [style.--m-img]="galleryThumb()">
+                  <span class="play" aria-hidden="true">▦</span>
+                </div>
+                <strong>Galerie</strong>
+                <span>Illustrations — {{ f.nom }}</span>
+              </a>
+            } @else {
+              <a class="media-card" routerLink="/gallery">
+                <div class="media-thumb" [style.--m-img]="neutralThumb(f)">
+                  <span class="play" aria-hidden="true">{{ f.symbole }}</span>
+                </div>
+                <strong>Galerie</strong>
+                <span>Voir la galerie</span>
+              </a>
+            }
           </section>
 
           <section class="sp">
@@ -591,9 +611,15 @@ export class FactionDetailComponent {
     this.showAllUnits() ? 0 : Math.max(0, this.visibleUnits().length - 7),
   );
 
-  readonly featuredVideo = computed(() => {
-    const vids = this.videos();
-    return vids.find(v => v.featured) ?? vids.find(v => v.incontournable) ?? vids[0] ?? null;
+  /** L42 : vidéo étiquetée du nom de la faction ou d'une de ses sous-factions (faction-media.ts). */
+  readonly factionVideo = computed(() => {
+    const f = this.faction();
+    return f ? videoForFaction(this.videos(), [f.nom, ...this.subFactions().map(s => s.name)]) : null;
+  });
+  /** L42 : illustration dont le champ `faction` est celui de la page. */
+  readonly factionArtwork = computed(() => {
+    const f = this.faction();
+    return f ? artworkForFaction(this.artworks(), f.id) : null;
   });
 
   /** Vignettes « Médias » résolues (L39 : jamais une requête du wiki ni un nom de fichier nu dans url()). */
@@ -610,11 +636,11 @@ export class FactionDetailComponent {
       this.galleryThumbs.destroy();
     });
     effect(() => {
-      const v = this.featuredVideo();
+      const v = this.factionVideo();
       untracked(() => this.videoThumbs.resolve(v ? mediaThumbSource(v) : {}));
     });
     effect(() => {
-      const a = this.artworks()[0];
+      const a = this.factionArtwork();
       untracked(() => this.galleryThumbs.resolve(a ? mediaThumbSource(a) : {}));
     });
 
@@ -824,6 +850,11 @@ export class FactionDetailComponent {
   videoThumb(): string {
     const url = this.videoThumbUrl();
     return url ? `url('${url}')` : 'linear-gradient(135deg, #1a1612, #050403)';
+  }
+
+  /** L42 : visuel neutre (couleur de la faction) quand aucun média ne lui correspond. */
+  neutralThumb(f: Faction): string {
+    return `linear-gradient(135deg, ${f.couleurThematique}cc 0%, #050403 85%)`;
   }
 
   galleryThumb(): string {
