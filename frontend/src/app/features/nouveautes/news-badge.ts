@@ -146,7 +146,9 @@ export function sinceLabel(count: number): string {
 
 /** Séparateur posé avant la première entrée déjà vue. */
 export function seenSeparatorLabel(seen: NewsSeen, timeZone?: string): string {
-  if (!seen.at) return 'Déjà vu lors d’une visite précédente';
+  // L34 : sans heure de visite, la mémoire est la base posée au premier chargement d'une page :
+  // ces entrées étaient publiées, pas « vues ».
+  if (!seen.at) return 'Déjà publié lors de votre première visite du codex';
   const when = new Date(seen.at).toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short', timeZone });
   return `Déjà vu lors de votre visite du ${when}`;
 }

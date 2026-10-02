@@ -102,7 +102,8 @@ describe('pastille « nouveau » (news-badge) — L23', () => {
   it('séparateur « Déjà vu lors de votre visite du … » : date et heure en français', () => {
     expect(seenSeparatorLabel({ date: '2026-09-10', slugs: [], at: '2026-09-25T11:57:30Z' }, 'Europe/Paris'))
       .toBe('Déjà vu lors de votre visite du 25 septembre 2026 à 13:57');
-    expect(seenSeparatorLabel({ date: '2026-09-10', slugs: [] })).toBe('Déjà vu lors d’une visite précédente');
+    // L34 : mémoire sans heure de visite = base posée au premier chargement : rien n'a été « vu ».
+    expect(seenSeparatorLabel({ date: '2026-09-10', slugs: [], all: true })).toBe('Déjà publié lors de votre première visite du codex');
   });
 
   it('L34 — base de référence : premier chargement de N’IMPORTE quelle page, rien de mémorisé → tout ce qui est publié est vu, sans heure de visite', () => {

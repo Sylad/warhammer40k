@@ -113,6 +113,13 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     expect(TestBed.inject(NewsService).unseen()).toBe(0);
   });
 
+  it('L34 — retour d’un visiteur qui n’avait jamais ouvert la page (base sans heure) : séparateur « Déjà publié lors de votre première visite du codex »', async () => {
+    localStorage.setItem(NEWS_SEEN_KEY, JSON.stringify({ date: '2026-09-28', slugs: ['2026-09-28-ancienne'], all: true }));
+    const f = await render();
+    expect($(f, '.news-seen-sep').textContent!.trim()).toBe('Déjà publié lors de votre première visite du codex');
+    expect($$(f, '.news-new')).toHaveLength(1);
+  });
+
   it('lien permanent : arrivée sur /nouveautes#<slug> → entrée signalée et focalisée', async () => {
     history.replaceState(null, '', '/nouveautes#2026-09-28-ancienne');
     const f = await render();
