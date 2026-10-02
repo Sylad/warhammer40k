@@ -49,7 +49,10 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     stubFetch({ '/nouveautes-data/nouveautes.json': JSON_DATA, '/nouveautes-data/tailles.json': SIZES });
     await setupTestBed([NouveautesComponent]);
   });
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
 
   it('entrées dans l’ordre du journal (la plus récente en haut), date, titre, texte', async () => {
     const f = await render();
@@ -157,14 +160,35 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     expect($(f, '[id="2026-09-28-ancienne"] [role="status"].sr-only').textContent!.trim()).toBe('');
   });
 
-  it('L34 — presse-papiers refusé : « Copie impossible », annonce de l’adresse à copier', async () => {
+  it('L34 — presse-papiers refusé : « Copie impossible », adresse visible et sélectionnable sous le titre, annoncée une seule fois', async () => {
     Object.defineProperty(navigator, 'clipboard', { value: { writeText: vi.fn().mockRejectedValue(new Error('refus')) }, configurable: true });
+    const f = await render();
+    vi.useFakeTimers({ toFake: ['setTimeout'] });
+    const entry = () => $(f, '[id="2026-10-01-recente"]');
+    (entry().querySelector('button.news-copy') as HTMLButtonElement).click();
+    await vi.advanceTimersByTimeAsync(0);
+    f.detectChanges();
+    const url = `${location.origin}/nouveautes#2026-10-01-recente`;
+    expect(entry().querySelector('.news-copy-labels > span.is-shown')!.textContent!.trim()).toBe('Copie impossible');
+    const line = entry().querySelector<HTMLElement>('.news-copy-fallback')!;
+    expect(line.previousElementSibling!.tagName).toBe('H2'); // sous le titre, pas dans la ligne du bouton
+    expect(line.querySelector('.news-url')!.textContent!.trim()).toBe(url);
+    expect(line.getAttribute('role')).toBeNull();
+    const live = [...entry().querySelectorAll('[role="status"], [aria-live]')].filter((e) => e.textContent!.includes(url));
+    expect(live).toHaveLength(1);
+    // L'état d'échec dure : le temps de sélectionner l'adresse (pas d'effacement après 4 s).
+    await vi.advanceTimersByTimeAsync(10_000);
+    f.detectChanges();
+    expect(entry().querySelector('.news-copy-fallback')).not.toBeNull();
+  });
+
+  it('L34 — copie réussie : aucune ligne d’adresse (pas de décalage)', async () => {
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: vi.fn().mockResolvedValue(undefined) }, configurable: true });
     const f = await render();
     ($(f, '[id="2026-10-01-recente"] button.news-copy') as HTMLButtonElement).click();
     await new Promise((r) => setTimeout(r, 0));
     f.detectChanges();
-    expect($(f, '[id="2026-10-01-recente"] .news-copy-labels > span.is-shown').textContent!.trim()).toBe('Copie impossible');
-    expect($(f, '[id="2026-10-01-recente"] [role="status"].sr-only').textContent).toContain(`${location.origin}/nouveautes#2026-10-01-recente`);
+    expect($(f, '[id="2026-10-01-recente"] .news-copy-fallback')).toBeNull();
   });
 
   it('visionneuse : clic (ou Entrée sur le lien) ouvre, « Fermer » hors de la zone qui défile, page bloquée', async () => {

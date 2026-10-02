@@ -80,6 +80,10 @@ interface Viewing {
                       </button>
                     </div>
                     <h2 [id]="e.slug + '-titre'">{{ e.title }}</h2>
+                    @if (copyState(e.slug) === 'ko') {
+                      <!-- L34 : copie refusée — l'adresse à copier à la main, sous le titre (annoncée par la ligne role=status). -->
+                      <p class="news-copy-fallback">Adresse de cette nouveauté : <span class="news-url">{{ link(e.slug) }}</span></p>
+                    }
                     <p class="sr-only" role="status">{{ announce(e.slug) }}</p>
                     <!-- HTML produit par cadence depuis le Markdown du dépôt (assaini par Angular). -->
                     <div class="news-body" [innerHTML]="e.html"></div>
@@ -188,6 +192,10 @@ export class NouveautesComponent implements OnInit, OnDestroy {
   readonly copyStates = ['idle', 'ok', 'ko'] as const;
   readonly copyLabel = { idle: 'Copier le lien', ok: 'Lien copié', ko: 'Copie impossible' } as const;
 
+  link(slug: string): string {
+    return permalink(location.origin, slug);
+  }
+
   copyState(slug: string): 'idle' | 'ok' | 'ko' {
     return this.linkStatus()[slug] ?? 'idle';
   }
@@ -196,14 +204,15 @@ export class NouveautesComponent implements OnInit, OnDestroy {
   announce(slug: string): string {
     const st = this.linkStatus()[slug];
     if (st === 'ok') return 'Lien copié dans le presse-papiers';
-    if (st === 'ko') return `Copie impossible. Adresse de cette nouveauté : ${permalink(location.origin, slug)}`;
+    if (st === 'ko') return `Copie impossible. Adresse de cette nouveauté : ${this.link(slug)}`;
     return '';
   }
 
   /**
    * L34 — « Copier le lien » : copie seulement. L'adresse n'est pas modifiée et la page ne
    * défile pas (le titre, qui le faisait au toucher, est redevenu du texte). Retour dans le
-   * libellé du bouton (largeur réservée) et annonce masquée, effacés après 4 s.
+   * libellé du bouton (largeur réservée) et annonce masquée, effacés après 4 s ; en cas d'échec,
+   * l'adresse s'affiche sous le titre et y reste.
    */
   async copyLink(slug: string): Promise<void> {
     let st: 'ok' | 'ko';
@@ -214,6 +223,9 @@ export class NouveautesComponent implements OnInit, OnDestroy {
       st = 'ko';
     }
     this.linkStatus.update((s) => ({ ...s, [slug]: st }));
+    // Réussite : retour effacé après 4 s. Échec : l'adresse reste affichée, le temps de la
+    // sélectionner (effacée au prochain essai réussi).
+    if (st === 'ko') return;
     this.statusTimers.push(setTimeout(() => this.linkStatus.update((s) => {
       const { [slug]: _, ...rest } = s;
       return rest;

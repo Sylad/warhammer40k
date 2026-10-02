@@ -43,6 +43,10 @@
   &:hover { text-decoration: underline; text-underline-offset: 4px; }
   @media (pointer: coarse) { min-height: 44px; min-width: 44px; margin: -12px -6px -12px 0; }
 }
+.news-copy-fallback {
+  margin: 6px 0 0; color: var(--text); font-size: 0.85rem; overflow-wrap: anywhere;
+  .news-url { color: var(--gold-bright); user-select: all; }
+}
 .news-copy-labels {
   display: grid;
   > span { grid-area: 1 / 1; white-space: nowrap; visibility: hidden; }
