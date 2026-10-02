@@ -470,7 +470,9 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     @media (max-width: 680px) {
       .wrap { padding: 22px 16px 40px; }
     }
-    @media (width <= 26.25em) {
+    /* L33 (relecture) : 30em, plus 26,25em — entre 421 et 465 px (16 px), « Ctrl K » et
+       « ☰ Menu 9+ » faisaient déborder la barre. Balayé px par px par search-hint.e2e.spec.ts. */
+    @media (width < 30em) {
       .topbar { padding: 0 12px; gap: 8px; }
       .topbar-actions { gap: 6px; }
       .nav-search-btn { padding: 0 12px; }
