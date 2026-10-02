@@ -52,7 +52,7 @@ interface Inspiration {
         <p>
           Pages factions, romans Black Library, archives vidéo, galerie impériale —
           tout a été co-écrit avec
-          <a href="https://claude.com/claude-code" target="_blank" rel="noopener">
+          <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">
             Claude Code <span class="ext">⤤</span>
           </a>.
           Mon rôle : tracer la vision, valider l'identité visuelle, repérer ce qui sonne faux.
@@ -60,7 +60,7 @@ interface Inspiration {
         </p>
         <p>
           Avant que Claude n'écrive la première ligne, un autre agent IA est passé par là —
-          <a href="https://chat.openai.com/" target="_blank" rel="noopener">
+          <a href="https://chatgpt.com/" target="_blank" rel="noopener">
             ChatGPT <span class="ext">⤤</span>
           </a>
           a généré les logos, les premières maquettes UX et les schémas de pages
@@ -244,6 +244,6 @@ export class AboutComponent {
     { tag: '🦖', name: 'Evatosorus', desc: 'Codex Mésozoïque (cadeau pour Eva)', url: 'https://evatosorus.pages.dev' },
     { tag: '⚽', name: 'OL Companion', desc: 'Suivi Olympique Lyonnais', url: 'https://github.com/Sylad/ol-companion' },
     { tag: '💸', name: 'Finance Tracker', desc: 'Suivi finances perso (PDF Claude)', url: 'https://github.com/Sylad/finance-tracker' },
-    { tag: '🌿', name: 'Eywa', desc: 'Codex Pandora (pour Eva)', url: 'https://eywa-eywa.pages.dev' },
+    { tag: '🌿', name: 'Eywa', desc: 'Codex Pandora (pour Eva)', url: 'https://avatar-pandora-12q.pages.dev' },
   ];
 }
