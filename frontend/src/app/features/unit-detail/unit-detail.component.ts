@@ -55,8 +55,8 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               }
               @if (f.symbole || f.iconUrl) {
                 <span class="hero-sigil">
-                  @if (f.iconUrl) {
-                    <img [src]="f.iconUrl" [alt]="f.nom" />
+                  @if (f.iconUrl && !brokenIcons().has(f.id)) {
+                    <img [src]="f.iconUrl" [alt]="f.nom" (error)="iconFailed(f.id)" />
                   } @else {
                     {{ f.symbole }}
                   }
@@ -310,6 +310,12 @@ export class UnitDetailComponent {
   private readonly service = inject(WarhammerService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
+  /** L39 : icône de faction introuvable (404 sur le wiki) → symbole de la faction à la place. */
+  readonly brokenIcons = signal(new Set<string>());
+  iconFailed(id: string): void {
+    this.brokenIcons.update(s => new Set(s).add(id));
+  }
 
   readonly tabs = TABS;
   readonly KEY_ICONS = KEY_ICONS;

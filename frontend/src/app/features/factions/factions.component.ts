@@ -69,8 +69,8 @@ const RESOURCES = [
           <article class="card" [routerLink]="['/factions', f.id]"
                    [style.--card-img]="cardImageUrl(f)">
             <div class="card-sigil">
-              @if (f.iconUrl) {
-                <img [src]="f.iconUrl" [alt]="f.nom" />
+              @if (f.iconUrl && !brokenIcons().has(f.id)) {
+                <img [src]="f.iconUrl" [alt]="f.nom" (error)="iconFailed(f.id)" />
               } @else {
                 <span>{{ f.symbole }}</span>
               }
@@ -141,6 +141,11 @@ export class FactionsComponent {
   private readonly service = inject(WarhammerService);
 
   readonly factions = toSignal(this.service.factions$, { initialValue: [] });
+  /** L39 : icônes du wiki introuvables (404) → symbole de la faction à la place. */
+  readonly brokenIcons = signal(new Set<string>());
+  iconFailed(id: string): void {
+    this.brokenIcons.update(s => new Set(s).add(id));
+  }
   readonly units = toSignal(this.service.getUnits(), { initialValue: [] });
   readonly wikiImages = signal(new Map<string, string>());
 
