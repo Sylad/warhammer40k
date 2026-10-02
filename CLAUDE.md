@@ -198,6 +198,35 @@ génération), sinon titre de sa Nouveauté, sinon le lot est masqué (`node scr
 `plan-data.mjs --leaks dist/frontend/browser` (code 1 si un texte privé du plan est dans
 l'application construite ; sauté dans le build Docker, sans `docs/`).
 
+## Liens du site (L39)
+
+Audit outillé de TOUS les liens (rapport du 2026-10-02 : `docs/liens/audit-2026-10-02.md`), dans
+`frontend/scripts/` autour de `liens-lib.mjs` :
+
+- `npm run liens` (statique, sans réseau) : inventaire (gabarits, code, données d'amorçage, carte
+  galactique) et vérification des liens internes — route servie par `app.routes.ts` (sinon le
+  `**` renvoie en silence vers /factions), identifiant présent dans `backend/seed`, ancre posée par
+  la page cible, **pas d'ancre nue** `href="#x"` sans `(click)` (avec `<base href="/">` elle mène à
+  l'accueil : utiliser `[routerLink]="[]" [fragment]`), fichier présent (casse comprise), fiche
+  technique de chaque unité. Code 1 s'il y a un lien cassé.
+- **Garde en CI** : `scripts/liens.test.mjs` (Vitest, donc `npm test` et « Contrôles frontend »)
+  échoue sur tout lien interne cassé. Un nouveau lien construit depuis une donnée s'ajoute à
+  `DATA_LINKS` ; un lien dont la destination est une variable doit être déclaré dans `COVERED`
+  avec ce qui le vérifie, sinon le test échoue. Le fil d'Ariane ne lie que les préfixes qui sont
+  des pages (`breadcrumb.utils.ts`).
+- `npm run liens:crawl` (backend :3001 + `npm run dev:frontend` :4201 lancés) : parcours de
+  l'application en marche depuis `/` et toutes les adresses de l'inventaire — redirections `**`,
+  API en erreur, pages restées en chargement, images en échec (y compris une « image » servie en
+  HTML par le repli), erreurs console, ancres ; mesure de densité par gabarit (1440×900, 390×844).
+  Aucune requête externe (coupées), `/api/wiki-image` bouchonné.
+- `npm run liens:externes [-- --wiki http://localhost:3001]` : **à la demande seulement, jamais
+  en CI** — 2 requêtes simultanées, 1,5 s par hôte, une reprise ; pages Fandom via l'API MediaWiki,
+  vidéos YouTube via oEmbed ; 403/429 de Cloudflare = « invérifiable », pas « mort ».
+
+Les corrections de **données** (`backend/seed/*.json`) n'atteignent pas la prod, qui lit le volume
+`data/` : les pages tolèrent désormais les identifiants absents, et la mise à jour du volume reste
+une action humaine (voir « Mise à jour contenu en prod »).
+
 ## Plan, sessions et revue UX (cadence)
 
 Le reste à faire vit dans `docs/plan/raf.yaml`, tenu par `raf`

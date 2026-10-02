@@ -413,7 +413,11 @@ export const COVERED = {
 /** Liens de données gardés (cible absente → texte simple) : à lister dans le rapport. */
 export function unlinkedData(links, data = loadSeed()) {
   const rids = routeIds(data);
-  return links.filter((l) => l.ref?.guard && !(rids[l.ref.to]?.has(l.target.split('/').at(-1))));
+  return links.filter((l) => {
+    const g = l.ref?.guard;
+    if (!g || rids[l.ref.to]?.has(l.target.split('/').at(-1))) return false;
+    return readFileSync(join(APP, g.file), 'utf8').includes(g.marker);
+  });
 }
 
 export function checkInternal(links, { routes = readRoutes(), data = loadSeed(), news = readNews() } = {}) {

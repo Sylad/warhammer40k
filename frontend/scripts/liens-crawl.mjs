@@ -11,8 +11,8 @@
 // Rien ne sort vers Internet : les requêtes externes sont coupées et `/api/wiki-image` répond
 // « pas d'image » (les requêtes Fandom sont vérifiées à part, avec ménagement, par liens-externes.mjs).
 import { chromium } from 'playwright-core';
-import { writeFileSync } from 'node:fs';
-import { inventory, matchRoute, readRoutes } from './liens-lib.mjs';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { inventory, loadSeed, matchRoute, readRoutes, routeIds, unlinkedData } from './liens-lib.mjs';
 
 const arg = (name, def) => {
   const i = process.argv.indexOf(name);
@@ -26,6 +26,49 @@ const CONCURRENCY = 3;
 const routes = readRoutes();
 const origin = new URL(BASE).origin;
 
+/**
+ * Problèmes relevés par un parcours : pages servies par la redirection « ** », appels d'API en
+ * erreur, pages restées en chargement, images en échec, erreurs de console, ancres absentes
+ * (sur la page cible, ou sur la page même pour une ancre interceptée par un (click)), ancres nues
+ * sans gestionnaire (« #x » résolu en « /#x » par <base href="/">), fichiers liés en erreur.
+ */
+export function analyse(r) {
+  const P = new Map(r.pages.map((p) => [p.path, p]));
+  const internal = r.links.filter((l) => l.kind !== 'external' && l.kind !== 'invalid');
+  const out = {
+    pages: r.pages.length,
+    liens: { internes: internal.length, externes: r.links.filter((l) => l.kind === 'external').length },
+    ciblesInternesDistinctes: new Set(internal.map((l) => l.to + (l.hash ? '#' + l.hash : ''))).size,
+    redirigees: r.pages.filter((p) => p.finalPath !== p.path || !p.route).map((p) => ({ page: p.path, finale: p.finalPath, liens: internal.filter((l) => l.to === p.path).length })),
+    api: r.pages.flatMap((p) => p.apiErrors.filter((e) => e.method !== 'HEAD').map((e) => ({ page: p.path, ...e }))),
+    chargement: r.pages.filter((p) => p.loading?.length).map((p) => ({ page: p.path, texte: p.loading })),
+    images: r.pages.flatMap((p) => p.imgErrors.map((e) => ({ page: p.path, ...e }))),
+    console: r.pages.flatMap((p) => p.consoleErrors.map((e) => ({ page: p.path, erreur: e }))),
+    ancresNues: [],
+    ancresAbsentes: [],
+    fichiers: Object.entries(r.fileStatus ?? {}).filter(([, s]) => s >= 400).map(([f, s]) => ({ fichier: f, statut: s })),
+  };
+  for (const l of internal) {
+    const bare = l.kind === 'href' && l.raw?.startsWith('#');
+    if (bare && l.raw === '#') continue; // commandes de la carte (Leaflet gère le clic)
+    if (bare && !(l.listeners ?? []).includes('click')) {
+      out.ancresNues.push({ page: l.from, lien: l.raw, texte: l.text });
+      continue;
+    }
+    if (!l.hash) continue;
+    const target = bare ? P.get(l.from) : P.get(l.to);
+    if (target && !target.ids.includes(l.hash)) out.ancresAbsentes.push({ page: l.from, lien: `${bare ? l.from : l.to}#${l.hash}`, texte: l.text });
+  }
+  return out;
+}
+
+const ai = process.argv.indexOf('--analyse');
+if (ai > 0) {
+  const a = analyse(JSON.parse(readFileSync(process.argv[ai + 1], 'utf8')));
+  console.log(JSON.stringify(a, null, 1));
+  process.exit(0);
+}
+
 /** Chemin normalisé (sans requête ni ancre) d'une URL interne. */
 function pathOf(u) {
   const url = new URL(u, BASE);
@@ -37,8 +80,11 @@ const seen = new Set(['/']);
 // Pages liées seulement derrière une interaction (élément déplié, palette Ctrl+K, popup de la carte) :
 // l'inventaire statique fournit leurs adresses, le parcours les visite aussi.
 if (!process.argv.includes('--sans-inventaire')) {
-  for (const l of inventory()) {
-    if (l.cls !== 'route' || l.dynamic || !l.target.startsWith('/') || l.target.includes(':')) continue;
+  const inv = inventory();
+  const unlinked = new Set(unlinkedData(inv).map((l) => l.target)); // affichés en texte, jamais liés
+  const fiches = Object.entries(routeIds(loadSeed())).flatMap(([r, ids]) => [...ids].map((id) => ({ cls: 'route', target: r.replace(':id', id) })));
+  for (const l of [...inv, ...fiches]) {
+    if (l.cls !== 'route' || l.dynamic || !l.target.startsWith('/') || l.target.includes(':') || unlinked.has(l.target)) continue;
     const p = l.target.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
     if (!seen.has(p)) {
       seen.add(p);
@@ -259,4 +305,6 @@ for (const f of files) {
 await browser.close();
 const result = { base: BASE, date: new Date().toISOString(), pages: [...pages.values()], links, fileStatus };
 writeFileSync(OUT, JSON.stringify(result, null, 1));
-console.log(`${pages.size} pages, ${links.length} liens relevés → ${OUT}`);
+const a = analyse(result);
+console.log(`${a.pages} pages, ${a.liens.internes} liens internes (${a.ciblesInternesDistinctes} cibles distinctes), ${a.liens.externes} externes → ${OUT}`);
+for (const k of ['redirigees', 'api', 'chargement', 'images', 'console', 'ancresNues', 'ancresAbsentes', 'fichiers']) console.log(`  ${k.padEnd(15)} ${a[k].length}`);

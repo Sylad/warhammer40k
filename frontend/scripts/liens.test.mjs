@@ -7,7 +7,7 @@ import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import {
-  checkInternal, codeLinks, existsCaseSensitive, fieldValues, loadSeed, readRoutes,
+  checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, inventory, loadSeed, readRoutes,
 } from './liens-lib.mjs';
 
 const routes = readRoutes();
@@ -81,5 +81,23 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     expect(fieldValues(rec, 'c[]')).toEqual(['x', 'y']);
     expect(fieldValues(rec, 'd')).toEqual(['z']);
     expect(fieldValues(rec, 'e')).toEqual([]);
+  });
+});
+
+describe('liens internes du site (garde L39)', () => {
+  const inv = inventory();
+
+  it('l’inventaire n’est pas vide (l’extraction marche encore)', () => {
+    const count = (c) => inv.filter((l) => l.cls === c).length;
+    expect(count('route')).toBeGreaterThan(500);
+    expect(count('anchor')).toBeGreaterThan(50);
+    expect(count('external')).toBeGreaterThan(50);
+    expect(inv.filter((l) => l.kind === 'datasheet')).toHaveLength(data.units.length);
+    expect(dataLinks(data).length).toBeGreaterThan(300);
+  });
+
+  it('aucun lien interne cassé (route, identifiant, ancre, fichier, fiche technique)', () => {
+    const broken = checkInternal(inv).map((b) => `${b.target} @ ${b.source} — ${b.cause}`);
+    expect(broken).toEqual([]);
   });
 });
