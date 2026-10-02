@@ -276,6 +276,16 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(live.textContent!.trim()).toBe('Plan de travail');
   });
 
+  it('L33 : bouton de recherche — « Ctrl K » hors Mac, nom accessible « Rechercher (Ctrl+K) », indice caché aux lecteurs d’écran', async () => {
+    const f = await render();
+    const button = el(f).querySelector<HTMLButtonElement>('button.nav-search-btn')!;
+    expect(button.getAttribute('aria-label')).toBe('Rechercher (Ctrl+K)');
+    expect(button.getAttribute('title')).toBe('Rechercher (Ctrl+K)');
+    const hint = button.querySelector('.nav-search-kbd')!;
+    expect(hint.textContent!.trim()).toBe('Ctrl K');
+    expect(hint.getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('le menu se referme après un changement de page', async () => {
     const f = await render();
     el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!.click();

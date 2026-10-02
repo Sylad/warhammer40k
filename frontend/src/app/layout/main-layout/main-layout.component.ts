@@ -11,6 +11,7 @@ import { CommandPaletteComponent } from '../../shared/components/command-palette
 import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
 import { PageTitleService } from '../../core/services/page-title.service';
+import { searchShortcut, type PlatformHints } from './search-shortcut';
 
 @Component({
   selector: 'app-main-layout',
@@ -73,9 +74,10 @@ import { PageTitleService } from '../../core/services/page-title.service';
       </nav>
 
       <div class="topbar-actions">
-        <button class="nav-search-btn" type="button" [attr.inert]="pageInert()" (click)="palette.open()" title="Recherche globale (Ctrl+K)" aria-label="Recherche">
+        <!-- L33 : raccourci de la plateforme (« Ctrl K » / « ⌘K »), repris dans le nom accessible. -->
+        <button class="nav-search-btn" type="button" [attr.inert]="pageInert()" (click)="palette.open()" [attr.title]="shortcut.label" [attr.aria-label]="shortcut.label">
           <span class="nav-ico">⌕</span>
-          <span class="nav-search-kbd">⌘K</span>
+          <span class="nav-search-kbd" aria-hidden="true">{{ shortcut.hint }}</span>
         </button>
         <!-- L23 : sous 80em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
         <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone" [class.has-badge]="badge()"
@@ -245,8 +247,9 @@ import { PageTitleService } from '../../core/services/page-title.service';
       border-color: var(--gold); color: var(--gold-bright);
       background: rgba(201,162,74,0.06);
     }
+    /* L33 : or à 70 % d'opacité = 4,05:1 ; à 85 %, ≥ 4,5:1 mesuré sur les pixels rendus. */
     .nav-search-kbd {
-      font-size: 0.62rem; opacity: 0.7; letter-spacing: 0.08em;
+      font-size: 0.62rem; opacity: 0.85; letter-spacing: 0.08em; white-space: nowrap;
       border-left: 1px solid var(--border); padding-left: 6px;
     }
 
@@ -483,6 +486,8 @@ import { PageTitleService } from '../../core/services/page-title.service';
 export class MainLayoutComponent implements OnInit {
   readonly quota = inject(QuotaAlertService);
   readonly pages = inject(PageTitleService);
+  /** L33 : « Ctrl K » hors Mac, « ⌘K » sur Mac (le raccourci marche des deux façons partout). */
+  readonly shortcut = searchShortcut(typeof navigator === 'undefined' ? undefined : (navigator as PlatformHints));
   private readonly news = inject(NewsService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroyRef = inject(DestroyRef);
