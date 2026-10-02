@@ -1,7 +1,32 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-01 23:02",
+  "generated": "2026-10-02 09:50",
   "entries": [
+    {
+      "slug": "2026-10-02-nouveautes-la-pastille-pour-tous-un-bouton-pour-copier-le-li",
+      "title": "Nouveautés : la pastille pour tous, un bouton pour copier le lien",
+      "date": "2026-10-02",
+      "lots": [
+        "L34"
+      ],
+      "captures": [
+        "captures/L34-copier-le-lien-telephone.png"
+      ],
+      "html": "<p>Deux améliorations de la page <strong>Nouveautés</strong>.</p>\n<ul><li>La <strong>pastille</strong> des nouveautés non vues s'affiche maintenant pour tout le monde, même si vous n'avez jamais ouvert la page : elle compte ce qui paraît après votre première visite du codex.</li><li>Chaque nouveauté a un bouton <strong>Copier le lien</strong>, visible aussi au téléphone. Le titre d'une nouveauté n'est plus un lien : c'est ce bouton qui copie l'adresse menant directement à elle.</li><li>Si la copie est refusée par le navigateur, l'adresse s'affiche sous le titre pour être sélectionnée à la main.</li></ul>"
+    },
+    {
+      "slug": "2026-10-02-une-page-plan-de-travail-et-un-menu-a-propos-dans-la-barre",
+      "title": "Une page Plan de travail, et un menu « À propos » dans la barre",
+      "date": "2026-10-02",
+      "lots": [
+        "L30"
+      ],
+      "captures": [
+        "captures/L30-menu-a-propos.png",
+        "captures/L30-plan-de-travail-telephone.png"
+      ],
+      "html": "<p>Une nouvelle page, <strong>Plan de travail</strong>, montre où en est le codex : ce qui est en cours, ce qui est prévu et ce qui vient d'être livré.</p>\n<ul><li>Chaque évolution indique son état en toutes lettres, et une évolution livrée renvoie à sa nouveauté.</li><li>Dans la barre du haut, <strong>Nouveautés</strong>, <strong>Plan de travail</strong> et <strong>À propos du codex</strong> sont maintenant regroupés sous le bouton <strong>À propos</strong>. La pastille des nouveautés non vues s'affiche sur ce bouton.</li><li>Les trois liens sont aussi en bas de chaque page, et dans le <strong>Menu</strong> au téléphone.</li><li>La barre du haut ne déborde plus quand le texte du navigateur est agrandi : le <strong>Menu</strong> prend alors le relais.</li></ul>"
+    },
     {
       "slug": "2026-10-01-une-page-nouveautes-et-un-menu-au-telephone",
       "title": "Une page Nouveautés, et un menu au téléphone",
@@ -13,7 +38,7 @@
         "captures/L23-page-nouveautes-telephone.png",
         "captures/L23-menu-telephone.png"
       ],
-      "html": "<p>Le codex a désormais sa page <strong>Nouveautés</strong> : chaque évolution visible y est décrite en quelques lignes, avec une capture d'écran, la plus récente en haut. On la trouve dans la barre du haut, juste avant « À propos », et dans la recherche rapide (Ctrl+K).</p>\n<p>Une capture s'agrandit au clic ou avec la touche Entrée, et Échap la referme. Au téléphone, elle garde une taille lisible et se fait défiler avec le doigt ; le bouton <strong>Fermer</strong> reste toujours visible.</p>\n<p>Le titre de chaque nouveauté est un lien : un clic copie l'adresse qui mène directement à elle, pour la partager.</p>\n<p>Après une première visite, une pastille sur le lien <strong>Nouveautés</strong> compte ce qui est paru depuis. Sur la page, les nouvelles portent la marque <strong>Nouveau</strong>, et un trait « Déjà vu lors de votre visite du… » les sépare de celles que vous aviez déjà lues.</p>\n<p>Au téléphone et sur les écrans de moins de 1280 px de large, la navigation passe dans un bouton <strong>Menu</strong> : la barre du haut ne déborde plus de l'écran.</p>"
+      "html": "<p>Le codex a désormais sa page <strong>Nouveautés</strong> : chaque évolution visible y est décrite en quelques lignes, avec une capture d'écran, la plus récente en haut. On la trouve dans la barre du haut, sous le bouton <strong>À propos</strong>, en bas de chaque page et dans la recherche rapide (Ctrl+K).</p>\n<p>Une capture s'agrandit au clic ou avec la touche Entrée, et Échap la referme. Au téléphone, elle garde une taille lisible et se fait défiler avec le doigt ; le bouton <strong>Fermer</strong> reste toujours visible.</p>\n<p>Chaque nouveauté a un bouton <strong>Copier le lien</strong> : il copie l'adresse qui mène directement à elle, pour la partager.</p>\n<p>Après votre première visite du codex, une pastille compte les nouveautés parues depuis. Sur la page, les nouvelles portent la marque <strong>Nouveau</strong>, et un trait « Déjà vu lors de votre visite du… » les sépare de celles que vous aviez déjà lues.</p>\n<p>Au téléphone et sur les écrans de moins de 1280 px de large, la navigation passe dans un bouton <strong>Menu</strong> : la barre du haut ne déborde plus de l'écran.</p>"
     }
   ]
 }

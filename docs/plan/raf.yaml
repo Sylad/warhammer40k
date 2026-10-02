@@ -198,13 +198,15 @@ lots:
   - id: L30
     title: "Page « Plan de travail » : ce qui est prévu, en cours et récemment livré, généré au build depuis docs/plan/raf.yaml (titres et états seulement, jamais les notes) — inspirée de la page « À venir » d'AetherWX"
     public: "Une page Plan de travail : ce qui se prépare"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-10-01
     started: 2026-10-02
     notes:
       - { date: 2026-10-02, text: "Modèle ol L23 : sous-tâches réduites à n/m (aucun titre publié), --check/--leaks, CI frontend-checks à chaque push (deploy.sh intact). Barre du haut : complète dès 1920 (au lieu de 1700), resserrée 1280–1439 ; mesurée 1280–2560 avec 9+. Lots visibles masqués faute de public: L31, L32, L33. Reste : entrée Nouveautés L30 + revue UX." }
+    ux: { date: 2026-10-02, verdict: "Deux revues ux-reviewer 02-10 (Chromium, 768–2126 px, polices chargées / bloquées / police 18 et 20 px) : conforme, réserves levées — barre du haut option B (À propos ▾ à divulgation, seuils en em, 0 px de débordement, marge ≥ 104 px), pied de page Nouveautés · Plan · À propos (44 px, 8,6:1), focus au h1 après le panneau, panneau et méga-menu Lore jamais ouverts ensemble, Réessayer, 1er octobre, Prévu rempli. Non vérifié : lecteur d'écran réel, appareil tactile réel, build de prod en navigateur." }
+    finished: 2026-10-02
   - id: L31
     title: "Reflow 320 px : .bible-hero de la page faction déborde (353/320 px, WCAG 1.4.10)"
     public: "Page faction : un en-tête qui tient sur les petits téléphones"
@@ -232,12 +234,14 @@ lots:
   - id: L34
     title: "Nouveautés : pastille aussi pour le visiteur qui n'ouvre jamais la page (base de référence à la première visite) ; bouton « Copier le lien » visible au toucher, le titre ne copie plus, sans défilement ni décalage (revue UX L30)"
     public: "Nouveautés : la pastille pour tous, un bouton pour copier le lien"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-02
     started: 2026-10-02
+    ux: { date: 2026-10-02, verdict: "Revue ux-reviewer 02-10 : conforme, réserves levées — pastille pour le visiteur qui n'ouvre jamais la page (base de référence), bouton Copier le lien visible (123×44 px au toucher, 0 px de décalage, adresse inchangée), adresse affichée si la copie échoue, séparateur juste pour une 1re visite, date insécable, bouton Menu sans débordement à 320 px. Non vérifié : refus réel du presse-papiers, appareil tactile réel." }
+    finished: 2026-10-02
   - id: L35
     title: "Page « Jeux vidéo » : les jeux Warhammer 40 000 existants et surtout les jeux à venir (Dawn of War 4, Total War: Warhammer 40,000) — dates et contenus annoncés à vérifier sur des sources en ligne au moment de coder, pas de mémoire ; lien dans la navigation"
     public: "Une page Jeux vidéo : les jeux existants et ceux qui arrivent"

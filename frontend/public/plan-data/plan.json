@@ -12,8 +12,9 @@
     {
       "id": "L30",
       "title": "Une page Plan de travail : ce qui se prépare",
-      "status": "doing",
-      "started": "2026-10-02"
+      "status": "done",
+      "started": "2026-10-02",
+      "finished": "2026-10-02"
     },
     {
       "id": "L31",
@@ -33,8 +34,9 @@
     {
       "id": "L34",
       "title": "Nouveautés : la pastille pour tous, un bouton pour copier le lien",
-      "status": "doing",
-      "started": "2026-10-02"
+      "status": "done",
+      "started": "2026-10-02",
+      "finished": "2026-10-02"
     },
     {
       "id": "L35",
