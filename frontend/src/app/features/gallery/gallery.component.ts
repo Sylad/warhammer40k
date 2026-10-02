@@ -2,8 +2,8 @@ import { Component, DestroyRef, inject, signal, computed, effect, HostListener }
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { filter, map } from 'rxjs';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
@@ -492,6 +492,8 @@ export class GalleryComponent {
   private searchTimer: ReturnType<typeof setTimeout> | undefined;
   /** Dernière adresse écrite par syncUrl() (pour reconnaître son écho dans queryParamMap). */
   private written: { q: string; faction: string } | null = null;
+  /** Adresse visée par la dernière réécriture de syncUrl() (pour reconnaître SA navigation). */
+  private ownUrl: string | null = null;
 
   readonly categories = CATEGORIES;
 
@@ -780,10 +782,18 @@ export class GalleryComponent {
         this.currentPage.set(1);
       }
     });
+    // 2e relecture : toute AUTRE navigation qui démarre (clic vers une page, même en chargement
+    // différé — la galerie vit encore) annule l'anti-rebond en attente, qui sinon la supplantait.
+    const navStarts = this.router.events
+      .pipe(filter((e): e is NavigationStart => e instanceof NavigationStart))
+      .subscribe(e => {
+        if (e.url !== this.ownUrl) clearTimeout(this.searchTimer);
+      });
     const live = setTimeout(() => this.liveReady.set(true), GalleryComponent.LIVE_REGION_DELAY_MS);
     this.destroyRef.onDestroy(() => {
       clearTimeout(this.searchTimer);
       clearTimeout(live);
+      navStarts.unsubscribe();
     });
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
@@ -919,13 +929,14 @@ export class GalleryComponent {
     clearTimeout(this.searchTimer);
     const q = this.searchQuery();
     const faction = this.filterFaction();
-    this.written = { q, faction };
-    void this.router.navigate([], {
+    const target = this.router.createUrlTree([], {
       relativeTo: this.route,
       queryParams: { faction: faction || null, q: q || null, search: null },
       queryParamsHandling: 'merge',
-      replaceUrl: true,
     });
+    this.written = { q, faction };
+    this.ownUrl = this.router.serializeUrl(target);
+    void this.router.navigateByUrl(target, { replaceUrl: true });
   }
 
   resetFilters(): void {

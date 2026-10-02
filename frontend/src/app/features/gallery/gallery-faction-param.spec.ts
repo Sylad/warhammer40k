@@ -12,6 +12,10 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { NEVER, of, type Observable } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { GalleryComponent } from './gallery.component';
+import { Component } from '@angular/core';
+
+@Component({ standalone: true, template: 'autre page' })
+class OtherPage {}
 
 const ARTWORKS = [
   { id: 'aw-001', title: 'Ultramarines', artist: 'A', image: 'u.jpg', category: 'Space Marines', faction: 'space-marines', likes: 1 },
@@ -142,14 +146,15 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
   it('saisie : une seule réécriture de l’adresse après la frappe (anti-rebond), historique remplacé', async () => {
     const { go, settle, router } = await harness();
     const c = await go('/gallery');
-    const nav = vi.spyOn(router, 'navigate');
+    const nav = vi.spyOn(router, 'navigateByUrl');
     vi.useFakeTimers();
     try {
       for (const q of ['E', 'Ei', 'Eis']) { c.onSearchChange(q); vi.advanceTimersByTime(100); }
       expect(nav).not.toHaveBeenCalled();
       vi.advanceTimersByTime(1000);
       expect(nav).toHaveBeenCalledTimes(1);
-      expect(nav.mock.calls[0][1]).toMatchObject({ queryParams: { q: 'Eis' }, replaceUrl: true });
+      expect(router.serializeUrl(nav.mock.calls[0][0] as never)).toBe('/gallery?q=Eis');
+      expect(nav.mock.calls[0][1]).toMatchObject({ replaceUrl: true });
     } finally {
       vi.useRealTimers();
     }
@@ -161,7 +166,7 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
   it('saisie puis départ de la page avant l’anti-rebond : aucune navigation de retour vers la galerie', async () => {
     const { h, go, router } = await harness();
     const c = await go('/gallery');
-    const nav = vi.spyOn(router, 'navigate');
+    const nav = vi.spyOn(router, 'navigateByUrl');
     vi.useFakeTimers();
     try {
       c.onSearchChange('abc');
@@ -171,6 +176,29 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     } finally {
       vi.useRealTimers();
     }
+  });
+
+  // 2e relecture de code : un anti-rebond en attente supplantait une navigation de SORTIE encore en
+  // vol (route en chargement différé) — l'utilisateur restait sur /gallery?q=abc, son clic perdu.
+  it('frappe puis clic vers une page en chargement différé : l’anti-rebond ne supplante pas la navigation de sortie', async () => {
+    let release!: () => void;
+    const chunk = new Promise<void>((r) => (release = r));
+    await setupTestBed([GalleryComponent], [
+      provideRouter([
+        { path: 'gallery', component: GalleryComponent },
+        { path: 'videos', loadComponent: () => chunk.then(() => OtherPage) },
+      ]),
+      { provide: WarhammerService, useValue: service() },
+    ]);
+    const h = await RouterTestingHarness.create();
+    const c = await h.navigateByUrl('/gallery', GalleryComponent);
+    const router = TestBed.inject(Router);
+    c.onSearchChange('abc');
+    const leaving = router.navigateByUrl('/videos'); // clic : le morceau de la page n'est pas chargé
+    await wait(600); // l'anti-rebond (400 ms) tombe pendant le chargement
+    release();
+    expect(await leaving, 'navigation de sortie supplantée').toBe(true);
+    expect(router.url).toBe('/videos');
   });
 
   it('identifiant inconnu : message visible qui le nomme, galerie entière affichée, liste sur « Toutes »', async () => {
