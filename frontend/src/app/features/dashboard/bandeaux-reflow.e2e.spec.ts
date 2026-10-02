@@ -12,6 +12,7 @@ import { distState, startDistServer } from '../../../testing/dist-server';
 import { reflowProbe } from '../../../testing/reflow-probe';
 
 const { built, stale } = distState([
+  'src/styles.scss',
   'src/app/features/dashboard/dashboard.component.scss',
   'src/app/features/gallery/gallery.component.scss',
   'src/app/features/lore-concepts/lore-concepts.component.scss',
@@ -101,4 +102,36 @@ describe.skipIf(!built || !chromium)('bandeaux de l’accueil, de la galerie et 
     await page.close();
     expect(problems).toEqual([]);
   });
+
+  // Revue UX R2 (L32) : le badge du bandeau (« Encyclopédie du 41e millénaire ») passait sur deux
+  // lignes dans une boîte de 24 px de haut : « MILLÉNAIRE » débordait du cadre. Même style de badge
+  // dans les bandeaux des autres pages Lore (mêmes débordements au téléphone, mesurés) et dans les
+  // pastilles des listes : aucun texte hors du cadre, et 24 px de haut au bureau, comme avant.
+  const BADGES = ['/lore/concepts', '/lore/chaos-gods', '/lore/civilians', '/lore/galaxy', '/lore/timeline', '/lore/emperor',
+    '/lore/primarchs', '/lore/equipment', '/factions', '/romans', '/lore/ships', '/lore/primarchs/horus'];
+  it('badges des bandeaux et des listes : texte dans son cadre de 320 à 1440 px, 24 px de haut à 1440 px', async () => {
+    const page = await browser.newPage();
+    const problems: string[] = [];
+    for (const [w, h] of [[320, 700], [360, 740], [390, 844], [768, 1024], [1024, 768], [1440, 900]]) {
+      await page.setViewportSize({ width: w, height: h });
+      for (const url of BADGES) {
+        await page.goto(base + url);
+        await page.locator('main .badge').first().waitFor();
+        await page.evaluate(() => document.fonts.ready);
+        const found = await page.evaluate(() => [...document.querySelectorAll('main .badge')].slice(0, 6).map((e) => {
+          const box = e.getBoundingClientRect();
+          const range = document.createRange();
+          range.selectNodeContents(e);
+          const bottom = Math.max(...[...range.getClientRects()].filter((r) => r.width > 0).map((r) => r.bottom));
+          return { text: e.textContent!.trim().slice(0, 30), height: box.height, spill: bottom - box.bottom };
+        }));
+        for (const b of found) {
+          if (b.spill > 0.5) problems.push(`${w} px ${url} « ${b.text} » : texte ${b.spill.toFixed(1)} px sous le cadre`);
+          if (w === 1440 && Math.abs(b.height - 24) > 0.1) problems.push(`${w} px ${url} « ${b.text} » : ${b.height} px de haut (24 avant)`);
+        }
+      }
+    }
+    await page.close();
+    expect(problems).toEqual([]);
+  }, 120_000);
 });

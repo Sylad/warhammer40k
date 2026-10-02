@@ -106,6 +106,12 @@ a:hover { color: var(--gold-bright); }
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+/* L32 (R2, WCAG 1.4.10) : au téléphone, le badge d'un bandeau (div) peut passer sur deux lignes —
+   il grandit au lieu de laisser déborder son texte (« MILLÉNAIRE » sous le cadre de 24 px). Au-delà
+   de 760 px et pour les pastilles (span) des listes, hauteur fixe de 24 px inchangée. */
+@media (max-width: 760px) {
+  div.badge { height: auto; min-height: 24px; }
+}
 .badge.blue  { border-color: rgba(73, 125, 190, 0.5); color: #9dbfff; background: rgba(23, 61, 117, 0.55); }
 .badge.green { border-color: rgba(35, 145, 90, 0.5);  color: #80e0ad; background: rgba(15, 107, 67, 0.35); }
 .badge.red   { border-color: rgba(170, 45, 45, 0.55); color: #ff8a8a; background: rgba(123, 17, 19, 0.42); }
