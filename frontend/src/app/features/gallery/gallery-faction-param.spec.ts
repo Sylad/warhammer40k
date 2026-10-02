@@ -52,7 +52,13 @@ async function harness(factions$?: Observable<unknown>, artworks$?: Observable<u
 }
 
 const ids = (c: GalleryComponent) => c.filteredArtworks().map((a) => a.id);
-const notice = (h: RouterTestingHarness) => h.routeNativeElement!.querySelector('[data-testid="faction-inconnue"]');
+/** Région d'état de la galerie (toujours présente, L42 R5) ; null tant qu'elle est vide. */
+const region = (h: RouterTestingHarness) => h.routeNativeElement!.querySelector<HTMLElement>('[data-testid="faction-status"]');
+const notice = (h: RouterTestingHarness) => {
+  const r = region(h);
+  return r && r.textContent!.trim() ? r : null;
+};
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 describe('galerie — filtre faction par l’adresse (L42)', () => {
   it('/gallery?faction=necrons : seules les illustrations Nécrons', async () => {
@@ -170,6 +176,7 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
   it('identifiant inconnu : message visible qui le nomme, galerie entière affichée, liste sur « Toutes »', async () => {
     const { h, go, settle, router } = await harness();
     const c = await go('/gallery?faction=necron');
+    await wait(200);
     await settle();
     const el = notice(h);
     expect(el, 'message « faction inconnue » absent').not.toBeNull();
@@ -221,6 +228,22 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
     await go('/gallery?faction=grey-knights');
     await settle();
     expect(h.routeNativeElement!.textContent).not.toContain('Aucune illustration de la faction');
+  });
+
+  // Revue UX R5 (WCAG 4.1.3) : la région role=status naissait AVEC son texte — beaucoup de
+  // lecteurs d'écran ne l'annoncent pas. Elle est désormais là dès le premier rendu, vide, et le
+  // texte y entre après coup, même quand les factions sont déjà en cache (cas le plus dur).
+  it('identifiant inconnu : région d’état présente et vide au premier rendu, texte inséré ensuite dans le MÊME élément', async () => {
+    const { h, go, settle } = await harness();
+    await go('/gallery?faction=necron');
+    const first = region(h);
+    expect(first, 'région d’état absente au premier rendu').not.toBeNull();
+    expect(first!.getAttribute('role')).toBe('status');
+    expect(first!.textContent!.trim()).toBe('');
+    await wait(200);
+    await settle();
+    expect(region(h)).toBe(first);
+    expect(first!.textContent).toContain('« necron »');
   });
 
   it('factions pas encore chargées : aucun message prématuré', async () => {

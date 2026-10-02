@@ -81,13 +81,15 @@ type SortBy = 'recent' | 'popular' | 'alpha';
       <!-- LAYOUT MAIN + SIDEBAR -->
       <section class="layout">
         <div class="main-col">
-          <!-- L42 (relecture) : ?faction= inconnu → dit, jamais une grille vide muette. -->
-          @if (unknownFaction(); as unknown) {
-            <div class="empty" role="status" data-testid="faction-inconnue">
+          <!-- L42 (relecture) : ?faction= inconnu → dit, jamais une grille vide muette.
+               Revue UX R5 (WCAG 4.1.3) : la région d'état existe dès le premier rendu, vide ; le
+               texte y entre ensuite (liveReady), sinon il naît avec elle et n'est pas annoncé. -->
+          <div role="status" data-testid="faction-status" [class.empty]="liveReady() && unknownFaction()" [class.section]="liveReady() && unknownFaction()">
+            @if (liveReady() && unknownFaction(); as unknown) {
               <p>Faction inconnue : « {{ unknown }} ». Ce lien ne correspond à aucune faction du codex : toute la galerie est affichée.</p>
               <button class="see-all" type="button" (click)="onFactionChange('')">Retirer ce filtre</button>
-            </div>
-          }
+            }
+          </div>
 
           <!-- CATEGORIES -->
           <section class="section">
@@ -778,7 +780,11 @@ export class GalleryComponent {
         this.currentPage.set(1);
       }
     });
-    this.destroyRef.onDestroy(() => clearTimeout(this.searchTimer));
+    const live = setTimeout(() => this.liveReady.set(true), GalleryComponent.LIVE_REGION_DELAY_MS);
+    this.destroyRef.onDestroy(() => {
+      clearTimeout(this.searchTimer);
+      clearTimeout(live);
+    });
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
       if (r.imageUrl) this.heroBgUrl.set(`url('${r.imageUrl}')`);
@@ -899,6 +905,10 @@ export class GalleryComponent {
   }
 
   private static readonly SEARCH_URL_DEBOUNCE_MS = 400;
+  /** R5 : délai entre la mise en place de la région d'état et son premier texte (annonce fiable). */
+  private static readonly LIVE_REGION_DELAY_MS = 150;
+  /** R5 : la région d'état est dans le DOM depuis assez longtemps pour qu'un ajout soit annoncé. */
+  readonly liveReady = signal(false);
 
   /**
    * L42 (relecture) : l'adresse suit la recherche et le filtre faction — les DEUX, écrits ensemble
