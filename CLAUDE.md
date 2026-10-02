@@ -27,13 +27,16 @@ Endpoints clés :
 - `GET /api/images?category=X` — galerie utilisateur (1468 images perso)
 - `POST /api/image-import` — import depuis Reddit/URL externe
 
-## Frontend features (10 pages)
+## Frontend features (11 pages)
 
-`dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `nouveautes` (/nouveautes), `about` (/about). Redirect `/galerie` → `/gallery`.
+`dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `nouveautes` (/nouveautes), `plan` (/plan, « Plan de travail »), `about` (/about). Redirect `/galerie` → `/gallery`.
 
 Navigation : barre du haut à partir de 1280 px ; en dessous, bouton **Menu** → tiroir
 `#menu-telephone` (inerte quand il est fermé, Échap le ferme, Tab y boucle). Toute nouvelle
-page s'ajoute aux DEUX listes de `main-layout.component.ts` (barre et tiroir).
+page s'ajoute aux DEUX listes de `main-layout.component.ts` (barre et tiroir). Barre complète
+(icônes, sous-titre du logo) à partir de 1920 px, compacte en dessous, resserrée entre 1280 et
+1439 px (L30) : `topbar.e2e.spec.ts` la mesure de 1280 à 2560 px avec la pastille « 9+ » —
+relancer `ng build` puis ce test après tout lien ajouté à la barre.
 
 ## Workflow dev
 
@@ -168,6 +171,26 @@ pastille des nouveautés non vues (localStorage `wh40k.news.seen-v1`) et lien pe
 Tests de composants : `src/testing/angular-testbed.ts` (TestBed JIT sous Vitest/jsdom, `styleUrl`
 résolues à vide, `<dialog>` simulé). Les requêtes-signaux `viewChild()` n'y marchent pas (transformation
 AOT absente) : `@ViewChild` dans les composants testés ainsi.
+
+## Plan de travail (L30)
+
+La page `/plan` montre ce qui est en cours, prévu et livré ces 30 derniers jours, depuis
+`frontend/public/plan-data/plan.json`, **versionné** (le build Docker n'a pas `docs/`) et généré
+par `cd frontend && npm run plan` (`scripts/plan-data.mjs`) depuis `docs/plan/raf.yaml` et
+`docs/nouveautes/`. **Après toute commande `raf` qui touche un lot `visible`** (start, done, drop,
+add, sous-tâche…) ou toute nouvelle entrée Nouveautés : `npm run plan`, puis commiter `plan.json`
+dans le même commit. Sinon `scripts/plan-data.test.mjs` et le workflow « Contrôles frontend »
+(`.github/workflows/frontend-checks.yml`, à chaque push, séparé de `build.yml` que lit `deploy.sh`)
+passent au rouge — et `cadence deliver` attend tous les runs du sha.
+
+Liste d'autorisation : id, titre public, état, dates, avancement `{ done, total }` (sous-tâches
+abandonnées exclues) — jamais les notes, verdicts UX, raisons, titres bruts ni titres de
+sous-tâches. Titre public = champ `public:` du lot (texte pour le visiteur, ≤ 80 caractères,
+ni chemin, ni fichier, ni identifiant de lot, ni vocabulaire de sécurité ; vérifié à la
+génération), sinon titre de sa Nouveauté, sinon le lot est masqué (`node scripts/plan-data.mjs
+--hidden` les liste). Les revues UX exigent un `public:`. `npm run build` se termine par
+`plan-data.mjs --leaks dist/frontend/browser` (code 1 si un texte privé du plan est dans
+l'application construite ; sauté dans le build Docker, sans `docs/`).
 
 ## Plan, sessions et revue UX (cadence)
 
