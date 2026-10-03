@@ -89,15 +89,20 @@ describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', 
     }
   });
 
-  // Relecture L45 (WCAG 2.5.3 Label in Name) : le seul texte visible du champ est son placeholder ;
-  // le nom accessible doit le contenir (commande vocale « cliquer Rechercher une œuvre… »).
-  it('le nom accessible du champ de recherche contient son texte visible (WCAG 2.5.3)', async () => {
+  // L45/t1 (revue UX, bloquant) : la recherche n'avait que son placeholder pour libellé (disparaît à
+  // la saisie, coupé à 390 px, 3,45:1). Libellé VISIBLE « Rechercher » relié par for/id ; le nom
+  // accessible contient ce texte visible (WCAG 2.5.3) ; le placeholder reste comme indication.
+  it('la recherche a un libellé visible « Rechercher » relié au champ (WCAG 1.3.1 / 2.5.3 / 3.3.2)', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    const input = byLabel(root.querySelector<HTMLElement>('.search-bar')!, 'Rechercher une œuvre, un artiste, une faction');
-    expect(input.tagName).toBe('INPUT');
-    const visible = input.placeholder.replace(/…$/, '').trim();
-    expect(visible).toBe('Rechercher une œuvre, un artiste, une faction');
-    expect(accessibleName(input).toLowerCase()).toContain(visible.toLowerCase());
+    const wrap = root.querySelector<HTMLElement>('.search-bar-wrap')!;
+    const input = wrap.querySelector<HTMLInputElement>('.search-bar input')!;
+    expect(input.id).toBeTruthy();
+    const label = wrap.querySelector<HTMLLabelElement>(`label[for="${input.id}"]`);
+    expect(label?.textContent?.trim()).toBe('Rechercher');
+    expect(label!.classList.contains('sr-only')).toBe(false);
+    expect(accessibleName(input)).toContain('Rechercher');
+    expect(byLabel(wrap, accessibleName(input))).toBe(input);
+    expect(input.placeholder).toBe('Rechercher une œuvre, un artiste, une faction…');
   });
 
   it('l’icône décorative ⌕ de la recherche est masquée aux technologies d’assistance', async () => {

@@ -60,10 +60,17 @@
       font-size: 16px;
       line-height: 1.65;
     }
-    .search-bar {
+    /* L45/t1 : libellé + champ ; libellé en onglet sur fond opaque (le bandeau est une image claire). */
+    .search-field {
       flex: 1;
-      position: relative;
       max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .search-bar {
+      align-self: stretch;
+      position: relative;
       display: flex;
       align-items: center;
     }
@@ -84,11 +91,14 @@
       font-size: 14px;
     }
     .search-bar input {
+      background: var(--panel); /* L45/t1 : placeholder ≥ 4,5:1 quelle que soit l'image du bandeau */
       width: 100%;
       height: 44px;
       padding: 0 18px 0 40px;
     }
     .search-bar input:focus { border-color: var(--border-strong); }
+    .search-bar input::placeholder { color: var(--muted); } /* L45/t1 : gris par défaut 3,45:1 */
+    .search-label { background: var(--panel); padding: 5px 10px 4px; } /* L45/t1 : onglet au-dessus du champ */
 
     .hero-stats {
       display: flex;
@@ -409,7 +419,7 @@
       margin-bottom: 12px;
     }
     .filter-row:last-child { margin-bottom: 0; }
-    .filter-row label {
+    .filter-row label, .search-label {
       color: var(--muted);
       font-size: 10px;
       font-weight: 700;
@@ -622,7 +632,7 @@
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
       .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
-      .search-bar { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
+      .search-field { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
       .art-content { padding: 14px 12px; }
       .category-grid { grid-template-columns: repeat(2, 1fr); }
       .art-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -720,7 +730,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      align-items: center;
+      align-items: flex-end; /* L45/t1 : « Importer » aligné sur le champ, pas sur le libellé */
       max-width: 720px;
     }
     .import-btn-hero {

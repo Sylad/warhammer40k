@@ -45,16 +45,19 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               {{ artworks().length }} œuvres triées, classées et archivées.
             </p>
             <div class="search-bar-wrap">
+              <!-- L45/t1 (WCAG 1.3.1 / 2.5.3 / 3.3.2) : libellé VISIBLE relié au champ, qui en fait le nom
+                   accessible ; le placeholder (disparaît à la saisie, coupé à 390 px) reste une indication. -->
+              <div class="search-field">
+              <label class="search-label" for="gallery-search">Rechercher</label>
               <div class="search-bar">
                 <span class="s-icon" aria-hidden="true">⌕</span>
-                <!-- L45 (WCAG 4.1.2 / 2.5.3) : nom accessible = le texte visible (placeholder), sans « … » ;
-                     le placeholder seul n'en est pas un (il disparaît à la saisie). -->
                 <input
+                  id="gallery-search"
                   type="text"
-                  aria-label="Rechercher une œuvre, un artiste, une faction"
                   [ngModel]="searchQuery()"
                   (ngModelChange)="onSearchChange($event)"
                   placeholder="Rechercher une œuvre, un artiste, une faction…" />
+              </div>
               </div>
               <button type="button" class="import-btn-hero" (click)="openImport()">
                 <span>+</span> Importer
