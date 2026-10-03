@@ -1994,6 +1994,15 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "position": "sticky",
     "top": "96px",
   },
+  ".sr-only": {
+    "clip": "rect(0 0 0 0)",
+    "height": "1px",
+    "margin": "-1px",
+    "overflow": "hidden",
+    "position": "absolute",
+    "white-space": "nowrap",
+    "width": "1px",
+  },
   ".stat-card": {
     "min-width": "92px",
     "text-align": "center",

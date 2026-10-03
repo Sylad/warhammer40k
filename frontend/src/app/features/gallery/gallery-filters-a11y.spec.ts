@@ -305,3 +305,47 @@ describe('galerie — recherche sans casse, accents ni ligatures (L45/t2)', () =
     expect(await titles('Œuvre')).toEqual(['Chef-d’Œuvre de Cadia']);
   });
 });
+
+// L45/t4 (revue UX, WCAG 4.1.3) : le nombre de résultats n'était pas annoncé après une recherche ou
+// un filtre, ni « Aucune œuvre ne correspond ». Région role=status PERSISTANTE (même élément d'un
+// état à l'autre : une région créée avec son texte n'est pas annoncée).
+describe('galerie — nombre de résultats annoncé (L45/t4)', () => {
+  const status = (root: HTMLElement) => root.querySelector<HTMLElement>('[data-testid="results-status"]');
+
+  it('le compteur est une région role=status présente dès le rendu, qui suit recherche et filtres', async () => {
+    const f = await render();
+    const root = f.nativeElement as HTMLElement;
+    const region = status(root)!;
+    expect(region).not.toBeNull();
+    expect(region.getAttribute('role')).toBe('status');
+    expect(region.textContent!.trim()).toBe('6 résultats'); // 5 du catalogue + 1 image perso
+
+    f.componentInstance.searchQuery.set('tau');
+    f.detectChanges();
+    expect(status(root)).toBe(region);
+    expect(region.textContent!.trim()).toBe('1 résultat');
+
+    f.componentInstance.searchQuery.set('introuvable');
+    f.detectChanges();
+    expect(status(root)).toBe(region);
+    expect(region.textContent!.trim()).toBe('Aucune œuvre ne correspond à ces filtres.');
+
+    f.componentInstance.searchQuery.set('');
+    f.componentInstance.filterFaction.set('necrons');
+    f.detectChanges();
+    expect(status(root)).toBe(region);
+    expect(region.textContent!.trim()).toBe('1 résultat');
+  });
+
+  it('faction connue sans illustration : le message dédié est annoncé', async () => {
+    const f = await render(META, USER_IMAGES, [...FACTIONS, { id: 'grey-knights', nom: 'Grey Knights' }], { faction: 'grey-knights' });
+    f.detectChanges();
+    expect(status(f.nativeElement)!.textContent!.trim()).toBe('Aucune illustration de la faction Grey Knights pour l’instant.');
+  });
+
+  it('une seule région d’état pour les résultats (pas de doublon dans la page)', async () => {
+    const root = (await render()).nativeElement as HTMLElement;
+    expect(root.querySelectorAll('[data-testid="results-status"]')).toHaveLength(1);
+    expect(root.querySelectorAll('.results-count:not([role="status"])')).toHaveLength(0);
+  });
+});

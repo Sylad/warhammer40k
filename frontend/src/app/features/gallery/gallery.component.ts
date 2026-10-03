@@ -121,9 +121,18 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <h2 class="section-title">
                   {{ filterCategory() ?? 'Œuvres récentes' }}
                 </h2>
-                @if (totalFiltered() > 0) {
-                  <span class="results-count">{{ totalFiltered() }} résultat{{ totalFiltered() > 1 ? 's' : '' }}</span>
-                }
+                <!-- L45/t4 (WCAG 4.1.3) : région d'état PERSISTANTE — le nombre de résultats, ou le
+                     message « aucune œuvre » (visible plus bas, ici pour lecteur d'écran), est annoncé
+                     après chaque recherche ou filtre. -->
+                <span class="results-count" role="status" data-testid="results-status">
+                  @if (totalFiltered() > 0) {
+                    {{ totalFiltered() }} résultat{{ totalFiltered() > 1 ? 's' : '' }}
+                  } @else if (emptyFactionName()) {
+                    <span class="sr-only">Aucune illustration de la faction {{ emptyFactionName() }} pour l’instant.</span>
+                  } @else {
+                    <span class="sr-only">Aucune œuvre ne correspond à ces filtres.</span>
+                  }
+                </span>
               </div>
               @if (hasActiveFilters()) {
                 <button class="see-all" type="button" (click)="resetFilters()">Réinitialiser →</button>

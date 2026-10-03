@@ -97,6 +97,10 @@
       padding: 0 18px 0 40px;
     }
     .search-bar input:focus { border-color: var(--border-strong); }
+    .sr-only { /* L45/t4 : texte pour lecteur d'écran seulement (span : ni marge interne ni bordure) */
+      position: absolute; width: 1px; height: 1px; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+    }
     .search-bar input::placeholder { color: var(--muted); } /* L45/t1 : gris par défaut 3,45:1 */
     .search-label { background: var(--panel); padding: 5px 10px 4px; } /* L45/t1 : onglet au-dessus du champ */
 
