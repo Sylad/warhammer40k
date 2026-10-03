@@ -1539,6 +1539,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".filter-row select:focus": {
     "border-color": "var(--border-strong)",
   },
+  ".filter-row select:focus-visible": {
+    "outline": "2px solid var(--gold-bright)",
+    "outline-offset": "3px",
+  },
   ".filter-row:last-child": {
     "margin-bottom": "0",
   },
@@ -1908,6 +1912,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".search-bar input:focus": {
     "border-color": "var(--border-strong)",
+  },
+  ".search-bar input:focus-visible": {
+    "outline": "2px solid var(--gold-bright)",
+    "outline-offset": "3px",
   },
   ".search-bar-wrap": {
     "align-items": "flex-end",

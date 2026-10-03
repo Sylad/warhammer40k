@@ -437,6 +437,8 @@
       outline: none;
     }
     .filter-row select:focus { border-color: var(--border-strong); }
+    /* L45/t3 : anneau de focus clavier, convention du site (plan, nouveautés). */
+    .filter-row select:focus-visible, .search-bar input:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
 
     .artist-row, .col-row {
       display: grid;
