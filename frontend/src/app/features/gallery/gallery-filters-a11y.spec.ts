@@ -82,11 +82,15 @@ describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', 
     }
   });
 
-  it('le champ de recherche a un nom accessible qui n’est pas son placeholder', async () => {
+  // Relecture L45 (WCAG 2.5.3 Label in Name) : le seul texte visible du champ est son placeholder ;
+  // le nom accessible doit le contenir (commande vocale « cliquer Rechercher une œuvre… »).
+  it('le nom accessible du champ de recherche contient son texte visible (WCAG 2.5.3)', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    const input = byLabel(root.querySelector<HTMLElement>('.search-bar')!, 'Rechercher dans la galerie');
+    const input = byLabel(root.querySelector<HTMLElement>('.search-bar')!, 'Rechercher une œuvre, un artiste, une faction');
     expect(input.tagName).toBe('INPUT');
-    expect(accessibleName(input)).not.toBe(input.placeholder);
+    const visible = input.placeholder.replace(/…$/, '').trim();
+    expect(visible).toBe('Rechercher une œuvre, un artiste, une faction');
+    expect(accessibleName(input).toLowerCase()).toContain(visible.toLowerCase());
   });
 
   it('chaque contrôle de la barre de filtres et de recherche a un nom accessible non vide', async () => {

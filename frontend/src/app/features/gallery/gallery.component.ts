@@ -47,10 +47,11 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <div class="search-bar-wrap">
               <div class="search-bar">
                 <span class="s-icon">⌕</span>
-                <!-- L45 (WCAG 4.1.2) : nom accessible propre ; le placeholder n'en est pas un. -->
+                <!-- L45 (WCAG 4.1.2 / 2.5.3) : nom accessible = le texte visible (placeholder), sans « … » ;
+                     le placeholder seul n'en est pas un (il disparaît à la saisie). -->
                 <input
                   type="text"
-                  aria-label="Rechercher dans la galerie"
+                  aria-label="Rechercher une œuvre, un artiste, une faction"
                   [ngModel]="searchQuery()"
                   (ngModelChange)="onSearchChange($event)"
                   placeholder="Rechercher une œuvre, un artiste, une faction…" />
