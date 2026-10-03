@@ -47,8 +47,10 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <div class="search-bar-wrap">
               <div class="search-bar">
                 <span class="s-icon">⌕</span>
+                <!-- L45 (WCAG 4.1.2) : nom accessible propre ; le placeholder n'en est pas un. -->
                 <input
                   type="text"
+                  aria-label="Rechercher dans la galerie"
                   [ngModel]="searchQuery()"
                   (ngModelChange)="onSearchChange($event)"
                   placeholder="Rechercher une œuvre, un artiste, une faction…" />
@@ -180,9 +182,10 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <button class="reset-btn" type="button" (click)="resetFilters()">Réinitialiser</button>
               }
             </div>
+            <!-- L45 (WCAG 1.3.1 / 4.1.2 / 3.3.2) : chaque libellé visible est associé à sa liste (for/id). -->
             <div class="filter-row">
-              <label>Faction</label>
-              <select [ngModel]="unknownFaction() ? '' : filterFaction()" (ngModelChange)="onFactionChange($event)">
+              <label for="gallery-filter-faction">Faction</label>
+              <select id="gallery-filter-faction" [ngModel]="unknownFaction() ? '' : filterFaction()" (ngModelChange)="onFactionChange($event)">
                 <option value="">Toutes</option>
                 @for (f of factionOptions(); track f) {
                   <option [value]="f">{{ f === filterFaction() ? factionName(f) : f }}</option>
@@ -190,8 +193,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               </select>
             </div>
             <div class="filter-row">
-              <label>Catégorie</label>
-              <select [ngModel]="filterCategory() ?? ''" (ngModelChange)="filterCategory.set($event || null)">
+              <label for="gallery-filter-category">Catégorie</label>
+              <select id="gallery-filter-category" [ngModel]="filterCategory() ?? ''" (ngModelChange)="filterCategory.set($event || null)">
                 <option value="">Toutes</option>
                 @for (c of availableCategories(); track c.key) {
                   <option [value]="c.key">{{ c.label }}</option>
@@ -199,8 +202,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               </select>
             </div>
             <div class="filter-row">
-              <label>Trier par</label>
-              <select [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+              <label for="gallery-filter-sort">Trier par</label>
+              <select id="gallery-filter-sort" [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
                 <option value="recent">Plus récentes</option>
                 <option value="popular">Populaires</option>
                 <option value="alpha">A — Z</option>
