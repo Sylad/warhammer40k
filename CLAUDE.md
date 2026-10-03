@@ -61,7 +61,19 @@ npm run dev:frontend   # ng serve sur :4201
 Livraison : commit + push sur `main` → la CI (`.github/workflows/build.yml`) construit et pousse
 `ghcr.io/sylad/warhammer40k-{backend,frontend}:sha-<7>` → `cadence deliver` (voir `cadence.yaml`)
 lance `scripts/deploy.sh` (bump du tag dans `developpeur-gitops/charts/warhammer40k/values.yaml`,
-ArgoCD synchronise) puis `scripts/verify-rollout.sh` et les URL de santé.
+ArgoCD synchronise) puis `scripts/verify-rollout.sh`, les URL de santé et `scripts/verify-cache.sh`.
+
+**Cache HTTP du frontend (L51)** — `frontend/nginx.conf` : `index.html` (`/`, `/index.html`, repli
+des routes) et ce qui est copié tel quel de `public/` (`favicon.svg`, `galaxy-map.jpg`,
+`nouveautes-data/`, `plan-data/`) partent en `Cache-Control: no-cache` (revalidés à chaque visite,
+304 possible) ; les fichiers à empreinte du build Angular (`main-`, `polyfills-`, `chunk-`,
+`styles-XXXXXXXX.*` à la racine, `media/`) en `public, max-age=31536000, immutable`. Une adresse hors
+`/api/` qui finit par une extension de script, feuille de style, police, image ou JSON répond 404
+`no-store` si le fichier est absent, jamais le repli HTML : ne pas créer de route qui finisse par
+une de ces extensions, ni déposer dans `public/` un fichier nommé `x-XXXXXXXX.ext` (8 majuscules ou
+chiffres : il serait gardé un an). Tout `add_header` ajouté dans un `location` doit y reposer la
+politique de sécurité de contenu (`$wh_csp`). Pas de service worker. Preuve rejouable :
+`cd frontend && npm run build`, puis `DOCKER_API_VERSION=1.44 scripts/test-nginx-cache.sh`.
 
 ## Variables d'env requises (`backend/.env`)
 

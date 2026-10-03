@@ -62,6 +62,7 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 | Sources externes | Wikipedia Fandom EN (wiki-image proxy), Reddit JSON public, 40k.gallery |
 | Build | Docker multi-stage (node:20-alpine → nginx:alpine) |
 | Déploiement | Images sur GHCR (CI GitHub), chart Helm sur k3s via ArgoCD (GitOps), exposé par un tunnel Cloudflare |
+| Cache HTTP | nginx sert `index.html` et les fichiers aux noms fixes (favicon, carte, Nouveautés, plan) en `no-cache` (revalidés à chaque visite), les fichiers à empreinte du build en cache d'un an ; un script, une feuille de style, une police ou une image absents répondent 404, jamais la page |
 
 ## Setup local
 
