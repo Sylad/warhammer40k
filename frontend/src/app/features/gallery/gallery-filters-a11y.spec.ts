@@ -26,20 +26,25 @@ const FACTIONS = [
 const META = { 'perso.jpg': { categories: ['Imperium'], title: 'Perso', artist: 'Moi', faction: 'Garde de Cadia' } };
 const USER_IMAGES = ['perso.jpg'];
 
-async function render(): Promise<ComponentFixture<GalleryComponent>> {
+async function render(
+  meta: Record<string, unknown> = META,
+  images: string[] = USER_IMAGES,
+  factions: unknown[] = FACTIONS,
+  query: Record<string, string> = {},
+): Promise<ComponentFixture<GalleryComponent>> {
   await setupTestBed([GalleryComponent], [
     provideRouter([]),
     {
       provide: WarhammerService,
       useValue: fakeWarhammerService({
         artworks$: of(ARTWORKS),
-        factions$: of(FACTIONS),
-        getImageMeta: () => of(META),
-        images$: of(USER_IMAGES),
+        factions$: of(factions),
+        getImageMeta: () => of(meta),
+        images$: of(images),
         getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
       }),
     },
-    { provide: ActivatedRoute, useValue: { queryParamMap: of(convertToParamMap({})), paramMap: of(convertToParamMap({})), snapshot: { fragment: null, queryParamMap: convertToParamMap({}) } } },
+    { provide: ActivatedRoute, useValue: { queryParamMap: of(convertToParamMap(query)), paramMap: of(convertToParamMap({})), snapshot: { fragment: null, queryParamMap: convertToParamMap(query) } } },
   ]);
   const f = TestBed.createComponent(GalleryComponent);
   f.detectChanges();
@@ -138,5 +143,85 @@ describe('galerie — noms de faction lisibles dans la liste (L45)', () => {
     const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
     const opts = Array.from(select.options).map((o) => ({ value: o.value, text: o.textContent!.trim() }));
     expect(opts).toContainEqual({ value: 'Garde de Cadia', text: 'Garde de Cadia' });
+  });
+});
+
+// Relecture L45 : une image perso peut porter une faction saisie par son NOM (« Nécrons »,
+// modale Catégoriser) alors que le catalogue porte l'identifiant (« necrons ») — deux options
+// « Nécrons » indistinguables filtraient des ensembles disjoints. Décision : une option par nom ;
+// le texte libre égal (casse, accents, espaces de bord ignorés) au nom d'une faction du codex est
+// rattaché à son identifiant, à la lecture (données enregistrées inchangées).
+describe('galerie — une seule option par faction, texte libre rattaché au codex (L45)', () => {
+  const FACTIONS_GK = [...FACTIONS, { id: 'grey-knights', nom: 'Grey Knights' }, { id: 'leagues-of-votann', nom: 'Leagues of Votann' }];
+  const META_LIBRE = {
+    'p0.jpg': { categories: ['Xénos'], title: 'Nécron perso', artist: 'Moi', faction: 'Nécrons' },
+    'p1.jpg': { categories: ['Space Marines'], title: 'SM perso', artist: 'Moi', faction: '  SPACE marines ' },
+    'p2.jpg': { categories: ['Imperium'], title: 'Cadia', artist: 'Moi', faction: 'Garde de Cadia' },
+    'p3.jpg': { categories: ['Imperium'], title: 'GK perso', artist: 'Moi', faction: 'grey knights' },
+    'p4.jpg': { categories: ['Xénos'], title: 'Necron sans accent', artist: 'Moi', faction: 'necrons ' },
+  };
+  const IMAGES_LIBRE = ['p0.jpg', 'p1.jpg', 'p2.jpg', 'p3.jpg', 'p4.jpg'];
+  const setup = (query: Record<string, string> = {}) => render(META_LIBRE, IMAGES_LIBRE, FACTIONS_GK, query);
+  const options = (root: HTMLElement) =>
+    Array.from(root.querySelector<HTMLSelectElement>('#gallery-filter-faction')!.options)
+      .map((o) => ({ value: o.value, text: o.textContent!.trim() }));
+
+  it('la liste « Faction » n’a aucun libellé en double', async () => {
+    const root = (await setup()).nativeElement as HTMLElement;
+    const texts = options(root).map((o) => o.text);
+    expect(new Set(texts).size).toBe(texts.length);
+    expect(options(root).filter((o) => o.text === 'Nécrons')).toEqual([{ value: 'necrons', text: 'Nécrons' }]);
+    expect(options(root).filter((o) => o.text === 'Space Marines')).toEqual([{ value: 'space-marines', text: 'Space Marines' }]);
+    // Faction du codex illustrée seulement par une image perso en texte libre : option à son identifiant.
+    expect(options(root)).toContainEqual({ value: 'grey-knights', text: 'Grey Knights' });
+  });
+
+  it('un texte libre sans nom du codex garde son option propre', async () => {
+    const root = (await setup()).nativeElement as HTMLElement;
+    expect(options(root)).toContainEqual({ value: 'Garde de Cadia', text: 'Garde de Cadia' });
+  });
+
+  it('choisir « Nécrons » montre les images des deux écritures ; compteur juste', async () => {
+    const f = await setup();
+    const c = f.componentInstance;
+    c.filterFaction.set('necrons');
+    f.detectChanges();
+    expect(c.filteredArtworks().map((a) => a.title).sort()).toEqual(['Necron sans accent', 'Nécron', 'Nécron perso'].sort());
+    expect(c.totalFiltered()).toBe(3);
+    expect((f.nativeElement as HTMLElement).querySelector('.results-count')!.textContent!.trim()).toBe('3 résultats');
+    expect(c.emptyFactionName()).toBeNull();
+    expect(c.unknownFaction()).toBeNull();
+  });
+
+  it('faction du codex illustrée seulement en texte libre : pas d’état vide, l’image est montrée', async () => {
+    const f = await setup({ faction: 'grey-knights' });
+    const c = f.componentInstance;
+    f.detectChanges();
+    expect(c.filteredArtworks().map((a) => a.title)).toEqual(['GK perso']);
+    expect(c.emptyFactionName()).toBeNull();
+    expect((f.nativeElement as HTMLElement).querySelector('[data-testid="faction-vide"]')).toBeNull();
+  });
+
+  it('faction du codex sans aucune image : l’état vide reste dit', async () => {
+    const f = await setup({ faction: 'leagues-of-votann' });
+    f.detectChanges();
+    expect(f.componentInstance.emptyFactionName()).toBe('Leagues of Votann');
+    expect((f.nativeElement as HTMLElement).querySelector('[data-testid="faction-vide"]')!.textContent).toContain('Leagues of Votann');
+  });
+
+  it('ancienne adresse ?faction=<nom en texte libre> : rattachée, liste positionnée sur l’option unique', async () => {
+    const f = await setup({ faction: 'Nécrons' });
+    const c = f.componentInstance;
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    expect(c.unknownFaction()).toBeNull();
+    expect(c.filteredArtworks()).toHaveLength(3);
+    expect((f.nativeElement as HTMLElement).querySelector<HTMLSelectElement>('#gallery-filter-faction')!.value).toBe('necrons');
+  });
+
+  it('les données enregistrées ne sont pas réécrites : l’œuvre garde sa faction en texte libre', async () => {
+    const c = (await setup()).componentInstance;
+    expect(c.artworks().find((a) => a.title === 'Nécron perso')!.faction).toBe('Nécrons');
   });
 });

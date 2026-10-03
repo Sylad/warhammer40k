@@ -186,7 +186,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <!-- L45 (WCAG 1.3.1 / 4.1.2 / 3.3.2) : chaque libellé visible est associé à sa liste (for/id). -->
             <div class="filter-row">
               <label for="gallery-filter-faction">Faction</label>
-              <select id="gallery-filter-faction" [ngModel]="unknownFaction() ? '' : filterFaction()" (ngModelChange)="onFactionChange($event)">
+              <select id="gallery-filter-faction" [ngModel]="unknownFaction() ? '' : factionKey(filterFaction())" (ngModelChange)="onFactionChange($event)">
                 <option value="">Toutes</option>
                 @for (f of factionOptions(); track f) {
                   <option [value]="f">{{ factionName(f) }}</option>
@@ -583,7 +583,10 @@ export class GalleryComponent {
         (a.extraCategories ?? []).some(c => c.toLowerCase().includes(q))
       );
     }
-    if (fac && !this.unknownFaction()) list = list.filter(a => a.faction === fac);
+    if (fac && !this.unknownFaction()) {
+      const key = this.factionKey(fac);
+      list = list.filter(a => this.factionKey(a.faction) === key);
+    }
     if (artist) list = list.filter(a => a.artist === artist);
     if (coll) list = list.filter(a => a.collectionId === coll);
     return list;
@@ -707,10 +710,41 @@ export class GalleryComponent {
   private fetchActive = 0;
   private readonly fetchQueue: Array<() => void> = [];
 
+  /**
+   * Relecture L45 : clé de comparaison d'un nom de faction — casse, accents, ligatures (œ, æ),
+   * apostrophe typographique et espaces de bord ignorés (« Sœurs de Bataille » = « soeurs de bataille »).
+   */
+  static normalizeFaction(s: string): string {
+    return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/[’‘]/g, "'");
+  }
+
+  /** Nom (et identifiant) normalisé d'une faction du codex → son identifiant. */
+  private readonly codexFactionKeys = computed(() => {
+    const m = new Map<string, string>();
+    for (const x of this.factions()) {
+      m.set(GalleryComponent.normalizeFaction(x.nom), x.id);
+      m.set(GalleryComponent.normalizeFaction(x.id), x.id);
+    }
+    return m;
+  });
+
+  /**
+   * Relecture L45 (décision du lead) : une faction saisie en texte libre sur une image perso
+   * (« Nécrons ») dont le nom est celui d'une faction du codex est rattachée à son identifiant
+   * (« necrons ») — une seule option par nom, qui filtre les deux écritures. Rattachement à la
+   * LECTURE : `a.faction` et image-meta.json restent tels que saisis. Texte libre sans
+   * correspondance → inchangé (option propre).
+   */
+  factionKey(raw: string | null | undefined): string {
+    if (!raw) return '';
+    return this.codexFactionKeys().get(GalleryComponent.normalizeFaction(raw)) ?? raw;
+  }
+
   readonly factionList = computed(() => {
     const set = new Set<string>();
     for (const a of this.artworks()) {
-      if (a.faction) set.add(a.faction);
+      if (a.faction) set.add(this.factionKey(a.faction));
     }
     return Array.from(set).sort();
   });
@@ -723,7 +757,7 @@ export class GalleryComponent {
    */
   readonly factionOptions = computed(() => {
     const list = this.factionList();
-    const f = this.filterFaction();
+    const f = this.factionKey(this.filterFaction());
     const options = !f || this.unknownFaction() || list.includes(f) ? list : [...list, f];
     return [...options].sort((a, b) => this.factionName(a).localeCompare(this.factionName(b), 'fr'));
   });
@@ -741,11 +775,11 @@ export class GalleryComponent {
    * message dédié. Rien avant factionSourcesSettled (pas de message prématuré).
    */
   readonly emptyFactionName = computed<string | null>(() => {
-    const f = this.filterFaction();
+    const f = this.factionKey(this.filterFaction());
     if (!f || this.unknownFaction() || !this.factionSourcesSettled()) return null;
     // 3e relecture : catalogue en échec → on ne sait pas ; pas d'« aucune illustration » affirmé.
     if (!this.catalogOk()) return null;
-    if (this.artworks().some(a => a.faction === f)) return null;
+    if (this.artworks().some(a => this.factionKey(a.faction) === f)) return null;
     return this.factionName(f);
   });
 
@@ -760,7 +794,8 @@ export class GalleryComponent {
     // 3e relecture : « inconnue » exige la liste des factions VRAIMENT chargée — un échec n'en est
     // pas une preuve (le filtre s'applique alors tel quel).
     if (!this.factionsOk()) return null;
-    if (this.factions().some(x => x.id === f) || this.factionList().includes(f)) return null;
+    const key = this.factionKey(f);
+    if (this.factions().some(x => x.id === key) || this.factionList().includes(key)) return null;
     return f;
   });
 
