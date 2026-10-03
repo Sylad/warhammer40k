@@ -99,3 +99,33 @@ describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', 
     for (const el of controls) expect(accessibleName(el), el.outerHTML).not.toBe('');
   });
 });
+
+describe('galerie — noms de faction lisibles dans la liste (L45)', () => {
+  it('les options montrent le nom du codex (« Nécrons », « T’au »), la valeur reste l’identifiant', async () => {
+    const root = (await render()).nativeElement as HTMLElement;
+    const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
+    const opts = Array.from(select.options).map((o) => ({ value: o.value, text: o.textContent!.trim() }));
+    expect(opts).toContainEqual({ value: 'necrons', text: 'Nécrons' });
+    expect(opts).toContainEqual({ value: 'tau', text: 'T\'au' });
+    expect(opts).toContainEqual({ value: 'astra-militarum', text: 'Astra Militarum' });
+    expect(opts).toContainEqual({ value: 'space-marines', text: 'Space Marines' });
+    // Plus aucun identifiant brut affiché pour une faction connue du codex.
+    for (const f of FACTIONS) expect(opts.map((o) => o.text)).not.toContain(f.id);
+  });
+
+  it('les options sont triées par nom affiché (ordre alphabétique français), « Toutes » en tête', async () => {
+    const root = (await render()).nativeElement as HTMLElement;
+    const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
+    const texts = Array.from(select.options).map((o) => o.textContent!.trim());
+    expect(texts[0]).toBe('Toutes');
+    const rest = texts.slice(1);
+    expect(rest).toEqual([...rest].sort((a, b) => a.localeCompare(b, 'fr')));
+  });
+
+  it('une faction saisie en texte libre (image perso, sans fiche au codex) reste affichée telle quelle', async () => {
+    const root = (await render()).nativeElement as HTMLElement;
+    const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
+    const opts = Array.from(select.options).map((o) => ({ value: o.value, text: o.textContent!.trim() }));
+    expect(opts).toContainEqual({ value: 'Garde de Cadia', text: 'Garde de Cadia' });
+  });
+});

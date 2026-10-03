@@ -188,7 +188,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <select id="gallery-filter-faction" [ngModel]="unknownFaction() ? '' : filterFaction()" (ngModelChange)="onFactionChange($event)">
                 <option value="">Toutes</option>
                 @for (f of factionOptions(); track f) {
-                  <option [value]="f">{{ f === filterFaction() ? factionName(f) : f }}</option>
+                  <option [value]="f">{{ factionName(f) }}</option>
                 }
               </select>
             </div>
@@ -718,15 +718,19 @@ export class GalleryComponent {
    * Options de la liste « Faction » : valeurs `faction` des illustrations (catalogue ET images
    * perso, voir factionList), plus la faction active si elle n'en a aucune (L42, revue UX R3 :
    * /gallery?faction=grey-knights laissait la liste vide).
+   * L45 : triées sur le nom affiché (factionName), pas sur l'identifiant — « Nécrons » se range à N.
    */
   readonly factionOptions = computed(() => {
     const list = this.factionList();
     const f = this.filterFaction();
-    if (!f || this.unknownFaction() || list.includes(f)) return list;
-    return [...list, f].sort();
+    const options = !f || this.unknownFaction() || list.includes(f) ? list : [...list, f];
+    return [...options].sort((a, b) => this.factionName(a).localeCompare(this.factionName(b), 'fr'));
   });
 
-  /** Nom lisible d'un identifiant de faction (« grey-knights » → « Grey Knights »), sinon tel quel. */
+  /**
+   * Nom lisible d'un identifiant de faction (« grey-knights » → « Grey Knights »), sinon tel quel
+   * (faction saisie en texte libre sur une image perso). L45 : utilisé pour TOUTES les options.
+   */
   factionName(id: string): string {
     return this.factions().find(x => x.id === id)?.nom ?? id;
   }
