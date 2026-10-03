@@ -1,7 +1,19 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-02 22:46",
+  "generated": "2026-10-03 09:44",
   "entries": [
+    {
+      "slug": "2026-10-03-galerie-une-recherche-qui-comprend-les-accents-des-filtres-p",
+      "title": "Galerie : une recherche qui comprend les accents, des filtres plus lisibles",
+      "date": "2026-10-03",
+      "lots": [
+        "L45"
+      ],
+      "captures": [
+        "captures/L45-filtres-galerie.png"
+      ],
+      "html": "<p>Dans la <strong>Galerie</strong>, chercher et filtrer devient plus simple.</p>\n<ul><li>La recherche ne tient plus compte des accents ni des majuscules : « celestine » trouve Sainte Célestine, « soeurs » trouve les Sœurs de Bataille.</li><li>Une faction se cherche aussi par son nom, par exemple « T'au » ou « Nécrons ».</li><li>La liste <strong>Faction</strong> affiche le nom de chaque faction, par ordre alphabétique.</li><li>Le champ de recherche porte un libellé <strong>Rechercher</strong>, toujours visible, et son texte d'exemple est plus lisible.</li><li>Au clavier, un cadre doré montre nettement le filtre sélectionné.</li><li>Avec un lecteur d'écran, chaque filtre annonce son nom, et le nombre de résultats est annoncé après chaque recherche.</li></ul>"
+    },
     {
       "slug": "2026-10-02-petits-ecrans-mieux-servis-titres-d-onglet-et-galerie-par-fa",
       "title": "Petits écrans mieux servis, titres d'onglet et galerie par faction",

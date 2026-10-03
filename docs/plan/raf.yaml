@@ -324,11 +324,20 @@ lots:
     created: 2026-10-02
   - id: L45
     title: "Galerie : libellés associés aux filtres (Faction, Catégorie, Trier par, recherche — WCAG 1.3.1 / 4.1.2 / 3.3.2) et noms de faction lisibles dans la liste au lieu des identifiants bruts (revue UX L42)"
-    status: todo
+    status: done
     estimate: 1
     quickwin: true
     visible: true
     created: 2026-10-02
+    started: 2026-10-03
+    tasks:
+      - { id: t1, title: "Recherche galerie : libellé visible associé (for/id) et placeholder en var(--muted), contraste ≥ 4,5:1 à mesurer (WCAG 3.3.2 / 1.4.3, mesuré 3,45:1)", status: done }
+      - { id: t2, title: "Recherche galerie : titre, artiste et catégorie sans accents comme la faction (« celestine » → Sainte Célestine) + test", status: done }
+      - { id: t3, title: "Focus visible des filtres et de la recherche galerie : outline 2px gold-bright en :focus-visible (WCAG 2.4.7, écart mesuré 1,98:1)", status: done }
+      - { id: t4, title: "Galerie : nombre de résultats annoncé (role=status) après recherche ou filtre (WCAG 4.1.3)", status: done }
+      - { id: t5, title: "Recherche galerie : anneau de focus collé au champ (outline-offset 0) — 2,27–2,53:1 sur l'image du bandeau, ≥ 3:1 attendu (WCAG 1.4.11)", status: done }
+    ux: { date: 2026-10-03, verdict: "Conforme avec réserves levées (revue cadence:ux-reviewer du 03-10, deux passes, 1440 et 390 px). Bloquant levé : libellé visible « Rechercher » relié au champ, libellé et placeholder à 5,50:1 (3,45:1 avant). Listes Faction / Catégorie / Trier par nommées (1.3.1, 4.1.2), nom accessible = texte visible (2.5.3), anneau de focus 13,4:1 sur les listes et 4,28:1 côté champ sur la recherche (1.4.11), résultats annoncés (4.1.3), recherche sans accents. Hors lot, planifiés : panneau Filtres avant la grille (L49, maquette), statistiques du bandeau à 1,05:1 (L50), saut en haut de page (note L48). Non vérifié : lecteur d'écran réel, vrai téléphone, zoom 200 %." }
+    finished: 2026-10-03
   - id: L46
     title: "Barre du haut : débordement horizontal avec une police par défaut du navigateur de 18 ou 20 px (1 px à 320 px en 18 px ; 320–371 px en 20 px) — logo + « Menu » trop larges, choix de design à faire (relecture L33)"
     status: todo
@@ -346,3 +355,18 @@ lots:
     status: todo
     estimate: 1
     created: 2026-10-02
+    notes:
+      - { date: 2026-10-03, text: "Revue UX de L45 (03-10) : à 390 px, choisir une Faction ramène la page en haut (scrollY 2993 → 0) et laisse le focus hors écran ; Catégorie et Tri ne le font pas. Probablement la navigation d'adresse de L42, non vérifié dans le code. À traiter ici." }
+  - id: L49
+    title: "Galerie : panneau Filtres avant la grille (ordre de focus WCAG 2.4.3 — filtres à la 34e tabulation) ; au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) — maquette à valider par Sylvain avant tout code"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-10-03
+  - id: L50
+    title: "Galerie : libellés des statistiques du bandeau (Œuvres, Artistes, Collections) à 1,05:1 sur l'image — pastille opaque var(--panel) comme l'onglet Rechercher, ou voile sombre ; mesurer ≥ 4,5:1 (WCAG 1.4.3) ; factoriser d'abord la feuille de la galerie (12 octets de marge sur le budget de 17,5 kB)"
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    visible: true
+    created: 2026-10-03

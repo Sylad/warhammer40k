@@ -67,6 +67,17 @@
       "id": "L44",
       "title": "Un codex tenu à jour : actualités de l'univers et pages révisées",
       "status": "todo"
+    },
+    {
+      "id": "L45",
+      "title": "Galerie : une recherche qui comprend les accents, des filtres plus lisibles",
+      "status": "done",
+      "started": "2026-10-03",
+      "finished": "2026-10-03",
+      "tasks": {
+        "done": 5,
+        "total": 5
+      }
     }
   ]
 }
