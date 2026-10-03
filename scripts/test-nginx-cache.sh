@@ -13,7 +13,12 @@
 #   5. /api/ : relayé tel quel, aucun Cache-Control ajouté, même pour un chemin
 #      qui finit par .jpg ou .js ;
 #   6. la politique de sécurité de contenu reste sur chaque réponse (un
-#      `add_header` dans un `location` annule ceux du bloc `server`).
+#      `add_header` dans un `location` annule ceux du bloc `server`) ;
+#   7. scripts/verify-cache.sh (le contrôle d'effet de `cadence deliver`) passe
+#      sur ce nginx, et échoue sur cinq faux frontaux : sans Cache-Control qui
+#      répond 200 à tout, scripts tous en 404, script du document servi en
+#      HTML, repli HTML sur un script absent, route sans no-cache — et dit
+#      « injoignable » quand rien ne répond.
 #
 # Prérequis : `cd frontend && npm run build` (le script sert
 # frontend/dist/frontend/browser tel quel, monté comme le Dockerfile le copie).
@@ -67,10 +72,71 @@ server {
         return 200 "stub $request_uri\n";
     }
 }
+# faux frontaux pour les contrôles négatifs de verify-cache.sh ; leur document
+# référence son script comme le fait le build Angular (src relatif, <base href="/">)
+# 3003 : document en no-cache, mais TOUS les scripts en 404 (celui du document aussi)
+server {
+    listen 3003;
+    location ~ \.js$ { return 404; }
+    location / {
+        default_type text/html;
+        add_header Cache-Control "no-cache";
+        return 200 '<script src="main-ABCD2345.js" type="module"></script>';
+    }
+}
+# 3004 : document en no-cache, script servi, mais repli HTML en 200 sur un absent
+server {
+    listen 3004;
+    location = /main-ABCD2345.js {
+        default_type application/javascript;
+        return 200 "export {}";
+    }
+    location / {
+        types { }
+        default_type text/html;
+        add_header Cache-Control "no-cache";
+        return 200 '<script src="main-ABCD2345.js" type="module"></script>';
+    }
+}
+# 3005 : document en no-cache, un absent en 404, mais le script du document
+# répond le repli HTML en 200 (ce que Cloudflare gardait sous le nom d'un script)
+server {
+    listen 3005;
+    location = /main-ABCD2345.js {
+        types { }
+        default_type text/html;
+        return 200 '<script src="main-ABCD2345.js" type="module"></script>';
+    }
+    location ~ \.js$ { return 404; }
+    location / {
+        default_type text/html;
+        add_header Cache-Control "no-cache";
+        return 200 '<script src="main-ABCD2345.js" type="module"></script>';
+    }
+}
+# 3006 : tout est juste, sauf le repli des routes, servi sans Cache-Control
+server {
+    listen 3006;
+    location = /main-ABCD2345.js {
+        default_type application/javascript;
+        return 200 "export {}";
+    }
+    location ~ \.js$ { return 404; }
+    location = / {
+        default_type text/html;
+        add_header Cache-Control "no-cache";
+        return 200 '<script src="main-ABCD2345.js" type="module"></script>';
+    }
+    location / {
+        default_type text/html;
+        return 200 '<script src="main-ABCD2345.js" type="module"></script>';
+    }
+}
 EOF
 
 docker network create "$NET" >/dev/null
-docker run -d --name "$BACK-$$" --network "$NET" --network-alias "$BACK" -p 127.0.0.1::3001 \
+docker run -d --name "$BACK-$$" --network "$NET" --network-alias "$BACK" \
+  -p 127.0.0.1::3001 -p 127.0.0.1::3003 -p 127.0.0.1::3004 -p 127.0.0.1::3005 -p 127.0.0.1::3006 \
   -v "$TMP/backend.conf:/etc/nginx/conf.d/default.conf:ro" "$IMAGE" >/dev/null
 docker run --rm --network "$NET" \
   -v "$CONF:/etc/nginx/conf.d/default.conf:ro" "$IMAGE" nginx -t
@@ -243,6 +309,38 @@ for path in '/api/wiki-image?q=Kharn.png' /api/images/file/x.jpg /api/chunk-0000
     fail=1
   fi
 done
+
+# 7. le contrôle d'effet de la livraison, rejoué depuis l'hôte sur les ports publiés
+port_url() { echo "http://$(docker port "$1" "$2/tcp" | head -n 1)"; }
+if WARHAMMER_URL="$(port_url "$FRONT" 80)" scripts/verify-cache.sh; then
+  echo "OK   | verify-cache.sh passe sur ce nginx"
+else
+  echo "FAIL | verify-cache.sh échoue sur ce nginx"
+  fail=1
+fi
+# refuse <port du faux frontal> <ce qu'il a de faux> <fragment attendu du message>
+refuse() {
+  local out
+  if out="$(WARHAMMER_URL="$(port_url "$BACK-$$" "$1")" scripts/verify-cache.sh 2>&1)"; then
+    echo "FAIL | verify-cache.sh passe sur un serveur $2"
+    fail=1
+    return
+  fi
+  case "$out" in
+    *"$3"*) echo "OK   | verify-cache.sh échoue sur un serveur $2" ;;
+    *) echo "FAIL | verify-cache.sh échoue sur un serveur $2, mais pas pour cette raison : $out"; fail=1 ;;
+  esac
+}
+refuse 3001 'sans Cache-Control qui répond 200 à tout'            'sans Cache-Control no-cache'
+refuse 3003 'dont tous les scripts répondent 404'                 'répond 404, attendu 200'
+refuse 3005 'dont le script du document est servi en HTML'        "n'est pas du JavaScript"
+refuse 3004 'qui répond le repli HTML en 200 sur un script absent' 'répond 200, attendu 404'
+refuse 3006 'dont le repli des routes est sans Cache-Control'     '/factions sans Cache-Control no-cache'
+unreachable="$(WARHAMMER_URL="http://127.0.0.1:9" scripts/verify-cache.sh 2>&1 || true)"
+case "$unreachable" in
+  *injoignable*) echo "OK   | verify-cache.sh dit « injoignable » quand le serveur ne répond pas" ;;
+  *) echo "FAIL | verify-cache.sh ne dit pas « injoignable » quand le serveur ne répond pas : $unreachable"; fail=1 ;;
+esac
 
 if [ "$fail" = 0 ]; then echo "test-nginx-cache: tout est conforme"; else echo "test-nginx-cache: ÉCHEC"; fi
 exit "$fail"
