@@ -15,7 +15,8 @@ describe('flux SSE /api/events retiré (L24)', () => {
 
   it('nginx ne déclare plus de location dédiée à /api/events', () => {
     const conf = readFileSync(resolve(root, 'nginx.conf'), 'utf8');
-    expect(conf).toContain('location /api/');
+    // le relais générique reste (« ^~ » : prioritaire sur le bloc des fichiers statiques)
+    expect(conf).toMatch(/location (\^~ )?\/api\/ \{/);
     expect(conf).not.toMatch(/api\/events/);
   });
 });
