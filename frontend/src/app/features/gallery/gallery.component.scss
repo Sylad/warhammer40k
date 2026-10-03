@@ -96,7 +96,6 @@
       height: 44px;
       padding: 0 18px 0 40px;
     }
-    .search-bar input:focus { border-color: var(--border-strong); }
     .sr-only { /* L45/t4 : texte pour lecteur d'écran seulement (span : ni marge interne ni bordure) */
       position: absolute; width: 1px; height: 1px; margin: -1px;
       overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
@@ -440,9 +439,10 @@
       font-size: 13px;
       outline: none;
     }
-    .filter-row select:focus { border-color: var(--border-strong); }
     /* L45/t3 : anneau de focus clavier, convention du site (plan, nouveautés). */
     .filter-row select:focus-visible, .search-bar input:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+    /* L45/t5 (WCAG 1.4.11) : sur la recherche, l'anneau touche le champ opaque, pas l'image du bandeau. */
+    .search-bar input:focus-visible { outline-offset: 0; }
 
     .artist-row, .col-row {
       display: grid;
@@ -624,8 +624,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 1280px) {
-      .category-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .art-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .category-grid, .art-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 1024px) {
       .hero-content { grid-template-columns: minmax(0, 1fr); } /* L32 : 1fr = largeur minimale du contenu */
@@ -702,6 +701,8 @@
       font-size: 13px;
       outline: none;
     }
+    /* Bordure au focus de tous les champs (recherche, filtres, Catégoriser) — L45/t5 : règles réunies (budget). */
+    .search-bar input:focus, .filter-row select:focus,
     .cat-row select:focus, .cat-row input[type="text"]:focus { border-color: var(--border-strong); }
     .cat-toggle {
       align-self: flex-start;

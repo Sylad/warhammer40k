@@ -43,9 +43,14 @@ describe('galerie — styles d’accessibilité (L45)', () => {
   // Convention du site (plan.component.scss, nouveautes.component.scss) en :focus-visible.
   it('t3 : anneau de focus visible (2px var(--gold-bright), décalé de 3px) sur les listes et la recherche', () => {
     for (const sel of ['.filter-row select:focus-visible', '.search-bar input:focus-visible']) {
-      const d = decls(sel);
-      expect(d.outline, sel).toBe('2px solid var(--gold-bright)');
-      expect(d['outline-offset'], sel).toBe('3px');
+      expect(decls(sel).outline, sel).toBe('2px solid var(--gold-bright)');
     }
+    expect(decls('.filter-row select:focus-visible')['outline-offset']).toBe('3px');
+  });
+
+  // t5 (contre-visite UX, WCAG 1.4.11) : décalé de 3 px, l'anneau de la recherche ne touchait que
+  // l'image claire du bandeau (2,27–2,53:1) ; sans décalage, son bord intérieur touche le champ opaque.
+  it('t5 : anneau de la recherche sans décalage (contre le champ var(--panel)), listes inchangées', () => {
+    expect(decls('.search-bar input:focus-visible')['outline-offset']).toBe('0');
   });
 });

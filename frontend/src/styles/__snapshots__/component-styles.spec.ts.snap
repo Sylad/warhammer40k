@@ -1915,7 +1915,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".search-bar input:focus-visible": {
     "outline": "2px solid var(--gold-bright)",
-    "outline-offset": "3px",
+    "outline-offset": "0",
   },
   ".search-bar-wrap": {
     "align-items": "flex-end",
