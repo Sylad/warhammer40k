@@ -93,6 +93,13 @@ describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', 
     expect(accessibleName(input).toLowerCase()).toContain(visible.toLowerCase());
   });
 
+  it('l’icône décorative ⌕ de la recherche est masquée aux technologies d’assistance', async () => {
+    const root = (await render()).nativeElement as HTMLElement;
+    const icon = root.querySelector<HTMLElement>('.search-bar .s-icon')!;
+    expect(icon.textContent!.trim()).toBe('⌕');
+    expect(icon.getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('chaque contrôle de la barre de filtres et de recherche a un nom accessible non vide', async () => {
     const root = (await render()).nativeElement as HTMLElement;
     const controls = [

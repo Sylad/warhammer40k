@@ -46,7 +46,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             </p>
             <div class="search-bar-wrap">
               <div class="search-bar">
-                <span class="s-icon">⌕</span>
+                <span class="s-icon" aria-hidden="true">⌕</span>
                 <!-- L45 (WCAG 4.1.2 / 2.5.3) : nom accessible = le texte visible (placeholder), sans « … » ;
                      le placeholder seul n'en est pas un (il disparaît à la saisie). -->
                 <input
