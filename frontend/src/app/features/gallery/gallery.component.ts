@@ -575,10 +575,18 @@ export class GalleryComponent {
     const coll = this.filterCollection();
     let list = this.artworks().slice();
     if (q) {
+      // Relecture L45 : la faction se cherche aussi par son NOM affiché (« T'au », « Sœurs de
+      // Bataille », « soeurs »), sans casse ni accents ni ligatures ; l'identifiant marche toujours.
+      const nq = GalleryComponent.normalizeFaction(q);
+      const matchesFaction = (raw: string | undefined) => {
+        if (!raw) return false;
+        const key = this.factionKey(raw);
+        return [raw, key, this.factionName(key)].some(v => GalleryComponent.normalizeFaction(v).includes(nq));
+      };
       list = list.filter(a =>
         a.title.toLowerCase().includes(q) ||
         a.artist.toLowerCase().includes(q) ||
-        (a.faction ?? '').toLowerCase().includes(q) ||
+        matchesFaction(a.faction) ||
         (a.category ?? '').toLowerCase().includes(q) ||
         (a.extraCategories ?? []).some(c => c.toLowerCase().includes(q))
       );

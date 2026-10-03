@@ -15,12 +15,14 @@ const ARTWORKS = [
   { id: 'aw-2', title: 'Nécron', artist: 'B', image: 'n.jpg', category: 'Xénos', faction: 'necrons', likes: 1 },
   { id: 'aw-3', title: 'Commissaire', artist: 'C', image: 'c.jpg', category: 'Imperium', faction: 'astra-militarum', likes: 1 },
   { id: 'aw-4', title: 'Tau', artist: 'D', image: 't.jpg', category: 'Xénos', faction: 'tau', likes: 1 },
+  { id: 'aw-5', title: 'Célestine', artist: 'E', image: 's.jpg', category: 'Imperium', faction: 'soeurs-de-bataille', likes: 1 },
 ];
 const FACTIONS = [
   { id: 'space-marines', nom: 'Space Marines' },
   { id: 'necrons', nom: 'Nécrons' },
   { id: 'astra-militarum', nom: 'Astra Militarum' },
   { id: 'tau', nom: 'T\'au' },
+  { id: 'soeurs-de-bataille', nom: 'Sœurs de Bataille' },
 ];
 /** Image perso catégorisée à la main : faction saisie en texte libre, sans fiche au codex. */
 const META = { 'perso.jpg': { categories: ['Imperium'], title: 'Perso', artist: 'Moi', faction: 'Garde de Cadia' } };
@@ -223,5 +225,37 @@ describe('galerie — une seule option par faction, texte libre rattaché au cod
   it('les données enregistrées ne sont pas réécrites : l’œuvre garde sa faction en texte libre', async () => {
     const c = (await setup()).componentInstance;
     expect(c.artworks().find((a) => a.title === 'Nécron perso')!.faction).toBe('Nécrons');
+  });
+});
+
+// Relecture L45 : le placeholder invite à chercher « une faction », mais la recherche comparait
+// l'identifiant (« soeurs-de-bataille ») : « Sœurs de Bataille » ou « T'au » ne trouvaient rien.
+describe('galerie — recherche par nom de faction (L45)', () => {
+  const META_LIBRE = { 'p0.jpg': { categories: ['Xénos'], title: 'Perso', artist: 'Moi', faction: 'Nécrons' } };
+  const search = async (q: string) => {
+    const f = await render(META_LIBRE, ['p0.jpg']);
+    f.componentInstance.searchQuery.set(q);
+    f.detectChanges();
+    return f.componentInstance.filteredArtworks().map((a) => a.id);
+  };
+
+  it("« T’au » et « T'au » trouvent les images T’au", async () => {
+    expect(await search("T'au")).toEqual(['aw-4']);
+    expect(await search('T’au')).toEqual(['aw-4']);
+  });
+
+  it('« Sœurs de Bataille », « soeurs » et « SOEURS » trouvent les images des Sœurs de Bataille', async () => {
+    expect(await search('Sœurs de Bataille')).toEqual(['aw-5']);
+    expect(await search('soeurs')).toEqual(['aw-5']);
+    expect(await search('SOEURS')).toEqual(['aw-5']);
+  });
+
+  it('« nécrons » trouve le catalogue (identifiant) ET l’image perso (texte libre)', async () => {
+    expect((await search('nécrons')).sort()).toEqual(['aw-2', 'local-0']);
+  });
+
+  it('la recherche par identifiant continue de marcher', async () => {
+    expect(await search('astra-militarum')).toEqual(['aw-3']);
+    expect(await search('soeurs-de-bataille')).toEqual(['aw-5']);
   });
 });
