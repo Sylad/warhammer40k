@@ -264,3 +264,44 @@ describe('galerie — recherche par nom de faction (L45)', () => {
     expect(await search('soeurs-de-bataille')).toEqual(['aw-5']);
   });
 });
+
+// L45/t2 (revue UX) : la recherche ignorait accents et ligatures pour la faction seulement —
+// « celestine » ne trouvait pas « Sainte Célestine ». Même normalisation pour titre, artiste, catégorie.
+describe('galerie — recherche sans casse, accents ni ligatures (L45/t2)', () => {
+  const META_T2 = {
+    'k.jpg': { categories: ['Chaos'], title: 'Khârn le Traître', artist: 'Moi' },
+    'o.jpg': { categories: ['Imperium'], title: 'Chef-d’Œuvre de Cadia', artist: 'Moi' },
+    'e.jpg': { categories: ['Xénos'], title: 'Portrait', artist: 'Émissaire Noir' },
+    'h.jpg': { categories: ['Héraldique'], title: 'Blason', artist: 'Moi' },
+  };
+  const titles = async (q: string) => {
+    const f = await render(META_T2, ['k.jpg', 'o.jpg', 'e.jpg', 'h.jpg']);
+    f.componentInstance.searchQuery.set(q);
+    f.detectChanges();
+    return f.componentInstance.filteredArtworks().map((a) => a.title);
+  };
+
+  it('« celestine » trouve « Célestine » (titre accentué)', async () => {
+    expect(await titles('celestine')).toEqual(['Célestine']);
+  });
+  it('« kharn » trouve « Khârn le Traître »', async () => {
+    expect(await titles('kharn')).toEqual(['Khârn le Traître']);
+  });
+  it('« oeuvre » trouve « Chef-d’Œuvre de Cadia » (ligature, majuscule)', async () => {
+    expect(await titles('oeuvre')).toEqual(['Chef-d’Œuvre de Cadia']);
+  });
+  it('« emissaire » trouve l’œuvre de l’artiste « Émissaire Noir »', async () => {
+    expect(await titles('emissaire')).toEqual(['Portrait']);
+  });
+  it('« heraldique » trouve la catégorie « Héraldique »', async () => {
+    expect(await titles('heraldique')).toEqual(['Blason']);
+  });
+  it("chef-d'oeuvre avec apostrophe droite trouve l'apostrophe typographique", async () => {
+    expect(await titles("chef-d'oeuvre")).toEqual(['Chef-d’Œuvre de Cadia']);
+  });
+  it('la recherche exacte avec accents marche toujours', async () => {
+    expect(await titles('Célestine')).toEqual(['Célestine']);
+    expect(await titles('Khârn')).toEqual(['Khârn le Traître']);
+    expect(await titles('Œuvre')).toEqual(['Chef-d’Œuvre de Cadia']);
+  });
+});

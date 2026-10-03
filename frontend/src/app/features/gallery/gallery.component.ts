@@ -578,20 +578,22 @@ export class GalleryComponent {
     const coll = this.filterCollection();
     let list = this.artworks().slice();
     if (q) {
-      // Relecture L45 : la faction se cherche aussi par son NOM affiché (« T'au », « Sœurs de
-      // Bataille », « soeurs »), sans casse ni accents ni ligatures ; l'identifiant marche toujours.
-      const nq = GalleryComponent.normalizeFaction(q);
+      // L45 : titre, artiste, catégorie ET faction comparés sans casse, accents, ligatures ni
+      // apostrophe typographique (« celestine », « soeurs ») ; la faction aussi par son NOM affiché
+      // (« T'au »), l'identifiant marchant toujours.
+      const nq = GalleryComponent.foldText(q);
+      const has = (v: string | undefined) => !!v && GalleryComponent.foldText(v).includes(nq);
       const matchesFaction = (raw: string | undefined) => {
         if (!raw) return false;
         const key = this.factionKey(raw);
-        return [raw, key, this.factionName(key)].some(v => GalleryComponent.normalizeFaction(v).includes(nq));
+        return [raw, key, this.factionName(key)].some(has);
       };
       list = list.filter(a =>
-        a.title.toLowerCase().includes(q) ||
-        a.artist.toLowerCase().includes(q) ||
+        has(a.title) ||
+        has(a.artist) ||
         matchesFaction(a.faction) ||
-        (a.category ?? '').toLowerCase().includes(q) ||
-        (a.extraCategories ?? []).some(c => c.toLowerCase().includes(q))
+        has(a.category) ||
+        (a.extraCategories ?? []).some(has)
       );
     }
     if (fac && !this.unknownFaction()) {
@@ -722,10 +724,11 @@ export class GalleryComponent {
   private readonly fetchQueue: Array<() => void> = [];
 
   /**
-   * Relecture L45 : clé de comparaison d'un nom de faction — casse, accents, ligatures (œ, æ),
-   * apostrophe typographique et espaces de bord ignorés (« Sœurs de Bataille » = « soeurs de bataille »).
+   * L45 : forme de comparaison d'un texte (recherche, noms de faction) — casse, accents, ligatures
+   * (œ, æ), apostrophe typographique et espaces de bord ignorés (« Sœurs » = « soeurs », « Khârn » =
+   * « kharn »).
    */
-  static normalizeFaction(s: string): string {
+  static foldText(s: string): string {
     return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/[’‘]/g, "'");
   }
@@ -734,8 +737,8 @@ export class GalleryComponent {
   private readonly codexFactionKeys = computed(() => {
     const m = new Map<string, string>();
     for (const x of this.factions()) {
-      m.set(GalleryComponent.normalizeFaction(x.nom), x.id);
-      m.set(GalleryComponent.normalizeFaction(x.id), x.id);
+      m.set(GalleryComponent.foldText(x.nom), x.id);
+      m.set(GalleryComponent.foldText(x.id), x.id);
     }
     return m;
   });
@@ -749,7 +752,7 @@ export class GalleryComponent {
    */
   factionKey(raw: string | null | undefined): string {
     if (!raw) return '';
-    return this.codexFactionKeys().get(GalleryComponent.normalizeFaction(raw)) ?? raw;
+    return this.codexFactionKeys().get(GalleryComponent.foldText(raw)) ?? raw;
   }
 
   readonly factionList = computed(() => {
