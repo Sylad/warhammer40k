@@ -2176,6 +2176,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 760px) .hero-content": {
     "padding": "24px",
   },
+  "@media (max-width: 760px) .hero-stats": {
+    "display": "grid",
+    "gap": "8px",
+    "grid-template-columns": "repeat(3, 1fr)",
+  },
   "@media (max-width: 760px) .nav-arrow": {
     "font-size": "26px",
     "height": "50px",
@@ -2193,6 +2198,14 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .sidebar": {
     "grid-template-columns": "1fr",
+  },
+  "@media (max-width: 760px) .stat-card": {
+    "min-width": "0",
+    "padding": "8px 4px",
+  },
+  "@media (max-width: 760px) .stat-label": {
+    "font-size": "12px",
+    "letter-spacing": "0.02em",
   },
 }
 `;

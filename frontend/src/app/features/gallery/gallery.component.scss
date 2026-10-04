@@ -81,7 +81,7 @@
       font-size: 16px;
       pointer-events: none;
     }
-    /* Champs de recherche (bandeau, import wiki) : même habillage. */
+    /* Champs de recherche (bandeau, import wiki), sélecteurs et saisies des catégories : même habillage. */
     .search-bar input, .wiki-search input, .cat-row select, .cat-row input[type="text"], .chip-input {
       border: 1px solid rgba(201, 162, 74, 0.32);
       background: rgba(5, 4, 3, 0.78);
@@ -312,7 +312,6 @@
       height: 32px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(201, 162, 74, 0.45);
       background: rgba(0, 0, 0, 0.62);
       color: rgba(201, 162, 74, 0.55);
       font-size: 16px;
@@ -320,7 +319,7 @@
       transition: color 0.15s ease, transform 0.15s ease;
     }
     .bookmark:hover { color: var(--gold-bright); transform: scale(1.08); }
-    .bookmark.on { color: #ff5c6b; border-color: rgba(255, 92, 107, 0.55); background: rgba(255, 92, 107, 0.1); }
+    .bookmark.on { background: rgba(255, 92, 107, 0.1); }
 
     /* Pagination numérotée — remplace l'ancien bouton 'load-more'. */
     .pagination {
@@ -329,6 +328,8 @@
       justify-content: center;
       gap: 8px;
       margin-top: 28px;
+    }
+    .pagination, .cat-actions {
       padding-top: 18px;
       border-top: 1px solid rgba(201, 162, 74, 0.18);
     }
@@ -595,12 +596,12 @@
       text-decoration: none;
     }
     .vi-btn:hover { background: rgba(201, 162, 74, 0.1); }
-    .vi-btn.on { color: #ff5c6b; border-color: rgba(255, 92, 107, 0.55); }
+    .bookmark.on, .vi-btn.on { color: #ff5c6b; border-color: rgba(255, 92, 107, 0.55); }
 
+    .bookmark, .close, .nav-arrow { border: 1px solid rgba(201, 162, 74, 0.45); }
     .close, .nav-arrow {
       position: absolute;
       z-index: 102;
-      border: 1px solid rgba(201, 162, 74, 0.45);
       background: rgba(0, 0, 0, 0.7);
       color: var(--gold-bright);
       cursor: pointer;
@@ -640,11 +641,15 @@
     @media (max-width: 760px) {
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
+      /* L54 : trois statistiques en trois colonnes égales (plus de 3e pastille orpheline) */
+      .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .stat-card { min-width: 0; padding: 8px 4px; }
+      .stat-label { font-size: 12px; letter-spacing: 0.02em; }
       .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
       .search-field { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
       .art-content { padding: 14px 12px; }
-      .category-grid { grid-template-columns: repeat(2, 1fr); }
-      .art-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .category-grid, .art-grid { grid-template-columns: repeat(2, 1fr); }
+      .art-grid { gap: 10px; }
       .sidebar { grid-template-columns: 1fr; }
       .nav-arrow { width: 40px; height: 50px; font-size: 26px; }
       .nav-arrow.left { left: 8px; }
@@ -719,8 +724,6 @@
       justify-content: flex-end;
       gap: 10px;
       margin-top: 22px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(201, 162, 74, 0.18);
     }
     .vi-btn.primary {
       background: rgba(201, 162, 74, 0.18);
@@ -750,7 +753,7 @@
       letter-spacing: 0.14em;
       white-space: nowrap;
     }
-    .import-btn-hero:hover { background: rgba(201, 162, 74, 0.22); }
+    .import-btn-hero:hover, .chip-add:hover { background: rgba(201, 162, 74, 0.22); }
     .import-btn-hero span { font-size: 16px; line-height: 1; }
 
     /* Chips input */
@@ -773,13 +776,13 @@
       font-size: 13px;
       outline: none;
     }
+    .chip, .chip-add, .cat-dropdown { border: 1px solid rgba(201, 162, 74, 0.5); }
     .chip {
       display: inline-flex;
       align-items: center;
       gap: 4px;
       padding: 3px 4px 3px 9px;
       background: rgba(201, 162, 74, 0.18);
-      border: 1px solid rgba(201, 162, 74, 0.5);
       color: var(--gold-bright);
       font-size: 12px;
       font-weight: 700;
@@ -803,14 +806,12 @@
       height: 26px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(201, 162, 74, 0.5);
       background: rgba(201, 162, 74, 0.12);
       color: var(--gold-bright);
       font-size: 14px;
       cursor: pointer;
       font-family: inherit;
     }
-    .chip-add:hover { background: rgba(201, 162, 74, 0.22); }
 
     /* Combobox sectionné — dropdown popover sous le chip-input */
     .cat-combo-row { position: relative; }
@@ -822,7 +823,6 @@
       max-height: 320px;
       overflow-y: auto;
       z-index: 5;
-      border: 1px solid rgba(201, 162, 74, 0.5);
       background: rgba(8, 6, 4, 0.98);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(2px);

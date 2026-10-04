@@ -45,3 +45,29 @@ describe('galerie — statistiques du bandeau (L50)', () => {
     expect(ratio(themeColor('gold-bright'), panel)).toBeGreaterThanOrEqual(4.5);
   });
 });
+
+// L54 : à 390 px, trois colonnes égales ; libellé 12 px tant que « COLLECTIONS » tient.
+function mobileDecls(sel: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  postcss.parse(css).walkAtRules('media', (at) => {
+    if (!/max-width:\s*760px/.test(at.params)) return;
+    at.walkRules((rule) => {
+      if (!rule.selectors.map((s) => s.replace(/\s+/g, ' ').trim()).includes(sel)) return;
+      rule.walkDecls((d) => { out[d.prop] = d.value; });
+    });
+  });
+  return out;
+}
+
+describe('galerie — statistiques à 390 px (L54)', () => {
+  it('grille de trois colonnes égales, pastilles sans largeur minimale', () => {
+    const grid = mobileDecls('.hero-stats');
+    expect(grid.display).toBe('grid');
+    expect(grid['grid-template-columns']).toBe('repeat(3, 1fr)');
+    expect(mobileDecls('.stat-card')['min-width']).toBe('0');
+  });
+
+  it('libellé 12 px', () => {
+    expect(mobileDecls('.stat-label')['font-size']).toBe('12px');
+  });
+});
