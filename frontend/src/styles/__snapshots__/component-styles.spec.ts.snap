@@ -2206,6 +2206,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 760px) .stat-label": {
     "font-size": "clamp(10px, 3.1vw, 12px)",
     "letter-spacing": "0",
+    "overflow-wrap": "anywhere",
   },
 }
 `;

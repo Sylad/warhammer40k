@@ -80,4 +80,29 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
       }
     });
   }
+
+  // WCAG 1.4.12 Text Spacing : avec l'espacement imposé par une extension, le texte reste dans
+  // la pastille (donc sur le fond --panel qui garantit 4,5:1), quitte à couper le mot.
+  it('espacement de texte utilisateur (1.4.12) : le libellé ne sort pas de sa pastille de 320 à 390 px', async () => {
+    const page = await browser.newPage();
+    await page.setViewportSize({ width: 320, height: 844 });
+    await page.goto(base + '/gallery');
+    await page.locator('.hero-stats .stat-card').first().waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    await page.addStyleTag({ content: '* { line-height: 1.5 !important; letter-spacing: 0.12em !important; word-spacing: 0.16em !important; }' });
+    const bad: string[] = [];
+    for (const width of [320, 340, 360, 375, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      const out = await page.evaluate(() => [...document.querySelectorAll('.hero-stats .stat-card')].map((c) => {
+        const l = c.querySelector('.stat-label')!;
+        const range = document.createRange();
+        range.selectNodeContents(l);
+        const right = Math.max(...[...range.getClientRects()].map((r) => r.right));
+        return `${l.textContent!.trim()} +${Math.round(right - c.getBoundingClientRect().right)}`;
+      }).filter((t) => !/\+(-\d+|0)$/.test(t)));
+      if (out.length) bad.push(`${width} px (${out.join(', ')})`);
+    }
+    await page.close();
+    expect(bad).toEqual([]);
+  });
 });
