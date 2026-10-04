@@ -397,13 +397,14 @@ lots:
     created: 2026-10-04
   - id: L54
     title: "Galerie 390 px : trois statistiques en grille 3 colonnes égales (plus de 3e pastille orpheline de 114 px), libellé 12 px si « COLLECTIONS » tient"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-04
     notes:
       - { date: 2026-10-04, text: "à faire avec : commentaire de gallery.component.scss:84 « Champs de recherche (bandeau, import wiki) » devenu inexact — la règle couvre aussi .cat-row et .chip-input (mineur de la revue de L50)" }
+    started: 2026-10-04
   - id: L55
     title: "ancres.e2e : /plan#<lot> intermittent (404 px sous la barre à 390 px, 1 fois sur 4 ; échoue aussi sur un dist/ périmé) — attendre la fin du chargement du plan avant de mesurer"
     status: todo
