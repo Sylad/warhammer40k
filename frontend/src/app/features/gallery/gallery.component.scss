@@ -82,9 +82,11 @@
       pointer-events: none;
     }
     /* Champs de recherche (bandeau, import wiki) : même habillage. */
-    .search-bar input, .wiki-search input {
+    .search-bar input, .wiki-search input, .cat-row select, .cat-row input[type="text"], .chip-input {
       border: 1px solid rgba(201, 162, 74, 0.32);
       background: rgba(5, 4, 3, 0.78);
+    }
+    .search-bar input, .wiki-search input {
       color: var(--text);
       outline: none;
       font: inherit;
@@ -693,8 +695,6 @@
     }
     .cat-row select, .cat-row input[type="text"] {
       height: 38px;
-      border: 1px solid rgba(201, 162, 74, 0.32);
-      background: rgba(5, 4, 3, 0.78);
       color: var(--text);
       padding: 0 12px;
       font-family: inherit;
@@ -759,8 +759,6 @@
       align-items: center;
       padding: 6px 8px;
       min-height: 38px;
-      border: 1px solid rgba(201, 162, 74, 0.32);
-      background: rgba(5, 4, 3, 0.78);
     }
     .chip-input input {
       flex: 1;
