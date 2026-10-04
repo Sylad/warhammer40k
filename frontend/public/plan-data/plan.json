@@ -78,6 +78,12 @@
         "done": 5,
         "total": 5
       }
+    },
+    {
+      "id": "L50",
+      "title": "Galerie : des statistiques lisibles sur toutes les images",
+      "status": "doing",
+      "started": "2026-10-04"
     }
   ]
 }
