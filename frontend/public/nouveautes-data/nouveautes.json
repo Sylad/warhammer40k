@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-04 10:56",
+  "generated": "2026-10-04 23:04",
   "entries": [
+    {
+      "slug": "2026-10-04-galerie-les-trois-statistiques-alignees-au-telephone",
+      "title": "Galerie : les trois statistiques alignées au téléphone",
+      "date": "2026-10-04",
+      "lots": [
+        "L54"
+      ],
+      "captures": [
+        "captures/L54-statistiques-galerie-telephone.png"
+      ],
+      "alts": [
+        "Bandeau de la Galerie à 390 px : les trois statistiques Œuvres, Artistes et Collections sur trois pastilles de même largeur"
+      ],
+      "html": "<p>Sur téléphone, les trois chiffres du bandeau de la <strong>Galerie</strong> (Œuvres, Artistes, Collections) se partagent désormais la largeur en trois pastilles égales, au lieu de laisser la troisième seule sur une ligne. Le mot « Collections » tient en entier dans sa pastille, même sur les écrans les plus étroits.</p>"
+    },
     {
       "slug": "2026-10-04-galerie-des-statistiques-lisibles-sur-toutes-les-images",
       "title": "Galerie : des statistiques lisibles sur toutes les images",
