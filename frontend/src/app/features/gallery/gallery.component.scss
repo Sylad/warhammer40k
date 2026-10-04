@@ -642,9 +642,10 @@
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
       /* L54 : trois statistiques en trois colonnes égales (plus de 3e pastille orpheline) */
-      .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-      .stat-card { min-width: 0; padding: 8px 4px; }
-      .stat-label { font-size: 12px; letter-spacing: 0.02em; }
+      .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+      .stat-card { min-width: 0; padding: 8px 2px; }
+      /* 12 px dès ~390 px, où « COLLECTIONS » tient ; 10 px à 320 px (WCAG 1.4.10) */
+      .stat-label { font-size: clamp(10px, 3.1vw, 12px); letter-spacing: 0; }
       .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
       .search-field { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
       .art-content { padding: 14px 12px; }
@@ -655,7 +656,6 @@
       .nav-arrow.left { left: 8px; }
       .nav-arrow.right { right: 8px; }
     }
-
     /* CATEGORIZE MODAL */
     /* Boîtes des modales « Catégoriser » et « Importer » : même cadre, même titre. */
     .cat-modal, .import-modal { z-index: 110; }

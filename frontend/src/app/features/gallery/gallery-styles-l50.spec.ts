@@ -67,7 +67,7 @@ describe('galerie — statistiques à 390 px (L54)', () => {
     expect(mobileDecls('.stat-card')['min-width']).toBe('0');
   });
 
-  it('libellé 12 px', () => {
-    expect(mobileDecls('.stat-label')['font-size']).toBe('12px');
+  it('libellé 12 px dès que « COLLECTIONS » tient, réduit jusqu\'à 10 px à 320 px', () => {
+    expect(mobileDecls('.stat-label')['font-size']).toBe('clamp(10px, 3.1vw, 12px)');
   });
 });

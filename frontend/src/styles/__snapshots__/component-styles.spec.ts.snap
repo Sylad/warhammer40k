@@ -2178,7 +2178,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .hero-stats": {
     "display": "grid",
-    "gap": "8px",
+    "gap": "4px",
     "grid-template-columns": "repeat(3, 1fr)",
   },
   "@media (max-width: 760px) .nav-arrow": {
@@ -2201,11 +2201,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .stat-card": {
     "min-width": "0",
-    "padding": "8px 4px",
+    "padding": "8px 2px",
   },
   "@media (max-width: 760px) .stat-label": {
-    "font-size": "12px",
-    "letter-spacing": "0.02em",
+    "font-size": "clamp(10px, 3.1vw, 12px)",
+    "letter-spacing": "0",
   },
 }
 `;
