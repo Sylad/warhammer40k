@@ -366,13 +366,15 @@ lots:
     created: 2026-10-03
   - id: L50
     title: "Galerie : libellés des statistiques du bandeau (Œuvres, Artistes, Collections) à 1,05:1 sur l'image — pastille opaque var(--panel) comme l'onglet Rechercher, ou voile sombre ; mesurer ≥ 4,5:1 (WCAG 1.4.3) ; factoriser d'abord la feuille de la galerie (12 octets de marge sur le budget de 17,5 kB)"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     visible: true
     created: 2026-10-03
     started: 2026-10-04
     ux: { date: 2026-10-04, verdict: "conforme (revue UX 04-10) : pastille opaque --panel, libellé 5,48:1 et valeur ~13:1 mesurés sur fond noir et fond clair simulé, pas de défilement à 390 px ; hors lot : voile du bandeau (surtitre/description/Importer) et grille 3 colonnes à 390 px reportés en lots" }
+    review: { date: 2026-10-04, verdict: "conforme (re-revue 04-10, HEAD 4cce5db) : bloquant Nouveautés corrigé et vérifié, build OK, vitest 513/513 (lead : 513/513 ×2) ; 1 mineur reporté en L54 (commentaire gallery.component.scss:84)", commit: 4cce5db062c00bad19162fbd27ee1541094b5cc7 }
+    finished: 2026-10-04
   - id: L51
     title: "Livraison : index.html servi sans Cache-Control — un visiteur revenu garde l'ancienne appli après une livraison (mesuré le 03-10 sur ol-companion, même nginx.conf ici) ; un fichier d'actif absent répond 200 text/html max-age=14400 et Cloudflare le met en cache (page blanche possible) — no-cache sur index.html, 404 sur un actif manquant, cache long sur les fichiers à empreinte, contrôle d'effet dans cadence.yaml"
     status: done
@@ -400,6 +402,8 @@ lots:
     quickwin: true
     visible: true
     created: 2026-10-04
+    notes:
+      - { date: 2026-10-04, text: "à faire avec : commentaire de gallery.component.scss:84 « Champs de recherche (bandeau, import wiki) » devenu inexact — la règle couvre aussi .cat-row et .chip-input (mineur de la revue de L50)" }
   - id: L55
     title: "ancres.e2e : /plan#<lot> intermittent (404 px sous la barre à 390 px, 1 fois sur 4 ; échoue aussi sur un dist/ périmé) — attendre la fin du chargement du plan avant de mesurer"
     status: todo

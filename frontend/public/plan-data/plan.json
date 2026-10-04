@@ -82,8 +82,9 @@
     {
       "id": "L50",
       "title": "Galerie : des statistiques lisibles sur toutes les images",
-      "status": "doing",
-      "started": "2026-10-04"
+      "status": "done",
+      "started": "2026-10-04",
+      "finished": "2026-10-04"
     }
   ]
 }
