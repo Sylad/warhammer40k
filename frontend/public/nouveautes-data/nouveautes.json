@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-03 09:44",
+  "generated": "2026-10-04 10:56",
   "entries": [
+    {
+      "slug": "2026-10-04-galerie-des-statistiques-lisibles-sur-toutes-les-images",
+      "title": "Galerie : des statistiques lisibles sur toutes les images",
+      "date": "2026-10-04",
+      "lots": [
+        "L50"
+      ],
+      "captures": [
+        "captures/L50-statistiques-galerie.png"
+      ],
+      "alts": [
+        "Bandeau de la Galerie : les trois statistiques Œuvres, Artistes et Collections, chacune sur une pastille sombre"
+      ],
+      "html": "<p>Dans la <strong>Galerie</strong>, les trois chiffres du bandeau (Œuvres, Artistes, Collections) se lisent désormais sur n'importe quelle image : chacun repose sur une pastille sombre, comme le libellé « Rechercher ». Leurs libellés passent d'un contraste quasi nul sur les images claires à 5,5:1.</p>"
+    },
     {
       "slug": "2026-10-03-galerie-une-recherche-qui-comprend-les-accents-des-filtres-p",
       "title": "Galerie : une recherche qui comprend les accents, des filtres plus lisibles",
