@@ -32,7 +32,33 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
     expect(stale).toBe(false);
   });
 
-  for (const width of [320, 360, 390, 500, 759]) {
+  // Balayage px par px (320 → 759), police par défaut 16 et 20 px : « COLLECTIONS » tient partout
+  // (WCAG 1.4.10 Reflow, 1.4.3 : le texte ne sort jamais de sa pastille, donc du fond --panel).
+  for (const fontSize of [16, 20]) {
+    it(`police par défaut ${fontSize} px : aucun libellé ne déborde de 320 à 759 px`, async () => {
+      const context = await browser.newContext({ viewport: { width: 320, height: 844 } });
+      const page = await context.newPage();
+      if (fontSize !== 16) {
+        const cdp = await context.newCDPSession(page);
+        await cdp.send('Page.setFontSizes', { fontSizes: { standard: fontSize } });
+      }
+      await page.goto(base + '/gallery');
+      await page.locator('.hero-stats .stat-card').first().waitFor();
+      await page.evaluate(() => document.fonts.ready);
+      const bad: string[] = [];
+      for (let width = 320; width <= 759; width++) {
+        await page.setViewportSize({ width, height: 844 });
+        const over = await page.evaluate(() => [...document.querySelectorAll('.hero-stats .stat-label')]
+          .map((l) => `${l.textContent!.trim()} +${l.scrollWidth - l.clientWidth}`)
+          .filter((s) => !s.endsWith('+0') && !s.endsWith('+-1')));
+        if (over.length) bad.push(`${width} px (${over.join(', ')})`);
+      }
+      await context.close();
+      expect(bad).toEqual([]);
+    }, 120_000);
+  }
+
+  for (const width of [320, 360, 375, 390, 500, 759]) {
     it(`${width} px : libellés sans débordement de leur pastille, pastilles sur une ligne ou alignées`, async () => {
       const page = await browser.newPage();
       await page.setViewportSize({ width, height: 844 });
