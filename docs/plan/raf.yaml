@@ -410,3 +410,27 @@ lots:
     estimate: 0.25
     quickwin: true
     created: 2026-10-04
+  - id: L56
+    title: "QA /factions : 6 logos wiki en 404 (Genestealer Cults, Drukhari, Officio Assassinorum, Grey Knights, Adeptus Custodes, Leagues of Votann) — embarquer les logos en local ou URL de repli, plus un test qu'aucun logo ne pointe vers une URL morte"
+    status: todo
+    estimate: 0.5
+    created: 2026-10-04
+  - id: L57
+    title: "QA /videos et /romans : défilement horizontal (side-panel à x=1511 à 1440 px ; drawer à x=704 à 390 px) — vérifier et contenir"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-04
+  - id: L58
+    title: "QA /gallery : accord du pluriel « 1 œuvres » (House Terryn)"
+    status: todo
+    estimate: 0.1
+    quickwin: true
+    visible: true
+    created: 2026-10-04
+  - id: L59
+    title: "QA : docs/qa/expectations.md (brouillon du contrôle QA du 04-10 : routes, contenus attendus, appels API)"
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    created: 2026-10-04
