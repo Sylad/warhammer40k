@@ -445,6 +445,7 @@ lots:
     estimate: 1
     created: 2026-10-05
     started: 2026-10-05
+    review: { date: 2026-10-05, verdict: "conforme (0 bloquant, 0 majeur, 3 mineurs → L63) — build OK, vitest 527/527 dont e2e galerie ; pastilles 101 px non étirées de 761 à 1024 px, h1 inchangé au-dessus de 1024 px (452 px à 1025) mesurés dans Chromium", commit: ac5f286ea57cd3b82fc7e25b7959f99f9618684e }
   - id: L61
     title: "En-tête du site : bouton MENU tronqué à 320 px avec l'espacement de texte WCAG 1.4.12 (+4 px de défilement horizontal) — relevé en revue UX L54"
     status: todo
@@ -454,4 +455,10 @@ lots:
     title: "Débordement horizontal : /videos (panneau latéral, 1511 px pour 1434 à 1440 ; 493 pour 384 à 390) et /romans à 390 (tiroir de menu, 490 pour 384) — mesurer et corriger — QA prod 05-10"
     status: todo
     estimate: 1
+    created: 2026-10-05
+  - id: L63
+    title: "Galerie (mineurs revue L60) : bandeau de stats mesuré aussi polices web bloquées au-dessus de 1024 px (h1 449 contre 451) avec seuil relatif ; retirer min-width 92px sans effet de .stat-card ; recadrer le commentaire L54 de gallery.component.scss:644"
+    status: todo
+    estimate: 0.25
+    quickwin: true
     created: 2026-10-05
