@@ -440,6 +440,7 @@ lots:
     created: 2026-10-04
   - id: L60
     title: "Galerie : trois pastilles de statistiques égales aussi de 761 à 1280 px (3e pastille 114 px contre 92) + test e2e 1280 — relevé en revue UX L54"
+    visible: true
     status: doing
     estimate: 1
     created: 2026-10-05
