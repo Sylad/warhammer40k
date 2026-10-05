@@ -61,7 +61,8 @@ function mobileDecls(sel: string): Record<string, string> {
 
 describe('galerie — statistiques à 390 px (L54)', () => {
   it('grille de trois colonnes égales, pastilles sans largeur minimale', () => {
-    const grid = mobileDecls('.hero-stats');
+    // L60 : la grille de trois colonnes égales vaut désormais à toute largeur (règle de base)
+    const grid = decls('.hero-stats');
     expect(grid.display).toBe('grid');
     expect(grid['grid-template-columns']).toBe('repeat(3, 1fr)');
     expect(mobileDecls('.stat-card')['min-width']).toBe('0');

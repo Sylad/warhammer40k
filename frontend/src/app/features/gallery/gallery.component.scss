@@ -106,8 +106,8 @@
     .search-label { background: var(--panel); padding: 5px 10px 4px; } /* L45/t1 : onglet au-dessus du champ */
 
     .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* L60 : trois pastilles égales (la plus large donne la largeur) */
       gap: 18px;
     }
     .stat-card {
@@ -642,7 +642,7 @@
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
       /* L54 : trois statistiques en trois colonnes égales (plus de 3e pastille orpheline) */
-      .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+      .hero-stats { gap: 4px; }
       .stat-card { min-width: 0; padding: 8px 2px; }
       /* 12 px dès ~390 px, où « COLLECTIONS » tient ; 10 px à 320 px (WCAG 1.4.10) ; overflow-wrap : avec l'espacement
          de texte imposé (1.4.12) le mot se coupe au lieu de sortir du fond --panel */

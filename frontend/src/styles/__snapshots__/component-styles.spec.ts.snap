@@ -1596,9 +1596,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "max-width": "620px",
   },
   ".hero-stats": {
-    "display": "flex",
-    "flex-wrap": "wrap",
+    "display": "grid",
     "gap": "18px",
+    "grid-template-columns": "repeat(3, 1fr)",
   },
   ".import-box": {
     "background": "linear-gradient(180deg, rgba(19, 15, 11, 0.98), rgba(5, 4, 3, 0.99))",
@@ -2177,9 +2177,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "24px",
   },
   "@media (max-width: 760px) .hero-stats": {
-    "display": "grid",
     "gap": "4px",
-    "grid-template-columns": "repeat(3, 1fr)",
   },
   "@media (max-width: 760px) .nav-arrow": {
     "font-size": "26px",

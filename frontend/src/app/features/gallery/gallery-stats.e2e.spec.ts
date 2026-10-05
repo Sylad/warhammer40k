@@ -81,6 +81,30 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
     });
   }
 
+  // L60 — de 761 à 1280 px (et au-delà) les trois pastilles sont aussi égales : plus de 3e pastille
+  // plus large que les autres (114 px contre 92), sur une seule ligne.
+  it('761 → 1600 px : trois pastilles de même largeur, sur une ligne, libellés dans leur pastille', async () => {
+    const page = await browser.newPage();
+    await page.setViewportSize({ width: 761, height: 900 });
+    await page.goto(base + '/gallery');
+    await page.locator('.hero-stats .stat-card').first().waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    const bad: string[] = [];
+    const widths = [...Array.from({ length: 1280 - 761 + 1 }, (_, i) => 761 + i * 1), 1281, 1440, 1600];
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 });
+      const cards = await page.evaluate(() => [...document.querySelectorAll('.hero-stats .stat-card')].map((c) => {
+        const r = c.getBoundingClientRect();
+        const l = c.querySelector('.stat-label') as HTMLElement;
+        return { w: Math.round(r.width * 10) / 10, top: Math.round(r.top), over: l.scrollWidth - l.clientWidth };
+      }));
+      const ok = cards.length === 3 && new Set(cards.map((c) => c.w)).size === 1 && new Set(cards.map((c) => c.top)).size === 1 && cards.every((c) => c.over <= 0);
+      if (!ok) bad.push(`${width} px (${cards.map((c) => `${c.w}@${c.top}${c.over > 0 ? '!' : ''}`).join(', ')})`);
+    }
+    await page.close();
+    expect(bad).toEqual([]);
+  }, 120_000);
+
   // WCAG 1.4.12 Text Spacing : avec l'espacement imposé par une extension, le texte reste dans
   // la pastille (donc sur le fond --panel qui garantit 4,5:1), quitte à couper le mot.
   it('espacement de texte utilisateur (1.4.12) : le libellé ne sort pas de sa pastille de 320 à 390 px', async () => {
