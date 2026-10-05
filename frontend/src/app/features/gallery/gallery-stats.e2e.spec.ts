@@ -98,7 +98,7 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
         const l = c.querySelector('.stat-label') as HTMLElement;
         return { w: Math.round(r.width * 10) / 10, top: Math.round(r.top), over: l.scrollWidth - l.clientWidth };
       }));
-      const ok = cards.length === 3 && new Set(cards.map((c) => c.w)).size === 1 && new Set(cards.map((c) => c.top)).size === 1 && cards.every((c) => c.over <= 0);
+      const ok = cards.length === 3 && new Set(cards.map((c) => c.w)).size === 1 && new Set(cards.map((c) => c.top)).size === 1 && cards.every((c) => c.over <= 0 && c.w <= 120);
       if (!ok) bad.push(`${width} px (${cards.map((c) => `${c.w}@${c.top}${c.over > 0 ? '!' : ''}`).join(', ')})`);
     }
     await page.close();

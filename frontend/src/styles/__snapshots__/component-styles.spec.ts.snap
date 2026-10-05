@@ -2139,6 +2139,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 1024px) .hero-stats": {
     "gap": "14px",
+    "justify-self": "start",
   },
   "@media (max-width: 1024px) .layout": {
     "grid-template-columns": "1fr",
@@ -2178,6 +2179,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .hero-stats": {
     "gap": "4px",
+    "justify-self": "stretch",
   },
   "@media (max-width: 760px) .nav-arrow": {
     "font-size": "26px",

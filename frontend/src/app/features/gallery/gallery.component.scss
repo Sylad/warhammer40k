@@ -633,7 +633,7 @@
     }
     @media (max-width: 1024px) {
       .hero-content { grid-template-columns: minmax(0, 1fr); } /* L32 : 1fr = largeur minimale du contenu */
-      .hero-stats { gap: 14px; }
+      .hero-stats { gap: 14px; justify-self: start; } /* L60 : colonne unique, le bandeau garde sa largeur de contenu */
       .stat-num { font-size: 24px; }
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, 1fr); }
@@ -642,7 +642,7 @@
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
       /* L54 : trois statistiques en trois colonnes égales (plus de 3e pastille orpheline) */
-      .hero-stats { gap: 4px; }
+      .hero-stats { gap: 4px; justify-self: stretch; }
       .stat-card { min-width: 0; padding: 8px 2px; }
       /* 12 px dès ~390 px, où « COLLECTIONS » tient ; 10 px à 320 px (WCAG 1.4.10) ; overflow-wrap : avec l'espacement
          de texte imposé (1.4.12) le mot se coupe au lieu de sortir du fond --panel */
