@@ -415,6 +415,7 @@ lots:
     quickwin: true
     created: 2026-10-04
     started: 2026-10-05
+    review: { date: 2026-10-05, verdict: "conforme — orchestré (vague 2026-10-05-2058, 1 passe(s) de correction)", commit: 82c72237d04cb77798ee4d03e0251bdfa1e89566 }
   - id: L56
     title: "QA /factions : 6 logos wiki en 404 (Genestealer Cults, Drukhari, Officio Assassinorum, Grey Knights, Adeptus Custodes, Leagues of Votann) — embarquer les logos en local ou URL de repli, plus un test qu'aucun logo ne pointe vers une URL morte"
     status: todo
