@@ -108,12 +108,12 @@
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* L60 : trois pastilles égales (la plus large donne la largeur) */
-      gap: 18px;
+      gap: 15px; /* L60 : 3 × 101 + 2 × 15 = 333 px, la largeur d'avant : le titre ne rétrécit pas */
     }
     .stat-card {
       text-align: center;
       min-width: 92px;
-      padding: 8px 10px;
+      padding: 8px 4px; /* L60 : « COLLECTIONS » (93 px) + 2 × 4 = 101 px */
       background: var(--panel); /* L50 : libellés ≥ 4,5:1 quelle que soit l'image du bandeau */
     }
     .stat-icon {

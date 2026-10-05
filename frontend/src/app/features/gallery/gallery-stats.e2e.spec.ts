@@ -105,6 +105,31 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
     expect(bad).toEqual([]);
   }, 120_000);
 
+  // L60 — le bandeau de statistiques ne prend pas plus de place qu'avant le lot (333 px : 92 + 92 + 113
+  // + 2 × 18) : le titre garde sa largeur d'avant (452 px à 1025 px, 707 px à 1280 px).
+  it('au-dessus de 1024 px : bandeau de 333 px au plus, titre de largeur inchangée', async () => {
+    const page = await browser.newPage();
+    await page.goto(base + '/gallery');
+    await page.locator('.hero-stats .stat-card').first().waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    const bad: string[] = [];
+    for (const [width, h1] of [[1025, 452], [1280, 707]] as const) {
+      await page.setViewportSize({ width, height: 900 });
+      const m = await page.evaluate(() => ({
+        stats: document.querySelector('.hero-stats')!.getBoundingClientRect().width,
+        h1: document.querySelector('.hero h1')!.getBoundingClientRect().width,
+      }));
+      if (m.stats > 333.5 || Math.abs(m.h1 - h1) > 1) bad.push(`${width} px (bandeau ${m.stats}, titre ${m.h1} au lieu de ${h1})`);
+    }
+    for (const width of [1025, 1100, 1280, 1440, 1600]) {
+      await page.setViewportSize({ width, height: 900 });
+      const stats = await page.evaluate(() => document.querySelector('.hero-stats')!.getBoundingClientRect().width);
+      if (stats > 333.5) bad.push(`${width} px (bandeau ${stats})`);
+    }
+    await page.close();
+    expect(bad).toEqual([]);
+  }, 60_000);
+
   // WCAG 1.4.12 Text Spacing : avec l'espacement imposé par une extension, le texte reste dans
   // la pastille (donc sur le fond --panel qui garantit 4,5:1), quitte à couper le mot.
   it('espacement de texte utilisateur (1.4.12) : le libellé ne sort pas de sa pastille de 320 à 390 px', async () => {
