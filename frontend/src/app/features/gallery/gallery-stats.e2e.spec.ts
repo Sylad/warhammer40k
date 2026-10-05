@@ -131,8 +131,10 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
   }, 60_000);
 
   // L63 — mêmes mesures polices web bloquées (repli : le h1 mesure 449 px à 1025 px, pas 452). Seuil
-  // relatif : 2 % de 333 px de tolérance sur le bandeau et sur la place que le titre en tire.
-  it('au-dessus de 1024 px, polices web bloquées : titre au plus 2 % plus étroit que la place laissée par un bandeau de 333 px', async () => {
+  // relatif : 2 % de 333 px de tolérance sur le bandeau ; le titre doit occuper toute la place que
+  // le bandeau MESURÉ lui laisse (grille `minmax(0, 1.1fr) auto`), à 1 px près : sans cela, un
+  // max-width ou une marge qui rétrécit le h1 passerait tant que le bandeau n'a pas grossi.
+  it('au-dessus de 1024 px, polices web bloquées : bandeau au plus 2 % au-delà de 333 px, titre sur toute la place restante', async () => {
     const page = await browser.newPage();
     await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.abort());
     await page.goto(base + '/gallery');
@@ -152,9 +154,9 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
           h1: document.querySelector('.hero h1')!.getBoundingClientRect().width,
         };
       });
-      const slack = 333 * 0.02; // repli plus large que Cinzel : bandeau de 336 px mesuré, titre 3 px plus étroit
-      const room = m.inner - m.gap - 333;
-      if (m.stats > 333 + slack || m.h1 < room - slack - 1) bad.push(`${width} px (bandeau ${m.stats}, titre ${m.h1} pour ${room} de place)`);
+      const slack = 333 * 0.02; // repli plus large que Cinzel : bandeau de 336 px mesuré
+      const room = m.inner - m.gap - m.stats;
+      if (m.stats > 333 + slack || Math.abs(m.h1 - room) > 1) bad.push(`${width} px (bandeau ${m.stats}, titre ${m.h1} pour ${room} de place)`);
     }
     await page.close();
     expect(bad).toEqual([]);
