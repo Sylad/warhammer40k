@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-04 23:04",
+  "generated": "2026-10-05 11:43",
   "entries": [
+    {
+      "slug": "2026-10-05-galerie-trois-pastilles-de-statistiques-egales-aussi-de-761",
+      "title": "Galerie : trois statistiques égales sur ordinateur et tablette",
+      "date": "2026-10-05",
+      "lots": [
+        "L60"
+      ],
+      "captures": [
+        "captures/L60-statistiques-galerie-egales.png"
+      ],
+      "alts": [
+        "Bandeau de la Galerie à 1440 px : les trois statistiques Œuvres, Artistes et Collections sur trois pastilles de même largeur"
+      ],
+      "html": "<p>Dans le bandeau de la <strong>Galerie</strong>, les trois chiffres (Œuvres, Artistes, Collections) ont maintenant la même largeur sur ordinateur et sur tablette, au lieu d'une troisième pastille plus large que les deux autres. Le titre du bandeau garde sa place.</p>"
+    },
     {
       "slug": "2026-10-04-galerie-les-trois-statistiques-alignees-au-telephone",
       "title": "Galerie : les trois statistiques alignées au téléphone",
