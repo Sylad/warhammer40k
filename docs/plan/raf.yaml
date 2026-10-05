@@ -441,11 +441,13 @@ lots:
   - id: L60
     title: "Galerie : trois pastilles de statistiques égales aussi de 761 à 1280 px (3e pastille 114 px contre 92) + test e2e 1280 — relevé en revue UX L54"
     visible: true
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-05
     started: 2026-10-05
     review: { date: 2026-10-05, verdict: "conforme (0 bloquant, 0 majeur, 3 mineurs → L63) — build OK, vitest 527/527 dont e2e galerie ; pastilles 101 px non étirées de 761 à 1024 px, h1 inchangé au-dessus de 1024 px (452 px à 1025) mesurés dans Chromium", commit: ac5f286ea57cd3b82fc7e25b7959f99f9618684e }
+    ux: { date: 2026-10-05, verdict: "conforme : 0 bloquant, 0 majeur, 2 mineurs (respiration inégale de COLLECTIONS à 4 px de marge, libellé 11 px) ; sans débordement à 1440/1024/900/390 px, contraste 5,5:1, capture 1440 relue par le lead" }
+    finished: 2026-10-05
   - id: L61
     title: "En-tête du site : bouton MENU tronqué à 320 px avec l'espacement de texte WCAG 1.4.12 (+4 px de défilement horizontal) — relevé en revue UX L54"
     status: todo
