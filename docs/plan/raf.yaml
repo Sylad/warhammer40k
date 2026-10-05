@@ -440,9 +440,10 @@ lots:
     created: 2026-10-04
   - id: L60
     title: "Galerie : trois pastilles de statistiques égales aussi de 761 à 1280 px (3e pastille 114 px contre 92) + test e2e 1280 — relevé en revue UX L54"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-10-05
+    started: 2026-10-05
   - id: L61
     title: "En-tête du site : bouton MENU tronqué à 320 px avec l'espacement de texte WCAG 1.4.12 (+4 px de défilement horizontal) — relevé en revue UX L54"
     status: todo
