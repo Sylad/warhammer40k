@@ -2005,7 +2005,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".stat-card": {
     "background": "var(--panel)",
-    "min-width": "92px",
     "padding": "8px 4px",
     "text-align": "center",
   },

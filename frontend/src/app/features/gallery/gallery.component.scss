@@ -112,7 +112,6 @@
     }
     .stat-card {
       text-align: center;
-      min-width: 92px;
       padding: 8px 4px; /* L60 : « COLLECTIONS » (93 px) + 2 × 4 = 101 px */
       background: var(--panel); /* L50 : libellés ≥ 4,5:1 quelle que soit l'image du bandeau */
     }
@@ -641,7 +640,8 @@
     @media (max-width: 760px) {
       .gallery-page { width: auto; }
       .hero-content { padding: 24px; }
-      /* L54 : trois statistiques en trois colonnes égales (plus de 3e pastille orpheline) */
+      /* L54 : jusqu'à 760 px le bandeau s'étire sur toute la largeur (écart 4 px, pastilles plus serrées) ;
+         les trois colonnes égales viennent de la grille de base (L60), valable à toute largeur */
       .hero-stats { gap: 4px; justify-self: stretch; }
       .stat-card { min-width: 0; padding: 8px 2px; }
       /* 12 px dès ~390 px, où « COLLECTIONS » tient ; 10 px à 320 px (WCAG 1.4.10) ; overflow-wrap : avec l'espacement

@@ -130,6 +130,36 @@ describe.skipIf(!built || !chromium)('galerie — statistiques du bandeau à 390
     expect(bad).toEqual([]);
   }, 60_000);
 
+  // L63 — mêmes mesures polices web bloquées (repli : le h1 mesure 449 px à 1025 px, pas 452). Seuil
+  // relatif : 2 % de 333 px de tolérance sur le bandeau et sur la place que le titre en tire.
+  it('au-dessus de 1024 px, polices web bloquées : titre au plus 2 % plus étroit que la place laissée par un bandeau de 333 px', async () => {
+    const page = await browser.newPage();
+    await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.abort());
+    await page.goto(base + '/gallery');
+    await page.locator('.hero-stats .stat-card').first().waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    const bad: string[] = [];
+    for (const width of [1025, 1100, 1280, 1440, 1600]) {
+      await page.setViewportSize({ width, height: 900 });
+      const m = await page.evaluate(() => {
+        const content = document.querySelector('.hero-content') as HTMLElement;
+        const cs = getComputedStyle(content);
+        const inner = content.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        return {
+          inner,
+          gap: parseFloat(cs.columnGap) || 0,
+          stats: document.querySelector('.hero-stats')!.getBoundingClientRect().width,
+          h1: document.querySelector('.hero h1')!.getBoundingClientRect().width,
+        };
+      });
+      const slack = 333 * 0.02; // repli plus large que Cinzel : bandeau de 336 px mesuré, titre 3 px plus étroit
+      const room = m.inner - m.gap - 333;
+      if (m.stats > 333 + slack || m.h1 < room - slack - 1) bad.push(`${width} px (bandeau ${m.stats}, titre ${m.h1} pour ${room} de place)`);
+    }
+    await page.close();
+    expect(bad).toEqual([]);
+  }, 60_000);
+
   // WCAG 1.4.12 Text Spacing : avec l'espacement imposé par une extension, le texte reste dans
   // la pastille (donc sur le fond --panel qui garantit 4,5:1), quitte à couper le mot.
   it('espacement de texte utilisateur (1.4.12) : le libellé ne sort pas de sa pastille de 320 à 390 px', async () => {
