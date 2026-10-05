@@ -187,6 +187,12 @@ export class PlanComponent implements OnInit, OnDestroy {
     }
     // Les cartes viennent d'être rendues : viser l'ancre une fois le DOM à jour.
     setTimeout(() => this.reveal(false));
+    // Les polices web arrivent parfois après : le texte se reflue et la carte quitte sa place (L55).
+    // Recaler une fois, seulement si la carte garde le focus (le visiteur n'est pas parti ailleurs).
+    void document.fonts?.ready.then(() => {
+      const el = this.host.nativeElement.querySelector<HTMLElement>('li.plan-lot.is-target');
+      if (el && document.activeElement === el) el.scrollIntoView?.({ block: 'start' });
+    });
   }
 
   /** Carte visée par l'ancre de l'URL : signalée ; défilement et focus une seule fois par arrivée. */

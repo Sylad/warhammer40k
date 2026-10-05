@@ -64,6 +64,7 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
   /** Haut de la cible par rapport au bas de la barre, une fois le défilement fini. */
   async function gap(page: Page, id: string): Promise<{ gap: number; bar: number; bottom: boolean }> {
     await page.waitForFunction((x) => !!document.getElementById(x), id);
+    await page.evaluate(() => document.fonts.ready.then(() => undefined));
     let last = -1;
     for (let i = 0; i < 40; i++) {
       const y = await page.evaluate(() => window.scrollY);
@@ -109,6 +110,8 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       it(`${w} px — ${name} : entre le bas de la barre et +40 px`, async () => {
         const page = await browser.newPage({ viewport: { width: w, height: h } });
         await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-01-01', slugs: [], at: '2026-01-02T10:00:00Z' })));
+        // L55 : polices web tardives (400 ms) — le texte se reflue après l'arrivée sur l'ancre.
+        await page.route(/\.(woff2?|ttf)(\?|$)|fonts\.(googleapis|gstatic)/, async (r) => { await new Promise((x) => setTimeout(x, 400)); await r.continue(); });
         const id = await open(page);
         const m = await gap(page, id);
         await page.close();
