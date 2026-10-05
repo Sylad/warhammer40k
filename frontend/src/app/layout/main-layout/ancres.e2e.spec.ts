@@ -13,7 +13,11 @@ import type { Browser, Page } from 'playwright-core';
 const FRONTEND = resolve(__dirname, '../../../..');
 const SEED = resolve(FRONTEND, '../backend/seed');
 const DIST = join(FRONTEND, 'dist/frontend/browser');
-const SOURCES = ['src/app/app.config.ts', 'src/app/layout/main-layout/main-layout.component.ts'];
+const SOURCES = [
+  'src/app/app.config.ts',
+  'src/app/layout/main-layout/main-layout.component.ts',
+  'src/app/features/plan/plan.component.ts',
+];
 const TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',
