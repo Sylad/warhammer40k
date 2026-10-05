@@ -460,7 +460,8 @@ lots:
     created: 2026-10-05
   - id: L63
     title: "Galerie (mineurs revue L60) : bandeau de stats mesuré aussi polices web bloquées au-dessus de 1024 px (h1 449 contre 451) avec seuil relatif ; retirer min-width 92px sans effet de .stat-card ; recadrer le commentaire L54 de gallery.component.scss:644"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     created: 2026-10-05
+    started: 2026-10-05
