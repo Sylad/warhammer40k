@@ -489,3 +489,14 @@ lots:
     estimate: 0.2
     quickwin: true
     created: 2026-10-05
+  - id: L67
+    title: "ancres : /plan#<dernier lot> reste à 372 px sous la barre (fin de page, défilement au maximum) — décider si un espace en bas de page est voulu (QA prod 05-10)"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-10-05
+  - id: L68
+    title: "QA : parcourir le reste des pages (lore, nouveautes, about, gallery) à 1440 et 390 px avec les comptes de docs/qa/expectations.md (QA prod 05-10 partielle)"
+    status: todo
+    estimate: 0.3
+    created: 2026-10-05
