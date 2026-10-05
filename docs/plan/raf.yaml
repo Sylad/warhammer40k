@@ -410,12 +410,13 @@ lots:
     finished: 2026-10-05
   - id: L55
     title: "ancres.e2e : /plan#<lot> intermittent (404 px sous la barre à 390 px, 1 fois sur 4 ; échoue aussi sur un dist/ périmé) — attendre la fin du chargement du plan avant de mesurer"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     created: 2026-10-04
     started: 2026-10-05
     review: { date: 2026-10-05, verdict: "conforme — orchestré (vague 2026-10-05-2058, 1 passe(s) de correction)", commit: 82c72237d04cb77798ee4d03e0251bdfa1e89566 }
+    finished: 2026-10-05
   - id: L56
     title: "QA /factions : 6 logos wiki en 404 (Genestealer Cults, Drukhari, Officio Assassinorum, Grey Knights, Adeptus Custodes, Leagues of Votann) — embarquer les logos en local ou URL de repli, plus un test qu'aucun logo ne pointe vers une URL morte"
     status: todo
@@ -481,4 +482,10 @@ lots:
     estimate: 1
     quickwin: true
     visible: true
+    created: 2026-10-05
+  - id: L66
+    title: "plan.component.spec : tester le recalage au chargement des polices — recale si la carte garde le focus, ne bouge pas si le focus est parti (revue de code L55)"
+    status: todo
+    estimate: 0.2
+    quickwin: true
     created: 2026-10-05
