@@ -448,3 +448,8 @@ lots:
     status: todo
     estimate: 1
     created: 2026-10-05
+  - id: L62
+    title: "Débordement horizontal : /videos (panneau latéral, 1511 px pour 1434 à 1440 ; 493 pour 384 à 390) et /romans à 390 (tiroir de menu, 490 pour 384) — mesurer et corriger — QA prod 05-10"
+    status: todo
+    estimate: 1
+    created: 2026-10-05
