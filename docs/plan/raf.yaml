@@ -491,7 +491,7 @@ lots:
       - { id: t3, title: "Nouveauté L64 : recapturer le panneau et la pagination après correction, texte aligné sur l'écran", status: todo }
       - { id: t4, title: "Galerie : indicateur de pagination sur une seule ligne à 390 px et sans coupure de « 1–24 » à 320 px (repli sous les boutons si besoin) ; test navigateur qui MESURE la hauteur de .page-indicator à 390 et 320 px", status: todo }
       - { id: t5, title: "Galerie : bandeau à deux pastilles sans colonne vide quand aucune collection n'est non vide (grille adaptée au nombre de pastilles)", status: todo }
-    ux: { date: 2026-10-06, verdict: "not compliant: 1 blocking (contraste compteur pagination 3,57:1, WCAG 1.4.3), 1 major (collections vides en impasse) → L64/t1-t3 (ux-reviewer 06-10)" }
+    ux: { date: 2026-10-06, verdict: "conforme — 4 écarts de la 1re revue corrigés et mesurés (pagination 5,67:1 sur une ligne de 18 px à 1440/390/320, bandeau sans colonne vide, collections vides masquées, Nouveauté fidèle à 390 px), aucune régression (ux-reviewer 06-10, 2e passe)" }
   - id: L65
     title: "Galerie : accord au singulier « 1 œuvre » sur les pastilles de catégorie — QA prod 05-10"
     status: todo
@@ -526,4 +526,14 @@ lots:
     status: todo
     estimate: 1
     visible: true
+    created: 2026-10-06
+  - id: L71
+    title: "Galerie : après un changement de page au clavier, focus sur la grille (tabindex=-1) et « Page N sur M » dans la région polite (WCAG 2.4.3, 4.1.3) — revue UX L64, antérieur au lot"
+    status: todo
+    estimate: 1
+    created: 2026-10-06
+  - id: L72
+    title: "Specs galerie : partager le render() TestBed (5 copies du bouchon de service : collections-count, collections-hidden-l64, plural-count, filters-a11y, faction-param) — revue de code L64"
+    status: todo
+    estimate: 1
     created: 2026-10-06
