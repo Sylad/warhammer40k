@@ -96,8 +96,9 @@
     {
       "id": "L58",
       "title": "Galerie : « 1 œuvre » au singulier sur les catégories",
-      "status": "doing",
-      "started": "2026-10-06"
+      "status": "done",
+      "started": "2026-10-06",
+      "finished": "2026-10-06"
     },
     {
       "id": "L60",
@@ -110,7 +111,11 @@
       "id": "L64",
       "title": "Galerie : « Collections populaires » affiche de vrais compteurs",
       "status": "doing",
-      "started": "2026-10-06"
+      "started": "2026-10-06",
+      "tasks": {
+        "done": 0,
+        "total": 3
+      }
     }
   ]
 }

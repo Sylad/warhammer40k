@@ -430,12 +430,15 @@ lots:
     created: 2026-10-04
   - id: L58
     title: "QA /gallery : accord du pluriel « 1 œuvres » (House Terryn)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-04
     started: 2026-10-06
+    review: { date: 2026-10-06, verdict: "compliant, 1 minor (accord « œuvre(s) » dupliqué en 4 endroits du gabarit galerie, dont 1 venu de L64 → lot de suite)", commit: 6fec74efb19ff963e69ccb3733d1603be42f86f5 }
+    ux: { date: 2026-10-06, verdict: "conforme — accord œuvre/œuvres vérifié en-tête, pastilles, collections, artistes à 1440 et 390 px (ux-reviewer 06-10)" }
+    finished: 2026-10-06
   - id: L59
     title: "QA : docs/qa/expectations.md (brouillon du contrôle QA du 04-10 : routes, contenus attendus, appels API)"
     status: todo
@@ -481,6 +484,11 @@ lots:
       - { date: 2026-10-06, text: "Décision lead 06-10 avant vague : la galerie doit être cohérente avec son bandeau. Si 39 œuvres existent et que 24 seulement s'affichent sans contrôle de pagination visible = bug → afficher tout (ou pagination explicite avec compteur juste). Compteurs « Collections populaires » codés en dur (312/276/198) = bug → les calculer depuis les données réelles. Ajouter la ligne d'attendus dans docs/qa/expectations.md." }
     started: 2026-10-06
     review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-0917, 0 passe(s) de correction + passe des mineurs)", commit: 49e6588070ff2055325da19a992489ced651a322 }
+    tasks:
+      - { id: t1, title: "Galerie : compteur de pagination « 1–24 / N » lisible (contraste ≥ 4,5:1 sans opacité, ≥ 12 px) et indicateur sur une ligne « Page 1 sur 2 · 1–24 sur N » (WCAG 1.4.3, bloquant)", status: todo }
+      - { id: t2, title: "Galerie : masquer les collections à 0 œuvre et le panneau « Collections populaires » s'il est vide ; pastille « Collections » du bandeau = collections non vides, absente à 0", status: todo }
+      - { id: t3, title: "Nouveauté L64 : recapturer le panneau et la pagination après correction, texte aligné sur l'écran", status: todo }
+    ux: { date: 2026-10-06, verdict: "not compliant: 1 blocking (contraste compteur pagination 3,57:1, WCAG 1.4.3), 1 major (collections vides en impasse) → L64/t1-t3 (ux-reviewer 06-10)" }
   - id: L65
     title: "Galerie : accord au singulier « 1 œuvre » sur les pastilles de catégorie — QA prod 05-10"
     status: todo
@@ -505,3 +513,8 @@ lots:
     status: todo
     estimate: 0.3
     created: 2026-10-05
+  - id: L69
+    title: "Galerie : une seule fonction d'accord (exporter plural de plan.utils ou pipe) pour les compteurs « œuvre(s) » de gallery.component.ts (l. 45, 111, 239, 254) + dashboard.component.ts:193 countLabel fixe « œuvres » — revue de code L58"
+    status: todo
+    estimate: 1
+    created: 2026-10-06
