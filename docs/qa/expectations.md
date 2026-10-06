@@ -34,10 +34,10 @@ Visiter sm-calgar, ou un lien de la fiche faction.
 - never: le panneau latéral (section.side-panel) qui dépasse à droite et crée un défilement horizontal (1511 px pour 1434 à 1440, 493 pour 384 à 390 le 05-10, suivi par L62)
 
 ## /gallery
-- shows: trois statistiques Œuvres, Artistes, Collections, chacune avec un nombre (39, 20 et 3 le 05-10) ; les catégories (8 le 05-10) ; des cartes d'œuvre (.art-card) avec leur image
-- shows: les trois statistiques de largeur égale sur une seule ligne, libellé « COLLECTIONS » entier dans sa pastille — 390 only (vaut aussi à 320)
-- shows: la pagination est explicite : 24 cartes par page ; quand les résultats dépassent 24 (« 39 résultats » le 05-10), un contrôle « Page 1 sur 2 » avec « 1–24 / 39 » est visible sous la grille ; sans filtre ni recherche, le total après « / » (39 le 05-10) est égal au nombre d'œuvres du bandeau (avec un filtre ou une recherche, il en est inférieur ou égal)
-- shows: « Collections populaires » : le compteur de chaque collection est calculé depuis les œuvres (/api/artwork-collections), jamais plus grand que le nombre d'œuvres du bandeau, et leur somme n'excède pas ce nombre (312, 276 et 198 pour 39 œuvres le 05-10 : bug L64)
+- shows: les statistiques Œuvres et Artistes, chacune avec un nombre (39 et 20 le 05-10) ; la pastille « Collections » n'apparaît que si au moins une collection compte une œuvre (aucune œuvre du seed ne porte de `collectionId` : absente le 06-10, donc 2 pastilles et non 3) ; les catégories (8 le 05-10) ; des cartes d'œuvre (.art-card) avec leur image
+- shows: les statistiques affichées (deux, ou trois si « Collections » est présente) de largeur égale sur une seule ligne, sans colonne vide ; si la pastille « Collections » est là, son libellé « COLLECTIONS » est entier — 390 only (vaut aussi à 320)
+- shows: la pagination est explicite : 24 cartes par page ; quand les résultats dépassent 24 (« 39 résultats » le 05-10), un contrôle « Page 1 sur 2 » avec « 1–24 sur 39 » (pas de « / ») est visible sous la grille, sur une ligne, sous les boutons à 760 px et moins ; sans filtre ni recherche, le total après « sur » (39 le 05-10) est égal au nombre d'œuvres du bandeau (avec un filtre ou une recherche, il en est inférieur ou égal)
+- shows: « Collections populaires » : le panneau n'apparaît que s'il existe au moins une collection non vide (absent le 06-10) ; quand il est là, le compteur de chaque collection est calculé depuis les œuvres (/api/artwork-collections), jamais plus grand que le nombre d'œuvres du bandeau, et leur somme n'excède pas ce nombre (312, 276 et 198 pour 39 œuvres le 05-10 : bug L64)
 - api: /api/artworks
 - api: /api/artwork-artists
 - api: /api/artwork-collections
