@@ -2,6 +2,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
+import { readContent } from '../../common/content.js';
 import type { Video } from './video.model.js';
 
 const FILE_PATH = path.resolve(process.cwd(), 'data', 'videos.json');
@@ -17,7 +18,7 @@ export class VideosService {
     try {
       this.videos = fs.existsSync(FILE_PATH)
         ? (JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) as Video[])
-        : [];
+        : readContent<Video[]>('videos.json', []); // L74 : vidéos ajoutées → volume ; à défaut, le seed
     } catch {
       this.videos = [];
     }

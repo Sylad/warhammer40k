@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
+import { contentPath } from '../../common/content.js';
 import { Serie } from './series.model.js';
 
 @Injectable()
@@ -10,9 +10,9 @@ export class SeriesService {
   private readonly descriptionCache = new Map<string, string>();
 
   constructor() {
-    const filePath = path.resolve(process.cwd(), 'data', 'series.json');
+    const filePath = contentPath('series.json');
     if (!fs.existsSync(filePath)) {
-      this.logger.warn(`series.json missing at ${filePath} — démarrage à vide. Copier le seed pour peupler.`);
+      this.logger.warn(`series.json missing at ${filePath} — démarrage à vide.`);
       this.series = [];
       return;
     }

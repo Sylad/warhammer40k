@@ -1,14 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
-import * as path from 'path';
+import { readContent } from '../../common/content.js';
 import type { LoreEvent, Emperor, Primarch, ChaosGod, ImperialOrganization, LoreConcept, Equipment, LegendaryShip, GodMachine, Saint } from './lore-feed.model.js';
 
-function loadJson<T>(file: string, fallback: T): T {
-  const filePath = path.resolve(process.cwd(), 'data', file);
-  return fs.existsSync(filePath)
-    ? (JSON.parse(fs.readFileSync(filePath, 'utf-8')) as T)
-    : fallback;
-}
+const loadJson = readContent;
 
 @Injectable()
 export class LoreFeedService {

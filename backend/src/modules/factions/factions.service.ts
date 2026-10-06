@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
+import { contentPath } from '../../common/content.js';
 import { Faction } from './faction.model.js';
 
 @Injectable()
@@ -9,9 +9,9 @@ export class FactionsService {
   private readonly factions: Faction[];
 
   constructor() {
-    const filePath = path.resolve(process.cwd(), 'data', 'factions.json');
+    const filePath = contentPath('factions.json');
     if (!fs.existsSync(filePath)) {
-      this.logger.warn(`factions.json missing at ${filePath} — démarrage à vide. Copier le seed pour peupler.`);
+      this.logger.warn(`factions.json missing at ${filePath} — démarrage à vide.`);
       this.factions = [];
       return;
     }

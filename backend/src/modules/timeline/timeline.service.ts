@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
+import { contentPath } from '../../common/content.js';
 import type { TimelineEvent } from './timeline.model.js';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class TimelineService {
   private readonly events: TimelineEvent[];
 
   constructor() {
-    const filePath = path.resolve(process.cwd(), 'data', 'timeline-events.json');
+    const filePath = contentPath('timeline-events.json');
     this.events = fs.existsSync(filePath)
       ? (JSON.parse(fs.readFileSync(filePath, 'utf-8')) as TimelineEvent[])
       : [];

@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
+import { contentPath } from '../../common/content.js';
 
 export interface ImageMeta {
   categories?: string[];
@@ -27,9 +28,6 @@ export interface SuggestedCategories {
 }
 
 const META_FILE = path.resolve(process.cwd(), 'data', 'image-meta.json');
-const FACTIONS_FILE = path.resolve(process.cwd(), 'data', 'factions.json');
-const SUBFACTIONS_FILE = path.resolve(process.cwd(), 'data', 'subfactions.json');
-const PRIMARCHS_FILE = path.resolve(process.cwd(), 'data', 'primarchs.json');
 
 @Injectable()
 export class ImageMetaService {
@@ -97,9 +95,9 @@ export class ImageMetaService {
    * dropdown sectionné côté frontend (pattern combobox > liste plate).
    */
   getSuggestedCategories(): SuggestedCategories {
-    const factions = this.readNamesFromJson(FACTIONS_FILE, ['nom', 'name']);
-    const subfactions = this.readNamesFromJson(SUBFACTIONS_FILE, ['name']);
-    const primarchs = this.readNamesFromJson(PRIMARCHS_FILE, ['name', 'nom']);
+    const factions = this.readNamesFromJson(contentPath('factions.json'), ['nom', 'name']);
+    const subfactions = this.readNamesFromJson(contentPath('subfactions.json'), ['name']);
+    const primarchs = this.readNamesFromJson(contentPath('primarchs.json'), ['name', 'nom']);
 
     // Custom = ce qui ne matche aucune source canonique
     const known = new Set<string>([...factions, ...subfactions, ...primarchs]);

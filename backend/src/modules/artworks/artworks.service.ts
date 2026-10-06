@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { contentPath } from '../../common/content.js';
 import { Artwork, ArtworkArtist, ArtworkCollection } from './artwork.model.js';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class ArtworksService {
   }
 
   private load<T>(filename: string, fallback: T): T {
-    const filePath = path.resolve(process.cwd(), 'data', filename);
+    const filePath = contentPath(filename);
     if (!fs.existsSync(filePath)) return fallback;
     return JSON.parse(fs.readFileSync(filePath, 'utf-8')) as T;
   }

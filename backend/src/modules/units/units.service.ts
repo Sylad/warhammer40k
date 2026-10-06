@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
+import { contentPath } from '../../common/content.js';
 import { Unit } from './unit.model.js';
 
 @Injectable()
@@ -10,9 +10,9 @@ export class UnitsService {
   private readonly descriptionCache = new Map<string, string>();
 
   constructor() {
-    const filePath = path.resolve(process.cwd(), 'data', 'units.json');
+    const filePath = contentPath('units.json');
     if (!fs.existsSync(filePath)) {
-      this.logger.warn(`units.json missing at ${filePath} — démarrage à vide. Copier le seed pour peupler.`);
+      this.logger.warn(`units.json missing at ${filePath} — démarrage à vide.`);
       this.units = [];
       return;
     }

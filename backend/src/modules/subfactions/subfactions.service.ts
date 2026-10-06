@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
+import { contentPath } from '../../common/content.js';
 
 export type SubFactionType =
   | 'chapter'
@@ -67,8 +67,6 @@ export interface SubFaction {
   galleryQueries?: string[];
 }
 
-const SEED_FILE = path.resolve(process.cwd(), 'data', 'subfactions.json');
-
 @Injectable()
 export class SubFactionsService {
   private readonly logger = new Logger(SubFactionsService.name);
@@ -91,13 +89,14 @@ export class SubFactionsService {
 
   private load(): SubFaction[] {
     if (this.cached) return this.cached;
-    if (!fs.existsSync(SEED_FILE)) {
-      this.logger.warn(`subfactions.json missing at ${SEED_FILE}`);
+    const file = contentPath('subfactions.json');
+    if (!fs.existsSync(file)) {
+      this.logger.warn(`subfactions.json missing at ${file}`);
       this.cached = [];
       return [];
     }
     try {
-      this.cached = JSON.parse(fs.readFileSync(SEED_FILE, 'utf-8')) as SubFaction[];
+      this.cached = JSON.parse(fs.readFileSync(file, 'utf-8')) as SubFaction[];
       return this.cached;
     } catch (err) {
       this.logger.error(`Failed to parse subfactions.json: ${(err as Error).message}`);

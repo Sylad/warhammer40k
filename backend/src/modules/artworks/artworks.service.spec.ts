@@ -20,9 +20,9 @@ describe('ArtworksService.collectionsAll — compteurs (L64)', () => {
   function service(artworks: object[], collections: object[]): ArtworksService {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wh-artworks-'));
     dossiers.push(dir);
-    fs.mkdirSync(path.join(dir, 'data'));
-    fs.writeFileSync(path.join(dir, 'data', 'artworks.json'), JSON.stringify(artworks));
-    fs.writeFileSync(path.join(dir, 'data', 'artwork-collections.json'), JSON.stringify(collections));
+    fs.mkdirSync(path.join(dir, 'seed'));
+    fs.writeFileSync(path.join(dir, 'seed', 'artworks.json'), JSON.stringify(artworks));
+    fs.writeFileSync(path.join(dir, 'seed', 'artwork-collections.json'), JSON.stringify(collections));
     process.chdir(dir);
     return new ArtworksService();
   }

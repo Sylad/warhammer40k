@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import * as fs from 'fs';
 import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
+import { readContent } from '../../common/content.js';
 import type { Channel } from '../videos/video.model.js';
 
 const FILE_PATH = path.resolve(process.cwd(), 'data', 'channels.json');
@@ -11,9 +12,10 @@ export class ChannelsService {
   private channels: Channel[];
 
   constructor() {
+    // L74 : chaînes ajoutées par POST /videos/import → volume ; à défaut, le seed.
     this.channels = fs.existsSync(FILE_PATH)
       ? (JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) as Channel[])
-      : [];
+      : readContent<Channel[]>('channels.json', []);
   }
 
   findAll(): Channel[] {
