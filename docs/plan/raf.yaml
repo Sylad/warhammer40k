@@ -538,3 +538,9 @@ lots:
     status: todo
     estimate: 1
     created: 2026-10-06
+  - id: L73
+    title: "Accueil « 35 Œuvres » contre galerie « 39 Œuvres » (35 /api/artworks + 4 /api/images) — aligner l'accueil sur le compte de la galerie (tout ce que la galerie montre, images perso comprises : décision lead 06-10) et ajouter l'attente « Œuvres » de / dans docs/qa/expectations.md — QA prod 06-10"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-10-06
