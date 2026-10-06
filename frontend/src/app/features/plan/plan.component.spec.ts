@@ -147,6 +147,42 @@ describe('page Plan de travail (/plan) — L30', () => {
     expect($(f, '#L31').classList.contains('is-target')).toBe(false);
   });
 
+  describe('recalage au chargement des polices web (L55)', () => {
+    let release!: () => void;
+    beforeEach(() => {
+      const ready = new Promise<void>((r) => (release = r));
+      Object.defineProperty(document, 'fonts', { value: { ready }, configurable: true });
+      history.replaceState(null, '', '/plan#L31');
+    });
+    afterEach(() => {
+      delete (document as unknown as { fonts?: unknown }).fonts;
+    });
+
+    it('la carte visée garde le focus : elle est recalée une fois les polices arrivées', async () => {
+      const scroll = vi.fn();
+      Element.prototype.scrollIntoView = scroll;
+      const f = await render();
+      expect(document.activeElement).toBe($(f, '#L31'));
+      expect(scroll).toHaveBeenCalledTimes(1); // arrivée
+      release();
+      await new Promise((r) => setTimeout(r, 0));
+      expect(scroll).toHaveBeenCalledTimes(2); // recalage
+      expect(scroll.mock.contexts[1]).toBe($(f, '#L31'));
+    });
+
+    it('le focus est parti ailleurs : les polices arrivent sans déplacer la page', async () => {
+      const scroll = vi.fn();
+      Element.prototype.scrollIntoView = scroll;
+      const f = await render();
+      $(f, 'h1').setAttribute('tabindex', '-1');
+      $(f, 'h1').focus();
+      release();
+      await new Promise((r) => setTimeout(r, 0));
+      expect(scroll).toHaveBeenCalledTimes(1); // seule l'arrivée a défilé
+      expect(document.activeElement).toBe($(f, 'h1'));
+    });
+  });
+
   it('ancre inconnue ou mal encodée : rien de visé', async () => {
     history.replaceState(null, '', '/plan#%E0%A4%A');
     const f = await render();
