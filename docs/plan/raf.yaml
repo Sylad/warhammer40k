@@ -558,7 +558,12 @@ lots:
     notes:
       - { date: 2026-10-06, text: "sous-partie 2 (comparaison prod / dépôt avant bascule) : 3 écarts trouvés entre l'API publique de la prod et backend/seed — units.json (247f236, sm-primaris-intercessor), primarchs.json (83da28d, fiche Mortarion) et timeline-events.json (0171157, liens externes). Tranchés sur décision du LEAD (le dépôt fait foi), PAS sur réponse de Sylvain. Les fichiers de contenu modifiés à la main dans le volume (kubectl cp, p. ex. pour L70) sont écrasés par l'image à la livraison." }
       - { date: 2026-10-06, text: "À FAIRE AVANT `cadence deliver` : Sylvain confirme que le dépôt remplace la prod pour ces 3 fichiers (le lot exige sa réponse en cas d'écart). Tant que cette confirmation n'est pas ajoutée ici, L74 ne se livre pas ni ne se clôt." }
+      - { date: 2026-10-06, text: "Étape 2 (comparaison prod ↔ dépôt, 06-10) : 3 écarts — units.json (sm-primaris-intercessor, texte P5c 247f236), timeline-events.json (5 URL de sources, L39 0171157), primarchs.json (Mortarion sans typhus, L39 83da28d) ; artworks.json identique (copié pour L70). CONFIRMÉ PAR SYLVAIN le 06-10 : la version du dépôt remplace la prod pour ces 3 fichiers. videos.json/channels.json restent données utilisateur (2 URL du commit 0171157 non propagées) → lot séparé." }
     started: 2026-10-06
+    tasks:
+      - { id: t1, title: "Tests : chaque service de contenu (factions, units, series, subfactions, timeline, lore-feed, suggestions image-meta) lit seed/ et ignore un data/ périmé ; videos/channels : volume prioritaire, repli sur le seed sans fichier", status: todo }
+      - { id: t2, title: "README : retirer la phrase « Au premier lancement, copie ces fichiers dans backend/data/ » (ligne 118), contredite par la ligne 101", status: todo }
+      - { id: t3, title: "Faire passer image-meta, videos, channels et images par userDataPath, ou supprimer cette fonction", status: todo }
   - id: L75
     title: "QA : docs/qa/expectations.md /gallery après L70 — 3 pastilles (Collections 3), panneau Collections populaires 8 / 1 / 8, clic sur une collection → exactement ce nombre de cartes (QA prod 06-10)"
     status: doing
@@ -566,3 +571,8 @@ lots:
     created: 2026-10-06
     started: 2026-10-06
     review: { date: 2026-10-06, verdict: "conforme (1 constat mineur reporté vers L72) — orchestré (vague 2026-10-06-1400, 0 passe(s) de correction + passe des mineurs)", commit: e896764bac3a034ed62a5fd447dd681f1e5cd79e }
+  - id: L76
+    title: "Vidéos et chaînes : séparer la référence (seed, dans l'image) des ajouts/suppressions de l'utilisateur (volume), fusionnés à la lecture — fait arriver les 2 URL YouTube corrigées par 0171157 (suite de L74, 06-10)"
+    status: todo
+    estimate: 1
+    created: 2026-10-06
