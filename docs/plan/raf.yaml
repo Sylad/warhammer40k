@@ -504,10 +504,11 @@ lots:
     started: 2026-10-06
   - id: L66
     title: "plan.component.spec : tester le recalage au chargement des polices — recale si la carte garde le focus, ne bouge pas si le focus est parti (revue de code L55)"
-    status: todo
+    status: doing
     estimate: 0.2
     quickwin: true
     created: 2026-10-05
+    started: 2026-10-06
   - id: L67
     title: "ancres : /plan#<dernier lot> reste à 372 px sous la barre (fin de page, défilement au maximum) — décider si un espace en bas de page est voulu (QA prod 05-10)"
     status: todo
