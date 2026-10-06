@@ -11,10 +11,15 @@ import { ArtworksService } from './artworks.service.js';
  */
 describe('ArtworksService.collectionsAll — compteurs (L64)', () => {
   const cwd = process.cwd();
-  afterEach(() => process.chdir(cwd));
+  const dossiers: string[] = [];
+  afterEach(() => {
+    process.chdir(cwd);
+    for (const d of dossiers.splice(0)) fs.rmSync(d, { recursive: true, force: true });
+  });
 
   function service(artworks: object[], collections: object[]): ArtworksService {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wh-artworks-'));
+    dossiers.push(dir);
     fs.mkdirSync(path.join(dir, 'data'));
     fs.writeFileSync(path.join(dir, 'data', 'artworks.json'), JSON.stringify(artworks));
     fs.writeFileSync(path.join(dir, 'data', 'artwork-collections.json'), JSON.stringify(collections));
