@@ -42,7 +42,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <h1>Galerie Impériale</h1>
             <p class="hero-desc">
               Explorez les illustrations, artworks et visuels du 41e millénaire.<br/>
-              {{ artworks().length }} œuvres triées, classées et archivées.
+              {{ artworks().length }} {{ artworks().length > 1 ? 'œuvres triées, classées et archivées' : 'œuvre triée, classée et archivée' }}.
             </p>
             <div class="search-bar-wrap">
               <!-- L45/t1 (WCAG 1.3.1 / 2.5.3 / 3.3.2) : libellé VISIBLE relié au champ, qui en fait le nom
@@ -108,7 +108,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   [style.--cat-bg]="categoryBg(cat.key)"
                   (click)="toggleCategoryFilter(cat.key)">
                   <span class="cat-name">{{ cat.label }}</span>
-                  <span class="cat-count">{{ categoryCount(cat.key) }} œuvres</span>
+                  <span class="cat-count">{{ categoryCount(cat.key) }} œuvre{{ categoryCount(cat.key) > 1 ? 's' : '' }}</span>
                 </button>
               }
             </div>
