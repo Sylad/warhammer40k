@@ -17,7 +17,8 @@
     "category": "Imperium",
     "faction": "astra-militarum",
     "likes": 312,
-    "wikiQuery": "Fall of Cadia"
+    "wikiQuery": "Fall of Cadia",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-003",
@@ -27,7 +28,8 @@
     "category": "Imperium",
     "faction": "soeurs-de-bataille",
     "likes": 198,
-    "wikiQuery": "Saint Celestine warhammer"
+    "wikiQuery": "Saint Celestine warhammer",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-004",
@@ -86,7 +88,8 @@
     "category": "Personnages",
     "faction": "space-marines",
     "likes": 412,
-    "wikiQuery": "Roboute Guilliman"
+    "wikiQuery": "Roboute Guilliman",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-010",
@@ -96,7 +99,8 @@
     "category": "Chaos",
     "faction": "chaos-space-marines",
     "likes": 298,
-    "wikiQuery": "Kharn the Betrayer"
+    "wikiQuery": "Kharn the Betrayer",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-011",
@@ -106,7 +110,8 @@
     "category": "Personnages",
     "faction": "space-marines",
     "likes": 412,
-    "wikiQuery": "Sanguinius Primarch Blood Angels"
+    "wikiQuery": "Sanguinius Primarch Blood Angels",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-012",
@@ -116,7 +121,8 @@
     "category": "Personnages",
     "faction": "chaos-space-marines",
     "likes": 388,
-    "wikiQuery": "Horus Lupercal Warmaster"
+    "wikiQuery": "Horus Lupercal Warmaster",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-013",
@@ -126,7 +132,8 @@
     "faction": "space-marines",
     "image": "god-emperor-throne.jpg",
     "likes": 521,
-    "wikiQuery": "Emperor of Mankind Golden Throne"
+    "wikiQuery": "Emperor of Mankind Golden Throne",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-014",
@@ -136,7 +143,8 @@
     "category": "Chaos",
     "faction": "chaos-space-marines",
     "likes": 345,
-    "wikiQuery": "Magnus the Red Daemon Primarch"
+    "wikiQuery": "Magnus the Red Daemon Primarch",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-015",
@@ -146,7 +154,8 @@
     "category": "Chaos",
     "faction": "chaos-space-marines",
     "likes": 298,
-    "wikiQuery": "Mortarion Daemon Primarch Death Guard"
+    "wikiQuery": "Mortarion Daemon Primarch Death Guard",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-016",
@@ -156,7 +165,8 @@
     "category": "Chaos",
     "faction": "chaos-space-marines",
     "likes": 267,
-    "wikiQuery": "Abaddon the Despoiler Black Legion"
+    "wikiQuery": "Abaddon the Despoiler Black Legion",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-017",
@@ -166,7 +176,8 @@
     "category": "Personnages",
     "faction": "space-marines",
     "likes": 234,
-    "wikiQuery": "Lion El Jonson Dark Angels"
+    "wikiQuery": "Lion El Jonson Dark Angels",
+    "collectionId": "horus-heresy"
   },
   {
     "id": "aw-018",
@@ -186,7 +197,8 @@
     "category": "Personnages",
     "faction": "space-marines",
     "likes": 221,
-    "wikiQuery": "Commander Dante Blood Angels"
+    "wikiQuery": "Commander Dante Blood Angels",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-020",
@@ -206,7 +218,8 @@
     "category": "Personnages",
     "faction": "adeptus-mechanicus",
     "likes": 256,
-    "wikiQuery": "Belisarius Cawl Adeptus Mechanicus"
+    "wikiQuery": "Belisarius Cawl Adeptus Mechanicus",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-022",
@@ -256,7 +269,8 @@
     "category": "Xénos",
     "faction": "necrons",
     "likes": 198,
-    "wikiQuery": "Trazyn the Infinite Nihilakh"
+    "wikiQuery": "Trazyn the Infinite Nihilakh",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-027",
@@ -296,7 +310,8 @@
     "category": "Personnages",
     "faction": "inquisition",
     "likes": 234,
-    "wikiQuery": "Gregor Eisenhorn Inquisitor"
+    "wikiQuery": "Gregor Eisenhorn Inquisitor",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-031",
@@ -326,7 +341,8 @@
     "category": "Personnages",
     "faction": "astra-militarum",
     "likes": 234,
-    "wikiQuery": "Commissar Sebastian Yarrick"
+    "wikiQuery": "Commissar Sebastian Yarrick",
+    "collectionId": "black-library-covers"
   },
   {
     "id": "aw-034",
@@ -336,7 +352,8 @@
     "category": "Imperium",
     "faction": "space-marines",
     "likes": 189,
-    "wikiQuery": "Cicatrix Maledictum Great Rift"
+    "wikiQuery": "Cicatrix Maledictum Great Rift",
+    "collectionId": "40k-core-book"
   },
   {
     "id": "aw-035",
