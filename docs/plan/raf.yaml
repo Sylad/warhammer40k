@@ -472,12 +472,13 @@ lots:
     finished: 2026-10-05
   - id: L64
     title: "Galerie : 24 cartes pour « 39 résultats » et « Collections populaires » (312/276/198 œuvres) en contradiction avec le bandeau (39 œuvres, 3 collections) — trancher pagination voulue ou bug, puis ajouter la ligne d'attendus QA — QA prod 05-10"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     created: 2026-10-05
     notes:
       - { date: 2026-10-06, text: "Décision lead 06-10 avant vague : la galerie doit être cohérente avec son bandeau. Si 39 œuvres existent et que 24 seulement s'affichent sans contrôle de pagination visible = bug → afficher tout (ou pagination explicite avec compteur juste). Compteurs « Collections populaires » codés en dur (312/276/198) = bug → les calculer depuis les données réelles. Ajouter la ligne d'attendus dans docs/qa/expectations.md." }
+    started: 2026-10-06
   - id: L65
     title: "Galerie : accord au singulier « 1 œuvre » sur les pastilles de catégorie — QA prod 05-10"
     status: todo
