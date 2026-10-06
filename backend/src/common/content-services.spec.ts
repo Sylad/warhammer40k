@@ -11,6 +11,7 @@ import { LoreFeedService } from '../modules/lore-feed/lore-feed.service.js';
 import { ImageMetaService } from '../modules/image-meta/image-meta.service.js';
 import { VideosService } from '../modules/videos/videos.service.js';
 import { ChannelsService } from '../modules/channels/channels.service.js';
+import { ArtworksService } from '../modules/artworks/artworks.service.js';
 
 /**
  * L74 : chaque service de contenu lit `seed/` (image), jamais `data/` (volume) ;
@@ -68,6 +69,13 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
   it('TimelineService', () => {
     both('timeline-events.json', [{ id: 'seed' }], [{ id: 'stale' }]);
     expect(new TimelineService().findAll().map((e) => e.id)).toEqual(['seed']);
+  });
+
+  it('ArtworksService', () => {
+    both('artworks.json', [{ id: 'seed', artist: 'A', collectionId: 'c' }], [{ id: 'stale', artist: 'B', collectionId: 'c' }]);
+    both('artwork-collections.json', [{ id: 'c' }], [{ id: 'stale' }]);
+    const s = new ArtworksService();
+    expect(s.findAll().map((a) => a.id)).toEqual(['seed']);
   });
 
   it('LoreFeedService', () => {

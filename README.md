@@ -115,8 +115,6 @@ des données.
 
 `backend/public/datasheets/` contient **119 JPEGs d'unités** (curés à la main, bundlés dans l'image Docker), servis via `/api/images/datasheets/:unitId`.
 
-Au premier lancement, copie ces fichiers dans `backend/data/` (cf instructions ci-dessus). Ensuite `backend/data/` n'est plus rejoué — tes catégorisations et imports persistent.
-
 ## Roadmap
 
 Voir [WARHAMMER_ROADMAP.md](./WARHAMMER_ROADMAP.md) pour le plan d'enrichissement (Custodes, Drukhari, Grey Knights, Empereur, primarques, Chaos pantheon, lore concepts, galaxy map, civils impériaux).

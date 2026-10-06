@@ -1,9 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { userDataPath } from '../../common/content.js';
 
-const IMAGES_DIR = process.env['IMAGES_DIR'] ?? path.resolve(process.cwd(), 'data', 'images');
-const IMPORTED_DIR = path.resolve(process.cwd(), 'data', 'imported');
+const IMAGES_DIR = process.env['IMAGES_DIR'] ?? userDataPath('images');
+const IMPORTED_DIR = userDataPath('imported');
 
 @Injectable()
 export class ImagesService {

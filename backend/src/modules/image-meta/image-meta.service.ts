@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
-import { contentPath } from '../../common/content.js';
+import { contentPath, userDataPath } from '../../common/content.js';
 
 export interface ImageMeta {
   categories?: string[];
@@ -27,7 +27,7 @@ export interface SuggestedCategories {
   custom: string[];
 }
 
-const META_FILE = path.resolve(process.cwd(), 'data', 'image-meta.json');
+const META_FILE = userDataPath('image-meta.json');
 
 @Injectable()
 export class ImageMetaService {
