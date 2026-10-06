@@ -552,7 +552,7 @@ lots:
     created: 2026-10-06
   - id: L74
     title: "Données : contenu éditorial lu dans l'image, données utilisateur seules sur le volume — 1) inventaire de data/ : « contenu » (aucun endpoint d'écriture : artworks, artwork-collections, factions, units, lore…) vs « utilisateur » (image-meta, imported/, favoris…, tout ce qu'un POST/DELETE écrit) ; 2) AVANT bascule, comparer chaque fichier « contenu » de la prod (API publique) au dépôt, écart = STOP et question à Sylvain ; 3) le backend lit le contenu depuis le seed embarqué dans l'image, le volume ne garde que l'utilisateur ; 4) CLAUDE.md + « Mise à jour contenu en prod » réécrits (plus de kubectl cp pour du contenu) — demande de Sylvain 06-10 après la mise à jour manuelle du volume pour L70"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-06
     notes:
@@ -561,17 +561,19 @@ lots:
       - { date: 2026-10-06, text: "Étape 2 (comparaison prod ↔ dépôt, 06-10) : 3 écarts — units.json (sm-primaris-intercessor, texte P5c 247f236), timeline-events.json (5 URL de sources, L39 0171157), primarchs.json (Mortarion sans typhus, L39 83da28d) ; artworks.json identique (copié pour L70). CONFIRMÉ PAR SYLVAIN le 06-10 : la version du dépôt remplace la prod pour ces 3 fichiers. videos.json/channels.json restent données utilisateur (2 URL du commit 0171157 non propagées) → lot séparé." }
     started: 2026-10-06
     tasks:
-      - { id: t1, title: "Tests : chaque service de contenu (factions, units, series, subfactions, timeline, lore-feed, suggestions image-meta) lit seed/ et ignore un data/ périmé ; videos/channels : volume prioritaire, repli sur le seed sans fichier", status: todo }
-      - { id: t2, title: "README : retirer la phrase « Au premier lancement, copie ces fichiers dans backend/data/ » (ligne 118), contredite par la ligne 101", status: todo }
-      - { id: t3, title: "Faire passer image-meta, videos, channels et images par userDataPath, ou supprimer cette fonction", status: todo }
+      - { id: t1, title: "Tests : chaque service de contenu (factions, units, series, subfactions, timeline, lore-feed, suggestions image-meta) lit seed/ et ignore un data/ périmé ; videos/channels : volume prioritaire, repli sur le seed sans fichier", status: done }
+      - { id: t2, title: "README : retirer la phrase « Au premier lancement, copie ces fichiers dans backend/data/ » (ligne 118), contredite par la ligne 101", status: done }
+      - { id: t3, title: "Faire passer image-meta, videos, channels et images par userDataPath, ou supprimer cette fonction", status: done }
     review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-1400, 2 passe(s) de correction)", commit: 747eda8d2957cd62ace6bfabd120354614a59d74 }
+    finished: 2026-10-06
   - id: L75
     title: "QA : docs/qa/expectations.md /gallery après L70 — 3 pastilles (Collections 3), panneau Collections populaires 8 / 1 / 8, clic sur une collection → exactement ce nombre de cartes (QA prod 06-10)"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-06
     started: 2026-10-06
     review: { date: 2026-10-06, verdict: "conforme (1 constat mineur reporté vers L72) — orchestré (vague 2026-10-06-1400, 0 passe(s) de correction + passe des mineurs)", commit: e896764bac3a034ed62a5fd447dd681f1e5cd79e }
+    finished: 2026-10-06
   - id: L76
     title: "Vidéos et chaînes : séparer la référence (seed, dans l'image) des ajouts/suppressions de l'utilisateur (volume), fusionnés à la lecture — fait arriver les 2 URL YouTube corrigées par 0171157 (suite de L74, 06-10)"
     status: todo
