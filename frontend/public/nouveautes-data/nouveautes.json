@@ -1,10 +1,10 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-06 09:48",
+  "generated": "2026-10-06 09:50",
   "entries": [
     {
       "slug": "2026-10-06-qa-gallery-accord-du-pluriel-1-uvres-house-terryn",
-      "title": "Galerie : « 1 œuvre » au singulier sur les catégories",
+      "title": "Galerie : « 1 œuvre » au singulier sur les catégories",
       "date": "2026-10-06",
       "lots": [
         "L58"
@@ -15,7 +15,7 @@
       "alts": [
         "En-tête de la Galerie et pastilles « Parcourir par catégorie » : « 1 œuvre » au singulier pour Space Marines, « 5 œuvres » pour Chaos"
       ],
-      "html": "<p>Dans la <strong>Galerie</strong>, une catégorie qui ne contient qu’une œuvre affiche maintenant « 1 œuvre » et non plus « 1 œuvres » ; de même pour la phrase d’en-tête (« 1 œuvre triée, classée et archivée »). Dès deux œuvres, le pluriel reste de mise.</p>"
+      "html": "<p>Dans la <strong>Galerie</strong>, une catégorie qui ne contient qu’une œuvre affiche maintenant « 1 œuvre » et non plus « 1 œuvres » ; de même pour la phrase d’en-tête (« 1 œuvre triée, classée et archivée »). Dès deux œuvres, le pluriel reste de mise.</p>"
     },
     {
       "slug": "2026-10-06-galerie-24-cartes-pour-39-resultats-et-collections-populaire",
