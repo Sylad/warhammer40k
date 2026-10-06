@@ -484,7 +484,7 @@ lots:
       - { date: 2026-10-06, text: "Décision lead 06-10 avant vague : la galerie doit être cohérente avec son bandeau. Si 39 œuvres existent et que 24 seulement s'affichent sans contrôle de pagination visible = bug → afficher tout (ou pagination explicite avec compteur juste). Compteurs « Collections populaires » codés en dur (312/276/198) = bug → les calculer depuis les données réelles. Ajouter la ligne d'attendus dans docs/qa/expectations.md." }
       - { date: 2026-10-06, text: "Lead 06-10 : t3 = capture de la pagination à 390 px seulement ; la capture du panneau Collections populaires viendra avec le lot de rattachement des œuvres (aujourd'hui aucune collection non vide, rien à montrer)." }
     started: 2026-10-06
-    review: { date: 2026-10-06, verdict: "non conforme : 1 majeur (indicateur de pagination sur 2 lignes à 390 px, 4 à 320 px, test t1 incapable d'échouer), 2 mineurs (Nouveauté sans capture du panneau, bandeau à colonne vide) → t4-t5", commit: 3a21a2579194c62595a4c9e7480d4f5f60d88f1c }
+    review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-1029, 2 passe(s) de correction + passe des mineurs)", commit: f8af1423e34f93e2d3540ca3a7ecf3183bafdfd9 }
     tasks:
       - { id: t1, title: "Galerie : compteur de pagination « 1–24 / N » lisible (contraste ≥ 4,5:1 sans opacité, ≥ 12 px) et indicateur sur une ligne « Page 1 sur 2 · 1–24 sur N » (WCAG 1.4.3, bloquant)", status: todo }
       - { id: t2, title: "Galerie : masquer les collections à 0 œuvre et le panneau « Collections populaires » s'il est vide ; pastille « Collections » du bandeau = collections non vides, absente à 0", status: todo }
