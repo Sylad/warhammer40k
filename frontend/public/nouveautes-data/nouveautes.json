@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-06 09:50",
+  "generated": "2026-10-06 10:10",
   "entries": [
     {
       "slug": "2026-10-06-qa-gallery-accord-du-pluriel-1-uvres-house-terryn",
@@ -19,18 +19,18 @@
     },
     {
       "slug": "2026-10-06-galerie-24-cartes-pour-39-resultats-et-collections-populaire",
-      "title": "Galerie : « Collections populaires » affiche de vrais compteurs",
+      "title": "Galerie : des compteurs justes et une pagination lisible",
       "date": "2026-10-06",
       "lots": [
         "L64"
       ],
       "captures": [
-        "captures/L64-collections-galerie.png"
+        "captures/L64-pagination-galerie.png"
       ],
       "alts": [
-        "Colonne latérale de la Galerie : le panneau « Collections populaires » avec le nombre d'œuvres de chaque collection, calculé depuis les œuvres"
+        "Bas de la grille de la Galerie : les boutons de page et, sur une seule ligne, « Page 1 sur 2 · 1–24 sur 37 »"
       ],
-      "html": "<p>Dans la <strong>Galerie</strong>, le panneau « Collections populaires » n’affiche plus des nombres d’œuvres inventés (312, 276, 198 pour une galerie de 39 œuvres) : chaque compteur est maintenant calculé d’après les œuvres réellement rangées dans la collection, avec l’accord « 0 œuvre », « 1 œuvre », « 2 œuvres ». La grille, elle, reste paginée par 24 : sous elle, « Page 1 sur 2 » et « 1–24 / 39 » indiquent le total juste.</p>"
+      "html": "<p>Dans la <strong>Galerie</strong>, le panneau « Collections populaires » n’affiche plus des nombres d’œuvres inventés (312, 276, 198 pour une galerie de 39 œuvres) : chaque compteur est calculé d’après les œuvres réellement rangées dans la collection. Une collection sans œuvre n’est plus proposée, et si aucune n’en contient, le panneau et la pastille « Collections » du bandeau disparaissent. La grille reste paginée par 24 : sous elle, une seule ligne, en caractères plus lisibles, indique « Page 1 sur 2 · 1–24 sur 37 ».</p>"
     },
     {
       "slug": "2026-10-05-galerie-trois-pastilles-de-statistiques-egales-aussi-de-761",
