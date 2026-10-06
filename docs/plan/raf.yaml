@@ -482,12 +482,15 @@ lots:
     created: 2026-10-05
     notes:
       - { date: 2026-10-06, text: "Décision lead 06-10 avant vague : la galerie doit être cohérente avec son bandeau. Si 39 œuvres existent et que 24 seulement s'affichent sans contrôle de pagination visible = bug → afficher tout (ou pagination explicite avec compteur juste). Compteurs « Collections populaires » codés en dur (312/276/198) = bug → les calculer depuis les données réelles. Ajouter la ligne d'attendus dans docs/qa/expectations.md." }
+      - { date: 2026-10-06, text: "Lead 06-10 : t3 = capture de la pagination à 390 px seulement ; la capture du panneau Collections populaires viendra avec le lot de rattachement des œuvres (aujourd'hui aucune collection non vide, rien à montrer)." }
     started: 2026-10-06
-    review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-0917, 0 passe(s) de correction + passe des mineurs)", commit: 49e6588070ff2055325da19a992489ced651a322 }
+    review: { date: 2026-10-06, verdict: "non conforme : 1 majeur (indicateur de pagination sur 2 lignes à 390 px, 4 à 320 px, test t1 incapable d'échouer), 2 mineurs (Nouveauté sans capture du panneau, bandeau à colonne vide) → t4-t5", commit: 3a21a2579194c62595a4c9e7480d4f5f60d88f1c }
     tasks:
       - { id: t1, title: "Galerie : compteur de pagination « 1–24 / N » lisible (contraste ≥ 4,5:1 sans opacité, ≥ 12 px) et indicateur sur une ligne « Page 1 sur 2 · 1–24 sur N » (WCAG 1.4.3, bloquant)", status: todo }
       - { id: t2, title: "Galerie : masquer les collections à 0 œuvre et le panneau « Collections populaires » s'il est vide ; pastille « Collections » du bandeau = collections non vides, absente à 0", status: todo }
       - { id: t3, title: "Nouveauté L64 : recapturer le panneau et la pagination après correction, texte aligné sur l'écran", status: todo }
+      - { id: t4, title: "Galerie : indicateur de pagination sur une seule ligne à 390 px et sans coupure de « 1–24 » à 320 px (repli sous les boutons si besoin) ; test navigateur qui MESURE la hauteur de .page-indicator à 390 et 320 px", status: todo }
+      - { id: t5, title: "Galerie : bandeau à deux pastilles sans colonne vide quand aucune collection n'est non vide (grille adaptée au nombre de pastilles)", status: todo }
     ux: { date: 2026-10-06, verdict: "not compliant: 1 blocking (contraste compteur pagination 3,57:1, WCAG 1.4.3), 1 major (collections vides en impasse) → L64/t1-t3 (ux-reviewer 06-10)" }
   - id: L65
     title: "Galerie : accord au singulier « 1 œuvre » sur les pastilles de catégorie — QA prod 05-10"
@@ -517,4 +520,10 @@ lots:
     title: "Galerie : une seule fonction d'accord (exporter plural de plan.utils ou pipe) pour les compteurs « œuvre(s) » de gallery.component.ts (l. 45, 111, 239, 254) + dashboard.component.ts:193 countLabel fixe « œuvres » — revue de code L58"
     status: todo
     estimate: 1
+    created: 2026-10-06
+  - id: L70
+    title: "Galerie : rattacher les œuvres aux collections (Horus Heresy, 40K Core Book, Black Library Covers) — 1) proposer la liste œuvre→collection depuis titre/artiste/source, 2) VALIDATION de Sylvain avant toute écriture, 3) seed + volume de prod (migration au boot ou API derrière PIN), 4) capture Nouveauté du panneau rempli ; collection sans œuvre → demander suppression ou masquage (accord de Sylvain 06-10)"
+    status: todo
+    estimate: 1
+    visible: true
     created: 2026-10-06
