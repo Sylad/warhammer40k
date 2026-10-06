@@ -1773,12 +1773,12 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "text-align": "center",
   },
   ".page-indicator": {
-    "align-items": "center",
+    "align-items": "baseline",
     "color": "var(--muted)",
     "display": "inline-flex",
-    "flex-direction": "column",
     "font-family": ""Cinzel", serif",
     "font-size": "13px",
+    "gap": "0.4em",
     "letter-spacing": "0.1em",
     "padding": "0 14px",
   },
@@ -1787,10 +1787,8 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-weight": "700",
   },
   ".page-range": {
-    "font-size": "11px",
+    "font-size": "12px",
     "letter-spacing": "0.08em",
-    "margin-top": "2px",
-    "opacity": "0.75",
   },
   ".pagination": {
     "align-items": "center",

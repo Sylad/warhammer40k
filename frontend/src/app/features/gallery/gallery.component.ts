@@ -75,11 +75,13 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <div class="stat-num">{{ artists().length }}</div>
               <div class="stat-label">Artistes</div>
             </div>
+            @if (nonEmptyCollections().length > 0) {
             <div class="stat-card">
               <div class="stat-icon">◇</div>
-              <div class="stat-num">{{ collections().length }}</div>
+              <div class="stat-num">{{ nonEmptyCollections().length }}</div>
               <div class="stat-label">Collections</div>
             </div>
+            }
           </aside>
         </div>
       </header>
@@ -175,8 +177,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   <button type="button" class="page-btn" [disabled]="currentPage() === 1" (click)="goToPage(1)" aria-label="Première page">«</button>
                   <button type="button" class="page-btn" [disabled]="currentPage() === 1" (click)="prevPage()" aria-label="Page précédente">‹</button>
                   <span class="page-indicator">
-                    Page <strong>{{ currentPage() }}</strong> sur <strong>{{ totalPages() }}</strong>
-                    <span class="page-range">{{ pageRangeStart() }}–{{ pageRangeEnd() }} / {{ totalFiltered() }}</span>
+                    Page <strong>{{ currentPage() }}</strong> sur <strong>{{ totalPages() }}</strong> ·
+                    <span class="page-range">{{ pageRangeStart() }}–{{ pageRangeEnd() }} sur <strong>{{ totalFiltered() }}</strong></span>
                   </span>
                   <button type="button" class="page-btn" [disabled]="currentPage() === totalPages()" (click)="nextPage()" aria-label="Page suivante">›</button>
                   <button type="button" class="page-btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(totalPages())" aria-label="Dernière page">»</button>
@@ -242,9 +244,10 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             }
           </section>
 
+          @if (nonEmptyCollections().length > 0) {
           <section class="side-panel">
             <h3>Collections populaires</h3>
-            @for (col of collections(); track col.id) {
+            @for (col of nonEmptyCollections(); track col.id) {
               <button class="col-row" type="button"
                 [class.active]="filterCollection() === col.id"
                 (click)="toggleCollectionFilter(col.id)">
@@ -256,6 +259,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               </button>
             }
           </section>
+          }
         </aside>
       </section>
 
@@ -518,6 +522,8 @@ export class GalleryComponent {
   private readonly catalogArtworks = toSignal(this.service.artworks$.pipe(catchError(() => of([] as Artwork[]))), { initialValue: [] as Artwork[] });
   private readonly localImages = toSignal(this.service.images$.pipe(catchError(() => of([] as string[]))), { initialValue: [] as string[] });
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
+  /** L64 : une collection à 0 œuvre est une impasse (filtre → grille vide) — jamais proposée ni comptée. */
+  readonly nonEmptyCollections = computed(() => this.collections().filter((c) => c.count > 0));
   readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
   readonly factions = toSignal(this.service.factions$.pipe(catchError(() => of([] as Faction[]))), { initialValue: [] as Faction[] });
   /** Vrai dès la première valeur OU l'échec d'une source (une source en échec ne bloque rien). */
