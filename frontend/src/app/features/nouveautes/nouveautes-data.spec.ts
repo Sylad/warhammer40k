@@ -107,6 +107,12 @@ describe('données des Nouveautés (public/nouveautes-data) — L23', () => {
     }
   });
 
+  it('L64 : la Nouveauté de la pagination porte une capture de téléphone (390 px), pas seulement de bureau', () => {
+    const entry = readJson().entries.find((e) => e.slug.startsWith('2026-10-06-galerie-24-cartes'));
+    expect(entry, 'entrée L64 absente').toBeDefined();
+    expect(entry!.captures.some((c) => /-telephone\.png$/.test(c)), entry!.captures.join(', ')).toBe(true);
+  });
+
   it('guillemets français tenus par une espace fine insécable (U+202F)', () => {
     for (const f of mdFiles()) {
       const src = readFileSync(join(ENTRIES, f), 'utf8');
