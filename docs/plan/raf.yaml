@@ -479,6 +479,7 @@ lots:
     notes:
       - { date: 2026-10-06, text: "Décision lead 06-10 avant vague : la galerie doit être cohérente avec son bandeau. Si 39 œuvres existent et que 24 seulement s'affichent sans contrôle de pagination visible = bug → afficher tout (ou pagination explicite avec compteur juste). Compteurs « Collections populaires » codés en dur (312/276/198) = bug → les calculer depuis les données réelles. Ajouter la ligne d'attendus dans docs/qa/expectations.md." }
     started: 2026-10-06
+    review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-0917, 0 passe(s) de correction + passe des mineurs)", commit: 49e6588070ff2055325da19a992489ced651a322 }
   - id: L65
     title: "Galerie : accord au singulier « 1 œuvre » sur les pastilles de catégorie — QA prod 05-10"
     status: todo
