@@ -64,7 +64,8 @@ describe('galerie — statistiques à 390 px (L54)', () => {
     // L60 : la grille de trois colonnes égales vaut désormais à toute largeur (règle de base)
     const grid = decls('.hero-stats');
     expect(grid.display).toBe('grid');
-    expect(grid['grid-template-columns']).toBe('repeat(3, 1fr)');
+    expect(grid['grid-auto-flow']).toBe('column');
+    expect(grid['grid-auto-columns']).toBe('1fr');
     expect(mobileDecls('.stat-card')['min-width']).toBe('0');
   });
 

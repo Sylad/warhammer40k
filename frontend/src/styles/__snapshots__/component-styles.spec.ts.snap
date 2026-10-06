@@ -1598,7 +1598,8 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".hero-stats": {
     "display": "grid",
     "gap": "15px",
-    "grid-template-columns": "repeat(3, 1fr)",
+    "grid-auto-columns": "1fr",
+    "grid-auto-flow": "column",
   },
   ".import-box": {
     "background": "linear-gradient(180deg, rgba(19, 15, 11, 0.98), rgba(5, 4, 3, 0.99))",
@@ -1781,6 +1782,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "gap": "0.4em",
     "letter-spacing": "0.1em",
     "padding": "0 14px",
+    "white-space": "nowrap",
   },
   ".page-indicator strong": {
     "color": "var(--gold-bright)",
@@ -1794,6 +1796,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "align-items": "center",
     "border-top": "1px solid rgba(201, 162, 74, 0.18)",
     "display": "flex",
+    "flex-wrap": "wrap",
     "gap": "8px",
     "justify-content": "center",
     "margin-top": "28px",
@@ -2188,6 +2191,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .nav-arrow.right": {
     "right": "8px",
+  },
+  "@media (max-width: 760px) .page-indicator": {
+    "flex": "0 0 100%",
+    "justify-content": "center",
+    "order": "5",
   },
   "@media (max-width: 760px) .search-field": {
     "flex-basis": "100%",
