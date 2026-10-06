@@ -509,6 +509,7 @@ lots:
     quickwin: true
     created: 2026-10-05
     started: 2026-10-06
+    review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-2138, 0 passe(s) de correction)", commit: 3f56669802386ec48a0d55a04123b05827011f3a }
   - id: L67
     title: "ancres : /plan#<dernier lot> reste à 372 px sous la barre (fin de page, défilement au maximum) — décider si un espace en bas de page est voulu (QA prod 05-10)"
     status: todo
