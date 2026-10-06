@@ -441,10 +441,11 @@ lots:
     finished: 2026-10-06
   - id: L59
     title: "QA : docs/qa/expectations.md (brouillon du contrôle QA du 04-10 : routes, contenus attendus, appels API)"
-    status: todo
+    status: doing
     estimate: 0.25
     quickwin: true
     created: 2026-10-04
+    started: 2026-10-06
   - id: L60
     title: "Galerie : trois pastilles de statistiques égales aussi de 761 à 1280 px (3e pastille 114 px contre 92) + test e2e 1280 — relevé en revue UX L54"
     visible: true
