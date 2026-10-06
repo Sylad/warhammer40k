@@ -78,10 +78,6 @@ cd warhammer40k
 cp backend/.env.example backend/.env
 # Édite ANTHROPIC_API_KEY
 
-# Bootstrap des données seed (premier lancement uniquement)
-mkdir -p backend/data/imported
-cp backend/seed/*.json backend/data/
-
 (cd backend && npm install) && (cd frontend && npm install)
 npm run dev:backend    # API NestJS sur http://localhost:3001
 npm run dev:frontend   # dans un autre terminal
@@ -102,7 +98,7 @@ des données.
 
 ## Données seed
 
-`backend/seed/` contient les fichiers JSON commités comme état initial :
+`backend/seed/` contient le contenu éditorial, lu directement par le backend (embarqué dans l'image, rien à copier : `backend/data/` ne garde que ce que les utilisateurs écrivent) :
 - `factions.json` (17 factions principales)
 - `subfactions.json` (182 sous-factions enrichies, dont 71 successeurs Space Marines lore-ifiés, 200+ notableUnits avec personnages Hérésie d'Horus)
 - `units.json` (133 unités)

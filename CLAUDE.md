@@ -8,7 +8,7 @@ Codex numérique fan Warhammer 40,000. Frontend Angular 19 (custom gothique noir
 |---|---|
 | Backend | NestJS 11 sur port `3001`, préfixe `/api` |
 | Frontend | Angular 19 + Material 19 (legacy en retrait) sur port `4201` (nginx) |
-| Stockage | JSON dans `data/` + seed `backend/seed/*.json` |
+| Stockage | contenu éditorial : `backend/seed/*.json` (dans l'image) · données utilisateur : `data/` (volume) |
 | AI | Anthropic SDK — descriptions narratives unités/séries (claude-sonnet-4-6, max 1024 tokens) |
 | Wiki proxy | `/api/wiki-image?q=...` → Warhammer 40k Fandom + cache in-memory |
 
@@ -51,7 +51,7 @@ après tout changement de la barre.
 
 ## Workflow dev
 
-En local sur Big-Blue (premier lancement : `mkdir -p backend/data && cp backend/seed/*.json backend/data/`) :
+En local sur Big-Blue (rien à copier : le contenu est lu dans `backend/seed/`, `backend/data/` se crée tout seul) :
 
 ```bash
 npm run dev:backend    # NestJS --watch sur :3001 (données dans backend/data/)
@@ -109,7 +109,7 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 
 ## Pièges connus
 
-- **Seed JSON manquants au premier lancement** → `ENOENT` crash-loop. Toujours copier les `backend/seed/*.json` vers `backend/data/` au premier lancement local.
+- **Contenu lu dans `seed/`, pas dans `data/`** (L74) : un fichier copié dans `backend/data/` (ou dans le volume) est ignoré s'il fait partie du contenu. `seed/` doit rester dans l'image (`Dockerfile` : `COPY … /app/seed`, gardé par `common/content.spec.ts`).
 - **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (`@Body() body: MonType` → `import type { MonType }`).
 
@@ -117,7 +117,12 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 
 `backend/seed/` : `factions.json`, `units.json`, `series.json`, `videos.json`, `subfactions.json` (**182 entrées** dont **71 successors Space Marines** lore-ifiés via Lexicanum scraping 2026-05-06), `channels.json` (8 chaînes YouTube), `artworks.json`, `lore-feed.json`. Voir `WARHAMMER_PROGRESS.md` et `WARHAMMER_ROADMAP.md` pour l'état des phases UX et le plan d'enrichissement futur.
 
-**Mise à jour contenu en prod** : `LoreFeedService` lit `data/*.json` (PVC `warhammer-backend-data` monté sur `/app/data`), pas le seed. Pour patcher factions/primarchs/etc. en prod (contexte kubectl `dark-blue` = la prod) : `kubectl -n preprod cp <fichier>.json <pod warhammer-backend>:/app/data/` puis `kubectl -n preprod rollout restart deploy/warhammer-backend` (pas besoin de rebuild image).
+**Contenu vs données utilisateur (L74, 2026-10-06)** — `common/content.ts` (`contentPath`, `readContent`, `userDataPath`) :
+
+- **Contenu éditorial** = aucun endpoint ne l'écrit : `factions`, `subfactions`, `units`, `series`, `artworks`, `artwork-collections`, `timeline-events`, `lore-feed`, `emperor`, `primarchs`, `chaos-gods`, `imperial-orgs`, `lore-concepts`, `equipment`, `legendary-ships`, `god-machines`, `living-saints`. Lu dans `backend/seed/` (`/app/seed` dans l'image, `CONTENT_DIR` pour le déplacer). Les fichiers de ce type encore présents dans le volume sont ignorés.
+- **Données utilisateur** = tout ce qu'un POST/DELETE écrit, seules à vivre dans `data/` (PVC `warhammer-backend-data`) : `image-meta.json`, `imported/`, et `videos.json` / `channels.json` (`POST /videos/import`, `DELETE /videos/:id`) — pour ces deux-là le seed ne sert que tant que le volume n'a pas son propre fichier : **une correction du seed ne les atteint pas en prod**.
+
+**Mise à jour contenu en prod** : modifier `backend/seed/*.json`, commit + push, livraison normale (CI → image → bump du tag). **Plus de `kubectl cp` ni de redémarrage manuel pour du contenu** : le déploiement suffit, le volume n'est pas touché. Contrôle après livraison : comparer l'API publique (`/api/factions`, `/api/units`, `/api/artworks/…`) au fichier du dépôt.
 
 ## Préférence éditoriale : LORE > règles
 
@@ -249,9 +254,9 @@ Audit outillé de TOUS les liens (rapport du 2026-10-02 : `docs/liens/audit-2026
   en CI** — 2 requêtes simultanées, 1,5 s par hôte, une reprise ; pages Fandom via l'API MediaWiki,
   vidéos YouTube via oEmbed ; 403/429 de Cloudflare = « invérifiable », pas « mort ».
 
-Les corrections de **données** (`backend/seed/*.json`) n'atteignent pas la prod, qui lit le volume
-`data/` : les pages tolèrent désormais les identifiants absents, et la mise à jour du volume reste
-une action humaine (voir « Mise à jour contenu en prod »).
+Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l'image (L74, voir
+« Mise à jour contenu en prod ») ; les pages tolèrent quand même les identifiants absents. Seuls
+`videos.json` et `channels.json`, données utilisateur, restent sur le volume.
 
 ## Plan, sessions et revue UX (cadence)
 
