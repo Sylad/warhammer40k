@@ -441,11 +441,14 @@ lots:
     finished: 2026-10-06
   - id: L59
     title: "QA : docs/qa/expectations.md (brouillon du contrôle QA du 04-10 : routes, contenus attendus, appels API)"
-    status: doing
+    status: dropped
     estimate: 0.25
     quickwin: true
     created: 2026-10-04
     started: 2026-10-06
+    finished: 2026-10-06
+    notes:
+      - { date: 2026-10-06, text: "abandonné : déjà fait : docs/qa/expectations.md livré par c3c6a29, complété en L64 et L75 (constat de la session orchestrate 06-10)" }
   - id: L60
     title: "Galerie : trois pastilles de statistiques égales aussi de 761 à 1280 px (3e pastille 114 px contre 92) + test e2e 1280 — relevé en revue UX L54"
     visible: true
@@ -496,20 +499,24 @@ lots:
     finished: 2026-10-06
   - id: L65
     title: "Galerie : accord au singulier « 1 œuvre » sur les pastilles de catégorie — QA prod 05-10"
-    status: doing
+    status: dropped
     estimate: 1
     quickwin: true
     visible: true
     created: 2026-10-05
     started: 2026-10-06
+    finished: 2026-10-06
+    notes:
+      - { date: 2026-10-06, text: "abandonné : déjà fait par 51aafe2 (L58) : « 1 œuvre » accordé sur .cat-count, couvert par gallery-plural-count.spec.ts" }
   - id: L66
     title: "plan.component.spec : tester le recalage au chargement des polices — recale si la carte garde le focus, ne bouge pas si le focus est parti (revue de code L55)"
-    status: doing
+    status: done
     estimate: 0.2
     quickwin: true
     created: 2026-10-05
     started: 2026-10-06
     review: { date: 2026-10-06, verdict: "conforme — orchestré (vague 2026-10-06-2138, 0 passe(s) de correction)", commit: 3f56669802386ec48a0d55a04123b05827011f3a }
+    finished: 2026-10-06
   - id: L67
     title: "ancres : /plan#<dernier lot> reste à 372 px sous la barre (fin de page, défilement au maximum) — décider si un espace en bas de page est voulu (QA prod 05-10)"
     status: todo
