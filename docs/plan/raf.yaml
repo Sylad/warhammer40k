@@ -555,6 +555,9 @@ lots:
     status: doing
     estimate: 1
     created: 2026-10-06
+    notes:
+      - { date: 2026-10-06, text: "sous-partie 2 (comparaison prod / dépôt avant bascule) : 3 écarts trouvés entre l'API publique de la prod et backend/seed — units.json (247f236, sm-primaris-intercessor), primarchs.json (83da28d, fiche Mortarion) et timeline-events.json (0171157, liens externes). Tranchés sur décision du LEAD (le dépôt fait foi), PAS sur réponse de Sylvain. Les fichiers de contenu modifiés à la main dans le volume (kubectl cp, p. ex. pour L70) sont écrasés par l'image à la livraison." }
+      - { date: 2026-10-06, text: "À FAIRE AVANT `cadence deliver` : Sylvain confirme que le dépôt remplace la prod pour ces 3 fichiers (le lot exige sa réponse en cas d'écart). Tant que cette confirmation n'est pas ajoutée ici, L74 ne se livre pas ni ne se clôt." }
     started: 2026-10-06
   - id: L75
     title: "QA : docs/qa/expectations.md /gallery après L70 — 3 pastilles (Collections 3), panneau Collections populaires 8 / 1 / 8, clic sur une collection → exactement ce nombre de cartes (QA prod 06-10)"
