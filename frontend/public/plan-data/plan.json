@@ -99,6 +99,12 @@
       "status": "done",
       "started": "2026-10-05",
       "finished": "2026-10-05"
+    },
+    {
+      "id": "L64",
+      "title": "Galerie : « Collections populaires » affiche de vrais compteurs",
+      "status": "doing",
+      "started": "2026-10-06"
     }
   ]
 }
