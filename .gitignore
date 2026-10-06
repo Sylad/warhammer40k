@@ -49,3 +49,4 @@ __pycache__/
 debug-*.jpg
 debug-*.png
 .token-savior-cache.json
+.playwright-mcp/
