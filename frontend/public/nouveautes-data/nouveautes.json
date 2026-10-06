@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-06 10:58",
+  "generated": "2026-10-06 11:07",
   "entries": [
     {
       "slug": "2026-10-06-qa-gallery-accord-du-pluriel-1-uvres-house-terryn",
@@ -30,7 +30,7 @@
       "alts": [
         "Bas de la grille de la Galerie à 390 px : les boutons de page, puis dessous, sur une seule ligne, « Page 1 sur 2 · 1–24 sur 35 »"
       ],
-      "html": "<p>Dans la <strong>Galerie</strong>, le panneau « Collections populaires » n’affiche plus des nombres d’œuvres inventés (312, 276, 198 pour une galerie de 39 œuvres) : chaque compteur est calculé d’après les œuvres réellement rangées dans la collection. Une collection sans œuvre n’est plus proposée, et si aucune n’en contient, le panneau et la pastille « Collections » du bandeau disparaissent. La grille reste paginée par 24 : sous elle, une seule ligne, en caractères plus lisibles, indique « Page 1 sur 2 · 1–24 sur 35 » (sur téléphone, elle passe sous les boutons).</p>"
+      "html": "<p>Dans la <strong>Galerie</strong>, le panneau « Collections populaires » n’affiche plus des nombres d’œuvres inventés (312, 276, 198 pour une galerie de 39 œuvres) : chaque compteur est calculé d’après les œuvres réellement rangées dans la collection. Une collection sans œuvre n’est plus proposée, et si aucune n’en contient, le panneau et la pastille « Collections » du bandeau disparaissent. La grille reste paginée par 24 : sous elle, une seule ligne, en caractères plus lisibles, indique « Page 1 sur 2 · 1–24 sur N », où N est le nombre d’œuvres de la galerie (sur téléphone, elle passe sous les boutons).</p>"
     },
     {
       "slug": "2026-10-05-galerie-trois-pastilles-de-statistiques-egales-aussi-de-761",

@@ -113,6 +113,12 @@ describe('données des Nouveautés (public/nouveautes-data) — L23', () => {
     expect(entry!.captures.some((c) => /-telephone\.png$/.test(c)), entry!.captures.join(', ')).toBe(true);
   });
 
+  it('L64 : le texte de la Nouveauté ne chiffre pas le total de la pagination (la prod et le seed diffèrent)', () => {
+    const file = mdFiles().find((f) => f.startsWith('2026-10-06-galerie-24-cartes'))!;
+    const body = readFileSync(join(ENTRIES, file), 'utf8').split(/\r?\n---\r?\n/).slice(1).join('\n');
+    expect(body).not.toMatch(/1–24 sur \d+/);
+  });
+
   it('guillemets français tenus par une espace fine insécable (U+202F)', () => {
     for (const f of mdFiles()) {
       const src = readFileSync(join(ENTRIES, f), 'utf8');
