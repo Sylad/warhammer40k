@@ -17,7 +17,11 @@ const lire = <T>(f: string): T => JSON.parse(fs.readFileSync(path.join(seedDir, 
 
 async function rendre() {
   const artworks = lire<any[]>('artworks.json');
-  const collections = lire<{ id: string; name: string; count: number }[]>('artwork-collections.json');
+  // Le serveur ignore le `count` du fichier (L64) et le recalcule depuis les œuvres : on fait de même.
+  const collections = lire<{ id: string; name: string }[]>('artwork-collections.json').map((c) => ({
+    ...c,
+    count: artworks.filter((a) => a.collectionId === c.id).length,
+  }));
   await setupTestBed([GalleryComponent], [
     provideRouter([]),
     {
@@ -52,12 +56,15 @@ describe('Galerie — collections du seed après L70 (L75)', () => {
     const { el, artworks } = await rendre();
     const lignes = Array.from(el.querySelectorAll('.col-row small')).map((e) => e.textContent?.trim()).sort();
     expect(lignes).toEqual(['1 œuvre', '8 œuvres', '8 œuvres']);
-    const somme = 8 + 1 + 8;
+    const somme = Array.from(el.querySelectorAll('.col-row small')).reduce((t, e) => t + parseInt(e.textContent!, 10), 0);
+    const total = Array.from(el.querySelectorAll('.stat-card')).find((s) => s.querySelector('.stat-label')?.textContent?.trim() === 'Œuvres');
+    expect(somme).toBeLessThanOrEqual(parseInt(total!.querySelector('.stat-num')!.textContent!, 10));
     expect(somme).toBeLessThanOrEqual(artworks.length);
   });
 
   it('un clic sur chaque collection affiche exactement son nombre de cartes', async () => {
-    const { f, el } = await rendre();
+    const { f, el, artworks } = await rendre();
+    const sansFiltre = Math.min(24, artworks.length);
     const rows = Array.from(el.querySelectorAll<HTMLButtonElement>('.col-row'));
     expect(rows).toHaveLength(3);
     for (const row of rows) {
@@ -67,6 +74,7 @@ describe('Galerie — collections du seed après L70 (L75)', () => {
       expect(el.querySelectorAll('.art-card')).toHaveLength(attendu);
       row.click();
       f.detectChanges();
+      expect(el.querySelectorAll('.art-card')).toHaveLength(sansFiltre);
     }
   });
 });
