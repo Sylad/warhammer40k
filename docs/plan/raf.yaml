@@ -552,9 +552,10 @@ lots:
     created: 2026-10-06
   - id: L74
     title: "Données : contenu éditorial lu dans l'image, données utilisateur seules sur le volume — 1) inventaire de data/ : « contenu » (aucun endpoint d'écriture : artworks, artwork-collections, factions, units, lore…) vs « utilisateur » (image-meta, imported/, favoris…, tout ce qu'un POST/DELETE écrit) ; 2) AVANT bascule, comparer chaque fichier « contenu » de la prod (API publique) au dépôt, écart = STOP et question à Sylvain ; 3) le backend lit le contenu depuis le seed embarqué dans l'image, le volume ne garde que l'utilisateur ; 4) CLAUDE.md + « Mise à jour contenu en prod » réécrits (plus de kubectl cp pour du contenu) — demande de Sylvain 06-10 après la mise à jour manuelle du volume pour L70"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-10-06
+    started: 2026-10-06
   - id: L75
     title: "QA : docs/qa/expectations.md /gallery après L70 — 3 pastilles (Collections 3), panneau Collections populaires 8 / 1 / 8, clic sur une collection → exactement ce nombre de cartes (QA prod 06-10)"
     status: todo
