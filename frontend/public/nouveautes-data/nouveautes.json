@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-06 11:07",
+  "generated": "2026-10-06 13:08",
   "entries": [
+    {
+      "slug": "2026-10-06-galerie-les-collections-contiennent-enfin-des-uvres",
+      "title": "Galerie : les collections contiennent enfin des œuvres",
+      "date": "2026-10-06",
+      "lots": [
+        "L70"
+      ],
+      "captures": [
+        "captures/L70-collections-galerie.png",
+        "captures/L70-collections-galerie-telephone.png"
+      ],
+      "alts": [
+        "Panneau « Collections populaires » de la Galerie à 1440 px : Horus Heresy, 8 œuvres ; 40K Core Book, 1 œuvre ; Black Library Covers, 8 œuvres",
+        "Le même panneau à 390 px, avec les mêmes trois collections et leurs compteurs"
+      ],
+      "html": "<p>Dans la <strong>Galerie</strong>, le panneau « Collections populaires » est de nouveau rempli : 17 œuvres sont rangées dans leur collection, d’après le roman ou la source dont elles viennent. <strong>Horus Heresy</strong> réunit 8 œuvres (Guilliman, Khârn, Sanguinius, Horus, l’Empereur, Magnus, Mortarion, le Lion), <strong>Black Library Covers</strong> 8 (Cadia, Célestine, Abaddon, Dante, Cawl, Trazyn, Eisenhorn, Yarrick) et <strong>40K Core Book</strong> 1 (la Cicatrix Maledictum). Choisir une collection filtre la grille sur ses œuvres ; les autres œuvres restent sans collection.</p>"
+    },
     {
       "slug": "2026-10-06-qa-gallery-accord-du-pluriel-1-uvres-house-terryn",
       "title": "Galerie : « 1 œuvre » au singulier sur les catégories",
