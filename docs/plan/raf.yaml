@@ -558,6 +558,7 @@ lots:
     started: 2026-10-06
   - id: L75
     title: "QA : docs/qa/expectations.md /gallery après L70 — 3 pastilles (Collections 3), panneau Collections populaires 8 / 1 / 8, clic sur une collection → exactement ce nombre de cartes (QA prod 06-10)"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-10-06
+    started: 2026-10-06
