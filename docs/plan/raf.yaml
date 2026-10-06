@@ -562,3 +562,4 @@ lots:
     estimate: 1
     created: 2026-10-06
     started: 2026-10-06
+    review: { date: 2026-10-06, verdict: "conforme (1 constat mineur reporté vers L72) — orchestré (vague 2026-10-06-1400, 0 passe(s) de correction + passe des mineurs)", commit: e896764bac3a034ed62a5fd447dd681f1e5cd79e }
