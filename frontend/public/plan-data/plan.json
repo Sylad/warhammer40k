@@ -110,10 +110,11 @@
     {
       "id": "L64",
       "title": "Galerie : des compteurs justes et une pagination lisible",
-      "status": "doing",
+      "status": "done",
       "started": "2026-10-06",
+      "finished": "2026-10-06",
       "tasks": {
-        "done": 0,
+        "done": 5,
         "total": 5
       }
     }
