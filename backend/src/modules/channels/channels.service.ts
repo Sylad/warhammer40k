@@ -1,11 +1,10 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
-import { readContent } from '../../common/content.js';
+import { readContent, userDataPath } from '../../common/content.js';
 import type { Channel } from '../videos/video.model.js';
 
-const FILE_PATH = path.resolve(process.cwd(), 'data', 'channels.json');
+
 
 @Injectable()
 export class ChannelsService {
@@ -13,8 +12,8 @@ export class ChannelsService {
 
   constructor() {
     // L74 : chaînes ajoutées par POST /videos/import → volume ; à défaut, le seed.
-    this.channels = fs.existsSync(FILE_PATH)
-      ? (JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) as Channel[])
+    this.channels = fs.existsSync(userDataPath('channels.json'))
+      ? (JSON.parse(fs.readFileSync(userDataPath('channels.json'), 'utf-8')) as Channel[])
       : readContent<Channel[]>('channels.json', []);
   }
 
@@ -50,7 +49,7 @@ export class ChannelsService {
       throw new BadRequestException(`Channel ${channel.id} already exists`);
     }
     this.channels.push(channel);
-    atomicWriteJsonSync(FILE_PATH, this.channels);
+    atomicWriteJsonSync(userDataPath('channels.json'), this.channels);
     return channel;
   }
 }

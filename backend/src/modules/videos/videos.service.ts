@@ -1,11 +1,10 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
-import { readContent } from '../../common/content.js';
+import { readContent, userDataPath } from '../../common/content.js';
 import type { Video } from './video.model.js';
 
-const FILE_PATH = path.resolve(process.cwd(), 'data', 'videos.json');
+
 
 @Injectable()
 export class VideosService {
@@ -16,8 +15,8 @@ export class VideosService {
     // videos.json manquant/tronqué faisait crash-looper TOUT le backend
     // (throw dans le constructor = bootstrap Nest avorté). Review 2026-08-14.
     try {
-      this.videos = fs.existsSync(FILE_PATH)
-        ? (JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) as Video[])
+      this.videos = fs.existsSync(userDataPath('videos.json'))
+        ? (JSON.parse(fs.readFileSync(userDataPath('videos.json'), 'utf-8')) as Video[])
         : readContent<Video[]>('videos.json', []); // L74 : vidéos ajoutées → volume ; à défaut, le seed
     } catch {
       this.videos = [];
@@ -43,7 +42,7 @@ export class VideosService {
       throw new BadRequestException(`Video ${video.id} already exists`);
     }
     this.videos.push(video);
-    atomicWriteJsonSync(FILE_PATH, this.videos);
+    atomicWriteJsonSync(userDataPath('videos.json'), this.videos);
     return video;
   }
 
@@ -51,7 +50,7 @@ export class VideosService {
     const idx = this.videos.findIndex(v => v.id === id);
     if (idx < 0) return false;
     this.videos.splice(idx, 1);
-    atomicWriteJsonSync(FILE_PATH, this.videos);
+    atomicWriteJsonSync(userDataPath('videos.json'), this.videos);
     return true;
   }
 }
