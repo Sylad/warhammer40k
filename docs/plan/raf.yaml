@@ -430,11 +430,12 @@ lots:
     created: 2026-10-04
   - id: L58
     title: "QA /gallery : accord du pluriel « 1 œuvres » (House Terryn)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     visible: true
     created: 2026-10-04
+    started: 2026-10-06
   - id: L59
     title: "QA : docs/qa/expectations.md (brouillon du contrôle QA du 04-10 : routes, contenus attendus, appels API)"
     status: todo
