@@ -528,6 +528,8 @@ lots:
     estimate: 1
     visible: true
     created: 2026-10-06
+    notes:
+      - { date: 2026-10-06, text: "VALIDÉ par Sylvain 06-10 — collections officielles conservées (ids inchangés), rattachement par roman/source : horus-heresy = aw-009 Guilliman (The Unremembered Empire), aw-010 Khârn (Betrayer), aw-011 Sanguinius (Fear to Tread), aw-012 Horus (Horus Rising), aw-013 Empereur (The Master of Mankind), aw-014 Magnus (A Thousand Sons), aw-015 Mortarion (The Pale King), aw-017 Lion El'Jonson (Descent of Angels) ; black-library-covers = aw-002 Cadia (Cadia Stands), aw-003 Célestine (The Living Saint), aw-016 Abaddon (The Talon of Horus), aw-019 Dante (Dante), aw-021 Cawl (The Great Work), aw-026 Trazyn (The Infinite and the Divine), aw-030 Eisenhorn (trilogie Eisenhorn), aw-033 Yarrick (Imperial Creed) ; 40k-core-book = aw-034 Cicatrix. Toutes les autres : pas de collectionId (Farsight écarté, source non vérifiée). Images perso : non rattachées. Session : appliquer dans backend/seed/artworks.json ET backend/data/artworks.json, counts du seed alignés (8/8/1) même s'ils sont recalculés, test qui verrouille le décompte, Nouveauté avec capture du panneau rempli (1440 et 390). La prod (PVC) est mise à jour par le LEAD après livraison (kubectl cp + rollout restart), pas par la session." }
   - id: L71
     title: "Galerie : après un changement de page au clavier, focus sur la grille (tabindex=-1) et « Page N sur M » dans la région polite (WCAG 2.4.3, 4.1.3) — revue UX L64, antérieur au lot"
     status: todo
