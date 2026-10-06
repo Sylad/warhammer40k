@@ -251,7 +251,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <span class="col-icon">▤</span>
                 <span class="col-info">
                   <strong>{{ col.name }}</strong>
-                  <small>{{ col.count }} œuvres</small>
+                  <small>{{ col.count }} œuvre{{ col.count > 1 ? 's' : '' }}</small>
                 </span>
               </button>
             }

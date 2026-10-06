@@ -36,6 +36,8 @@ Visiter sm-calgar, ou un lien de la fiche faction.
 ## /gallery
 - shows: trois statistiques Œuvres, Artistes, Collections, chacune avec un nombre (39, 20 et 3 le 05-10) ; les catégories (8 le 05-10) ; des cartes d'œuvre (.art-card) avec leur image
 - shows: les trois statistiques de largeur égale sur une seule ligne, libellé « COLLECTIONS » entier dans sa pastille — 390 only (vaut aussi à 320)
+- shows: la pagination est explicite : 24 cartes par page ; quand les résultats dépassent 24 (« 39 résultats » le 05-10), un contrôle « Page 1 sur 2 » avec « 1–24 / 39 » est visible sous la grille, et le total des pages reste égal au nombre d'œuvres du bandeau
+- shows: « Collections populaires » : le compteur de chaque collection est calculé depuis les œuvres (/api/artwork-collections), jamais plus grand que le nombre d'œuvres du bandeau, et leur somme n'excède pas ce nombre (312, 276 et 198 pour 39 œuvres le 05-10 : bug L64)
 - api: /api/artworks
 - api: /api/artwork-artists
 - api: /api/artwork-collections

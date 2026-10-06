@@ -11,7 +11,10 @@ export class ArtworksService {
 
   constructor() {
     this.artworks = this.load<Artwork[]>('artworks.json', []);
-    this.collections = this.load<ArtworkCollection[]>('artwork-collections.json', []);
+    this.collections = this.deriveCollections(
+      this.load<ArtworkCollection[]>('artwork-collections.json', []),
+      this.artworks,
+    );
     this.artists = this.deriveArtists(this.artworks);
   }
 
@@ -27,6 +30,15 @@ export class ArtworksService {
     return [...counts.entries()]
       .map(([name, artworkCount]) => ({ id: name.toLowerCase().replace(/\s+/g, '-'), name, artworkCount }))
       .sort((a, b) => b.artworkCount - a.artworkCount);
+  }
+
+  // L64 : le `count` du fichier est ignoré (valeurs écrites à la main, sans rapport avec les
+  // œuvres) ; on compte les œuvres qui référencent réellement la collection.
+  private deriveCollections(collections: ArtworkCollection[], artworks: Artwork[]): ArtworkCollection[] {
+    return collections.map((c) => ({
+      ...c,
+      count: artworks.filter((a) => a.collectionId === c.id).length,
+    }));
   }
 
   findAll(): Artwork[] { return this.artworks; }
