@@ -592,7 +592,9 @@ lots:
     created: 2026-10-06
   - id: L77
     title: orchestrate.ux déclaré (port 4201) pour la revue UX automatique des vagues — suite de cadence L95
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-07
     started: 2026-10-07
+    review: { date: 2026-10-07, verdict: "conforme (lead) : cadence.yaml seul, orchestrate.ux au format lu par readOrchestrateConfig, commande POSIX essayée sous groupe de processus → HTTP 200, ports libérés après kill", commit: 12fbf9ebcb687d3c484347aa5c1eb842e85c4c3f }
+    finished: 2026-10-07
