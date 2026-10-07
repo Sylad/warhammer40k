@@ -19,3 +19,11 @@ deliver:
     # pour un script absent
     - command: ./scripts/verify-cache.sh
   verifyTimeout: 600
+
+# Revue UX automatique des vagues (cadence orchestrate) : backend NestJS (3001) + frontend Angular (4201)
+# dans UN groupe de processus, tués ensemble par le programme.
+orchestrate:
+  ux:
+    command: '(cd backend && npm run start:dev) & (cd frontend && npm start) & wait'
+    url: http://localhost:4201
+    timeout: 300
