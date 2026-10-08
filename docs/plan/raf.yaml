@@ -341,14 +341,14 @@ lots:
     finished: 2026-10-03
   - id: L46
     title: "Barre du haut : débordement horizontal avec une police par défaut du navigateur de 18 ou 20 px (1 px à 320 px en 18 px ; 320–371 px en 20 px) — logo + « Menu » trop larges, choix de design à faire (relecture L33)"
-    public: Barre du haut sans débordement avec une grande police du navigateur
+    public: "Barre du haut : plus de débordement avec une grande police par défaut du navigateur"
     status: todo
     estimate: 1
     visible: true
     created: 2026-10-02
   - id: L47
     title: "Bloc Médias : la carte « Vidéo à la une » ouvre cette vidéo — la page /videos n'a aujourd'hui ni paramètre d'adresse ni ancre pour ouvrir une vidéo précise, à créer (revue UX L42, Nielsen #2/#4)"
-    public: "Médias : la vidéo à la une s'ouvre directement sur /videos"
+    public: "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo"
     status: todo
     estimate: 1
     visible: true
@@ -362,7 +362,7 @@ lots:
       - { date: 2026-10-03, text: "Revue UX de L45 (03-10) : à 390 px, choisir une Faction ramène la page en haut (scrollY 2993 → 0) et laisse le focus hors écran ; Catégorie et Tri ne le font pas. Probablement la navigation d'adresse de L42, non vérifié dans le code. À traiter ici." }
   - id: L49
     title: "Galerie : panneau Filtres avant la grille (ordre de focus WCAG 2.4.3 — filtres à la 34e tabulation) ; au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) — maquette à valider par Sylvain avant tout code"
-    public: "Galerie : filtres accessibles avant la grille, au clavier et au téléphone"
+    public: "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone"
     status: todo
     estimate: 1
     visible: true
@@ -394,7 +394,7 @@ lots:
     created: 2026-10-03
   - id: L53
     title: "Galerie : voile sombre sur .hero-bg — surtitre, description et bouton Importer ≥ 4,5:1 sur image claire (même cause que L45/L50) ; vérifier sur une vraie image claire"
-    public: "Galerie : textes et bouton Importer lisibles sur une image claire"
+    public: "Galerie : surtitre, description et bouton lisibles sur une image d'en-tête claire"
     status: todo
     estimate: 0.25
     visible: true
@@ -428,7 +428,7 @@ lots:
     created: 2026-10-04
   - id: L57
     title: "QA /videos et /romans : défilement horizontal (side-panel à x=1511 à 1440 px ; drawer à x=704 à 390 px) — vérifier et contenir"
-    public: "Vidéos et Romans : plus de défilement horizontal"
+    public: "Vidéos et Romans : plus de défilement horizontal parasite"
     status: todo
     estimate: 0.25
     visible: true
@@ -524,7 +524,7 @@ lots:
     finished: 2026-10-06
   - id: L67
     title: "ancres : /plan#<dernier lot> reste à 372 px sous la barre (fin de page, défilement au maximum) — décider si un espace en bas de page est voulu (QA prod 05-10)"
-    public: "Plan : l'ancre du dernier lot s'affiche sous la barre"
+    public: "Plan : le dernier lot s'affiche sous la barre quand on suit son lien"
     status: todo
     estimate: 1
     visible: true
@@ -563,7 +563,7 @@ lots:
     created: 2026-10-06
   - id: L73
     title: "Accueil « 35 Œuvres » contre galerie « 39 Œuvres » (35 /api/artworks + 4 /api/images) — aligner l'accueil sur le compte de la galerie (tout ce que la galerie montre, images perso comprises : décision lead 06-10) et ajouter l'attente « Œuvres » de / dans docs/qa/expectations.md — QA prod 06-10"
-    public: "Accueil : le compte des œuvres est celui de la galerie"
+    public: "Accueil : le compte des œuvres est le même que dans la galerie"
     status: todo
     estimate: 1
     visible: true
