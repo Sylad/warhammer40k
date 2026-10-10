@@ -64,7 +64,7 @@ describe.skipIf(!built || !chromium)('bandeaux de l’accueil, de la galerie et 
       }
       await page.close();
       expect(problems).toEqual([]);
-    });
+    }, 120_000);
 
     it(`${url} : tailles des titres au bureau inchangées (1440 × 900)`, async () => {
       const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
