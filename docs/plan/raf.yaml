@@ -659,10 +659,11 @@ lots:
   - id: L82
     title: "Brèves : relire les 40 entrées de backend/seed/lore-feed.json (« d'Vulkan », « âmes-piscine », « Eveil », accents), libellé de type à 9 px trop petit (revue UX L2, mineur)"
     public: "Brèves : textes relus et libellés lisibles"
-    status: todo
+    status: doing
     estimate: 0.1
     visible: true
     created: 2026-10-10
+    started: 2026-10-10
   - id: L83
     title: "Accueil : « 41e » passé en capitales (« 41E MILLÉNAIRE ») par text-transform, deux procédés d'exposant — sup { text-transform: none }, un seul procédé (revue UX L2, mineur)"
     public: "Accueil : « 41e millénaire » correctement écrit"
