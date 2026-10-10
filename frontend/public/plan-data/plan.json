@@ -205,14 +205,16 @@
     {
       "id": "L85",
       "title": "Nouveautés : les titres d'œuvres s'affichent en italique",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     },
     {
       "id": "L86",
       "title": "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     }
   ]
 }
