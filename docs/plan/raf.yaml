@@ -612,16 +612,18 @@ lots:
   - id: L78
     title: "Accueil : texte des cartes raccourcis sur image à 3,3:1 (p10, Romans/Factions) — voile ≥ 0,8 dès le sous-titre ou pastille var(--panel) derrière .shortcut-content, remesurer ≥ 4,5:1 ; image Black Library plus sombre (revue UX L2, majeur WCAG 1.4.3)"
     public: "Accueil : le texte des cartes reste lisible sur toute image"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant — orchestré (vague 2026-10-10-1345, 0 passe(s) de correction)", commit: 805617b25ce8d07f919d44b03f419fa84cda4c06 }
+    ux: { date: 2026-10-10, verdict: "conforme (Sylvain 10-10 sur la capture L78-cartes-accueil) : voile plus dense, texte des cartes lisible sur toute image ; revue UX de la vague conforme" }
+    finished: 2026-10-10
   - id: L79
     title: "Accueil : compteurs à « 0 » pendant le chargement (initialValue []) et sur erreur d'API, sans message ni Réessayer — valeur initiale null → « — », message + Réessayer (l'état « À propos » figé reste L38) (revue UX L2, majeur Nielsen 1)"
     public: "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
@@ -629,6 +631,8 @@ lots:
     review: { date: 2026-10-10, verdict: "conforme (revue légère Sonnet vague 1345, confirmée par le lead 10-10) : 3 commits, 0 bloquant, 0 majeur, 3 mineurs (focus perdu après Réessayer, rechargement de toutes les sources, pas de libellé de chargement)", commit: 429def08f80b37f6674687ef1ae8ad72ac90c065 }
     notes:
       - { date: 2026-10-10, text: "mineurs revue 10-10 : focus perdu après Réessayer, Réessayer recharge toutes les sources, pas de libellé pendant le chargement ; captures de la revue déplacées dans tmp/ux-wh-L79/ (écrites à la racine par l'agent, 3e fois — corrigé par cadence L84, vague sur copie gelée)" }
+    ux: { date: 2026-10-10, verdict: "conforme (Sylvain 10-10 sur la capture L79-accueil-erreur) : « — » pendant le chargement, bandeau + Réessayer sur erreur" }
+    finished: 2026-10-10
   - id: L80
     title: "Accueil au téléphone : barre de statistiques de 392 px (5 lignes empilées + citation) répète les nombres des cartes — maquette B : masquer .stats-bar sous 760 px et porter « 182 sous-factions » sur la carte Factions (à valider par Sylvain) (revue UX L2, majeur Nielsen 8)"
     public: "Accueil au téléphone : page plus courte, statistiques réduites"

@@ -156,14 +156,16 @@
     {
       "id": "L78",
       "title": "Accueil : le texte des cartes reste lisible sur toute image",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     },
     {
       "id": "L79",
       "title": "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     },
     {
       "id": "L80",
