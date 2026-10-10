@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 18:27",
+  "generated": "2026-10-10 19:40",
   "entries": [
+    {
+      "slug": "2026-10-10-sous-factions-le-bandeau-n-est-plus-rogne-au-telephone",
+      "title": "Sous-factions : le bandeau n'est plus rogné au téléphone",
+      "date": "2026-10-10",
+      "lots": [
+        "L88"
+      ],
+      "captures": [
+        "captures/L88-sous-faction-telephone.png"
+      ],
+      "alts": [
+        "La fiche de la sous-faction Ymyr Conglomerate sur un téléphone de 390 px : le nom, la description et le type tiennent entièrement dans le bandeau, sans être coupés à droite"
+      ],
+      "html": "<p>Sur les fiches de <strong>sous-factions</strong> (chapitres, dynasties, flottes-ruches…), le bandeau du haut n'est plus coupé sur un téléphone : le nom, la description et les informations clés s'affichent en entier, sans qu'il faille faire défiler la page de côté. Le nom se réduit juste assez pour tenir sur la largeur de l'écran. Rien ne change sur ordinateur.</p>"
+    },
     {
       "slug": "2026-10-10-lecteurs-d-ecran-le-logo-et-les-pictos-de-la-navigation-ne-s",
       "title": "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus",
