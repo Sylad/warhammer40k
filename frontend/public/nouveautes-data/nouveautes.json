@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 14:11",
+  "generated": "2026-10-10 14:27",
   "entries": [
+    {
+      "slug": "2026-10-10-accueil-au-telephone-page-plus-courte-statistiques-reduites",
+      "title": "Accueil au téléphone : page plus courte, statistiques réduites",
+      "date": "2026-10-10",
+      "lots": [
+        "L80"
+      ],
+      "captures": [
+        "captures/L80-accueil-telephone.png"
+      ],
+      "alts": [
+        "L’accueil sur un téléphone de 390 px : plus de barre de statistiques en bas de page, et « 182 sous-factions » sous le nombre de factions majeures dans la carte Factions"
+      ],
+      "html": "<p>Sur <strong>téléphone</strong> (écran de moins de 760 px), l’accueil est plus court : la barre de statistiques en bas de page, qui répétait les nombres déjà affichés sur les cartes, n’apparaît plus, ni la citation qui l’accompagnait. Le nombre de sous-factions, seul chiffre qui n’était que dans cette barre, figure désormais en bas de la carte <strong>Factions</strong> (« 182 sous-factions »). Sur tablette et ordinateur, rien ne change.</p>"
+    },
     {
       "slug": "2026-10-10-accueil-plus-de-faux-0-pendant-le-chargement-ni-sur-erreur",
       "title": "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur",

@@ -271,6 +271,15 @@
       flex: 1;
     }
     .shortcut-foot .arrow { color: var(--gold-bright); font-size: 18px; }
+    /* L80 : « sous-factions » ne vit sur la carte qu'au téléphone, où la barre de statistiques est masquée. */
+    .shortcut-sub {
+      display: none;
+      margin: 8px 0 0;
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
 
     /* === LORE FEED === */
     .lore-feed {
@@ -395,4 +404,7 @@
        rognaient le titre, le chapeau et la citation jusqu'à 390 px. */
     @media (max-width: 760px) {
       .hero { padding: 48px 22px 32px; }
+      /* L80 (Nielsen 8) : la barre répétait les nombres des cartes sur 392 px ; citation comprise, elle disparaît. */
+      .stats-bar { display: none; }
+      .shortcut-sub { display: block; }
     }

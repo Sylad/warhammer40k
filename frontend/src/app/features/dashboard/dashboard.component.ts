@@ -98,6 +98,9 @@ const TYPE_LABEL: Record<string, string> = {
               <span class="lbl">{{ s.countLabel }}</span>
               <span class="arrow">→</span>
             </div>
+            @if (s.route === '/factions') {
+              <p class="shortcut-sub">{{ shown(subFactions()) }} sous-factions</p>
+            }
           </div>
         </a>
       }
