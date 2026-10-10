@@ -683,12 +683,16 @@ lots:
   - id: L84
     title: "Accueil : images Wikia sous-dimensionnées (hero 700 px affiché 1 364, Black Library 200 px étirée 326) — scale-to-width-down/1400 ou visuels ≥ 700 px, lié L41/L44 (revue UX L2, mineur)"
     public: "Accueil : images du bandeau et des cartes nettes"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant after 3 minor notes (README collé à la puce, Romans 315 px contredit le texte Nouveautés « double », carte Vidéos sur jaquette de jeu) — 0 blocking, 0 major — orchestré (vague 2026-10-10-1705, 0 passe(s) de correction)", commit: 43a14e08b5120b25d51e6da656b7ded843141695 }
+    ux: { date: 2026-10-10, verdict: "ok Sylvain 10-10 (Discord « ok L84 A ») : jaquette Space Marine 2 gardée sur la carte Vidéos ; revue UX auto conforme, 3 mineurs" }
+    notes:
+      - { date: 2026-10-10, text: "Revue : README collé à la puce Wiki-image proxy ; carte Romans 315 px pour 326 affichés (+3 %, invisible) — acceptés" }
+    finished: 2026-10-10
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

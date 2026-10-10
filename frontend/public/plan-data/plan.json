@@ -198,8 +198,9 @@
     {
       "id": "L84",
       "title": "Accueil : images du bandeau et des cartes nettes",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     }
   ]
 }
