@@ -24,6 +24,10 @@ const TYPES: Record<string, string> = {
 };
 const FACTIONS = JSON.parse(readFileSync(join(SEED, 'factions.json'), 'utf8'));
 const API: Record<string, string> = { '/api/lore/chaos-gods': 'chaos-gods.json', '/api/lore/concepts': 'lore-concepts.json' };
+const FICHES: Record<string, string> = {
+  primarchs: 'primarchs.json', ships: 'legendary-ships.json', saints: 'living-saints.json',
+  equipment: 'equipment.json', 'god-machines': 'god-machines.json',
+};
 const built = existsSync(join(DIST, 'index.html'));
 const stale = built && SOURCES.some((s) => statSync(join(FRONTEND, s)).mtimeMs > statSync(join(DIST, 'index.html')).mtimeMs);
 let chromium: typeof import('playwright-core').chromium | null = null;
@@ -53,6 +57,12 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
           const q = new URL(req.url!, 'http://x').searchParams.get('factionId');
           const all = JSON.parse(readFileSync(join(SEED, path === '/api/units' ? 'units.json' : 'subfactions.json'), 'utf8'));
           res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify(all.filter((x: { factionId?: string }) => !q || x.factionId === q)));
+          return;
+        }
+        const fiche = /^\/api\/lore\/(primarchs|ships|saints|equipment|god-machines)\/([\w-]+)$/.exec(path);
+        if (fiche) {
+          const all = JSON.parse(readFileSync(join(SEED, FICHES[fiche[1]]), 'utf8'));
+          res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify(all.find((x: { id: string }) => x.id === fiche[2]) ?? null));
           return;
         }
         const f = API[path];
@@ -132,6 +142,25 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       return slug;
     }],
   ];
+
+  // L89 : clic sur un lien de la barre d'ancres (scrollIntoView : scroll-margin ET scroll-padding
+  // s'additionnent), sur chacune des six fiches.
+  const fiches: [string, string][] = [
+    ['faction', '/factions/space-marines'], ['primarque', '/lore/primarchs/lion-eljonson'],
+    ['vaisseau', '/lore/ships/phalanx'], ['saint', '/lore/saints/saint-celestine'],
+    ['titan', '/lore/titans/warhound-titan'], ['équipement', '/lore/equipment/boltgun-astartes'],
+  ];
+  for (const [nom, url] of fiches) {
+    cases.push([`Fiche ${nom}, clic sur la barre d'ancres`, async (p) => {
+      await p.goto(`${base}${url}`);
+      const links = p.locator('.anchor-nav a');
+      await links.first().waitFor();
+      const a = links.nth(Math.min(2, (await links.count()) - 1));
+      const id = (await a.getAttribute('href'))!.split('#')[1];
+      await a.click();
+      return id;
+    }]);
+  }
 
   for (const [w, h] of [[1440, 900], [390, 844]]) {
     for (const [name, open] of cases) {

@@ -58,13 +58,15 @@ describe('barre d\'ancres des fiches (L89)', () => {
   it('les cibles d\'ancre laissent la place à l\'en-tête ET à la barre', () => {
     for (const f of ['faction-detail', 'ship-detail', 'primarch-detail']) {
       const scss = readFileSync(resolve(src, `app/features/${f}/${f}.component.scss`), 'utf8');
-      expect(scss, f).toMatch(/scroll-margin-top:\s*var\(--anchor-offset\)/);
-      expect(scss, f).not.toMatch(/scroll-margin-top:\s*80px/);
+      // scrollIntoView additionne scroll-margin et scroll-padding (html:has(.anchor-nav)) : la marge
+      // des cibles ne reprend pas --anchor-offset, sinon le décalage est compté deux fois.
+      expect(scss, f).toMatch(/scroll-margin-top:\s*12px/);
+      expect(scss, f).not.toMatch(/scroll-margin-top:\s*(80px|var\(--anchor-offset\))/);
     }
     expect(css).toMatch(/--anchor-offset:\s*calc\(var\(--topbar-h\) \+ var\(--anchor-nav-h\)/);
   });
 
-  it('fiche faction : CHAQUE cible de la barre laisse la place à l\'en-tête ET à la barre', () => {
+  it('fiche faction : CHAQUE cible de la barre laisse la place à l\'en-tête ET à la barre (scroll-padding + 12 px)', () => {
     const ts = readFileSync(resolve(src, 'app/features/faction-detail/faction-detail.component.ts'), 'utf8');
     const ids = [...ts.matchAll(/<a href="#(\w+)" \(click\)="scrollTo/g)].map((m) => m[1]);
     expect(ids.length).toBeGreaterThan(5);
@@ -75,9 +77,9 @@ describe('barre d\'ancres des fiches (L89)', () => {
       let ok = false;
       compiled.walkRules((r) => {
         if (!r.selectors.some((sel) => new RegExp(`\\.${cls}$`).test(sel.trim()))) return;
-        r.walkDecls('scroll-margin-top', (d) => { if (d.value === 'var(--anchor-offset)') ok = true; });
+        r.walkDecls('scroll-margin-top', (d) => { if (d.value === '12px') ok = true; });
       });
-      expect(ok, `#${id} (.${cls}) sans scroll-margin-top: var(--anchor-offset)`).toBe(true);
+      expect(ok, `#${id} (.${cls}) sans scroll-margin-top: 12px`).toBe(true);
     }
   });
 

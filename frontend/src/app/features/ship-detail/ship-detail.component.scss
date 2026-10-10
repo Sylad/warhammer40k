@@ -96,7 +96,7 @@
   background: rgba(11, 9, 7, 0.85);
   border: 1px solid var(--border);
   padding: 28px 32px;
-  scroll-margin-top: var(--anchor-offset);
+  scroll-margin-top: 12px; /* + scroll-padding-top (_anchor-nav) */
 }
 .panel h2 {
   font-family: var(--serif);

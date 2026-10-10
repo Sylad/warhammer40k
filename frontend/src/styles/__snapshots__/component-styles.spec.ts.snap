@@ -151,7 +151,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "border": "1px solid var(--border)",
     "margin-bottom": "24px",
     "padding": "28px 32px",
-    "scroll-margin-top": "var(--anchor-offset)",
+    "scroll-margin-top": "12px",
   },
   ".bible-text": {
     "color": "#d8d0bf",
@@ -361,7 +361,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "border": "1px solid var(--border)",
     "box-shadow": "var(--shadow)",
     "padding": "28px 30px",
-    "scroll-margin-top": "var(--anchor-offset)",
+    "scroll-margin-top": "12px",
   },
   ".lore-col p": {
     "color": "#c3baaa",
@@ -776,7 +776,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".subfactions": {
     "margin-bottom": "36px",
-    "scroll-margin-top": "var(--anchor-offset)",
+    "scroll-margin-top": "12px",
   },
   ".t-flourish": {
     "color": "var(--gold)",
@@ -933,7 +933,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "border-color": "var(--gold-bright)",
   },
   ".units": {
-    "scroll-margin-top": "var(--anchor-offset)",
+    "scroll-margin-top": "12px",
   },
   ".units-grid": {
     "display": "grid",
@@ -2730,7 +2730,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "background": "rgba(11, 9, 7, 0.85)",
     "border": "1px solid var(--border)",
     "padding": "28px 32px",
-    "scroll-margin-top": "var(--anchor-offset)",
+    "scroll-margin-top": "12px",
   },
   ".panel .lead": {
     "border-left": "3px solid var(--gold)",
@@ -3410,7 +3410,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "background": "rgba(11, 9, 7, 0.85)",
     "border": "1px solid var(--border)",
     "padding": "28px 32px",
-    "scroll-margin-top": "var(--anchor-offset)",
+    "scroll-margin-top": "12px",
   },
   ".panel h2": {
     "border-bottom": "1px solid var(--border)",

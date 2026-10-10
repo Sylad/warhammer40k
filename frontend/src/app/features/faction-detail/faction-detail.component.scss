@@ -167,7 +167,7 @@
       background: linear-gradient(180deg, rgba(19,15,11,0.92), rgba(5,4,3,0.96));
       padding: 28px 30px;
       box-shadow: var(--shadow);
-      scroll-margin-top: var(--anchor-offset);
+      scroll-margin-top: 12px; /* + scroll-padding-top (_anchor-nav) */
     }
     .lore-grid {
       display: grid;
@@ -216,8 +216,8 @@
     }
 
     /* SUBFACTIONS */
-    .subfactions { margin-bottom: 36px; scroll-margin-top: var(--anchor-offset); }
-    .units { scroll-margin-top: var(--anchor-offset); }
+    .subfactions { margin-bottom: 36px; scroll-margin-top: 12px; /* + scroll-padding-top (_anchor-nav) */ }
+    .units { scroll-margin-top: 12px; /* + scroll-padding-top (_anchor-nav) */ }
     .sf-count {
       color: var(--gold);
       font-size: 11px;
@@ -757,7 +757,7 @@
       border: 1px solid var(--border);
       padding: 28px 32px;
       margin-bottom: 24px;
-      scroll-margin-top: var(--anchor-offset);
+      scroll-margin-top: 12px; /* + scroll-padding-top (_anchor-nav) */
     }
     .bible-text {
       font-size: 15px;
