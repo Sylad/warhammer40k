@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 19:40",
+  "generated": "2026-10-10 19:58",
   "entries": [
+    {
+      "slug": "2026-10-10-sous-factions-les-unites-notables-s-affichent",
+      "title": "Sous-factions : les unités notables s'affichent",
+      "date": "2026-10-10",
+      "lots": [
+        "L90"
+      ],
+      "captures": [
+        "captures/L90-unites-notables.png"
+      ],
+      "alts": [
+        "La section « Unités notables » des Ultramarines : huit cartes de personnages (Roboute Guilliman, Marneus Calgar, Varro Tigurius…) avec leur rôle, leur nom et une courte description"
+      ],
+      "html": "<p>Sur les fiches de <strong>sous-factions</strong>, la section « Unités notables » n'est plus vide : elle présente les personnages et les unités marquants de la sous-faction (par exemple Roboute Guilliman, Marneus Calgar ou Varro Tigurius chez les Ultramarines), chacun avec son rôle, son nom, une courte description et une illustration quand le wiki en fournit une. Les sous-factions qui n'ont pas encore d'unités notables gardent le message d'attente.</p>"
+    },
     {
       "slug": "2026-10-10-sous-factions-le-bandeau-n-est-plus-rogne-au-telephone",
       "title": "Sous-factions : le bandeau n'est plus rogné au téléphone",
