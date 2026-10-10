@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 17:45",
+  "generated": "2026-10-10 17:56",
   "entries": [
+    {
+      "slug": "2026-10-10-nouveautes-les-titres-d-uvres-s-affichent-en-italique",
+      "title": "Nouveautés : les titres d'œuvres s'affichent en italique",
+      "date": "2026-10-10",
+      "lots": [
+        "L85"
+      ],
+      "captures": [
+        "captures/L85-nouveautes-italique.png"
+      ],
+      "alts": [
+        "La page Nouveautés : dans l’entrée sur les images de l’accueil, Horus Rising et Space Marine 2 sont en italique, sans astérisques"
+      ],
+      "html": "<p>Sur la page <strong>Nouveautés</strong>, les titres d’œuvres s’affichent désormais en italique. Dans l’entrée « Accueil : images du bandeau et des cartes nettes », on lit *Horus Rising* et *Space Marine 2* en italique, au lieu de les voir encadrés d’astérisques.</p>"
+    },
     {
       "slug": "2026-10-10-accueil-images-du-bandeau-et-des-cartes-nettes",
       "title": "Accueil : images du bandeau et des cartes nettes",
