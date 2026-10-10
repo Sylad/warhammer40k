@@ -725,9 +725,10 @@ lots:
       - { date: 2026-10-10, text: "QA prod 10-10 (lead, Playwright sur sha-5919549… livré 5d9080a) : 0 glyphe décoratif non masqué sur / à 1440 et 390 ; L85 : 0 astérisque visible sur /nouveautes, 4 <em> (Horus Rising, Space Marine 2) — le rendu italique se fait dans le composant, le JSON garde *titre*" }
   - id: L87
     title: "Factions : cartes faction et unité (article routerLink) inopérantes au clavier, Entrée/Espace sans effet, « Voir toutes les unités » non focalisable — liens <a> et bouton (WCAG 2.1.1, revue UX L3, bloquant)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-10
+    started: 2026-10-10
   - id: L88
     title: "Sous-faction : bandeau rogné au téléphone (57/182 pages à 320 px, Shadowkeepers +80 px à 390) — minmax(0,1fr), h1 césurable, test de reflow (WCAG 1.4.10, revue UX L3, bloquant)"
     public: "Sous-factions : le bandeau n'est plus rogné au téléphone"
