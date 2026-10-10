@@ -1,6 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { browserStorage, countUnseen, markAllSeen, readSeen, recordBaseline, type NewsSeen } from './news-badge';
-import type { CaptureSize } from './nouveautes.utils';
+import { italicize, type CaptureSize } from './nouveautes.utils';
 
 /**
  * L23 — journal des Nouveautés, partagé par la page /nouveautes et la pastille du menu.
@@ -56,7 +56,7 @@ export class NewsService {
         this.pending = null; // nouvel essai à la prochaine visite
         return;
       }
-      this.entries.set(news.entries);
+      this.entries.set(news.entries.map(e => ({ ...e, html: italicize(e.html) })));
       this.sizes.set(sizes ?? {});
       // L34 : premier chargement sur n'importe quelle page, rien de mémorisé → base de
       // référence (tout est vu), pour qu'une entrée publiée ensuite allume la pastille même

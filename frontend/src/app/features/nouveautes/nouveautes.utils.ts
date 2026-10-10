@@ -74,3 +74,14 @@ export function separatorIndex(fresh: readonly boolean[], hasVisited: boolean): 
   const last = fresh.lastIndexOf(true);
   return last >= 0 && last + 1 < fresh.length ? last + 1 : -1;
 }
+
+/**
+ * L85 — `cadence news build` rend **gras** mais laisse `*italique*` tel quel : les titres
+ * d'œuvres s'affichaient avec leurs astérisques. Le texte (hors balises) est repris ici.
+ */
+export function italicize(html: string): string {
+  return html
+    .split(/(<[^>]*>)/)
+    .map(part => (part.startsWith('<') ? part : part.replace(/\*([^\s*](?:[^*]*[^\s*])?)\*/g, '<em>$1</em>')))
+    .join('');
+}

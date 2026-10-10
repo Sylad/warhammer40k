@@ -1,7 +1,7 @@
 // L23 — page Nouveautés : fonctions pures (dates, place réservée des captures, visionneuse).
 import { describe, expect, it } from 'vitest';
 import {
-  captureAlt, captureBoxWidth, formatDay, PHONE_ZONE_INSET, separatorIndex, viewerMode, viewerPhoneWidth,
+  captureAlt, captureBoxWidth, formatDay, italicize, PHONE_ZONE_INSET, separatorIndex, viewerMode, viewerPhoneWidth,
 } from './nouveautes.utils';
 
 describe('page Nouveautés — utilitaires (L23)', () => {
@@ -57,5 +57,15 @@ describe('page Nouveautés — utilitaires (L23)', () => {
     expect(separatorIndex([true, true], true)).toBe(-1);
     // Premier visiteur : pas de séparateur.
     expect(separatorIndex([true, false], false)).toBe(-1);
+  });
+
+  it('italique : *titre* du texte devient <em>, sans toucher aux balises ni aux astérisques isolés', () => {
+    expect(italicize('<p>la couverture d’*Horus Rising* et *Space Marine 2*.</p>'))
+      .toBe('<p>la couverture d’<em>Horus Rising</em> et <em>Space Marine 2</em>.</p>');
+    expect(italicize('<p><strong>Romans</strong> : *Horus Rising*</p>'))
+      .toBe('<p><strong>Romans</strong> : <em>Horus Rising</em></p>');
+    expect(italicize('<p>2 * 3 * 4</p>')).toBe('<p>2 * 3 * 4</p>');
+    expect(italicize('<a href="x*y*z">lien</a>')).toBe('<a href="x*y*z">lien</a>');
+    expect(italicize('')).toBe('');
   });
 });

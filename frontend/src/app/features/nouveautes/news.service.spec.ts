@@ -50,4 +50,11 @@ describe('NewsService — base de référence (L34)', () => {
     await news.load();
     expect(localStorage.getItem(NEWS_SEEN_KEY)).toBeNull();
   });
+
+  it('L85 : *titre* d’une entrée est servi en <em>, sans astérisque littéral', async () => {
+    stubFetch({ '/nouveautes-data/nouveautes.json': { ...JOURNAL, entries: [{ ...entry('c', '2026-10-05'), html: '<p>*Horus Rising*</p>' }] } });
+    const news = await freshService();
+    await news.load();
+    expect(news.entries()[0].html).toBe('<p><em>Horus Rising</em></p>');
+  });
 });
