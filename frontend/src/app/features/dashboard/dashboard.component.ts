@@ -44,8 +44,8 @@ const TYPE_LABEL: Record<string, string> = {
           explorer la galaxie en guerre éternelle.
         </p>
         <div class="hero-actions">
-          <a routerLink="/factions" class="cta-primary">⚔ Explorer les factions</a>
-          <a routerLink="/lore/emperor" class="cta-secondary">✠ Le Trône d'Or</a>
+          <a routerLink="/factions" class="cta-primary"><span aria-hidden="true">⚔</span> Explorer les factions</a>
+          <a routerLink="/lore/emperor" class="cta-secondary"><span aria-hidden="true">✠</span> Le Trône d'Or</a>
         </div>
         <div class="hero-citation">
           « Dans les ténèbres du lointain futur, il n'y a que la guerre. »
@@ -55,21 +55,21 @@ const TYPE_LABEL: Record<string, string> = {
 
     <section class="quick-lore">
       <a routerLink="/lore/emperor" class="ql-card">
-        <span class="ql-sigil">✠</span>
+        <span class="ql-sigil" aria-hidden="true">✠</span>
         <div>
           <div class="ql-title">L'Empereur</div>
           <div class="ql-meta">6 sections lore</div>
         </div>
       </a>
       <a routerLink="/lore/primarchs" class="ql-card">
-        <span class="ql-sigil">⚜</span>
+        <span class="ql-sigil" aria-hidden="true">⚜</span>
         <div>
           <div class="ql-title">Les 20 Primarques</div>
           <div class="ql-meta">9 loyalistes · 9 traîtres · 2 perdus</div>
         </div>
       </a>
       <a routerLink="/lore/chaos-gods" class="ql-card">
-        <span class="ql-sigil chaos">☠</span>
+        <span class="ql-sigil chaos" aria-hidden="true">☠</span>
         <div>
           <div class="ql-title">Le Panthéon Chaos</div>
           <div class="ql-meta">Khorne · Tzeentch · Nurgle · Slaanesh</div>
@@ -90,13 +90,13 @@ const TYPE_LABEL: Record<string, string> = {
           <div class="shortcut-img" [class.dim]="s.dim" [style.background-image]="shortcutImg(s.route)"></div>
           <div class="shortcut-overlay"></div>
           <div class="shortcut-content">
-            <div class="shortcut-ico">{{ s.ico }}</div>
+            <div class="shortcut-ico" aria-hidden="true">{{ s.ico }}</div>
             <h2>{{ s.title }}</h2>
             <p>{{ s.subtitle }}</p>
             <div class="shortcut-foot">
               <span class="num">{{ shown(s.count()) }}</span>
               <span class="lbl">{{ s.countLabel }}</span>
-              <span class="arrow">→</span>
+              <span class="arrow" aria-hidden="true">→</span>
             </div>
             @if (s.route === '/factions') {
               <p class="shortcut-sub">{{ shown(subFactions()) }} sous-factions</p>
@@ -115,7 +115,7 @@ const TYPE_LABEL: Record<string, string> = {
         <div class="lf-grid">
           @for (e of events(); track e.id) {
             <article class="lf-card" [attr.data-type]="e.type">
-              <div class="lf-icon">{{ e.icon }}</div>
+              <div class="lf-icon" aria-hidden="true">{{ e.icon }}</div>
               <div class="lf-body">
                 <div class="lf-type">{{ typeLabel(e.type) }}</div>
                 <h3>{{ e.title }}</h3>
