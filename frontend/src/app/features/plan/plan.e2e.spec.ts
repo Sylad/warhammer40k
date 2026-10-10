@@ -91,7 +91,7 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) �
   it('1440 px, depuis l’accueil : « À propos ▾ » montre Nouveautés et Plan de travail ; le lien mène à la page (focus sur le h1 non requis : clic souris)', async () => {
     const page = await open(1440, '/');
     const toggle = page.locator('nav.nav button.about-toggle');
-    expect(await toggle.isVisible()).toBe(true);
+    await toggle.waitFor({ state: 'visible' }); // Angular rend après `load` : sous charge, isVisible() immédiat tombait à faux
     expect(await page.locator('#menu-a-propos').isVisible()).toBe(false);
     await toggle.click();
     await page.waitForSelector('button.about-toggle[aria-expanded="true"]'); // détection regroupée : image suivante
