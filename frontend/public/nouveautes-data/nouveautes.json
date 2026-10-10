@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 19:58",
+  "generated": "2026-10-10 20:20",
   "entries": [
+    {
+      "slug": "2026-10-10-sous-factions-la-date-et-le-recit-des-batailles-sont-a-leur",
+      "title": "Sous-factions : la date et le récit des batailles sont à leur place",
+      "date": "2026-10-10",
+      "lots": [
+        "L91"
+      ],
+      "captures": [
+        "captures/L91-batailles.png"
+      ],
+      "alts": [
+        "La section « Batailles Notables » des Ultramarines : chaque bataille affiche sa date (M31, 745.M41…) à côté de son nom, puis son récit en dessous"
+      ],
+      "html": "<p>Sur les fiches de <strong>sous-factions</strong>, la section « Batailles Notables » affiche de nouveau chaque bataille correctement : la date (par exemple <code>745.M41</code> ou <code>999.M41-010.M42</code>) figure à côté du nom de la bataille, et le récit se lit en dessous. Auparavant, sur 139 batailles réparties dans 49 sous-factions, le récit apparaissait à la place de la date et la date à la place du récit.</p>"
+    },
     {
       "slug": "2026-10-10-sous-factions-les-unites-notables-s-affichent",
       "title": "Sous-factions : les unités notables s'affichent",
