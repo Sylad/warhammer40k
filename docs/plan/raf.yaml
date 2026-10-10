@@ -617,7 +617,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
-    review: { date: 2026-10-10, verdict: "compliant — orchestré (vague 2026-10-10-1345, 0 passe(s) de correction)", commit: 805617b25ce8d07f919d44b03f419fa84cda4c06 }
+    review: { date: 2026-10-10, verdict: "conforme (revue légère vague 1345, re-confirmée par le lead 10-10 sur l'état final : 564 tests, build de production) : 0 bloquant, 0 majeur ; mineur : test de contraste shortcuts-contrast-l78.spec.ts calculé sur la couleur déclarée, pas sur les pixels", commit: 797000c3b49fb31f3c1bbc2cf36701a33a16ca30 }
     ux: { date: 2026-10-10, verdict: "conforme (Sylvain 10-10 sur la capture L78-cartes-accueil) : voile plus dense, texte des cartes lisible sur toute image ; revue UX de la vague conforme" }
     finished: 2026-10-10
   - id: L79
