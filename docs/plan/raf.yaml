@@ -754,6 +754,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant — 0 blocking, 0 major, 2 minor notes (notableUnits visible : 77/182 sous-factions, 245 entrées, cartes non cliquables cohérentes avec l'absence de fiche) — orchestré (vague 2026-10-10-1905, 0 passe(s) de correction)", commit: 0a57ae9bd674d2decfdf8dfb3c6dd2600c6aa200 }
   - id: L91
     title: "Sous-factions : date et résumé inversés dans 139/214 batailles notables (49 sous-factions, seed subfactions.json) — corriger le seed + test de forme de la date (revue UX L3)"
     public: "Sous-factions : la date et le récit des batailles sont à leur place"
