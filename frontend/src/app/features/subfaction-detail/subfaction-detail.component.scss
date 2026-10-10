@@ -1,3 +1,5 @@
+@use '../../../styles/fit-title' as *;
+
     :host { display: block; }
     .page {
       width: min(1440px, calc(100% - 64px));
@@ -38,6 +40,7 @@
       display: grid;
       align-items: end;
       padding: 36px 40px;
+      container-type: inline-size; /* L88 : le titre se mesure au bandeau */
     }
     .eyebrow {
       display: block;
@@ -52,7 +55,8 @@
       margin: 0 0 16px;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: clamp(38px, 5vw, 64px);
+      @include fit-title(clamp(38px, 5vw, 64px)); /* L88 : le mot le plus long tient dans le bandeau */
+      overflow-wrap: break-word;
       line-height: 0.95;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -279,7 +283,7 @@
     .battles-list li p { margin: 0; font-size: 14px; line-height: 1.6; color: #c8c0ad; }
 
     @media (max-width: 1024px) {
-      .layout { grid-template-columns: 1fr; }
+      .layout { grid-template-columns: minmax(0, 1fr); } /* L88 : 1fr s'élargissait au contenu */
       .sidebar { position: relative; top: auto; }
     }
     @media (max-width: 760px) {

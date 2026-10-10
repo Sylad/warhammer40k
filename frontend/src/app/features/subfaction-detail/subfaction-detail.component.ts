@@ -5,6 +5,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, map, of, catchError, combineLatest } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
+import { longestWord } from '../../shared/longest-word';
 import type { SubFaction, SubFactionType, Unit, Faction } from '../../core/models/models';
 
 const TYPE_LABEL: Record<SubFactionType, string> = {
@@ -44,7 +45,7 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
         <div class="hero-content">
           <div class="hero-text">
             <span class="eyebrow">{{ typeLabel(d.subfaction.type) }} · {{ d.faction?.nom }}</span>
-            <h1>{{ d.subfaction.name }}</h1>
+            <h1 [style.--longest-word]="longestWord(d.subfaction.name)">{{ d.subfaction.name }}</h1>
             <p class="hero-desc">{{ d.subfaction.description }}</p>
             <div class="key-info">
               @if (d.subfaction.primarch) {
@@ -203,6 +204,7 @@ export class SubFactionDetailComponent {
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
   private readonly unitImgCache = signal<Record<string, string>>({});
 
+  readonly longestWord = longestWord;
   readonly notFound = signal(false);
   readonly loading = signal(true);
 
