@@ -733,10 +733,11 @@ lots:
   - id: L88
     title: "Sous-faction : bandeau rogné au téléphone (57/182 pages à 320 px, Shadowkeepers +80 px à 390) — minmax(0,1fr), h1 césurable, test de reflow (WCAG 1.4.10, revue UX L3, bloquant)"
     public: "Sous-factions : le bandeau n'est plus rogné au téléphone"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-10-10
   - id: L89
     title: "Barre d'ancres des fiches (MAQUETTE B à valider par Sylvain) : collée à top 0 sous l'en-tête (cachée à 1440, focus masqué), 191 px à 390 — top = hauteur d'en-tête, une ligne défilante au téléphone (WCAG 2.4.11, revue UX L3)"
     public: "Fiches : la barre des sections reste visible sous l'en-tête"
