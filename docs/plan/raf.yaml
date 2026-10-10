@@ -797,6 +797,7 @@ lots:
     notes:
       - { date: 2026-10-10, text: "Maquette A validée par Sylvain 10-10 (Discord « ok A ») : retirer « Filtres rapides » et sa légende, « Ressources rapides » = 3 liens (Chronologie, Carte galactique, Concepts), panneau latéral masqué sous 760 px" }
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 2 notes mineures) — vitest 600/600 verts (62 fichiers), `npm run liens` : 0 lien cassé — orchestré (vague 2026-10-10-2240, 0 passe(s) de correction)", commit: 35f8cef7dbd74124788d116f08889f1ebe2c8915 }
   - id: L94
     title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
     public: "Fiches faction : des liens latéraux qui mènent où ils le disent"
