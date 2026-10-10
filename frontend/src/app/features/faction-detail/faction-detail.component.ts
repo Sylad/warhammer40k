@@ -268,7 +268,7 @@ const DEFAULT_RESOURCES = [
             } @else {
               <div class="units-grid">
                 @for (u of displayedUnits(); track u.id) {
-                  <article class="unit-card" [routerLink]="['/units', u.id]"
+                  <a class="unit-card" [routerLink]="['/units', u.id]"
                            [style.--unit-img]="unitImg(u)">
                     <span class="u-badge" [class]="unitBadgeClass(u.type)">{{ u.type }}</span>
                     <div class="unit-content">
@@ -276,15 +276,15 @@ const DEFAULT_RESOURCES = [
                       <p>{{ u.loreCourt || u.description || u.role || '—' }}</p>
                       <span class="u-arrow">→</span>
                     </div>
-                  </article>
+                  </a>
                 }
                 @if (extraUnitCount() > 0) {
-                  <article class="unit-extra" (click)="resetUnitFilters()">
+                  <button type="button" class="unit-extra" (click)="resetUnitFilters()">
                     <div class="ue-sigil">⚜</div>
                     <h3>Voir toutes les unités</h3>
                     <p>+{{ extraUnitCount() }} autres unités disponibles</p>
                     <span class="u-arrow">→</span>
-                  </article>
+                  </button>
                 }
               </div>
             }

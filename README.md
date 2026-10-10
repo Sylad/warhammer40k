@@ -48,6 +48,7 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 - **Lore narratif** : 6 sections Empereur, 20 fiches Primarques (9 loyalistes / 9 traîtres / 2 expurgés — chacun avec `loreLong` complet), 4 dieux Chaos, **13 organisations civiles** (incluant Imperial Navy avec classes de vaisseaux, Collegia Titanica avec classes de Titans, Conseil du Sigillite — Malcador & Valdor), 15 concepts (Trône d'Or, Astronomican, Webway, Cicatrix, etc.), carte galactique SVG calibrée (65 markers + 5 Segmenta Bézier)
 - **Codex de l'arsenal** (`/lore/equipment`) : 69 pièces (26 armes ranged, 16 mêlée, 15 armures, 12 reliques nommées dont Drach'nyen, Black Sword Sigismund, Mjalnar)
 - **Compteurs de l'accueil** : « — » pendant le chargement et sur erreur d'API (jamais un faux « 0 »), message + bouton « Réessayer » si un chiffre manque
+- **Clavier sur les Factions** : chaque carte de faction (`/factions`) et d'unité (fiche faction) est un vrai lien `<a href>` (Tab, Entrée) ; « Voir toutes les unités » est un `<button>` (Tab, Entrée, Espace)
 - **Accueil au téléphone** (moins de 760 px) : la barre de statistiques et sa citation sont masquées (les nombres sont déjà sur les cartes) ; « N sous-factions » s'affiche en bas de la carte Factions. Au-delà de 760 px, inchangé
 - **Brèves du 41ᵉ millénaire** : ticker dashboard de 40 entrées atmosphériques (Croisade Indomitus, Cicatrix, Chute de Cadia, Plague Wars, etc.)
 - **Breadcrumb global** + fragment scroll + fil narratif central

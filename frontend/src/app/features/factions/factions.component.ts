@@ -66,7 +66,7 @@ const RESOURCES = [
     <section class="layout">
       <div class="grid">
         @for (f of displayedFactions(); track f.id) {
-          <article class="card" [routerLink]="['/factions', f.id]"
+          <a class="card" [routerLink]="['/factions', f.id]"
                    [style.--card-img]="cardImageUrl(f)">
             <div class="card-sigil">
               @if (f.iconUrl && !brokenIcons().has(f.id)) {
@@ -84,7 +84,7 @@ const RESOURCES = [
                 <span class="card-arrow">→</span>
               </div>
             </div>
-          </article>
+          </a>
         }
 
       </div>

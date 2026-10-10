@@ -34,3 +34,18 @@ describe('liste des factions — icône introuvable (L39)', () => {
     expect(el.querySelector('.card-sigil span')?.getAttribute('aria-hidden')).toBe('true');
   });
 });
+
+// L87 — les cartes de faction étaient des <article routerLink> : ni focalisables, ni activables au
+// clavier (WCAG 2.1.1). Une carte est un vrai lien <a href>.
+describe('liste des factions — cartes au clavier (L87)', () => {
+  it('chaque carte est un lien <a href> vers la fiche, sans <article> cliquable', async () => {
+    const service = fakeWarhammerService({ factions$: of([F('a'), F('b')]), getUnits: () => of([]) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    const cards = [...el.querySelectorAll<HTMLAnchorElement>('a.card')];
+    expect(cards.map((c) => c.getAttribute('href'))).toEqual(['/factions/a', '/factions/b']);
+    expect(el.querySelector('article.card')).toBeNull();
+  });
+});

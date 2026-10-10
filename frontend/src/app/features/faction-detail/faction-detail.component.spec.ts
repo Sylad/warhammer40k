@@ -122,3 +122,38 @@ describe('fiche faction — bloc Médias de la faction (L42)', () => {
     expect(video.querySelector('strong')!.textContent!.trim()).toBe('Vidéos');
   });
 });
+
+// L87 — cartes d'unité (<article routerLink>) et encart « Voir toutes les unités » (<article (click)>)
+// inopérants au clavier (WCAG 2.1.1) : lien <a href> et vrai <button>.
+describe('fiche faction — unités au clavier (L87)', () => {
+  it('cartes d’unité = liens ; « Voir toutes les unités » = bouton', async () => {
+    const units = Array.from({ length: 30 }, (_, i) => ({
+      id: `u${i}`, nom: `Unité ${i}`, factionId: 'orks', type: 'Infanterie', description: 'd',
+    }));
+    const service = fakeWarhammerService({
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of(units as never),
+      getSubFactions: () => of([]),
+      videos$: of([]),
+      artworks$: of([]),
+    });
+    await setupTestBed([FactionDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'orks' })), snapshot: { fragment: null } } },
+    ]);
+    const f = TestBed.createComponent(FactionDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    const cards = [...el.querySelectorAll<HTMLAnchorElement>('a.unit-card')];
+    expect(cards.length).toBeGreaterThan(0);
+    expect(cards[0].getAttribute('href')).toBe('/units/u0');
+    expect(el.querySelector('article.unit-card')).toBeNull();
+    const extra = el.querySelector<HTMLButtonElement>('button.unit-extra');
+    expect(extra).not.toBeNull();
+    expect(extra!.type).toBe('button');
+    expect(el.querySelector('article.unit-extra')).toBeNull();
+  });
+});
