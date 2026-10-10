@@ -24,6 +24,9 @@
 }
 
 html {
+  /* L89 : Tab / Maj+Tab ne laissent pas le focus sous l'en-tête collé (WCAG 2.4.11) ; les fiches
+     à barre d'ancres réservent aussi sa hauteur (styles/_anchor-nav.scss). */
+  scroll-padding-top: calc(var(--topbar-h) + 8px);
   height: 100%;
   color-scheme: dark;
 }

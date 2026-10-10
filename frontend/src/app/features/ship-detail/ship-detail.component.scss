@@ -183,7 +183,7 @@
 
 .sidebar {
   position: sticky;
-  top: 80px;
+  top: var(--anchor-offset);
   align-self: start;
   display: flex;
   flex-direction: column;

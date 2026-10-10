@@ -44,13 +44,13 @@ describe('barre d\'ancres des fiches (L89)', () => {
     expect(token).toBe(topbar);
   });
 
-  it('sous 760 px : une seule ligne défilante, bords estompés, hauteur déclarée', () => {
-    const nav = decls('.anchor-nav', /max-width:\s*760px/);
+  it('sous 1280 px : une seule ligne défilante, bords estompés, hauteur déclarée (pas de 2e ligne)', () => {
+    const nav = decls('.anchor-nav', /max-width:\s*1279px/);
     expect(nav['flex-wrap']).toBe('nowrap');
     expect(nav['overflow-x']).toBe('auto');
     expect(nav.height).toBe('var(--anchor-nav-h)');
     expect(nav['mask-image']).toMatch(/linear-gradient/);
-    const link = decls('.anchor-nav a', /max-width:\s*760px/);
+    const link = decls('.anchor-nav a', /max-width:\s*1279px/);
     expect(link['white-space']).toBe('nowrap');
     expect(link['flex-shrink']).toBe('0');
   });
@@ -79,5 +79,19 @@ describe('barre d\'ancres des fiches (L89)', () => {
       });
       expect(ok, `#${id} (.${cls}) sans scroll-margin-top: var(--anchor-offset)`).toBe(true);
     }
+  });
+
+  it('colonnes latérales collées des fiches : sous l\'en-tête ET la barre (--anchor-offset)', () => {
+    for (const f of ['ship-detail', 'primarch-detail', 'faction-detail']) {
+      const scss = readFileSync(resolve(src, `app/features/${f}/${f}.component.scss`), 'utf8');
+      const m = /\.sidebar \{[^}]*?position:\s*sticky;[^}]*?top:\s*([^;]+);/s.exec(scss);
+      expect(m?.[1], f).toBe('var(--anchor-offset)');
+    }
+  });
+
+  it('focus au clavier : le défilement réserve la place des en-têtes collés (WCAG 2.4.11)', () => {
+    const styles = readFileSync(resolve(src, 'styles.scss'), 'utf8');
+    expect(styles).toMatch(/scroll-padding-top:\s*calc\(var\(--topbar-h\)/);
+    expect(css).toMatch(/html:has\(\.anchor-nav\)\s*\{\s*scroll-padding-top:\s*var\(--anchor-offset\)/);
   });
 });

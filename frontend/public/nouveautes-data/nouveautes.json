@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-11 00:12",
+  "generated": "2026-10-11 00:40",
   "entries": [
     {
       "slug": "2026-10-10-factions-les-ressources-rapides-menent-aux-pages",
@@ -45,7 +45,7 @@
       "alts": [
         "Une fiche de faction sur un téléphone de 390 px, page défilée : la barre des sections (Histoire & lore, Chronique complète) tient sur une seule ligne, collée sous l'en-tête"
       ],
-      "html": "<p>Sur les fiches (factions, primarques, vaisseaux, saints, titans, équipements, événements), la barre des sections — Histoire, Chronique, Iconographie… — reste maintenant visible en haut de l'écran, <strong>juste sous l'en-tête</strong>, pendant qu'on lit : elle ne passe plus derrière lui. Sur un téléphone, elle tient sur <strong>une seule ligne</strong> qu'on fait glisser du doigt, au lieu d'occuper près de la moitié de l'écran. Un clic sur une section l'amène sous la barre, sans que son titre soit caché. Rien ne change dans le contenu des fiches.</p>"
+      "html": "<p>Sur les fiches (factions, primarques, vaisseaux, saints, titans, équipements), la barre des sections — Histoire, Chronique, Iconographie… — reste maintenant visible en haut de l'écran, <strong>juste sous l'en-tête</strong>, pendant qu'on lit : elle ne passe plus derrière lui. Sur un téléphone ou une tablette, elle tient sur <strong>une seule ligne</strong> qu'on fait glisser du doigt, au lieu d'occuper près de la moitié de l'écran. La colonne « Données vitales » reste visible sous elle, et la navigation au clavier ne cache plus l'élément sélectionné sous l'en-tête. Un clic sur une section l'amène sous la barre, sans que son titre soit caché. Rien ne change dans le contenu des fiches.</p>"
     },
     {
       "slug": "2026-10-10-sous-factions-la-date-et-le-recit-des-batailles-sont-a-leur",

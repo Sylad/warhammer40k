@@ -519,8 +519,8 @@ export class MainLayoutComponent implements OnInit {
   constructor() {
     // L39 : le défilement d'ancre du routeur (window.scrollTo) ignore scroll-margin-top ; sans
     // décalage, la cible arrive SOUS la barre collante. Décalage = bas réel de la barre + 10 px.
-    // L89 : sur une fiche, la barre d'ancres collée sous l'en-tête s'ajoute (sa hauteur varie : 60 px
-    // au téléphone, plus à 1440 px quand elle passe à la ligne), sinon le titre reste caché dessous.
+    // L89 : sur une fiche, la barre d'ancres collée sous l'en-tête s'ajoute (sa hauteur varie : 44 px
+    // au téléphone, 60 px de 761 à 1279 px et aussi à 1440 px, où elle tient sur une ligne), sinon le titre reste caché dessous.
     inject(ViewportScroller).setOffset(() => {
       const host = this.host.nativeElement;
       const top = Math.round(host.querySelector('.topbar')?.getBoundingClientRect().bottom ?? 70);

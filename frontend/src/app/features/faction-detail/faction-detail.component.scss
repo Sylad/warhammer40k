@@ -576,7 +576,7 @@
       gap: 18px;
       align-self: start;
       position: sticky;
-      top: 96px;
+      top: var(--anchor-offset);
     }
     .sp {
       border: 1px solid var(--border);

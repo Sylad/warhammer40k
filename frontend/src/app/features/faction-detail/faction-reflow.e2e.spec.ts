@@ -58,7 +58,7 @@ describe.skipIf(!built || !chromium)('pages faction : redistribution à 320–39
       }
       await page.close();
       expect(problems).toEqual([]);
-    });
+    }, 120_000); // trois largeurs, fiche la plus longue : le délai par défaut (5 s) casse sous charge
   }
 
   it('bureau inchangé : titre de faction à 79,2 px à 1440, 75,13 px à 1366 (comme avant L31)', async () => {

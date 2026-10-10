@@ -99,7 +99,7 @@
       border: 1px solid var(--border);
       background: #060504;
       overflow: hidden;
-      scroll-margin-top: 90px;
+      scroll-margin-top: 12px; /* + scroll-padding-top de styles.scss */
     }
 
     .concept-head {
