@@ -177,20 +177,23 @@
     {
       "id": "L81",
       "title": "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     },
     {
       "id": "L82",
       "title": "Brèves : textes relus et libellés lisibles",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     },
     {
       "id": "L83",
       "title": "Accueil : « 41e millénaire » correctement écrit",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-10"
     },
     {
       "id": "L84",

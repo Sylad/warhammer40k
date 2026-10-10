@@ -650,30 +650,36 @@ lots:
   - id: L81
     title: "Accueil : glyphes décoratifs (⚔ ▤ ▶ ▦ ✠ ⚜ ☠ →) lus par les lecteurs d'écran — aria-hidden comme L39 ailleurs (revue UX L2, mineur)"
     public: "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran"
-    status: doing
+    status: done
     estimate: 0.1
     visible: true
     created: 2026-10-10
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 0 mineur) — revue légère Sonnet, vague 2026-10-10-1605 ; verdict confirmé par le lead après l'incident des captures écrites à la racine (déplacées dans tmp)", commit: 22c426242f654b2dafed4cc4df49bcf94398001f }
+    ux: { date: 2026-10-10, verdict: ok Sylvain 10-10 (Discord « ok L81 L82 L83 ») }
+    finished: 2026-10-10
   - id: L82
     title: "Brèves : relire les 40 entrées de backend/seed/lore-feed.json (« d'Vulkan », « âmes-piscine », « Eveil », accents), libellé de type à 9 px trop petit (revue UX L2, mineur)"
     public: "Brèves : textes relus et libellés lisibles"
-    status: doing
+    status: done
     estimate: 0.1
     visible: true
     created: 2026-10-10
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant after 1 fix (0 bloquant, 0 majeur, 3 mineurs) : libellé à 12 px vu à l'écran, pas de débordement à 390 ; restent « de Ullanor » (lf-023) et quelques tournures dans les 40 brèves — revue légère Sonnet, vague 2026-10-10-1605, confirmé par le lead après l'incident des captures (déplacées dans tmp)", commit: fed073d40411f2b32e5079c8f7697e379801d99f }
+    ux: { date: 2026-10-10, verdict: ok Sylvain 10-10 (Discord « ok L81 L82 L83 ») }
+    finished: 2026-10-10
   - id: L83
     title: "Accueil : « 41e » passé en capitales (« 41E MILLÉNAIRE ») par text-transform, deux procédés d'exposant — sup { text-transform: none }, un seul procédé (revue UX L2, mineur)"
     public: "Accueil : « 41e millénaire » correctement écrit"
-    status: doing
+    status: done
     estimate: 0.1
     visible: true
     created: 2026-10-10
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 1 mineur : la règle sup ne couvre pas le <sup> injecté par innerHTML, sans effet visible aujourd'hui) — revue légère Sonnet, vague 2026-10-10-1605, confirmé par le lead après l'incident des captures (déplacées dans tmp)", commit: f5fe7f0e8ef55f0468a1b96e8972a4af79eb10b5 }
+    ux: { date: 2026-10-10, verdict: ok Sylvain 10-10 (Discord « ok L81 L82 L83 ») }
+    finished: 2026-10-10
   - id: L84
     title: "Accueil : images Wikia sous-dimensionnées (hero 700 px affiché 1 364, Black Library 200 px étirée 326) — scale-to-width-down/1400 ou visuels ≥ 700 px, lié L41/L44 (revue UX L2, mineur)"
     public: "Accueil : images du bandeau et des cartes nettes"
