@@ -21,30 +21,30 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     <app-demo-banner [attr.inert]="pageInert()" />
     <header class="topbar">
       <a class="brand" routerLink="/" [attr.inert]="pageInert()">
-        <span class="aigle">⚜</span>
+        <span class="aigle" aria-hidden="true">⚜</span>
         <strong>Warhammer 40,000</strong>
         <span class="brand-sub">Codex numérique</span>
       </a>
       <nav class="nav" [class.about-open]="aboutOpen()" [attr.inert]="pageInert()">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <span class="nav-ico">⌂</span>Accueil
+          <span class="nav-ico" aria-hidden="true">⌂</span>Accueil
         </a>
         <a routerLink="/factions" routerLinkActive="active">
-          <span class="nav-ico">⚔</span>Factions
+          <span class="nav-ico" aria-hidden="true">⚔</span>Factions
         </a>
         <a routerLink="/romans" routerLinkActive="active">
-          <span class="nav-ico">▤</span>Romans
+          <span class="nav-ico" aria-hidden="true">▤</span>Romans
         </a>
         <a routerLink="/videos" routerLinkActive="active">
-          <span class="nav-ico">▶</span>Vidéos
+          <span class="nav-ico" aria-hidden="true">▶</span>Vidéos
         </a>
         <a routerLink="/gallery" routerLinkActive="active">
-          <span class="nav-ico">▦</span>Galerie
+          <span class="nav-ico" aria-hidden="true">▦</span>Galerie
         </a>
         <!-- L30 : Lore et « À propos ▾ » jamais ouverts ensemble (le panneau couvrait « Guerre & Histoire »). -->
         <div class="nav-dropdown" (pointerenter)="aboutMenu.close()" (focusin)="aboutMenu.close()">
           <a routerLink="/lore" routerLinkActive="active">
-            <span class="nav-ico">✠</span>Lore<span class="nav-caret">▾</span>
+            <span class="nav-ico" aria-hidden="true">✠</span>Lore<span class="nav-caret" aria-hidden="true">▾</span>
           </a>
           <div class="mega-menu">
             <div class="mega-col">
@@ -76,7 +76,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       <div class="topbar-actions">
         <!-- L33 : raccourci de la plateforme (« Ctrl K » / « ⌘K »), repris dans le nom accessible. -->
         <button class="nav-search-btn" type="button" [attr.inert]="pageInert()" (click)="palette.open()" [attr.title]="shortcut.label" [attr.aria-label]="shortcut.label">
-          <span class="nav-ico">⌕</span>
+          <span class="nav-ico" aria-hidden="true">⌕</span>
           <span class="nav-search-kbd" aria-hidden="true">{{ shortcut.hint }}</span>
         </button>
         <!-- L23 : sous 80em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
@@ -149,7 +149,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     <footer class="legal" [attr.inert]="pageInert()">
       <div class="ornament">
         <span class="line"></span>
-        <span class="aigle">⚜</span>
+        <span class="aigle" aria-hidden="true">⚜</span>
         <span class="line"></span>
       </div>
       <!-- L30 : les pages du codex à une action de chaque page, à toute largeur. -->
