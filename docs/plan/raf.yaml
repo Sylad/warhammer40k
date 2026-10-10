@@ -612,10 +612,11 @@ lots:
   - id: L78
     title: "Accueil : texte des cartes raccourcis sur image à 3,3:1 (p10, Romans/Factions) — voile ≥ 0,8 dès le sous-titre ou pastille var(--panel) derrière .shortcut-content, remesurer ≥ 4,5:1 ; image Black Library plus sombre (revue UX L2, majeur WCAG 1.4.3)"
     public: "Accueil : le texte des cartes reste lisible sur toute image"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-10-10
   - id: L79
     title: "Accueil : compteurs à « 0 » pendant le chargement (initialValue []) et sur erreur d'API, sans message ni Réessayer — valeur initiale null → « — », message + Réessayer (l'état « À propos » figé reste L38) (revue UX L2, majeur Nielsen 1)"
     public: "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur"
