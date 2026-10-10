@@ -786,6 +786,7 @@ lots:
     notes:
       - { date: 2026-10-10, text: "Maquette A validée par Sylvain 10-10 (Discord « ok A ») : retirer « Filtres rapides » et sa légende, « Ressources rapides » = 3 liens (Chronologie, Carte galactique, Concepts), panneau latéral masqué sous 760 px" }
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 3 notes mineures) — orchestré (vague 2026-10-10-2240, 0 passe(s) de correction)", commit: b2e962e59f83f158e519a6e5cb75036a7d306096 }
   - id: L93
     title: "/factions (MAQUETTE A à valider par Sylvain) : « Ressources rapides » = 4 lignes au curseur main sans lien — liens chronologie, carte, concepts ; retirer « Relations entre factions » (revue UX L3)"
     public: "Factions : les ressources rapides mènent aux pages"
