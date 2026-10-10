@@ -71,23 +71,23 @@
     "notableBattles": [
       {
         "name": "Calth Underworld War",
-        "summary": "M31",
-        "date": "25 ans de guerre souterraine contre les Word Bearers traîtres."
+        "summary": "25 ans de guerre souterraine contre les Word Bearers traîtres.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Macragge",
-        "summary": "745.M41",
-        "date": "Défense contre Hive Fleet Behemoth. Tactique de défense légendaire."
+        "summary": "Défense contre Hive Fleet Behemoth. Tactique de défense légendaire.",
+        "date": "745.M41"
       },
       {
         "name": "Indomitus Crusade",
-        "summary": "999.M41-010.M42",
-        "date": "Vaisseau-amiral Macragge's Honour. Reconquête galactique."
+        "summary": "Vaisseau-amiral Macragge's Honour. Reconquête galactique.",
+        "date": "999.M41-010.M42"
       },
       {
         "name": "Bataille de Vigilus",
-        "summary": "M42",
-        "date": "Combat contre Genestealer Cult majeur."
+        "summary": "Combat contre Genestealer Cult majeur.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -171,23 +171,23 @@
     "notableBattles": [
       {
         "name": "Massacre de Signus Prime",
-        "summary": "M31",
-        "date": "Sanguinius vainquit Ka'Bandha. Soif Rouge ancrée."
+        "summary": "Sanguinius vainquit Ka'Bandha. Soif Rouge ancrée.",
+        "date": "M31"
       },
       {
         "name": "Première Bataille d'Armageddon",
-        "summary": "444.M41",
-        "date": "Tu'shan Maître de Chapitre tomba face à un Greater Daemon."
+        "summary": "Tu'shan Maître de Chapitre tomba face à un Greater Daemon.",
+        "date": "444.M41"
       },
       {
         "name": "Devastation of Baal",
-        "summary": "999.M41",
-        "date": "Hive Fleet Leviathan presque victorieuse. Dante commanda la défense."
+        "summary": "Hive Fleet Leviathan presque victorieuse. Dante commanda la défense.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Saint Celestine et Dante combattent côte-à-côte."
+        "summary": "Saint Celestine et Dante combattent côte-à-côte.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -283,13 +283,13 @@
     "notableBattles": [
       {
         "name": "Croisade Calibanique",
-        "summary": "Pre-M30",
-        "date": "Lion mena la purge des Bêtes Warp avant l'Empereur."
+        "summary": "Lion mena la purge des Bêtes Warp avant l'Empereur.",
+        "date": "Pre-M30"
       },
       {
         "name": "Caliban Heresy",
-        "summary": "M31",
-        "date": "Lion combattit Luther. Caliban se déchira. The Rock survécut."
+        "summary": "Lion combattit Luther. Caliban se déchira. The Rock survécut.",
+        "date": "M31"
       },
       {
         "name": "Chasse aux Fallen",
@@ -298,8 +298,8 @@
       },
       {
         "name": "Réveil de Lion",
-        "summary": "999.M41",
-        "date": "Lion émerge de stase. Marche aux côtés de Guilliman."
+        "summary": "Lion émerge de stase. Marche aux côtés de Guilliman.",
+        "date": "999.M41"
       }
     ],
     "galleryQueries": [
@@ -389,23 +389,23 @@
     "notableBattles": [
       {
         "name": "Burning of Prospero",
-        "summary": "M31",
-        "date": "Russ mena le massacre des Mille Fils de Magnus. Bibliothèque détruite."
+        "summary": "Russ mena le massacre des Mille Fils de Magnus. Bibliothèque détruite.",
+        "date": "M31"
       },
       {
         "name": "Premières Guerres d'Armageddon",
-        "summary": "M41",
-        "date": "Logan Grimnar combattit Ghazghkull aux côtés de Yarrick."
+        "summary": "Logan Grimnar combattit Ghazghkull aux côtés de Yarrick.",
+        "date": "M41"
       },
       {
         "name": "Bataille de Cadia",
-        "summary": "999.M41",
-        "date": "Space Wolves envoyés en renfort. Cadia perdit malgré tout."
+        "summary": "Space Wolves envoyés en renfort. Cadia perdit malgré tout.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Marche aux côtés de Guilliman, sans pour autant l'accepter formellement."
+        "summary": "Marche aux côtés de Guilliman, sans pour autant l'accepter formellement.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -483,23 +483,23 @@
     "notableBattles": [
       {
         "name": "Construction du Phalanx",
-        "summary": "M30",
-        "date": "Dorn supervisa lui-même."
+        "summary": "Dorn supervisa lui-même.",
+        "date": "M30"
       },
       {
         "name": "Fortification de Terra",
-        "summary": "M31",
-        "date": "55 jours de siège tenus."
+        "summary": "55 jours de siège tenus.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Yusran",
-        "summary": "M31",
-        "date": "Mort de Dorn. Main récupérée."
+        "summary": "Mort de Dorn. Main récupérée.",
+        "date": "M31"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Phalanx coordonne flottes d'Indomitus."
+        "summary": "Phalanx coordonne flottes d'Indomitus.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -565,18 +565,18 @@
     "notableBattles": [
       {
         "name": "Massacre du Drop Pod (Isstvan V)",
-        "summary": "M31",
-        "date": "Salamanders décimés. Vulkan tué et revenu."
+        "summary": "Salamanders décimés. Vulkan tué et revenu.",
+        "date": "M31"
       },
       {
         "name": "Première Guerre d'Armageddon",
-        "summary": "M41",
-        "date": "Tu'shan combattit Daemon Prince Bloodthirster."
+        "summary": "Tu'shan combattit Daemon Prince Bloodthirster.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Recherche des Reliques continue."
+        "summary": "Recherche des Reliques continue.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -642,23 +642,23 @@
     "notableBattles": [
       {
         "name": "Compliance de Chondax",
-        "summary": "M30",
-        "date": "Jaghatai défit les Orks par charge cavalerie surprise."
+        "summary": "Jaghatai défit les Orks par charge cavalerie surprise.",
+        "date": "M30"
       },
       {
         "name": "Voyage Webway",
-        "summary": "M30",
-        "date": "Jaghatai voyagea seul deux ans."
+        "summary": "Jaghatai voyagea seul deux ans.",
+        "date": "M30"
       },
       {
         "name": "Bataille de Catallus",
-        "summary": "M31",
-        "date": "White Scars confrontèrent Iron Warriors."
+        "summary": "White Scars confrontèrent Iron Warriors.",
+        "date": "M31"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Kor'sarro Khan accompagne Indomitus aux côtés des Ultramarines."
+        "summary": "Kor'sarro Khan accompagne Indomitus aux côtés des Ultramarines.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -712,18 +712,18 @@
     "notableBattles": [
       {
         "name": "Massacre du Drop Pod (Isstvan V)",
-        "summary": "M31",
-        "date": "Décimation. Mort de Ferrus à mains de Fulgrim."
+        "summary": "Décimation. Mort de Ferrus à mains de Fulgrim.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Medusa V",
-        "summary": "M41",
-        "date": "Combat contre Tyranides Hive Fleet Behemoth."
+        "summary": "Combat contre Tyranides Hive Fleet Behemoth.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Stronos accompagne Indomitus avec ses Cohortes Cybernetica."
+        "summary": "Stronos accompagne Indomitus avec ses Cohortes Cybernetica.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -783,18 +783,18 @@
     "notableBattles": [
       {
         "name": "Massacre du Drop Pod",
-        "summary": "M31",
-        "date": "Décimation à 75%. Corvus survécut."
+        "summary": "Décimation à 75%. Corvus survécut.",
+        "date": "M31"
       },
       {
         "name": "Mission Terra (génome)",
-        "summary": "M31",
-        "date": "Corvus tenta de reformer la Légion. Échec partiel."
+        "summary": "Corvus tenta de reformer la Légion. Échec partiel.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Vigilus",
-        "summary": "M42",
-        "date": "Shrike mena opérations clandestines."
+        "summary": "Shrike mena opérations clandestines.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -848,18 +848,18 @@
     "notableBattles": [
       {
         "name": "Croisade Bordel",
-        "summary": "M31",
-        "date": "Sigismund mena la première Croisade Éternelle après l'Hérésie."
+        "summary": "Sigismund mena la première Croisade Éternelle après l'Hérésie.",
+        "date": "M31"
       },
       {
         "name": "Croisade Sabbat Worlds",
-        "summary": "M41",
-        "date": "Black Templars en force majeure."
+        "summary": "Black Templars en force majeure.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Helbrecht accompagne Guilliman."
+        "summary": "Helbrecht accompagne Guilliman.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -900,18 +900,18 @@
     "notableBattles": [
       {
         "name": "Destruction de Rynn's World",
-        "summary": "989.M41",
-        "date": "Roquette Ork explosa l'arsenal du Chapitre. 95% du Chapitre détruit."
+        "summary": "Roquette Ork explosa l'arsenal du Chapitre. 95% du Chapitre détruit.",
+        "date": "989.M41"
       },
       {
         "name": "Défense de New Rynn",
-        "summary": "989.M41",
-        "date": "Pedro Cantor mena la défense désespérée. Survie miraculeuse."
+        "summary": "Pedro Cantor mena la défense désespérée. Survie miraculeuse.",
+        "date": "989.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Reconstruction avec Primaris."
+        "summary": "Reconstruction avec Primaris.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -952,18 +952,18 @@
     "notableBattles": [
       {
         "name": "Fondation par l'Inquisition",
-        "summary": "M31",
-        "date": "Créé pour traquer xenos durant l'Hérésie."
+        "summary": "Créé pour traquer xenos durant l'Hérésie.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Macragge (Tyranides)",
-        "summary": "745.M41",
-        "date": "Deathwatch infiltra une Hive Tyrant pendant la défense."
+        "summary": "Deathwatch infiltra une Hive Tyrant pendant la défense.",
+        "date": "745.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Opérations clandestines anti-xenos."
+        "summary": "Opérations clandestines anti-xenos.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -992,23 +992,23 @@
     "notableBattles": [
       {
         "name": "Apostasie de Krieg",
-        "summary": "M37",
-        "date": "Krieg se rebella. Auto-bombardement nucléaire d'expiation. Survie du peuple par mutation génétique."
+        "summary": "Krieg se rebella. Auto-bombardement nucléaire d'expiation. Survie du peuple par mutation génétique.",
+        "date": "M37"
       },
       {
         "name": "Siège de Vraks",
-        "summary": "M41",
-        "date": "Krieg tint le siège pendant 17 ans. 14 millions tués. Plus grande bataille de tranchée de l'Imperium."
+        "summary": "Krieg tint le siège pendant 17 ans. 14 millions tués. Plus grande bataille de tranchée de l'Imperium.",
+        "date": "M41"
       },
       {
         "name": "Bataille de Hydraphur",
-        "summary": "M41",
-        "date": "Krieg défit une invasion Genestealer Cult majeure."
+        "summary": "Krieg défit une invasion Genestealer Cult majeure.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Krieg envoyés sur tous les sièges majeurs. Spécialistes guerre statique."
+        "summary": "Krieg envoyés sur tous les sièges majeurs. Spécialistes guerre statique.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1037,23 +1037,23 @@
     "notableBattles": [
       {
         "name": "13ᵉ Croisade Noire",
-        "summary": "999.M41",
-        "date": "Cadia tomba après plusieurs Croisades Noires d'Abaddon. Lord-Castellan Creed disparut. Cadia explosa en débris orbiteurs."
+        "summary": "Cadia tomba après plusieurs Croisades Noires d'Abaddon. Lord-Castellan Creed disparut. Cadia explosa en débris orbiteurs.",
+        "date": "999.M41"
       },
       {
         "name": "Bataille de Vigilus",
-        "summary": "M42",
-        "date": "Cadian Excubitae mena la défense de Vigilus aux côtés de Marneus Calgar."
+        "summary": "Cadian Excubitae mena la défense de Vigilus aux côtés de Marneus Calgar.",
+        "date": "M42"
       },
       {
         "name": "Indomitus Crusade",
-        "summary": "999.M41-010.M42",
-        "date": "Cadians dispersés rejoignent Indomitus, élite reconnue."
+        "summary": "Cadians dispersés rejoignent Indomitus, élite reconnue.",
+        "date": "999.M41-010.M42"
       },
       {
         "name": "Bataille de Hera",
-        "summary": "M42",
-        "date": "Cadian Excubitae sous Leontus repoussa une invasion Death Guard."
+        "summary": "Cadian Excubitae sous Leontus repoussa une invasion Death Guard.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1080,23 +1080,23 @@
     "notableBattles": [
       {
         "name": "Bataille d'Octarius",
-        "summary": "M41",
-        "date": "Catachans piégés entre Tyranides et Orks dans guerre orchestrée par l'Inquisition. Énormes pertes."
+        "summary": "Catachans piégés entre Tyranides et Orks dans guerre orchestrée par l'Inquisition. Énormes pertes.",
+        "date": "M41"
       },
       {
         "name": "Croisade Sabbat Worlds",
-        "summary": "M41",
-        "date": "Catachans en soutien de la Croisade. Combat en milieu jungle."
+        "summary": "Catachans en soutien de la Croisade. Combat en milieu jungle.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Catachans envoyés sur fronts Indomitus jungle/forêt. Spécialistes anti-Tyranide en milieu boisé."
+        "summary": "Catachans envoyés sur fronts Indomitus jungle/forêt. Spécialistes anti-Tyranide en milieu boisé.",
+        "date": "M42"
       },
       {
         "name": "Bataille de Catachan I",
-        "summary": "M41",
-        "date": "Défense du monde-mère contre raid Eldar Noir."
+        "summary": "Défense du monde-mère contre raid Eldar Noir.",
+        "date": "M41"
       }
     ],
     "galleryQueries": [
@@ -1169,13 +1169,13 @@
     "notableBattles": [
       {
         "name": "Anéantissement de Tanith",
-        "summary": "M41",
-        "date": "Chaos Marines détruisirent Tanith. Gaunt évacua quelques milliers de survivants. Tanith devint monde mort."
+        "summary": "Chaos Marines détruisirent Tanith. Gaunt évacua quelques milliers de survivants. Tanith devint monde mort.",
+        "date": "M41"
       },
       {
         "name": "Bataille de Voltis Watergate",
-        "summary": "M41",
-        "date": "Tanith First sous Gaunt attaqua une cathédrale Chaos. Bataille étudiée comme cas de tactique d'infiltration."
+        "summary": "Tanith First sous Gaunt attaqua une cathédrale Chaos. Bataille étudiée comme cas de tactique d'infiltration.",
+        "date": "M41"
       },
       {
         "name": "Croisade Sabbat Worlds",
@@ -1184,8 +1184,8 @@
       },
       {
         "name": "Bataille de Salvation",
-        "summary": "M41",
-        "date": "Tanith First aux côtés de Saint Sabbat's Beati."
+        "summary": "Tanith First aux côtés de Saint Sabbat's Beati.",
+        "date": "M41"
       }
     ],
     "galleryQueries": [
@@ -1254,18 +1254,18 @@
     "notableBattles": [
       {
         "name": "Massacre de Skalathrax",
-        "summary": "M31",
-        "date": "Khârn tua ses propres Frères et gagna le titre 'le Traître'."
+        "summary": "Khârn tua ses propres Frères et gagna le titre 'le Traître'.",
+        "date": "M31"
       },
       {
         "name": "Manifestation d'Angron sur Vraks",
-        "summary": "M42",
-        "date": "Daemon-Primarque manifesté physiquement. Catastrophe galactique."
+        "summary": "Daemon-Primarque manifesté physiquement. Catastrophe galactique.",
+        "date": "M42"
       },
       {
         "name": "13ᵉ Croisade Noire",
-        "summary": "999.M41",
-        "date": "World Eaters chargèrent en frenzy aux côtés d'Abaddon."
+        "summary": "World Eaters chargèrent en frenzy aux côtés d'Abaddon.",
+        "date": "999.M41"
       }
     ],
     "galleryQueries": [
@@ -1347,18 +1347,18 @@
     "notableBattles": [
       {
         "name": "Voyage Endurance (Hérésie)",
-        "summary": "M31",
-        "date": "Death Guard piégée dans Warp. Pacte avec Nurgle."
+        "summary": "Death Guard piégée dans Warp. Pacte avec Nurgle.",
+        "date": "M31"
       },
       {
         "name": "Siège de Terra",
-        "summary": "014.M31",
-        "date": "Mortarion déchaîna pestes contre défenseurs."
+        "summary": "Mortarion déchaîna pestes contre défenseurs.",
+        "date": "014.M31"
       },
       {
         "name": "Plague Wars (M42)",
-        "summary": "M42",
-        "date": "Mortarion attaqua Ultramar avec succès partiel."
+        "summary": "Mortarion attaqua Ultramar avec succès partiel.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1440,23 +1440,23 @@
     "notableBattles": [
       {
         "name": "Burning of Prospero",
-        "summary": "M31",
-        "date": "Russ détruisit la bibliothèque, massacre Mille Fils. Magnus s'enfuit à Tzeentch."
+        "summary": "Russ détruisit la bibliothèque, massacre Mille Fils. Magnus s'enfuit à Tzeentch.",
+        "date": "M31"
       },
       {
         "name": "Rubric d'Ahriman",
-        "summary": "M31",
-        "date": "Ahriman composa le Rubric. Sauvant les âmes en sacrifiant la conscience."
+        "summary": "Ahriman composa le Rubric. Sauvant les âmes en sacrifiant la conscience.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Fenris",
-        "summary": "M41",
-        "date": "Mille Fils attaquèrent Fenris pour la vengeance. Repoussés par Logan Grimnar."
+        "summary": "Mille Fils attaquèrent Fenris pour la vengeance. Repoussés par Logan Grimnar.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Mille Fils manipulés via Tzeentch contre Indomitus."
+        "summary": "Mille Fils manipulés via Tzeentch contre Indomitus.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1593,23 +1593,23 @@
     "notableBattles": [
       {
         "name": "Hérésie d'Horus",
-        "summary": "M31",
-        "date": "Originellement Sons of Horus, sous Horus."
+        "summary": "Originellement Sons of Horus, sous Horus.",
+        "date": "M31"
       },
       {
         "name": "Fondation de la Légion Noire",
-        "summary": "M32",
-        "date": "Abaddon réunit les Légions sous une bannière."
+        "summary": "Abaddon réunit les Légions sous une bannière.",
+        "date": "M32"
       },
       {
         "name": "13ᵉ Croisade Noire",
-        "summary": "999.M41",
-        "date": "Cadia brisée. Galaxie déchirée par la Cicatrix."
+        "summary": "Cadia brisée. Galaxie déchirée par la Cicatrix.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Combat permanent contre Indomitus Crusade."
+        "summary": "Combat permanent contre Indomitus Crusade.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1673,23 +1673,23 @@
     "notableBattles": [
       {
         "name": "Burning of Khur",
-        "summary": "M30",
-        "date": "L'Empereur ordonna la destruction de leur cité-temple."
+        "summary": "L'Empereur ordonna la destruction de leur cité-temple.",
+        "date": "M30"
       },
       {
         "name": "Davin",
-        "summary": "M31",
-        "date": "Erebus Word Bearer planta le piège qui corrompit Horus."
+        "summary": "Erebus Word Bearer planta le piège qui corrompit Horus.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Calth",
-        "summary": "M31",
-        "date": "Word Bearers attaquèrent Ultramarines par surprise."
+        "summary": "Word Bearers attaquèrent Ultramarines par surprise.",
+        "date": "M31"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Word Bearers déchaînent rituels daemoniaques massifs."
+        "summary": "Word Bearers déchaînent rituels daemoniaques massifs.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1747,18 +1747,18 @@
     "notableBattles": [
       {
         "name": "Bataille de Tallarn",
-        "summary": "M31",
-        "date": "Plus grande bataille de chars de l'histoire impériale. Iron Warriors libérèrent virus."
+        "summary": "Plus grande bataille de chars de l'histoire impériale. Iron Warriors libérèrent virus.",
+        "date": "M31"
       },
       {
         "name": "Siège de Terra (stratégie)",
-        "summary": "014.M31",
-        "date": "Perturabo dirigea les opérations de siège du Palais Impérial."
+        "summary": "Perturabo dirigea les opérations de siège du Palais Impérial.",
+        "date": "014.M31"
       },
       {
         "name": "Bataille des Trois Forteresses",
-        "summary": "M42",
-        "date": "Affrontement avec Imperial Fists Successors. Destruction mutuelle quasi-totale."
+        "summary": "Affrontement avec Imperial Fists Successors. Destruction mutuelle quasi-totale.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1814,18 +1814,18 @@
     "notableBattles": [
       {
         "name": "Sabotage de Tallarn",
-        "summary": "M31",
-        "date": "Alpha Legion infiltra logistique Iron Warriors, ralentit l'opération virale."
+        "summary": "Alpha Legion infiltra logistique Iron Warriors, ralentit l'opération virale.",
+        "date": "M31"
       },
       {
         "name": "Bataille d'Eskrador",
-        "summary": "M31",
-        "date": "Alpharius (l'un des deux) tué par Rogal Dorn."
+        "summary": "Alpharius (l'un des deux) tué par Rogal Dorn.",
+        "date": "M31"
       },
       {
         "name": "Manipulations Indomitus",
-        "summary": "M42",
-        "date": "Alpha Legion soupçonnée d'avoir infiltré l'Indomitus Crusade."
+        "summary": "Alpha Legion soupçonnée d'avoir infiltré l'Indomitus Crusade.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -1889,23 +1889,23 @@
     "notableBattles": [
       {
         "name": "Pacification de Nostramo",
-        "summary": "Pre-M30",
-        "date": "Curze fit régner la terreur sur son monde-mère."
+        "summary": "Curze fit régner la terreur sur son monde-mère.",
+        "date": "Pre-M30"
       },
       {
         "name": "Massacre du Drop Pod",
-        "summary": "M31",
-        "date": "Night Lords trahirent et massacrèrent Salamanders, Iron Hands, Raven Guard."
+        "summary": "Night Lords trahirent et massacrèrent Salamanders, Iron Hands, Raven Guard.",
+        "date": "M31"
       },
       {
         "name": "Bataille de Thramas Crusade",
-        "summary": "M31",
-        "date": "Curze affronta Lion El'Jonson personnellement."
+        "summary": "Curze affronta Lion El'Jonson personnellement.",
+        "date": "M31"
       },
       {
         "name": "Apparitions Hantise (M42)",
-        "summary": "M42",
-        "date": "Sur certains mondes, on dit que Curze marche encore."
+        "summary": "Sur certains mondes, on dit que Curze marche encore.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -2045,18 +2045,18 @@
     "notableBattles": [
       {
         "name": "Bataille de Iyanden (soutien)",
-        "summary": "M41",
-        "date": "Biel-Tan envoyé secourir Iyanden contre Hive Fleet Kraken."
+        "summary": "Biel-Tan envoyé secourir Iyanden contre Hive Fleet Kraken.",
+        "date": "M41"
       },
       {
         "name": "Cicatrix Maledictum",
-        "summary": "999.M41",
-        "date": "Biel-Tan brisé par tempêtes warp. Survivants éparpillés."
+        "summary": "Biel-Tan brisé par tempêtes warp. Survivants éparpillés.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus (Ynnari)",
-        "summary": "M42",
-        "date": "Yvraine rallie les survivants. Coopération avec Imperium."
+        "summary": "Yvraine rallie les survivants. Coopération avec Imperium.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -2107,13 +2107,13 @@
     "notableBattles": [
       {
         "name": "Bataille du Sun-Eater",
-        "summary": "M41",
-        "date": "Alaitoc défit un Daemon majeur dans le Webway."
+        "summary": "Alaitoc défit un Daemon majeur dans le Webway.",
+        "date": "M41"
       },
       {
         "name": "Indomitus (manipulations)",
-        "summary": "M42",
-        "date": "Voyants Alaitoc tissent destins parallèles à Imperium."
+        "summary": "Voyants Alaitoc tissent destins parallèles à Imperium.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -2341,18 +2341,18 @@
     "notableBattles": [
       {
         "name": "Réveil du Tombeau Khepri",
-        "summary": "M41",
-        "date": "Première activation Sautekh majeure."
+        "summary": "Première activation Sautekh majeure.",
+        "date": "M41"
       },
       {
         "name": "Bataille de Damnos",
-        "summary": "M41",
-        "date": "Conquête contre Ultramarines. Drago vainquit (presque)."
+        "summary": "Conquête contre Ultramarines. Drago vainquit (presque).",
+        "date": "M41"
       },
       {
         "name": "13ᵉ Croisade Noire",
-        "summary": "999.M41",
-        "date": "Sautekh prit Vandred et Bashar pendant que l'Imperium combattait Abaddon."
+        "summary": "Sautekh prit Vandred et Bashar pendant que l'Imperium combattait Abaddon.",
+        "date": "999.M41"
       }
     ],
     "galleryQueries": [
@@ -2397,8 +2397,8 @@
     "notableBattles": [
       {
         "name": "Réveil partiel",
-        "summary": "M41",
-        "date": "Plusieurs Tombeaux Mephrit éveillés."
+        "summary": "Plusieurs Tombeaux Mephrit éveillés.",
+        "date": "M41"
       },
       {
         "name": "Conflit Sautekh-Mephrit",
@@ -2447,8 +2447,8 @@
     "notableBattles": [
       {
         "name": "Réveil Novokh",
-        "summary": "M41",
-        "date": "Cohortes éveillées en mode bataille immédiate."
+        "summary": "Cohortes éveillées en mode bataille immédiate.",
+        "date": "M41"
       },
       {
         "name": "Croisades de Lames",
@@ -2491,13 +2491,13 @@
     "notableBattles": [
       {
         "name": "Réveil Nephrekh",
-        "summary": "M41",
-        "date": "Tombeaux dorés éveillés."
+        "summary": "Tombeaux dorés éveillés.",
+        "date": "M41"
       },
       {
         "name": "Raid sur Cadia (post-chute)",
-        "summary": "M42",
-        "date": "Nephrekh pilla planètes ravagées par Abaddon."
+        "summary": "Nephrekh pilla planètes ravagées par Abaddon.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -2897,18 +2897,18 @@
     "notableBattles": [
       {
         "name": "Croisade Eleusis",
-        "summary": "M40",
-        "date": "Saint Celestine apparut pour la première fois."
+        "summary": "Saint Celestine apparut pour la première fois.",
+        "date": "M40"
       },
       {
         "name": "Bataille de Sanctus Lin",
-        "summary": "M41",
-        "date": "Saint Celestine convertit Hérétiques en masse."
+        "summary": "Saint Celestine convertit Hérétiques en masse.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Celestine prêtée à Guilliman."
+        "summary": "Celestine prêtée à Guilliman.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -2953,13 +2953,13 @@
     "notableBattles": [
       {
         "name": "Sanctification de Saint Silvana",
-        "summary": "M37",
-        "date": "Argent Shroud canonisa Saint Silvana."
+        "summary": "Argent Shroud canonisa Saint Silvana.",
+        "date": "M37"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Mission de purification de mondes corrompus."
+        "summary": "Mission de purification de mondes corrompus.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -3009,18 +3009,18 @@
     "notableBattles": [
       {
         "name": "Bataille de Vraks",
-        "summary": "M41",
-        "date": "Bloody Rose mena assauts furieux contre Cultes du Chaos."
+        "summary": "Bloody Rose mena assauts furieux contre Cultes du Chaos.",
+        "date": "M41"
       },
       {
         "name": "Devastation of Baal",
-        "summary": "999.M41",
-        "date": "Bloody Rose secourut Blood Angels."
+        "summary": "Bloody Rose secourut Blood Angels.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Combat-frenzy déchaîné contre Daemons."
+        "summary": "Combat-frenzy déchaîné contre Daemons.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -3064,18 +3064,18 @@
     "notableBattles": [
       {
         "name": "Fondation Sororitas",
-        "summary": "M36",
-        "date": "Ebon Chalice fondé par Alicia Dominica elle-même."
+        "summary": "Ebon Chalice fondé par Alicia Dominica elle-même.",
+        "date": "M36"
       },
       {
         "name": "Cathédrale Mendalion",
-        "summary": "M40",
-        "date": "Défense majeure contre raid Word Bearers."
+        "summary": "Défense majeure contre raid Word Bearers.",
+        "date": "M40"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Soutien à Indomitus, conservation du dogme."
+        "summary": "Soutien à Indomitus, conservation du dogme.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -3119,13 +3119,13 @@
     "notableBattles": [
       {
         "name": "Croisade Sabbat Worlds",
-        "summary": "M41",
-        "date": "Sacred Rose accompagna les forces impériales."
+        "summary": "Sacred Rose accompagna les forces impériales.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Mission contemplative et combat mêlés."
+        "summary": "Mission contemplative et combat mêlés.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -3169,18 +3169,18 @@
     "notableBattles": [
       {
         "name": "Siège de Vraks",
-        "summary": "M41",
-        "date": "Valorous Heart tint position pendant 17 ans de siège."
+        "summary": "Valorous Heart tint position pendant 17 ans de siège.",
+        "date": "M41"
       },
       {
         "name": "Cadia (M41)",
-        "summary": "999.M41",
-        "date": "Valorous Heart évacua civils Cadians."
+        "summary": "Valorous Heart évacua civils Cadians.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Spécialisation grands sièges."
+        "summary": "Spécialisation grands sièges.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -3872,8 +3872,8 @@
     "notableBattles": [
       {
         "name": "Bataille de Commorragh",
-        "summary": "M40",
-        "date": "Vect renversa son maître précédent par coup d'État."
+        "summary": "Vect renversa son maître précédent par coup d'État.",
+        "date": "M40"
       },
       {
         "name": "Raids éternels",
@@ -4109,8 +4109,8 @@
     "notableBattles": [
       {
         "name": "Expérimentations sur Coronus",
-        "summary": "M41",
-        "date": "Haemonculi capturèrent prisoniers d'une planète entière pour expérimentations."
+        "summary": "Haemonculi capturèrent prisoniers d'une planète entière pour expérimentations.",
+        "date": "M41"
       }
     ],
     "galleryQueries": [
@@ -4778,13 +4778,13 @@
     "notableBattles": [
       {
         "name": "Bataille de Solemnace",
-        "summary": "M41",
-        "date": "Trazyn défendit son musée contre Imperium. Capture étrange de Saint Celestine en stase pendant 6 minutes."
+        "summary": "Trazyn défendit son musée contre Imperium. Capture étrange de Saint Celestine en stase pendant 6 minutes.",
+        "date": "M41"
       },
       {
         "name": "13ᵉ Croisade Noire (observation)",
-        "summary": "999.M41",
-        "date": "Nihilakh n'intervint pas — collectionna les batailles à distance."
+        "summary": "Nihilakh n'intervint pas — collectionna les batailles à distance.",
+        "date": "999.M41"
       }
     ],
     "galleryQueries": [
@@ -4955,13 +4955,13 @@
     "notableBattles": [
       {
         "name": "Pacifications post-Hérésie",
-        "summary": "M32+",
-        "date": "Reconquête de mondes perdus."
+        "summary": "Reconquête de mondes perdus.",
+        "date": "M32+"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Force standard sous Guilliman direct."
+        "summary": "Force standard sous Guilliman direct.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -4988,13 +4988,13 @@
     "notableBattles": [
       {
         "name": "Croisades post-M41",
-        "summary": "M41",
-        "date": "Sons of Guilliman maintinrent l'orthodoxie ultramarines."
+        "summary": "Sons of Guilliman maintinrent l'orthodoxie ultramarines.",
+        "date": "M41"
       },
       {
         "name": "Indomitus (premier soutien)",
-        "summary": "999.M41",
-        "date": "Premiers à soutenir Guilliman au réveil."
+        "summary": "Premiers à soutenir Guilliman au réveil.",
+        "date": "999.M41"
       }
     ],
     "galleryQueries": [
@@ -5034,13 +5034,13 @@
     "notableBattles": [
       {
         "name": "Pacifications Firenze",
-        "summary": "M37",
-        "date": "Aurora pacifia plusieurs mondes désertiques."
+        "summary": "Aurora pacifia plusieurs mondes désertiques.",
+        "date": "M37"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Force standard sous Indomitus."
+        "summary": "Force standard sous Indomitus.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -5067,13 +5067,13 @@
     "notableBattles": [
       {
         "name": "Croisades de Reconquête",
-        "summary": "M41",
-        "date": "Genesis mena plusieurs croisades contre xenos."
+        "summary": "Genesis mena plusieurs croisades contre xenos.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Force Codex standard."
+        "summary": "Force Codex standard.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -5113,13 +5113,13 @@
     "notableBattles": [
       {
         "name": "Bataille de Posul",
-        "summary": "M41",
-        "date": "Première rencontre majeure avec Hive Fleet Behemoth."
+        "summary": "Première rencontre majeure avec Hive Fleet Behemoth.",
+        "date": "M41"
       },
       {
         "name": "Indomitus (anti-Tyranide)",
-        "summary": "M42",
-        "date": "Mortifactors envoyés sur tous les fronts Tyranide."
+        "summary": "Mortifactors envoyés sur tous les fronts Tyranide.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -5146,13 +5146,13 @@
     "notableBattles": [
       {
         "name": "Bataille de Damnos",
-        "summary": "M41",
-        "date": "Silver Eagles intervinrent contre invasion Necron Sautekh."
+        "summary": "Silver Eagles intervinrent contre invasion Necron Sautekh.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Force Indomitus standard."
+        "summary": "Force Indomitus standard.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -5231,13 +5231,13 @@
     "notableBattles": [
       {
         "name": "Croisade Sabbat Worlds",
-        "summary": "M41",
-        "date": "Doom Eagles soutinrent la Croisade."
+        "summary": "Doom Eagles soutinrent la Croisade.",
+        "date": "M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Force Indomitus."
+        "summary": "Force Indomitus.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
@@ -5537,13 +5537,13 @@
     "notableBattles": [
       {
         "name": "Devastation of Baal",
-        "summary": "999.M41",
-        "date": "Flesh Tearers sauvèrent Blood Angels en sacrifiant beaucoup de leur effectif."
+        "summary": "Flesh Tearers sauvèrent Blood Angels en sacrifiant beaucoup de leur effectif.",
+        "date": "999.M41"
       },
       {
         "name": "Indomitus",
-        "summary": "M42",
-        "date": "Flesh Tearers Primaris atténuent partiellement la malédiction."
+        "summary": "Flesh Tearers Primaris atténuent partiellement la malédiction.",
+        "date": "M42"
       }
     ],
     "galleryQueries": [
