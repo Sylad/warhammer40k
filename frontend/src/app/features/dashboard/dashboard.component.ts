@@ -1,8 +1,8 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { take, type Observable } from 'rxjs';
 import type { LoreEvent } from '../../core/models/models';
 
 interface ShortcutCard {
@@ -10,7 +10,7 @@ interface ShortcutCard {
   title: string;
   subtitle: string;
   ico: string;
-  count: () => number;
+  count: () => number | null;
   countLabel: string;
   wikiQuery: string;
   /** Image trop claire pour le texte : assombrie (L78). */
@@ -77,6 +77,13 @@ const TYPE_LABEL: Record<string, string> = {
       </a>
     </section>
 
+    @if (failed()) {
+      <div class="counts-error" role="alert">
+        <p>Certains chiffres n’ont pas pu être chargés. Vérifiez la connexion, puis réessayez.</p>
+        <button type="button" class="counts-retry" (click)="loadCounts()">Réessayer</button>
+      </div>
+    }
+
     <section class="shortcuts">
       @for (s of shortcuts; track s.route) {
         <a class="shortcut" [routerLink]="s.route">
@@ -87,7 +94,7 @@ const TYPE_LABEL: Record<string, string> = {
             <h2>{{ s.title }}</h2>
             <p>{{ s.subtitle }}</p>
             <div class="shortcut-foot">
-              <span class="num">{{ s.count() }}</span>
+              <span class="num">{{ shown(s.count()) }}</span>
               <span class="lbl">{{ s.countLabel }}</span>
               <span class="arrow">→</span>
             </div>
@@ -119,23 +126,23 @@ const TYPE_LABEL: Record<string, string> = {
 
     <section class="stats-bar">
       <div class="stat">
-        <strong>{{ factions().length }}</strong>
+        <strong>{{ shown(factions()) }}</strong>
         <span>Factions</span>
       </div>
       <div class="stat">
-        <strong>{{ subFactionsCount() }}</strong>
+        <strong>{{ shown(subFactions()) }}</strong>
         <span>Sous-factions</span>
       </div>
       <div class="stat">
-        <strong>{{ series().length }}</strong>
+        <strong>{{ shown(series()) }}</strong>
         <span>Romans</span>
       </div>
       <div class="stat">
-        <strong>{{ videos().length }}</strong>
+        <strong>{{ shown(videos()) }}</strong>
         <span>Vidéos</span>
       </div>
       <div class="stat">
-        <strong>{{ artworks().length }}</strong>
+        <strong>{{ shown(artworks()) }}</strong>
         <span>Œuvres</span>
       </div>
       <div class="quote">
@@ -148,15 +155,17 @@ const TYPE_LABEL: Record<string, string> = {
 export class DashboardComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly factions = toSignal(this.service.factions$, { initialValue: [] });
-  readonly series = toSignal(this.service.series$, { initialValue: [] });
-  readonly videos = toSignal(this.service.videos$, { initialValue: [] });
-  readonly artworks = toSignal(this.service.artworks$, { initialValue: [] });
+  // null = pas encore reçu (chargement ou erreur) : affiché « — », jamais un faux « 0 » (L79).
+  readonly factions = signal<number | null>(null);
+  readonly series = signal<number | null>(null);
+  readonly videos = signal<number | null>(null);
+  readonly artworks = signal<number | null>(null);
+  readonly subFactions = signal<number | null>(null);
+  readonly failed = signal(false);
 
   readonly events = signal<LoreEvent[]>([]);
   readonly heroImg = signal<string>('');
   readonly shortcutImages = signal<Map<string, string>>(new Map());
-  readonly subFactionsCount = signal<number>(0);
 
   readonly shortcuts: ShortcutCard[] = [
     {
@@ -164,7 +173,7 @@ export class DashboardComponent {
       title: 'Factions',
       subtitle: 'Les peuples du 41ᵉ millénaire — Imperium, Chaos, xénos.',
       ico: '⚔',
-      count: () => this.factions().length,
+      count: () => this.factions(),
       countLabel: 'factions majeures',
       wikiQuery: 'Space Marines battle Adeptus Astartes',
     },
@@ -173,7 +182,7 @@ export class DashboardComponent {
       title: 'Romans',
       subtitle: 'La bibliothèque Black Library — Hérésie d\'Horus, Eisenhorn…',
       ico: '▤',
-      count: () => this.series().length,
+      count: () => this.series(),
       countLabel: 'séries',
       wikiQuery: 'Black Library Warhammer 40000 books',
       dim: true,
@@ -183,7 +192,7 @@ export class DashboardComponent {
       title: 'Vidéos',
       subtitle: 'Archives cinématiques — chaînes lore, animations cultes.',
       ico: '▶',
-      count: () => this.videos().length,
+      count: () => this.videos(),
       countLabel: 'vidéos',
       wikiQuery: 'Astartes animated film',
     },
@@ -192,7 +201,7 @@ export class DashboardComponent {
       title: 'Galerie',
       subtitle: 'Galerie impériale — artworks, illustrations, visuels.',
       ico: '▦',
-      count: () => this.artworks().length,
+      count: () => this.artworks(),
       countLabel: 'œuvres',
       wikiQuery: 'Warhammer 40k art fresco imperial',
     },
@@ -218,8 +227,30 @@ export class DashboardComponent {
     // Lore feed (3 events random)
     this.service.loreFeed(3).subscribe(events => this.events.set(events));
 
-    // SubFactions count
-    this.service.getSubFactions().subscribe(list => this.subFactionsCount.set(list.length));
+    this.loadCounts();
+  }
+
+  /** Charge les cinq compteurs ; un échec laisse « — » et affiche le message avec « Réessayer ». */
+  loadCounts(): void {
+    this.failed.set(false);
+    const sources: Array<[Observable<unknown[]>, typeof this.factions]> = [
+      [this.service.factions$, this.factions],
+      [this.service.series$, this.series],
+      [this.service.videos$, this.videos],
+      [this.service.artworks$, this.artworks],
+      [this.service.getSubFactions(), this.subFactions],
+    ];
+    for (const [source, target] of sources) {
+      target.set(null);
+      source.pipe(take(1)).subscribe({
+        next: (list) => target.set(list.length),
+        error: () => this.failed.set(true),
+      });
+    }
+  }
+
+  shown(n: number | null): string {
+    return n === null ? '—' : String(n);
   }
 
   shortcutImg(route: string): string | null {

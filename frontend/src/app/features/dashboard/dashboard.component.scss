@@ -163,6 +163,18 @@
     }
 
     /* === SHORTCUTS image-first === */
+    .counts-error {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px;
+      margin-bottom: 18px; padding: 14px 22px;
+      background: var(--panel); border: 1px solid var(--border); color: var(--text);
+      p { margin: 0; flex: 1 1 260px; }
+    }
+    .counts-retry {
+      min-height: 44px; padding: 0 16px; border: 1px solid var(--border-strong); background: transparent;
+      color: var(--gold-bright); font: 600 0.85rem var(--sans); letter-spacing: 0.08em; cursor: pointer;
+      &:hover { border-color: var(--gold); }
+      &:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+    }
     .shortcuts {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
