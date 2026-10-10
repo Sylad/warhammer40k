@@ -42,7 +42,7 @@
     "id": "lf-006",
     "icon": "◈",
     "type": "prophetie",
-    "title": "Vision d'un Archiviste",
+    "title": "Vision d'un Prophète",
     "body": "Eldrad Ulthran a transmis une prophétie aux Mondes-Vaisseaux. Sa parole pèse plus lourd qu'une planète."
   },
   {
@@ -107,7 +107,7 @@
     "icon": "☠",
     "type": "menace",
     "title": "Flotte-Ruche Léviathan",
-    "body": "Le Leviathan, plus grande flotte tyranide jamais détectée, s'enfonce vers le cœur de l'Imperium. Les Blood Angels et leurs Successeurs convergent sur Baal."
+    "body": "Le Léviathan, plus grande flotte tyranide jamais détectée, s'enfonce vers le cœur de l'Imperium. Les Blood Angels et leurs Successeurs convergent sur Baal."
   },
   {
     "id": "lf-016",
@@ -162,7 +162,7 @@
     "id": "lf-023",
     "icon": "☠",
     "type": "menace",
-    "title": "Eveil de la Bête",
+    "title": "Éveil de la Bête",
     "body": "Le Roi-Ork de Ullanor rallie une armada planétoïde. Imperial Fists annihilés. L'Imperium chancelle au M32 — un événement effacé des chroniques officielles."
   },
   {
@@ -247,7 +247,7 @@
     "icon": "✦",
     "type": "evenement",
     "title": "Renaissance de Vulkan",
-    "body": "Sur Nocturne, la Salamandre relit les artefacts d'Vulkan. Le Primarque Salamandre n'est pas mort. Sa quête des Neuf Reliques continue dans l'ombre."
+    "body": "Sur Nocturne, les Salamandres relisent les artefacts de Vulkan. Le Primarque des Salamandres n'est pas mort. Sa quête des Neuf Reliques continue dans l'ombre."
   },
   {
     "id": "lf-036",
@@ -261,27 +261,27 @@
     "icon": "☠",
     "type": "menace",
     "title": "Crise du Trône d'Or",
-    "body": "Les Adeptus Custodes signalent une dégradation accélérée du Trône d'Or. L'Empereur consume des milliers d'âmes psyches chaque jour. Le Mechanicus est sourd à la requête."
+    "body": "Les Adeptus Custodes signalent une dégradation accélérée du Trône d'Or. L'Empereur consume des milliers d'âmes psychiques chaque jour. Le Mechanicus est sourd à la requête."
   },
   {
     "id": "lf-038",
     "icon": "⊗",
     "type": "evenement",
     "title": "Réveil de Maugan Ra",
-    "body": "Le Phénix Eldar Maugan Ra émerge de son temple-monde. Sa fauche-canon hurle. Iyanden marche vers la guerre."
+    "body": "Le Phénix Eldar Maugan Ra émerge de son temple-monde. Sa Faucheuse d'âmes hurle. Iyanden marche vers la guerre."
   },
   {
     "id": "lf-039",
     "icon": "Ψ",
     "type": "decouverte",
     "title": "Crypte d'Anrakyr",
-    "body": "Anrakyr le Voyageur exhume le berceau d'une dynastie Necron oubliée sous Cadia. Trois cent millions d'âmes-piscine attendent l'éveil. Sera-ce à temps ?"
+    "body": "Anrakyr le Voyageur exhume le berceau d'une dynastie Necron oubliée sous Cadia. Trois cent millions d'âmes endormies attendent l'éveil. Sera-ce à temps ?"
   },
   {
     "id": "lf-040",
     "icon": "◈",
     "type": "prophetie",
-    "title": "Le Pâle dans l'Œil",
-    "body": "Un Drukhari Aeldari de Commorragh prophétise que la Fin viendra par la Soif d'âmes. Slaanesh sourit dans le Warp. Trois Aeldari murmurent Ynnead."
+    "title": "Le Pâle Prophète",
+    "body": "Un Drukhari de Commorragh prophétise que la Fin viendra par la Soif d'âmes. Slaanesh sourit dans le Warp. Trois Aeldari murmurent Ynnead."
   }
 ]
