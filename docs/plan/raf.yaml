@@ -773,6 +773,8 @@ lots:
     review: { date: 2026-10-10, verdict: "conforme (1 note mineure hors périmètre : test e2e L32 instable sous charge) — orchestré (vague 2026-10-10-1905, 1 passe(s) de correction)", commit: 15a3c17f85047da3c1a0e0a30a686b0cb65a89e6 }
     ux: { date: 2026-10-10, verdict: ok Sylvain 10-10 (Discord « ok L88 L90 L91 ») ; revue UX auto conforme }
     finished: 2026-10-10
+    notes:
+      - { date: 2026-10-10, text: "QA prod 10-10 (lead, API) : /api/subfactions/blood-angels sert 8 notableUnits et des batailles datées (Massacre de Signus Prime M31, Première Bataille d'Armageddon 444.M41) — L87 L88 L90 L91 livrés bad649e" }
   - id: L92
     title: "/factions (MAQUETTE A à valider par Sylvain) : « Autres » rend les 17 factions (comparaison en minuscules) ; panneau « Filtres rapides » en double et légende Loyal/Neutre/Hostile sans objet — les retirer (revue UX L3)"
     public: "Factions : le filtre « Autres » et le panneau latéral corrigés"
