@@ -107,6 +107,13 @@ describe('données des Nouveautés (public/nouveautes-data) — L23', () => {
     }
   });
 
+  it('capture de téléphone jamais plus de 6 fois plus haute que large (6:1)', () => {
+    for (const c of readJson().entries.flatMap((e) => e.captures).filter((c) => /-telephone\.png$/.test(c))) {
+      const [w, h] = pngSize(join(DATA, c));
+      expect(h / w, `${c} : ${w}×${h}`).toBeLessThanOrEqual(6);
+    }
+  });
+
   it('L64 : la Nouveauté de la pagination porte une capture de téléphone (390 px), pas seulement de bureau', () => {
     const entry = readJson().entries.find((e) => e.slug.startsWith('2026-10-06-galerie-24-cartes'));
     expect(entry, 'entrée L64 absente').toBeDefined();
