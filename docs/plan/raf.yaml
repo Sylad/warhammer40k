@@ -639,6 +639,7 @@ lots:
     notes:
       - { date: 2026-10-10, text: "DÉCISION Sylvain 10-10 : option B — sous 760 px, masquer .stats-bar et porter « 182 sous-factions » dans le pied de la carte Factions ; la citation du Trône rejoint le pied de page ou disparaît ; au-dessus de 1100 px inchangé" }
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "conforme après 1 correctif mineur — orchestré (vague 2026-10-10-1345, 2 passe(s) de correction)", commit: 4b1a14019bb471c48727f9258802029f1ffcc8f2 }
   - id: L81
     title: "Accueil : glyphes décoratifs (⚔ ▤ ▶ ▦ ✠ ⚜ ☠ →) lus par les lecteurs d'écran — aria-hidden comme L39 ailleurs (revue UX L2, mineur)"
     public: "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran"
