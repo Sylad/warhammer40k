@@ -22,6 +22,7 @@ const TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',
 };
+const FACTIONS = JSON.parse(readFileSync(join(SEED, 'factions.json'), 'utf8'));
 const API: Record<string, string> = { '/api/lore/chaos-gods': 'chaos-gods.json', '/api/lore/concepts': 'lore-concepts.json' };
 const built = existsSync(join(DIST, 'index.html'));
 const stale = built && SOURCES.some((s) => statSync(join(FRONTEND, s)).mtimeMs > statSync(join(DIST, 'index.html')).mtimeMs);
@@ -43,6 +44,17 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
     server = createServer((req, res) => {
       const path = normalize(decodeURIComponent(new URL(req.url!, 'http://x').pathname));
       if (path.startsWith('/api/')) {
+        const fac = /^\/api\/factions\/([\w-]+)$/.exec(path);
+        if (fac) {
+          res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify(FACTIONS.find((x: { id: string }) => x.id === fac[1]) ?? null));
+          return;
+        }
+        if (path === '/api/units' || path === '/api/subfactions') {
+          const q = new URL(req.url!, 'http://x').searchParams.get('factionId');
+          const all = JSON.parse(readFileSync(join(SEED, path === '/api/units' ? 'units.json' : 'subfactions.json'), 'utf8'));
+          res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify(all.filter((x: { factionId?: string }) => !q || x.factionId === q)));
+          return;
+        }
         const f = API[path];
         res.writeHead(200, { 'content-type': 'application/json' }).end(f ? readFileSync(join(SEED, f)) : path.startsWith('/api/demo') || path.startsWith('/api/wiki') ? '{}' : '[]');
         return;
@@ -77,7 +89,9 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       await page.waitForTimeout(100);
     }
     return page.evaluate((x) => {
-      const bar = document.querySelector('.topbar')!.getBoundingClientRect().bottom;
+      // L89 : sur une fiche à barre d'ancres collée, la cible doit arriver sous l'en-tête ET la barre.
+      const nav = document.querySelector('.anchor-nav')?.getBoundingClientRect();
+      const bar = Math.max(document.querySelector('.topbar')!.getBoundingClientRect().bottom, nav ? nav.bottom : 0);
       // Bas de page atteint : la cible ne peut pas monter plus haut (page trop courte).
       const bottom = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 1;
       return { gap: Math.round(document.getElementById(x)!.getBoundingClientRect().top - bar), bar: Math.round(bar), bottom };
@@ -96,6 +110,16 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       const id = decodeURIComponent((await a.getAttribute('href'))!.split('#')[1]);
       await a.click();
       return id;
+    }],
+    ['Fiche faction, lien rapide vers #heros', async (p) => {
+      await p.goto(`${base}/factions/space-marines`);
+      await p.locator('a.row-link[href$="#heros"]').first().click();
+      return 'heros';
+    }],
+    ['Fiche faction, lien rapide vers #subfactions', async (p) => {
+      await p.goto(`${base}/factions/space-marines`);
+      await p.locator('a.row-link[href$="#subfactions"]').first().click();
+      return 'subfactions';
     }],
     ['/plan#<lot>', async (p) => {
       const id = (plan.lots.find((l: { status: string }) => l.status === 'doing') ?? plan.lots[0]).id;
