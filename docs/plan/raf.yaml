@@ -745,12 +745,13 @@ lots:
   - id: L89
     title: "Barre d'ancres des fiches (MAQUETTE B à valider par Sylvain) : collée à top 0 sous l'en-tête (cachée à 1440, focus masqué), 191 px à 390 — top = hauteur d'en-tête, une ligne défilante au téléphone (WCAG 2.4.11, revue UX L3)"
     public: "Fiches : la barre des sections reste visible sous l'en-tête"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
     notes:
       - { date: 2026-10-10, text: "Maquette B validée par Sylvain 10-10 (Discord « ok B ») : barre collée sous l'en-tête (top = hauteur d'en-tête, une ligne) ; sous 760 px une seule ligne défilante ~44 px, bords estompés, toujours collante" }
+    started: 2026-10-10
   - id: L90
     title: "Sous-faction : « Unités notables » toujours vide — le gabarit lit unitIds (0/182) et ignore notableUnits (77/182) ; afficher notableUnits (revue UX L3)"
     public: "Sous-factions : les unités notables s'affichent"
