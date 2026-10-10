@@ -702,6 +702,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant — orchestré (vague 2026-10-10-1745, 0 passe(s) de correction)", commit: 23526e38f63f346da4eda77acb560b7048cabd5d }
   - id: L86
     title: "Gabarit : le logo ⚜ (en-tête et pied) et les 5 pictos de la navigation ⚔ ▤ ▶ ▦ ✠ restent lus par les lecteurs d'écran — aria-hidden comme le reste (suite de L81, QA prod 10-10), test"
     public: "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus"
