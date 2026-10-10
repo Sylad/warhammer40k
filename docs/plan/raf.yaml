@@ -738,6 +738,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant — 1 minor (h1 à 18,5 px à 320 px, plus petit que les h2 ; le test de reflow des 182 pages passe) — orchestré (vague 2026-10-10-1905, 0 passe(s) de correction)", commit: aec164b9a559763a8739200d2781cc21effe3510 }
   - id: L89
     title: "Barre d'ancres des fiches (MAQUETTE B à valider par Sylvain) : collée à top 0 sous l'en-tête (cachée à 1440, focus masqué), 191 px à 390 — top = hauteur d'en-tête, une ligne défilante au téléphone (WCAG 2.4.11, revue UX L3)"
     public: "Fiches : la barre des sections reste visible sous l'en-tête"
