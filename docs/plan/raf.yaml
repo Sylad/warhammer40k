@@ -636,7 +636,7 @@ lots:
   - id: L80
     title: "Accueil au téléphone : barre de statistiques de 392 px (5 lignes empilées + citation) répète les nombres des cartes — maquette B : masquer .stats-bar sous 760 px et porter « 182 sous-factions » sur la carte Factions (à valider par Sylvain) (revue UX L2, majeur Nielsen 8)"
     public: "Accueil au téléphone : page plus courte, statistiques réduites"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
@@ -644,6 +644,8 @@ lots:
       - { date: 2026-10-10, text: "DÉCISION Sylvain 10-10 : option B — sous 760 px, masquer .stats-bar et porter « 182 sous-factions » dans le pied de la carte Factions ; la citation du Trône rejoint le pied de page ou disparaît ; au-dessus de 1100 px inchangé" }
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "conforme après 1 correctif mineur — orchestré (vague 2026-10-10-1345, 2 passe(s) de correction)", commit: 4b1a14019bb471c48727f9258802029f1ffcc8f2 }
+    ux: { date: 2026-10-10, verdict: "conforme (Sylvain 10-10 sur la capture L80-accueil-telephone) : barre de statistiques masquée sous 760 px, « 182 sous-factions » sur la carte Factions" }
+    finished: 2026-10-10
   - id: L81
     title: "Accueil : glyphes décoratifs (⚔ ▤ ▶ ▦ ✠ ⚜ ☠ →) lus par les lecteurs d'écran — aria-hidden comme L39 ailleurs (revue UX L2, mineur)"
     public: "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran"
