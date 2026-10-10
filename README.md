@@ -52,6 +52,7 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 - **Compteurs de l'accueil** : « — » pendant le chargement et sur erreur d'API (jamais un faux « 0 »), message + bouton « Réessayer » si un chiffre manque
 - **Clavier sur les Factions** : chaque carte de faction (`/factions`) et d'unité (fiche faction) est un vrai lien `<a href>` (Tab, Entrée) ; « Voir toutes les unités » est un `<button>` (Tab, Entrée, Espace)
 - **Accueil au téléphone** (moins de 760 px) : la barre de statistiques et sa citation sont masquées (les nombres sont déjà sur les cartes) ; « N sous-factions » s'affiche en bas de la carte Factions. Au-delà de 760 px, inchangé
+- **Barre des sections des fiches** (faction, primarque, vaisseau, saint, titan, équipement, événement) : collée juste sous l'en-tête (`top` = `--topbar-h`, la hauteur du bandeau du haut, au lieu de passer derrière lui) ; sous 760 px elle tient sur une seule ligne défilante de 44 px aux bords estompés, toujours visible. Les sections atteintes par un lien de la barre s'arrêtent sous l'en-tête et la barre (`--anchor-offset`), focus compris (WCAG 2.4.11). Gardé par `styles/anchor-nav.spec.ts`
 - **Brèves du 41ᵉ millénaire** : ticker dashboard de 40 entrées atmosphériques (Croisade Indomitus, Cicatrix, Chute de Cadia, Plague Wars, etc.)
 - **Breadcrumb global** + fragment scroll + fil narratif central
 - Cosmétique : design tokens custom (or sur fond noir, Cinzel/Inter), pas de Bootstrap/Material-default

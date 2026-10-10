@@ -1,7 +1,9 @@
 /**
  * L31/L32 — sonde de redistribution (WCAG 1.4.10), exécutée DANS la page (`page.evaluate(reflowProbe,
  * selector)`) : autonome, sans import. Pour chaque nœud texte visible sous `root` :
- *  - `overflow` : texte hors de la fenêtre (défilement horizontal) ;
+ *  - `overflow` : texte hors de la fenêtre (défilement horizontal), sauf dans un conteneur à
+ *    défilement horizontal (`overflow-x: auto | scroll`) qui tient lui-même dans la fenêtre —
+ *    barre d'ancres sur une ligne défilante (L89) : le texte y est atteignable sans faire défiler la page ;
  *  - `clipped`  : texte rogné par un ancêtre `overflow: hidden | clip` (hors conteneur défilant) ;
  *  - `broken`   : titre (h1–h4) coupé à l'intérieur d'un mot — une coupure APRÈS un trait d'union
  *    (« Vaisseaux-/Mondes ») est une coupure de ligne normale, pas une coupure de mot.
@@ -33,7 +35,14 @@ export function reflowProbe(rootSelector: string): ReflowReport {
     if (!rects.length) continue;
     const left = Math.min(...rects.map((r) => r.left));
     const right = Math.max(...rects.map((r) => r.right));
-    if (right > vw + 1 || left < -1) out.overflow.push(`${label(el, text)} [${Math.round(left)}, ${Math.round(right)}] / ${vw}`);
+    let scroller: Element | null = null;
+    for (let a: Element | null = el; a && a !== document.body; a = a.parentElement) {
+      const ox = getComputedStyle(a).overflowX;
+      if (ox === 'auto' || ox === 'scroll') { scroller = a; break; }
+    }
+    const sb = scroller?.getBoundingClientRect();
+    const inScroller = !!sb && sb.left >= -1 && sb.right <= vw + 1;
+    if (!inScroller && (right > vw + 1 || left < -1)) out.overflow.push(`${label(el, text)} [${Math.round(left)}, ${Math.round(right)}] / ${vw}`);
     for (let a: Element | null = el; a && a !== document.body; a = a.parentElement) {
       const s = getComputedStyle(a);
       if (s.overflowX === 'auto' || s.overflowX === 'scroll') break;
