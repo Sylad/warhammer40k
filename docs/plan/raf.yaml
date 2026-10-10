@@ -697,10 +697,11 @@ lots:
   - id: L85
     title: "Nouveautés : l'entrée « images de l'accueil nettes » affiche des astérisques littéraux (*Horus Rising*, *Space Marine 2*) — rendre l'italique ou retirer les astérisques (QA prod 10-10)"
     public: "Nouveautés : les titres d'œuvres s'affichent en italique"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-10-10
   - id: L86
     title: "Gabarit : le logo ⚜ (en-tête et pied) et les 5 pictos de la navigation ⚔ ▤ ▶ ▦ ✠ restent lus par les lecteurs d'écran — aria-hidden comme le reste (suite de L81, QA prod 10-10), test"
     public: "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus"
