@@ -2,6 +2,9 @@
 
     :host { display: block; }
 
+    /* « 41e » reste en minuscule sous un parent en capitales (« 41E » serait faux) */
+    sup { text-transform: none; }
+
     /* === HERO immersif Empereur/Trône === */
     .hero {
       position: relative;

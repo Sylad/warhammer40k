@@ -92,7 +92,7 @@ const TYPE_LABEL: Record<string, string> = {
           <div class="shortcut-content">
             <div class="shortcut-ico" aria-hidden="true">{{ s.ico }}</div>
             <h2>{{ s.title }}</h2>
-            <p>{{ s.subtitle }}</p>
+            <p [innerHTML]="s.subtitle"></p>
             <div class="shortcut-foot">
               <span class="num">{{ shown(s.count()) }}</span>
               <span class="lbl">{{ s.countLabel }}</span>
@@ -174,7 +174,7 @@ export class DashboardComponent {
     {
       route: '/factions',
       title: 'Factions',
-      subtitle: 'Les peuples du 41ᵉ millénaire — Imperium, Chaos, xénos.',
+      subtitle: 'Les peuples du 41<sup>e</sup> millénaire — Imperium, Chaos, xénos.',
       ico: '⚔',
       count: () => this.factions(),
       countLabel: 'factions majeures',
