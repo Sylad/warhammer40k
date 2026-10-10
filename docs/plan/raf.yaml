@@ -725,11 +725,12 @@ lots:
       - { date: 2026-10-10, text: "QA prod 10-10 (lead, Playwright sur sha-5919549… livré 5d9080a) : 0 glyphe décoratif non masqué sur / à 1440 et 390 ; L85 : 0 astérisque visible sur /nouveautes, 4 <em> (Horus Rising, Space Marine 2) — le rendu italique se fait dans le composant, le JSON garde *titre*" }
   - id: L87
     title: "Factions : cartes faction et unité (article routerLink) inopérantes au clavier, Entrée/Espace sans effet, « Voir toutes les unités » non focalisable — liens <a> et bouton (WCAG 2.1.1, revue UX L3, bloquant)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-10
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "conforme — 2 mineurs (cible du focus fausse quand un filtre est actif, contenu non autorisé dans un <button>) — orchestré (vague 2026-10-10-1905, 1 passe(s) de correction)", commit: 01186b9ade16cdd2873157763592a1915ff694bd }
+    finished: 2026-10-10
   - id: L88
     title: "Sous-faction : bandeau rogné au téléphone (57/182 pages à 320 px, Shadowkeepers +80 px à 390) — minmax(0,1fr), h1 césurable, test de reflow (WCAG 1.4.10, revue UX L3, bloquant)"
     public: "Sous-factions : le bandeau n'est plus rogné au téléphone"
@@ -746,6 +747,8 @@ lots:
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    notes:
+      - { date: 2026-10-10, text: "Maquette B validée par Sylvain 10-10 (Discord « ok B ») : barre collée sous l'en-tête (top = hauteur d'en-tête, une ligne) ; sous 760 px une seule ligne défilante ~44 px, bords estompés, toujours collante" }
   - id: L90
     title: "Sous-faction : « Unités notables » toujours vide — le gabarit lit unitIds (0/182) et ignore notableUnits (77/182) ; afficher notableUnits (revue UX L3)"
     public: "Sous-factions : les unités notables s'affichent"
@@ -771,6 +774,8 @@ lots:
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    notes:
+      - { date: 2026-10-10, text: "Maquette A validée par Sylvain 10-10 (Discord « ok A ») : retirer « Filtres rapides » et sa légende, « Ressources rapides » = 3 liens (Chronologie, Carte galactique, Concepts), panneau latéral masqué sous 760 px" }
   - id: L93
     title: "/factions (MAQUETTE A à valider par Sylvain) : « Ressources rapides » = 4 lignes au curseur main sans lien — liens chronologie, carte, concepts ; retirer « Relations entre factions » (revue UX L3)"
     public: "Factions : les ressources rapides mènent aux pages"
@@ -778,6 +783,8 @@ lots:
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    notes:
+      - { date: 2026-10-10, text: "Maquette A validée par Sylvain 10-10 (Discord « ok A ») : retirer « Filtres rapides » et sa légende, « Ressources rapides » = 3 liens (Chronologie, Carte galactique, Concepts), panneau latéral masqué sous 760 px" }
   - id: L94
     title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
     public: "Fiches faction : des liens latéraux qui mènent où ils le disent"
