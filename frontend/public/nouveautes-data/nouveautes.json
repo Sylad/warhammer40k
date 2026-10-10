@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 23:45",
+  "generated": "2026-10-11 00:12",
   "entries": [
+    {
+      "slug": "2026-10-10-factions-les-ressources-rapides-menent-aux-pages",
+      "title": "Factions : les ressources rapides mènent aux pages",
+      "date": "2026-10-10",
+      "lots": [
+        "L93"
+      ],
+      "captures": [
+        "captures/L93-factions-ressources.png"
+      ],
+      "alts": [
+        "La page Factions : à droite, le panneau « Ressources rapides » avec trois lignes, Chronologie, Carte galactique et Concepts"
+      ],
+      "html": "<p>Sur la page Factions, le panneau « Ressources rapides » propose maintenant trois liens qui s'ouvrent vraiment : « Chronologie », « Carte galactique » et « Concepts ». Chaque ligne se clique et se choisit au clavier, et le curseur en forme de main correspond à un lien réel.</p>\n<p>Les lignes « Relations entre factions » et « Lexique », qui n'ouvraient aucune page, sont retirées.</p>"
+    },
     {
       "slug": "2026-10-10-factions-le-filtre-autres-et-le-panneau-lateral-corriges",
       "title": "Factions : le filtre « Autres » et le panneau latéral corrigés",

@@ -23,13 +23,6 @@ const WIKI_SEARCH: Record<string, string> = {
 type SortKey = 'az' | 'units' | 'alignement';
 type FilterKey = 'all' | 'Imperium' | 'Chaos' | 'Xenos' | 'autres';
 
-const RESOURCES = [
-  { ico: '⌚', label: 'Timeline du 41e millénaire', sub: 'Voir les grands événements' },
-  { ico: '⊛', label: 'Carte galactique', sub: 'Explorer la galaxie' },
-  { ico: '⚠', label: 'Relations entre factions', sub: 'Alliances, guerres et rivalités' },
-  { ico: '▤', label: 'Lexique Warhammer 40,000', sub: 'Termes et définitions clés' },
-];
-
 @Component({
   selector: 'app-factions',
   standalone: true,
@@ -102,15 +95,27 @@ const RESOURCES = [
 
         <section class="side-panel">
           <h3>Ressources rapides</h3>
-          @for (r of resources; track r.label) {
-            <div class="resource-row">
-              <div class="resource-ico">{{ r.ico }}</div>
-              <div>
-                <strong>{{ r.label }}</strong>
-                <span>{{ r.sub }}</span>
-              </div>
+          <a class="resource-row" routerLink="/lore/timeline">
+            <div class="resource-ico">⌚</div>
+            <div>
+              <strong>Chronologie</strong>
+              <span>Voir les grands événements</span>
             </div>
-          }
+          </a>
+          <a class="resource-row" routerLink="/lore/galaxy">
+            <div class="resource-ico">⊛</div>
+            <div>
+              <strong>Carte galactique</strong>
+              <span>Explorer la galaxie</span>
+            </div>
+          </a>
+          <a class="resource-row" routerLink="/lore/concepts">
+            <div class="resource-ico">▤</div>
+            <div>
+              <strong>Concepts</strong>
+              <span>Termes et notions clés</span>
+            </div>
+          </a>
         </section>
       </aside>
     </section>
@@ -133,7 +138,6 @@ export class FactionsComponent {
   readonly searchQuery = signal('');
   readonly sortKey = signal<SortKey>('az');
 
-  readonly resources = RESOURCES;
 
   readonly unitCountByFaction = computed(() => {
     const map = new Map<string, number>();

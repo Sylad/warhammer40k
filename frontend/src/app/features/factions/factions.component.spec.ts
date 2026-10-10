@@ -95,3 +95,19 @@ describe('liste des factions — filtre « Autres » et panneau latéral (L92)',
     expect(el.textContent).not.toMatch(/Loyal|Hostile/);
   });
 });
+
+// L93 — « Ressources rapides » : trois liens (Chronologie, Carte galactique, Concepts), plus de
+// « Relations entre factions » ni de ligne cliquable sans destination.
+describe('liste des factions — ressources rapides (L93)', () => {
+  it('trois liens <a href> vers la chronologie, la carte et les concepts', async () => {
+    const service = fakeWarhammerService({ factions$: of([F('a')]), getUnits: () => of([]) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    const liens = [...el.querySelectorAll<HTMLAnchorElement>('.side-panel a.resource-row')];
+    expect(liens.map((a) => a.getAttribute('href'))).toEqual(['/lore/timeline', '/lore/galaxy', '/lore/concepts']);
+    expect(el.querySelector('div.resource-row')).toBeNull();
+    expect(el.textContent).not.toContain('Relations entre factions');
+  });
+});

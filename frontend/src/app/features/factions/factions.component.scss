@@ -258,9 +258,12 @@
       align-items: center;
       padding: 10px 0;
       border-top: 1px solid rgba(201, 162, 74, 0.12);
+      color: inherit;
+      text-decoration: none;
       cursor: pointer;
       transition: opacity 0.2s;
     }
+    .resource-row:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .resource-row:first-of-type { border-top: 0; padding-top: 0; }
     .resource-row:hover { opacity: 0.85; }
     .resource-ico {
