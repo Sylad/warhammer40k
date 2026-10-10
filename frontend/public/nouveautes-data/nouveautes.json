@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 16:09",
+  "generated": "2026-10-10 16:14",
   "entries": [
     {
       "slug": "2026-10-10-accueil-les-symboles-decoratifs-ne-sont-plus-lus-aux-lecteur",
@@ -9,8 +9,13 @@
       "lots": [
         "L81"
       ],
-      "captures": [],
-      "html": "<p>Sur l’<strong>accueil</strong>, un lecteur d’écran ne lit plus les symboles décoratifs : ⚔ et ✠ devant les boutons d’en-tête, les emblèmes ✠ ⚜ ☠ des trois cartes de lore, les icônes ⚔ ▤ ▶ ▦ et la flèche → des cartes Factions, Romans, Vidéos et Galerie, ainsi que les icônes des Brèves. Un lien est annoncé par son seul texte (« Explorer les factions », « Le Trône d’Or »). Rien ne change à l’écran.</p>"
+      "captures": [
+        "captures/L81-accueil-symboles.png"
+      ],
+      "alts": [
+        "L’accueil, identique à l’écran : les symboles ⚔ ✠ ⚜ ☠ restent affichés, seul leur annonce par un lecteur d’écran disparaît"
+      ],
+      "html": "<p>Sur l’<strong>accueil</strong>, un lecteur d’écran ne lit plus les symboles décoratifs : ⚔ et ✠ devant les boutons d’en-tête, les emblèmes ✠ ⚜ ☠ des trois cartes de lore, les icônes ⚔ ▤ ▶ ▦ et la flèche → des cartes Factions, Romans, Vidéos et Galerie, ainsi que les icônes des Brèves. Un lien est annoncé par son seul texte (« Explorer les factions », « Le Trône d’Or »). Rien ne change à l’écran.</p>"
     },
     {
       "slug": "2026-10-10-accueil-au-telephone-page-plus-courte-statistiques-reduites",
