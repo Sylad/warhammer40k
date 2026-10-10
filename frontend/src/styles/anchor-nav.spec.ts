@@ -44,13 +44,13 @@ describe('barre d\'ancres des fiches (L89)', () => {
     expect(token).toBe(topbar);
   });
 
-  it('sous 1280 px : une seule ligne défilante, bords estompés, hauteur déclarée (pas de 2e ligne)', () => {
-    const nav = decls('.anchor-nav', /max-width:\s*1279px/);
+  it('sous 1320 px : une seule ligne défilante, bords estompés, hauteur déclarée (pas de 2e ligne)', () => {
+    const nav = decls('.anchor-nav', /max-width:\s*1319px/);
     expect(nav['flex-wrap']).toBe('nowrap');
     expect(nav['overflow-x']).toBe('auto');
     expect(nav.height).toBe('var(--anchor-nav-h)');
     expect(nav['mask-image']).toMatch(/linear-gradient/);
-    const link = decls('.anchor-nav a', /max-width:\s*1279px/);
+    const link = decls('.anchor-nav a', /max-width:\s*1319px/);
     expect(link['white-space']).toBe('nowrap');
     expect(link['flex-shrink']).toBe('0');
   });

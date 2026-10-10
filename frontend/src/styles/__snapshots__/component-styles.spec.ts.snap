@@ -954,23 +954,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "--anchor-nav-h": "60px",
     "--anchor-offset": "calc(var(--topbar-h) + var(--anchor-nav-h) + 12px)",
   },
-  "@media (max-width: 1279px) .anchor-nav": {
-    "-webkit-mask-image": "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
-    "align-items": "center",
-    "flex-wrap": "nowrap",
-    "height": "var(--anchor-nav-h)",
-    "mask-image": "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
-    "overflow-x": "auto",
-    "padding": "0 16px",
-    "scrollbar-width": "none",
-  },
-  "@media (max-width: 1279px) .anchor-nav a": {
-    "flex-shrink": "0",
-    "white-space": "nowrap",
-  },
-  "@media (max-width: 1279px) .anchor-nav::-webkit-scrollbar": {
-    "display": "none",
-  },
   "@media (max-width: 1280px) .hero-text": {
     "max-width": "80%",
   },
@@ -980,6 +963,23 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 1280px) .sidebar": {
     "position": "relative",
     "top": "auto",
+  },
+  "@media (max-width: 1319px) .anchor-nav": {
+    "-webkit-mask-image": "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
+    "align-items": "center",
+    "flex-wrap": "nowrap",
+    "height": "var(--anchor-nav-h)",
+    "mask-image": "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
+    "overflow-x": "auto",
+    "padding": "0 16px",
+    "scrollbar-width": "none",
+  },
+  "@media (max-width: 1319px) .anchor-nav a": {
+    "flex-shrink": "0",
+    "white-space": "nowrap",
+  },
+  "@media (max-width: 1319px) .anchor-nav::-webkit-scrollbar": {
+    "display": "none",
   },
   "@media (max-width: 760px) .anchor-nav": {
     "margin-bottom": "16px",
@@ -3075,7 +3075,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "grid-template-columns": "280px 1fr",
     "padding": "40px 32px",
   },
-  "@media (max-width: 1279px) .anchor-nav": {
+  "@media (max-width: 1319px) .anchor-nav": {
     "-webkit-mask-image": "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
     "align-items": "center",
     "flex-wrap": "nowrap",
@@ -3085,11 +3085,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "0 16px",
     "scrollbar-width": "none",
   },
-  "@media (max-width: 1279px) .anchor-nav a": {
+  "@media (max-width: 1319px) .anchor-nav a": {
     "flex-shrink": "0",
     "white-space": "nowrap",
   },
-  "@media (max-width: 1279px) .anchor-nav::-webkit-scrollbar": {
+  "@media (max-width: 1319px) .anchor-nav::-webkit-scrollbar": {
     "display": "none",
   },
   "@media (max-width: 760px) .anchor-nav": {
@@ -3503,7 +3503,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "position": "relative",
     "top": "auto",
   },
-  "@media (max-width: 1279px) .anchor-nav": {
+  "@media (max-width: 1319px) .anchor-nav": {
     "-webkit-mask-image": "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
     "align-items": "center",
     "flex-wrap": "nowrap",
@@ -3513,11 +3513,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "0 16px",
     "scrollbar-width": "none",
   },
-  "@media (max-width: 1279px) .anchor-nav a": {
+  "@media (max-width: 1319px) .anchor-nav a": {
     "flex-shrink": "0",
     "white-space": "nowrap",
   },
-  "@media (max-width: 1279px) .anchor-nav::-webkit-scrollbar": {
+  "@media (max-width: 1319px) .anchor-nav::-webkit-scrollbar": {
     "display": "none",
   },
   "@media (max-width: 760px) .anchor-nav": {

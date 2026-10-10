@@ -4,7 +4,7 @@
  * peut surcharger le conteneur dans sa propre feuille (primarch-detail).
  *
  * L89 : la barre se colle SOUS l'en-tête (top = --topbar-h, défini dans styles.scss et égal à la
- * hauteur du .topbar) ; à top 0 elle passait derrière lui. Sous 1280 px (là où les liens ne tiennent plus sur une ligne) elle tient sur une seule
+ * hauteur du .topbar) ; à top 0 elle passait derrière lui. Sous 1320 px (les liens des fiches primarque à dix entrées passent sur deux lignes jusqu’à ~1297 px avec une barre de défilement de 17 px) elle tient sur une seule
  * ligne défilante de --anchor-nav-h (60 px, 44 px sous 760 px), bords estompés. --anchor-offset = place à laisser au-dessus
  * d'une cible d'ancre (scroll-margin-top) : en-tête + barre + un souffle. */
 :root {
@@ -42,7 +42,7 @@ html:has(.anchor-nav) { scroll-padding-top: var(--anchor-offset); }
   background: rgba(201, 162, 74, 0.06);
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1319px) {
   .anchor-nav {
     flex-wrap: nowrap;
     overflow-x: auto;
