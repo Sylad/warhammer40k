@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 16:14",
+  "generated": "2026-10-10 16:38",
   "entries": [
+    {
+      "slug": "2026-10-10-breves-textes-relus-et-libelles-lisibles",
+      "title": "Brèves : textes relus et libellés lisibles",
+      "date": "2026-10-10",
+      "lots": [
+        "L82"
+      ],
+      "captures": [
+        "captures/L82-breves.png"
+      ],
+      "alts": [
+        "Les brèves de l’accueil : libellé de type (ÉVÉNEMENT, MENACE…) plus grand au-dessus de chaque titre"
+      ],
+      "html": "<p>Sur l’<strong>accueil</strong>, les brèves du 41ᵉ millénaire ont été relues : des fautes sont corrigées (« d’Vulkan » devient « de Vulkan », « Éveil de la Bête » reprend son accent) et quelques formules bancales sont réécrites. Le petit libellé de type au-dessus de chaque titre (Événement, Menace, Guerre…) passe de 9 à 12 px et se lit sans effort.</p>"
+    },
     {
       "slug": "2026-10-10-accueil-les-symboles-decoratifs-ne-sont-plus-lus-aux-lecteur",
       "title": "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran",
