@@ -167,6 +167,7 @@
       background: linear-gradient(180deg, rgba(19,15,11,0.92), rgba(5,4,3,0.96));
       padding: 28px 30px;
       box-shadow: var(--shadow);
+      scroll-margin-top: var(--anchor-offset);
     }
     .lore-grid {
       display: grid;
@@ -215,7 +216,8 @@
     }
 
     /* SUBFACTIONS */
-    .subfactions { margin-bottom: 36px; }
+    .subfactions { margin-bottom: 36px; scroll-margin-top: var(--anchor-offset); }
+    .units { scroll-margin-top: var(--anchor-offset); }
     .sf-count {
       color: var(--gold);
       font-size: 11px;

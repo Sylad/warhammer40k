@@ -63,4 +63,21 @@ describe('barre d\'ancres des fiches (L89)', () => {
     }
     expect(css).toMatch(/--anchor-offset:\s*calc\(var\(--topbar-h\) \+ var\(--anchor-nav-h\)/);
   });
+
+  it('fiche faction : CHAQUE cible de la barre laisse la place à l\'en-tête ET à la barre', () => {
+    const ts = readFileSync(resolve(src, 'app/features/faction-detail/faction-detail.component.ts'), 'utf8');
+    const ids = [...ts.matchAll(/<a href="#(\w+)" \(click\)="scrollTo/g)].map((m) => m[1]);
+    expect(ids.length).toBeGreaterThan(5);
+    const compiled = postcss.parse(sass.compile(resolve(src, 'app/features/faction-detail/faction-detail.component.scss')).css);
+    for (const id of ids) {
+      const cls = new RegExp(`<section class="([\\w-]+)"[^>]*id="${id}"`).exec(ts)?.[1];
+      expect(cls, `balise de #${id}`).toBeDefined();
+      let ok = false;
+      compiled.walkRules((r) => {
+        if (!r.selectors.some((sel) => new RegExp(`\\.${cls}$`).test(sel.trim()))) return;
+        r.walkDecls('scroll-margin-top', (d) => { if (d.value === 'var(--anchor-offset)') ok = true; });
+      });
+      expect(ok, `#${id} (.${cls}) sans scroll-margin-top: var(--anchor-offset)`).toBe(true);
+    }
+  });
 });

@@ -361,6 +361,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "border": "1px solid var(--border)",
     "box-shadow": "var(--shadow)",
     "padding": "28px 30px",
+    "scroll-margin-top": "var(--anchor-offset)",
   },
   ".lore-col p": {
     "color": "#c3baaa",
@@ -775,6 +776,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".subfactions": {
     "margin-bottom": "36px",
+    "scroll-margin-top": "var(--anchor-offset)",
   },
   ".t-flourish": {
     "color": "var(--gold)",
@@ -929,6 +931,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".unit-extra:hover": {
     "border-color": "var(--gold-bright)",
+  },
+  ".units": {
+    "scroll-margin-top": "var(--anchor-offset)",
   },
   ".units-grid": {
     "display": "grid",
