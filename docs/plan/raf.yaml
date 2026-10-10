@@ -617,6 +617,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant — orchestré (vague 2026-10-10-1345, 0 passe(s) de correction)", commit: 805617b25ce8d07f919d44b03f419fa84cda4c06 }
   - id: L79
     title: "Accueil : compteurs à « 0 » pendant le chargement (initialValue []) et sur erreur d'API, sans message ni Réessayer — valeur initiale null → « — », message + Réessayer (l'état « À propos » figé reste L38) (revue UX L2, majeur Nielsen 1)"
     public: "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur"
