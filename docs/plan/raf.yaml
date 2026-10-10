@@ -17,10 +17,13 @@ lots:
     finished: 2026-09-28
   - id: L2
     title: Revue UX — Accueil
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-10
+    notes:
+      - { date: 2026-10-10, text: "Revue UX 10-10 (agent, prod, 1440/768/390/320, états chargé/chargement/erreur/focus) : 0 bloquant, 3 majeurs, 6 mineurs → 7 lots posés ; notes : focus des liens de l'accueil en outline navigateur (règle globale à étendre aux .cta-*, .ql-card, .shortcut), libellés « 6 sections lore »/« artworks », deux liens vers /lore/emperor à 70 px ; déjà planifié L32 L37 L38 L73 L69 L21 L46 L61 L41 L44 ; maquette M3 (option B) à valider par Sylvain. Captures tmp/ux-wh-L2/" }
+    finished: 2026-10-10
   - id: L3
     title: "Revue UX — Factions : liste, fiche faction, sous-faction"
     status: todo
@@ -606,6 +609,55 @@ lots:
     started: 2026-10-07
     review: { date: 2026-10-07, verdict: "conforme (lead) : cadence.yaml seul, orchestrate.ux au format lu par readOrchestrateConfig, commande POSIX essayée sous groupe de processus → HTTP 200, ports libérés après kill", commit: 12fbf9ebcb687d3c484347aa5c1eb842e85c4c3f }
     finished: 2026-10-07
+  - id: L78
+    title: "Accueil : texte des cartes raccourcis sur image à 3,3:1 (p10, Romans/Factions) — voile ≥ 0,8 dès le sous-titre ou pastille var(--panel) derrière .shortcut-content, remesurer ≥ 4,5:1 ; image Black Library plus sombre (revue UX L2, majeur WCAG 1.4.3)"
+    public: "Accueil : le texte des cartes reste lisible sur toute image"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L79
+    title: "Accueil : compteurs à « 0 » pendant le chargement (initialValue []) et sur erreur d'API, sans message ni Réessayer — valeur initiale null → « — », message + Réessayer (l'état « À propos » figé reste L38) (revue UX L2, majeur Nielsen 1)"
+    public: "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L80
+    title: "Accueil au téléphone : barre de statistiques de 392 px (5 lignes empilées + citation) répète les nombres des cartes — maquette B : masquer .stats-bar sous 760 px et porter « 182 sous-factions » sur la carte Factions (à valider par Sylvain) (revue UX L2, majeur Nielsen 8)"
+    public: "Accueil au téléphone : page plus courte, statistiques réduites"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L81
+    title: "Accueil : glyphes décoratifs (⚔ ▤ ▶ ▦ ✠ ⚜ ☠ →) lus par les lecteurs d'écran — aria-hidden comme L39 ailleurs (revue UX L2, mineur)"
+    public: "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran"
+    status: todo
+    estimate: 0.1
+    visible: true
+    created: 2026-10-10
+  - id: L82
+    title: "Brèves : relire les 40 entrées de backend/seed/lore-feed.json (« d'Vulkan », « âmes-piscine », « Eveil », accents), libellé de type à 9 px trop petit (revue UX L2, mineur)"
+    public: "Brèves : textes relus et libellés lisibles"
+    status: todo
+    estimate: 0.1
+    visible: true
+    created: 2026-10-10
+  - id: L83
+    title: "Accueil : « 41e » passé en capitales (« 41E MILLÉNAIRE ») par text-transform, deux procédés d'exposant — sup { text-transform: none }, un seul procédé (revue UX L2, mineur)"
+    public: "Accueil : « 41e millénaire » correctement écrit"
+    status: todo
+    estimate: 0.1
+    visible: true
+    created: 2026-10-10
+  - id: L84
+    title: "Accueil : images Wikia sous-dimensionnées (hero 700 px affiché 1 364, Black Library 200 px étirée 326) — scale-to-width-down/1400 ou visuels ≥ 700 px, lié L41/L44 (revue UX L2, mineur)"
+    public: "Accueil : images du bandeau et des cartes nettes"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
