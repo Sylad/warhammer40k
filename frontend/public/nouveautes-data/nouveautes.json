@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 22:40",
+  "generated": "2026-10-10 23:45",
   "entries": [
+    {
+      "slug": "2026-10-10-factions-le-filtre-autres-et-le-panneau-lateral-corriges",
+      "title": "Factions : le filtre « Autres » et le panneau latéral corrigés",
+      "date": "2026-10-10",
+      "lots": [
+        "L92"
+      ],
+      "captures": [
+        "captures/L92-factions-panneau.png"
+      ],
+      "alts": [
+        "La page Factions : barre de filtres au-dessus de la grille, et à droite deux panneaux seulement, « À propos des factions » et « Ressources rapides »"
+      ],
+      "html": "<p>Sur la page <strong>Factions</strong>, le bouton « Autres » filtre désormais vraiment : il ne garde que les factions qui ne sont ni Imperium, ni Chaos, ni Xénos, au lieu d'afficher les 17 factions comme « Toutes les factions ». Quand aucune faction ne correspond, un message le dit.</p>\n<p>Le panneau latéral « Filtres rapides », qui répétait les boutons de la barre du haut, et sa légende Loyal / Neutre / Hostile sont retirés. Il ne reste que « À propos des factions » et « Ressources rapides ». Sous 760 px de large (téléphone), le panneau latéral est masqué pour laisser la place aux cartes.</p>"
+    },
     {
       "slug": "2026-10-10-fiches-la-barre-des-sections-reste-visible-sous-l-en-tete",
       "title": "Fiches : la barre des sections reste visible sous l'en-tête",
