@@ -655,6 +655,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 0 mineur) — revue légère Sonnet, vague 2026-10-10-1605 ; verdict confirmé par le lead après l'incident des captures écrites à la racine (déplacées dans tmp)", commit: 22c426242f654b2dafed4cc4df49bcf94398001f }
   - id: L82
     title: "Brèves : relire les 40 entrées de backend/seed/lore-feed.json (« d'Vulkan », « âmes-piscine », « Eveil », accents), libellé de type à 9 px trop petit (revue UX L2, mineur)"
     public: "Brèves : textes relus et libellés lisibles"
