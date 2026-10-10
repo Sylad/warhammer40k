@@ -621,10 +621,11 @@ lots:
   - id: L79
     title: "Accueil : compteurs à « 0 » pendant le chargement (initialValue []) et sur erreur d'API, sans message ni Réessayer — valeur initiale null → « — », message + Réessayer (l'état « À propos » figé reste L38) (revue UX L2, majeur Nielsen 1)"
     public: "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-10-10
   - id: L80
     title: "Accueil au téléphone : barre de statistiques de 392 px (5 lignes empilées + citation) répète les nombres des cartes — maquette B : masquer .stats-bar sous 760 px et porter « 182 sous-factions » sur la carte Factions (à valider par Sylvain) (revue UX L2, majeur Nielsen 8)"
     public: "Accueil au téléphone : page plus courte, statistiques réduites"
