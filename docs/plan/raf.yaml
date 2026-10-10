@@ -26,9 +26,13 @@ lots:
     finished: 2026-10-10
   - id: L3
     title: "Revue UX — Factions : liste, fiche faction, sous-faction"
-    status: todo
+    status: done
     estimate: 0.25
     created: 2026-09-28
+    notes:
+      - { date: 2026-10-10, text: "Revue UX 10-10 (ux-reviewer Opus, prod, 1440/390/320, 182 sous-factions) : non conforme — 2 bloquants, 11 majeurs, 2 mineurs → L87 à L101 ; maquettes A (panneau latéral /factions : L92 L93) et B (barre d'ancres au téléphone : L89) à valider par Sylvain. Notes : L56 (404 Fandom = PNG 80 px, repli jamais déclenché, alt logo vide), L43 (fil d'Ariane Accueil › Sous-Factions sans faction parente), L40 (Space Marines 15 224 px à 390, encart latéral redit le bandeau), « 1.000+ » → « 1 000+ », badges d'unité à 9 px. Captures : ~/projects/developpeur/tmp/ux-wh-factions/" }
+    started: 2026-10-10
+    finished: 2026-10-10
   - id: L4
     title: Revue UX — Fiche unité (datasheet)
     status: todo
@@ -719,6 +723,107 @@ lots:
     notes:
       - { date: 2026-10-10, text: "Revue : le test ne protège pas le picto ⌕ de la recherche (aria-hidden présent dans le gabarit, absent de la liste du test) — accepté" }
       - { date: 2026-10-10, text: "QA prod 10-10 (lead, Playwright sur sha-5919549… livré 5d9080a) : 0 glyphe décoratif non masqué sur / à 1440 et 390 ; L85 : 0 astérisque visible sur /nouveautes, 4 <em> (Horus Rising, Space Marine 2) — le rendu italique se fait dans le composant, le JSON garde *titre*" }
+  - id: L87
+    title: "Factions : cartes faction et unité (article routerLink) inopérantes au clavier, Entrée/Espace sans effet, « Voir toutes les unités » non focalisable — liens <a> et bouton (WCAG 2.1.1, revue UX L3, bloquant)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-10
+  - id: L88
+    title: "Sous-faction : bandeau rogné au téléphone (57/182 pages à 320 px, Shadowkeepers +80 px à 390) — minmax(0,1fr), h1 césurable, test de reflow (WCAG 1.4.10, revue UX L3, bloquant)"
+    public: "Sous-factions : le bandeau n'est plus rogné au téléphone"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L89
+    title: "Barre d'ancres des fiches (MAQUETTE B à valider par Sylvain) : collée à top 0 sous l'en-tête (cachée à 1440, focus masqué), 191 px à 390 — top = hauteur d'en-tête, une ligne défilante au téléphone (WCAG 2.4.11, revue UX L3)"
+    public: "Fiches : la barre des sections reste visible sous l'en-tête"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L90
+    title: "Sous-faction : « Unités notables » toujours vide — le gabarit lit unitIds (0/182) et ignore notableUnits (77/182) ; afficher notableUnits (revue UX L3)"
+    public: "Sous-factions : les unités notables s'affichent"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L91
+    title: "Sous-factions : date et résumé inversés dans 139/214 batailles notables (49 sous-factions, seed subfactions.json) — corriger le seed + test de forme de la date (revue UX L3)"
+    public: "Sous-factions : la date et le récit des batailles sont à leur place"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L92
+    title: "/factions (MAQUETTE A à valider par Sylvain) : « Autres » rend les 17 factions (comparaison en minuscules) ; panneau « Filtres rapides » en double et légende Loyal/Neutre/Hostile sans objet — les retirer (revue UX L3)"
+    public: "Factions : le filtre « Autres » et le panneau latéral corrigés"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L93
+    title: "/factions (MAQUETTE A à valider par Sylvain) : « Ressources rapides » = 4 lignes au curseur main sans lien — liens chronologie, carte, concepts ; retirer « Relations entre factions » (revue UX L3)"
+    public: "Factions : les ressources rapides mènent aux pages"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L94
+    title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
+    public: "Fiches faction : des liens latéraux qui mènent où ils le disent"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L95
+    title: "Fiche faction sans unité (6 factions) : bouton « Explorer les unités », filtres et « Aucune unité ne correspond » sur un ensemble vide — masquer, message juste (revue UX L3)"
+    public: "Fiches faction sans unité : plus de recherche d'unités vide"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L96
+    title: "/factions : grille vide au chargement et sur erreur d'API, « UNITÉS 0 » tant que les unités chargent, recherche sans résultat muette — états + région live (revue UX L3, cf L79)"
+    public: "Factions : chargement, erreur et recherche vide annoncés"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L97
+    title: "/factions/<id inconnu> : titre « Faction introuvable » mais « Chargement de la faction... » sans fin — message d'erreur + lien vers /factions (revue UX L3)"
+    public: "Faction inconnue : un message clair au lieu d'un chargement sans fin"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L98
+    title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
+    public: "Sous-factions : les libellés du bandeau sont lisibles"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L99
+    title: "Contrôles sans nom ni état : sélecteur « Tri » sans nom accessible, boutons de filtre sans aria-pressed (/factions et unités d'une faction) — WCAG 4.1.2 (revue UX L3)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-10
+  - id: L100
+    title: "Chapitres : portrait de primarque faux via la recherche wiki (Iron Hands → Fulgrim, Imperial Fists → un char) — image de la fiche primarque, alt vide (revue UX L3)"
+    public: "Chapitres : le bon portrait de primarque"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L101
+    title: "Pages faction : glyphes lus (✠ des titres, ⚔, ⌚⊛⚠▤, →) et « 41E » en capitales (/factions) — aria-hidden et règle sup globale, suites de L81/L83/L86 (revue UX L3)"
+    public: "Pages faction : symboles décoratifs muets et « 41ᵉ » correct"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

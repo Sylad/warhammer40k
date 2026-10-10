@@ -215,6 +215,71 @@
       "status": "done",
       "started": "2026-10-10",
       "finished": "2026-10-10"
+    },
+    {
+      "id": "L88",
+      "title": "Sous-factions : le bandeau n'est plus rogné au téléphone",
+      "status": "todo"
+    },
+    {
+      "id": "L89",
+      "title": "Fiches : la barre des sections reste visible sous l'en-tête",
+      "status": "todo"
+    },
+    {
+      "id": "L90",
+      "title": "Sous-factions : les unités notables s'affichent",
+      "status": "todo"
+    },
+    {
+      "id": "L91",
+      "title": "Sous-factions : la date et le récit des batailles sont à leur place",
+      "status": "todo"
+    },
+    {
+      "id": "L92",
+      "title": "Factions : le filtre « Autres » et le panneau latéral corrigés",
+      "status": "todo"
+    },
+    {
+      "id": "L93",
+      "title": "Factions : les ressources rapides mènent aux pages",
+      "status": "todo"
+    },
+    {
+      "id": "L94",
+      "title": "Fiches faction : des liens latéraux qui mènent où ils le disent",
+      "status": "todo"
+    },
+    {
+      "id": "L95",
+      "title": "Fiches faction sans unité : plus de recherche d'unités vide",
+      "status": "todo"
+    },
+    {
+      "id": "L96",
+      "title": "Factions : chargement, erreur et recherche vide annoncés",
+      "status": "todo"
+    },
+    {
+      "id": "L97",
+      "title": "Faction inconnue : un message clair au lieu d'un chargement sans fin",
+      "status": "todo"
+    },
+    {
+      "id": "L98",
+      "title": "Sous-factions : les libellés du bandeau sont lisibles",
+      "status": "todo"
+    },
+    {
+      "id": "L100",
+      "title": "Chapitres : le bon portrait de primarque",
+      "status": "todo"
+    },
+    {
+      "id": "L101",
+      "title": "Pages faction : symboles décoratifs muets et « 41ᵉ » correct",
+      "status": "todo"
     }
   ]
 }
