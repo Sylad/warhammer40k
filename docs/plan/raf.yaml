@@ -692,7 +692,22 @@ lots:
     ux: { date: 2026-10-10, verdict: "ok Sylvain 10-10 (Discord « ok L84 A ») : jaquette Space Marine 2 gardée sur la carte Vidéos ; revue UX auto conforme, 3 mineurs" }
     notes:
       - { date: 2026-10-10, text: "Revue : README collé à la puce Wiki-image proxy ; carte Romans 315 px pour 326 affichés (+3 %, invisible) — acceptés" }
+      - { date: 2026-10-10, text: "QA prod 10-10 (qa-reviewer Sonnet, / et /nouveautes, 1440/390) : L81 à L84 conformes (0 glyphe non masqué dans le contenu, libellé 12 px, 41e intact, images ≥ taille affichée sauf Romans 0,97/0,90 connu) ; écarts : astérisques littéraux dans l'entrée Nouveautés, 7 glyphes du gabarit non masqués ; docs/qa/expectations.md annonce 39 œuvres sur /gallery, /api/artworks en sert 35" }
     finished: 2026-10-10
+  - id: L85
+    title: "Nouveautés : l'entrée « images de l'accueil nettes » affiche des astérisques littéraux (*Horus Rising*, *Space Marine 2*) — rendre l'italique ou retirer les astérisques (QA prod 10-10)"
+    public: "Nouveautés : les titres d'œuvres s'affichent en italique"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
+  - id: L86
+    title: "Gabarit : le logo ⚜ (en-tête et pied) et les 5 pictos de la navigation ⚔ ▤ ▶ ▦ ✠ restent lus par les lecteurs d'écran — aria-hidden comme le reste (suite de L81, QA prod 10-10), test"
+    public: "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-10
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
