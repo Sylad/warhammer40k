@@ -626,6 +626,9 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "conforme (revue légère Sonnet vague 1345, confirmée par le lead 10-10) : 3 commits, 0 bloquant, 0 majeur, 3 mineurs (focus perdu après Réessayer, rechargement de toutes les sources, pas de libellé de chargement)", commit: 429def08f80b37f6674687ef1ae8ad72ac90c065 }
+    notes:
+      - { date: 2026-10-10, text: "mineurs revue 10-10 : focus perdu après Réessayer, Réessayer recharge toutes les sources, pas de libellé pendant le chargement ; captures de la revue déplacées dans tmp/ux-wh-L79/ (écrites à la racine par l'agent, 3e fois — corrigé par cadence L84, vague sur copie gelée)" }
   - id: L80
     title: "Accueil au téléphone : barre de statistiques de 392 px (5 lignes empilées + citation) répète les nombres des cartes — maquette B : masquer .stats-bar sous 760 px et porter « 182 sous-factions » sur la carte Factions (à valider par Sylvain) (revue UX L2, majeur Nielsen 8)"
     public: "Accueil au téléphone : page plus courte, statistiques réduites"
