@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 13:46",
+  "generated": "2026-10-10 14:08",
   "entries": [
+    {
+      "slug": "2026-10-10-accueil-plus-de-faux-0-pendant-le-chargement-ni-sur-erreur",
+      "title": "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur",
+      "date": "2026-10-10",
+      "lots": [
+        "L79"
+      ],
+      "captures": [
+        "captures/L79-accueil-erreur.png"
+      ],
+      "alts": [
+        "L’accueil quand les chiffres n’ont pas pu être chargés : un message et un bouton Réessayer au-dessus des cartes, « — » à la place des compteurs"
+      ],
+      "html": "<p>Sur l’<strong>accueil</strong>, les compteurs (Factions, Sous-factions, Romans, Vidéos, Œuvres) n’affichent plus « 0 » tant que les données arrivent, ni quand le chargement échoue : ils montrent « — ». Si un chiffre n’a pas pu être chargé, un message l’indique et un bouton <strong>Réessayer</strong> relance le chargement. Un vrai zéro reste affiché « 0 ».</p>"
+    },
     {
       "slug": "2026-10-10-accueil-le-texte-des-cartes-reste-lisible-sur-toute-image",
       "title": "Accueil : le texte des cartes reste lisible sur toute image",
