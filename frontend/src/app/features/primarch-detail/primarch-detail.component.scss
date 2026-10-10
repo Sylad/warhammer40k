@@ -225,7 +225,7 @@ h1 {
   background: rgba(11, 9, 7, 0.85);
   border: 1px solid var(--border);
   padding: 28px 32px;
-  scroll-margin-top: 80px;
+  scroll-margin-top: var(--anchor-offset);
   h2 {
     font-family: var(--serif);
     font-size: 24px;
@@ -789,7 +789,6 @@ h1 {
   :host { padding: 20px 14px 60px; }
   .hero-grid { padding: 24px 18px; gap: 20px; }
   .iconography-grid { grid-template-columns: 1fr 1fr; }
-  .anchor-nav { overflow-x: auto; flex-wrap: nowrap; a { white-space: nowrap; } }
   h1 { font-size: 36px; }
   .panel { padding: 22px 20px; }
 }

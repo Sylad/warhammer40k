@@ -1,0 +1,66 @@
+// @vitest-environment node
+import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import * as sass from 'sass';
+import postcss from 'postcss';
+
+/**
+ * L89 : la barre d'ancres des fiches se colle SOUS l'en-tête (top = hauteur de l'en-tête, pas 0 :
+ * à top 0 elle passait derrière l'en-tête, z-index 100) et tient sur une seule ligne défilante
+ * sous 760 px (191 px de haut à 390 px auparavant, WCAG 2.4.11 : le focus ne doit pas être masqué).
+ */
+const src = resolve(__dirname, '..');
+const css = sass.compile(resolve(src, 'styles/_anchor-nav.scss')).css;
+const root = postcss.parse(css);
+
+function decls(selector: string, media?: RegExp): Record<string, string> {
+  const out: Record<string, string> = {};
+  root.walkRules((rule) => {
+    const parent = rule.parent;
+    const inMedia = parent?.type === 'atrule' ? (parent as postcss.AtRule).params : undefined;
+    if (media ? !(inMedia && media.test(inMedia)) : inMedia) return;
+    if (!rule.selectors.includes(selector)) return;
+    rule.walkDecls((d) => { out[d.prop] = d.value; });
+  });
+  return out;
+}
+
+describe('barre d\'ancres des fiches (L89)', () => {
+  it('se colle sous l\'en-tête, à la hauteur de l\'en-tête', () => {
+    const nav = decls('.anchor-nav');
+    expect(nav.position).toBe('sticky');
+    expect(nav.top).toBe('var(--topbar-h)');
+    expect(nav['z-index']).toBeDefined();
+    expect(Number(nav['z-index'])).toBeLessThan(100); // sous l'en-tête (menus, tiroir)
+  });
+
+  it('la hauteur d\'en-tête déclarée est celle du .topbar', () => {
+    const styles = readFileSync(resolve(src, 'styles.scss'), 'utf8');
+    const layout = readFileSync(resolve(src, 'app/layout/main-layout/main-layout.component.ts'), 'utf8');
+    const token = /--topbar-h:\s*(\d+)px/.exec(styles)?.[1];
+    const topbar = /\.topbar \{[^}]*?height:\s*(\d+)px/.exec(layout)?.[1];
+    expect(token).toBeDefined();
+    expect(token).toBe(topbar);
+  });
+
+  it('sous 760 px : une seule ligne défilante, bords estompés, hauteur déclarée', () => {
+    const nav = decls('.anchor-nav', /max-width:\s*760px/);
+    expect(nav['flex-wrap']).toBe('nowrap');
+    expect(nav['overflow-x']).toBe('auto');
+    expect(nav.height).toBe('var(--anchor-nav-h)');
+    expect(nav['mask-image']).toMatch(/linear-gradient/);
+    const link = decls('.anchor-nav a', /max-width:\s*760px/);
+    expect(link['white-space']).toBe('nowrap');
+    expect(link['flex-shrink']).toBe('0');
+  });
+
+  it('les cibles d\'ancre laissent la place à l\'en-tête ET à la barre', () => {
+    for (const f of ['faction-detail', 'ship-detail', 'primarch-detail']) {
+      const scss = readFileSync(resolve(src, `app/features/${f}/${f}.component.scss`), 'utf8');
+      expect(scss, f).toMatch(/scroll-margin-top:\s*var\(--anchor-offset\)/);
+      expect(scss, f).not.toMatch(/scroll-margin-top:\s*80px/);
+    }
+    expect(css).toMatch(/--anchor-offset:\s*calc\(var\(--topbar-h\) \+ var\(--anchor-nav-h\)/);
+  });
+});

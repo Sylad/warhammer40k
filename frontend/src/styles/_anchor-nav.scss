@@ -1,7 +1,16 @@
 /* Barre d'ancres collante des pages détail (faction, primarque, vaisseau,
  * saint, titan, équipement, événement). Factorisée ici en L29 : la règle
  * était recopiée à l'identique dans trois feuilles de composant. Une page
- * peut surcharger le conteneur dans sa propre feuille (primarch-detail). */
+ * peut surcharger le conteneur dans sa propre feuille (primarch-detail).
+ *
+ * L89 : la barre se colle SOUS l'en-tête (top = --topbar-h, défini dans styles.scss et égal à la
+ * hauteur du .topbar) ; à top 0 elle passait derrière lui. Sous 760 px elle tient sur une seule
+ * ligne défilante de --anchor-nav-h, bords estompés. --anchor-offset = place à laisser au-dessus
+ * d'une cible d'ancre (scroll-margin-top) : en-tête + barre + un souffle. */
+:root {
+  --anchor-nav-h: 60px;
+  --anchor-offset: calc(var(--topbar-h) + var(--anchor-nav-h) + 12px);
+}
 .anchor-nav {
   display: flex;
   flex-wrap: wrap;
@@ -11,7 +20,7 @@
   background: rgba(11, 9, 7, 0.85);
   border: 1px solid var(--border);
   position: sticky;
-  top: 0;
+  top: var(--topbar-h);
   z-index: 5;
   backdrop-filter: blur(6px);
 }
@@ -30,4 +39,24 @@
   color: var(--gold-bright);
   border-color: var(--border-strong);
   background: rgba(201, 162, 74, 0.06);
+}
+
+@media (max-width: 760px) {
+  :root { --anchor-nav-h: 44px; }
+  .anchor-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    align-items: center;
+    height: var(--anchor-nav-h);
+    padding: 0 16px;
+    margin-bottom: 16px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  }
+  .anchor-nav::-webkit-scrollbar { display: none; }
+  .anchor-nav a {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 }
