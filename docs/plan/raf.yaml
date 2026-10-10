@@ -790,12 +790,13 @@ lots:
   - id: L93
     title: "/factions (MAQUETTE A à valider par Sylvain) : « Ressources rapides » = 4 lignes au curseur main sans lien — liens chronologie, carte, concepts ; retirer « Relations entre factions » (revue UX L3)"
     public: "Factions : les ressources rapides mènent aux pages"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
     notes:
       - { date: 2026-10-10, text: "Maquette A validée par Sylvain 10-10 (Discord « ok A ») : retirer « Filtres rapides » et sa légende, « Ressources rapides » = 3 liens (Chronologie, Carte galactique, Concepts), panneau latéral masqué sous 760 px" }
+    started: 2026-10-10
   - id: L94
     title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
     public: "Fiches faction : des liens latéraux qui mènent où ils le disent"
