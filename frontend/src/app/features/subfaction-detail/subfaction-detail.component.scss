@@ -129,7 +129,7 @@
       overflow: hidden;
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .unit-card:hover { transform: translateY(-4px); border-color: rgba(201, 162, 74, 0.55); }
+    .unit-card:is(a):hover { transform: translateY(-4px); border-color: rgba(201, 162, 74, 0.55); }
     .unit-thumb {
       aspect-ratio: 16 / 10;
       background-size: cover;

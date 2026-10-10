@@ -1,3 +1,4 @@
+import { notableCards } from './notable-units';
 import { Component, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -111,13 +112,23 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
 
           <section class="block">
             <h2>Unités notables</h2>
-            @if (d.units.length === 0) {
+            @if (d.units.length === 0 && d.notable.length === 0) {
               <p class="empty">
                 Aucune unité spécifiquement liée pour l'instant.
                 Voir <a [routerLink]="['/factions', d.subfaction.factionId]">toutes les unités de {{ d.faction?.nom }}</a>.
               </p>
             } @else {
               <div class="unit-grid">
+                @for (n of d.notable; track n.name) {
+                  <article class="unit-card">
+                    <div class="unit-thumb" [style.background-image]="noteBg(n.wikiQuery)"></div>
+                    <div class="unit-info">
+                      @if (n.role) { <span class="unit-type">{{ n.role }}</span> }
+                      <strong>{{ n.name }}</strong>
+                      @if (n.description) { <span class="unit-role">{{ n.description }}</span> }
+                    </div>
+                  </article>
+                }
                 @for (u of d.units; track u.id) {
                   <a class="unit-card" [routerLink]="['/units', u.id]">
                     <div class="unit-thumb" [style.background-image]="unitBg(u.id)"></div>
@@ -228,7 +239,7 @@ export class SubFactionDetailComponent {
                 ? this.service.getUnits(sub.factionId).pipe(map(units => units.filter(u => sub.unitIds!.includes(u.id))))
                 : of([] as Unit[])),
             ]).pipe(
-              map(([subfaction, faction, parent, successors, units]) => ({ subfaction, faction, parent, successors, units })),
+              map(([subfaction, faction, parent, successors, units]) => ({ subfaction, faction, parent, successors, units, notable: notableCards(subfaction) })),
             ),
           ),
           catchError(() => {
@@ -251,6 +262,12 @@ export class SubFactionDetailComponent {
         this.service.getWikiImage(q).subscribe(r => {
           if (r.imageUrl) this.heroBgUrl.set(`url('${r.imageUrl}')`);
         });
+        for (const n of d.notable) {
+          if (this.unitImgCache()[n.wikiQuery]) continue;
+          this.service.getWikiImage(n.wikiQuery).subscribe(r => {
+            if (r.imageUrl) this.unitImgCache.update(c => ({ ...c, [n.wikiQuery]: r.imageUrl! }));
+          });
+        }
         for (const u of d.units) {
           if (this.unitImgCache()[u.id]) continue;
           this.service.getWikiImage(`${u.nom} warhammer`).subscribe(r => {
@@ -261,6 +278,10 @@ export class SubFactionDetailComponent {
         }
       }
     });
+  }
+
+  noteBg(query: string): string {
+    return this.unitBg(query);
   }
 
   unitBg(unitId: string): string {
