@@ -673,6 +673,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 1 mineur : la règle sup ne couvre pas le <sup> injecté par innerHTML, sans effet visible aujourd'hui) — revue légère Sonnet, vague 2026-10-10-1605, confirmé par le lead après l'incident des captures (déplacées dans tmp)", commit: f5fe7f0e8ef55f0468a1b96e8972a4af79eb10b5 }
   - id: L84
     title: "Accueil : images Wikia sous-dimensionnées (hero 700 px affiché 1 364, Black Library 200 px étirée 326) — scale-to-width-down/1400 ou visuels ≥ 700 px, lié L41/L44 (revue UX L2, mineur)"
     public: "Accueil : images du bandeau et des cartes nettes"
