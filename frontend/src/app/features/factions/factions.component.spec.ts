@@ -49,3 +49,49 @@ describe('liste des factions — cartes au clavier (L87)', () => {
     expect(el.querySelector('article.card')).toBeNull();
   });
 });
+
+// L92 — « Autres » comparait l'alignement ('Imperium') à des minuscules : tout passait le filtre et
+// la liste restait à 17 factions. Le panneau « Filtres rapides » (doublon de la barre) et sa légende
+// Loyal/Neutre/Hostile (sans objet) sont retirés.
+describe('liste des factions — filtre « Autres » et panneau latéral (L92)', () => {
+  const mk = (id: string, alignement: string) => ({ ...F(id), alignement });
+  async function monte() {
+    const service = fakeWarhammerService({
+      factions$: of([mk('a', 'Imperium'), mk('b', 'Chaos'), mk('c', 'Xenos'), mk('d', 'Neutre')]),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    return f;
+  }
+  const noms = (el: HTMLElement) => [...el.querySelectorAll('a.card h2')].map((h) => h.textContent?.trim());
+
+  it('« Autres » ne garde que les factions hors Imperium, Chaos et Xénos', async () => {
+    const f = await monte();
+    const el = f.nativeElement as HTMLElement;
+    expect(noms(el)).toHaveLength(4);
+    f.componentInstance.filterKey.set('autres');
+    f.detectChanges();
+    expect(noms(el)).toEqual(['d']);
+  });
+
+  it('« Autres » sans résultat affiche un message au lieu d’une grille vide', async () => {
+    const f = await monte();
+    const el = f.nativeElement as HTMLElement;
+    f.componentInstance.filterKey.set('Chaos');
+    f.componentInstance.searchQuery.set('zzz');
+    f.detectChanges();
+    expect(noms(el)).toEqual([]);
+    expect(el.querySelector('.empty')?.textContent).toContain('Aucune faction');
+  });
+
+  it('le panneau « Filtres rapides » et la légende Loyal/Neutre/Hostile n’existent plus', async () => {
+    const f = await monte();
+    const el = f.nativeElement as HTMLElement;
+    const titres = [...el.querySelectorAll('.side-panel h3')].map((h) => h.textContent?.trim());
+    expect(titres).toEqual(['À propos des factions', 'Ressources rapides']);
+    expect(el.querySelector('.quick-block, .align-list, .qt')).toBeNull();
+    expect(el.textContent).not.toMatch(/Loyal|Hostile/);
+  });
+});

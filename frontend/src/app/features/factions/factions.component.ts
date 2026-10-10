@@ -85,8 +85,9 @@ const RESOURCES = [
               </div>
             </div>
           </a>
+        } @empty {
+          <p class="empty">Aucune faction ne correspond à ce filtre.</p>
         }
-
       </div>
 
       <aside class="sidebar">
@@ -110,27 +111,6 @@ const RESOURCES = [
               </div>
             </div>
           }
-        </section>
-
-        <section class="side-panel">
-          <h3>Filtres rapides</h3>
-          <div class="quick-block">
-            <strong>TYPE</strong>
-            <div class="quick-types">
-              <button class="qt qt-imp" (click)="filterKey.set('Imperium')">Imperium</button>
-              <button class="qt qt-chaos" (click)="filterKey.set('Chaos')">Chaos</button>
-              <button class="qt qt-xenos" (click)="filterKey.set('Xenos')">Xénos</button>
-              <button class="qt qt-other" (click)="filterKey.set('autres')">Autres</button>
-            </div>
-          </div>
-          <div class="quick-block">
-            <strong>ALIGNEMENT</strong>
-            <div class="align-list">
-              <span class="align-item"><span class="dot blue"></span>Loyal</span>
-              <span class="align-item"><span class="dot gold"></span>Neutre</span>
-              <span class="align-item"><span class="dot red"></span>Hostile</span>
-            </div>
-          </div>
         </section>
       </aside>
     </section>
@@ -168,9 +148,9 @@ export class FactionsComponent {
     const sort = this.sortKey();
     let out = f;
     if (filter === 'autres') {
-      // « Autres » = tout ce qui n'est pas un des 3 alignements principaux
-      // (le bouton était un no-op qui rendait la liste complète).
-      out = out.filter(x => !['imperium', 'chaos', 'xenos'].includes(x.alignement));
+      // « Autres » = tout ce qui n'est pas un des 3 alignements principaux (L92 : comparaison en
+      // minuscules des deux côtés, 'Imperium' n'égalait pas 'imperium' et les 17 factions passaient).
+      out = out.filter(x => !['imperium', 'chaos', 'xenos'].includes(x.alignement.toLowerCase()));
     } else if (filter !== 'all') {
       out = out.filter(x => x.alignement === filter);
     }
