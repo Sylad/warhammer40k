@@ -211,7 +211,8 @@
     {
       "id": "L86",
       "title": "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-10"
     }
   ]
 }

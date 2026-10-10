@@ -1,7 +1,17 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 17:56",
+  "generated": "2026-10-10 18:11",
   "entries": [
+    {
+      "slug": "2026-10-10-lecteurs-d-ecran-le-logo-et-les-pictos-de-la-navigation-ne-s",
+      "title": "Lecteurs d'écran : le logo et les pictos de la navigation ne sont plus lus",
+      "date": "2026-10-10",
+      "lots": [
+        "L86"
+      ],
+      "captures": [],
+      "html": "<p>Dans l’en-tête et le pied de page, un lecteur d’écran ne lit plus le logo ⚜. Dans la barre de navigation, il ne lit plus les pictos ⌂ ⚔ ▤ ▶ ▦ ✠ ni le chevron ▾ : chaque lien est annoncé par son seul texte (« Factions », « Romans », « Vidéos », « Galerie », « Lore »). Rien ne change à l’écran.</p>"
+    },
     {
       "slug": "2026-10-10-nouveautes-les-titres-d-uvres-s-affichent-en-italique",
       "title": "Nouveautés : les titres d'œuvres s'affichent en italique",
