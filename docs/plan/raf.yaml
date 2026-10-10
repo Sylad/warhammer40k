@@ -664,6 +664,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-10
+    review: { date: 2026-10-10, verdict: "compliant after 1 fix (0 bloquant, 0 majeur, 3 mineurs) : libellé à 12 px vu à l'écran, pas de débordement à 390 ; restent « de Ullanor » (lf-023) et quelques tournures dans les 40 brèves — revue légère Sonnet, vague 2026-10-10-1605, confirmé par le lead après l'incident des captures (déplacées dans tmp)", commit: fed073d40411f2b32e5079c8f7697e379801d99f }
   - id: L83
     title: "Accueil : « 41e » passé en capitales (« 41E MILLÉNAIRE ») par text-transform, deux procédés d'exposant — sup { text-transform: none }, un seul procédé (revue UX L2, mineur)"
     public: "Accueil : « 41e millénaire » correctement écrit"
