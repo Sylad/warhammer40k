@@ -1,7 +1,17 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 14:46",
+  "generated": "2026-10-10 16:09",
   "entries": [
+    {
+      "slug": "2026-10-10-accueil-les-symboles-decoratifs-ne-sont-plus-lus-aux-lecteur",
+      "title": "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran",
+      "date": "2026-10-10",
+      "lots": [
+        "L81"
+      ],
+      "captures": [],
+      "html": "<p>Sur l’<strong>accueil</strong>, un lecteur d’écran ne lit plus les symboles décoratifs : ⚔ et ✠ devant les boutons d’en-tête, les emblèmes ✠ ⚜ ☠ des trois cartes de lore, les icônes ⚔ ▤ ▶ ▦ et la flèche → des cartes Factions, Romans, Vidéos et Galerie, ainsi que les icônes des Brèves. Un lien est annoncé par son seul texte (« Explorer les factions », « Le Trône d’Or »). Rien ne change à l’écran.</p>"
+    },
     {
       "slug": "2026-10-10-accueil-au-telephone-page-plus-courte-statistiques-reduites",
       "title": "Accueil au téléphone : page plus courte, statistiques réduites",
