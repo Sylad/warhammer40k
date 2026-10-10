@@ -80,6 +80,21 @@
       }
     },
     {
+      "id": "L46",
+      "title": "Barre du haut : plus de débordement avec une grande police du navigateur",
+      "status": "todo"
+    },
+    {
+      "id": "L47",
+      "title": "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo",
+      "status": "todo"
+    },
+    {
+      "id": "L49",
+      "title": "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone",
+      "status": "todo"
+    },
+    {
       "id": "L50",
       "title": "Galerie : des statistiques lisibles sur toutes les images",
       "status": "done",
@@ -87,11 +102,21 @@
       "finished": "2026-10-04"
     },
     {
+      "id": "L53",
+      "title": "Galerie : textes et bouton Importer lisibles sur une image d'en-tête claire",
+      "status": "todo"
+    },
+    {
       "id": "L54",
       "title": "Galerie : les trois statistiques alignées au téléphone",
       "status": "done",
       "started": "2026-10-04",
       "finished": "2026-10-05"
+    },
+    {
+      "id": "L57",
+      "title": "Vidéos et Romans : plus de défilement horizontal parasite",
+      "status": "todo"
     },
     {
       "id": "L58",
@@ -117,6 +142,52 @@
         "done": 5,
         "total": 5
       }
+    },
+    {
+      "id": "L67",
+      "title": "Plan : le dernier lot s'affiche sous la barre quand on suit son lien",
+      "status": "todo"
+    },
+    {
+      "id": "L73",
+      "title": "Accueil : le compte des œuvres est le même que dans la galerie",
+      "status": "todo"
+    },
+    {
+      "id": "L78",
+      "title": "Accueil : le texte des cartes reste lisible sur toute image",
+      "status": "doing",
+      "started": "2026-10-10"
+    },
+    {
+      "id": "L79",
+      "title": "Accueil : plus de faux « 0 » pendant le chargement ni sur erreur",
+      "status": "todo"
+    },
+    {
+      "id": "L80",
+      "title": "Accueil au téléphone : page plus courte, statistiques réduites",
+      "status": "todo"
+    },
+    {
+      "id": "L81",
+      "title": "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran",
+      "status": "todo"
+    },
+    {
+      "id": "L82",
+      "title": "Brèves : textes relus et libellés lisibles",
+      "status": "todo"
+    },
+    {
+      "id": "L83",
+      "title": "Accueil : « 41e millénaire » correctement écrit",
+      "status": "todo"
+    },
+    {
+      "id": "L84",
+      "title": "Accueil : images du bandeau et des cartes nettes",
+      "status": "todo"
     }
   ]
 }

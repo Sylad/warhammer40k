@@ -13,6 +13,8 @@ interface ShortcutCard {
   count: () => number;
   countLabel: string;
   wikiQuery: string;
+  /** Image trop claire pour le texte : assombrie (L78). */
+  dim?: boolean;
 }
 
 const TYPE_LABEL: Record<string, string> = {
@@ -78,7 +80,7 @@ const TYPE_LABEL: Record<string, string> = {
     <section class="shortcuts">
       @for (s of shortcuts; track s.route) {
         <a class="shortcut" [routerLink]="s.route">
-          <div class="shortcut-img" [style.background-image]="shortcutImg(s.route)"></div>
+          <div class="shortcut-img" [class.dim]="s.dim" [style.background-image]="shortcutImg(s.route)"></div>
           <div class="shortcut-overlay"></div>
           <div class="shortcut-content">
             <div class="shortcut-ico">{{ s.ico }}</div>
@@ -174,6 +176,7 @@ export class DashboardComponent {
       count: () => this.series().length,
       countLabel: 'séries',
       wikiQuery: 'Black Library Warhammer 40000 books',
+      dim: true,
     },
     {
       route: '/videos',
