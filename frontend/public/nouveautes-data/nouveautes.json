@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-10 16:59",
+  "generated": "2026-10-10 17:14",
   "entries": [
+    {
+      "slug": "2026-10-10-accueil-images-du-bandeau-et-des-cartes-nettes",
+      "title": "Accueil : images du bandeau et des cartes nettes",
+      "date": "2026-10-10",
+      "lots": [
+        "L84"
+      ],
+      "captures": [
+        "captures/L84-accueil-images.png"
+      ],
+      "alts": [
+        "L’accueil à 1440 px : le bandeau du Trône d’Or et les quatre cartes Factions, Romans, Vidéos et Galerie, images nettes"
+      ],
+      "html": "<p>Sur l’<strong>accueil</strong>, l’image du bandeau (le Trône d’Or) n’est plus agrandie au-delà de sa taille : elle est chargée en 1 400 px de large, donc nette sur un grand écran. Les images des cartes sont chargées en 700 px, soit le double de leur largeur d’affichage. La carte <strong>Romans</strong> montre désormais la couverture d’*Horus Rising* au lieu du petit logo de Black Library, et la carte <strong>Vidéos</strong> une illustration de *Space Marine 2*, plus grande que l’ancienne.</p>"
+    },
     {
       "slug": "2026-10-10-accueil-41e-millenaire-correctement-ecrit",
       "title": "Accueil : « 41e millénaire » correctement écrit",
