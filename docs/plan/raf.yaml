@@ -650,10 +650,11 @@ lots:
   - id: L81
     title: "Accueil : glyphes décoratifs (⚔ ▤ ▶ ▦ ✠ ⚜ ☠ →) lus par les lecteurs d'écran — aria-hidden comme L39 ailleurs (revue UX L2, mineur)"
     public: "Accueil : les symboles décoratifs ne sont plus lus aux lecteurs d'écran"
-    status: todo
+    status: doing
     estimate: 0.1
     visible: true
     created: 2026-10-10
+    started: 2026-10-10
   - id: L82
     title: "Brèves : relire les 40 entrées de backend/seed/lore-feed.json (« d'Vulkan », « âmes-piscine », « Eveil », accents), libellé de type à 9 px trop petit (revue UX L2, mineur)"
     public: "Brèves : textes relus et libellés lisibles"
