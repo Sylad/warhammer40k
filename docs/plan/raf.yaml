@@ -642,6 +642,7 @@ lots:
     created: 2026-10-10
     notes:
       - { date: 2026-10-10, text: "DÉCISION Sylvain 10-10 : option B — sous 760 px, masquer .stats-bar et porter « 182 sous-factions » dans le pied de la carte Factions ; la citation du Trône rejoint le pied de page ou disparaît ; au-dessus de 1100 px inchangé" }
+      - { date: 2026-10-10, text: "QA prod 10-10 (nouvel agent qa-reviewer, / et /nouveautes, 1440 et 390) : conforme — contraste des cartes, compteurs chargés, barre de stats absente à 390 avec « 182 sous-factions » sur la carte, 3 entrées Nouveautés en tête ; états « — »/erreur de L79 non déclenchables en prod. Captures tmp/qa-wh-accueil/" }
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "conforme après 1 correctif mineur — orchestré (vague 2026-10-10-1345, 2 passe(s) de correction)", commit: 4b1a14019bb471c48727f9258802029f1ffcc8f2 }
     ux: { date: 2026-10-10, verdict: "conforme (Sylvain 10-10 sur la capture L80-accueil-telephone) : barre de statistiques masquée sous 760 px, « 182 sous-factions » sur la carte Factions" }
