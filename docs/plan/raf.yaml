@@ -718,6 +718,7 @@ lots:
     finished: 2026-10-10
     notes:
       - { date: 2026-10-10, text: "Revue : le test ne protège pas le picto ⌕ de la recherche (aria-hidden présent dans le gabarit, absent de la liste du test) — accepté" }
+      - { date: 2026-10-10, text: "QA prod 10-10 (lead, Playwright sur sha-5919549… livré 5d9080a) : 0 glyphe décoratif non masqué sur / à 1440 et 390 ; L85 : 0 astérisque visible sur /nouveautes, 4 <em> (Horus Rising, Space Marine 2) — le rendu italique se fait dans le composant, le JSON garde *titre*" }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
