@@ -156,4 +156,40 @@ describe('fiche faction — unités au clavier (L87)', () => {
     expect(extra!.type).toBe('button');
     expect(el.querySelector('article.unit-extra')).toBeNull();
   });
+
+  it('activer « Voir toutes les unités » garde le focus : première unité ajoutée', async () => {
+    const units = Array.from({ length: 30 }, (_, i) => ({
+      id: `u${i}`, nom: `Unité ${i}`, factionId: 'orks', type: 'Infanterie', description: 'd',
+    }));
+    const service = fakeWarhammerService({
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of(units as never),
+      getSubFactions: () => of([]),
+      videos$: of([]),
+      artworks$: of([]),
+    });
+    await setupTestBed([FactionDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'orks' })), snapshot: { fragment: null } } },
+    ]);
+    const f = TestBed.createComponent(FactionDetailComponent);
+    document.body.appendChild(f.nativeElement);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    const extra = el.querySelector<HTMLButtonElement>('button.unit-extra')!;
+    extra.focus();
+    expect(document.activeElement).toBe(extra);
+    extra.click();
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    expect(el.querySelector('button.unit-extra')).toBeNull();
+    const cards = el.querySelectorAll<HTMLAnchorElement>('a.unit-card');
+    expect(cards.length).toBe(30);
+    expect(document.activeElement).toBe(cards[7]);
+    f.nativeElement.remove();
+  });
 });

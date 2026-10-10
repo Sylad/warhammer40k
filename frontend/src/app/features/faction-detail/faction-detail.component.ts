@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, untracked } from '@angular/core';
+import { afterNextRender, Component, computed, DestroyRef, effect, ElementRef, inject, Injector, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -279,7 +279,7 @@ const DEFAULT_RESOURCES = [
                   </a>
                 }
                 @if (extraUnitCount() > 0) {
-                  <button type="button" class="unit-extra" (click)="resetUnitFilters()">
+                  <button type="button" class="unit-extra" (click)="revealAllUnits()">
                     <div class="ue-sigil">⚜</div>
                     <h3>Voir toutes les unités</h3>
                     <p>+{{ extraUnitCount() }} autres unités disponibles</p>
@@ -456,6 +456,8 @@ export class FactionDetailComponent {
   private readonly subFactionImgInflight = new Set<string>();
   private readonly primarchImgInflight = new Set<string>();
   private readonly route = inject(ActivatedRoute);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
 
   readonly typeFilters = TYPE_FILTERS;
   readonly longestWord = longestWord;
@@ -753,6 +755,16 @@ export class FactionDetailComponent {
     this.typeFilter.set('Tous');
     this.searchQuery.set('');
     this.showAllUnits.set(true);
+  }
+
+  /** Le bouton disparaît avec son clic : le focus passe à la première unité ajoutée (WCAG 2.4.3). */
+  revealAllUnits() {
+    const firstAdded = this.displayedUnits().length;
+    this.resetUnitFilters();
+    afterNextRender(
+      () => this.host.nativeElement.querySelectorAll<HTMLElement>('a.unit-card')[firstAdded]?.focus(),
+      { injector: this.injector },
+    );
   }
 
   heroImg(): string {
