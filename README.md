@@ -42,7 +42,7 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 - **Galerie 1500+ images** avec multi-catégorisation user (chips), import depuis Wikipedia Fandom / Reddit r/Warhammer40k / URL directe, catégories dynamiques (built-in + factions + customs) — **la recherche filtre aussi les cards de catégorie**
 - **Datasheets locales** : **119/133 unités** ont un visuel curé bundlé dans l'image Docker (HEAD-check + fallback wiki proxy)
 - **Lightbox plein écran** sur les figures notables (Civils, Primarques, Panthéon Chaos) avec mini-galerie multi-thumbs + lien vers /gallery filtré
-- **Wiki-image proxy** (Wikipedia Fandom EN) pour fetch les illustrations à la volée + cache in-memory + Lexicanum en fallback dédié
+- **Wiki-image proxy** (Wikipedia Fandom EN) pour fetch les illustrations à la volée + cache in-memory + Lexicanum en fallback dédié L’accueil redemande ses miniatures à Fandom à la taille d’affichage (1 400 px pour le bandeau, 700 px pour les cartes) : l’API ne renvoie que 700 px, `wikiThumbWidth` (`shared/media-thumb.ts`) réécrit la largeur.
 - **Black Library** — 38 séries de romans (incluant Drukhari, Grey Knights, Genestealer Cults) avec progression de lecture, badges et tags
 - **Vidéos lore** — chaînes YT (officielles + créateurs) catégorisées
 - **Lore narratif** : 6 sections Empereur, 20 fiches Primarques (9 loyalistes / 9 traîtres / 2 expurgés — chacun avec `loreLong` complet), 4 dieux Chaos, **13 organisations civiles** (incluant Imperial Navy avec classes de vaisseaux, Collegia Titanica avec classes de Titans, Conseil du Sigillite — Malcador & Valdor), 15 concepts (Trône d'Or, Astronomican, Webway, Cicatrix, etc.), carte galactique SVG calibrée (65 markers + 5 Segmenta Bézier)

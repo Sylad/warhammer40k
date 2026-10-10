@@ -3,7 +3,7 @@
 // tel quel dans `url(...)`, le navigateur demandait « /Emperor%20of%20Mankind… » et
 // « /ultramarines-brothers.jpg » : image cassée sur les 17 fiches faction.
 import { describe, expect, it } from 'vitest';
-import { createThumbResolver, isImageUrl, mediaThumbSource } from './media-thumb';
+import { createThumbResolver, isImageUrl, mediaThumbSource, wikiThumbWidth } from './media-thumb';
 
 describe('isImageUrl', () => {
   it('n’accepte que les adresses absolues http(s) et les chemins de l’API', () => {
@@ -73,5 +73,21 @@ describe('createThumbResolver (L39 : réponse en retard d’une autre faction)',
     r.destroy();
     s.next({ imageUrl: 'https://img/late.jpg' });
     expect(value).toBeNull();
+  });
+});
+
+// L84 — l'accueil affichait le héros (700 px demandés) sur 1 364 px : l'API du wiki est
+// interrogée à 700 px, il faut redemander la miniature à la largeur d'affichage.
+describe('wikiThumbWidth', () => {
+  const base = 'https://static.wikia.nocookie.net/warhammer40k/images/2/23/Throne.jpg/revision/latest';
+  it('remplace la largeur demandée d’une miniature Fandom', () => {
+    expect(wikiThumbWidth(`${base}/scale-to-width-down/700?cb=1`, 1400)).toBe(`${base}/scale-to-width-down/1400?cb=1`);
+  });
+  it('ajoute la largeur à une adresse d’original', () => {
+    expect(wikiThumbWidth(`${base}?cb=1`, 700)).toBe(`${base}/scale-to-width-down/700?cb=1`);
+  });
+  it('laisse intactes les autres adresses', () => {
+    expect(wikiThumbWidth('/api/images/file/a.jpg', 1400)).toBe('/api/images/file/a.jpg');
+    expect(wikiThumbWidth('https://example.org/a.jpg', 1400)).toBe('https://example.org/a.jpg');
   });
 });

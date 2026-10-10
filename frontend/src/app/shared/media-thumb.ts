@@ -57,3 +57,16 @@ export function createThumbResolver(
     destroy: cancel,
   };
 }
+
+/**
+ * L84 — `/api/wiki-image` demande la miniature à 700 px ; sur un grand écran le héros s'affiche
+ * à plus de 1 300 px. Redemande une miniature Fandom à `width` px (Fandom ne dépasse jamais la
+ * taille de l'original). Toute autre adresse est rendue telle quelle.
+ */
+export function wikiThumbWidth(url: string, width: number): string {
+  if (!/^https:\/\/static\.wikia\.nocookie\.net\//.test(url)) return url;
+  if (/\/revision\/latest\/scale-to-width-down\/\d+/.test(url)) {
+    return url.replace(/\/scale-to-width-down\/\d+/, `/scale-to-width-down/${width}`);
+  }
+  return url.replace(/\/revision\/latest(?=[?]|$)/, `/revision/latest/scale-to-width-down/${width}`);
+}

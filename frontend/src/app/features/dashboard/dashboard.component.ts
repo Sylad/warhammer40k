@@ -4,6 +4,11 @@ import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { take, type Observable } from 'rxjs';
 import type { LoreEvent } from '../../core/models/models';
+import { wikiThumbWidth } from '../../shared/media-thumb';
+
+/** L84 : largeurs demandées à Fandom — le héros s'étale sur tout l'écran, les cartes font ~330 px (écrans 2x). */
+const HERO_WIDTH = 1400;
+const CARD_WIDTH = 700;
 
 interface ShortcutCard {
   route: string;
@@ -187,7 +192,7 @@ export class DashboardComponent {
       ico: '▤',
       count: () => this.series(),
       countLabel: 'séries',
-      wikiQuery: 'Black Library Warhammer 40000 books',
+      wikiQuery: 'Horus Rising',
       dim: true,
     },
     {
@@ -197,7 +202,7 @@ export class DashboardComponent {
       ico: '▶',
       count: () => this.videos(),
       countLabel: 'vidéos',
-      wikiQuery: 'Astartes animated film',
+      wikiQuery: 'Warhammer 40,000: Space Marine 2',
     },
     {
       route: '/gallery',
@@ -213,7 +218,7 @@ export class DashboardComponent {
   constructor() {
     // Hero image — Empereur sur Trône d'Or
     this.service.getWikiImage('Emperor of Mankind Golden Throne').subscribe(r => {
-      if (r.imageUrl) this.heroImg.set(`url('${r.imageUrl}')`);
+      if (r.imageUrl) this.heroImg.set(`url('${wikiThumbWidth(r.imageUrl, HERO_WIDTH)}')`);
     });
 
     // Shortcut images
@@ -221,7 +226,7 @@ export class DashboardComponent {
       this.service.getWikiImage(s.wikiQuery).subscribe(r => {
         if (r.imageUrl) {
           const m = new Map(this.shortcutImages());
-          m.set(s.route, r.imageUrl);
+          m.set(s.route, wikiThumbWidth(r.imageUrl, CARD_WIDTH));
           this.shortcutImages.set(m);
         }
       });
