@@ -263,11 +263,12 @@ lots:
   - id: L35
     title: "Page « Jeux vidéo » : les jeux Warhammer 40 000 existants et surtout les jeux à venir (Dawn of War 4, Total War: Warhammer 40,000) — dates et contenus annoncés à vérifier sur des sources en ligne au moment de coder, pas de mémoire ; lien dans la navigation"
     public: "Une page Jeux vidéo : les jeux existants et ceux qui arrivent"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     screen: page
     created: 2026-10-02
+    started: 2026-10-11
   - id: L36
     title: "Titre de page par route (WCAG 2.4.2) : toutes les routes s'appellent « Warhammer 40 000 — Codex Numérique » (revue UX L30)"
     status: done
