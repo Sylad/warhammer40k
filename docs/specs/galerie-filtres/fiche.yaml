@@ -1,0 +1,120 @@
+ecran:
+  id: galerie-filtres
+  titre: Galerie — panneau Filtres avant la grille
+  route: /gallery
+  lot: L49
+  largeurs: [1440, 390]
+  maquette: docs/specs/galerie-filtres/maquette.html
+etats: [charge, filtres-ouverts, vide, chargement, erreur]
+
+champs:
+  - { id: recherche, libelle: Champ « Rechercher » du bandeau, type: texte, source: statique, obligatoire: true }
+  - { id: bouton-filtres, libelle: Bouton « Filtres » (téléphone, sous la recherche), type: bouton, source: statique, obligatoire: true }
+  - { id: compteur-filtres-actifs, libelle: Nombre de filtres actifs sur le bouton, type: texte, source: "état des filtres (faction, catégorie)", obligatoire: false }
+  - { id: panneau-filtres, libelle: Panneau « Filtres », type: liste, source: statique, obligatoire: true }
+  - { id: filtre-faction, libelle: Liste Faction, type: liste, source: "GET /api/factions → nom", obligatoire: true }
+  - { id: filtre-categorie, libelle: Liste Catégorie, type: liste, source: "GET /api/artworks → category", obligatoire: true }
+  - { id: filtre-tri, libelle: Liste Trier par, type: liste, source: statique, obligatoire: true }
+  - { id: bouton-reinitialiser, libelle: Bouton « Réinitialiser » du panneau, type: bouton, source: statique, obligatoire: false }
+  - { id: mise-en-page, libelle: Mise en page (panneau Filtres, grille, colonne de droite), type: texte, source: statique, obligatoire: true }
+  - { id: resultats-statut, libelle: Nombre de résultats annoncé (role=status), type: texte, source: "GET /api/artworks → total filtré", obligatoire: true }
+  - { id: grille-oeuvres, libelle: Grille des œuvres, type: liste, source: "GET /api/artworks → items", obligatoire: true }
+  - { id: message-vide, libelle: Message « aucune œuvre », type: texte, source: statique, obligatoire: false }
+  - { id: message-chargement, libelle: Message de chargement, type: texte, source: statique, obligatoire: false }
+  - { id: message-erreur, libelle: Message d'erreur de chargement, type: texte, source: statique, obligatoire: false }
+  - { id: bouton-reessayer, libelle: Réessayer, type: bouton, source: "action A2", obligatoire: false }
+
+regles:
+  - id: R1
+    etat: charge
+    enonce: Dans l'ordre du document, donc l'ordre de tabulation, le panneau Filtres (Faction, Catégorie, Trier par) vient après la recherche et avant les catégories, la grille et la pagination. Aujourd'hui il est dans la colonne de droite, après la grille (filtres atteints à la 34e tabulation).
+    message: ~
+    champs: [panneau-filtres, filtre-faction, filtre-categorie, filtre-tri, mise-en-page, grille-oeuvres]
+    statut: sourcee
+    source: "demande du lot L49 : « panneau Filtres avant la grille (ordre de focus WCAG 2.4.3 — filtres à la 34e tabulation) » ; ordre actuel gallery.component.ts:99-192 (main-col puis aside.sidebar)"
+    tests: ["R1 — ordre de tabulation : recherche, Filtres, Faction, Catégorie, Trier par avant la première carte", "R1 — le panneau précède .main-col dans le DOM"]
+  - id: R2
+    etat: charge
+    enonce: À partir de 761 px le panneau Filtres reste affiché en haut de la colonne de droite (même place visuelle qu'aujourd'hui, repositionné par la grille CSS) ; il est toujours visible, sans bouton.
+    message: ~
+    champs: [panneau-filtres, mise-en-page]
+    statut: hypothese
+    si_faux: Si le panneau doit s'afficher au-dessus de la grille à toute largeur, seule la définition de la mise en page change (aucune donnée).
+    tests: ["R2 — 1440 px : panneau à droite de la grille, au même niveau que les catégories", "R2 — 1440 px : bouton Filtres absent"]
+  - id: R3
+    etat: charge
+    enonce: Jusqu'à 760 px (seuil téléphone déjà utilisé par la galerie), un bouton « Filtres » se place sous le champ de recherche, avant « Importer » ; c'est un bouton à divulgation (aria-expanded, aria-controls vers le panneau) qui montre ou cache le panneau, replié au chargement.
+    message: "Filtres"
+    champs: [bouton-filtres, recherche, panneau-filtres]
+    statut: sourcee
+    source: "demande du lot L49 : « au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) » ; le replié par défaut est une hypothèse (R4)"
+    tests: ["R3 — 390 px : bouton Filtres sous la recherche", "R3 — aria-expanded passe à true à l'ouverture, aria-controls pointe le panneau", "R3 — Entrée et Espace ouvrent et ferment"]
+  - id: R4
+    etat: charge
+    enonce: À 390 px le panneau est replié au chargement, ses trois listes sortent de l'ordre de tabulation et de l'arbre d'accessibilité tant qu'il est fermé.
+    message: ~
+    champs: [panneau-filtres, bouton-filtres]
+    statut: hypothese
+    si_faux: Si le panneau doit être ouvert par défaut au téléphone, seul l'état initial du bouton change ; le panneau reste avant la grille.
+    tests: ["R4 — 390 px : panneau replié (hidden), listes non focalisables", "R4 — ouvert, les listes redeviennent focalisables juste après le bouton"]
+  - id: R5
+    etat: filtres-ouverts
+    enonce: Le panneau ouvert s'insère juste sous le bandeau, avant les catégories ; le bouton passe à aria-expanded=true et affiche le nombre de filtres actifs (Faction, Catégorie) quand il est supérieur à 0.
+    message: ~
+    champs: [bouton-filtres, compteur-filtres-actifs, panneau-filtres, bouton-reinitialiser]
+    statut: hypothese
+    si_faux: Si le nombre ne doit pas figurer, seule la pastille du bouton disparaît ; le « Réinitialiser » du panneau suffit à signaler un filtre actif.
+    tests: ["R5 — ouvert : panneau entre le bandeau et les catégories", "R5 — un filtre actif : pastille 1 sur le bouton", "R5 — aucun filtre : pas de pastille"]
+  - id: R6
+    etat: filtres-ouverts
+    enonce: Choisir une valeur dans une liste met la grille à jour sans refermer le panneau ni déplacer le focus ; le nombre de résultats est annoncé dans la région d'état persistante.
+    message: "6 résultats"
+    champs: [filtre-faction, filtre-categorie, filtre-tri, resultats-statut, grille-oeuvres, bouton-reinitialiser]
+    statut: sourcee
+    source: "comportement codé gallery.component.ts:129-137 (role=status, L45/t4, WCAG 4.1.3) et :192-222 (filtres) ; la tenue du panneau ouvert est une hypothèse prolongeant R5"
+    tests: ["R6 — Faction Space Marines : « 6 résultats » annoncé, panneau toujours ouvert", "R6 — le focus reste sur la liste choisie", "R6 — Réinitialiser remet Toutes et lève la pastille"]
+  - id: R7
+    etat: vide
+    enonce: Si les filtres ne laissent aucune œuvre, la grille est remplacée par le message d'état vide ; le panneau Filtres reste utilisable et son « Réinitialiser » est visible.
+    message: "Aucune œuvre ne correspond à ces filtres."
+    champs: [message-vide, bouton-reinitialiser, panneau-filtres]
+    masque: [grille-oeuvres]
+    statut: sourcee
+    source: "gallery.component.ts:151 (message existant) et :196-198 (Réinitialiser)"
+    tests: ["R7 — filtres sans résultat : message affiché, pas de grille", "R7 — Réinitialiser rend la grille"]
+  - id: R8
+    etat: chargement
+    enonce: Pendant la lecture des œuvres, la grille montre des emplacements gris et le message « Chargement de la galerie… » (role=status) ; les trois listes du panneau sont désactivées, le panneau garde sa place avant la grille.
+    message: "Chargement de la galerie…"
+    champs: [message-chargement, panneau-filtres, filtre-faction, filtre-categorie, filtre-tri]
+    statut: hypothese
+    si_faux: Si le chargement doit rester muet (état actuel, aucun message), seul ce bloc change ; les listes peuvent aussi rester actives (aucune donnée en jeu).
+    tests: ["R8 — chargement : message annoncé, listes désactivées", "R8 — le panneau précède toujours la grille pendant le chargement"]
+  - id: R9
+    etat: erreur
+    enonce: Si la lecture des œuvres échoue, la grille est remplacée par l'erreur et un bouton « Réessayer » qui relance la lecture ; les listes du panneau sont désactivées. Aujourd'hui l'échec est avalé et la galerie affiche l'état vide (gallery.component.ts:522).
+    message: "Impossible de charger la galerie."
+    champs: [message-erreur, bouton-reessayer, panneau-filtres]
+    statut: hypothese
+    si_faux: Si l'erreur ne doit pas être distinguée du vide, on garde le comportement actuel (message de R7) ; seul ce bloc disparaît, aucune donnée en jeu.
+    tests: ["R9 — erreur d'API : message et bouton Réessayer", "R9 — Réessayer relance GET /api/artworks"]
+  - id: R10
+    etat: charge
+    enonce: Les panneaux « Artistes à découvrir » et « Collections populaires » restent après la grille dans l'ordre du document (en colonne de droite sous les Filtres à partir de 761 px, sous la pagination au téléphone) ; seul le panneau Filtres est déplacé.
+    message: ~
+    champs: [mise-en-page]
+    statut: hypothese
+    si_faux: Si ces deux panneaux (qui filtrent aussi la grille) doivent précéder la grille, le focus passe devant 6 artistes et jusqu'à 3 collections de plus ; seul l'ordre du DOM change.
+    tests: ["R10 — Artistes et Collections après la pagination dans l'ordre de tabulation"]
+  - id: R11
+    etat: charge
+    enonce: Entre 761 et 1024 px, où la galerie passe sur une colonne, le panneau Filtres s'affiche ouvert au-dessus des catégories, sans bouton ; le bouton « Filtres » n'existe qu'à 760 px et moins.
+    message: ~
+    champs: [panneau-filtres, mise-en-page]
+    statut: hypothese
+    si_faux: Si le bouton doit aussi exister sur tablette, seul le seuil d'affichage du bouton change.
+    tests: ["R11 — 900 px : panneau ouvert avant les catégories, pas de bouton Filtres"]
+
+actions:
+  - { id: A1, declencheur: ~, appel: "GET /api/artworks", regles: [R1, R2, R7, R8, R9, R10, R11] }
+  - { id: A2, declencheur: bouton-reessayer, appel: "GET /api/artworks", regles: [R9] }
