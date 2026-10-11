@@ -266,8 +266,9 @@
     {
       "id": "L95",
       "title": "Fiches faction sans unité : plus de recherche d'unités vide",
-      "status": "doing",
-      "started": "2026-10-11"
+      "status": "done",
+      "started": "2026-10-11",
+      "finished": "2026-10-11"
     },
     {
       "id": "L96",
