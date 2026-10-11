@@ -745,7 +745,7 @@ lots:
   - id: L89
     title: "Barre d'ancres des fiches (MAQUETTE B à valider par Sylvain) : collée à top 0 sous l'en-tête (cachée à 1440, focus masqué), 191 px à 390 — top = hauteur d'en-tête, une ligne défilante au téléphone (WCAG 2.4.11, revue UX L3)"
     public: "Fiches : la barre des sections reste visible sous l'en-tête"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-10-10
@@ -755,6 +755,8 @@ lots:
       - { date: 2026-10-11, text: "Vague 2026-10-11-0035 suspendue à 1 h 30 (arrêt demandé par Sylvain) après la 2e correction (06edbf9, 4be7505, 2645905) : reprendre par « cadence orchestrate --resume 2026-10-11-0035 » depuis ~/projects/developpeur → revue Opus" }
     started: 2026-10-10
     review: { date: 2026-10-11, verdict: "conforme — orchestré (vague 2026-10-11-0035, 1 passe(s) de correction + passe des mineurs)", commit: 26459054f87da2de6ce42bc3ab13225fb466ae17 }
+    ux: { date: 2026-10-11, verdict: "Sylvain 11-10 : ok L89 (captures 1440/390 px, barre collée sous l'en-tête, Données vitales dégagée) ; revue UX automatique conforme" }
+    finished: 2026-10-11
   - id: L90
     title: "Sous-faction : « Unités notables » toujours vide — le gabarit lit unitIds (0/182) et ignore notableUnits (77/182) ; afficher notableUnits (revue UX L3)"
     public: "Sous-factions : les unités notables s'affichent"
@@ -782,7 +784,7 @@ lots:
   - id: L92
     title: "/factions (MAQUETTE A à valider par Sylvain) : « Autres » rend les 17 factions (comparaison en minuscules) ; panneau « Filtres rapides » en double et légende Loyal/Neutre/Hostile sans objet — les retirer (revue UX L3)"
     public: "Factions : le filtre « Autres » et le panneau latéral corrigés"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
@@ -791,10 +793,11 @@ lots:
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 3 notes mineures) — orchestré (vague 2026-10-10-2240, 0 passe(s) de correction)", commit: b2e962e59f83f158e519a6e5cb75036a7d306096 }
     ux: { date: 2026-10-11, verdict: "Verdict Sylvain 11-10 (Discord « ok L92 L93 ») : conforme ; relecteur UX conforme, 0 majeur, 3 mineurs (Autres toujours vide → lot de masquage, message vide sans role=status)" }
+    finished: 2026-10-11
   - id: L93
     title: "/factions (MAQUETTE A à valider par Sylvain) : « Ressources rapides » = 4 lignes au curseur main sans lien — liens chronologie, carte, concepts ; retirer « Relations entre factions » (revue UX L3)"
     public: "Factions : les ressources rapides mènent aux pages"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
@@ -803,6 +806,7 @@ lots:
     started: 2026-10-10
     review: { date: 2026-10-10, verdict: "compliant (0 bloquant, 0 majeur, 2 notes mineures) — vitest 600/600 verts (62 fichiers), `npm run liens` : 0 lien cassé — orchestré (vague 2026-10-10-2240, 0 passe(s) de correction)", commit: 35f8cef7dbd74124788d116f08889f1ebe2c8915 }
     ux: { date: 2026-10-11, verdict: "Verdict Sylvain 11-10 (Discord « ok L92 L93 ») : conforme ; relecteur UX conforme, 0 majeur, 2 mineurs (libellés Carte galactique/Concepts ≠ h1 des pages cibles)" }
+    finished: 2026-10-11
   - id: L94
     title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
     public: "Fiches faction : des liens latéraux qui mènent où ils le disent"

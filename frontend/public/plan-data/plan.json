@@ -226,8 +226,9 @@
     {
       "id": "L89",
       "title": "Fiches : la barre des sections reste visible sous l'en-tête",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-11"
     },
     {
       "id": "L90",
@@ -246,14 +247,16 @@
     {
       "id": "L92",
       "title": "Factions : le filtre « Autres » et le panneau latéral corrigés",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-11"
     },
     {
       "id": "L93",
       "title": "Factions : les ressources rapides mènent aux pages",
-      "status": "doing",
-      "started": "2026-10-10"
+      "status": "done",
+      "started": "2026-10-10",
+      "finished": "2026-10-11"
     },
     {
       "id": "L94",
