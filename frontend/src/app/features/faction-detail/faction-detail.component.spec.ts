@@ -193,3 +193,44 @@ describe('fiche faction — unités au clavier (L87)', () => {
     f.nativeElement.remove();
   });
 });
+
+// L95 — une faction sans unité ne propose ni bouton « Explorer les unités », ni filtres, ni
+// « Aucune unité ne correspond » (ensemble vide, pas filtre trop strict).
+describe('fiche faction — sans unité (L95)', () => {
+  async function render(units: unknown[]) {
+    const service = fakeWarhammerService({
+      getFaction: (id: string) => of(FACTIONS[id]),
+      getUnits: () => of(units),
+      getSubFactions: () => of([]),
+      videos$: of([]),
+      artworks$: of([]),
+    });
+    await setupTestBed([FactionDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'orks' })), snapshot: { fragment: null } } },
+    ]);
+    const f = TestBed.createComponent(FactionDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    return f.nativeElement as HTMLElement;
+  }
+
+  it('aucune unité : ni bouton, ni section, ni filtres, ni lien « Unités », ni message', async () => {
+    const el = await render([]);
+    expect(el.querySelector('button.cta')).toBeNull();
+    expect(el.querySelector('#units')).toBeNull();
+    expect(el.querySelector('.filters')).toBeNull();
+    expect(el.querySelector('input.search')).toBeNull();
+    expect(el.textContent).not.toContain('Aucune unité ne correspond');
+    expect(el.textContent).not.toContain('Explorer les unités');
+    expect([...el.querySelectorAll('.anchor-nav a')].map(a => a.textContent!.trim())).not.toContain('Unités');
+  });
+
+  it('des unités : bouton, section et filtres présents', async () => {
+    const el = await render([{ id: 'boyz', nom: 'Boyz', type: 'Infanterie', factionId: 'orks' }]);
+    expect(el.querySelector('button.cta')).not.toBeNull();
+    expect(el.querySelector('#units .filters')).not.toBeNull();
+  });
+});

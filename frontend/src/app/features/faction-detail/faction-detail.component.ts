@@ -94,9 +94,11 @@ const DEFAULT_RESOURCES = [
           @if (f.motto) {
             <p class="hero-motto"><span class="motto-mark">✠</span> {{ f.motto }}</p>
           }
-          <button class="cta" (click)="scrollToUnits()">
-            <span class="cta-ico">⚔</span>EXPLORER LES UNITÉS
-          </button>
+          @if (units().length > 0) {
+            <button class="cta" (click)="scrollToUnits()">
+              <span class="cta-ico">⚔</span>EXPLORER LES UNITÉS
+            </button>
+          }
           @if (f.citation) {
             <blockquote class="hero-quote">
               <span class="quote-sigil">{{ f.symbole }}</span>
@@ -244,51 +246,53 @@ const DEFAULT_RESOURCES = [
             </section>
           }
 
-          <section class="units" id="units">
-            <div class="units-head">
-              <h2 class="section-title"><span class="t-flourish">✠</span>Explorer les unités</h2>
-            </div>
-
-            <div class="toolbar">
-              <div class="filters">
-                @for (t of typeFilters; track t.key) {
-                  <button class="filter" [class.active]="typeFilter() === t.key" (click)="typeFilter.set(t.key)">
-                    {{ t.label }}
-                  </button>
-                }
+          @if (units().length > 0) {
+            <section class="units" id="units">
+              <div class="units-head">
+                <h2 class="section-title"><span class="t-flourish">✠</span>Explorer les unités</h2>
               </div>
-              <input class="search" type="text" placeholder="Rechercher une unité..."
-                     [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
-            </div>
 
-            @if (visibleUnits().length === 0) {
-              <div class="empty">
-                <p>Aucune unité ne correspond pour cette faction.</p>
+              <div class="toolbar">
+                <div class="filters">
+                  @for (t of typeFilters; track t.key) {
+                    <button class="filter" [class.active]="typeFilter() === t.key" (click)="typeFilter.set(t.key)">
+                      {{ t.label }}
+                    </button>
+                  }
+                </div>
+                <input class="search" type="text" placeholder="Rechercher une unité..."
+                       [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
               </div>
-            } @else {
-              <div class="units-grid">
-                @for (u of displayedUnits(); track u.id) {
-                  <a class="unit-card" [routerLink]="['/units', u.id]"
-                           [style.--unit-img]="unitImg(u)">
-                    <span class="u-badge" [class]="unitBadgeClass(u.type)">{{ u.type }}</span>
-                    <div class="unit-content">
-                      <h3>{{ u.nom }}</h3>
-                      <p>{{ u.loreCourt || u.description || u.role || '—' }}</p>
+
+              @if (visibleUnits().length === 0) {
+                <div class="empty">
+                  <p>Aucune unité ne correspond pour cette faction.</p>
+                </div>
+              } @else {
+                <div class="units-grid">
+                  @for (u of displayedUnits(); track u.id) {
+                    <a class="unit-card" [routerLink]="['/units', u.id]"
+                             [style.--unit-img]="unitImg(u)">
+                      <span class="u-badge" [class]="unitBadgeClass(u.type)">{{ u.type }}</span>
+                      <div class="unit-content">
+                        <h3>{{ u.nom }}</h3>
+                        <p>{{ u.loreCourt || u.description || u.role || '—' }}</p>
+                        <span class="u-arrow">→</span>
+                      </div>
+                    </a>
+                  }
+                  @if (extraUnitCount() > 0) {
+                    <button type="button" class="unit-extra" (click)="revealAllUnits()">
+                      <div class="ue-sigil">⚜</div>
+                      <h3>Voir toutes les unités</h3>
+                      <p>+{{ extraUnitCount() }} autres unités disponibles</p>
                       <span class="u-arrow">→</span>
-                    </div>
-                  </a>
-                }
-                @if (extraUnitCount() > 0) {
-                  <button type="button" class="unit-extra" (click)="revealAllUnits()">
-                    <div class="ue-sigil">⚜</div>
-                    <h3>Voir toutes les unités</h3>
-                    <p>+{{ extraUnitCount() }} autres unités disponibles</p>
-                    <span class="u-arrow">→</span>
-                  </button>
-                }
-              </div>
-            }
-          </section>
+                    </button>
+                  }
+                </div>
+              }
+            </section>
+          }
 
           @if (f.currentState) {
             <section class="bible-panel" id="etat">
