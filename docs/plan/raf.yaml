@@ -898,10 +898,11 @@ lots:
   - id: L104
     title: "/nouveautes : le texte alternatif rédigé de chaque capture (nouveautes.json) n'est jamais affiché — captureAlt(e.title, …) (nouveautes.component.ts:186) le remplace par « Capture d'écran : <titre> » ; utiliser le texte de l'entrée quand il existe, repli sur le titre, test (QA prod L95 11-10, WCAG 1.1.1)"
     public: "Nouveautés : chaque capture décrite par son propre texte"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-11
+    started: 2026-10-11
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
