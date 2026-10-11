@@ -51,3 +51,26 @@ export function acceptationOnly(file = process.env.CADENCE_ACCEPTATION) {
   if (!doc) throw new Error(`${file} : acceptation.json illisible`);
   return doc.fichiers.filter((f) => typeof f === 'string');
 }
+
+/** Fichiers d'acceptation (verts ou non) que l'`include` de vitest.config.ts (`src/**\/*.spec.ts`, `scripts/**\/*.test.mjs`) ne lancerait pas : une fois le lot vert, ils ne tourneraient plus jamais. */
+export function acceptationOutsideSuite(root = process.cwd(), dir = 'docs/specs') {
+  const base = join(root, dir);
+  if (!existsSync(base)) return [];
+  const inSuite = /^frontend\/(src\/.+\.spec\.ts|scripts\/.+\.test\.mjs)$/;
+  const out = [];
+  for (const name of readdirSync(base).sort()) {
+    const folder = join(base, name);
+    let files = [];
+    try {
+      files = readdirSync(folder).filter((f) => /^acceptation(-.+)?\.json$/.test(f)).sort();
+    } catch {
+      continue;
+    }
+    for (const file of files) {
+      const doc = read(join(folder, file));
+      if (!doc) continue;
+      for (const f of doc.fichiers) if (typeof f === 'string' && !inSuite.test(f)) out.push(f);
+    }
+  }
+  return out;
+}

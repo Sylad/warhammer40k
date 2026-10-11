@@ -5,7 +5,9 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { acceptationIgnored, acceptationOnly } from './acceptation-runner.mjs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { acceptationIgnored, acceptationOnly, acceptationOutsideSuite } from './acceptation-runner.mjs';
 
 let root;
 const spec = (ecran, name, doc) => {
@@ -50,5 +52,18 @@ describe('acceptationOnly', () => {
   it('échoue fort sans CADENCE_ACCEPTATION ou avec un fichier illisible', () => {
     expect(() => acceptationOnly(undefined)).toThrow(/CADENCE_ACCEPTATION/);
     expect(() => acceptationOnly(join(root, 'absent.json'))).toThrow(/illisible/);
+  });
+});
+
+describe('acceptationOutsideSuite', () => {
+  it('repère un fichier d’acceptation que la suite ordinaire ne lancerait pas, vert ou non', () => {
+    spec('a', 'acceptation-L1.json', { fichiers: ['frontend/src/x.acceptation.spec.ts', 'frontend/src/y.acceptation.test.ts'], vert: true });
+    spec('b', 'acceptation-L2.json', { fichiers: ['frontend/e2e/z.spec.ts'], vert: false });
+    expect(acceptationOutsideSuite(root)).toEqual(['frontend/src/y.acceptation.test.ts', 'frontend/e2e/z.spec.ts']);
+  });
+
+  it('les acceptations du dépôt retombent toutes dans l’include de vitest.config.ts', () => {
+    const repo = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+    expect(acceptationOutsideSuite(repo)).toEqual([]);
   });
 });
