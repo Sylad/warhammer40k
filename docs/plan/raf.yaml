@@ -824,10 +824,11 @@ lots:
   - id: L95
     title: "Fiche faction sans unité (6 factions) : bouton « Explorer les unités », filtres et « Aucune unité ne correspond » sur un ensemble vide — masquer, message juste (revue UX L3)"
     public: "Fiches faction sans unité : plus de recherche d'unités vide"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-10-11
   - id: L96
     title: "/factions : grille vide au chargement et sur erreur d'API, « UNITÉS 0 » tant que les unités chargent, recherche sans résultat muette — états + région live (revue UX L3, cf L79)"
     public: "Factions : chargement, erreur et recherche vide annoncés"
