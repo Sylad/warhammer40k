@@ -15,7 +15,20 @@ a{color:var(--gold-bright)}
 .nav{display:flex;gap:18px;font-size:.9rem}
 .nav a{color:var(--text);text-decoration:none;padding:6px 2px}
 .nav a.active{color:var(--gold-bright);border-bottom:2px solid var(--gold)}
-.menu-btn{display:none;margin-left:auto;min-height:44px;padding:0 16px;background:transparent;color:var(--gold-bright);border:1px solid var(--border-strong);font:600 .9rem var(--sans)}
+.actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.search{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 10px;background:transparent;color:var(--text);border:1px solid var(--border);font:.8rem var(--sans)}
+.search kbd{font:inherit;color:var(--muted)}
+.menu-btn{display:none;min-height:44px;padding:0 16px;align-items:center;gap:6px;background:transparent;color:var(--gold-bright);border:1px solid var(--border-strong);font:600 .9rem var(--sans)}
+.badge{display:inline-block;min-width:1.35em;padding:1px 5px;border-radius:999px;background:var(--gold);color:var(--bg);font-size:.66rem;line-height:1.35;text-align:center}
+.nav a,.nav .abt{text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:.8rem;white-space:nowrap}
+.nav .abt{color:var(--text);padding:6px 2px;display:inline-flex;gap:6px;align-items:center;opacity:.75}
+.caret{font-size:.65rem;opacity:.6}
+.drawer{max-width:360px;margin:0;background:var(--panel);border:1px solid var(--border-strong);display:flex;flex-direction:column}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font:600 1rem var(--serif);color:var(--gold-bright)}
+.drawer-head span+span{font:600 .85rem var(--sans);color:var(--text)}
+.drawer a{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border)}
+.drawer a.active{color:var(--gold-bright);border-left:3px solid var(--gold);padding-left:13px}
+.drawer-wrap{max-width:1100px;margin:14px auto 0;padding:0 24px}
 .crumb{max-width:1100px;margin:14px auto 0;padding:0 24px;color:var(--muted);font-size:.8rem}
 .crumb a{color:var(--muted)}
 .state-tag{max-width:1100px;margin:18px auto 0;padding:0 24px;color:var(--muted);font:.7rem var(--sans);letter-spacing:.14em;text-transform:uppercase}
@@ -56,20 +69,25 @@ a{color:var(--gold-bright)}
 .sk-ligne{height:64px;margin-bottom:10px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .footer{max-width:1100px;margin:0 auto;padding:18px 24px 40px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
-section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:target)) #etat-charge{display:block}
-@media (max-width:1279px){.nav{display:none}.menu-btn{display:block}}
+section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:target)) #etat-charge,#etat-tiroir:target .drawer-wrap{display:block}
+@media (max-width:1279px){.nav{display:none}.menu-btn{display:inline-flex}}
+@media (max-width:480px){.search kbd{display:none}}
+.search,.menu-btn{white-space:nowrap}
 @media (max-width:760px){.cards{grid-template-columns:1fr}.page{padding:12px 16px 40px}.topbar{padding:0 16px}.crumb,.state-tag{padding:0 16px}.ligne{grid-template-columns:1fr}.ligne .annee{order:-1}}
 </style>
 </head>
 <body>
 <header class="topbar">
-  <span class="brand">Warhammer 40,000</span>
+  <span class="brand">⚜ Warhammer 40,000</span>
   <nav class="nav" aria-label="Navigation (maquette)">
-    <a href="#">⌂ Accueil</a><a href="#">⚔ Factions</a><a href="#">▤ Romans</a><a href="#">▶ Vidéos</a>
-    <a href="#" class="active" aria-current="page" data-testid="lien-navigation">◈ Jeux vidéo</a>
-    <a href="#">▦ Galerie</a><a href="#">✠ Lore ▾</a><a href="#">À propos ▾</a>
+    <a href="#">Accueil</a><a href="#">Factions</a><a href="#">Romans</a><a href="#">Vidéos</a>
+    <a href="#" class="active" aria-current="page" data-testid="lien-navigation">Jeux vidéo</a>
+    <a href="#">Galerie</a><a href="#">Lore <span class="caret">▾</span></a><span class="abt">À propos <span class="caret">▾</span> <span class="badge">9+</span></span>
   </nav>
-  <button class="menu-btn" type="button">Menu</button>
+  <div class="actions">
+    <span class="search" aria-hidden="true">⌕ <kbd>Ctrl K</kbd></span>
+    <button class="menu-btn" type="button">☰ Menu <span class="badge">9+</span></button>
+  </div>
 </header>
 <p class="crumb"><a href="#">Accueil</a> › Jeux vidéo</p>
 
@@ -176,6 +194,21 @@ section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:
       <button class="btn" type="button" data-testid="bouton-reessayer">Réessayer</button>
     </div>
   </main>
+</section>
+
+
+<!-- ============ ÉTAT TIROIR (téléphone, menu ouvert) ============ -->
+<section id="etat-tiroir">
+  <p class="state-tag">État : tiroir ouvert (téléphone, &lt; 1280 px)</p>
+  <div class="drawer-wrap">
+  <nav class="drawer" id="menu-telephone" aria-label="Menu principal">
+    <div class="drawer-head"><span>Menu</span><span>✕ Fermer</span></div>
+    <a href="#">Accueil</a><a href="#">Factions</a><a href="#">Romans</a><a href="#">Vidéos</a>
+    <a href="#" class="active" aria-current="page" data-testid="lien-navigation-tiroir">Jeux vidéo</a>
+    <a href="#">Galerie</a><a href="#">Lore</a><a href="#">Nouveautés <span class="badge">9+</span></a><a href="#">Plan de travail</a><a href="#">À propos</a>
+  </nav>
+  </div>
+  <p class="verif" style="max-width:1100px;margin:16px auto 0;padding:0 24px">À 1280 px et plus : barre compacte ci-dessus (sans icônes avant 1700 px), « Jeux vidéo » entre Vidéos et Galerie. Repli si elle déborde au seuil de 80em : lien sous « À propos ▾ ».</p>
 </section>
 
 <footer class="footer">Nouveautés · Plan de travail · À propos</footer>

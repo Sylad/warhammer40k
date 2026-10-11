@@ -5,12 +5,13 @@ ecran:
   lot: L35
   largeurs: [1440, 390]
   maquette: docs/specs/jeux-video/maquette.html
-etats: [vide, chargement, erreur, charge]
+etats: [vide, chargement, erreur, charge, tiroir]
 
 champs:
   - { id: titre-page, libelle: Titre de la page, type: texte, source: statique, obligatoire: true }
   - { id: intro-page, libelle: Phrase d'introduction, type: texte, source: statique, obligatoire: true }
   - { id: lien-navigation, libelle: Lien « Jeux vidéo » de la navigation, type: lien, source: statique, obligatoire: true }
+  - { id: lien-navigation-tiroir, libelle: Lien « Jeux vidéo » du tiroir téléphone, type: lien, source: statique, obligatoire: true }
   - { id: date-verification, libelle: Date de vérification des informations, type: texte, source: "GET /jeux-data/jeux.json → verifieLe", obligatoire: true }
   - { id: section-a-venir, libelle: Section « À venir », type: texte, source: statique, obligatoire: true }
   - { id: liste-a-venir, libelle: Liste des jeux à venir, type: liste, source: "GET /jeux-data/jeux.json → aVenir", obligatoire: true }
@@ -70,7 +71,7 @@ regles:
     tests: ["R4 — existants : ordre décroissant des années"]
   - id: R5
     etat: charge
-    enonce: Un lien « Jeux vidéo » est présent dans la navigation (barre, tiroir téléphone), actif sur la page, et mène à /jeux-video.
+    enonce: Un lien « Jeux vidéo » est présent dans la barre compacte telle que l'application la rend à 1440 px (sans icônes avant 1700 px, avec ⌕ et la pastille « 9+ »), entre Vidéos et Galerie, actif sur la page, et mène à /jeux-video. S'il fait déborder la barre au seuil de 80em (mesure topbar.e2e), il passe dans le panneau « À propos ▾ ».
     message: "Jeux vidéo"
     champs: [lien-navigation]
     statut: sourcee
@@ -101,7 +102,15 @@ regles:
     statut: hypothese
     si_faux: Si le message change, seul ce bloc change (aucune donnée en jeu).
     tests: ["R8 — erreur : message et bouton Réessayer", "R8 — Réessayer relance la lecture"]
+  - id: R9
+    etat: tiroir
+    enonce: Sous 1280 px, le lien « Jeux vidéo » figure dans le tiroir #menu-telephone, à plat entre Vidéos et Galerie, actif sur la page.
+    message: "Jeux vidéo"
+    champs: [lien-navigation-tiroir]
+    statut: sourcee
+    source: "demande du lot L35 : « lien dans la navigation » ; tiroir existant main-layout.component.ts:95-116"
+    tests: ["R9 — tiroir ouvert : lien Jeux vidéo présent et actif"]
 
 actions:
-  - { id: A1, declencheur: ~, appel: "GET /jeux-data/jeux.json", regles: [R1, R2, R3, R4, R6, R7, R8] }
+  - { id: A1, declencheur: ~, appel: "GET /jeux-data/jeux.json", regles: [R1, R2, R3, R4, R5, R6, R7, R8, R9] }
   - { id: A2, declencheur: bouton-reessayer, appel: "GET /jeux-data/jeux.json", regles: [R8] }
