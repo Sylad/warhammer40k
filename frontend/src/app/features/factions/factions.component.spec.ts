@@ -111,3 +111,57 @@ describe('liste des factions — ressources rapides (L93)', () => {
     expect(el.textContent).not.toContain('Relations entre factions');
   });
 });
+
+// L102 — « Autres » n'apparaît que si une faction y entre (décision de Sylvain, 11-10) ; le message
+// de liste vide est une région role=status (WCAG 4.1.3) avec un bouton de retour à « Toutes les factions ».
+describe('liste des factions — « Autres » conditionnel et liste vide (L102)', () => {
+  async function monte(alignements: string[]) {
+    const service = fakeWarhammerService({
+      factions$: of(alignements.map((a, i) => ({ ...F('f' + i), alignement: a }))),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    return f;
+  }
+  const filtres = (el: HTMLElement) => [...el.querySelectorAll('.filters .filter')].map((b) => b.textContent?.trim());
+
+  it('sans faction hors Imperium, Chaos et Xénos, le bouton « Autres » est absent', async () => {
+    const f = await monte(['Imperium', 'Chaos', 'Xenos']);
+    expect(filtres(f.nativeElement)).toEqual(['Toutes les factions', 'Imperium', 'Chaos', 'Xénos']);
+  });
+
+  it('dès qu’une faction y entre, le bouton « Autres » apparaît', async () => {
+    const f = await monte(['Imperium', 'Neutre']);
+    expect(filtres(f.nativeElement)).toContain('Autres');
+  });
+
+  it('la liste vide est annoncée dans une région role=status, présente avant le message', async () => {
+    const f = await monte(['Imperium']);
+    const el = f.nativeElement as HTMLElement;
+    const status = el.querySelector('[role="status"]');
+    expect(status).not.toBeNull();
+    expect(status?.textContent?.trim()).toBe('');
+    f.componentInstance.searchQuery.set('zzz');
+    f.detectChanges();
+    expect(el.querySelector('[role="status"]')).toBe(status);
+    expect(status?.textContent).toContain('Aucune faction');
+  });
+
+  it('« Toutes les factions » dans le message remet le filtre et la recherche à zéro', async () => {
+    const f = await monte(['Imperium', 'Chaos']);
+    const el = f.nativeElement as HTMLElement;
+    f.componentInstance.filterKey.set('Chaos');
+    f.componentInstance.searchQuery.set('zzz');
+    f.detectChanges();
+    const retour = el.querySelector<HTMLButtonElement>('[role="status"] button');
+    expect(retour?.textContent?.trim()).toBe('Toutes les factions');
+    retour!.click();
+    f.detectChanges();
+    expect(f.componentInstance.filterKey()).toBe('all');
+    expect(f.componentInstance.searchQuery()).toBe('');
+    expect(el.querySelectorAll('a.card')).toHaveLength(2);
+    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+  });
+});

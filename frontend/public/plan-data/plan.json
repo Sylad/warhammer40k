@@ -296,7 +296,8 @@
     {
       "id": "L102",
       "title": "Factions : le filtre « Autres » n'apparaît que s'il a des factions",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-11"
     }
   ]
 }

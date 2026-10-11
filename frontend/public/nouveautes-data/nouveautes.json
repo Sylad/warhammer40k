@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-11 00:40",
+  "generated": "2026-10-11 09:37",
   "entries": [
+    {
+      "slug": "2026-10-11-factions-le-filtre-autres-n-apparait-que-s-il-a-des-factions",
+      "title": "Factions : le filtre « Autres » n'apparaît que s'il a des factions",
+      "date": "2026-10-11",
+      "lots": [
+        "L102"
+      ],
+      "captures": [
+        "captures/L102-factions-liste-vide.png"
+      ],
+      "alts": [
+        "Page Factions : message « Aucune faction ne correspond » et bouton « Toutes les factions », sans bouton « Autres »"
+      ],
+      "html": "<p>Sur la page Factions, le bouton « Autres » n'est plus affiché tant qu'aucune faction n'y entre : il reste caché, au lieu de mener à une liste vide.</p>\n<p>Quand une recherche ou un filtre ne donne aucun résultat, le message « Aucune faction ne correspond à ce filtre. » est annoncé par les lecteurs d'écran, et un bouton « Toutes les factions » remet d'un clic le filtre et la recherche à zéro.</p>"
+    },
     {
       "slug": "2026-10-10-factions-les-ressources-rapides-menent-aux-pages",
       "title": "Factions : les ressources rapides mènent aux pages",

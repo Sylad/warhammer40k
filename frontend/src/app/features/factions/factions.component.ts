@@ -23,6 +23,8 @@ const WIKI_SEARCH: Record<string, string> = {
 type SortKey = 'az' | 'units' | 'alignement';
 type FilterKey = 'all' | 'Imperium' | 'Chaos' | 'Xenos' | 'autres';
 
+const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].includes(x.alignement.toLowerCase());
+
 @Component({
   selector: 'app-factions',
   standalone: true,
@@ -45,7 +47,9 @@ type FilterKey = 'all' | 'Imperium' | 'Chaos' | 'Xenos' | 'autres';
         <button class="filter" [class.active]="filterKey() === 'Imperium'" (click)="filterKey.set('Imperium')">Imperium</button>
         <button class="filter" [class.active]="filterKey() === 'Chaos'" (click)="filterKey.set('Chaos')">Chaos</button>
         <button class="filter" [class.active]="filterKey() === 'Xenos'" (click)="filterKey.set('Xenos')">Xénos</button>
-        <button class="filter" [class.active]="filterKey() === 'autres'" (click)="filterKey.set('autres')">Autres</button>
+        @if (hasAutres()) {
+          <button class="filter" [class.active]="filterKey() === 'autres'" (click)="filterKey.set('autres')">Autres</button>
+        }
       </div>
       <input class="search" type="text" placeholder="Rechercher une faction..."
              [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
@@ -78,9 +82,8 @@ type FilterKey = 'all' | 'Imperium' | 'Chaos' | 'Xenos' | 'autres';
               </div>
             </div>
           </a>
-        } @empty {
-          <p class="empty">Aucune faction ne correspond à ce filtre.</p>
         }
+        <div class="empty" role="status">@if (!displayedFactions().length) {Aucune faction ne correspond à ce filtre. <button type="button" class="filter" (click)="reset()">Toutes les factions</button>}</div>
       </div>
 
       <aside class="sidebar">
@@ -145,6 +148,14 @@ export class FactionsComponent {
     return map;
   });
 
+  /** L102 : « Autres » n'est proposé que si au moins une faction y entre. */
+  readonly hasAutres = computed(() => this.factions().some(x => isAutre(x)));
+
+  reset(): void {
+    this.filterKey.set('all');
+    this.searchQuery.set('');
+  }
+
   readonly displayedFactions = computed(() => {
     const f = this.factions();
     const filter = this.filterKey();
@@ -154,7 +165,7 @@ export class FactionsComponent {
     if (filter === 'autres') {
       // « Autres » = tout ce qui n'est pas un des 3 alignements principaux (L92 : comparaison en
       // minuscules des deux côtés, 'Imperium' n'égalait pas 'imperium' et les 17 factions passaient).
-      out = out.filter(x => !['imperium', 'chaos', 'xenos'].includes(x.alignement.toLowerCase()));
+      out = out.filter(isAutre);
     } else if (filter !== 'all') {
       out = out.filter(x => x.alignement === filter);
     }

@@ -290,7 +290,9 @@
       line-height: 1.4;
     }
 
+    .empty:empty { display: none; }
     .empty { grid-column: 1 / -1; margin: 0; padding: 28px 0; color: var(--muted); text-align: center; }
+    .empty .filter { margin-left: 12px; }
 
     /* RESPONSIVE */
     @media (max-width: 1280px) {
