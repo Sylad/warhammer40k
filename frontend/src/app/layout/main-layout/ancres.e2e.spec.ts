@@ -91,13 +91,23 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
   async function gap(page: Page, id: string): Promise<{ gap: number; bar: number; bottom: boolean }> {
     await page.waitForFunction((x) => !!document.getElementById(x), id);
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
-    let last = -1;
-    for (let i = 0; i < 40; i++) {
-      const y = await page.evaluate(() => window.scrollY);
-      if (y === last && i > 3) break;
-      last = y;
-      await page.waitForTimeout(100);
-    }
+    // L105 : la mesure attend une position STABLE (défilement, hauteur de page et haut de la cible
+    // inchangés) pendant une fenêtre plus longue que le retard des polices (400 ms) — chronométrée
+    // sur les images, donc indifférente à la charge de la machine — au lieu de quelques pas de 100 ms
+    // qu'un navigateur ralenti franchit avant le reflux ou le défilement différé.
+    await page.evaluate((x) => new Promise<void>((done) => {
+      const snap = () => `${window.scrollY}|${document.documentElement.scrollHeight}|${document.getElementById(x)?.getBoundingClientRect().top}`;
+      const t0 = performance.now();
+      let last = snap();
+      let since = t0;
+      const tick = (now: number) => {
+        const cur = snap();
+        if (cur !== last) { last = cur; since = now; }
+        if (now - since >= 700 || now - t0 > 10_000) done();
+        else requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }), id);
     return page.evaluate((x) => {
       // L89 : sur une fiche à barre d'ancres collée, la cible doit arriver sous l'en-tête ET la barre.
       const nav = document.querySelector('.anchor-nav')?.getBoundingClientRect();
