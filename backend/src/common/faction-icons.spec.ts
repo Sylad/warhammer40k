@@ -1,6 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import { readContent } from './content';
 
 // L56 : Fandom répond 404 avec une image de remplacement de 80 px dans le corps,
@@ -21,14 +19,12 @@ describe('logos de factions (L56)', () => {
     expect(f.symbole).toBeTruthy();
   });
 
-  it('chaque iconUrl est un fichier local présent, ou une URL Fandom datée (?cb=)', () => {
+  // Aucune route ne sert de logo de faction (images.controller.ts ne sert que les
+  // datasheets) : un chemin local serait une URL morte. Si un logo est embarqué un
+  // jour, ajouter sa route ET rouvrir cette règle.
+  it('chaque iconUrl est une URL Fandom datée (?cb=), jamais un chemin local', () => {
     for (const f of factions.filter((x) => x.iconUrl)) {
-      const u = f.iconUrl!;
-      if (u.startsWith('/')) {
-        expect(existsSync(join(__dirname, '../../public', u.replace(/^\/api\//, ''))), f.id).toBe(true);
-      } else {
-        expect(u, f.id).toMatch(/^https:\/\/static\.wikia\.nocookie\.net\/.+\?cb=\d+$/);
-      }
+      expect(f.iconUrl!, f.id).toMatch(/^https:\/\/static\.wikia\.nocookie\.net\/.+\?cb=\d+$/);
     }
   });
 });
