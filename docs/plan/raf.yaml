@@ -832,6 +832,8 @@ lots:
     review: { date: 2026-10-11, verdict: "conforme : 0 bloquant, 0 majeur, 1 mineur (apparition tardive du bouton et de la section pendant le chargement, hors sous-tâche) — orchestré (vague 2026-10-11-1605, 0 passe(s) de correction)", commit: 0f435b7138f917c3aa5f98fe69f055fe95aa5629 }
     ux: { date: 2026-10-11, verdict: "Sylvain 11-10 : ok L95 (capture Grey Knights) ; revue UX automatique conforme, 1 mineur (apparition tardive du bouton pendant le chargement)" }
     finished: 2026-10-11
+    notes:
+      - { date: 2026-10-11, text: "QA prod 11-10 (df33c33) : 8/8 pages conformes aux deux largeurs (6 factions sans unité, space-marines avec ses 19 unités, /nouveautes) ; texte alternatif des captures → L104." }
   - id: L96
     title: "/factions : grille vide au chargement et sur erreur d'API, « UNITÉS 0 » tant que les unités chargent, recherche sans résultat muette — états + région live (revue UX L3, cf L79)"
     public: "Factions : chargement, erreur et recherche vide annoncés"
@@ -893,6 +895,13 @@ lots:
     started: 2026-10-11
     review: { date: 2026-10-11, verdict: "conforme après 1 correction mineure : le titre générique de la fiche titan est « Machine de guerre », pas « Titan » (aace476) — orchestré (vague 2026-10-11-0935, 0 passe(s) de correction)", commit: null }
     finished: 2026-10-11
+  - id: L104
+    title: "/nouveautes : le texte alternatif rédigé de chaque capture (nouveautes.json) n'est jamais affiché — captureAlt(e.title, …) (nouveautes.component.ts:186) le remplace par « Capture d'écran : <titre> » ; utiliser le texte de l'entrée quand il existe, repli sur le titre, test (QA prod L95 11-10, WCAG 1.1.1)"
+    public: "Nouveautés : chaque capture décrite par son propre texte pour les lecteurs d'écran"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-11
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
