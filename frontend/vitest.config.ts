@@ -1,4 +1,6 @@
-import { defineConfig } from 'vitest/config';
+import path from 'node:path';
+import { configDefaults, defineConfig } from 'vitest/config';
+import { acceptationIgnored } from './scripts/acceptation-runner.mjs';
 
 /**
  * Vitest config for the Warhammer 40K frontend.
@@ -15,7 +17,14 @@ export default defineConfig({
     globals: false,
     // L30 : + tests des scripts Node (générateur du Plan de travail, workflow CI).
     include: ['src/**/*.spec.ts', 'scripts/**/*.test.mjs'],
-    exclude: ['**/node_modules/**', '**/dist/**', '**/.angular/**'],
+    // L106 : tests d'acceptation des lots pas encore verts (docs/specs/*/acceptation-<lot>.json, vert: false),
+    // exclus de la suite et de la CI ; la commande orchestrate.accept les lance seule.
+    exclude: [
+      ...configDefaults.exclude,
+      '**/dist/**',
+      '**/.angular/**',
+      ...acceptationIgnored(path.resolve(__dirname, '..')).map((f) => path.resolve(__dirname, '..', f)),
+    ],
     reporters: ['default'],
   },
 });

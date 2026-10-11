@@ -258,6 +258,10 @@ Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l
 « Mise à jour contenu en prod ») ; les pages tolèrent quand même les identifiants absents. Seuls
 `videos.json` et `channels.json`, données utilisateur, restent sur le volume.
 
+## Étape spec et acceptation (L106)
+
+`cadence.yaml` : `orchestrate.spec: { dir: docs/specs }` et `orchestrate.accept` (lanceur `frontend/vitest.acceptation.config.ts`, fichiers donnés par `CADENCE_ACCEPTATION`). `frontend/vitest.config.ts` (suite et CI) exclut les fichiers des `docs/specs/*/acceptation-<lot>.json` à `vert: false` via `frontend/scripts/acceptation-runner.mjs` (testé : `acceptation-runner.test.mjs`). Nommer les tests d'acceptation `*.acceptation.spec.ts` sous `frontend/src/`.
+
 ## Plan, sessions et revue UX (cadence)
 
 Le reste à faire vit dans `docs/plan/raf.yaml`, tenu par `raf`

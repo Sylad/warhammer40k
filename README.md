@@ -123,6 +123,10 @@ des données.
 
 `backend/public/datasheets/` contient **119 JPEGs d'unités** (curés à la main, bundlés dans l'image Docker), servis via `/api/images/datasheets/:unitId`.
 
+## Étape spec (cadence)
+
+Un lot à écran (`screen:`) passe par l'étape spec de cadence (`orchestrate.spec` dans `cadence.yaml`) : fiche et maquette sous `docs/specs/<écran>/`, revue de maquette, puis tests d'acceptation rouges. Ces tests sont des `*.acceptation.spec.ts` listés dans `docs/specs/<écran>/acceptation-<lot>.json` ; tant que ce fichier dit `"vert": false`, la suite (`npm test`) et la CI les excluent (`frontend/scripts/acceptation-runner.mjs`, repris d'ol-companion). La commande dédiée `orchestrate.accept` ne lance qu'eux : `cd frontend && CADENCE_ACCEPTATION=../docs/specs/<écran>/acceptation-<lot>.json npx vitest run -c vitest.acceptation.config.ts`. Le cycle pose `"vert": true` quand ils passent, et ils rejoignent alors la suite.
+
 ## Roadmap
 
 Voir [WARHAMMER_ROADMAP.md](./WARHAMMER_ROADMAP.md) pour le plan d'enrichissement (Custodes, Drukhari, Grey Knights, Empereur, primarques, Chaos pantheon, lore concepts, galaxy map, civils impériaux).
