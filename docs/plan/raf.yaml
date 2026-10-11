@@ -868,17 +868,20 @@ lots:
     title: "/factions : masquer le filtre « Autres » tant qu'aucune faction n'y entre (décision Sylvain 11-10), message de liste vide en role=status avec retour à « Toutes les factions » (WCAG 4.1.3)"
     public: "Factions : le filtre « Autres » n'apparaît que s'il a des factions"
     status: doing
-    estimate: 0.25
+    estimate: 0.5
     visible: true
     created: 2026-10-11
     started: 2026-10-11
+    notes:
+      - { date: 2026-10-11, text: "Rendu par la vague 2026-10-11-0935 (revue non conforme après 2 passes ; commits 651a3e7 d4a0bce f96d8f7). À corriger dans la reprise : (1) MAJEUR factions.component.ts:86 — le message « Aucune faction ne correspond à ce filtre » et le bouton « Toutes les factions » s'affichent pendant le chargement de /api/factions et en cas d'erreur (factions initialValue [] l. 131) : bouton inopérant (filtre déjà « all », recherche vide), Nielsen 1 et 9 — prévoir un état de chargement et un état d'erreur à part, test avec factions$ asynchrone (et en erreur) ; (2) mineur factions.component.scss:295 — la région .empty toujours présente dans .grid (gap 18 px) ajoute 18 px sous la dernière carte : la sortir de la grille ou annuler l'écart. Estimation passée à 0.5." }
   - id: L103
     title: "QA : ajouter à docs/qa/expectations.md les fiches /lore/ships/:id, /lore/saints/:id, /lore/titans/:id, /lore/equipment/:id (titre = nom, barre d'ancres collée sous l'en-tête, colonne latérale sous la barre, clic d'ancre à moins de 40 px sous la barre hors fin de page) — QA prod 11-10"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-11
     started: 2026-10-11
     review: { date: 2026-10-11, verdict: "conforme après 1 correction mineure : le titre générique de la fiche titan est « Machine de guerre », pas « Titan » (aace476) — orchestré (vague 2026-10-11-0935, 0 passe(s) de correction)", commit: null }
+    finished: 2026-10-11
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
