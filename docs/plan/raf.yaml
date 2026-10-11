@@ -374,11 +374,12 @@ lots:
   - id: L49
     title: "Galerie : panneau Filtres avant la grille (ordre de focus WCAG 2.4.3 — filtres à la 34e tabulation) ; au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) — maquette à valider par Sylvain avant tout code"
     public: "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     screen: journey
     created: 2026-10-03
+    started: 2026-10-11
   - id: L50
     title: "Galerie : libellés des statistiques du bandeau (Œuvres, Artistes, Collections) à 1,05:1 sur l'image — pastille opaque var(--panel) comme l'onglet Rechercher, ou voile sombre ; mesurer ≥ 4,5:1 (WCAG 1.4.3) ; factoriser d'abord la feuille de la galerie (12 octets de marge sur le budget de 17,5 kB)"
     status: done
