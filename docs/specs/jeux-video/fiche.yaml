@@ -1,0 +1,107 @@
+ecran:
+  id: jeux-video
+  titre: Jeux vidéo
+  route: /jeux-video
+  lot: L35
+  largeurs: [1440, 390]
+  maquette: docs/specs/jeux-video/maquette.html
+etats: [vide, chargement, erreur, charge]
+
+champs:
+  - { id: titre-page, libelle: Titre de la page, type: texte, source: statique, obligatoire: true }
+  - { id: intro-page, libelle: Phrase d'introduction, type: texte, source: statique, obligatoire: true }
+  - { id: lien-navigation, libelle: Lien « Jeux vidéo » de la navigation, type: lien, source: statique, obligatoire: true }
+  - { id: date-verification, libelle: Date de vérification des informations, type: texte, source: "GET /jeux-data/jeux.json → verifieLe", obligatoire: true }
+  - { id: section-a-venir, libelle: Section « À venir », type: texte, source: statique, obligatoire: true }
+  - { id: liste-a-venir, libelle: Liste des jeux à venir, type: liste, source: "GET /jeux-data/jeux.json → aVenir", obligatoire: true }
+  - { id: carte-a-venir, libelle: Carte d'un jeu à venir, type: texte, source: "GET /jeux-data/jeux.json → aVenir[]", obligatoire: true }
+  - { id: jeu-visuel, libelle: Visuel du jeu (ou symbole de repli), type: image, source: "GET /jeux-data/jeux.json → aVenir[].image", obligatoire: true }
+  - { id: jeu-statut, libelle: Statut (Annoncé, En développement), type: texte, source: "GET /jeux-data/jeux.json → aVenir[].statut", obligatoire: true }
+  - { id: jeu-titre, libelle: Titre du jeu à venir, type: texte, source: "GET /jeux-data/jeux.json → aVenir[].titre", obligatoire: true }
+  - { id: jeu-date, libelle: Date de sortie annoncée, type: texte, source: "GET /jeux-data/jeux.json → aVenir[].sortie", obligatoire: true }
+  - { id: jeu-genre, libelle: Genre, type: texte, source: "GET /jeux-data/jeux.json → aVenir[].genre", obligatoire: true }
+  - { id: jeu-plateformes, libelle: Plateformes, type: texte, source: "GET /jeux-data/jeux.json → aVenir[].plateformes", obligatoire: true }
+  - { id: jeu-resume, libelle: Contenu annoncé, type: texte, source: "GET /jeux-data/jeux.json → aVenir[].resume", obligatoire: true }
+  - { id: jeu-source, libelle: Lien vers la source de l'annonce, type: lien, source: "GET /jeux-data/jeux.json → aVenir[].source", obligatoire: true }
+  - { id: section-existants, libelle: Section « Déjà sortis », type: texte, source: statique, obligatoire: true }
+  - { id: liste-existants, libelle: Liste des jeux déjà sortis, type: liste, source: "GET /jeux-data/jeux.json → existants", obligatoire: true }
+  - { id: ligne-existant, libelle: Ligne d'un jeu déjà sorti, type: texte, source: "GET /jeux-data/jeux.json → existants[]", obligatoire: true }
+  - { id: existant-titre, libelle: Titre du jeu sorti, type: texte, source: "GET /jeux-data/jeux.json → existants[].titre", obligatoire: true }
+  - { id: existant-annee, libelle: Année de sortie, type: texte, source: "GET /jeux-data/jeux.json → existants[].annee", obligatoire: true }
+  - { id: existant-resume, libelle: Présentation du jeu sorti, type: texte, source: "GET /jeux-data/jeux.json → existants[].resume", obligatoire: true }
+  - { id: existant-plateformes, libelle: Plateformes du jeu sorti, type: texte, source: "GET /jeux-data/jeux.json → existants[].plateformes", obligatoire: true }
+  - { id: message-vide, libelle: Message d'état vide, type: texte, source: statique, obligatoire: true }
+  - { id: message-chargement, libelle: Message de chargement, type: texte, source: statique, obligatoire: true }
+  - { id: message-erreur, libelle: Message d'erreur de chargement, type: texte, source: statique, obligatoire: true }
+  - { id: bouton-reessayer, libelle: Réessayer, type: bouton, source: "action A2", obligatoire: true }
+
+regles:
+  - id: R1
+    etat: charge
+    enonce: Une fois chargée, la page montre d'abord la section « À venir » (jeux annoncés, pas encore sortis), puis la section « Déjà sortis ».
+    message: ~
+    champs: [titre-page, intro-page, section-a-venir, liste-a-venir, carte-a-venir, section-existants, liste-existants, ligne-existant]
+    statut: sourcee
+    source: "demande du lot L35 : « les jeux existants et surtout les jeux à venir »"
+    tests: ["R1 — chargé : « À venir » précède « Déjà sortis »"]
+  - id: R2
+    etat: charge
+    enonce: Chaque jeu à venir montre visuel (symbole de repli si l'image manque), statut, titre, date de sortie, genre, plateformes, contenu annoncé et un lien vers sa source. Une date non confirmée s'affiche « Date non communiquée », jamais une date devinée.
+    message: "Date non communiquée"
+    champs: [jeu-visuel, jeu-statut, jeu-titre, jeu-date, jeu-genre, jeu-plateformes, jeu-resume, jeu-source]
+    statut: sourcee
+    source: "demande du lot L35 : « dates et contenus annoncés à vérifier sur des sources en ligne, pas de mémoire »"
+    tests: ["R2 — carte à venir : tous les champs et le lien source", "R2 — date inconnue : « Date non communiquée »"]
+  - id: R3
+    etat: charge
+    enonce: La page affiche la date à laquelle les informations ont été vérifiées en ligne.
+    message: "Informations vérifiées le 11 octobre 2026."
+    champs: [date-verification]
+    statut: hypothese
+    si_faux: Si la date de vérification ne doit pas être montrée, seul ce paragraphe disparaît (champ verifieLe du JSON conservé ou retiré).
+    tests: ["R3 — chargé : la date de vérification est affichée"]
+  - id: R4
+    etat: charge
+    enonce: Les jeux déjà sortis sont listés du plus récent au plus ancien, avec titre, année, présentation et plateformes.
+    message: ~
+    champs: [existant-titre, existant-annee, existant-resume, existant-plateformes]
+    statut: hypothese
+    si_faux: Si l'ordre voulu est alphabétique ou par série, seul le tri change.
+    tests: ["R4 — existants : ordre décroissant des années"]
+  - id: R5
+    etat: charge
+    enonce: Un lien « Jeux vidéo » est présent dans la navigation (barre, tiroir téléphone), actif sur la page, et mène à /jeux-video.
+    message: "Jeux vidéo"
+    champs: [lien-navigation]
+    statut: sourcee
+    source: "demande du lot L35 : « lien dans la navigation »"
+    tests: ["R5 — le lien de navigation mène à /jeux-video et est actif", "R5 — barre : aucun débordement aux seuils (topbar.e2e)"]
+  - id: R6
+    etat: vide
+    enonce: Sans aucun jeu, la page affiche un message d'état vide à la place des deux sections.
+    message: "Aucun jeu à présenter pour le moment."
+    champs: [message-vide]
+    masque: [section-a-venir, liste-a-venir, section-existants, liste-existants, date-verification]
+    statut: hypothese
+    si_faux: Si le texte doit changer, seul ce bloc change (aucune donnée en jeu).
+    tests: ["R6 — liste vide : message affiché, aucune section"]
+  - id: R7
+    etat: chargement
+    enonce: Pendant la lecture des données, la page affiche « Chargement des jeux… » et des emplacements gris ; le titre reste visible.
+    message: "Chargement des jeux…"
+    champs: [message-chargement]
+    statut: hypothese
+    si_faux: Si le chargement doit être muet, seul le message change.
+    tests: ["R7 — chargement : message annoncé en role=status"]
+  - id: R8
+    etat: erreur
+    enonce: Si la lecture échoue, la page affiche l'erreur et un bouton « Réessayer » qui relance la lecture ; pas d'exception qui fige la page (cf. L38).
+    message: "Impossible de charger les jeux vidéo."
+    champs: [message-erreur, bouton-reessayer]
+    statut: hypothese
+    si_faux: Si le message change, seul ce bloc change (aucune donnée en jeu).
+    tests: ["R8 — erreur : message et bouton Réessayer", "R8 — Réessayer relance la lecture"]
+
+actions:
+  - { id: A1, declencheur: ~, appel: "GET /jeux-data/jeux.json", regles: [R1, R2, R3, R4, R6, R7, R8] }
+  - { id: A2, declencheur: bouton-reessayer, appel: "GET /jeux-data/jeux.json", regles: [R8] }

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeux vidéo — Warhammer 40 000 (maquette L35)</title>
+<style>
+:root{--bg:#050403;--panel:#0b0907;--panel-2:#130f0b;--gold:#c9a24a;--gold-soft:#80652b;--gold-bright:#f0d276;--red:#7b1113;--red-deep:#4a0a0c;--text:#e6dfce;--muted:#8d8678;--border:rgba(201,162,74,.28);--border-strong:rgba(201,162,74,.55);--serif:'Cinzel',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--topbar-h:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.5 var(--sans)}
+h1,h2,h3{font-family:var(--serif);color:var(--gold-bright);font-weight:600;margin:0}
+a{color:var(--gold-bright)}
+.topbar{height:var(--topbar-h);display:flex;align-items:center;gap:22px;padding:0 24px;background:var(--panel);border-bottom:1px solid var(--border)}
+.brand{font:700 1rem var(--serif);color:var(--gold-bright);white-space:nowrap}
+.nav{display:flex;gap:18px;font-size:.9rem}
+.nav a{color:var(--text);text-decoration:none;padding:6px 2px}
+.nav a.active{color:var(--gold-bright);border-bottom:2px solid var(--gold)}
+.menu-btn{display:none;margin-left:auto;min-height:44px;padding:0 16px;background:transparent;color:var(--gold-bright);border:1px solid var(--border-strong);font:600 .9rem var(--sans)}
+.crumb{max-width:1100px;margin:14px auto 0;padding:0 24px;color:var(--muted);font-size:.8rem}
+.crumb a{color:var(--muted)}
+.state-tag{max-width:1100px;margin:18px auto 0;padding:0 24px;color:var(--muted);font:.7rem var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.page{max-width:1100px;margin:0 auto;padding:12px 24px 56px}
+.eyebrow{margin:0 0 8px;color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.page h1{font-size:clamp(1.7rem,5vw,2.6rem);margin-bottom:10px;overflow-wrap:anywhere}
+.lede{margin:0 0 10px;max-width:640px;line-height:1.6}
+.verif{margin:0 0 28px;color:var(--muted);font-size:.85rem}
+.verif time{color:var(--gold-bright);white-space:nowrap}
+.section{margin-top:34px}
+.section h2{font-size:clamp(1.2rem,3.6vw,1.6rem);margin-bottom:6px}
+.section .sub{margin:0 0 16px;color:var(--muted);font-size:.9rem}
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);height:100%}
+.visuel{aspect-ratio:16/9;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,var(--red) 0,var(--red-deep) 45%,var(--panel-2) 100%);color:var(--gold);font:700 2.2rem var(--serif);border-bottom:1px solid var(--border)}
+.corps{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.statut{align-self:flex-start;padding:2px 10px;border-radius:999px;background:var(--gold);color:var(--bg);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.statut.dev{background:transparent;color:var(--gold-bright);border:1px solid var(--gold)}
+.card h3{font-size:1.2rem;overflow-wrap:anywhere}
+.meta{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:.88rem}
+.meta dt{color:var(--muted)}
+.meta dd{margin:0}
+.resume{margin:4px 0 0;line-height:1.6}
+.source{margin-top:auto;padding-top:8px;font-size:.85rem}
+.source a{display:inline-flex;align-items:center;min-height:24px}
+.existants{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ligne{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:baseline;padding:14px 18px;background:var(--panel);border:1px solid var(--border)}
+.ligne h3{font-size:1.02rem;overflow-wrap:anywhere}
+.ligne .annee{color:var(--gold);font-weight:700;white-space:nowrap}
+.ligne .detail{grid-column:1/-1;margin:0;color:var(--text);font-size:.9rem}
+.ligne .plat{grid-column:1/-1;margin:0;color:var(--muted);font-size:.82rem}
+.msg{padding:28px 24px;background:var(--panel);border:1px solid var(--border);max-width:640px}
+.msg p{margin:0 0 6px}
+.msg .aide{color:var(--muted);font-size:.9rem}
+.btn{margin-top:12px;min-height:44px;padding:0 20px;background:transparent;color:var(--gold-bright);border:1px solid var(--gold);font:600 .9rem var(--sans);cursor:pointer}
+.sk{background:linear-gradient(90deg,var(--panel) 0,var(--panel-2) 50%,var(--panel) 100%);border:1px solid var(--border)}
+.sk-card{aspect-ratio:16/12}
+.sk-ligne{height:64px;margin-bottom:10px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.footer{max-width:1100px;margin:0 auto;padding:18px 24px 40px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:target)) #etat-charge{display:block}
+@media (max-width:1279px){.nav{display:none}.menu-btn{display:block}}
+@media (max-width:760px){.cards{grid-template-columns:1fr}.page{padding:12px 16px 40px}.topbar{padding:0 16px}.crumb,.state-tag{padding:0 16px}.ligne{grid-template-columns:1fr}.ligne .annee{order:-1}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <span class="brand">Warhammer 40,000</span>
+  <nav class="nav" aria-label="Navigation (maquette)">
+    <a href="#">⌂ Accueil</a><a href="#">⚔ Factions</a><a href="#">▤ Romans</a><a href="#">▶ Vidéos</a>
+    <a href="#" class="active" aria-current="page" data-testid="lien-navigation">◈ Jeux vidéo</a>
+    <a href="#">▦ Galerie</a><a href="#">✠ Lore ▾</a><a href="#">À propos ▾</a>
+  </nav>
+  <button class="menu-btn" type="button">Menu</button>
+</header>
+<p class="crumb"><a href="#">Accueil</a> › Jeux vidéo</p>
+
+<!-- ============ ÉTAT CHARGÉ ============ -->
+<section id="etat-charge">
+  <p class="state-tag">État : chargé</p>
+  <main class="page">
+    <p class="eyebrow">Codex numérique · Jeux vidéo</p>
+    <h1 data-testid="titre-page">Jeux vidéo</h1>
+    <p class="lede" data-testid="intro-page">Les jeux Warhammer 40 000 qui arrivent, puis ceux déjà sortis. Les dates sont celles annoncées par les éditeurs ; elles peuvent bouger.</p>
+    <p class="verif" data-testid="date-verification">Informations vérifiées le <time datetime="2026-10-11">11 octobre 2026</time>.</p>
+
+    <section class="section" aria-labelledby="h-venir" data-testid="section-a-venir">
+      <h2 id="h-venir">À venir</h2>
+      <p class="sub">Annoncés, pas encore sortis.</p>
+      <ul class="cards" data-testid="liste-a-venir">
+        <li><article class="card" data-testid="carte-a-venir">
+          <div class="visuel" aria-hidden="true" data-testid="jeu-visuel">✠</div>
+          <div class="corps">
+            <span class="statut dev" data-testid="jeu-statut">En développement</span>
+            <h3 data-testid="jeu-titre">Dawn of War 4 <em style="color:var(--muted);font-size:.8rem">(exemple)</em></h3>
+            <dl class="meta">
+              <dt>Sortie</dt><dd data-testid="jeu-date">Date non communiquée</dd>
+              <dt>Genre</dt><dd data-testid="jeu-genre">Stratégie en temps réel</dd>
+              <dt>Plateformes</dt><dd data-testid="jeu-plateformes">PC</dd>
+            </dl>
+            <p class="resume" data-testid="jeu-resume">Texte de présentation du contenu annoncé (factions, campagne, modes), rédigé d’après les annonces de l’éditeur.</p>
+            <p class="source"><a href="#" data-testid="jeu-source" rel="noopener" target="_blank">Source : annonce officielle<span class="sr-only"> (nouvel onglet)</span> ↗</a></p>
+          </div>
+        </article></li>
+        <li><article class="card">
+          <div class="visuel" aria-hidden="true">✠</div>
+          <div class="corps">
+            <span class="statut dev">Annoncé</span>
+            <h3>Total War: Warhammer 40,000 <em style="color:var(--muted);font-size:.8rem">(exemple)</em></h3>
+            <dl class="meta">
+              <dt>Sortie</dt><dd>Date non communiquée</dd>
+              <dt>Genre</dt><dd>Stratégie et batailles en temps réel</dd>
+              <dt>Plateformes</dt><dd>PC</dd>
+            </dl>
+            <p class="resume">Texte de présentation du contenu annoncé, rédigé d’après les annonces de l’éditeur.</p>
+            <p class="source"><a href="#" rel="noopener" target="_blank">Source : annonce officielle<span class="sr-only"> (nouvel onglet)</span> ↗</a></p>
+          </div>
+        </article></li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="h-sortis" data-testid="section-existants">
+      <h2 id="h-sortis">Déjà sortis</h2>
+      <p class="sub">Les jeux disponibles, du plus récent au plus ancien.</p>
+      <ul class="existants" data-testid="liste-existants">
+        <li><article class="ligne" data-testid="ligne-existant">
+          <h3 data-testid="existant-titre">Space Marine 2 <em style="color:var(--muted);font-size:.8rem">(exemple)</em></h3>
+          <span class="annee" data-testid="existant-annee">2024</span>
+          <p class="detail" data-testid="existant-resume">Action à la troisième personne, campagne et modes coopératifs.</p>
+          <p class="plat" data-testid="existant-plateformes">PC · PlayStation · Xbox</p>
+        </article></li>
+        <li><article class="ligne"><h3>Jeu existant <em style="color:var(--muted);font-size:.8rem">(exemple)</em></h3><span class="annee">2022</span><p class="detail">Une ligne de présentation du jeu.</p><p class="plat">PC</p></article></li>
+        <li><article class="ligne"><h3>Jeu existant <em style="color:var(--muted);font-size:.8rem">(exemple)</em></h3><span class="annee">2017</span><p class="detail">Une ligne de présentation du jeu.</p><p class="plat">PC</p></article></li>
+      </ul>
+    </section>
+  </main>
+</section>
+
+<!-- ============ ÉTAT VIDE ============ -->
+<section id="etat-vide">
+  <p class="state-tag">État : vide</p>
+  <main class="page">
+    <p class="eyebrow">Codex numérique · Jeux vidéo</p>
+    <h1>Jeux vidéo</h1>
+    <p class="lede">Les jeux Warhammer 40 000 qui arrivent, puis ceux déjà sortis. Les dates sont celles annoncées par les éditeurs ; elles peuvent bouger.</p>
+    <div class="msg" data-testid="message-vide">
+      <p>Aucun jeu à présenter pour le moment.</p>
+      <p class="aide">La liste sera complétée dès que des informations vérifiées seront disponibles.</p>
+    </div>
+  </main>
+</section>
+
+<!-- ============ ÉTAT CHARGEMENT ============ -->
+<section id="etat-chargement">
+  <p class="state-tag">État : chargement</p>
+  <main class="page" aria-busy="true">
+    <p class="eyebrow">Codex numérique · Jeux vidéo</p>
+    <h1>Jeux vidéo</h1>
+    <p class="lede">Les jeux Warhammer 40 000 qui arrivent, puis ceux déjà sortis. Les dates sont celles annoncées par les éditeurs ; elles peuvent bouger.</p>
+    <p class="verif" role="status" data-testid="message-chargement">Chargement des jeux…</p>
+    <ul class="cards" aria-hidden="true">
+      <li class="sk sk-card"></li><li class="sk sk-card"></li>
+    </ul>
+    <div style="margin-top:22px" aria-hidden="true"><div class="sk sk-ligne"></div><div class="sk sk-ligne"></div></div>
+  </main>
+</section>
+
+<!-- ============ ÉTAT ERREUR ============ -->
+<section id="etat-erreur">
+  <p class="state-tag">État : erreur</p>
+  <main class="page">
+    <p class="eyebrow">Codex numérique · Jeux vidéo</p>
+    <h1>Jeux vidéo</h1>
+    <p class="lede">Les jeux Warhammer 40 000 qui arrivent, puis ceux déjà sortis. Les dates sont celles annoncées par les éditeurs ; elles peuvent bouger.</p>
+    <div class="msg" role="alert">
+      <p data-testid="message-erreur">Impossible de charger les jeux vidéo.</p>
+      <p class="aide">Vérifiez votre connexion, puis réessayez.</p>
+      <button class="btn" type="button" data-testid="bouton-reessayer">Réessayer</button>
+    </div>
+  </main>
+</section>
+
+<footer class="footer">Nouveautés · Plan de travail · À propos</footer>
+</body>
+</html>
