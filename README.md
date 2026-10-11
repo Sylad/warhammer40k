@@ -106,7 +106,7 @@ des données.
 ## Données seed
 
 `backend/seed/` contient le contenu éditorial, lu directement par le backend (embarqué dans l'image, rien à copier : `backend/data/` ne garde que ce que les utilisateurs écrivent) :
-- `factions.json` (17 factions principales)
+- `factions.json` (17 factions principales) — `iconUrl` facultatif : sans lui (ou si l'image échoue) la carte affiche le `symbole` ; Fandom répondant 404 avec une image de remplacement, l'événement d'erreur ne part pas, donc aucune URL non datée n'est acceptée (`backend/src/common/faction-icons.spec.ts`)
 - `subfactions.json` (182 sous-factions enrichies, dont 71 successeurs Space Marines lore-ifiés, 200+ notableUnits avec personnages Hérésie d'Horus)
 - `units.json` (133 unités)
 - `series.json` (38 séries Black Library)

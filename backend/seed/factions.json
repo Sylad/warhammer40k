@@ -1110,7 +1110,6 @@
     "description": "Gardes personnels de l'Empereur, façonnés un par un par Sa propre main. Plus rares que les Astartes, plus puissants à l'unité, et tous voués à un seul devoir : veiller éternellement sur le Trône d'Or.",
     "couleurThematique": "#c9a24a",
     "symbole": "⚜",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/8/85/AdeptusCustodes_Logo.png/revision/latest/scale-to-width-down/80",
     "sousTitre": "La Garde de l'Empereur",
     "citation": "Nous sommes les yeux qui jamais ne se ferment. Nous sommes la lame qui jamais ne tombe.",
     "lore": {
@@ -1195,7 +1194,6 @@
     "description": "Quatre temples, quatre disciplines, un seul mandat : éliminer les ennemis de l'Imperium par la mort silencieuse. Les assassins du Haut Seigneur de Terra n'ont ni nom, ni visage, ni passé.",
     "couleurThematique": "#3a3a3a",
     "symbole": "☠",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/0/03/Officio_Assassinorum_Logo.png/revision/latest/scale-to-width-down/80",
     "sousTitre": "Les Lames Sans Visage de l'Empereur",
     "citation": "Et il en sera ainsi : un, et un, et un. Pas une cible — une vérité.",
     "lore": {
@@ -1287,7 +1285,6 @@
     "description": "Cousins sadiques des Aeldari, prédateurs interstellaires nichés dans Commorragh. Leur survie dépend de la souffrance d'autres âmes — ils volent, torturent, esclavagent pour échapper à l'appétit insatiable de Slaanesh qui guette leur âme.",
     "couleurThematique": "#3a0e3e",
     "symbole": "⛧",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/9/9f/Drukhari_Logo.png/revision/latest/scale-to-width-down/80",
     "sousTitre": "Les Eldars Noirs",
     "citation": "La douleur est notre nourriture. Le cri est notre musique. La cruauté est notre art.",
     "lore": {
@@ -1367,7 +1364,6 @@
     "description": "Chapitre psyker secret du 666ᵉ Founding, succursale militaire de l'Ordo Malleus. Aucune mention dans les chroniques officielles, aucune trace dans les registres impériaux : ils sont la lame qui éteint les daemons, et ils n'existent pas.",
     "couleurThematique": "#5a6878",
     "symbole": "✠",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/0/0a/Grey_Knights_Icon.png/revision/latest/scale-to-width-down/80",
     "sousTitre": "Les Chevaliers du Titan",
     "citation": "Ils ne savent même pas que nous existons. Et ceux qui le savent ne s'en souviennent pas.",
     "lore": {
@@ -1452,7 +1448,6 @@
     "description": "Descendants des Squats originels — humains augmentés génétiquement il y a des millénaires, devenus mineurs-ingénieurs autosuffisants. Leurs Kindreds vivent à l'écart de l'Imperium dans des forteresses spatiales sous les pôles galactiques.",
     "couleurThematique": "#7d8a9c",
     "symbole": "⚒",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/c/c3/Leagues_of_Votann_Logo.png/revision/latest/scale-to-width-down/80",
     "sousTitre": "Les Fils du Trône-Forge",
     "citation": "Nous étions là avant l'Imperium. Nous serons là après. La pierre se souvient.",
     "lore": {
@@ -1522,7 +1517,6 @@
     "description": "Cultes hybrides cachés sous les ruches impériales, infiltrés dans la société humaine. Précurseurs des Tyranides : leur Patriarche reste tapi pendant des décennies, infectant des générations entières avant l'arrivée de la Hive Fleet.",
     "couleurThematique": "#5a3a8c",
     "symbole": "☩",
-    "iconUrl": "https://static.wikia.nocookie.net/warhammer40k/images/4/4c/Genestealer_Cults_Logo.png/revision/latest/scale-to-width-down/80",
     "sousTitre": "Les Enfants du Patriarche",
     "citation": "Le Quatre-Bras vient. Préparez le grand banquet.",
     "lore": {
