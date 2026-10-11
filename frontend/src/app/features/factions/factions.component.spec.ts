@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { of } from 'rxjs';
+import { Subject, of, throwError } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { FactionsComponent } from './factions.component';
 
@@ -196,5 +196,50 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     f.componentInstance.searchQuery.set('zzz');
     f.detectChanges();
     expect(el.querySelector('[role="status"] > .empty-msg')?.textContent).toContain('Aucune faction');
+  });
+
+  // Revue de la vague 2026-10-11-0935 : avant la réponse de /api/factions (ou en cas d'erreur) la
+  // liste est vide sans que le filtre y soit pour rien ; le bouton de retour serait inopérant.
+  async function monteAvec(factions$: import('rxjs').Observable<ReturnType<typeof F>[]>) {
+    const service = fakeWarhammerService({ factions$, getUnits: () => of([]) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    return f;
+  }
+
+  it('pendant le chargement : pas de « Aucune faction » ni de bouton, un message de chargement', async () => {
+    const flux = new Subject<ReturnType<typeof F>[]>();
+    const f = await monteAvec(flux);
+    const el = f.nativeElement as HTMLElement;
+    const status = el.querySelector('[role="status"]')!;
+    expect(status.textContent).toContain('Chargement');
+    expect(status.textContent).not.toContain('Aucune faction');
+    expect(status.querySelector('button')).toBeNull();
+    flux.next([F('a'), F('b')]);
+    flux.complete();
+    f.detectChanges();
+    expect(el.querySelectorAll('a.card')).toHaveLength(2);
+    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+  });
+
+  it('chargement terminé sans aucune faction : le message de liste vide apparaît', async () => {
+    const f = await monteAvec(of([]));
+    expect(f.nativeElement.querySelector('[role="status"]').textContent).toContain('Aucune faction');
+  });
+
+  it('en cas d’erreur de /api/factions : message d’erreur, pas de « Aucune faction », pas de bouton inopérant', async () => {
+    const f = await monteAvec(throwError(() => new Error('500')));
+    const status = (f.nativeElement as HTMLElement).querySelector('[role="status"]')!;
+    expect(status.textContent).toContain('n’ont pas pu être chargées');
+    expect(status.textContent).not.toContain('Aucune faction');
+    expect(status.querySelector('button')).toBeNull();
+  });
+
+  it('la région de statut est hors de la grille (pas d’écart de 18 px sous la dernière carte)', async () => {
+    const f = await monte(['Imperium']);
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('.grid [role="status"]')).toBeNull();
+    expect(el.querySelector('[role="status"]')).not.toBeNull();
   });
 });

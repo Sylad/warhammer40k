@@ -292,7 +292,8 @@
 
     /* Région live toujours dans l'arbre (jamais display:none) : vide, elle n'a pas de hauteur ;
        l'espacement est porté par le message. */
-    .empty { grid-column: 1 / -1; margin: 0; padding: 0; }
+    .results { min-width: 0; }
+    .empty { margin: 0; padding: 0; }
     .empty-msg { margin: 0; padding: 28px 0; color: var(--muted); text-align: center; }
     .empty .filter { margin-left: 12px; }
 

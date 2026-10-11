@@ -10,3 +10,5 @@ captures: [{ file: captures/L102-factions-liste-vide.png, alt: "Page Factions : 
 Sur la page Factions, le bouton « Autres » n'est plus affiché tant qu'aucune faction n'y entre : il reste caché, au lieu de mener à une liste vide.
 
 Quand une recherche ou un filtre ne donne aucun résultat, le message « Aucune faction ne correspond à ce filtre. » est annoncé par les lecteurs d'écran, et un bouton « Toutes les factions » remet d'un clic le filtre et la recherche à zéro.
+
+Pendant que les factions se chargent, la page affiche « Chargement des factions… » au lieu du message « Aucune faction ». Si le chargement échoue, elle indique que les factions n’ont pas pu être chargées.

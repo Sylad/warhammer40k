@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError, map, of, startWith } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -61,6 +62,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
     </section>
 
     <section class="layout">
+      <div class="results">
       <div class="grid">
         @for (f of displayedFactions(); track f.id) {
           <a class="card" [routerLink]="['/factions', f.id]"
@@ -83,7 +85,16 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
             </div>
           </a>
         }
-        <div class="empty" role="status">@if (!displayedFactions().length) {<p class="empty-msg">Aucune faction ne correspond à ce filtre. <button type="button" class="filter" (click)="reset()">Toutes les factions</button></p>}</div>
+      </div>
+      <div class="empty" role="status">
+        @if (etat() === 'chargement') {
+          <p class="empty-msg">Chargement des factions…</p>
+        } @else if (etat() === 'erreur') {
+          <p class="empty-msg">Les factions n’ont pas pu être chargées. Rechargez la page pour réessayer.</p>
+        } @else if (!displayedFactions().length) {
+          <p class="empty-msg">Aucune faction ne correspond à ce filtre. <button type="button" class="filter" (click)="reset()">Toutes les factions</button></p>
+        }
+      </div>
       </div>
 
       <aside class="sidebar">
@@ -128,7 +139,17 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
 export class FactionsComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly factions = toSignal(this.service.factions$, { initialValue: [] });
+  /** L102 : le chargement et l'erreur de /api/factions ne sont pas une « liste vide » due au filtre. */
+  private readonly chargement = toSignal(
+    this.service.factions$.pipe(
+      map(data => ({ etat: 'ok' as const, data })),
+      catchError(() => of({ etat: 'erreur' as const, data: [] as Faction[] })),
+      startWith({ etat: 'chargement' as const, data: [] as Faction[] }),
+    ),
+    { requireSync: true },
+  );
+  readonly etat = computed(() => this.chargement().etat);
+  readonly factions = computed(() => this.chargement().data);
   /** L39 : icônes du wiki introuvables (404) → symbole de la faction à la place. */
   readonly brokenIcons = signal(new Set<string>());
   iconFailed(id: string): void {
