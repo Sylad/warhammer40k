@@ -897,7 +897,7 @@ lots:
     finished: 2026-10-11
   - id: L104
     title: "/nouveautes : le texte alternatif rédigé de chaque capture (nouveautes.json) n'est jamais affiché — captureAlt(e.title, …) (nouveautes.component.ts:186) le remplace par « Capture d'écran : <titre> » ; utiliser le texte de l'entrée quand il existe, repli sur le titre, test (QA prod L95 11-10, WCAG 1.1.1)"
-    public: "Nouveautés : chaque capture décrite par son propre texte pour les lecteurs d'écran"
+    public: "Nouveautés : chaque capture décrite par son propre texte"
     status: todo
     estimate: 0.25
     visible: true
