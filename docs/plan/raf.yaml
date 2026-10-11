@@ -431,13 +431,15 @@ lots:
     finished: 2026-10-05
   - id: L56
     title: "QA /factions : 6 logos wiki en 404 (Genestealer Cults, Drukhari, Officio Assassinorum, Grey Knights, Adeptus Custodes, Leagues of Votann) — embarquer les logos en local ou URL de repli, plus un test qu'aucun logo ne pointe vers une URL morte"
-    status: doing
+    status: done
     estimate: 0.5
     created: 2026-10-04
     notes:
       - { date: 2026-10-11, text: "QA prod 11-10 : les 6 icônes 404 ne déclenchent jamais le repli — Fandom renvoie une image de remplacement de 80 px dans le corps de sa 404 (naturalWidth 80, l'événement (error) ne part pas) ; le test de repli doit vérifier l'URL, pas l'événement error" }
+      - { date: 2026-10-11, text: "Clos 11-10 (vague 2026-10-11-1120, conforme ; 101 + 627 tests re-vérifiés). Choix : les 6 iconUrl Fandom retirées (symbole de repli affiché) — embarquer les logos est impossible, Fandom répond 403 depuis Big-Blue. Mineur en note : faction-icons.spec.ts:25 vérifie la forme des URL, pas qu'elles répondent (test hors réseau)." }
     started: 2026-10-11
     review: { date: 2026-10-11, verdict: "conforme : 0 bloquant, 0 majeur, 1 mineur (le test vérifie la forme de l'URL, pas que l'image existe ; note de plan à ajouter) — orchestré (vague 2026-10-11-1120, 0 passe(s) de correction + passe des mineurs)", commit: 1374e05193e8f716a3c541f4086f892c468603d8 }
+    finished: 2026-10-11
   - id: L57
     title: "QA /videos et /romans : défilement horizontal (side-panel à x=1511 à 1440 px ; drawer à x=704 à 390 px) — vérifier et contenir"
     public: "Vidéos et Romans : plus de défilement horizontal parasite"
