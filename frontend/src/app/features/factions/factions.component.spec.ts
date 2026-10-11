@@ -3,6 +3,8 @@
 // symbole de la faction.
 import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -163,5 +165,17 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     expect(f.componentInstance.searchQuery()).toBe('');
     expect(el.querySelectorAll('a.card')).toHaveLength(2);
     expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+  });
+
+  // jsdom ne charge pas les styles : on lit la feuille. Une région live en display:none est hors de
+  // l'arbre d'accessibilité ; quand elle apparaît avec son texte, l'annonce n'est pas fiable.
+  it('la région role=status vide n\'est jamais en display:none (le style est porté par un enfant)', async () => {
+    const scss = readFileSync(resolve(__dirname, 'factions.component.scss'), 'utf8');
+    expect(scss).not.toMatch(/\.empty(:empty)?\s*\{[^}]*display:\s*none/);
+    const f = await monte(['Imperium']);
+    const el = f.nativeElement as HTMLElement;
+    f.componentInstance.searchQuery.set('zzz');
+    f.detectChanges();
+    expect(el.querySelector('[role="status"] > .empty-msg')?.textContent).toContain('Aucune faction');
   });
 });

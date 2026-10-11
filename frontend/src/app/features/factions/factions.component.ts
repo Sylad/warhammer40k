@@ -83,7 +83,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
             </div>
           </a>
         }
-        <div class="empty" role="status">@if (!displayedFactions().length) {Aucune faction ne correspond à ce filtre. <button type="button" class="filter" (click)="reset()">Toutes les factions</button>}</div>
+        <div class="empty" role="status">@if (!displayedFactions().length) {<p class="empty-msg">Aucune faction ne correspond à ce filtre. <button type="button" class="filter" (click)="reset()">Toutes les factions</button></p>}</div>
       </div>
 
       <aside class="sidebar">
