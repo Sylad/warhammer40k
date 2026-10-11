@@ -43,28 +43,28 @@ regles:
     tests: ["R2 — 1440 px : panneau à droite de la grille, au même niveau que les catégories", "R2 — 1440 px : bouton Filtres absent"]
   - id: R3
     etat: charge
-    enonce: Jusqu'à 760 px (seuil téléphone déjà utilisé par la galerie), un bouton « Filtres » se place sous le champ de recherche, avant « Importer » ; c'est un bouton à divulgation (aria-expanded, aria-controls vers le panneau) qui montre ou cache le panneau, replié au chargement.
+    enonce: Jusqu'à 760 px (seuil téléphone déjà utilisé par la galerie), un bouton « Filtres » se place sous le champ de recherche, dans la rangée de boutons, en dernier (« Importer » puis « Filtres »), pour que le panneau qu'il dévoile suive immédiatement le bouton dans l'ordre de tabulation ; c'est un bouton à divulgation (aria-expanded, aria-controls vers le panneau) qui montre ou cache le panneau, replié au chargement.
     message: "Filtres"
     champs: [bouton-filtres, recherche, panneau-filtres]
     statut: sourcee
     source: "demande du lot L49 : « au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) » ; le replié par défaut est une hypothèse (R4)"
-    tests: ["R3 — 390 px : bouton Filtres sous la recherche", "R3 — aria-expanded passe à true à l'ouverture, aria-controls pointe le panneau", "R3 — Entrée et Espace ouvrent et ferment"]
+    tests: ["R3 — 390 px : bouton Filtres sous la recherche, après Importer", "R3 — aria-expanded passe à true à l'ouverture, aria-controls pointe le panneau", "R3 — Entrée et Espace ouvrent et ferment"]
   - id: R4
     etat: charge
-    enonce: À 390 px le panneau est replié au chargement, ses trois listes sortent de l'ordre de tabulation et de l'arbre d'accessibilité tant qu'il est fermé.
+    enonce: À 390 px le panneau est replié au chargement (y compris pendant le chargement et en erreur, classe « ferme », aria-expanded=false, flèche ▼), ses trois listes sortent de l'ordre de tabulation et de l'arbre d'accessibilité tant qu'il est fermé. Ordre de tabulation, panneau ouvert, recherche → Importer → Filtres → Réinitialiser → Faction → Catégorie → Trier par.
     message: ~
     champs: [panneau-filtres, bouton-filtres]
     statut: hypothese
     si_faux: Si le panneau doit être ouvert par défaut au téléphone, seul l'état initial du bouton change ; le panneau reste avant la grille.
-    tests: ["R4 — 390 px : panneau replié (hidden), listes non focalisables", "R4 — ouvert, les listes redeviennent focalisables juste après le bouton"]
+    tests: ["R4 — 390 px : panneau replié (hidden), listes non focalisables", "R4 — ouvert, Réinitialiser puis les listes suivent immédiatement le bouton Filtres dans l'ordre de tabulation", "R4 — chargement et erreur à 390 px : panneau replié, aria-expanded=false"]
   - id: R5
     etat: filtres-ouverts
-    enonce: Le panneau ouvert s'insère juste sous le bandeau, avant les catégories ; le bouton passe à aria-expanded=true et affiche le nombre de filtres actifs (Faction, Catégorie) quand il est supérieur à 0.
+    enonce: Le panneau ouvert s'insère juste sous la rangée de boutons, avant les catégories ; à 390 px les pastilles de statistiques du bandeau sont masquées tant qu'il est ouvert, de sorte que son haut est visible juste sous le bouton sans défilement ; le bouton passe à aria-expanded=true et affiche le nombre de filtres actifs (Faction, Catégorie) quand il est supérieur à 0.
     message: ~
     champs: [bouton-filtres, compteur-filtres-actifs, panneau-filtres, bouton-reinitialiser]
     statut: hypothese
     si_faux: Si le nombre ne doit pas figurer, seule la pastille du bouton disparaît ; le « Réinitialiser » du panneau suffit à signaler un filtre actif.
-    tests: ["R5 — ouvert : panneau entre le bandeau et les catégories", "R5 — un filtre actif : pastille 1 sur le bouton", "R5 — aucun filtre : pas de pastille"]
+    tests: ["R5 — ouvert : panneau entre le bandeau et les catégories", "R5 — 390 px : pastilles de statistiques masquées, haut du panneau à moins de 80 px sous le bouton", "R5 — un filtre actif : pastille 1 sur le bouton", "R5 — aucun filtre : pas de pastille"]
   - id: R6
     etat: filtres-ouverts
     enonce: Choisir une valeur dans une liste met la grille à jour sans refermer le panneau ni déplacer le focus ; le nombre de résultats est annoncé dans la région d'état persistante.
@@ -84,20 +84,20 @@ regles:
     tests: ["R7 — filtres sans résultat : message affiché, pas de grille", "R7 — Réinitialiser rend la grille"]
   - id: R8
     etat: chargement
-    enonce: Pendant la lecture des œuvres, la grille montre des emplacements gris et le message « Chargement de la galerie… » (role=status) ; les trois listes du panneau sont désactivées, le panneau garde sa place avant la grille.
+    enonce: Pendant la lecture des œuvres, la grille montre des emplacements gris et le message « Chargement de la galerie… » (role=status) ; les trois listes du panneau sont désactivées et, à 390 px, le panneau reste replié ; le panneau garde sa place avant la grille. Le bandeau n'annonce aucun total (phrase « … œuvres triées, classées et archivées » absente), les trois pastilles de statistiques affichent « – » et les cartes de catégorie sont désactivées avec « – » à la place de leur effectif.
     message: "Chargement de la galerie…"
     champs: [message-chargement, panneau-filtres, filtre-faction, filtre-categorie, filtre-tri]
     statut: hypothese
     si_faux: Si le chargement doit rester muet (état actuel, aucun message), seul ce bloc change ; les listes peuvent aussi rester actives (aucune donnée en jeu).
-    tests: ["R8 — chargement : message annoncé, listes désactivées", "R8 — le panneau précède toujours la grille pendant le chargement"]
+    tests: ["R8 — chargement : message annoncé, listes et cartes de catégorie désactivées, pastilles « – », pas de total dans le bandeau", "R8 — le panneau précède toujours la grille pendant le chargement"]
   - id: R9
     etat: erreur
-    enonce: Si la lecture des œuvres échoue, la grille est remplacée par l'erreur et un bouton « Réessayer » qui relance la lecture ; les listes du panneau sont désactivées. Aujourd'hui l'échec est avalé et la galerie affiche l'état vide (gallery.component.ts:522).
+    enonce: Si la lecture des œuvres échoue, la grille est remplacée par l'erreur et un bouton « Réessayer » qui relance la lecture ; les listes du panneau sont désactivées et, à 390 px, le panneau reste replié ; comme au chargement, le bandeau n'annonce aucun total, les pastilles de statistiques affichent « – » et les cartes de catégorie sont désactivées (effectif « – »). Aujourd'hui l'échec est avalé et la galerie affiche l'état vide (gallery.component.ts:522).
     message: "Impossible de charger la galerie."
     champs: [message-erreur, bouton-reessayer, panneau-filtres]
     statut: hypothese
     si_faux: Si l'erreur ne doit pas être distinguée du vide, on garde le comportement actuel (message de R7) ; seul ce bloc disparaît, aucune donnée en jeu.
-    tests: ["R9 — erreur d'API : message et bouton Réessayer", "R9 — Réessayer relance GET /api/artworks"]
+    tests: ["R9 — erreur d'API : message et bouton Réessayer, cartes de catégorie désactivées, pastilles « – »", "R9 — Réessayer relance GET /api/artworks"]
   - id: R10
     etat: charge
     enonce: Les panneaux « Artistes à découvrir » et « Collections populaires » restent après la grille dans l'ordre du document (en colonne de droite sous les Filtres à partir de 761 px, sous la pagination au téléphone) ; seul le panneau Filtres est déplacé.
