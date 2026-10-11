@@ -910,9 +910,10 @@ lots:
       - { date: 2026-10-11, text: "QA prod 11-10 (f281380) : / et /nouveautes conformes aux deux largeurs ; 33/33 captures avec l'alt attendu (25 textes rédigés, 8 replis, 0 écart). Les 8 replis sont 5 entrées du 01-10 au 03-10 sans alts : texte à rédiger un jour (contenu, pas un défaut)." }
   - id: L105
     title: "Test e2e ancres.e2e.spec.ts instable sous charge : 2 échecs le 11-10 sur des cas différents (fiche faction 1440 « guerres » 120 px, fiche équipement 390 « specs » −13 px), verts relancés seuls (25/25) — attendre la fin du défilement (scrollend ou position stable) avant de mesurer, plutôt qu'un délai fixe"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-11
+    started: 2026-10-11
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
