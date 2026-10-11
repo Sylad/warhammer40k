@@ -236,6 +236,24 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     expect(status.querySelector('button')).toBeNull();
   });
 
+  it('/api/units en erreur : les cartes s’affichent quand même (comptes à 0), pas de chargement sans fin', async () => {
+    const service = fakeWarhammerService({ factions$: of([F('a'), F('b')]), getUnits: () => throwError(() => new Error('500')) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelectorAll('a.card')).toHaveLength(2);
+    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+  });
+
+  it('les deux appels en erreur : le message d’erreur des factions s’affiche', async () => {
+    const service = fakeWarhammerService({ factions$: throwError(() => new Error('500')), getUnits: () => throwError(() => new Error('500')) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    expect((f.nativeElement as HTMLElement).querySelector('[role="status"]')?.textContent).toContain('n’ont pas pu être chargées');
+  });
+
   it('la région de statut est hors de la grille (pas d’écart de 18 px sous la dernière carte)', async () => {
     const f = await monte(['Imperium']);
     const el = f.nativeElement as HTMLElement;
