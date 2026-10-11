@@ -79,7 +79,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
               <span class="badge" [class]="alignClass(f.alignement)">{{ f.alignement }}</span>
               <p>{{ f.description }}</p>
               <div class="card-footer">
-                <span class="units-count">UNITÉS <strong>{{ unitCount(f) }}</strong></span>
+                <span class="units-count">UNITÉS <strong>{{ unitsErreur() ? '—' : unitCount(f) }}</strong></span>
                 <span class="card-arrow">→</span>
               </div>
             </div>
@@ -155,9 +155,14 @@ export class FactionsComponent {
   iconFailed(id: string): void {
     this.brokenIcons.update(s => new Set(s).add(id));
   }
+  /** Une erreur de /api/units affiche « — » à la place des comptes : jamais un faux « 0 » (L102). */
+  readonly unitsErreur = signal(false);
   readonly units = toSignal(
     // Sans catchError, une erreur de /api/units relève à la lecture du signal et fige la page (L102).
-    this.service.getUnits().pipe(catchError(() => of([] as Unit[]))),
+    this.service.getUnits().pipe(catchError(() => {
+      this.unitsErreur.set(true);
+      return of([] as Unit[]);
+    })),
     { initialValue: [] as Unit[] },
   );
   readonly wikiImages = signal(new Map<string, string>());
