@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-11 16:10",
+  "generated": "2026-10-11 16:55",
   "entries": [
+    {
+      "slug": "2026-10-11-nouveautes-chaque-capture-decrite-par-son-propre-texte",
+      "title": "Nouveautés : chaque capture décrite par son propre texte",
+      "date": "2026-10-11",
+      "lots": [
+        "L104"
+      ],
+      "captures": [
+        "captures/L104-nouveautes.png"
+      ],
+      "alts": [
+        "La page Nouveautés à 1440 px : chaque capture d’une entrée porte son propre texte alternatif, lu par les lecteurs d’écran"
+      ],
+      "html": "<p>Sur la page Nouveautés, chaque capture d’écran est maintenant décrite par le texte rédigé pour elle, qui dit ce qu’elle montre (par exemple « Fiche Grey Knights, sans unité : pas de bouton « Explorer les unités » dans l’en-tête »). Les lecteurs d’écran l’annoncent à la place de la formule générique « Capture d’écran : » suivie du titre.</p>\n<p>Les anciennes nouveautés qui n’ont pas de texte rédigé gardent la formule générique.</p>"
+    },
     {
       "slug": "2026-10-11-fiches-faction-sans-unite-plus-de-recherche-d-unites-vide",
       "title": "Fiches faction sans unité : plus de recherche d'unités vide",
