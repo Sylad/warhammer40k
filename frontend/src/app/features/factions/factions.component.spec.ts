@@ -167,6 +167,25 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
   });
 
+  // WCAG 2.4.3 : le bouton du message disparaît quand on l'active ; le focus doit passer au filtre
+  // « Toutes les factions » de la barre, sinon il tombe sur <body> et Tab saute les cartes.
+  it('après « Toutes les factions » du message, le focus est sur le filtre « Toutes les factions » de la barre', async () => {
+    const f = await monte(['Imperium', 'Chaos']);
+    const el = f.nativeElement as HTMLElement;
+    document.body.appendChild(el);
+    f.componentInstance.searchQuery.set('zzz');
+    f.detectChanges();
+    const retour = el.querySelector<HTMLButtonElement>('[role="status"] button')!;
+    retour.focus();
+    retour.click();
+    f.detectChanges();
+    expect(el.querySelector('[role="status"] button')).toBeNull();
+    const actif = document.activeElement as HTMLElement;
+    expect(actif).toBe(el.querySelector('.filters .filter'));
+    expect(actif.textContent?.trim()).toBe('Toutes les factions');
+    el.remove();
+  });
+
   // jsdom ne charge pas les styles : on lit la feuille. Une région live en display:none est hors de
   // l'arbre d'accessibilité ; quand elle apparaît avec son texte, l'annonce n'est pas fiable.
   it('la région role=status vide n\'est jamais en display:none (le style est porté par un enfant)', async () => {

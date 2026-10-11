@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +43,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
 
     <section class="toolbar">
       <div class="filters">
-        <button class="filter" [class.active]="filterKey() === 'all'" (click)="filterKey.set('all')">Toutes les factions</button>
+        <button #toutes class="filter" [class.active]="filterKey() === 'all'" (click)="filterKey.set('all')">Toutes les factions</button>
         <button class="filter" [class.active]="filterKey() === 'Imperium'" (click)="filterKey.set('Imperium')">Imperium</button>
         <button class="filter" [class.active]="filterKey() === 'Chaos'" (click)="filterKey.set('Chaos')">Chaos</button>
         <button class="filter" [class.active]="filterKey() === 'Xenos'" (click)="filterKey.set('Xenos')">Xénos</button>
@@ -137,6 +137,8 @@ export class FactionsComponent {
   readonly units = toSignal(this.service.getUnits(), { initialValue: [] });
   readonly wikiImages = signal(new Map<string, string>());
 
+  @ViewChild('toutes') private toutes?: ElementRef<HTMLButtonElement>;
+
   readonly filterKey = signal<FilterKey>('all');
   readonly searchQuery = signal('');
   readonly sortKey = signal<SortKey>('az');
@@ -154,6 +156,8 @@ export class FactionsComponent {
   reset(): void {
     this.filterKey.set('all');
     this.searchQuery.set('');
+    // Le bouton du message vide disparaît avec lui : le focus va au filtre « Toutes les factions » (WCAG 2.4.3).
+    this.toutes?.nativeElement.focus();
   }
 
   readonly displayedFactions = computed(() => {
