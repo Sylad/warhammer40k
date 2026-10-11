@@ -305,8 +305,9 @@
     {
       "id": "L104",
       "title": "Nouveautés : chaque capture décrite par son propre texte",
-      "status": "doing",
-      "started": "2026-10-11"
+      "status": "done",
+      "started": "2026-10-11",
+      "finished": "2026-10-11"
     }
   ]
 }
