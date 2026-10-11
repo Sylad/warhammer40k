@@ -57,6 +57,14 @@ Visiter lion-eljonson.
 ## /lore/equipment
 - shows: 69 équipements
 
+## Fiches de lore (/lore/ships/:id, /lore/saints/:id, /lore/titans/:id, /lore/equipment/:id)
+Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine (saint), warhound-titan (titan), boltgun-astartes (équipement), ou le lien d'une carte de la liste. Les quatre fiches partagent la barre d'ancres (`.anchor-nav`, `_anchor-nav.scss`, L89) : mêmes attendus.
+- shows: le nom de l'entité en titre de la fiche (h1 et titre de l'onglet « <nom> — Warhammer 40 000 »), pas le titre générique de la route (« Vaisseau », « Saint », « Titan », « Équipement ») ni « introuvable »
+- shows: la barre d'ancres collée juste sous l'en-tête, après défilement comme au chargement : le haut de `.anchor-nav` à la hauteur de l'en-tête (`.topbar`, --topbar-h), à 1 px près, sans recouvrement ni écart ; elle ne passe jamais derrière l'en-tête
+- shows: la colonne latérale collante (quand la fiche en a une) sous la barre d'ancres, après défilement : son haut est supérieur ou égal au bas de `.anchor-nav`, elle ne recouvre pas la barre
+- shows: un clic sur un lien de la barre amène le titre de la section visée à moins de 40 px sous le bas de la barre d'ancres (ni masqué derrière elle, ni loin dessous) ; excepté pour les dernières sections quand la fin de page est atteinte et que la section ne peut plus monter (défilement au maximum)
+- never: une section cible cachée derrière l'en-tête ou la barre après un clic d'ancre ; une barre d'ancres à top 0
+
 ## /lore/timeline
 - shows: 35 événements
 
