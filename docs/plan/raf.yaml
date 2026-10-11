@@ -906,6 +906,8 @@ lots:
     review: { date: 2026-10-11, verdict: "compliant — orchestré (vague 2026-10-11-1655, 0 passe(s) de correction)", commit: 2caa4aeeebe9218c8e5221de4dd29ea1627b9ceb }
     ux: { date: 2026-10-11, verdict: "Sylvain 11-10 : ok L104 (texte alternatif rédigé des captures, invisible à l'œil) ; revue UX automatique conforme" }
     finished: 2026-10-11
+    notes:
+      - { date: 2026-10-11, text: "QA prod 11-10 (f281380) : / et /nouveautes conformes aux deux largeurs ; 33/33 captures avec l'alt attendu (25 textes rédigés, 8 replis, 0 écart). Les 8 replis sont 5 entrées du 01-10 au 03-10 sans alts : texte à rédiger un jour (contenu, pas un défaut)." }
   - id: L105
     title: "Test e2e ancres.e2e.spec.ts instable sous charge : 2 échecs le 11-10 sur des cas différents (fiche faction 1440 « guerres » 120 px, fiche équipement 390 « specs » −13 px), verts relancés seuls (25/25) — attendre la fin du défilement (scrollend ou position stable) avant de mesurer, plutôt qu'un délai fixe"
     status: todo
