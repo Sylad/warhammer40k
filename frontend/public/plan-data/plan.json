@@ -289,6 +289,11 @@
       "id": "L101",
       "title": "Pages faction : symboles décoratifs muets et « 41ᵉ » correct",
       "status": "todo"
+    },
+    {
+      "id": "L102",
+      "title": "Factions : le filtre « Autres » n'apparaît que s'il a des factions",
+      "status": "todo"
     }
   ]
 }
