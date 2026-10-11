@@ -874,6 +874,7 @@ lots:
     started: 2026-10-11
     notes:
       - { date: 2026-10-11, text: "Rendu par la vague 2026-10-11-0935 (revue non conforme après 2 passes ; commits 651a3e7 d4a0bce f96d8f7). À corriger dans la reprise : (1) MAJEUR factions.component.ts:86 — le message « Aucune faction ne correspond à ce filtre » et le bouton « Toutes les factions » s'affichent pendant le chargement de /api/factions et en cas d'erreur (factions initialValue [] l. 131) : bouton inopérant (filtre déjà « all », recherche vide), Nielsen 1 et 9 — prévoir un état de chargement et un état d'erreur à part, test avec factions$ asynchrone (et en erreur) ; (2) mineur factions.component.scss:295 — la région .empty toujours présente dans .grid (gap 18 px) ajoute 18 px sous la dernière carte : la sortir de la grille ou annuler l'écart. Estimation passée à 0.5." }
+    review: { date: 2026-10-11, verdict: "conforme — orchestré (vague 2026-10-11-1015, 1 passe(s) de correction + passe des mineurs)", commit: 2384d5ffd7d773c0c110caf3cf4e07072275e8f3 }
   - id: L103
     title: "QA : ajouter à docs/qa/expectations.md les fiches /lore/ships/:id, /lore/saints/:id, /lore/titans/:id, /lore/equipment/:id (titre = nom, barre d'ancres collée sous l'en-tête, colonne latérale sous la barre, clic d'ancre à moins de 40 px sous la barre hors fin de page) — QA prod 11-10"
     status: done
