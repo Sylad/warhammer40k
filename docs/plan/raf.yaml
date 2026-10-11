@@ -434,6 +434,8 @@ lots:
     status: todo
     estimate: 0.5
     created: 2026-10-04
+    notes:
+      - { date: 2026-10-11, text: "QA prod 11-10 : les 6 icônes 404 ne déclenchent jamais le repli — Fandom renvoie une image de remplacement de 80 px dans le corps de sa 404 (naturalWidth 80, l'événement (error) ne part pas) ; le test de repli doit vérifier l'URL, pas l'événement error" }
   - id: L57
     title: "QA /videos et /romans : défilement horizontal (side-panel à x=1511 à 1440 px ; drawer à x=704 à 390 px) — vérifier et contenir"
     public: "Vidéos et Romans : plus de défilement horizontal parasite"
@@ -753,6 +755,7 @@ lots:
       - { date: 2026-10-10, text: "Maquette B validée par Sylvain 10-10 (Discord « ok B ») : barre collée sous l'en-tête (top = hauteur d'en-tête, une ligne) ; sous 760 px une seule ligne défilante ~44 px, bords estompés, toujours collante" }
       - { date: 2026-10-11, text: "Rendu par la vague 2026-10-10-2240 (revue 6 non conforme), estimation passée à 0.5 pour une revue Opus complète. À corriger dans la reprise : (1) MAJEUR la colonne latérale collée à top 80 px des fiches vaisseau, saint, titan, équipement et primarque (ship-detail.component.scss:186, primarch-detail.component.scss:652) passe sous la barre d'ancres (70→129 px à 1440) — « Données vitales » caché : caler son top sur --anchor-offset (en-tête + barre) ; (2) MAJEUR WCAG 2.4.11 : Maj+Tab sur /lore/primarchs/lion-eljonson à 390 px, « Voir la Légion » (64→104 px) entièrement sous l'en-tête et la barre — réserver la place des en-têtes collés (scroll-padding-top = --anchor-offset ou équivalent) ; (3) à 761–1279 px la barre passe sur deux lignes (92 px) alors que --anchor-nav-h vaut 60 : décalage faux, 24 px de titre cachés — une ligne défilante comme au téléphone (maquette B : une ligne) ou hauteur mesurée ; (4) #histoire, #subfactions, #units de la fiche faction sans scroll-margin-top ; (5) mineurs : README/Nouveautés citent à tort les fiches événement, commentaire main-layout.component.ts:522 (44 px au téléphone, 59 à 1440), délai du test faction-reflow /factions/space-marines sous charge" }
       - { date: 2026-10-11, text: "Vague 2026-10-11-0035 suspendue à 1 h 30 (arrêt demandé par Sylvain) après la 2e correction (06edbf9, 4be7505, 2645905) : reprendre par « cadence orchestrate --resume 2026-10-11-0035 » depuis ~/projects/developpeur → revue Opus" }
+      - { date: 2026-10-11, text: "QA prod 11-10 (e36080c) : 6 fiches conformes aux deux largeurs (barre à top 70, une ligne à 1280, 78/80 clics à 16–27 px sous la barre) ; en fin de page la dernière ancre ne peut monter (boltgun-astartes à 1440 : Citation à 324 px) — même décision que L67, non bloquant" }
     started: 2026-10-10
     review: { date: 2026-10-11, verdict: "conforme — orchestré (vague 2026-10-11-0035, 1 passe(s) de correction + passe des mineurs)", commit: 26459054f87da2de6ce42bc3ab13225fb466ae17 }
     ux: { date: 2026-10-11, verdict: "Sylvain 11-10 : ok L89 (captures 1440/390 px, barre collée sous l'en-tête, Données vitales dégagée) ; revue UX automatique conforme" }
@@ -867,6 +870,11 @@ lots:
     status: todo
     estimate: 0.25
     visible: true
+    created: 2026-10-11
+  - id: L103
+    title: "QA : ajouter à docs/qa/expectations.md les fiches /lore/ships/:id, /lore/saints/:id, /lore/titans/:id, /lore/equipment/:id (titre = nom, barre d'ancres collée sous l'en-tête, colonne latérale sous la barre, clic d'ancre à moins de 40 px sous la barre hors fin de page) — QA prod 11-10"
+    status: todo
+    estimate: 0.25
     created: 2026-10-11
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
