@@ -829,6 +829,7 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-10-11
+    review: { date: 2026-10-11, verdict: "conforme : 0 bloquant, 0 majeur, 1 mineur (apparition tardive du bouton et de la section pendant le chargement, hors sous-tâche) — orchestré (vague 2026-10-11-1605, 0 passe(s) de correction)", commit: 0f435b7138f917c3aa5f98fe69f055fe95aa5629 }
   - id: L96
     title: "/factions : grille vide au chargement et sur erreur d'API, « UNITÉS 0 » tant que les unités chargent, recherche sans résultat muette — états + région live (revue UX L3, cf L79)"
     public: "Factions : chargement, erreur et recherche vide annoncés"
