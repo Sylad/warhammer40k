@@ -3,7 +3,7 @@ title: "Fiches faction sans unité : plus de recherche d'unités vide"
 date: 2026-10-11
 created: 2026-10-11T16:02+02:00
 lots: [L95]
-captures: [{ file: captures/L95-faction-sans-unite.png, alt: "Fiche Grey Knights, sans unité : pas de bouton « Explorer les unités » dans l'en-tête" }]
+captures: [{ file: captures/L95-faction-sans-unite.png, alt: "Fiche Grey Knights, sans unité : pas de bouton « Explorer les unités » dans l'en-tête" }]
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---
