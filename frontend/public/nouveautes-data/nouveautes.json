@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-11 16:03",
+  "generated": "2026-10-11 16:09",
   "entries": [
     {
       "slug": "2026-10-11-fiches-faction-sans-unite-plus-de-recherche-d-unites-vide",
@@ -15,7 +15,7 @@
       "alts": [
         "Fiche Grey Knights, sans unité : pas de bouton « Explorer les unités » dans l'en-tête"
       ],
-      "html": "<p>Six factions n'ont pas encore d'unité dans le codex (Custodes, Officio Assassinorum, Drukhari, Grey Knights, Ligues de Votann, Cultes genestealers). Leur fiche ne propose plus le bouton « Explorer les unités », ni la section d'unités avec ses filtres et sa recherche, ni le lien « Unités » de la barre des sections.</p>\n<p>Le message « Aucune unité ne correspond » n'apparaît plus que pour une faction qui a des unités mais aucune sous le filtre choisi.</p>"
+      "html": "<p>Six factions n'ont pas encore d'unité dans le codex (Custodes, Officio Assassinorum, Drukhari, Grey Knights, Ligues de Votann, Cultes genestealers). Leur fiche ne propose plus le bouton « Explorer les unités », ni la section d'unités avec ses filtres et sa recherche, ni le lien « Unités » de la barre des sections.</p>\n<p>Le message « Aucune unité ne correspond » n'apparaît plus que pour une faction qui a des unités mais aucune sous le filtre choisi.</p>"
     },
     {
       "slug": "2026-10-11-factions-le-filtre-autres-n-apparait-que-s-il-a-des-factions",

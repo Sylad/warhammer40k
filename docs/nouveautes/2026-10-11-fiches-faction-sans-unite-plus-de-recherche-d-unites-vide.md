@@ -7,6 +7,6 @@ captures: [{ file: captures/L95-faction-sans-unite.png, alt: "Fiche Grey Knights
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---
-Six factions n'ont pas encore d'unité dans le codex (Custodes, Officio Assassinorum, Drukhari, Grey Knights, Ligues de Votann, Cultes genestealers). Leur fiche ne propose plus le bouton « Explorer les unités », ni la section d'unités avec ses filtres et sa recherche, ni le lien « Unités » de la barre des sections.
+Six factions n'ont pas encore d'unité dans le codex (Custodes, Officio Assassinorum, Drukhari, Grey Knights, Ligues de Votann, Cultes genestealers). Leur fiche ne propose plus le bouton « Explorer les unités », ni la section d'unités avec ses filtres et sa recherche, ni le lien « Unités » de la barre des sections.
 
-Le message « Aucune unité ne correspond » n'apparaît plus que pour une faction qui a des unités mais aucune sous le filtre choisi.
+Le message « Aucune unité ne correspond » n'apparaît plus que pour une faction qui a des unités mais aucune sous le filtre choisi.
