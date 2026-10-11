@@ -183,7 +183,7 @@ export class NouveautesComponent implements OnInit, OnDestroy {
     const sizes = this.news.sizes();
     return e.captures.map((c, i) => ({
       src: `${NEWS_BASE}/${c}`,
-      alt: captureAlt(e.title, i, e.captures.length),
+      alt: captureAlt(e.title, i, e.captures.length, e.alts?.[i]),
       size: sizes[c],
       box: captureBoxWidth(sizes[c]),
     }));

@@ -20,6 +20,8 @@ export interface NewsEntry {
   date: string;
   lots: string[];
   captures: string[];
+  /** Texte alternatif rédigé, parallèle à `captures` (absent des anciennes entrées). */
+  alts?: string[];
   html: string;
 }
 

@@ -13,6 +13,7 @@ const JSON_DATA = {
     {
       slug: '2026-10-01-recente', title: 'La plus récente', date: '2026-10-01', lots: ['L23'],
       captures: ['captures/L23-telephone.png', 'captures/L23-bureau.png'],
+      alts: ['Le journal à 390 px, première entrée en haut'],
       html: '<p>Texte <strong>gras</strong>.</p>',
     },
     {
@@ -74,8 +75,18 @@ describe('page Nouveautés (/nouveautes) — L23', () => {
     expect(img.getAttribute('height')).toBe('844');
     expect(img.style.aspectRatio).toMatch(/390 \/ 844/);
     expect(link.style.width).toContain('390px');
-    expect(img.getAttribute('alt')).toBe('Capture d’écran 1 sur 2 : La plus récente');
+    expect(img.getAttribute('alt')).toBe('Le journal à 390 px, première entrée en haut');
     expect(img.getAttribute('loading')).toBe('lazy');
+  });
+
+  it('texte alternatif : celui de l’entrée quand il existe, sinon repli sur le titre (L104)', async () => {
+    const f = await render();
+    const alts = $$(f, 'a.news-capture img').map((i) => i.getAttribute('alt'));
+    expect(alts).toEqual([
+      'Le journal à 390 px, première entrée en haut',
+      'Capture d’écran 2 sur 2 : La plus récente',
+      'Capture d’écran : Une ancienne',
+    ]);
   });
 
   it('journal vide : message explicite', async () => {

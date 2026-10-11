@@ -18,6 +18,13 @@ describe('page Nouveautés — utilitaires (L23)', () => {
     expect(captureAlt('Une page', 1, 2)).toBe('Capture d’écran 2 sur 2 : Une page');
   });
 
+  it('texte alternatif : le texte rédigé de l’entrée prime, repli sur le titre s’il manque ou est vide (L104)', () => {
+    expect(captureAlt('Une page', 0, 1, 'Fiche Grey Knights, sans bouton')).toBe('Fiche Grey Knights, sans bouton');
+    expect(captureAlt('Une page', 1, 2, '  Le même panneau à 390 px  ')).toBe('Le même panneau à 390 px');
+    expect(captureAlt('Une page', 0, 1, undefined)).toBe('Capture d’écran : Une page');
+    expect(captureAlt('Une page', 1, 2, '   ')).toBe('Capture d’écran 2 sur 2 : Une page');
+  });
+
   it('place réservée : min(largeur dispo, largeur naturelle, largeur qui donne 32rem de haut)', () => {
     expect(captureBoxWidth([390, 844])).toBe('min(100%, 390px, calc(32rem * 390 / 844))');
     expect(captureBoxWidth(undefined)).toBeNull();

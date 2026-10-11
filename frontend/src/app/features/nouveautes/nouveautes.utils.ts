@@ -14,7 +14,10 @@ export function formatDay(day: string): string {
   return text.replace(/^1 /, '1er ');
 }
 
-export function captureAlt(title: string, index: number, count: number): string {
+/** Texte rédigé de l'entrée (`alts`, WCAG 1.1.1) ; à défaut, repli numéroté sur le titre. */
+export function captureAlt(title: string, index: number, count: number, written?: string): string {
+  const text = written?.trim();
+  if (text) return text;
   return count > 1 ? `Capture d’écran ${index + 1} sur ${count} : ${title}` : `Capture d’écran : ${title}`;
 }
 
