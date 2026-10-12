@@ -6,6 +6,15 @@
   ],
   "vert": false,
   "empreintes": {
-    "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts": "47f2b16c1ce5e02cb7db4eda713a0b8336ea6946"
-  }
+    "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts": "f6ff6b6d2baff36b8831c0abb01a480d3b2e4356"
+  },
+  "resceaux": [
+    {
+      "test": "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts",
+      "raison": "test « R2 — date imprécise » : la regex /\\d{1,2} / attrape le 3 de « T3 2027 » et le 28 de « 2028 », que la fiche R2 impose ; elle devient jour + mois (/\\b\\d{1,2} (janv|…|déc)/i), l'intention (aucun jour inventé) est gardée",
+      "date": "2026-10-12",
+      "avant": "47f2b16c1ce5e02cb7db4eda713a0b8336ea6946",
+      "apres": "f6ff6b6d2baff36b8831c0abb01a480d3b2e4356"
+    }
+  ]
 }

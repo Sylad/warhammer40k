@@ -183,8 +183,8 @@ describe('L35 — Jeux vidéo : page', () => {
     for (const i of [0, 2, 3, 4]) expect(dates[i]).toContain('annoncée');
     // jamais une date devinée : pas de jour ajouté au mois, au trimestre ni à l'année
     expect(dates[0]).not.toMatch(/\b\d{1,2} mars/i);
-    expect(dates[2]).not.toMatch(/juillet|septembre|\d{1,2} /i);
-    expect(dates[3]).not.toMatch(/janvier|\d{1,2} /i);
+    expect(dates[2]).not.toMatch(/juillet|septembre|\b\d{1,2} (janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)/i);
+    expect(dates[3]).not.toMatch(/janvier|\b\d{1,2} (janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)/i);
   });
 
   it('R3 — chargé : la date de vérification est affichée', async () => {
