@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { acceptationIgnored, acceptationOnly, acceptationOutsideSuite } from './acceptation-runner.mjs';
+import { acceptationBrowser, acceptationIgnored, acceptationOnly, acceptationOutsideSuite } from './acceptation-runner.mjs';
 
 let root;
 const spec = (ecran, name, doc) => {
@@ -65,5 +65,15 @@ describe('acceptationOutsideSuite', () => {
   it('les acceptations du dépôt retombent toutes dans l’include de vitest.config.ts', () => {
     const repo = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
     expect(acceptationOutsideSuite(repo)).toEqual([]);
+  });
+});
+
+describe('acceptationBrowser', () => {
+  it('range avec les e2e les acceptations (vertes ou non) qui importent playwright-core, pas les autres', () => {
+    mkdirSync(join(root, 'frontend/src'), { recursive: true });
+    writeFileSync(join(root, 'frontend/src/nav.acceptation.spec.ts'), "import { chromium } from 'playwright-core';\n");
+    writeFileSync(join(root, 'frontend/src/pur.acceptation.spec.ts'), "import { it } from 'vitest';\n");
+    spec('videos', 'acceptation-L1.json', { fichiers: ['frontend/src/nav.acceptation.spec.ts', 'frontend/src/pur.acceptation.spec.ts', 'frontend/src/absent.spec.ts'], vert: true });
+    expect(acceptationBrowser(root)).toEqual(['frontend/src/nav.acceptation.spec.ts']);
   });
 });

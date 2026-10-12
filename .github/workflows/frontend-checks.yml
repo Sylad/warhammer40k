@@ -48,3 +48,9 @@ jobs:
 
       - name: Build (avec vérification de fuite du plan)
         run: npm run build
+
+      - name: Chromium pour l'acceptation de bout en bout
+        run: npx playwright-core install --with-deps chromium
+
+      - name: Acceptation de bout en bout (application construite, Chromium)
+        run: npm run test:e2e

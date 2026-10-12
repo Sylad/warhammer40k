@@ -74,3 +74,32 @@ export function acceptationOutsideSuite(root = process.cwd(), dir = 'docs/specs'
   }
   return out;
 }
+
+/** Fichiers d'acceptation (verts ou non) qui pilotent un navigateur (importent playwright-core) : ils demandent `dist` et Chromium, donc rangés avec les e2e (vitest.e2e.config.ts), jamais dans la suite unitaire. Chemins relatifs à `root`. */
+export function acceptationBrowser(root = process.cwd(), dir = 'docs/specs') {
+  const base = join(root, dir);
+  if (!existsSync(base)) return [];
+  const out = [];
+  for (const name of readdirSync(base).sort()) {
+    const folder = join(base, name);
+    let files = [];
+    try {
+      files = readdirSync(folder).filter((f) => /^acceptation(-.+)?\.json$/.test(f)).sort();
+    } catch {
+      continue;
+    }
+    for (const file of files) {
+      const doc = read(join(folder, file));
+      if (!doc) continue;
+      for (const f of doc.fichiers) {
+        if (typeof f !== 'string') continue;
+        try {
+          if (/from\s+['"]playwright-core['"]/.test(readFileSync(join(root, f), 'utf8'))) out.push(f);
+        } catch {
+          /* fichier absent : rien à ranger */
+        }
+      }
+    }
+  }
+  return out;
+}

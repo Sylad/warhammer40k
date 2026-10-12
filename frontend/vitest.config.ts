@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { configDefaults, defineConfig } from 'vitest/config';
-import { acceptationIgnored } from './scripts/acceptation-runner.mjs';
+import { acceptationBrowser, acceptationIgnored } from './scripts/acceptation-runner.mjs';
 
 /**
  * Vitest config for the Warhammer 40K frontend.
@@ -24,6 +24,8 @@ export default defineConfig({
       '**/dist/**',
       '**/.angular/**',
       ...acceptationIgnored(path.resolve(__dirname, '..')).map((f) => path.resolve(__dirname, '..', f)),
+      // L47 : une acceptation qui pilote un navigateur veut dist + Chromium : rangée avec les e2e, quel que soit `vert`.
+      ...acceptationBrowser(path.resolve(__dirname, '..')).map((f) => path.resolve(__dirname, '..', f)),
     ],
     reporters: ['default'],
   },
