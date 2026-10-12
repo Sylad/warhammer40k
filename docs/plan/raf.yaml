@@ -293,9 +293,10 @@ lots:
     created: 2026-10-02
   - id: L38
     title: "Erreur d'API (404/500, backend absent) : les signaux de données lèvent pendant la détection de changements et figent tout le rendu (menu À propos, recherche Ctrl+K) — état d'erreur par page au lieu d'une exception (vu en L30)"
-    status: todo
+    status: doing
     estimate: 0.5
     created: 2026-10-02
+    started: 2026-10-12
   - id: L39
     title: "Liens morts : audit automatique de tous les liens du site (internes : routes, ancres, images et datasheets ; externes : wiki, vidéos, boutiques) — rapport, corrections, puis test qui échoue sur un lien interne cassé (consigne Sylvain 02-10 : « potentiellement des liens morts »)"
     public: "Liens internes réparés : fil d'Ariane, ancres et images vérifiés"
