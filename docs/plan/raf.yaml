@@ -362,11 +362,12 @@ lots:
   - id: L47
     title: "Bloc Médias : la carte « Vidéo à la une » ouvre cette vidéo — la page /videos n'a aujourd'hui ni paramètre d'adresse ni ancre pour ouvrir une vidéo précise, à créer (revue UX L42, Nielsen #2/#4)"
     public: "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     screen: journey
     created: 2026-10-02
+    started: 2026-10-12
   - id: L48
     title: "Galerie : cas étroits de la liaison adresse ↔ filtres — action pendant une navigation de sortie lente qui l'annule, clic sur « Galerie » pendant l'anti-rebond perdu, écho resté armé sur une réécriture de fragment seul, échec silencieux des images personnelles ; deux chemins de 6da3576 sans test dédié (3e relecture L42)"
     status: todo
