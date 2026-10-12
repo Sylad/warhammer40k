@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { combineLatest, map, switchMap } from 'rxjs';
@@ -86,17 +86,21 @@ export class LoreEmperorComponent {
     });
 
     // Per-section images
-    this.service.emperor$.subscribe(e => {
-      e.sections.forEach((s, idx) => {
-        if (s.wikiQuery) {
-          this.service.getWikiImage(s.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              const m = new Map(this.sectionImages());
-              m.set(idx, r.imageUrl);
-              this.sectionImages.set(m);
-            }
-          });
-        }
+    effect(() => {
+      const e = this.emperor();
+      if (!e) return;
+      untracked(() => {
+        e.sections.forEach((s, idx) => {
+          if (s.wikiQuery) {
+            this.service.getWikiImage(s.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                const m = new Map(this.sectionImages());
+                m.set(idx, r.imageUrl);
+                this.sectionImages.set(m);
+              }
+            });
+          }
+        });
       });
     });
   }

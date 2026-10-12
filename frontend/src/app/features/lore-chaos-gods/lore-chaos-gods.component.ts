@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -155,17 +155,20 @@ export class LoreChaosGodsComponent {
   readonly lightbox = signal<LightboxState | null>(null);
 
   constructor() {
-    this.service.chaosGods$.subscribe(list => {
-      list.forEach(g => {
-        if (g.wikiQuery) {
-          this.service.getWikiImage(g.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              const m = new Map(this.godImages());
-              m.set(g.id, r.imageUrl);
-              this.godImages.set(m);
-            }
-          });
-        }
+    effect(() => {
+      const list = this.gods();
+      untracked(() => {
+        list.forEach(g => {
+          if (g.wikiQuery) {
+            this.service.getWikiImage(g.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                const m = new Map(this.godImages());
+                m.set(g.id, r.imageUrl);
+                this.godImages.set(m);
+              }
+            });
+          }
+        });
       });
     });
   }

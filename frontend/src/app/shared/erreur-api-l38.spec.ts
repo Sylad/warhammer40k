@@ -80,4 +80,21 @@ describe('API en erreur (L38)', () => {
     expect(el.querySelector('[role="alert"]')).toBeNull();
     expect(el.textContent).toContain('Saint B');
   });
+
+  it('liste : après Réessayer, les images du wiki se chargent (cartes image-first)', async () => {
+    let backendOk = false;
+    const saint = { id: 's', name: 'Sainte Test', category: 'living-saint', color: '#fff', era: 'M41', ordoOrChapter: 'x', wikiQuery: 'Sainte' };
+    const source = new Observable<unknown[]>((o) => {
+      if (!backendOk) o.error(new Error('500'));
+      else { o.next([saint]); o.complete(); }
+    });
+    const f = await monter(LoreSaintsComponent, { saints$: source, getWikiImage: () => of({ imageUrl: 'http://img/s.jpg' }) });
+    const el = f.nativeElement as HTMLElement;
+    backendOk = true;
+    (el.querySelector('[role="alert"] button') as HTMLButtonElement).click();
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    expect((el.querySelector('.card-img') as HTMLElement).style.backgroundImage).toContain('http://img/s.jpg');
+  });
 });

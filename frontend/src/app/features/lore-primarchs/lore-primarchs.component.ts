@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -155,17 +155,20 @@ export class LorePrimarchsComponent {
 
   constructor() {
     // Async wiki images for each primarch
-    this.service.primarchs$.subscribe(list => {
-      list.forEach(p => {
-        if (p.wikiQuery) {
-          this.service.getWikiImage(p.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              const m = new Map(this.primarchImages());
-              m.set(p.id, r.imageUrl);
-              this.primarchImages.set(m);
-            }
-          });
-        }
+    effect(() => {
+      const list = this.primarchs();
+      untracked(() => {
+        list.forEach(p => {
+          if (p.wikiQuery) {
+            this.service.getWikiImage(p.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                const m = new Map(this.primarchImages());
+                m.set(p.id, r.imageUrl);
+                this.primarchImages.set(m);
+              }
+            });
+          }
+        });
       });
     });
   }

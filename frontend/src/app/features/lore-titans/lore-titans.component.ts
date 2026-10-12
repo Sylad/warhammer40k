@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -76,15 +76,18 @@ export class LoreTitansComponent {
   });
 
   constructor() {
-    this.service.godMachines$.subscribe(list => {
-      list.forEach(m => {
-        if (m.wikiQuery) {
-          this.service.getWikiImage(m.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              this.machineImages.update(map => new Map(map).set(m.id, r.imageUrl!));
-            }
-          });
-        }
+    effect(() => {
+      const list = this.machines();
+      untracked(() => {
+        list.forEach(m => {
+          if (m.wikiQuery) {
+            this.service.getWikiImage(m.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                this.machineImages.update(map => new Map(map).set(m.id, r.imageUrl!));
+              }
+            });
+          }
+        });
       });
     });
   }

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -196,29 +196,32 @@ export class LoreCiviliansComponent {
     });
 
     // Per-org + per-figure images
-    this.service.imperialOrgs$.subscribe(list => {
-      list.forEach(org => {
-        if (org.wikiQuery) {
-          this.service.getWikiImage(org.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              const m = new Map(this.orgImages());
-              m.set(org.id, r.imageUrl);
-              this.orgImages.set(m);
-            }
-          });
-        }
-        for (const fig of org.notableFigures) {
-          const q = fig.wikiQuery ?? fig.name;
-          if (!q) continue;
-          this.service.getWikiImage(q).subscribe(r => {
-            if (r.imageUrl) {
-              const key = `${org.id}::${fig.name}`;
-              const m = new Map(this.figureImages());
-              m.set(key, r.imageUrl);
-              this.figureImages.set(m);
-            }
-          });
-        }
+    effect(() => {
+      const list = this.orgs();
+      untracked(() => {
+        list.forEach(org => {
+          if (org.wikiQuery) {
+            this.service.getWikiImage(org.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                const m = new Map(this.orgImages());
+                m.set(org.id, r.imageUrl);
+                this.orgImages.set(m);
+              }
+            });
+          }
+          for (const fig of org.notableFigures) {
+            const q = fig.wikiQuery ?? fig.name;
+            if (!q) continue;
+            this.service.getWikiImage(q).subscribe(r => {
+              if (r.imageUrl) {
+                const key = `${org.id}::${fig.name}`;
+                const m = new Map(this.figureImages());
+                m.set(key, r.imageUrl);
+                this.figureImages.set(m);
+              }
+            });
+          }
+        });
       });
     });
   }

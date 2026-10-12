@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -184,26 +184,29 @@ export class LoreConceptsComponent {
       if (r.imageUrl) this.heroImg.set(`url('${r.imageUrl}')`);
     });
 
-    this.service.loreConcepts$.subscribe(list => {
-      list.forEach(c => {
-        if (c.wikiQuery) {
-          this.service.getWikiImage(c.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              const m = new Map(this.conceptImages());
-              m.set(c.id, r.imageUrl);
-              this.conceptImages.set(m);
-            }
-          });
+    effect(() => {
+      const list = this.concepts();
+      untracked(() => {
+        list.forEach(c => {
+          if (c.wikiQuery) {
+            this.service.getWikiImage(c.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                const m = new Map(this.conceptImages());
+                m.set(c.id, r.imageUrl);
+                this.conceptImages.set(m);
+              }
+            });
+          }
+        });
+
+        // Scroll vers le fragment URL une fois les concepts rendus
+        const frag = this.route.snapshot.fragment;
+        if (frag && list.some(c => c.id === frag)) {
+          setTimeout(() => {
+            document.getElementById(frag)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
         }
       });
-
-      // Scroll vers le fragment URL une fois les concepts rendus
-      const frag = this.route.snapshot.fragment;
-      if (frag && list.some(c => c.id === frag)) {
-        setTimeout(() => {
-          document.getElementById(frag)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
     });
   }
 

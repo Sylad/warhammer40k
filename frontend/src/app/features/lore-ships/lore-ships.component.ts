@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -90,15 +90,18 @@ export class LoreShipsComponent {
   });
 
   constructor() {
-    this.service.ships$.subscribe(list => {
-      list.forEach(s => {
-        if (s.wikiQuery) {
-          this.service.getWikiImage(s.wikiQuery).subscribe(r => {
-            if (r.imageUrl) {
-              this.shipImages.update(m => new Map(m).set(s.id, r.imageUrl!));
-            }
-          });
-        }
+    effect(() => {
+      const list = this.ships();
+      untracked(() => {
+        list.forEach(s => {
+          if (s.wikiQuery) {
+            this.service.getWikiImage(s.wikiQuery).subscribe(r => {
+              if (r.imageUrl) {
+                this.shipImages.update(m => new Map(m).set(s.id, r.imageUrl!));
+              }
+            });
+          }
+        });
       });
     });
   }
