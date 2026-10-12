@@ -128,7 +128,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           </div>
           <div class="filter-row">
             <label for="gallery-filter-category">Catégorie</label>
-            <select id="gallery-filter-category" data-testid="filtre-categorie" [disabled]="!catalogReady()" [ngModel]="filterCategory() ?? ''" (ngModelChange)="filterCategory.set($event || null)">
+            <select id="gallery-filter-category" data-testid="filtre-categorie" [disabled]="!catalogReady()" [ngModel]="filterCategory() ?? ''" (ngModelChange)="onCategoryChange($event)">
               <option value="">Toutes</option>
               @for (c of categoryOptions(); track c.key) {
                 <option [value]="c.key">{{ c.label }}</option>
@@ -137,7 +137,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           </div>
           <div class="filter-row">
             <label for="gallery-filter-sort">Trier par</label>
-            <select id="gallery-filter-sort" data-testid="filtre-tri" [disabled]="!catalogReady()" [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+            <select id="gallery-filter-sort" data-testid="filtre-tri" [disabled]="!catalogReady()" [ngModel]="sortBy()" (ngModelChange)="onSortChange($event)">
               <option value="recent">Plus récentes</option>
               <option value="popular">Populaires</option>
               <option value="alpha">A — Z</option>
@@ -1107,6 +1107,18 @@ export class GalleryComponent {
     this.filterFaction.set(f);
     this.currentPage.set(1);
     this.syncUrl();
+    this.cdr.detectChanges();
+  }
+
+  /** L49/R6 : le rappel « N résultats » du panneau suit tout de suite le choix (sans attendre le prochain cycle). */
+  onCategoryChange(c: string): void {
+    this.filterCategory.set(c || null);
+    this.cdr.detectChanges();
+  }
+
+  onSortChange(s: SortBy): void {
+    this.sortBy.set(s);
+    this.cdr.detectChanges();
   }
 
   private static readonly SEARCH_URL_DEBOUNCE_MS = 400;
