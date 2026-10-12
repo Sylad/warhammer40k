@@ -47,8 +47,9 @@
     {
       "id": "L35",
       "title": "Une page Jeux vidéo : les jeux existants et ceux qui arrivent",
-      "status": "doing",
-      "started": "2026-10-11"
+      "status": "done",
+      "started": "2026-10-11",
+      "finished": "2026-10-12"
     },
     {
       "id": "L39",
