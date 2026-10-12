@@ -95,7 +95,7 @@ regles:
     tests: ["R8 — chargement : message annoncé, listes et cartes de catégorie désactivées, pastilles « – », pas de total dans le bandeau", "R8 — le panneau précède toujours la grille pendant le chargement"]
   - id: R9
     etat: erreur
-    enonce: Si la lecture des œuvres échoue, la grille est remplacée par l'erreur et un bouton « Réessayer » qui relance la lecture ; les listes du panneau sont désactivées et, à 390 px, le panneau reste replié ; comme au chargement, le bandeau n'annonce aucun total, les pastilles de statistiques affichent « – » et les cartes de catégorie sont désactivées (effectif « – »). Aujourd'hui l'échec est avalé et la galerie affiche l'état vide (gallery.component.ts:522).
+    enonce: Si la lecture des œuvres échoue, la grille est remplacée par l'erreur et un bouton « Réessayer » qui relance la lecture ; les listes du panneau sont désactivées et, à 390 px, le panneau reste replié ; comme au chargement, le bandeau n'annonce aucun total, les pastilles de statistiques affichent « – » et les cartes de catégorie sont désactivées (effectif « – »). Aujourd'hui l'échec est avalé et la galerie affiche l'état vide (gallery.component.ts:522). Exception (L42, reprise telle quelle) : si des images perso existent, l'erreur et « Réessayer » s'affichent au-dessus et ces images restent affichées dessous, listes et cartes de catégorie actives ; les pastilles de statistiques restent à « – ».
     message: "Impossible de charger la galerie."
     champs: [message-erreur, bouton-reessayer, panneau-filtres]
     statut: hypothese

@@ -21,6 +21,6 @@ La liste Catégorie propose désormais toutes les catégories de la galerie, mê
 - R4 — Au téléphone, le panneau est replié au chargement. S’il doit être ouvert par défaut, seul l’état initial du bouton change.
 - R5 — Le bouton affiche le nombre de filtres actifs. Si le nombre ne doit pas figurer, seule la pastille du bouton disparaît.
 - R8 — Pendant la lecture, la page affiche « Chargement de la galerie… » et grise les listes. Si le chargement doit rester muet, seul ce bloc change.
-- R9 — Si la lecture échoue, la page affiche l’erreur et « Réessayer » au lieu de l’état vide. Si l’erreur ne doit pas être distinguée du vide, on revient au message d’avant.
+- R9 — Si la lecture échoue, la page affiche l’erreur et « Réessayer » au lieu de l’état vide. Si l’erreur ne doit pas être distinguée du vide, on revient au message d’avant. Exception reprise du lot L42 : quand des images importées existent, elles restent affichées sous l’erreur, avec listes et cartes de catégorie actives ; si elles doivent aussi être masquées, seul cet état change.
 - R10 — « Artistes à découvrir » et « Collections populaires » restent après la grille dans l’ordre de tabulation. S’ils doivent la précéder, seul l’ordre du document change.
 - R11 — Entre 761 et 1024 px le panneau est ouvert au-dessus des catégories, sans bouton. Si le bouton doit aussi exister sur tablette, seul son seuil d’affichage change.
