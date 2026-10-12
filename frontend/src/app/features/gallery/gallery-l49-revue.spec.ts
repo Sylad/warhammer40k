@@ -59,4 +59,9 @@ describe('galerie — relecture L49', () => {
     expect(root.querySelector('.hero-desc')?.textContent).not.toContain('œuvre');
     expect([...root.querySelectorAll('.stat-num')].map((e) => e.textContent!.trim())).toEqual(['–', '–', '–']);
   });
+
+  it('R9 — catalogue en échec avec des images perso : rangée compacte des cartes (erreur et Réessayer restent dans le premier écran)', async () => {
+    const { root } = await harness(throwError(() => new Error('500')), of(['perso.jpg']));
+    expect(root.querySelector('.category-grid')!.classList.contains('attente')).toBe(true);
+  });
 });

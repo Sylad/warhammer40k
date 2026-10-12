@@ -163,7 +163,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <!-- CATEGORIES -->
           <section class="section">
             <h2 class="section-title">Parcourir par catégorie</h2>
-            <div class="category-grid" [class.attente]="!catalogReady()">
+            <div class="category-grid" [class.attente]="!catalogReady() || catalogFailed()">
               @if (catalogReady()) {
                 @for (cat of availableCategories(); track cat.key) {
                   <button class="category-card"
@@ -960,8 +960,8 @@ export class GalleryComponent {
   readonly pageRangeEnd = computed(() => Math.min(this.currentPage() * PAGE_SIZE, this.totalFiltered()));
 
   constructor() {
-    // L49/R2 : au bureau le panneau Filtres reste collé en haut (sticky) sur toute la hauteur de la colonne de
-    // droite ; la rangée « filtres » de la grille prend sa hauteur (--filtres-h) pour que les Artistes la suivent.
+    // L49/R2 : au bureau le panneau Filtres et l'aside restent collés, empilés ; la hauteur du panneau
+    // (--filtres-h) décale l'aside sous lui, sans recouvrement.
     afterNextRender(() => {
       const layout = this.host.nativeElement.querySelector<HTMLElement>('.layout');
       const panel = this.host.nativeElement.querySelector<HTMLElement>('#panneau-filtres');

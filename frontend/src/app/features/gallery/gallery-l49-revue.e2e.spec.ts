@@ -149,4 +149,20 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
     await page.close();
     expect(b).toBeLessThanOrEqual(900);
   }, 30_000);
+
+  it('R2 — 1440×900 : après 1500 px de défilement, le panneau Filtres reste à l\'écran et ne recouvre pas les Artistes', async () => {
+    const page = await open(1440, 900);
+    await page.evaluate(() => window.scrollTo(0, 1500));
+    await page.waitForTimeout(200);
+    const m = await page.evaluate(() => {
+      const f = document.querySelector('[data-testid="panneau-filtres"]')!.getBoundingClientRect();
+      const a = document.querySelector('.sidebar')!.getBoundingClientRect();
+      return { y: window.scrollY, ft: f.top, fb: f.bottom, at: a.top };
+    });
+    await page.close();
+    expect(m.y).toBeGreaterThan(1000);
+    expect(m.ft, JSON.stringify(m)).toBeGreaterThanOrEqual(0);
+    expect(m.fb, JSON.stringify(m)).toBeLessThanOrEqual(900);
+    expect(m.at, JSON.stringify(m)).toBeGreaterThanOrEqual(m.fb);
+  }, 30_000);
 });

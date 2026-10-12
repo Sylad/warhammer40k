@@ -1622,8 +1622,14 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "display": "none",
   },
   ".gallery-page .layout": {
-    "grid-template-areas": ""main filtres" "main aside"",
-    "grid-template-rows": "var(--filtres-h, 17rem) 1fr",
+    "grid-template-areas": ""main filtres"",
+    "grid-template-rows": "auto",
+  },
+  ".gallery-page .layout .sidebar": {
+    "grid-column": "2",
+    "grid-row": "1",
+    "margin-top": "calc(var(--filtres-h, 17rem) + 24px)",
+    "top": "calc(96px + var(--filtres-h, 17rem) + 24px)",
   },
   ".gallery-page .main-col": {
     "grid-area": "main",
@@ -1632,6 +1638,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "align-self": "start",
     "grid-column": "2",
     "grid-row": "1",
+    "position": "sticky",
+    "top": "96px",
+    "z-index": "1",
   },
   ".gallery-page .panel-count": {
     "border-top": "1px solid var(--border)",
@@ -1646,10 +1655,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".gallery-page .rappel-vide": {
     "display": "none",
-  },
-  ".gallery-page .sidebar": {
-    "grid-column": "2",
-    "grid-row": "2",
   },
   ".gallery-page .skel": {
     "aspect-ratio": "3/4",
@@ -2247,12 +2252,14 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "grid-template-areas": ""filtres" "main" "aside"",
     "grid-template-rows": "auto",
   },
+  "@media (max-width: 1024px) .gallery-page .layout .sidebar": {
+    "grid-area": "aside",
+    "margin-top": "0",
+    "top": "96px",
+  },
   "@media (max-width: 1024px) .gallery-page .p-filtres": {
     "grid-area": "filtres",
     "position": "static",
-  },
-  "@media (max-width: 1024px) .gallery-page .sidebar": {
-    "grid-area": "aside",
   },
   "@media (max-width: 1024px) .hero-content": {
     "grid-template-columns": "minmax(0, 1fr)",
