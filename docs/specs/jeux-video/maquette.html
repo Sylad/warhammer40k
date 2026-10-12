@@ -70,7 +70,7 @@ a{color:var(--gold-bright)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .footer{max-width:1100px;margin:0 auto;padding:18px 24px 40px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
 section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:target)) #etat-charge,#etat-tiroir:target .drawer-wrap{display:block}
-@media (max-width:1279px){.nav{display:none}.menu-btn{display:inline-flex}}
+@media (max-width:1343px){.nav{display:none}.menu-btn{display:inline-flex}}
 @media (max-width:480px){.search kbd{display:none}}
 .search,.menu-btn{white-space:nowrap}
 @media (max-width:760px){.cards{grid-template-columns:1fr}.page{padding:12px 16px 40px}.topbar{padding:0 16px}.crumb,.state-tag{padding:0 16px}.ligne{grid-template-columns:1fr}.ligne .annee{order:-1}}
@@ -110,7 +110,7 @@ section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:
             <span class="statut dev" data-testid="jeu-statut">En développement</span>
             <h3 data-testid="jeu-titre">Dawn of War 4 <em style="color:var(--muted);font-size:.8rem">(exemple)</em></h3>
             <dl class="meta">
-              <dt>Sortie</dt><dd data-testid="jeu-date">Date non communiquée</dd>
+              <dt>Sortie</dt><dd data-testid="jeu-date">Mars 2027 <span class="statut dev" style="padding:0 8px;font-size:.62rem">annoncée</span></dd>
               <dt>Genre</dt><dd data-testid="jeu-genre">Stratégie en temps réel</dd>
               <dt>Plateformes</dt><dd data-testid="jeu-plateformes">PC</dd>
             </dl>
@@ -199,7 +199,7 @@ section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:
 
 <!-- ============ ÉTAT TIROIR (téléphone, menu ouvert) ============ -->
 <section id="etat-tiroir">
-  <p class="state-tag">État : tiroir ouvert (téléphone, &lt; 1280 px)</p>
+  <p class="state-tag">État : tiroir ouvert (téléphone, &lt; 84em ≈ 1344 px, largeur mesurée)</p>
   <div class="drawer-wrap">
   <nav class="drawer" id="menu-telephone" aria-label="Menu principal">
     <div class="drawer-head"><span>Menu</span><span>✕ Fermer</span></div>
@@ -208,7 +208,7 @@ section[id^=etat-]{display:none}section[id^=etat-]:target,body:not(:has(section:
     <a href="#">Galerie</a><a href="#">Lore</a><a href="#">Nouveautés <span class="badge">9+</span></a><a href="#">Plan de travail</a><a href="#">À propos</a>
   </nav>
   </div>
-  <p class="verif" style="max-width:1100px;margin:16px auto 0;padding:0 24px">À 1280 px et plus : barre compacte ci-dessus (sans icônes avant 1700 px), « Jeux vidéo » entre Vidéos et Galerie. Repli si elle déborde au seuil de 80em : lien sous « À propos ▾ ».</p>
+  <p class="verif" style="max-width:1100px;margin:16px auto 0;padding:0 24px">Dès 84em (≈ 1344 px, largeur mesurée par topbar.e2e où la barre complète tient) : barre compacte, « Jeux vidéo » de premier niveau entre Vidéos et Galerie. En dessous : ce tiroir.</p>
 </section>
 
 <footer class="footer">Nouveautés · Plan de travail · À propos</footer>

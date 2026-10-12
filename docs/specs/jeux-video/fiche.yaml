@@ -47,12 +47,12 @@ regles:
     tests: ["R1 — chargé : « À venir » précède « Déjà sortis »"]
   - id: R2
     etat: charge
-    enonce: Chaque jeu à venir montre visuel (symbole de repli si l'image manque), statut, titre, date de sortie, genre, plateformes, contenu annoncé et un lien vers sa source. Une date non confirmée s'affiche « Date non communiquée », jamais une date devinée.
+    enonce: "Chaque jeu à venir montre visuel (symbole de repli si l'image manque), statut, titre, date de sortie, genre, plateformes, contenu annoncé et un lien vers sa source. La date s'affiche à la précision annoncée par l'éditeur, suivie de la mention « annoncée » : jour complet (« 12 mars 2027 »), mois (« Mars 2027 »), trimestre (« T3 2027 ») ou année (« 2027 »). Une date imprécise compte comme annoncée ; seule l'absence de toute date affiche « Date non communiquée ». Jamais une date devinée."
     message: "Date non communiquée"
     champs: [jeu-visuel, jeu-statut, jeu-titre, jeu-date, jeu-genre, jeu-plateformes, jeu-resume, jeu-source]
     statut: sourcee
     source: "demande du lot L35 : « dates et contenus annoncés à vérifier sur des sources en ligne, pas de mémoire »"
-    tests: ["R2 — carte à venir : tous les champs et le lien source", "R2 — date inconnue : « Date non communiquée »"]
+    tests: ["R2 — carte à venir : tous les champs et le lien source", "R2 — date inconnue : « Date non communiquée »", "R2 — date imprécise (mois, trimestre, année) : affichée telle quelle avec « annoncée »"]
   - id: R3
     etat: charge
     enonce: La page affiche la date à laquelle les informations ont été vérifiées en ligne.
@@ -71,11 +71,11 @@ regles:
     tests: ["R4 — existants : ordre décroissant des années"]
   - id: R5
     etat: charge
-    enonce: Un lien « Jeux vidéo » est présent dans la barre compacte telle que l'application la rend à 1440 px (sans icônes avant 1700 px, avec ⌕ et la pastille « 9+ »), entre Vidéos et Galerie, actif sur la page, et mène à /jeux-video. S'il fait déborder la barre au seuil de 80em (mesure topbar.e2e), il passe dans le panneau « À propos ▾ ».
+    enonce: "Un lien « Jeux vidéo » est présent dans la barre compacte telle que l'application la rend à 1440 px (sans icônes avant 1700 px, avec ⌕ et la pastille « 9+ »), entre Vidéos et Galerie, actif sur la page, et mène à /jeux-video. Le seuil du tiroir monte de 80em à la largeur mesurée par topbar.e2e où la barre complète tient (~84em) : main-layout.component.ts (@media (width < 84em))."
     message: "Jeux vidéo"
     champs: [lien-navigation]
-    statut: sourcee
-    source: "demande du lot L35 : « lien dans la navigation »"
+    statut: hypothese
+    si_faux: "Si un lien de premier niveau reste trop large, on regroupe Vidéos, Jeux vidéo et Galerie dans un menu « Médias ▾ » (restructuration de la navigation) ; le seuil du tiroir redescendrait à 80em."
     tests: ["R5 — le lien de navigation mène à /jeux-video et est actif", "R5 — barre : aucun débordement aux seuils (topbar.e2e)"]
   - id: R6
     etat: vide
@@ -104,11 +104,12 @@ regles:
     tests: ["R8 — erreur : message et bouton Réessayer", "R8 — Réessayer relance la lecture"]
   - id: R9
     etat: tiroir
-    enonce: Sous 1280 px, le lien « Jeux vidéo » figure dans le tiroir #menu-telephone, à plat entre Vidéos et Galerie, actif sur la page.
+    enonce: Sous le seuil mesuré (~84em, topbar.e2e), le lien « Jeux vidéo » figure dans le tiroir #menu-telephone, à plat entre Vidéos et Galerie, actif sur la page.
     message: "Jeux vidéo"
     champs: [lien-navigation-tiroir]
-    statut: sourcee
-    source: "demande du lot L35 : « lien dans la navigation » ; tiroir existant main-layout.component.ts:95-116"
+    statut: hypothese
+    si_faux: "Si le seuil mesuré diffère de ~84em, seule la valeur du @media change ; avec un menu « Médias ▾ » le seuil resterait 80em."
+    source: "tiroir existant main-layout.component.ts:95-116"
     tests: ["R9 — tiroir ouvert : lien Jeux vidéo présent et actif"]
 
 actions:
