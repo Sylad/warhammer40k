@@ -66,3 +66,15 @@ describe('artworkForFaction (L42)', () => {
     expect(artworkForFaction([{ id: '0', faction: 'g' }, { id: '1', faction: 'f' }, { id: '2', faction: 'f' }], 'f')?.id).toBe('1');
   });
 });
+
+// L47 — la colonne latérale collée (1 517 px) ne doit pas dépasser l'écran, sinon la carte
+// « Vidéo à la une » reste hors champ (WCAG 2.4.11) : hauteur bornée à l'écran, défilement interne.
+describe('colonne latérale collée (L47)', () => {
+  it('L47 — .sidebar : max-height bornée à l’écran et overflow-y auto', () => {
+    const scss = readFileSync(resolve(__dirname, 'faction-detail.component.scss'), 'utf8');
+    const bloc = /\.sidebar\s*\{([^}]*)\}/.exec(scss)?.[1] ?? '';
+    expect(bloc).toMatch(/position:\s*sticky/);
+    expect(bloc).toMatch(/max-height:\s*calc\(100vh - var\(--anchor-offset\)\)/);
+    expect(bloc).toMatch(/overflow-y:\s*auto/);
+  });
+});

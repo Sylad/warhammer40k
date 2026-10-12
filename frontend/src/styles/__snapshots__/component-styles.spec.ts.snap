@@ -745,6 +745,8 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "display": "flex",
     "flex-direction": "column",
     "gap": "18px",
+    "max-height": "calc(100vh - var(--anchor-offset))",
+    "overflow-y": "auto",
     "position": "sticky",
     "top": "var(--anchor-offset)",
   },

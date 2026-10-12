@@ -577,6 +577,8 @@
       align-self: start;
       position: sticky;
       top: var(--anchor-offset);
+      max-height: calc(100vh - var(--anchor-offset));
+      overflow-y: auto;
     }
     .sp {
       border: 1px solid var(--border);
