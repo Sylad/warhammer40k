@@ -393,7 +393,7 @@ lots:
   - id: L49
     title: "Galerie : panneau Filtres avant la grille (ordre de focus WCAG 2.4.3 — filtres à la 34e tabulation) ; au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) — maquette à valider par Sylvain avant tout code"
     public: "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     screen: journey
@@ -406,6 +406,10 @@ lots:
       - { date: 2026-10-12, text: "test d'acceptation rescellé (frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche inchangée) : 3 tests (R6 « 390 px : 6 résultats visible dans le panneau », R12 « rappel visible », R12 « Réinitialiser les filtres 44 px ») lisaient page.evaluate(() => scrollY) : la fonction capture la constante locale scrollY (esbuild la renomme scrollY2) au lieu de window.scrollY ; seul changement : window.scrollY" }
       - { date: 2026-10-12, text: "test d'acceptation rescellé (frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche inchangée) : test « R10 — Artistes et Collections après la pagination » : simulate() renvoyait [] pour /api/artwork-artists (source des artistes de la galerie depuis 9c85b76, avant L49), le panneau Artistes n'avait rien de focalisable et R10 ne pouvait pas passer ; seul ajout : une route /api/artwork-artists à 2 artistes cohérents avec ARTWORKS" }
       - { date: 2026-10-12, text: "DÉCISION LEAD 12-10 (rendu non conforme après 2 passes, vague 2026-10-12-1855) — 2 majeurs, SEULS points : (1) R2/R10 au bureau, le panneau Filtres collant (grid-row 1 / 3, sticky top 96px, _gallery-filtres.scss:11) recouvre « Artistes à découvrir » au défilement : revenir au comportement d avant L49 — tout l aside collant (comme avant), le panneau Filtres placé en tête dedans, pas de sticky propre au panneau ; test e2e 1440×900 : après 1200 px de défilement, elementFromPoint au centre du panneau Artistes renvoie le panneau Artistes et son 1er bouton focalisé est visible. (2) R12 à 390 px : le rappel s affiche dès que les filtres ne laissent aucune œuvre, y compris une faction connue sans illustration passée par l adresse (/gallery?faction=grey-knights) — fusionner la condition (gallery.component.ts:78) en gardant le message propre à la faction ; test. Les mineurs restent des notes." }
+      - { date: 2026-10-12, text: "UX 12-10 (notes) : contraste du bandeau photo de la galerie, préexistant à L49 ; Filtres non collant au bureau → lot de suivi." }
+    review: { date: 2026-10-12, verdict: "conforme après arbitrage du lead (12-10, vague 2026-10-12-1955, revue 9) : ordre de tabulation (WCAG 2.4.3, objet du lot) atteint, R6/R10/R12 verts, rescellés tracés ; arbitrage : au bureau le panneau Filtres ne suit plus le défilement (R10 impose Filtres avant la grille et Artistes/Collections après dans le DOM ; un Filtres collant recouvrait les Artistes) — régression mesurée suivie en lot ; 693 tests verts", commit: 0eef36bf8d722a2e7a4702a180d005e1daff29dd }
+    ux: { date: 2026-10-12, verdict: "conforme avec réserve (posé par le lead, règle L197) : panneau Filtres avant la grille, bouton Filtres au téléphone, états chargement/erreur/vide ; réserve : Filtres non collant au bureau (régression mesurée par l'agent UX, lot de suivi) ; contraste du bandeau photo préexistant en note" }
+    finished: 2026-10-12
   - id: L50
     title: "Galerie : libellés des statistiques du bandeau (Œuvres, Artistes, Collections) à 1,05:1 sur l'image — pastille opaque var(--panel) comme l'onglet Rechercher, ou voile sombre ; mesurer ≥ 4,5:1 (WCAG 1.4.3) ; factoriser d'abord la feuille de la galerie (12 octets de marge sur le budget de 17,5 kB)"
     status: done
@@ -961,6 +965,13 @@ lots:
     title: "Vidéos à 1440 px : le carré ▶ de 62 px centré sur la carte chevauche le titre quand il fait 3 lignes (« Toutes les vidéos ») — placer le ▶ sur la vignette, pas au centre de la carte ; test (UX L47)"
     status: todo
     estimate: 0.25
+    created: 2026-10-12
+  - id: L108
+    title: "Galerie au bureau : le panneau Filtres suit à nouveau le défilement sans recouvrir « Artistes à découvrir » — deux blocs collants empilés (Filtres top 96 px, Artistes/Collections top = 96 + hauteur des Filtres, mesurée) ou autre schéma, l'ordre du DOM de L49 inchangé (Filtres avant la grille, Artistes après) ; test e2e 1440×900 après 800 et 1200 px de défilement (régression de L49, UX 12-10)"
+    public: "Galerie : les filtres restent à portée en faisant défiler la page"
+    status: todo
+    estimate: 0.5
+    visible: true
     created: 2026-10-12
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }

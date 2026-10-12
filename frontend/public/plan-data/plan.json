@@ -96,8 +96,9 @@
     {
       "id": "L49",
       "title": "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone",
-      "status": "doing",
-      "started": "2026-10-11"
+      "status": "done",
+      "started": "2026-10-11",
+      "finished": "2026-10-12"
     },
     {
       "id": "L50",
@@ -313,6 +314,11 @@
       "status": "done",
       "started": "2026-10-11",
       "finished": "2026-10-11"
+    },
+    {
+      "id": "L108",
+      "title": "Galerie : les filtres restent à portée en faisant défiler la page",
+      "status": "todo"
     }
   ]
 }
