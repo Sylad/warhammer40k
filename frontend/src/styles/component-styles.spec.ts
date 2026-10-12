@@ -22,10 +22,11 @@ const src = resolve(frontend, 'src');
 
 /** Partiel global (inclus dans styles.scss) qui porte des règles factorisées. */
 const ANCHOR_NAV = 'styles/_anchor-nav.scss';
+const GALLERY_FILTRES = 'styles/_gallery-filtres.scss';
 
 /** Feuille de composant → partiels globaux dont dépend le rendu de son gabarit. */
 const GUARDED: Record<string, string[]> = {
-  'app/features/gallery/gallery.component.scss': [],
+  'app/features/gallery/gallery.component.scss': [GALLERY_FILTRES],
   'app/features/faction-detail/faction-detail.component.scss': [ANCHOR_NAV],
   'app/features/ship-detail/ship-detail.component.scss': [ANCHOR_NAV],
   'app/features/primarch-detail/primarch-detail.component.scss': [ANCHOR_NAV],

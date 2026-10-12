@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-12 08:54",
+  "generated": "2026-10-12 10:19",
   "entries": [
+    {
+      "slug": "2026-10-12-galerie-les-filtres-accessibles-avant-la-grille-bouton-filtr",
+      "title": "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone",
+      "date": "2026-10-12",
+      "lots": [
+        "L49"
+      ],
+      "captures": [
+        "captures/L49-galerie-filtres-390.png"
+      ],
+      "alts": [
+        "La galerie à 390 px avec le panneau Filtres déplié sous la recherche : le bouton Filtres porte la pastille 1, la liste Faction est sur Space Marines et « 6 résultats » s’affiche sous Trier par"
+      ],
+      "html": "<p>Dans la galerie, le panneau Filtres (Faction, Catégorie, Trier par) vient maintenant juste après la recherche, avant les catégories et les œuvres. Au clavier, on atteint ces listes en quelques tabulations au lieu de traverser toute la grille. À partir de 761 px, il garde sa place habituelle en haut de la colonne de droite.</p>\n<p>Sur téléphone, un bouton « Filtres » apparaît sous la recherche, à côté d’« Importer ». Il déplie ou replie le panneau ; il indique le nombre de filtres actifs (Faction, Catégorie) et, panneau ouvert, les pastilles de statistiques du bandeau s’effacent pour que les listes soient visibles tout de suite. Choisir une valeur met la grille à jour sans refermer le panneau, et le nombre de résultats se lit en bas du panneau.</p>\n<p>Quand les filtres ne laissent aucune œuvre, un rappel « Aucune œuvre ne correspond » accompagné de « Réinitialiser les filtres » s’affiche sous la recherche, dans le premier écran du téléphone.</p>\n<p>La galerie distingue aussi le chargement et l’échec : « Chargement de la galerie… » pendant la lecture, puis, si elle échoue, « Impossible de charger la galerie. » avec un bouton « Réessayer », au lieu d’une galerie vide. Dans les deux cas les listes et les cartes de catégorie sont grisées et les chiffres du bandeau affichent « – ».</p>\n<p>La liste Catégorie propose désormais toutes les catégories de la galerie, même après le choix d’une faction.</p>\n<h3>Hypothèses</h3>\n<ul><li>R2 — À partir de 761 px le panneau Filtres reste affiché en haut de la colonne de droite, sans bouton. Si le panneau doit s’afficher au-dessus de la grille à toute largeur, seule la mise en page change.</li><li>R4 — Au téléphone, le panneau est replié au chargement. S’il doit être ouvert par défaut, seul l’état initial du bouton change.</li><li>R5 — Le bouton affiche le nombre de filtres actifs. Si le nombre ne doit pas figurer, seule la pastille du bouton disparaît.</li><li>R8 — Pendant la lecture, la page affiche « Chargement de la galerie… » et grise les listes. Si le chargement doit rester muet, seul ce bloc change.</li><li>R9 — Si la lecture échoue, la page affiche l’erreur et « Réessayer » au lieu de l’état vide. Si l’erreur ne doit pas être distinguée du vide, on revient au message d’avant.</li><li>R10 — « Artistes à découvrir » et « Collections populaires » restent après la grille dans l’ordre de tabulation. S’ils doivent la précéder, seul l’ordre du document change.</li><li>R11 — Entre 761 et 1024 px le panneau est ouvert au-dessus des catégories, sans bouton. Si le bouton doit aussi exister sur tablette, seul son seuil d’affichage change.</li></ul>"
+    },
     {
       "slug": "2026-10-12-une-page-jeux-video-les-jeux-existants-et-ceux-qui-arrivent",
       "title": "Une page Jeux vidéo : les jeux existants et ceux qui arrivent",

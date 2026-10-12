@@ -110,7 +110,7 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 ## Pièges connus
 
 - **Contenu lu dans `seed/`, pas dans `data/`** (L74) : un fichier copié dans `backend/data/` (ou dans le volume) est ignoré s'il fait partie du contenu. `seed/` doit rester dans l'image (`Dockerfile` : `COPY … /app/seed`, gardé par `common/content.spec.ts`).
-- **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
+- **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). L49 : les règles du panneau Filtres, du bouton « Filtres » et des états chargement/erreur/vide vivent dans le partiel global `src/styles/_gallery-filtres.scss` (préfixé `.gallery-page`, déclaré dans `component-styles.spec.ts`) pour tenir le budget. Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (`@Body() body: MonType` → `import type { MonType }`).
 
 ## Jeux vidéo (L35)

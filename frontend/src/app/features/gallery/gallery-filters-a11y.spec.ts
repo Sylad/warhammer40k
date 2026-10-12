@@ -78,7 +78,7 @@ function byLabel(root: HTMLElement, name: string): HTMLInputElement | HTMLSelect
 describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', () => {
   it('« Faction », « Catégorie » et « Trier par » nomment leur liste déroulante (label for/id)', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    const sidebar = root.querySelector<HTMLElement>('.sidebar')!;
+    const sidebar = root.querySelector<HTMLElement>('.p-filtres')!;
     for (const name of ['Faction', 'Catégorie', 'Trier par']) {
       const el = byLabel(sidebar, name);
       expect(el.tagName).toBe('SELECT');
@@ -115,7 +115,7 @@ describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', 
   it('chaque contrôle de la barre de filtres et de recherche a un nom accessible non vide', async () => {
     const root = (await render()).nativeElement as HTMLElement;
     const controls = [
-      ...Array.from(root.querySelectorAll<HTMLSelectElement>('.sidebar select')),
+      ...Array.from(root.querySelectorAll<HTMLSelectElement>('.p-filtres select')),
       ...Array.from(root.querySelectorAll<HTMLInputElement>('.search-bar input')),
     ];
     expect(controls).toHaveLength(4);
@@ -126,7 +126,7 @@ describe('galerie — libellés des filtres (L45, WCAG 1.3.1 / 4.1.2 / 3.3.2)', 
 describe('galerie — noms de faction lisibles dans la liste (L45)', () => {
   it('les options montrent le nom du codex (« Nécrons », « T’au »), la valeur reste l’identifiant', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
+    const select = byLabel(root.querySelector<HTMLElement>('.p-filtres')!, 'Faction') as HTMLSelectElement;
     const opts = Array.from(select.options).map((o) => ({ value: o.value, text: o.textContent!.trim() }));
     expect(opts).toContainEqual({ value: 'necrons', text: 'Nécrons' });
     expect(opts).toContainEqual({ value: 'tau', text: 'T\'au' });
@@ -138,7 +138,7 @@ describe('galerie — noms de faction lisibles dans la liste (L45)', () => {
 
   it('les options sont triées par nom affiché (ordre alphabétique français), « Toutes » en tête', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
+    const select = byLabel(root.querySelector<HTMLElement>('.p-filtres')!, 'Faction') as HTMLSelectElement;
     const texts = Array.from(select.options).map((o) => o.textContent!.trim());
     expect(texts[0]).toBe('Toutes');
     const rest = texts.slice(1);
@@ -147,7 +147,7 @@ describe('galerie — noms de faction lisibles dans la liste (L45)', () => {
 
   it('une faction saisie en texte libre (image perso, sans fiche au codex) reste affichée telle quelle', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    const select = byLabel(root.querySelector<HTMLElement>('.sidebar')!, 'Faction') as HTMLSelectElement;
+    const select = byLabel(root.querySelector<HTMLElement>('.p-filtres')!, 'Faction') as HTMLSelectElement;
     const opts = Array.from(select.options).map((o) => ({ value: o.value, text: o.textContent!.trim() }));
     expect(opts).toContainEqual({ value: 'Garde de Cadia', text: 'Garde de Cadia' });
   });
@@ -310,7 +310,7 @@ describe('galerie — recherche sans casse, accents ni ligatures (L45/t2)', () =
 // un filtre, ni « Aucune œuvre ne correspond ». Région role=status PERSISTANTE (même élément d'un
 // état à l'autre : une région créée avec son texte n'est pas annoncée).
 describe('galerie — nombre de résultats annoncé (L45/t4)', () => {
-  const status = (root: HTMLElement) => root.querySelector<HTMLElement>('[data-testid="results-status"]');
+  const status = (root: HTMLElement) => root.querySelector<HTMLElement>('[data-testid="resultats-statut"]');
 
   it('le compteur est une région role=status présente dès le rendu, qui suit recherche et filtres', async () => {
     const f = await render();
@@ -345,7 +345,7 @@ describe('galerie — nombre de résultats annoncé (L45/t4)', () => {
 
   it('une seule région d’état pour les résultats (pas de doublon dans la page)', async () => {
     const root = (await render()).nativeElement as HTMLElement;
-    expect(root.querySelectorAll('[data-testid="results-status"]')).toHaveLength(1);
+    expect(root.querySelectorAll('[data-testid="resultats-statut"]')).toHaveLength(1);
     expect(root.querySelectorAll('.results-count:not([role="status"])')).toHaveLength(0);
   });
 });

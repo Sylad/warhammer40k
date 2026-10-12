@@ -1,0 +1,46 @@
+/*
+ * L49 — Galerie : panneau Filtres avant la grille (ordre de tabulation, WCAG 2.4.3), bouton « Filtres »
+ * au téléphone, états chargement / erreur / vide. Partiel global (budget anyComponentStyle de la feuille
+ * du composant, L29) : tout est préfixé .gallery-page, plus spécifique que les règles de base du composant
+ * à égalité d'ordre (le bouton reprend .import-btn-hero, d'où .import-btn-hero.btn-filtres).
+ */
+.gallery-page {
+  /* le panneau précède la grille dans le DOM ; la grille CSS le replace en haut de la colonne de droite */
+  .layout { grid-template-areas: "main filtres" "main aside"; grid-template-rows: auto 1fr; }
+  .p-filtres { grid-area: filtres; align-self: start; }
+  .main-col { grid-area: main; }
+  .sidebar { grid-area: aside; }
+  .import-btn-hero.btn-filtres { display: none; }
+  .btn-filtres .count {
+    min-width: 1.5em; padding: 1px 6px; border-radius: 999px;
+    background: var(--gold); color: var(--bg); font-size: 11px; text-align: center;
+  }
+  .btn-filtres .caret { font-size: 10px; opacity: 0.8; }
+  .panel-count {
+    display: none; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--border);
+    color: var(--gold); font-size: 11px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .rappel-vide { display: none; }
+  .state-msg { color: var(--muted); margin: 0 0 16px; }
+  .skel {
+    background: linear-gradient(90deg, var(--panel-2), #1c160f, var(--panel-2));
+    border: 1px solid var(--border); aspect-ratio: 3 / 4;
+  }
+  .category-card:disabled { opacity: 0.5; cursor: default; }
+}
+@media (max-width: 1024px) {
+  .gallery-page .layout { grid-template-areas: "filtres" "main" "aside"; grid-template-rows: auto; }
+}
+@media (max-width: 760px) {
+  .gallery-page {
+    .import-btn-hero.btn-filtres { display: inline-flex; }
+    .hero-stats.filtres-ouverts { display: none; }
+    .p-filtres.ferme { display: none; }
+    .panel-count { display: block; }
+    .rappel-vide {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-top: 12px; padding: 10px 12px; border: 1px dashed var(--border); color: var(--text); font-size: 14px;
+    }
+    .rappel-vide .reset-btn { min-height: 44px; padding: 0 4px; flex: none; }
+  }
+}

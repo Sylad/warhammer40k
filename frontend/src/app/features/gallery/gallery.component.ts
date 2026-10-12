@@ -1,9 +1,9 @@
-import { Component, DestroyRef, inject, signal, computed, effect, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, signal, computed, effect, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { catchError, filter, map, of, type Observable } from 'rxjs';
+import { BehaviorSubject, catchError, concat, filter, map, of, switchMap, type Observable } from 'rxjs';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
@@ -42,7 +42,9 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <h1>Galerie Impériale</h1>
             <p class="hero-desc">
               Explorez les illustrations, artworks et visuels du 41e millénaire.<br/>
-              {{ artworks().length }} {{ artworks().length > 1 ? 'œuvres triées, classées et archivées' : 'œuvre triée, classée et archivée' }}.
+              @if (catalogReady()) {
+                {{ artworks().length }} {{ artworks().length > 1 ? 'œuvres triées, classées et archivées' : 'œuvre triée, classée et archivée' }}.
+              }
             </p>
             <div class="search-bar-wrap">
               <!-- L45/t1 (WCAG 1.3.1 / 2.5.3 / 3.3.2) : libellé VISIBLE relié au champ, qui en fait le nom
@@ -52,7 +54,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <div class="search-bar">
                 <span class="s-icon" aria-hidden="true">⌕</span>
                 <input
-                  id="gallery-search"
+                  id="gallery-search" data-testid="recherche"
                   type="text"
                   [ngModel]="searchQuery()"
                   (ngModelChange)="onSearchChange($event)"
@@ -62,23 +64,40 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <button type="button" class="import-btn-hero" (click)="openImport()">
                 <span>+</span> Importer
               </button>
+              <!-- L49 (WCAG 2.4.3) : bouton à divulgation, au téléphone seulement, juste avant le panneau Filtres. -->
+              <button type="button" class="import-btn-hero btn-filtres" data-testid="bouton-filtres"
+                [attr.aria-expanded]="filtersOpen()" aria-controls="panneau-filtres"
+                (click)="toggleFilters()">
+                Filtres
+                @if (activeFilterCount() > 0) {
+                  <span class="count" data-testid="compteur-filtres-actifs">{{ activeFilterCount() }}</span>
+                }
+                <span class="caret" aria-hidden="true">{{ filtersOpen() ? '▲' : '▼' }}</span>
+              </button>
             </div>
+            @if (catalogReady() && totalFiltered() === 0 && !emptyFactionName()) {
+              <!-- L49/R12 : au téléphone, le vide se voit dans le premier écran, sous la recherche. -->
+              <div class="rappel-vide" data-testid="rappel-vide">
+                <span class="rv-text">Aucune œuvre ne correspond</span>
+                <button type="button" class="reset-btn" data-testid="bouton-reinitialiser-rappel" (click)="resetFilters()">Réinitialiser les filtres</button>
+              </div>
+            }
           </div>
-          <aside class="hero-stats">
+          <aside class="hero-stats" [class.filtres-ouverts]="filtersOpen()">
             <div class="stat-card">
               <div class="stat-icon">▦</div>
-              <div class="stat-num">{{ artworks().length }}</div>
+              <div class="stat-num">{{ catalogReady() ? artworks().length : '–' }}</div>
               <div class="stat-label">Œuvres</div>
             </div>
             <div class="stat-card">
               <div class="stat-icon">◐</div>
-              <div class="stat-num">{{ artists().length }}</div>
+              <div class="stat-num">{{ catalogReady() ? artists().length : '–' }}</div>
               <div class="stat-label">Artistes</div>
             </div>
-            @if (nonEmptyCollections().length > 0) {
+            @if (nonEmptyCollections().length > 0 || !catalogReady()) {
             <div class="stat-card">
               <div class="stat-icon">◇</div>
-              <div class="stat-num">{{ nonEmptyCollections().length }}</div>
+              <div class="stat-num">{{ catalogReady() ? nonEmptyCollections().length : '–' }}</div>
               <div class="stat-label">Collections</div>
             </div>
             }
@@ -87,7 +106,49 @@ type SortBy = 'recent' | 'popular' | 'alpha';
       </header>
 
       <!-- LAYOUT MAIN + SIDEBAR -->
-      <section class="layout">
+      <section class="layout" data-testid="mise-en-page">
+        <!-- L49 : le panneau Filtres précède la grille dans le DOM (ordre de tabulation, WCAG 2.4.3) ;
+             la grille CSS le replace en haut de la colonne de droite. -->
+        <section class="side-panel p-filtres" [class.ferme]="!filtersOpen()" id="panneau-filtres" data-testid="panneau-filtres" aria-labelledby="filtres-titre">
+          <div class="panel-head">
+            <h3 id="filtres-titre">Filtres</h3>
+            @if (hasActiveFilters()) {
+              <button class="reset-btn" type="button" data-testid="bouton-reinitialiser" (click)="resetFilters()">Réinitialiser</button>
+            }
+          </div>
+          <!-- L45 (WCAG 1.3.1 / 4.1.2 / 3.3.2) : chaque libellé visible est associé à sa liste (for/id). -->
+          <div class="filter-row">
+            <label for="gallery-filter-faction">Faction</label>
+            <select id="gallery-filter-faction" data-testid="filtre-faction" [disabled]="!catalogReady()" [ngModel]="unknownFaction() ? '' : factionKey(filterFaction())" (ngModelChange)="onFactionChange($event)">
+              <option value="">Toutes</option>
+              @for (f of factionOptions(); track f) {
+                <option [value]="f">{{ factionName(f) }}</option>
+              }
+            </select>
+          </div>
+          <div class="filter-row">
+            <label for="gallery-filter-category">Catégorie</label>
+            <select id="gallery-filter-category" data-testid="filtre-categorie" [disabled]="!catalogReady()" [ngModel]="filterCategory() ?? ''" (ngModelChange)="filterCategory.set($event || null)">
+              <option value="">Toutes</option>
+              @for (c of categoryOptions(); track c.key) {
+                <option [value]="c.key">{{ c.label }}</option>
+              }
+            </select>
+          </div>
+          <div class="filter-row">
+            <label for="gallery-filter-sort">Trier par</label>
+            <select id="gallery-filter-sort" data-testid="filtre-tri" [disabled]="!catalogReady()" [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+              <option value="recent">Plus récentes</option>
+              <option value="popular">Populaires</option>
+              <option value="alpha">A — Z</option>
+            </select>
+          </div>
+          @if (catalogReady()) {
+            <!-- L49/R6 : rappel visible au téléphone ; aria-hidden, la région d'état de la grille reste la seule annoncée. -->
+            <p class="panel-count" data-testid="resultats-panneau" aria-hidden="true">{{ resultsLabel() }}</p>
+          }
+        </section>
+
         <div class="main-col">
           <!-- L42 (relecture) : ?faction= inconnu → dit, jamais une grille vide muette.
                Revue UX R5 (WCAG 4.1.3) : la région d'état existe dès le premier rendu, vide ; le
@@ -103,15 +164,25 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <section class="section">
             <h2 class="section-title">Parcourir par catégorie</h2>
             <div class="category-grid">
-              @for (cat of availableCategories(); track cat.key) {
-                <button class="category-card"
-                  type="button"
-                  [class.active]="filterCategory() === cat.key"
-                  [style.--cat-bg]="categoryBg(cat.key)"
-                  (click)="toggleCategoryFilter(cat.key)">
-                  <span class="cat-name">{{ cat.label }}</span>
-                  <span class="cat-count">{{ categoryCount(cat.key) }} œuvre{{ categoryCount(cat.key) > 1 ? 's' : '' }}</span>
-                </button>
+              @if (catalogReady()) {
+                @for (cat of availableCategories(); track cat.key) {
+                  <button class="category-card"
+                    type="button"
+                    [class.active]="filterCategory() === cat.key"
+                    [style.--cat-bg]="categoryBg(cat.key)"
+                    (click)="toggleCategoryFilter(cat.key)">
+                    <span class="cat-name">{{ cat.label }}</span>
+                    <span class="cat-count">{{ categoryCount(cat.key) }} œuvre{{ categoryCount(cat.key) > 1 ? 's' : '' }}</span>
+                  </button>
+                }
+              } @else {
+                <!-- L49/R8-R9 : pendant la lecture (ou son échec) les cartes restent là, désactivées, sans effectif. -->
+                @for (cat of categories; track cat.key) {
+                  <button class="category-card" type="button" disabled [style.--cat-bg]="categoryBg(cat.key)">
+                    <span class="cat-name">{{ cat.label }}</span>
+                    <span class="cat-count">–</span>
+                  </button>
+                }
               }
             </div>
           </section>
@@ -126,9 +197,11 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <!-- L45/t4 (WCAG 4.1.3) : région d'état PERSISTANTE — le nombre de résultats, ou le
                      message « aucune œuvre » (visible plus bas, ici pour lecteur d'écran), est annoncé
                      après chaque recherche ou filtre. -->
-                <span class="results-count" role="status" data-testid="results-status">
-                  @if (totalFiltered() > 0) {
-                    {{ totalFiltered() }} résultat{{ totalFiltered() > 1 ? 's' : '' }}
+                <span class="results-count" role="status" data-testid="resultats-statut">
+                  @if (!catalogReady()) {
+                    &nbsp;
+                  } @else if (totalFiltered() > 0) {
+                    {{ resultsLabel() }}
                   } @else if (emptyFactionName()) {
                     <span class="sr-only">Aucune illustration de la faction {{ emptyFactionName() }} pour l’instant.</span>
                   } @else {
@@ -136,21 +209,31 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   }
                 </span>
               </div>
-              @if (hasActiveFilters()) {
+              @if (catalogReady() && hasActiveFilters()) {
                 <button class="see-all" type="button" (click)="resetFilters()">Réinitialiser →</button>
               }
             </header>
 
-            @if (emptyFactionName(); as name) {
+            @if (catalogLoading()) {
+              <p class="state-msg" data-testid="message-chargement" role="status">Chargement de la galerie…</p>
+              <div class="art-grid" aria-hidden="true">
+                @for (n of skeletons; track n) { <div class="skel"></div> }
+              </div>
+            } @else if (catalogFailed()) {
+              <div class="empty">
+                <p data-testid="message-erreur" role="alert">Impossible de charger la galerie.</p>
+                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer" (click)="retryCatalog()">Réessayer</button>
+              </div>
+            } @else if (emptyFactionName()) {
               <!-- L42 (revue UX R3) : faction connue sans illustration → nommée, avec une sortie. -->
               <div class="empty" data-testid="faction-vide">
-                <p>Aucune illustration de la faction {{ name }} pour l’instant.</p>
+                <p>Aucune illustration de la faction {{ emptyFactionName() }} pour l’instant.</p>
                 <button class="see-all" type="button" (click)="onFactionChange('')">Retirer ce filtre</button>
               </div>
             } @else if (totalFiltered() === 0) {
-              <div class="empty">Aucune œuvre ne correspond à ces filtres.</div>
+              <div class="empty" data-testid="message-vide">Aucune œuvre ne correspond à ces filtres.</div>
             } @else {
-              <div class="art-grid">
+              <div class="art-grid" data-testid="grille-oeuvres">
                 @for (art of pagedArtworks(); track art.id; let i = $index) {
                   <article class="art-card"
                     [style.--art]="artBg(art)"
@@ -188,44 +271,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           </section>
         </div>
 
-        <!-- SIDEBAR -->
+        <!-- SIDEBAR : Artistes et Collections restent après la grille (L49/R10) -->
         <aside class="sidebar">
-          <section class="side-panel">
-            <div class="panel-head">
-              <h3>Filtres</h3>
-              @if (hasActiveFilters()) {
-                <button class="reset-btn" type="button" (click)="resetFilters()">Réinitialiser</button>
-              }
-            </div>
-            <!-- L45 (WCAG 1.3.1 / 4.1.2 / 3.3.2) : chaque libellé visible est associé à sa liste (for/id). -->
-            <div class="filter-row">
-              <label for="gallery-filter-faction">Faction</label>
-              <select id="gallery-filter-faction" [ngModel]="unknownFaction() ? '' : factionKey(filterFaction())" (ngModelChange)="onFactionChange($event)">
-                <option value="">Toutes</option>
-                @for (f of factionOptions(); track f) {
-                  <option [value]="f">{{ factionName(f) }}</option>
-                }
-              </select>
-            </div>
-            <div class="filter-row">
-              <label for="gallery-filter-category">Catégorie</label>
-              <select id="gallery-filter-category" [ngModel]="filterCategory() ?? ''" (ngModelChange)="filterCategory.set($event || null)">
-                <option value="">Toutes</option>
-                @for (c of availableCategories(); track c.key) {
-                  <option [value]="c.key">{{ c.label }}</option>
-                }
-              </select>
-            </div>
-            <div class="filter-row">
-              <label for="gallery-filter-sort">Trier par</label>
-              <select id="gallery-filter-sort" [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
-                <option value="recent">Plus récentes</option>
-                <option value="popular">Populaires</option>
-                <option value="alpha">A — Z</option>
-              </select>
-            </div>
-          </section>
-
           <section class="side-panel">
             <h3>Artistes à découvrir</h3>
             @if (artists().length === 0) {
@@ -508,6 +555,7 @@ export class GalleryComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly cdr = inject(ChangeDetectorRef);
   /** Anti-rebond de la réécriture de ?q= pendant la frappe (une navigation, pas une par touche). */
   private searchTimer: ReturnType<typeof setTimeout> | undefined;
   /** Dernière adresse écrite par syncUrl() (pour reconnaître son écho dans queryParamMap). */
@@ -517,9 +565,43 @@ export class GalleryComponent {
 
   readonly categories = CATEGORIES;
 
-  // 2e/3e relecture : source en échec → liste vide (toSignal relancerait l'erreur à chaque lecture :
-  // 0 carte, région d'état vide, erreurs console). Catalogue, images perso et factions.
-  private readonly catalogArtworks = toSignal(this.service.artworks$.pipe(catchError(() => of([] as Artwork[]))), { initialValue: [] as Artwork[] });
+  // L49/R9 : le catalogue a trois états (lecture, lu, échec) ; « Réessayer » le relit. Source en échec →
+  // liste vide (toSignal relancerait l'erreur à chaque lecture), mais l'échec n'est plus pris pour un vide.
+  private readonly catalogReload = new BehaviorSubject<void>(undefined);
+  private readonly catalogState = toSignal(
+    this.catalogReload.pipe(
+      switchMap(() =>
+        concat(
+          of({ status: 'loading' as const, list: [] as Artwork[] }),
+          this.service.artworks$.pipe(
+            map((list) => ({ status: 'ok' as const, list })),
+            catchError(() => of({ status: 'error' as const, list: [] as Artwork[] })),
+          ),
+        ),
+      ),
+    ),
+    { initialValue: { status: 'loading' as const, list: [] as Artwork[] } },
+  );
+  private readonly catalogArtworks = computed(() => this.catalogState().list);
+  readonly catalogLoading = computed(() => this.catalogState().status === 'loading');
+  /**
+   * Faux pendant la lecture et en cas d'échec : listes, pastilles et cartes de catégorie restent muettes.
+   * Exception (L42) : catalogue en échec mais images perso présentes → elles restent affichées, comme avant.
+   */
+  readonly catalogReady = computed(() => {
+    const status = this.catalogState().status;
+    return status === 'ok' || (status === 'error' && this.artworks().length > 0);
+  });
+  readonly catalogFailed = computed(() => this.catalogState().status === 'error' && !this.catalogReady());
+  readonly skeletons = [1, 2, 3, 4, 5, 6];
+  /** Le DOM suit tout de suite le clic (aria-expanded lu par les lecteurs d'écran), sans attendre le tick regroupé. */
+  toggleFilters(): void {
+    this.filtersOpen.set(!this.filtersOpen());
+    this.cdr.detectChanges();
+  }
+  retryCatalog(): void { this.catalogReload.next(); }
+  /** L49 : panneau Filtres déplié (téléphone ; au-dessus de 760 px il est toujours affiché). */
+  readonly filtersOpen = signal(false);
   private readonly localImages = toSignal(this.service.images$.pipe(catchError(() => of([] as string[]))), { initialValue: [] as string[] });
   readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
   /** L64 : une collection à 0 œuvre est une impasse (filtre → grille vide) — jamais proposée ni comptée. */
@@ -530,7 +612,7 @@ export class GalleryComponent {
   private static settled(source: Observable<unknown>) {
     return toSignal(source.pipe(map(() => true), catchError(() => of(true))), { initialValue: false });
   }
-  private readonly catalogLoaded = GalleryComponent.settled(this.service.artworks$);
+  private readonly catalogLoaded = computed(() => this.catalogState().status !== 'loading');
   private readonly factionsLoaded = GalleryComponent.settled(this.service.factions$);
   private readonly imagesLoaded = GalleryComponent.settled(this.service.images$);
   private readonly metaLoaded = signal(false);
@@ -538,7 +620,7 @@ export class GalleryComponent {
   private static loadedOk(source: Observable<unknown>) {
     return toSignal(source.pipe(map(() => true), catchError(() => of(false))), { initialValue: false });
   }
-  private readonly catalogOk = GalleryComponent.loadedOk(this.service.artworks$);
+  private readonly catalogOk = computed(() => this.catalogState().status === 'ok');
   private readonly factionsOk = GalleryComponent.loadedOk(this.service.factions$);
   /**
    * 2e relecture : toutes les sources qui peuvent rendre une faction valide ou illustrée sont là
@@ -836,6 +918,18 @@ export class GalleryComponent {
     !!(this.filterCategory() || this.filterFaction() || this.filterArtist() || this.filterCollection() || this.searchQuery().trim()),
   );
 
+  /** L49/R5 : filtres de la liste (Faction, Catégorie) comptés sur le bouton « Filtres ». */
+  readonly activeFilterCount = computed(() => (this.filterFaction() ? 1 : 0) + (this.filterCategory() ? 1 : 0));
+  /** L49 : la liste Catégorie propose toutes les catégories du catalogue (pas seulement celles de la recherche en cours). */
+  readonly categoryOptions = computed<{ key: string; label: string }[]>(() => {
+    const present = new Set<string>();
+    for (const a of this.artworks()) for (const t of [a.category, ...(a.extraCategories ?? [])]) if (t) present.add(t);
+    const keys = [...CATEGORIES.map((c) => c.key as string), ...this.factionCategories(), ...this.customCategories()];
+    const active = this.filterCategory();
+    return [...new Set(keys)].filter((k) => present.has(k) || k === active).map((k) => ({ key: k, label: k }));
+  });
+  readonly resultsLabel = computed(() => `${this.totalFiltered()} résultat${this.totalFiltered() > 1 ? 's' : ''}`);
+
   readonly filteredArtworks = computed(() => {
     const cat = this.filterCategory();
     let list = this.searchedArtworks().slice();
@@ -1058,6 +1152,7 @@ export class GalleryComponent {
     this.filterCollection.set('');
     this.currentPage.set(1);
     this.syncUrl();
+    this.cdr.detectChanges();
   }
 
   toggleBookmark(id: string): void {
