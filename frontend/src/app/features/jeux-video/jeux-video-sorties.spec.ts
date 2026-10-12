@@ -1,7 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { repartirJeux, type JeuxData } from './jeux-video.component';
+import { TestBed } from '@angular/core/testing';
+import { setupTestBed } from '../../../testing/angular-testbed';
+import { JEUX_VIDEO_NOW, repartirJeux, type JeuxData } from './jeux-video.component';
 
 const data = (sorties: (string | null)[]): JeuxData => ({
   verifieLe: '2026-10-11',
@@ -35,5 +37,13 @@ describe('L35 — une seule zone principale', () => {
   it('la page vit dans le <main> de la mise en page : son gabarit n’ouvre pas de second <main>', () => {
     const src = readFileSync(resolve(__dirname, 'jeux-video.component.ts'), 'utf8');
     expect(src).not.toMatch(/<main[\s>]/);
+  });
+});
+
+describe('L35 — horloge de la page', () => {
+  it('R1 — sous TestBed l’horloge est figée : les suites ne dépendent pas de la date du jour', async () => {
+    await setupTestBed([]);
+    const now = TestBed.inject(JEUX_VIDEO_NOW)();
+    expect(now.getTime()).toBe(new Date(2026, 9, 12).getTime());
   });
 });

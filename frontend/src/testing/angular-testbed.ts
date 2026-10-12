@@ -10,6 +10,7 @@ import 'zone.js/testing';
 import { ɵresolveComponentResources as resolveComponentResources } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { JEUX_VIDEO_NOW } from '../app/features/jeux-video/jeux-video.component';
 
 const KEY = Symbol.for('wh40k.testbed.ready');
 const g = globalThis as Record<symbol, unknown>;
@@ -48,6 +49,6 @@ export async function setupTestBed(imports: unknown[], providers: unknown[] = []
   const pages = routes.flatMap((r) => [r, ...(r.children ?? [])]);
   await Promise.all(pages.map((r) => (r.loadComponent as (() => Promise<unknown>) | undefined)?.()));
   await resolveComponentResources(async () => '');
-  TestBed.configureTestingModule({ imports: imports as never[], providers: providers as never[] });
+  TestBed.configureTestingModule({ imports: imports as never[], providers: [{ provide: JEUX_VIDEO_NOW, useValue: () => new Date(2026, 9, 12) }, ...providers] as never[] });
   await TestBed.compileComponents();
 }

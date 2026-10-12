@@ -1,4 +1,10 @@
-import { Component, OnInit, computed, signal } from '@angular/core';
+import { Component, InjectionToken, OnInit, computed, inject, signal } from '@angular/core';
+
+/** Horloge de la page (R1 : « pas encore sortis ») ; remplaçable, les tests la figent. */
+export const JEUX_VIDEO_NOW = new InjectionToken<() => Date>('JEUX_VIDEO_NOW', {
+  providedIn: 'root',
+  factory: () => () => new Date(),
+});
 
 /** Un jeu annoncé, pas encore sorti. `sortie` : date à la précision annoncée, ou null si aucune. */
 export interface JeuAVenir {
@@ -162,10 +168,11 @@ export function dateFr(iso: string): string {
 export class JeuxVideoComponent implements OnInit {
   readonly state = signal<'loading' | 'error' | 'empty' | 'ready'>('loading');
   private readonly data = signal<JeuxData | null>(null);
+  private readonly now = inject(JEUX_VIDEO_NOW);
 
   private readonly parts = computed(() => {
     const d = this.data();
-    return d ? repartirJeux(d, new Date()) : { aVenir: [], existants: [] };
+    return d ? repartirJeux(d, this.now()) : { aVenir: [], existants: [] };
   });
   readonly aVenir = computed(() => this.parts().aVenir);
   /** Du plus récent au plus ancien (R4) ; à année égale, l'ordre du fichier. */
