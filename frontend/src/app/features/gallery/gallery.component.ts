@@ -42,7 +42,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <h1>Galerie Impériale</h1>
             <p class="hero-desc">
               Explorez les illustrations, artworks et visuels du 41e millénaire.<br/>
-              @if (catalogReady()) {
+              @if (catalogOk()) {
                 {{ artworks().length }} {{ artworks().length > 1 ? 'œuvres triées, classées et archivées' : 'œuvre triée, classée et archivée' }}.
               }
             </p>
@@ -86,18 +86,18 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <aside class="hero-stats" [class.filtres-ouverts]="filtersOpen()">
             <div class="stat-card">
               <div class="stat-icon">▦</div>
-              <div class="stat-num">{{ catalogReady() ? artworks().length : '–' }}</div>
+              <div class="stat-num">{{ catalogOk() ? artworks().length : '–' }}</div>
               <div class="stat-label">Œuvres</div>
             </div>
             <div class="stat-card">
               <div class="stat-icon">◐</div>
-              <div class="stat-num">{{ catalogReady() ? artists().length : '–' }}</div>
+              <div class="stat-num">{{ catalogOk() ? artists().length : '–' }}</div>
               <div class="stat-label">Artistes</div>
             </div>
-            @if (nonEmptyCollections().length > 0 || !catalogReady()) {
+            @if (nonEmptyCollections().length > 0 || !catalogOk()) {
             <div class="stat-card">
               <div class="stat-icon">◇</div>
-              <div class="stat-num">{{ catalogReady() ? nonEmptyCollections().length : '–' }}</div>
+              <div class="stat-num">{{ catalogOk() ? nonEmptyCollections().length : '–' }}</div>
               <div class="stat-label">Collections</div>
             </div>
             }
@@ -214,16 +214,20 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               }
             </header>
 
+            @if (catalogFailed()) {
+              <!-- R9 : l'échec n'est jamais avalé, même quand des images perso restent affichées dessous. -->
+              <div class="empty">
+                <p data-testid="message-erreur" role="alert">Impossible de charger la galerie.</p>
+                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer" (click)="retryCatalog()">Réessayer</button>
+              </div>
+            }
             @if (catalogLoading()) {
               <p class="state-msg" data-testid="message-chargement" role="status">Chargement de la galerie…</p>
               <div class="art-grid" aria-hidden="true">
                 @for (n of skeletons; track n) { <div class="skel"></div> }
               </div>
-            } @else if (catalogFailed()) {
-              <div class="empty">
-                <p data-testid="message-erreur" role="alert">Impossible de charger la galerie.</p>
-                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer" (click)="retryCatalog()">Réessayer</button>
-              </div>
+            } @else if (catalogFailed() && !catalogReady()) {
+              <!-- erreur et Réessayer : affichés au-dessus, ni grille ni état vide -->
             } @else if (emptyFactionName()) {
               <!-- L42 (revue UX R3) : faction connue sans illustration → nommée, avec une sortie. -->
               <div class="empty" data-testid="faction-vide">
@@ -592,7 +596,8 @@ export class GalleryComponent {
     const status = this.catalogState().status;
     return status === 'ok' || (status === 'error' && this.artworks().length > 0);
   });
-  readonly catalogFailed = computed(() => this.catalogState().status === 'error' && !this.catalogReady());
+  /** R9 : l'échec se dit toujours (message + Réessayer), les images perso restent affichées dessous. */
+  readonly catalogFailed = computed(() => this.catalogState().status === 'error');
   readonly skeletons = [1, 2, 3, 4, 5, 6];
   /** Le DOM suit tout de suite le clic (aria-expanded lu par les lecteurs d'écran), sans attendre le tick regroupé. */
   toggleFilters(): void {
@@ -620,7 +625,8 @@ export class GalleryComponent {
   private static loadedOk(source: Observable<unknown>) {
     return toSignal(source.pipe(map(() => true), catchError(() => of(false))), { initialValue: false });
   }
-  private readonly catalogOk = computed(() => this.catalogState().status === 'ok');
+  /** R9 : le catalogue a répondu ; faux pendant la lecture et en cas d'échec, même si des images perso sont là. */
+  readonly catalogOk = computed(() => this.catalogState().status === 'ok');
   private readonly factionsOk = GalleryComponent.loadedOk(this.service.factions$);
   /**
    * 2e relecture : toutes les sources qui peuvent rendre une faction valide ou illustrée sont là
@@ -1113,11 +1119,13 @@ export class GalleryComponent {
   /** L49/R6 : le rappel « N résultats » du panneau suit tout de suite le choix (sans attendre le prochain cycle). */
   onCategoryChange(c: string): void {
     this.filterCategory.set(c || null);
+    this.currentPage.set(1);
     this.cdr.detectChanges();
   }
 
   onSortChange(s: SortBy): void {
     this.sortBy.set(s);
+    this.currentPage.set(1);
     this.cdr.detectChanges();
   }
 
