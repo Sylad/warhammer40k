@@ -1,0 +1,8 @@
+{
+  "lot": "L49",
+  "fiche": "docs/specs/galerie-filtres/fiche.yaml",
+  "fichiers": [
+    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts"
+  ],
+  "vert": false
+}
