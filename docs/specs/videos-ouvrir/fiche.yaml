@@ -10,12 +10,13 @@ etats: [charge, carte, vide, chargement, erreur]
 champs:
   - { id: carte-une-faction, libelle: Carte « Vidéo à la une » du bloc Médias d'une page faction (lien vers /videos?video=<id>), type: bouton, source: "faction-media.ts videoForFaction → id", obligatoire: true }
   - { id: carte-repli-faction, libelle: Carte de repli « Vidéos / Voir les vidéos » (lien vers /videos sans paramètre), type: bouton, source: "faction-media.ts : faction sans vidéo", obligatoire: false }
-  - { id: carte-video, libelle: "Carte vidéo de /videos (Incontournables, Toutes les vidéos) : lien <a href=\"/videos?video=<id>\">", type: bouton, source: "GET /api/videos → items[].id", obligatoire: true }
+  - { id: carte-video, libelle: "Carte vidéo de /videos (Incontournables, Toutes les vidéos) : un <article> dont le titre est un lien étiré <a href=\"/videos?video=<id>\"> couvrant toute la carte (::after)", type: bouton, source: "GET /api/videos → items[].id", obligatoire: true }
+  - { id: bouton-supprimer, libelle: "Bouton « Supprimer la vidéo » (✕) des cartes de « Toutes les vidéos » : frère du lien, posé au-dessus de lui", type: bouton, source: "action A6 ; videos.component.ts:273", obligatoire: true }
   - { id: modale-video, libelle: Fenêtre de lecture ouverte sur la vidéo de l'adresse (role=dialog, aria-modal), type: texte, source: "GET /api/videos → vidéo dont id = paramètre video", obligatoire: true }
   - { id: lecteur-video, libelle: Lecteur YouTube intégré (ou repli « Ouvrir sur YouTube »), type: texte, source: "GET /api/videos → embedId, embedType, url", obligatoire: true }
   - { id: titre-video, libelle: Titre de la vidéo ouverte, type: texte, source: "GET /api/videos → titre", obligatoire: true }
   - { id: bouton-fermer, libelle: Bouton Fermer (×), type: bouton, source: statique, obligatoire: true }
-  - { id: liste-videos, libelle: Section « Toutes les vidéos » (rangées et bouton « Charger plus… »), type: liste, source: "GET /api/videos → items", obligatoire: true }
+  - { id: liste-videos, libelle: Section « Toutes les vidéos » (grille de cartes et bouton « Charger plus… »), type: liste, source: "GET /api/videos → items", obligatoire: true }
   - { id: message-chargement, libelle: Message de chargement, type: texte, source: statique, obligatoire: false }
   - { id: message-vide, libelle: Message d'identifiant de vidéo inconnu, type: texte, source: statique, obligatoire: false }
   - { id: message-erreur, libelle: Message d'erreur de chargement, type: texte, source: statique, obligatoire: false }
@@ -64,12 +65,12 @@ regles:
     tests: ["R5 — /videos?video=disparue : message affiché, liste entière, pas de fenêtre", "R5 — /videos sans paramètre : pas de message"]
   - id: R6
     etat: charge
-    enonce: À la fermeture d'une fenêtre ouverte par l'adresse, le focus va au titre h1 de la page (aucun bouton d'origine à retrouver) ; à la fermeture d'une fenêtre ouverte par un clic ou par Entrée, il retourne au lien <a> de la carte activée (carte-video).
+    enonce: À la fermeture d'une fenêtre ouverte par l'adresse, le focus va au titre h1 de la page (aucun bouton d'origine à retrouver) ; à la fermeture d'une fenêtre ouverte par un clic ou par Entrée, il retourne au lien étiré (le <a> du titre) de la carte activée (carte-video).
     message: ~
     champs: [bouton-fermer, carte-video]
     statut: hypothese
     si_faux: Si le focus doit rester où le navigateur le met, seule la gestion du focus à la fermeture change.
-    tests: ["R6 — fermeture après arrivée par adresse : focus sur le h1", "R6 — fermeture après clic ou Entrée : focus sur le lien de la carte"]
+    tests: ["R6 — fermeture après arrivée par adresse : focus sur le h1", "R6 — fermeture après clic ou Entrée : focus sur le lien étiré de la carte"]
   - id: R7
     etat: erreur
     enonce: Si GET /api/videos échoue, la page affiche l'erreur et un bouton « Réessayer » qui rappelle l'API ; aucune fenêtre ne s'ouvre. Aujourd'hui la page n'a aucun état d'erreur (le flux n'en traite pas).
@@ -87,13 +88,13 @@ regles:
     si_faux: Si un autre nom ou une ancre (#video-astartes) est préféré, seul le nom change avant livraison ; après livraison, les liens déjà partagés casseraient.
     tests: ["R8 — ?video= vide : pas de fenêtre, pas de message"]
   - id: R9
-    etat: charge
-    enonce: Chaque carte vidéo de /videos (Incontournables, Toutes les vidéos) est un lien <a href="/videos?video=<id>"> que le clavier atteint (Tab) et qu'Entrée active ; un clic du milieu (ou Ctrl+clic) l'ouvre dans un nouvel onglet sur cette vidéo ; un clic simple ouvre la fenêtre sur place et écrit ?video (R3). Les filtres et « Charger plus… » sont des <button>. Même lien dans l'état vide (R5), pour que l'utilisateur au clavier puisse ouvrir une des vidéos proposées.
+    etat: vide
+    enonce: "Chaque carte vidéo de /videos (Incontournables, Toutes les vidéos) reste un <article> ; son titre est un lien <a href=\"/videos?video=<id>\"> que le clavier atteint (Tab) et qu'Entrée active, étiré sur toute la carte par un ::after en position absolue. Le bouton « Supprimer la vidéo » (✕) des cartes de « Toutes les vidéos » est un frère du lien (jamais son descendant : pas d'interactif imbriqué), au-dessus (position relative, z-index) ; ordre de tabulation : lien puis bouton. Le focus du lien se voit par le contour de la carte (:focus-within). Clic du milieu ou Ctrl+clic : nouvel onglet sur cette vidéo ; clic simple : la fenêtre s'ouvre sur place et écrit ?video (R3) ; clic sur ✕ : supprime sans ouvrir la fenêtre. Les filtres et « Charger plus… » sont des <button>. Même structure dans l'état vide (R5), où le focus sur le lien est dessiné sur la première carte de « Toutes les vidéos »."
     message: ~
-    champs: [carte-video, liste-videos]
+    champs: [carte-video, bouton-supprimer, liste-videos]
     statut: sourcee
-    source: "décision du lead du 2026-10-12 (notes du lot L47) ; WCAG 2.1.1 Clavier"
-    tests: ["R9 — chaque carte est un <a href=\"/videos?video=<id>\"> focusable", "R9 — Entrée sur une carte ouvre la fenêtre et écrit ?video", "R9 — clic du milieu : nouvel onglet sur la vidéo, page courante inchangée", "R9 — état vide : les cartes sont focusables, filtres et « Charger plus… » sont des boutons"]
+    source: "décisions du lead du 2026-10-12 (notes du lot L47, schéma du lien étiré) ; contenu interactif HTML (pas d'élément interactif descendant d'un <a>) ; WCAG 2.1.1 Clavier"
+    tests: ["R9 — chaque carte reste un <article> dont le titre est un <a href=\"/videos?video=<id>\"> focusable", "R9 — le bouton Supprimer est frère du lien, jamais son descendant ; Tab : lien puis bouton", "R9 — le focus du lien dessine le contour de la carte", "R9 — Entrée sur le lien ouvre la fenêtre et écrit ?video", "R9 — clic du milieu : nouvel onglet sur la vidéo, page courante inchangée", "R9 — clic sur ✕ : la vidéo est supprimée, aucune fenêtre ne s'ouvre", "R9 — état vide : cartes focusables, filtres et « Charger plus… » sont des boutons"]
 
 actions:
   - { id: A1, declencheur: ~, appel: "GET /api/videos", regles: [R2, R4, R5, R7] }
@@ -101,3 +102,4 @@ actions:
   - { id: A3, declencheur: bouton-reessayer, appel: "GET /api/videos", regles: [R7] }
   - { id: A4, declencheur: bouton-fermer, appel: "GET /videos", regles: [R3, R6] }
   - { id: A5, declencheur: carte-video, appel: "GET /videos?video=<id>", regles: [R3, R6, R9] }
+  - { id: A6, declencheur: bouton-supprimer, appel: "DELETE /api/videos/:id", regles: [R9] }
