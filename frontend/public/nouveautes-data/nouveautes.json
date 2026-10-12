@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-12 21:08",
+  "generated": "2026-10-12 23:29",
   "entries": [
+    {
+      "slug": "2026-10-12-galerie-textes-et-bouton-importer-lisibles-sur-une-image-d-e",
+      "title": "Galerie : textes et bouton Importer lisibles sur une image d'en-tête claire",
+      "date": "2026-10-12",
+      "lots": [
+        "L53"
+      ],
+      "captures": [
+        "captures/L53-galerie-bandeau-image-claire.png"
+      ],
+      "alts": [
+        "Le bandeau de la galerie sur une fiche technique claire : surtitre, description et bouton Importer se lisent nettement sur le fond assombri"
+      ],
+      "html": "<p>Dans la galerie, l’image d’en-tête est désormais recouverte d’un voile sombre. Quand l’image choisie est très claire, le surtitre « Codex visuel du 41e millénaire », la description et le bouton « Importer » restent lisibles (au moins 4,5:1 de contraste, vérifié sur une image blanche et sur une vraie fiche technique claire). L’image reste visible, simplement plus sombre.</p>"
+    },
     {
       "slug": "2026-10-12-medias-la-carte-video-a-la-une-ouvre-directement-cette-video",
       "title": "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo",
