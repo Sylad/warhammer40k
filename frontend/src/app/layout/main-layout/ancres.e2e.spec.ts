@@ -185,7 +185,9 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
         expect(m.bar).toBeGreaterThan(0);
         expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeGreaterThanOrEqual(0);
         if (!m.bottom) expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeLessThanOrEqual(40);
-      });
+        // L47 : la mesure attend 700 ms de stabilité (10 s au plus) après des polices retardées de 400 ms :
+        // le délai par défaut de 5 s expirait au hasard de la charge de la machine.
+      }, 30_000);
     }
   }
 });
