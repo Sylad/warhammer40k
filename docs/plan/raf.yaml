@@ -269,6 +269,8 @@ lots:
     screen: page
     created: 2026-10-02
     started: 2026-10-11
+    notes:
+      - { date: 2026-10-12, text: "DÉCISION LEAD 11-10 (rendu « maquette non conforme après 2 revues » : « Jeux vidéo » déborde de 15 à 54 px dans la barre compacte au seuil 80em) — lien de 1er niveau entre Vidéos et Galerie (R5 inchangée) ; le seuil du tiroir monte à la largeur MESURÉE où la barre complète tient (~84em au lieu de 80em) : main-layout.component.ts (@media (width < 80em)) et mesure par topbar.e2e.spec.ts. Écrire ce choix en HYPOTHÈSE de la fiche (statut hypothese, si_faux : menu « Médias ▾ » regroupant Vidéos, Jeux vidéo, Galerie). Écartés : menu Médias ▾ (restructuration hors lot), rangement dans « À propos ▾ » (faux sur le fond)." }
   - id: L36
     title: "Titre de page par route (WCAG 2.4.2) : toutes les routes s'appellent « Warhammer 40 000 — Codex Numérique » (revue UX L30)"
     status: done
