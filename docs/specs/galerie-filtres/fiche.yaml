@@ -21,6 +21,8 @@ champs:
   - { id: resultats-statut, libelle: Nombre de résultats annoncé (role=status), type: texte, source: "GET /api/artworks → total filtré", obligatoire: true }
   - { id: grille-oeuvres, libelle: Grille des œuvres, type: liste, source: "GET /api/artworks → items", obligatoire: true }
   - { id: message-vide, libelle: Message « aucune œuvre », type: texte, source: statique, obligatoire: false }
+  - { id: rappel-vide, libelle: Rappel « Aucune œuvre ne correspond » sous la recherche (téléphone), type: texte, source: statique, obligatoire: false }
+  - { id: bouton-reinitialiser-rappel, libelle: Bouton « Réinitialiser les filtres » du rappel (téléphone), type: bouton, source: statique, obligatoire: false }
   - { id: message-chargement, libelle: Message de chargement, type: texte, source: statique, obligatoire: false }
   - { id: message-erreur, libelle: Message d'erreur de chargement, type: texte, source: statique, obligatoire: false }
   - { id: bouton-reessayer, libelle: Réessayer, type: bouton, source: "action A2", obligatoire: false }
@@ -115,7 +117,15 @@ regles:
     statut: hypothese
     si_faux: Si le bouton doit aussi exister sur tablette, seul le seuil d'affichage du bouton change.
     tests: ["R11 — 900 px : panneau ouvert avant les catégories, pas de bouton Filtres"]
+  - id: R12
+    etat: vide
+    enonce: "À 390 px (760 px et moins), quand les filtres ne laissent aucune œuvre, le rappel « Aucune œuvre ne correspond » apparaît sous la recherche, dans la rangée du bandeau, avec l'action « Réinitialiser les filtres » (cible tactile d'au moins 44 px) ; il est visible dans le premier écran, au-dessus de la barre du bas (mesuré dans la maquette : y = 514 à 599 px pour un écran de 844 px), que le panneau soit ouvert ou non. Il n'existe pas au-dessus de 760 px, où le message de R7 est déjà dans la page. Réinitialiser remet Toutes partout et rend la grille."
+    message: "Aucune œuvre ne correspond"
+    champs: [rappel-vide, bouton-reinitialiser-rappel]
+    statut: sourcee
+    source: "décision du lead du 2026-10-12 (note de L49, rendu « maquette non conforme après 2 revues ») ; revue UX : Nielsen 1 et 9"
+    tests: ["R12 — 390 px, filtres sans résultat : « Aucune œuvre ne correspond » visible, bas du rappel à moins de 844 px du haut de la page", "R12 — 390 px : « Réinitialiser les filtres » visible dans le même écran, cible d'au moins 44 px", "R12 — Réinitialiser les filtres remet Toutes et rend la grille", "R12 — 761 px et plus : rappel absent"]
 
 actions:
-  - { id: A1, declencheur: ~, appel: "GET /api/artworks", regles: [R1, R2, R7, R8, R9, R10, R11] }
+  - { id: A1, declencheur: ~, appel: "GET /api/artworks", regles: [R1, R2, R7, R12, R8, R9, R10, R11] }
   - { id: A2, declencheur: bouton-reessayer, appel: "GET /api/artworks", regles: [R9] }
