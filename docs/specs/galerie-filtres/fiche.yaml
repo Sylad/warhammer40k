@@ -17,6 +17,7 @@ champs:
   - { id: filtre-tri, libelle: Liste Trier par, type: liste, source: statique, obligatoire: true }
   - { id: bouton-reinitialiser, libelle: Bouton « Réinitialiser » du panneau, type: bouton, source: statique, obligatoire: false }
   - { id: mise-en-page, libelle: Mise en page (panneau Filtres, grille, colonne de droite), type: texte, source: statique, obligatoire: true }
+  - { id: resultats-panneau, libelle: Rappel visible du nombre de résultats au bas du panneau (téléphone, sans région live), type: texte, source: "GET /api/artworks → total filtré", obligatoire: false }
   - { id: resultats-statut, libelle: Nombre de résultats annoncé (role=status), type: texte, source: "GET /api/artworks → total filtré", obligatoire: true }
   - { id: grille-oeuvres, libelle: Grille des œuvres, type: liste, source: "GET /api/artworks → items", obligatoire: true }
   - { id: message-vide, libelle: Message « aucune œuvre », type: texte, source: statique, obligatoire: false }
@@ -67,12 +68,12 @@ regles:
     tests: ["R5 — ouvert : panneau entre le bandeau et les catégories", "R5 — 390 px : pastilles de statistiques masquées, haut du panneau à moins de 80 px sous le bouton", "R5 — un filtre actif : pastille 1 sur le bouton", "R5 — aucun filtre : pas de pastille"]
   - id: R6
     etat: filtres-ouverts
-    enonce: Choisir une valeur dans une liste met la grille à jour sans refermer le panneau ni déplacer le focus ; le nombre de résultats est annoncé dans la région d'état persistante.
+    enonce: Choisir une valeur dans une liste met la grille à jour sans refermer le panneau ni déplacer le focus ; le nombre de résultats est annoncé dans la région d'état persistante. À 390 px, où la grille est hors de l'écran, le bas du panneau (sous Trier par) répète le même texte en ligne visible (aria-hidden, aucune seconde région live), pour que le filtre appliqué se voie sans quitter le panneau.
     message: "6 résultats"
-    champs: [filtre-faction, filtre-categorie, filtre-tri, resultats-statut, grille-oeuvres, bouton-reinitialiser]
+    champs: [filtre-faction, filtre-categorie, filtre-tri, resultats-statut, resultats-panneau, grille-oeuvres, bouton-reinitialiser]
     statut: sourcee
     source: "comportement codé gallery.component.ts:129-137 (role=status, L45/t4, WCAG 4.1.3) et :192-222 (filtres) ; la tenue du panneau ouvert est une hypothèse prolongeant R5"
-    tests: ["R6 — Faction Space Marines : « 6 résultats » annoncé, panneau toujours ouvert", "R6 — le focus reste sur la liste choisie", "R6 — Réinitialiser remet Toutes et lève la pastille"]
+    tests: ["R6 — Faction Space Marines : « 6 résultats » annoncé, panneau toujours ouvert", "R6 — 390 px : « 6 résultats » visible dans le panneau, sous Trier par, sans défilement vers la grille", "R6 — une seule région role=status porte le total (le rappel du panneau est aria-hidden)", "R6 — 761 px et plus : rappel du panneau absent", "R6 — le focus reste sur la liste choisie", "R6 — Réinitialiser remet Toutes et lève la pastille"]
   - id: R7
     etat: vide
     enonce: Si les filtres ne laissent aucune œuvre, la grille est remplacée par le message d'état vide ; le panneau Filtres reste utilisable et son « Réinitialiser » est visible.
