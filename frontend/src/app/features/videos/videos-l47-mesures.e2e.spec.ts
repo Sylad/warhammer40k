@@ -66,6 +66,22 @@ describe.skipIf(!built || stale || !chromium)('L47 — mesures de la page /video
     }
   });
 
+  it('R2 — le bouton Fermer ne recouvre pas le lecteur (390 et 1440 px), 44 px minimum', async () => {
+    for (const width of [390, 1440]) {
+      const page = await open(width, '/videos?video=astartes');
+      const m = await page.evaluate(() => {
+        const c = document.querySelector('[data-testid="bouton-fermer"]')!.getBoundingClientRect();
+        const p = document.querySelector('.modal-player')!.getBoundingClientRect();
+        return { w: c.width, h: c.height, top: c.top, cb: c.bottom, pt: p.top, pl: p.left, pr: p.right, cl: c.left, cr: c.right };
+      });
+      expect(m.cb).toBeLessThanOrEqual(m.pt);
+      expect(m.top).toBeGreaterThanOrEqual(0);
+      expect(Math.min(m.w, m.h)).toBeGreaterThanOrEqual(44);
+      expect(m.cr).toBeLessThanOrEqual(m.pr + 1);
+      await page.close();
+    }
+  });
+
   it('R5 — à 390 px, le message d\'identifiant inconnu est dans le premier écran', async () => {
     const page = await open(390, '/videos?video=disparue');
     const top = await page.locator('[data-testid="message-vide"]').evaluate((e) => e.getBoundingClientRect().top);
