@@ -861,7 +861,7 @@
     /* RESPONSIVE */
     @media (max-width: 1280px) {
       .layout { grid-template-columns: 1fr; }
-      .sidebar { position: relative; top: auto; }
+      .sidebar { position: relative; top: auto; max-height: none; overflow-y: visible; }
       .hero-text { max-width: 80%; }
     }
     @media (max-width: 900px) {
