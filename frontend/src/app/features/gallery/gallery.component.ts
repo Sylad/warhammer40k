@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject, signal, computed, effect, HostListener } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, signal, computed, effect, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -163,7 +163,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <!-- CATEGORIES -->
           <section class="section">
             <h2 class="section-title">Parcourir par catégorie</h2>
-            <div class="category-grid">
+            <div class="category-grid" [class.attente]="!catalogReady()">
               @if (catalogReady()) {
                 @for (cat of availableCategories(); track cat.key) {
                   <button class="category-card"
@@ -560,6 +560,7 @@ export class GalleryComponent {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   /** Anti-rebond de la réécriture de ?q= pendant la frappe (une navigation, pas une par touche). */
   private searchTimer: ReturnType<typeof setTimeout> | undefined;
   /** Dernière adresse écrite par syncUrl() (pour reconnaître son écho dans queryParamMap). */
@@ -959,6 +960,16 @@ export class GalleryComponent {
   readonly pageRangeEnd = computed(() => Math.min(this.currentPage() * PAGE_SIZE, this.totalFiltered()));
 
   constructor() {
+    // L49/R2 : au bureau le panneau Filtres reste collé en haut (sticky) sur toute la hauteur de la colonne de
+    // droite ; la rangée « filtres » de la grille prend sa hauteur (--filtres-h) pour que les Artistes la suivent.
+    afterNextRender(() => {
+      const layout = this.host.nativeElement.querySelector<HTMLElement>('.layout');
+      const panel = this.host.nativeElement.querySelector<HTMLElement>('#panneau-filtres');
+      if (!layout || !panel || typeof ResizeObserver === 'undefined') return;
+      const ro = new ResizeObserver(() => layout.style.setProperty('--filtres-h', `${panel.offsetHeight}px`));
+      ro.observe(panel);
+      this.destroyRef.onDestroy(() => ro.disconnect());
+    });
     // L42 : ?q= (alias historique ?search=, liens des pages Lore) et ?faction=<id> (carte
     // « Galerie » des pages faction) SUIVENT l'adresse : paramètre absent → recherche vide / plus
     // de filtre (composant réutilisé de /gallery?faction=x à /gallery : le filtre restait collé).
