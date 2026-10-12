@@ -115,7 +115,7 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 
 ## Jeux vidéo (L35)
 
-`/jeux-video` lit `frontend/public/jeux-data/jeux.json` (versionné, `verifieLe` = date de vérification en ligne). `aVenir[].sortie` est affichée telle quelle (jour, mois, trimestre, année) suivie de « annoncée », `null` → « Date non communiquée » : **jamais de date devinée**. Mettre à jour le fichier à partir de sources en ligne et changer `verifieLe`.
+`/jeux-video` lit `frontend/public/jeux-data/jeux.json` (versionné, `verifieLe` = date de vérification en ligne). `aVenir[].sortie` est affichée telle quelle (jour, mois, trimestre, année) suivie de « annoncée », `null` → « Date non communiquée » : **jamais de date devinée**. Bascule automatique : `repartirJeux` (`jeux-video.component.ts`) fait passer un jeu à venir dont le **jour complet** annoncé est atteint (horloge `JEUX_VIDEO_NOW`, horloge réelle par défaut, figée au 2026-10-12 sous TestBed) en tête de « Déjà sortis » (année seule, résumé d'annonce) ; une date imprécise (mois, trimestre, année) ne bascule jamais. Quand un jeu est sorti, le déplacer de `aVenir` vers `existants` dans `jeux.json` avec son vrai résumé et ses plateformes, à partir de sources en ligne, et changer `verifieLe`.
 
 ## Données seed
 
