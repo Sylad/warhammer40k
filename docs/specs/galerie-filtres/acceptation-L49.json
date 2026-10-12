@@ -4,7 +4,7 @@
   "fichiers": [
     "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts"
   ],
-  "vert": false,
+  "vert": true,
   "empreintes": {
     "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "5355d61e935ac80e7a93f19b71633f5b50d62fcc"
   },
