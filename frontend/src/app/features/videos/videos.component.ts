@@ -70,7 +70,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
         </div>
       } @else if (waitingForVideo()) {
         <div class="msg info" role="status" data-testid="message-chargement">Chargement de la vidéo…</div>
-        <div class="featured-grid" aria-hidden="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+        <div class="featured-grid attente" aria-hidden="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
       } @else {
       @if (unknownVideo()) {
         <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
