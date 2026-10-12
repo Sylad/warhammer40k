@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { ImperialOrganization, ImperialOrgCategory, ImperialOrgFigure } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<ImperialOrgCategory, string> = {
   governance: 'Gouvernance',
@@ -27,7 +28,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
 @Component({
   selector: 'app-lore-civilians',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -49,6 +50,10 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
         </div>
       </div>
     </section>
+
+    @if (orgs.failed()) {
+      <app-load-error (retry)="orgs.retry()" />
+    }
 
     <section class="filters">
       <button class="filter" [class.active]="filterCategory() === 'all'" (click)="setFilter('all')">
@@ -150,7 +155,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
 })
 export class LoreCiviliansComponent {
   private readonly service = inject(WarhammerService);
-  readonly orgs = toSignal(this.service.imperialOrgs$, { initialValue: [] as ImperialOrganization[] });
+  readonly orgs = toSafeSignal(this.service.imperialOrgs$, [] as ImperialOrganization[]);
   readonly filterCategory = signal<'all' | ImperialOrgCategory>('all');
   readonly orgImages = signal<Map<string, string>>(new Map());
   readonly figureImages = signal<Map<string, string>>(new Map());

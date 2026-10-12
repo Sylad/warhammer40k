@@ -1,11 +1,12 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Equipment, EquipmentType } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Arme à distance',
@@ -17,7 +18,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
 @Component({
   selector: 'app-equipment-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (equipment(); as e) {
       <a class="back-btn" routerLink="/lore/equipment">← RETOUR À L'ARSENAL</a>
@@ -104,6 +105,8 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
           <a class="cta" routerLink="/lore/equipment">VOIR TOUT L'ARSENAL</a>
         </aside>
       </section>
+    } @else if (equipment.failed()) {
+      <app-load-error (retry)="equipment.retry()" />
     } @else {
       <div class="loading"><p>Chargement de l'équipement...</p></div>
     }
@@ -117,9 +120,8 @@ export class EquipmentDetailComponent {
 
   readonly heroImage = signal<string | null>(null);
 
-  readonly equipment = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getEquipmentItem(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
-  );
+  readonly equipment = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getEquipmentItem(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
 
   constructor() {
     effect(() => {

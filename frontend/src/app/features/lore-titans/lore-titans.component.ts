@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { GodMachine, GodMachineCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<GodMachineCategory, string> = {
   titan: 'Titans',
@@ -15,7 +16,7 @@ const CATEGORY_LABEL: Record<GodMachineCategory, string> = {
 @Component({
   selector: 'app-lore-titans',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-btn" routerLink="/lore">← RETOUR AU CODEX</a>
 
@@ -33,6 +34,10 @@ const CATEGORY_LABEL: Record<GodMachineCategory, string> = {
         <button [class.active]="filter() === 'war-machine'" (click)="filter.set('war-machine')">Walkers</button>
       </div>
     </header>
+
+    @if (machines.failed()) {
+      <app-load-error (retry)="machines.retry()" />
+    }
 
     <section class="grid">
       @for (m of filtered(); track m.id) {
@@ -59,7 +64,7 @@ const CATEGORY_LABEL: Record<GodMachineCategory, string> = {
 export class LoreTitansComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly machines = toSignal(this.service.godMachines$, { initialValue: [] as GodMachine[] });
+  readonly machines = toSafeSignal(this.service.godMachines$, [] as GodMachine[]);
   readonly filter = signal<'all' | GodMachineCategory>('all');
   readonly machineImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);

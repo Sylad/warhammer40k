@@ -1,14 +1,15 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { combineLatest, map, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 @Component({
   selector: 'app-lore-emperor',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -62,6 +63,8 @@ import { WarhammerService } from '../../core/services/warhammer.service';
           <a routerLink="/lore/primarchs" class="cta-link">Voir les vingt Primarques →</a>
         </div>
       </section>
+    } @else if (emperor.failed()) {
+      <app-load-error (retry)="emperor.retry()" />
     } @else {
       <div class="loading">Chargement des archives sacrées…</div>
     }
@@ -71,7 +74,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 export class LoreEmperorComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly emperor = toSignal(this.service.emperor$);
+  readonly emperor = toSafeSignal(this.service.emperor$, undefined);
 
   readonly heroBg = signal<string>('');
   readonly sectionImages = signal<Map<number, string>>(new Map());

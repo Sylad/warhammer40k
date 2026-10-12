@@ -1,11 +1,12 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Saint, SaintCategory } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
   'living-saint': 'Sainte Vivante',
@@ -16,7 +17,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 @Component({
   selector: 'app-saint-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (saint(); as s) {
       <a class="back-btn" routerLink="/lore/saints">← RETOUR AUX SAINTS</a>
@@ -118,6 +119,8 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
           <a class="cta" routerLink="/lore/saints">VOIR TOUS LES SAINTS</a>
         </aside>
       </section>
+    } @else if (saint.failed()) {
+      <app-load-error (retry)="saint.retry()" />
     } @else {
       <div class="loading"><p>Chargement du Saint...</p></div>
     }
@@ -132,9 +135,8 @@ export class SaintDetailComponent {
   readonly heroImage = signal<string | null>(null);
   readonly galleryImages = signal<string[]>([]);
 
-  readonly saint = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getSaint(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
-  );
+  readonly saint = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getSaint(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
 
   constructor() {
     effect(() => {

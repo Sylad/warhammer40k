@@ -2,8 +2,8 @@ import { Component, computed, EventEmitter, HostListener, inject, Output, signal
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { WarhammerService } from '../../../core/services/warhammer.service';
+import { toSafeSignal } from '../../safe-signal';
 
 interface SearchResult {
   type: 'faction' | 'subfaction' | 'unit' | 'primarch' | 'saint' | 'ship' | 'titan' | 'event' | 'equipment' | 'concept' | 'org' | 'page';
@@ -186,13 +186,13 @@ export class CommandPaletteComponent {
   readonly selectedIndex = signal(0);
 
   // Load all searchable data once
-  private readonly factions = toSignal(this.service.factions$, { initialValue: [] });
-  private readonly primarchs = toSignal(this.service.primarchs$, { initialValue: [] });
-  private readonly saints = toSignal(this.service.saints$, { initialValue: [] });
-  private readonly ships = toSignal(this.service.ships$, { initialValue: [] });
-  private readonly titans = toSignal(this.service.godMachines$, { initialValue: [] });
-  private readonly equipment = toSignal(this.service.equipment$, { initialValue: [] });
-  private readonly events = toSignal(this.service.timelineEvents$, { initialValue: [] });
+  private readonly factions = toSafeSignal(this.service.factions$, []);
+  private readonly primarchs = toSafeSignal(this.service.primarchs$, []);
+  private readonly saints = toSafeSignal(this.service.saints$, []);
+  private readonly ships = toSafeSignal(this.service.ships$, []);
+  private readonly titans = toSafeSignal(this.service.godMachines$, []);
+  private readonly equipment = toSafeSignal(this.service.equipment$, []);
+  private readonly events = toSafeSignal(this.service.timelineEvents$, []);
 
   readonly results = computed(() => {
     const q = this.queryS().toLowerCase().trim();

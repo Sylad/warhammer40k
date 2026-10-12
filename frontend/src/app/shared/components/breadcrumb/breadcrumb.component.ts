@@ -1,10 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs/operators';
 import { Crumb, crumbsFor, pagePaths } from './breadcrumb.utils';
 import { PageTitleService } from '../../../core/services/page-title.service';
+import { toSafeSignal } from '../../safe-signal';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -74,14 +74,12 @@ export class BreadcrumbComponent {
   private readonly router = inject(Router);
   private readonly pages = inject(PageTitleService);
 
-  private readonly url = toSignal(
+  private readonly url = toSafeSignal(
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd),
       map(e => (e as NavigationEnd).urlAfterRedirects),
       startWith(this.router.url),
-    ),
-    { initialValue: this.router.url },
-  );
+    ), this.router.url);
 
   /** Chemins des pages (enfants de la mise en page, redirections exclues). */
   private readonly isPage = pagePaths(

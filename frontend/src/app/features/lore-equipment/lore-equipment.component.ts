@@ -1,11 +1,12 @@
 import { Component, computed, inject, signal, effect } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Equipment, EquipmentType, Faction } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Armes à distance',
@@ -31,7 +32,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
 @Component({
   selector: 'app-lore-equipment',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -55,6 +56,10 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
         </div>
       </div>
     </section>
+
+    @if (items.failed()) {
+      <app-load-error (retry)="items.retry()" />
+    }
 
     <section class="filters">
       <div class="filter-row">
@@ -148,8 +153,8 @@ export class LoreEquipmentComponent {
 
   readonly typeKeys: EquipmentType[] = ['ranged', 'melee', 'armor', 'relic'];
 
-  readonly items = toSignal(this.service.equipment$, { initialValue: [] as Equipment[] });
-  readonly factions = toSignal(this.service.factions$, { initialValue: [] as Faction[] });
+  readonly items = toSafeSignal(this.service.equipment$, [] as Equipment[]);
+  readonly factions = toSafeSignal(this.service.factions$, [] as Faction[]);
 
   readonly filterType = signal<'all' | EquipmentType>('all');
   readonly filterFaction = signal<string>('all');

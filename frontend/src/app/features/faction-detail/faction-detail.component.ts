@@ -1,5 +1,4 @@
 import { afterNextRender, Component, computed, DestroyRef, effect, ElementRef, inject, Injector, signal, untracked } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -10,6 +9,8 @@ import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/
 import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
 import { longestWord } from '../../shared/longest-word';
 import { artworkForFaction, videoForFaction } from './faction-media';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -72,7 +73,7 @@ const DEFAULT_RESOURCES = [
 @Component({
   selector: 'app-faction-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (faction(); as f) {
       <a class="back-btn" routerLink="/factions">← RETOUR AUX FACTIONS</a>
@@ -441,6 +442,8 @@ const DEFAULT_RESOURCES = [
           }
         </aside>
       </section>
+    } @else if (faction.failed()) {
+      <app-load-error (retry)="faction.retry()" />
     } @else {
       <div class="loading">
         <p>Chargement de la faction...</p>
@@ -481,17 +484,12 @@ export class FactionDetailComponent {
       + ses 26 successeurs). */
   readonly subFactionSearch = signal('');
 
-  readonly faction = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!).pipe(namedPage(this.pages, f => f.nom))))
-  );
-  readonly units = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getUnits(p.get('id')!))),
-    { initialValue: [] as Unit[] }
-  );
-  readonly subFactions = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getSubFactions(p.get('id')!))),
-    { initialValue: [] as SubFaction[] }
-  );
+  readonly faction = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!).pipe(namedPage(this.pages, f => f.nom)))), undefined);
+  readonly units = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getUnits(p.get('id')!))), [] as Unit[]);
+  readonly subFactions = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getSubFactions(p.get('id')!))), [] as SubFaction[]);
   readonly subFactionImages = signal(new Map<string, string>());
   readonly primarchImages = signal(new Map<string, string>());
 
@@ -592,8 +590,8 @@ export class FactionDetailComponent {
     const url = this.subFactionImages().get(id);
     return url ? `url('${url}')` : null;
   }
-  readonly videos = toSignal(this.service.videos$, { initialValue: [] });
-  readonly artworks = toSignal(this.service.artworks$, { initialValue: [] });
+  readonly videos = toSafeSignal(this.service.videos$, []);
+  readonly artworks = toSafeSignal(this.service.artworks$, []);
 
   readonly visibleUnits = computed(() => {
     const t = this.typeFilter();

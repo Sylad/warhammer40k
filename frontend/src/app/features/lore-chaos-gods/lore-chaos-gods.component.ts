@@ -1,15 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { ChaosGod, ChaosGodDaemon } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 @Component({
   selector: 'app-lore-chaos-gods',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -33,6 +34,10 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
         </div>
       </div>
     </section>
+
+    @if (gods.failed()) {
+      <app-load-error (retry)="gods.retry()" />
+    }
 
     @for (god of gods(); track god.id) {
       <article class="god" [id]="god.id" [style.--god-color]="god.color">
@@ -145,7 +150,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
 })
 export class LoreChaosGodsComponent {
   private readonly service = inject(WarhammerService);
-  readonly gods = toSignal(this.service.chaosGods$, { initialValue: [] as ChaosGod[] });
+  readonly gods = toSafeSignal(this.service.chaosGods$, [] as ChaosGod[]);
   readonly godImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
 

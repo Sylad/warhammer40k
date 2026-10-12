@@ -1,11 +1,12 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { TimelineEvent, TimelineEra } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const ERA_LABEL: Record<TimelineEra, string> = {
   'pre-imperium': 'Pré-Imperium',
@@ -19,7 +20,7 @@ const ERA_LABEL: Record<TimelineEra, string> = {
 @Component({
   selector: 'app-timeline-event-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (event(); as e) {
       <a class="back-btn" routerLink="/lore/timeline">← RETOUR À LA CHRONOLOGIE</a>
@@ -76,6 +77,8 @@ const ERA_LABEL: Record<TimelineEra, string> = {
           <a class="cta" routerLink="/lore/timeline">RETOUR CHRONOLOGIE</a>
         </aside>
       </section>
+    } @else if (event.failed()) {
+      <app-load-error (retry)="event.retry()" />
     } @else {
       <div class="loading"><p>Chargement de l'événement...</p></div>
     }
@@ -89,9 +92,8 @@ export class TimelineEventDetailComponent {
 
   readonly heroImage = signal<string | null>(null);
 
-  readonly event = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getTimelineEvent(p.get('id')!).pipe(namedPage(this.pages, x => x.title)))),
-  );
+  readonly event = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getTimelineEvent(p.get('id')!).pipe(namedPage(this.pages, x => x.title)))), undefined);
 
   constructor() {
     effect(() => {

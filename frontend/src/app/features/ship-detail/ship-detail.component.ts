@@ -1,16 +1,17 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { LegendaryShip } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 @Component({
   selector: 'app-ship-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (ship(); as s) {
       <a class="back-btn" routerLink="/lore/ships">← RETOUR AUX VAISSEAUX</a>
@@ -128,6 +129,8 @@ import type { LegendaryShip } from '../../core/models/models';
           <a class="cta" routerLink="/lore/ships">VOIR TOUS LES VAISSEAUX</a>
         </aside>
       </section>
+    } @else if (ship.failed()) {
+      <app-load-error (retry)="ship.retry()" />
     } @else {
       <div class="loading"><p>Chargement du vaisseau...</p></div>
     }
@@ -142,9 +145,8 @@ export class ShipDetailComponent {
   readonly heroImage = signal<string | null>(null);
   readonly galleryImages = signal<string[]>([]);
 
-  readonly ship = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getShip(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
-  );
+  readonly ship = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getShip(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
 
   constructor() {
     effect(() => {

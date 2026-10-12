@@ -2,12 +2,12 @@ import { notableCards } from './notable-units';
 import { Component, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, map, of, catchError, combineLatest } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { longestWord } from '../../shared/longest-word';
 import type { SubFaction, SubFactionType, Unit, Faction } from '../../core/models/models';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const TYPE_LABEL: Record<SubFactionType, string> = {
   chapter: 'Chapitre',
@@ -219,7 +219,7 @@ export class SubFactionDetailComponent {
   readonly notFound = signal(false);
   readonly loading = signal(true);
 
-  readonly data = toSignal(
+  readonly data = toSafeSignal(
     this.route.params.pipe(
       switchMap(params => {
         const id = params['id'];
@@ -249,9 +249,7 @@ export class SubFactionDetailComponent {
           }),
         );
       }),
-    ),
-    { initialValue: null },
-  );
+    ), null);
 
   constructor() {
     effect(() => {

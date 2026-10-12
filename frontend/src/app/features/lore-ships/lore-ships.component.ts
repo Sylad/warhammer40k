@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { LegendaryShip } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const ALIGNMENT_BY_FACTION: Record<string, string> = {
   'space-marines': 'Imperium',
@@ -29,7 +30,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
 @Component({
   selector: 'app-lore-ships',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-btn" routerLink="/lore">← RETOUR AU CODEX</a>
 
@@ -47,6 +48,10 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
         <button [class.active]="filter() === 'Xenos'" (click)="filter.set('Xenos')">Xenos</button>
       </div>
     </header>
+
+    @if (ships.failed()) {
+      <app-load-error (retry)="ships.retry()" />
+    }
 
     <section class="grid">
       @for (s of filtered(); track s.id) {
@@ -73,7 +78,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
 export class LoreShipsComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly ships = toSignal(this.service.ships$, { initialValue: [] as LegendaryShip[] });
+  readonly ships = toSafeSignal(this.service.ships$, [] as LegendaryShip[]);
   readonly filter = signal<'all' | 'Imperium' | 'Chaos' | 'Xenos'>('all');
   readonly shipImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);

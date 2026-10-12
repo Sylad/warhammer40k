@@ -1,5 +1,4 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -7,6 +6,8 @@ import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, Artwork } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 type TabKey = 'apercu' | 'equipement' | 'lore' | 'variantes';
 
@@ -33,7 +34,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 @Component({
   selector: 'app-unit-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (unit(); as u) {
       @if (faction(); as f) {
@@ -301,6 +302,8 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
       } @else {
         <div class="loading"><p>Chargement de la faction...</p></div>
       }
+    } @else if (unit.failed()) {
+      <app-load-error (retry)="unit.retry()" />
     } @else {
       <div class="loading"><p>Chargement de l'unité...</p></div>
     }
@@ -332,22 +335,22 @@ export class UnitDetailComponent {
 
   // Catalog artworks (shared replay) — utilisé par la sidebar "Galerie liée"
   // pour proposer les œuvres de la même faction que l'unit courant.
-  private readonly allArtworks = toSignal(this.service.artworks$, { initialValue: [] as Artwork[] });
+  private readonly allArtworks = toSafeSignal(this.service.artworks$, [] as Artwork[]);
   // Cache des URLs résolues via wiki pour les artworks de la sidebar.
   readonly artworkImageCache = signal(new Map<string, string>());
 
-  readonly unit = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)))),
-  );
+  readonly unit = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)))), undefined);
 
-  readonly faction = toSignal<Faction | undefined>(
+  readonly faction = toSafeSignal<Faction | undefined, undefined>(
     this.route.paramMap.pipe(
       switchMap(p => this.service.getUnit(p.get('id')!)),
       switchMap(u => u ? this.service.getFaction(u.factionId) : of(undefined)),
     ),
+    undefined,
   );
 
-  readonly relatedUnits = toSignal(
+  readonly relatedUnits = toSafeSignal(
     this.route.paramMap.pipe(
       switchMap(p => this.service.getUnit(p.get('id')!)),
       switchMap(u => {
@@ -359,9 +362,7 @@ export class UnitDetailComponent {
           switchMap(list => of(list.filter(x => x.id !== u.id).slice(0, 4))),
         );
       }),
-    ),
-    { initialValue: [] as Unit[] },
-  );
+    ), [] as Unit[]);
 
   /** Œuvres du catalog de la faction courante — sidebar "Galerie liée". */
   readonly factionArtworks = computed<Artwork[]>(() => {

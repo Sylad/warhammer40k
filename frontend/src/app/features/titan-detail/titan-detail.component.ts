@@ -1,16 +1,17 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { GodMachine } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 @Component({
   selector: 'app-titan-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (machine(); as m) {
       <a class="back-btn" routerLink="/lore/titans">← RETOUR AUX DIEUX-MACHINES</a>
@@ -110,6 +111,8 @@ import type { GodMachine } from '../../core/models/models';
           <a class="cta" routerLink="/lore/titans">VOIR TOUS LES DIEUX-MACHINES</a>
         </aside>
       </section>
+    } @else if (machine.failed()) {
+      <app-load-error (retry)="machine.retry()" />
     } @else {
       <div class="loading"><p>Chargement...</p></div>
     }
@@ -125,12 +128,11 @@ export class TitanDetailComponent {
   readonly galleryImages = signal<string[]>([]);
 
   /** L39 : on ne lie que les factions qui ont une fiche (« imperial-knights » n'en a pas). */
-  private readonly factions = toSignal(this.service.factions$, { initialValue: [] });
+  private readonly factions = toSafeSignal(this.service.factions$, []);
   readonly factionIds = computed(() => new Set(this.factions().map(f => f.id)));
 
-  readonly machine = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getGodMachine(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
-  );
+  readonly machine = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getGodMachine(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
 
   constructor() {
     effect(() => {

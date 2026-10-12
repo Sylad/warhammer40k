@@ -2,9 +2,10 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { TimelineEra, TimelineEvent } from '../../core/models/models';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 interface EraDef {
   id: TimelineEra;
@@ -85,14 +86,14 @@ const TAG_LABEL: Record<string, string> = {
 @Component({
   selector: 'app-lore-timeline',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, LoadErrorComponent],
   templateUrl: './lore-timeline.component.html',
   styleUrls: ['./lore-timeline.component.scss'],
 })
 export class LoreTimelineComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly events = toSignal(this.service.timelineEvents$, { initialValue: [] as TimelineEvent[] });
+  readonly events = toSafeSignal(this.service.timelineEvents$, [] as TimelineEvent[]);
 
   readonly filterEra = signal<'all' | TimelineEra>('all');
   readonly filterTag = signal<string>('all');

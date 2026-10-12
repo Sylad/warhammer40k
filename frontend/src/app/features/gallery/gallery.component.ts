@@ -1,5 +1,6 @@
 import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, signal, computed, effect, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { toSafeSignal } from '../../shared/safe-signal';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
@@ -609,10 +610,10 @@ export class GalleryComponent {
   /** L49 : panneau Filtres déplié (téléphone ; au-dessus de 760 px il est toujours affiché). */
   readonly filtersOpen = signal(false);
   private readonly localImages = toSignal(this.service.images$.pipe(catchError(() => of([] as string[]))), { initialValue: [] as string[] });
-  readonly collections = toSignal(this.service.artworkCollections$, { initialValue: [] as ArtworkCollection[] });
+  readonly collections = toSafeSignal(this.service.artworkCollections$, [] as ArtworkCollection[]);
   /** L64 : une collection à 0 œuvre est une impasse (filtre → grille vide) — jamais proposée ni comptée. */
   readonly nonEmptyCollections = computed(() => this.collections().filter((c) => c.count > 0));
-  readonly artists = toSignal(this.service.artworkArtists$, { initialValue: [] as ArtworkArtist[] });
+  readonly artists = toSafeSignal(this.service.artworkArtists$, [] as ArtworkArtist[]);
   readonly factions = toSignal(this.service.factions$.pipe(catchError(() => of([] as Faction[]))), { initialValue: [] as Faction[] });
   /** Vrai dès la première valeur OU l'échec d'une source (une source en échec ne bloque rien). */
   private static settled(source: Observable<unknown>) {

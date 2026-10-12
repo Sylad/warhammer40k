@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { Alignment, Faction, Unit } from '../../core/models/models';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const WIKI_SEARCH: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -157,14 +158,12 @@ export class FactionsComponent {
   }
   /** Une erreur de /api/units affiche « — » à la place des comptes : jamais un faux « 0 » (L102). */
   readonly unitsErreur = signal(false);
-  readonly units = toSignal(
+  readonly units = toSafeSignal(
     // Sans catchError, une erreur de /api/units relève à la lecture du signal et fige la page (L102).
     this.service.getUnits().pipe(catchError(() => {
       this.unitsErreur.set(true);
       return of([] as Unit[]);
-    })),
-    { initialValue: [] as Unit[] },
-  );
+    })), [] as Unit[]);
   readonly wikiImages = signal(new Map<string, string>());
 
   @ViewChild('toutes') private toutes?: ElementRef<HTMLButtonElement>;

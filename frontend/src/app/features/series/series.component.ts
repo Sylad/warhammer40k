@@ -1,10 +1,11 @@
 import { Component, inject, signal, computed, effect } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Serie, SerieBadge } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const SERIES_WIKI: Record<string, string> = {
   'heresie-horus':    'Horus Heresy Warhammer 40k',
@@ -52,7 +53,7 @@ const PAGE_SIZE = 8;
 @Component({
   selector: 'app-series',
   standalone: true,
-  imports: [CommonModule, FormsModule, FigureLightboxComponent],
+  imports: [CommonModule, FormsModule, FigureLightboxComponent, LoadErrorComponent],
   template: `
     <section class="romans-page">
 
@@ -80,6 +81,10 @@ const PAGE_SIZE = 8;
           <div class="hero-grain"></div>
         </div>
       </header>
+
+      @if (series.failed()) {
+        <app-load-error (retry)="series.retry()" />
+      }
 
       <!-- TABS -->
       <nav class="tabs">
@@ -269,7 +274,7 @@ export class SeriesComponent {
     'Fondamental', 'Inquisition', 'Space Marines', 'Garde Impériale', 'Adeptus Sororitas', 'Aventure',
   ];
 
-  readonly series = toSignal(this.service.series$, { initialValue: [] as Serie[] });
+  readonly series = toSafeSignal(this.service.series$, [] as Serie[]);
   readonly wikiImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);
   readonly heroImageUrl = signal<string | null>(null);

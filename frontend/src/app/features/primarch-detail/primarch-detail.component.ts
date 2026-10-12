@@ -1,5 +1,4 @@
 import { Component, computed, effect, inject, isDevMode, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -8,6 +7,8 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -34,7 +35,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 @Component({
   selector: 'app-primarch-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     @if (primarch(); as p) {
       <a class="back-btn" routerLink="/lore/primarchs">← RETOUR AUX PRIMARQUES</a>
@@ -342,6 +343,8 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 
       <!-- LIGHTBOX -->
       <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    } @else if (primarch.failed()) {
+      <app-load-error (retry)="primarch.retry()" />
     } @else {
       <div class="loading"><p>Chargement du Primarque...</p></div>
     }
@@ -358,11 +361,10 @@ export class PrimarchDetailComponent {
   readonly relatedImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
 
-  readonly primarch = toSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))),
-  );
+  readonly primarch = toSafeSignal(
+    this.route.paramMap.pipe(switchMap(p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
 
-  readonly related = toSignal(
+  readonly related = toSafeSignal(
     this.route.paramMap.pipe(
       switchMap(p => this.service.getPrimarch(p.get('id')!)),
       switchMap(prim => {
@@ -380,9 +382,7 @@ export class PrimarchDetailComponent {
           })))
         ).pipe(map(list => list.filter((r): r is Primarch => !!r).slice(0, 3)));
       }),
-    ),
-    { initialValue: [] as Primarch[] },
-  );
+    ), [] as Primarch[]);
 
   constructor() {
     effect(() => {

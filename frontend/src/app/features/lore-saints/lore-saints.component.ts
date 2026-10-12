@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Saint, SaintCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
   'living-saint': 'Sainte Vivante',
@@ -15,7 +16,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 @Component({
   selector: 'app-lore-saints',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-btn" routerLink="/lore">← RETOUR AU CODEX</a>
 
@@ -33,6 +34,10 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
         <button [class.active]="filter() === 'ecclesiarch-canonized'" (click)="filter.set('ecclesiarch-canonized')">Ecclésiarques</button>
       </div>
     </header>
+
+    @if (saints.failed()) {
+      <app-load-error (retry)="saints.retry()" />
+    }
 
     <section class="grid">
       @for (s of filtered(); track s.id) {
@@ -59,7 +64,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 export class LoreSaintsComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly saints = toSignal(this.service.saints$, { initialValue: [] as Saint[] });
+  readonly saints = toSafeSignal(this.service.saints$, [] as Saint[]);
   readonly filter = signal<'all' | SaintCategory>('all');
   readonly saintImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);

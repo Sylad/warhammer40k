@@ -1,11 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { longestWord } from '../../shared/longest-word';
 import type { LoreConcept, LoreConceptCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
   imperial: 'Impérial',
@@ -24,7 +25,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 @Component({
   selector: 'app-lore-concepts',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -47,6 +48,10 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
         </div>
       </div>
     </section>
+
+    @if (concepts.failed()) {
+      <app-load-error (retry)="concepts.retry()" />
+    }
 
     <section class="filters">
       <button class="filter" [class.active]="filterCategory() === 'all'" (click)="setFilter('all')">
@@ -148,7 +153,7 @@ export class LoreConceptsComponent {
   private readonly service = inject(WarhammerService);
   private readonly route = inject(ActivatedRoute);
   readonly longestWord = longestWord;
-  readonly concepts = toSignal(this.service.loreConcepts$, { initialValue: [] as LoreConcept[] });
+  readonly concepts = toSafeSignal(this.service.loreConcepts$, [] as LoreConcept[]);
   readonly filterCategory = signal<'all' | LoreConceptCategory>('all');
   readonly conceptImages = signal<Map<string, string>>(new Map());
   readonly heroImg = signal<string>('');

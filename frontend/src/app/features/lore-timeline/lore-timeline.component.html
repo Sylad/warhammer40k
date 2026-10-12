@@ -21,6 +21,10 @@
   </div>
 </section>
 
+@if (events.failed()) {
+  <app-load-error (retry)="events.retry()" />
+}
+
 <div class="layout">
   <main class="main">
     <nav class="era-nav" aria-label="Navigation par ère">

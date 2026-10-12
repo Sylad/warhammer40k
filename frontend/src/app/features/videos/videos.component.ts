@@ -1,5 +1,4 @@
 import { Component, DestroyRef, ViewChild, ElementRef, Injector, afterNextRender, inject, signal, computed, effect, untracked, HostListener } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import type { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -7,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { WarhammerService, VideoPreview, VideoImportBody } from '../../core/services/warhammer.service';
 import type { Video, Channel } from '../../core/models/models';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 type FilterKey = 'all' | 'lore' | 'animation' | 'official' | 'FR' | 'EN';
 type SortKey = 'recommended' | 'duration' | 'channel' | 'recent';
@@ -391,10 +391,10 @@ export class VideosComponent {
   readonly loadError = signal(false);
   private videosSub?: Subscription;
   /** R8 : valeur de ?video=, vide ou absente → null. */
-  private readonly queryParams = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
+  private readonly queryParams = toSafeSignal(this.route.queryParamMap, this.route.snapshot.queryParamMap);
   readonly videoParam = computed(() => this.queryParams().get('video') || null);
-  readonly channels = toSignal(this.service.channels$, { initialValue: [] as Channel[] });
-  readonly priorityChannels = toSignal(this.service.channelsPriority$, { initialValue: [] as Channel[] });
+  readonly channels = toSafeSignal(this.service.channels$, [] as Channel[]);
+  readonly priorityChannels = toSafeSignal(this.service.channelsPriority$, [] as Channel[]);
 
   readonly searchQuery = signal('');
   readonly activeFilter = signal<FilterKey>('all');

@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { toSafeSignal } from '../../shared/safe-signal';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -33,7 +34,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 @Component({
   selector: 'app-lore-primarchs',
   standalone: true,
-  imports: [CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -54,6 +55,10 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
         </div>
       </div>
     </section>
+
+    @if (primarchs.failed()) {
+      <app-load-error (retry)="primarchs.retry()" />
+    }
 
     <section class="filters">
       <button class="filter" [class.active]="filterAllegiance() === 'all'" (click)="setFilter('all')">
@@ -132,7 +137,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 export class LorePrimarchsComponent {
   private readonly service = inject(WarhammerService);
 
-  readonly primarchs = toSignal(this.service.primarchs$, { initialValue: [] as Primarch[] });
+  readonly primarchs = toSafeSignal(this.service.primarchs$, [] as Primarch[]);
   readonly filterAllegiance = signal<'all' | PrimarchAllegiance>('all');
   readonly primarchImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
