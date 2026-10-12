@@ -88,8 +88,9 @@
     {
       "id": "L47",
       "title": "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo",
-      "status": "doing",
-      "started": "2026-10-12"
+      "status": "done",
+      "started": "2026-10-12",
+      "finished": "2026-10-12"
     },
     {
       "id": "L49",
