@@ -960,8 +960,8 @@ export class GalleryComponent {
   readonly pageRangeEnd = computed(() => Math.min(this.currentPage() * PAGE_SIZE, this.totalFiltered()));
 
   constructor() {
-    // L49/R2 : au bureau le panneau Filtres et l'aside restent collés, empilés ; la hauteur du panneau
-    // (--filtres-h) décale l'aside sous lui, sans recouvrement.
+    // L49/R2 : au bureau le panneau Filtres est en tête de la colonne de droite ; la rangée « filtres »
+    // de la grille prend sa hauteur (--filtres-h) et l'aside, seul collant, occupe la rangée suivante.
     afterNextRender(() => {
       const layout = this.host.nativeElement.querySelector<HTMLElement>('.layout');
       const panel = this.host.nativeElement.querySelector<HTMLElement>('#panneau-filtres');

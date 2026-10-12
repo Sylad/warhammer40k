@@ -6,11 +6,11 @@
  */
 .gallery-page {
   /* le panneau précède la grille dans le DOM ; la grille CSS le replace en haut de la colonne de droite */
-  .layout { grid-template-areas: "main filtres"; grid-template-rows: auto; }
-  /* R2 : le panneau est en tête de la colonne de droite et collant ; l'aside (Artistes, Collections) est collant juste dessous (marge = hauteur du panneau + 24 px), sans recouvrement */
-  .p-filtres { grid-column: 2; grid-row: 1; align-self: start; position: sticky; top: 96px; z-index: 1; }
+  .layout { grid-template-areas: "main filtres" "main aside"; grid-template-rows: var(--filtres-h, 17rem) 1fr; }
+  /* R2 : le panneau est en tête de la colonne de droite (rangée 1) ; l'aside (Artistes, Collections) reste collant comme avant L49, en rangée 2 : un seul élément collant, jamais de recouvrement */
+  .p-filtres { grid-column: 2; grid-row: 1; align-self: start; }
   .main-col { grid-area: main; }
-  .layout .sidebar { grid-column: 2; grid-row: 1; margin-top: calc(var(--filtres-h, 17rem) + 24px); top: calc(96px + var(--filtres-h, 17rem) + 24px); }
+  .sidebar { grid-column: 2; grid-row: 2; }
   .import-btn-hero.btn-filtres { display: none; }
   /* WCAG 1.4.3 : ces boutons reposent sur la photo du bandeau ; fond opaque (maquette : var(--panel)), teinte or au survol */
   .hero .import-btn-hero { background: var(--panel); }
@@ -40,7 +40,7 @@
 @media (max-width: 1024px) {
   .gallery-page .layout { grid-template-areas: "filtres" "main" "aside"; grid-template-rows: auto; }
   .gallery-page .p-filtres { grid-area: filtres; position: static; }
-  .gallery-page .layout .sidebar { grid-area: aside; margin-top: 0; top: 96px; }
+  .gallery-page .sidebar { grid-area: aside; }
 }
 @media (max-width: 760px) {
   .gallery-page {

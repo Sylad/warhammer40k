@@ -80,6 +80,39 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
     expect(m.btn.bottom, JSON.stringify(m)).toBeLessThanOrEqual(900);
   }, 30_000);
 
+  it('R2 — 1440 px : en bas de page (scrollHeight − innerHeight), Artistes et Collections ne sont recouverts par rien', async () => {
+    const page = await open(1440, 900);
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight - window.innerHeight));
+    await page.waitForTimeout(200);
+    const m = await page.evaluate(() => {
+      const res = [...document.querySelectorAll('.sidebar .side-panel')].map((p) => {
+        const r = p.getBoundingClientRect();
+        const top = document.elementFromPoint(r.left + r.width / 2, Math.min(Math.max(r.top + 20, 1), window.innerHeight - 1));
+        return { titre: p.querySelector('h3')?.textContent, visible: r.bottom > 0 && r.top < window.innerHeight, dessus: !!top && p.contains(top) };
+      });
+      return { y: window.scrollY, res };
+    });
+    await page.close();
+    expect(m.res.length, JSON.stringify(m)).toBeGreaterThan(0);
+    for (const p of m.res.filter((x) => x.visible)) expect(p.dessus, JSON.stringify(m)).toBe(true);
+  }, 30_000);
+
+  for (const [w, h] of [[1024, 768], [390, 844]] as const) {
+    it(`R2 — ${w} px : l'aside n'est pas décalé vers le bas, il suit la colonne principale à l'écart de la grille`, async () => {
+      const page = await open(w, h);
+      const m = await page.evaluate(() => {
+        const main = document.querySelector('.main-col')!.getBoundingClientRect();
+        const side = document.querySelector('.sidebar')!.getBoundingClientRect();
+        const footer = document.querySelector('footer')?.getBoundingClientRect();
+        const layout = document.querySelector('.layout')!.getBoundingClientRect();
+        return { ecart: side.top - main.bottom, sideBottom: side.bottom + window.scrollY, layoutBottom: layout.bottom + window.scrollY, footerTop: footer ? footer.top + window.scrollY : null };
+      });
+      await page.close();
+      expect(m.ecart, JSON.stringify(m)).toBeLessThanOrEqual(40);
+      expect(m.sideBottom, JSON.stringify(m)).toBeLessThanOrEqual(m.layoutBottom + 1);
+    }, 30_000);
+  }
+
   it('R12 — 390 px : une faction connue sans illustration (?faction=) montre le rappel avec son message propre et Réinitialiser', async () => {
     const page = await open(390, 844, 'vide', '?faction=grey-knights');
     const txt = await page.getByTestId('rappel-vide').innerText();
@@ -150,19 +183,19 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
     expect(b).toBeLessThanOrEqual(900);
   }, 30_000);
 
-  it('R2 — 1440×900 : après 1500 px de défilement, le panneau Filtres reste à l\'écran et ne recouvre pas les Artistes', async () => {
+  it('R2 — 1440×900 : après 1500 px de défilement, l\'aside seul est collant (en haut de l\'écran) et le panneau Filtres n\'est pas collant', async () => {
     const page = await open(1440, 900);
     await page.evaluate(() => window.scrollTo(0, 1500));
     await page.waitForTimeout(200);
     const m = await page.evaluate(() => {
-      const f = document.querySelector('[data-testid="panneau-filtres"]')!.getBoundingClientRect();
+      const f = document.querySelector('[data-testid="panneau-filtres"]')!;
       const a = document.querySelector('.sidebar')!.getBoundingClientRect();
-      return { y: window.scrollY, ft: f.top, fb: f.bottom, at: a.top };
+      return { y: window.scrollY, filtres: getComputedStyle(f).position, at: a.top, ab: a.bottom };
     });
     await page.close();
     expect(m.y).toBeGreaterThan(1000);
-    expect(m.ft, JSON.stringify(m)).toBeGreaterThanOrEqual(0);
-    expect(m.fb, JSON.stringify(m)).toBeLessThanOrEqual(900);
-    expect(m.at, JSON.stringify(m)).toBeGreaterThanOrEqual(m.fb);
+    expect(m.filtres, JSON.stringify(m)).toBe('static');
+    expect(m.at, JSON.stringify(m)).toBeGreaterThanOrEqual(0);
+    expect(m.at, JSON.stringify(m)).toBeLessThanOrEqual(120);
   }, 30_000);
 });
