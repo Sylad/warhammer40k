@@ -1,6 +1,11 @@
 {
   "lot": "L35",
   "fiche": "docs/specs/jeux-video/fiche.yaml",
-  "fichiers": ["frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts"],
-  "vert": false
+  "fichiers": [
+    "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts"
+  ],
+  "vert": false,
+  "empreintes": {
+    "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts": "47f2b16c1ce5e02cb7db4eda713a0b8336ea6946"
+  }
 }
