@@ -263,7 +263,7 @@ lots:
   - id: L35
     title: "Page « Jeux vidéo » : les jeux Warhammer 40 000 existants et surtout les jeux à venir (Dawn of War 4, Total War: Warhammer 40,000) — dates et contenus annoncés à vérifier sur des sources en ligne au moment de coder, pas de mémoire ; lien dans la navigation"
     public: "Une page Jeux vidéo : les jeux existants et ceux qui arrivent"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     screen: page
@@ -273,6 +273,10 @@ lots:
       - { date: 2026-10-12, text: "DÉCISION LEAD 11-10 (rendu « maquette non conforme après 2 revues » : « Jeux vidéo » déborde de 15 à 54 px dans la barre compacte au seuil 80em) — lien de 1er niveau entre Vidéos et Galerie (R5 inchangée) ; le seuil du tiroir monte à la largeur MESURÉE où la barre complète tient (~84em au lieu de 80em) : main-layout.component.ts (@media (width < 80em)) et mesure par topbar.e2e.spec.ts. Écrire ce choix en HYPOTHÈSE de la fiche (statut hypothese, si_faux : menu « Médias ▾ » regroupant Vidéos, Jeux vidéo, Galerie). Écartés : menu Médias ▾ (restructuration hors lot), rangement dans « À propos ▾ » (faux sur le fond)." }
       - { date: 2026-10-12, text: "Rendu 12-10 « tests rouges après 2 passes » (vague 2026-10-12-0820) : code conforme à la fiche (641 tests verts, acceptation 12/13, build OK) ; le seul rouge est un défaut du TEST SCELLÉ « R2 — date imprécise » : /\\d{1,2} / interdit « T3 2027 annoncée » et « 2028 annoncée » que la fiche R2 impose (attrape « 3 » et « 28 »). Intention : aucune date imprécise avec un jour → /\\b\\d{1,2} (janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)/i. cadence n'a pas de chemin pour resceller un test faux du lot en cours : lot cadence à faire, puis reprise de L35 sur ce seul test." }
       - { date: 2026-10-12, text: "test d'acceptation rescellé (frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts, fiche inchangée) : test « R2 — date imprécise » : la regex /\\d{1,2} / attrape le 3 de « T3 2027 » et le 28 de « 2028 », que la fiche R2 impose ; elle devient jour + mois (/\\b\\d{1,2} (janv|…|déc)/i), l'intention (aucun jour inventé) est gardée" }
+      - { date: 2026-10-12, text: "Mineurs UX 12-10 (notes) : interlignes ≈1,2 contre 1,5 en maquette (.jv-meta, .jv-msg) ; marge latérale doublée à 390 px (main.wrap 16 + .jv 16) ; 3e carte « À venir » seule sur sa ligne à 1440 px ; « Source de l'annonce ↗ » au lieu de « Source : annonce officielle ↗ » (le libellé de l'app est le plus juste). Mineur de revue : l'horloge réelle par défaut de JEUX_VIDEO_NOW n'est atteinte par aucun test ; « 1er décembre 2026 » et espaces insécables non reconnus par jourComplet." }
+    review: { date: 2026-10-12, verdict: "conforme après 1 correction (revue lead 12-10 sur 8b039d2 + bec1160) : horloge JEUX_VIDEO_NOW vérifiée (acceptation verte aux 2027-03-13 et 2030-01-01, 677/677), acceptation scellée intacte depuis le rescellé 52f5636 ; CLAUDE.md et README décrivent la bascule en « Déjà sortis » (bec1160). Mineur en note : l'horloge réelle par défaut n'est atteinte par aucun test.", commit: bec1160c37f1d78282b4749bfbdedb91b3aaa816 }
+    ux: { date: 2026-10-12, verdict: "conforme (posé par le lead, règle L197) : captures regardées — « Jeux vidéo » tient dans la barre (seuil du tiroir mesuré, décision lead), À venir avec dates « annoncée » / « Date non communiquée », Déjà sortis du plus récent au plus ancien ; 4 mineurs en notes (interlignes, marge doublée à 390 px, 3e carte seule à 1440 px, libellé du lien source)" }
+    finished: 2026-10-12
   - id: L36
     title: "Titre de page par route (WCAG 2.4.2) : toutes les routes s'appellent « Warhammer 40 000 — Codex Numérique » (revue UX L30)"
     status: done
