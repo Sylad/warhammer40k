@@ -368,6 +368,8 @@ lots:
     screen: journey
     created: 2026-10-02
     started: 2026-10-12
+    notes:
+      - { date: 2026-10-12, text: "DÉCISION LEAD 12-10 (rendu « maquette non conforme après 2 revues », vague 2026-10-12-0940, majeur : cartes <article (click)> sans focus, R6 inapplicable, ouverture impossible au clavier) : chaque carte vidéo (Incontournables, Toutes les vidéos, Vidéo à la une) devient un lien <a href=\"/videos?video=<id>\"> — focusable, Entrée l'ouvre, clic du milieu = nouvel onglet ; le clic simple ouvre la fenêtre et écrit ?video (R3) ; R6 retourne le focus sur ce lien. Règle à ajouter à la fiche (sourcée : WCAG 2.1.1 Clavier + décision lead), maquette avec les cartes en <a>, test. Les 3 mineurs (bouton Fermer déplacé, aria-label recopié, …) en notes." }
   - id: L48
     title: "Galerie : cas étroits de la liaison adresse ↔ filtres — action pendant une navigation de sortie lente qui l'annule, clic sur « Galerie » pendant l'anti-rebond perdu, écho resté armé sur une réécriture de fragment seul, échec silencieux des images personnelles ; deux chemins de 6da3576 sans test dédié (3e relecture L42)"
     status: todo
@@ -386,6 +388,7 @@ lots:
     started: 2026-10-11
     notes:
       - { date: 2026-10-12, text: "DÉCISION LEAD 12-10 (rendu « maquette non conforme après 2 revues », vague 2026-10-12-0820) : à 390 px l'état vide doit reprendre le rappel « N résultats » sous la recherche, comme l'état chargé — il y devient « Aucune œuvre ne correspond » + action « Réinitialiser les filtres », visible dans le premier écran (mesuré, au-dessus de la barre du bas) ; seul ce point dans la maquette et la fiche (règle + test), les 4 mineurs restent des notes." }
+      - { date: 2026-10-12, text: "En QUESTION (vague 2026-10-12-0940) : 3 tests scellés (R6 « 390 px : 6 résultats visible dans le panneau », R12 « rappel visible », R12 « Réinitialiser les filtres 44 px ») lisent  qui capture la constante locale (esbuild → scrollY2) au lieu de window.scrollY — défaut du TEST. Attendre le lot cadence de rescellé, resceller avec window.scrollY (seul changement), puis --resume --answer." }
   - id: L50
     title: "Galerie : libellés des statistiques du bandeau (Œuvres, Artistes, Collections) à 1,05:1 sur l'image — pastille opaque var(--panel) comme l'onglet Rechercher, ou voile sombre ; mesurer ≥ 4,5:1 (WCAG 1.4.3) ; factoriser d'abord la feuille de la galerie (12 octets de marge sur le budget de 17,5 kB)"
     status: done
