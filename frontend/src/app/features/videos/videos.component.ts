@@ -35,6 +35,17 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
   template: `
     <section class="videos-page">
 
+      @if (loadError()) {
+        <div class="msg" role="alert">
+          <span data-testid="message-erreur">Impossible de charger les vidéos.</span>
+          <button type="button" data-testid="bouton-reessayer" (click)="loadVideos()">Réessayer</button>
+        </div>
+      } @else if (waitingForVideo()) {
+        <div class="msg info" role="status" data-testid="message-chargement">Chargement de la vidéo…</div>
+      } @else if (unknownVideo()) {
+        <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
+      }
+
       <!-- HERO -->
       <header class="hero">
         <div class="hero-bg" [style.background-image]="heroBgUrl()"></div>
@@ -63,18 +74,10 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
         </div>
       </header>
 
-      @if (loadError()) {
-        <div class="msg" role="alert">
-          <span data-testid="message-erreur">Impossible de charger les vidéos.</span>
-          <button type="button" data-testid="bouton-reessayer" (click)="loadVideos()">Réessayer</button>
-        </div>
-      } @else if (waitingForVideo()) {
-        <div class="msg info" role="status" data-testid="message-chargement">Chargement de la vidéo…</div>
+      @if (waitingForVideo() && !loadError()) {
         <div class="featured-grid attente" aria-hidden="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
-      } @else {
-      @if (unknownVideo()) {
-        <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
       }
+      @if (!loadError() && !waitingForVideo()) {
 
       <!-- TOOLBAR -->
       <section class="toolbar">

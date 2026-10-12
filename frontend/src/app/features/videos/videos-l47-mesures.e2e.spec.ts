@@ -72,4 +72,52 @@ describe.skipIf(!built || stale || !chromium)('L47 — mesures de la page /video
     expect(top).toBeLessThan(500);
     await page.close();
   });
+
+  it('R9 — à 390 px, le hero tient dans la fenêtre (aucun enfant ne dépasse)', async () => {
+    const page = await open(390, '/videos');
+    const m = await page.evaluate(() => {
+      const hero = document.querySelector('.hero')!.getBoundingClientRect();
+      const h1 = document.querySelector('.hero h1') as HTMLElement;
+      const over = [...document.querySelectorAll('.hero-content *')].filter((e) => e.getBoundingClientRect().right > hero.right + 1).length;
+      return { over, h1Clipped: h1.scrollWidth > h1.clientWidth + 1 };
+    });
+    expect(m).toEqual({ over: 0, h1Clipped: false });
+    await page.close();
+  });
+
+  it('R5 — le bandeau d\'état précède le hero dans le DOM et à l\'écran', async () => {
+    const page = await open(1440, '/videos?video=disparue');
+    const m = await page.evaluate(() => {
+      const msg = document.querySelector('[data-testid="message-vide"]')!;
+      const hero = document.querySelector('.hero')!;
+      return { dom: !!(msg.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING), top: msg.getBoundingClientRect().top < hero.getBoundingClientRect().top };
+    });
+    expect(m).toEqual({ dom: true, top: true });
+    await page.close();
+  });
+
+  it('R4 — les cartes d\'attente viennent après le hero', async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.route('**/api/videos*', () => undefined);
+    await page.goto(base + '/videos?video=astartes', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.attente');
+    const m = await page.evaluate(() => ({
+      skel: document.querySelector('.attente')!.getBoundingClientRect().top,
+      heroBottom: document.querySelector('.hero')!.getBoundingClientRect().bottom,
+    }));
+    expect(m.skel).toBeGreaterThanOrEqual(m.heroBottom);
+    await page.close();
+  });
+
+  it('R9 — le bouton Supprimer est visible en permanence, 44×44 px', async () => {
+    const page = await open(390, '/videos?video=disparue');
+    const m = await page.locator('[data-testid="bouton-supprimer"]').first().evaluate((e) => {
+      const r = e.getBoundingClientRect();
+      return { w: r.width, h: r.height, o: getComputedStyle(e).opacity };
+    });
+    expect(m.w).toBeGreaterThanOrEqual(44);
+    expect(m.h).toBeGreaterThanOrEqual(44);
+    expect(Number(m.o)).toBeGreaterThan(0.5);
+    await page.close();
+  });
 });
