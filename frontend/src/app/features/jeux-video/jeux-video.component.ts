@@ -29,12 +29,33 @@ export interface JeuxData {
 
 export const JEUX_URL = '/jeux-data/jeux.json';
 
+const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+
+/** « 14 octobre 2026 » → jour local ; null pour toute date imprécise (mois, trimestre, année) : jamais devinée. */
+function jourComplet(sortie: string | null): Date | null {
+  const m = /^(\d{1,2}) (\S+) (\d{4})$/.exec(sortie?.trim() ?? '');
+  const mois = m ? MOIS.indexOf(m[2].toLowerCase()) : -1;
+  return m && mois >= 0 ? new Date(Number(m[3]), mois, Number(m[1])) : null;
+}
+
+/** R1 : un jeu dont le jour de sortie annoncé est atteint n'est plus « à venir » ; il passe en tête des sortis. */
+export function repartirJeux(data: JeuxData, now: Date): { aVenir: JeuAVenir[]; existants: JeuSorti[] } {
+  const jour = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const aVenir: JeuAVenir[] = [];
+  const sortis: JeuSorti[] = [];
+  for (const j of data.aVenir) {
+    const d = jourComplet(j.sortie);
+    if (d && d <= jour) sortis.push({ id: j.id, titre: j.titre, annee: d.getFullYear(), resume: j.resume, plateformes: j.plateformes });
+    else aVenir.push(j);
+  }
+  return { aVenir, existants: [...sortis, ...data.existants] };
+}
+
 /** « 2026-10-11 » → « 11 octobre 2026 » (sans fuseau : la date est écrite telle quelle). */
 export function dateFr(iso: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
   if (!m) return iso;
-  const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-  return `${Number(m[3])} ${mois[Number(m[2]) - 1] ?? ''} ${m[1]}`;
+  return `${Number(m[3])} ${MOIS[Number(m[2]) - 1] ?? ''} ${m[1]}`;
 }
 
 /**
@@ -47,7 +68,7 @@ export function dateFr(iso: string): string {
   selector: 'app-jeux-video',
   standalone: true,
   template: `
-    <main class="jv">
+    <div class="jv">
       <p class="jv-eyebrow">Codex numérique · Jeux vidéo</p>
       <h1 data-testid="titre-page">Jeux vidéo</h1>
       <p class="jv-lede" data-testid="intro-page">
@@ -134,7 +155,7 @@ export function dateFr(iso: string): string {
           }
         }
       }
-    </main>
+    </div>
   `,
   styleUrl: './jeux-video.component.scss',
 })
@@ -142,9 +163,13 @@ export class JeuxVideoComponent implements OnInit {
   readonly state = signal<'loading' | 'error' | 'empty' | 'ready'>('loading');
   private readonly data = signal<JeuxData | null>(null);
 
-  readonly aVenir = computed(() => this.data()?.aVenir ?? []);
+  private readonly parts = computed(() => {
+    const d = this.data();
+    return d ? repartirJeux(d, new Date()) : { aVenir: [], existants: [] };
+  });
+  readonly aVenir = computed(() => this.parts().aVenir);
   /** Du plus récent au plus ancien (R4) ; à année égale, l'ordre du fichier. */
-  readonly existants = computed(() => [...(this.data()?.existants ?? [])].sort((a, b) => b.annee - a.annee));
+  readonly existants = computed(() => [...this.parts().existants].sort((a, b) => b.annee - a.annee));
   readonly verifieLe = computed(() => {
     const iso = this.data()?.verifieLe;
     return iso ? { iso, text: dateFr(iso) } : null;
