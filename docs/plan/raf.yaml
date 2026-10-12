@@ -445,6 +445,7 @@ lots:
     visible: true
     created: 2026-10-04
     started: 2026-10-12
+    review: { date: 2026-10-12, verdict: "compliant — orchestré (vague 2026-10-12-2235, 0 passe(s) de correction)", commit: f7b583320e1d335a1e62017cf0d134fa92eaa664 }
   - id: L54
     title: "Galerie 390 px : trois statistiques en grille 3 colonnes égales (plus de 3e pastille orpheline de 114 px), libellé 12 px si « COLLECTIONS » tient"
     status: done
