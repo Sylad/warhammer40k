@@ -446,6 +446,12 @@
       color: inherit;
     }
     .video-card.large { min-height: 330px; }
+    /* L47 : le titre est un lien étiré sur toute la carte ; le bouton Supprimer, frère du lien, reste au-dessus (z-index 3). */
+    .card-link { color: inherit; text-decoration: none; }
+    .card-link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+    .card-link:focus-visible { outline: none; }
+    .video-card:focus-within { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+    .vc-delete:focus-visible { opacity: 0.9; }
     .video-card:hover {
       transform: translateY(-5px);
       border-color: rgba(201, 162, 74, 0.68);
@@ -710,6 +716,7 @@
       height: 100%;
       border: 0;
     }
+    .modal-player { position: absolute; inset: 0; }
     .modal-fallback {
       position: absolute;
       inset: 0;
@@ -719,11 +726,19 @@
       padding: 24px;
       color: var(--muted);
     }
-    .modal-fallback strong { color: var(--gold-bright); font-family: var(--serif); font-size: 22px; display: block; margin-bottom: 8px; }
-    .modal-fallback p { margin: 0 0 16px; }
-    .modal-link {
+    .modal-fallback p { margin: 0; }
+    .modal-cap {
+      position: absolute;
+      left: 0; right: 0; bottom: -34px;
+      max-width: calc(100% - 200px);
+      color: var(--text);
+      font: 600 14px var(--serif);
+    }
+    .modal-box .modal-link {
+      position: absolute;
+      right: 0; bottom: -40px;
       display: inline-block;
-      padding: 10px 20px;
+      padding: 6px 12px;
       border: 1px solid var(--gold);
       color: var(--gold-bright);
       text-decoration: none;
@@ -735,18 +750,34 @@
     .modal-link:hover { background: rgba(201, 162, 74, 0.15); }
     .close {
       position: absolute;
-      top: -44px;
-      right: 0;
-      border: 1px solid rgba(201, 162, 74, 0.38);
-      background: rgba(0, 0, 0, 0.7);
+      top: -1px;
+      right: -1px;
+      z-index: 2;
+      border: 1px solid rgba(201, 162, 74, 0.55);
+      background: rgba(5, 4, 3, 0.85);
       color: var(--gold-bright);
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
       font-size: 18px;
       font-family: inherit;
     }
     .close:hover { border-color: var(--gold); }
+    .close:focus-visible, .modal-link:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+
+    /* L47 : bandeau d'état (chargement, identifiant inconnu, erreur) et cartes d'attente. */
+    .msg {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+      margin-bottom: 20px; padding: 14px 18px;
+      border: 1px solid rgba(201, 162, 74, 0.28); border-left: 3px solid var(--red);
+      background: var(--panel); font-size: 14px;
+    }
+    .msg.info { border-left-color: var(--gold); }
+    .msg button {
+      min-height: 44px; padding: 0 18px; background: transparent; border: 1px solid var(--gold);
+      color: var(--gold-bright); font-family: inherit; font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    }
+    .skel { min-height: 245px; border: 1px solid rgba(201, 162, 74, 0.24); background: linear-gradient(90deg, var(--panel), #1b150f, var(--panel)); }
 
     /* RESPONSIVE */
     @media (max-width: 1220px) {

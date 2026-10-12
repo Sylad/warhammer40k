@@ -1,5 +1,7 @@
-import { Component, inject, signal, computed, effect, HostListener } from '@angular/core';
+import { Component, DestroyRef, ViewChild, ElementRef, Injector, afterNextRender, inject, signal, computed, effect, untracked, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
+import type { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -39,7 +41,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
         <div class="hero-content">
           <div class="hero-text">
             <span class="eyebrow">Archives vidéo du 41e millénaire</span>
-            <h1>Archives Cinématiques</h1>
+            <h1 #pageTitle tabindex="-1">Archives Cinématiques</h1>
             <p class="hero-desc">
               Retrouve les chaînes lore FR, les animations iconiques, les cinématiques
               officielles et les vidéos cultes liées à Warhammer 40,000.
@@ -60,6 +62,19 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           </aside>
         </div>
       </header>
+
+      @if (loadError()) {
+        <div class="msg" role="alert">
+          <span data-testid="message-erreur">Impossible de charger les vidéos.</span>
+          <button type="button" data-testid="bouton-reessayer" (click)="loadVideos()">Réessayer</button>
+        </div>
+      } @else if (waitingForVideo()) {
+        <div class="msg info" role="status" data-testid="message-chargement">Chargement de la vidéo…</div>
+        <div class="featured-grid" aria-hidden="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      } @else {
+      @if (unknownVideo()) {
+        <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
+      }
 
       <!-- TOOLBAR -->
       <section class="toolbar">
@@ -191,10 +206,9 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               </header>
               <div class="featured-grid">
                 @for (v of displayedFeatured(); track v.id; let i = $index) {
-                  <article class="video-card"
+                  <article class="video-card" data-testid="carte-video"
                     [class.large]="i === 0"
-                    [style.--thumb]="thumbStyle(v)"
-                    (click)="openModal(v)">
+                    [style.--thumb]="thumbStyle(v)">
                     <span class="duration">{{ v.duration }}</span>
                     <span class="play">▶</span>
                     <div class="video-content">
@@ -206,7 +220,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                         @if (v.language === 'Sans dialogue') { <span class="tag">Mute</span> }
                         <span class="tag">{{ categoryLabel(v.category) }}</span>
                       </div>
-                      <h3 class="video-title">{{ v.titre }}</h3>
+                      <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
                       <div class="video-meta">{{ v.createur }} · {{ shortDesc(v.description) }}</div>
                     </div>
                   </article>
@@ -252,7 +266,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           </section>
 
           <!-- TOUTES LES VIDEOS -->
-          <section class="section">
+          <section class="section" data-testid="liste-videos">
             <header class="section-head">
               <div>
                 <h2>Toutes les vidéos</h2>
@@ -265,12 +279,10 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
             } @else {
               <div class="video-grid">
                 @for (v of displayedAll(); track v.id) {
-                  <article class="video-card"
-                    [style.--thumb]="thumbStyle(v)"
-                    (click)="openModal(v)">
+                  <article class="video-card" data-testid="carte-video"
+                    [style.--thumb]="thumbStyle(v)">
                     <span class="duration">{{ v.duration }}</span>
                     <span class="play">▶</span>
-                    <button class="vc-delete" type="button" (click)="deleteVideo(v, $event)" aria-label="Supprimer la vidéo">✕</button>
                     <div class="video-content">
                       <div class="tags">
                         @if (v.language === 'FR') { <span class="tag fr">FR</span> }
@@ -279,9 +291,10 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                         @if (v.language === 'Sans dialogue') { <span class="tag">Mute</span> }
                         <span class="tag">{{ categoryLabel(v.category) }}</span>
                       </div>
-                      <h3 class="video-title">{{ v.titre }}</h3>
+                      <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
                       <div class="video-meta">{{ v.createur }}</div>
                     </div>
+                    <button class="vc-delete" type="button" data-testid="bouton-supprimer" (click)="deleteVideo(v, $event)" aria-label="Supprimer la vidéo">✕</button>
                   </article>
                 }
               </div>
@@ -315,7 +328,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           <section class="side-panel">
             <h3>Vidéos récentes</h3>
             @for (v of recentVideos(); track v.id) {
-              <button class="recent-row" type="button" (click)="openModal(v)">
+              <button class="recent-row" type="button" (click)="openModal(v, $event)">
                 <span class="rr-title">{{ v.titre }}</span>
                 <small>{{ v.duration }}</small>
               </button>
@@ -323,30 +336,34 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           </section>
         </aside>
       </section>
+      }
 
       <footer class="page-footer">
         Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
       </footer>
     </section>
 
-    <!-- MODAL -->
+    <!-- MODAL : ouverte par l'adresse (?video=<id>), L47 -->
     @if (selectedVideo(); as sv) {
-      <div class="modal" (click)="onModalBackdrop($event)">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="video-modal-title" data-testid="modale-video"
+        (click)="onModalBackdrop($event)" (keydown)="onModalKeydown($event)">
         <div class="modal-box">
-          <button class="close" type="button" (click)="closeModal()" aria-label="Fermer">×</button>
-          @if (modalEmbedUrl(); as url) {
-            <iframe [src]="url"
-              [title]="sv.titre"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          } @else {
-            <div class="modal-fallback">
-              <strong>{{ sv.titre }}</strong>
-              <p>Cette ressource n'est pas embarquable.</p>
-              <a class="modal-link" [href]="sv.url" target="_blank" rel="noopener">Ouvrir sur YouTube ↗</a>
-            </div>
-          }
+          <button class="close" type="button" data-testid="bouton-fermer" (click)="closeModal()" aria-label="Fermer">×</button>
+          <div class="modal-player" data-testid="lecteur-video">
+            @if (modalEmbedUrl(); as url) {
+              <iframe [src]="url"
+                [title]="sv.titre"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            } @else {
+              <div class="modal-fallback">
+                <p>Cette ressource n'est pas embarquable.</p>
+              </div>
+            }
+          </div>
+          <div class="modal-cap" id="video-modal-title" data-testid="titre-video">{{ sv.titre }}</div>
+          <a class="modal-link" [href]="sv.url" target="_blank" rel="noopener">Ouvrir sur YouTube ↗</a>
         </div>
       </div>
     }
@@ -360,7 +377,19 @@ export class VideosComponent {
   readonly filters = FILTERS;
   readonly sidebarOptions = SIDEBAR_OPTIONS;
 
-  readonly videos = toSignal(this.service.videos$, { initialValue: [] as Video[] });
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
+
+  readonly videos = signal<Video[]>([]);
+  /** Liste reçue au moins une fois ; `loadError` : le dernier GET /api/videos a échoué (R4, R7). */
+  readonly loaded = signal(false);
+  readonly loadError = signal(false);
+  private videosSub?: Subscription;
+  /** R8 : valeur de ?video=, vide ou absente → null. */
+  private readonly queryParams = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
+  readonly videoParam = computed(() => this.queryParams().get('video') || null);
   readonly channels = toSignal(this.service.channels$, { initialValue: [] as Channel[] });
   readonly priorityChannels = toSignal(this.service.channelsPriority$, { initialValue: [] as Channel[] });
 
@@ -368,7 +397,19 @@ export class VideosComponent {
   readonly activeFilter = signal<FilterKey>('all');
   readonly sortOrder = signal<SortKey>('recommended');
   readonly sidebarFilters = signal<Set<SidebarFilter>>(new Set());
-  readonly selectedVideo = signal<Video | null>(null);
+  /** La fenêtre suit l'adresse : ouvrir ou fermer, c'est naviguer (R2, R3). */
+  readonly selectedVideo = computed(() => {
+    const id = this.videoParam();
+    return id ? this.videos().find(v => v.id === id) ?? null : null;
+  });
+  readonly waitingForVideo = computed(() => !!this.videoParam() && !this.loaded());
+  readonly unknownVideo = computed(() => !!this.videoParam() && this.loaded() && !this.selectedVideo());
+
+  @ViewChild('pageTitle') private pageTitle?: ElementRef<HTMLElement>;
+  private modalWasOpen = false;
+  /** Élément activé pour ouvrir la fenêtre (R6) ; null si arrivée par l'adresse. */
+  private opener: HTMLElement | null = null;
+  private inerted: Element[] = [];
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
 
   // Add Video modal state
@@ -463,6 +504,14 @@ export class VideosComponent {
   });
 
   constructor() {
+    this.loadVideos();
+    inject(DestroyRef).onDestroy(() => { this.videosSub?.unsubscribe(); this.setBackgroundInert(false); });
+
+    effect(() => {
+      const open = !!this.selectedVideo();
+      untracked(() => this.onModalToggled(open));
+    });
+
     this.service.getWikiImage('warhammer 40k cinematic dark grimdark').subscribe(r => {
       if (r.imageUrl) {
         this.heroBgUrl.set(`url('${r.imageUrl}')`);
@@ -530,8 +579,86 @@ export class VideosComponent {
     this.allLimit.update(n => n + VideosComponent.PAGE_ALL);
   }
 
-  openModal(v: Video): void { this.selectedVideo.set(v); }
-  closeModal(): void { this.selectedVideo.set(null); }
+  /** R2/R4/R7 : (re)charge la liste ; après un échec le flux est mort, d'où une nouvelle souscription. */
+  loadVideos(): void {
+    this.videosSub?.unsubscribe();
+    this.loadError.set(false);
+    this.videosSub = this.service.videos$.subscribe({
+      next: list => { this.videos.set(list); this.loaded.set(true); },
+      error: () => this.loadError.set(true),
+    });
+  }
+
+  videoHref(v: Video): string { return `/videos?video=${encodeURIComponent(v.id)}`; }
+
+  /** Clic simple : la fenêtre s'ouvre sur place ; clic du milieu, Ctrl, Maj, Alt ou Cmd : le navigateur ouvre le lien (R9). */
+  onCardClick(event: MouseEvent, v: Video): void {
+    if (event.button !== 0 || event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return;
+    event.preventDefault();
+    this.openModal(v, event);
+  }
+
+  openModal(v: Video, event?: Event): void {
+    this.opener = (event?.currentTarget as HTMLElement | null) ?? null;
+    void this.navigateKeepingScroll(v.id);
+  }
+  closeModal(): void { void this.navigateKeepingScroll(null); }
+
+  /** `scrollPositionRestoration: 'enabled'` remonterait la page à chaque navigation : on la remet où elle était. */
+  private async navigateKeepingScroll(id: string | null): Promise<void> {
+    const y = window.scrollY;
+    await this.router.navigate([], { relativeTo: this.route, queryParams: { video: id }, queryParamsHandling: 'merge' });
+    const back = () => window.scrollTo(0, y);
+    back();
+    setTimeout(back, 0);
+  }
+
+  private onModalToggled(open: boolean): void {
+    if (open && !this.modalWasOpen) {
+      this.modalWasOpen = true;
+      afterNextRender(() => {
+        if (!this.modalWasOpen) return;
+        this.setBackgroundInert(true);
+        this.host.nativeElement.querySelector<HTMLElement>('.modal .close')?.focus();
+      }, { injector: this.injector });
+    } else if (!open && this.modalWasOpen) {
+      this.modalWasOpen = false;
+      this.setBackgroundInert(false);
+      const opener = this.opener;
+      this.opener = null;
+      (opener?.isConnected ? opener : this.pageTitle?.nativeElement)?.focus();
+    }
+  }
+
+  /** La fenêtre est modale : tout le reste du document (en-tête, contenu, pied) est inerte tant qu'elle est ouverte. */
+  private setBackgroundInert(on: boolean): void {
+    for (const el of this.inerted) el.removeAttribute('inert');
+    this.inerted = [];
+    if (!on) return;
+    let node: Element | null = this.host.nativeElement.querySelector('.modal');
+    while (node && node !== document.body) {
+      const parent: Element | null = node.parentElement;
+      if (!parent) break;
+      for (const sib of Array.from(parent.children)) {
+        if (sib === node || sib.hasAttribute('inert') || ['SCRIPT', 'STYLE', 'LINK'].includes(sib.tagName)) continue;
+        sib.setAttribute('inert', '');
+        this.inerted.push(sib);
+      }
+      node = parent;
+    }
+  }
+
+  /** Tab et Maj+Tab bouclent dans la fenêtre. */
+  onModalKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Tab') return;
+    const items = Array.from(this.host.nativeElement.querySelectorAll<HTMLElement>('.modal button, .modal a[href], .modal iframe'));
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement;
+    if (event.shiftKey && (active === first || !items.includes(active as HTMLElement))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && (active === last || !items.includes(active as HTMLElement))) { event.preventDefault(); first.focus(); }
+  }
 
   onModalBackdrop(event: MouseEvent): void {
     if ((event.target as HTMLElement).classList.contains('modal')) {

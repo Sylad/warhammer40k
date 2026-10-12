@@ -374,7 +374,7 @@ const DEFAULT_RESOURCES = [
           <section class="sp">
             <h3>Médias</h3>
             @if (factionVideo(); as v) {
-              <a class="media-card" routerLink="/videos">
+              <a class="media-card" data-testid="carte-une-faction" routerLink="/videos" [queryParams]="{ video: v.id }">
                 <div class="media-thumb" [style.--m-img]="videoThumb()">
                   <span class="play" aria-hidden="true">▶</span>
                   @if (v.duration) { <span class="dur">{{ v.duration }}</span> }
@@ -383,7 +383,7 @@ const DEFAULT_RESOURCES = [
                 <span>{{ v.titre }}</span>
               </a>
             } @else {
-              <a class="media-card" routerLink="/videos">
+              <a class="media-card" data-testid="carte-repli-faction" routerLink="/videos">
                 <div class="media-thumb" [style.--m-img]="neutralThumb(f)">
                   <span class="play" aria-hidden="true">{{ f.symbole }}</span>
                 </div>
