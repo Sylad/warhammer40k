@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vidéos : ouvrir une vidéo par l'adresse — Warhammer 40 000 (maquette L47)</title>
+<style>
+:root{--bg:#050403;--panel:#0b0907;--panel-2:#130f0b;--gold:#c9a24a;--gold-soft:#80652b;--gold-bright:#f0d276;--red:#7b1113;--red-deep:#4a0a0c;--text:#e6dfce;--muted:#8d8678;--border:rgba(201,162,74,.28);--border-strong:rgba(201,162,74,.55);--shadow:0 20px 80px rgba(0,0,0,.75);--serif:'Cinzel',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--topbar-h:70px}
+*{box-sizing:border-box}a{color:inherit;text-decoration:none}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.5 var(--sans)}
+h1,h2,h3{font-family:var(--serif);color:var(--gold-bright);font-weight:600;margin:0}
+.topbar{height:var(--topbar-h);display:flex;align-items:center;gap:22px;padding:0 24px;background:var(--panel);border-bottom:1px solid var(--border)}
+.brand{font:700 1rem var(--serif);color:var(--gold-bright);white-space:nowrap}
+.nav{display:flex;gap:18px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:.8rem;white-space:nowrap}
+.nav span.active{color:var(--gold-bright);border-bottom:2px solid var(--gold)}
+.menu-btn{display:none;margin-left:auto;min-height:44px;padding:0 16px;align-items:center;background:transparent;color:var(--gold-bright);border:1px solid var(--border-strong);font:600 .9rem var(--sans)}
+.etat{display:none}.etat:target{display:block}
+body:not(:has(.etat:target)) #etat-charge{display:block}
+.state-tag{margin:14px 32px 0;color:var(--muted);font:.7rem var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.videos-page{width:min(1440px,calc(100% - 64px));margin:0 auto;padding:20px 0 64px}
+.parcours{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;padding:12px 16px;border:1px dashed var(--border);font-size:13px;color:var(--muted)}
+.parcours .media-card{display:grid;gap:2px;padding:8px 12px;border:1px solid var(--border);background:var(--panel-2);color:var(--text);font-size:13px}
+.parcours .media-card strong{color:var(--gold-bright);font-size:12px;letter-spacing:.06em}
+.parcours code{color:var(--gold-bright);font:12px ui-monospace,monospace;word-break:break-all}
+.hero{position:relative;min-height:150px;border:1px solid var(--border);overflow:hidden;background:var(--panel);box-shadow:var(--shadow),inset 0 0 110px rgba(201,162,74,.045);margin-bottom:20px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a0a08 0%,#050403 100%)}
+.hero-content{position:relative;padding:26px 36px}
+.eyebrow{display:block;color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.hero h1{font-size:clamp(30px,4vw,52px);line-height:.95;letter-spacing:.05em;text-transform:uppercase}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.search{flex:1;min-width:200px;height:44px;padding:0 16px;background:var(--panel);border:1px solid var(--border);color:var(--muted);font:14px var(--sans);display:flex;align-items:center}
+.filter,.add-btn{height:44px;padding:0 16px;display:inline-flex;align-items:center;border:1px solid var(--border);color:var(--text);font:700 12px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.filter.active{border-color:var(--gold);color:var(--gold-bright)}
+.add-btn{border-color:var(--gold);color:var(--gold)}
+.section-head{margin-bottom:14px}.section-head h2{font-size:22px;text-transform:uppercase;letter-spacing:.09em}
+.section-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.video-card{position:relative;min-height:245px;overflow:hidden;border:1px solid rgba(201,162,74,.24);background:radial-gradient(circle at 30% 20%,var(--red-deep) 0,var(--panel-2) 100%);display:flex;align-items:flex-end}
+.video-card.large{min-height:330px}
+.video-content{padding:16px;background:linear-gradient(transparent,rgba(5,4,3,.95));width:100%}
+.video-title{font:600 16px var(--serif);color:var(--gold-bright)}.video-meta{font-size:12px;color:var(--muted)}
+.tag{display:inline-block;margin-right:6px;padding:2px 8px;border:1px solid var(--border);font-size:11px;color:var(--text)}
+.duration{position:absolute;top:12px;right:12px;padding:2px 8px;background:rgba(0,0,0,.7);font-size:12px}
+.msg{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px;padding:14px 18px;border:1px solid var(--border);border-left:3px solid var(--red);background:var(--panel-2);font-size:14px}
+.msg.info{border-left-color:var(--gold)}
+.msg button{min-height:44px;padding:0 18px;background:transparent;border:1px solid var(--gold);color:var(--gold-bright);font:800 12px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.skel{background:linear-gradient(90deg,var(--panel-2),#1b150f,var(--panel-2));border:1px solid var(--border);min-height:245px}
+/* modale */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:34px;background:rgba(0,0,0,.92)}
+.modal-box{position:relative;width:min(1100px,100%);aspect-ratio:16/9;border:1px solid rgba(201,162,74,.42);background:#000;box-shadow:0 40px 150px rgba(0,0,0,.9)}
+.player{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#2a0d0c,#050403);color:var(--gold-bright);font-size:64px}
+.player small{display:block;font:12px var(--sans);color:var(--muted);text-align:center;letter-spacing:.1em}
+.close{position:absolute;top:-1px;right:-1px;z-index:2;width:44px;height:44px;background:rgba(5,4,3,.85);border:1px solid var(--border-strong);color:var(--gold-bright);font-size:24px}
+.modal-cap{position:absolute;left:0;right:0;bottom:-34px;color:var(--text);font:600 14px var(--serif)}
+@media (max-width:1279px){.nav{display:none}.menu-btn{display:inline-flex}}
+@media (max-width:1024px){.featured-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){
+ .videos-page{width:calc(100% - 32px)}.hero-content{padding:20px}.featured-grid{grid-template-columns:1fr}
+ .modal{padding:12px;align-items:center}.modal-box{aspect-ratio:16/9}.modal-cap{bottom:-56px}
+ .player{font-size:40px}.state-tag{margin:10px 16px 0}
+}
+</style></head><body>
+<header class="topbar"><span class="brand">WARHAMMER 40 000</span>
+<nav class="nav"><span>Accueil</span><span>Factions</span><span>Romans</span><span class="active">Vidéos</span><span>Jeux vidéo</span><span>Galerie</span><span>Lore ▾</span><span>À propos ▾</span></nav>
+<span class="menu-btn">Menu</span></header>
+
+<!-- États : #etat-charge (défaut), #etat-chargement, #etat-vide, #etat-erreur -->
+<section class="etat" id="etat-charge">
+<div class="state-tag">État chargé — adresse /videos?video=astartes (arrivée depuis la page Space Marines)</div>
+<main class="videos-page">
+ <div class="parcours" data-testid="carte-une-faction">
+  <a class="media-card" href="#"><strong>Vidéo à la une</strong><span>Astartes — Partie 1</span></a>
+  <span>→ ouvre</span><code>/videos?video=astartes</code>
+ </div>
+ <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
+ <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><span class="filter active">Tous</span><span class="filter">Lore</span><span class="filter">Animations</span><span class="add-btn">+ Ajouter une vidéo</span></section>
+ <section><header class="section-head"><h2>Incontournables</h2><p>Les vidéos à mettre en avant.</p></header>
+ <div class="featured-grid">
+  <article class="video-card large"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><span class="tag">Animation</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></article>
+  <article class="video-card"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></article>
+  <article class="video-card"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></article>
+ </div></section>
+</main>
+<div class="modal" role="dialog" aria-modal="true" aria-label="Astartes — Partie 1" data-testid="modale-video">
+ <div class="modal-box">
+  <button class="close" type="button" aria-label="Fermer" data-testid="bouton-fermer">×</button>
+  <div class="player" data-testid="lecteur-video"><span>▶<small>Lecteur YouTube intégré</small></span></div>
+  <div class="modal-cap" data-testid="titre-video">Astartes — Partie 1</div>
+ </div>
+</div>
+</section>
+
+<section class="etat" id="etat-chargement">
+<div class="state-tag">État chargement — /videos?video=astartes, liste pas encore reçue</div>
+<main class="videos-page">
+ <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
+ <div class="msg info" role="status" data-testid="message-chargement">Chargement de la vidéo…</div>
+ <div class="featured-grid"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+</main>
+</section>
+
+<section class="etat" id="etat-vide">
+<div class="state-tag">État vide — /videos?video=disparue (identifiant inconnu)</div>
+<main class="videos-page">
+ <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
+ <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
+ <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><span class="filter active">Tous</span><span class="filter">Lore</span><span class="add-btn">+ Ajouter une vidéo</span></section>
+ <section data-testid="liste-videos"><header class="section-head"><h2>Incontournables</h2></header>
+ <div class="featured-grid">
+  <article class="video-card large"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></article>
+  <article class="video-card"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></article>
+  <article class="video-card"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></article>
+ </div></section>
+</main>
+</section>
+
+<section class="etat" id="etat-erreur">
+<div class="state-tag">État erreur — /videos?video=astartes, GET /api/videos en échec</div>
+<main class="videos-page">
+ <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
+ <div class="msg" role="alert"><span data-testid="message-erreur">Impossible de charger les vidéos.</span><button type="button" data-testid="bouton-reessayer">Réessayer</button></div>
+</main>
+</section>
+</body></html>

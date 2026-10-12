@@ -1,0 +1,92 @@
+ecran:
+  id: videos-ouvrir
+  titre: Vidéos — ouvrir une vidéo précise par l'adresse
+  route: /videos
+  lot: L47
+  largeurs: [1440, 390]
+  maquette: docs/specs/videos-ouvrir/maquette.html
+etats: [charge, vide, chargement, erreur]
+
+champs:
+  - { id: carte-une-faction, libelle: Carte « Vidéo à la une » du bloc Médias d'une page faction (lien vers /videos?video=<id>), type: bouton, source: "faction-media.ts videoForFaction → id", obligatoire: true }
+  - { id: modale-video, libelle: Fenêtre de lecture ouverte sur la vidéo de l'adresse (role=dialog, aria-modal), type: texte, source: "GET /api/videos → vidéo dont id = paramètre video", obligatoire: true }
+  - { id: lecteur-video, libelle: Lecteur YouTube intégré (ou repli « Ouvrir sur YouTube »), type: texte, source: "GET /api/videos → embedId, embedType, url", obligatoire: true }
+  - { id: titre-video, libelle: Titre de la vidéo ouverte, type: texte, source: "GET /api/videos → titre", obligatoire: true }
+  - { id: bouton-fermer, libelle: Bouton Fermer (×), type: bouton, source: statique, obligatoire: true }
+  - { id: liste-videos, libelle: Liste des vidéos de la page, type: liste, source: "GET /api/videos → items", obligatoire: true }
+  - { id: message-chargement, libelle: Message de chargement, type: texte, source: statique, obligatoire: false }
+  - { id: message-vide, libelle: Message d'identifiant de vidéo inconnu, type: texte, source: statique, obligatoire: false }
+  - { id: message-erreur, libelle: Message d'erreur de chargement, type: texte, source: statique, obligatoire: false }
+  - { id: bouton-reessayer, libelle: Réessayer, type: bouton, source: "action A3", obligatoire: false }
+
+regles:
+  - id: R1
+    etat: charge
+    enonce: La carte « Vidéo à la une » du bloc Médias d'une page faction mène à /videos?video=<identifiant de cette vidéo> au lieu de /videos tout court. La carte de repli « Vidéos » (aucune vidéo pour la faction) reste un lien vers /videos sans paramètre.
+    message: ~
+    champs: [carte-une-faction]
+    statut: sourcee
+    source: "demande du lot L47 : « la carte « Vidéo à la une » ouvre cette vidéo » ; carte actuelle faction-detail.component.ts:377 (routerLink=\"/videos\", sans paramètre)"
+    tests: ["R1 — carte à la une : href /videos?video=astartes sur la page Space Marines", "R1 — carte de repli : href /videos sans paramètre"]
+  - id: R2
+    etat: charge
+    enonce: Quand /videos est chargée avec ?video=<id> et que la liste contient cette vidéo, la fenêtre de lecture s'ouvre sur elle (même fenêtre que le clic sur une carte), quelle que soit la section ou la pagination où la vidéo figure ; elle porte role=dialog, aria-modal et le titre de la vidéo comme nom, et le focus passe au bouton Fermer.
+    message: "Astartes — Partie 1"
+    champs: [modale-video, lecteur-video, titre-video, bouton-fermer, liste-videos]
+    statut: sourcee
+    source: "demande du lot L47 (ouvrir cette vidéo) ; fenêtre existante videos.component.ts:332-350 (openModal, iframe embed ou repli « Ouvrir sur YouTube ») ; le role=dialog et le focus sont une hypothèse (R6)"
+    tests: ["R2 — /videos?video=astartes : la fenêtre s'ouvre sur « Astartes — Partie 1 »", "R2 — vidéo hors des 9 premières de « Toutes les vidéos » : ouverte quand même", "R2 — vidéo sans embedId : repli « Ouvrir sur YouTube »"]
+  - id: R3
+    etat: charge
+    enonce: Fermer la fenêtre (×, Échap, clic sur le fond) retire le paramètre video de l'adresse ; recharger la page ne rouvre donc pas la vidéo. Ouvrir une vidéo depuis la page y écrit le paramètre, pour que l'adresse puisse être partagée.
+    message: ~
+    champs: [bouton-fermer, modale-video]
+    statut: hypothese
+    si_faux: Si l'adresse ne doit pas suivre les ouvertures faites depuis la page, seule l'écriture du paramètre à l'ouverture disparaît ; l'arrivée par adresse (R2) ne change pas.
+    tests: ["R3 — Fermer, Échap et le fond retirent ?video de l'adresse", "R3 — clic sur une carte : ?video=<id> écrit", "R3 — Précédent après fermeture rouvre la vidéo"]
+  - id: R4
+    etat: chargement
+    enonce: Tant que la liste des vidéos n'est pas reçue et que l'adresse porte ?video, la page affiche « Chargement de la vidéo… » (role=status) et des cartes d'attente ; la fenêtre ne s'ouvre pas avant d'avoir la vidéo.
+    message: "Chargement de la vidéo…"
+    champs: [message-chargement]
+    statut: hypothese
+    si_faux: Si la page doit rester sans message de chargement (comportement actuel), seul ce bandeau disparaît ; la liste s'affiche à l'arrivée des données.
+    tests: ["R4 — liste en attente : message de chargement, pas de fenêtre", "R4 — liste reçue : le message disparaît et la fenêtre s'ouvre"]
+  - id: R5
+    etat: vide
+    enonce: Si l'identifiant de l'adresse ne correspond à aucune vidéo, aucune fenêtre ne s'ouvre ; la page affiche la liste entière avec le message d'identifiant inconnu au-dessus (role=status). L'adresse n'est pas réécrite.
+    message: "Cette vidéo n'est plus dans le codex. Voici les autres vidéos."
+    champs: [message-vide, liste-videos]
+    statut: hypothese
+    si_faux: Si l'adresse doit être nettoyée, seule la réécriture du paramètre s'ajoute ; le message ne change pas. Le parti (message + liste entière) reprend celui de la galerie (revue UX L42), sans source écrite pour le texte.
+    tests: ["R5 — /videos?video=disparue : message affiché, liste entière, pas de fenêtre", "R5 — /videos sans paramètre : pas de message"]
+  - id: R6
+    etat: charge
+    enonce: À la fermeture d'une fenêtre ouverte par l'adresse, le focus va au titre h1 de la page (aucun bouton d'origine à retrouver) ; à la fermeture d'une fenêtre ouverte par un clic, il retourne à la carte cliquée.
+    message: ~
+    champs: [bouton-fermer]
+    statut: hypothese
+    si_faux: Si le focus doit rester où le navigateur le met, seule la gestion du focus à la fermeture change.
+    tests: ["R6 — fermeture après arrivée par adresse : focus sur le h1", "R6 — fermeture après clic : focus sur la carte"]
+  - id: R7
+    etat: erreur
+    enonce: Si GET /api/videos échoue, la page affiche l'erreur et un bouton « Réessayer » qui rappelle l'API ; aucune fenêtre ne s'ouvre. Aujourd'hui la page n'a aucun état d'erreur (le flux n'en traite pas).
+    message: "Impossible de charger les vidéos."
+    champs: [message-erreur, bouton-reessayer]
+    statut: hypothese
+    si_faux: Si l'erreur ne doit pas être traitée dans ce lot, seul ce bloc disparaît ; la page reste sans liste (comportement actuel).
+    tests: ["R7 — API en échec : message et bouton Réessayer, role=alert", "R7 — Réessayer rappelle l'API et ouvre la vidéo si elle revient"]
+  - id: R8
+    etat: charge
+    enonce: Le nom du paramètre est « video » (valeur = id de la vidéo, ex. /videos?video=astartes), sur le modèle de ?faction=<id> de la galerie ; une valeur absente ou vide équivaut à /videos.
+    message: ~
+    champs: [modale-video]
+    statut: hypothese
+    si_faux: Si un autre nom ou une ancre (#video-astartes) est préféré, seul le nom change avant livraison ; après livraison, les liens déjà partagés casseraient.
+    tests: ["R8 — ?video= vide : pas de fenêtre, pas de message"]
+
+actions:
+  - { id: A1, declencheur: ~, appel: "GET /api/videos", regles: [R2, R4, R5, R7] }
+  - { id: A2, declencheur: carte-une-faction, appel: "GET /videos?video=<id>", regles: [R1, R2, R8] }
+  - { id: A3, declencheur: bouton-reessayer, appel: "GET /api/videos", regles: [R7] }
+  - { id: A4, declencheur: bouton-fermer, appel: "GET /videos", regles: [R3, R6] }
