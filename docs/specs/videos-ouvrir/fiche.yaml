@@ -5,15 +5,16 @@ ecran:
   lot: L47
   largeurs: [1440, 390]
   maquette: docs/specs/videos-ouvrir/maquette.html
-etats: [charge, vide, chargement, erreur]
+etats: [charge, carte, vide, chargement, erreur]
 
 champs:
   - { id: carte-une-faction, libelle: Carte « Vidéo à la une » du bloc Médias d'une page faction (lien vers /videos?video=<id>), type: bouton, source: "faction-media.ts videoForFaction → id", obligatoire: true }
+  - { id: carte-repli-faction, libelle: Carte de repli « Vidéos / Voir les vidéos » (lien vers /videos sans paramètre), type: bouton, source: "faction-media.ts : faction sans vidéo", obligatoire: false }
   - { id: modale-video, libelle: Fenêtre de lecture ouverte sur la vidéo de l'adresse (role=dialog, aria-modal), type: texte, source: "GET /api/videos → vidéo dont id = paramètre video", obligatoire: true }
   - { id: lecteur-video, libelle: Lecteur YouTube intégré (ou repli « Ouvrir sur YouTube »), type: texte, source: "GET /api/videos → embedId, embedType, url", obligatoire: true }
   - { id: titre-video, libelle: Titre de la vidéo ouverte, type: texte, source: "GET /api/videos → titre", obligatoire: true }
   - { id: bouton-fermer, libelle: Bouton Fermer (×), type: bouton, source: statique, obligatoire: true }
-  - { id: liste-videos, libelle: Liste des vidéos de la page, type: liste, source: "GET /api/videos → items", obligatoire: true }
+  - { id: liste-videos, libelle: Section « Toutes les vidéos » (rangées et bouton « Charger plus… »), type: liste, source: "GET /api/videos → items", obligatoire: true }
   - { id: message-chargement, libelle: Message de chargement, type: texte, source: statique, obligatoire: false }
   - { id: message-vide, libelle: Message d'identifiant de vidéo inconnu, type: texte, source: statique, obligatoire: false }
   - { id: message-erreur, libelle: Message d'erreur de chargement, type: texte, source: statique, obligatoire: false }
@@ -21,21 +22,21 @@ champs:
 
 regles:
   - id: R1
-    etat: charge
+    etat: carte
     enonce: La carte « Vidéo à la une » du bloc Médias d'une page faction mène à /videos?video=<identifiant de cette vidéo> au lieu de /videos tout court. La carte de repli « Vidéos » (aucune vidéo pour la faction) reste un lien vers /videos sans paramètre.
     message: ~
-    champs: [carte-une-faction]
+    champs: [carte-une-faction, carte-repli-faction]
     statut: sourcee
     source: "demande du lot L47 : « la carte « Vidéo à la une » ouvre cette vidéo » ; carte actuelle faction-detail.component.ts:377 (routerLink=\"/videos\", sans paramètre)"
     tests: ["R1 — carte à la une : href /videos?video=astartes sur la page Space Marines", "R1 — carte de repli : href /videos sans paramètre"]
   - id: R2
     etat: charge
-    enonce: Quand /videos est chargée avec ?video=<id> et que la liste contient cette vidéo, la fenêtre de lecture s'ouvre sur elle (même fenêtre que le clic sur une carte), quelle que soit la section ou la pagination où la vidéo figure ; elle porte role=dialog, aria-modal et le titre de la vidéo comme nom, et le focus passe au bouton Fermer.
+    enonce: Quand /videos est chargée avec ?video=<id> et que la liste contient cette vidéo, la fenêtre de lecture s'ouvre sur elle (même fenêtre que le clic sur une carte), quelle que soit la section ou la pagination où la vidéo figure ; elle porte role=dialog, aria-modal et le titre de la vidéo comme nom, et le focus passe au bouton Fermer. Tant qu'elle est ouverte, Tab et Maj+Tab restent dans la fenêtre (Fermer, lecteur, lien « Ouvrir sur YouTube ») et bouclent ; le reste de la page (en-tête, contenu) est inerte.
     message: "Astartes — Partie 1"
     champs: [modale-video, lecteur-video, titre-video, bouton-fermer, liste-videos]
     statut: sourcee
     source: "demande du lot L47 (ouvrir cette vidéo) ; fenêtre existante videos.component.ts:332-350 (openModal, iframe embed ou repli « Ouvrir sur YouTube ») ; le role=dialog et le focus sont une hypothèse (R6)"
-    tests: ["R2 — /videos?video=astartes : la fenêtre s'ouvre sur « Astartes — Partie 1 »", "R2 — vidéo hors des 9 premières de « Toutes les vidéos » : ouverte quand même", "R2 — vidéo sans embedId : repli « Ouvrir sur YouTube »"]
+    tests: ["R2 — /videos?video=astartes : la fenêtre s'ouvre sur « Astartes — Partie 1 »", "R2 — vidéo hors des 9 premières de « Toutes les vidéos » : ouverte quand même", "R2 — vidéo sans embedId : repli « Ouvrir sur YouTube »", "R2 — Tab et Maj+Tab bouclent dans la fenêtre, le fond est inerte"]
   - id: R3
     etat: charge
     enonce: Fermer la fenêtre (×, Échap, clic sur le fond) retire le paramètre video de l'adresse ; recharger la page ne rouvre donc pas la vidéo. Ouvrir une vidéo depuis la page y écrit le paramètre, pour que l'adresse puisse être partagée.

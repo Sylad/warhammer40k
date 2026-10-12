@@ -48,12 +48,17 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
 .player{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#2a0d0c,#050403);color:var(--gold-bright);font-size:64px}
 .player small{display:block;font:12px var(--sans);color:var(--muted);text-align:center;letter-spacing:.1em}
 .close{position:absolute;top:-1px;right:-1px;z-index:2;width:44px;height:44px;background:rgba(5,4,3,.85);border:1px solid var(--border-strong);color:var(--gold-bright);font-size:24px}
+.yt{position:absolute;right:0;bottom:-34px;color:var(--gold);font:600 13px var(--sans);text-decoration:underline}
+.rows{display:grid;gap:10px}.row{display:flex;gap:14px;align-items:center;padding:10px;border:1px solid var(--border);background:var(--panel-2)}.thumb{width:120px;height:68px;background:linear-gradient(135deg,var(--red-deep),var(--bg));flex:none}
+.more{margin:16px 0 0}
+.carte-bloc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:760px;margin:12px 0 24px}.carte-bloc .media-card{display:grid;gap:4px;padding:16px;border:1px solid var(--border-strong);background:var(--panel-2);min-height:88px}.carte-bloc .media-card strong{color:var(--gold-bright);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.carte-bloc code{color:var(--muted);font:12px ui-monospace,monospace;word-break:break-all}
 .modal-cap{position:absolute;left:0;right:0;bottom:-34px;color:var(--text);font:600 14px var(--serif)}
 @media (max-width:1279px){.nav{display:none}.menu-btn{display:inline-flex}}
 @media (max-width:1024px){.featured-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){
+ .carte-bloc{grid-template-columns:1fr}
  .videos-page{width:calc(100% - 32px)}.hero-content{padding:20px}.featured-grid{grid-template-columns:1fr}
- .modal{padding:12px;align-items:center}.modal-box{aspect-ratio:16/9}.modal-cap{bottom:-56px}
+ .modal{padding:12px;align-items:center}.modal-box{aspect-ratio:16/9}.modal-cap{bottom:-56px}.yt{bottom:-30px}.modal-cap{max-width:60%}
  .player{font-size:40px}.state-tag{margin:10px 16px 0}
 }
 </style></head><body>
@@ -61,14 +66,10 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
 <nav class="nav"><span>Accueil</span><span>Factions</span><span>Romans</span><span class="active">Vidéos</span><span>Jeux vidéo</span><span>Galerie</span><span>Lore ▾</span><span>À propos ▾</span></nav>
 <span class="menu-btn">Menu</span></header>
 
-<!-- États : #etat-charge (défaut), #etat-chargement, #etat-vide, #etat-erreur -->
+<!-- États : #etat-carte,  #etat-charge (défaut), #etat-chargement, #etat-vide, #etat-erreur -->
 <section class="etat" id="etat-charge">
 <div class="state-tag">État chargé — adresse /videos?video=astartes (arrivée depuis la page Space Marines)</div>
-<main class="videos-page">
- <div class="parcours" data-testid="carte-une-faction">
-  <a class="media-card" href="#"><strong>Vidéo à la une</strong><span>Astartes — Partie 1</span></a>
-  <span>→ ouvre</span><code>/videos?video=astartes</code>
- </div>
+<main class="videos-page" inert>
  <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
  <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><span class="filter active">Tous</span><span class="filter">Lore</span><span class="filter">Animations</span><span class="add-btn">+ Ajouter une vidéo</span></section>
  <section><header class="section-head"><h2>Incontournables</h2><p>Les vidéos à mettre en avant.</p></header>
@@ -77,14 +78,33 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
   <article class="video-card"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></article>
   <article class="video-card"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></article>
  </div></section>
+ <section data-testid="liste-videos"><header class="section-head"><h2>Toutes les vidéos</h2><p>9 vidéos affichées sur 24.</p></header>
+ <div class="rows">
+  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Astartes — Partie 2</h3><div class="video-meta">Syama Pedersen · 18:02</div></div></article>
+  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Ultramarines — Le film</h3><div class="video-meta">Codex Films · 1:16:00</div></div></article>
+  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Les Primarques en bref</h3><div class="video-meta">Chaîne lore · 12:40</div></div></article>
+ </div>
+ <p class="more"><span class="add-btn">Charger plus…</span></p></section>
 </main>
 <div class="modal" role="dialog" aria-modal="true" aria-label="Astartes — Partie 1" data-testid="modale-video">
  <div class="modal-box">
   <button class="close" type="button" aria-label="Fermer" data-testid="bouton-fermer">×</button>
   <div class="player" data-testid="lecteur-video"><span>▶<small>Lecteur YouTube intégré</small></span></div>
   <div class="modal-cap" data-testid="titre-video">Astartes — Partie 1</div>
+  <a class="yt" href="https://www.youtube.com/watch?v=astartes">Ouvrir sur YouTube</a>
  </div>
 </div>
+</section>
+
+<section class="etat" id="etat-carte">
+<div class="state-tag">État carte — page faction (Space Marines), bloc Médias : les deux variantes de la carte</div>
+<main class="videos-page">
+ <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Faction</span><h1>Space Marines</h1></div></header>
+ <section><header class="section-head"><h2>Médias</h2><p>Faction avec une vidéo : la carte mène à cette vidéo.</p></header>
+ <div class="carte-bloc"><a class="media-card" href="/videos?video=astartes" data-testid="carte-une-faction"><strong>Vidéo à la une</strong><span>Astartes — Partie 1</span><code>→ /videos?video=astartes</code></a></div>
+ <header class="section-head"><p>Faction sans vidéo : la carte de repli reste un lien vers la page.</p></header>
+ <div class="carte-bloc"><a class="media-card" href="/videos" data-testid="carte-repli-faction"><strong>Vidéos</strong><span>Voir les vidéos</span><code>→ /videos</code></a></div></section>
+</main>
 </section>
 
 <section class="etat" id="etat-chargement">
@@ -102,12 +122,20 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
  <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
  <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
  <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><span class="filter active">Tous</span><span class="filter">Lore</span><span class="add-btn">+ Ajouter une vidéo</span></section>
- <section data-testid="liste-videos"><header class="section-head"><h2>Incontournables</h2></header>
+ <section><header class="section-head"><h2>Incontournables</h2></header>
  <div class="featured-grid">
   <article class="video-card large"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></article>
   <article class="video-card"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></article>
   <article class="video-card"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></article>
  </div></section>
+
+ <section data-testid="liste-videos"><header class="section-head"><h2>Toutes les vidéos</h2><p>9 vidéos affichées sur 24.</p></header>
+ <div class="rows">
+  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Astartes — Partie 2</h3><div class="video-meta">Syama Pedersen · 18:02</div></div></article>
+  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Ultramarines — Le film</h3><div class="video-meta">Codex Films · 1:16:00</div></div></article>
+  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Les Primarques en bref</h3><div class="video-meta">Chaîne lore · 12:40</div></div></article>
+ </div>
+ <p class="more"><span class="add-btn">Charger plus…</span></p></section>
 </main>
 </section>
 
