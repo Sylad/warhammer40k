@@ -1,0 +1,6 @@
+{
+  "lot": "L35",
+  "fiche": "docs/specs/jeux-video/fiche.yaml",
+  "fichiers": ["frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts"],
+  "vert": false
+}
