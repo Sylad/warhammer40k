@@ -362,7 +362,7 @@ lots:
   - id: L47
     title: "Bloc Médias : la carte « Vidéo à la une » ouvre cette vidéo — la page /videos n'a aujourd'hui ni paramètre d'adresse ni ancre pour ouvrir une vidéo précise, à créer (revue UX L42, Nielsen #2/#4)"
     public: "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     screen: journey
@@ -374,7 +374,10 @@ lots:
       - { date: 2026-10-12, text: "Reprise 12-10 (3e rendu, 1 seul majeur) : dans docs/specs/videos-ouvrir/maquette.html (cartes de « Toutes les vidéos », lignes ~93-95 et ~144-146) placer le <button> « Supprimer la vidéo » APRÈS .video-content (qui contient le lien étiré) : ordre DOM = ordre de tabulation lien puis bouton (R9). Rien d autre dans la maquette ; le z-index garde le ✕ cliquable. Les 6 mineurs restent des notes." }
       - { date: 2026-10-12, text: "DÉCISION LEAD 12-10 (rendu non conforme après 2 passes, vague 2026-10-12-1250). [bloquant] le test d acceptation L47 est un test de bout en bout (dist + Chromium) : à vert: true il entre dans npx vitest run (suite unitaire) et la CI « Contrôles frontend » rougit (pas de dist ni de Chromium à cette étape). Solution SANS toucher au test scellé : la CONFIG range les *.acceptation.spec.ts qui pilotent un navigateur avec les e2e (exclus de vitest.config.ts quel que soit vert, inclus dans la config/étape e2e qui tourne après npm run build avec Chromium installé, comme topbar.e2e.spec.ts) ; testTimeout 30 s pour ces fichiers dans la config e2e (majeur : R3 ≈ 2,5 s, a dépassé 5 s sous charge). Vérifier : npx vitest run (unitaire) vert sans dist, puis la commande e2e verte après build. Les 2 mineurs (focus h1 hors écran après Précédent/Suivant/Échap ; aucun test de conservation du défilement) restent des notes." }
       - { date: 2026-10-12, text: "Reprise 12-10 (rendu après 2 passes, vague 2026-10-12-1400, revue 9 « conforme après 1 correction » mais 1 majeur restant) — SEUL point : faction-detail.component.scss:580 — max-height: calc(100vh - var(--anchor-offset)) et overflow-y: auto du .sidebar ne valent que quand elle est collée : les remettre à none/visible dans @media (max-width: 1280px) (l. 864) ou ne les poser que dans le contexte sticky ; test e2e : à 390×844 et 1024×768 sur /factions/space-marines, la colonne n est pas bornée (scrollHeight == clientHeight) et la carte « Vidéo à la une » est atteignable par le défilement de la page. Faire aussi (doc) : CLAUDE.md:267 — les acceptations qui importent playwright-core tournent par npm run test:e2e, exclues de vitest.config.ts quel que soit vert. Les 2 autres mineurs restent des notes." }
+      - { date: 2026-10-12, text: "Mineurs UX (revue de conformité 12-10, notes) : bandeau d'état des états vide/chargement/erreur placé au-dessus du hero (maquette : dessous) ; ✕ posé 52 px au-dessus du lecteur ; « Ouvrir sur YouTube ↗ » rendu en bouton doré 12 px majuscules (maquette : lien)." }
     review: { date: 2026-10-12, verdict: "conforme — orchestré (vague 2026-10-12-1500, 2 passe(s) de correction + passe des mineurs)", commit: e84687a379737bcd0ba71c3863d2b9abfc0efa55 }
+    ux: { date: 2026-10-12, verdict: "conforme (posé par le lead, règle L197) : captures regardées — carte « Vidéo à la une » en lien vers /videos?video=, fenêtre ouverte par l'adresse, ✕ et lien YouTube ; mineurs en notes (bandeau d'état au-dessus du hero, ✕ hors du lecteur, « Ouvrir sur YouTube » stylé en bouton) ; ▶ qui chevauche les titres de 3 lignes à 1440 suivi en lot" }
+    finished: 2026-10-12
   - id: L48
     title: "Galerie : cas étroits de la liaison adresse ↔ filtres — action pendant une navigation de sortie lente qui l'annule, clic sur « Galerie » pendant l'anti-rebond perdu, écho resté armé sur une réécriture de fragment seul, échec silencieux des images personnelles ; deux chemins de 6da3576 sans test dédié (3e relecture L42)"
     status: todo
@@ -946,6 +949,11 @@ lots:
     started: 2026-10-11
     review: { date: 2026-10-11, verdict: "conforme — orchestré (vague 2026-10-11-1845, 0 passe(s) de correction + passe des mineurs)", commit: bdafe80d04a49b290de2f49aa2eecab94a62336c }
     finished: 2026-10-11
+  - id: L107
+    title: "Vidéos à 1440 px : le carré ▶ de 62 px centré sur la carte chevauche le titre quand il fait 3 lignes (« Toutes les vidéos ») — placer le ▶ sur la vignette, pas au centre de la carte ; test (UX L47)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-12
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
