@@ -7,7 +7,7 @@ import type { Server } from 'node:http';
 import type { Browser } from 'playwright-core';
 import { distState, startDistServer } from '../../../testing/dist-server';
 
-const { built, stale } = distState(['src/app/features/faction-detail/faction-detail.component.scss']);
+const { built, stale } = distState(['src/app/features/faction-detail/faction-detail.component.scss', 'src/app/features/faction-detail/faction-detail.component.ts']);
 let chromium: typeof import('playwright-core').chromium | null = null;
 try {
   chromium = (await import('playwright-core')).chromium;
@@ -55,4 +55,22 @@ describe.skipIf(!built || !chromium)('colonne latérale de la page faction (navi
       await page.close();
     }, 60_000);
   }
+
+  it('L47 — 1440×900 : la carte « Vidéo à la une » est entièrement visible sans défilement de la colonne (colonne collée)', async () => {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.goto(`${base}/factions/space-marines`);
+    await page.locator('main h1').waitFor();
+    const carte = page.locator('[data-testid="carte-une-faction"]');
+    await carte.waitFor();
+    await page.evaluate(() => window.scrollTo(0, 1200)); // colonne collée
+    await page.waitForTimeout(200);
+    const m = await page.evaluate(() => {
+      const side = document.querySelector('.sidebar')!.getBoundingClientRect();
+      const c = document.querySelector('[data-testid="carte-une-faction"]')!.getBoundingClientRect();
+      return { sideTop: side.top, sideBottom: side.bottom, top: c.top, bottom: c.bottom, vh: innerHeight };
+    });
+    expect(m.top).toBeGreaterThanOrEqual(m.sideTop);
+    expect(m.bottom).toBeLessThanOrEqual(Math.min(m.sideBottom, m.vh));
+    await page.close();
+  }, 60_000);
 });

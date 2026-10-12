@@ -352,24 +352,6 @@ const DEFAULT_RESOURCES = [
             }
           </section>
 
-          @if (hasStats()) {
-            <section class="sp">
-              <h3>Statistiques</h3>
-              @if (f.stats?.chapitresConnus) {
-                <div class="row-stat"><span>Chapitres connus</span><strong>{{ f.stats!.chapitresConnus }}</strong></div>
-              }
-              @if (f.stats?.effectifs) {
-                <div class="row-stat"><span>Effectifs estimés</span><strong>{{ f.stats!.effectifs }}</strong></div>
-              }
-              @if (f.stats?.mondeOrigine) {
-                <div class="row-stat"><span>Monde d'origine</span><strong>{{ f.stats!.mondeOrigine }}</strong></div>
-              }
-              @if (f.stats?.allegiance) {
-                <div class="row-stat"><span>Allégeance</span><strong>{{ f.stats!.allegiance }}</strong></div>
-              }
-            </section>
-          }
-
           <!-- L42 : vidéo et illustration DE la faction, sinon visuel neutre (symbole de la faction). -->
           <section class="sp">
             <h3>Médias</h3>
@@ -409,6 +391,24 @@ const DEFAULT_RESOURCES = [
               </a>
             }
           </section>
+
+          @if (hasStats()) {
+            <section class="sp">
+              <h3>Statistiques</h3>
+              @if (f.stats?.chapitresConnus) {
+                <div class="row-stat"><span>Chapitres connus</span><strong>{{ f.stats!.chapitresConnus }}</strong></div>
+              }
+              @if (f.stats?.effectifs) {
+                <div class="row-stat"><span>Effectifs estimés</span><strong>{{ f.stats!.effectifs }}</strong></div>
+              }
+              @if (f.stats?.mondeOrigine) {
+                <div class="row-stat"><span>Monde d'origine</span><strong>{{ f.stats!.mondeOrigine }}</strong></div>
+              }
+              @if (f.stats?.allegiance) {
+                <div class="row-stat"><span>Allégeance</span><strong>{{ f.stats!.allegiance }}</strong></div>
+              }
+            </section>
+          }
 
           <section class="sp">
             <h3>Ressources</h3>
