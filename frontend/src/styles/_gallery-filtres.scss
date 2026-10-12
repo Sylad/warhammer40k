@@ -7,10 +7,10 @@
 .gallery-page {
   /* le panneau précède la grille dans le DOM ; la grille CSS le replace en haut de la colonne de droite */
   .layout { grid-template-areas: "main filtres" "main aside"; grid-template-rows: var(--filtres-h, 17rem) 1fr; }
-  /* R2 : le panneau couvre les deux rangées de la colonne (zone de collage sticky), les Artistes occupent la 2e */
-  .p-filtres { grid-column: 2; grid-row: 1 / 3; align-self: start; position: sticky; top: 96px; z-index: 1; }
+  /* R2 : le panneau est en tête de la colonne de droite (rangée 1) ; l'aside (Artistes, Collections) reste collant comme avant L49, en rangée 2 */
+  .p-filtres { grid-column: 2; grid-row: 1; align-self: start; }
   .main-col { grid-area: main; }
-  .sidebar { grid-column: 2; grid-row: 2; position: static; }
+  .sidebar { grid-column: 2; grid-row: 2; }
   .import-btn-hero.btn-filtres { display: none; }
   /* WCAG 1.4.3 : ces boutons reposent sur la photo du bandeau ; fond opaque (maquette : var(--panel)), teinte or au survol */
   .hero .import-btn-hero { background: var(--panel); }

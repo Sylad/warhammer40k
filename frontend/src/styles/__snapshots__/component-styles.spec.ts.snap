@@ -1631,10 +1631,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".gallery-page .p-filtres": {
     "align-self": "start",
     "grid-column": "2",
-    "grid-row": "1/3",
-    "position": "sticky",
-    "top": "96px",
-    "z-index": "1",
+    "grid-row": "1",
   },
   ".gallery-page .panel-count": {
     "border-top": "1px solid var(--border)",
@@ -1653,7 +1650,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".gallery-page .sidebar": {
     "grid-column": "2",
     "grid-row": "2",
-    "position": "static",
   },
   ".gallery-page .skel": {
     "aspect-ratio": "3/4",

@@ -1,6 +1,6 @@
 // @vitest-environment node
-// L49 (relecture) — navigateur réel, application construite (dist) : R2 le panneau Filtres reste à l'écran
-// au défilement (bureau), R12 reflow à 320 px de l'état vide, R6 rappel visible à 390 px dans l'application
+// L49 (relecture) — navigateur réel, application construite (dist) : R2 l'aside (Artistes, Collections) reste collant et
+// n'est jamais recouvert au défilement (bureau), R12 reflow à 320 px de l'état vide, R6 rappel visible à 390 px dans l'application
 // en marche (polices chargées), R8/R9 message et Réessayer dans le premier écran à 1440×900.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
@@ -15,7 +15,7 @@ try {
   chromium = null;
 }
 
-const FACTIONS = [{ id: 'space-marines', nom: 'Space Marines' }, { id: 'necrons', nom: 'Nécrons' }];
+const FACTIONS = [{ id: 'space-marines', nom: 'Space Marines' }, { id: 'necrons', nom: 'Nécrons' }, { id: 'grey-knights', nom: 'Chevaliers Gris' }];
 const ARTWORKS = Array.from({ length: 30 }, (_, i) => ({
   id: `aw-${i + 1}`, title: `Œuvre ${i + 1}`, artist: `Artiste ${(i % 7) + 1}`, image: `img-${i + 1}.jpg`,
   category: i < 9 ? 'Space Marines' : 'Xénos', faction: i < 9 ? 'space-marines' : 'necrons', likes: i + 1,
@@ -34,7 +34,7 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
     server?.close();
   });
 
-  async function open(width: number, height: number, mode: 'ok' | 'chargement' | 'erreur' = 'ok'): Promise<Page> {
+  async function open(width: number, height: number, mode: 'ok' | 'chargement' | 'erreur' | 'vide' = 'ok', query = ''): Promise<Page> {
     const page = await browser.newPage();
     page.setDefaultTimeout(6000);
     const json = (r: Route, body: unknown, status = 200) => r.fulfill({ status, contentType: 'application/json', body: JSON.stringify(body) });
@@ -52,8 +52,8 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
       return json(route, []);
     });
     await page.setViewportSize({ width, height });
-    await page.goto(base + '/gallery');
-    await page.locator(mode === 'ok' ? '[data-testid="grille-oeuvres"]' : mode === 'erreur' ? '[data-testid="message-erreur"]' : '[data-testid="message-chargement"]').waitFor();
+    await page.goto(base + '/gallery' + query);
+    await page.locator(mode === 'vide' ? '[data-testid="rappel-vide"]' : mode === 'ok' ? '[data-testid="grille-oeuvres"]' : mode === 'erreur' ? '[data-testid="message-erreur"]' : '[data-testid="message-chargement"]').waitFor();
     await page.evaluate(() => document.fonts.ready);
     return page;
   }
@@ -62,18 +62,32 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
     expect(stale).toBe(false);
   });
 
-  it('R2 — 1440 px : le panneau Filtres reste à l\'écran quand on défile la grille', async () => {
+  it('R2 — 1440 px : après 1200 px de défilement, le panneau Artistes n\'est pas recouvert et son premier bouton est visible', async () => {
     const page = await open(1440, 900);
-    await page.evaluate(() => window.scrollTo(0, 1500));
+    await page.evaluate(() => window.scrollTo(0, 1200));
     await page.waitForTimeout(200);
     const m = await page.evaluate(() => {
-      const r = document.querySelector('[data-testid="panneau-filtres"]')!.getBoundingClientRect();
-      return { top: r.top, bottom: r.bottom, y: window.scrollY };
+      const panneau = [...document.querySelectorAll('.sidebar .side-panel')].find((p) => p.querySelector('h3')?.textContent?.includes('Artistes'))!;
+      const r = panneau.getBoundingClientRect();
+      const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      const btn = panneau.querySelector('button')!.getBoundingClientRect();
+      return { y: window.scrollY, r: { top: r.top, bottom: r.bottom }, dessus: !!top && panneau.contains(top), btn: { top: btn.top, bottom: btn.bottom } };
     });
     await page.close();
     expect(m.y).toBeGreaterThan(1000);
-    expect(m.top, JSON.stringify(m)).toBeGreaterThanOrEqual(0);
-    expect(m.bottom, JSON.stringify(m)).toBeLessThanOrEqual(900);
+    expect(m.dessus, JSON.stringify(m)).toBe(true);
+    expect(m.btn.top, JSON.stringify(m)).toBeGreaterThanOrEqual(0);
+    expect(m.btn.bottom, JSON.stringify(m)).toBeLessThanOrEqual(900);
+  }, 30_000);
+
+  it('R12 — 390 px : une faction connue sans illustration (?faction=) montre le rappel avec son message propre et Réinitialiser', async () => {
+    const page = await open(390, 844, 'vide', '?faction=grey-knights');
+    const txt = await page.getByTestId('rappel-vide').innerText();
+    const btn = await page.getByTestId('bouton-reinitialiser-rappel').boundingBox();
+    await page.close();
+    expect(txt).toContain('Aucune illustration de la faction Chevaliers Gris');
+    expect(btn!.height).toBeGreaterThanOrEqual(44);
+    expect(btn!.y + btn!.height).toBeLessThanOrEqual(844);
   }, 30_000);
 
   it('R2 — 1440 px : le panneau Filtres ne recouvre pas les Artistes', async () => {

@@ -75,10 +75,10 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <span class="caret" aria-hidden="true">{{ filtersOpen() ? '▲' : '▼' }}</span>
               </button>
             </div>
-            @if (catalogReady() && totalFiltered() === 0 && !emptyFactionName()) {
+            @if (catalogReady() && totalFiltered() === 0) {
               <!-- L49/R12 : au téléphone, le vide se voit dans le premier écran, sous la recherche. -->
               <div class="rappel-vide" data-testid="rappel-vide">
-                <span class="rv-text">Aucune œuvre ne correspond</span>
+                <span class="rv-text">{{ emptyFactionName() ? 'Aucune illustration de la faction ' + emptyFactionName() + ' pour l’instant' : 'Aucune œuvre ne correspond' }}</span>
                 <button type="button" class="reset-btn" data-testid="bouton-reinitialiser-rappel" (click)="resetFilters()">Réinitialiser les filtres</button>
               </div>
             }
