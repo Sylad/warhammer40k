@@ -446,9 +446,10 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .drawer a {
       display: flex; align-items: center; gap: 10px; min-height: 48px;
       border-bottom: 1px solid rgba(201, 162, 74, 0.12); color: var(--text);
+      border-left: 3px solid transparent; padding-left: 8px;
       font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     }
-    .drawer a.active { color: var(--gold); }
+    .drawer a.active { color: var(--gold); border-left-color: var(--gold); }
     @media (prefers-reduced-motion: reduce) {
       .drawer, .drawer.open, .drawer-backdrop { transition: none; }
     }
