@@ -4,7 +4,7 @@
   "fichiers": [
     "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts"
   ],
-  "vert": false,
+  "vert": true,
   "empreintes": {
     "frontend/src/app/features/jeux-video/jeux-video-l35.acceptation.spec.ts": "f6ff6b6d2baff36b8831c0abb01a480d3b2e4356"
   },
