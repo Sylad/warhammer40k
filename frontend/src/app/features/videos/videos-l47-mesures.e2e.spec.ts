@@ -136,4 +136,20 @@ describe.skipIf(!built || stale || !chromium)('L47 — mesures de la page /video
     expect(Number(m.o)).toBeGreaterThan(0.5);
     await page.close();
   });
+  it('R2 — fenêtre basse (1366×650, 1280×600, 844×390) : Fermer et « Ouvrir sur YouTube » restent à l\'écran', async () => {
+    for (const [w, h] of [[1366, 650], [1280, 600], [844, 390]] as const) {
+      for (const id of ['astartes', 'flashgitz-space-king']) {
+        const page = await browser.newPage({ viewport: { width: w, height: h } });
+        await page.goto(`${base}/videos?video=${id}`, { waitUntil: 'networkidle' });
+        const m = await page.evaluate(() => {
+          const r = (s: string) => document.querySelector(s)?.getBoundingClientRect();
+          return { close: r('[data-testid="bouton-fermer"]'), link: r('.modal-link'), box: r('.modal-box') };
+        });
+        expect(m.close && m.close.top >= 0 && m.close.bottom <= h).toBe(true);
+        expect(m.link && m.link.top >= 0 && m.link.bottom <= h).toBe(true);
+        expect(m.box && m.box.height >= 150).toBe(true);
+        await page.close();
+      }
+    }
+  });
 });

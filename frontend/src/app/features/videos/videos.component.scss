@@ -709,7 +709,9 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .modal-box {
       position: relative;
-      width: min(1100px, 100%);
+      /* Largeur bornée aussi par la hauteur de l'écran : × (52 px au-dessus) et lien/légende (40 px dessous) restent visibles. */
+      width: min(1100px, 100%, calc((100vh - 190px) * 16 / 9));
+      width: min(1100px, 100%, calc((100dvh - 190px) * 16 / 9));
       aspect-ratio: 16 / 9;
       border: 1px solid rgba(201, 162, 74, 0.42);
       background: #000;
