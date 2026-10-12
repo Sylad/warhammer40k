@@ -6,7 +6,7 @@
   ],
   "vert": false,
   "empreintes": {
-    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "597c5f3eee2c300ca6bc2b64f39a4c9f8b67d341"
+    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "5355d61e935ac80e7a93f19b71633f5b50d62fcc"
   },
   "resceaux": [
     {
@@ -15,6 +15,13 @@
       "date": "2026-10-12",
       "avant": "ed5b3d089510461b73a451453edf93bd8497e078",
       "apres": "597c5f3eee2c300ca6bc2b64f39a4c9f8b67d341"
+    },
+    {
+      "test": "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts",
+      "raison": "test « R10 — Artistes et Collections après la pagination » : simulate() renvoyait [] pour /api/artwork-artists (source des artistes de la galerie depuis 9c85b76, avant L49), le panneau Artistes n'avait rien de focalisable et R10 ne pouvait pas passer ; seul ajout : une route /api/artwork-artists à 2 artistes cohérents avec ARTWORKS",
+      "date": "2026-10-12",
+      "avant": "597c5f3eee2c300ca6bc2b64f39a4c9f8b67d341",
+      "apres": "5355d61e935ac80e7a93f19b71633f5b50d62fcc"
     }
   ]
 }

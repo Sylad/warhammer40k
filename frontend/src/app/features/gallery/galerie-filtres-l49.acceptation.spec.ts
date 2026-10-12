@@ -43,6 +43,7 @@ async function simulate(page: Page, mode: Mode = 'ok'): Promise<Sim> {
     }
     if (path === '/api/factions') return json(route, FACTIONS);
     if (path === '/api/artwork-collections') return json(route, COLLECTIONS);
+    if (path === '/api/artwork-artists') return json(route, [{ id: 'artiste-1', name: 'Artiste 1', artworkCount: 5 }, { id: 'artiste-2', name: 'Artiste 2', artworkCount: 4 }]);
     if (path === '/api/images') return json(route, []);
     if (path.startsWith('/api/wiki-image')) return json(route, { imageUrl: null });
     if (path.startsWith('/api/image-meta') || path.startsWith('/api/demo')) return json(route, {});
