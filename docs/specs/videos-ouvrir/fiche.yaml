@@ -10,6 +10,7 @@ etats: [charge, carte, vide, chargement, erreur]
 champs:
   - { id: carte-une-faction, libelle: Carte « Vidéo à la une » du bloc Médias d'une page faction (lien vers /videos?video=<id>), type: bouton, source: "faction-media.ts videoForFaction → id", obligatoire: true }
   - { id: carte-repli-faction, libelle: Carte de repli « Vidéos / Voir les vidéos » (lien vers /videos sans paramètre), type: bouton, source: "faction-media.ts : faction sans vidéo", obligatoire: false }
+  - { id: carte-video, libelle: "Carte vidéo de /videos (Incontournables, Toutes les vidéos) : lien <a href=\"/videos?video=<id>\">", type: bouton, source: "GET /api/videos → items[].id", obligatoire: true }
   - { id: modale-video, libelle: Fenêtre de lecture ouverte sur la vidéo de l'adresse (role=dialog, aria-modal), type: texte, source: "GET /api/videos → vidéo dont id = paramètre video", obligatoire: true }
   - { id: lecteur-video, libelle: Lecteur YouTube intégré (ou repli « Ouvrir sur YouTube »), type: texte, source: "GET /api/videos → embedId, embedType, url", obligatoire: true }
   - { id: titre-video, libelle: Titre de la vidéo ouverte, type: texte, source: "GET /api/videos → titre", obligatoire: true }
@@ -63,12 +64,12 @@ regles:
     tests: ["R5 — /videos?video=disparue : message affiché, liste entière, pas de fenêtre", "R5 — /videos sans paramètre : pas de message"]
   - id: R6
     etat: charge
-    enonce: À la fermeture d'une fenêtre ouverte par l'adresse, le focus va au titre h1 de la page (aucun bouton d'origine à retrouver) ; à la fermeture d'une fenêtre ouverte par un clic, il retourne à la carte cliquée.
+    enonce: À la fermeture d'une fenêtre ouverte par l'adresse, le focus va au titre h1 de la page (aucun bouton d'origine à retrouver) ; à la fermeture d'une fenêtre ouverte par un clic ou par Entrée, il retourne au lien <a> de la carte activée (carte-video).
     message: ~
-    champs: [bouton-fermer]
+    champs: [bouton-fermer, carte-video]
     statut: hypothese
     si_faux: Si le focus doit rester où le navigateur le met, seule la gestion du focus à la fermeture change.
-    tests: ["R6 — fermeture après arrivée par adresse : focus sur le h1", "R6 — fermeture après clic : focus sur la carte"]
+    tests: ["R6 — fermeture après arrivée par adresse : focus sur le h1", "R6 — fermeture après clic ou Entrée : focus sur le lien de la carte"]
   - id: R7
     etat: erreur
     enonce: Si GET /api/videos échoue, la page affiche l'erreur et un bouton « Réessayer » qui rappelle l'API ; aucune fenêtre ne s'ouvre. Aujourd'hui la page n'a aucun état d'erreur (le flux n'en traite pas).
@@ -85,9 +86,18 @@ regles:
     statut: hypothese
     si_faux: Si un autre nom ou une ancre (#video-astartes) est préféré, seul le nom change avant livraison ; après livraison, les liens déjà partagés casseraient.
     tests: ["R8 — ?video= vide : pas de fenêtre, pas de message"]
+  - id: R9
+    etat: charge
+    enonce: Chaque carte vidéo de /videos (Incontournables, Toutes les vidéos) est un lien <a href="/videos?video=<id>"> que le clavier atteint (Tab) et qu'Entrée active ; un clic du milieu (ou Ctrl+clic) l'ouvre dans un nouvel onglet sur cette vidéo ; un clic simple ouvre la fenêtre sur place et écrit ?video (R3). Les filtres et « Charger plus… » sont des <button>. Même lien dans l'état vide (R5), pour que l'utilisateur au clavier puisse ouvrir une des vidéos proposées.
+    message: ~
+    champs: [carte-video, liste-videos]
+    statut: sourcee
+    source: "décision du lead du 2026-10-12 (notes du lot L47) ; WCAG 2.1.1 Clavier"
+    tests: ["R9 — chaque carte est un <a href=\"/videos?video=<id>\"> focusable", "R9 — Entrée sur une carte ouvre la fenêtre et écrit ?video", "R9 — clic du milieu : nouvel onglet sur la vidéo, page courante inchangée", "R9 — état vide : les cartes sont focusables, filtres et « Charger plus… » sont des boutons"]
 
 actions:
   - { id: A1, declencheur: ~, appel: "GET /api/videos", regles: [R2, R4, R5, R7] }
   - { id: A2, declencheur: carte-une-faction, appel: "GET /videos?video=<id>", regles: [R1, R2, R8] }
   - { id: A3, declencheur: bouton-reessayer, appel: "GET /api/videos", regles: [R7] }
   - { id: A4, declencheur: bouton-fermer, appel: "GET /videos", regles: [R3, R6] }
+  - { id: A5, declencheur: carte-video, appel: "GET /videos?video=<id>", regles: [R3, R6, R9] }

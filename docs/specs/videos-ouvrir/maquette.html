@@ -27,9 +27,12 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
 .toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
 .search{flex:1;min-width:200px;height:44px;padding:0 16px;background:var(--panel);border:1px solid var(--border);color:var(--muted);font:14px var(--sans);display:flex;align-items:center}
 .filter,.add-btn{height:44px;padding:0 16px;display:inline-flex;align-items:center;border:1px solid var(--border);color:var(--text);font:700 12px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+button.filter,button.add-btn{background:transparent;cursor:pointer}
+.video-card:focus-visible,.row:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.row{color:inherit}
 .filter.active{border-color:var(--gold);color:var(--gold-bright)}
 .add-btn{border-color:var(--gold);color:var(--gold)}
-.section-head{margin-bottom:14px}.section-head h2{font-size:22px;text-transform:uppercase;letter-spacing:.09em}
+.videos-page>section+section{margin-top:28px}.section-head{margin-bottom:14px}.section-head h2{font-size:22px;text-transform:uppercase;letter-spacing:.09em}
 .section-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
 .featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .video-card{position:relative;min-height:245px;overflow:hidden;border:1px solid rgba(201,162,74,.24);background:radial-gradient(circle at 30% 20%,var(--red-deep) 0,var(--panel-2) 100%);display:flex;align-items:flex-end}
@@ -57,7 +60,7 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
 @media (max-width:1024px){.featured-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){
  .carte-bloc{grid-template-columns:1fr}
- .videos-page{width:calc(100% - 32px)}.hero-content{padding:20px}.featured-grid{grid-template-columns:1fr}
+ .videos-page{width:calc(100% - 32px)}.search{flex-basis:100%}.hero-content{padding:20px}.featured-grid{grid-template-columns:1fr}
  .modal{padding:12px;align-items:center}.modal-box{aspect-ratio:16/9}.modal-cap{bottom:-56px}.yt{bottom:-30px}.modal-cap{max-width:60%}
  .player{font-size:40px}.state-tag{margin:10px 16px 0}
 }
@@ -71,20 +74,20 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
 <div class="state-tag">État chargé — adresse /videos?video=astartes (arrivée depuis la page Space Marines)</div>
 <main class="videos-page" inert>
  <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
- <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><span class="filter active">Tous</span><span class="filter">Lore</span><span class="filter">Animations</span><span class="add-btn">+ Ajouter une vidéo</span></section>
+ <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><button type="button" class="filter active">Tous</button><button type="button" class="filter">Lore</button><button type="button" class="filter">Animations</button><button type="button" class="add-btn">+ Ajouter une vidéo</button></section>
  <section><header class="section-head"><h2>Incontournables</h2><p>Les vidéos à mettre en avant.</p></header>
  <div class="featured-grid">
-  <article class="video-card large"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><span class="tag">Animation</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></article>
-  <article class="video-card"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></article>
-  <article class="video-card"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></article>
+  <a class="video-card large" href="/videos?video=astartes" data-testid="carte-video"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><span class="tag">Animation</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></a>
+  <a class="video-card" href="/videos?video=emperor-tts" data-testid="carte-video"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></a>
+  <a class="video-card" href="/videos?video=lord-inquisitor" data-testid="carte-video"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><span class="tag">EN</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></a>
  </div></section>
  <section data-testid="liste-videos"><header class="section-head"><h2>Toutes les vidéos</h2><p>9 vidéos affichées sur 24.</p></header>
  <div class="rows">
-  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Astartes — Partie 2</h3><div class="video-meta">Syama Pedersen · 18:02</div></div></article>
-  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Ultramarines — Le film</h3><div class="video-meta">Codex Films · 1:16:00</div></div></article>
-  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Les Primarques en bref</h3><div class="video-meta">Chaîne lore · 12:40</div></div></article>
+  <a class="row" href="/videos?video=astartes-2" data-testid="carte-video"><span class="thumb"></span><div><h3 class="video-title">Astartes — Partie 2</h3><div class="video-meta">Syama Pedersen · 18:02</div></div></a>
+  <a class="row" href="/videos?video=ultramarines-film" data-testid="carte-video"><span class="thumb"></span><div><h3 class="video-title">Ultramarines — Le film</h3><div class="video-meta">Codex Films · 1:16:00</div></div></a>
+  <a class="row" href="/videos?video=primarques-en-bref" data-testid="carte-video"><span class="thumb"></span><div><h3 class="video-title">Les Primarques en bref</h3><div class="video-meta">Chaîne lore · 12:40</div></div></a>
  </div>
- <p class="more"><span class="add-btn">Charger plus…</span></p></section>
+ <p class="more"><button type="button" class="add-btn">Charger plus…</button></p></section>
 </main>
 <div class="modal" role="dialog" aria-modal="true" aria-label="Astartes — Partie 1" data-testid="modale-video">
  <div class="modal-box">
@@ -121,21 +124,21 @@ body:not(:has(.etat:target)) #etat-charge{display:block}
 <main class="videos-page">
  <header class="hero"><div class="hero-bg"></div><div class="hero-content"><span class="eyebrow">Archives vidéo du 41e millénaire</span><h1>Archives Cinématiques</h1></div></header>
  <div class="msg info" role="status" data-testid="message-vide">Cette vidéo n'est plus dans le codex. Voici les autres vidéos.</div>
- <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><span class="filter active">Tous</span><span class="filter">Lore</span><span class="add-btn">+ Ajouter une vidéo</span></section>
+ <section class="toolbar"><div class="search">Rechercher une vidéo, une chaîne, un sujet...</div><button type="button" class="filter active">Tous</button><button type="button" class="filter">Lore</button><button type="button" class="add-btn">+ Ajouter une vidéo</button></section>
  <section><header class="section-head"><h2>Incontournables</h2></header>
  <div class="featured-grid">
-  <article class="video-card large"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></article>
-  <article class="video-card"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></article>
-  <article class="video-card"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></article>
+  <a class="video-card large" href="/videos?video=astartes" data-testid="carte-video"><span class="duration">21:34</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">Astartes — Partie 1</h3><div class="video-meta">Syama Pedersen</div></div></a>
+  <a class="video-card" href="/videos?video=emperor-tts" data-testid="carte-video"><span class="duration">Série</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">If the Emperor Had a Text-to-Speech Device</h3><div class="video-meta">Alfabusa</div></div></a>
+  <a class="video-card" href="/videos?video=lord-inquisitor" data-testid="carte-video"><span class="duration">1:00:42</span><div class="video-content"><span class="tag">Culte</span><h3 class="video-title">The Lord Inquisitor — Film complet 4K</h3><div class="video-meta">Erasmus Brosdau (fan)</div></div></a>
  </div></section>
 
  <section data-testid="liste-videos"><header class="section-head"><h2>Toutes les vidéos</h2><p>9 vidéos affichées sur 24.</p></header>
  <div class="rows">
-  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Astartes — Partie 2</h3><div class="video-meta">Syama Pedersen · 18:02</div></div></article>
-  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Ultramarines — Le film</h3><div class="video-meta">Codex Films · 1:16:00</div></div></article>
-  <article class="row"><span class="thumb"></span><div><h3 class="video-title">Les Primarques en bref</h3><div class="video-meta">Chaîne lore · 12:40</div></div></article>
+  <a class="row" href="/videos?video=astartes-2" data-testid="carte-video"><span class="thumb"></span><div><h3 class="video-title">Astartes — Partie 2</h3><div class="video-meta">Syama Pedersen · 18:02</div></div></a>
+  <a class="row" href="/videos?video=ultramarines-film" data-testid="carte-video"><span class="thumb"></span><div><h3 class="video-title">Ultramarines — Le film</h3><div class="video-meta">Codex Films · 1:16:00</div></div></a>
+  <a class="row" href="/videos?video=primarques-en-bref" data-testid="carte-video"><span class="thumb"></span><div><h3 class="video-title">Les Primarques en bref</h3><div class="video-meta">Chaîne lore · 12:40</div></div></a>
  </div>
- <p class="more"><span class="add-btn">Charger plus…</span></p></section>
+ <p class="more"><button type="button" class="add-btn">Charger plus…</button></p></section>
 </main>
 </section>
 
