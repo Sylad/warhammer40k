@@ -297,6 +297,8 @@ lots:
     estimate: 0.5
     created: 2026-10-02
     started: 2026-10-12
+    notes:
+      - { date: 2026-10-12, text: "Rendu au lead 12-10 (budget 406 k/450 k, 2 passes) : revue non conforme, 1 majeur — « Réessayer » d'une fiche à plusieurs flux (faction, unité, primarque, titan, Équipement) ne relance que le flux principal (units, subFactions, videos, artworks restent vides). Autres constats : palette Ctrl+K vide toute la session après un échec au démarrage ; fiche unité « Chargement de la faction… » sans fin si getFaction échoue ; double message (erreur + « Aucune … ne correspond ») sur Équipement et Séries ; import switchMap mort dans 6 fiches. Reprendre dans une NOUVELLE vague avec un budget plus large (--budget), critère de fin : chaque Réessayer relance tous les flux de la page, test qui émet échec puis succès sur chaque flux. L53 (prêt, clos) est empilé dessus : rien de livrable avant L38." }
   - id: L39
     title: "Liens morts : audit automatique de tous les liens du site (internes : routes, ancres, images et datasheets ; externes : wiki, vidéos, boutiques) — rapport, corrections, puis test qui échoue sur un lien interne cassé (consigne Sylvain 02-10 : « potentiellement des liens morts »)"
     public: "Liens internes réparés : fil d'Ariane, ancres et images vérifiés"
