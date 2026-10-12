@@ -1618,6 +1618,13 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".gallery-page .hero .import-btn-hero:hover": {
     "background": "linear-gradient(rgba(201, 162, 74, 0.22), rgba(201, 162, 74, 0.22)), var(--panel)",
   },
+  ".gallery-page .hero::after": {
+    "background": "rgba(0, 0, 0, 0.65)",
+    "content": """",
+    "inset": "0",
+    "pointer-events": "none",
+    "position": "absolute",
+  },
   ".gallery-page .import-btn-hero.btn-filtres": {
     "display": "none",
   },
