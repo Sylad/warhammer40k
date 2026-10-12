@@ -362,11 +362,11 @@ export class PrimarchDetailComponent {
   readonly lightbox = signal<LightboxState | null>(null);
 
   readonly primarch = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
+    this.route.paramMap, p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
   readonly related = toSafeSignal(
-    this.route.paramMap.pipe(
-      switchMap(p => this.service.getPrimarch(p.get('id')!)),
+    this.route.paramMap,
+    p => this.service.getPrimarch(p.get('id')!).pipe(
       switchMap(prim => {
         if (!prim?.relatedPrimarchIds?.length) return of([] as Primarch[]);
         // L39 : un identifiant absent des données (« typhus » en prod) est ignoré, au lieu de

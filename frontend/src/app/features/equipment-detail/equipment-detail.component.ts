@@ -121,7 +121,7 @@ export class EquipmentDetailComponent {
   readonly heroImage = signal<string | null>(null);
 
   readonly equipment = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getEquipmentItem(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
+    this.route.paramMap, p => this.service.getEquipmentItem(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
   constructor() {
     effect(() => {

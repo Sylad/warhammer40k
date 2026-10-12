@@ -485,11 +485,11 @@ export class FactionDetailComponent {
   readonly subFactionSearch = signal('');
 
   readonly faction = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getFaction(p.get('id')!).pipe(namedPage(this.pages, f => f.nom)))), undefined);
+    this.route.paramMap, p => this.service.getFaction(p.get('id')!).pipe(namedPage(this.pages, f => f.nom)), undefined);
   readonly units = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getUnits(p.get('id')!))), [] as Unit[]);
+    this.route.paramMap, p => this.service.getUnits(p.get('id')!), [] as Unit[]);
   readonly subFactions = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getSubFactions(p.get('id')!))), [] as SubFaction[]);
+    this.route.paramMap, p => this.service.getSubFactions(p.get('id')!), [] as SubFaction[]);
   readonly subFactionImages = signal(new Map<string, string>());
   readonly primarchImages = signal(new Map<string, string>());
 

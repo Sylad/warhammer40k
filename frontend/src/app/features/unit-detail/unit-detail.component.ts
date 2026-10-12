@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
@@ -340,19 +340,19 @@ export class UnitDetailComponent {
   readonly artworkImageCache = signal(new Map<string, string>());
 
   readonly unit = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)))), undefined);
+    this.route.paramMap, p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)), undefined);
 
-  readonly faction = toSafeSignal<Faction | undefined, undefined>(
-    this.route.paramMap.pipe(
-      switchMap(p => this.service.getUnit(p.get('id')!)),
+  readonly faction = toSafeSignal<ParamMap, Faction | undefined, undefined>(
+    this.route.paramMap,
+    p => this.service.getUnit(p.get('id')!).pipe(
       switchMap(u => u ? this.service.getFaction(u.factionId) : of(undefined)),
     ),
     undefined,
   );
 
   readonly relatedUnits = toSafeSignal(
-    this.route.paramMap.pipe(
-      switchMap(p => this.service.getUnit(p.get('id')!)),
+    this.route.paramMap,
+    p => this.service.getUnit(p.get('id')!).pipe(
       switchMap(u => {
         if (!u) return of([] as Unit[]);
         if (u.relatedUnitIds?.length) {

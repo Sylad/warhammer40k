@@ -5,7 +5,7 @@ import { fakeWarhammerService } from '../../testing/fake-warhammer-service';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
-import { Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { WarhammerService } from '../core/services/warhammer.service';
 import { CommandPaletteComponent } from './components/command-palette/command-palette.component';
 import { LoreSaintsComponent } from '../features/lore-saints/lore-saints.component';
@@ -56,5 +56,28 @@ describe('API en erreur (L38)', () => {
     const el = f.nativeElement as HTMLElement;
     expect(el.querySelector('[role="alert"]')).not.toBeNull();
     expect(el.textContent).not.toContain('Chargement du Saint');
+  });
+
+  it('fiche : après un échec, la navigation vers une autre fiche du même type recharge', async () => {
+    const params = new BehaviorSubject(convertToParamMap({ id: 'a' }));
+    await setupTestBed([SaintDetailComponent as never], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: fakeWarhammerService({
+        getSaint: (id: string) => id === 'a' ? down() : of({ id, name: 'Saint B', category: 'living-saint', color: '#fff', era: 'M41', ordoOrChapter: 'x' }),
+      }) },
+      { provide: ActivatedRoute, useValue: { paramMap: params } },
+    ]);
+    const f = TestBed.createComponent(SaintDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('[role="alert"]')).not.toBeNull();
+    params.next(convertToParamMap({ id: 'b' }));
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    expect(el.querySelector('[role="alert"]')).toBeNull();
+    expect(el.textContent).toContain('Saint B');
   });
 });

@@ -132,7 +132,7 @@ export class TitanDetailComponent {
   readonly factionIds = computed(() => new Set(this.factions().map(f => f.id)));
 
   readonly machine = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getGodMachine(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
+    this.route.paramMap, p => this.service.getGodMachine(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
   constructor() {
     effect(() => {

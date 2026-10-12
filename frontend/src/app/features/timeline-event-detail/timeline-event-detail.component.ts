@@ -93,7 +93,7 @@ export class TimelineEventDetailComponent {
   readonly heroImage = signal<string | null>(null);
 
   readonly event = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getTimelineEvent(p.get('id')!).pipe(namedPage(this.pages, x => x.title)))), undefined);
+    this.route.paramMap, p => this.service.getTimelineEvent(p.get('id')!).pipe(namedPage(this.pages, x => x.title)), undefined);
 
   constructor() {
     effect(() => {

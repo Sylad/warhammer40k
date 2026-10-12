@@ -136,7 +136,7 @@ export class SaintDetailComponent {
   readonly galleryImages = signal<string[]>([]);
 
   readonly saint = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getSaint(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
+    this.route.paramMap, p => this.service.getSaint(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
   constructor() {
     effect(() => {

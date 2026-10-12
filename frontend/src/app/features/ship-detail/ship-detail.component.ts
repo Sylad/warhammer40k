@@ -146,7 +146,7 @@ export class ShipDetailComponent {
   readonly galleryImages = signal<string[]>([]);
 
   readonly ship = toSafeSignal(
-    this.route.paramMap.pipe(switchMap(p => this.service.getShip(p.get('id')!).pipe(namedPage(this.pages, x => x.name)))), undefined);
+    this.route.paramMap, p => this.service.getShip(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
   constructor() {
     effect(() => {

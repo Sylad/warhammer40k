@@ -12,17 +12,34 @@ export type SafeSignal<T> = Signal<T> & { readonly failed: Signal<boolean>; retr
  * `failed()` passe à vrai et la page affiche son état d'erreur avec « Réessayer » (`retry()`).
  * À appeler dans un contexte d'injection, comme `toSignal`.
  */
-export function toSafeSignal<T, I = T>(source$: Observable<T>, initialValue: I): SafeSignal<T | I> {
+export function toSafeSignal<T, I = T>(source$: Observable<T>, initialValue: I): SafeSignal<T | I>;
+/**
+ * Variante pour les fiches : `trigger$` (paramètres de route) est écouté en permanence, l'échec de
+ * `project` est absorbé DANS le `switchMap` — sinon l'erreur terminerait l'abonnement aux paramètres
+ * et l'état d'erreur resterait affiché après une navigation vers une autre fiche du même type.
+ */
+export function toSafeSignal<P, T, I = T>(trigger$: Observable<P>, project: (p: P) => Observable<T>, initialValue: I): SafeSignal<T | I>;
+export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Observable<T>) | I, b?: I): SafeSignal<T | I> {
+  const initialValue = (typeof a === 'function' && arguments.length > 2 ? b : a) as I;
+  const project = (typeof a === 'function' && arguments.length > 2 ? a : null) as ((p: P) => Observable<T>) | null;
   const failed = signal(false);
   const attempt$ = new BehaviorSubject<void>(undefined);
-  const value = toSignal(
-    attempt$.pipe(
-      switchMap(() => source$.pipe(
+  const guarded$: Observable<T | I> = project
+    ? source$.pipe(switchMap(p => {
+        failed.set(false);
+        return project(p).pipe(
+          map((v): T | I => { failed.set(false); return v; }),
+          catchError(() => { failed.set(true); return of(initialValue as T | I); }),
+          startWith(initialValue as T | I),
+        );
+      }))
+    : (source$ as unknown as Observable<T>).pipe(
         map((v): T | I => { failed.set(false); return v; }),
         catchError(() => { failed.set(true); return of(initialValue as T | I); }),
         startWith(initialValue as T | I),
-      )),
-    ),
+      );
+  const value = toSignal(
+    attempt$.pipe(switchMap(() => guarded$)),
     { initialValue: initialValue as T | I },
   );
   return Object.assign(() => value(), {
