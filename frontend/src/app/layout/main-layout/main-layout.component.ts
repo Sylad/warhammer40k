@@ -82,7 +82,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
           <span class="nav-ico" aria-hidden="true">⌕</span>
           <span class="nav-search-kbd" aria-hidden="true">{{ shortcut.hint }}</span>
         </button>
-        <!-- L23 : sous 84em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
+        <!-- L23 : sous 84em (1344 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
         <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone" [class.has-badge]="badge()"
                 [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : null"
                 (click)="toggleMenu()">
@@ -455,7 +455,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
 
     /* L30 (option b) : seuils de la barre en em (suivent la taille de police par défaut du
        navigateur) — barre complète (icônes, sous-titre) dès 106,25em (1700 px à 16 px),
-       compacte en dessous, tiroir sous 84em (1280 px à 16 px). Mesurés par topbar.e2e.spec.ts. */
+       compacte en dessous, tiroir sous 84em (1344 px à 16 px). Mesurés par topbar.e2e.spec.ts. */
     .nav { min-width: 0; }
     @media (width < 106.25em) {
       .brand .brand-sub, .nav-ico { display: none; }
