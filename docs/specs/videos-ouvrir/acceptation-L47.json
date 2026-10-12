@@ -1,0 +1,8 @@
+{
+  "lot": "L47",
+  "fiche": "docs/specs/videos-ouvrir/fiche.yaml",
+  "fichiers": [
+    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts"
+  ],
+  "vert": false
+}
