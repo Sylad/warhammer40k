@@ -440,12 +440,14 @@ lots:
   - id: L53
     title: "Galerie : voile sombre sur .hero-bg — surtitre, description et bouton Importer ≥ 4,5:1 sur image claire (même cause que L45/L50) ; vérifier sur une vraie image claire"
     public: "Galerie : textes et bouton Importer lisibles sur une image d'en-tête claire"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-04
     started: 2026-10-12
     review: { date: 2026-10-12, verdict: "compliant — orchestré (vague 2026-10-12-2235, 0 passe(s) de correction)", commit: f7b583320e1d335a1e62017cf0d134fa92eaa664 }
+    ux: { date: 2026-10-12, verdict: "conforme : capture regardée par le lead (bandeau galerie sur datasheet claire) — surtitre, titre, description et bouton lisibles sous le voile 0,65 ; contraste calculé sur image blanche filtrée (surtitre or, le plus exigeant ≥ 4,5:1)" }
+    finished: 2026-10-12
   - id: L54
     title: "Galerie 390 px : trois statistiques en grille 3 colonnes égales (plus de 3e pastille orpheline de 114 px), libellé 12 px si « COLLECTIONS » tient"
     status: done
