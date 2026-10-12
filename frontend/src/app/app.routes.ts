@@ -58,6 +58,12 @@ export const routes: Routes = [
         loadComponent: () => import('./features/gallery/gallery.component')
           .then(m => m.GalleryComponent)
       },
+      {
+        path: 'jeux-video',
+        title: 'Jeux vidéo',
+        loadComponent: () => import('./features/jeux-video/jeux-video.component')
+          .then(m => m.JeuxVideoComponent)
+      },
       { path: 'galerie', redirectTo: '/gallery', pathMatch: 'full' },
       {
         path: 'lore',

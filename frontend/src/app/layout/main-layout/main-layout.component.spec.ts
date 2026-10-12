@@ -61,7 +61,7 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     const f = await render();
     const nav = el(f).querySelector('nav.nav')!;
     const top = [...nav.querySelectorAll<HTMLAnchorElement>(':scope > a, :scope > .nav-dropdown > a')].map((a) => a.getAttribute('href'));
-    expect(top).toEqual(['/', '/factions', '/romans', '/videos', '/gallery', '/lore']);
+    expect(top).toEqual(['/', '/factions', '/romans', '/videos', '/jeux-video', '/gallery', '/lore']);
     const menu = nav.lastElementChild!;
     expect(menu.tagName.toLowerCase()).toBe('app-about-menu');
     expect([...menu.querySelectorAll('#menu-a-propos a')].map((a) => a.getAttribute('href'))).toEqual(['/nouveautes', '/plan', '/about']);

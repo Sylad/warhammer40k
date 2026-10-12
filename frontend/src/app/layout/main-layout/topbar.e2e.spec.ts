@@ -1,7 +1,7 @@
 // @vitest-environment node
 // L23, L30 (option b) — barre du haut dans un vrai navigateur, sur l'application CONSTRUITE
 // (dist/frontend/browser, `ng build`), pastille la plus large (« 9+ »). Seuils en em : tiroir
-// sous 80em, barre compacte sous 106,25em, complète au-delà. Mesurés à chaque seuil ±1 px
+// sous 84em, barre compacte sous 106,25em, complète au-delà. Mesurés à chaque seuil ±1 px
 // dans quatre configurations : polices web chargées ; polices web bloquées (repli) ; taille
 // de police par défaut du navigateur 18 px et 20 px (CDP Page.setFontSizes).
 // jsdom ne calcule aucune mise en page. Chromium via playwright-core (sauté s'il manque).
@@ -51,7 +51,7 @@ export const CONFIGS: Config[] = [
   { name: 'police par défaut 18 px', fontSize: 18, webFonts: true },
   { name: 'police par défaut 20 px', fontSize: 20, webFonts: true },
 ];
-const DRAWER_EM = 80;
+const DRAWER_EM = 84;
 const FULL_EM = 106.25;
 
 /** Seuils ±1 px dans le px de la configuration (un seuil fractionnaire : les deux px qui l'encadrent). */

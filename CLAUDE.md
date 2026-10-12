@@ -27,9 +27,9 @@ Endpoints clés :
 - `GET /api/images?category=X` — galerie utilisateur (1468 images perso)
 - `POST /api/image-import` — import depuis Reddit/URL externe
 
-## Frontend features (11 pages)
+## Frontend features (12 pages)
 
-`dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `gallery` (/gallery), `nouveautes` (/nouveautes), `plan` (/plan, « Plan de travail »), `about` (/about). Redirect `/galerie` → `/gallery`.
+`dashboard` (/), `factions` (/factions), `faction-detail` (/factions/:id), `unit-detail` (/units/:id), `subfaction-detail` (/subfactions/:id), `series` (/romans), `videos` (/videos), `jeux-video` (/jeux-video), `gallery` (/gallery), `nouveautes` (/nouveautes), `plan` (/plan, « Plan de travail »), `about` (/about). Redirect `/galerie` → `/gallery`.
 
 Titre de page (L36, `core/services/page-title.service.ts`) : « <page> — Warhammer 40 000 ». Page
 fixe : libellé du fil d'Ariane (`STATIC_LABELS`) ; fiche : `title:` de sa route (« Faction »…) en
@@ -38,9 +38,9 @@ par le dernier élément du fil d'Ariane et annoncé dans la région live de la 
 quand le focus va au h1). Une nouvelle fiche : `title:` sur la route + `namedPage` sur son flux.
 
 Navigation (L23, L30 option b) — seuils en **em** (suivent la taille de police par défaut du
-navigateur) : sous `80em` (1280 px à 16 px), bouton **Menu** → tiroir `#menu-telephone` (inerte
-quand il est fermé, Échap le ferme, Tab y boucle), liens à plat ; dès `80em`, barre compacte :
-Accueil · Factions · Romans · Vidéos · Galerie · Lore ▾ · **« À propos ▾ »**, bouton à divulgation
+navigateur) : sous `84em` (1344 px à 16 px), bouton **Menu** → tiroir `#menu-telephone` (inerte
+quand il est fermé, Échap le ferme, Tab y boucle), liens à plat ; dès `84em`, barre compacte :
+Accueil · Factions · Romans · Vidéos · Jeux vidéo · Galerie · Lore ▾ · **« À propos ▾ »**, bouton à divulgation
 (`layout/about-menu/`, pas un `role=menu`) qui montre Nouveautés (pastille), Plan de travail et
 À propos du codex ; dès `106.25em` (1700 px), barre complète (icônes, sous-titre du logo). Le pied
 de page porte « Nouveautés · Plan de travail · À propos » sur chaque page. Une nouvelle page
@@ -112,6 +112,10 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 - **Contenu lu dans `seed/`, pas dans `data/`** (L74) : un fichier copié dans `backend/data/` (ou dans le volume) est ignoré s'il fait partie du contenu. `seed/` doit rester dans l'image (`Dockerfile` : `COPY … /app/seed`, gardé par `common/content.spec.ts`).
 - **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (`@Body() body: MonType` → `import type { MonType }`).
+
+## Jeux vidéo (L35)
+
+`/jeux-video` lit `frontend/public/jeux-data/jeux.json` (versionné, `verifieLe` = date de vérification en ligne). `aVenir[].sortie` est affichée telle quelle (jour, mois, trimestre, année) suivie de « annoncée », `null` → « Date non communiquée » : **jamais de date devinée**. Mettre à jour le fichier à partir de sources en ligne et changer `verifieLe`.
 
 ## Données seed
 

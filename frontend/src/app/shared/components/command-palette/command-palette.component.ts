@@ -30,6 +30,7 @@ const PAGE_LINKS: SearchResult[] = [
   { type: 'page', label: 'Armement', sublabel: 'Armes & reliques', routerLink: ['/lore/equipment'], weight: 0 },
   { type: 'page', label: 'Romans', sublabel: 'Black Library', routerLink: ['/romans'], weight: 0 },
   { type: 'page', label: 'Vidéos', sublabel: 'YouTube', routerLink: ['/videos'], weight: 0 },
+  { type: 'page', label: 'Jeux vidéo', sublabel: 'À venir et déjà sortis', routerLink: ['/jeux-video'], weight: 0 },
   { type: 'page', label: 'Galerie', sublabel: 'Artworks', routerLink: ['/gallery'], weight: 0 },
   { type: 'page', label: 'Nouveautés', sublabel: 'Ce qui a changé', routerLink: ['/nouveautes'], weight: 0 },
   { type: 'page', label: 'Plan de travail', sublabel: 'Ce qui se prépare', routerLink: ['/plan'], weight: 0 },

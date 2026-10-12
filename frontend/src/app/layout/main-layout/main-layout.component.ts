@@ -38,6 +38,9 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         <a routerLink="/videos" routerLinkActive="active">
           <span class="nav-ico" aria-hidden="true">▶</span>Vidéos
         </a>
+        <a routerLink="/jeux-video" routerLinkActive="active" data-testid="lien-navigation">
+          <span class="nav-ico" aria-hidden="true">✠</span>Jeux vidéo
+        </a>
         <a routerLink="/gallery" routerLinkActive="active">
           <span class="nav-ico" aria-hidden="true">▦</span>Galerie
         </a>
@@ -79,7 +82,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
           <span class="nav-ico" aria-hidden="true">⌕</span>
           <span class="nav-search-kbd" aria-hidden="true">{{ shortcut.hint }}</span>
         </button>
-        <!-- L23 : sous 80em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
+        <!-- L23 : sous 84em (1280 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
         <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone" [class.has-badge]="badge()"
                 [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : null"
                 (click)="toggleMenu()">
@@ -104,6 +107,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       <a (click)="focusOnArrival = true" routerLink="/factions" routerLinkActive="active">Factions</a>
       <a (click)="focusOnArrival = true" routerLink="/romans" routerLinkActive="active">Romans</a>
       <a (click)="focusOnArrival = true" routerLink="/videos" routerLinkActive="active">Vidéos</a>
+      <a (click)="focusOnArrival = true" routerLink="/jeux-video" routerLinkActive="active" data-testid="lien-navigation-tiroir">Jeux vidéo</a>
       <a (click)="focusOnArrival = true" routerLink="/gallery" routerLinkActive="active">Galerie</a>
       <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
       <a (click)="focusOnArrival = true" routerLink="/nouveautes" routerLinkActive="active">
@@ -450,20 +454,20 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
 
     /* L30 (option b) : seuils de la barre en em (suivent la taille de police par défaut du
        navigateur) — barre complète (icônes, sous-titre) dès 106,25em (1700 px à 16 px),
-       compacte en dessous, tiroir sous 80em (1280 px à 16 px). Mesurés par topbar.e2e.spec.ts. */
+       compacte en dessous, tiroir sous 84em (1280 px à 16 px). Mesurés par topbar.e2e.spec.ts. */
     .nav { min-width: 0; }
     @media (width < 106.25em) {
       .brand .brand-sub, .nav-ico { display: none; }
       .nav { gap: 16px; }
       .nav-search-btn .nav-ico { display: inline; }
     }
-    @media (width < 80em) {
+    @media (width < 84em) {
       .topbar { padding: 0 18px; }
       .nav { display: none; }
       .menu-toggle { display: inline-flex; }
       .nav-search-btn { min-height: 44px; margin-left: 0; }
     }
-    @media (width >= 80em) {
+    @media (width >= 84em) {
       .brand { white-space: nowrap; flex-shrink: 0; } /* au téléphone, le logo garde le droit de passer sur deux lignes */
       .drawer, .drawer-backdrop { display: none; }
     }
@@ -557,8 +561,8 @@ export class MainLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     void this.news.load();
-    // Passage au bureau (≥ 80em) menu ouvert : le tiroir disparaît, la page doit redéfiler.
-    const desktop = window.matchMedia?.('(min-width: 80em)');
+    // Passage au bureau (≥ 84em) menu ouvert : le tiroir disparaît, la page doit redéfiler.
+    const desktop = window.matchMedia?.('(min-width: 84em)');
     if (desktop) {
       const onChange = (e: MediaQueryListEvent) => { if (e.matches) this.closeMenu(); };
       desktop.addEventListener('change', onChange);

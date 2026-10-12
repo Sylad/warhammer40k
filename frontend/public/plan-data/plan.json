@@ -47,7 +47,8 @@
     {
       "id": "L35",
       "title": "Une page Jeux vidéo : les jeux existants et ceux qui arrivent",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-11"
     },
     {
       "id": "L39",
@@ -92,7 +93,8 @@
     {
       "id": "L49",
       "title": "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-11"
     },
     {
       "id": "L50",

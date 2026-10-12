@@ -15,6 +15,7 @@ const STATIC_LABELS: Record<string, string> = {
   units: 'Unités',
   romans: 'Romans',
   videos: 'Vidéos',
+  'jeux-video': 'Jeux vidéo',
   gallery: 'Galerie',
   galerie: 'Galerie',
   about: 'À propos',

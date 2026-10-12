@@ -43,6 +43,7 @@ const TABLE: [string, string][] = [
   ['/subfactions/ultramarines', 'Sous-faction'],
   ['/romans', 'Romans'],
   ['/videos', 'Vidéos'],
+  ['/jeux-video', 'Jeux vidéo'],
   ['/gallery', 'Galerie'],
   ['/galerie', 'Galerie'],
   ['/lore', 'Lore'],
