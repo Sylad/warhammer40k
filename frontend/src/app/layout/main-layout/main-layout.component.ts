@@ -38,8 +38,8 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         <a routerLink="/videos" routerLinkActive="active">
           <span class="nav-ico" aria-hidden="true">▶</span>Vidéos
         </a>
-        <a routerLink="/jeux-video" routerLinkActive="active" data-testid="lien-navigation">
-          <span class="nav-ico" aria-hidden="true">✠</span>Jeux vidéo
+        <a routerLink="/jeux-video" routerLinkActive="active" ariaCurrentWhenActive="page" data-testid="lien-navigation">
+          <span class="nav-ico" aria-hidden="true" data-ico="✠"></span>Jeux vidéo
         </a>
         <a routerLink="/gallery" routerLinkActive="active">
           <span class="nav-ico" aria-hidden="true">▦</span>Galerie
@@ -107,7 +107,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       <a (click)="focusOnArrival = true" routerLink="/factions" routerLinkActive="active">Factions</a>
       <a (click)="focusOnArrival = true" routerLink="/romans" routerLinkActive="active">Romans</a>
       <a (click)="focusOnArrival = true" routerLink="/videos" routerLinkActive="active">Vidéos</a>
-      <a (click)="focusOnArrival = true" routerLink="/jeux-video" routerLinkActive="active" data-testid="lien-navigation-tiroir">Jeux vidéo</a>
+      <a (click)="focusOnArrival = true" routerLink="/jeux-video" routerLinkActive="active" ariaCurrentWhenActive="page" data-testid="lien-navigation-tiroir">Jeux vidéo</a>
       <a (click)="focusOnArrival = true" routerLink="/gallery" routerLinkActive="active">Galerie</a>
       <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
       <a (click)="focusOnArrival = true" routerLink="/nouveautes" routerLinkActive="active">
@@ -315,6 +315,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       opacity: 1;
     }
     .nav-ico { font-size: 1rem; line-height: 1; }
+    .nav-ico[data-ico]::before { content: attr(data-ico); }
 
     .quota-banner {
       background: var(--red-deep);

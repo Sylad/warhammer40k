@@ -42,6 +42,11 @@ export function stubFetch(files: Record<string, unknown>): void {
 /** Configure TestBed pour `imports` ; les `styleUrl` (.scss) sont résolues à vide. */
 export async function setupTestBed(imports: unknown[], providers: unknown[] = []): Promise<void> {
   TestBed.resetTestingModule();
+  // Les pages chargées à la demande (loadComponent) n'existent qu'une fois importées : les charger
+  // avant de résoudre les ressources, sinon leur `styleUrl` reste non résolu au premier createComponent.
+  const { routes } = await import('../app/app.routes');
+  const pages = routes.flatMap((r) => [r, ...(r.children ?? [])]);
+  await Promise.all(pages.map((r) => (r.loadComponent as (() => Promise<unknown>) | undefined)?.()));
   await resolveComponentResources(async () => '');
   TestBed.configureTestingModule({ imports: imports as never[], providers: providers as never[] });
   await TestBed.compileComponents();
