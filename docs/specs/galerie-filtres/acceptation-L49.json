@@ -6,6 +6,15 @@
   ],
   "vert": false,
   "empreintes": {
-    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "ed5b3d089510461b73a451453edf93bd8497e078"
-  }
+    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "597c5f3eee2c300ca6bc2b64f39a4c9f8b67d341"
+  },
+  "resceaux": [
+    {
+      "test": "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts",
+      "raison": "3 tests (R6 « 390 px : 6 résultats visible dans le panneau », R12 « rappel visible », R12 « Réinitialiser les filtres 44 px ») lisaient page.evaluate(() => scrollY) : la fonction capture la constante locale scrollY (esbuild la renomme scrollY2) au lieu de window.scrollY ; seul changement : window.scrollY",
+      "date": "2026-10-12",
+      "avant": "ed5b3d089510461b73a451453edf93bd8497e078",
+      "apres": "597c5f3eee2c300ca6bc2b64f39a4c9f8b67d341"
+    }
+  ]
 }

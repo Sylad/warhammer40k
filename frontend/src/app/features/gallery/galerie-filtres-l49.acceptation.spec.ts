@@ -356,7 +356,7 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
     const text = (await tid(page, 'resultats-panneau').textContent())?.trim();
     const r = await box(page, 'resultats-panneau');
     const tri = await box(page, 'filtre-tri');
-    const scrollY = await page.evaluate(() => scrollY);
+    const scrollY = await page.evaluate(() => window.scrollY);
     const inPanel = await tid(page, 'panneau-filtres').locator('[data-testid="resultats-panneau"]').count();
     await done();
     expect(text).toBe('6 résultats');
@@ -576,7 +576,7 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
       const visible = await tid(page, 'rappel-vide').isVisible();
       const text = (await tid(page, 'rappel-vide').textContent()) ?? '';
       const b = await box(page, 'rappel-vide');
-      const scrollY = await page.evaluate(() => scrollY);
+      const scrollY = await page.evaluate(() => window.scrollY);
       const search = await box(page, 'recherche');
       await done();
       expect(visible, `ouvert=${panelOpen}`).toBe(true);
@@ -593,7 +593,7 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
     const visible = await btn.isVisible();
     const text = (await btn.textContent())?.trim();
     const b = await box(page, 'bouton-reinitialiser-rappel');
-    const scrollY = await page.evaluate(() => scrollY);
+    const scrollY = await page.evaluate(() => window.scrollY);
     await done();
     expect(visible).toBe(true);
     expect(text).toBe('Réinitialiser les filtres');
