@@ -1612,6 +1612,12 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "cursor": "default",
     "opacity": "0.5",
   },
+  ".gallery-page .hero .import-btn-hero": {
+    "background": "var(--panel)",
+  },
+  ".gallery-page .hero .import-btn-hero:hover": {
+    "background": "linear-gradient(rgba(201, 162, 74, 0.22), rgba(201, 162, 74, 0.22)), var(--panel)",
+  },
   ".gallery-page .import-btn-hero.btn-filtres": {
     "display": "none",
   },
@@ -2290,6 +2296,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .gallery-page .rappel-vide": {
     "align-items": "center",
+    "background": "var(--panel)",
     "border": "1px dashed var(--border)",
     "color": "var(--text)",
     "display": "flex",

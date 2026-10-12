@@ -11,6 +11,9 @@
   .main-col { grid-area: main; }
   .sidebar { grid-area: aside; }
   .import-btn-hero.btn-filtres { display: none; }
+  /* WCAG 1.4.3 : ces boutons reposent sur la photo du bandeau ; fond opaque (maquette : var(--panel)), teinte or au survol */
+  .hero .import-btn-hero { background: var(--panel); }
+  .hero .import-btn-hero:hover { background: linear-gradient(rgba(201, 162, 74, 0.22), rgba(201, 162, 74, 0.22)), var(--panel); }
   .btn-filtres .count {
     min-width: 1.5em; padding: 1px 6px; border-radius: 999px;
     background: var(--gold); color: var(--bg); font-size: 11px; text-align: center;
@@ -39,7 +42,7 @@
     .panel-count { display: block; }
     .rappel-vide {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      margin-top: 12px; padding: 10px 12px; border: 1px dashed var(--border); color: var(--text); font-size: 14px;
+      margin-top: 12px; padding: 10px 12px; border: 1px dashed var(--border); background: var(--panel); color: var(--text); font-size: 14px;
     }
     .rappel-vide .reset-btn { min-height: 44px; padding: 0 4px; flex: none; }
   }
