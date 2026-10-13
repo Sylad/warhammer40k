@@ -1036,9 +1036,10 @@ lots:
     finished: 2026-10-13
   - id: L114
     title: "Fiche sous-faction : l'effect() des images relit unitImgCache() et se relance à chaque réponse — 28 à ~170 appels /api/wiki-image pour 9 à 10 images distinctes par chargement (QA prod L112, 13-10, subfaction-detail.component.ts:264-287)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-13
+    started: 2026-10-13
   - id: L115
     title: "Listes Lore en erreur : les compteurs du bandeau (« 0 pièces archivées », « 0 armes à distance »…) et des onglets (« Tous · 0 ») s'affichent comme des valeurs — « — » tant que la source est en échec (capture L111, /lore/equipment)"
     public: "Listes en erreur : plus de compteurs à zéro trompeurs"
