@@ -1005,9 +1005,10 @@ lots:
     created: 2026-10-13
   - id: L112
     title: "Fiche sous-faction : sur une 500 ou backend absent, le corps affiche « Sous-faction introuvable. » alors que le titre garde « Sous-faction » — lire isNotFound(err) dans le catchError (subfaction-detail.component.ts:229), test 404 vs 500 (constat revue L38)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-13
+    started: 2026-10-13
   - id: L113
     title: "Tests frontend instables sous charge : deux lancements complets de npm test sur trois ont eu chacun un échec différent, vert en isolé — ancres.e2e.spec.ts (fiche primarque 390 px : cible à 92 px sous la barre au lieu de ≤ 40) et plan-data.test.mjs (« dist/ ne contient aucun texte privé »), tous deux lisent dist/ ; trouver la cause (dist reconstruit pendant le run ? délai ?) et rendre la suite déterministe"
     status: todo
