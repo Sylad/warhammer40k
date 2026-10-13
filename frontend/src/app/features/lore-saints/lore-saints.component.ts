@@ -5,7 +5,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Saint, SaintCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
   'living-saint': 'Sainte Vivante',
@@ -28,7 +28,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
         présence inspirante. Voici les figures qui galvanisent un trillion de fidèles à travers la galaxie.
       </p>
       <div class="filters">
-        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ saints().length }}</button>
+        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(saints().length) }}</button>
         <button [class.active]="filter() === 'living-saint'" (click)="filter.set('living-saint')">Saintes Vivantes</button>
         <button [class.active]="filter() === 'saint-canonized'" (click)="filter.set('saint-canonized')">Canonisés</button>
         <button [class.active]="filter() === 'ecclesiarch-canonized'" (click)="filter.set('ecclesiarch-canonized')">Ecclésiarques</button>
@@ -68,6 +68,9 @@ export class LoreSaintsComponent {
   readonly filter = signal<'all' | SaintCategory>('all');
   readonly saintImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.saints.failed()); }
 
   readonly filtered = computed(() => {
     const f = this.filter();

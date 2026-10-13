@@ -5,7 +5,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { LegendaryShip } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 const ALIGNMENT_BY_FACTION: Record<string, string> = {
   'space-marines': 'Imperium',
@@ -42,7 +42,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
         dans la coque adamantine.
       </p>
       <div class="filters">
-        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ ships().length }}</button>
+        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(ships().length) }}</button>
         <button [class.active]="filter() === 'Imperium'" (click)="filter.set('Imperium')">Imperium</button>
         <button [class.active]="filter() === 'Chaos'" (click)="filter.set('Chaos')">Chaos</button>
         <button [class.active]="filter() === 'Xenos'" (click)="filter.set('Xenos')">Xenos</button>
@@ -82,6 +82,9 @@ export class LoreShipsComponent {
   readonly filter = signal<'all' | 'Imperium' | 'Chaos' | 'Xenos'>('all');
   readonly shipImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.ships.failed()); }
 
   readonly filtered = computed(() => {
     const f = this.filter();

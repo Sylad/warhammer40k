@@ -63,3 +63,8 @@ export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Obse
 export function retryAll(...signals: readonly { retry(): void }[]): void {
   for (const s of signals) s.retry();
 }
+
+/** L115 — compteur d'une liste : « — » tant que la source est en échec (un « 0 » serait une valeur), le nombre sinon. */
+export function compteur(n: number, failed: boolean): string {
+  return failed ? '—' : String(n);
+}

@@ -5,7 +5,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { GodMachine, GodMachineCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<GodMachineCategory, string> = {
   titan: 'Titans',
@@ -28,7 +28,7 @@ const CATEGORY_LABEL: Record<GodMachineCategory, string> = {
         Chacun est une légende, chacun est un dieu mineur fait de pression hydraulique et d'esprit-machine.
       </p>
       <div class="filters">
-        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ machines().length }}</button>
+        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(machines().length) }}</button>
         <button [class.active]="filter() === 'titan'" (click)="filter.set('titan')">Titans</button>
         <button [class.active]="filter() === 'knight'" (click)="filter.set('knight')">Chevaliers</button>
         <button [class.active]="filter() === 'war-machine'" (click)="filter.set('war-machine')">Walkers</button>
@@ -68,6 +68,9 @@ export class LoreTitansComponent {
   readonly filter = signal<'all' | GodMachineCategory>('all');
   readonly machineImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.machines.failed()); }
 
   readonly filtered = computed(() => {
     const f = this.filter();

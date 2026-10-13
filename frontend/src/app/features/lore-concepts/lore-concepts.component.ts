@@ -6,7 +6,7 @@ import { longestWord } from '../../shared/longest-word';
 import type { LoreConcept, LoreConceptCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
   imperial: 'Impérial',
@@ -42,9 +42,9 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
           voici les piliers (et les fissures) de la galaxie.
         </p>
         <div class="counters">
-          <div class="counter"><strong>{{ concepts().length }}</strong><span>Concepts</span></div>
-          <div class="counter"><strong>{{ totalKeyFacts() }}</strong><span>Faits documentés</span></div>
-          <div class="counter"><strong>{{ totalRelations() }}</strong><span>Liens inter-concepts</span></div>
+          <div class="counter"><strong>{{ nb(concepts().length) }}</strong><span>Concepts</span></div>
+          <div class="counter"><strong>{{ nb(totalKeyFacts()) }}</strong><span>Faits documentés</span></div>
+          <div class="counter"><strong>{{ nb(totalRelations()) }}</strong><span>Liens inter-concepts</span></div>
         </div>
       </div>
     </section>
@@ -55,11 +55,11 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 
     <section class="filters">
       <button class="filter" [class.active]="filterCategory() === 'all'" (click)="setFilter('all')">
-        Tous · {{ concepts().length }}
+        Tous · {{ nb(concepts().length) }}
       </button>
       @for (cat of categories; track cat) {
         <button class="filter" [class.active]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)">
-          {{ categoryLabel(cat) }} · {{ countByCategory(cat) }}
+          {{ categoryLabel(cat) }} · {{ nb(countByCategory(cat)) }}
         </button>
       }
     </section>
@@ -174,6 +174,9 @@ export class LoreConceptsComponent {
   readonly totalRelations = computed(() =>
     this.concepts().reduce((sum, c) => sum + c.relatedConcepts.length, 0),
   );
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.concepts.failed()); }
 
   countByCategory(cat: LoreConceptCategory): number {
     return this.concepts().filter(c => c.category === cat).length;

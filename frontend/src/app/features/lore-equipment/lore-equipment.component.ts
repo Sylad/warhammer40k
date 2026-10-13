@@ -6,7 +6,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Equipment, EquipmentType, Faction } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { compteur, retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Armes à distance',
@@ -48,11 +48,11 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
           Chaque entrée porte le poids d'une histoire, d'une foi ou d'une damnation.
         </p>
         <div class="counters">
-          <div class="counter"><strong>{{ items().length }}</strong><span>Pièces archivées</span></div>
-          <div class="counter"><strong>{{ countByType('ranged') }}</strong><span>Armes à distance</span></div>
-          <div class="counter"><strong>{{ countByType('melee') }}</strong><span>Armes de mêlée</span></div>
-          <div class="counter"><strong>{{ countByType('armor') }}</strong><span>Armures</span></div>
-          <div class="counter"><strong>{{ countByType('relic') }}</strong><span>Reliques</span></div>
+          <div class="counter"><strong>{{ nb(items().length) }}</strong><span>Pièces archivées</span></div>
+          <div class="counter"><strong>{{ nb(countByType('ranged')) }}</strong><span>Armes à distance</span></div>
+          <div class="counter"><strong>{{ nb(countByType('melee')) }}</strong><span>Armes de mêlée</span></div>
+          <div class="counter"><strong>{{ nb(countByType('armor')) }}</strong><span>Armures</span></div>
+          <div class="counter"><strong>{{ nb(countByType('relic')) }}</strong><span>Reliques</span></div>
         </div>
       </div>
     </section>
@@ -64,11 +64,11 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
     <section class="filters">
       <div class="filter-row">
         <button class="filter" [class.active]="filterType() === 'all'" (click)="filterType.set('all')">
-          Tous · {{ items().length }}
+          Tous · {{ nb(items().length) }}
         </button>
         @for (t of typeKeys; track t) {
           <button class="filter" [class.active]="filterType() === t" [style.--t-color]="typeColor(t)" (click)="filterType.set(t)">
-            <span class="filter-sigil">{{ typeSigil(t) }}</span>{{ typeLabel(t) }} · {{ countByType(t) }}
+            <span class="filter-sigil">{{ typeSigil(t) }}</span>{{ typeLabel(t) }} · {{ nb(countByType(t)) }}
           </button>
         }
       </div>
@@ -192,6 +192,9 @@ export class LoreEquipmentComponent {
     }
     return this.factions().filter(f => ids.has(f.id)).sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
   });
+
+  /** L115 : « — » tant que la liste d'équipement est en échec. */
+  nb(n: number): string { return compteur(n, this.items.failed()); }
 
   countByType(t: EquipmentType): number {
     return this.items().filter(i => i.type === t).length;

@@ -5,7 +5,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -49,9 +49,9 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
           encore actifs), 2 expurgés des registres impériaux pour des raisons que personne ne révèle.
         </p>
         <div class="counters">
-          <div class="counter"><strong>{{ countLoyalist() }}</strong><span>Loyalistes</span></div>
-          <div class="counter"><strong>{{ countTraitor() }}</strong><span>Traîtres</span></div>
-          <div class="counter"><strong>{{ countLost() }}</strong><span>Perdus</span></div>
+          <div class="counter"><strong>{{ nb(countLoyalist()) }}</strong><span>Loyalistes</span></div>
+          <div class="counter"><strong>{{ nb(countTraitor()) }}</strong><span>Traîtres</span></div>
+          <div class="counter"><strong>{{ nb(countLost()) }}</strong><span>Perdus</span></div>
         </div>
       </div>
     </section>
@@ -62,16 +62,16 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
 
     <section class="filters">
       <button class="filter" [class.active]="filterAllegiance() === 'all'" (click)="setFilter('all')">
-        Tous · 20
+        Tous · {{ nb(primarchs().length) }}
       </button>
       <button class="filter" [class.active]="filterAllegiance() === 'loyalist'" (click)="setFilter('loyalist')">
-        Loyalistes · {{ countLoyalist() }}
+        Loyalistes · {{ nb(countLoyalist()) }}
       </button>
       <button class="filter" [class.active]="filterAllegiance() === 'traitor'" (click)="setFilter('traitor')">
-        Traîtres · {{ countTraitor() }}
+        Traîtres · {{ nb(countTraitor()) }}
       </button>
       <button class="filter" [class.active]="filterAllegiance() === 'lost'" (click)="setFilter('lost')">
-        Perdus · {{ countLost() }}
+        Perdus · {{ nb(countLost()) }}
       </button>
     </section>
 
@@ -141,6 +141,9 @@ export class LorePrimarchsComponent {
   readonly filterAllegiance = signal<'all' | PrimarchAllegiance>('all');
   readonly primarchImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.primarchs.failed()); }
 
   readonly filtered = computed(() => {
     const all = this.primarchs();

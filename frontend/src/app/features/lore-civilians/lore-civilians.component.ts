@@ -5,7 +5,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { ImperialOrganization, ImperialOrgCategory, ImperialOrgFigure } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 const CATEGORY_LABEL: Record<ImperialOrgCategory, string> = {
   governance: 'Gouvernance',
@@ -44,9 +44,9 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
           écolières-soldates. Voici les ordres et institutions qui font tourner Sa machine.
         </p>
         <div class="counters">
-          <div class="counter"><strong>{{ orgs().length }}</strong><span>Organisations</span></div>
-          <div class="counter"><strong>{{ totalFunctions() }}</strong><span>Fonctions documentées</span></div>
-          <div class="counter"><strong>{{ totalFigures() }}</strong><span>Figures notables</span></div>
+          <div class="counter"><strong>{{ nb(orgs().length) }}</strong><span>Organisations</span></div>
+          <div class="counter"><strong>{{ nb(totalFunctions()) }}</strong><span>Fonctions documentées</span></div>
+          <div class="counter"><strong>{{ nb(totalFigures()) }}</strong><span>Figures notables</span></div>
         </div>
       </div>
     </section>
@@ -57,11 +57,11 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
 
     <section class="filters">
       <button class="filter" [class.active]="filterCategory() === 'all'" (click)="setFilter('all')">
-        Toutes · {{ orgs().length }}
+        Toutes · {{ nb(orgs().length) }}
       </button>
       @for (cat of categories; track cat) {
         <button class="filter" [class.active]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)">
-          {{ categoryLabel(cat) }} · {{ countByCategory(cat) }}
+          {{ categoryLabel(cat) }} · {{ nb(countByCategory(cat)) }}
         </button>
       }
     </section>
@@ -184,6 +184,9 @@ export class LoreCiviliansComponent {
   readonly totalFigures = computed(() =>
     this.orgs().reduce((sum, o) => sum + o.notableFigures.length, 0),
   );
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.orgs.failed()); }
 
   countByCategory(cat: ImperialOrgCategory): number {
     return this.orgs().filter(o => o.category === cat).length;
