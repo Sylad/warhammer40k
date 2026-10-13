@@ -1012,9 +1012,10 @@ lots:
     review: { date: 2026-10-13, verdict: "compliant — orchestré (vague 2026-10-13-0900b, 0 passe(s) de correction)", commit: 3e975d4d8dbc098632292cc592b1d9679341f200 }
   - id: L113
     title: "Tests frontend instables sous charge : deux lancements complets de npm test sur trois ont eu chacun un échec différent, vert en isolé — ancres.e2e.spec.ts (fiche primarque 390 px : cible à 92 px sous la barre au lieu de ≤ 40) et plan-data.test.mjs (« dist/ ne contient aucun texte privé »), tous deux lisent dist/ ; trouver la cause (dist reconstruit pendant le run ? délai ?) et rendre la suite déterministe"
-    status: todo
+    status: doing
     estimate: 0.5
     created: 2026-10-13
+    started: 2026-10-13
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
