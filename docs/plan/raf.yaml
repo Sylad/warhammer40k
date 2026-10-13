@@ -896,6 +896,7 @@ lots:
     created: 2026-10-10
     notes:
       - { date: 2026-10-13, text: "13-10 QA prod (sha-20107c4) : l'état « fiche introuvable » (faction, unité, primarque…) n'a pas de h1 (attente « * » : un h1 non vide) et l'API de la fiche est appelée plusieurs fois par affichage (/api/units/<id> ×3, /api/lore/primarchs/<id> ×2) — à traiter avec le lien vers la liste." }
+      - { date: 2026-10-13, text: "13-10 QA L112 : même manque sur /subfactions/n-existe-pas et sur l'état 500 de la sous-faction (aucun h1) ; ajouter aussi la section ## /subfactions/:id à docs/qa/expectations.md (proposition dans le rapport QA : titre, sections, 404 → introuvable + Retour, 500 → Réessayer, successors vide permis, exception console de la 404)." }
   - id: L98
     title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
     public: "Sous-factions : les libellés du bandeau sont lisibles"
@@ -1026,6 +1027,12 @@ lots:
     notes:
       - { date: 2026-10-13, text: "13-10 : rendu au lead (vague 2026-10-13-0900b, revue non conforme après 2 corrections). Fait : maxWorkers 8, délai 30 s, attente networkidle avant le clic + retard permanent de 1,5 s sur units/subfactions (reproduit la fiche faction). Reste : cas primarque 390 px (92 px) non reproduit, cas faction 1440 px (120 px, position stable) observé 1 run sur 3 ; README:130 consigne l'hypothèse démentie (fenêtre de stabilité) ; networkidle déconseillé par Playwright (attendre un état précis). Reprendre : reproduire avec un retard sur les requêtes réelles de la fiche primarque, remplacer networkidle par l'attente des sections, corriger le README." }
       - { date: 2026-10-13, text: "13-10 : la CI de 3e975d4 (L112) a échoué sur videos-ouvrir-l47.acceptation.spec.ts:464 — l'onglet ouvert lu à « blank » au lieu de /videos?video=astartes-2 (waitForLoadState trop tôt sur le nouvel onglet) ; même famille d'instabilité, vert sur 20107c4. Job relancé." }
+      - { date: 2026-10-13, text: "13-10 (vague 2026-10-13-1030) : rendu par le verrou — d783ca3 modifie videos-ouvrir-l47.acceptation.spec.ts, test scellé de L47 (livré, fiche inchangée). Reprise : remettre ce fichier EXACTEMENT à son contenu d'avant le premier commit de travail de L113 (git checkout a33c296 -- <fichier>, exemption L184 du verrou), dans un commit qui cite L113 ; l'instabilité du test vidéos L47 n'est plus dans ce lot (cadence L212 : rescellé d'un lot livré). Garder les corrections d'ancres.e2e (attente des requêtes en vol et des polices) et finir : README:130 avec la cause réelle." }
+  - id: L114
+    title: "Fiche sous-faction : l'effect() des images relit unitImgCache() et se relance à chaque réponse — 28 à ~170 appels /api/wiki-image pour 9 à 10 images distinctes par chargement (QA prod L112, 13-10, subfaction-detail.component.ts:264-287)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-13
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
