@@ -28,5 +28,11 @@ export default defineConfig({
       ...acceptationBrowser(path.resolve(__dirname, '..')).map((f) => path.resolve(__dirname, '..', f)),
     ],
     reporters: ['default'],
+    // L113 : un worker par cœur (32 ici) lançait ~20 Chromium et les scans de dist/ en même temps ; sous
+    // cette charge le scan de plan-data.test.mjs (~1 s au repos) dépassait les 5 s par défaut. Parallélisme
+    // borné, délai de 30 s comme vitest.e2e.config.ts : garde dans scripts/vitest-charge.test.mjs.
+    maxWorkers: 8,
+    testTimeout: 30000,
+    hookTimeout: 60000,
   },
 });
