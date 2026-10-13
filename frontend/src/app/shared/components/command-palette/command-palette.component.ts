@@ -1,3 +1,4 @@
+import { ReplaySubject, switchMap, take } from 'rxjs';
 import { Component, computed, EventEmitter, HostListener, inject, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -188,7 +189,9 @@ export class CommandPaletteComponent {
 
   // Load all searchable data once
   private readonly factions = toSafeSignal(this.service.factions$, []);
-  private readonly subFactions = toSafeSignal(this.service.subFactions$, []);
+  // 350 Ko (loreLong compris) : demandées à la première ouverture, pas à chaque page vue.
+  private readonly premiereOuverture$ = new ReplaySubject<void>(1);
+  private readonly subFactions = toSafeSignal(this.premiereOuverture$.pipe(take(1), switchMap(() => this.service.subFactions$)), []);
   private readonly primarchs = toSafeSignal(this.service.primarchs$, []);
   private readonly saints = toSafeSignal(this.service.saints$, []);
   private readonly ships = toSafeSignal(this.service.ships$, []);
@@ -245,6 +248,7 @@ export class CommandPaletteComponent {
 
   open(): void {
     this.relancerSourcesEnEchec();
+    this.premiereOuverture$.next();
     this.isOpen.set(true);
     this.query = '';
     this.queryS.set('');

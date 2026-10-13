@@ -7,7 +7,7 @@ import { fakeWarhammerService } from '../../../../testing/fake-warhammer-service
 import { WarhammerService } from '../../../core/services/warhammer.service';
 import { CommandPaletteComponent } from './command-palette.component';
 
-async function monter(over: Record<string, unknown>) {
+async function monter(over: Record<string, unknown>, ouvrir = true) {
   await setupTestBed([CommandPaletteComponent as never], [
     provideRouter([]),
     { provide: WarhammerService, useValue: fakeWarhammerService(over) },
@@ -16,10 +16,9 @@ async function monter(over: Record<string, unknown>) {
   f.detectChanges();
   await f.whenStable();
   const palette = f.componentInstance;
-  palette.open();
-  f.detectChanges();
+  if (ouvrir) { palette.open(); f.detectChanges(); }
   const chercher = (q: string) => { palette.query = q; palette.onQueryChange(q); f.detectChanges(); };
-  return { f, el: f.nativeElement as HTMLElement, chercher };
+  return { f, palette, el: f.nativeElement as HTMLElement, chercher };
 }
 
 describe('palette Ctrl+K (L117)', () => {
@@ -47,18 +46,31 @@ describe('palette Ctrl+K (L117)', () => {
     expect(sub).not.toContain('daemon-weapon');
   });
 
-  it('une sous-faction en échec au démarrage est relancée à l’ouverture', async () => {
+  it('une sous-faction en échec au démarrage est relancée à la réouverture', async () => {
     let appels = 0;
-    const { f, el, chercher } = await monter({
+    const { f, palette, el, chercher } = await monter({
       subFactions$: new (await import('rxjs')).Observable<unknown[]>((o) => {
         appels++;
         if (appels === 1) o.error(new Error('500'));
         else { o.next([{ id: 'ultramarines', factionId: 'f', name: 'Ultramarines', type: 'chapter' }]); o.complete(); }
       }),
     });
-    expect(appels).toBe(2); // 1 démarrage (échec) + relance à l'ouverture
+    expect(appels).toBe(1); // chargée à la première ouverture (échec)
+    palette.close(); palette.open(); f.detectChanges(); await f.whenStable(); f.detectChanges();
+    expect(appels).toBe(2); // relancée à la réouverture
     chercher('ultra');
     expect(el.textContent).toContain('Ultramarines');
     void f;
+  });
+
+  it('la liste complète des sous-factions (350 Ko) n’est demandée qu’à la première ouverture', async () => {
+    let appels = 0;
+    const src = new (await import('rxjs')).Observable<unknown[]>((o) => { appels++; o.next([]); o.complete(); });
+    const { f, palette } = await monter({ subFactions$: src }, false);
+    expect(appels).toBe(0);
+    palette.open(); f.detectChanges(); await f.whenStable();
+    expect(appels).toBe(1);
+    palette.close(); palette.open(); f.detectChanges();
+    expect(appels).toBe(1);
   });
 });
