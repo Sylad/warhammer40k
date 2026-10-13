@@ -1065,10 +1065,11 @@ lots:
   - id: L117
     title: "Palette Ctrl+K : les sous-factions ne sont pas indexées — « Ultramarines » ne propose que Guilliman et Macragge's Honour, pas /subfactions/ultramarines (command-palette.component.ts:190-207 déclare le type subfaction sans source) ; sous-libellé des équipements brut (« daemon-weapon ») au lieu du libellé traduit de /lore/equipment (subCategoryLabel) (QA prod L110, 13-10)"
     public: "Recherche Ctrl+K : les chapitres et sous-factions trouvables"
-    status: todo
+    status: doing
     estimate: 0.5
     visible: true
     created: 2026-10-13
+    started: 2026-10-13
   - id: L118
     title: "Chronologie en erreur : le message « aucun résultat » s'affiche sous le bandeau d'erreur (comme Équipement et Séries avant L111) ; fiche titan : h1 « Machine introuvable » ≠ titre d'onglet « Machine de guerre introuvable » (constats UX L115 et L97)"
     public: "Chronologie en erreur : un seul message"
