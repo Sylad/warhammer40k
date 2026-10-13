@@ -497,6 +497,7 @@ export const COVERED = {
   'frontend/src/app/features/faction-detail/faction-detail.component.ts|r.route': 'littéraux « route: » de toResourceLink',
   'frontend/src/app/shared/components/breadcrumb/breadcrumb.component.ts|c.link': 'breadcrumb.utils.spec.ts : seuls les préfixes servis par une route sont liés',
   'frontend/src/app/shared/components/command-palette/command-palette.component.ts|r.routerLink': 'littéraux « routerLink: [...] » du même fichier (gabarits paramétrés)',
+  'frontend/src/app/shared/components/load-error/load-error.component.ts|backLink': 'littéraux backLink="/…" des pages (chemins de listes, tous servis par app.routes.ts ; load-error.component.spec.ts)',
 };
 
 /**
