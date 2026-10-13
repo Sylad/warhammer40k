@@ -1077,6 +1077,7 @@ lots:
     visible: true
     created: 2026-10-13
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "compliant — 0 finding : Chronologie en erreur n'affiche plus que le bandeau (pas de « Aucun événement », pastilles « — »), titre d'onglet et h1 de la fiche titan « Machine introuvable » mesurés identiques ; 5 fichiers de tests, 95 tests de scripts verts — orchestré (vague 2026-10-13-1315, 0 passe(s) de correction)", commit: 56c74386c3be82b942ed5dd4ce7d0efd2e14bfb6 }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
