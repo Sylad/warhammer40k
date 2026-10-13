@@ -325,8 +325,14 @@
     {
       "id": "L111",
       "title": "Listes en erreur : plus de « aucun résultat » sous le message d'erreur",
-      "status": "doing",
-      "started": "2026-10-13"
+      "status": "done",
+      "started": "2026-10-13",
+      "finished": "2026-10-13"
+    },
+    {
+      "id": "L115",
+      "title": "Listes en erreur : plus de compteurs à zéro trompeurs",
+      "status": "todo"
     }
   ]
 }
