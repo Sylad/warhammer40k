@@ -298,6 +298,8 @@ export function codeLinks(files = sourceFiles()) {
 
     // Code TypeScript : objets de navigation, commandes du routeur, chaînes d'URL.
     for (const m of src.matchAll(/\b(?:route|link):\s*'(\/[^']*)'/g)) push({ cls: 'route', target: m[1], source: source(m.index) });
+    // L97 : lien de retour littéral d'un <app-load-error> (rendu par le composant en routerLink).
+    for (const m of src.matchAll(/\sbackLink="(\/[^"]*)"/g)) push({ cls: 'route', target: m[1], source: source(m.index) });
     for (const m of src.matchAll(/routerLink:\s*(\[[^\]]*\])/g)) {
       const c = parseCommands(m[1]);
       if (c) {
@@ -497,7 +499,7 @@ export const COVERED = {
   'frontend/src/app/features/faction-detail/faction-detail.component.ts|r.route': 'littéraux « route: » de toResourceLink',
   'frontend/src/app/shared/components/breadcrumb/breadcrumb.component.ts|c.link': 'breadcrumb.utils.spec.ts : seuls les préfixes servis par une route sont liés',
   'frontend/src/app/shared/components/command-palette/command-palette.component.ts|r.routerLink': 'littéraux « routerLink: [...] » du même fichier (gabarits paramétrés)',
-  'frontend/src/app/shared/components/load-error/load-error.component.ts|backLink': 'littéraux backLink="/…" des pages (chemins de listes, tous servis par app.routes.ts ; load-error.component.spec.ts)',
+  'frontend/src/app/shared/components/load-error/load-error.component.ts|backLink': 'littéraux backLink="/…" des pages : inventoriés et vérifiés contre app.routes.ts comme des liens de gabarit (liens.test.mjs) ; h1 et lien de chaque fiche : fiche-introuvable-l97.spec.ts',
 };
 
 /**

@@ -63,6 +63,13 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     expect(causes.some((c) => /ne pose aucune ancre/.test(c))).toBe(true);
   });
 
+  it('backLink="/…" d’un <app-load-error> : inventorié et vérifié contre les routes (L97)', () => {
+    const f = page('@Component({template: `<app-load-error backLink="/lore/saint" /><app-load-error backLink="/factions" />`})');
+    const broken = checkInternal(codeLinks([f]), { routes, data, news: { entries: [] } });
+    expect(broken.map((b) => b.target)).toEqual(['/lore/saint']);
+    expect(broken[0].cause).toMatch(/aucune route/);
+  });
+
   it('destination calculée non déclarée → cassée tant qu’on ne dit pas ce qui la vérifie', () => {
     const f = page('@Component({template: `<a [routerLink]="x.cible">x</a>`})');
     const causes = checkInternal(codeLinks([f]), { routes, data, news: { entries: [] } }).map((b) => b.cause);
