@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { TimelineEra, TimelineEvent } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
 interface EraDef {
   id: TimelineEra;
@@ -94,6 +94,9 @@ export class LoreTimelineComponent {
   private readonly service = inject(WarhammerService);
 
   readonly events = toSafeSignal(this.service.timelineEvents$, [] as TimelineEvent[]);
+
+  /** L115 : « — » tant que la liste est en échec. */
+  nb(n: number): string { return compteur(n, this.events.failed()); }
 
   readonly filterEra = signal<'all' | TimelineEra>('all');
   readonly filterTag = signal<string>('all');

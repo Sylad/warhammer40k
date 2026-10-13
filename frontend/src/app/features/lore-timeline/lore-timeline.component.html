@@ -14,7 +14,7 @@
       ici en langage des fidèles pour qui l'éternité s'achève demain.
     </p>
     <div class="counters">
-      <div class="counter"><strong>{{ events().length }}</strong><span>Événements consignés</span></div>
+      <div class="counter"><strong>{{ nb(events().length) }}</strong><span>Événements consignés</span></div>
       <div class="counter"><strong>6</strong><span>Ères distinctes</span></div>
       <div class="counter"><strong>M30 → M42</strong><span>Couverture</span></div>
     </div>
@@ -35,7 +35,7 @@
                 (click)="scrollToEra(e.id)">
           <span class="pill-sigil">{{ e.sigil }}</span>
           <span class="pill-label">{{ e.label }}</span>
-          <span class="pill-count">{{ countByEra(e.id) }}</span>
+          <span class="pill-count">{{ nb(countByEra(e.id)) }}</span>
         </button>
       }
     </nav>
@@ -114,14 +114,14 @@
           <div class="filter-label">Par ère</div>
           <div class="filter-list">
             <button class="filter" [class.active]="filterEra() === 'all'" (click)="filterEra.set('all')">
-              Toutes · {{ events().length }}
+              Toutes · {{ nb(events().length) }}
             </button>
             @for (e of eras; track e.id) {
               <button class="filter"
                       [class.active]="filterEra() === e.id"
                       [disabled]="countByEra(e.id) === 0"
                       (click)="filterEra.set(e.id)">
-                <span class="filter-sigil">{{ e.sigil }}</span>{{ e.label }} · {{ countByEra(e.id) }}
+                <span class="filter-sigil">{{ e.sigil }}</span>{{ e.label }} · {{ nb(countByEra(e.id)) }}
               </button>
             }
           </div>

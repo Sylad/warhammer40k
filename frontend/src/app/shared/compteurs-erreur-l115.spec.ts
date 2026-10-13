@@ -15,6 +15,7 @@ import { LoreConceptsComponent } from '../features/lore-concepts/lore-concepts.c
 import { LorePrimarchsComponent } from '../features/lore-primarchs/lore-primarchs.component';
 import { LoreSaintsComponent } from '../features/lore-saints/lore-saints.component';
 import { LoreShipsComponent } from '../features/lore-ships/lore-ships.component';
+import { LoreTimelineComponent } from '../features/lore-timeline/lore-timeline.component';
 import { LoreTitansComponent } from '../features/lore-titans/lore-titans.component';
 
 const http500 = () => new HttpErrorResponse({ status: 500 });
@@ -40,7 +41,7 @@ async function monter<T>(type: new () => T, over: Record<string, unknown>) {
 
 /** Texte des compteurs : cartes du bandeau + boutons d'onglets. */
 const valeurs = (el: HTMLElement) =>
-  [...el.querySelectorAll('.counter strong, .filter, .filters button')].map((n) => (n.textContent ?? '').replace(/\s+/g, ' ').trim());
+  [...el.querySelectorAll('.counter strong, .filter, .filters button, .pill-count')].map((n) => (n.textContent ?? '').replace(/\s+/g, ' ').trim());
 const zeroTrompeur = (v: string) => v === '0' || /· 0$/.test(v);
 
 describe('compteur()', () => {
@@ -60,6 +61,7 @@ const cas: [string, new () => unknown, string][] = [
   ['saints', LoreSaintsComponent, 'saints$'],
   ['vaisseaux', LoreShipsComponent, 'ships$'],
   ['dieux-machines', LoreTitansComponent, 'godMachines$'],
+  ['chronologie', LoreTimelineComponent, 'timelineEvents$'],
 ];
 
 describe('compteurs des listes Lore en erreur (L115)', () => {
