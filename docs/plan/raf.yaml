@@ -1070,6 +1070,7 @@ lots:
     visible: true
     created: 2026-10-13
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "conforme : 5 mineurs en notes (sous-factions téléchargées deux fois depuis l'accueil, « space marines » remplit les 20 places et fait sortir Stormbird, recherche de sous-catégorie qui diffère entre la palette et /lore/equipment) — orchestré (vague 2026-10-13-1315, 0 passe(s) de correction + passe des mineurs)", commit: 788737ca910a62d737b4ac4e67671a77bff04986 }
   - id: L118
     title: "Chronologie en erreur : le message « aucun résultat » s'affiche sous le bandeau d'erreur (comme Équipement et Séries avant L111) ; fiche titan : h1 « Machine introuvable » ≠ titre d'onglet « Machine de guerre introuvable » (constats UX L115 et L97)"
     public: "Chronologie en erreur : un seul message"
