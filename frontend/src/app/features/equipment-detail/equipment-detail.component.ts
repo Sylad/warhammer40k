@@ -6,6 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { Equipment, EquipmentType } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { subCategoryLabel } from '../../shared/sub-category-label';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Arme à distance',
@@ -26,7 +27,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
         <div class="hero-overlay"></div>
         <div class="hero-text">
           <div class="hero-eyebrow">
-            <span class="hero-class">{{ typeLabel(e.type) }} · {{ e.subCategory }}</span>
+            <span class="hero-class">{{ typeLabel(e.type) }} · {{ souscategorie(e.subCategory) }}</span>
             @if (e.sigil) { <span class="hero-size">{{ e.sigil }}</span> }
           </div>
           <h1>{{ e.name }}</h1>
@@ -85,7 +86,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
           <section class="sp">
             <h3>Données</h3>
             <div class="info-row"><strong>Type</strong><span>{{ typeLabel(e.type) }}</span></div>
-            <div class="info-row"><strong>Sous-catégorie</strong><span>{{ e.subCategory }}</span></div>
+            <div class="info-row"><strong>Sous-catégorie</strong><span>{{ souscategorie(e.subCategory) }}</span></div>
             @if (e.nameVO) { <div class="info-row"><strong>Nom VO</strong><span>{{ e.nameVO }}</span></div> }
           </section>
 
@@ -141,6 +142,7 @@ export class EquipmentDetailComponent {
   }
 
   typeLabel(t: EquipmentType): string { return TYPE_LABEL[t]; }
+  readonly souscategorie = subCategoryLabel;
 
   factionsLabel(e: Equipment): string {
     return (e.factionIds ?? []).join(' · ');
