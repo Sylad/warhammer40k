@@ -2,12 +2,13 @@ import { notableCards } from './notable-units';
 import { Component, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { switchMap, map, of, catchError, combineLatest } from 'rxjs';
+import { switchMap, map, of, catchError, combineLatest, BehaviorSubject } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { longestWord } from '../../shared/longest-word';
 import type { SubFaction, SubFactionType, Unit, Faction } from '../../core/models/models';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { isNotFound, toSafeSignal } from '../../shared/safe-signal';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 
 const TYPE_LABEL: Record<SubFactionType, string> = {
   chapter: 'Chapitre',
@@ -34,7 +35,7 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
 @Component({
   selector: 'app-subfaction-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, LoadErrorComponent],
   template: `
     <section class="page" *ngIf="data() as d">
       <a [routerLink]="['/factions', d.subfaction.factionId]" class="back-link">
@@ -203,6 +204,9 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
     @if (notFound()) {
       <div class="loading">Sous-faction introuvable. <a routerLink="/factions">Retour</a></div>
     }
+    @if (failed()) {
+      <app-load-error (retry)="retry$.next()" />
+    }
   `,
   styleUrls: ['./subfaction-detail.component.scss'],
 })
@@ -217,14 +221,18 @@ export class SubFactionDetailComponent {
 
   readonly longestWord = longestWord;
   readonly notFound = signal(false);
+  /** 500 ou backend absent (≠ 404) : bandeau + Réessayer, jamais « introuvable ». */
+  readonly failed = signal(false);
   readonly loading = signal(true);
+  protected readonly retry$ = new BehaviorSubject<void>(undefined);
 
   readonly data = toSafeSignal(
-    this.route.params.pipe(
-      switchMap(params => {
+    combineLatest([this.route.params, this.retry$]).pipe(
+      switchMap(([params]) => {
         const id = params['id'];
         this.loading.set(true);
         this.notFound.set(false);
+        this.failed.set(false);
         return this.service.getSubFaction(id).pipe(
           namedPage(this.pages, sub => sub.name),
           switchMap(sub =>
@@ -242,8 +250,9 @@ export class SubFactionDetailComponent {
               map(([subfaction, faction, parent, successors, units]) => ({ subfaction, faction, parent, successors, units, notable: notableCards(subfaction) })),
             ),
           ),
-          catchError(() => {
-            this.notFound.set(true);
+          catchError(err => {
+            if (isNotFound(err)) this.notFound.set(true);
+            else this.failed.set(true);
             this.loading.set(false);
             return of(null);
           }),
