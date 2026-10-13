@@ -1,5 +1,5 @@
 import { notableCards } from './notable-units';
-import { Component, inject, signal, computed, effect } from '@angular/core';
+import { Component, inject, signal, computed, effect, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { switchMap, map, of, catchError, combineLatest, BehaviorSubject } from 'rxjs';
@@ -263,27 +263,25 @@ export class SubFactionDetailComponent {
   constructor() {
     effect(() => {
       const d = this.data();
-      if (d) {
+      if (!d) return;
+      // L114 : le corps ne lit aucun signal (cache compris) — sinon chaque réponse relançait l'effect
+      // et redemandait toutes les images ; `demandees` ne garde qu'une requête par image et par fiche.
+      untracked(() => {
         this.loading.set(false);
-        const q = d.subfaction.wikiQuery ?? `${d.subfaction.name} warhammer`;
-        this.service.getWikiImage(q).subscribe(r => {
-          if (r.imageUrl) this.heroBgUrl.set(`url('${r.imageUrl}')`);
-        });
+        const demandees = new Set<string>();
+        const demander = (cle: string, requete: string, poser: (url: string) => void) => {
+          if (demandees.has(cle)) return;
+          demandees.add(cle);
+          this.service.getWikiImage(requete).subscribe(r => { if (r.imageUrl) poser(r.imageUrl); });
+        };
+        demander('hero', d.subfaction.wikiQuery ?? `${d.subfaction.name} warhammer`, url => this.heroBgUrl.set(`url('${url}')`));
         for (const n of d.notable) {
-          if (this.unitImgCache()[n.wikiQuery]) continue;
-          this.service.getWikiImage(n.wikiQuery).subscribe(r => {
-            if (r.imageUrl) this.unitImgCache.update(c => ({ ...c, [n.wikiQuery]: r.imageUrl! }));
-          });
+          demander(n.wikiQuery, n.wikiQuery, url => this.unitImgCache.update(c => ({ ...c, [n.wikiQuery]: url })));
         }
         for (const u of d.units) {
-          if (this.unitImgCache()[u.id]) continue;
-          this.service.getWikiImage(`${u.nom} warhammer`).subscribe(r => {
-            if (r.imageUrl) {
-              this.unitImgCache.update(c => ({ ...c, [u.id]: r.imageUrl! }));
-            }
-          });
+          demander(u.id, `${u.nom} warhammer`, url => this.unitImgCache.update(c => ({ ...c, [u.id]: url })));
         }
-      }
+      });
     });
   }
 
