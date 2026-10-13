@@ -128,4 +128,15 @@ describe('Réessayer relance tous les flux de la page (L38)', () => {
     expect((instance['items']() as unknown[]).length).toBe(1);
     expect((instance['factions']() as unknown[]).length).toBe(1);
   });
+
+  it('Équipement : seules les factions échouent, le bandeau apparaît puis disparaît', async () => {
+    const fa = flaky([faction]);
+    const { el, reessayer, instance } = await monter(LoreEquipmentComponent, {
+      equipment$: of([{ id: 'e1', name: 'Arme', type: 'weapon', subCategory: 'bolter', factionIds: ['f1'] }]), factions$: fa.flux,
+    });
+    expect(el.querySelector('[role="alert"]')).not.toBeNull();
+    await reessayer();
+    expect(el.querySelector('[role="alert"]')).toBeNull();
+    expect((instance['factions']() as unknown[]).length).toBe(1);
+  });
 });
