@@ -998,6 +998,7 @@ lots:
     after: [ L38 ]
     created: 2026-10-13
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "compliant — orchestré (vague 2026-10-13-1030, 0 passe(s) de correction)", commit: 16d9d326284ac65178dee8549a60fb1a18b8b822 }
   - id: L111
     title: "Listes Équipement et Séries en erreur : le bandeau d'erreur s'affiche au-dessus de « Aucune … ne correspond aux filtres » — masquer l'état vide quand la liste est en échec (constat revue L38)"
     public: "Listes en erreur : plus de « aucun résultat » sous le message d'erreur"
