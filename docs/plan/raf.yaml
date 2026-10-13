@@ -1063,6 +1063,8 @@ lots:
     estimate: 0.25
     created: 2026-10-13
     started: 2026-10-13
+    notes:
+      - { date: 2026-10-13, text: "test d'acceptation rescellé (lot livré L47, frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts, fiche inchangée) : test instable en CI (onglet lu à about:blank avant sa navigation) : attendre l'adresse du nouvel onglet avec waitForURL ; contrat de L47 et fiche inchangés" }
   - id: L117
     title: "Palette Ctrl+K : les sous-factions ne sont pas indexées — « Ultramarines » ne propose que Guilliman et Macragge's Honour, pas /subfactions/ultramarines (command-palette.component.ts:190-207 déclare le type subfaction sans source) ; sous-libellé des équipements brut (« daemon-weapon ») au lieu du libellé traduit de /lore/equipment (subCategoryLabel) (QA prod L110, 13-10)"
     public: "Recherche Ctrl+K : les chapitres et sous-factions trouvables"
