@@ -113,7 +113,7 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
     await page.waitForFunction((x) => !!document.getElementById(x), id);
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
     // L105 : la mesure attend une position STABLE (défilement, hauteur de page et haut de la cible
-    // inchangés) pendant une fenêtre plus longue que le retard des polices (400 ms) — chronométrée
+    // inchangés) pendant une fenêtre qui repart tant qu'une police charge (les polices sont retardées de 2,5 s, plus que la fenêtre) — chronométrée
     // sur les images, donc indifférente à la charge de la machine — au lieu de quelques pas de 100 ms
     // qu'un navigateur ralenti franchit avant le reflux ou le défilement différé.
     const stable = await page.evaluate((x) => new Promise<boolean>((done) => {
@@ -202,7 +202,7 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       it(`${w} px — ${name} : entre le bas de la barre et +40 px`, async () => {
         const page = await browser.newPage({ viewport: { width: w, height: h } });
         await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-01-01', slugs: [], at: '2026-01-02T10:00:00Z' })));
-        // L55 : polices web tardives (400 ms) — le texte se reflue après l'arrivée sur l'ancre.
+        // L55 : polices web tardives (2,5 s) — le texte se reflue après l'arrivée sur l'ancre.
         await page.route(/\.(woff2?|ttf)(\?|$)|fonts\.(googleapis|gstatic)/, async (r) => { await new Promise((x) => setTimeout(x, 2500)); await r.continue(); });
         // L113 : données des fiches (unités, sous-factions, primarques, images du wiki) tardives (1,5 s), comme sur une machine chargée :
         // elles ajoutent du contenu au-dessus des sections APRÈS le clic, donc après une position « stable ».
@@ -218,7 +218,7 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
         expect(m.bar).toBeGreaterThan(0);
         expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeGreaterThanOrEqual(0);
         if (!m.bottom) expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeLessThanOrEqual(40);
-        // L47 : la mesure attend 700 ms de stabilité (20 s au plus) après des polices retardées de 400 ms :
+        // L47 : la mesure attend 700 ms de stabilité (20 s au plus) après des polices retardées de 2,5 s :
         // le délai par défaut de 5 s expirait au hasard de la charge de la machine.
       }, 45_000);
     }
