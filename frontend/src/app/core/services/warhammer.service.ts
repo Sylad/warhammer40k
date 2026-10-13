@@ -36,6 +36,11 @@ export class WarhammerService {
     return this.http.get<SubFaction[]>(url);
   }
 
+  /** L117 : toutes les sous-factions, pour la palette Ctrl+K. */
+  readonly subFactions$: Observable<SubFaction[]> = this.http
+    .get<SubFaction[]>(`${this.base}/subfactions`)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
   getSubFaction(id: string): Observable<SubFaction> {
     return this.http.get<SubFaction>(`${this.base}/subfactions/${id}`);
   }

@@ -1,3 +1,4 @@
+import { subCategoryLabel } from '../../shared/sub-category-label';
 import { Component, computed, inject, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -209,8 +210,7 @@ export class LoreEquipmentComponent {
   typeColor(t: EquipmentType): string { return TYPE_COLOR[t]; }
 
   subCategoryLabel(item: Equipment): string {
-    const sub = item.subCategory.replace(/-/g, ' ');
-    return sub.charAt(0).toUpperCase() + sub.slice(1);
+    return subCategoryLabel(item.subCategory);
   }
 
   factionName(fid: string): string {

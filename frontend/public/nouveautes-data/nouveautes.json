@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-13 13:19",
+  "generated": "2026-10-13 13:41",
   "entries": [
+    {
+      "slug": "2026-10-13-recherche-ctrl-k-les-chapitres-et-sous-factions-trouvables",
+      "title": "Recherche Ctrl+K : les chapitres et sous-factions trouvables",
+      "date": "2026-10-13",
+      "lots": [
+        "L117"
+      ],
+      "captures": [
+        "captures/L117-palette-sous-factions.png"
+      ],
+      "alts": [
+        "Recherche Ctrl+K pour « ultramarines » : la sous-faction Ultramarines (Space Marines) arrive en premier, devant Roboute Guilliman et Macragge's Honour"
+      ],
+      "html": "<p>La recherche Ctrl+K trouve maintenant les chapitres et les autres sous-factions : en tapant « Ultramarines », la fiche du chapitre arrive en premier, avec sa faction à droite (« Space Marines »), avant Roboute Guilliman et Macragge’s Honour. Dans les résultats, les équipements affichent aussi leur catégorie comme sur la page Armement (« Daemon weapon » et non plus « daemon-weapon »).</p>"
+    },
     {
       "slug": "2026-10-13-chronologie-en-erreur-un-seul-message",
       "title": "Chronologie en erreur : un seul message",

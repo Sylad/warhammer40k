@@ -161,7 +161,7 @@ export const SELF_LINKS = {
   [T('lore-galaxy/lore-galaxy.component.ts', '/lore/ships/${id}')]: { to: ['/lore/ships/:id'] },
   'frontend/src/app/shared/components/command-palette/command-palette.component.ts|f.id': { to: ['/factions/:id'] },
   'frontend/src/app/shared/components/command-palette/command-palette.component.ts|p.id': { to: ['/lore/primarchs/:id'] },
-  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|s.id': { to: ['/lore/saints/:id', '/lore/ships/:id'] },
+  'frontend/src/app/shared/components/command-palette/command-palette.component.ts|s.id': { to: ['/lore/saints/:id', '/lore/ships/:id', '/subfactions/:id'] },
   'frontend/src/app/shared/components/command-palette/command-palette.component.ts|t.id': { to: ['/lore/titans/:id'] },
   'frontend/src/app/shared/components/command-palette/command-palette.component.ts|e.id': { to: ['/lore/timeline/:id', '/lore/equipment/:id'] },
 };

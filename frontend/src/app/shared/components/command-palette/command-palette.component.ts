@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../../core/services/warhammer.service';
 import { toSafeSignal } from '../../safe-signal';
+import { subCategoryLabel } from '../../sub-category-label';
 
 interface SearchResult {
   type: 'faction' | 'subfaction' | 'unit' | 'primarch' | 'saint' | 'ship' | 'titan' | 'event' | 'equipment' | 'concept' | 'org' | 'page';
@@ -187,6 +188,7 @@ export class CommandPaletteComponent {
 
   // Load all searchable data once
   private readonly factions = toSafeSignal(this.service.factions$, []);
+  private readonly subFactions = toSafeSignal(this.service.subFactions$, []);
   private readonly primarchs = toSafeSignal(this.service.primarchs$, []);
   private readonly saints = toSafeSignal(this.service.saints$, []);
   private readonly ships = toSafeSignal(this.service.ships$, []);
@@ -197,14 +199,16 @@ export class CommandPaletteComponent {
   readonly results = computed(() => {
     const q = this.queryS().toLowerCase().trim();
     if (q.length < 2) return [];
+    const nomsFactions = new Map(this.factions().map(f => [f.id, f.nom]));
     const all: SearchResult[] = [
       ...this.factions().map(f => ({ type: 'faction' as const, label: f.nom, sublabel: f.alignement, routerLink: ['/factions', f.id], weight: 10 })),
+      ...this.subFactions().map(s => ({ type: 'subfaction' as const, label: s.name, sublabel: nomsFactions.get(s.factionId) ?? s.factionId, routerLink: ['/subfactions', s.id], weight: 9 })),
       ...this.primarchs().map(p => ({ type: 'primarch' as const, label: p.name, sublabel: p.legion, routerLink: ['/lore/primarchs', p.id], weight: 9 })),
       ...this.saints().map(s => ({ type: 'saint' as const, label: s.name, sublabel: s.ordoOrChapter, routerLink: ['/lore/saints', s.id], weight: 8 })),
       ...this.ships().map(s => ({ type: 'ship' as const, label: s.name, sublabel: s.factionName, routerLink: ['/lore/ships', s.id], weight: 7 })),
       ...this.titans().map(t => ({ type: 'titan' as const, label: t.name, sublabel: t.scoutClass, routerLink: ['/lore/titans', t.id], weight: 7 })),
       ...this.events().map(e => ({ type: 'event' as const, label: e.title, sublabel: e.date, routerLink: ['/lore/timeline', e.id], weight: 5 })),
-      ...this.equipment().map(e => ({ type: 'equipment' as const, label: e.name, sublabel: e.subCategory, routerLink: ['/lore/equipment', e.id], weight: 5 })),
+      ...this.equipment().map(e => ({ type: 'equipment' as const, label: e.name, sublabel: subCategoryLabel(e.subCategory), routerLink: ['/lore/equipment', e.id], weight: 5 })),
       ...PAGE_LINKS.map(p => ({ ...p, weight: 1 })),
     ];
     const matches = all
@@ -234,7 +238,7 @@ export class CommandPaletteComponent {
 
   /** L110 : une source tombée au démarrage est relancée à chaque ouverture ; les autres ne sont pas rechargées. */
   private relancerSourcesEnEchec(): void {
-    for (const s of [this.factions, this.primarchs, this.saints, this.ships, this.titans, this.equipment, this.events]) {
+    for (const s of [this.factions, this.subFactions, this.primarchs, this.saints, this.ships, this.titans, this.equipment, this.events]) {
       if (s.failed()) s.retry();
     }
   }
