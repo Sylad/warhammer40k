@@ -1040,6 +1040,7 @@ lots:
     estimate: 0.25
     created: 2026-10-13
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "compliant — commit 3904322 (L114), 0 finding. Le Set local et untracked() suppriment la relecture de unitImgCache. Le test échoue sur l'ancien code (8 requêtes au lieu de 7) et passe sur le nouveau. — orchestré (vague 2026-10-13-1145, 0 passe(s) de correction)", commit: 39043223d11fba0d3e6ecfb362fc8622e9b28821 }
   - id: L115
     title: "Listes Lore en erreur : les compteurs du bandeau (« 0 pièces archivées », « 0 armes à distance »…) et des onglets (« Tous · 0 ») s'affichent comme des valeurs — « — » tant que la source est en échec (capture L111, /lore/equipment)"
     public: "Listes en erreur : plus de compteurs à zéro trompeurs"
