@@ -88,14 +88,14 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
   });
 
   /** Haut de la cible par rapport au bas de la barre, une fois le défilement fini. */
-  async function gap(page: Page, id: string): Promise<{ gap: number; bar: number; bottom: boolean }> {
+  async function gap(page: Page, id: string): Promise<{ gap: number; bar: number; bottom: boolean; stable: boolean }> {
     await page.waitForFunction((x) => !!document.getElementById(x), id);
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
     // L105 : la mesure attend une position STABLE (défilement, hauteur de page et haut de la cible
     // inchangés) pendant une fenêtre plus longue que le retard des polices (400 ms) — chronométrée
     // sur les images, donc indifférente à la charge de la machine — au lieu de quelques pas de 100 ms
     // qu'un navigateur ralenti franchit avant le reflux ou le défilement différé.
-    await page.evaluate((x) => new Promise<void>((done) => {
+    const stable = await page.evaluate((x) => new Promise<boolean>((done) => {
       const snap = () => `${window.scrollY}|${document.documentElement.scrollHeight}|${document.getElementById(x)?.getBoundingClientRect().top}`;
       const t0 = performance.now();
       let last = snap();
@@ -103,7 +103,10 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       const tick = (now: number) => {
         const cur = snap();
         if (cur !== last) { last = cur; since = now; }
-        if (now - since >= 700 || now - t0 > 10_000) done();
+        // L113 : `true` seulement si la position a vraiment tenu 700 ms ; au plafond (20 s) on rend
+        // `false` et le cas échoue en le disant, au lieu de mesurer une position qui bouge encore.
+        if (now - since >= 700) done(true);
+        else if (now - t0 > 20_000) done(false);
         else requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
@@ -115,7 +118,7 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       // Bas de page atteint : la cible ne peut pas monter plus haut (page trop courte).
       const bottom = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 1;
       return { gap: Math.round(document.getElementById(x)!.getBoundingClientRect().top - bar), bar: Math.round(bar), bottom };
-    }, id);
+    }, id).then((m) => ({ ...m, stable }));
   }
 
   const cases: [string, (p: Page) => Promise<string>][] = [
@@ -182,12 +185,13 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
         const id = await open(page);
         const m = await gap(page, id);
         await page.close();
+        expect(m.stable, `${id} : position encore instable après 20 s d'attente (gap ${m.gap} px mesuré à un instant quelconque)`).toBe(true);
         expect(m.bar).toBeGreaterThan(0);
         expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeGreaterThanOrEqual(0);
         if (!m.bottom) expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeLessThanOrEqual(40);
-        // L47 : la mesure attend 700 ms de stabilité (10 s au plus) après des polices retardées de 400 ms :
+        // L47 : la mesure attend 700 ms de stabilité (20 s au plus) après des polices retardées de 400 ms :
         // le délai par défaut de 5 s expirait au hasard de la charge de la machine.
-      }, 30_000);
+      }, 45_000);
     }
   }
 });
