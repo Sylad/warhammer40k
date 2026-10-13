@@ -894,6 +894,8 @@ lots:
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    notes:
+      - { date: 2026-10-13, text: "13-10 QA prod (sha-20107c4) : l'état « fiche introuvable » (faction, unité, primarque…) n'a pas de h1 (attente « * » : un h1 non vide) et l'API de la fiche est appelée plusieurs fois par affichage (/api/units/<id> ×3, /api/lore/primarchs/<id> ×2) — à traiter avec le lien vers la liste." }
   - id: L98
     title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
     public: "Sous-factions : les libellés du bandeau sont lisibles"
@@ -1005,17 +1007,20 @@ lots:
     created: 2026-10-13
   - id: L112
     title: "Fiche sous-faction : sur une 500 ou backend absent, le corps affiche « Sous-faction introuvable. » alors que le titre garde « Sous-faction » — lire isNotFound(err) dans le catchError (subfaction-detail.component.ts:229), test 404 vs 500 (constat revue L38)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-13
     started: 2026-10-13
     review: { date: 2026-10-13, verdict: "compliant — orchestré (vague 2026-10-13-0900b, 0 passe(s) de correction)", commit: 3e975d4d8dbc098632292cc592b1d9679341f200 }
+    finished: 2026-10-13
   - id: L113
     title: "Tests frontend instables sous charge : deux lancements complets de npm test sur trois ont eu chacun un échec différent, vert en isolé — ancres.e2e.spec.ts (fiche primarque 390 px : cible à 92 px sous la barre au lieu de ≤ 40) et plan-data.test.mjs (« dist/ ne contient aucun texte privé »), tous deux lisent dist/ ; trouver la cause (dist reconstruit pendant le run ? délai ?) et rendre la suite déterministe"
     status: doing
     estimate: 0.5
     created: 2026-10-13
     started: 2026-10-13
+    notes:
+      - { date: 2026-10-13, text: "13-10 : rendu au lead (vague 2026-10-13-0900b, revue non conforme après 2 corrections). Fait : maxWorkers 8, délai 30 s, attente networkidle avant le clic + retard permanent de 1,5 s sur units/subfactions (reproduit la fiche faction). Reste : cas primarque 390 px (92 px) non reproduit, cas faction 1440 px (120 px, position stable) observé 1 run sur 3 ; README:130 consigne l'hypothèse démentie (fenêtre de stabilité) ; networkidle déconseillé par Playwright (attendre un état précis). Reprendre : reproduire avec un retard sur les requêtes réelles de la fiche primarque, remplacer networkidle par l'attente des sections, corriger le README." }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
