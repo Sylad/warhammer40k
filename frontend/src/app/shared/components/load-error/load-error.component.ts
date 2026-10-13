@@ -6,8 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   template: `
     <div class="load-error" role="alert">
-      <p>{{ message }}</p>
-      <button type="button" (click)="retry.emit()">Réessayer</button>
+      <p>{{ notFound ? 'Cette fiche est introuvable.' : message }}</p>
+      @if (!notFound) {
+        <button type="button" (click)="retry.emit()">Réessayer</button>
+      }
     </div>
   `,
   styles: [`
@@ -27,5 +29,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class LoadErrorComponent {
   @Input() message = 'Les données n’ont pas pu être chargées. Vérifiez la connexion, puis réessayez.';
+  /** 404 : la fiche n'existe pas, « Réessayer » ne pourrait pas aboutir. */
+  @Input() notFound = false;
   @Output() retry = new EventEmitter<void>();
 }

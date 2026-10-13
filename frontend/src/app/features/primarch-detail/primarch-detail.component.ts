@@ -1,14 +1,13 @@
-import { Component, computed, effect, inject, isDevMode, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { catchError, of, switchMap, forkJoin, map } from 'rxjs';
+import { catchError, of, switchMap, forkJoin, map, throwError } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { isNotFound, retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -38,6 +37,9 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
   imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     @if (primarch(); as p) {
+      @if (related.failed()) {
+        <app-load-error message="Une partie de cette fiche n’a pas pu être chargée." (retry)="retryAll(primarch, related)" />
+      }
       <a class="back-btn" routerLink="/lore/primarchs">← RETOUR AUX PRIMARQUES</a>
 
       <!-- HERO : portrait floating + identité -->
@@ -344,7 +346,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
       <!-- LIGHTBOX -->
       <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
     } @else if (primarch.failed()) {
-      <app-load-error (retry)="retryAll(primarch, related)" />
+      <app-load-error [notFound]="primarch.notFound()" (retry)="retryAll(primarch, related)" />
     } @else {
       <div class="loading"><p>Chargement du Primarque...</p></div>
     }
@@ -373,14 +375,11 @@ export class PrimarchDetailComponent {
         // L39 : un identifiant absent des données (« typhus » en prod) est ignoré, au lieu de
         // faire échouer toute la section (forkJoin propage la première erreur).
         // Filtrer AVANT de couper à 3 : un inconnu en tête ne raccourcit pas la liste. Seule une 404
-        // est tue ; toute autre erreur est signalée en console (mode développement).
+        // est tue ; toute autre erreur (500, backend absent) fait échouer la section, signalée par
+        // `related.failed()` (bandeau + Réessayer).
         return forkJoin(
-          prim.relatedPrimarchIds.map(id => this.service.getPrimarch(id).pipe(catchError((err: unknown) => {
-            if (!(err instanceof HttpErrorResponse && err.status === 404) && isDevMode()) {
-              console.warn(`Primarque apparenté « ${id} » non chargé`, err);
-            }
-            return of(null);
-          })))
+          prim.relatedPrimarchIds.map(id => this.service.getPrimarch(id).pipe(catchError((err: unknown) =>
+            isNotFound(err) ? of(null) : throwError(() => err))))
         ).pipe(map(list => list.filter((r): r is Primarch => !!r).slice(0, 3)));
       }),
     ), [] as Primarch[]);

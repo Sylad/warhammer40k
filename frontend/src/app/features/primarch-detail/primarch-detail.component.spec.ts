@@ -3,7 +3,7 @@
 // sans ses fiches liées et la console affichait une erreur. Un identifiant inconnu est ignoré.
 import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
@@ -64,14 +64,8 @@ describe('fiche Primarque — primarques apparentés (L39)', () => {
     expect(await relatedOf('fulgrim')).toEqual(['/lore/primarchs/horus', '/lore/primarchs/magnus', '/lore/primarchs/lorgar']);
   });
 
-  afterEach(() => vi.restoreAllMocks());
-
-  it('seule une 404 est tue : une autre erreur HTTP est signalée en console', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  it('seule une 404 est tue : une autre erreur HTTP fait échouer la section (bandeau + Réessayer), plus de console', async () => {
     expect(await relatedOf('mortarion')).toEqual(['/lore/primarchs/horus', '/lore/primarchs/magnus']);
-    expect(warn).not.toHaveBeenCalled();
-    expect(await relatedOf('angron', { panne: 500 })).toEqual(['/lore/primarchs/horus', '/lore/primarchs/magnus']);
-    expect(warn).toHaveBeenCalledTimes(1);
-    expect(String(warn.mock.calls[0][0])).toMatch(/panne/);
+    expect(await relatedOf('angron', { panne: 500 })).toEqual([]);
   });
 });

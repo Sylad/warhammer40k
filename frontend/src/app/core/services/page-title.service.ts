@@ -2,6 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 import { tap, type MonoTypeOperatorFunction } from 'rxjs';
+import { isNotFound } from '../../shared/safe-signal';
 import { slugToLabel } from '../../shared/components/breadcrumb/breadcrumb.utils';
 
 /**
@@ -106,8 +107,8 @@ export class PageTitleStrategy extends TitleStrategy {
 }
 
 /**
- * Opérateur des fiches : à l'arrivée de l'entité, son nom devient celui de la page ; sur erreur
- * (identifiant inconnu), « <type> introuvable ». Le flux n'est pas modifié.
+ * Opérateur des fiches : à l'arrivée de l'entité, son nom devient celui de la page ; sur 404
+ * (identifiant inconnu), « <type> introuvable » ; une autre erreur (500, backend absent) laisse le libellé du type. Le flux n'est pas modifié.
  */
 export function namedPage<T>(pages: PageTitleService, nameOf: (entity: T) => string | null | undefined): MonoTypeOperatorFunction<T> {
   return tap<T>({
@@ -116,6 +117,6 @@ export function namedPage<T>(pages: PageTitleService, nameOf: (entity: T) => str
       if (name) pages.setName(name);
       else pages.setNotFound();
     },
-    error: () => pages.setNotFound(),
+    error: (err) => { if (isNotFound(err)) pages.setNotFound(); },
   });
 }

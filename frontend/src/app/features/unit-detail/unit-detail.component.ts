@@ -37,6 +37,9 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
   imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (unit(); as u) {
+      @if (faction() && (relatedUnits.failed() || allArtworks.failed())) {
+        <app-load-error message="Une partie de cette fiche n’a pas pu être chargée." (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
+      }
       @if (faction(); as f) {
         <div class="topbar">
           <a class="back-btn" [routerLink]="['/factions', f.id]">← RETOUR AUX UNITÉS</a>
@@ -301,13 +304,13 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
         </section>
       } @else {
         @if (faction.failed()) {
-          <app-load-error (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
+          <app-load-error [notFound]="faction.notFound()" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
         } @else {
           <div class="loading"><p>Chargement de la faction...</p></div>
         }
       }
     } @else if (unit.failed()) {
-      <app-load-error (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
+      <app-load-error [notFound]="unit.notFound()" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
     } @else {
       <div class="loading"><p>Chargement de l'unité...</p></div>
     }

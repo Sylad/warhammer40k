@@ -3,6 +3,7 @@
 // l'identifiant de l'URL), un titre d'attente pendant le chargement et « … introuvable » sinon.
 // Avant L36, toutes les routes s'appelaient « Warhammer 40 000 — Codex Numérique ».
 import { setupTestBed } from '../../../testing/angular-testbed';
+import { HttpErrorResponse } from '@angular/common/http';
 import { describe, expect, it } from 'vitest';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -122,7 +123,7 @@ describe('titre de document par route (L36)', () => {
     expect(seen).toHaveLength(1);
     await router.navigateByUrl('/lore/timeline/inconnu');
     let failed = false;
-    throwError(() => new Error('404')).pipe(namedPage(pages, () => 'x')).subscribe({ error: () => (failed = true) });
+    throwError(() => new HttpErrorResponse({ status: 404 })).pipe(namedPage(pages, () => 'x')).subscribe({ error: () => (failed = true) });
     expect(title.getTitle()).toBe('Événement introuvable' + S);
     expect(failed).toBe(true);
   });

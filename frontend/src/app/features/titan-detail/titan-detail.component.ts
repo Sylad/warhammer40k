@@ -13,6 +13,9 @@ import { retryAll, toSafeSignal } from '../../shared/safe-signal';
   imports: [LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (machine(); as m) {
+      @if (factions.failed()) {
+        <app-load-error message="Une partie de cette fiche n’a pas pu être chargée." (retry)="retryAll(machine, factions)" />
+      }
       <a class="back-btn" routerLink="/lore/titans">← RETOUR AUX DIEUX-MACHINES</a>
 
       <section class="hero" [style.--hero-img]="heroImg()" [style.--hero-color]="m.color">
@@ -111,7 +114,7 @@ import { retryAll, toSafeSignal } from '../../shared/safe-signal';
         </aside>
       </section>
     } @else if (machine.failed()) {
-      <app-load-error (retry)="retryAll(machine, factions)" />
+      <app-load-error [notFound]="machine.notFound()" (retry)="retryAll(machine, factions)" />
     } @else {
       <div class="loading"><p>Chargement...</p></div>
     }

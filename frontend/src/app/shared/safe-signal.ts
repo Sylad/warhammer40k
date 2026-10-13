@@ -1,9 +1,18 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, Observable, catchError, map, of, startWith, switchMap } from 'rxjs';
 
-/** Signal de données qui ne lève jamais : `failed()` dit si le flux a échoué, `retry()` le relance. */
-export type SafeSignal<T> = Signal<T> & { readonly failed: Signal<boolean>; retry(): void };
+/** Une 404 : l'entité n'existe pas, réessayer ne peut pas aboutir (≠ 500 ou backend absent). */
+export function isNotFound(err: unknown): boolean {
+  return err instanceof HttpErrorResponse && err.status === 404;
+}
+
+/**
+ * Signal de données qui ne lève jamais : `failed()` dit si le flux a échoué, `notFound()` si c'est
+ * une 404 (sous-ensemble de `failed()`), `retry()` le relance.
+ */
+export type SafeSignal<T> = Signal<T> & { readonly failed: Signal<boolean>; readonly notFound: Signal<boolean>; retry(): void };
 
 /**
  * L38 — `toSignal` relance l'erreur du flux à chaque lecture du signal : sur une 404/500 ou un
@@ -23,19 +32,20 @@ export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Obse
   const initialValue = (typeof a === 'function' && arguments.length > 2 ? b : a) as I;
   const project = (typeof a === 'function' && arguments.length > 2 ? a : null) as ((p: P) => Observable<T>) | null;
   const failed = signal(false);
+  const notFound = signal(false);
   const attempt$ = new BehaviorSubject<void>(undefined);
   const guarded$: Observable<T | I> = project
     ? source$.pipe(switchMap(p => {
-        failed.set(false);
+        failed.set(false); notFound.set(false);
         return project(p).pipe(
-          map((v): T | I => { failed.set(false); return v; }),
-          catchError(() => { failed.set(true); return of(initialValue as T | I); }),
+          map((v): T | I => { failed.set(false); notFound.set(false); return v; }),
+          catchError((err) => { failed.set(true); notFound.set(isNotFound(err)); return of(initialValue as T | I); }),
           startWith(initialValue as T | I),
         );
       }))
     : (source$ as unknown as Observable<T>).pipe(
-        map((v): T | I => { failed.set(false); return v; }),
-        catchError(() => { failed.set(true); return of(initialValue as T | I); }),
+        map((v): T | I => { failed.set(false); notFound.set(false); return v; }),
+        catchError((err) => { failed.set(true); notFound.set(isNotFound(err)); return of(initialValue as T | I); }),
         startWith(initialValue as T | I),
       );
   const value = toSignal(
@@ -44,7 +54,8 @@ export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Obse
   );
   return Object.assign(() => value(), {
     failed: failed.asReadonly(),
-    retry: () => { failed.set(false); attempt$.next(); },
+    notFound: notFound.asReadonly(),
+    retry: () => { failed.set(false); notFound.set(false); attempt$.next(); },
   }) as SafeSignal<T | I>;
 }
 

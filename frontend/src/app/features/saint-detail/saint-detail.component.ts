@@ -119,7 +119,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
         </aside>
       </section>
     } @else if (saint.failed()) {
-      <app-load-error (retry)="saint.retry()" />
+      <app-load-error [notFound]="saint.notFound()" (retry)="saint.retry()" />
     } @else {
       <div class="loading"><p>Chargement du Saint...</p></div>
     }

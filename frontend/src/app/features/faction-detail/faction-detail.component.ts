@@ -75,6 +75,9 @@ const DEFAULT_RESOURCES = [
   imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (faction(); as f) {
+      @if (units.failed() || subFactions.failed() || videos.failed() || artworks.failed()) {
+        <app-load-error message="Une partie de cette fiche n’a pas pu être chargée." (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
+      }
       <a class="back-btn" routerLink="/factions">← RETOUR AUX FACTIONS</a>
 
       <section class="hero hero-flicker" [style.--hero-img]="heroImg()">
@@ -442,7 +445,7 @@ const DEFAULT_RESOURCES = [
         </aside>
       </section>
     } @else if (faction.failed()) {
-      <app-load-error (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
+      <app-load-error [notFound]="faction.notFound()" (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
     } @else {
       <div class="loading">
         <p>Chargement de la faction...</p>
