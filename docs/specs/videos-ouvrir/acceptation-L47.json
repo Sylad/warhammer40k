@@ -6,6 +6,16 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "4adef2d4f65ce35f42a594ef9f0c72c26ec7b846"
-  }
+    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "488d594f671384ba2c7987fc5322286c86287e67"
+  },
+  "resceaux": [
+    {
+      "test": "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts",
+      "raison": "test instable en CI (onglet lu à about:blank avant sa navigation) : attendre l'adresse du nouvel onglet avec waitForURL ; contrat de L47 et fiche inchangés",
+      "date": "2026-10-13",
+      "avant": "4adef2d4f65ce35f42a594ef9f0c72c26ec7b846",
+      "apres": "488d594f671384ba2c7987fc5322286c86287e67",
+      "porteur": "L116"
+    }
+  ]
 }
