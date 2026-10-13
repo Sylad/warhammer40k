@@ -890,13 +890,14 @@ lots:
   - id: L97
     title: "/factions/<id inconnu> : titre « Faction introuvable » mais « Chargement de la faction... » sans fin — message d'erreur + lien vers /factions (revue UX L3)"
     public: "Faction inconnue : un message clair au lieu d'un chargement sans fin"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
     notes:
       - { date: 2026-10-13, text: "13-10 QA prod (sha-20107c4) : l'état « fiche introuvable » (faction, unité, primarque…) n'a pas de h1 (attente « * » : un h1 non vide) et l'API de la fiche est appelée plusieurs fois par affichage (/api/units/<id> ×3, /api/lore/primarchs/<id> ×2) — à traiter avec le lien vers la liste." }
       - { date: 2026-10-13, text: "13-10 QA L112 : même manque sur /subfactions/n-existe-pas et sur l'état 500 de la sous-faction (aucun h1) ; ajouter aussi la section ## /subfactions/:id à docs/qa/expectations.md (proposition dans le rapport QA : titre, sections, 404 → introuvable + Retour, 500 → Réessayer, successors vide permis, exception console de la 404)." }
+    started: 2026-10-13
   - id: L98
     title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
     public: "Sous-factions : les libellés du bandeau sont lisibles"
