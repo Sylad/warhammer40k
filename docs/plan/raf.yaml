@@ -1059,30 +1059,38 @@ lots:
     finished: 2026-10-13
   - id: L116
     title: "Test d'acceptation L47 instable en CI : videos-ouvrir-l47.acceptation.spec.ts:464 lit l'onglet ouvert à about:blank au lieu de /videos?video=astartes-2 (CI de 3e975d4) — attendre l'adresse du nouvel onglet (waitForURL) ; test scellé d'un lot livré : la session corrige le test dans l'arbre et pose une question, le lead rescelle avec cadence spec reseal L47 <test> --porteur <ce lot> --reason (contrat inchangé)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-13
     started: 2026-10-13
     notes:
       - { date: 2026-10-13, text: "test d'acceptation rescellé (lot livré L47, frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts, fiche inchangée) : test instable en CI (onglet lu à about:blank avant sa navigation) : attendre l'adresse du nouvel onglet avec waitForURL ; contrat de L47 et fiche inchangés" }
+    review: { date: 2026-10-13, verdict: "conforme — code-reviewer (opus) : waitForURL traite la course about:blank sans masquer de défaut (assertion l.466 inchangée, regex ancrée), rescellé cohérent (empreinte 488d594 = fichier, avant 4adef2d, porteur L116) ; 25/25 ×3 et 5/5 sur le cas en local, course CI non reproductible localement", commit: 56f664100547385fd1efb184a1db0e9a51a5ee20 }
+    finished: 2026-10-13
   - id: L117
     title: "Palette Ctrl+K : les sous-factions ne sont pas indexées — « Ultramarines » ne propose que Guilliman et Macragge's Honour, pas /subfactions/ultramarines (command-palette.component.ts:190-207 déclare le type subfaction sans source) ; sous-libellé des équipements brut (« daemon-weapon ») au lieu du libellé traduit de /lore/equipment (subCategoryLabel) (QA prod L110, 13-10)"
     public: "Recherche Ctrl+K : les chapitres et sous-factions trouvables"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-10-13
     started: 2026-10-13
     review: { date: 2026-10-13, verdict: "conforme : 5 mineurs en notes (sous-factions téléchargées deux fois depuis l'accueil, « space marines » remplit les 20 places et fait sortir Stormbird, recherche de sous-catégorie qui diffère entre la palette et /lore/equipment) — orchestré (vague 2026-10-13-1315, 0 passe(s) de correction + passe des mineurs)", commit: 788737ca910a62d737b4ac4e67671a77bff04986 }
+    ux: { date: 2026-10-13, verdict: "conforme — agent UX de la vague 2026-10-13-1315 (5 mineurs en notes) et capture regardée par le lead : « ultramarines » propose d'abord la sous-faction Ultramarines (Space Marines), puis Guilliman et Macragge's Honour" }
+    finished: 2026-10-13
+    notes:
+      - { date: 2026-10-13, text: "13-10 clos : mineurs laissés en notes — /api/subfactions (350 Ko) chargé deux fois depuis l'accueil (flux subFactions$ non partagé avec le tableau de bord) ; « space marines » remplit les 20 places de la palette ; recherche de sous-catégorie de /lore/equipment encore sur l'identifiant brut alors que la palette cherche sur le libellé." }
   - id: L118
     title: "Chronologie en erreur : le message « aucun résultat » s'affiche sous le bandeau d'erreur (comme Équipement et Séries avant L111) ; fiche titan : h1 « Machine introuvable » ≠ titre d'onglet « Machine de guerre introuvable » (constats UX L115 et L97)"
     public: "Chronologie en erreur : un seul message"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-13
     started: 2026-10-13
     review: { date: 2026-10-13, verdict: "compliant — 0 finding : Chronologie en erreur n'affiche plus que le bandeau (pas de « Aucun événement », pastilles « — »), titre d'onglet et h1 de la fiche titan « Machine introuvable » mesurés identiques ; 5 fichiers de tests, 95 tests de scripts verts — orchestré (vague 2026-10-13-1315, 0 passe(s) de correction)", commit: 56c74386c3be82b942ed5dd4ce7d0efd2e14bfb6 }
+    ux: { date: 2026-10-13, verdict: "conforme — revue UX de la vague 2026-10-13-1315 (0 constat) et capture regardée par le lead : Chronologie en erreur = bandeau seul, pastilles « — » ; titan h1 = onglet « Machine introuvable »" }
+    finished: 2026-10-13
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
