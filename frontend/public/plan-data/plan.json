@@ -321,6 +321,11 @@
       "id": "L108",
       "title": "Galerie : les filtres restent à portée en faisant défiler la page",
       "status": "todo"
+    },
+    {
+      "id": "L111",
+      "title": "Listes en erreur : plus de « aucun résultat » sous le message d'erreur",
+      "status": "todo"
     }
   ]
 }

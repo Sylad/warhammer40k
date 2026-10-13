@@ -293,7 +293,7 @@ lots:
     created: 2026-10-02
   - id: L38
     title: "Erreur d'API (404/500, backend absent) : les signaux de données lèvent pendant la détection de changements et figent tout le rendu (menu À propos, recherche Ctrl+K) — état d'erreur par page au lieu d'une exception (vu en L30)"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-02
     started: 2026-10-12
@@ -301,6 +301,7 @@ lots:
       - { date: 2026-10-12, text: "Rendu au lead 12-10 (budget 406 k/450 k, 2 passes) : revue non conforme, 1 majeur — « Réessayer » d'une fiche à plusieurs flux (faction, unité, primarque, titan, Équipement) ne relance que le flux principal (units, subFactions, videos, artworks restent vides). Autres constats : palette Ctrl+K vide toute la session après un échec au démarrage ; fiche unité « Chargement de la faction… » sans fin si getFaction échoue ; double message (erreur + « Aucune … ne correspond ») sur Équipement et Séries ; import switchMap mort dans 6 fiches. Reprendre dans une NOUVELLE vague avec un budget plus large (--budget), critère de fin : chaque Réessayer relance tous les flux de la page, test qui émet échec puis succès sur chaque flux. L53 (prêt, clos) est empilé dessus : rien de livrable avant L38." }
       - { date: 2026-10-13, text: "13-10, reprise (estimate relevée à 1 j → budget 750 k, périmètre réel ~20 composants) : 1) MAJEUR — chaque « Réessayer » relance TOUS les flux de la page (faction : units, subFactions, videos, artworks ; unit-detail : faction, relatedUnits ; primarch-detail : related ; titan-detail : factions ; lore-equipment : factions), avec un test par fiche qui émet échec puis succès sur chaque flux ; 2) fiche unité : lire faction.failed() (plus de « Chargement de la faction… » sans fin) ; 3) retirer l'import switchMap mort des 6 fiches. Hors périmètre (lots à part) : palette Ctrl+K, double message Équipement/Séries." }
     review: { date: 2026-10-13, verdict: "conforme (2 constats mineurs en note) — orchestré (vague 2026-10-13-0900, 2 passe(s) de correction + passe des mineurs)", commit: 3cf0cafed31eed308bb3e9ad801de0dea27b5812 }
+    finished: 2026-10-13
   - id: L39
     title: "Liens morts : audit automatique de tous les liens du site (internes : routes, ancres, images et datasheets ; externes : wiki, vidéos, boutiques) — rapport, corrections, puis test qui échoue sur un lien interne cassé (consigne Sylvain 02-10 : « potentiellement des liens morts »)"
     public: "Liens internes réparés : fil d'Ariane, ancres et images vérifiés"
@@ -996,10 +997,21 @@ lots:
     created: 2026-10-13
   - id: L111
     title: "Listes Équipement et Séries en erreur : le bandeau d'erreur s'affiche au-dessus de « Aucune … ne correspond aux filtres » — masquer l'état vide quand la liste est en échec (constat revue L38)"
+    public: "Listes en erreur : plus de « aucun résultat » sous le message d'erreur"
     status: todo
     estimate: 0.25
     visible: true
     after: [ L38 ]
+    created: 2026-10-13
+  - id: L112
+    title: "Fiche sous-faction : sur une 500 ou backend absent, le corps affiche « Sous-faction introuvable. » alors que le titre garde « Sous-faction » — lire isNotFound(err) dans le catchError (subfaction-detail.component.ts:229), test 404 vs 500 (constat revue L38)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-13
+  - id: L113
+    title: "Tests frontend instables sous charge : deux lancements complets de npm test sur trois ont eu chacun un échec différent, vert en isolé — ancres.e2e.spec.ts (fiche primarque 390 px : cible à 92 px sous la barre au lieu de ≤ 40) et plan-data.test.mjs (« dist/ ne contient aucun texte privé »), tous deux lisent dist/ ; trouver la cause (dist reconstruit pendant le run ? délai ?) et rendre la suite déterministe"
+    status: todo
+    estimate: 0.5
     created: 2026-10-13
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
