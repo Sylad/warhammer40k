@@ -1091,6 +1091,11 @@ lots:
     review: { date: 2026-10-13, verdict: "compliant — 0 finding : Chronologie en erreur n'affiche plus que le bandeau (pas de « Aucun événement », pastilles « — »), titre d'onglet et h1 de la fiche titan « Machine introuvable » mesurés identiques ; 5 fichiers de tests, 95 tests de scripts verts — orchestré (vague 2026-10-13-1315, 0 passe(s) de correction)", commit: 56c74386c3be82b942ed5dd4ce7d0efd2e14bfb6 }
     ux: { date: 2026-10-13, verdict: "conforme — revue UX de la vague 2026-10-13-1315 (0 constat) et capture regardée par le lead : Chronologie en erreur = bandeau seul, pastilles « — » ; titan h1 = onglet « Machine introuvable »" }
     finished: 2026-10-13
+  - id: L119
+    title: "Accueil : /api/subfactions (350 Ko, ~109 Ko gzip) téléchargé deux fois depuis L117 — compteurs de l'accueil (dashboard.component.ts:249 getSubFactions()) puis palette Ctrl+K à l'ouverture (subFactions$) ; partager subFactions$, et ajouter dans docs/qa/expectations.md (## /) « api: /api/subfactions au plus une fois par visite » (QA prod 13-10)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-13
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
