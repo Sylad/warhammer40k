@@ -70,9 +70,14 @@ describe('Réessayer relance tous les flux de la page (L38)', () => {
       getUnit: (id: string) => id === 'u1' ? un.flux : li.flux, getFaction: () => fa.flux, artworks$: ar.flux,
     }, { id: 'u1' });
     expect(el.querySelector('[role="alert"]')).not.toBeNull();
-    // `un` ne rate qu'au 1er abonnement (unit) : les unités liées échouent sur leur propre flux (u2).
-    expect(li.abonnements()).toBe(1);
+    // L97 : les unités liées se déduisent de l'unité chargée ; tant qu'elle échoue, u2 n'est pas demandée.
+    expect(li.abonnements()).toBe(0);
     expect((instance['relatedUnits']() as unknown[]).length).toBe(0);
+    await reessayer();
+    // La faction et les unités liées ne sont demandées qu'après ce premier Réessayer (L97) et
+    // ratent alors sur leur propre flux ; le second Réessayer les relance.
+    expect(instance['unit']()).toBeTruthy();
+    expect(el.querySelector('[role="alert"]')).not.toBeNull();
     await reessayer();
     expect(el.querySelector('[role="alert"]')).toBeNull();
     expect(instance['unit']()).toBeTruthy();
@@ -98,6 +103,11 @@ describe('Réessayer relance tous les flux de la page (L38)', () => {
     const { el, reessayer, instance } = await monter(PrimarchDetailComponent, {
       getPrimarch: (id: string) => id === 'p1' ? pr.flux : p2.flux,
     }, { id: 'p1' });
+    expect(el.querySelector('[role="alert"]')).not.toBeNull();
+    await reessayer();
+    // L97 : les apparentés se déduisent du primarque chargé, p2 n'est demandé qu'après ce premier
+    // Réessayer et rate alors sur son propre flux ; le second Réessayer le relance.
+    expect(instance['primarch']()).toBeTruthy();
     expect(el.querySelector('[role="alert"]')).not.toBeNull();
     await reessayer();
     expect(el.querySelector('[role="alert"]')).toBeNull();
