@@ -460,8 +460,7 @@ describe('vidéos — ouvrir une vidéo précise par l\'adresse (navigateur, dis
         ctx.waitForEvent('page'),
         cardLink(page, 'astartes-2').click({ button: 'middle' }),
       ]);
-      // L113 : un nouvel onglet naît à « about:blank » ; lire son adresse avant la navigation donnait « blank ».
-      await tab.waitForURL((u) => u.pathname === '/videos' && u.searchParams.has('video'));
+      await tab.waitForLoadState();
       expect(new URL(tab.url()).pathname + new URL(tab.url()).search).toBe('/videos?video=astartes-2');
       expect(videoParam(page)).toBeNull();
       expect(await tid(page, 'modale-video').count()).toBe(0);
