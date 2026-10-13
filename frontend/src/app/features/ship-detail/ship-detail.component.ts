@@ -129,7 +129,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
         </aside>
       </section>
     } @else if (ship.failed()) {
-      <app-load-error [notFound]="ship.notFound()" (retry)="ship.retry()" />
+      <app-load-error [notFound]="ship.notFound()" heading="Vaisseau introuvable" backLink="/lore/ships" backLabel="Tous les vaisseaux" (retry)="ship.retry()" />
     } @else {
       <div class="loading"><p>Chargement du vaisseau...</p></div>
     }

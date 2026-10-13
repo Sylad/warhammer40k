@@ -77,7 +77,7 @@ const ERA_LABEL: Record<TimelineEra, string> = {
         </aside>
       </section>
     } @else if (event.failed()) {
-      <app-load-error [notFound]="event.notFound()" (retry)="event.retry()" />
+      <app-load-error [notFound]="event.notFound()" heading="Événement introuvable" backLink="/lore/timeline" backLabel="Toute la chronologie" (retry)="event.retry()" />
     } @else {
       <div class="loading"><p>Chargement de l'événement...</p></div>
     }

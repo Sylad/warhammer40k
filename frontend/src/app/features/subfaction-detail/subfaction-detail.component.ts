@@ -202,10 +202,10 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
       <div class="loading">Chargement…</div>
     }
     @if (notFound()) {
-      <div class="loading">Sous-faction introuvable. <a routerLink="/factions">Retour</a></div>
+      <app-load-error [notFound]="true" heading="Sous-faction introuvable" backLink="/factions" backLabel="Toutes les factions" />
     }
     @if (failed()) {
-      <app-load-error (retry)="retry$.next()" />
+      <app-load-error heading="Sous-faction indisponible" (retry)="retry$.next()" />
     }
   `,
   styleUrls: ['./subfaction-detail.component.scss'],

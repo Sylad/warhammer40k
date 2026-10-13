@@ -304,13 +304,13 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
         </section>
       } @else {
         @if (faction.failed()) {
-          <app-load-error [notFound]="faction.notFound()" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
+          <app-load-error [notFound]="faction.notFound()" heading="Faction introuvable" backLink="/factions" backLabel="Toutes les factions" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
         } @else {
           <div class="loading"><p>Chargement de la faction...</p></div>
         }
       }
     } @else if (unit.failed()) {
-      <app-load-error [notFound]="unit.notFound()" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
+      <app-load-error [notFound]="unit.notFound()" heading="Unité introuvable" backLink="/factions" backLabel="Toutes les factions" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
     } @else {
       <div class="loading"><p>Chargement de l'unité...</p></div>
     }

@@ -26,15 +26,17 @@ async function monter(getSubFaction: () => Observable<unknown>) {
 }
 
 describe('fiche sous-faction : 404 distincte de 500 (L112)', () => {
-  it('404 : « Sous-faction introuvable. », pas de Réessayer', async () => {
+  it('404 : h1 « Sous-faction introuvable », lien vers /factions, pas de Réessayer (L97)', async () => {
     const { el } = await monter(() => throwError(() => http(404)));
-    expect(el.textContent).toContain('Sous-faction introuvable.');
-    expect(el.querySelector('[role="alert"]')).toBeNull();
+    expect(el.querySelector('h1')!.textContent!.trim()).toBe('Sous-faction introuvable');
+    expect(el.querySelector('a[href="/factions"]')).not.toBeNull();
+    expect(el.querySelector('button')).toBeNull();
   });
 
   it('500 : bandeau avec Réessayer, jamais « introuvable »', async () => {
     const { el } = await monter(() => throwError(() => http(500)));
     expect(el.textContent).not.toContain('introuvable');
+    expect(el.querySelector('h1')!.textContent!.trim()).toBe('Sous-faction indisponible');
     expect(el.querySelector('[role="alert"] button')).not.toBeNull();
   });
 

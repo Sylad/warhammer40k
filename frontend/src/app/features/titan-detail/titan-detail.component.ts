@@ -114,7 +114,7 @@ import { retryAll, toSafeSignal } from '../../shared/safe-signal';
         </aside>
       </section>
     } @else if (machine.failed()) {
-      <app-load-error [notFound]="machine.notFound()" (retry)="retryAll(machine, factions)" />
+      <app-load-error [notFound]="machine.notFound()" heading="Machine introuvable" backLink="/lore/titans" backLabel="Toutes les machines" (retry)="retryAll(machine, factions)" />
     } @else {
       <div class="loading"><p>Chargement...</p></div>
     }

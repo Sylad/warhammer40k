@@ -346,7 +346,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
       <!-- LIGHTBOX -->
       <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
     } @else if (primarch.failed()) {
-      <app-load-error [notFound]="primarch.notFound()" (retry)="retryAll(primarch, related)" />
+      <app-load-error [notFound]="primarch.notFound()" heading="Primarque introuvable" backLink="/lore/primarchs" backLabel="Tous les Primarques" (retry)="retryAll(primarch, related)" />
     } @else {
       <div class="loading"><p>Chargement du Primarque...</p></div>
     }

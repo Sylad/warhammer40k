@@ -105,7 +105,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
         </aside>
       </section>
     } @else if (equipment.failed()) {
-      <app-load-error [notFound]="equipment.notFound()" (retry)="equipment.retry()" />
+      <app-load-error [notFound]="equipment.notFound()" heading="Équipement introuvable" backLink="/lore/equipment" backLabel="Tout l’équipement" (retry)="equipment.retry()" />
     } @else {
       <div class="loading"><p>Chargement de l'équipement...</p></div>
     }
