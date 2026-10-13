@@ -134,7 +134,7 @@ export const routes: Routes = [
       },
       {
         path: 'lore/titans/:id',
-        title: 'Machine de guerre',
+        title: 'Machine',
         loadComponent: () => import('./features/titan-detail/titan-detail.component')
           .then(m => m.TitanDetailComponent)
       },

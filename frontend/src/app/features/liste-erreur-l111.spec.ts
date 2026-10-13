@@ -9,6 +9,7 @@ import { of, throwError } from 'rxjs';
 import { WarhammerService } from '../core/services/warhammer.service';
 import { LoreEquipmentComponent } from './lore-equipment/lore-equipment.component';
 import { SeriesComponent } from './series/series.component';
+import { LoreTimelineComponent } from './lore-timeline/lore-timeline.component';
 
 async function rendre(type: new () => unknown, flux: Record<string, unknown>): Promise<HTMLElement> {
   await setupTestBed([type as never], [
@@ -44,5 +45,15 @@ describe('listes en erreur (L111)', () => {
     const el = await rendre(SeriesComponent, { series$: of([]) });
     expect(el.querySelector('app-load-error')).toBeNull();
     expect(el.querySelector('.empty')?.textContent).toContain('Aucune série');
+  });
+  it('Chronologie en échec : bandeau d’erreur, pas de « Aucun événement »', async () => {
+    const el = await rendre(LoreTimelineComponent, { timelineEvents$: echec() });
+    expect(el.querySelector('app-load-error')).not.toBeNull();
+    expect(el.querySelector('.empty')).toBeNull();
+  });
+  it('Chronologie chargée mais vide : « Aucun événement » reste affiché', async () => {
+    const el = await rendre(LoreTimelineComponent, { timelineEvents$: of([]) });
+    expect(el.querySelector('app-load-error')).toBeNull();
+    expect(el.querySelector('.empty')?.textContent).toContain('Aucun événement');
   });
 });

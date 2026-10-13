@@ -62,7 +62,7 @@ const TABLE: [string, string][] = [
   ['/lore/ships', 'Vaisseaux légendaires'],
   ['/lore/ships/x', 'Vaisseau'],
   ['/lore/titans', 'Titans & Chevaliers'],
-  ['/lore/titans/x', 'Machine de guerre'],
+  ['/lore/titans/x', 'Machine'],
   ['/lore/saints', 'Saints & Saintes'],
   ['/lore/saints/x', 'Saint'],
   ['/nouveautes', 'Nouveautés'],

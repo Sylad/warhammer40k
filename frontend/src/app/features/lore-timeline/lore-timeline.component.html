@@ -40,7 +40,7 @@
       }
     </nav>
 
-    @if (filtered().length === 0) {
+    @if (filtered().length === 0 && !events.failed()) {
       <div class="empty">
         Aucun événement ne correspond aux filtres sélectionnés.
         <button class="reset" (click)="resetFilters()">Réinitialiser</button>
