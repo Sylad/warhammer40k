@@ -37,6 +37,27 @@ try {
   chromium = null;
 }
 
+/**
+ * L113 : « page réglée » = état précis, pas `networkidle` (déconseillé par Playwright, fenêtre de 500 ms
+ * indifférente à ce que la page attend). Compte les requêtes en vol de la page ; réglée quand il n'y en a
+ * plus ET que les polices ne chargent plus, constaté sur deux images successives (le chargement d'une
+ * police ou d'une donnée ne part qu'après le rendu qui la réclame).
+ */
+function trackSettled(page: Page): () => Promise<void> {
+  let inflight = 0;
+  page.on('request', () => { inflight++; });
+  const done = () => { inflight = Math.max(0, inflight - 1); };
+  page.on('requestfinished', done);
+  page.on('requestfailed', done);
+  return async () => {
+    for (let calme = 0; calme < 2;) {
+      const fontsIdle = await page.evaluate(() => new Promise<boolean>((r) => requestAnimationFrame(() => r(document.fonts.status !== 'loading'))));
+      calme = inflight === 0 && fontsIdle ? calme + 1 : 0;
+      if (calme < 2) await page.waitForTimeout(50);
+    }
+  };
+}
+
 const news = JSON.parse(readFileSync(join(FRONTEND, 'public/nouveautes-data/nouveautes.json'), 'utf8'));
 const plan = JSON.parse(readFileSync(join(FRONTEND, 'public/plan-data/plan.json'), 'utf8'));
 
@@ -102,7 +123,8 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       let since = t0;
       const tick = (now: number) => {
         const cur = snap();
-        if (cur !== last) { last = cur; since = now; }
+        // Une police en cours de chargement va refluer le texte : la fenêtre repart.
+        if (cur !== last || document.fonts.status === 'loading') { last = cur; since = now; }
         // L113 : `true` seulement si la position a vraiment tenu 700 ms ; au plafond (20 s) on rend
         // `false` et le cas échoue en le disant, au lieu de mesurer une position qui bouge encore.
         if (now - since >= 700) done(true);
@@ -181,14 +203,14 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
         const page = await browser.newPage({ viewport: { width: w, height: h } });
         await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-01-01', slugs: [], at: '2026-01-02T10:00:00Z' })));
         // L55 : polices web tardives (400 ms) — le texte se reflue après l'arrivée sur l'ancre.
-        await page.route(/\.(woff2?|ttf)(\?|$)|fonts\.(googleapis|gstatic)/, async (r) => { await new Promise((x) => setTimeout(x, 400)); await r.continue(); });
+        await page.route(/\.(woff2?|ttf)(\?|$)|fonts\.(googleapis|gstatic)/, async (r) => { await new Promise((x) => setTimeout(x, 2500)); await r.continue(); });
         // L113 : données de la fiche (unités, sous-factions) tardives (1,5 s), comme sur une machine chargée :
         // elles ajoutent du contenu au-dessus des sections APRÈS le clic, donc après une position « stable ».
         await page.route(/\/api\/(units|subfactions)(\?|$)/, async (r) => { await new Promise((x) => setTimeout(x, 1500)); await r.continue(); });
-        // …et la page ne reçoit son clic qu'une fois ses données arrivées (réseau au repos) : sinon le
-        // contenu tardif décale la cible après une position stable de 700 ms.
+        // …et la page ne reçoit son clic qu'une fois réglée (settled) : requêtes terminées, polices chargées.
+        const settled = trackSettled(page);
         const goto = page.goto.bind(page);
-        page.goto = async (url, opts) => { const r = await goto(url, opts); await page.waitForLoadState('networkidle'); return r; };
+        page.goto = async (url, opts) => { const r = await goto(url, opts); await settled(); return r; };
         const id = await open(page);
         const m = await gap(page, id);
         await page.close();
