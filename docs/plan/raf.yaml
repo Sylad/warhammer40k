@@ -993,10 +993,11 @@ lots:
     created: 2026-10-12
   - id: L110
     title: "Palette Ctrl+K : après un échec du backend au démarrage, la recherche reste vide toute la session (« Horus » introuvable) — relancer les sources en échec à l'ouverture de la palette, avec un test échec puis succès (constat revue L38)"
-    status: todo
+    status: doing
     estimate: 0.25
     after: [ L38 ]
     created: 2026-10-13
+    started: 2026-10-13
   - id: L111
     title: "Listes Équipement et Séries en erreur : le bandeau d'erreur s'affiche au-dessus de « Aucune … ne correspond aux filtres » — masquer l'état vide quand la liste est en échec (constat revue L38)"
     public: "Listes en erreur : plus de « aucun résultat » sous le message d'erreur"
