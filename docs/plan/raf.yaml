@@ -1002,11 +1002,12 @@ lots:
   - id: L111
     title: "Listes Équipement et Séries en erreur : le bandeau d'erreur s'affiche au-dessus de « Aucune … ne correspond aux filtres » — masquer l'état vide quand la liste est en échec (constat revue L38)"
     public: "Listes en erreur : plus de « aucun résultat » sous le message d'erreur"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     after: [ L38 ]
     created: 2026-10-13
+    started: 2026-10-13
   - id: L112
     title: "Fiche sous-faction : sur une 500 ou backend absent, le corps affiche « Sous-faction introuvable. » alors que le titre garde « Sous-faction » — lire isNotFound(err) dans le catchError (subfaction-detail.component.ts:229), test 404 vs 500 (constat revue L38)"
     status: done
