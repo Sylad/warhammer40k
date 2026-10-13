@@ -460,6 +460,8 @@ describe('vidéos — ouvrir une vidéo précise par l\'adresse (navigateur, dis
         ctx.waitForEvent('page'),
         cardLink(page, 'astartes-2').click({ button: 'middle' }),
       ]);
+      // le nouvel onglet démarre à about:blank : attendre sa vraie adresse, pas seulement le chargement
+      await tab.waitForURL(/\/videos\?video=astartes-2$/);
       await tab.waitForLoadState();
       expect(new URL(tab.url()).pathname + new URL(tab.url()).search).toBe('/videos?video=astartes-2');
       expect(videoParam(page)).toBeNull();
