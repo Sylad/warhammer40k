@@ -1008,6 +1008,7 @@ lots:
     after: [ L38 ]
     created: 2026-10-13
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "compliant — 0 finding bloquant/majeur (1 note mineure hors périmètre : état vide visible pendant le chargement) — orchestré (vague 2026-10-13-1030, 0 passe(s) de correction)", commit: a7db68ceb7aa8ac796442f170bd082ce0302839e }
   - id: L112
     title: "Fiche sous-faction : sur une 500 ou backend absent, le corps affiche « Sous-faction introuvable. » alors que le titre garde « Sous-faction » — lire isNotFound(err) dans le catchError (subfaction-detail.component.ts:229), test 404 vs 500 (constat revue L38)"
     status: done
