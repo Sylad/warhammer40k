@@ -286,8 +286,9 @@
     {
       "id": "L97",
       "title": "Faction inconnue : un message clair au lieu d'un chargement sans fin",
-      "status": "doing",
-      "started": "2026-10-13"
+      "status": "done",
+      "started": "2026-10-13",
+      "finished": "2026-10-13"
     },
     {
       "id": "L98",
@@ -333,8 +334,19 @@
     {
       "id": "L115",
       "title": "Listes en erreur : plus de compteurs à zéro trompeurs",
-      "status": "doing",
-      "started": "2026-10-13"
+      "status": "done",
+      "started": "2026-10-13",
+      "finished": "2026-10-13"
+    },
+    {
+      "id": "L117",
+      "title": "Recherche Ctrl+K : les chapitres et sous-factions trouvables",
+      "status": "todo"
+    },
+    {
+      "id": "L118",
+      "title": "Chronologie en erreur : un seul message",
+      "status": "todo"
     }
   ]
 }

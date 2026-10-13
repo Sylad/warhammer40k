@@ -890,7 +890,7 @@ lots:
   - id: L97
     title: "/factions/<id inconnu> : titre « Faction introuvable » mais « Chargement de la faction... » sans fin — message d'erreur + lien vers /factions (revue UX L3)"
     public: "Faction inconnue : un message clair au lieu d'un chargement sans fin"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
@@ -899,6 +899,8 @@ lots:
       - { date: 2026-10-13, text: "13-10 QA L112 : même manque sur /subfactions/n-existe-pas et sur l'état 500 de la sous-faction (aucun h1) ; ajouter aussi la section ## /subfactions/:id à docs/qa/expectations.md (proposition dans le rapport QA : titre, sections, 404 → introuvable + Retour, 500 → Réessayer, successors vide permis, exception console de la 404)." }
     started: 2026-10-13
     review: { date: 2026-10-13, verdict: "conforme, 1 note mineure (h1 « Machine introuvable » ≠ titre « Machine de guerre introuvable » sur la fiche titan) — orchestré (vague 2026-10-13-1145, 2 passe(s) de correction)", commit: 89cfeb8e4f19c7d3733f8e565fcc861954125b9e }
+    ux: { date: 2026-10-13, verdict: "conforme — agent UX de la vague 2026-10-13-1145 (1 mineur : h1 « Machine introuvable » ≠ titre « Machine de guerre introuvable » sur la fiche titan) et capture regardée par le lead : h1 « Faction introuvable » + lien « Toutes les factions »" }
+    finished: 2026-10-13
   - id: L98
     title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
     public: "Sous-factions : les libellés du bandeau sont lisibles"
@@ -1038,24 +1040,41 @@ lots:
     finished: 2026-10-13
   - id: L114
     title: "Fiche sous-faction : l'effect() des images relit unitImgCache() et se relance à chaque réponse — 28 à ~170 appels /api/wiki-image pour 9 à 10 images distinctes par chargement (QA prod L112, 13-10, subfaction-detail.component.ts:264-287)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-13
     started: 2026-10-13
     review: { date: 2026-10-13, verdict: "compliant — commit 3904322 (L114), 0 finding. Le Set local et untracked() suppriment la relecture de unitImgCache. Le test échoue sur l'ancien code (8 requêtes au lieu de 7) et passe sur le nouveau. — orchestré (vague 2026-10-13-1145, 0 passe(s) de correction)", commit: 39043223d11fba0d3e6ecfb362fc8622e9b28821 }
+    finished: 2026-10-13
   - id: L115
     title: "Listes Lore en erreur : les compteurs du bandeau (« 0 pièces archivées », « 0 armes à distance »…) et des onglets (« Tous · 0 ») s'affichent comme des valeurs — « — » tant que la source est en échec (capture L111, /lore/equipment)"
     public: "Listes en erreur : plus de compteurs à zéro trompeurs"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-13
     started: 2026-10-13
     review: { date: 2026-10-13, verdict: "conforme — 1 constat mineur antérieur au lot (message « aucun résultat » sous l'erreur de la chronologie), proposé en sous-tâche — orchestré (vague 2026-10-13-1145, 2 passe(s) de correction)", commit: e6f56308f3a3ba9020e008bcea51423b2efab50f }
+    ux: { date: 2026-10-13, verdict: "conforme — agent UX de la vague 2026-10-13-1145 et capture regardée par le lead : compteurs du bandeau et des onglets à « — » quand la liste est en échec" }
+    finished: 2026-10-13
   - id: L116
     title: "Test d'acceptation L47 instable en CI : videos-ouvrir-l47.acceptation.spec.ts:464 lit l'onglet ouvert à about:blank au lieu de /videos?video=astartes-2 (CI de 3e975d4) — attendre l'adresse du nouvel onglet (waitForURL) ; test scellé d'un lot livré : la session corrige le test dans l'arbre et pose une question, le lead rescelle avec cadence spec reseal L47 <test> --porteur <ce lot> --reason (contrat inchangé)"
     status: todo
     estimate: 0.25
+    created: 2026-10-13
+  - id: L117
+    title: "Palette Ctrl+K : les sous-factions ne sont pas indexées — « Ultramarines » ne propose que Guilliman et Macragge's Honour, pas /subfactions/ultramarines (command-palette.component.ts:190-207 déclare le type subfaction sans source) ; sous-libellé des équipements brut (« daemon-weapon ») au lieu du libellé traduit de /lore/equipment (subCategoryLabel) (QA prod L110, 13-10)"
+    public: "Recherche Ctrl+K : les chapitres et sous-factions trouvables"
+    status: todo
+    estimate: 0.5
+    visible: true
+    created: 2026-10-13
+  - id: L118
+    title: "Chronologie en erreur : le message « aucun résultat » s'affiche sous le bandeau d'erreur (comme Équipement et Séries avant L111) ; fiche titan : h1 « Machine introuvable » ≠ titre d'onglet « Machine de guerre introuvable » (constats UX L115 et L97)"
+    public: "Chronologie en erreur : un seul message"
+    status: todo
+    estimate: 0.25
+    visible: true
     created: 2026-10-13
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
