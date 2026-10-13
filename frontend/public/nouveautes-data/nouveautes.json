@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-13 10:49",
+  "generated": "2026-10-13 11:54",
   "entries": [
+    {
+      "slug": "2026-10-13-listes-en-erreur-plus-de-compteurs-a-zero-trompeurs",
+      "title": "Listes en erreur : plus de compteurs à zéro trompeurs",
+      "date": "2026-10-13",
+      "lots": [
+        "L115"
+      ],
+      "captures": [
+        "captures/L115-equipement-erreur.png"
+      ],
+      "alts": [
+        "Page Armement et Reliques quand le chargement échoue : les compteurs du bandeau et des onglets affichent « — » au lieu de « 0 »"
+      ],
+      "html": "<p>Quand une liste du Lore ne se charge pas (Équipement, Organisations, Concepts, Primarques, Saints, Vaisseaux, Dieux-machines), les compteurs du bandeau (« Pièces archivées », « Armes à distance »…) et des onglets (« Tous · … ») affichent « — » au lieu de « 0 ». Un zéro laissait croire que la liste était vide ; le tiret dit que le nombre est inconnu. Les vrais nombres reviennent dès que « Réessayer » aboutit.</p>"
+    },
     {
       "slug": "2026-10-13-listes-en-erreur-plus-de-aucun-resultat-sous-le-message-d-er",
       "title": "Listes en erreur : plus de « aucun résultat » sous le message d'erreur",
