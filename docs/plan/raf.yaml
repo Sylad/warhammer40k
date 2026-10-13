@@ -898,6 +898,7 @@ lots:
       - { date: 2026-10-13, text: "13-10 QA prod (sha-20107c4) : l'état « fiche introuvable » (faction, unité, primarque…) n'a pas de h1 (attente « * » : un h1 non vide) et l'API de la fiche est appelée plusieurs fois par affichage (/api/units/<id> ×3, /api/lore/primarchs/<id> ×2) — à traiter avec le lien vers la liste." }
       - { date: 2026-10-13, text: "13-10 QA L112 : même manque sur /subfactions/n-existe-pas et sur l'état 500 de la sous-faction (aucun h1) ; ajouter aussi la section ## /subfactions/:id à docs/qa/expectations.md (proposition dans le rapport QA : titre, sections, 404 → introuvable + Retour, 500 → Réessayer, successors vide permis, exception console de la 404)." }
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "conforme, 1 note mineure (h1 « Machine introuvable » ≠ titre « Machine de guerre introuvable » sur la fiche titan) — orchestré (vague 2026-10-13-1145, 2 passe(s) de correction)", commit: 89cfeb8e4f19c7d3733f8e565fcc861954125b9e }
   - id: L98
     title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
     public: "Sous-factions : les libellés du bandeau sont lisibles"
