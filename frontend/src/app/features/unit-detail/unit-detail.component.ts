@@ -1,7 +1,8 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
@@ -350,27 +351,26 @@ export class UnitDetailComponent {
   readonly unit = toSafeSignal(
     this.route.paramMap, p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)), undefined);
 
-  readonly faction = toSafeSignal<ParamMap, Faction | undefined, undefined>(
-    this.route.paramMap,
-    p => this.service.getUnit(p.get('id')!).pipe(
-      switchMap(u => u ? this.service.getFaction(u.factionId) : of(undefined)),
-    ),
+  // L97 : faction et unités liées se déduisent de l'unité déjà chargée (un seul getUnit par affichage).
+  private readonly unit$ = toObservable(this.unit);
+
+  readonly faction = toSafeSignal<Unit | undefined, Faction | undefined, undefined>(
+    this.unit$,
+    u => u ? this.service.getFaction(u.factionId) : of(undefined),
     undefined,
   );
 
   readonly relatedUnits = toSafeSignal(
-    this.route.paramMap,
-    p => this.service.getUnit(p.get('id')!).pipe(
-      switchMap(u => {
-        if (!u) return of([] as Unit[]);
-        if (u.relatedUnitIds?.length) {
-          return forkJoin(u.relatedUnitIds.slice(0, 4).map(id => this.service.getUnit(id)));
-        }
-        return this.service.getUnits(u.factionId).pipe(
-          switchMap(list => of(list.filter(x => x.id !== u.id).slice(0, 4))),
-        );
-      }),
-    ), [] as Unit[]);
+    this.unit$,
+    u => {
+      if (!u) return of([] as Unit[]);
+      if (u.relatedUnitIds?.length) {
+        return forkJoin(u.relatedUnitIds.slice(0, 4).map(id => this.service.getUnit(id)));
+      }
+      return this.service.getUnits(u.factionId).pipe(
+        switchMap(list => of(list.filter(x => x.id !== u.id).slice(0, 4))),
+      );
+    }, [] as Unit[]);
 
   /** Œuvres du catalog de la faction courante — sidebar "Galerie liée". */
   readonly factionArtworks = computed<Artwork[]>(() => {

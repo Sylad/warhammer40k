@@ -1,7 +1,8 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { catchError, of, switchMap, forkJoin, map, throwError } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { catchError, of, forkJoin, map, throwError } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
@@ -367,22 +368,22 @@ export class PrimarchDetailComponent {
   readonly primarch = toSafeSignal(
     this.route.paramMap, p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
+  // L97 : les apparentés se déduisent du primarque déjà chargé (un seul getPrimarch par affichage).
   readonly related = toSafeSignal(
-    this.route.paramMap,
-    p => this.service.getPrimarch(p.get('id')!).pipe(
-      switchMap(prim => {
-        if (!prim?.relatedPrimarchIds?.length) return of([] as Primarch[]);
-        // L39 : un identifiant absent des données (« typhus » en prod) est ignoré, au lieu de
-        // faire échouer toute la section (forkJoin propage la première erreur).
-        // Filtrer AVANT de couper à 3 : un inconnu en tête ne raccourcit pas la liste. Seule une 404
-        // est tue ; toute autre erreur (500, backend absent) fait échouer la section, signalée par
-        // `related.failed()` (bandeau + Réessayer).
-        return forkJoin(
-          prim.relatedPrimarchIds.map(id => this.service.getPrimarch(id).pipe(catchError((err: unknown) =>
-            isNotFound(err) ? of(null) : throwError(() => err))))
-        ).pipe(map(list => list.filter((r): r is Primarch => !!r).slice(0, 3)));
-      }),
-    ), [] as Primarch[]);
+    toObservable(this.primarch),
+    prim => {
+      if (!prim?.relatedPrimarchIds?.length) return of([] as Primarch[]);
+      // L39 : un identifiant absent des données (« typhus » en prod) est ignoré, au lieu de
+      // faire échouer toute la section (forkJoin propage la première erreur).
+      // Filtrer AVANT de couper à 3 : un inconnu en tête ne raccourcit pas la liste. Seule une 404
+      // est tue ; toute autre erreur (500, backend absent) fait échouer la section, signalée par
+      // `related.failed()` (bandeau + Réessayer).
+      return forkJoin(
+        prim.relatedPrimarchIds.map(id => this.service.getPrimarch(id).pipe(catchError((err: unknown) =>
+          isNotFound(err) ? of(null) : throwError(() => err))))
+      ).pipe(map(list => list.filter((r): r is Primarch => !!r).slice(0, 3)));
+    },
+    [] as Primarch[]);
 
   constructor() {
     effect(() => {
