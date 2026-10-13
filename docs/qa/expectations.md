@@ -23,6 +23,14 @@ libellés en capitales).
 Visiter space-marines.
 - shows: le nom de la faction en titre ; au moins un lien vers une fiche d'unité
 
+- never: pour un identifiant inconnu (visiter /factions/n-existe-pas) : « Chargement… » sans fin ; le titre est alors « Faction introuvable » avec un lien vers /factions et sans bouton Réessayer (L97)
+
+## /subfactions/:id
+Visiter un lien de la fiche faction.
+- shows: le nom de la sous-faction en titre ; ses sections ; la liste des successeurs peut être vide
+- 404 (visiter /subfactions/n-existe-pas) : h1 « Sous-faction introuvable » + lien « Toutes les factions » vers /factions, pas de Réessayer ; une erreur 404 dans la console est permise
+- 500 ou backend absent : h1 « Sous-faction indisponible » + bouton Réessayer, jamais « introuvable »
+
 ## /units/:id
 Visiter sm-calgar, ou un lien de la fiche faction.
 - shows: le nom de l'unité en titre ; sa datasheet

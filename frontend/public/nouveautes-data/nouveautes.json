@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-13 12:10",
+  "generated": "2026-10-13 12:28",
   "entries": [
+    {
+      "slug": "2026-10-13-faction-inconnue-un-message-clair-au-lieu-d-un-chargement-sa",
+      "title": "Faction inconnue : un message clair au lieu d'un chargement sans fin",
+      "date": "2026-10-13",
+      "lots": [
+        "L97"
+      ],
+      "captures": [
+        "captures/L97-faction-introuvable.png"
+      ],
+      "alts": [
+        "Page d’une faction inconnue : titre « Faction introuvable », message et lien « Toutes les factions »"
+      ],
+      "html": "<p>Quand l’adresse d’une faction n’existe pas, la page n’affiche plus « Chargement de la faction… » sans fin. Elle montre le titre « Faction introuvable », un message clair et un lien « Toutes les factions » pour revenir à la liste.</p>\n<p>Il en va de même pour les fiches d’unité, de sous-faction, de Primarque, de titan, de saint, d’équipement, de vaisseau et d’événement de la chronologie : chacune affiche son titre « … introuvable » et un lien vers sa liste.</p>"
+    },
     {
       "slug": "2026-10-13-listes-en-erreur-plus-de-compteurs-a-zero-trompeurs",
       "title": "Listes en erreur : plus de compteurs à zéro trompeurs",
