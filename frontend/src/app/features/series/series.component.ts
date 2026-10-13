@@ -164,7 +164,9 @@ const PAGE_SIZE = 8;
               </article>
             }
             @empty {
-              <div class="empty">Aucune série ne correspond à votre recherche.</div>
+              @if (!series.failed()) {
+                <div class="empty">Aucune série ne correspond à votre recherche.</div>
+              }
             }
           </div>
 

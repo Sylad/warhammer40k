@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-12 23:33",
+  "generated": "2026-10-13 10:49",
   "entries": [
+    {
+      "slug": "2026-10-13-listes-en-erreur-plus-de-aucun-resultat-sous-le-message-d-er",
+      "title": "Listes en erreur : plus de « aucun résultat » sous le message d'erreur",
+      "date": "2026-10-13",
+      "lots": [
+        "L111"
+      ],
+      "captures": [
+        "captures/L111-equipement-erreur.png"
+      ],
+      "alts": [
+        "Page Armement et Reliques quand le chargement échoue : le message d'erreur avec « Réessayer », sans « Aucune pièce ne correspond »"
+      ],
+      "html": "<p>Quand le chargement de la liste Équipement ou de la liste des Séries échoue, la page n'affiche plus que le message d'erreur et son bouton « Réessayer ». Le texte « Aucune pièce ne correspond aux filtres » (ou « Aucune série ne correspond à votre recherche ») ne s'affiche plus au-dessous, à tort : il reste réservé aux listes bien chargées dont les filtres ne laissent rien.</p>"
+    },
     {
       "slug": "2026-10-12-galerie-textes-et-bouton-importer-lisibles-sur-une-image-d-e",
       "title": "Galerie : textes et bouton Importer lisibles sur une image d'en-tête claire",

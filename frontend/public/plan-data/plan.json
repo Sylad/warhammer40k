@@ -325,7 +325,8 @@
     {
       "id": "L111",
       "title": "Listes en erreur : plus de « aucun résultat » sous le message d'erreur",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-13"
     }
   ]
 }

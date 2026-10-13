@@ -139,7 +139,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
           <div class="card-arrow" [class.flipped]="expandedId() === item.id">›</div>
         </article>
       }
-      @if (filtered().length === 0) {
+      @if (filtered().length === 0 && !items.failed()) {
         <div class="empty">Aucune pièce ne correspond aux filtres sélectionnés.</div>
       }
     </section>
