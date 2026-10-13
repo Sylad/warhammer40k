@@ -65,11 +65,14 @@ describe('Réessayer relance tous les flux de la page (L38)', () => {
   });
 
   it('fiche unité : unité, faction, unités liées, œuvres', async () => {
-    const un = flaky(unit), fa = flaky(faction), ar = flaky([{ id: 'a1', faction: 'f1' }]);
+    const un = flaky(unit), fa = flaky(faction), ar = flaky([{ id: 'a1', faction: 'f1' }]), li = flaky(unit2);
     const { el, reessayer, instance } = await monter(UnitDetailComponent, {
-      getUnit: (id: string) => id === 'u1' ? un.flux : of(unit2), getFaction: () => fa.flux, artworks$: ar.flux,
+      getUnit: (id: string) => id === 'u1' ? un.flux : li.flux, getFaction: () => fa.flux, artworks$: ar.flux,
     }, { id: 'u1' });
     expect(el.querySelector('[role="alert"]')).not.toBeNull();
+    // `un` ne rate qu'au 1er abonnement (unit) : les unités liées échouent sur leur propre flux (u2).
+    expect(li.abonnements()).toBe(1);
+    expect((instance['relatedUnits']() as unknown[]).length).toBe(0);
     await reessayer();
     expect(el.querySelector('[role="alert"]')).toBeNull();
     expect(instance['unit']()).toBeTruthy();
