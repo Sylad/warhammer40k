@@ -182,6 +182,13 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
         await page.addInitScript(() => localStorage.setItem('wh40k.news.seen-v1', JSON.stringify({ date: '2026-01-01', slugs: [], at: '2026-01-02T10:00:00Z' })));
         // L55 : polices web tardives (400 ms) — le texte se reflue après l'arrivée sur l'ancre.
         await page.route(/\.(woff2?|ttf)(\?|$)|fonts\.(googleapis|gstatic)/, async (r) => { await new Promise((x) => setTimeout(x, 400)); await r.continue(); });
+        // L113 : données de la fiche (unités, sous-factions) tardives (1,5 s), comme sur une machine chargée :
+        // elles ajoutent du contenu au-dessus des sections APRÈS le clic, donc après une position « stable ».
+        await page.route(/\/api\/(units|subfactions)(\?|$)/, async (r) => { await new Promise((x) => setTimeout(x, 1500)); await r.continue(); });
+        // …et la page ne reçoit son clic qu'une fois ses données arrivées (réseau au repos) : sinon le
+        // contenu tardif décale la cible après une position stable de 700 ms.
+        const goto = page.goto.bind(page);
+        page.goto = async (url, opts) => { const r = await goto(url, opts); await page.waitForLoadState('networkidle'); return r; };
         const id = await open(page);
         const m = await gap(page, id);
         await page.close();
