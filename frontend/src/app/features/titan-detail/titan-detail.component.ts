@@ -1,12 +1,11 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { GodMachine } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 @Component({
   selector: 'app-titan-detail',
@@ -112,7 +111,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
         </aside>
       </section>
     } @else if (machine.failed()) {
-      <app-load-error (retry)="machine.retry()" />
+      <app-load-error (retry)="retryAll(machine, factions)" />
     } @else {
       <div class="loading"><p>Chargement...</p></div>
     }
@@ -128,9 +127,10 @@ export class TitanDetailComponent {
   readonly galleryImages = signal<string[]>([]);
 
   /** L39 : on ne lie que les factions qui ont une fiche (« imperial-knights » n'en a pas). */
-  private readonly factions = toSafeSignal(this.service.factions$, []);
+  protected readonly factions = toSafeSignal(this.service.factions$, []);
   readonly factionIds = computed(() => new Set(this.factions().map(f => f.id)));
 
+  protected readonly retryAll = retryAll;
   readonly machine = toSafeSignal(
     this.route.paramMap, p => this.service.getGodMachine(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 

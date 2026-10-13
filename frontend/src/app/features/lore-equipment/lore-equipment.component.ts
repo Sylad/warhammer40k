@@ -6,7 +6,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Equipment, EquipmentType, Faction } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Armes à distance',
@@ -57,8 +57,8 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
       </div>
     </section>
 
-    @if (items.failed()) {
-      <app-load-error (retry)="items.retry()" />
+    @if (items.failed() || factions.failed()) {
+      <app-load-error (retry)="retryAll(items, factions)" />
     }
 
     <section class="filters">
@@ -153,6 +153,7 @@ export class LoreEquipmentComponent {
 
   readonly typeKeys: EquipmentType[] = ['ranged', 'melee', 'armor', 'relic'];
 
+  protected readonly retryAll = retryAll;
   readonly items = toSafeSignal(this.service.equipment$, [] as Equipment[]);
   readonly factions = toSafeSignal(this.service.factions$, [] as Faction[]);
 

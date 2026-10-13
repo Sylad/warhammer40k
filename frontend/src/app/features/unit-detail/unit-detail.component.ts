@@ -7,7 +7,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, Artwork } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 type TabKey = 'apercu' | 'equipement' | 'lore' | 'variantes';
 
@@ -300,10 +300,14 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
           </aside>
         </section>
       } @else {
-        <div class="loading"><p>Chargement de la faction...</p></div>
+        @if (faction.failed()) {
+          <app-load-error (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
+        } @else {
+          <div class="loading"><p>Chargement de la faction...</p></div>
+        }
       }
     } @else if (unit.failed()) {
-      <app-load-error (retry)="unit.retry()" />
+      <app-load-error (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
     } @else {
       <div class="loading"><p>Chargement de l'unité...</p></div>
     }
@@ -335,10 +339,11 @@ export class UnitDetailComponent {
 
   // Catalog artworks (shared replay) — utilisé par la sidebar "Galerie liée"
   // pour proposer les œuvres de la même faction que l'unit courant.
-  private readonly allArtworks = toSafeSignal(this.service.artworks$, [] as Artwork[]);
+  protected readonly allArtworks = toSafeSignal(this.service.artworks$, [] as Artwork[]);
   // Cache des URLs résolues via wiki pour les artworks de la sidebar.
   readonly artworkImageCache = signal(new Map<string, string>());
 
+  protected readonly retryAll = retryAll;
   readonly unit = toSafeSignal(
     this.route.paramMap, p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)), undefined);
 

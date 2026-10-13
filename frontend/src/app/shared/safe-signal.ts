@@ -47,3 +47,8 @@ export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Obse
     retry: () => { failed.set(false); attempt$.next(); },
   }) as SafeSignal<T | I>;
 }
+
+/** L38 — « Réessayer » d'une page à plusieurs flux : relance chacun d'eux, pas seulement le principal. */
+export function retryAll(...signals: readonly { retry(): void }[]): void {
+  for (const s of signals) s.retry();
+}

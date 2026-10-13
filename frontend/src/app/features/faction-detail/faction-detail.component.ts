@@ -2,7 +2,6 @@ import { afterNextRender, Component, computed, DestroyRef, effect, ElementRef, i
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
@@ -10,7 +9,7 @@ import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb'
 import { longestWord } from '../../shared/longest-word';
 import { artworkForFaction, videoForFaction } from './faction-media';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -443,7 +442,7 @@ const DEFAULT_RESOURCES = [
         </aside>
       </section>
     } @else if (faction.failed()) {
-      <app-load-error (retry)="faction.retry()" />
+      <app-load-error (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
     } @else {
       <div class="loading">
         <p>Chargement de la faction...</p>
@@ -484,6 +483,7 @@ export class FactionDetailComponent {
       + ses 26 successeurs). */
   readonly subFactionSearch = signal('');
 
+  protected readonly retryAll = retryAll;
   readonly faction = toSafeSignal(
     this.route.paramMap, p => this.service.getFaction(p.get('id')!).pipe(namedPage(this.pages, f => f.nom)), undefined);
   readonly units = toSafeSignal(

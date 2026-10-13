@@ -8,7 +8,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -344,7 +344,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
       <!-- LIGHTBOX -->
       <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
     } @else if (primarch.failed()) {
-      <app-load-error (retry)="primarch.retry()" />
+      <app-load-error (retry)="retryAll(primarch, related)" />
     } @else {
       <div class="loading"><p>Chargement du Primarque...</p></div>
     }
@@ -361,6 +361,7 @@ export class PrimarchDetailComponent {
   readonly relatedImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
 
+  protected readonly retryAll = retryAll;
   readonly primarch = toSafeSignal(
     this.route.paramMap, p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
