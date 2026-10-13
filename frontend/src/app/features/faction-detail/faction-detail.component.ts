@@ -445,7 +445,7 @@ const DEFAULT_RESOURCES = [
         </aside>
       </section>
     } @else if (faction.failed()) {
-      <app-load-error [notFound]="faction.notFound()" heading="Faction introuvable" backLink="/factions" backLabel="Toutes les factions" (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
+      <app-load-error [notFound]="faction.notFound()" [heading]="faction.notFound() ? 'Faction introuvable' : 'Faction indisponible'" backLink="/factions" backLabel="Toutes les factions" (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
     } @else {
       <div class="loading">
         <p>Chargement de la faction...</p>

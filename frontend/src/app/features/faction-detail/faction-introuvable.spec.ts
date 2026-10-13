@@ -34,4 +34,27 @@ describe('fiche faction inconnue (L97)', () => {
     expect(el.querySelector('a[href="/factions"]')).not.toBeNull();
     expect(el.querySelector('button')).toBeNull();
   });
+
+  it('500 : h1 « indisponible » (pas « introuvable ») et bouton Réessayer', async () => {
+    const service = fakeWarhammerService({
+      getFaction: () => throwError(() => new HttpErrorResponse({ status: 500 })),
+      getUnits: () => of([]),
+      getSubFactions: () => of([]),
+      videos$: of([]),
+      artworks$: of([]),
+    });
+    await setupTestBed([FactionDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'xxx' })), snapshot: { fragment: null } } },
+    ]);
+    const f = TestBed.createComponent(FactionDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('h1')!.textContent!.trim()).toBe('Faction indisponible');
+    expect(el.textContent).not.toContain('introuvable');
+    expect(el.querySelector('button')).not.toBeNull();
+  });
 });
