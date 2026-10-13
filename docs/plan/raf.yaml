@@ -1049,6 +1049,7 @@ lots:
     visible: true
     created: 2026-10-13
     started: 2026-10-13
+    review: { date: 2026-10-13, verdict: "conforme — 1 constat mineur antérieur au lot (message « aucun résultat » sous l'erreur de la chronologie), proposé en sous-tâche — orchestré (vague 2026-10-13-1145, 2 passe(s) de correction)", commit: e6f56308f3a3ba9020e008bcea51423b2efab50f }
   - id: L116
     title: "Test d'acceptation L47 instable en CI : videos-ouvrir-l47.acceptation.spec.ts:464 lit l'onglet ouvert à about:blank au lieu de /videos?video=astartes-2 (CI de 3e975d4) — attendre l'adresse du nouvel onglet (waitForURL) ; test scellé d'un lot livré : la session corrige le test dans l'arbre et pose une question, le lead rescelle avec cadence spec reseal L47 <test> --porteur <ce lot> --reason (contrat inchangé)"
     status: todo
