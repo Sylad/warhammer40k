@@ -1044,10 +1044,11 @@ lots:
   - id: L115
     title: "Listes Lore en erreur : les compteurs du bandeau (« 0 pièces archivées », « 0 armes à distance »…) et des onglets (« Tous · 0 ») s'affichent comme des valeurs — « — » tant que la source est en échec (capture L111, /lore/equipment)"
     public: "Listes en erreur : plus de compteurs à zéro trompeurs"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-13
+    started: 2026-10-13
   - id: L116
     title: "Test d'acceptation L47 instable en CI : videos-ouvrir-l47.acceptation.spec.ts:464 lit l'onglet ouvert à about:blank au lieu de /videos?video=astartes-2 (CI de 3e975d4) — attendre l'adresse du nouvel onglet (waitForURL) ; test scellé d'un lot livré : la session corrige le test dans l'arbre et pose une question, le lead rescelle avec cadence spec reseal L47 <test> --porteur <ce lot> --reason (contrat inchangé)"
     status: todo
