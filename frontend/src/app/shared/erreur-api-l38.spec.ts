@@ -35,6 +35,29 @@ describe('API en erreur (L38)', () => {
     expect(() => { f.detectChanges(); f.detectChanges(); }).not.toThrow();
   });
 
+  it('palette Ctrl+K (L110) : échec au démarrage puis succès — l’ouverture relance seulement les sources en échec', async () => {
+    const appels = { primarchs: 0, saints: 0 };
+    const primarchs$ = new Observable<unknown[]>((o) => {
+      appels.primarchs++;
+      if (appels.primarchs === 1) o.error(new Error('500'));
+      else { o.next([{ id: 'horus', name: 'Horus', legion: 'Sons of Horus' }]); o.complete(); }
+    });
+    const saints$ = new Observable<unknown[]>((o) => { appels.saints++; o.next([]); o.complete(); });
+    const f = await monter(CommandPaletteComponent, { primarchs$, saints$ });
+    const palette = f.componentInstance as CommandPaletteComponent;
+    const el = f.nativeElement as HTMLElement;
+    const chercher = (q: string) => { palette.query = q; palette.onQueryChange(q); f.detectChanges(); };
+
+    expect(appels.primarchs).toBe(1); // échec au démarrage, palette fermée : rien n'est relancé
+
+    palette.open();
+    f.detectChanges();
+    chercher('horus');
+    expect(el.textContent).toContain('Horus');
+    expect(appels.primarchs).toBe(2);
+    expect(appels.saints).toBe(1);
+  });
+
   it('page de liste : message d’erreur avec Réessayer, et Réessayer relance le chargement', async () => {
     let appels = 0;
     const source = new Observable<unknown[]>((o) => {

@@ -232,7 +232,15 @@ export class CommandPaletteComponent {
    */
   @Output() readonly navigated = new EventEmitter<void>();
 
+  /** L110 : une source tombée au démarrage est relancée à chaque ouverture ; les autres ne sont pas rechargées. */
+  private relancerSourcesEnEchec(): void {
+    for (const s of [this.factions, this.primarchs, this.saints, this.ships, this.titans, this.equipment, this.events]) {
+      if (s.failed()) s.retry();
+    }
+  }
+
   open(): void {
+    this.relancerSourcesEnEchec();
     this.isOpen.set(true);
     this.query = '';
     this.queryS.set('');
