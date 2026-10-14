@@ -225,3 +225,25 @@ describe('fiche unité — CTA galerie et vidéo (L127)', () => {
     ico.forEach(i => expect(i.getAttribute('aria-hidden')).toBe('true'));
   });
 });
+
+describe('fiche unité — « Retour aux unités » (L123)', () => {
+  it('mène à la grille des unités de la faction (fragment units), pas au haut de la fiche', async () => {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'orks', nom: 'Boyz', type: 'Infanterie', role: 'r', description: 'd' }),
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const back = (f.nativeElement as HTMLElement).querySelector<HTMLAnchorElement>('a.back-btn')!;
+    expect(back.getAttribute('href')).toBe('/factions/orks#units');
+  });
+});

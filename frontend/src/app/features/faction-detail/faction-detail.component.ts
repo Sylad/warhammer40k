@@ -1,5 +1,5 @@
 import { afterNextRender, Component, computed, DestroyRef, effect, ElementRef, inject, Injector, signal, untracked } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -467,6 +467,9 @@ export class FactionDetailComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
+  private readonly viewport = inject(ViewportScroller);
+  /** L123 : le défilement vers #units n'est fait qu'une fois par arrivée. */
+  private unitsAnchorDone = false;
 
   readonly typeFilters = TYPE_FILTERS;
   readonly longestWord = longestWord;
@@ -649,6 +652,15 @@ export class FactionDetailComponent {
     effect(() => {
       const a = this.factionArtwork();
       untracked(() => this.galleryThumbs.resolve(a ? mediaThumbSource(a) : {}));
+    });
+
+    // L123 : le lien « Retour aux unités » (fiche unité) arrive avec #units, mais la section n'est
+    // rendue qu'après la réponse des unités : le défilement d'ancre du routeur (NavigationEnd) tombe
+    // avant et s'arrête sur la page encore courte. On défile quand la section existe.
+    effect(() => {
+      if (this.unitsAnchorDone || this.route.snapshot.fragment !== 'units' || this.units().length === 0) return;
+      this.unitsAnchorDone = true;
+      afterNextRender(() => this.viewport.scrollToAnchor('units'), { injector: this.injector });
     });
 
     // Reset la pagination des sub-factions quand la recherche change.

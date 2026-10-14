@@ -43,7 +43,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
       }
       @if (faction(); as f) {
         <div class="topbar">
-          <a class="back-btn" [routerLink]="['/factions', f.id]">← RETOUR AUX UNITÉS</a>
+          <a class="back-btn" [routerLink]="['/factions', f.id]" fragment="units">← RETOUR AUX UNITÉS</a>
           <div class="topbar-actions">
             <button class="iconbtn" type="button" [title]="shareCopied() ? 'Lien copié' : 'Partager'" (click)="shareUnit(u)">
               <span>{{ shareCopied() ? '✓' : '↗' }}</span>

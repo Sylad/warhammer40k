@@ -4,6 +4,7 @@ import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
+import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, convertToParamMap, provideRouter, type ParamMap } from '@angular/router';
 import { BehaviorSubject, of, Subject } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -232,5 +233,43 @@ describe('fiche faction — sans unité (L95)', () => {
     const el = await render([{ id: 'boyz', nom: 'Boyz', type: 'Infanterie', factionId: 'orks' }]);
     expect(el.querySelector('button.cta')).not.toBeNull();
     expect(el.querySelector('#units .filters')).not.toBeNull();
+  });
+});
+
+// L123 — arrivée par le lien #units : la section n'existe qu'après la réponse des unités, le
+// défilement d'ancre du routeur (au NavigationEnd) tombait avant. La page défile elle-même.
+describe('fiche faction — arrivée sur #units (L123)', () => {
+  async function monter(fragment: string | null, units: unknown[]) {
+    const ancres: string[] = [];
+    const service = fakeWarhammerService({
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of(units),
+      getSubFactions: () => of([]),
+      videos$: of([]),
+      artworks$: of([]),
+    });
+    await setupTestBed([FactionDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ViewportScroller, useValue: { scrollToAnchor: (id: string) => ancres.push(id), setOffset: () => {} } },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'orks' })), snapshot: { fragment } } },
+    ]);
+    const f = TestBed.createComponent(FactionDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    await f.whenStable();
+    return ancres;
+  }
+  const UNITS = [{ id: 'boyz', factionId: 'orks', nom: 'Boyz', type: 'Infanterie', role: 'r', description: 'd' }];
+
+  it('défile vers la grille des unités une fois les unités rendues', async () => {
+    expect(await monter('units', UNITS)).toEqual(['units']);
+  });
+  it('ne défile pas sans le fragment units', async () => {
+    expect(await monter(null, UNITS)).toEqual([]);
+  });
+  it('ne défile pas quand la faction n’a aucune unité (pas de section)', async () => {
+    expect(await monter('units', [])).toEqual([]);
   });
 });
