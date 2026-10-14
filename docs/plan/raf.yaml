@@ -1132,10 +1132,11 @@ lots:
     created: 2026-10-14
   - id: L124
     title: "Fiche unité : badges du hero dupliqués (Infanterie ×2, Imperium ×2), type et alignement déjà dans unit.badges, doublon sans classe de style (revue UX L4)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-14
   - id: L125
     title: "Fiche unité : panneaux Description et Histoire & Lore affichent le même loreLong, citation rendue deux fois (revue UX L4)"
     status: todo
