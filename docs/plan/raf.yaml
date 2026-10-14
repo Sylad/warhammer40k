@@ -1140,10 +1140,11 @@ lots:
     review: { date: 2026-10-14, verdict: "compliant (1 minor note: badge « Hero » encore répété à côté de la pastille « Héros » sur 62 unités) — orchestré (vague 2026-10-14-1900, 0 passe(s) de correction)", commit: b356c6369f21a31863d878842dffaa4cbda4565f }
   - id: L125
     title: "Fiche unité : panneaux Description et Histoire & Lore affichent le même loreLong, citation rendue deux fois (revue UX L4)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-14
   - id: L126
     title: "Fiche unité : onglet Variantes vide pour 132/133 unités ; pour l'Intercessor 5 cartes noires sans image ni action (revue UX L4)"
     status: todo
