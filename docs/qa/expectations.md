@@ -34,6 +34,11 @@ Visiter un lien de la fiche faction.
 ## /units/:id
 Visiter sm-calgar, ou un lien de la fiche faction.
 - shows: le nom de l'unité en titre ; sa datasheet
+- shows: la barre d'onglets `nav.tabs`, nommée « Sections de la fiche » (aria-label), dont l'onglet affiché porte `aria-current="true"` et aucun autre : un seul aria-current dans la barre (L121) ; l'onglet Variantes n'y figure que si l'unité a des variantes (L126)
+- shows: les panneaux Description et Histoire & Lore ont des textes différents : Description n'affiche jamais le `loreLong` réservé à Histoire & Lore, et la citation du lore n'est rendue qu'une seule fois dans la page, ni dans le hero ni dans Description (L125)
+- shows: le CTA « Voir dans la galerie » mène à `/gallery?faction=<id de la faction>` et la galerie s'ouvre filtrée (moins d'œuvres que sans filtre) ; le CTA « Voir la vidéo » a pour nom accessible « Voir la vidéo : <titre> » et mène à `/videos?video=<id>` ; sans vidéo liée à la faction, ce CTA est absent (pas désactivé) (L127)
+- shows: à 390 px, « Retour aux unités » et le bouton partager mesurent au moins 44 px de haut (le bouton partager 44 × 44 px) (L129)
+- never: deux badges de même sens dans le hero, à casse, accent ou langue près (« Héros » et « Hero », « Infanterie » deux fois, l'alignement répété) ; la liste des badges visibles n'a aucun doublon de sens (L124, L130, QA prod du 14-10)
 
 ## /romans
 - never: le tiroir du menu (nav.drawer) qui sort de l'écran et crée un défilement horizontal — 390 only (490 px pour 384 le 05-10, suivi par L62)
