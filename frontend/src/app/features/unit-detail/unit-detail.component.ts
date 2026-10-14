@@ -75,11 +75,12 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
             <p class="hero-desc">{{ u.description || u.loreCourt || f.description }}</p>
             <div class="hero-cta">
               <a class="cta cta-solid" routerLink="/gallery" [queryParams]="{ faction: f.id }">
-                <span class="cta-ico">▦</span>VOIR DANS LA GALERIE
+                <span class="cta-ico" aria-hidden="true">▦</span>VOIR DANS LA GALERIE
               </a>
               @if (linkedVideo(); as v) {
-                <a class="cta cta-outline" routerLink="/videos" [queryParams]="{ video: v.id }">
-                  <span class="cta-ico">▶</span>VOIR LA VIDÉO
+                <a class="cta cta-outline" routerLink="/videos" [queryParams]="{ video: v.id }"
+                   [attr.aria-label]="'Voir la vidéo : ' + v.titre">
+                  <span class="cta-ico" aria-hidden="true">▶</span>VOIR LA VIDÉO
                 </a>
               }
             </div>
@@ -347,16 +348,34 @@ export class UnitDetailComponent {
   readonly artworkImageCache = signal(new Map<string, string>());
 
   protected readonly retryAll = retryAll;
-  // Vidéos du codex : aucune n'est rattachée à une unité, seul un tag (nom de la faction ou de
-  // l'unité) fait le lien. Sans correspondance, le CTA « Voir la vidéo » n'est pas proposé.
+  // Vidéos du codex : aucune n'est rattachée à une unité, seul un tag (nom de l'unité ou de la
+  // faction) fait le lien. Sans correspondance, le CTA « Voir la vidéo » n'est pas proposé.
+  // Plusieurs vidéos peuvent correspondre (« Space Marines » : une parodie, un court-métrage, une
+  // série officielle) : la meilleure gagne, à rang égal la première de la liste.
+  //   0 = tag égal au nom de l'unité · 1 = tag faction + Officiel / Chef-d'œuvre / Film / Série
+  //   2 = tag faction simple · 3 = Parodie / Humour (en dernier, même si le tag faction y est)
   private readonly videos = toSafeSignal(this.service.videos$, [] as Video[]);
   readonly linkedVideo = computed<Video | null>(() => {
     const u = this.unit();
     const f = this.faction();
     if (!u || !f) return null;
-    const fold = (t: string) => t.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const names = new Set([u.nom, f.nom, f.id].map(fold));
-    return this.videos().find(v => (v.tags ?? []).some(t => names.has(fold(t)))) ?? null;
+    const fold = (t: string) => t.trim().toLowerCase().replace(/[’‘]/g, "'").normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const unitName = fold(u.nom);
+    const factionNames = new Set([f.nom, f.id].map(fold));
+    const GOOD = new Set(['officiel', "chef-d'œuvre", 'film', 'série', 'serie'].map(fold));
+    const JOKE = new Set(['parodie', 'humour'].map(fold));
+    let best: Video | null = null;
+    let bestRank = Infinity;
+    for (const v of this.videos()) {
+      const tags = (v.tags ?? []).map(fold);
+      let rank: number;
+      if (tags.includes(unitName)) rank = 0;
+      else if (!tags.some(t => factionNames.has(t))) continue;
+      else if (tags.some(t => JOKE.has(t))) rank = 3;
+      else rank = tags.some(t => GOOD.has(t)) ? 1 : 2;
+      if (rank < bestRank) { best = v; bestRank = rank; }
+    }
+    return best;
   });
 
   readonly unit = toSafeSignal(

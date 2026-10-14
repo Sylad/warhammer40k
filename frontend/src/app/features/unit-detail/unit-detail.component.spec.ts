@@ -102,10 +102,10 @@ describe('fiche unité — symbole de faction (L39)', () => {
 });
 
 describe('fiche unité — CTA galerie et vidéo (L127)', () => {
-  async function monter(videos: unknown[]) {
+  async function monter(videos: unknown[], faction = { id: 'blood-angels', nom: 'Blood Angels' }, unitNom = 'Sanguinor') {
     const service = fakeWarhammerService({
-      getUnit: () => of({ id: 'u', factionId: 'blood-angels', nom: 'Sanguinor', type: 'Infanterie', role: 'r', description: 'd' }),
-      getFaction: () => of({ id: 'blood-angels', nom: 'Blood Angels', alignement: 'Imperium', symbole: 'B', description: 'd', couleurThematique: '#a11' }),
+      getUnit: () => of({ id: 'u', factionId: faction.id, nom: unitNom, type: 'Infanterie', role: 'r', description: 'd' }),
+      getFaction: () => of({ id: faction.id, nom: faction.nom, alignement: 'Imperium', symbole: 'B', description: 'd', couleurThematique: '#a11' }),
       getUnits: () => of([]),
       videos$: of(videos),
     });
@@ -141,5 +141,49 @@ describe('fiche unité — CTA galerie et vidéo (L127)', () => {
     const root = await monter([{ id: 'astartes', titre: 'Astartes', tags: ['Space Marines'] }]);
     expect(cta(root, /VID/)).toBeUndefined();
     expect(cta(root, /GALERIE/)).toBeDefined();
+  });
+
+  const SM = { id: 'space-marines', nom: 'Space Marines' };
+  const parodie = { id: 'flashgitz-space-king', titre: 'Flashgitz Space King', tags: ['Parodie', 'Space Marines', 'Humour', 'Animation'] };
+  const chefDoeuvre = { id: 'astartes', titre: 'Astartes', tags: ['Space Marines', 'Action', "Chef-d'œuvre", 'Court-métrage'] };
+  const officielle = { id: 'angels-of-death', titre: 'Angels of Death', tags: ['Blood Angels', 'Space Marines', 'Officiel'] };
+
+  it('une parodie en tête de liste ne l’emporte pas sur le chef-d’œuvre', async () => {
+    const root = await monter([parodie, chefDoeuvre, officielle], SM, 'Roboute Guilliman');
+    expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=astartes');
+  });
+
+  it('une vidéo officielle passe avant une parodie placée en tête', async () => {
+    const root = await monter([parodie, { id: 'x', titre: 'Simple', tags: ['Space Marines'] }, officielle], SM, 'Dante');
+    expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=angels-of-death');
+  });
+
+  it('une vidéo à tag faction simple passe avant une parodie', async () => {
+    const root = await monter([parodie, { id: 'simple', titre: 'Simple', tags: ['Space Marines', 'Lore'] }], SM, 'Dante');
+    expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=simple');
+  });
+
+  it('la parodie reste proposée quand elle est la seule correspondance', async () => {
+    const root = await monter([parodie], SM, 'Dante');
+    expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=flashgitz-space-king');
+  });
+
+  it('un tag égal au nom de l’unité gagne sur tout tag de faction, accents et casse ignorés', async () => {
+    const root = await monter([chefDoeuvre, officielle, { id: 'gui', titre: 'Guilliman', tags: ['roboute guilliman'] }], SM, 'Roboute Guilliman');
+    expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=gui');
+  });
+
+  it('aucune vidéo ne porte la faction ni l’unité : pas de bouton, même avec des parodies', async () => {
+    const root = await monter([parodie, { id: 'orks', titre: 'Orks', tags: ['Orks'] }], { id: 'tyranides', nom: 'Tyranides' }, 'Genestealer');
+    expect(cta(root, /VID/)).toBeUndefined();
+    expect(cta(root, /GALERIE/)).toBeDefined();
+  });
+
+  it('le lien vidéo est nommé par le titre de la vidéo, les glyphes décoratifs sont masqués', async () => {
+    const root = await monter([chefDoeuvre], SM, 'Dante');
+    expect(cta(root, /VID/)!.getAttribute('aria-label')).toBe('Voir la vidéo : Astartes');
+    const ico = root.querySelectorAll('.hero-cta .cta-ico');
+    expect(ico.length).toBe(2);
+    ico.forEach(i => expect(i.getAttribute('aria-hidden')).toBe('true'));
   });
 });
