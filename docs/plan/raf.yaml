@@ -1113,10 +1113,11 @@ lots:
       - { date: 2026-10-14, text: "maquette UX (14-10) : la datasheet devient un contenu, plus un décor. Hero 1440 en deux colonnes — gauche 44 % inchangée (titre, badges dédoublonnés, rôle, description, CTA), droite 56 % un <figure> à bord or avec <img src=/api/images/datasheets/:id alt='Fiche technique de <nom> : profil, armes et aptitudes'>, object-fit contain, sans filtre ni dégradé par-dessus, ~400 px de haut, légende « Fiche technique · agrandir » ouvrant app-figure-lightbox (clavier, Échap, retour du focus) ; l'ambiance actuelle (copie floutée du scan) peut rester derrière la figure. 6 portraits : même figure, alt « Illustration de <nom> ». Onglet Aperçu : panneau « Fiche technique » pleine largeur (max 898 px, 1:1) avec le même agrandissement. 390 px : hero texte seul sans image derrière, figure datasheet pleine largeur juste dessous (259 px de haut), puis Informations clés remontées, puis onglets sur deux rangées, sidebar en fin de page. Captures : tmp/ux-warhammer-L4-42/43/44." }
   - id: L121
     title: "Fiche unité : onglets sans rôle ni état (aria-selected/aria-current absents, nav sans aria-label) — WCAG 4.1.2 (revue UX L4)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-14
   - id: L122
     title: "Fiche unité : focus laissé sur <body> à l'arrivée (h1 asynchrone rendu après NavigationEnd) — WCAG 2.4.3 (revue UX L4)"
     status: todo
