@@ -353,10 +353,21 @@
       "finished": "2026-10-13"
     },
     {
+      "id": "L120",
+      "title": "Fiche unité : la fiche technique devient lisible et agrandissable",
+      "status": "todo"
+    },
+    {
       "id": "L127",
       "title": "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction",
-      "status": "doing",
-      "started": "2026-10-14"
+      "status": "done",
+      "started": "2026-10-14",
+      "finished": "2026-10-14"
+    },
+    {
+      "id": "L128",
+      "title": "Fiche unité sur téléphone : onglets lisibles, infos clés remontées",
+      "status": "todo"
     }
   ]
 }
