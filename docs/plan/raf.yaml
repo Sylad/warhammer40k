@@ -1160,6 +1160,7 @@ lots:
     screen: component
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "conforme (0 bloquant, 0 majeur, 3 mineurs : branches nom d'unité et accents non testées, vignettes iconographie non testées, entrée Nouveautés à créer avant raf done) — orchestré (vague 2026-10-14-1900, 1 passe(s) de correction)", commit: 1fbf9737ea98167cbb5207231c96623d3ff5f311 }
   - id: L128
     title: "Fiche unité, téléphone 390 : barre d'onglets coupée sans indice (453 px pour 358), Informations clés à 4 274 px d'une page de 6 195 px (revue UX L4)"
     status: todo
