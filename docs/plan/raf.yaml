@@ -1128,6 +1128,7 @@ lots:
     quickwin: true
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "compliant — 1 minor note (observateur de h1 tardif non annulé à la navigation suivante) — orchestré (vague 2026-10-14-2050, 0 passe(s) de correction)", commit: 30d1b0f5826449a79bd09d9a40cf04f4c776ceca }
   - id: L123
     title: "Fiche unité : « Retour aux unités » arrive en haut de la faction (grille à 4 677 px) et le lien fragment=units s'arrête à 805 px avant le rendu des sections (revue UX L4)"
     status: todo
