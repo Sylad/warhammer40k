@@ -2,7 +2,7 @@
 // nouveautés non vues, menu du téléphone (tiroir) inerte quand il est fermé.
 import { setupTestBed, stubFetch } from '../../../testing/angular-testbed';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter, Router, TitleStrategy } from '@angular/router';
 import { PageTitleStrategy } from '../../core/services/page-title.service';
@@ -19,6 +19,13 @@ import { routes } from '../../app.routes';
 
 @Component({ standalone: true, template: `<h1>Page d’arrivée</h1><p>contenu</p>` })
 class ArrivalPage {}
+
+// Fiche à données asynchrones : le h1 n'existe qu'une fois la réponse reçue, après NavigationEnd (L122).
+@Component({ standalone: true, template: `@if (nom()) { <h1>{{ nom() }}</h1> }<p>contenu</p>` })
+class SlowPage {
+  readonly nom = signal('');
+  constructor() { setTimeout(() => this.nom.set('Fiche lente'), 60); }
+}
 
 const NEWS = {
   project: 'warhammer40k', generated: '',
@@ -44,7 +51,7 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     document.body.style.overflow = '';
     stubFetch({ '/nouveautes-data/nouveautes.json': NEWS, '/nouveautes-data/tailles.json': {} });
     await setupTestBed([MainLayoutComponent], [
-      provideRouter([{ path: 'about', component: ArrivalPage }, { path: 'plan', component: ArrivalPage }, { path: '', component: ArrivalPage }]),
+      provideRouter([{ path: 'about', component: ArrivalPage }, { path: 'plan', component: ArrivalPage }, { path: 'lente', component: SlowPage }, { path: '', component: ArrivalPage }]),
       provideHttpClient(), provideHttpClientTesting(),
       { provide: TitleStrategy, useClass: PageTitleStrategy },
     ]);
@@ -173,6 +180,38 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     const h1 = el(f).querySelector('main h1')!;
     expect(document.activeElement).toBe(h1);
     expect(h1.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('L122 : h1 rendu après NavigationEnd (données asynchrones) → le focus le rejoint dès qu’il existe (WCAG 2.4.3)', async () => {
+    const f = await render();
+    el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!.click();
+    f.detectChanges();
+    await TestBed.inject(Router).navigateByUrl('/about');
+    (f.componentInstance as unknown as { focusOnArrival: boolean }).focusOnArrival = true;
+    await TestBed.inject(Router).navigateByUrl('/lente');
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(el(f).querySelector('main h1')).toBeNull();
+    await new Promise((r) => setTimeout(r, 120));
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    const h1 = el(f).querySelector('main h1')!;
+    expect(h1.textContent).toBe('Fiche lente');
+    expect(document.activeElement).toBe(h1);
+  });
+
+  it('L122 : h1 tardif mais l’utilisateur a déplacé le focus entre-temps → le focus n’est pas volé', async () => {
+    const f = await render();
+    (f.componentInstance as unknown as { focusOnArrival: boolean }).focusOnArrival = true;
+    await TestBed.inject(Router).navigateByUrl('/lente');
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    const btn = el(f).querySelector<HTMLButtonElement>('button.menu-toggle')!;
+    btn.focus();
+    await new Promise((r) => setTimeout(r, 140));
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(document.activeElement).toBe(btn);
   });
 
   it('recherche rapide : Ctrl+K → « Plan de travail » → Entrée : le focus va au titre h1 de la page (L30)', async () => {

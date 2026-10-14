@@ -558,7 +558,32 @@ export class MainLayoutComponent implements OnInit {
       const target = h1 ?? main;
       if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true });
+      if (!h1) this.focusLateHeading(main);
     });
+  }
+
+  /**
+   * Fiche à données asynchrones (L122, WCAG 2.4.3) : le h1 n'existe qu'après la réponse de l'API,
+   * donc après NavigationEnd. Le focus a été posé sur <main> en attendant ; il rejoint le h1 dès
+   * qu'il apparaît, sauf si l'utilisateur l'a déplacé ailleurs entre-temps. Abandon après 10 s.
+   */
+  private focusLateHeading(main: HTMLElement): void {
+    const stop = (observer: MutationObserver, timer: ReturnType<typeof setTimeout>) => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+    const observer = new MutationObserver(() => {
+      const h1 = main.querySelector<HTMLElement>('h1');
+      if (!h1) return;
+      stop(observer, timer);
+      const active = document.activeElement;
+      if (active && active !== document.body && active !== main) return;
+      if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1');
+      h1.focus({ preventScroll: true });
+    });
+    const timer = setTimeout(() => observer.disconnect(), 10_000);
+    observer.observe(main, { childList: true, subtree: true });
+    this.destroyRef.onDestroy(() => stop(observer, timer));
   }
 
   ngOnInit(): void {
