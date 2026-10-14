@@ -102,9 +102,10 @@ describe('fiche unité — symbole de faction (L39)', () => {
 });
 
 describe('fiche unité — CTA galerie et vidéo (L127)', () => {
-  async function monter(videos: unknown[], faction = { id: 'blood-angels', nom: 'Blood Angels' }, unitNom = 'Sanguinor') {
+  async function monter(videos: unknown[], faction = { id: 'blood-angels', nom: 'Blood Angels' }, unitNom = 'Sanguinor', unitExtra: Record<string, unknown> = {}, serviceExtra: Record<string, unknown> = {}) {
     const service = fakeWarhammerService({
-      getUnit: () => of({ id: 'u', factionId: faction.id, nom: unitNom, type: 'Infanterie', role: 'r', description: 'd' }),
+      ...serviceExtra,
+      getUnit: () => of({ id: 'u', factionId: faction.id, nom: unitNom, type: 'Infanterie', role: 'r', description: 'd', ...unitExtra }),
       getFaction: () => of({ id: faction.id, nom: faction.nom, alignement: 'Imperium', symbole: 'B', description: 'd', couleurThematique: '#a11' }),
       getUnits: () => of([]),
       videos$: of(videos),
@@ -171,6 +172,24 @@ describe('fiche unité — CTA galerie et vidéo (L127)', () => {
   it('un tag égal au nom de l’unité gagne sur tout tag de faction, accents et casse ignorés', async () => {
     const root = await monter([chefDoeuvre, officielle, { id: 'gui', titre: 'Guilliman', tags: ['roboute guilliman'] }], SM, 'Roboute Guilliman');
     expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=gui');
+  });
+
+  it('un tag accentué ou à apostrophe typographique reconnaît le nom de la faction ou de l’unité', async () => {
+    const necrons = await monter([{ id: 'necrons-v', titre: 'Necrons', tags: ['Nécrons'] }], { id: 'necrons', nom: 'necrons' }, 'Szarekh');
+    expect(cta(necrons, /VID/)!.getAttribute('href')).toBe('/videos?video=necrons-v');
+    const tau = await monter([parodie, { id: 'tau-v', titre: 'Tau', tags: ['T’au'] }], { id: 'tau-empire', nom: 'Empire T\'au' }, 'T\'au');
+    expect(cta(tau, /VID/)!.getAttribute('href')).toBe('/videos?video=tau-v');
+    const tau2 = await monter([{ id: 'tau-w', titre: 'Tau', tags: ["T'au"] }], { id: 'tau-empire', nom: 'Empire T’au' }, 'T’au');
+    expect(cta(tau2, /VID/)!.getAttribute('href')).toBe('/videos?video=tau-w');
+  });
+
+  it('les vignettes d’iconographie pointent sur la galerie filtrée par la faction de l’unité', async () => {
+    const root = await monter([], { id: 'blood-angels', nom: 'Blood Angels' }, 'Sanguinor',
+      { galleryQueries: ['a', 'b'] },
+      { getWikiImage: (q: string) => of({ imageUrl: `https://img.test/${q}.jpg`, pageTitle: q, pageUrl: null }) });
+    const cartes = Array.from(root.querySelectorAll<HTMLAnchorElement>('.iconography-card'));
+    expect(cartes.length).toBe(2);
+    cartes.forEach(c => expect(c.getAttribute('href')).toBe('/gallery?faction=blood-angels'));
   });
 
   it('aucune vidéo ne porte la faction ni l’unité : pas de bouton, même avec des parodies', async () => {
