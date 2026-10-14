@@ -247,3 +247,38 @@ describe('fiche unité — « Retour aux unités » (L123)', () => {
     expect(back.getAttribute('href')).toBe('/factions/orks#units');
   });
 });
+
+describe('fiche unité — onglet Variantes (L126)', () => {
+  async function monter(variants?: unknown[]) {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'orks', nom: 'Boyz', type: 'Infanterie', role: 'r', description: 'd', ...(variants ? { variants } : {}) }),
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    return f.nativeElement as HTMLElement;
+  }
+  const labels = (root: HTMLElement) => Array.from(root.querySelectorAll('nav.tabs button')).map(b => b.textContent!.trim());
+
+  it('sans variante, l’onglet Variantes n’est pas proposé', async () => {
+    expect(labels(await monter())).toEqual(['Aperçu', 'Équipement', 'Histoire & Lore']);
+  });
+
+  it('avec des variantes, l’onglet est proposé et les cartes ont un fond défini, sans faux air de bouton', async () => {
+    const root = await monter([{ id: 'a', name: 'Auto bolt rifle', description: 'Standard' }]);
+    expect(labels(root)).toContain('Variantes');
+    (Array.from(root.querySelectorAll<HTMLButtonElement>('nav.tabs button')).find(b => b.textContent!.trim() === 'Variantes'))!.click();
+    const card = root.querySelector<HTMLElement>('.variant-card')!;
+    expect(card.getAttribute('style') ?? '').not.toMatch(/--v-img:\s*none/);
+    expect(card.getAttribute('style') ?? '').toMatch(/--v-img/);
+  });
+});

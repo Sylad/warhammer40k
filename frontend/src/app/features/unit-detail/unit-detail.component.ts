@@ -88,7 +88,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
         </section>
 
         <nav class="tabs" aria-label="Sections de la fiche">
-          @for (t of tabs; track t.key) {
+          @for (t of tabs(); track t.key) {
             <button class="tab" [class.active]="activeTab() === t.key" [attr.aria-current]="activeTab() === t.key ? 'true' : null" (click)="activeTab.set(t.key)">
               {{ t.label }}
             </button>
@@ -330,7 +330,7 @@ export class UnitDetailComponent {
     this.brokenIcons.update(s => new Set(s).add(id));
   }
 
-  readonly tabs = TABS;
+  readonly tabs = computed(() => this.unit()?.variants?.length ? TABS : TABS.filter(t => t.key !== 'variantes'));
   readonly KEY_ICONS = KEY_ICONS;
   readonly activeTab = signal<TabKey>('apercu');
   readonly shareCopied = signal(false);
@@ -499,8 +499,8 @@ export class UnitDetailComponent {
       const u = this.unit();
       if (!u?.variants?.length) return;
       u.variants.forEach(v => {
-        if (this.variantImages().has(v.id)) return;
-        const q = v.image || `${u.nom} ${v.name}`;
+        if (this.variantImages().has(v.id) || !v.image) return;
+        const q = v.image;
         this.service.getWikiImage(q).subscribe({
           next: res => {
             if (res.imageUrl) {
@@ -527,7 +527,7 @@ export class UnitDetailComponent {
   }
 
   variantImg(image?: string): string {
-    if (!image) return 'none';
+    if (!image) return this.unitImg();
     if (image.startsWith('http')) return `url('${image}')`;
     const u = this.unit();
     if (!u) return 'none';
