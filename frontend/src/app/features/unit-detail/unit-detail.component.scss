@@ -697,19 +697,17 @@
       /* L129 : cibles tactiles de 44 px */
       .back-btn { display: inline-flex; align-items: center; min-height: 44px; }
       .iconbtn { width: 44px; height: 44px; }
-      /* L128 : 453 px d'onglets pour 358 px — espacement et lettrage resserrés pour que les quatre
-         tiennent sans rien cacher (mesuré : 358 px) ; défilement horizontal en dernier recours */
-      .tabs {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-      }
+      /* L128 : 453 px d'onglets pour 358 px — espacement et lettrage resserrés : les quatre tiennent
+         sur une ligne à 390 px (340 px) ; plus étroit (360, 320 px) ils passent à la ligne au lieu
+         d'être coupés sans indice */
+      .tabs { flex-wrap: wrap; }
       .tab { white-space: nowrap; padding: 12px 6px; letter-spacing: 0.05em; min-height: 44px; }
 
       /* L128 : Informations clés (6 lignes) en tête du contenu au lieu de 4 274 px plus bas ; la
          colonne latérale est aplatie, ses autres blocs gardent leur ordre après le contenu */
       .sidebar { display: contents; }
       .sp-info { order: -1; }
-      .sp-info-rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; }
-      .sp-info .info-row { border-top: 0; padding: 6px 0; grid-template-columns: 32px 1fr; gap: 10px; }
+      .sp-info-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 14px; }
+      .sp-info .info-row { border-top: 0; padding: 6px 0; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; }
       .sp-info .info-ico { width: 32px; height: 32px; }
     }

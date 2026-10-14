@@ -22,9 +22,10 @@ function declarations(selector: string, media: string | null): Record<string, st
 describe('fiche unité : téléphone', () => {
   const media = '(max-width: 760px)';
 
-  it('la barre d\'onglets défile et montre un dégradé de bord tant qu\'il reste des onglets cachés', () => {
+  it('la barre d\'onglets passe à la ligne quand ils ne tiennent pas (360 et 320 px) : rien n\'est coupé', () => {
     const d = declarations('.tabs', media);
-    expect(d['overflow-x']).toBe('auto');
+    expect(d['flex-wrap']).toBe('wrap');
+    expect(d['overflow-x']).toBeUndefined();
     expect(d['mask-image']).toBeUndefined();
   });
 
@@ -44,6 +45,6 @@ describe('fiche unité : téléphone', () => {
   });
 
   it('Informations clés tient sur deux colonnes', () => {
-    expect(declarations('.sp-info-rows', media)['grid-template-columns']).toBe('1fr 1fr');
+    expect(declarations('.sp-info-rows', media)['grid-template-columns']).toBe('repeat(2, minmax(0, 1fr))');
   });
 });
