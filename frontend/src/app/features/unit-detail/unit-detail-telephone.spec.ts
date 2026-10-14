@@ -47,4 +47,11 @@ describe('fiche unité : téléphone', () => {
   it('Informations clés tient sur deux colonnes', () => {
     expect(declarations('.sp-info-rows', media)['grid-template-columns']).toBe('repeat(2, minmax(0, 1fr))');
   });
+
+  it('une valeur longue d\'Informations clés se coupe dans sa colonne au lieu de chevaucher la voisine', () => {
+    expect(declarations('.sp-info .info-row > div', media)['min-width']).toBe('0');
+    const v = declarations('.sp-info .info-row > div span', media);
+    expect(v['overflow-wrap']).toBe('anywhere');
+    expect(v['hyphens']).toBe('auto');
+  });
 });

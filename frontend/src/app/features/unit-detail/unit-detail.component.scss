@@ -703,11 +703,16 @@
       .tabs { flex-wrap: wrap; }
       .tab { white-space: nowrap; padding: 12px 6px; letter-spacing: 0.05em; min-height: 44px; }
 
-      /* L128 : Informations clés (6 lignes) en tête du contenu au lieu de 4 274 px plus bas ; la
-         colonne latérale est aplatie, ses autres blocs gardent leur ordre après le contenu */
+      /* L128 : Informations clés (6 lignes) placé sous les onglets, atteint après l'en-tête (et non en
+         tête de page) au lieu de 4 274 px plus bas ; la colonne latérale est aplatie, ses autres
+         blocs gardent leur ordre après le contenu */
       .sidebar { display: contents; }
       .sp-info { order: -1; }
       .sp-info-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 14px; }
       .sp-info .info-row { border-top: 0; padding: 6px 0; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; }
       .sp-info .info-ico { width: 32px; height: 32px; }
+      /* L128 : un mot long (12/133 fiches à 390 px, toutes à 320 px) ne doit pas sortir de sa colonne
+         ni chevaucher la voisine : la cellule peut rétrécir, le mot se coupe */
+      .sp-info .info-row > div { min-width: 0; }
+      .sp-info .info-row > div span { overflow-wrap: anywhere; hyphens: auto; }
     }
