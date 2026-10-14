@@ -1153,10 +1153,11 @@ lots:
     created: 2026-10-14
   - id: L127
     title: "Fiche unité : CTA « Voir dans la galerie » et « Voir la vidéo » ouvrent les listes sans filtre ni vidéo associée (revue UX L4)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-14
   - id: L128
     title: "Fiche unité, téléphone 390 : barre d'onglets coupée sans indice (453 px pour 358), Informations clés à 4 274 px d'une page de 6 195 px (revue UX L4)"
     status: todo
