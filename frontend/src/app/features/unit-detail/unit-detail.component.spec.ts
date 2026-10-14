@@ -100,3 +100,46 @@ describe('fiche unité — symbole de faction (L39)', () => {
     expect(root.textContent!.split('Waaagh !').length - 1).toBe(1);
   });
 });
+
+describe('fiche unité — CTA galerie et vidéo (L127)', () => {
+  async function monter(videos: unknown[]) {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'blood-angels', nom: 'Sanguinor', type: 'Infanterie', role: 'r', description: 'd' }),
+      getFaction: () => of({ id: 'blood-angels', nom: 'Blood Angels', alignement: 'Imperium', symbole: 'B', description: 'd', couleurThematique: '#a11' }),
+      getUnits: () => of([]),
+      videos$: of(videos),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    return f.nativeElement as HTMLElement;
+  }
+  const cta = (root: HTMLElement, re: RegExp) =>
+    Array.from(root.querySelectorAll<HTMLAnchorElement>('.hero-cta a')).find(a => re.test(a.textContent!));
+
+  it('« Voir dans la galerie » filtre sur la faction de l’unité', async () => {
+    const root = await monter([]);
+    expect(cta(root, /GALERIE/)!.getAttribute('href')).toBe('/gallery?faction=blood-angels');
+  });
+
+  it('« Voir la vidéo » ouvre la vidéo dont un tag est la faction', async () => {
+    const root = await monter([
+      { id: 'astartes', titre: 'Astartes', tags: ['Space Marines'] },
+      { id: 'angels-of-death', titre: 'Angels of Death', tags: ['Blood Angels', 'Officiel'] },
+    ]);
+    expect(cta(root, /VID/)!.getAttribute('href')).toBe('/videos?video=angels-of-death');
+  });
+
+  it('sans vidéo associée, le bouton « Voir la vidéo » n’est pas proposé', async () => {
+    const root = await monter([{ id: 'astartes', titre: 'Astartes', tags: ['Space Marines'] }]);
+    expect(cta(root, /VID/)).toBeUndefined();
+    expect(cta(root, /GALERIE/)).toBeDefined();
+  });
+});

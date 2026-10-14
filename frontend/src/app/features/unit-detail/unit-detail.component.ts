@@ -6,7 +6,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
-import { Faction, Unit, UnitType, Artwork } from '../../core/models/models';
+import { Faction, Unit, UnitType, Artwork, Video } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
@@ -74,12 +74,14 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
             }
             <p class="hero-desc">{{ u.description || u.loreCourt || f.description }}</p>
             <div class="hero-cta">
-              <a class="cta cta-solid" routerLink="/gallery">
+              <a class="cta cta-solid" routerLink="/gallery" [queryParams]="{ faction: f.id }">
                 <span class="cta-ico">▦</span>VOIR DANS LA GALERIE
               </a>
-              <a class="cta cta-outline" routerLink="/videos">
-                <span class="cta-ico">▶</span>VOIR LA VIDÉO
-              </a>
+              @if (linkedVideo(); as v) {
+                <a class="cta cta-outline" routerLink="/videos" [queryParams]="{ video: v.id }">
+                  <span class="cta-ico">▶</span>VOIR LA VIDÉO
+                </a>
+              }
             </div>
           </div>
         </section>
@@ -190,7 +192,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                   <p class="panel-sub-text">Le personnage à travers les illustrations canoniques.</p>
                   <div class="iconography-grid">
                     @for (g of galleryImages(); track g) {
-                      <a class="iconography-card" routerLink="/gallery"
+                      <a class="iconography-card" routerLink="/gallery" [queryParams]="{ faction: f.id }"
                          [style.--g-img]="'url(' + g + ')'"
                          aria-label="Voir dans la galerie"></a>
                     }
@@ -345,6 +347,18 @@ export class UnitDetailComponent {
   readonly artworkImageCache = signal(new Map<string, string>());
 
   protected readonly retryAll = retryAll;
+  // Vidéos du codex : aucune n'est rattachée à une unité, seul un tag (nom de la faction ou de
+  // l'unité) fait le lien. Sans correspondance, le CTA « Voir la vidéo » n'est pas proposé.
+  private readonly videos = toSafeSignal(this.service.videos$, [] as Video[]);
+  readonly linkedVideo = computed<Video | null>(() => {
+    const u = this.unit();
+    const f = this.faction();
+    if (!u || !f) return null;
+    const fold = (t: string) => t.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const names = new Set([u.nom, f.nom, f.id].map(fold));
+    return this.videos().find(v => (v.tags ?? []).some(t => names.has(fold(t)))) ?? null;
+  });
+
   readonly unit = toSafeSignal(
     this.route.paramMap, p => this.service.getUnit(p.get('id')!).pipe(namedPage(this.pages, u => u.nom)), undefined);
 
