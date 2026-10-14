@@ -1162,6 +1162,7 @@ lots:
     screen: component
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "conforme (3 commits, 815/815 tests verts, build AOT OK) ; 2 notes mineures : transitions orphelines des cartes, test « sans faux air de bouton » qui ne vérifie pas le curseur — orchestré (vague 2026-10-14-2050, 2 passe(s) de correction)", commit: 0faf7b5c9a40ae20ea8b65125af8a65b9bfc421e }
   - id: L127
     title: "Fiche unité : CTA « Voir dans la galerie » et « Voir la vidéo » ouvrent les listes sans filtre ni vidéo associée (revue UX L4)"
     public: "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction"
