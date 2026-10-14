@@ -1130,6 +1130,8 @@ lots:
     started: 2026-10-14
     review: { date: 2026-10-14, verdict: "compliant — 1 minor note (observateur de h1 tardif non annulé à la navigation suivante) — orchestré (vague 2026-10-14-2050, 0 passe(s) de correction)", commit: 30d1b0f5826449a79bd09d9a40cf04f4c776ceca }
     finished: 2026-10-14
+    notes:
+      - { date: 2026-10-14, text: "QA prod 14-10 : focus sur BODY après un lien de grille et en chargement direct (comportement prévu par L36, focusOnArrival seulement depuis tiroir/menu/palette) ; le chemin palette → fiche n'a pas pu être exercé (aucune entrée d'unité) — préciser l'attente dans docs/qa/expectations.md" }
   - id: L123
     title: "Fiche unité : « Retour aux unités » arrive en haut de la faction (grille à 4 677 px) et le lien fragment=units s'arrête à 805 px avant le rendu des sections (revue UX L4)"
     status: done
@@ -1159,7 +1161,7 @@ lots:
   - id: L126
     title: "Fiche unité : onglet Variantes vide pour 132/133 unités ; pour l'Intercessor 5 cartes noires sans image ni action (revue UX L4)"
     public: "Fiche unité : l'onglet Variantes n'apparaît que s'il y a des variantes"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     screen: component
@@ -1168,6 +1170,8 @@ lots:
     review: { date: 2026-10-14, verdict: "conforme (3 commits, 815/815 tests verts, build AOT OK) ; 2 notes mineures : transitions orphelines des cartes, test « sans faux air de bouton » qui ne vérifie pas le curseur — orchestré (vague 2026-10-14-2050, 2 passe(s) de correction)", commit: 0faf7b5c9a40ae20ea8b65125af8a65b9bfc421e }
     notes:
       - { date: 2026-10-14, text: "visible sans passage UX dans la vague (rendu visible pendant sa correction) : revue UX à faire demain via le Chrome CDP de mini-blue avant raf done ; code livré avec la vague du 14-10 soir (revue conforme)" }
+    ux: { date: 2026-10-14, verdict: "conforme (verdict du lead sur capture prod 14-10 23 h 20 et mesures QA) : onglet Variantes absent pour les 3 unités sans variante, présent pour l'Intercessor avec 5 cartes 184×200 à visuel, aria-current suit le clic" }
+    finished: 2026-10-14
   - id: L127
     title: "Fiche unité : CTA « Voir dans la galerie » et « Voir la vidéo » ouvrent les listes sans filtre ni vidéo associée (revue UX L4)"
     public: "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction"

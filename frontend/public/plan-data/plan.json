@@ -360,8 +360,9 @@
     {
       "id": "L126",
       "title": "Fiche unité : l'onglet Variantes n'apparaît que s'il y a des variantes",
-      "status": "doing",
-      "started": "2026-10-14"
+      "status": "done",
+      "started": "2026-10-14",
+      "finished": "2026-10-14"
     },
     {
       "id": "L127",
