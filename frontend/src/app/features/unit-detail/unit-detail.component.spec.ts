@@ -77,6 +77,25 @@ describe('fiche unité — symbole de faction (L39)', () => {
     expect(badges.map(b => b.textContent!.trim())).toEqual(['Infanterie', 'Ligne', 'Imperium']);
     expect(badges.every(b => b.className.split(' ').length > 1)).toBe(true);
   });
+  it('un badge de données équivalent au type sans casse, accent ni langue est ignoré (L130)', async () => {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'inq', nom: 'Eisenhorn', type: 'Héros', role: 'r', description: 'd', badges: ['Hero', 'Inquisitor'] }),
+      getFaction: () => of({ id: 'inq', nom: 'Inquisition', alignement: 'Imperium', symbole: 'I', description: 'd', couleurThematique: '#14a' }),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const badges = Array.from((f.nativeElement as HTMLElement).querySelectorAll('.hero-badges .ub'));
+    expect(badges.map(b => b.textContent!.trim())).toEqual(['Héros', 'Inquisitor', 'Imperium']);
+  });
   it('Description et Histoire & Lore n’affichent pas le même texte et la citation n’est rendue qu’une fois (L125)', async () => {
     const service = fakeWarhammerService({
       getUnit: () => of({ id: 'u', factionId: 'orks', nom: 'Boyz', type: 'Infanterie', role: 'r', description: 'Courte description.', loreCourt: 'Lore court.', loreLong: 'Long récit de lore.', citation: 'Waaagh !' }),

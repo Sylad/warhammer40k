@@ -557,7 +557,13 @@ export class UnitDetailComponent {
     const arr: { label: string; cls: string }[] = [];
     arr.push({ label: u.type, cls: 'ub ' + this.typeBadgeClass(u.type) });
     // Le type et l'alignement ont leur pastille stylée : un badge de données qui les répète est ignoré.
-    const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
+    // L130 : équivalence sans casse, sans accent et entre français et anglais (« Héros » = « Hero »).
+    const EN_FR: Record<string, string> = { hero: 'heros', vehicle: 'vehicule', monster: 'monstre', infantry: 'infanterie' };
+    const canon = (s: string) => {
+      const k = s.trim().toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
+      return EN_FR[k] ?? k;
+    };
+    const same = (a: string, b: string) => canon(a) === canon(b);
     if (u.badges?.length) {
       u.badges.filter(b => !same(b, u.type) && !same(b, f.alignement)).forEach(b => arr.push({ label: b, cls: 'ub ' + this.simpleBadgeClass(b) }));
     } else {
