@@ -697,6 +697,9 @@
     @media (max-width: 760px) {
       .hero { padding: 24px 20px; }
       .hero-text { max-width: 100%; }
+      /* L129 : cibles tactiles de 44 px */
+      .back-btn { display: inline-flex; align-items: center; min-height: 44px; }
+      .iconbtn { width: 44px; height: 44px; }
       .tabs { overflow-x: auto; flex-wrap: nowrap; }
       .tab { white-space: nowrap; padding: 12px 14px; }
     }
