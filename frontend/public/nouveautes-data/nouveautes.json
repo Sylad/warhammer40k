@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-13 13:41",
+  "generated": "2026-10-14 19:57",
   "entries": [
+    {
+      "slug": "2026-10-14-fiche-unite-les-boutons-galerie-et-video-ouvrent-la-bonne-fa",
+      "title": "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction",
+      "date": "2026-10-14",
+      "lots": [
+        "L127"
+      ],
+      "captures": [
+        "captures/L127-fiche-unite-boutons.png"
+      ],
+      "alts": [
+        "Fiche de Roboute Guilliman (Space Marines) : sous le résumé, le bouton « Voir dans la galerie » et le bouton « Voir la vidéo », qui ouvre le court-métrage Astartes et non une parodie"
+      ],
+      "html": "<p>Sur la fiche d’une unité, « Voir dans la galerie » ouvre la galerie déjà filtrée sur sa faction, et « Voir la vidéo » ouvre une vidéo de cette faction ou de cette unité : le film officiel ou le chef-d’œuvre passe avant toute parodie, et sans vidéo correspondante le bouton n’apparaît pas. Pour les lecteurs d’écran, le lien vidéo annonce le titre de la vidéo (« Voir la vidéo : Astartes — Partie 1 »).</p>"
+    },
     {
       "slug": "2026-10-13-recherche-ctrl-k-les-chapitres-et-sous-factions-trouvables",
       "title": "Recherche Ctrl+K : les chapitres et sous-factions trouvables",

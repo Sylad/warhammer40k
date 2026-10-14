@@ -351,6 +351,12 @@
       "status": "done",
       "started": "2026-10-13",
       "finished": "2026-10-13"
+    },
+    {
+      "id": "L127",
+      "title": "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction",
+      "status": "doing",
+      "started": "2026-10-14"
     }
   ]
 }
