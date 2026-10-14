@@ -1203,10 +1203,11 @@ lots:
     review: { date: 2026-10-14, verdict: "compliant (2 notes mineures : entrées EN_FR vehicle/monster/infantry sans effet ni test ; « Hero » en anglais encore affiché sur 10 fiches Psyker/Monstre, hors périmètre) — choix du composant plutôt que du seed validé — orchestré (vague 2026-10-14-2050, 0 passe(s) de correction)", commit: 1d62ba94e22f84c795563d16853ec25a74bfc0e7 }
   - id: L131
     title: "Attentes QA /units/:id : inscrire les attendus livrés par L121/L125/L127/L129 (nav.tabs nommée avec un seul aria-current ; Description ≠ Lore et citation une fois ; CTA galerie filtrée et vidéo nommée, absente sans vidéo ; cibles ≥ 44 px à 390) et « jamais deux badges de même sens » (QA prod 14-10)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-14
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
