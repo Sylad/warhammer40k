@@ -1179,11 +1179,12 @@ lots:
   - id: L128
     title: "Fiche unité, téléphone 390 : barre d'onglets coupée sans indice (453 px pour 358), Informations clés à 4 274 px d'une page de 6 195 px (revue UX L4)"
     public: "Fiche unité sur téléphone : onglets lisibles, infos clés remontées"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     screen: component
     created: 2026-10-14
+    started: 2026-10-14
   - id: L129
     title: "Fiche unité : cible « Retour aux unités » de 14 px de haut et bouton partager 36 px, passer à 44 px sur téléphone (revue UX L4)"
     status: done
