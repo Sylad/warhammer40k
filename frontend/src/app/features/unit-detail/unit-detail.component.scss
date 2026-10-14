@@ -697,20 +697,14 @@
       /* L129 : cibles tactiles de 44 px */
       .back-btn { display: inline-flex; align-items: center; min-height: 44px; }
       .iconbtn { width: 44px; height: 44px; }
-      /* L128 : 453 px d'onglets pour 358 px — dégradés de bord (visibles seulement tant qu'il reste du
-         défilement : « local » les fait suivre le contenu) pour signaler les onglets cachés */
+      /* L128 : 453 px d'onglets pour 358 px — le bord droit s'estompe (le dernier onglet, coupé, se
+         devine) ; la marge à droite le dégage une fois la barre défilée jusqu'au bout */
       .tabs {
         overflow-x: auto;
         flex-wrap: nowrap;
-        background-image:
-          linear-gradient(90deg, #050403, #050403),
-          linear-gradient(270deg, #050403, #050403),
-          linear-gradient(90deg, rgba(201, 162, 74, 0.38), transparent),
-          linear-gradient(270deg, rgba(201, 162, 74, 0.38), transparent);
-        background-position: left center, right center, left center, right center;
-        background-size: 28px 100%, 28px 100%, 22px 100%, 22px 100%;
-        background-repeat: no-repeat;
-        background-attachment: local, local, scroll, scroll;
+        padding-right: 28px;
+        -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+        mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
       }
       .tab { white-space: nowrap; padding: 12px 14px; min-height: 44px; }
 

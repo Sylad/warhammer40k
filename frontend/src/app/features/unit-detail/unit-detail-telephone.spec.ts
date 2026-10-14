@@ -25,9 +25,8 @@ describe('fiche unité : téléphone', () => {
   it('la barre d\'onglets défile et montre un dégradé de bord tant qu\'il reste des onglets cachés', () => {
     const d = declarations('.tabs', media);
     expect(d['overflow-x']).toBe('auto');
-    expect(d['background-attachment']).toContain('local');
-    expect(d['background-attachment']).toContain('scroll');
-    expect(d['background-image']).toContain('linear-gradient');
+    expect(d['mask-image']).toContain('linear-gradient');
+    expect(d['padding-right']).toBe('28px');
   });
 
   it('les onglets mesurent au moins 44 px de haut', () => {
