@@ -1080,7 +1080,7 @@ lots:
     visible: true
     created: 2026-10-13
     started: 2026-10-13
-    review: { date: 2026-10-13, verdict: "conforme : 5 mineurs en notes (sous-factions téléchargées deux fois depuis l'accueil, « space marines » remplit les 20 places et fait sortir Stormbird, recherche de sous-catégorie qui diffère entre la palette et /lore/equipment) — orchestré (vague 2026-10-13-1315, 0 passe(s) de correction + passe des mineurs)", commit: 788737ca910a62d737b4ac4e67671a77bff04986 }
+    review: { date: 2026-10-14, verdict: "conforme (relecture du lead sur d2ff710, après revue initiale) : timer de focus gardé et annulé dans ngOnDestroy, test de destruction ajouté, suite 827 verte sans erreur non gérée — correctif d'un échec CI déterministe (document is not defined après démontage)", commit: d2ff710e7cafd64a32b581905370c013ae709561 }
     ux: { date: 2026-10-13, verdict: "conforme — agent UX de la vague 2026-10-13-1315 (5 mineurs en notes) et capture regardée par le lead : « ultramarines » propose d'abord la sous-faction Ultramarines (Space Marines), puis Guilliman et Macragge's Honour" }
     finished: 2026-10-13
     notes:
