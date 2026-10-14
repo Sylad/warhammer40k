@@ -1155,9 +1155,10 @@ lots:
     finished: 2026-10-14
   - id: L126
     title: "Fiche unité : onglet Variantes vide pour 132/133 unités ; pour l'Intercessor 5 cartes noires sans image ni action (revue UX L4)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-14
+    started: 2026-10-14
   - id: L127
     title: "Fiche unité : CTA « Voir dans la galerie » et « Voir la vidéo » ouvrent les listes sans filtre ni vidéo associée (revue UX L4)"
     public: "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction"
