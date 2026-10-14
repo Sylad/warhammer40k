@@ -1145,6 +1145,7 @@ lots:
     quickwin: true
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "compliant (2 notes mineures : repli de descriptionPanel qui peut encore répéter le hero sans loreCourt, tests des branches de repli absents) — orchestré (vague 2026-10-14-1900, 0 passe(s) de correction)", commit: 2ab4c4379f8a40ada2f0151ab0afac94c974ed87 }
   - id: L126
     title: "Fiche unité : onglet Variantes vide pour 132/133 unités ; pour l'Intercessor 5 cartes noires sans image ni action (revue UX L4)"
     status: todo
