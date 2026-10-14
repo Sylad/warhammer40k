@@ -697,6 +697,28 @@
       /* L129 : cibles tactiles de 44 px */
       .back-btn { display: inline-flex; align-items: center; min-height: 44px; }
       .iconbtn { width: 44px; height: 44px; }
-      .tabs { overflow-x: auto; flex-wrap: nowrap; }
-      .tab { white-space: nowrap; padding: 12px 14px; }
+      /* L128 : 453 px d'onglets pour 358 px — dégradés de bord (visibles seulement tant qu'il reste du
+         défilement : « local » les fait suivre le contenu) pour signaler les onglets cachés */
+      .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        background-image:
+          linear-gradient(90deg, #050403, #050403),
+          linear-gradient(270deg, #050403, #050403),
+          linear-gradient(90deg, rgba(201, 162, 74, 0.38), transparent),
+          linear-gradient(270deg, rgba(201, 162, 74, 0.38), transparent);
+        background-position: left center, right center, left center, right center;
+        background-size: 28px 100%, 28px 100%, 22px 100%, 22px 100%;
+        background-repeat: no-repeat;
+        background-attachment: local, local, scroll, scroll;
+      }
+      .tab { white-space: nowrap; padding: 12px 14px; min-height: 44px; }
+
+      /* L128 : Informations clés (6 lignes) en tête du contenu au lieu de 4 274 px plus bas ; la
+         colonne latérale est aplatie, ses autres blocs gardent leur ordre après le contenu */
+      .sidebar { display: contents; }
+      .sp-info { order: -1; }
+      .sp-info-rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; }
+      .sp-info .info-row { border-top: 0; padding: 6px 0; grid-template-columns: 32px 1fr; gap: 10px; }
+      .sp-info .info-ico { width: 32px; height: 32px; }
     }

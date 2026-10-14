@@ -1,0 +1,45 @@
+// @vitest-environment node
+import { describe, it, expect } from 'vitest';
+import { resolve } from 'node:path';
+import * as sass from 'sass';
+import postcss from 'postcss';
+
+/** L128 : fiche unité à 390 px — barre d'onglets qui signale son défilement, Informations clés remontées. */
+const css = sass.compile(resolve(__dirname, 'unit-detail.component.scss')).css;
+
+function declarations(selector: string, media: string | null): Record<string, string> {
+  const out: Record<string, string> = {};
+  postcss.parse(css).walkRules((rule) => {
+    const p = rule.parent;
+    const ctx = p && p.type === 'atrule' ? (p as postcss.AtRule).params : null;
+    if (ctx !== media) return;
+    if (!rule.selectors.some((s) => s.replace(/\s+/g, ' ').trim().endsWith(selector))) return;
+    rule.walkDecls((d) => { out[d.prop] = d.value; });
+  });
+  return out;
+}
+
+describe('fiche unité : téléphone', () => {
+  const media = '(max-width: 760px)';
+
+  it('la barre d\'onglets défile et montre un dégradé de bord tant qu\'il reste des onglets cachés', () => {
+    const d = declarations('.tabs', media);
+    expect(d['overflow-x']).toBe('auto');
+    expect(d['background-attachment']).toContain('local');
+    expect(d['background-attachment']).toContain('scroll');
+    expect(d['background-image']).toContain('linear-gradient');
+  });
+
+  it('les onglets mesurent au moins 44 px de haut', () => {
+    expect(declarations('.tab', media)['min-height']).toBe('44px');
+  });
+
+  it('Informations clés passe avant le contenu : colonne latérale aplatie, bloc en tête', () => {
+    expect(declarations('.sidebar', media)['display']).toBe('contents');
+    expect(declarations('.sp-info', media)['order']).toBe('-1');
+  });
+
+  it('Informations clés tient sur deux colonnes', () => {
+    expect(declarations('.sp-info-rows', media)['grid-template-columns']).toBe('1fr 1fr');
+  });
+});

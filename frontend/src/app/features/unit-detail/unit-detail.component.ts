@@ -224,8 +224,9 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
           </div>
 
           <aside class="sidebar">
-            <section class="sp">
+            <section class="sp sp-info">
               <h3>Informations clés</h3>
+              <div class="sp-info-rows">
               @for (info of infoRows(u, f); track info.label) {
                 <div class="info-row">
                   <span class="info-ico">{{ info.ico }}</span>
@@ -235,6 +236,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                   </div>
                 </div>
               }
+              </div>
             </section>
 
             <section class="sp">
