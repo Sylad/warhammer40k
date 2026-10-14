@@ -1118,6 +1118,7 @@ lots:
     quickwin: true
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "compliant — orchestré (vague 2026-10-14-1900, 0 passe(s) de correction)", commit: 553ad69e93a03a068796366487903279ca2c2a77 }
   - id: L122
     title: "Fiche unité : focus laissé sur <body> à l'arrivée (h1 asynchrone rendu après NavigationEnd) — WCAG 2.4.3 (revue UX L4)"
     status: todo
