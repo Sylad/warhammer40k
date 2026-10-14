@@ -30,4 +30,30 @@ describe('fiche unité — symbole de faction (L39)', () => {
     expect(sigil.textContent!.trim()).toBe('☠');
     expect(sigil.querySelector('[aria-hidden="true"]')?.textContent).toBe('☠');
   });
+
+  it('les onglets sont dans une nav nommée et l’actif porte aria-current (L121)', async () => {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'orks', nom: 'Boyz', type: 'Infanterie', role: 'r', description: 'd' }),
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const root = f.nativeElement as HTMLElement;
+    expect(root.querySelector('nav.tabs')!.getAttribute('aria-label')).toBe('Sections de la fiche');
+    const current = () => Array.from(root.querySelectorAll('nav.tabs button')).filter(b => b.getAttribute('aria-current') === 'true');
+    expect(current().map(b => b.textContent!.trim())).toEqual(['Aperçu']);
+    (root.querySelectorAll('nav.tabs button')[2] as HTMLButtonElement).click();
+    f.detectChanges();
+    expect(current()).toHaveLength(1);
+    expect(current()[0].textContent!.trim()).not.toBe('Aperçu');
+  });
 });

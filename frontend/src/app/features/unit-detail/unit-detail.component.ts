@@ -84,9 +84,9 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
           </div>
         </section>
 
-        <nav class="tabs">
+        <nav class="tabs" aria-label="Sections de la fiche">
           @for (t of tabs; track t.key) {
-            <button class="tab" [class.active]="activeTab() === t.key" (click)="activeTab.set(t.key)">
+            <button class="tab" [class.active]="activeTab() === t.key" [attr.aria-current]="activeTab() === t.key ? 'true' : null" (click)="activeTab.set(t.key)">
               {{ t.label }}
             </button>
           }
