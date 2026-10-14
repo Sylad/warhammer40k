@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-14 19:57",
+  "generated": "2026-10-14 21:50",
   "entries": [
+    {
+      "slug": "2026-10-14-fiche-unite-l-onglet-variantes-n-apparait-que-s-il-y-a-des-v",
+      "title": "Fiche unité : l'onglet Variantes n'apparaît que s'il y a des variantes",
+      "date": "2026-10-14",
+      "lots": [
+        "L126"
+      ],
+      "captures": [
+        "captures/L126-fiche-unite-variantes.png"
+      ],
+      "alts": [
+        "Fiche de l’Intercessor Primaris, onglet Variantes : cinq cartes (Auto bolt rifle, Stalker bolt rifle, Assault bolt rifle, Auxiliaire grenade, Sergent) qui montrent chacune le visuel de l’unité"
+      ],
+      "html": "<p>Sur la fiche d’une unité, l’onglet « Variantes » n’apparaît que lorsque l’unité a des variantes, soit une seule fiche sur 133 : les autres n’ont plus d’onglet vide. Les cartes de variantes montrent désormais le visuel de l’unité et ne ressemblent plus à des boutons, puisqu’elles n’ont aucune action.</p>"
+    },
     {
       "slug": "2026-10-14-fiche-unite-les-boutons-galerie-et-video-ouvrent-la-bonne-fa",
       "title": "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction",

@@ -358,6 +358,12 @@
       "status": "todo"
     },
     {
+      "id": "L126",
+      "title": "Fiche unité : l'onglet Variantes n'apparaît que s'il y a des variantes",
+      "status": "doing",
+      "started": "2026-10-14"
+    },
+    {
       "id": "L127",
       "title": "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction",
       "status": "done",

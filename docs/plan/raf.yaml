@@ -1155,8 +1155,11 @@ lots:
     finished: 2026-10-14
   - id: L126
     title: "Fiche unité : onglet Variantes vide pour 132/133 unités ; pour l'Intercessor 5 cartes noires sans image ni action (revue UX L4)"
+    public: "Fiche unité : l'onglet Variantes n'apparaît que s'il y a des variantes"
     status: doing
     estimate: 0.25
+    visible: true
+    screen: component
     created: 2026-10-14
     started: 2026-10-14
   - id: L127
