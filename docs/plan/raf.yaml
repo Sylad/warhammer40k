@@ -1123,18 +1123,21 @@ lots:
     finished: 2026-10-14
   - id: L122
     title: "Fiche unité : focus laissé sur <body> à l'arrivée (h1 asynchrone rendu après NavigationEnd) — WCAG 2.4.3 (revue UX L4)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
     started: 2026-10-14
     review: { date: 2026-10-14, verdict: "compliant — 1 minor note (observateur de h1 tardif non annulé à la navigation suivante) — orchestré (vague 2026-10-14-2050, 0 passe(s) de correction)", commit: 30d1b0f5826449a79bd09d9a40cf04f4c776ceca }
+    finished: 2026-10-14
   - id: L123
     title: "Fiche unité : « Retour aux unités » arrive en haut de la faction (grille à 4 677 px) et le lien fragment=units s'arrête à 805 px avant le rendu des sections (revue UX L4)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "conforme (code-reviewer Sonnet, c965c55 + 3df2bf9) : défilement après rendu asynchrone, 3 cas testés ; notes : test moque ViewportScroller, README ne cite qu'un des deux liens", commit: 3df2bf9916cab848b1ccb12a576929df08075d9a }
+    finished: 2026-10-14
   - id: L124
     title: "Fiche unité : badges du hero dupliqués (Infanterie ×2, Imperium ×2), type et alignement déjà dans unit.badges, doublon sans classe de style (revue UX L4)"
     status: done
@@ -1163,6 +1166,8 @@ lots:
     created: 2026-10-14
     started: 2026-10-14
     review: { date: 2026-10-14, verdict: "conforme (3 commits, 815/815 tests verts, build AOT OK) ; 2 notes mineures : transitions orphelines des cartes, test « sans faux air de bouton » qui ne vérifie pas le curseur — orchestré (vague 2026-10-14-2050, 2 passe(s) de correction)", commit: 0faf7b5c9a40ae20ea8b65125af8a65b9bfc421e }
+    notes:
+      - { date: 2026-10-14, text: "visible sans passage UX dans la vague (rendu visible pendant sa correction) : revue UX à faire demain via le Chrome CDP de mini-blue avant raf done ; code livré avec la vague du 14-10 soir (revue conforme)" }
   - id: L127
     title: "Fiche unité : CTA « Voir dans la galerie » et « Voir la vidéo » ouvrent les listes sans filtre ni vidéo associée (revue UX L4)"
     public: "Fiche unité : les boutons galerie et vidéo ouvrent la bonne faction"
@@ -1179,12 +1184,15 @@ lots:
   - id: L128
     title: "Fiche unité, téléphone 390 : barre d'onglets coupée sans indice (453 px pour 358), Informations clés à 4 274 px d'une page de 6 195 px (revue UX L4)"
     public: "Fiche unité sur téléphone : onglets lisibles, infos clés remontées"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     screen: component
     created: 2026-10-14
     started: 2026-10-14
+    review: { date: 2026-10-14, verdict: "conforme (Opus ×3 puis Sonnet sur aefd305) : onglets à la ligne, Informations clés sous les onglets, valeurs longues coupées dans leur colonne (min-width 0 + overflow-wrap anywhere)", commit: aefd30531ded854e7b5439f0e3b989e38265e1bc }
+    ux: { date: 2026-10-14, verdict: "conforme après 1 correction (ux-reviewer de la vague 2026-10-14-2050 : majeur valeurs longues chevauchant la colonne voisine sur 12/133 fiches à 390 px, corrigé aefd305 ; mineur commentaire corrigé) — rendu réel à 390 px à confirmer par la QA prod" }
+    finished: 2026-10-14
   - id: L129
     title: "Fiche unité : cible « Retour aux unités » de 14 px de haut et bouton partager 36 px, passer à 44 px sur téléphone (revue UX L4)"
     status: done
@@ -1196,20 +1204,22 @@ lots:
     finished: 2026-10-14
   - id: L130
     title: "Fiche unité : badges « Héros » et « Hero » côte à côte sur 52 fiches sur 133 (type en français + badge de données en anglais, ex. inq-eisenhorn, eld-eldrad, sm-calgar) — étendre la déduplication de L124 aux libellés équivalents sans casse ni langue, ou corriger le seed (QA prod 14-10)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
     started: 2026-10-14
     review: { date: 2026-10-14, verdict: "compliant (2 notes mineures : entrées EN_FR vehicle/monster/infantry sans effet ni test ; « Hero » en anglais encore affiché sur 10 fiches Psyker/Monstre, hors périmètre) — choix du composant plutôt que du seed validé — orchestré (vague 2026-10-14-2050, 0 passe(s) de correction)", commit: 1d62ba94e22f84c795563d16853ec25a74bfc0e7 }
+    finished: 2026-10-14
   - id: L131
     title: "Attentes QA /units/:id : inscrire les attendus livrés par L121/L125/L127/L129 (nav.tabs nommée avec un seul aria-current ; Description ≠ Lore et citation une fois ; CTA galerie filtrée et vidéo nommée, absente sans vidéo ; cibles ≥ 44 px à 390) et « jamais deux badges de même sens » (QA prod 14-10)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
     started: 2026-10-14
     review: { date: 2026-10-14, verdict: "compliant — orchestré (vague 2026-10-14-2050, 0 passe(s) de correction)", commit: 64d00de578fe09b3f1d6d492f7ea4a43e9082926 }
+    finished: 2026-10-14
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

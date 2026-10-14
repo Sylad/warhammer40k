@@ -373,8 +373,9 @@
     {
       "id": "L128",
       "title": "Fiche unité sur téléphone : onglets lisibles, infos clés remontées",
-      "status": "doing",
-      "started": "2026-10-14"
+      "status": "done",
+      "started": "2026-10-14",
+      "finished": "2026-10-14"
     }
   ]
 }
