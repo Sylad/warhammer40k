@@ -697,16 +697,13 @@
       /* L129 : cibles tactiles de 44 px */
       .back-btn { display: inline-flex; align-items: center; min-height: 44px; }
       .iconbtn { width: 44px; height: 44px; }
-      /* L128 : 453 px d'onglets pour 358 px — le bord droit s'estompe (le dernier onglet, coupé, se
-         devine) ; la marge à droite le dégage une fois la barre défilée jusqu'au bout */
+      /* L128 : 453 px d'onglets pour 358 px — espacement et lettrage resserrés pour que les quatre
+         tiennent sans rien cacher (mesuré : 358 px) ; défilement horizontal en dernier recours */
       .tabs {
         overflow-x: auto;
         flex-wrap: nowrap;
-        padding-right: 28px;
-        -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
-        mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
       }
-      .tab { white-space: nowrap; padding: 12px 14px; min-height: 44px; }
+      .tab { white-space: nowrap; padding: 12px 6px; letter-spacing: 0.05em; min-height: 44px; }
 
       /* L128 : Informations clés (6 lignes) en tête du contenu au lieu de 4 274 px plus bas ; la
          colonne latérale est aplatie, ses autres blocs gardent leur ordre après le contenu */

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import * as sass from 'sass';
 import postcss from 'postcss';
 
-/** L128 : fiche unité à 390 px — barre d'onglets qui signale son défilement, Informations clés remontées. */
+/** L128 : fiche unité à 390 px — quatre onglets visibles d'un coup, Informations clés remontées. */
 const css = sass.compile(resolve(__dirname, 'unit-detail.component.scss')).css;
 
 function declarations(selector: string, media: string | null): Record<string, string> {
@@ -25,8 +25,13 @@ describe('fiche unité : téléphone', () => {
   it('la barre d\'onglets défile et montre un dégradé de bord tant qu\'il reste des onglets cachés', () => {
     const d = declarations('.tabs', media);
     expect(d['overflow-x']).toBe('auto');
-    expect(d['mask-image']).toContain('linear-gradient');
-    expect(d['padding-right']).toBe('28px');
+    expect(d['mask-image']).toBeUndefined();
+  });
+
+  it('les quatre onglets tiennent dans 358 px : espacement et lettrage resserrés, sans marge morte', () => {
+    expect(declarations('.tab', media)['padding']).toBe('12px 6px');
+    expect(declarations('.tab', media)['letter-spacing']).toBe('0.05em');
+    expect(declarations('.tabs', media)['padding-right']).toBeUndefined();
   });
 
   it('les onglets mesurent au moins 44 px de haut', () => {
