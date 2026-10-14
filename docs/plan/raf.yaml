@@ -1156,6 +1156,8 @@ lots:
     status: doing
     estimate: 0.1
     quickwin: true
+    visible: true
+    screen: component
     created: 2026-10-14
     started: 2026-10-14
   - id: L128
