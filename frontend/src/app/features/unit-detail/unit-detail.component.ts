@@ -100,7 +100,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                 @if (activeTab() === 'apercu') {
                   <article class="panel">
                     <h2 class="panel-title">Description</h2>
-                    <p class="panel-text">{{ u.loreLong || u.description || u.loreCourt || fallbackDesc(u, f) }}</p>
+                    <p class="panel-text">{{ descriptionPanel(u, f) }}</p>
                   </article>
 
                   @if (u.capacities?.length) {
@@ -179,12 +179,9 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               <article class="panel panel-lore">
                 <h2 class="panel-title">Histoire & Lore</h2>
                 <div class="lore-grid">
-                  <p class="panel-text">{{ u.loreLong || u.description || fallbackLore(u, f) }}</p>
+                  <p class="panel-text">{{ u.loreLong || fallbackLore(u, f) }}</p>
                   <div class="lore-img" [style.--lore-img]="loreImg()"></div>
                 </div>
-                @if (u.citation) {
-                  <blockquote class="inline-quote">« {{ u.citation }} »</blockquote>
-                }
               </article>
 
               @if (galleryImages().length > 0) {
@@ -587,6 +584,13 @@ export class UnitDetailComponent {
       { ico: '◈', label: 'Points (approx.)',   value: u.pointsCost ? `${u.pointsCost} pts` : '—' },
       { ico: '⌚', label: 'Apparition',         value: u.apparition || '—' },
     ];
+  }
+
+  /** Texte du panneau Description : jamais `loreLong` (réservé à Histoire & Lore, L125) ; évite aussi de répéter le texte du hero. */
+  descriptionPanel(u: Unit, f: Faction): string {
+    const hero = u.description || u.loreCourt || f.description;
+    if (u.loreCourt && u.loreCourt !== hero) return u.loreCourt;
+    return u.description || u.loreCourt || this.fallbackDesc(u, f);
   }
 
   fallbackDesc(u: Unit, f: Faction): string {

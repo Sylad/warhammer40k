@@ -77,4 +77,26 @@ describe('fiche unité — symbole de faction (L39)', () => {
     expect(badges.map(b => b.textContent!.trim())).toEqual(['Infanterie', 'Ligne', 'Imperium']);
     expect(badges.every(b => b.className.split(' ').length > 1)).toBe(true);
   });
+  it('Description et Histoire & Lore n’affichent pas le même texte et la citation n’est rendue qu’une fois (L125)', async () => {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'orks', nom: 'Boyz', type: 'Infanterie', role: 'r', description: 'Courte description.', loreCourt: 'Lore court.', loreLong: 'Long récit de lore.', citation: 'Waaagh !' }),
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const root = f.nativeElement as HTMLElement;
+    const texts = Array.from(root.querySelectorAll('.main .panel-text')).map(p => p.textContent!.trim());
+    expect(texts.filter(t => t === 'Long récit de lore.')).toHaveLength(1);
+    expect(root.querySelector('.panel-lore .panel-text')!.textContent!.trim()).toBe('Long récit de lore.');
+    expect(root.textContent!.split('Waaagh !').length - 1).toBe(1);
+  });
 });
