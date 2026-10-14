@@ -5,7 +5,7 @@ import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { UnitDetailComponent } from './unit-detail.component';
 
@@ -117,6 +117,41 @@ describe('fiche unité — symbole de faction (L39)', () => {
     expect(texts.filter(t => t === 'Long récit de lore.')).toHaveLength(1);
     expect(root.querySelector('.panel-lore .panel-text')!.textContent!.trim()).toBe('Long récit de lore.');
     expect(root.textContent!.split('Waaagh !').length - 1).toBe(1);
+  });
+});
+
+describe('fiche unité — onglet actif entre deux unités (L126)', () => {
+  it('l’onglet Variantes actif retombe sur Aperçu quand l’unité suivante n’a pas de variante', async () => {
+    const unites: Record<string, unknown> = {
+      a: { id: 'a', factionId: 'orks', nom: 'Avec', type: 'Infanterie', role: 'r', description: 'd', variants: [{ nom: 'V1', description: 'x' }] },
+      b: { id: 'b', factionId: 'orks', nom: 'Sans', type: 'Infanterie', role: 'r', description: 'd' },
+    };
+    const service = fakeWarhammerService({
+      getUnit: (id: string) => of(unites[id]),
+      getFaction: () => of({ id: 'orks', nom: 'Orks', alignement: 'Xenos', symbole: '☠', description: 'd', couleurThematique: '#3a5' }),
+      getUnits: () => of([]),
+    });
+    const params = new BehaviorSubject(convertToParamMap({ id: 'a' }));
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: params, snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const root = f.nativeElement as HTMLElement;
+    const boutons = () => Array.from(root.querySelectorAll('nav.tabs button'));
+    (boutons().find(b => b.textContent!.includes('Variantes')) as HTMLButtonElement).click();
+    f.detectChanges();
+    params.next(convertToParamMap({ id: 'b' }));
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    expect(boutons().some(b => b.textContent!.includes('Variantes'))).toBe(false);
+    expect(boutons().filter(b => b.getAttribute('aria-current') === 'true').map(b => b.textContent!.trim())).toEqual(['Aperçu']);
   });
 });
 

@@ -89,7 +89,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 
         <nav class="tabs" aria-label="Sections de la fiche">
           @for (t of tabs(); track t.key) {
-            <button class="tab" [class.active]="activeTab() === t.key" [attr.aria-current]="activeTab() === t.key ? 'true' : null" (click)="activeTab.set(t.key)">
+            <button class="tab" [class.active]="activeTab() === t.key" [attr.aria-current]="activeTab() === t.key ? 'true' : null" (click)="chosenTab.set(t.key)">
               {{ t.label }}
             </button>
           }
@@ -332,7 +332,9 @@ export class UnitDetailComponent {
 
   readonly tabs = computed(() => this.unit()?.variants?.length ? TABS : TABS.filter(t => t.key !== 'variantes'));
   readonly KEY_ICONS = KEY_ICONS;
-  readonly activeTab = signal<TabKey>('apercu');
+  protected readonly chosenTab = signal<TabKey>('apercu');
+  /** Onglet choisi, ou Aperçu quand il n'existe plus pour l'unité affichée (le routeur réutilise le composant). */
+  readonly activeTab = computed<TabKey>(() => this.tabs().some(t => t.key === this.chosenTab()) ? this.chosenTab() : 'apercu');
   readonly shareCopied = signal(false);
 
   readonly heroImage = signal<string | null>(null);
