@@ -658,7 +658,7 @@ export class FactionDetailComponent {
     // rendue qu'après la réponse des unités : le défilement d'ancre du routeur (NavigationEnd) tombe
     // avant et s'arrête sur la page encore courte. On défile quand la section existe.
     effect(() => {
-      if (this.unitsAnchorDone || this.route.snapshot.fragment !== 'units' || this.units().length === 0) return;
+      if (this.unitsAnchorDone || this.route.snapshot?.fragment !== 'units' || this.units().length === 0) return;
       this.unitsAnchorDone = true;
       afterNextRender(() => this.viewport.scrollToAnchor('units'), { injector: this.injector });
     });
