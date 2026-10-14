@@ -1187,10 +1187,11 @@ lots:
     finished: 2026-10-14
   - id: L130
     title: "Fiche unité : badges « Héros » et « Hero » côte à côte sur 52 fiches sur 133 (type en français + badge de données en anglais, ex. inq-eisenhorn, eld-eldrad, sm-calgar) — étendre la déduplication de L124 aux libellés équivalents sans casse ni langue, ou corriger le seed (QA prod 14-10)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-14
   - id: L131
     title: "Attentes QA /units/:id : inscrire les attendus livrés par L121/L125/L127/L129 (nav.tabs nommée avec un seul aria-current ; Description ≠ Lore et citation une fois ; CTA galerie filtrée et vidéo nommée, absente sans vidéo ; cibles ≥ 44 px à 390) et « jamais deux badges de même sens » (QA prod 14-10)"
     status: todo
