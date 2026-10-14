@@ -1,5 +1,5 @@
 import { ReplaySubject, switchMap, take } from 'rxjs';
-import { Component, computed, EventEmitter, HostListener, inject, Output, signal } from '@angular/core';
+import { Component, computed, EventEmitter, HostListener, inject, OnDestroy, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -178,7 +178,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
     }
   `],
 })
-export class CommandPaletteComponent {
+export class CommandPaletteComponent implements OnDestroy {
   private readonly service = inject(WarhammerService);
   private readonly router = inject(Router);
 
@@ -253,10 +253,27 @@ export class CommandPaletteComponent {
     this.query = '';
     this.queryS.set('');
     this.selectedIndex.set(0);
-    setTimeout(() => {
+    // Le handle est gardé : une ouverture répétée remplace le timer, la destruction l'annule
+    // (sinon il tire après le démontage de l'environnement — « document is not defined » en CI).
+    this.annulerFocus();
+    this.focusTimer = setTimeout(() => {
+      this.focusTimer = undefined;
       const input = document.querySelector<HTMLInputElement>('.cmdk-input');
       input?.focus();
     }, 50);
+  }
+
+  private focusTimer: ReturnType<typeof setTimeout> | undefined;
+
+  private annulerFocus(): void {
+    if (this.focusTimer !== undefined) {
+      clearTimeout(this.focusTimer);
+      this.focusTimer = undefined;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.annulerFocus();
   }
 
   close(): void {

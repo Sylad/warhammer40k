@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
@@ -22,6 +22,12 @@ async function monter(over: Record<string, unknown>, ouvrir = true) {
 }
 
 describe('palette Ctrl+K (L117)', () => {
+  // Détruit les composants (donc annule le timer de focus) avant la fin du fichier.
+  afterEach(() => {
+    TestBed.resetTestingModule();
+    vi.useRealTimers();
+  });
+
   it('une sous-faction est trouvable et mène à /subfactions/:id', async () => {
     const { el, chercher } = await monter({
       factions$: of([{ id: 'space-marines', nom: 'Space Marines', alignement: 'Imperium' }]),
@@ -72,5 +78,20 @@ describe('palette Ctrl+K (L117)', () => {
     expect(appels).toBe(1);
     palette.close(); palette.open(); f.detectChanges();
     expect(appels).toBe(1);
+  });
+
+  it('la destruction du composant annule le timer de focus (aucune exception, aucun focus)', async () => {
+    vi.useFakeTimers();
+    const { f, palette } = await monter({}, false);
+    const focus = vi.spyOn(HTMLInputElement.prototype, 'focus');
+    const avant = vi.getTimerCount();
+    palette.open();
+    const ouvert = vi.getTimerCount();
+    expect(ouvert).toBeGreaterThan(avant); // le timer de focus est posé
+    f.destroy();
+    expect(vi.getTimerCount()).toBe(ouvert - 1); // la destruction a annulé le timer de focus (et lui seul)
+    expect(() => vi.runAllTimers()).not.toThrow();
+    expect(focus).not.toHaveBeenCalled();
+    focus.mockRestore();
   });
 });
