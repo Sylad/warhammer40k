@@ -56,4 +56,25 @@ describe('fiche unité — symbole de faction (L39)', () => {
     expect(current()).toHaveLength(1);
     expect(current()[0].textContent!.trim()).not.toBe('Aperçu');
   });
+
+  it('les badges du hero ne répètent ni le type ni l’alignement (L124)', async () => {
+    const service = fakeWarhammerService({
+      getUnit: () => of({ id: 'u', factionId: 'ultramarines', nom: 'Tactique', type: 'Infanterie', role: 'r', description: 'd', badges: ['Infanterie', 'Imperium', 'Ligne'] }),
+      getFaction: () => of({ id: 'ultramarines', nom: 'Ultramarines', alignement: 'Imperium', symbole: 'U', description: 'd', couleurThematique: '#14a' }),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([UnitDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'u' })), snapshot: { fragment: null } } },
+    ]);
+    globalThis.fetch = (async () => ({ ok: false, status: 404 })) as unknown as typeof fetch;
+    const f = TestBed.createComponent(UnitDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const badges = Array.from((f.nativeElement as HTMLElement).querySelectorAll('.hero-badges .ub'));
+    expect(badges.map(b => b.textContent!.trim())).toEqual(['Infanterie', 'Ligne', 'Imperium']);
+    expect(badges.every(b => b.className.split(' ').length > 1)).toBe(true);
+  });
 });
