@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-14 22:17",
+  "generated": "2026-10-14 22:22",
   "entries": [
     {
       "slug": "2026-10-14-fiche-unite-sur-telephone-onglets-lisibles-infos-cles-remont",
@@ -15,7 +15,7 @@
       "alts": [
         "Fiche de l’Intercessor Primaris à 390 px : barre d’onglets dont le bord droit s’estompe, puis le bloc « Informations clés » sur deux colonnes, avant la Description"
       ],
-      "html": "<p>Sur téléphone, la barre d’onglets de la fiche unité (Aperçu, Équipement, Histoire &amp; Lore, Variantes) n’est plus coupée sans prévenir : son bord droit s’estompe pour montrer qu’elle défile, et chaque onglet mesure 44 px de haut. Le bloc « Informations clés » (rôle, allégeance, faction, taille, points, apparition) apparaît juste sous les onglets, sur deux colonnes, au lieu de se trouver tout en bas de la page.</p>"
+      "html": "<p>Sur téléphone, la barre d’onglets de la fiche unité (Aperçu, Équipement, Histoire &amp; Lore, Variantes) n’est plus coupée sans prévenir : son bord droit s’estompe pour montrer qu’elle défile, et chaque onglet mesure 44 px de haut. Le bloc « Informations clés » (rôle, allégeance, faction, taille, points, apparition) apparaît juste sous les onglets, sur deux colonnes, au lieu de se trouver tout en bas de la page.</p>"
     },
     {
       "slug": "2026-10-14-fiche-unite-l-onglet-variantes-n-apparait-que-s-il-y-a-des-v",
