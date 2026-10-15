@@ -80,7 +80,7 @@ describe('fiche unité — mesures de la figure (navigateur, dist) — L120', ()
   it('R13 — hauteur du bouton ≥ 44 px à 390 px', async () => {
     await fresh(390);
     try {
-      const b = await page.getByRole('button', { name: 'Agrandir la fiche technique de Escouade Tactique' }).first().boundingBox();
+      const b = await page.getByRole('button', { name: 'Fiche technique · agrandir — Escouade Tactique' }).first().boundingBox();
       expect(b!.height).toBeGreaterThanOrEqual(44);
     } finally { await ctx.close(); }
   });
