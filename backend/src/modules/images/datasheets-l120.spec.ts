@@ -30,20 +30,26 @@ function jpegSize(file: string): { w: number; h: number } {
 }
 
 describe('fiches techniques et portraits locaux (L120)', () => {
+  // Invariants, pas de comptes : ajouter une image locale ne demande aucun code ni aucun chiffre à retoucher (CLAUDE.md).
+  const isScan = ({ w, h }: { w: number; h: number }) => w / h >= 1.4 && w / h <= 1.6 && w >= 800;
+  const sizes = (dir: string) => ids(dir).map((id) => ({ id, ...jpegSize(path.join(dir, `${id}.jpg`)) }));
+
   it('chaque fichier de datasheets/ a le rapport 3:2 d\'un scan de fiche (entre 1,4 et 1,6) et au moins 800 px de large', () => {
     // ork-makari (626×422) avait le bon rapport : une illustration, pas un scan. Les scans font 898×596.
-    const hors = ids(DATASHEETS).map((id) => ({ id, ...jpegSize(path.join(DATASHEETS, `${id}.jpg`)) }))
-      .filter(({ w, h }) => w / h < 1.4 || w / h > 1.6 || w < 800)
-      .map(({ id, w, h }) => `${id} ${w}×${h}`);
+    const hors = sizes(DATASHEETS).filter((s) => !isScan(s)).map(({ id, w, h }) => `${id} ${w}×${h}`);
     expect(hors).toEqual([]);
   });
 
-  it('les portraits locaux sont dans portraits/, pas dans datasheets/', () => {
+  it('aucun fichier de portraits/ n\'est un scan de fiche (rapport [1,4 ; 1,6] et ≥ 800 px) : un scan va dans datasheets/', () => {
+    const scans = sizes(PORTRAITS).filter(isScan).map(({ id, w, h }) => `${id} ${w}×${h}`);
+    expect(scans).toEqual([]);
+  });
+
+  it('un identifiant n\'est ni dans datasheets/ ni dans portraits/ en double, et inq-valeria reste un portrait', () => {
     const p = ids(PORTRAITS);
-    expect(p).toHaveLength(14);
     expect(p).toContain('inq-valeria');
+    expect(ids(DATASHEETS)).not.toContain('inq-valeria');
     expect(ids(DATASHEETS).filter((id) => p.includes(id))).toEqual([]);
-    expect(ids(DATASHEETS)).toHaveLength(119);
   });
 
   it('chaque fichier de datasheets/ et de portraits/ porte l\'identifiant d\'une unité', () => {
