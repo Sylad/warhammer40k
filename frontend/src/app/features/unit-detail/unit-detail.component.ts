@@ -7,6 +7,7 @@ import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, Artwork, Video } from '../../core/models/models';
+import { UnitDatasheetDialogComponent } from './unit-datasheet-dialog.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
@@ -35,7 +36,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 @Component({
   selector: 'app-unit-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink],
+  imports: [LoadErrorComponent, UnitDatasheetDialogComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (unit(); as u) {
       @if (faction() && (relatedUnits.failed() || allArtworks.failed())) {
@@ -85,6 +86,16 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
               }
             </div>
           </div>
+          @if (heroImage(); as src) {
+            <figure class="hero-figure">
+              <img [src]="src" [alt]="imageAlt(u)" (error)="imageFailed()" />
+              <figcaption>
+                <button class="zoom-btn" type="button" [attr.aria-label]="zoomLabel(u)" (click)="openZoom($event)">
+                  {{ heroKind() === 'fiche' ? 'Fiche technique' : 'Illustration' }} · agrandir
+                </button>
+              </figcaption>
+            </figure>
+          }
         </section>
 
         <nav class="tabs" aria-label="Sections de la fiche">
@@ -175,6 +186,16 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
                   </article>
                 }
               </div>
+            }
+
+            @if (activeTab() === 'apercu' && sheetUrl(); as sheet) {
+              <article class="panel panel-datasheet">
+                <h2 class="panel-title">Fiche technique</h2>
+                <div class="ds-frame">
+                  <img [src]="sheet" [alt]="imageAlt(u)" (error)="imageFailed()" />
+                </div>
+                <button class="zoom-btn" type="button" [attr.aria-label]="zoomLabel(u)" (click)="openZoom($event)">Fiche technique · agrandir</button>
+              </article>
             }
 
             <!-- HISTOIRE & LORE -->
@@ -305,6 +326,10 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 
           </aside>
         </section>
+        @if (zoomOpen() && heroImage(); as zsrc) {
+          <app-unit-datasheet-dialog [src]="zsrc" [alt]="imageAlt(u)" [label]="dialogLabel(u)"
+                                     (closed)="closeZoom()" (failed)="imageFailed()" />
+        }
       } @else {
         @if (faction.failed()) {
           <app-load-error [notFound]="faction.notFound()" [heading]="faction.notFound() ? 'Faction introuvable' : 'Faction indisponible'" backLink="/factions" backLabel="Toutes les factions" (retry)="retryAll(unit, faction, relatedUnits, allArtworks)" />
@@ -340,6 +365,13 @@ export class UnitDetailComponent {
   readonly shareCopied = signal(false);
 
   readonly heroImage = signal<string | null>(null);
+  /** L120 : nature de `heroImage` (fiche technique locale ou portrait du wiki), posée avec l'URL, remise à zéro avec elle. */
+  readonly heroKind = signal<'fiche' | 'portrait' | null>(null);
+  readonly zoomOpen = signal(false);
+  private zoomOpener: HTMLElement | null = null;
+  /** Génération du chargement de l'image : une réponse d'une unité précédente est ignorée (R6). */
+  private imageRun = 0;
+  readonly sheetUrl = computed(() => this.heroKind() === 'fiche' ? this.heroImage() : null);
   readonly loreImage = signal<string | null>(null);
   readonly relatedImages = signal(new Map<string, string>());
   readonly variantImages = signal(new Map<string, string>());
@@ -419,25 +451,21 @@ export class UnitDetailComponent {
       const u = this.unit();
       const f = this.faction();
       if (!u || !f) return;
-      this.heroImage.set(null);
+      this.setHero(null, null);
+      this.zoomOpen.set(false);
       this.loreImage.set(null);
 
+      const run = ++this.imageRun;
       const datasheetUrl = this.service.datasheetUrl(u.id);
-      fetch(datasheetUrl, { method: 'HEAD' }).then(r => {
-        if (r.ok) {
-          this.heroImage.set(datasheetUrl);
-        } else {
-          this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
-            next: res => { if (res.imageUrl) this.heroImage.set(res.imageUrl); },
-            error: () => {},
-          });
-        }
-      }).catch(() => {
-        this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
-          next: res => { if (res.imageUrl) this.heroImage.set(res.imageUrl); },
-          error: () => {},
-        });
+      const portrait = () => this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
+        next: res => { if (run === this.imageRun && res.imageUrl) this.setHero(res.imageUrl, 'portrait'); },
+        error: () => {},
       });
+      fetch(datasheetUrl, { method: 'HEAD' }).then(r => {
+        if (run !== this.imageRun) return;
+        if (r.ok) this.setHero(datasheetUrl, 'fiche');
+        else portrait();
+      }).catch(() => { if (run === this.imageRun) portrait(); });
 
       const loreQ = u.loreImageQuery ?? `${f.nom} battle warhammer`;
       this.service.getWikiImage(loreQ).subscribe({
@@ -515,6 +543,43 @@ export class UnitDetailComponent {
         });
       });
     });
+  }
+
+  private setHero(url: string | null, kind: 'fiche' | 'portrait' | null): void {
+    this.heroImage.set(url);
+    this.heroKind.set(kind);
+  }
+
+  imageAlt(u: Unit): string {
+    return this.heroKind() === 'fiche'
+      ? `Fiche technique de ${u.nom} : profil, armes et aptitudes`
+      : `Illustration de ${u.nom}`;
+  }
+
+  zoomLabel(u: Unit): string {
+    return this.heroKind() === 'fiche' ? `Agrandir la fiche technique de ${u.nom}` : `Agrandir l’illustration de ${u.nom}`;
+  }
+
+  dialogLabel(u: Unit): string {
+    return this.heroKind() === 'fiche' ? `Fiche technique de ${u.nom}` : `Illustration de ${u.nom}`;
+  }
+
+  openZoom(e: Event): void {
+    this.zoomOpener = e.currentTarget as HTMLElement;
+    this.zoomOpen.set(true);
+  }
+
+  closeZoom(): void {
+    this.zoomOpen.set(false);
+    this.zoomOpener?.focus();
+    this.zoomOpener = null;
+  }
+
+  /** R9 : l'image ne se charge pas — figure, panneau et fenêtre disparaissent, sans repli sur le wiki. */
+  imageFailed(): void {
+    this.setHero(null, null);
+    this.zoomOpen.set(false);
+    this.zoomOpener = null;
   }
 
   unitImg(): string {
