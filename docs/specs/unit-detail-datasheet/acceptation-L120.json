@@ -1,0 +1,9 @@
+{
+  "lot": "L120",
+  "fiche": "docs/specs/unit-detail-datasheet/fiche.yaml",
+  "fichiers": [
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts",
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts"
+  ],
+  "vert": false
+}
