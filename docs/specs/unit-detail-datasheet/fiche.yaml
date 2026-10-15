@@ -1,0 +1,183 @@
+sujet:
+  id: unit-detail-datasheet
+  titre: Fiche unité — la fiche technique devient une figure lisible et agrandissable
+  lot: L120
+  perimetre:
+    modules:
+      - frontend/src/app/features/unit-detail
+      - frontend/src/app/shared/components/figure-lightbox
+    endpoints: ["GET /api/images/datasheets/:unitId", "GET /api/wiki-image?q="]
+    jobs: []
+    hors_perimetre:
+      - "le backend (aucun endpoint ni fichier modifié) et les 133 JPEG de backend/public/datasheets"
+      - "les onglets (L121), le focus à l'arrivée (L122), les autres blocs de la fiche (Informations clés, sidebar : seul leur ordre à 390 px est déjà traité par L128)"
+      - "la page galerie et les autres pages qui utilisent app-figure-lightbox, sauf ce que R10 garantit"
+
+cas:
+  - id: C1
+    titre: Le visiteur ouvre la fiche d'une unité qui a une fiche technique (127 unités sur 133)
+    acteur: un visiteur de la fiche /units/:id
+    declencheur: GET /api/images/datasheets/:unitId (HEAD puis chargement de l'<img>)
+    preconditions:
+      - l'unité existe et sa faction est chargée
+      - backend/public/datasheets/<id>.jpg existe
+    nominal:
+      - Le composant demande la fiche technique de l'unité (HEAD, comportement déjà codé).
+      - La réponse est 200 ; l'image est de type « fiche technique ».
+      - Le hero affiche, à droite du texte, un <figure> à bord or contenant un <img> de la fiche, avec son alt et sa légende « Fiche technique · agrandir ».
+      - L'onglet Aperçu affiche un panneau « Fiche technique » avec la même image et le même agrandissement.
+    alternatives:
+      - { si: l'<img> ne se charge pas (erreur réseau après un HEAD réussi), alors: la figure est retirée au lieu d'afficher une image cassée, regles: [R9] }
+    resultat: La fiche technique est un contenu lisible (img, alt, légende), plus un fond assombri.
+  - id: C2
+    titre: Le visiteur ouvre la fiche d'une unité sans fiche technique (portrait du wiki)
+    acteur: un visiteur de la fiche /units/:id
+    declencheur: GET /api/images/datasheets/:unitId puis GET /api/wiki-image?q=
+    preconditions:
+      - aucune fiche technique pour l'unité (HEAD ≠ 200 ou échec réseau)
+    nominal:
+      - "Le composant demande le portrait du wiki (comportement déjà codé : wikiQuery sinon nom)."
+      - Le wiki renvoie une imageUrl.
+      - Le hero affiche la même figure, avec l'alt « Illustration de <nom> » et la légende « Illustration · agrandir ».
+    alternatives:
+      - { si: le wiki ne renvoie pas d'imageUrl ou échoue, alors: aucune figure, le hero reste texte seul, regles: [R5] }
+      - { si: l'unité est un portrait, alors: pas de panneau « Fiche technique » dans Aperçu, regles: [R7] }
+    resultat: Les 6 portraits ont la même figure que les fiches techniques, avec un alt qui dit ce qu'ils sont.
+  - id: C3
+    titre: Le visiteur agrandit la figure
+    acteur: un visiteur au clavier ou à la souris
+    declencheur: clic, Entrée ou Espace sur la légende/figure (hero ou panneau Aperçu)
+    preconditions:
+      - une figure est affichée
+    nominal:
+      - L'image s'ouvre dans app-figure-lightbox, entière (object-fit contain), avec son alt.
+      - Le focus passe dans la fenêtre ; Tab y reste.
+      - Échap, le bouton Fermer ou un clic hors de l'image ferme la fenêtre.
+      - Le focus revient sur le bouton qui l'a ouverte.
+    alternatives:
+      - { si: la fenêtre est ouverte depuis le panneau Aperçu, alors: le focus revient sur le bouton du panneau, pas sur celui du hero, regles: [R8] }
+    resultat: La fiche est lisible en grand, sans souris obligatoire.
+  - id: C4
+    titre: Le visiteur lit la fiche sur téléphone (390 px)
+    acteur: un visiteur
+    declencheur: affichage de /units/:id sous 760 px
+    preconditions:
+      - une figure est disponible
+    nominal:
+      - Le hero ne montre que le texte, sans image derrière.
+      - La figure occupe toute la largeur juste sous le hero (≈ 259 px de haut).
+      - Informations clés, onglets (deux rangées) puis sidebar suivent (ordre déjà codé par L128).
+    alternatives: []
+    sans_alternative: le seul échec (image absente) est celui de C1/C2 (R5, R9) ; la mise en page ne change pas d'autre branche
+    resultat: Pas de texte blanc sur scan gris, la fiche est lisible à 390 px.
+  - id: C5
+    titre: Le visiteur passe d'une unité à une autre sans quitter le composant
+    acteur: un visiteur (lien « unités liées »)
+    declencheur: changement du paramètre :id de la route
+    preconditions:
+      - une figure est affichée pour l'unité A
+    nominal:
+      - Le composant (réutilisé par le routeur) recharge l'image de l'unité B.
+      - Pendant le chargement, la figure de A n'est plus affichée.
+    alternatives:
+      - { si: la fenêtre d'agrandissement est ouverte pendant le changement, alors: elle est fermée, regles: [R6] }
+    resultat: Jamais la fiche de A sous le titre de B.
+
+regles:
+  - id: R1
+    cas: [C1]
+    enonce: "Quand la fiche technique existe, le hero (≥ 761 px) est en deux colonnes — texte 44 %, figure 56 % — et la figure est un <figure> à bord or contenant un <img src=/api/images/datasheets/:id> (WarhammerService.datasheetUrl), en object-fit: contain, d'environ 400 px de haut."
+    statut: sourcee
+    source: "notes du lot L120 (maquette UX 14-10) ; URL : core/services/warhammer.service.ts:102"
+    tests: ["R1 — fiche technique présente : le hero contient un figure avec un img dont src est l'URL de la fiche", "R1 — la feuille de style donne object-fit contain à l'image de la figure"]
+  - id: R2
+    cas: [C1]
+    enonce: "L'alt de la fiche technique est exactement « Fiche technique de <nom> : profil, armes et aptitudes » (<nom> = nom de l'unité)."
+    statut: sourcee
+    source: "notes du lot L120 ; WCAG 1.1.1 (revue UX L4)"
+    tests: ["R2 — alt de la fiche technique de l'Escouade Tactique", "R2 — l'alt change avec le nom quand l'unité change"]
+  - id: R3
+    cas: [C1, C2]
+    enonce: "Aucun filtre (contrast, brightness, saturate), dégradé ou voile ne recouvre l'image de la figure ; seule l'ambiance en arrière-plan (copie floutée du scan) peut rester derrière, hors de la figure."
+    statut: sourcee
+    source: "notes du lot L120 (« sans filtre ni dégradé par-dessus ») ; WCAG 1.4.3 ; filtre actuel unit-detail.component.scss:50-60"
+    tests: ["R3 — la figure et son img n'ont ni filter ni pseudo-élément de dégradé", "R3 — le filtre du hero ne s'applique qu'à l'ambiance, pas à la figure"]
+  - id: R4
+    cas: [C2]
+    enonce: "Un portrait (fiche technique absente, image venue du wiki) est affiché dans la même figure, avec l'alt « Illustration de <nom> » et la légende « Illustration · agrandir »."
+    statut: sourcee
+    source: "notes du lot L120 (« 6 portraits : même figure, alt « Illustration de <nom> »»)"
+    tests: ["R4 — sans fiche technique, image du wiki : alt « Illustration de <nom> »", "R4 — la légende d'un portrait ne dit pas « Fiche technique »"]
+  - id: R5
+    cas: [C2, C4]
+    enonce: "Sans fiche technique ni image du wiki, le hero n'affiche aucune figure ni légende (texte seul, comportement actuel sans image) ; aucun <img> à src vide."
+    statut: hypothese
+    si_faux: "Si un cadre de remplacement est voulu, seul le gabarit du hero change (aucune donnée en jeu)."
+    tests: ["R5 — ni datasheet ni wiki : pas de figure dans le hero", "R5 — wiki en erreur : pas de figure et pas d'erreur affichée"]
+  - id: R6
+    cas: [C5]
+    enonce: "Au changement d'unité, l'image et l'état d'agrandissement sont remis à zéro avant le chargement : la figure de l'unité précédente n'est jamais affichée avec le nom de la suivante, et la fenêtre ouverte est fermée."
+    statut: sourcee
+    source: "comportement déjà codé : unit-detail.component.ts:422 (heroImage.set(null) à chaque changement d'unité)"
+    tests: ["R6 — changement d'unité : la figure disparaît avant l'arrivée de la nouvelle image", "R6 — fenêtre ouverte puis changement d'unité : fermée"]
+  - id: R7
+    cas: [C1, C2]
+    enonce: "L'onglet Aperçu montre un panneau « Fiche technique » (h2) pleine largeur (max 898 px, rapport 1:1) avec la même image, le même alt et le même agrandissement, seulement quand l'image est une fiche technique ; pas pour un portrait."
+    statut: sourcee
+    source: "notes du lot L120 (onglet Aperçu : panneau « Fiche technique »)"
+    tests: ["R7 — onglet Aperçu : panneau Fiche technique avec img et bouton agrandir", "R7 — portrait : pas de panneau Fiche technique", "R7 — autres onglets : pas de panneau"]
+  - id: R8
+    cas: [C3]
+    enonce: "L'agrandissement s'ouvre au clavier (bouton natif : Entrée, Espace), affiche l'image entière avec le même alt, se ferme par Échap, le bouton Fermer ou un clic hors de l'image, garde le focus dedans (Tab boucle) et le rend à l'élément qui l'a ouvert."
+    statut: sourcee
+    source: "notes du lot L120 (« clavier, Échap, retour du focus ») ; Échap déjà codé : figure-lightbox.component.ts (onEscape)"
+    tests: ["R8 — Entrée sur la légende ouvre la fenêtre", "R8 — Échap ferme et le focus revient sur le bouton d'origine", "R8 — Tab ne sort pas de la fenêtre", "R8 — ouverte depuis le panneau Aperçu, le focus revient sur le panneau"]
+  - id: R9
+    cas: [C1]
+    enonce: "Si l'<img> d'une fiche technique ne se charge pas, la figure (et le panneau Aperçu) sont retirés au lieu d'afficher une image cassée ; on ne bascule pas sur le portrait du wiki."
+    statut: hypothese
+    si_faux: "Si on veut le repli sur le portrait du wiki, il faut un second appel après l'échec de l'<img> ; l'alt et la légende suivent R4."
+    tests: ["R9 — erreur de chargement de l'img : figure retirée", "R9 — erreur de chargement : pas d'appel au wiki"]
+  - id: R10
+    cas: [C3]
+    enonce: "app-figure-lightbox gagne un mode « image seule » (un champ optionnel de LightboxState pour l'alt et le titre, sans bloc Galerie ni lien « Chercher dans la Galerie Impériale »). Le rendu et les sorties des autres pages (primarques, séries, lore) restent inchangés, hors rôle dialog et gestion du focus qui s'appliquent à toutes."
+    statut: hypothese
+    si_faux: "Si le composant partagé ne doit pas bouger, un composant de lightbox dédié est créé dans unit-detail ; les autres pages ne sont alors pas touchées (aucune donnée en jeu)."
+    tests: ["R10 — mode image seule : ni miniatures ni lien galerie", "R10 — état existant (primarque) : rendu inchangé, miniatures et lien présents"]
+  - id: R11
+    cas: [C4]
+    enonce: "Sous 761 px (≤ 760 px, seuil déjà codé), le hero n'a plus d'image derrière le texte (--hero-img non appliquée) et la figure passe pleine largeur juste sous le hero, environ 259 px de haut ; Informations clés, onglets, sidebar gardent l'ordre de L128."
+    statut: sourcee
+    source: "notes du lot L120 (390 px) ; seuil unit-detail.component.scss:693 ; L128 : unit-detail-telephone.spec.ts"
+    tests: ["R11 — ≤ 760 px : le hero n'applique plus l'image de fond", "R11 — ≤ 760 px : la figure est en pleine largeur et fait 259 px de haut", "R11 — l'ordre Informations clés / onglets de L128 est inchangé"]
+  - id: R12
+    cas: [C1, C2]
+    enonce: "Le texte de gauche du hero (titre, badges dédoublonnés, rôle, description, boutons) garde son contenu ; il occupe 44 % de la largeur au lieu de 56 % (max-width)."
+    statut: sourcee
+    source: "notes du lot L120 (« gauche 44 % inchangée »)"
+    tests: ["R12 — le texte du hero garde titre, rôle, description et boutons", "R12 — la colonne texte fait 44 % à 1440 px"]
+  - id: R13
+    cas: [C1, C2, C3]
+    enonce: "Le bouton d'agrandissement porte un nom accessible qui dit l'action et l'objet (« Agrandir la fiche technique de <nom> » ou « Agrandir l'illustration de <nom> ») et fait au moins 44 px de haut à 390 px."
+    statut: hypothese
+    si_faux: "Seul le texte du aria-label change ; si 44 px ne sont pas voulus, seule la feuille de style change."
+    tests: ["R13 — nom accessible du bouton d'une fiche technique", "R13 — nom accessible du bouton d'un portrait", "R13 — hauteur du bouton ≥ 44 px à 390 px"]
+
+contrats:
+  - id: A1
+    appel: GET /api/images/datasheets/:unitId
+    entree: "unitId = identifiant de l'unité (HEAD par le composant, puis <img src>)"
+    sortie: "le JPEG de la fiche technique (HTTP 200), inchangé"
+    erreurs:
+      - { code: HTTP 404, message: "Not Found" }
+    regles: [R1, R2, R4, R9]
+  - id: A2
+    appel: GET /api/wiki-image
+    entree: "q = wikiQuery de l'unité, sinon son nom"
+    sortie: "{ imageUrl } (peut être vide) — contrat inchangé"
+    erreurs: []
+    sans_erreur: "un échec est avalé côté composant (aucun message affiché) et couvert par R5 ; le contrat n'est pas modifié"
+    regles: [R4, R5]
+
+donnees:
+  - { id: D1, objet: "backend/public/datasheets/<id>.jpg (133 fichiers)", existant: true, modification: aucune, note: "lus tels quels ; aucun fichier ajouté ni retouché" }
