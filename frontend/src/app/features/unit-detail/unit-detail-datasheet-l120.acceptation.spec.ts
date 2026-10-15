@@ -21,21 +21,24 @@ const B = { id: 'sm-terminator', factionId: 'space-marines', nom: 'Terminators',
 const UNITS: Record<string, typeof A> = { [A.id]: A as never, [B.id]: B as never };
 const FACTION = { id: 'space-marines', nom: 'Space Marines', alignement: 'Imperium', symbole: 'S', description: 'd', couleurThematique: '#14a' };
 const DS = (id: string) => `/api/images/datasheets/${id}`;
+const PT = (id: string) => `/api/images/portraits/${id}`;
 const WIKI = (id: string) => `https://wiki.example/${id}.jpg`;
 
 type Head = number | 'reseau' | Promise<number>;
-interface Env { heads: Record<string, Head>; wiki: Record<string, 'erreur' | 'vide' | Subject<{ imageUrl: string | null }> | string>; wikiCalls: string[]; params: BehaviorSubject<ReturnType<typeof convertToParamMap>> }
+interface Env { heads: Record<string, Head>; portraits: Record<string, Head>; wiki: Record<string, 'erreur' | 'vide' | Subject<{ imageUrl: string | null }> | string>; wikiCalls: string[]; params: BehaviorSubject<ReturnType<typeof convertToParamMap>> }
 
-async function mount(opts: { id?: string; heads?: Record<string, Head>; wiki?: Env['wiki'] } = {}): Promise<{ f: ComponentFixture<UnitDetailComponent>; root: HTMLElement; env: Env }> {
+async function mount(opts: { id?: string; heads?: Record<string, Head>; portraits?: Record<string, Head>; wiki?: Env['wiki'] } = {}): Promise<{ f: ComponentFixture<UnitDetailComponent>; root: HTMLElement; env: Env }> {
   polyfillDialog();
   const env: Env = {
     heads: { [A.id]: 200, [B.id]: 200, ...(opts.heads ?? {}) },
+    portraits: { ...(opts.portraits ?? {}) }, // HEAD /api/images/portraits/:id : 404 par défaut
     wiki: { [A.id]: WIKI(A.id), [B.id]: WIKI(B.id), ...(opts.wiki ?? {}) },
     wikiCalls: [],
     params: new BehaviorSubject(convertToParamMap({ id: opts.id ?? A.id })),
   };
   const service = fakeWarhammerService({
     datasheetUrl: (id: string) => DS(id),
+    portraitUrl: (id: string) => PT(id),
     getUnit: (id: string) => of(UNITS[id]),
     getFaction: () => of(FACTION),
     getUnits: () => of([]),
@@ -58,7 +61,8 @@ async function mount(opts: { id?: string; heads?: Record<string, Head>; wiki?: E
   globalThis.fetch = (async (input: RequestInfo | URL) => {
     const url = String(input);
     const id = Object.keys(UNITS).find((k) => url.endsWith(DS(k)));
-    const h = id ? env.heads[id] : 404;
+    const pid = Object.keys(UNITS).find((k) => url.endsWith(PT(k)));
+    const h = id ? env.heads[id] : pid ? (env.portraits[pid] ?? 404) : 404;
     if (h === 'reseau') throw new TypeError('network');
     const status = await h;
     return { ok: status >= 200 && status < 300, status } as Response;
@@ -440,6 +444,15 @@ describe('fiche unité — fiche technique en figure agrandissable (L120)', () =
     expect(heroImg(root)!.getAttribute('alt')).toBe('Illustration de Escouade Tactique');
     expect(heroFigure(root)!.textContent).toContain('Illustration · agrandir');
   });
+  it('R14 — portrait local : type portrait (alt, légende, nom accessible, fenêtre, pas de panneau Aperçu)', async () => {
+    const { f, root } = await mount({ heads: { [A.id]: 404 }, portraits: { [A.id]: 200 } });
+    expect(heroImg(root)!.getAttribute('alt')).toBe('Illustration de Escouade Tactique');
+    expect(heroBtn(root)!.getAttribute('aria-label')).toBe('Illustration · agrandir — Escouade Tactique');
+    expect(panelTitle(root)).toBeNull();
+    await open(f, heroBtn(root));
+    expect(nameOf(dialogEl()!)).toBe('Illustration de Escouade Tactique');
+    expect(dialogEl()!.querySelector('img')!.getAttribute('src')).toBe(PT(A.id));
+  });
   it('R14 — changement d\'unité : le type est remis à zéro avec l\'image', async () => {
     let release!: (n: number) => void;
     const lent = new Promise<number>((r) => { release = r; });
@@ -492,6 +505,27 @@ describe('fiche unité — fiche technique en figure agrandissable (L120)', () =
     const { root, env } = await mount({ heads: { [A.id]: 'reseau' } });
     expect(env.wikiCalls).toContain('Escouade Tactique');
     expect(heroFigure(root)).not.toBeNull();
+  });
+
+  it('R16 — fiche 404 puis portrait local 200 : le portrait local prend la figure, le wiki n\'est pas appelé', async () => {
+    const { root, env } = await mount({ heads: { [A.id]: 404 }, portraits: { [A.id]: 200 } });
+    expect(heroImg(root)!.getAttribute('src')).toBe(PT(A.id));
+    expect(heroImg(root)!.getAttribute('alt')).toBe('Illustration de Escouade Tactique');
+    expect(heroFigure(root)!.textContent).toContain('Illustration · agrandir');
+    expect(env.wikiCalls).not.toContain('Escouade Tactique');
+  });
+  it('R16 — fiche 404 puis portrait local 404, 500 ou en échec réseau : appel au wiki', async () => {
+    for (const p of [404, 500, 'reseau'] as const) {
+      const { root, env } = await mount({ heads: { [A.id]: 404 }, portraits: { [A.id]: p } });
+      expect(env.wikiCalls, String(p)).toContain('Escouade Tactique');
+      expect(heroImg(root)!.getAttribute('src'), String(p)).toBe(WIKI(A.id));
+      TestBed.resetTestingModule();
+    }
+  });
+  it('R16 — fiche technique 200 : le portrait local n\'est jamais demandé', async () => {
+    const { root } = await mount({ portraits: { [A.id]: 200 } });
+    expect(heroImg(root)!.getAttribute('src')).toBe(DS(A.id));
+    expect(heroImg(root)!.getAttribute('alt')).toMatch(/^Fiche technique de/);
   });
 
   // ---------------------------------------------------------------- R17
