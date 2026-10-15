@@ -5,5 +5,9 @@
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts",
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts"
   ],
-  "vert": false
+  "vert": false,
+  "empreintes": {
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "acecdd89cd2a748c2a1aeaa51342ecf884b5d167",
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "4a272ceea26d0d01bf69cd9f0ffb61b29e6c42c8"
+  }
 }
