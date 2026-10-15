@@ -79,4 +79,20 @@ describe('fiche unité — correctifs de revue (L120)', () => {
     });
     expect(found).toEqual(['.hero.hero--figure']);
   });
+
+  it('R5 — plus de sélecteur :only-child sur .hero-text (il ne correspondait jamais) : 56 % et 80 % sont portés par .hero:not(.hero--figure)', () => {
+    const css = sass.compile(resolve(__dirname, 'unit-detail.component.scss')).css;
+    const root = postcss.parse(css);
+    const textRules: { selector: string; media: string; maxWidth: string }[] = [];
+    root.walkRules((rule) => {
+      if (!rule.selector.includes('.hero-text')) return;
+      rule.walkDecls('max-width', (d) => {
+        const at = rule.parent && rule.parent.type === 'atrule' ? (rule.parent as postcss.AtRule).params : '';
+        textRules.push({ selector: rule.selector, media: at, maxWidth: d.value });
+      });
+    });
+    expect(textRules.filter((r) => r.selector.includes(':only-child') && !r.selector.includes('hero--figure'))).toEqual([]);
+    const sans = textRules.filter((r) => r.selector.includes('.hero:not(.hero--figure) .hero-text'));
+    expect(sans.map((r) => [r.media, r.maxWidth])).toEqual([['', '56%'], ['(max-width: 1280px)', '80%'], ['(max-width: 760px)', '100%']]);
+  });
 });

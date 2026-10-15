@@ -2,7 +2,7 @@
 // L120 — deux mesures de la revue que jsdom ne peut pas faire (docs/specs/unit-detail-datasheet/fiche.yaml) :
 // R8 (WCAG 2.4.3) le focus revient au bouton d'origine après la fermeture de la fenêtre, par Échap, par le
 // bouton Fermer et par un clic sur le fond ; R5 sans figure, ni vide de 297 px sous le hero à 390 px, ni
-// texte du hero rétréci (56 %, 80 % sous 1281 px, 100 % sous 761 px). Navigateur réel, application construite (dist).
+// texte du hero plafonné à 44 % (56 %, 80 % sous 1281 px, 100 % sous 761 px comme avant le lot). Navigateur réel, application construite (dist).
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import type { Server } from 'node:http';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
@@ -96,4 +96,25 @@ describe.skipIf(!built || !chromium)('fiche unité — focus rendu et hero sans 
       expect(gap).toBeLessThan(40);
     } finally { await ctx.close(); }
   });
+
+  // R5 : sans figure, le texte retrouve son comportement d'avant le lot : largeur de son contenu plafonnée à 56 %
+  // (80 % sous 1281 px, pleine largeur sous 761 px) ; avec figure le plafond est de 44 %.
+  const PLAFONDS: [number, number][] = [[1440, 0.56], [1200, 0.8], [390, 1]];
+  for (const [width, cap] of PLAFONDS) {
+    it(`R5 — sans figure à ${width} px, le plafond de largeur du texte du hero est de ${Math.round(cap * 100)} % de la largeur utile`, async () => {
+      await open(width, false);
+      try {
+        const m = await page.evaluate(() => {
+          const hero = document.querySelector('.hero') as HTMLElement;
+          const cs = getComputedStyle(hero);
+          const inner = hero.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+          const text = document.querySelector('.hero .hero-text') as HTMLElement;
+          return { inner, max: getComputedStyle(text).maxWidth, width: text.getBoundingClientRect().width };
+        });
+        console.log(`[L120] texte du hero sans figure à ${width} px : plafond ${m.max}, largeur ${(100 * m.width / m.inner).toFixed(1)} %`);
+        expect(m.max).toBe(`${Math.round(cap * 100)}%`);
+        expect(m.width).toBeLessThanOrEqual(cap * m.inner + 1);
+      } finally { await ctx.close(); }
+    });
+  }
 });

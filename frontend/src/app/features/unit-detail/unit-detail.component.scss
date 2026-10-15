@@ -60,7 +60,8 @@
       filter: contrast(1.4) saturate(0.9) brightness(0.6);
     }
     .hero-text { position: relative; z-index: 1; flex: 0 1 44%; max-width: 44%; }
-    .hero-text:only-child { flex-basis: auto; max-width: 56%; }
+    /* sans figure (pas de .hero--figure), le texte retrouve sa largeur d'avant L120 */
+    .hero:not(.hero--figure) .hero-text { flex-basis: auto; max-width: 56%; }
     /* L120 : la fiche technique est un contenu (<figure> + <img>), pas un décor : aucun filtre ni voile par-dessus */
     .hero-figure {
       position: relative; z-index: 1;
@@ -706,7 +707,7 @@
     @media (max-width: 1280px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: auto; }
-      .hero-text:only-child { max-width: 80%; }
+      .hero:not(.hero--figure) .hero-text { max-width: 80%; }
     }
     @media (max-width: 900px) {
       .grid-2 { grid-template-columns: 1fr; }
@@ -719,7 +720,7 @@
       .hero { padding: 24px 20px; overflow: visible; }
       .hero.hero--figure { margin-bottom: 297px; }
       .hero::before { display: none; background-image: none; }
-      .hero-text, .hero-text:only-child { flex: 1 1 auto; max-width: 100%; }
+      .hero-text, .hero:not(.hero--figure) .hero-text { flex: 1 1 auto; max-width: 100%; }
       .hero-figure { position: absolute; top: calc(100% + 12px); left: 0; right: 0; width: auto; height: 259px; margin: 0; }
       /* L129 : cibles tactiles de 44 px */
       .back-btn { display: inline-flex; align-items: center; min-height: 44px; }
