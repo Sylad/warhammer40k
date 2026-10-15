@@ -8,7 +8,7 @@
   "vert": true,
   "empreintes": {
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "57044f7197a4abe1003b9980c27c9d61c3c1d974",
-    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "c0f4feda9f30388ef113e32d0ddd0e7717aff2eb"
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "dc1b8bac8668d4252253fbda552169d102435245"
   },
   "resceaux": [
     {
@@ -52,6 +52,13 @@
       "date": "2026-10-15",
       "avant": "3befdf13aad5d73c49ddcb5e69f6f82ad6dc8c89",
       "apres": "57044f7197a4abe1003b9980c27c9d61c3c1d974"
+    },
+    {
+      "test": "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts",
+      "raison": "R17 : deux assertions corrigées après la première mesure dans Chromium (touch-action calculé « manipulation », légende en majuscules lue par textContent) ; mêmes mesures, règle inchangée",
+      "date": "2026-10-15",
+      "avant": "c0f4feda9f30388ef113e32d0ddd0e7717aff2eb",
+      "apres": "dc1b8bac8668d4252253fbda552169d102435245"
     }
   ]
 }

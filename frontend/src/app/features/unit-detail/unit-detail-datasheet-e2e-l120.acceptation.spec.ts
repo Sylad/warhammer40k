@@ -135,7 +135,7 @@ describe('fiche unité — mesures de la figure (navigateur, dist) — L120', ()
       });
       expect(sc.overflowX).toBe('auto');
       expect(sc.overflowY).toBe('auto');
-      expect(sc.touchAction).toBe('pan-x pan-y pinch-zoom');
+      expect(sc.touchAction).toBe('manipulation'); // Chromium normalise « pan-x pan-y pinch-zoom » en « manipulation »
       expect(sc.scrollW).toBeGreaterThan(sc.clientW);
       expect(sc.scrollH).toBeGreaterThanOrEqual(sc.clientH);
       expect([sc.left, sc.top]).toEqual([0, 0]);
@@ -164,7 +164,7 @@ describe('fiche unité — mesures de la figure (navigateur, dist) — L120', ()
   it('R17 — à 1440 px, un portrait local de 350×260 est au moins aussi grand dans la fenêtre que dans la figure', async () => {
     await freshWith(1440, 'inq-valeria', { portrait: PORTRAIT });
     try {
-      expect(await page.locator('.hero figure figcaption').innerText()).toContain('Illustration · agrandir');
+      expect(await page.locator('.hero figure figcaption').textContent()).toContain('Illustration · agrandir');
       expect(await page.locator('h2', { hasText: 'Fiche technique' }).count()).toBe(0);
       const inFigure = await shown('.hero figure img');
       expect(inFigure.width).toBeGreaterThan(400); // la figure agrandit ce petit insigne (≈ 475 px)
