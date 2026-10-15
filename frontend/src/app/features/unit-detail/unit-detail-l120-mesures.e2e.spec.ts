@@ -111,6 +111,24 @@ describe.skipIf(!built || !chromium)('fiche unité — focus rendu et hero sans 
     } finally { await ctx.close(); }
   });
 
+  it('bonus — fenêtre ouverte, la page derrière ne défile pas à la molette (:root:has(dialog[open]) { overflow: hidden })', async () => {
+    await open(1440, true);
+    try {
+      const root = () => page.evaluate(() => ({ overflow: getComputedStyle(document.documentElement).overflow, y: window.scrollY }));
+      expect((await root()).overflow).not.toBe('hidden');
+      await page.locator('.hero button.zoom-btn').click();
+      await page.locator('dialog.ds-dialog[open] img.ds-img').waitFor({ state: 'visible' });
+      expect((await root()).overflow).toBe('hidden');
+      await page.mouse.move(700, 450);
+      await page.mouse.wheel(0, 700);
+      await page.waitForTimeout(300);
+      expect((await root()).y).toBe(0);
+      await page.keyboard.press('Escape');
+      await page.locator('dialog.ds-dialog').waitFor({ state: 'detached' });
+      expect((await root()).overflow).not.toBe('hidden');
+    } finally { await ctx.close(); }
+  });
+
   it('R5 — sans figure à 390 px, l\'écart entre le bas du hero et nav.tabs est de ≈ 26 px (pas 297 px)', async () => {
     await open(390, false);
     try {

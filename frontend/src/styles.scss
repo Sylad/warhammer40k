@@ -32,6 +32,10 @@ html {
   color-scheme: dark;
 }
 
+/* L120 : fenêtre modale ouverte (agrandissement de la fiche unité, visionneuse des Nouveautés), la page derrière
+   ne défile pas à la molette. */
+:root:has(dialog[open]) { overflow: hidden; }
+
 * { box-sizing: border-box; }
 
 body {
