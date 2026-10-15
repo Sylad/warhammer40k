@@ -8,7 +8,7 @@
   "vert": true,
   "empreintes": {
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "57044f7197a4abe1003b9980c27c9d61c3c1d974",
-    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "dc1b8bac8668d4252253fbda552169d102435245"
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "0d09f56df83121ffc3629e2c7b4269052ff479e4"
   },
   "resceaux": [
     {
@@ -59,6 +59,13 @@
       "date": "2026-10-15",
       "avant": "c0f4feda9f30388ef113e32d0ddd0e7717aff2eb",
       "apres": "dc1b8bac8668d4252253fbda552169d102435245"
+    },
+    {
+      "test": "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts",
+      "raison": "R17 : bornes hautes ajoutées après une mesure Chromium qui a révélé un étirement de l'image (390 px, insigne 350×260 affiché à 898 px) ; règle inchangée, max(conteneur, min(natif, 898 px))",
+      "date": "2026-10-15",
+      "avant": "dc1b8bac8668d4252253fbda552169d102435245",
+      "apres": "0d09f56df83121ffc3629e2c7b4269052ff479e4"
     }
   ]
 }

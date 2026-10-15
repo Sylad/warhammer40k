@@ -127,6 +127,7 @@ describe('fiche unité — mesures de la figure (navigateur, dist) — L120', ()
       await openZoom();
       const inDialog = await shown('dialog img.ds-img');
       expect(inDialog.width).toBeGreaterThanOrEqual(Math.min(inDialog.nat, 898) - 0.5);
+      expect(inDialog.width).toBeLessThanOrEqual(898.5);
       expect(inDialog.scale).toBeGreaterThan(inFigure.scale * 2);
       const sc = await page.evaluate(() => {
         const c = document.querySelector('dialog .ds-scroll') as HTMLElement;
@@ -158,6 +159,7 @@ describe('fiche unité — mesures de la figure (navigateur, dist) — L120', ()
       const inDialog = await shown('dialog img.ds-img');
       expect(inDialog.width).toBeGreaterThanOrEqual(inFigure.width - 0.5);
       expect(inDialog.width).toBeGreaterThanOrEqual(388);
+      expect(inDialog.width).toBeLessThanOrEqual(392); // max(conteneur 390 px, min(natif 350 px, 898 px)) : pas étirée à la hauteur du conteneur
     } finally { await ctx.close(); }
   });
 
