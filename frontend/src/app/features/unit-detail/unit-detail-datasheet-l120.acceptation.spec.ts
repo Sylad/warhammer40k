@@ -556,6 +556,32 @@ describe('fiche unité — fiche technique en figure agrandissable (L120)', () =
       expect(JSON.stringify(r.decls), r.selectors.join()).not.toMatch(/gradient/);
     }
   });
+  it('R17 — sous 761 px, l\'img est dans un conteneur défilable au doigt, largeur = max(conteneur, min(natif, 898 px)), départ en haut à gauche', () => {
+    const all = rules(allCss());
+    const narrow = (sel: RegExp) => all.filter((r) => r.media && /max-width:\s*760px/.test(r.media) && r.selectors.some((s) => sel.test(s)));
+    const scroll = narrow(/\.ds-scroll$/);
+    expect(scroll.length).toBeGreaterThan(0);
+    expect(scroll.some((r) => r.decls['overflow'] === 'auto' && /pan-x/.test(r.decls['touch-action'] ?? '') && /pan-y/.test(r.decls['touch-action'] ?? '') && /pinch-zoom/.test(r.decls['touch-action'] ?? ''))).toBe(true);
+    const img = narrow(/\.ds-img$/);
+    // width:auto (natif) borné par max-width 898 px, relevé par min-width (le conteneur gagne : le min l'emporte sur le max en CSS)
+    expect(img.some((r) => r.decls['max-width'] === '898px' && /max\(100%/.test(r.decls['min-width'] ?? '') && r.decls['max-height'] === 'none')).toBe(true);
+    expect(JSON.stringify(img.map((r) => r.decls))).not.toMatch(/margin:\s*auto/);
+  });
+  it('R17 — la fenêtre garde au moins l\'échelle de la figure : minimum posé depuis l\'image de la figure (≤ 100 % du natif au-dessus de 760 px)', async () => {
+    const { f, root } = await mount();
+    const fig = heroImg(root)!;
+    Object.defineProperty(fig, 'naturalWidth', { value: 350 });
+    Object.defineProperty(fig, 'naturalHeight', { value: 260 });
+    fig.getBoundingClientRect = () => ({ width: 475, height: 400, x: 0, y: 0, top: 0, left: 0, right: 475, bottom: 400, toJSON: () => ({}) }) as DOMRect;
+    await open(f, heroBtn(root));
+    const img = dialogEl()!.querySelector('img')!;
+    // contain : l'échelle de la figure est min(475/350 ; 400/260) = 1,357, soit 475 × 352,9 px à l'écran
+    expect(parseFloat(img.style.getPropertyValue('--ds-min-w'))).toBeCloseTo(475, 0);
+    expect(parseFloat(img.style.getPropertyValue('--ds-min-h'))).toBeCloseTo(352.9, 0);
+    const wide = rules(allCss()).filter((r) => !r.media && r.selectors.some((s) => /\.ds-img$/.test(s)));
+    expect(wide.some((r) => r.decls['object-fit'] === 'contain' && r.decls['max-width'] === '100%' && r.decls['max-height'] === '100%'
+      && /--ds-min-w/.test(r.decls['min-width'] ?? '') && /--ds-min-h/.test(r.decls['min-height'] ?? ''))).toBe(true);
+  });
   it('R17 — la fenêtre a role dialog, aria-modal et un nom accessible', async () => {
     const { f, root } = await mount();
     await open(f, heroBtn(root));

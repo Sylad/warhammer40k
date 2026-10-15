@@ -7,7 +7,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "46c5b80b61509d99e8891d885640cfc9f7176516",
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "3befdf13aad5d73c49ddcb5e69f6f82ad6dc8c89",
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "62a3f390426f19ccb5be731d6fbecb97346f477e"
   },
   "resceaux": [
@@ -31,6 +31,13 @@
       "date": "2026-10-15",
       "avant": "e2ed21e618f8630714b1b15e508402bcdb6bcab5",
       "apres": "46c5b80b61509d99e8891d885640cfc9f7176516"
+    },
+    {
+      "test": "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts",
+      "raison": "R17 amendée par le lead (revue UX, F2) : sous 761 px la fenêtre défile (largeur max(conteneur, min(natif, 898 px))) ; toutes largeurs, l'échelle de la fenêtre n'est jamais inférieure à celle de la figure",
+      "date": "2026-10-15",
+      "avant": "46c5b80b61509d99e8891d885640cfc9f7176516",
+      "apres": "3befdf13aad5d73c49ddcb5e69f6f82ad6dc8c89"
     }
   ]
 }
