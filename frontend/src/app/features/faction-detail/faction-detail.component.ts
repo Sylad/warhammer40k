@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
+import { localUnitImage } from '../../core/utils/local-unit-image';
 import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
 import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
 import { longestWord } from '../../shared/longest-word';
@@ -709,10 +710,9 @@ export class FactionDetailComponent {
       list.forEach(u => {
         if (this.unitImgInflight.has(u.id) || untracked(() => this.unitImages()).has(u.id)) return;
         this.unitImgInflight.add(u.id);
-        const datasheetUrl = this.service.datasheetUrl(u.id);
-        fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
-          if (head.ok) {
-            this.unitImages.update(m => new Map(m).set(u.id, datasheetUrl));
+        localUnitImage({ datasheet: this.service.datasheetUrl(u.id), portrait: this.service.portraitUrl(u.id) }).then(local => {
+          if (local) {
+            this.unitImages.update(m => new Map(m).set(u.id, local.url));
           } else {
             this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
               next: r => {
@@ -723,7 +723,7 @@ export class FactionDetailComponent {
               error: () => {},
             });
           }
-        }).catch(() => {});
+        });
       });
     });
 

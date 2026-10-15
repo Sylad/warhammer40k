@@ -139,23 +139,28 @@ Sylvain est fan du **lore narratif** (Primarques, Saints, Phaerons, scènes épi
 
 ## Imagerie unit-detail : datasheet locale prioritaire
 
-Pattern HEAD-check + fallback wiki sur `unit-detail` et `faction-detail` :
+Pattern HEAD-check + fallback wiki sur `unit-detail` et `faction-detail` (`core/utils/local-unit-image.ts`, `localUnitImage()`) :
 
 ```ts
 const run = ++this.imageRun;               // garde : une réponse tardive d'une fiche précédente est ignorée
-const datasheetUrl = this.service.datasheetUrl(u.id);   // `/api/images/datasheets/${u.id}`
-fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
-  if (run !== this.imageRun) return;
-  if (head.ok) this.setHero(datasheetUrl, 'fiche');      // setHero(url, kind) : image + nature ('fiche' | 'portrait')
-  else this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe(res => {
-    if (run === this.imageRun && res.imageUrl) this.setHero(res.imageUrl, 'portrait');
+localUnitImage({ datasheet: this.service.datasheetUrl(u.id), portrait: this.service.portraitUrl(u.id) })
+  .then(local => {                          // HEAD /api/images/datasheets/:id, puis HEAD /api/images/portraits/:id
+    if (run !== this.imageRun) return;
+    if (local) this.setHero(local.url, local.kind);   // setHero(url, kind) : image + nature ('fiche' | 'portrait')
+    else this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe(res => {
+      if (run === this.imageRun && res.imageUrl) this.setHero(res.imageUrl, 'portrait');
+    });
   });
-});
 ```
 
 Une image qui ne se charge pas (`(error)`) appelle `imageFailed()` : figure, panneau et fenêtre d'agrandissement disparaissent, sans repli sur le wiki.
 
-Datasheets (`backend/public/datasheets/<unit-id>.jpg`, 119/133 unités) servies via `GET /api/images/datasheets/:unitId`. **Pour ajouter une datasheet** : déposer le JPEG + rebuild image backend. Pas de code à toucher, détection auto.
+Images locales d'unités, dans l'image Docker (`backend/public/`, copié en entier par le `Dockerfile`) :
+
+- `datasheets/<unit-id>.jpg` — **119 fiches techniques**, scans 898×596 (profil, armes, aptitudes), servis par `GET|HEAD /api/images/datasheets/:unitId`. Seul un scan va là : la fiche unité les présente « Fiche technique de … » avec le panneau Aperçu. Un test backend (`images/datasheets-l120.spec.ts`) refuse tout fichier hors du rapport [1,4 ; 1,6] ou de moins de 800 px de large.
+- `portraits/<unit-id>.jpg` — **14 portraits et insignes locaux** (800×800, 350×260, …), servis par `GET|HEAD /api/images/portraits/:unitId` ; la fiche les présente « Illustration de … » (type `portrait`, pas de panneau Aperçu).
+
+**Pour ajouter une image locale** : un scan 898×596 → `datasheets/`, tout le reste (portrait, insigne, illustration) → `portraits/`, puis rebuild image backend. Pas de code à toucher, détection auto (fiche, sinon portrait local, sinon wiki). Ne jamais déposer un portrait dans `datasheets/`.
 
 **`wikiQuery` toujours en EN** dans les seeds — le scrape MediaWiki en FR (em-dash, accents) renvoie NULL.
 

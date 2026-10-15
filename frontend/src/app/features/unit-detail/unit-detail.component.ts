@@ -6,6 +6,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
+import { localUnitImage } from '../../core/utils/local-unit-image';
 import { Faction, Unit, UnitType, Artwork, Video } from '../../core/models/models';
 import { longestWord } from '../../shared/longest-word';
 import { UnitDatasheetDialogComponent } from './unit-datasheet-dialog.component';
@@ -460,16 +461,17 @@ export class UnitDetailComponent {
       this.loreImage.set(null);
 
       const run = ++this.imageRun;
-      const datasheetUrl = this.service.datasheetUrl(u.id);
-      const portrait = () => this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
+      const wiki = () => this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe({
         next: res => { if (run === this.imageRun && res.imageUrl) this.setHero(res.imageUrl, 'portrait'); },
         error: () => {},
       });
-      fetch(datasheetUrl, { method: 'HEAD' }).then(r => {
-        if (run !== this.imageRun) return;
-        if (r.ok) this.setHero(datasheetUrl, 'fiche');
-        else portrait();
-      }).catch(() => { if (run === this.imageRun) portrait(); });
+      // Fiche technique locale, sinon portrait local, sinon portrait du wiki (R16, C2).
+      localUnitImage({ datasheet: this.service.datasheetUrl(u.id), portrait: this.service.portraitUrl(u.id) })
+        .then(local => {
+          if (run !== this.imageRun) return;
+          if (local) this.setHero(local.url, local.kind);
+          else wiki();
+        });
 
       const loreQ = u.loreImageQuery ?? `${f.nom} battle warhammer`;
       this.service.getWikiImage(loreQ).subscribe({
@@ -497,10 +499,9 @@ export class UnitDetailComponent {
       const list = this.relatedUnits();
       list.forEach(r => {
         if (this.relatedImages().has(r.id)) return;
-        const datasheetUrl = this.service.datasheetUrl(r.id);
-        fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
-          if (head.ok) {
-            this.relatedImages.update(m => new Map(m).set(r.id, datasheetUrl));
+        localUnitImage({ datasheet: this.service.datasheetUrl(r.id), portrait: this.service.portraitUrl(r.id) }).then(local => {
+          if (local) {
+            this.relatedImages.update(m => new Map(m).set(r.id, local.url));
           } else {
             this.service.getWikiImage(r.wikiQuery ?? r.nom).subscribe({
               next: res => {
@@ -511,7 +512,7 @@ export class UnitDetailComponent {
               error: () => {},
             });
           }
-        }).catch(() => {});
+        });
       });
     });
 

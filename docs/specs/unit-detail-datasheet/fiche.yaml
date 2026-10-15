@@ -5,22 +5,23 @@ sujet:
   perimetre:
     modules:
       - frontend/src/app/features/unit-detail
-    endpoints: ["GET /api/images/datasheets/:unitId", "GET /api/wiki-image?q="]
+      - "backend/src/modules/images (revue UX : endpoint des portraits locaux) et backend/public/portraits"
+    endpoints: ["GET /api/images/datasheets/:unitId", "GET /api/images/portraits/:unitId", "GET /api/wiki-image?q="]
     jobs: []
     hors_perimetre:
-      - "le backend (aucun endpoint ni fichier modifié) et les 133 JPEG de backend/public/datasheets"
+      - "le backend, hors l'endpoint des portraits locaux et le déplacement de 14 portraits de backend/public/datasheets vers backend/public/portraits (décision du lead après la revue UX) ; les 119 scans restants sont lus tels quels"
       - "les onglets (L121), le focus à l'arrivée (L122), les autres blocs de la fiche (Informations clés, sidebar : seul leur ordre à 390 px est déjà traité par L128)"
       - "app-figure-lightbox (composant partagé par une dizaine de pages) : non modifié, voir R10"
       - "les autres usages de l'image de l'unité (.equip-figure « Équipement standard », cartes de variantes, ambiance du hero) : inchangés, voir R15"
 
 cas:
   - id: C1
-    titre: Le visiteur ouvre la fiche d'une unité qui a une fiche technique (127 unités sur 133)
+    titre: Le visiteur ouvre la fiche d'une unité qui a une fiche technique (119 unités sur 133)
     acteur: un visiteur de la fiche /units/:id
     declencheur: GET /api/images/datasheets/:unitId (HEAD puis chargement de l'<img>)
     preconditions:
       - l'unité existe et sa faction est chargée
-      - backend/public/datasheets/<id>.jpg existe
+      - backend/public/datasheets/<id>.jpg existe (un scan 898×596 du profil, des armes et des aptitudes)
     nominal:
       - Le composant demande la fiche technique de l'unité (HEAD, comportement déjà codé).
       - La réponse est 200 ; l'image est enregistrée avec son type « fiche technique » (R14).
@@ -28,23 +29,25 @@ cas:
       - L'onglet Aperçu affiche un panneau « Fiche technique » avec la même image et le même agrandissement.
     alternatives:
       - { si: l'<img> ne se charge pas (erreur réseau après un HEAD réussi), alors: la figure est retirée au lieu d'afficher une image cassée, regles: [R9] }
-      - { si: le HEAD répond 404, 5xx ou échoue (délai dépassé, réseau), alors: repli sur le portrait du wiki comme aujourd'hui (C2), regles: [R16] }
+      - { si: le HEAD répond 404, 5xx ou échoue (délai dépassé, réseau), alors: repli sur le portrait local, puis sur le portrait du wiki (C2), regles: [R16] }
     resultat: La fiche technique est un contenu lisible (img, alt, légende), plus un fond assombri.
   - id: C2
-    titre: Le visiteur ouvre la fiche d'une unité sans fiche technique (portrait du wiki)
+    titre: Le visiteur ouvre la fiche d'une unité sans fiche technique (portrait local, sinon portrait du wiki)
     acteur: un visiteur de la fiche /units/:id
-    declencheur: GET /api/images/datasheets/:unitId puis GET /api/wiki-image?q=
+    declencheur: GET|HEAD /api/images/datasheets/:unitId puis /api/images/portraits/:unitId puis GET /api/wiki-image?q=
     preconditions:
       - aucune fiche technique pour l'unité (HEAD ≠ 200, y compris 404 et 5xx, ou échec réseau)
       - l'image est enregistrée avec son type « portrait » (R14)
+      - "14 unités ont un portrait ou un insigne local (backend/public/portraits/<id>.jpg : 800×800, 350×260, une illustration 626×422, …), jamais un scan : le fichier n'est pas une fiche technique"
     nominal:
-      - "Le composant demande le portrait du wiki (comportement déjà codé : wikiQuery sinon nom)."
-      - Le wiki renvoie une imageUrl.
+      - "Le composant demande le portrait local de l'unité (HEAD /api/images/portraits/:unitId)."
+      - "La réponse est 200 : l'image est enregistrée avec le type « portrait » ; sinon le composant demande le portrait du wiki (comportement déjà codé : wikiQuery sinon nom) et le wiki renvoie une imageUrl."
       - Le hero affiche la même figure, avec l'alt « Illustration de <nom> » et la légende « Illustration · agrandir ».
     alternatives:
+      - { si: le portrait local est absent (404, 5xx, échec réseau), alors: repli sur le portrait du wiki, regles: [R16] }
       - { si: le wiki ne renvoie pas d'imageUrl ou échoue, alors: aucune figure, le hero reste texte seul, regles: [R5] }
       - { si: l'unité est un portrait, alors: pas de panneau « Fiche technique » dans Aperçu, regles: [R7] }
-    resultat: Les 6 portraits ont la même figure que les fiches techniques, avec un alt qui dit ce qu'ils sont.
+    resultat: Un portrait a la même figure que les fiches techniques, avec un alt qui dit ce qu'il est ; un portrait n'est jamais présenté comme fiche technique.
   - id: C3
     titre: Le visiteur agrandit la figure
     acteur: un visiteur au clavier ou à la souris
@@ -109,10 +112,10 @@ regles:
     tests: ["R3 — la figure et son img n'ont ni filter ni pseudo-élément de dégradé", "R3 — le filtre du hero ne s'applique qu'à l'ambiance, pas à la figure"]
   - id: R4
     cas: [C2]
-    enonce: "Un portrait (fiche technique absente, image venue du wiki) est affiché dans la même figure, avec l'alt « Illustration de <nom> » et la légende « Illustration · agrandir »."
+    enonce: "Un portrait (fiche technique absente : portrait local de backend/public/portraits, sinon image venue du wiki) est affiché dans la même figure, avec l'alt « Illustration de <nom> » et la légende « Illustration · agrandir »."
     statut: sourcee
     source: "notes du lot L120 (« 6 portraits : même figure, alt « Illustration de <nom> »»)"
-    tests: ["R4 — sans fiche technique, image du wiki : alt « Illustration de <nom> »", "R4 — la légende d'un portrait ne dit pas « Fiche technique »"]
+    tests: ["R4 — sans fiche technique, image du wiki : alt « Illustration de <nom> »", "R4 — la légende d'un portrait ne dit pas « Fiche technique »", "R14 — portrait local : type portrait (alt, légende, nom accessible, fenêtre, pas de panneau Aperçu)"]
   - id: R5
     cas: [C2, C4]
     enonce: "Sans fiche technique ni image du wiki, le hero n'affiche aucune figure ni légende (texte seul, comportement actuel sans image) ; aucun <img> à src vide."
@@ -169,10 +172,10 @@ regles:
     tests: ["R13 — nom accessible du bouton d'une fiche technique", "R13 — nom accessible du bouton d'un portrait", "R13 — hauteur du bouton ≥ 44 px à 390 px"]
   - id: R14
     cas: [C1, C2]
-    enonce: "Le composant mémorise le type de l'image avec son URL (fiche technique ou portrait), posé en même temps qu'elle (signal dédié ou valeur composée) et remis à zéro avec elle. L'alt, la légende, le nom accessible (R13) et le panneau Aperçu (R7) en dépendent ; un portrait n'est jamais présenté comme fiche technique."
+    enonce: "Le composant mémorise le type de l'image avec son URL (fiche technique ou portrait), posé en même temps qu'elle (signal dédié ou valeur composée) et remis à zéro avec elle. Le type est « fiche technique » seulement si /api/images/datasheets/:id a répondu (un scan) ; un portrait local (/api/images/portraits/:id) ou du wiki est « portrait ». L'alt, la légende, le nom accessible (R13) et le panneau Aperçu (R7) en dépendent ; un portrait n'est jamais présenté comme fiche technique."
     statut: hypothese
     si_faux: "Si le type se déduisait de l'URL (préfixe /api/images/datasheets/), seul le moyen de le connaître change ; aucune donnée en jeu."
-    tests: ["R14 — URL de fiche technique : type fiche technique, alt et légende de fiche", "R14 — URL du wiki : type portrait, alt « Illustration de <nom> »", "R14 — changement d'unité : le type est remis à zéro avec l'image"]
+    tests: ["R14 — URL de fiche technique : type fiche technique, alt et légende de fiche", "R14 — URL du wiki : type portrait, alt « Illustration de <nom> »", "R14 — portrait local : type portrait (alt, légende, nom accessible, fenêtre, pas de panneau Aperçu)", "R14 — changement d'unité : le type est remis à zéro avec l'image", "chaque fichier de datasheets/ a le rapport 3:2 d'un scan de fiche (entre 1,4 et 1,6) et d'au moins 800 px de large (backend, images/datasheets-l120.spec.ts)"]
   - id: R15
     cas: [C1, C2]
     enonce: "Les autres usages de l'image de l'unité sont inchangés : l'ambiance floutée derrière le hero, la vignette « Équipement standard » (.equip-figure) et le repli des cartes de variantes (variantImg) continuent de lire l'URL en image de fond via unitImg() ; R3 ne vise que la figure. À 390 px, seule l'ambiance du hero disparaît (R11)."
@@ -181,10 +184,10 @@ regles:
     tests: ["R15 — .equip-figure et variantImg lisent toujours l'URL de l'unité", "R15 — la figure du hero n'utilise pas unitImg() en fond"]
   - id: R16
     cas: [C1, C2]
-    enonce: "Quand le HEAD de la fiche technique répond autre chose que 200 (404, 5xx) ou échoue (délai, réseau), le composant demande le portrait du wiki et son échec est avalé ; aucun message d'erreur n'est affiché."
+    enonce: "Quand le HEAD de la fiche technique répond autre chose que 200 (404, 5xx) ou échoue (délai, réseau), le composant demande le HEAD du portrait local (/api/images/portraits/:id) : 200, le portrait local prend la figure (type portrait, le wiki n'est pas appelé) ; 404, 5xx ou échec, il demande le portrait du wiki. L'échec du wiki est avalé ; aucun message d'erreur n'est affiché. Une fiche technique trouvée ne déclenche jamais la demande du portrait local."
     statut: sourcee
-    source: "comportement déjà codé : unit-detail.component.ts:425-438 (else et .catch appellent getWikiImage, error: () => {})"
-    tests: ["R16 — HEAD 404 : appel au wiki", "R16 — HEAD 500 : appel au wiki, portrait affiché", "R16 — HEAD en échec réseau : appel au wiki"]
+    source: "comportement déjà codé : unit-detail.component.ts:425-438 (else et .catch appellent getWikiImage, error: () => {}) ; décision du lead après la revue UX (15-10) : type « portrait local », 14 fichiers déplacés (les 13 de la revue + ork-makari, trouvé par la mesure) dans backend/public/portraits"
+    tests: ["R16 — HEAD 404 : appel au wiki", "R16 — HEAD 500 : appel au wiki, portrait affiché", "R16 — HEAD en échec réseau : appel au wiki", "R16 — fiche 404 puis portrait local 200 : le portrait local prend la figure, le wiki n'est pas appelé", "R16 — fiche 404 puis portrait local 404, 500 ou en échec réseau : appel au wiki", "R16 — fiche technique 200 : le portrait local n'est jamais demandé", "R16 — une fiche technique trouvée ne demande jamais le portrait local ; sans fiche, la fiche puis le portrait local sont demandés dans cet ordre"]
   - id: R17
     cas: [C3]
     enonce: "La fenêtre agrandie contient un vrai <img> (pas un background-image) portant l'alt de la figure (R2 ou R4), sans filter, voile ni dégradé (WCAG 1.1.1, 1.4.3), en object-fit contain ; elle a role dialog, aria-modal et un nom accessible (« Fiche technique de <nom> » ou « Illustration de <nom> »)."
@@ -200,7 +203,7 @@ contrats:
     erreurs:
       - { code: HTTP 404, message: "Not Found" }
       - { code: HTTP 500, message: "Internal Server Error" }
-    regles: [R1, R2, R4, R9, R16, R17]
+    regles: [R1, R2, R9, R14, R16, R17]
   - id: A2
     appel: GET /api/wiki-image
     entree: "q = wikiQuery de l'unité, sinon son nom"
@@ -208,6 +211,14 @@ contrats:
     erreurs: []
     sans_erreur: "un échec est avalé côté composant (aucun message affiché) et couvert par R5 ; le contrat n'est pas modifié"
     regles: [R4, R5, R6, R16]
+  - id: A3
+    appel: GET|HEAD /api/images/portraits/:unitId
+    entree: "unitId = identifiant de l'unité (HEAD par le composant, puis <img src>)"
+    sortie: "le JPEG du portrait ou de l'insigne local de l'unité (HTTP 200) ; backend/public/portraits/<id>.jpg, même nettoyage de l'identifiant et même Dockerfile (public/ copié en entier) que A1"
+    erreurs:
+      - { code: HTTP 404, message: "Not Found" }
+    regles: [R4, R14, R16, R17]
 
 donnees:
-  - { id: D1, objet: "backend/public/datasheets/<id>.jpg (133 fichiers)", existant: true, modification: aucune, note: "lus tels quels ; aucun fichier ajouté ni retouché" }
+  - { id: D1, objet: "backend/public/datasheets/<id>.jpg (119 fichiers, scans 898×596 ; rapport entre 1,4 et 1,6)", existant: true, modification: aucune, note: "lus tels quels ; aucun fichier retouché (14 des 133 fichiers d'origine en ont été retirés, voir D2)" }
+  - { id: D2, objet: "backend/public/portraits/<id>.jpg (14 fichiers : admech-magos, am-corbec, am-macharius, am-yarrick, csm-fulgrim, csm-hellbrute, csm-horus, inq-henchmen, inq-ravenor, inq-valeria, ork-makari, sm-leman-russ-prim, sm-primaris-intercessor, sm-sanguinius)", existant: true, modification: "déplacés (git mv) depuis backend/public/datasheets : portraits et insignes, pas des fiches techniques", note: "aucun des 14 identifiants n'a par ailleurs de scan ; un test refuse tout fichier de datasheets/ hors du rapport [1,4 ; 1,6] ou de moins de 800 px de large (ork-makari, 626×422, avait le bon rapport mais n'est pas un scan)" }

@@ -26,6 +26,7 @@ async function mount(status: number) {
   polyfillDialog();
   const service = fakeWarhammerService({
     datasheetUrl: (id: string) => `/api/images/datasheets/${id}`,
+    portraitUrl: (id: string) => `/api/images/portraits/${id}`,
     getUnit: () => of(A),
     getFaction: () => of(FACTION),
     getUnits: () => of([]),
@@ -36,13 +37,21 @@ async function mount(status: number) {
     { provide: WarhammerService, useValue: service },
     { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: A.id })), snapshot: { fragment: null } } },
   ]);
-  globalThis.fetch = (async () => ({ ok: status === 200, status }) as Response) as typeof fetch;
+  const fetched: string[] = [];
+  globalThis.fetch = (async (url: RequestInfo | URL) => { fetched.push(String(url)); return { ok: status === 200, status } as Response; }) as typeof fetch;
   const f = TestBed.createComponent(UnitDetailComponent);
   await settle(f);
-  return { f, root: f.nativeElement as HTMLElement };
+  return { f, root: f.nativeElement as HTMLElement, fetched };
 }
 
 describe('fiche unité — correctifs de revue (L120)', () => {
+  it('R16 — une fiche technique trouvée ne demande jamais le portrait local ; sans fiche, la fiche puis le portrait local sont demandés dans cet ordre', async () => {
+    const avec = await mount(200);
+    expect(avec.fetched.filter((u) => u.includes('/images/portraits/'))).toEqual([]);
+    const sans = await mount(404);
+    expect(sans.fetched.filter((u) => u.includes('/images/'))).toEqual(['/api/images/datasheets/sm-tactique', '/api/images/portraits/sm-tactique']);
+  });
+
   it('R8 — le focus est rendu au bouton une fois la fenêtre retirée du document (le reste du document n\'est plus inerte)', async () => {
     const { f, root } = await mount(200);
     const b = root.querySelector('.hero button.zoom-btn') as HTMLButtonElement;

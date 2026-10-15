@@ -52,6 +52,7 @@ function seed(file: string): unknown {
 
 function api(path: string, query: URLSearchParams): [number, unknown] {
   const p = path.replace(/^\/api\//, '').replace(/\/$/, '');
+  if (p.startsWith('images/portraits/')) return [404, { statusCode: 404 }]; // L120 : aucun portrait local dans l'API bouchonnée
   if (OBJECTS.some((o) => p === o || p.startsWith(o + '/'))) return [200, p.startsWith('wiki-image') ? { imageUrl: null } : {}];
   if (COLLECTIONS[p]) {
     let data = seed(COLLECTIONS[p]);

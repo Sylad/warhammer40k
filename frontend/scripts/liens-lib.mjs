@@ -432,7 +432,7 @@ export function seedExternals(data) {
 export function apiAssets(data) {
   const out = [];
   for (const u of data.units ?? []) {
-    out.push({ cls: 'api', kind: 'datasheet', target: `/api/images/datasheets/${u.id}`, file: `backend/public/datasheets/${u.id}.jpg`, source: `backend/seed/units.json#${u.id}` });
+    out.push({ cls: 'api', kind: 'datasheet', target: `/api/images/datasheets/${u.id}`, file: `backend/public/datasheets/${u.id}.jpg`, portraitFile: `backend/public/portraits/${u.id}.jpg`, source: `backend/seed/units.json#${u.id}` });
   }
   const queries = new Map();
   const visit = (v, key, src) => {
@@ -619,7 +619,8 @@ export function checkInternal(links, { routes = readRoutes(), data = loadSeed(),
       const path = decodeURIComponent(l.target.split(/[?#]/)[0]);
       if (!existsCaseSensitive(PUBLIC, path)) fail(`fichier ${path} absent de frontend/public (casse comprise)`);
     } else if (l.cls === 'api' && l.kind === 'datasheet') {
-      if (!existsCaseSensitive(ROOT, l.file)) fail(`fiche technique ${l.file} absente`);
+      // L120 : une unité a sa fiche technique (datasheets/) ou, à défaut, son portrait local (portraits/).
+      if (!existsCaseSensitive(ROOT, l.file) && !existsCaseSensitive(ROOT, l.portraitFile)) fail(`fiche technique ${l.file} et portrait ${l.portraitFile} absents`);
     }
   }
   return broken;

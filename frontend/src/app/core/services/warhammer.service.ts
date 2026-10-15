@@ -103,6 +103,11 @@ export class WarhammerService {
     return `${this.base}/images/datasheets/${unitId}`;
   }
 
+  /** Portrait ou insigne local d'une unité sans fiche technique (L120) : `backend/public/portraits/<id>.jpg`. */
+  portraitUrl(unitId: string): string {
+    return `${this.base}/images/portraits/${unitId}`;
+  }
+
   getWikiImage(query: string): Observable<WikiImageResult> {
     return this.http.get<WikiImageResult>(`${this.base}/wiki-image?q=${encodeURIComponent(query)}`);
   }
