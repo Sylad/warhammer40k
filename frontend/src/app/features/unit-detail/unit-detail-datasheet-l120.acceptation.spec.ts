@@ -557,15 +557,21 @@ describe('fiche unité — fiche technique en figure agrandissable (L120)', () =
     }
   });
   it('R17 — sous 761 px, l\'img est dans un conteneur défilable au doigt, largeur = max(conteneur, min(natif, 898 px)), départ en haut à gauche', () => {
+    // Déclarations effectives à ≤ 760 px : celles de la feuille de base, surchargées par celles du bloc @media (max-width: 760px).
     const all = rules(allCss());
-    const narrow = (sel: RegExp) => all.filter((r) => r.media && /max-width:\s*760px/.test(r.media) && r.selectors.some((s) => sel.test(s)));
-    const scroll = narrow(/\.ds-scroll$/);
-    expect(scroll.length).toBeGreaterThan(0);
-    expect(scroll.some((r) => r.decls['overflow'] === 'auto' && /pan-x/.test(r.decls['touch-action'] ?? '') && /pan-y/.test(r.decls['touch-action'] ?? '') && /pinch-zoom/.test(r.decls['touch-action'] ?? ''))).toBe(true);
-    const img = narrow(/\.ds-img$/);
+    const effective = (sel: RegExp): Record<string, string> => {
+      const pick = (inMedia: boolean) => all.filter((r) => (inMedia ? !!r.media && /max-width:\s*760px/.test(r.media) : !r.media) && r.selectors.some((s) => sel.test(s)));
+      return Object.assign({}, ...pick(false).map((r) => r.decls), ...pick(true).map((r) => r.decls));
+    };
+    const scroll = effective(/\.ds-scroll$/);
+    expect(scroll['overflow']).toBe('auto');
+    for (const k of ['pan-x', 'pan-y', 'pinch-zoom']) expect(scroll['touch-action'] ?? '').toContain(k);
+    const img = effective(/\.ds-img$/);
     // width:auto (natif) borné par max-width 898 px, relevé par min-width (le conteneur gagne : le min l'emporte sur le max en CSS)
-    expect(img.some((r) => r.decls['max-width'] === '898px' && /max\(100%/.test(r.decls['min-width'] ?? '') && r.decls['max-height'] === 'none')).toBe(true);
-    expect(JSON.stringify(img.map((r) => r.decls))).not.toMatch(/margin:\s*auto/);
+    expect(img['max-width']).toBe('898px');
+    expect(img['max-height']).toBe('none');
+    expect(img['min-width']).toMatch(/^max\(100%/);
+    expect(img['margin']).not.toBe('auto'); // départ en haut à gauche, pas centré
   });
   it('R17 — la fenêtre garde au moins l\'échelle de la figure : minimum posé depuis l\'image de la figure (≤ 100 % du natif au-dessus de 760 px)', async () => {
     const { f, root } = await mount();
