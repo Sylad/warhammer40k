@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-15 08:56",
+  "generated": "2026-10-15 08:59",
   "entries": [
     {
       "slug": "2026-10-15-fiche-unite-la-fiche-technique-devient-lisible-et-agrandissa",
@@ -15,7 +15,7 @@
       "alts": [
         "Fiche de l’Escouade Tactique à 1440 px : le texte à gauche, la fiche technique entière et lisible dans un cadre doré à droite, avec la légende « Fiche technique · agrandir »"
       ],
-      "html": "<p>Sur la fiche d’une unité, la fiche technique (profil, armes, aptitudes) s’affiche désormais en entier et sans voile sombre, dans un cadre doré à droite du titre, au lieu d’un fond assombri et coupé derrière le texte. Un clic ou la touche Entrée sur « Fiche technique · agrandir » ouvre l’image en grand ; Échap, le bouton Fermer ou un clic à côté de l’image la referment. L’onglet Aperçu propose aussi un panneau « Fiche technique » avec le même agrandissement. Quand une unité n’a pas de fiche technique, son illustration prend la même place. Sur téléphone, le texte reste seul en haut et la fiche s’affiche pleine largeur juste en dessous.</p>"
+      "html": "<p>Sur la fiche d’une unité, la fiche technique (profil, armes, aptitudes) s’affiche désormais en entier et sans voile sombre, dans un cadre doré à droite du titre, au lieu d’un fond assombri et coupé derrière le texte. Un clic ou la touche Entrée sur « Fiche technique · agrandir » ouvre l’image en grand ; Échap, le bouton Fermer ou un clic à côté de l’image la referment. L’onglet Aperçu propose aussi un panneau « Fiche technique » avec le même agrandissement. Quand une unité n’a pas de fiche technique, son illustration prend la même place. Sur téléphone, le texte reste seul en haut et la fiche s’affiche pleine largeur juste en dessous.</p>"
     },
     {
       "slug": "2026-10-14-fiche-unite-sur-telephone-onglets-lisibles-infos-cles-remont",
