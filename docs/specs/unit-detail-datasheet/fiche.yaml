@@ -163,9 +163,9 @@ regles:
     tests: ["R12 — le texte du hero garde titre, rôle, description et boutons", "R12 — la colonne texte fait 44 % à 1440 px (assertion CSS sur la feuille compilée ou e2e Playwright)"]
   - id: R13
     cas: [C1, C2, C3]
-    enonce: "Le bouton d'agrandissement porte un nom accessible qui dit l'action et l'objet (« Agrandir la fiche technique de <nom> » ou « Agrandir l'illustration de <nom> ») et fait au moins 44 px de haut à 390 px."
+    enonce: "Le bouton d'agrandissement porte un nom accessible qui COMMENCE par le texte visible de sa légende (WCAG 2.5.3, étiquette dans le nom) puis nomme l'objet : « Fiche technique · agrandir — <nom> » pour une fiche technique, « Illustration · agrandir — <nom> » pour un portrait ; il fait au moins 44 px de haut à 390 px. La légende visible (R4) ne change pas."
     statut: hypothese
-    si_faux: "Seul le texte du aria-label change (aucune source ne le fixe) ; la hauteur de 44 px suit la règle des cibles tactiles de L129 (unit-detail.component.scss ~l.696), si elle change seule la feuille de style change."
+    si_faux: "Seul le texte du aria-label change (aucune source ne le fixe, hormis WCAG 2.5.3 qui impose que le nom contienne le texte visible, au début de préférence) ; la hauteur de 44 px suit la règle des cibles tactiles de L129 (unit-detail.component.scss ~l.696), si elle change seule la feuille de style change."
     tests: ["R13 — nom accessible du bouton d'une fiche technique", "R13 — nom accessible du bouton d'un portrait", "R13 — hauteur du bouton ≥ 44 px à 390 px"]
   - id: R14
     cas: [C1, C2]

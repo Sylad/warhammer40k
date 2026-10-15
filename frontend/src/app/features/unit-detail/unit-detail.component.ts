@@ -558,7 +558,8 @@ export class UnitDetailComponent {
   }
 
   zoomLabel(u: Unit): string {
-    return this.heroKind() === 'fiche' ? `Agrandir la fiche technique de ${u.nom}` : `Agrandir l’illustration de ${u.nom}`;
+    // WCAG 2.5.3 (R13) : le nom commence par le texte visible de la légende, puis nomme l'objet.
+    return `${this.heroKind() === 'fiche' ? 'Fiche technique' : 'Illustration'} · agrandir — ${u.nom}`;
   }
 
   dialogLabel(u: Unit): string {
