@@ -146,8 +146,8 @@ regles:
   - id: R10
     cas: [C3]
     enonce: "L'agrandissement utilise un composant de fenêtre dédié à la fiche unité (dans features/unit-detail) ; le composant partagé app-figure-lightbox, utilisé par une dizaine d'autres pages, n'est pas modifié (ni état, ni rôle, ni focus, ni rendu)."
-    statut: hypothese
-    si_faux: "Si le lead préfère étendre app-figure-lightbox (mode image seule, role dialog, focus), cela change le contrat d'un composant partagé par toutes les pages qui l'emploient : il faudra des tests de focus et de dialogue sur chacune ; voir la question au lead. Dans l'hypothèse retenue, seul un composant local est ajouté."
+    statut: sourcee
+    source: "décision du lead (réponse à la question sur app-figure-lightbox) : fenêtre dédiée dans features/unit-detail (role dialog, focus, vrai img avec alt, sans filtre) ; composant partagé non modifié, son extension fera l'objet d'un lot séparé"
     tests: ["R10 — le composant partagé figure-lightbox est inchangé : rendu primarque identique (miniatures et lien galerie présents)", "R10 — la fiche unité n'utilise pas app-figure-lightbox"]
   - id: R11
     cas: [C4]
