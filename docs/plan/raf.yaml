@@ -1104,7 +1104,7 @@ lots:
   - id: L120
     title: "Fiche unité : datasheet illisible — 127/133 fiches sont des tableaux de stats affichés en fond assombri et tronqué sous le titre, sans <img>, alt ni agrandissement (WCAG 1.1.1, 1.4.3) — figure + lightbox selon maquette (revue UX L4)"
     public: "Fiche unité : la fiche technique devient lisible et agrandissable"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     screen: component
@@ -1131,7 +1131,11 @@ lots:
       - { date: 2026-10-15, text: "test d'acceptation rescellé (frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts, fiche inchangée) : R17 : le test de la feuille de style lit les déclarations effectives à ≤ 760 px (base + @media), pas le seul bloc @media ; même règle (conteneur défilable, max(conteneur, min(natif, 898 px))), assertion de marge non vide" }
       - { date: 2026-10-15, text: "test d'acceptation rescellé (frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts, fiche inchangée) : R17 : deux assertions corrigées après la première mesure dans Chromium (touch-action calculé « manipulation », légende en majuscules lue par textContent) ; mêmes mesures, règle inchangée" }
       - { date: 2026-10-15, text: "test d'acceptation rescellé (frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts, fiche inchangée) : R17 : bornes hautes ajoutées après une mesure Chromium qui a révélé un étirement de l'image (390 px, insigne 350×260 affiché à 898 px) ; règle inchangée, max(conteneur, min(natif, 898 px))" }
+      - { date: 2026-10-15, text: "UX mineurs non traités (notes) : F3 panneau Aperçu en cadre 1:1 laisse 287 px vides à 1440 sous un scan 3:2 (lot séparé) ; F4 figure 1440 : scan 532/685 px, cadre au rapport du scan donnerait ~80 px au texte ; F5 761–1024 px hero écrasé (empiler dès ≤ 1024 ?) ; F6 décalage à l'arrivée de l'image (h1 63→42 px), réserver la grille ; molette traitée (overflow hidden)" }
     started: 2026-10-15
+    review: { date: 2026-10-15, verdict: "conforme (3 revues Opus successives : majeurs corrigés — focus rendu, vide 297 px, nom accessible WCAG 2.5.3, titres longs sous la figure, 14 portraits annoncés fiche technique, fenêtre qui n'agrandit pas sous 760 px ; dernier correctif 024d4a9 = tests seuls, relu par le lead ; front 915, back 111, e2e 64, build et raf check verts)", commit: 024d4a9e2cfd39c9dd2e78d3a7632001b9e6fcf7 }
+    ux: { date: 2026-10-15, verdict: "conforme (agent ux-reviewer 15-10 : R1–R17 mesurées conformes, 2 majeurs hors fiche corrigés dans le lot — portraits locaux, fenêtre défilable 898 px à 390 px — captures relues par le lead ; mineurs en notes)" }
+    finished: 2026-10-15
   - id: L121
     title: "Fiche unité : onglets sans rôle ni état (aria-selected/aria-current absents, nav sans aria-label) — WCAG 4.1.2 (revue UX L4)"
     status: done
@@ -1250,6 +1254,13 @@ lots:
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+  - id: L133
+    title: "Fiche unité : panneau Aperçu « Fiche technique » en cadre 1:1 (R7) laisse 287 px vides à 1440 et 103 px à 390 sous un scan 3:2 — cadre au rapport de l'image (revue UX L120, Nielsen 8)"
+    status: todo
+    estimate: 0.25
+    visible: true
+    screen: component
+    created: 2026-10-15
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

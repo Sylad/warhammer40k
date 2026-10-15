@@ -355,8 +355,9 @@
     {
       "id": "L120",
       "title": "Fiche unité : la fiche technique devient lisible et agrandissable",
-      "status": "doing",
-      "started": "2026-10-15"
+      "status": "done",
+      "started": "2026-10-15",
+      "finished": "2026-10-15"
     },
     {
       "id": "L126",
