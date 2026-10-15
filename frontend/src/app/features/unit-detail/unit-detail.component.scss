@@ -716,7 +716,8 @@
     }
     @media (max-width: 760px) {
       /* L120 : plus d'image derrière le texte ; la figure passe pleine largeur juste sous le hero (259 px) */
-      .hero { padding: 24px 20px; overflow: visible; margin-bottom: 297px; }
+      .hero { padding: 24px 20px; overflow: visible; }
+      .hero.hero--figure { margin-bottom: 297px; }
       .hero::before { display: none; background-image: none; }
       .hero-text, .hero-text:only-child { flex: 1 1 auto; max-width: 100%; }
       .hero-figure { position: absolute; top: calc(100% + 12px); left: 0; right: 0; width: auto; height: 259px; margin: 0; }
