@@ -8,7 +8,7 @@
   "vert": true,
   "empreintes": {
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "3befdf13aad5d73c49ddcb5e69f6f82ad6dc8c89",
-    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "62a3f390426f19ccb5be731d6fbecb97346f477e"
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "c0f4feda9f30388ef113e32d0ddd0e7717aff2eb"
   },
   "resceaux": [
     {
@@ -38,6 +38,13 @@
       "date": "2026-10-15",
       "avant": "46c5b80b61509d99e8891d885640cfc9f7176516",
       "apres": "3befdf13aad5d73c49ddcb5e69f6f82ad6dc8c89"
+    },
+    {
+      "test": "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts",
+      "raison": "R17 amendée par le lead (revue UX, F2) : mesures Chromium de la fenêtre, 898 px et défilement à 390 px, jamais sous l'échelle de la figure à 390 et 1440 px (portrait local 350×260 compris)",
+      "date": "2026-10-15",
+      "avant": "62a3f390426f19ccb5be731d6fbecb97346f477e",
+      "apres": "c0f4feda9f30388ef113e32d0ddd0e7717aff2eb"
     }
   ]
 }
