@@ -79,7 +79,7 @@ async function settle(f: ComponentFixture<unknown>): Promise<void> {
 
 const heroFigure = (root: HTMLElement) => root.querySelector('.hero figure') as HTMLElement | null;
 const heroImg = (root: HTMLElement) => root.querySelector('.hero figure img') as HTMLImageElement | null;
-const buttons = (root: HTMLElement) => Array.from(root.querySelectorAll('button[aria-label^="Agrandir"]')) as HTMLButtonElement[];
+const buttons = (root: HTMLElement) => Array.from(root.querySelectorAll('button.zoom-btn')) as HTMLButtonElement[];
 const heroBtn = (root: HTMLElement) => buttons(root).find((b) => b.closest('.hero')) ?? null;
 const panelBtn = (root: HTMLElement) => buttons(root).find((b) => !b.closest('.hero')) ?? null;
 const panelTitle = (root: HTMLElement) => Array.from(root.querySelectorAll('h2')).find((h) => h.textContent!.trim() === 'Fiche technique') ?? null;
@@ -417,12 +417,15 @@ describe('fiche unité — fiche technique en figure agrandissable (L120)', () =
   // ---------------------------------------------------------------- R13
   it('R13 — nom accessible du bouton d\'une fiche technique', async () => {
     const { root } = await mount();
-    expect(heroBtn(root)!.getAttribute('aria-label')).toBe('Agrandir la fiche technique de Escouade Tactique');
-    expect(panelBtn(root)!.getAttribute('aria-label')).toBe('Agrandir la fiche technique de Escouade Tactique');
+    // WCAG 2.5.3 : le nom commence par le texte visible de la légende
+    expect(heroBtn(root)!.getAttribute('aria-label')).toBe('Fiche technique · agrandir — Escouade Tactique');
+    expect(panelBtn(root)!.getAttribute('aria-label')).toBe('Fiche technique · agrandir — Escouade Tactique');
+    expect(heroBtn(root)!.getAttribute('aria-label')!.startsWith(heroBtn(root)!.textContent!.trim())).toBe(true);
   });
   it('R13 — nom accessible du bouton d\'un portrait', async () => {
     const { root } = await mount({ heads: { [A.id]: 404 } });
-    expect(heroBtn(root)!.getAttribute('aria-label')).toMatch(/^Agrandir l['’]illustration de Escouade Tactique$/);
+    expect(heroBtn(root)!.getAttribute('aria-label')).toBe('Illustration · agrandir — Escouade Tactique');
+    expect(heroBtn(root)!.getAttribute('aria-label')!.startsWith(heroBtn(root)!.textContent!.trim())).toBe(true);
   });
 
   // ---------------------------------------------------------------- R14

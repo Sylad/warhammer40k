@@ -7,7 +7,16 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "acecdd89cd2a748c2a1aeaa51342ecf884b5d167",
+    "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts": "e2ed21e618f8630714b1b15e508402bcdb6bcab5",
     "frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": "4a272ceea26d0d01bf69cd9f0ffb61b29e6c42c8"
-  }
+  },
+  "resceaux": [
+    {
+      "test": "frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts",
+      "raison": "R13 amendée par le lead (WCAG 2.5.3) : le nom accessible commence par le texte visible de la légende",
+      "date": "2026-10-15",
+      "avant": "acecdd89cd2a748c2a1aeaa51342ecf884b5d167",
+      "apres": "e2ed21e618f8630714b1b15e508402bcdb6bcab5"
+    }
+  ]
 }
