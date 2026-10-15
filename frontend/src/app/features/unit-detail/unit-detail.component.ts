@@ -35,6 +35,14 @@ const KEY_ICONS = ['⚜', '✠', '⚔'];
 
 const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
 
+/** Taille à l'écran du contenu d'une image (object-fit contain dans sa boîte) : 0 × 0 tant qu'elle n'est pas chargée. */
+function shownSize(img: HTMLImageElement | null | undefined): { w: number; h: number } {
+  if (!img?.naturalWidth || !img.naturalHeight) return { w: 0, h: 0 };
+  const r = img.getBoundingClientRect();
+  const scale = Math.min(r.width / img.naturalWidth, r.height / img.naturalHeight);
+  return { w: img.naturalWidth * scale, h: img.naturalHeight * scale };
+}
+
 @Component({
   selector: 'app-unit-detail',
   standalone: true,
@@ -329,7 +337,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
           </aside>
         </section>
         @if (zoomOpen() && heroImage(); as zsrc) {
-          <app-unit-datasheet-dialog [src]="zsrc" [alt]="imageAlt(u)" [label]="dialogLabel(u)"
+          <app-unit-datasheet-dialog [src]="zsrc" [alt]="imageAlt(u)" [label]="dialogLabel(u)" [minWidth]="zoomMin().w" [minHeight]="zoomMin().h"
                                      (closed)="closeZoom()" (failed)="imageFailed()" />
         }
       } @else {
@@ -372,6 +380,8 @@ export class UnitDetailComponent {
   /** L120 : nature de `heroImage` (fiche technique locale ou portrait du wiki), posée avec l'URL, remise à zéro avec elle. */
   readonly heroKind = signal<'fiche' | 'portrait' | null>(null);
   readonly zoomOpen = signal(false);
+  /** Taille à l'écran de l'image de la figure d'où la fenêtre a été ouverte : plancher de l'échelle dans la fenêtre (R17). */
+  readonly zoomMin = signal({ w: 0, h: 0 });
   private zoomOpener: HTMLElement | null = null;
   /** Génération du chargement de l'image : une réponse d'une unité précédente est ignorée (R6). */
   readonly longestWord = longestWord;
@@ -571,7 +581,9 @@ export class UnitDetailComponent {
   }
 
   openZoom(e: Event): void {
-    this.zoomOpener = e.currentTarget as HTMLElement;
+    const opener = e.currentTarget as HTMLElement;
+    this.zoomOpener = opener;
+    this.zoomMin.set(shownSize(opener.closest('figure, article')?.querySelector('img')));
     this.zoomOpen.set(true);
   }
 

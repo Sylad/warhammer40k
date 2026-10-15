@@ -153,6 +153,8 @@ localUnitImage({ datasheet: this.service.datasheetUrl(u.id), portrait: this.serv
   });
 ```
 
+Fenêtre d'agrandissement (`unit-datasheet-dialog.component.*`) : l'`<img class="ds-img">` est dans un conteneur défilable `.ds-scroll`. Sa taille se règle **en CSS seul** avec `max-width`/`min-width` (le min l'emporte sur le max) : au-dessus de 760 px `max-*: 100 %` et `min-width/height: var(--ds-min-w/h)` (taille de l'image dans la figure, mesurée à l'ouverture par `openZoom`) ; jusqu'à 760 px `max-width: 898px`, `min-width: max(100%, …)`. Garder `align-items: flex-start` sur le conteneur (sinon l'image s'étire à sa hauteur et s'affiche à 898 px) et ne pas remettre `max-width/max-height: 100 %` partout : c'est ce qui rétrécissait l'image.
+
 Une image qui ne se charge pas (`(error)`) appelle `imageFailed()` : figure, panneau et fenêtre d'agrandissement disparaissent, sans repli sur le wiki.
 
 Images locales d'unités, dans l'image Docker (`backend/public/`, copié en entier par le `Dockerfile`) :

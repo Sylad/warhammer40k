@@ -84,6 +84,33 @@ describe.skipIf(!built || !chromium)('fiche unité — focus rendu et hero sans 
     });
   }
 
+  it('F2 — un clic dans le vide du conteneur de l\'image (à côté d\'elle) ferme la fenêtre, un clic sur l\'image non', async () => {
+    await open(1440, true);
+    try {
+      await page.locator('.hero button.zoom-btn').click();
+      await page.locator('dialog.ds-dialog[open] img.ds-img').waitFor({ state: 'visible' });
+      await page.locator('dialog img.ds-img').click();
+      expect(await page.locator('dialog.ds-dialog[open]').count()).toBe(1);
+      await page.mouse.click(60, 450); // dans le conteneur (marge de 24 px), à gauche de l'image centrée
+      await page.locator('dialog.ds-dialog').waitFor({ state: 'detached' });
+    } finally { await ctx.close(); }
+  });
+
+  it('F2 — le clavier fait défiler l\'image à 390 px pendant que le focus reste sur Fermer', async () => {
+    await open(390, true);
+    try {
+      await page.locator('.hero button.zoom-btn').click();
+      await page.locator('dialog.ds-dialog[open] img.ds-img').waitFor({ state: 'visible' });
+      const pos = () => page.evaluate(() => { const c = document.querySelector('dialog .ds-scroll') as HTMLElement; return [c.scrollLeft, c.scrollTop]; });
+      expect(await pos()).toEqual([0, 0]);
+      await page.keyboard.press('ArrowRight');
+      await page.waitForFunction(() => (document.querySelector('dialog .ds-scroll') as HTMLElement).scrollLeft > 0);
+      await page.keyboard.press('End');
+      await page.waitForFunction(() => { const c = document.querySelector('dialog .ds-scroll') as HTMLElement; return c.scrollLeft + c.clientWidth >= c.scrollWidth - 1; });
+      expect(await page.evaluate(() => document.activeElement?.className)).toBe('ds-close');
+    } finally { await ctx.close(); }
+  });
+
   it('R5 — sans figure à 390 px, l\'écart entre le bas du hero et nav.tabs est de ≈ 26 px (pas 297 px)', async () => {
     await open(390, false);
     try {
