@@ -7,6 +7,7 @@ import { forkJoin, of, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { Faction, Unit, UnitType, Artwork, Video } from '../../core/models/models';
+import { longestWord } from '../../shared/longest-word';
 import { UnitDatasheetDialogComponent } from './unit-datasheet-dialog.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
@@ -55,7 +56,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
         <section class="hero hero-flicker" [class.hero--figure]="!!heroImage()" [style.--hero-img]="unitImg()">
           <div class="dust-motes" aria-hidden="true"></div>
           <div class="hero-text">
-            <h1>{{ u.nom }}</h1>
+            <h1 [style.--longest-word]="longestWord(u.nom)">{{ u.nom }}</h1>
             <div class="hero-badges">
               @for (b of badges(u, f); track b.label) {
                 <span class="ub" [class]="b.cls">{{ b.label }}</span>
@@ -371,6 +372,7 @@ export class UnitDetailComponent {
   readonly zoomOpen = signal(false);
   private zoomOpener: HTMLElement | null = null;
   /** Génération du chargement de l'image : une réponse d'une unité précédente est ignorée (R6). */
+  readonly longestWord = longestWord;
   private imageRun = 0;
   readonly sheetUrl = computed(() => this.heroKind() === 'fiche' ? this.heroImage() : null);
   readonly loreImage = signal<string | null>(null);
