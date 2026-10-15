@@ -95,4 +95,35 @@ describe('fiche unité — correctifs de revue (L120)', () => {
     const sans = textRules.filter((r) => r.selector.includes('.hero:not(.hero--figure) .hero-text'));
     expect(sans.map((r) => [r.media, r.maxWidth])).toEqual([['', '56%'], ['(max-width: 1280px)', '80%'], ['(max-width: 760px)', '100%']]);
   });
+
+  it('C3 — l\'image échoue fenêtre ouverte : la fenêtre se ferme et le focus est rendu au titre du hero (tabindex -1), pas à body', async () => {
+    const { f, root } = await mount(200);
+    (root.querySelector('.hero button.zoom-btn') as HTMLButtonElement).click();
+    await settle(f);
+    expect(document.querySelector('dialog')).not.toBeNull();
+    (document.querySelector('dialog img') as HTMLImageElement).dispatchEvent(new Event('error'));
+    await settle(f);
+    expect(document.querySelector('dialog')).toBeNull();
+    expect(root.querySelector('.hero figure')).toBeNull();
+    const h1 = root.querySelector('.hero h1') as HTMLElement;
+    expect(h1.getAttribute('tabindex')).toBe('-1');
+    expect(document.activeElement).toBe(h1);
+  });
+
+  it('C3 — l\'image échoue pendant que le focus est sur le bouton d\'agrandissement (fenêtre fermée) : le focus va au titre', async () => {
+    const { f, root } = await mount(200);
+    (root.querySelector('.hero button.zoom-btn') as HTMLButtonElement).focus();
+    (root.querySelector('.hero figure img') as HTMLImageElement).dispatchEvent(new Event('error'));
+    await settle(f);
+    expect(document.activeElement).toBe(root.querySelector('.hero h1'));
+  });
+
+  it('C3 — l\'image échoue sans que le focus soit dans la figure : le focus ne bouge pas', async () => {
+    const { f, root } = await mount(200);
+    const other = root.querySelector('.back-btn') as HTMLElement;
+    other.focus();
+    (root.querySelector('.hero figure img') as HTMLImageElement).dispatchEvent(new Event('error'));
+    await settle(f);
+    expect(document.activeElement).toBe(other);
+  });
 });

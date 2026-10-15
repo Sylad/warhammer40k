@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -56,7 +56,7 @@ const DEFAULT_EQUIPMENT_ICONS = ['⌖', '⚔', '◈', '※'];
         <section class="hero hero-flicker" [class.hero--figure]="!!heroImage()" [style.--hero-img]="unitImg()">
           <div class="dust-motes" aria-hidden="true"></div>
           <div class="hero-text">
-            <h1 [style.--longest-word]="longestWord(u.nom)">{{ u.nom }}</h1>
+            <h1 tabindex="-1" [style.--longest-word]="longestWord(u.nom)">{{ u.nom }}</h1>
             <div class="hero-badges">
               @for (b of badges(u, f); track b.label) {
                 <span class="ub" [class]="b.cls">{{ b.label }}</span>
@@ -352,6 +352,7 @@ export class UnitDetailComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   /** L39 : icône de faction introuvable (404 sur le wiki) → symbole de la faction à la place. */
   readonly brokenIcons = signal(new Set<string>());
@@ -585,9 +586,17 @@ export class UnitDetailComponent {
 
   /** R9 : l'image ne se charge pas — figure, panneau et fenêtre disparaissent, sans repli sur le wiki. */
   imageFailed(): void {
+    // Fenêtre ouverte, ou focus sur le bouton d'agrandissement : ils disparaissent avec la figure et le focus
+    // tomberait sur body (WCAG 2.4.3, C3 « la fenêtre se ferme, focus rendu ») : il va au titre, cible stable.
+    const active = document.activeElement;
+    const lost = this.zoomOpen() || (!!active && !!this.host.nativeElement.querySelector('.hero-figure')?.contains(active));
     this.setHero(null, null);
     this.zoomOpen.set(false);
     this.zoomOpener = null;
+    if (lost) {
+      this.cdr.detectChanges();
+      this.host.nativeElement.querySelector<HTMLElement>('.hero h1')?.focus();
+    }
   }
 
   unitImg(): string {
