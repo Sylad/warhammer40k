@@ -1125,6 +1125,7 @@ lots:
       - { date: 2026-10-15, text: "Hypothèses (fiche unit-detail-datasheet) — R15 : Les autres usages de l'image de l'unité sont inchangés : l'ambiance floutée derrière le hero, la vignette « Équipement standard » (.equip-figure) et le repli d… ; si faux : Si la fiche technique ne doit plus servir de fond à .equip-figure et aux variantes, il faut un autre visuel ou un dégradé pour ces blocs : changement de gabari…" }
       - { date: 2026-10-15, text: "test d'acceptation rescellé (frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts, fiche inchangée) : R13 amendée par le lead (WCAG 2.5.3) : le nom accessible commence par le texte visible de la légende" }
       - { date: 2026-10-15, text: "test d'acceptation rescellé (frontend/src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts, fiche inchangée) : R13 amendée par le lead (WCAG 2.5.3) : le nom accessible commence par le texte visible de la légende" }
+      - { date: 2026-10-15, text: "test d'acceptation rescellé (frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts, fiche inchangée) : R14 et R16 amendées par le lead (revue UX, F1) : un portrait local (backend/public/portraits/) passe avant le portrait du wiki, seul un scan 898×596 est une fiche technique (C2)" }
     started: 2026-10-15
   - id: L121
     title: "Fiche unité : onglets sans rôle ni état (aria-selected/aria-current absents, nav sans aria-label) — WCAG 4.1.2 (revue UX L4)"
