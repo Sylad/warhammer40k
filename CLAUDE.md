@@ -142,12 +142,18 @@ Sylvain est fan du **lore narratif** (Primarques, Saints, Phaerons, scènes épi
 Pattern HEAD-check + fallback wiki sur `unit-detail` et `faction-detail` :
 
 ```ts
-const datasheetUrl = `/api/images/datasheets/${u.id}`;
+const run = ++this.imageRun;               // garde : une réponse tardive d'une fiche précédente est ignorée
+const datasheetUrl = this.service.datasheetUrl(u.id);   // `/api/images/datasheets/${u.id}`
 fetch(datasheetUrl, { method: 'HEAD' }).then(head => {
-  if (head.ok) this.heroImage.set(datasheetUrl);
-  else this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe(...);
+  if (run !== this.imageRun) return;
+  if (head.ok) this.setHero(datasheetUrl, 'fiche');      // setHero(url, kind) : image + nature ('fiche' | 'portrait')
+  else this.service.getWikiImage(u.wikiQuery ?? u.nom).subscribe(res => {
+    if (run === this.imageRun && res.imageUrl) this.setHero(res.imageUrl, 'portrait');
+  });
 });
 ```
+
+Une image qui ne se charge pas (`(error)`) appelle `imageFailed()` : figure, panneau et fenêtre d'agrandissement disparaissent, sans repli sur le wiki.
 
 Datasheets (`backend/public/datasheets/<unit-id>.jpg`, 119/133 unités) servies via `GET /api/images/datasheets/:unitId`. **Pour ajouter une datasheet** : déposer le JPEG + rebuild image backend. Pas de code à toucher, détection auto.
 
