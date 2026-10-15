@@ -1256,6 +1256,7 @@ lots:
     created: 2026-10-14
   - id: L133
     title: "Fiche unité : panneau Aperçu « Fiche technique » en cadre 1:1 (R7) laisse 287 px vides à 1440 et 103 px à 390 sous un scan 3:2 — cadre au rapport de l'image (revue UX L120, Nielsen 8)"
+    public: "Fiche unité : le panneau Aperçu épouse le format de la fiche technique"
     status: todo
     estimate: 0.25
     visible: true
