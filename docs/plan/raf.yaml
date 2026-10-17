@@ -1308,6 +1308,11 @@ lots:
     visible: true
     screen: component
     created: 2026-10-17
+  - id: L137
+    title: "QA 17-10 : attentes docs/qa/expectations.md ## /romans après L5 — h1 « Romans Black Library » ; nav.tabs nommée « Affichage des séries », 4 onglets tous visibles à 1440, 390 et 320, un seul aria-pressed ; tri (select « Trier par ») désactivé dans Ordre de lecture avec sa note ; recherche nommée ; 27 lettres avec aria-pressed, lettres sans série désactivées ; « N séries affichées sur 38 » au-dessus de Charger plus ; Entrée sur « Voir la couverture de <série> » ouvre un role=dialog aria-modal nommé, Échap rend le focus ; état vide nomme le filtre avec « Effacer les filtres » ; never: défilement horizontal à 390 et 320 ; api: /api/series, /api/wiki-image?q= (QA L5 conforme)"
+    status: todo
+    estimate: 0.1
+    created: 2026-10-17
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
