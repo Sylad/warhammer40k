@@ -307,6 +307,20 @@
       font-size: 12px;
       color: rgba(232, 222, 202, 0.6);
     }
+    .card-epoque {
+      font-size: 12px;
+      color: rgba(240, 210, 118, 0.85);
+    }
+    .continue-note {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 14px;
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: rgba(232, 222, 202, 0.8);
+      .empty-reset { padding: 6px 14px; font-size: 11px; }
+    }
     .card-desc {
       font-size: 12.5px;
       line-height: 1.6;

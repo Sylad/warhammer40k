@@ -94,7 +94,7 @@ const PAGE_SIZE = 8;
           <button class="tab"
             [class.active]="activeTab() === t.key"
             [attr.aria-pressed]="activeTab() === t.key"
-            (click)="activeTab.set(t.key)">
+            (click)="selectTab(t.key)">
             {{ t.label }}
           </button>
         }
@@ -114,7 +114,7 @@ const PAGE_SIZE = 8;
             <span class="caret">▾</span>
           </div>
           @if (activeTab() === 'order') {
-            <span class="sort-note">L'ordre de lecture impose l'ordre des séries.</span>
+            <span class="sort-note">L'ordre de lecture suit la chronologie : les séries sont classées par époque.</span>
           }
         </div>
 
@@ -138,7 +138,14 @@ const PAGE_SIZE = 8;
 
         <!-- MAIN -->
         <div class="main">
-          <div class="grid" id="liste-series" tabindex="-1" role="region" aria-label="Liste des séries">
+          @if (continuing()) {
+            <p class="continue-note">
+              Séries commencées et non terminées, les plus avancées d'abord.
+              <button type="button" class="empty-reset" (click)="selectTab('library')">Voir toute ma bibliothèque</button>
+            </p>
+          }
+          <div class="grid" id="liste-series" tabindex="-1" role="region" aria-label="Liste des séries"
+               [attr.aria-busy]="series.pending()">
             @for (s of visibleSeries(); track s.id) {
               <article class="serie-card">
                 <button class="card-image" type="button"
@@ -152,6 +159,7 @@ const PAGE_SIZE = 8;
                 <div class="card-body">
                   <h3 class="card-title">{{ s.titre }}</h3>
                   <div class="card-author">{{ formatAuthors(s.auteurs) }}</div>
+                  <div class="card-epoque">{{ s.epoque }}</div>
                   <p class="card-desc">{{ s.description }}</p>
                   <div class="card-count">
                     <span class="count-ico">📖</span>
@@ -175,7 +183,11 @@ const PAGE_SIZE = 8;
               </article>
             }
             @empty {
-              @if (!series.failed()) {
+              @if (series.pending()) {
+                <div class="empty" role="status">
+                  <p>Chargement des séries…</p>
+                </div>
+              } @else if (!series.failed()) {
                 <div class="empty" role="status">
                   <p>{{ emptyMessage() }}</p>
                   @if (hasFilters()) {
@@ -210,7 +222,7 @@ const PAGE_SIZE = 8;
                   <circle cx="40" cy="40" r="34"
                           fill="none" stroke="url(#donutGold)" stroke-width="8"
                           stroke-dasharray="213.6"
-                          [attr.stroke-dashoffset]="213.6 - (213.6 * progressionPercent() / 100)"
+                          [attr.stroke-dashoffset]="213.6 - (213.6 * (statsAvailable() ? progressionPercent() : 0) / 100)"
                           stroke-linecap="round"
                           transform="rotate(-90 40 40)" />
                   <defs>
@@ -221,17 +233,21 @@ const PAGE_SIZE = 8;
                   </defs>
                 </svg>
                 <div class="donut-label">
-                  <div class="donut-pct">{{ progressionPercent() }}%</div>
-                  <div class="donut-sub">terminé</div>
+                  @if (statsAvailable()) {
+                    <div class="donut-pct">{{ progressionPercent() }}%</div>
+                    <div class="donut-sub">terminé</div>
+                  } @else {
+                    <div class="donut-pct">—</div>
+                  }
                 </div>
               </div>
               <ul class="prog-list">
-                <li><span class="dot d-read"></span><strong>{{ progressionStats().read }}</strong> Lus</li>
-                <li><span class="dot d-cur"></span><strong>{{ progressionStats().inProgress }}</strong> En cours</li>
-                <li><span class="dot d-tbr"></span><strong>{{ progressionStats().tbr }}</strong> À lire</li>
+                <li><span class="dot d-read"></span><strong>{{ stat(progressionStats().read) }}</strong> Lus</li>
+                <li><span class="dot d-cur"></span><strong>{{ stat(progressionStats().inProgress) }}</strong> En cours</li>
+                <li><span class="dot d-tbr"></span><strong>{{ stat(progressionStats().tbr) }}</strong> À lire</li>
               </ul>
             </div>
-            <div class="prog-total">Total : {{ progressionStats().total }} romans</div>
+            <div class="prog-total">Total : {{ stat(progressionStats().total) }} romans</div>
           </div>
 
           <div class="panel">
@@ -305,6 +321,11 @@ export class SeriesComponent {
   readonly selectedLetter = signal<string | null>(null);
   readonly sort = signal<SortKey>('az');
   readonly visibleCount = signal<number>(PAGE_SIZE);
+  /** « Continuer ma lecture » : l'onglet Ma bibliothèque restreint aux séries commencées et non terminées. */
+  readonly continuing = signal(false);
+
+  /** Les compteurs n'existent qu'une fois les séries reçues : ni pendant le chargement, ni après une erreur. */
+  readonly statsAvailable = computed(() => !this.series.pending() && !this.series.failed());
 
   constructor() {
     effect(() => {
@@ -341,11 +362,11 @@ export class SeriesComponent {
     let list = this.series().slice();
     const tab = this.activeTab();
     if (tab === 'library') {
-      list = list.filter(s => (s.readBooks ?? 0) > 0);
+      list = list.filter(s => this.continuing() ? isInProgress(s) : (s.readBooks ?? 0) > 0);
     } else if (tab === 'tbr') {
       list = list.filter(s => (s.readBooks ?? 0) === 0);
     } else if (tab === 'order') {
-      list = list.slice().sort((a, b) => a.epoque.localeCompare(b.epoque));
+      list = list.slice().sort((a, b) => a.epoqueOrdre - b.epoqueOrdre || a.titre.localeCompare(b.titre));
     }
 
     const query = this.searchQuery().trim().toLowerCase();
@@ -387,6 +408,7 @@ export class SeriesComponent {
     const out: string[] = [];
     const tab = this.activeTab();
     if (tab !== 'all') out.push(`l'onglet « ${this.tabs.find(t => t.key === tab)!.label} »`);
+    if (this.continuing()) out.push('« Continuer ma lecture »');
     const query = this.searchQuery().trim();
     if (query) out.push(`la recherche « ${query} »`);
     const letter = this.selectedLetter();
@@ -411,10 +433,7 @@ export class SeriesComponent {
     const series = this.series();
     const total = series.reduce((acc, s) => acc + s.nbLivres, 0);
     const read = series.reduce((acc, s) => acc + (s.readBooks ?? 0), 0);
-    const inProgress = series.filter(s => {
-      const r = s.readBooks ?? 0;
-      return r > 0 && r < s.nbLivres;
-    }).length;
+    const inProgress = series.filter(isInProgress).length;
     const tbr = total - read;
     return { total, read, inProgress, tbr };
   });
@@ -439,7 +458,18 @@ export class SeriesComponent {
     this.visibleCount.set(PAGE_SIZE);
   }
 
+  /** Chiffre d'un compteur de la colonne latérale, « — » tant qu'il n'est pas connu. */
+  stat(n: number): string {
+    return this.statsAvailable() ? String(n) : '—';
+  }
+
+  selectTab(key: TabKey): void {
+    this.activeTab.set(key);
+    this.continuing.set(false);
+  }
+
   resetFilters(): void {
+    this.continuing.set(false);
     this.activeTab.set('all');
     this.searchQuery.set('');
     this.selectedLetter.set(null);
@@ -455,14 +485,15 @@ export class SeriesComponent {
   }
 
   showReadingOrder(): void {
-    this.activeTab.set('order');
+    this.selectTab('order');
     this.selectedLetter.set(null);
     this.visibleCount.set(PAGE_SIZE);
     this.backToList();
   }
 
   showInProgress(): void {
-    this.activeTab.set('library');
+    this.selectTab('library');
+    this.continuing.set(true);
     this.sort.set('progression');
     this.selectedLetter.set(null);
     this.visibleCount.set(PAGE_SIZE);
@@ -551,6 +582,12 @@ export class SeriesComponent {
   }
 
   closeLightbox(): void { this.lightbox.set(null); }
+}
+
+/** Série commencée et pas terminée. */
+function isInProgress(s: Serie): boolean {
+  const r = s.readBooks ?? 0;
+  return r > 0 && r < s.nbLivres;
 }
 
 /** Lettre d'index d'un titre (article et accent écartés) ; « # » pour un titre qui ne commence pas par une lettre. */
