@@ -85,7 +85,7 @@ const PAGE_SIZE = 8;
       </header>
 
       @if (series.failed()) {
-        <app-load-error (retry)="series.retry()" />
+        <app-load-error (retry)="retrySeries()" />
       }
 
       <!-- TABS -->
@@ -486,7 +486,7 @@ export class SeriesComponent {
     }, { injector: this.injector });
   }
 
-  /** « Réessayer » de la liste : le bouton disparaît avec l'erreur, le focus reste dans le bloc de la liste. */
+  /** « Réessayer » (bandeau d'erreur ou liste) : le bouton disparaît avec l'erreur, le focus passe au bloc de la liste (WCAG 2.4.3). */
   retrySeries(): void {
     this.series.retry();
     this.focusBlock(false);
@@ -498,6 +498,7 @@ export class SeriesComponent {
     this.searchQuery.set('');
     this.selectedLetter.set(null);
     this.visibleCount.set(PAGE_SIZE);
+    this.focusBlock(false);
   }
 
   loadMore() {
