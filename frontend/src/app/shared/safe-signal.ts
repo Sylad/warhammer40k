@@ -12,7 +12,13 @@ export function isNotFound(err: unknown): boolean {
  * Signal de données qui ne lève jamais : `failed()` dit si le flux a échoué, `notFound()` si c'est
  * une 404 (sous-ensemble de `failed()`), `retry()` le relance.
  */
-export type SafeSignal<T> = Signal<T> & { readonly failed: Signal<boolean>; readonly notFound: Signal<boolean>; retry(): void };
+export type SafeSignal<T> = Signal<T> & {
+  readonly failed: Signal<boolean>;
+  readonly notFound: Signal<boolean>;
+  /** Vrai tant que le flux n'a ni émis ni échoué (premier chargement, ou `retry()` en cours) : `initialValue` n'est alors pas une réponse. */
+  readonly pending: Signal<boolean>;
+  retry(): void;
+};
 
 /**
  * L38 — `toSignal` relance l'erreur du flux à chaque lecture du signal : sur une 404/500 ou un
@@ -33,19 +39,20 @@ export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Obse
   const project = (typeof a === 'function' && arguments.length > 2 ? a : null) as ((p: P) => Observable<T>) | null;
   const failed = signal(false);
   const notFound = signal(false);
+  const pending = signal(true);
   const attempt$ = new BehaviorSubject<void>(undefined);
   const guarded$: Observable<T | I> = project
     ? source$.pipe(switchMap(p => {
-        failed.set(false); notFound.set(false);
+        failed.set(false); notFound.set(false); pending.set(true);
         return project(p).pipe(
-          map((v): T | I => { failed.set(false); notFound.set(false); return v; }),
-          catchError((err) => { failed.set(true); notFound.set(isNotFound(err)); return of(initialValue as T | I); }),
+          map((v): T | I => { failed.set(false); notFound.set(false); pending.set(false); return v; }),
+          catchError((err) => { failed.set(true); notFound.set(isNotFound(err)); pending.set(false); return of(initialValue as T | I); }),
           startWith(initialValue as T | I),
         );
       }))
     : (source$ as unknown as Observable<T>).pipe(
-        map((v): T | I => { failed.set(false); notFound.set(false); return v; }),
-        catchError((err) => { failed.set(true); notFound.set(isNotFound(err)); return of(initialValue as T | I); }),
+        map((v): T | I => { failed.set(false); notFound.set(false); pending.set(false); return v; }),
+        catchError((err) => { failed.set(true); notFound.set(isNotFound(err)); pending.set(false); return of(initialValue as T | I); }),
         startWith(initialValue as T | I),
       );
   const value = toSignal(
@@ -55,7 +62,8 @@ export function toSafeSignal<P, T, I>(source$: Observable<P>, a: ((p: P) => Obse
   return Object.assign(() => value(), {
     failed: failed.asReadonly(),
     notFound: notFound.asReadonly(),
-    retry: () => { failed.set(false); notFound.set(false); attempt$.next(); },
+    pending: pending.asReadonly(),
+    retry: () => { failed.set(false); notFound.set(false); pending.set(true); attempt$.next(); },
   }) as SafeSignal<T | I>;
 }
 

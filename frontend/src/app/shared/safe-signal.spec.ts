@@ -46,3 +46,27 @@ describe('toSafeSignal', () => {
     expect(s()).toEqual({ a: 1 });
   });
 });
+
+describe('toSafeSignal — pending() (L136)', () => {
+  it('R1 — pending() est vrai tant que le flux n’a rien émis, faux après la valeur', () => {
+    const src = new Subject<number[]>();
+    const s = inCtx(() => toSafeSignal(src, [] as number[]));
+    expect(s.pending()).toBe(true);
+    src.next([]);
+    expect(s.pending()).toBe(false);
+  });
+
+  it('R2 — pending() est faux après un échec, et redevient vrai pendant un retry()', () => {
+    const retry$ = new Subject<string>();
+    let calls = 0;
+    const s = inCtx(() => toSafeSignal(
+      new Observable<string>((o) => { calls++; if (calls === 1) o.error(new Error('x')); else retry$.subscribe(o); }),
+      'init' as string));
+    expect(s.failed()).toBe(true);
+    expect(s.pending()).toBe(false);
+    s.retry();
+    expect(s.pending()).toBe(true);
+    retry$.next('ok');
+    expect(s.pending()).toBe(false);
+  });
+});
