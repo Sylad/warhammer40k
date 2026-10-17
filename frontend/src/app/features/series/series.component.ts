@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect } from '@angular/core';
+import { Component, ElementRef, Injector, afterNextRender, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -71,6 +71,7 @@ const PAGE_SIZE = 8;
             <span class="s-icon">⌕</span>
             <input
               type="text"
+              aria-label="Rechercher un roman, une série ou un auteur"
               [ngModel]="searchQuery()"
               (ngModelChange)="searchQuery.set($event)"
               placeholder="Rechercher un roman, une série, un auteur…" />
@@ -87,10 +88,11 @@ const PAGE_SIZE = 8;
       }
 
       <!-- TABS -->
-      <nav class="tabs">
+      <nav class="tabs" aria-label="Affichage des séries">
         @for (t of tabs; track t.key) {
           <button class="tab"
             [class.active]="activeTab() === t.key"
+            [attr.aria-pressed]="activeTab() === t.key"
             (click)="activeTab.set(t.key)">
             {{ t.label }}
           </button>
@@ -100,23 +102,29 @@ const PAGE_SIZE = 8;
       <!-- TOOLBAR -->
       <div class="toolbar">
         <div class="t-block">
-          <span class="t-label">Trier par</span>
+          <label class="t-label" for="tri-series">Trier par</label>
           <div class="select-wrap">
-            <select [ngModel]="sort()" (ngModelChange)="sort.set($event)">
+            <select id="tri-series" [ngModel]="sort()" (ngModelChange)="sort.set($event)"
+                    [disabled]="activeTab() === 'order'">
               <option value="az">A — Z</option>
               <option value="count">Nombre de livres</option>
               <option value="progression">Progression</option>
             </select>
             <span class="caret">▾</span>
           </div>
+          @if (activeTab() === 'order') {
+            <span class="sort-note">L'ordre de lecture impose l'ordre des séries.</span>
+          }
         </div>
 
         <div class="t-block letter-block">
-          <span class="t-label">Filtrer par lettre</span>
-          <div class="letters">
+          <span class="t-label" id="lettres-label">Filtrer par lettre</span>
+          <div class="letters" role="group" aria-labelledby="lettres-label">
             @for (l of alphabet; track l) {
               <button class="letter"
                 [class.active]="selectedLetter() === l"
+                [attr.aria-pressed]="selectedLetter() === l"
+                [disabled]="!letterEnabled(l)"
                 (click)="toggleLetter(l)">{{ l }}</button>
             }
           </div>
@@ -129,12 +137,12 @@ const PAGE_SIZE = 8;
 
         <!-- MAIN -->
         <div class="main">
-          <div class="grid">
+          <div class="grid" id="liste-series" tabindex="-1" role="region" aria-label="Liste des séries">
             @for (s of visibleSeries(); track s.id) {
               <article class="serie-card">
                 <button class="card-image" type="button"
                      [style.background-image]="wikiImages().get(s.id) ? 'url(' + wikiImages().get(s.id) + ')' : ''"
-                     (click)="openLightbox(s)" aria-label="Voir cover en grand">
+                     (click)="openLightbox(s)" [attr.aria-label]="'Voir la couverture de ' + s.titre">
                   <div class="card-overlay"></div>
                   <span class="card-zoom">⛶</span>
                 </button>
@@ -165,13 +173,19 @@ const PAGE_SIZE = 8;
             }
             @empty {
               @if (!series.failed()) {
-                <div class="empty">Aucune série ne correspond à votre recherche.</div>
+                <div class="empty" role="status">
+                  <p>{{ emptyMessage() }}</p>
+                  @if (hasFilters()) {
+                    <button type="button" class="empty-reset" (click)="resetFilters()">Effacer les filtres</button>
+                  }
+                </div>
               }
             }
           </div>
 
           @if (filteredSeries().length > visibleCount()) {
             <div class="load-more-wrap">
+              <p class="lm-count">{{ visibleSeries().length }} séries affichées sur {{ filteredSeries().length }}</p>
               <button class="load-more" (click)="loadMore()">
                 Charger plus de séries
                 <span class="lm-arrow">▾</span>
@@ -268,6 +282,8 @@ const PAGE_SIZE = 8;
 })
 export class SeriesComponent {
   private readonly service = inject(WarhammerService);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
 
   readonly tabs = TABS;
   readonly alphabet = ALPHABET;
@@ -317,7 +333,8 @@ export class SeriesComponent {
     return url ? `url(${url})` : '';
   }
 
-  readonly filteredSeries = computed<Serie[]>(() => {
+  /** Série filtrée par onglet et recherche, avant la lettre : sert aussi à savoir quelles lettres ont des séries. */
+  private readonly beforeLetter = computed<Serie[]>(() => {
     let list = this.series().slice();
     const tab = this.activeTab();
     if (tab === 'library') {
@@ -337,16 +354,18 @@ export class SeriesComponent {
         s.tags.some(t => t.toLowerCase().includes(query))
       );
     }
+    return list;
+  });
 
+  private readonly lettersWithSeries = computed(() => new Set(this.beforeLetter().map(s => firstLetter(s.titre))));
+
+  readonly filteredSeries = computed<Serie[]>(() => {
+    let list = this.beforeLetter();
     const letter = this.selectedLetter();
-    if (letter && letter !== '#') {
-      list = list.filter(s => {
-        const first = stripPrefix(s.titre).charAt(0).toUpperCase();
-        return first === letter;
-      });
-    }
+    if (letter) list = list.filter(s => firstLetter(s.titre) === letter);
 
-    if (tab !== 'order') {
+    if (this.activeTab() !== 'order') {
+      list = list.slice();
       const sortKey = this.sort();
       if (sortKey === 'az') {
         list.sort((a, b) => stripPrefix(a.titre).localeCompare(stripPrefix(b.titre)));
@@ -358,6 +377,27 @@ export class SeriesComponent {
     }
 
     return list;
+  });
+
+  /** Filtres actifs, nommés pour l'état vide : onglet de filtrage, recherche, lettre. */
+  readonly activeFilters = computed<string[]>(() => {
+    const out: string[] = [];
+    const tab = this.activeTab();
+    if (tab === 'library' || tab === 'tbr') out.push(`l'onglet « ${this.tabs.find(t => t.key === tab)!.label} »`);
+    const query = this.searchQuery().trim();
+    if (query) out.push(`la recherche « ${query} »`);
+    const letter = this.selectedLetter();
+    if (letter) out.push(`la lettre « ${letter} »`);
+    return out;
+  });
+
+  readonly hasFilters = computed(() => this.activeFilters().length > 0);
+
+  readonly emptyMessage = computed(() => {
+    const filters = this.activeFilters();
+    return filters.length
+      ? `Aucune série ne correspond à ${filters.join(' + ')}.`
+      : 'Aucune série à afficher.';
   });
 
   readonly visibleSeries = computed<Serie[]>(() =>
@@ -386,23 +426,36 @@ export class SeriesComponent {
     this.series().slice().sort((a, b) => b.nbLivres - a.nbLivres).slice(0, 5)
   );
 
+  /** Une lettre sans série (dans l'onglet et la recherche en cours) est inutilisable, sauf si elle est déjà active. */
+  letterEnabled(l: string): boolean {
+    return this.selectedLetter() === l || this.lettersWithSeries().has(l);
+  }
+
   toggleLetter(l: string) {
-    if (this.selectedLetter() === l || l === '#') {
-      this.selectedLetter.set(null);
-    } else {
-      this.selectedLetter.set(l);
-    }
+    this.selectedLetter.set(this.selectedLetter() === l ? null : l);
+    this.visibleCount.set(PAGE_SIZE);
+  }
+
+  resetFilters(): void {
+    this.activeTab.set('all');
+    this.searchQuery.set('');
+    this.selectedLetter.set(null);
     this.visibleCount.set(PAGE_SIZE);
   }
 
   loadMore() {
+    const shown = this.visibleCount();
     this.visibleCount.update(n => n + PAGE_SIZE);
+    afterNextRender(() => {
+      this.host.nativeElement.querySelectorAll<HTMLElement>('.serie-card')[shown]?.querySelector<HTMLElement>('.card-image')?.focus();
+    }, { injector: this.injector });
   }
 
   showReadingOrder(): void {
     this.activeTab.set('order');
     this.selectedLetter.set(null);
     this.visibleCount.set(PAGE_SIZE);
+    this.backToList();
   }
 
   showInProgress(): void {
@@ -410,6 +463,17 @@ export class SeriesComponent {
     this.sort.set('progression');
     this.selectedLetter.set(null);
     this.visibleCount.set(PAGE_SIZE);
+    this.backToList();
+  }
+
+  /** Dès que la colonne latérale passe sous la liste (≤ 1100 px), l'action rapide ramène à la liste et y place le focus. */
+  private backToList(): void {
+    if (typeof window.matchMedia !== 'function' || !window.matchMedia('(max-width: 1100px)').matches) return;
+    afterNextRender(() => {
+      const list = this.host.nativeElement.querySelector<HTMLElement>('#liste-series');
+      list?.scrollIntoView({ block: 'start' });
+      list?.focus({ preventScroll: true });
+    }, { injector: this.injector });
   }
 
   formatAuthors(authors: string[]): string {
@@ -484,6 +548,12 @@ export class SeriesComponent {
   }
 
   closeLightbox(): void { this.lightbox.set(null); }
+}
+
+/** Lettre d'index d'un titre (article et accent écartés) ; « # » pour un titre qui ne commence pas par une lettre. */
+function firstLetter(titre: string): string {
+  const c = stripPrefix(titre).normalize('NFD').charAt(0).toUpperCase();
+  return /[A-Z]/.test(c) ? c : '#';
 }
 
 function stripPrefix(t: string): string {
