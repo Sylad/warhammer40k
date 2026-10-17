@@ -1331,6 +1331,7 @@ lots:
     screen: component
     created: 2026-10-17
     started: 2026-10-17
+    review: { date: 2026-10-17, verdict: "compliant — orchestré (vague 2026-10-17-1650, 0 passe(s) de correction)", commit: cc4466b822e0f1cda6f6fff623e674a16ff9468e }
   - id: L139
     title: "Romans à 320 px : le bandeau .hero (280 px, overflow hidden) coupe de 22 px l'accroche, la description et le champ de recherche (bord droit 322 pour 300) — contenir .hero-text dans sa colonne, attente « never: … 320 only » dans docs/qa/expectations.md ; libellé d'époque de Gardiens du Trône « de la 13e Croisade Noire » ; attente des lettres « au plus une à true » (QA prod 17-10)"
     public: "Romans : bandeau lisible sur petit téléphone"
