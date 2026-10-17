@@ -22,6 +22,8 @@ libellés en capitales).
 ## /factions/:id
 Visiter space-marines.
 - shows: le nom de la faction en titre ; au moins un lien vers une fiche d'unité
+- never: pour une faction sans sous-faction (visiter inquisition) : une section ou un lien d'ancre « sous-factions », un compteur « 0 », un message d'erreur
+- api: `/api/subfactions?factionId=inquisition` répond `[]` (200), ce n'est pas une erreur (QA prod 15-10, L135)
 
 - never: pour un identifiant inconnu (visiter /factions/n-existe-pas) : « Chargement… » sans fin ; le titre est alors « Faction introuvable » avec un lien vers /factions et sans bouton Réessayer (L97)
 

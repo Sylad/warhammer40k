@@ -236,6 +236,46 @@ describe('fiche faction — sans unité (L95)', () => {
   });
 });
 
+// L135 — une faction sans sous-faction (inquisition) : /api/subfactions?factionId= répond [],
+// la fiche n'a ni section, ni lien d'ancre, ni compteur, et n'affiche pas d'erreur.
+describe('fiche faction — sans sous-faction (L135)', () => {
+  async function render(subFactions: unknown[]) {
+    const service = fakeWarhammerService({
+      getFaction: () => of({ id: 'inquisition', nom: 'Inquisition', alignement: 'Imperium', symbole: '✠', description: 'd', couleurThematique: '#7b1113' }),
+      getUnits: () => of([{ id: 'inquisitor', nom: 'Inquisiteur', type: 'Personnage', factionId: 'inquisition' }]),
+      getSubFactions: () => of(subFactions),
+      videos$: of([]),
+      artworks$: of([]),
+    });
+    await setupTestBed([FactionDetailComponent], [
+      provideRouter([]),
+      { provide: WarhammerService, useValue: service },
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'inquisition' })), snapshot: { fragment: null } } },
+    ]);
+    const f = TestBed.createComponent(FactionDetailComponent);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    return f.nativeElement as HTMLElement;
+  }
+
+  it('R1 — aucune sous-faction : ni section, ni carte, ni lien d’ancre, ni message d’erreur', async () => {
+    const el = await render([]);
+    expect(el.querySelector('h1')!.textContent).toContain('Inquisition');
+    expect(el.querySelector('#subfactions')).toBeNull();
+    expect(el.querySelector('.sf-card')).toBeNull();
+    expect(el.querySelector('a[href="#subfactions"]')).toBeNull();
+    expect(el.querySelector('app-load-error')).toBeNull();
+    expect(el.querySelector('a[href^="/units/"]')).not.toBeNull();
+  });
+
+  it('R1 — des sous-factions : section, carte et lien d’ancre présents', async () => {
+    const el = await render([{ id: 'ordo-xenos', nom: 'Ordo Xenos', factionId: 'inquisition', type: 'ordre' }]);
+    expect(el.querySelector('#subfactions')).not.toBeNull();
+    expect(el.querySelector('a[href="#subfactions"]')).not.toBeNull();
+  });
+});
+
 // L123 — arrivée par le lien #units : la section n'existe qu'après la réponse des unités, le
 // défilement d'ancre du routeur (au NavigationEnd) tombait avant. La page défile elle-même.
 describe('fiche faction — arrivée sur #units (L123)', () => {
