@@ -1,10 +1,11 @@
 // L5/t2 — la visionneuse de couverture est un dialogue nommé qui garde le focus (comme la modale de /videos).
-import { setupTestBed } from '../../../../testing/angular-testbed';
+import { setupTestBed } from '../../../testing/angular-testbed';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { signal } from '@angular/core';
+import type { LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { FigureLightboxComponent, type LightboxState } from './figure-lightbox.component';
+import { SeriesCoverViewerComponent } from './series-cover-viewer.component';
 
 const ETAT: LightboxState = {
   title: 'Eisenhorn', subtitle: 'Abnett', contextName: 'Black Library', contextColor: '#c9a24a', contextSigil: '▤',
@@ -14,12 +15,12 @@ const ETAT: LightboxState = {
 const $ = (f: ComponentFixture<unknown>, sel: string) => (f.nativeElement as HTMLElement).querySelector(sel) as HTMLElement | null;
 const tick = async (f: ComponentFixture<unknown>) => { f.detectChanges(); await f.whenStable(); f.detectChanges(); };
 
-async function ouvert(): Promise<ComponentFixture<FigureLightboxComponent>> {
-  await setupTestBed([FigureLightboxComponent], [provideRouter([])]);
+async function ouvert(): Promise<ComponentFixture<SeriesCoverViewerComponent>> {
+  await setupTestBed([SeriesCoverViewerComponent], [provideRouter([])]);
   const opener = document.createElement('button');
   opener.id = 'opener';
   document.body.appendChild(opener);
-  const f = TestBed.createComponent(FigureLightboxComponent);
+  const f = TestBed.createComponent(SeriesCoverViewerComponent);
   // Le JIT de Vitest ne reconnaît pas les entrées-signaux (pas de transformation AOT) : on remplace le champ.
   const state = signal<LightboxState | null>(null);
   (f.componentInstance as unknown as { state: unknown }).state = state;

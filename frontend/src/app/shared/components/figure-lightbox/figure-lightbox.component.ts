@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Injector, afterNextRender, effect, inject, input, output } from '@angular/core';
+import { Component, HostListener, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -21,16 +21,16 @@ export interface LightboxState {
   imports: [CommonModule, RouterLink],
   template: `
     @if (state()) {
-      <div class="lightbox" (click)="closed.emit()" (keydown)="onKeydown($event)">
-        <div class="lightbox-stage" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" (click)="$event.stopPropagation()">
+      <div class="lightbox" (click)="closed.emit()">
+        <div class="lightbox-stage" (click)="$event.stopPropagation()">
           <button class="lightbox-close" (click)="closed.emit()" aria-label="Fermer">✕</button>
-          <div class="lightbox-image" role="img" [attr.aria-label]="'Couverture : ' + state()!.title" [style.background-image]="'url(\\'' + state()!.mainUrl + '\\')'"></div>
+          <div class="lightbox-image" [style.background-image]="'url(\\'' + state()!.mainUrl + '\\')'"></div>
           <div class="lightbox-info">
             <div class="lightbox-meta">
               <span class="lightbox-org">{{ state()!.contextName }}</span>
               <span class="lightbox-sigil">{{ state()!.contextSigil }}</span>
             </div>
-            <h2 class="lightbox-title" id="lightbox-title" [style.color]="state()!.contextColor">{{ state()!.title }}</h2>
+            <h2 class="lightbox-title" [style.color]="state()!.contextColor">{{ state()!.title }}</h2>
             <div class="lightbox-role">{{ state()!.subtitle }}</div>
             @if (state()!.description) {
               <p class="lightbox-desc">{{ state()!.description }}</p>
@@ -175,39 +175,6 @@ export class FigureLightboxComponent {
   readonly state = input<LightboxState | null>(null);
   readonly closed = output<void>();
   readonly thumbSelected = output<number>();
-
-  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly injector = inject(Injector);
-  private opener: HTMLElement | null = null;
-  private wasOpen = false;
-
-  constructor() {
-    effect(() => {
-      const open = this.state() !== null;
-      if (open && !this.wasOpen) {
-        this.wasOpen = true;
-        this.opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-        afterNextRender(() => this.host.nativeElement.querySelector<HTMLElement>('.lightbox-close')?.focus(), { injector: this.injector });
-      } else if (!open && this.wasOpen) {
-        this.wasOpen = false;
-        const opener = this.opener;
-        this.opener = null;
-        if (opener?.isConnected) opener.focus();
-      }
-    });
-  }
-
-  /** Tab et Maj+Tab bouclent dans la fenêtre. */
-  onKeydown(event: KeyboardEvent): void {
-    if (event.key !== 'Tab') return;
-    const items = Array.from(this.host.nativeElement.querySelectorAll<HTMLElement>('.lightbox button, .lightbox a[href]'));
-    if (!items.length) return;
-    const first = items[0];
-    const last = items[items.length - 1];
-    const active = document.activeElement;
-    if (event.shiftKey && (active === first || !items.includes(active as HTMLElement))) { event.preventDefault(); last.focus(); }
-    else if (!event.shiftKey && (active === last || !items.includes(active as HTMLElement))) { event.preventDefault(); first.focus(); }
-  }
 
   @HostListener('document:keydown.escape')
   onEscape(): void {

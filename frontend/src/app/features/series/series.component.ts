@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Serie, SerieBadge } from '../../core/models/models';
-import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import type { LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { SeriesCoverViewerComponent } from './series-cover-viewer.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
 
@@ -53,7 +54,7 @@ const PAGE_SIZE = 8;
 @Component({
   selector: 'app-series',
   standalone: true,
-  imports: [CommonModule, FormsModule, FigureLightboxComponent, LoadErrorComponent],
+  imports: [CommonModule, FormsModule, SeriesCoverViewerComponent, LoadErrorComponent],
   template: `
     <section class="romans-page">
 
@@ -276,7 +277,7 @@ const PAGE_SIZE = 8;
       </div>
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-series-cover-viewer [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
   `,
   styleUrls: ['./series.component.scss'],
 })
