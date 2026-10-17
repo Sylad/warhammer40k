@@ -6,7 +6,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "488d594f671384ba2c7987fc5322286c86287e67"
+    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "0cb5fa2b877e085358e25e06f69bfe46b04e470e"
   },
   "resceaux": [
     {
@@ -16,6 +16,14 @@
       "avant": "4adef2d4f65ce35f42a594ef9f0c72c26ec7b846",
       "apres": "488d594f671384ba2c7987fc5322286c86287e67",
       "porteur": "L116"
+    },
+    {
+      "test": "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts",
+      "raison": "délai par défaut du contexte 4 s trop court sur un runner GitHub lent : le cas R9 (clic du milieu, browserContext.waitForEvent page) a échoué 1 run sur 3 le 14-10 ; porté à 8 s comme unit-detail-l120-titres.e2e.spec.ts, aucune assertion ni contrat changé",
+      "date": "2026-10-17",
+      "avant": "488d594f671384ba2c7987fc5322286c86287e67",
+      "apres": "0cb5fa2b877e085358e25e06f69bfe46b04e470e",
+      "porteur": "L132"
     }
   ]
 }

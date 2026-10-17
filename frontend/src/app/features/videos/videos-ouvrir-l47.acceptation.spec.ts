@@ -92,7 +92,7 @@ let page: Page;
 
 async function fresh(mode: Mode = 'ok', width = 1440): Promise<Sim> {
   ctx = await browser.newContext({ viewport: { width, height: 900 } });
-  ctx.setDefaultTimeout(4000);
+  ctx.setDefaultTimeout(8000);
   const sim = await simulate(ctx, mode);
   page = await ctx.newPage();
   return sim;
