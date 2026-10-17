@@ -1325,23 +1325,27 @@ lots:
   - id: L138
     title: "Romans, accessibilité résiduelle (revue UX de L136, 17-10, antérieure au lot) : après Entrée sur « Effacer les filtres » de l'état vide et après un « Réessayer » réussi du bandeau partagé load-error, le focus retombe sur body (WCAG 2.4.3, mesuré) — le placer sur la liste ou l'en-tête ; « .pop-count » (« 54 livres », 11 px) à 4,24:1, à porter à ≥ 4,5:1"
     public: "Romans : focus et contraste mieux tenus"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     screen: component
     created: 2026-10-17
     started: 2026-10-17
     review: { date: 2026-10-17, verdict: "compliant — orchestré (vague 2026-10-17-1650, 0 passe(s) de correction)", commit: cc4466b822e0f1cda6f6fff623e674a16ff9468e }
+    ux: { date: 2026-10-17, verdict: "conforme — focus sur #bloc-series après « Effacer les filtres » et après le Réessayer du bandeau, .pop-count ≥ 4,5:1 ; revue légère conforme, capture du panneau regardée" }
+    finished: 2026-10-17
   - id: L139
     title: "Romans à 320 px : le bandeau .hero (280 px, overflow hidden) coupe de 22 px l'accroche, la description et le champ de recherche (bord droit 322 pour 300) — contenir .hero-text dans sa colonne, attente « never: … 320 only » dans docs/qa/expectations.md ; libellé d'époque de Gardiens du Trône « de la 13e Croisade Noire » ; attente des lettres « au plus une à true » (QA prod 17-10)"
     public: "Romans : bandeau lisible sur petit téléphone"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     screen: component
     created: 2026-10-17
     started: 2026-10-17
     review: { date: 2026-10-17, verdict: "compliant — orchestré (vague 2026-10-17-1650, 0 passe(s) de correction)", commit: bb25d4a10065e0e491af013fceaca01df435dbb8 }
+    ux: { date: 2026-10-17, verdict: "conforme — bandeau de Romans contenu à 320 et 390 px (texte et recherche entiers, capture 390 regardée par le lead), libellé « de la 13e Croisade Noire », attente des lettres « au plus une à true »" }
+    finished: 2026-10-17
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

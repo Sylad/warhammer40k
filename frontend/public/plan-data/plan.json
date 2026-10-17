@@ -395,14 +395,16 @@
     {
       "id": "L138",
       "title": "Romans : focus et contraste mieux tenus",
-      "status": "doing",
-      "started": "2026-10-17"
+      "status": "done",
+      "started": "2026-10-17",
+      "finished": "2026-10-17"
     },
     {
       "id": "L139",
       "title": "Romans : bandeau lisible sur petit téléphone",
-      "status": "doing",
-      "started": "2026-10-17"
+      "status": "done",
+      "started": "2026-10-17",
+      "finished": "2026-10-17"
     }
   ]
 }
