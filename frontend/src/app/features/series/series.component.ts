@@ -94,6 +94,7 @@ const PAGE_SIZE = 8;
           <button class="tab"
             [class.active]="activeTab() === t.key"
             [attr.aria-pressed]="activeTab() === t.key"
+            [attr.data-tab]="t.key"
             (click)="selectTab(t.key)">
             {{ t.label }}
           </button>
@@ -137,14 +138,14 @@ const PAGE_SIZE = 8;
       <div class="layout">
 
         <!-- MAIN -->
-        <div class="main">
-          @if (continuing()) {
+        <div class="main" id="bloc-series" tabindex="-1" role="group" aria-label="Séries affichées">
+          @if (continuing() && statsAvailable()) {
             <p class="continue-note">
               Séries commencées et non terminées@if (sort() === 'progression') {, les plus avancées d'abord}.
-              <button type="button" class="empty-reset" (click)="selectTab('library')">Voir toute ma bibliothèque</button>
+              <button type="button" class="empty-reset" (click)="leaveContinuing()">Voir toute ma bibliothèque</button>
             </p>
           }
-          <div class="grid" id="liste-series" tabindex="-1" role="region" aria-label="Liste des séries"
+          <div class="grid" id="liste-series" role="region" aria-label="Liste des séries"
                [attr.aria-busy]="series.pending()">
             @for (s of visibleSeries(); track s.id) {
               <article class="serie-card">
@@ -193,6 +194,11 @@ const PAGE_SIZE = 8;
                   @if (hasFilters()) {
                     <button type="button" class="empty-reset" (click)="resetFilters()">Effacer les filtres</button>
                   }
+                </div>
+              } @else {
+                <div class="list-error" role="status">
+                  <p>Les séries n’ont pas pu être chargées.</p>
+                  <button type="button" class="empty-reset" (click)="retrySeries()">Réessayer</button>
                 </div>
               }
             }
@@ -268,15 +274,19 @@ const PAGE_SIZE = 8;
 
           <div class="panel">
             <h4 class="panel-title">Séries populaires</h4>
-            <ol class="popular">
-              @for (p of popular(); track p.id; let i = $index) {
-                <li>
-                  <span class="pop-rank">{{ i + 1 }}</span>
-                  <span class="pop-name">{{ p.titre }}</span>
-                  <span class="pop-count">{{ p.nbLivres }} livres</span>
-                </li>
-              }
-            </ol>
+            @if (statsAvailable()) {
+              <ol class="popular">
+                @for (p of popular(); track p.id; let i = $index) {
+                  <li>
+                    <span class="pop-rank">{{ i + 1 }}</span>
+                    <span class="pop-name">{{ p.titre }}</span>
+                    <span class="pop-count">{{ p.nbLivres }} livres</span>
+                  </li>
+                }
+              </ol>
+            } @else {
+              <p class="pop-na">—</p>
+            }
           </div>
 
           <div class="panel">
@@ -468,6 +478,20 @@ export class SeriesComponent {
     this.continuing.set(false);
   }
 
+  /** « Voir toute ma bibliothèque » retire la note qui porte le focus : il passe à l'onglet « Ma bibliothèque » (WCAG 2.4.3). */
+  leaveContinuing(): void {
+    this.selectTab('library');
+    afterNextRender(() => {
+      this.host.nativeElement.querySelector<HTMLElement>('.tabs [data-tab="library"]')?.focus();
+    }, { injector: this.injector });
+  }
+
+  /** « Réessayer » de la liste : le bouton disparaît avec l'erreur, le focus reste dans le bloc de la liste. */
+  retrySeries(): void {
+    this.series.retry();
+    this.focusBlock(false);
+  }
+
   resetFilters(): void {
     this.continuing.set(false);
     this.activeTab.set('all');
@@ -500,13 +524,20 @@ export class SeriesComponent {
     this.backToList();
   }
 
-  /** Dès que la colonne latérale passe sous la liste (≤ 1100 px), l'action rapide ramène à la liste et y place le focus. */
+  /**
+   * Dès que la colonne latérale passe sous la liste (≤ 1100 px), l'action rapide ramène au bloc qui
+   * contient la note et la liste (pas à la seule liste : la note passerait sous l'en-tête) et y place le focus.
+   */
   private backToList(): void {
     if (typeof window.matchMedia !== 'function' || !window.matchMedia('(max-width: 1100px)').matches) return;
+    this.focusBlock(true);
+  }
+
+  private focusBlock(scroll: boolean): void {
     afterNextRender(() => {
-      const list = this.host.nativeElement.querySelector<HTMLElement>('#liste-series');
-      list?.scrollIntoView({ block: 'start' });
-      list?.focus({ preventScroll: true });
+      const block = this.host.nativeElement.querySelector<HTMLElement>('#bloc-series');
+      if (scroll) block?.scrollIntoView({ block: 'start' });
+      block?.focus({ preventScroll: true });
     }, { injector: this.injector });
   }
 

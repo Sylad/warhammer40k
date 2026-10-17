@@ -2,10 +2,10 @@
 // R3 « Continuer ma lecture », R4–R5 « Ordre de lecture » par clé d'époque.
 import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { Subject, of, throwError, type Observable } from 'rxjs';
+import { Subject, defer, of, throwError, type Observable } from 'rxjs';
 import { SeriesComponent } from './series.component';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Serie } from '../../core/models/models';
@@ -160,5 +160,121 @@ describe('Romans — Ordre de lecture (L136)', () => {
     const eras = $$(f, '.card-epoque').map((e) => e.textContent?.trim());
     expect(eras).toHaveLength(4);
     expect(eras).toContain('M42 — Ère Indomitus');
+  });
+});
+
+// Correctifs de la revue UX de L136 : focus (WCAG 2.4.3), erreur visible (Nielsen 1 et 9), retour à la liste, panneau populaire.
+describe('Romans — corrections de la revue UX (L136)', () => {
+  const stacked = () => {
+    (window as unknown as { matchMedia: unknown }).matchMedia = vi.fn().mockReturnValue({ matches: true });
+    const scroll = vi.fn();
+    (HTMLElement.prototype as unknown as { scrollIntoView: unknown }).scrollIntoView = scroll;
+    return scroll;
+  };
+  const action = (f: ComponentFixture<unknown>, label: string) => $$(f, '.link-list button').find((b) => b.textContent?.includes(label))!;
+  const list = [
+    serie('Gaunt', { nbLivres: 15, readBooks: 3 }),
+    serie('Horus', { nbLivres: 4, readBooks: 3 }),
+    serie('Jamais', { nbLivres: 4, readBooks: 0 }),
+  ];
+
+  it('M1 — « Voir toute ma bibliothèque » : le focus passe à l’onglet « Ma bibliothèque », pas au body', async () => {
+    const f = await render(of(list));
+    action(f, 'Continuer').click();
+    await tick(f);
+    const voir = $$(f, '.continue-note button')[0];
+    voir.focus();
+    voir.click();
+    await tick(f);
+    expect($(f, '.continue-note')).toBeNull();
+    const onglet = $$(f, '.tab').find((t) => t.textContent?.trim() === 'Ma bibliothèque')!;
+    expect(document.activeElement).toBe(onglet);
+    expect(document.activeElement).not.toBe(document.body);
+  });
+
+  for (const [label, nom] of [['Continuer', 'Continuer ma lecture'], ['ordre de lecture', 'Voir l’ordre de lecture']] as const) {
+    it(`M2 — en erreur, « ${nom} » met le focus sur un bloc qui montre l’erreur avec Réessayer, sans la note`, async () => {
+      stacked();
+      const f = await render(throwError(() => new Error('500')));
+      action(f, label).click();
+      await tick(f);
+      const bloc = document.activeElement as HTMLElement;
+      expect(bloc).not.toBe(document.body);
+      expect(bloc.contains($(f, '#liste-series'))).toBe(true);
+      expect(bloc.textContent).toContain('n’ont pas pu être chargées');
+      const reessayer = [...bloc.querySelectorAll('button')].find((b) => b.textContent?.trim() === 'Réessayer');
+      expect(reessayer).toBeTruthy();
+      expect($(f, '.continue-note')).toBeNull();
+      expect(text(f)).not.toContain('Aucune série');
+    });
+  }
+
+  it('M2 — pendant le chargement, « Continuer ma lecture » n’affiche pas la note', async () => {
+    const f = await render(new Subject<Serie[]>());
+    action(f, 'Continuer').click();
+    await tick(f);
+    expect($(f, '.continue-note')).toBeNull();
+    expect($(f, '[role=status]')?.textContent).toContain('Chargement');
+  });
+
+  it('M2 — le « Réessayer » de la liste relance le chargement, remet la liste et garde le focus dans le bloc', async () => {
+    stacked();
+    let essais = 0;
+    const f = await render(defer(() => (++essais === 1 ? throwError(() => new Error('500')) : of(list))));
+    action(f, 'Continuer').click();
+    await tick(f);
+    const bloc = document.activeElement as HTMLElement;
+    [...bloc.querySelectorAll('button')].find((b) => b.textContent?.trim() === 'Réessayer')!.click();
+    await tick(f);
+    expect(essais).toBe(2);
+    expect(titles(f)).toEqual(['Horus', 'Gaunt']);
+    expect(document.activeElement).toBe(bloc);
+  });
+
+  it('M3 — empilé, le retour à la liste fait défiler et met le focus sur le bloc qui contient la note ET la liste', async () => {
+    const scroll = stacked();
+    const f = await render(of(list));
+    action(f, 'Continuer').click();
+    await tick(f);
+    const bloc = document.activeElement as HTMLElement;
+    expect(scroll).toHaveBeenCalled();
+    expect(scroll.mock.contexts.at(-1)).toBe(bloc);
+    expect(bloc.contains($(f, '.continue-note'))).toBe(true);
+    expect(bloc.contains($(f, '#liste-series'))).toBe(true);
+    expect(bloc.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('M3 — « Voir l’ordre de lecture » : même bloc', async () => {
+    const scroll = stacked();
+    const f = await render(of(list));
+    action(f, 'ordre de lecture').click();
+    await tick(f);
+    const bloc = document.activeElement as HTMLElement;
+    expect(scroll.mock.contexts.at(-1)).toBe(bloc);
+    expect(bloc).not.toBe($(f, '#liste-series'));
+    expect(bloc.contains($(f, '#liste-series'))).toBe(true);
+  });
+
+  const popular = (f: ComponentFixture<unknown>) => $$(f, '.panel').find((p) => p.querySelector('.panel-title')?.textContent?.includes('populaires'))!;
+
+  it('M4 — « Séries populaires » affiche « — » pendant le chargement, comme les compteurs voisins', async () => {
+    const f = await render(new Subject<Serie[]>());
+    expect(popular(f).querySelectorAll('li')).toHaveLength(0);
+    expect(popular(f).textContent).toContain('—');
+  });
+
+  it('M4 — « Séries populaires » affiche « — » après une erreur', async () => {
+    const f = await render(throwError(() => new Error('500')));
+    expect(popular(f).querySelectorAll('li')).toHaveLength(0);
+    expect(popular(f).textContent).toContain('—');
+  });
+
+  it('M4 — chargé : le classement revient, sans « — »', async () => {
+    const src = new Subject<Serie[]>();
+    const f = await render(src);
+    src.next(list);
+    await tick(f);
+    expect([...popular(f).querySelectorAll('.pop-name')].map((e) => e.textContent?.trim())).toEqual(['Gaunt', 'Horus', 'Jamais']);
+    expect(popular(f).textContent).not.toContain('—');
   });
 });

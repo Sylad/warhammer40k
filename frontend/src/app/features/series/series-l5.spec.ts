@@ -126,14 +126,14 @@ describe('Romans — retour à la liste (L5/t6)', () => {
   const stacked = (matches: boolean) =>
     (window as unknown as { matchMedia: unknown }).matchMedia = vi.fn().mockReturnValue({ matches });
 
-  it('t6 — empilé, « Voir l’ordre de lecture » ramène à la liste et y met le focus', async () => {
+  it('t6 — empilé, « Voir l’ordre de lecture » ramène au bloc de la liste et y met le focus', async () => {
     stacked(true);
     const f = await render([serie(1), serie(2)]);
     const scroll = vi.fn();
     (HTMLElement.prototype as unknown as { scrollIntoView: unknown }).scrollIntoView = scroll;
     $$(f, '.link-list button')[0].click();
     await tick(f);
-    expect(document.activeElement).toBe($(f, '#liste-series'));
+    expect(document.activeElement).toBe($(f, '#bloc-series'));
     expect(scroll).toHaveBeenCalled();
   });
 
@@ -143,7 +143,7 @@ describe('Romans — retour à la liste (L5/t6)', () => {
     (HTMLElement.prototype as unknown as { scrollIntoView: unknown }).scrollIntoView = vi.fn();
     $$(f, '.link-list button')[1].click();
     await tick(f);
-    expect(document.activeElement).toBe($(f, '#liste-series'));
+    expect(document.activeElement).toBe($(f, '#bloc-series'));
   });
 
   it('t6 — sur grand écran (liste visible à côté), le focus ne bouge pas', async () => {

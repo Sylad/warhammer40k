@@ -412,7 +412,7 @@
       color: rgba(232, 222, 202, 0.7);
     }
 
-    .empty {
+    .empty, .list-error {
       grid-column: 1 / -1;
       text-align: center;
       padding: 60px 20px;
@@ -421,7 +421,7 @@
       border-radius: 4px;
       font-style: italic;
     }
-    .empty p { margin: 0 0 14px; }
+    .empty p, .list-error p { margin: 0 0 14px; }
     .empty-reset {
       padding: 11px 24px;
       background: transparent;
@@ -435,7 +435,7 @@
       cursor: pointer;
     }
     .empty-reset:hover { background: rgba(201, 162, 74, 0.1); border-color: var(--gold); }
-    #liste-series:focus { outline: none; }
+    #bloc-series:focus { outline: none; }
 
     .load-more-wrap {
       display: flex;
@@ -621,6 +621,7 @@
       color: var(--gold);
       font-size: 14px;
     }
+    .pop-na { margin: 0; padding: 8px 4px; color: rgba(232, 222, 202, 0.65); }
     .pop-name {
       color: rgba(232, 222, 202, 0.85);
       overflow: hidden;
