@@ -1274,12 +1274,13 @@ lots:
     created: 2026-10-15
   - id: L135
     title: "QA : docs/qa/expectations.md — /factions/:id : une faction sans sous-faction (inquisition) n'a pas de section sous-factions, /api/subfactions?factionId= peut répondre [] (QA prod 15-10)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-15
     started: 2026-10-17
     review: { date: 2026-10-17, verdict: "compliant (0 blocking, 0 major, 1 minor note) — orchestré (vague 2026-10-17-1045, 0 passe(s) de correction)", commit: c0e6da0d1839394556dc97fb7596be5324b9c115 }
+    finished: 2026-10-17
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
