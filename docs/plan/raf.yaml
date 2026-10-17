@@ -1325,11 +1325,12 @@ lots:
   - id: L138
     title: "Romans, accessibilité résiduelle (revue UX de L136, 17-10, antérieure au lot) : après Entrée sur « Effacer les filtres » de l'état vide et après un « Réessayer » réussi du bandeau partagé load-error, le focus retombe sur body (WCAG 2.4.3, mesuré) — le placer sur la liste ou l'en-tête ; « .pop-count » (« 54 livres », 11 px) à 4,24:1, à porter à ≥ 4,5:1"
     public: "Romans : focus et contraste mieux tenus"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     screen: component
     created: 2026-10-17
+    started: 2026-10-17
   - id: L139
     title: "Romans à 320 px : le bandeau .hero (280 px, overflow hidden) coupe de 22 px l'accroche, la description et le champ de recherche (bord droit 322 pour 300) — contenir .hero-text dans sa colonne, attente « never: … 320 only » dans docs/qa/expectations.md ; libellé d'époque de Gardiens du Trône « de la 13e Croisade Noire » ; attente des lettres « au plus une à true » (QA prod 17-10)"
     public: "Romans : bandeau lisible sur petit téléphone"
