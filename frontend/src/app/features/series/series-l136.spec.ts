@@ -99,6 +99,19 @@ describe('Romans — Continuer ma lecture (L136)', () => {
     expect(titles(f)).toContain('Eisenhorn');
   });
 
+  it('R3 — la note et « Voir toute ma bibliothèque » n’existent qu’en mode « Continuer » ; le bouton en sort', async () => {
+    const f = await render(of(list));
+    expect($(f, '.continue-note')).toBeNull();
+    $$(f, '.link-list button').find((b) => b.textContent?.includes('Continuer'))!.click();
+    await tick(f);
+    expect($(f, '.continue-note')).not.toBeNull();
+    expect(titles(f)).not.toContain('Eisenhorn');
+    $$(f, '.continue-note button').find((b) => b.textContent?.includes('Voir toute ma bibliothèque'))!.click();
+    await tick(f);
+    expect($(f, '.continue-note')).toBeNull();
+    expect(titles(f)).toContain('Eisenhorn');
+  });
+
   it('R3 — rien en cours : l’état vide nomme « Continuer ma lecture »', async () => {
     const f = await render(of([serie('Fini', { nbLivres: 2, readBooks: 2 })]));
     $$(f, '.link-list button').find((b) => b.textContent?.includes('Continuer'))!.click();
