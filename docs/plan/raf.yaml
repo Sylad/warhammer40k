@@ -1303,20 +1303,33 @@ lots:
   - id: L136
     title: "Page Romans, logique des onglets (revue UX L5 17-10) : état de chargement avec aria-busy et compteurs masqués tant que les séries ne sont pas chargées ou en erreur (aujourd'hui « Aucune série… », « 0 % terminé », « Total : 0 romans » pendant le chargement et après une erreur) ; « Continuer ma lecture » ne montre que les séries commencées et non terminées, les plus avancées d'abord (aujourd'hui Eisenhorn 3/3 en tête) ; « Ordre de lecture » ordonné chronologiquement par une clé d'époque explicite, époque affichée sur chaque carte (aujourd'hui tri alphabétique sur le texte libre : Siège de Terra avant l'Hérésie)"
     public: "Romans : chargement annoncé, onglets Continuer et Ordre de lecture cohérents"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     screen: component
     created: 2026-10-17
     started: 2026-10-17
     review: { date: 2026-10-17, verdict: "conforme — revue Opus (3 passes de correction en vague) puis correctif UX aed7d99 revu (1 majeur : test M2 qui ne pouvait pas échouer) corrigé par 4185ca1, mutation rejouée rouge/vert ; Nouveautés b85b40b justes ; 978 tests", commit: b85b40bc0c73b7b0307ce5c3635ebbc16be840a0 }
+    ux: { date: 2026-10-17, verdict: "conforme — M1 (focus sur l'onglet Ma bibliothèque) et M2 (erreur + Réessayer dans la liste, focus dans le bloc, note masquée) mesurés à 1440/390/320 par le ux-reviewer, captures regardées par le lead ; aucune régression ; double Réessayer acceptable (WCAG 3.2.4 tenu)" }
+    notes:
+      - { date: 2026-10-17, text: "Mineurs 17-10 (note) : double « Réessayer » (bandeau + liste, styles différents, double annonce alert + status) ; ordre de lecture : Ciaphas Caïn avant Eisenhorn dans M41 ; accord « Crise du 13e Croisade Noire » ; « Votre progression » mêle séries (En cours) et livres (Lus, À lire)" }
+    finished: 2026-10-17
   - id: L137
     title: "QA 17-10 : attentes docs/qa/expectations.md ## /romans après L5 — h1 « Romans Black Library » ; nav.tabs nommée « Affichage des séries », 4 onglets tous visibles à 1440, 390 et 320, un seul aria-pressed ; tri (select « Trier par ») désactivé dans Ordre de lecture avec sa note ; recherche nommée ; 27 lettres avec aria-pressed, lettres sans série désactivées ; « N séries affichées sur 38 » au-dessus de Charger plus ; Entrée sur « Voir la couverture de <série> » ouvre un role=dialog aria-modal nommé, Échap rend le focus ; état vide nomme le filtre avec « Effacer les filtres » ; never: défilement horizontal à 390 et 320 ; api: /api/series, /api/wiki-image?q= (QA L5 conforme)"
-    status: doing
+    status: done
     estimate: 0.1
     created: 2026-10-17
     started: 2026-10-17
     review: { date: 2026-10-17, verdict: "compliant — orchestré (vague 2026-10-17-1418, 0 passe(s) de correction)", commit: 8c59ee943721b8035c2e81fa22a4d89358310bba }
+    finished: 2026-10-17
+  - id: L138
+    title: "Romans, accessibilité résiduelle (revue UX de L136, 17-10, antérieure au lot) : après Entrée sur « Effacer les filtres » de l'état vide et après un « Réessayer » réussi du bandeau partagé load-error, le focus retombe sur body (WCAG 2.4.3, mesuré) — le placer sur la liste ou l'en-tête ; « .pop-count » (« 54 livres », 11 px) à 4,24:1, à porter à ≥ 4,5:1"
+    public: "Romans : focus et contraste mieux tenus"
+    status: todo
+    estimate: 0.25
+    visible: true
+    screen: component
+    created: 2026-10-17
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
