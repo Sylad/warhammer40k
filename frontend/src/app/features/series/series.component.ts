@@ -143,9 +143,11 @@ const PAGE_SIZE = 8;
               <article class="serie-card">
                 <button class="card-image" type="button"
                      [style.background-image]="wikiImages().get(s.id) ? 'url(' + wikiImages().get(s.id) + ')' : ''"
-                     (click)="openLightbox(s)" [attr.aria-label]="'Voir la couverture de ' + s.titre">
+                     (click)="openLightbox(s)"
+                     [attr.aria-disabled]="wikiImages().get(s.id) ? null : 'true'"
+                     [attr.aria-label]="(wikiImages().get(s.id) ? 'Voir la couverture de ' : 'Couverture indisponible : ') + s.titre">
                   <div class="card-overlay"></div>
-                  <span class="card-zoom">⛶</span>
+                  @if (wikiImages().get(s.id)) { <span class="card-zoom">⛶</span> }
                 </button>
                 <div class="card-body">
                   <h3 class="card-title">{{ s.titre }}</h3>
@@ -384,7 +386,7 @@ export class SeriesComponent {
   readonly activeFilters = computed<string[]>(() => {
     const out: string[] = [];
     const tab = this.activeTab();
-    if (tab === 'library' || tab === 'tbr') out.push(`l'onglet « ${this.tabs.find(t => t.key === tab)!.label} »`);
+    if (tab !== 'all') out.push(`l'onglet « ${this.tabs.find(t => t.key === tab)!.label} »`);
     const query = this.searchQuery().trim();
     if (query) out.push(`la recherche « ${query} »`);
     const letter = this.selectedLetter();

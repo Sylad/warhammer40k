@@ -204,6 +204,19 @@ describe('Romans — état vide et lettres (L5/t8)', () => {
     expect($(f, '.empty')?.textContent).toContain('« zzz »');
   });
 
+  it('t8 — l’onglet « Ordre de lecture » est cité quand « Effacer » le quitte', async () => {
+    const f = await render([serie(1)]);
+    tab(f, 'Ordre de lecture').click();
+    await tick(f);
+    const input = $(f, '.search-bar input') as HTMLInputElement;
+    input.value = 'zzz';
+    input.dispatchEvent(new Event('input'));
+    await tick(f);
+    const text = $(f, '.empty')?.textContent ?? '';
+    expect(text).toContain('Ordre de lecture');
+    expect(text).toContain('« zzz »');
+  });
+
   it('t8 — les lettres sans série sont désactivées, celle qui est active reste utilisable', async () => {
     const f = await render([serie(0, { titre: 'Alpha' }), serie(1, { titre: 'Bêta' })]);
     const letter = (l: string) => $$(f, '.letter').find((b) => b.textContent?.trim() === l) as HTMLButtonElement;
@@ -230,7 +243,17 @@ describe('Romans — état vide et lettres (L5/t8)', () => {
 describe('Romans — boutons de couverture (L5/t9)', () => {
   it('t9 — chaque bouton de couverture porte le titre de la série', async () => {
     const f = await render([serie(1, { titre: 'Les Fantômes de Gaunt' })]);
+    (f.componentInstance as any).wikiImages.set(new Map([['s1', 'http://x/y.jpg']]));
+    await tick(f);
     expect($(f, '.card-image')?.getAttribute('aria-label')).toBe('Voir la couverture de Les Fantômes de Gaunt');
+  });
+
+  it('t9 — sans image, le bouton le dit (aria-disabled, nom honnête, pas d’icône) et ne fait rien', async () => {
+    const f = await render([serie(1, { titre: 'Les Fantômes de Gaunt' })]);
+    const b = $(f, '.card-image')!;
+    expect(b.getAttribute('aria-disabled')).toBe('true');
+    expect(b.getAttribute('aria-label')).toBe('Couverture indisponible : Les Fantômes de Gaunt');
+    expect(b.querySelector('.card-zoom')).toBeNull();
   });
 
   it('t9 — l’icône d’agrandissement apparaît aussi au focus clavier', () => {
