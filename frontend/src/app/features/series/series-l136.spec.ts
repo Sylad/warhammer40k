@@ -224,7 +224,11 @@ describe('Romans — corrections de la revue UX (L136)', () => {
     action(f, 'Continuer').click();
     await tick(f);
     const bloc = document.activeElement as HTMLElement;
-    [...bloc.querySelectorAll('button')].find((b) => b.textContent?.trim() === 'Réessayer')!.click();
+    const reessayer = [...bloc.querySelectorAll('button')].find((b) => b.textContent?.trim() === 'Réessayer')!;
+    // Un vrai clic donne le focus au bouton : sans cela le bloc garde le focus posé par « Continuer » et l'assertion finale ne prouve rien.
+    reessayer.focus();
+    expect(document.activeElement).toBe(reessayer);
+    reessayer.click();
     await tick(f);
     expect(essais).toBe(2);
     expect(titles(f)).toEqual(['Horus', 'Gaunt']);
