@@ -1250,10 +1250,11 @@ lots:
     finished: 2026-10-14
   - id: L132
     title: "CI : le test de bout en bout videos-ouvrir-l47.acceptation.spec.ts attend l'ouverture d'un nouvel onglet en 4 s (browserContext.waitForEvent page) et échoue sur un runner GitHub lent (14-10, 1 échec sur 3 runs) — délai aligné sur les autres e2e ou attente explicite du lien avant le clic"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
+    started: 2026-10-17
   - id: L133
     title: "Fiche unité : panneau Aperçu « Fiche technique » en cadre 1:1 (R7) laisse 287 px vides à 1440 et 103 px à 390 sous un scan 3:2 — cadre au rapport de l'image (revue UX L120, Nielsen 8)"
     public: "Fiche unité : le panneau Aperçu épouse le format de la fiche technique"
