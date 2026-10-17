@@ -140,7 +140,7 @@ const PAGE_SIZE = 8;
         <div class="main">
           @if (continuing()) {
             <p class="continue-note">
-              Séries commencées et non terminées, les plus avancées d'abord.
+              Séries commencées et non terminées@if (sort() === 'progression') {, les plus avancées d'abord}.
               <button type="button" class="empty-reset" (click)="selectTab('library')">Voir toute ma bibliothèque</button>
             </p>
           }

@@ -112,6 +112,19 @@ describe('Romans — Continuer ma lecture (L136)', () => {
     expect(titles(f)).toContain('Eisenhorn');
   });
 
+  it('R3 — la note n’annonce « les plus avancées d’abord » que tant que le tri est par progression', async () => {
+    const f = await render(of(list));
+    $$(f, '.link-list button').find((b) => b.textContent?.includes('Continuer'))!.click();
+    await tick(f);
+    expect($(f, '.continue-note')?.textContent).toContain('les plus avancées d');
+    const sel = $(f, '#tri-series') as HTMLSelectElement;
+    sel.value = 'az';
+    sel.dispatchEvent(new Event('change'));
+    await tick(f);
+    expect($(f, '.continue-note')).not.toBeNull();
+    expect($(f, '.continue-note')?.textContent).not.toContain('plus avancées');
+  });
+
   it('R3 — rien en cours : l’état vide nomme « Continuer ma lecture »', async () => {
     const f = await render(of([serie('Fini', { nbLivres: 2, readBooks: 2 })]));
     $$(f, '.link-list button').find((b) => b.textContent?.includes('Continuer'))!.click();
