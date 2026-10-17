@@ -1250,7 +1250,7 @@ lots:
     finished: 2026-10-14
   - id: L132
     title: "CI : le test de bout en bout videos-ouvrir-l47.acceptation.spec.ts attend l'ouverture d'un nouvel onglet en 4 s (browserContext.waitForEvent page) et échoue sur un runner GitHub lent (14-10, 1 échec sur 3 runs) — délai aligné sur les autres e2e ou attente explicite du lien avant le clic"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-14
@@ -1258,6 +1258,7 @@ lots:
     notes:
       - { date: 2026-10-17, text: "test d'acceptation rescellé (lot livré L47, frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts, fiche inchangée) : délai par défaut du contexte 4 s trop court sur un runner GitHub lent : le cas R9 (clic du milieu, browserContext.waitForEvent page) a échoué 1 run sur 3 le 14-10 ; porté à 8 s comme unit-detail-l120-titres.e2e.spec.ts, aucune assertion ni contrat changé" }
     review: { date: 2026-10-17, verdict: "compliant — orchestré (vague 2026-10-17-1020, 0 passe(s) de correction)", commit: 35ae3284d3cd1a391407466e26a75b5ae5c5dda3 }
+    finished: 2026-10-17
   - id: L133
     title: "Fiche unité : panneau Aperçu « Fiche technique » en cadre 1:1 (R7) laisse 287 px vides à 1440 et 103 px à 390 sous un scan 3:2 — cadre au rapport de l'image (revue UX L120, Nielsen 8)"
     public: "Fiche unité : le panneau Aperçu épouse le format de la fiche technique"
