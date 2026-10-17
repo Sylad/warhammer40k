@@ -1,7 +1,36 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-15 10:33",
+  "generated": "2026-10-17 14:29",
   "entries": [
+    {
+      "slug": "2026-10-17-romans-chargement-annonce-onglets-continuer-et-ordre-de-lect",
+      "title": "Romans : chargement annoncé, onglets Continuer et Ordre de lecture cohérents",
+      "date": "2026-10-17",
+      "lots": [
+        "L136"
+      ],
+      "captures": [
+        "captures/L136-ordre-liste-1440.png",
+        "captures/L136-chargement-1440.png",
+        "captures/L136-erreur-1440.png",
+        "captures/L136-continuer-1440.png",
+        "captures/L136-ordre-390.png",
+        "captures/L136-continuer-390.png",
+        "captures/L136-chargement-390.png",
+        "captures/L136-erreur-390.png"
+      ],
+      "alts": [
+        "Page Romans, onglet Ordre de lecture : les séries sont classées de l'Hérésie d'Horus vers le présent et chaque carte indique son époque",
+        "Page Romans pendant le chargement : « Chargement des séries… » et des tirets à la place des compteurs de progression",
+        "Page Romans après une erreur : message d'erreur avec Réessayer et des tirets à la place des compteurs",
+        "Page Romans, Continuer ma lecture : seules les séries commencées et non terminées, les plus avancées d'abord",
+        "Ordre de lecture sur téléphone (390 px)",
+        "Continuer ma lecture sur téléphone (390 px)",
+        "Chargement de la page Romans sur téléphone (390 px)",
+        "Erreur de la page Romans sur téléphone (390 px)"
+      ],
+      "html": "<p>Sur la page Romans, tant que les séries se chargent, la page l'annonce (« Chargement des séries… ») et la colonne « Votre progression » affiche des tirets au lieu de « 0 % terminé » et « Total : 0 romans ». Il en va de même après une erreur : seul le message avec « Réessayer » s'affiche, sans « Aucune série… ».</p>\n<p>« Continuer ma lecture » ne montre plus que les séries commencées et non terminées, les plus avancées en premier ; une série déjà finie n'y figure plus. Un lien « Voir toute ma bibliothèque » permet de revenir à la liste complète.</p>\n<p>L'onglet « Ordre de lecture » classe désormais les séries dans l'ordre chronologique de l'univers (l'Hérésie d'Horus avant le Siège de Terra, puis les siècles suivants), et chaque carte indique son époque.</p>"
+    },
     {
       "slug": "2026-10-15-fiche-unite-la-fiche-technique-devient-lisible-et-agrandissa",
       "title": "Fiche unité : la fiche technique devient lisible et agrandissable",
