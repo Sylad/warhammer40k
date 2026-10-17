@@ -384,6 +384,11 @@
       "id": "L133",
       "title": "Fiche unité : le panneau Aperçu épouse le format de la fiche technique",
       "status": "todo"
+    },
+    {
+      "id": "L136",
+      "title": "Romans : chargement annoncé, onglets Continuer et Ordre de lecture cohérents",
+      "status": "todo"
     }
   ]
 }
