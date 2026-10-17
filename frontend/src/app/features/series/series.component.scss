@@ -26,6 +26,7 @@
       position: relative;
     }
     .hero-text {
+      min-width: 0;
       padding: 38px 42px 42px;
       display: flex;
       flex-direction: column;
@@ -85,6 +86,7 @@
       color: var(--text);
       font-family: inherit;
       font-size: 14px;
+      min-width: 0;
       padding: 14px 0;
       outline: none;
     }
@@ -656,7 +658,10 @@
     @media (max-width: 1100px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: static; }
-      .hero { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: minmax(0, 1fr); }
       .hero-image { display: none; }
       .toolbar { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero-text { padding: 28px 20px 30px; }
     }

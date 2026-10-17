@@ -48,12 +48,13 @@ Ajouté par L137 (QA prod du 17-10, après L5 et L136) : 38 séries Black Librar
 - shows: la barre `nav.tabs` nommée « Affichage des séries » (aria-label) : 4 onglets, tous visibles à 1440, 390 et 320 px (ils passent à la ligne, aucun hors de l'écran), un seul aria-pressed="true" dans la barre (L5)
 - shows: dans l'onglet Ordre de lecture, le sélecteur « Trier par » (select nommé) est désactivé, avec sa note qui dit pourquoi ; actif dans les autres onglets (L5)
 - shows: le champ de recherche nommé (aria-label « Rechercher un roman, une série ou un auteur »)
-- shows: 27 lettres (A–Z et #), chacune avec aria-pressed, une seule à true ; les lettres sans série dans l'onglet et la recherche en cours sont désactivées
+- shows: 27 lettres (A–Z et #), chacune avec aria-pressed, au plus une à true (aucune quand aucun filtre de lettre n'est actif) ; les lettres sans série dans l'onglet et la recherche en cours sont désactivées
 - shows: « N séries affichées sur 38 » (sans filtre, N ≤ 38) au-dessus du bouton « Charger plus de séries », qui disparaît quand tout est affiché
 - shows: Entrée sur un bouton « Voir la couverture de <série> » ouvre un dialogue role=dialog aria-modal="true" nommé par le titre de la série ; Échap le ferme et rend le focus au bouton d'origine
 - shows: un état vide (recherche ou lettre sans résultat, mode « Continuer ma lecture » sans série en cours) nomme le filtre actif et propose « Effacer les filtres »
 - never: un défilement horizontal (scrollWidth > clientWidth) à 390 et 320 px (492 px pour 390 avant L5)
 - never: le tiroir du menu (nav.drawer) qui sort de l'écran et crée un défilement horizontal — 390 only (490 px pour 384 le 05-10, suivi par L62)
+- never: l'accroche (eyebrow), la description ou le champ de recherche du bandeau .hero coupés par son bord droit (bord droit du texte ou de .search-bar au-delà de celui de .hero ; 322 px pour 300 le 17-10, suivi par L139) — 320 only
 - api: /api/series (38 séries), /api/wiki-image?q= (couvertures)
 
 ## /videos
