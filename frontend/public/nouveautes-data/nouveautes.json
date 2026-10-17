@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-17 17:05",
+  "generated": "2026-10-17 17:14",
   "entries": [
     {
       "slug": "2026-10-17-romans-bandeau-lisible-sur-petit-telephone",
@@ -19,7 +19,7 @@
         "Le même bandeau sur téléphone (390 px)",
         "Le bandeau sur grand écran (1440 px), inchangé"
       ],
-      "html": "<p>Sur la page Romans, avec un très petit écran de téléphone (320 px de large), le bandeau du haut ne coupe plus la fin de la phrase d'accroche, de la description ni du champ de recherche : tout reste lisible dans le cadre.</p>\n<p>Dans la série « Gardiens du Trône », l'époque se lit maintenant « M42 — Crise de la 13e Croisade Noire » (et non plus « du 13e »).</p>"
+      "html": "<p>Sur la page Romans, avec un très petit écran de téléphone (320 px de large), le bandeau du haut ne coupe plus la fin de la phrase d'accroche, de la description ni du champ de recherche : tout reste lisible dans le cadre.</p>\n<p>Dans la série « Gardiens du Trône », l'époque se lit maintenant « M42 — Crise de la 13e Croisade Noire » (et non plus « du 13e »).</p>"
     },
     {
       "slug": "2026-10-17-romans-focus-et-contraste-mieux-tenus",

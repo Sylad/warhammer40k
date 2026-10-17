@@ -10,4 +10,4 @@ captures:
 ---
 Sur la page Romans, avec un très petit écran de téléphone (320 px de large), le bandeau du haut ne coupe plus la fin de la phrase d'accroche, de la description ni du champ de recherche : tout reste lisible dans le cadre.
 
-Dans la série « Gardiens du Trône », l'époque se lit maintenant « M42 — Crise de la 13e Croisade Noire » (et non plus « du 13e »).
+Dans la série « Gardiens du Trône », l'époque se lit maintenant « M42 — Crise de la 13e Croisade Noire » (et non plus « du 13e »).
