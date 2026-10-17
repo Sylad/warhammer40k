@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-17 16:04",
+  "generated": "2026-10-17 16:57",
   "entries": [
+    {
+      "slug": "2026-10-17-romans-focus-et-contraste-mieux-tenus",
+      "title": "Romans : focus et contraste mieux tenus",
+      "date": "2026-10-17",
+      "lots": [
+        "L138"
+      ],
+      "captures": [
+        "captures/L138-populaires-1440.png",
+        "captures/L138-populaires-390.png"
+      ],
+      "alts": [
+        "Panneau des séries populaires de la page Romans : le nombre de livres de chaque série est écrit plus clair, donc plus lisible",
+        "Le même panneau sur téléphone (390 px)"
+      ],
+      "html": "<p>Sur la page Romans, quand vous utilisez le clavier, « Effacer les filtres » (dans le message « Aucune série ») et « Réessayer » (dans le bandeau d'erreur) ne vous font plus perdre votre place : après l'appui sur Entrée, le curseur clavier se pose sur la liste des séries au lieu de repartir en haut de la page.</p>\n<p>Dans le panneau des séries populaires, le nombre de livres (« 54 livres ») est écrit un peu plus clair sur le fond sombre, pour être plus facile à lire.</p>"
+    },
     {
       "slug": "2026-10-17-romans-chargement-annonce-onglets-continuer-et-ordre-de-lect",
       "title": "Romans : chargement annoncé, onglets Continuer et Ordre de lecture cohérents",
