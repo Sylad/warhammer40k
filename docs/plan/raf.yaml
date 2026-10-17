@@ -1303,11 +1303,12 @@ lots:
   - id: L136
     title: "Page Romans, logique des onglets (revue UX L5 17-10) : état de chargement avec aria-busy et compteurs masqués tant que les séries ne sont pas chargées ou en erreur (aujourd'hui « Aucune série… », « 0 % terminé », « Total : 0 romans » pendant le chargement et après une erreur) ; « Continuer ma lecture » ne montre que les séries commencées et non terminées, les plus avancées d'abord (aujourd'hui Eisenhorn 3/3 en tête) ; « Ordre de lecture » ordonné chronologiquement par une clé d'époque explicite, époque affichée sur chaque carte (aujourd'hui tri alphabétique sur le texte libre : Siège de Terra avant l'Hérésie)"
     public: "Romans : chargement annoncé, onglets Continuer et Ordre de lecture cohérents"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     screen: component
     created: 2026-10-17
+    started: 2026-10-17
   - id: L137
     title: "QA 17-10 : attentes docs/qa/expectations.md ## /romans après L5 — h1 « Romans Black Library » ; nav.tabs nommée « Affichage des séries », 4 onglets tous visibles à 1440, 390 et 320, un seul aria-pressed ; tri (select « Trier par ») désactivé dans Ordre de lecture avec sa note ; recherche nommée ; 27 lettres avec aria-pressed, lettres sans série désactivées ; « N séries affichées sur 38 » au-dessus de Charger plus ; Entrée sur « Voir la couverture de <série> » ouvre un role=dialog aria-modal nommé, Échap rend le focus ; état vide nomme le filtre avec « Effacer les filtres » ; never: défilement horizontal à 390 et 320 ; api: /api/series, /api/wiki-image?q= (QA L5 conforme)"
     status: todo
