@@ -46,7 +46,7 @@ lots:
   - id: L5
     title: Revue UX — Romans
     status: doing
-    estimate: 0.25
+    estimate: 0.75
     created: 2026-09-28
     started: 2026-10-17
     tasks:
@@ -1299,6 +1299,7 @@ lots:
     finished: 2026-10-17
   - id: L136
     title: "Page Romans, logique des onglets (revue UX L5 17-10) : état de chargement avec aria-busy et compteurs masqués tant que les séries ne sont pas chargées ou en erreur (aujourd'hui « Aucune série… », « 0 % terminé », « Total : 0 romans » pendant le chargement et après une erreur) ; « Continuer ma lecture » ne montre que les séries commencées et non terminées, les plus avancées d'abord (aujourd'hui Eisenhorn 3/3 en tête) ; « Ordre de lecture » ordonné chronologiquement par une clé d'époque explicite, époque affichée sur chaque carte (aujourd'hui tri alphabétique sur le texte libre : Siège de Terra avant l'Hérésie)"
+    public: "Romans : chargement annoncé, onglets Continuer et Ordre de lecture cohérents"
     status: todo
     estimate: 1
     visible: true
