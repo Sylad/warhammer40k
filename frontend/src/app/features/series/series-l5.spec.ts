@@ -33,7 +33,7 @@ const lum = (rgb: number[]) => {
 function serie(i: number, over: Partial<Serie> = {}): Serie {
   return {
     id: `s${i}`, titre: `Série ${String.fromCharCode(65 + (i % 26))}${i}`, titreVO: `VO ${i}`, auteurs: ['Auteur'],
-    nbLivres: 3, epoque: String(100 + i), factionIds: [], tags: [], premierLivre: 'Livre', description: 'Desc',
+    nbLivres: 3, epoque: String(100 + i), epoqueOrdre: 100 + i, factionIds: [], tags: [], premierLivre: 'Livre', description: 'Desc',
     niveauEntree: 'Facile', readBooks: 0, ...over,
   };
 }

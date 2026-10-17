@@ -20,6 +20,7 @@ const serie: Serie = {
   auteurs: ['Dan Abnett', 'Graham McNeill'],
   nbLivres: 54,
   epoque: 'M30 / M31',
+    epoqueOrdre: 300,
   factionIds: ['f1'],
   tags: ['Space Marines', 'Chaos'],
   premierLivre: 'L Ascension d Horus',

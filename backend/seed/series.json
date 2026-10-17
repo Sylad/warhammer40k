@@ -18,6 +18,7 @@
       "Audible"
     ],
     "epoque": "M30 — Grande Croisade & Hérésie",
+    "epoqueOrdre": 300,
     "factionIds": [
       "space-marines",
       "chaos-space-marines"
@@ -47,6 +48,7 @@
       "Audible"
     ],
     "epoque": "M41 — Croisade de Sabbat",
+    "epoqueOrdre": 410,
     "factionIds": [
       "astra-militarum"
     ],
@@ -75,6 +77,7 @@
       "Audible"
     ],
     "epoque": "M41 — Ordo Xenos",
+    "epoqueOrdre": 410,
     "factionIds": [
       "inquisition"
     ],
@@ -103,6 +106,7 @@
       "Papier"
     ],
     "epoque": "M41 — Ordo Xenos (suite d'Eisenhorn)",
+    "epoqueOrdre": 410,
     "factionIds": [
       "inquisition"
     ],
@@ -129,6 +133,7 @@
       "Papier"
     ],
     "epoque": "M41 — Suite de la saga Eisenhorn/Ravenor",
+    "epoqueOrdre": 410,
     "factionIds": [
       "inquisition"
     ],
@@ -156,6 +161,7 @@
       "Audible"
     ],
     "epoque": "M41 — Diverses campagnes",
+    "epoqueOrdre": 410,
     "factionIds": [
       "astra-militarum"
     ],
@@ -183,6 +189,7 @@
       "Papier"
     ],
     "epoque": "M41 — Guerres post-Hérésie",
+    "epoqueOrdre": 410,
     "factionIds": [
       "chaos-space-marines"
     ],
@@ -210,6 +217,7 @@
       "Papier"
     ],
     "epoque": "M41 — Mille Fils / Chaos",
+    "epoqueOrdre": 410,
     "factionIds": [
       "chaos-space-marines"
     ],
@@ -238,6 +246,7 @@
       "Audible"
     ],
     "epoque": "M41 — Guerres Ultramarines",
+    "epoqueOrdre": 410,
     "factionIds": [
       "space-marines"
     ],
@@ -265,6 +274,7 @@
       "Papier"
     ],
     "epoque": "M41 — Fenris",
+    "epoqueOrdre": 410,
     "factionIds": [
       "space-marines"
     ],
@@ -292,6 +302,7 @@
       "Papier"
     ],
     "epoque": "M30 — Hérésie d'Horus",
+    "epoqueOrdre": 301,
     "factionIds": [
       "adeptus-mechanicus"
     ],
@@ -325,6 +336,7 @@
       "Audible"
     ],
     "epoque": "M30 — Apogée de l'Hérésie",
+    "epoqueOrdre": 302,
     "factionIds": [
       "space-marines",
       "chaos-space-marines",
@@ -359,6 +371,7 @@
       "Audible"
     ],
     "epoque": "M42 — Ère Indomitus",
+    "epoqueOrdre": 460,
     "factionIds": [
       "space-marines",
       "astra-militarum",
@@ -391,6 +404,7 @@
       "Audible"
     ],
     "epoque": "M42 — Retour de Guilliman",
+    "epoqueOrdre": 450,
     "factionIds": [
       "space-marines",
       "chaos-space-marines"
@@ -425,6 +439,7 @@
       "Audible"
     ],
     "epoque": "M32 — Guerre contre les Orks",
+    "epoqueOrdre": 320,
     "factionIds": [
       "space-marines",
       "orks",
@@ -456,6 +471,7 @@
       "Audible"
     ],
     "epoque": "M42 — Crise du 13e Croisade Noire",
+    "epoqueOrdre": 441,
     "factionIds": [
       "adeptus-custodes",
       "officio-assassinorum"
@@ -485,6 +501,7 @@
       "Audible"
     ],
     "epoque": "M41 — Veille de la 13e Croisade Noire",
+    "epoqueOrdre": 435,
     "factionIds": [
       "inquisition"
     ],
@@ -514,6 +531,7 @@
       "Audible"
     ],
     "epoque": "M41 — Avant l'Ère Indomitus",
+    "epoqueOrdre": 430,
     "factionIds": [
       "space-marines",
       "tyranides"
@@ -544,6 +562,7 @@
       "Audible"
     ],
     "epoque": "M41 — Troisième Guerre d'Armageddon",
+    "epoqueOrdre": 421,
     "factionIds": [
       "space-marines",
       "orks",
@@ -576,6 +595,7 @@
       "Audible"
     ],
     "epoque": "M31 — Après l'Hérésie",
+    "epoqueOrdre": 310,
     "factionIds": [
       "chaos-space-marines"
     ],
@@ -603,6 +623,7 @@
       "Papier"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "space-marines"
     ],
@@ -630,6 +651,7 @@
       "Papier"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "chaos-space-marines"
     ],
@@ -658,6 +680,7 @@
       "Audible"
     ],
     "epoque": "M41 — Trois Guerres d'Armageddon",
+    "epoqueOrdre": 420,
     "factionIds": [
       "astra-militarum",
       "orks"
@@ -687,6 +710,7 @@
       "Audible"
     ],
     "epoque": "M41 — 13e Croisade Noire",
+    "epoqueOrdre": 440,
     "factionIds": [
       "astra-militarum",
       "chaos-space-marines"
@@ -717,6 +741,7 @@
       "Comédie"
     ],
     "epoque": "Hors temps — millions d'années",
+    "epoqueOrdre": 900,
     "factionIds": [
       "necrons"
     ],
@@ -746,6 +771,7 @@
       "Audible"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "necrons"
     ],
@@ -773,6 +799,7 @@
       "Papier"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "aeldari"
     ],
@@ -802,6 +829,7 @@
       "Comédie"
     ],
     "epoque": "M42 — Ère Indomitus",
+    "epoqueOrdre": 460,
     "factionIds": [
       "orks"
     ],
@@ -830,6 +858,7 @@
       "Papier"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "tau",
       "astra-militarum"
@@ -859,6 +888,7 @@
       "Audible"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "tau"
     ],
@@ -887,6 +917,7 @@
       "Audible"
     ],
     "epoque": "M42 — Ère Indomitus",
+    "epoqueOrdre": 460,
     "factionIds": [
       "soeurs-de-bataille"
     ],
@@ -915,6 +946,7 @@
       "Audible"
     ],
     "epoque": "M42",
+    "epoqueOrdre": 460,
     "factionIds": [
       "adeptus-mechanicus",
       "necrons"
@@ -943,6 +975,7 @@
       "Papier"
     ],
     "epoque": "M41",
+    "epoqueOrdre": 410,
     "factionIds": [
       "inquisition"
     ],
@@ -970,6 +1003,7 @@
       "Papier"
     ],
     "epoque": "M41 — Commorragh, intrigues entre Kabales rivales",
+    "epoqueOrdre": 410,
     "factionIds": [
       "drukhari"
     ],
@@ -998,6 +1032,7 @@
       "Papier"
     ],
     "epoque": "M41 — Chasses démoniaques aux confins de l'Imperium",
+    "epoqueOrdre": 410,
     "factionIds": [
       "grey-knights"
     ],
@@ -1026,6 +1061,7 @@
       "Papier"
     ],
     "epoque": "M41 — Porteur de la Lame Noire d'Antwyr",
+    "epoqueOrdre": 410,
     "factionIds": [
       "grey-knights"
     ],
@@ -1054,6 +1090,7 @@
       "Papier"
     ],
     "epoque": "M41 — Monde-jungle de Redemption, infiltration tyranide",
+    "epoqueOrdre": 410,
     "factionIds": [
       "genestealer-cults"
     ],
@@ -1082,6 +1119,7 @@
       "Papier"
     ],
     "epoque": "M41 — Monde agricole frontalier infesté",
+    "epoqueOrdre": 410,
     "factionIds": [
       "genestealer-cults"
     ],

@@ -17,6 +17,7 @@ export interface Serie {
   auteurs: string[];
   nbLivres: number;
   epoque: string;
+  epoqueOrdre: number;
   factionIds: string[];
   tags: string[];
   premierLivre: string;
