@@ -23,4 +23,10 @@ describe('seed series.json — clé d’époque (L136)', () => {
     const hors = series.filter((s) => s.epoque.startsWith('Hors temps')).map(rang);
     expect(Math.min(...hors)).toBeGreaterThan(Math.max(...parMillenaire(42)));
   });
+
+  it('R4 — une suite de saga vient après le tome qu’elle prolonge (Eisenhorn, Ravenor, Bequin), sans égalité', () => {
+    const cle = (id: string) => series.find((s) => s.id === id)?.epoqueOrdre as number;
+    expect(cle('eisenhorn')).toBeLessThan(cle('ravenor'));
+    expect(cle('ravenor')).toBeLessThan(cle('bequin'));
+  });
 });
