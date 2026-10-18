@@ -6,7 +6,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "0cb5fa2b877e085358e25e06f69bfe46b04e470e"
+    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "84b1cff9f1deacec184c83f1cf4488c9a3a55f68"
   },
   "resceaux": [
     {
@@ -24,6 +24,15 @@
       "avant": "488d594f671384ba2c7987fc5322286c86287e67",
       "apres": "0cb5fa2b877e085358e25e06f69bfe46b04e470e",
       "porteur": "L132"
+    },
+    {
+      "test": "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts",
+      "raison": "R9 amendée (décision de Sylvain du 18-10, lot L6) : le ✕ n'existe qu'en mode édition ; les deux cas qui cliquent ou tabulent sur le ✕ posent le PIN avant de charger la page, et un cas vérifie qu'aucun ✕ n'apparaît sans PIN",
+      "date": "2026-10-18",
+      "avant": "0cb5fa2b877e085358e25e06f69bfe46b04e470e",
+      "apres": "84b1cff9f1deacec184c83f1cf4488c9a3a55f68",
+      "porteur": "L6",
+      "ficheAmendee": "8a9f11a"
     }
   ]
 }

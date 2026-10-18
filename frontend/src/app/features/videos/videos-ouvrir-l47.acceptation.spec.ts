@@ -98,6 +98,8 @@ async function fresh(mode: Mode = 'ok', width = 1440): Promise<Sim> {
   return sim;
 }
 const done = async () => { await ctx.close(); };
+/** Mode édition (L6) : le PIN du codex est en sessionStorage avant le chargement de la page. */
+const withPin = () => ctx.addInitScript(() => { sessionStorage.setItem('wh40k.pin', '0000'); });
 const settle = async () => {
   await page.getByRole('heading', { level: 1 }).first().waitFor();
   await page.waitForLoadState('networkidle');
@@ -398,9 +400,20 @@ describe('vidéos — ouvrir une vidéo précise par l\'adresse (navigateur, dis
     } finally { await done(); }
   });
 
+  it('R9 — sans PIN : aucune carte n\'a de bouton Supprimer', async () => {
+    await fresh();
+    try {
+      await page.goto(`${base}/videos`);
+      await settle();
+      expect(await tid(page, 'carte-video').count()).toBeGreaterThan(0);
+      expect(await tid(page, 'bouton-supprimer').count()).toBe(0);
+    } finally { await done(); }
+  });
+
   it('R9 — le bouton Supprimer est frère du lien, jamais son descendant ; Tab : lien puis bouton', async () => {
     await fresh();
     try {
+      await withPin();
       await page.goto(`${base}/videos`);
       await settle();
       const card = tid(page, 'carte-video').filter({ has: cardLink(page, 'astartes-2') });
@@ -472,6 +485,7 @@ describe('vidéos — ouvrir une vidéo précise par l\'adresse (navigateur, dis
   it('R9 — clic sur ✕ : la vidéo est supprimée, aucune fenêtre ne s\'ouvre', async () => {
     const sim = await fresh();
     try {
+      await withPin();
       page.on('dialog', (d) => { void d.accept(); });
       await page.goto(`${base}/videos`);
       await settle();
