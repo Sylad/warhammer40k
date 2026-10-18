@@ -1410,9 +1410,10 @@ lots:
     finished: 2026-10-18
   - id: L145
     title: "Import d'image : Reddit répond 403 au backend, qui renvoie [] → « Aucun post avec image » — renvoyer l'erreur et l'afficher, ouvrir sur l'onglet Wiki, « Wikipedia » → « wiki Warhammer (Fandom) », onglets aria-selected (revue UX L7)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-18
+    started: 2026-10-18
   - id: L146
     title: "Galerie, œuvres du seed : liste œuvre → image vérifiée + auteur + source (≈ 15 sur 35 montrent autre chose que leur sujet : Marneus Calgar = étoile du Chaos, Yvraine = rune, armoiries pour Sanguinius, Magnus, Abaddon… ; artiste crédité sur une image dont il n'est pas l'auteur) — VALIDATION de Sylvain avant écriture (revue UX L7)"
     status: todo
