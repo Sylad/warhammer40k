@@ -1378,10 +1378,12 @@ lots:
     created: 2026-10-18
   - id: L142
     title: "Vidéos : une vidéo retirée de YouTube (vignette 404, erreur console) s'affiche avec la vignette grise et sans signe — signaler la vidéo indisponible sur la carte ; cas réel 18-10 : « Raptors » (raptors-CcFcmPQklyY, importée en prod, oEmbed 404)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-18
     started: 2026-10-18
+    review: { date: 2026-10-18, verdict: "conforme après 1 correction (ce98890 : vignette de remplacement 120×90 détectée, test fidèle aux moteurs, README juste, signe relié au lien) ; preuve navigateur Chromium et Firefox", commit: ce988908d2bf291c195863bf74648b48f0e9b23f }
+    finished: 2026-10-18
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
