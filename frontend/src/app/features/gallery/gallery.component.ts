@@ -248,15 +248,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   <article class="art-card"
                     [style.--art]="artBg(art)">
                     <!-- L7/t1 (WCAG 2.1.1 / 4.1.2) : vrai bouton nommé par le titre, étiré sur toute la carte ;
-                         le bouton Favori en est le frère (pas de bouton dans un bouton). -->
+                         seul bouton de la carte. -->
                     <button type="button" class="art-open" [attr.data-art-id]="art.id" (click)="openViewer(art, i)">{{ art.title }}</button>
-                    <button class="bookmark"
-                      type="button"
-                      [class.on]="bookmarks().has(art.id)"
-                      (click)="toggleBookmark(art.id)"
-                      aria-label="Favori">
-                      ♥
-                    </button>
                     <div class="art-content">
                       <div class="art-title" aria-hidden="true">{{ art.title }}</div>
                       <div class="art-meta">
@@ -355,11 +348,6 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               }
             </div>
             <div class="vi-actions">
-              <button type="button" class="vi-btn"
-                [class.on]="bookmarks().has(art.id)"
-                (click)="toggleBookmark(art.id)">
-                ♥ {{ bookmarks().has(art.id) ? 'Favori' : 'Ajouter aux favoris' }}
-              </button>
               @if (art.isLocal && editMode()) {
                 <button type="button" class="vi-btn" (click)="openCategorize()">
                   ✦ Catégoriser
@@ -834,7 +822,6 @@ export class GalleryComponent {
   readonly filterArtist = signal<string>('');
   readonly filterCollection = signal<string>('');
   readonly sortBy = signal<SortBy>('recent');
-  readonly bookmarks = signal<Set<string>>(new Set());
   /** Page courante (1-indexed) — pagination numérotée plutôt que load-more. */
   readonly currentPage = signal(1);
 
@@ -1207,12 +1194,6 @@ export class GalleryComponent {
     this.currentPage.set(1);
     this.syncUrl();
     this.cdr.detectChanges();
-  }
-
-  toggleBookmark(id: string): void {
-    const set = new Set(this.bookmarks());
-    if (set.has(id)) set.delete(id); else set.add(id);
-    this.bookmarks.set(set);
   }
 
   goToPage(n: number): void {

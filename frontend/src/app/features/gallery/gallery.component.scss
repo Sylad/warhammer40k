@@ -333,23 +333,6 @@
     }
     .art-artist { color: #c9beaa; }
     .art-likes { color: var(--gold); white-space: nowrap; }
-    .bookmark {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 3;
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      background: rgba(0, 0, 0, 0.62);
-      color: rgba(201, 162, 74, 0.55);
-      font-size: 16px;
-      cursor: pointer;
-      transition: color 0.15s ease, transform 0.15s ease;
-    }
-    .bookmark:hover { color: var(--gold-bright); transform: scale(1.08); }
-    .bookmark.on { background: rgba(255, 92, 107, 0.1); }
 
     /* Pagination numérotée — remplace l'ancien bouton 'load-more'. */
     .pagination {
@@ -579,9 +562,8 @@
       text-decoration: none;
     }
     .vi-btn:hover { background: rgba(201, 162, 74, 0.1); }
-    .bookmark.on, .vi-btn.on { color: #ff5c6b; border-color: rgba(255, 92, 107, 0.55); }
 
-    .bookmark, .close, .nav-arrow { border: 1px solid rgba(201, 162, 74, 0.45); }
+    .close, .nav-arrow { border: 1px solid rgba(201, 162, 74, 0.45); }
     .close, .nav-arrow {
       position: absolute;
       z-index: 102;

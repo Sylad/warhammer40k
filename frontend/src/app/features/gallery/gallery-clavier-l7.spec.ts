@@ -53,12 +53,19 @@ describe('galerie — carte d\'œuvre au clavier (L7/t1, WCAG 2.1.1 / 4.1.2)', (
     expect(root.ownerDocument.querySelector('.vi-title')?.textContent?.trim()).toBe('Nécron');
   });
 
-  it('R3 — le bouton Favori d\'une carte reste un frère du bouton d\'ouverture (pas de bouton imbriqué)', async () => {
-    const root = (await render()).nativeElement as HTMLElement;
+  it('R3 — aucune carte ni la visionneuse ne porte de bouton Favori (retiré, décision du 18-10), sans bouton imbriqué', async () => {
+    const f = await render();
+    const root = f.nativeElement as HTMLElement;
     for (const c of cartes(root)) {
       expect(c.querySelectorAll('button button')).toHaveLength(0);
-      expect(c.querySelector('button.bookmark')).not.toBeNull();
+      expect(c.querySelectorAll('button')).toHaveLength(1);
+      expect(c.querySelector('.bookmark')).toBeNull();
     }
+    cartes(root)[0].querySelector<HTMLButtonElement>('button.art-open')!.click();
+    f.detectChanges();
+    const dlg = root.ownerDocument.querySelector('.vi-actions')!;
+    expect(dlg.textContent).not.toMatch(/favori/i);
+    expect(dlg.querySelector('.vi-btn.on')).toBeNull();
   });
 });
 

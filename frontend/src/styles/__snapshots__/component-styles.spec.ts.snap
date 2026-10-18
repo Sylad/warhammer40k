@@ -1170,31 +1170,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".artist-row:hover": {
     "color": "var(--gold-bright)",
   },
-  ".bookmark": {
-    "background": "rgba(0, 0, 0, 0.62)",
-    "border": "1px solid rgba(201, 162, 74, 0.45)",
-    "color": "rgba(201, 162, 74, 0.55)",
-    "cursor": "pointer",
-    "display": "grid",
-    "font-size": "16px",
-    "height": "32px",
-    "place-items": "center",
-    "position": "absolute",
-    "right": "10px",
-    "top": "10px",
-    "transition": "color 0.15s ease, transform 0.15s ease",
-    "width": "32px",
-    "z-index": "3",
-  },
-  ".bookmark.on": {
-    "background": "rgba(255, 92, 107, 0.1)",
-    "border-color": "rgba(255, 92, 107, 0.55)",
-    "color": "#ff5c6b",
-  },
-  ".bookmark:hover": {
-    "color": "var(--gold-bright)",
-    "transform": "scale(1.08)",
-  },
   ".cat-actions": {
     "border-top": "1px solid rgba(201, 162, 74, 0.18)",
     "display": "flex",
@@ -2191,10 +2166,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".vi-btn.ghost:hover": {
     "border-color": "rgba(201, 162, 74, 0.45)",
     "color": "var(--text)",
-  },
-  ".vi-btn.on": {
-    "border-color": "rgba(255, 92, 107, 0.55)",
-    "color": "#ff5c6b",
   },
   ".vi-btn.primary": {
     "background": "rgba(201, 162, 74, 0.18)",

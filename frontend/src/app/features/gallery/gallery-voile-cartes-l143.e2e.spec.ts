@@ -1,5 +1,5 @@
 // @vitest-environment node
-// L143 — navigateur réel, application construite (dist) : le titre, l'artiste et le ♥ d'une carte d'œuvre
+// L143 — navigateur réel, application construite (dist) : le titre, l'artiste et le nombre de ♥ d'une carte d'œuvre
 // restent ≥ 4,5:1 (WCAG 1.4.3) même quand le titre passe sur 3-4 lignes (390 et 320 px) et que l'image est
 // blanche (pire cas). Mesuré sur les pixels rendus, texte rendu transparent, comme gallery-voile.e2e.spec.ts.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
@@ -57,7 +57,7 @@ describe.skipIf(!built || !chromium)('galerie — voile sous le texte des cartes
         return t.top >= c.top - 0.5 && t.bottom <= c.bottom + 0.5;
       });
       expect(dedans, 'le titre ne sort pas de la carte').toBe(true);
-      await page.addStyleTag({ content: '.art-content * { color: transparent !important; } .bookmark { visibility: hidden; }' /* le favori a son propre contraste, hors de cette mesure */ });
+      await page.addStyleTag({ content: '.art-content * { color: transparent !important; }' });
       await page.waitForTimeout(300);
       const out: Record<string, number> = {};
       for (let i = 0; i < cibles.length; i++) {
