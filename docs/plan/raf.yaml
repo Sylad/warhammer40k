@@ -1397,6 +1397,7 @@ lots:
     estimate: 0.25
     created: 2026-10-18
     started: 2026-10-18
+    review: { date: 2026-10-18, verdict: "compliant (0 blocking, 0 major, 1 minor : le chiffre du budget CSS de CLAUDE.md est périmé, 17,27 kB mesurés pour 17,03 kB écrits). Suite complète 114 fichiers / 1060 tests verts, dont les 4 tests de style et les 3 tests navigateur du lot à 390 et 320 px. — orchestré (vague 2026-10-18-galerie, 0 passe(s) de correction)", commit: 4d6a61a9a13a8a531555742ebc118f7b621a0be2 }
   - id: L144
     title: "Galerie, édition derrière le PIN comme Vidéos : « + Importer » et « Catégoriser » cachés sans PIN, bouton « Mode édition » (aria-pressed) en pied de page ; saveCategorize affiche l'échec (PIN annulé ou refusé, aujourd'hui muet) — décision de Sylvain du 18-10 (revue UX L7)"
     status: doing
