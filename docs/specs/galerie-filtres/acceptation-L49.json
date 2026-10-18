@@ -6,7 +6,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "5355d61e935ac80e7a93f19b71633f5b50d62fcc"
+    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "0d663d7565999535f99dc7d03998d6929f45ba0d"
   },
   "resceaux": [
     {
@@ -22,6 +22,15 @@
       "date": "2026-10-12",
       "avant": "597c5f3eee2c300ca6bc2b64f39a4c9f8b67d341",
       "apres": "5355d61e935ac80e7a93f19b71633f5b50d62fcc"
+    },
+    {
+      "test": "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts",
+      "raison": "R3/R4 amendées (décision de Sylvain du 18-10, L144) : « Importer » caché sans PIN ; R3 vérifie maintenant les deux cas — sans PIN, Filtres suit la recherche et aucun Importer ; avec PIN, Importer puis Filtres sur la même rangée",
+      "date": "2026-10-18",
+      "avant": "5355d61e935ac80e7a93f19b71633f5b50d62fcc",
+      "apres": "0d663d7565999535f99dc7d03998d6929f45ba0d",
+      "porteur": "L150",
+      "ficheAmendee": "7b53bfa"
     }
   ]
 }

@@ -183,7 +183,21 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
 
   // ---------------------------------------------------------------- R3
   it('R3 — 390 px : bouton Filtres sous la recherche, après Importer', async () => {
+    // Sans PIN (L144, décision de Sylvain du 18-10) : pas d'« Importer », « Filtres » suit directement la recherche.
     await fresh();
+    await open(page, 390);
+    const searchSansPin = await box(page, 'recherche');
+    const filtresSansPin = await box(page, 'bouton-filtres');
+    const importerSansPin = await page.getByRole('button', { name: /Importer/ }).count();
+    const seqSansPin = await tabSequence(page, 'recherche', 1);
+    await done();
+    expect(importerSansPin).toBe(0);
+    expect(filtresSansPin.y).toBeGreaterThanOrEqual(searchSansPin.y + searchSansPin.height - 1);
+    expect(seqSansPin[0]).toBe('bouton-filtres');
+
+    // En mode édition (PIN saisi) : « Importer » puis « Filtres » sur la même rangée, dans cet ordre.
+    await fresh();
+    await page.addInitScript(() => { sessionStorage.setItem('wh40k.pin', '0000'); });
     await open(page, 390);
     const search = await box(page, 'recherche');
     const filtres = await box(page, 'bouton-filtres');
