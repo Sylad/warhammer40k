@@ -85,16 +85,17 @@ lots:
     finished: 2026-10-18
   - id: L7
     title: Revue UX — Galerie
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-09-28
     tasks:
-      - { id: t1, title: "Galerie, clavier et état : carte d'œuvre ouvrable au clavier (bouton nommé par le titre, Entrée ouvre la visionneuse, focus rendu à la carte), aria-pressed sur cartes catégorie, artistes et collections (WCAG 2.1.1, 4.1.2)", status: todo }
-      - { id: t2, title: "Galerie, visionneuse en vraie boîte de dialogue : role=dialog aria-modal aria-labelledby, fond inerte, focus sur ×, Échap ferme aussi Importer et Catégoriser, défilement du fond bloqué ; rendue au-dessus de la barre collante (× masqué : clic reçu par Ctrl+K à 1440 et MENU à 390) ; test elementFromPoint du × à 1440 et 390 (WCAG 2.4.3, 4.1.2)", status: todo }
+      - { id: t1, title: "Galerie, clavier et état : carte d'œuvre ouvrable au clavier (bouton nommé par le titre, Entrée ouvre la visionneuse, focus rendu à la carte), aria-pressed sur cartes catégorie, artistes et collections (WCAG 2.1.1, 4.1.2)", status: done }
+      - { id: t2, title: "Galerie, visionneuse en vraie boîte de dialogue : role=dialog aria-modal aria-labelledby, fond inerte, focus sur ×, Échap ferme aussi Importer et Catégoriser, défilement du fond bloqué ; rendue au-dessus de la barre collante (× masqué : clic reçu par Ctrl+K à 1440 et MENU à 390) ; test elementFromPoint du × à 1440 et 390 (WCAG 2.4.3, 4.1.2)", status: done }
     notes:
       - { date: 2026-10-18, text: "revue UX du 18-10 (prod, captures ~/projects/developpeur/tmp/ux-wh-L7/) : non conforme, 4 bloquants 5 majeurs → t1 (clavier, aria-pressed) et t2 (visionneuse en dialogue, × sous la barre) ici ; L143 contraste des titres à 390, L144 édition derrière le PIN, L145 import Reddit 403, L146 puis L147 images et crédits du seed (validation de Sylvain), L148 contenu d'abord ; favori des cartes (24 « Favori » sans état, non conservé) : décision de Sylvain demandée — retirer ou garder avec stockage local ; mineurs : pied « Site fan » en double (cf. L141), états erreur/chargement sous le premier écran au téléphone, « HAWKSHROUD » coupé en erreur à 1440, taxonomie (« Space Marines : 1 œuvre »), visionneuse bouclée sur la page, image de visionneuse sans alternative, 35 appels wiki-image (cf. L134), anneau de focus Chrome sur les boutons, cibles favori 32 et pagination 38 px, import réussi → reload efface « Importé », « Œuvres récentes » sans date" }
     started: 2026-10-18
     review: { date: 2026-10-18, verdict: "compliant (1 note mineure : CLAUDE.md, budget CSS de la galerie à mettre à jour) — orchestré (vague 2026-10-18-galerie, 2 passe(s) de correction)", commit: d0064f4df19e6fd4b258ad9def4a2b53c2be3d76 }
+    finished: 2026-10-18
   - id: L8
     title: "Revue UX — Lore : sommaire"
     status: todo
@@ -1393,18 +1394,20 @@ lots:
     finished: 2026-10-18
   - id: L143
     title: "Galerie 390 px : titres de carte sur 3-4 lignes hors du dégradé (Marneus Calgar 2,78:1, Horus 3,94:1, Yvraine 4,0:1) — voile sous .art-content qui suit la hauteur du texte, ≥ 4,5:1 mesuré à 390 et 320 (WCAG 1.4.3, revue UX L7)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-18
     started: 2026-10-18
     review: { date: 2026-10-18, verdict: "compliant (0 blocking, 0 major, 1 minor : le chiffre du budget CSS de CLAUDE.md est périmé, 17,27 kB mesurés pour 17,03 kB écrits). Suite complète 114 fichiers / 1060 tests verts, dont les 4 tests de style et les 3 tests navigateur du lot à 390 et 320 px. — orchestré (vague 2026-10-18-galerie, 0 passe(s) de correction)", commit: 4d6a61a9a13a8a531555742ebc118f7b621a0be2 }
+    finished: 2026-10-18
   - id: L144
     title: "Galerie, édition derrière le PIN comme Vidéos : « + Importer » et « Catégoriser » cachés sans PIN, bouton « Mode édition » (aria-pressed) en pied de page ; saveCategorize affiche l'échec (PIN annulé ou refusé, aujourd'hui muet) — décision de Sylvain du 18-10 (revue UX L7)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-18
     started: 2026-10-18
     review: { date: 2026-10-18, verdict: "compliant (2 notes mineures : bandeaux-reflow.e2e « Importer » vacueux sans PIN ; .edit-toggle dupliqué et chiffre du budget CSS de CLAUDE.md à relever à 17,04 kB) — orchestré (vague 2026-10-18-galerie, 0 passe(s) de correction)", commit: ffbb2c2edf1b3012a0e71e19dcb004b518c77ec4 }
+    finished: 2026-10-18
   - id: L145
     title: "Import d'image : Reddit répond 403 au backend, qui renvoie [] → « Aucun post avec image » — renvoyer l'erreur et l'afficher, ouvrir sur l'onglet Wiki, « Wikipedia » → « wiki Warhammer (Fandom) », onglets aria-selected (revue UX L7)"
     status: todo
@@ -1428,10 +1431,14 @@ lots:
     created: 2026-10-18
   - id: L149
     title: "Galerie : retirer le bouton « Favori » (♥) des cartes et de la visionneuse — état visible à la seule couleur, perdu au rechargement, sans vue « Mes favoris » ; décision de Sylvain du 18-10 (revue UX L7), tests et README"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-18
     started: 2026-10-18
+    review: { date: 2026-10-18, verdict: "conforme — bouton Favori, signal et styles retirés, R3 réécrit (peut échouer si le bouton revient), README à jour, L7 L143 L144 intacts, 1060 tests verts ; mineur en note : champ bookmarked orphelin dans models.ts:263 et artwork.model.ts:19", commit: f75dee205c275f671dfb28241b7193cd22d3c3c1 }
+    notes:
+      - { date: 2026-10-18, text: "mineurs revue 18-10 : champ bookmarked orphelin (frontend models.ts:263, backend artwork.model.ts:19) ; « ♥ 0 » affiché sur les cartes sans likes alors que la visionneuse le masque (préexistant, cf. L147 likes inventés)" }
+    finished: 2026-10-18
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
