@@ -257,6 +257,12 @@
     }
     .art-card {
       aspect-ratio: 1 / 1.08;
+      /* L143 : le texte est dans le flux, en bas ; « clip » (pas « hidden ») laisse le ratio jouer de minimum :
+       * la carte grandit quand un titre prend 4-5 lignes à 320-390 px au lieu de le laisser sortir par le haut. */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: clip;
       border: 1px solid rgba(201, 162, 74, 0.22);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
       font: inherit;
@@ -296,11 +302,20 @@
     }
     .art-open:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: -4px; }
     .art-content {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
+      position: relative;
       z-index: 2;
       pointer-events: none;
       padding: 14px 16px;
+    }
+    /* L143 : voile propre au texte, il suit la hauteur du titre (3-4 lignes à 390 px) ; le dégradé de la carte,
+     * lui, est fixé à sa hauteur et laissait le haut du titre sur l'image. */
+    .art-content::before {
+      content: '';
+      position: absolute;
+      inset: -28px 0 0;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.92) calc(100% - 28px), rgba(0, 0, 0, 0));
     }
     .art-title {
       color: var(--gold-bright);
@@ -620,7 +635,7 @@
       .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
       .search-field { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
       .art-content { padding: 14px 12px; }
-      .category-grid, .art-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-grid, .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* L143 : le texte des cartes est dans le flux, un mot long ne doit plus élargir la colonne */
       .art-grid { gap: 10px; }
       .sidebar { grid-template-columns: 1fr; }
       .nav-arrow { width: 40px; height: 50px; font-size: 26px; }

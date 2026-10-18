@@ -1064,8 +1064,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "box-shadow": "0 16px 48px rgba(0, 0, 0, 0.55)",
     "color": "inherit",
     "cursor": "pointer",
+    "display": "flex",
+    "flex-direction": "column",
     "font": "inherit",
-    "overflow": "hidden",
+    "justify-content": "flex-end",
+    "overflow": "clip",
     "padding": "0",
     "position": "relative",
     "text-align": "left",
@@ -1091,13 +1094,18 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "transform": "scale(1.06)",
   },
   ".art-content": {
-    "bottom": "0",
-    "left": "0",
     "padding": "14px 16px",
     "pointer-events": "none",
-    "position": "absolute",
-    "right": "0",
+    "position": "relative",
     "z-index": "2",
+  },
+  ".art-content::before": {
+    "background": "linear-gradient(to top, rgba(0, 0, 0, 0.92) calc(100% - 28px), rgba(0, 0, 0, 0))",
+    "content": """",
+    "inset": "-28px 0 0",
+    "pointer-events": "none",
+    "position": "absolute",
+    "z-index": "-1",
   },
   ".art-grid": {
     "display": "grid",
@@ -2260,10 +2268,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .art-grid": {
     "gap": "10px",
-    "grid-template-columns": "repeat(2, 1fr)",
+    "grid-template-columns": "repeat(2, minmax(0, 1fr))",
   },
   "@media (max-width: 760px) .category-grid": {
-    "grid-template-columns": "repeat(2, 1fr)",
+    "grid-template-columns": "repeat(2, minmax(0, 1fr))",
   },
   "@media (max-width: 760px) .gallery-page": {
     "width": "auto",
