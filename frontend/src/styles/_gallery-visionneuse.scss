@@ -4,10 +4,19 @@
  * sous l'hôte <app-gallery>, d'où ce préfixe.
  */
 app-gallery {
+  /* <dialog> modale (couche supérieure : au-dessus de la barre collante sans z-index) ; plein écran,
+     les réglages par défaut du navigateur (cadre, marge, largeur ajustée) sont neutralisés */
   .modal {
     position: fixed;
     inset: 0;
-    z-index: 100;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    color: inherit;
     display: flex;
     align-items: center;
     justify-content: center;

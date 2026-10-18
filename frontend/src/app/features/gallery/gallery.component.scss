@@ -617,7 +617,6 @@
     }
     /* CATEGORIZE MODAL */
     /* Boîtes des modales « Catégoriser » et « Importer » : même cadre, même titre. */
-    .cat-modal, .import-modal { z-index: 110; }
     .cat-box, .import-box {
       position: relative;
       padding: 28px 26px 22px;

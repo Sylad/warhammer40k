@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { BehaviorSubject, catchError, concat, filter, map, of, switchMap, type Observable } from 'rxjs';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
+import { GalleryModalDirective } from './gallery-modal.directive';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
 interface CategoryDef {
@@ -30,7 +31,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, GalleryModalDirective],
   template: `
     <section class="gallery-page">
 
@@ -327,7 +328,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 
     <!-- VIEWER MODAL -->
     @if (selectedArt(); as art) {
-      <div class="modal" (click)="onModalBackdrop($event)">
+      <dialog class="modal" appGalleryModal role="dialog" aria-modal="true" aria-labelledby="viewer-titre"
+        (dismiss)="closeViewer()" (click)="onModalBackdrop($event)">
         <button class="close" type="button" (click)="closeViewer()" aria-label="Fermer">×</button>
         <button class="nav-arrow left" type="button"
           (click)="$event.stopPropagation(); navViewer(-1)"
@@ -338,7 +340,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
         <div class="viewer" (click)="$event.stopPropagation()">
           <div class="viewer-img" [style.background-image]="viewerBg()"></div>
           <div class="viewer-info">
-            <div class="vi-title">{{ art.title }}</div>
+            <div class="vi-title" id="viewer-titre">{{ art.title }}</div>
             <div class="vi-meta">
               <span>{{ art.artist }}</span>
               <span class="vi-dot">·</span>
@@ -367,15 +369,16 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             </div>
           </div>
         </div>
-      </div>
+      </dialog>
     }
 
     <!-- CATEGORIZE MODAL -->
     @if (catModalOpen()) {
-      <div class="modal cat-modal" (click)="onCatBackdrop($event)">
+      <dialog class="modal cat-modal" appGalleryModal role="dialog" aria-modal="true" aria-labelledby="cat-titre"
+        (dismiss)="closeCategorize()" (click)="onCatBackdrop($event)">
         <div class="cat-box" (click)="$event.stopPropagation()">
           <button class="close" type="button" (click)="closeCategorize()" aria-label="Fermer">×</button>
-          <h3>Catégoriser l'image</h3>
+          <h3 id="cat-titre">Catégoriser l'image</h3>
           <p class="cat-hint">Assigne plusieurs catégories, un titre, un artiste ou une faction. Tape une nouvelle catégorie et appuie sur Entrée.</p>
 
           <div class="cat-row cat-combo-row">
@@ -394,7 +397,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 (ngModelChange)="catInput.set($event); catDropdownOpen.set(true)"
                 (focus)="catDropdownOpen.set(true)"
                 (keydown.enter)="$event.preventDefault(); addCatTag()"
-                (keydown.escape)="catDropdownOpen.set(false)" />
+                (keydown.escape)="onCatEscape($event)" />
               @if (catInput().trim()) {
                 <button type="button" class="chip-add" (click)="addCatTag()" aria-label="Ajouter">+</button>
               }
@@ -450,15 +453,16 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <button type="button" class="vi-btn primary" (click)="saveCategorize()">Enregistrer</button>
           </div>
         </div>
-      </div>
+      </dialog>
     }
 
     <!-- IMPORT MODAL -->
     @if (importModalOpen()) {
-      <div class="modal import-modal" (click)="onImportBackdrop($event)">
+      <dialog class="modal import-modal" appGalleryModal role="dialog" aria-modal="true" aria-labelledby="import-titre"
+        (dismiss)="closeImport()" (click)="onImportBackdrop($event)">
         <div class="import-box" (click)="$event.stopPropagation()">
           <button class="close" type="button" (click)="closeImport()" aria-label="Fermer">×</button>
-          <h3>Importer une image</h3>
+          <h3 id="import-titre">Importer une image</h3>
           <p class="cat-hint">Recherche sur Wikipedia, parcours r/Warhammer40k, ou colle une URL directe.</p>
 
           <div class="import-tabs">
@@ -555,7 +559,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             </div>
           }
         </div>
-      </div>
+      </dialog>
     }
   `,
   styleUrls: ['./gallery.component.scss'],
@@ -1232,9 +1236,6 @@ export class GalleryComponent {
     this.selectedArt.set(list[this.viewerIndex]);
   }
 
-  @HostListener('document:keydown.escape')
-  onEscape(): void { if (this.selectedArt()) this.closeViewer(); }
-
   @HostListener('document:keydown.arrowleft')
   onLeft(): void { if (this.selectedArt()) this.navViewer(-1); }
 
@@ -1259,6 +1260,13 @@ export class GalleryComponent {
     this.catArtist.set(a.artist === 'Collection personnelle' ? '' : a.artist);
     this.catFaction.set(a.faction ?? '');
     this.catModalOpen.set(true);
+    this.catDropdownOpen.set(false);
+  }
+
+  /** Échap dans le champ : ferme la liste de suggestions seule (keydown annulé : pas de `cancel`, la boîte reste). */
+  onCatEscape(event: Event): void {
+    if (!this.catDropdownOpen()) return;
+    event.preventDefault();
     this.catDropdownOpen.set(false);
   }
 

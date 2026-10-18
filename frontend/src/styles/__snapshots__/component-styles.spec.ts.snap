@@ -1247,9 +1247,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "color": "var(--gold-bright)",
     "font-size": "12px",
   },
-  ".cat-modal": {
-    "z-index": "110",
-  },
   ".cat-name": {
     "bottom": "32px",
     "color": "var(--gold-bright)",
@@ -1797,9 +1794,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "background": "rgba(123, 17, 19, 0.25)",
     "border-color": "rgba(170, 45, 45, 0.55)",
     "color": "#ff8a8a",
-  },
-  ".import-modal": {
-    "z-index": "110",
   },
   ".import-tabs": {
     "border-bottom": "1px solid rgba(201, 162, 74, 0.2)",
@@ -2353,17 +2347,25 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "aspect-ratio": "auto",
     "height": "92px",
   },
+  "app-gallery": {},
   "app-gallery .modal": {
     "align-items": "center",
     "animation": "fadeIn 0.2s ease-out",
     "backdrop-filter": "blur(12px)",
     "background": "rgba(0, 0, 0, 0.94)",
+    "border": "0",
+    "box-sizing": "border-box",
+    "color": "inherit",
     "display": "flex",
+    "height": "100%",
     "inset": "0",
     "justify-content": "center",
+    "margin": "0",
+    "max-height": "none",
+    "max-width": "none",
     "padding": "28px",
     "position": "fixed",
-    "z-index": "100",
+    "width": "100%",
   },
   "app-gallery .vi-actions": {
     "display": "flex",
