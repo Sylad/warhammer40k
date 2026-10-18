@@ -1439,6 +1439,14 @@ lots:
     notes:
       - { date: 2026-10-18, text: "mineurs revue 18-10 : champ bookmarked orphelin (frontend models.ts:263, backend artwork.model.ts:19) ; « ♥ 0 » affiché sur les cartes sans likes alors que la visionneuse le masque (préexistant, cf. L147 likes inventés)" }
     finished: 2026-10-18
+  - id: L150
+    title: "Galerie : contrat L49 R3/R4 aligné sur L144 (Importer caché sans PIN, décision de Sylvain du 18-10) — fiche amendée, acceptation L49 rescellée (sans PIN : Filtres suit la recherche ; en mode édition : Importer puis Filtres) ; CI rouge du 18-10 sur R3"
+    status: doing
+    estimate: 0.1
+    created: 2026-10-18
+    started: 2026-10-18
+    notes:
+      - { date: 2026-10-18, text: "test d'acceptation rescellé (lot livré L49, frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche amendée en 7b53bfa) : R3/R4 amendées (décision de Sylvain du 18-10, L144) : « Importer » caché sans PIN ; R3 vérifie maintenant les deux cas — sans PIN, Filtres suit la recherche et aucun Importer ; avec PIN, Importer puis Filtres sur la même rangée" }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
