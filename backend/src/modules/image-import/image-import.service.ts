@@ -1,4 +1,4 @@
-import { Injectable, Logger, BadRequestException } from '@nestjs/common';
+import { Injectable, Logger, BadRequestException, BadGatewayException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
@@ -49,7 +49,7 @@ export class ImageImportService {
       const res = await fetch(url, { headers: REDDIT_HEADERS, signal: AbortSignal.timeout(10_000) });
       if (!res.ok) {
         this.logger.warn(`Reddit ${safeSub} → HTTP ${res.status}`);
-        return [];
+        throw new BadGatewayException(`Reddit a refusé la requête (HTTP ${res.status})`);
       }
       const data = (await res.json()) as any;
       const children: any[] = data?.data?.children ?? [];
@@ -87,8 +87,9 @@ export class ImageImportService {
       }
       return posts;
     } catch (err) {
+      if (err instanceof BadGatewayException) throw err;
       this.logger.warn(`Reddit fetch failed: ${(err as Error).message}`);
-      return [];
+      throw new BadGatewayException('Reddit est injoignable');
     }
   }
 
