@@ -1398,9 +1398,10 @@ lots:
     created: 2026-10-18
   - id: L144
     title: "Galerie, édition derrière le PIN comme Vidéos : « + Importer » et « Catégoriser » cachés sans PIN, bouton « Mode édition » (aria-pressed) en pied de page ; saveCategorize affiche l'échec (PIN annulé ou refusé, aujourd'hui muet) — décision de Sylvain du 18-10 (revue UX L7)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-18
+    started: 2026-10-18
   - id: L145
     title: "Import d'image : Reddit répond 403 au backend, qui renvoie [] → « Aucun post avec image » — renvoyer l'erreur et l'afficher, ouvrir sur l'onglet Wiki, « Wikipedia » → « wiki Warhammer (Fandom) », onglets aria-selected (revue UX L7)"
     status: todo
