@@ -152,3 +152,29 @@ describe('galerie — visionneuse en boîte de dialogue (L7/t2, WCAG 2.4.3 / 4.1
     expect(touche.defaultPrevented, 'keydown annulé : le navigateur n\'émet pas cancel').toBe(true);
   });
 });
+
+describe('galerie — flèches ← → et boîtes au-dessus de la visionneuse (L7/t2)', () => {
+  const fleche = (cible: EventTarget, key: 'ArrowLeft' | 'ArrowRight') =>
+    cible.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+
+  it('R10 — ← → naviguent dans la visionneuse seule : sans effet quand « Catégoriser » ou « Importer » est ouverte', async () => {
+    const f = await render();
+    ouvrirVisionneuse(f, 0);
+    const c = f.componentInstance;
+    fleche(document.body, 'ArrowRight');
+    expect(c.selectedArt()?.id, 'visionneuse seule : ← → naviguent').toBe('aw-2');
+
+    c.selectedArt.set({ id: 'p', title: 'Perso', artist: 'Moi', image: 'perso.jpg', category: 'Imperium', isLocal: true } as never);
+    c.openCategorize();
+    f.detectChanges();
+    fleche(document.body, 'ArrowLeft');
+    fleche(document.body, 'ArrowRight');
+    expect(c.selectedArt()?.id, 'Catégoriser ouverte : l\'œuvre ne change pas').toBe('p');
+    c.closeCategorize();
+
+    c.openImport();
+    f.detectChanges();
+    fleche(document.body, 'ArrowRight');
+    expect(c.selectedArt()?.id, 'Importer ouverte : l\'œuvre ne change pas').toBe('p');
+  });
+});

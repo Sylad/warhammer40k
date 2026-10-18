@@ -1236,11 +1236,17 @@ export class GalleryComponent {
     this.selectedArt.set(list[this.viewerIndex]);
   }
 
+  /** ← → ne font défiler la visionneuse que si elle est la boîte du dessus (sinon ils déplaceraient
+   *  le curseur d'un champ de « Catégoriser » et changeraient l'œuvre qu'enregistre la boîte). */
+  private viewerOnTop(): boolean {
+    return !!this.selectedArt() && !this.catModalOpen() && !this.importModalOpen();
+  }
+
   @HostListener('document:keydown.arrowleft')
-  onLeft(): void { if (this.selectedArt()) this.navViewer(-1); }
+  onLeft(): void { if (this.viewerOnTop()) this.navViewer(-1); }
 
   @HostListener('document:keydown.arrowright')
-  onRight(): void { if (this.selectedArt()) this.navViewer(1); }
+  onRight(): void { if (this.viewerOnTop()) this.navViewer(1); }
 
   initials(name: string): string {
     return name
