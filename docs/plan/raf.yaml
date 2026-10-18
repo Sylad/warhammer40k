@@ -79,6 +79,7 @@ lots:
       - { date: 2026-10-18, text: "revue UX du 18-10 (prod, captures ~/projects/developpeur/tmp/ux-wh-L6/) : non conforme, 2 bloquants 5 majeurs → 4 tâches ici ; mise en page des filtres (barre au-dessus de la grille, premier résultat 981 px sous la barre) et lisibilité en lots à part ; notes : 16 vidéos sur 32 sans durée, catégorie « animations » de Siege of the Imperium, « Mute », « Culte » vs « Incontournables », pied « Site fan » en double, h1 → h3, puce EN seule sur sa ligne ; à relayer : L62 (à 390 .main-col fait 464 px), L107 (▶ chevauche aussi les étiquettes) ; couverts : L57 L62 L107 L109 L76 L41 L40 ; outillage : captures Playwright bloquées avec Chromium 1243, faites avec playwright-core 1.61" }
       - { date: 2026-10-18, text: "18-10 (revue Opus à la main, la session implement ayant dépassé son délai après f51ac44 et c631589) : t1 t2 t3 faites et testées, t4 à moitié — la fenêtre d'ajout est un vrai dialogue et « + Ajouter » est derrière le PIN, mais le ✕ de suppression reste visible sans PIN, car la règle R9 scellée de L47 (docs/specs/videos-ouvrir/fiche.yaml:90-97, test videos-ouvrir-l47.acceptation.spec.ts:401-418 et :472-483) l'exige sans PIN. Suite pour le lead : amender R9 (✕ en mode édition seulement, décision de Sylvain 18-10) dans un commit citant L6, corriger le test dans l'arbre, puis cadence spec reseal L47 <fichier> --reason … --porteur L6, puis faire cacher le ✕ et revoir. Mineurs en note : bouton edit-toggle à aria-pressed ET libellé changeant (APG), README:57 sur les compteurs, revealMore de loadMoreFeatured / loadMoreChannels sans test, dialogue d'ajout ouvert quand le mode édition tombe (PIN faux 401×2). Les 8 cas à clic de l'acceptation L47 échouent sur Chromium 1243 (environnement, pas L6)." }
       - { date: 2026-10-18, text: "test d'acceptation rescellé (lot livré L47, frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts, fiche amendée en 8a9f11a) : R9 amendée (décision de Sylvain du 18-10, lot L6) : le ✕ n'existe qu'en mode édition ; les deux cas qui cliquent ou tabulent sur le ✕ posent le PIN avant de charger la page, et un cas vérifie qu'aucun ✕ n'apparaît sans PIN" }
+      - { date: 2026-10-18, text: "18-10 QA prod (de0d778) : conforme sur le périmètre du lot — sans PIN 0 ✕ et 0 « Ajouter », 32/32 vidéos, filtres et compteurs égaux aux résultats, états vides ; hors lot : vidéo morte « Raptors » → lot à part, 15/32 durées « — » (donnée), défilement horizontal /videos déjà dans L62/L57" }
     started: 2026-10-18
     review: { date: 2026-10-18, verdict: "conforme après 2 corrections (R9 complétée en ad1b65f, fond inerte testé en 053e1e7, mutation vérifiée), 3 mineurs en note : fenêtre d'ajout ouverte quand le mode édition tombe (401×2), aria-pressed + libellé changeant sur le bouton d'édition (APG), README:57 compteur d'un filtre actif", commit: 053e1e73001ac649776a0a8c0762facc9ef108e8 }
     finished: 2026-10-18
@@ -1374,6 +1375,11 @@ lots:
     estimate: 0.5
     visible: true
     screen: component
+    created: 2026-10-18
+  - id: L142
+    title: "Vidéos : une vidéo retirée de YouTube (vignette 404, erreur console) s'affiche avec la vignette grise et sans signe — signaler la vidéo indisponible sur la carte ; cas réel 18-10 : « Raptors » (raptors-CcFcmPQklyY, importée en prod, oEmbed 404)"
+    status: todo
+    estimate: 0.25
     created: 2026-10-18
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
