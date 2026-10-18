@@ -21,13 +21,24 @@ const VIDEOS = [
   mk('culte-retiree', 'retiree5678', { featured: true, incontournable: true }),
 ];
 
-/** Faux `Image` : charge sans erreur, sauf l'adresse d'une vidéo retirée (404). */
-function fauxImage(retirees: string[]): void {
+/**
+ * Faux `Image` reproduisant les moteurs : YouTube répond 404 avec un JPEG décodable de 120×90 pour une vidéo retirée
+ * (`onload`, jamais `onerror`) ; une vidéo existante donne 320×180. `coupees` : coupure réseau (`onerror`).
+ */
+function fauxImage(retirees: string[], coupees: string[] = []): void {
   vi.stubGlobal('Image', class {
     onload: (() => void) | null = null;
     onerror: (() => void) | null = null;
+    naturalWidth = 0;
+    naturalHeight = 0;
     set src(url: string) {
-      queueMicrotask(() => (retirees.some(e => url.includes(`/vi/${e}/`)) ? this.onerror : this.onload)?.());
+      queueMicrotask(() => {
+        if (coupees.some(e => url.includes(`/vi/${e}/`))) { this.onerror?.(); return; }
+        const retiree = retirees.some(e => url.includes(`/vi/${e}/`));
+        this.naturalWidth = retiree ? 120 : 320;
+        this.naturalHeight = retiree ? 90 : 180;
+        this.onload?.();
+      });
     }
   });
 }
@@ -49,7 +60,7 @@ const carte = (el: HTMLElement, titre: string) =>
 afterEach(() => vi.unstubAllGlobals());
 
 describe('L142 — vidéo indisponible', () => {
-  it('vignette en 404 : la carte porte le signe « Vidéo indisponible » (liste et incontournables)', async () => {
+  it('vignette de remplacement 120×90 (404) : la carte porte le signe « Vidéo indisponible » (liste et incontournables)', async () => {
     fauxImage(['CcFcmPQklyY', 'retiree5678']);
     const el = await rendre();
     const raptors = carte(el, 'Titre raptors-CcFcmPQklyY');
@@ -59,6 +70,29 @@ describe('L142 — vidéo indisponible', () => {
     const culte = carte(el, 'Titre culte-retiree');
     expect(culte.length).toBe(2);
     expect(culte.every(c => c.querySelector('[data-testid="video-indisponible"]'))).toBe(true);
+  });
+
+  it('coupure réseau (onerror) : la carte porte aussi le signe', async () => {
+    fauxImage([], ['CcFcmPQklyY']);
+    const el = await rendre();
+    expect(carte(el, 'Titre raptors')[0].querySelector('[data-testid="video-indisponible"]')).not.toBeNull();
+    expect(carte(el, 'Titre vivante')[0].querySelector('[data-testid="video-indisponible"]')).toBeNull();
+  });
+
+  it('le signe décrit le lien (aria-describedby) et son « ⚠ » est masqué aux lecteurs d\'écran', async () => {
+    fauxImage(['CcFcmPQklyY', 'retiree5678']);
+    const el = await rendre();
+    const ids = new Set<string>();
+    for (const c of [...carte(el, 'Titre raptors'), ...carte(el, 'Titre culte-retiree')]) {
+      const signe = c.querySelector<HTMLElement>('[data-testid="video-indisponible"]')!;
+      expect(signe.id).toBeTruthy();
+      expect(ids.has(signe.id)).toBe(false);
+      ids.add(signe.id);
+      expect(c.querySelector('a.card-link')?.getAttribute('aria-describedby')).toBe(signe.id);
+      expect(signe.querySelector('[aria-hidden="true"]')?.textContent).toContain('⚠');
+    }
+    const vivante = carte(el, 'Titre vivante')[0];
+    expect(vivante.querySelector('a.card-link')?.hasAttribute('aria-describedby')).toBe(false);
   });
 
   it('vignette chargée : aucun signe sur la carte', async () => {

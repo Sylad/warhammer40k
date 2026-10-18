@@ -221,7 +221,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                     [style.--thumb]="thumbStyle(v)">
                     <span class="duration">{{ v.duration }}</span>
                     @if (indisponibles().has(v.id)) {
-                      <span class="unavailable" data-testid="video-indisponible">⚠ Vidéo indisponible</span>
+                      <span class="unavailable" data-testid="video-indisponible" id="indispo-culte-{{ v.id }}"><span aria-hidden="true">⚠ </span>Vidéo indisponible</span>
                     }
                     <span class="play">▶</span>
                     <div class="video-content">
@@ -233,7 +233,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                         @if (v.language === 'Sans dialogue') { <span class="tag">Mute</span> }
                         <span class="tag">{{ categoryLabel(v.category) }}</span>
                       </div>
-                      <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
+                      <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" [attr.aria-describedby]="indisponibles().has(v.id) ? 'indispo-culte-' + v.id : null" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
                       <div class="video-meta">{{ v.createur }} · {{ shortDesc(v.description) }}</div>
                     </div>
                   </article>
@@ -306,7 +306,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                     [style.--thumb]="thumbStyle(v)">
                     <span class="duration">{{ v.duration }}</span>
                     @if (indisponibles().has(v.id)) {
-                      <span class="unavailable" data-testid="video-indisponible">⚠ Vidéo indisponible</span>
+                      <span class="unavailable" data-testid="video-indisponible" id="indispo-liste-{{ v.id }}"><span aria-hidden="true">⚠ </span>Vidéo indisponible</span>
                     }
                     <span class="play">▶</span>
                     <div class="video-content">
@@ -317,7 +317,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                         @if (v.language === 'Sans dialogue') { <span class="tag">Mute</span> }
                         <span class="tag">{{ categoryLabel(v.category) }}</span>
                       </div>
-                      <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
+                      <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" [attr.aria-describedby]="indisponibles().has(v.id) ? 'indispo-liste-' + v.id : null" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
                       <div class="video-meta">{{ v.createur }}</div>
                     </div>
                     @if (editMode() && !v.featured) {
@@ -619,10 +619,14 @@ export class VideosComponent {
     this.sidebarFilters.set(new Set());
   }
 
-  /** Le fond CSS n'émet aucun événement d'erreur : on charge la vignette dans un `Image` pour voir le 404. */
+  /** Le fond CSS n'émet aucun événement d'erreur : on charge la vignette dans un `Image` pour voir qu'elle est absente (réseau coupé) ou remplacée par l'image 120×90 du 404. */
   private sonderVignette(id: string, url: string): void {
     const img = new Image();
-    img.onerror = () => this.indisponibles.update(s => new Set(s).add(id));
+    const marquer = () => this.indisponibles.update(s => new Set(s).add(id));
+    img.onerror = marquer;
+    // YouTube répond 404 avec une image de remplacement décodable de 120×90 (identique pour tout identifiant inexistant) :
+    // `onload` se déclenche, jamais `onerror`. Une vidéo existante donne 320×180 en mqdefault.
+    img.onload = () => { if (img.naturalWidth === 120 && img.naturalHeight === 90) marquer(); };
     img.src = url;
   }
 
