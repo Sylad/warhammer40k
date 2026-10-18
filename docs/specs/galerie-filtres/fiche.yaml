@@ -46,7 +46,7 @@ regles:
     tests: ["R2 — 1440 px : panneau à droite de la grille, au même niveau que les catégories", "R2 — 1440 px : bouton Filtres absent"]
   - id: R3
     etat: charge
-    enonce: Jusqu'à 760 px (seuil téléphone déjà utilisé par la galerie), un bouton « Filtres » se place sous le champ de recherche, dans la rangée de boutons, en dernier (« Importer » puis « Filtres »), pour que le panneau qu'il dévoile suive immédiatement le bouton dans l'ordre de tabulation ; c'est un bouton à divulgation (aria-expanded, aria-controls vers le panneau) qui montre ou cache le panneau, replié au chargement.
+    enonce: Jusqu'à 760 px (seuil téléphone déjà utilisé par la galerie), un bouton « Filtres » se place sous le champ de recherche, dans la rangée de boutons, en dernier (« Importer » puis « Filtres » en mode édition ; sans PIN « Importer » n'existe pas — décision de Sylvain du 18-10, lot L144 — et « Filtres » suit directement la recherche), pour que le panneau qu'il dévoile suive immédiatement le bouton dans l'ordre de tabulation ; c'est un bouton à divulgation (aria-expanded, aria-controls vers le panneau) qui montre ou cache le panneau, replié au chargement.
     message: "Filtres"
     champs: [bouton-filtres, recherche, panneau-filtres]
     statut: sourcee
@@ -54,7 +54,7 @@ regles:
     tests: ["R3 — 390 px : bouton Filtres sous la recherche, après Importer", "R3 — aria-expanded passe à true à l'ouverture, aria-controls pointe le panneau", "R3 — Entrée et Espace ouvrent et ferment"]
   - id: R4
     etat: charge
-    enonce: À 390 px le panneau est replié au chargement (y compris pendant le chargement et en erreur, classe « ferme », aria-expanded=false, flèche ▼), ses trois listes sortent de l'ordre de tabulation et de l'arbre d'accessibilité tant qu'il est fermé. Ordre de tabulation, panneau ouvert, recherche → Importer → Filtres → Réinitialiser → Faction → Catégorie → Trier par.
+    enonce: À 390 px le panneau est replié au chargement (y compris pendant le chargement et en erreur, classe « ferme », aria-expanded=false, flèche ▼), ses trois listes sortent de l'ordre de tabulation et de l'arbre d'accessibilité tant qu'il est fermé. Ordre de tabulation, panneau ouvert, recherche → (Importer, en mode édition seulement) → Filtres → Réinitialiser → Faction → Catégorie → Trier par.
     message: ~
     champs: [panneau-filtres, bouton-filtres]
     statut: hypothese
