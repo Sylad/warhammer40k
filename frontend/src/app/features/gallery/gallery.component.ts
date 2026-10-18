@@ -458,18 +458,25 @@ type SortBy = 'recent' | 'popular' | 'alpha';
         <div class="import-box" (click)="$event.stopPropagation()">
           <button class="close" type="button" (click)="closeImport()" aria-label="Fermer">×</button>
           <h3 id="import-titre">Importer une image</h3>
-          <p class="cat-hint">Recherche sur Wikipedia, parcours r/Warhammer40k, ou colle une URL directe.</p>
+          <p class="cat-hint">Recherche sur le wiki Warhammer (Fandom), parcours r/Warhammer40k, ou colle une URL directe.</p>
 
-          <div class="import-tabs">
-            <button type="button" [class.active]="importTab() === 'reddit'" (click)="setImportTab('reddit')">▲ Reddit</button>
-            <button type="button" [class.active]="importTab() === 'wiki'" (click)="setImportTab('wiki')">⌕ Wiki</button>
-            <button type="button" [class.active]="importTab() === 'url'" (click)="setImportTab('url')">↗ URL</button>
+          <div class="import-tabs" role="tablist" aria-label="Source de l'image">
+            <button type="button" role="tab" id="import-tab-wiki" aria-controls="import-panel" [attr.aria-selected]="importTab() === 'wiki'"
+              [class.active]="importTab() === 'wiki'" (click)="setImportTab('wiki')">⌕ Wiki</button>
+            <button type="button" role="tab" id="import-tab-reddit" aria-controls="import-panel" [attr.aria-selected]="importTab() === 'reddit'"
+              [class.active]="importTab() === 'reddit'" (click)="setImportTab('reddit')">▲ Reddit</button>
+            <button type="button" role="tab" id="import-tab-url" aria-controls="import-panel" [attr.aria-selected]="importTab() === 'url'"
+              [class.active]="importTab() === 'url'" (click)="setImportTab('url')">↗ URL</button>
           </div>
 
+          <div id="import-panel" role="tabpanel" [attr.aria-labelledby]="'import-tab-' + importTab()">
           @if (importTab() === 'reddit') {
             <div class="import-content">
               @if (importRedditLoading()) {
                 <div class="empty">Chargement de r/Warhammer40k…</div>
+              } @else if (importRedditError()) {
+                <div class="empty"><p class="import-message error" role="alert">{{ importRedditError() }}</p>
+                  <button type="button" class="cat-toggle" (click)="loadRedditPosts()">Réessayer</button></div>
               } @else if (importRedditPosts().length === 0) {
                 <div class="empty">Aucun post avec image. <button type="button" class="cat-toggle" (click)="loadRedditPosts()">Réessayer</button></div>
               } @else {
@@ -547,6 +554,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               }
             </div>
           }
+          </div>
 
           @if (importMessage()) {
             <div class="import-message" [class.error]="importMessage().startsWith('Échec')">
@@ -806,12 +814,14 @@ export class GalleryComponent {
 
   // Import modal state
   readonly importModalOpen = signal(false);
-  readonly importTab = signal<'wiki' | 'reddit' | 'url'>('reddit');
+  readonly importTab = signal<'wiki' | 'reddit' | 'url'>('wiki');
   readonly importWikiQuery = signal('');
   readonly importWikiResult = signal<{ imageUrl: string | null; pageTitle: string | null; pageUrl: string | null } | null>(null);
   readonly importWikiLoading = signal(false);
   readonly importRedditPosts = signal<RedditPost[]>([]);
   readonly importRedditLoading = signal(false);
+  /** Message du serveur quand Reddit refuse ou n'est pas joignable ; vide hors échec. */
+  readonly importRedditError = signal('');
   readonly importUrlInput = signal('');
   readonly importPending = signal<string | null>(null); // url being imported
   readonly importMessage = signal<string>('');
@@ -1352,9 +1362,7 @@ export class GalleryComponent {
   openImport(): void {
     this.importModalOpen.set(true);
     this.importMessage.set('');
-    if (this.importTab() === 'reddit' && this.importRedditPosts().length === 0) {
-      this.loadRedditPosts();
-    }
+    this.importTab.set('wiki');
   }
 
   closeImport(): void {
@@ -1376,13 +1384,15 @@ export class GalleryComponent {
 
   loadRedditPosts(): void {
     this.importRedditLoading.set(true);
+    this.importRedditError.set('');
     this.service.searchReddit('Warhammer40k', 30).subscribe({
       next: posts => {
         this.importRedditPosts.set(posts);
         this.importRedditLoading.set(false);
       },
-      error: () => {
+      error: err => {
         this.importRedditPosts.set([]);
+        this.importRedditError.set(err?.error?.message ?? 'Reddit ne répond pas pour le moment.');
         this.importRedditLoading.set(false);
       },
     });
