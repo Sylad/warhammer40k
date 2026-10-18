@@ -519,6 +519,18 @@
     }
 
     /* FOOTER */
+    .edit-toggle {
+      display: block;
+      margin: 10px auto 0;
+      min-height: 44px;
+      padding: 0 16px;
+      background: none;
+      border: 1px solid rgba(201, 162, 74, 0.26);
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+    }
+    .edit-toggle:hover { color: var(--gold-bright); border-color: var(--gold); }
     .page-footer {
       margin-top: 48px;
       padding: 22px;

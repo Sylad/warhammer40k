@@ -47,6 +47,7 @@ describe.skipIf(!built || !chromium)('galerie — bandeau sur image claire (navi
         const page = await context.newPage();
         await page.route('**/api/wiki-image*', (r) => r.fulfill({ json: { imageUrl: '/hero-claire' } }));
         await page.route('**/hero-claire', (r) => { const i = image(); return r.fulfill({ contentType: i.type, body: i.body }); });
+        await page.addInitScript(() => sessionStorage.setItem('wh40k.pin', '1234')); // L144 : « + Importer » n'existe qu'en mode édition
         await page.goto(base + '/gallery');
         await page.locator('.hero .eyebrow').waitFor();
         await page.waitForTimeout(800);

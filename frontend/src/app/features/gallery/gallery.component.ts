@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { BehaviorSubject, catchError, concat, filter, map, of, switchMap, type Observable } from 'rxjs';
+import { PinService } from '../../core/services/pin.service';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import { GalleryModalDirective } from './gallery-modal.directive';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
@@ -63,9 +64,11 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   placeholder="Rechercher une œuvre, un artiste, une faction…" />
               </div>
               </div>
-              <button type="button" class="import-btn-hero" (click)="openImport()">
-                <span>+</span> Importer
-              </button>
+              @if (editMode()) {
+                <button type="button" class="import-btn-hero" (click)="openImport()">
+                  <span>+</span> Importer
+                </button>
+              }
               <!-- L49 (WCAG 2.4.3) : bouton à divulgation, au téléphone seulement, juste avant le panneau Filtres. -->
               <button type="button" class="import-btn-hero btn-filtres" data-testid="bouton-filtres"
                 [attr.aria-expanded]="filtersOpen()" aria-controls="panneau-filtres"
@@ -323,6 +326,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 
       <footer class="page-footer">
         Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
+        <button class="edit-toggle" type="button" [attr.aria-pressed]="editMode()" (click)="toggleEditMode()">{{ editMode() ? 'Quitter l’édition' : 'Mode édition' }}</button>
       </footer>
     </section>
 
@@ -356,7 +360,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 (click)="toggleBookmark(art.id)">
                 ♥ {{ bookmarks().has(art.id) ? 'Favori' : 'Ajouter aux favoris' }}
               </button>
-              @if (art.isLocal) {
+              @if (art.isLocal && editMode()) {
                 <button type="button" class="vi-btn" (click)="openCategorize()">
                   ✦ Catégoriser
                 </button>
@@ -448,6 +452,9 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               [ngModel]="catFaction()" (ngModelChange)="catFaction.set($event)" />
           </div>
 
+          @if (catError()) {
+            <p class="import-message error" role="alert">{{ catError() }}</p>
+          }
           <div class="cat-actions">
             <button type="button" class="vi-btn ghost" (click)="closeCategorize()">Annuler</button>
             <button type="button" class="vi-btn primary" (click)="saveCategorize()">Enregistrer</button>
@@ -570,6 +577,12 @@ export class GalleryComponent {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly pinService = inject(PinService);
+
+  /** L144 : l'édition (importer, catégoriser) n'est offerte qu'une fois le PIN saisi, comme Vidéos. */
+  readonly editMode = computed(() => !!this.pinService.pin());
+  /** Échec du dernier « Enregistrer » de « Catégoriser » (vide : aucun). */
+  readonly catError = signal('');
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   /** Anti-rebond de la réécriture de ?q= pendant la frappe (une navigation, pas une par touche). */
   private searchTimer: ReturnType<typeof setTimeout> | undefined;
@@ -1265,6 +1278,7 @@ export class GalleryComponent {
     this.catTitle.set(a.title.startsWith('Œuvre #') ? '' : a.title);
     this.catArtist.set(a.artist === 'Collection personnelle' ? '' : a.artist);
     this.catFaction.set(a.faction ?? '');
+    this.catError.set('');
     this.catModalOpen.set(true);
     this.catDropdownOpen.set(false);
   }
@@ -1335,10 +1349,22 @@ export class GalleryComponent {
       artist: this.catArtist().trim() || undefined,
       faction: this.catFaction().trim() || undefined,
     };
-    this.service.saveImageMeta(a.image, meta).subscribe(updated => {
-      this.imageMeta.set(updated);
-      this.closeCategorize();
+    this.catError.set('');
+    this.service.saveImageMeta(a.image, meta).subscribe({
+      next: updated => {
+        this.imageMeta.set(updated);
+        this.closeCategorize();
+      },
+      error: err => this.catError.set(err?.status === 401
+        ? 'Échec de l’enregistrement : PIN absent ou refusé.'
+        : 'Échec de l’enregistrement : réessayez dans un instant.'),
     });
+  }
+
+  /** Active l'édition en demandant le PIN du codex, ou la quitte en l'oubliant. */
+  toggleEditMode(): void {
+    if (this.editMode()) this.pinService.clear();
+    else this.pinService.prompt();
   }
 
   // === Import modal ===

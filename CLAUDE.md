@@ -113,6 +113,10 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 - **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). L49 : les règles du panneau Filtres, du bouton « Filtres » et des états chargement/erreur/vide vivent dans le partiel global `src/styles/_gallery-filtres.scss` (préfixé `.gallery-page`, déclaré dans `component-styles.spec.ts`) pour tenir le budget. Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (`@Body() body: MonType` → `import type { MonType }`).
 
+## Galerie, édition derrière le PIN (L144)
+
+Comme Vidéos : « + Importer » et « ✦ Catégoriser » n'existent qu'une fois le PIN saisi (`editMode = !!PinService.pin()`), bouton « Mode édition » (`aria-pressed`) en pied de page ; un « Enregistrer » refusé affiche son échec (`catError`, `role=alert`). Un test navigateur qui vise « + Importer » doit poser `sessionStorage['wh40k.pin']` avant `goto`.
+
 ## Jeux vidéo (L35)
 
 `/jeux-video` lit `frontend/public/jeux-data/jeux.json` (versionné, `verifieLe` = date de vérification en ligne). `aVenir[].sortie` est affichée telle quelle (jour, mois, trimestre, année) suivie de « annoncée », `null` → « Date non communiquée » : **jamais de date devinée**. Bascule automatique : `repartirJeux` (`jeux-video.component.ts`) fait passer un jeu à venir dont le **jour complet** annoncé est atteint (horloge `JEUX_VIDEO_NOW`, horloge réelle par défaut, figée au 2026-10-12 sous TestBed) en tête de « Déjà sortis » (année seule, résumé d'annonce) ; une date imprécise (mois, trimestre, année) ne bascule jamais. Quand un jeu est sorti, le déplacer de `aVenir` vers `existants` dans `jeux.json` avec son vrai résumé et ses plateformes, à partir de sources en ligne, et changer `verifieLe`.

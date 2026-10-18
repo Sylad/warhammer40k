@@ -1549,6 +1549,21 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".col-row:hover": {
     "color": "var(--gold-bright)",
   },
+  ".edit-toggle": {
+    "background": "none",
+    "border": "1px solid rgba(201, 162, 74, 0.26)",
+    "color": "var(--muted)",
+    "cursor": "pointer",
+    "display": "block",
+    "font": "inherit",
+    "margin": "10px auto 0",
+    "min-height": "44px",
+    "padding": "0 16px",
+  },
+  ".edit-toggle:hover": {
+    "border-color": "var(--gold)",
+    "color": "var(--gold-bright)",
+  },
   ".empty": {
     "background": "rgba(8, 7, 6, 0.4)",
     "border": "1px dashed rgba(201, 162, 74, 0.3)",
