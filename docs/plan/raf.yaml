@@ -1393,9 +1393,10 @@ lots:
     finished: 2026-10-18
   - id: L143
     title: "Galerie 390 px : titres de carte sur 3-4 lignes hors du dégradé (Marneus Calgar 2,78:1, Horus 3,94:1, Yvraine 4,0:1) — voile sous .art-content qui suit la hauteur du texte, ≥ 4,5:1 mesuré à 390 et 320 (WCAG 1.4.3, revue UX L7)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-18
+    started: 2026-10-18
   - id: L144
     title: "Galerie, édition derrière le PIN comme Vidéos : « + Importer » et « Catégoriser » cachés sans PIN, bouton « Mode édition » (aria-pressed) en pied de page ; saveCategorize affiche l'échec (PIN annulé ou refusé, aujourd'hui muet) — décision de Sylvain du 18-10 (revue UX L7)"
     status: doing
