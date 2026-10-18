@@ -218,6 +218,14 @@ describe('L6 t4 — édition et fenêtre « Ajouter une vidéo »', () => {
     expect(bouton(el, '+ Ajouter une vidéo')).toBeUndefined();
   });
 
+  it('un incontournable, désormais aussi dans « Toutes les vidéos », n’y a pas de ✕ (comme avant L6)', async () => {
+    const { el } = await rendre();
+    const cartes = Array.from(liste(el).querySelectorAll('.video-card'));
+    const parTitre = (t: string) => cartes.find((c) => c.querySelector('.video-title')!.textContent!.trim() === t)!;
+    expect(parTitre('The Fallen Crown').querySelector('.vc-delete')).toBeNull();
+    expect(parTitre('Court métrage').querySelector('.vc-delete')).not.toBeNull();
+  });
+
   it('avec un PIN saisi : « + Ajouter une vidéo » apparaît', async () => {
     const { el } = await rendre({}, '1234');
     expect(bouton(el, '+ Ajouter une vidéo')).toBeDefined();
