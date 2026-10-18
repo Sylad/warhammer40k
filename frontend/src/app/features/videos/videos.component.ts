@@ -312,7 +312,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                       <h3 class="video-title"><a class="card-link" [attr.href]="videoHref(v)" (click)="onCardClick($event, v)">{{ v.titre }}</a></h3>
                       <div class="video-meta">{{ v.createur }}</div>
                     </div>
-                    @if (!v.featured) {
+                    @if (editMode() && !v.featured) {
                       <button class="vc-delete" type="button" data-testid="bouton-supprimer" (click)="deleteVideo(v, $event)" aria-label="Supprimer la vidéo">✕</button>
                     }
                   </article>

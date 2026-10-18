@@ -212,18 +212,33 @@ describe('L6 t3 — états de la liste', () => {
 });
 
 describe('L6 t4 — édition et fenêtre « Ajouter une vidéo »', () => {
-  // Le ✕ de suppression reste visible sans PIN tant que la question au lead sur les tests R9 de L47 est ouverte.
   it('sans PIN : pas de « + Ajouter une vidéo »', async () => {
     const { el } = await rendre();
     expect(bouton(el, '+ Ajouter une vidéo')).toBeUndefined();
   });
 
-  it('un incontournable, désormais aussi dans « Toutes les vidéos », n’y a pas de ✕ (comme avant L6)', async () => {
+  it('sans PIN : aucune carte n’a de ✕ de suppression', async () => {
     const { el } = await rendre();
+    expect(liste(el).querySelectorAll('.video-card').length).toBeGreaterThan(0);
+    expect(el.querySelector('.vc-delete')).toBeNull();
+    expect(el.querySelector('[data-testid="bouton-supprimer"]')).toBeNull();
+  });
+
+  it('avec PIN : ✕ sur les cartes non à la une, jamais sur un incontournable (désormais aussi dans « Toutes les vidéos »)', async () => {
+    const { el } = await rendre({}, '1234');
     const cartes = Array.from(liste(el).querySelectorAll('.video-card'));
     const parTitre = (t: string) => cartes.find((c) => c.querySelector('.video-title')!.textContent!.trim() === t)!;
     expect(parTitre('The Fallen Crown').querySelector('.vc-delete')).toBeNull();
     expect(parTitre('Court métrage').querySelector('.vc-delete')).not.toBeNull();
+    expect(liste(el).querySelectorAll('.vc-delete').length).toBe(VIDEOS.filter((v) => !v.featured).length);
+  });
+
+  it('quitter l’édition retire les ✕', async () => {
+    const { f, el } = await rendre({}, '1234');
+    expect(el.querySelector('.vc-delete')).not.toBeNull();
+    bouton(el, 'Quitter l’édition')!.click();
+    await maj(f);
+    expect(el.querySelector('.vc-delete')).toBeNull();
   });
 
   it('avec un PIN saisi : « + Ajouter une vidéo » apparaît', async () => {

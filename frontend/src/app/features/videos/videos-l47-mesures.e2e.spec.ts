@@ -125,8 +125,10 @@ describe.skipIf(!built || stale || !chromium)('L47 — mesures de la page /video
     await page.close();
   });
 
-  it('R9 — le bouton Supprimer est visible en permanence, 44×44 px', async () => {
-    const page = await open(390, '/videos?video=disparue');
+  it('R9 — le bouton Supprimer (mode édition) est visible en permanence, 44×44 px', async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.addInitScript(() => { sessionStorage.setItem('wh40k.pin', '0000'); });
+    await page.goto(base + '/videos?video=disparue', { waitUntil: 'networkidle' });
     const m = await page.locator('[data-testid="bouton-supprimer"]').first().evaluate((e) => {
       const r = e.getBoundingClientRect();
       return { w: r.width, h: r.height, o: getComputedStyle(e).opacity };
