@@ -1402,6 +1402,7 @@ lots:
     estimate: 0.25
     created: 2026-10-18
     started: 2026-10-18
+    review: { date: 2026-10-18, verdict: "compliant (2 notes mineures : bandeaux-reflow.e2e « Importer » vacueux sans PIN ; .edit-toggle dupliqué et chiffre du budget CSS de CLAUDE.md à relever à 17,04 kB) — orchestré (vague 2026-10-18-galerie, 0 passe(s) de correction)", commit: ffbb2c2edf1b3012a0e71e19dcb004b518c77ec4 }
   - id: L145
     title: "Import d'image : Reddit répond 403 au backend, qui renvoie [] → « Aucun post avec image » — renvoyer l'erreur et l'afficher, ouvrir sur l'onglet Wiki, « Wikipedia » → « wiki Warhammer (Fandom) », onglets aria-selected (revue UX L7)"
     status: todo
