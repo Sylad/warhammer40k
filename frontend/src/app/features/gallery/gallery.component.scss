@@ -281,10 +281,25 @@
     }
     .art-card:hover { transform: translateY(-5px); border-color: rgba(201, 162, 74, 0.62); box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7); }
     .art-card:hover::before { transform: scale(1.06); filter: contrast(1.3) saturate(1.05) brightness(0.95); }
+    /* L7/t1 : bouton d'ouverture étiré sur la carte ; son texte (le titre) est le nom accessible, le titre
+     * visible est dessous (.art-title, aria-hidden). Le contenu laisse passer les clics jusqu'au bouton. */
+    .art-open {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: transparent;
+      font-size: 0;
+      cursor: pointer;
+    }
+    .art-open:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: -4px; }
     .art-content {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       z-index: 2;
+      pointer-events: none;
       padding: 14px 16px;
     }
     .art-title {
@@ -514,63 +529,6 @@
       line-height: 1.5;
     }
 
-    /* MODAL VIEWER */
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-      background: rgba(0, 0, 0, 0.94);
-      backdrop-filter: blur(12px);
-      animation: fadeIn 0.2s ease-out;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .viewer {
-      position: relative;
-      width: min(1200px, 100%);
-      max-height: 90vh;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      gap: 16px;
-    }
-    .viewer-img {
-      aspect-ratio: 16/10;
-      max-height: 70vh;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      border: 1px solid rgba(201, 162, 74, 0.42);
-      background-color: #050403;
-    }
-    .viewer-info {
-      padding: 14px 18px;
-      border: 1px solid rgba(201, 162, 74, 0.28);
-      background: rgba(8, 6, 4, 0.85);
-    }
-    .vi-title {
-      color: var(--gold-bright);
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 8px;
-    }
-    .vi-meta {
-      color: #c9beaa;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .vi-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 12px;
-    }
     /* Boutons d'action (modales) et bouton « Importer » du bandeau. Avant
      * .import-btn, qui réduit la taille des boutons d'import. */
     .vi-btn, .import-btn-hero {

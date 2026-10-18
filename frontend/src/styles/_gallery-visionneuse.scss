@@ -1,0 +1,63 @@
+/*
+ * L7 — Galerie : visionneuse (fond plein écran, image, titre, actions). Partiel global (budget
+ * anyComponentStyle de la feuille du composant, L29) : la visionneuse est rendue hors de .gallery-page,
+ * sous l'hôte <app-gallery>, d'où ce préfixe.
+ */
+app-gallery {
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(12px);
+    animation: fadeIn 0.2s ease-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .viewer {
+    position: relative;
+    width: min(1200px, 100%);
+    max-height: 90vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 16px;
+  }
+  .viewer-img {
+    aspect-ratio: 16/10;
+    max-height: 70vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid rgba(201, 162, 74, 0.42);
+    background-color: #050403;
+  }
+  .viewer-info {
+    padding: 14px 18px;
+    border: 1px solid rgba(201, 162, 74, 0.28);
+    background: rgba(8, 6, 4, 0.85);
+  }
+  .vi-title {
+    color: var(--gold-bright);
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .vi-meta {
+    color: #c9beaa;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .vi-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+}

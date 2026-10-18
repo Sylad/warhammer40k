@@ -170,6 +170,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                   <button class="category-card"
                     type="button"
                     [class.active]="filterCategory() === cat.key"
+                    [attr.aria-pressed]="filterCategory() === cat.key"
                     [style.--cat-bg]="categoryBg(cat.key)"
                     (click)="toggleCategoryFilter(cat.key)">
                     <span class="cat-name">{{ cat.label }}</span>
@@ -241,17 +242,19 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <div class="art-grid" data-testid="grille-oeuvres">
                 @for (art of pagedArtworks(); track art.id; let i = $index) {
                   <article class="art-card"
-                    [style.--art]="artBg(art)"
-                    (click)="openViewer(art, i)">
+                    [style.--art]="artBg(art)">
+                    <!-- L7/t1 (WCAG 2.1.1 / 4.1.2) : vrai bouton nommé par le titre, étiré sur toute la carte ;
+                         le bouton Favori en est le frère (pas de bouton dans un bouton). -->
+                    <button type="button" class="art-open" [attr.data-art-id]="art.id" (click)="openViewer(art, i)">{{ art.title }}</button>
                     <button class="bookmark"
                       type="button"
                       [class.on]="bookmarks().has(art.id)"
-                      (click)="$event.stopPropagation(); toggleBookmark(art.id)"
+                      (click)="toggleBookmark(art.id)"
                       aria-label="Favori">
                       ♥
                     </button>
                     <div class="art-content">
-                      <div class="art-title">{{ art.title }}</div>
+                      <div class="art-title" aria-hidden="true">{{ art.title }}</div>
                       <div class="art-meta">
                         <span class="art-artist">{{ art.artist }}</span>
                         <span class="art-likes">♥ {{ art.likes ?? 0 }}</span>
@@ -286,6 +289,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             @for (a of topArtists(); track a.id) {
               <button class="artist-row" type="button"
                 [class.active]="filterArtist() === a.name"
+                [attr.aria-pressed]="filterArtist() === a.name"
                 (click)="toggleArtistFilter(a.name)">
                 <span class="ar-avatar">{{ initials(a.name) }}</span>
                 <span class="ar-info">
@@ -302,6 +306,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             @for (col of nonEmptyCollections(); track col.id) {
               <button class="col-row" type="button"
                 [class.active]="filterCollection() === col.id"
+                [attr.aria-pressed]="filterCollection() === col.id"
                 (click)="toggleCollectionFilter(col.id)">
                 <span class="col-icon">▤</span>
                 <span class="col-info">
