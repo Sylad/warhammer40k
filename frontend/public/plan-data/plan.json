@@ -405,6 +405,16 @@
       "status": "done",
       "started": "2026-10-17",
       "finished": "2026-10-17"
+    },
+    {
+      "id": "L140",
+      "title": "Vidéos : filtres au-dessus des résultats",
+      "status": "todo"
+    },
+    {
+      "id": "L141",
+      "title": "Vidéos : chaînes et cartes plus lisibles",
+      "status": "todo"
     }
   ]
 }

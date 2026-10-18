@@ -68,8 +68,15 @@ lots:
   - id: L6
     title: Revue UX — Vidéos
     status: todo
-    estimate: 0.25
+    estimate: 0.75
     created: 2026-09-28
+    tasks:
+      - { id: t1, title: "Vidéos : « Toutes les vidéos » couvre tout le catalogue (incontournables compris) ; la recherche trouve « fallen crown » (0 résultat aujourd'hui) ; chaque compteur de Filtres avancés égale le nombre de résultats obtenus (Durée courte 2→1, Long format 2→1, Animations 16→12) ; test", status: todo }
+      - { id: t2, title: "Vidéos, filtres accessibles : aria-pressed sur les 6 puces et les 4 filtres avancés (état actif pas seulement en couleur), nom « Trier par » sur le select, étiquette du champ de recherche (texte indicatif ≥ 4,5:1, 4,45 mesuré), « N résultats » dans une région polite (WCAG 4.1.2, 1.4.1, 3.3.2, 4.1.3)", status: todo }
+      - { id: t3, title: "Vidéos, états de la liste : pas de « 0 résultat / Aucune vidéo ne correspond » ni de compteurs à 0 pendant le chargement ; message propre au catalogue vide ; état vide filtré qui nomme le filtre et propose « Effacer les filtres » ; focus sur la liste après « Réessayer » et après le dernier « Charger plus » (WCAG 2.4.3)", status: todo }
+      - { id: t4, title: "Vidéos, édition : ✕ de suppression et « + Ajouter une vidéo » cachés hors mode édition (PIN saisi), décision de Sylvain 18-10 ; fenêtre « Ajouter une vidéo » en role=dialog aria-modal nommée par son h2, focus sur le champ URL à l'ouverture, Tab bouclé, Échap et ✕ rendent le focus au bouton d'origine, labels reliés (URL, Description, Catégorie, Type) (WCAG 2.4.3, 4.1.2, 1.3.1)", status: todo }
+    notes:
+      - { date: 2026-10-18, text: "revue UX du 18-10 (prod, captures ~/projects/developpeur/tmp/ux-wh-L6/) : non conforme, 2 bloquants 5 majeurs → 4 tâches ici ; mise en page des filtres (barre au-dessus de la grille, premier résultat 981 px sous la barre) et lisibilité en lots à part ; notes : 16 vidéos sur 32 sans durée, catégorie « animations » de Siege of the Imperium, « Mute », « Culte » vs « Incontournables », pied « Site fan » en double, h1 → h3, puce EN seule sur sa ligne ; à relayer : L62 (à 390 .main-col fait 464 px), L107 (▶ chevauche aussi les étiquettes) ; couverts : L57 L62 L107 L109 L76 L41 L40 ; outillage : captures Playwright bloquées avec Chromium 1243, faites avec playwright-core 1.61" }
   - id: L7
     title: Revue UX — Galerie
     status: todo
@@ -1346,6 +1353,23 @@ lots:
     review: { date: 2026-10-17, verdict: "compliant — orchestré (vague 2026-10-17-1650, 0 passe(s) de correction)", commit: bb25d4a10065e0e491af013fceaca01df435dbb8 }
     ux: { date: 2026-10-17, verdict: "conforme — bandeau de Romans contenu à 320 et 390 px (texte et recherche entiers, capture 390 regardée par le lead), libellé « de la 13e Croisade Noire », attente des lettres « au plus une à true »" }
     finished: 2026-10-17
+  - id: L140
+    title: "Vidéos, mise en page des filtres : un filtre ou une recherche ne montre rien à l'écran (premier résultat 981 px sous la barre à 1440, 1971 px à 390 ; « Filtres avancés » à y=5741 au téléphone ; doublons Animations et FR / FR uniquement) — maquette de la revue UX L6 : une seule barre recherche + puces (Tous · Lore · Animations · Officiel · FR · EN · Courte · Long format) + tri + « N résultats » juste sous le h2 « Toutes les vidéos », grille directement dessous, « Filtres avancés » supprimés, colonne latérale = « Vidéos récentes » collante, « + Ajouter » à droite du h2 ; à 390 : hero réduit, incontournables, chaînes repliées à 3, puis la barre ; premier résultat ≤ 120 px sous la barre, test de mesure"
+    public: "Vidéos : filtres au-dessus des résultats"
+    status: todo
+    estimate: 0.5
+    visible: true
+    screen: page
+    after: [ L6 ]
+    created: 2026-10-18
+  - id: L141
+    title: "Vidéos, lisibilité : noms des chaînes entiers à 1440 (5 sur 6 coupés à 82 px, sans infobulle) et cartes de chaîne en vrais liens « nouvel onglet » ; au téléphone, « Chaînes prioritaires » (doublon de 341 px) masqué, première vidéo plus haut que y=1227 ; durées « — » non affichées ; « Mute » → « Sans dialogue » ; catégorie « animations » de Siege of the Imperium corrigée (volume, cf L76) ; pied « Site fan » une seule fois (revue UX L6)"
+    public: "Vidéos : chaînes et cartes plus lisibles"
+    status: todo
+    estimate: 0.5
+    visible: true
+    screen: component
+    created: 2026-10-18
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
