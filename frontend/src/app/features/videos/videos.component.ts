@@ -217,8 +217,12 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                 @for (v of displayedFeatured(); track v.id; let i = $index) {
                   <article class="video-card" data-testid="carte-video"
                     [class.large]="i === 0"
+                    [class.indisponible]="indisponibles().has(v.id)"
                     [style.--thumb]="thumbStyle(v)">
                     <span class="duration">{{ v.duration }}</span>
+                    @if (indisponibles().has(v.id)) {
+                      <span class="unavailable" data-testid="video-indisponible">⚠ Vidéo indisponible</span>
+                    }
                     <span class="play">▶</span>
                     <div class="video-content">
                       <div class="tags">
@@ -298,8 +302,12 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               <div class="video-grid">
                 @for (v of displayedAll(); track v.id) {
                   <article class="video-card" data-testid="carte-video"
+                    [class.indisponible]="indisponibles().has(v.id)"
                     [style.--thumb]="thumbStyle(v)">
                     <span class="duration">{{ v.duration }}</span>
+                    @if (indisponibles().has(v.id)) {
+                      <span class="unavailable" data-testid="video-indisponible">⚠ Vidéo indisponible</span>
+                    }
                     <span class="play">▶</span>
                     <div class="video-content">
                       <div class="tags">
@@ -466,6 +474,8 @@ export class VideosComponent {
 
   private readonly thumbCache = signal<Record<string, string>>({});
   private readonly thumbInflight = new Set<string>();
+  /** Vidéos dont la vignette YouTube répond 404 : retirées de YouTube (L142). */
+  readonly indisponibles = signal<ReadonlySet<string>>(new Set());
 
   readonly featuredVideos = computed(() => this.videos().filter(v => v.featured));
   readonly displayedFeatured = computed(() => this.featuredVideos().slice(0, this.featuredLimit()));
@@ -575,6 +585,7 @@ export class VideosComponent {
         if (v.embedType === 'video' && v.embedId) {
           const url = `https://img.youtube.com/vi/${v.embedId}/mqdefault.jpg`;
           this.thumbCache.update(c => ({ ...c, [v.id]: url }));
+          this.sonderVignette(v.id, url);
           continue;
         }
 
@@ -606,6 +617,13 @@ export class VideosComponent {
     this.searchQuery.set('');
     this.activeFilter.set('all');
     this.sidebarFilters.set(new Set());
+  }
+
+  /** Le fond CSS n'émet aucun événement d'erreur : on charge la vignette dans un `Image` pour voir le 404. */
+  private sonderVignette(id: string, url: string): void {
+    const img = new Image();
+    img.onerror = () => this.indisponibles.update(s => new Set(s).add(id));
+    img.src = url;
   }
 
   thumbStyle(v: Video): string {
