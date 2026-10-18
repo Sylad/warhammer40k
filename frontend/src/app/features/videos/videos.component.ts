@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ViewChild, ElementRef, Injector, afterNextRender, inject, signal, computed, effect, untracked, HostListener } from '@angular/core';
+import { Component, DestroyRef, ViewChild, ElementRef, Injector, afterNextRender, inject, signal, computed, WritableSignal, effect, untracked, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import type { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { WarhammerService, VideoPreview, VideoImportBody } from '../../core/services/warhammer.service';
 import type { Video, Channel } from '../../core/models/models';
+import { PinService } from '../../core/services/pin.service';
 import { toSafeSignal } from '../../shared/safe-signal';
 
 type FilterKey = 'all' | 'lore' | 'animation' | 'official' | 'FR' | 'EN';
@@ -38,7 +39,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
       @if (loadError()) {
         <div class="msg" role="alert">
           <span data-testid="message-erreur">Impossible de charger les vidéos.</span>
-          <button type="button" data-testid="bouton-reessayer" (click)="loadVideos()">Réessayer</button>
+          <button type="button" data-testid="bouton-reessayer" (click)="loadVideos(true)">Réessayer</button>
         </div>
       } @else if (waitingForVideo()) {
         <div class="msg info" role="status" data-testid="message-chargement">Chargement de la vidéo…</div>
@@ -84,6 +85,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
         <input
           class="search"
           type="text"
+          aria-label="Rechercher une vidéo"
           [ngModel]="searchQuery()"
           (ngModelChange)="searchQuery.set($event)"
           placeholder="Rechercher une vidéo, une chaîne, un sujet..." />
@@ -91,10 +93,11 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           @for (f of filters; track f.key) {
             <button class="filter" type="button"
               [class.active]="activeFilter() === f.key"
+              [attr.aria-pressed]="activeFilter() === f.key"
               (click)="activeFilter.set(f.key)">{{ f.label }}</button>
           }
         </div>
-        <select class="select"
+        <select class="select" aria-label="Trier par"
           [ngModel]="sortOrder()"
           (ngModelChange)="sortOrder.set($event)">
           <option value="recommended">Tri : recommandées</option>
@@ -102,21 +105,24 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           <option value="channel">Chaîne</option>
           <option value="recent">Récentes</option>
         </select>
-        <button class="add-btn" type="button" (click)="openAddVideo()">+ Ajouter une vidéo</button>
+        @if (editMode()) {
+          <button class="add-btn" type="button" (click)="openAddVideo($event)">+ Ajouter une vidéo</button>
+        }
       </section>
 
       <!-- ADD VIDEO MODAL -->
       @if (addVideoOpen()) {
         <div class="add-modal" (click)="closeAddVideo()">
-          <div class="add-stage" (click)="$event.stopPropagation()">
+          <div class="add-stage" role="dialog" aria-modal="true" aria-labelledby="add-video-title"
+               (click)="$event.stopPropagation()" (keydown)="onAddKeydown($event)">
             <button class="add-close" type="button" (click)="closeAddVideo()" aria-label="Fermer">✕</button>
-            <h2>Ajouter une vidéo YouTube</h2>
+            <h2 id="add-video-title">Ajouter une vidéo YouTube</h2>
             <p class="add-lede">Colle l'URL d'une vidéo YouTube. La chaîne sera détectée et ajoutée si nouvelle.</p>
 
             <div class="add-form">
-              <label class="add-label">URL YouTube</label>
+              <label class="add-label" for="add-url">URL YouTube</label>
               <div class="add-row">
-                <input class="add-input" type="text" [ngModel]="addUrl()" (ngModelChange)="addUrl.set($event)"
+                <input class="add-input" id="add-url" type="text" [ngModel]="addUrl()" (ngModelChange)="addUrl.set($event)"
                        placeholder="https://youtu.be/... ou https://www.youtube.com/watch?v=..." />
                 <button class="add-action" type="button" [disabled]="!addUrl() || addLoading()" (click)="previewVideo()">
                   {{ addLoading() ? '…' : 'Aperçu' }}
@@ -151,14 +157,14 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               </div>
 
               <div class="add-extras">
-                <label class="add-label">Description (optionnel)</label>
-                <textarea class="add-textarea" rows="3" [ngModel]="addDesc()" (ngModelChange)="addDesc.set($event)"
+                <label class="add-label" for="add-desc">Description (optionnel)</label>
+                <textarea class="add-textarea" id="add-desc" rows="3" [ngModel]="addDesc()" (ngModelChange)="addDesc.set($event)"
                           placeholder="Décris brièvement la vidéo (lore traité, ton, format)"></textarea>
 
                 <div class="add-grid">
                   <div>
-                    <label class="add-label">Catégorie</label>
-                    <select [ngModel]="addCategory()" (ngModelChange)="addCategory.set($event)">
+                    <label class="add-label" for="add-category">Catégorie</label>
+                    <select id="add-category" [ngModel]="addCategory()" (ngModelChange)="addCategory.set($event)">
                       <option value="lore">Lore</option>
                       <option value="animation">Animation</option>
                       <option value="official">Officiel</option>
@@ -166,8 +172,8 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                     </select>
                   </div>
                   <div>
-                    <label class="add-label">Type</label>
-                    <select [ngModel]="addType()" (ngModelChange)="addType.set($event)">
+                    <label class="add-label" for="add-type">Type</label>
+                    <select id="add-type" [ngModel]="addType()" (ngModelChange)="addType.set($event)">
                       <option value="Chaîne lore">Chaîne lore</option>
                       <option value="Animation fan">Animation fan</option>
                       <option value="Parodie">Parodie</option>
@@ -269,16 +275,25 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
           </section>
 
           <!-- TOUTES LES VIDEOS -->
-          <section class="section" data-testid="liste-videos">
+          <section #listeVideos class="section" data-testid="liste-videos" tabindex="-1">
             <header class="section-head">
               <div>
                 <h2>Toutes les vidéos</h2>
                 <p>Catalogue filtrable des contenus ajoutés au codex.</p>
               </div>
-              <span class="results-count">{{ filteredVideos().length }} résultat{{ filteredVideos().length > 1 ? 's' : '' }}</span>
+              @if (loaded()) {
+                <span class="results-count" role="status" aria-live="polite">{{ filteredVideos().length }} résultat{{ filteredVideos().length > 1 ? 's' : '' }}</span>
+              }
             </header>
-            @if (filteredVideos().length === 0) {
-              <div class="empty">Aucune vidéo ne correspond à ces filtres.</div>
+            @if (!loaded()) {
+              <div class="empty" role="status" data-testid="chargement-liste">Chargement des vidéos…</div>
+            } @else if (videos().length === 0) {
+              <div class="empty" data-testid="catalogue-vide">Le codex ne contient encore aucune vidéo.</div>
+            } @else if (filteredVideos().length === 0) {
+              <div class="empty" data-testid="filtres-vides">
+                <p>Aucune vidéo ne correspond à {{ activeFiltersLabel() }}.</p>
+                <button class="load-more" type="button" (click)="clearFilters()">Effacer les filtres</button>
+              </div>
             } @else {
               <div class="video-grid">
                 @for (v of displayedAll(); track v.id) {
@@ -319,12 +334,13 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
             @for (sf of sidebarOptions; track sf.key) {
               <button class="check-row" type="button"
                 [class.active]="sidebarFilters().has(sf.key)"
+                [attr.aria-pressed]="sidebarFilters().has(sf.key)"
                 (click)="toggleSidebar(sf.key)">
                 <span class="cr-label">
                   <span class="dot" [class.on]="sidebarFilters().has(sf.key)"></span>
                   {{ sf.label }}
                 </span>
-                <span class="count">{{ counts()[sf.key] }}</span>
+                @if (loaded()) { <span class="count">{{ counts()[sf.key] }}</span> }
               </button>
             }
           </section>
@@ -343,6 +359,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
 
       <footer class="page-footer">
         Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
+        <button class="edit-toggle" type="button" [attr.aria-pressed]="editMode()" (click)="toggleEditMode()">{{ editMode() ? 'Quitter l’édition' : 'Mode édition' }}</button>
       </footer>
     </section>
 
@@ -384,6 +401,10 @@ export class VideosComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
+  private readonly pinService = inject(PinService);
+
+  /** L6 t4 : l'édition (ajout, suppression) n'est offerte qu'une fois le PIN saisi. */
+  readonly editMode = computed(() => !!this.pinService.pin());
 
   readonly videos = signal<Video[]>([]);
   /** Liste reçue au moins une fois ; `loadError` : le dernier GET /api/videos a échoué (R4, R7). */
@@ -409,6 +430,11 @@ export class VideosComponent {
   readonly unknownVideo = computed(() => !!this.videoParam() && this.loaded() && !this.selectedVideo());
 
   @ViewChild('pageTitle') private pageTitle?: ElementRef<HTMLElement>;
+  @ViewChild('listeVideos') private listeVideos?: ElementRef<HTMLElement>;
+  /** Bouton qui a ouvert la fenêtre « Ajouter une vidéo » : il récupère le focus à la fermeture. */
+  private addOpener: HTMLElement | null = null;
+  /** « Réessayer » : le bouton disparaît avec le bandeau, le focus va sur la liste une fois chargée (WCAG 2.4.3). */
+  private focusListAfterLoad = false;
   private modalWasOpen = false;
   /** Élément activé pour ouvrir la fenêtre (R6) ; null si arrivée par l'adresse. */
   private opener: HTMLElement | null = null;
@@ -443,26 +469,23 @@ export class VideosComponent {
   readonly displayedFeatured = computed(() => this.featuredVideos().slice(0, this.featuredLimit()));
   readonly displayedChannels = computed(() => this.channels().slice(0, this.channelsLimit()));
 
+  /** Résultats obtenus en ajoutant ce filtre avancé à la recherche et à la puce actives (un compteur = ce que le clic affiche). */
   readonly counts = computed(() => {
-    const list = this.videos();
-    return {
-      short: list.filter(v => this.isShort(v.duration)).length,
-      long: list.filter(v => this.isLong(v.duration)).length,
-      fr: list.filter(v => v.language === 'FR').length,
-      animation: list.filter(v => v.category === 'animation').length,
-    };
+    const base = this.afterSearchAndChip();
+    const sidebar = this.sidebarFilters();
+    const withFilter = (key: SidebarFilter) => this.applySidebar(base, new Set([...sidebar, key])).length;
+    return { short: withFilter('short'), long: withFilter('long'), fr: withFilter('fr'), animation: withFilter('animation') };
   });
 
   readonly recentVideos = computed(() => this.videos().slice(-3).reverse());
   readonly displayedAll = computed(() => this.filteredVideos().slice(0, this.allLimit()));
 
-  readonly filteredVideos = computed(() => {
+  /** Tout le catalogue (incontournables compris), après recherche et puce. */
+  private readonly afterSearchAndChip = computed(() => {
     const q = this.searchQuery().trim().toLowerCase();
     const filter = this.activeFilter();
-    const sort = this.sortOrder();
-    const sidebar = this.sidebarFilters();
 
-    let list = this.videos().filter(v => !v.featured);
+    let list = this.videos();
 
     if (q) {
       list = list.filter(v =>
@@ -480,11 +503,12 @@ export class VideosComponent {
     } else if (filter === 'EN') {
       list = list.filter(v => v.language === 'EN' || v.language === 'FR/EN' || v.language === 'Sans dialogue');
     }
+    return list;
+  });
 
-    if (sidebar.has('short')) list = list.filter(v => this.isShort(v.duration));
-    if (sidebar.has('long')) list = list.filter(v => this.isLong(v.duration));
-    if (sidebar.has('fr')) list = list.filter(v => v.language === 'FR');
-    if (sidebar.has('animation')) list = list.filter(v => v.category === 'animation');
+  readonly filteredVideos = computed(() => {
+    const sort = this.sortOrder();
+    let list = this.applySidebar(this.afterSearchAndChip(), this.sidebarFilters());
 
     if (sort === 'duration') {
       list = [...list].sort((a, b) => this.durationSec(a.duration) - this.durationSec(b.duration));
@@ -495,6 +519,17 @@ export class VideosComponent {
     }
 
     return list;
+  });
+
+  /** Les filtres actifs, nommés (recherche, puce, filtres avancés), pour l'état vide. */
+  readonly activeFiltersLabel = computed(() => {
+    const noms: string[] = [];
+    const q = this.searchQuery().trim();
+    if (q) noms.push(`« ${q} »`);
+    const puce = FILTERS.find(f => f.key === this.activeFilter());
+    if (puce && puce.key !== 'all') noms.push(puce.label);
+    for (const o of SIDEBAR_OPTIONS) if (this.sidebarFilters().has(o.key)) noms.push(o.label);
+    return noms.length ? noms.join(' · ') : 'ces filtres';
   });
 
   readonly modalEmbedUrl = computed<SafeResourceUrl | null>(() => {
@@ -557,6 +592,20 @@ export class VideosComponent {
     });
   }
 
+  private applySidebar(list: Video[], sidebar: ReadonlySet<SidebarFilter>): Video[] {
+    if (sidebar.has('short')) list = list.filter(v => this.isShort(v.duration));
+    if (sidebar.has('long')) list = list.filter(v => this.isLong(v.duration));
+    if (sidebar.has('fr')) list = list.filter(v => v.language === 'FR');
+    if (sidebar.has('animation')) list = list.filter(v => v.category === 'animation');
+    return list;
+  }
+
+  clearFilters(): void {
+    this.searchQuery.set('');
+    this.activeFilter.set('all');
+    this.sidebarFilters.set(new Set());
+  }
+
   thumbStyle(v: Video): string {
     const url = this.thumbCache()[v.id];
     if (!url) {
@@ -573,22 +622,39 @@ export class VideosComponent {
   }
 
   loadMoreFeatured(): void {
-    this.featuredLimit.update(n => n + VideosComponent.PAGE_FEATURED);
+    this.revealMore(this.featuredLimit, VideosComponent.PAGE_FEATURED, this.featuredVideos().length, '.featured-grid .card-link');
   }
   loadMoreChannels(): void {
-    this.channelsLimit.update(n => n + VideosComponent.PAGE_CHANNELS);
+    this.revealMore(this.channelsLimit, VideosComponent.PAGE_CHANNELS, this.channels().length, '.channel-grid .channel-card');
   }
   loadMoreAll(): void {
-    this.allLimit.update(n => n + VideosComponent.PAGE_ALL);
+    this.revealMore(this.allLimit, VideosComponent.PAGE_ALL, this.filteredVideos().length, '[data-testid="liste-videos"] .card-link');
+  }
+
+  /** « Charger plus » : si le bouton disparaît (plus rien à charger), le focus va sur le premier élément ajouté (WCAG 2.4.3). */
+  private revealMore(limit: WritableSignal<number>, page: number, total: number, selector: string): void {
+    const before = limit();
+    limit.set(before + page);
+    if (before + page < total) return;
+    afterNextRender(() => {
+      this.host.nativeElement.querySelectorAll<HTMLElement>(selector)[before]?.focus();
+    }, { injector: this.injector });
   }
 
   /** R2/R4/R7 : (re)charge la liste ; après un échec le flux est mort, d'où une nouvelle souscription. */
-  loadVideos(): void {
+  loadVideos(retry = false): void {
+    this.focusListAfterLoad = retry;
     this.videosSub?.unsubscribe();
     this.loadError.set(false);
     this.videosSub = this.service.videos$.subscribe({
-      next: list => { this.videos.set(list); this.loaded.set(true); },
-      error: () => this.loadError.set(true),
+      next: list => {
+        const retry = this.focusListAfterLoad;
+        this.focusListAfterLoad = false;
+        this.videos.set(list);
+        this.loaded.set(true);
+        if (retry) afterNextRender(() => this.listeVideos?.nativeElement.focus(), { injector: this.injector });
+      },
+      error: () => { this.focusListAfterLoad = false; this.loadError.set(true); },
     });
   }
 
@@ -634,11 +700,11 @@ export class VideosComponent {
   }
 
   /** La fenêtre est modale : tout le reste du document (en-tête, contenu, pied) est inerte tant qu'elle est ouverte. */
-  private setBackgroundInert(on: boolean): void {
+  private setBackgroundInert(on: boolean, dialog = '.modal'): void {
     for (const el of this.inerted) el.removeAttribute('inert');
     this.inerted = [];
     if (!on) return;
-    let node: Element | null = this.host.nativeElement.querySelector('.modal');
+    let node: Element | null = this.host.nativeElement.querySelector(dialog);
     while (node && node !== document.body) {
       const parent: Element | null = node.parentElement;
       if (!parent) break;
@@ -680,12 +746,41 @@ export class VideosComponent {
   }
 
   // === Add Video flow ===
-  openAddVideo(): void {
+  openAddVideo(event?: Event): void {
+    this.addOpener = (event?.currentTarget as HTMLElement | null) ?? null;
     this.addVideoOpen.set(true);
+    afterNextRender(() => {
+      if (!this.addVideoOpen()) return;
+      this.setBackgroundInert(true, '.add-modal');
+      this.host.nativeElement.querySelector<HTMLElement>('.add-input')?.focus();
+    }, { injector: this.injector });
+  }
+
+  /** Tab et Maj+Tab bouclent dans la fenêtre « Ajouter une vidéo ». */
+  onAddKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Tab') return;
+    const items = Array.from(this.host.nativeElement.querySelectorAll<HTMLElement>(
+      '.add-stage button:not([disabled]), .add-stage input:not([disabled]), .add-stage select:not([disabled]), .add-stage textarea:not([disabled])'));
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement;
+    if (event.shiftKey && (active === first || !items.includes(active as HTMLElement))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && (active === last || !items.includes(active as HTMLElement))) { event.preventDefault(); first.focus(); }
+  }
+
+  /** Active l'édition en demandant le PIN du codex, ou la quitte en l'oubliant. */
+  toggleEditMode(): void {
+    if (this.editMode()) this.pinService.clear();
+    else this.pinService.prompt();
   }
 
   closeAddVideo(): void {
+    this.setBackgroundInert(false);
+    const opener = this.addOpener;
+    this.addOpener = null;
     this.addVideoOpen.set(false);
+    if (opener?.isConnected) opener.focus();
     this.addUrl.set('');
     this.preview.set(null);
     this.addError.set(null);
