@@ -94,6 +94,7 @@ lots:
     notes:
       - { date: 2026-10-18, text: "revue UX du 18-10 (prod, captures ~/projects/developpeur/tmp/ux-wh-L7/) : non conforme, 4 bloquants 5 majeurs → t1 (clavier, aria-pressed) et t2 (visionneuse en dialogue, × sous la barre) ici ; L143 contraste des titres à 390, L144 édition derrière le PIN, L145 import Reddit 403, L146 puis L147 images et crédits du seed (validation de Sylvain), L148 contenu d'abord ; favori des cartes (24 « Favori » sans état, non conservé) : décision de Sylvain demandée — retirer ou garder avec stockage local ; mineurs : pied « Site fan » en double (cf. L141), états erreur/chargement sous le premier écran au téléphone, « HAWKSHROUD » coupé en erreur à 1440, taxonomie (« Space Marines : 1 œuvre »), visionneuse bouclée sur la page, image de visionneuse sans alternative, 35 appels wiki-image (cf. L134), anneau de focus Chrome sur les boutons, cibles favori 32 et pagination 38 px, import réussi → reload efface « Importé », « Œuvres récentes » sans date" }
     started: 2026-10-18
+    review: { date: 2026-10-18, verdict: "compliant (1 note mineure : CLAUDE.md, budget CSS de la galerie à mettre à jour) — orchestré (vague 2026-10-18-galerie, 2 passe(s) de correction)", commit: d0064f4df19e6fd4b258ad9def4a2b53c2be3d76 }
   - id: L8
     title: "Revue UX — Lore : sommaire"
     status: todo
