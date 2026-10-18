@@ -4,7 +4,7 @@ import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { NEVER, Subject, defer, of, throwError } from 'rxjs';
@@ -315,6 +315,113 @@ describe('L6 t4 — édition et fenêtre « Ajouter une vidéo »', () => {
     el.querySelector<HTMLButtonElement>('.add-close')!.click();
     await maj(f);
     expect(document.activeElement).toBe(ajout);
+    el.remove();
+  });
+
+  const inertes = () => Array.from(document.querySelectorAll('[inert]'));
+  const apercu = {
+    title: 'T', authorName: 'A', authorUrl: '', thumbnailUrl: '', suggestedChannelId: 'a', suggestedVideoId: 'v', matchedChannel: null,
+  } as never;
+
+  it('ouverte, la fenêtre rend le fond inerte (en-tête, contenu, pied) sans l’être elle-même', async () => {
+    const { el } = await ouvrir();
+    const fenetre = el.querySelector('.add-modal')!;
+    expect(inertes().length).toBeGreaterThan(0);
+    expect(fenetre.closest('[inert]')).toBeNull();
+    // tous les frères de la fenêtre et de ses ancêtres, jusqu'au <body>, sont inertes
+    const fond: Element[] = [];
+    for (let n: Element = fenetre; n.parentElement && n !== document.body; n = n.parentElement) {
+      fond.push(...Array.from(n.parentElement.children).filter((c) => c !== n && !['SCRIPT', 'STYLE', 'LINK'].includes(c.tagName)));
+    }
+    expect(fond.length).toBeGreaterThan(0);
+    for (const bloc of fond) expect(bloc.hasAttribute('inert'), bloc.tagName + '.' + bloc.className).toBe(true);
+    expect(fond.some((b) => el.contains(b))).toBe(true);
+    el.remove();
+  });
+
+  it('Échap lève l’inert du fond', async () => {
+    const { f, el } = await ouvrir();
+    expect(inertes().length).toBeGreaterThan(0);
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await maj(f);
+    expect(el.querySelector('.add-stage')).toBeNull();
+    expect(inertes()).toHaveLength(0);
+    el.remove();
+  });
+
+  it('✕ lève l’inert du fond', async () => {
+    const { f, el } = await ouvrir();
+    expect(inertes().length).toBeGreaterThan(0);
+    el.querySelector<HTMLButtonElement>('.add-close')!.click();
+    await maj(f);
+    expect(el.querySelector('.add-stage')).toBeNull();
+    expect(inertes()).toHaveLength(0);
+    el.remove();
+  });
+
+  it('un clic sur le voile lève l’inert du fond', async () => {
+    const { f, el } = await ouvrir();
+    expect(inertes().length).toBeGreaterThan(0);
+    el.querySelector<HTMLElement>('.add-modal')!.click();
+    await maj(f);
+    expect(el.querySelector('.add-stage')).toBeNull();
+    expect(inertes()).toHaveLength(0);
+    el.remove();
+  });
+
+  it('un enregistrement réussi ferme la fenêtre et lève l’inert du fond', async () => {
+    const importVideo = () => of({});
+    const r = await rendre({ importVideo }, '1234');
+    const { f, el } = r;
+    document.body.appendChild(el);
+    bouton(el, '+ Ajouter une vidéo')!.click();
+    await maj(f);
+    await new Promise((x) => setTimeout(x, 0));
+    f.componentInstance.preview.set(apercu);
+    await maj(f);
+    expect(inertes().length).toBeGreaterThan(0);
+    el.querySelector<HTMLButtonElement>('.add-cta')!.click();
+    await maj(f);
+    expect(el.querySelector('.add-stage')).toBeNull();
+    expect(inertes()).toHaveLength(0);
+    el.remove();
+  });
+
+  it('un enregistrement refusé laisse la fenêtre ouverte, donc le fond inerte', async () => {
+    const r = await rendre({ importVideo: () => throwError(() => ({ error: { message: 'Refusé' } })) }, '1234');
+    const { f, el } = r;
+    document.body.appendChild(el);
+    bouton(el, '+ Ajouter une vidéo')!.click();
+    await maj(f);
+    await new Promise((x) => setTimeout(x, 0));
+    f.componentInstance.preview.set(apercu);
+    await maj(f);
+    el.querySelector<HTMLButtonElement>('.add-cta')!.click();
+    await maj(f);
+    expect(el.querySelector('.add-stage')).not.toBeNull();
+    expect(inertes().length).toBeGreaterThan(0);
+    el.remove();
+  });
+
+  it('ouvrir puis fermer la fenêtre de lecture après celle d’ajout ne laisse aucun inert', async () => {
+    const defile = vi.spyOn(window, 'scrollTo').mockImplementation(() => undefined); // jsdom : non implémenté
+    const { f, el } = await ouvrir();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await maj(f);
+    expect(inertes()).toHaveLength(0);
+    liste(el).querySelector<HTMLElement>('.video-card .card-link')!.click();
+    await maj(f);
+    await new Promise((x) => setTimeout(x, 0));
+    await maj(f);
+    expect(el.querySelector('.modal')).not.toBeNull();
+    expect(inertes().length).toBeGreaterThan(0);
+    el.querySelector<HTMLButtonElement>('.modal .close')!.click();
+    await maj(f);
+    await new Promise((x) => setTimeout(x, 0));
+    await maj(f);
+    expect(el.querySelector('.modal')).toBeNull();
+    expect(inertes()).toHaveLength(0);
+    defile.mockRestore();
     el.remove();
   });
 
