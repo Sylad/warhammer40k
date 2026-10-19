@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-19 13:21",
+  "generated": "2026-10-19 13:42",
   "entries": [
     {
       "slug": "2026-10-19-lore-sommaire-compteurs-justes",
@@ -17,7 +17,7 @@
         "Cartes du sommaire du lore sur grand écran (1440 px) : Primarques « 9 Loyalistes, 9 Traîtres, 2 Perdus », Civils « 13 organisations · 68 fonctions », Concepts « 15 concepts », Galaxie « 69 hot zones », Chronologie « 35 événements »",
         "Les mêmes cartes sur téléphone (390 px), avec les mêmes chiffres"
       ],
-      "html": "<p>Sur la page Lore, les chiffres affichés au bas de chaque carte correspondent désormais à ce que contiennent les pages : 13 organisations et 68 fonctions pour les Civils, 15 concepts, 35 événements dans la Chronologie, 69 hot zones sur la carte de la Galaxie.</p>\n<p>La carte des Primarques annonce maintenant « 9 Loyalistes, 9 Traîtres, 2 Perdus », comme la page des Primarques.</p>\n<p>Si une liste ne peut pas se charger, sa carte n'affiche aucun chiffre plutôt qu'un chiffre périmé.</p>"
+      "html": "<p>Sur la page Lore, les chiffres affichés au bas de chaque carte correspondent désormais à ce que contiennent les pages : 13 organisations et 68 fonctions pour les Civils, 15 concepts, 35 événements dans la Chronologie, 69 hot zones sur la carte de la Galaxie.</p>\n<p>La carte des Primarques annonce maintenant « 9 Loyalistes, 9 Traîtres, 2 Perdus », comme la page des Primarques.</p>\n<p>Si une liste ne peut pas se charger, sa carte n'affiche aucun chiffre plutôt qu'un chiffre périmé.</p>"
     },
     {
       "slug": "2026-10-19-lore-sommaire-titre-concepts-amp-lieux-affiche-amp-entite-ec",
