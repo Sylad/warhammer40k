@@ -417,6 +417,12 @@
       "status": "todo"
     },
     {
+      "id": "L151",
+      "title": "Lore : les chiffres des cartes du sommaire sont ceux des pages",
+      "status": "doing",
+      "started": "2026-10-19"
+    },
+    {
       "id": "L152",
       "title": "Lore : titre « Concepts & Lieux » correct, sommaire lisible sur petit téléphone",
       "status": "doing",
