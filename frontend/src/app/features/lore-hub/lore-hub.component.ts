@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { catchError, combineLatest, of } from 'rxjs';
+import { WarhammerService } from '../../core/services/warhammer.service';
+import { HOT_ZONES } from '../lore-galaxy/lore-galaxy.data';
+import { hubMeta, primarchsSummary, type HubData } from './lore-hub.counts';
 
 interface LoreCard {
   route: string;
@@ -32,7 +37,7 @@ interface LoreCard {
     </section>
 
     <section class="cards">
-      @for (c of cards; track c.route) {
+      @for (c of cards(); track c.route) {
         @if (c.available) {
           <a class="card" [routerLink]="c.route">
             <div class="card-ico">{{ c.ico }}</div>
@@ -71,7 +76,41 @@ interface LoreCard {
   styleUrls: ['./lore-hub.component.scss'],
 })
 export class LoreHubComponent {
-  cards: LoreCard[] = [
+  private readonly service = inject(WarhammerService);
+
+  /** Un flux en erreur vaut « indisponible » : sa carte n'affiche alors aucun chiffre. */
+  private readonly data = toSignal(
+    combineLatest({
+      primarchs: this.service.primarchs$.pipe(catchError(() => of(null))),
+      chaosGods: this.service.chaosGods$.pipe(catchError(() => of(null))),
+      orgs: this.service.imperialOrgs$.pipe(catchError(() => of(null))),
+      concepts: this.service.loreConcepts$.pipe(catchError(() => of(null))),
+      events: this.service.timelineEvents$.pipe(catchError(() => of(null))),
+      equipment: this.service.equipment$.pipe(catchError(() => of(null))),
+      ships: this.service.ships$.pipe(catchError(() => of(null))),
+      godMachines: this.service.godMachines$.pipe(catchError(() => of(null))),
+      saints: this.service.saints$.pipe(catchError(() => of(null))),
+    }),
+    { initialValue: null },
+  );
+
+  readonly cards = computed((): LoreCard[] => {
+    const d = this.data();
+    const meta = hubMeta({ ...(d ?? EMPTY), zones: HOT_ZONES });
+    return CARDS.map((c) => ({
+      ...c,
+      meta: meta[c.route] ?? c.meta,
+      description: c.route === '/lore/primarchs' ? c.description.replace('{repartition} ', primarchsSummary(d?.primarchs ?? null)?.concat(' ') ?? '') : c.description,
+    }));
+  });
+}
+
+const EMPTY: Omit<HubData, 'zones'> = {
+  primarchs: null, chaosGods: null, orgs: null, concepts: null, events: null,
+  equipment: null, ships: null, godMachines: null, saints: null,
+};
+
+const CARDS: LoreCard[] = [
     {
       route: '/lore/emperor',
       ico: '✠',
@@ -88,8 +127,8 @@ export class LoreHubComponent {
       eyebrow: 'Les vingt fils',
       title: 'Les Primarques',
       description:
-        '10 Loyalistes, 9 Traîtres, 2 Disparus. Lion El\'Jonson, Sanguinius, Guilliman, Horus, Magnus, Angron, Mortarion… leur statut au M42, leurs légions, leurs morts ou résurrections.',
-      meta: '20 fiches',
+        '{repartition} Lion El\'Jonson, Sanguinius, Guilliman, Horus, Magnus, Angron, Mortarion… leur statut au M42, leurs légions, leurs morts ou résurrections.',
+      meta: '',
       available: true,
     },
     {
@@ -99,7 +138,7 @@ export class LoreHubComponent {
       title: 'Le Panthéon Chaos',
       description:
         'Khorne, Tzeentch, Nurgle, Slaanesh — les quatre puissances ruineuses du Warp. Leurs sphères, leurs daemons, leurs primarques corrompus.',
-      meta: '4 dieux · 8 daemons notables',
+      meta: '',
       available: true,
     },
     {
@@ -109,7 +148,7 @@ export class LoreHubComponent {
       title: 'Civils Impériaux',
       description:
         'Administratum, Ministorum, Arbites, Navigators, Astropaths, Sœurs du Silence, Rogue Traders, Knight Households… les ordres invisibles qui font tenir l\'Imperium debout.',
-      meta: '10 organisations · 30+ fonctions',
+      meta: '',
       available: true,
     },
     {
@@ -119,7 +158,7 @@ export class LoreHubComponent {
       title: 'Concepts & Lieux',
       description:
         'Trône d\'Or, Astronomican, Œil de la Terreur, Cicatrix Maledictum, Codex Astartes, Cadia, Holy Terra, Macragge… les piliers et les fissures de la galaxie.',
-      meta: '14 concepts · 4 catégories',
+      meta: '',
       available: true,
     },
     {
@@ -129,7 +168,7 @@ export class LoreHubComponent {
       title: 'La Galaxie',
       description:
         'Les 5 Segmenta, l\'Œil de la Terreur, le Maelstrom, la Cicatrice Maledictum, les mondes-clés. Carte SVG interactive avec hot zones cliquables.',
-      meta: '11 hot zones · 3 failles warp',
+      meta: '',
       available: true,
     },
     {
@@ -139,7 +178,7 @@ export class LoreHubComponent {
       title: 'Armement & Reliques',
       description:
         'Bolters, plasma, melta, marteaux-tonnerre, wraithbone, gauss, daemon weapons, Mark IV-X, Cataphractii, reliques nommées (Drach\'nyen, Black Sword, Mjalnar)… armes, armures, et objets sacrés ou damnés.',
-      meta: '69 pièces · 4 types',
+      meta: '',
       available: true,
     },
     {
@@ -149,7 +188,7 @@ export class LoreHubComponent {
       title: 'Chronologie',
       description:
         'De la Vieille Nuit à la Cicatrix Maledictum, les jalons gravés dans la pierre des reliquaires impériaux. Trente millénaires d\'agonie, de conquête et de foi — Hérésie, Croisades, Chutes de Cadia et Indomitus.',
-      meta: '29 événements · 6 ères',
+      meta: '',
       available: true,
     },
     {
@@ -159,7 +198,7 @@ export class LoreHubComponent {
       title: 'Vaisseaux Légendaires',
       description:
         'Phalanx, Vengeful Spirit, Macragge\'s Honour, Endurance, Eternal Crusader, Ark Mechanicus Speranza… les vaisseaux qui portent les Primarques, transportent les Légions, et déchirent les flottes ennemies.',
-      meta: '15 vaisseaux · toutes factions',
+      meta: '',
       available: true,
     },
     {
@@ -169,7 +208,7 @@ export class LoreHubComponent {
       title: 'Titans, Chevaliers & Dieux-Machines',
       description:
         'Warhound, Reaver, Warlord, Imperator. Knights Paladin, Errant, Castellan. Robots Kastelan. Stompas Orks. Cathédrales-machines de 12 à 55 mètres, bénies par les Tech-Prêtres, pilotées par la noblesse martiale.',
-      meta: '10 dieux-machines · 3 catégories',
+      meta: '',
       available: true,
     },
     {
@@ -179,8 +218,7 @@ export class LoreHubComponent {
       title: 'Saintes & Saints',
       description:
         'Saint Celestine, Saint Katherine, Saint Sabbat, Saint Drusus, Sebastian Thor, Saint Silvana, Saint Praxedes, Saint Sanguinaire. Les figures qui galvanisent un trillion de fidèles à travers la galaxie. Acta Saint, miracles, martyres.',
-      meta: '8 figures · 3 catégories',
+      meta: '',
       available: true,
     },
-  ];
-}
+];

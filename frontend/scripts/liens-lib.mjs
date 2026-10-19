@@ -359,9 +359,9 @@ export function dataLinks(data, defs = DATA_LINKS) {
   return out;
 }
 
-/** Zones cliquables de la carte galactique (données embarquées dans le composant). */
+/** Zones cliquables de la carte galactique (données de lore-galaxy.data.ts). */
 export function galaxyLinks(
-  file = join(APP, 'features/lore-galaxy/lore-galaxy.component.ts'),
+  file = join(APP, 'features/lore-galaxy/lore-galaxy.data.ts'),
   utils = join(APP, 'features/lore-galaxy/lore-galaxy.utils.ts'),
 ) {
   const src = readFileSync(file, 'utf8');
