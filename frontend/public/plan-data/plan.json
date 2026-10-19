@@ -415,6 +415,12 @@
       "id": "L141",
       "title": "Vidéos : chaînes et cartes plus lisibles",
       "status": "todo"
+    },
+    {
+      "id": "L152",
+      "title": "Lore : titre « Concepts & Lieux » correct, sommaire lisible sur petit téléphone",
+      "status": "doing",
+      "started": "2026-10-19"
     }
   ]
 }

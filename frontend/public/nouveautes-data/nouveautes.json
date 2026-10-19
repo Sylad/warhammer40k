@@ -1,7 +1,26 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-17 17:14",
+  "generated": "2026-10-19 13:06",
   "entries": [
+    {
+      "slug": "2026-10-19-lore-sommaire-titre-concepts-amp-lieux-affiche-amp-entite-ec",
+      "title": "Lore : titre « Concepts & Lieux » correct, sommaire lisible sur petit téléphone",
+      "date": "2026-10-19",
+      "lots": [
+        "L152"
+      ],
+      "captures": [
+        "captures/L152-lore-sommaire-320.png",
+        "captures/L152-lore-sommaire-390.png",
+        "captures/L152-lore-sommaire-1440.png"
+      ],
+      "alts": [
+        "Sommaire du lore sur un petit téléphone (320 px) : le titre « Lore Impérial » et le texte d'introduction tiennent entièrement dans le cadre",
+        "Le même sommaire sur téléphone (390 px)",
+        "Le sommaire sur grand écran (1440 px), inchangé"
+      ],
+      "html": "<p>Sur la page Lore, la carte des concepts s'intitule maintenant « Concepts &amp; Lieux » ; elle affichait par erreur « Concepts &amp;AMP; Lieux ».</p>\n<p>Avec un très petit écran de téléphone (320 px de large), le titre « Lore Impérial » et la fin du texte d'introduction ne sont plus coupés au bord du cadre. Sur grand écran, rien ne change.</p>"
+    },
     {
       "slug": "2026-10-17-romans-bandeau-lisible-sur-petit-telephone",
       "title": "Romans : bandeau lisible sur petit téléphone",

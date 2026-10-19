@@ -116,7 +116,7 @@ export class LoreHubComponent {
       route: '/lore/concepts',
       ico: '📜',
       eyebrow: 'Encyclopédie',
-      title: 'Concepts &amp; Lieux',
+      title: 'Concepts & Lieux',
       description:
         'Trône d\'Or, Astronomican, Œil de la Terreur, Cicatrix Maledictum, Codex Astartes, Cadia, Holy Terra, Macragge… les piliers et les fissures de la galaxie.',
       meta: '14 concepts · 4 catégories',
