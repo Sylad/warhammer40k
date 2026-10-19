@@ -1463,10 +1463,11 @@ lots:
     finished: 2026-10-18
   - id: L151
     title: "Lore sommaire : les compteurs des cartes contredisent les pages (Primarques 10/9/2 au lieu de 9/9/2, Concepts 14→15, Chronologie 29→35, Civils 10 org.→13 et 30+ fonctions→68, Galaxie 11 hot zones→69, Chaos 8 daemons→16) — compteurs tirés du seed ou de l'API, avec test qui compare carte et seed — issu de la revue UX L8"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-19
+    started: 2026-10-19
   - id: L152
     title: "Lore sommaire : titre « Concepts &amp; Lieux » affiché « &AMP; » (entité échappée par l'interpolation) ; à 320 px le hero coupe « IMPÉRIAL » et la fin du chapeau 10 px au-delà de sa bordure (padding 50 px, h1 ≥ 44 px) — padding réduit sous 600 px, min-width 0, clamp du h1 abaissé (WCAG 1.4.10) — issu de la revue UX L8"
     status: doing
