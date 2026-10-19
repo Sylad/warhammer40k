@@ -1463,20 +1463,24 @@ lots:
     finished: 2026-10-18
   - id: L151
     title: "Lore sommaire : les compteurs des cartes contredisent les pages (Primarques 10/9/2 au lieu de 9/9/2, Concepts 14→15, Chronologie 29→35, Civils 10 org.→13 et 30+ fonctions→68, Galaxie 11 hot zones→69, Chaos 8 daemons→16) — compteurs tirés du seed ou de l'API, avec test qui compare carte et seed — issu de la revue UX L8"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-19
     started: 2026-10-19
-    review: { date: 2026-10-19, verdict: "compliant (2 notes mineures, dont « 16 daemons » du lot non reproductible : 8 daemons notables dans le seed et sur la page ; revue visuelle non faite, navigateur indisponible) — orchestré (vague 2026-10-19-wh-lore, 0 passe(s) de correction)", commit: 60a36662d9a8a683fb57187c154547cb22c4463d }
+    review: { date: 2026-10-19, verdict: "conforme — revue de la vague 2026-10-19-wh-lore ; commit c2b96b1 relu par le lead : guillemets U+202F de l'entrée Nouveautés seulement", commit: c2b96b1c79ee098a9d4b7e79dd500bcbefa8c3b3 }
+    ux: { date: 2026-10-19, verdict: "conforme (lead, capture 390 regardée : 9/9/2, 15 concepts, 35 événements, 13 org. · 68 fonctions, 69 hot zones, « Concepts & Lieux ») ; 8 daemons notables = seed (le « 16 » de la revue L8 non reproduit)" }
+    finished: 2026-10-19
   - id: L152
     title: "Lore sommaire : titre « Concepts &amp; Lieux » affiché « &AMP; » (entité échappée par l'interpolation) ; à 320 px le hero coupe « IMPÉRIAL » et la fin du chapeau 10 px au-delà de sa bordure (padding 50 px, h1 ≥ 44 px) — padding réduit sous 600 px, min-width 0, clamp du h1 abaissé (WCAG 1.4.10) — issu de la revue UX L8"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-19
     started: 2026-10-19
     review: { date: 2026-10-19, verdict: "compliant — orchestré (vague 2026-10-19-wh-lore, 0 passe(s) de correction)", commit: 513a154acdd67e25a4abe7cc617c2ed6f6e10987 }
+    ux: { date: 2026-10-19, verdict: "conforme (lead, capture 320 px regardée : « LORE IMPÉRIAL » et le chapeau dans la bordure ; mesures : IMPÉRIAL à 85 px de la bordure, chapeau à 22 px ; « Concepts & Lieux » sans entité ; 1440 inchangé) ; note : sous 600 px le texte du hero est décalé de 6 px par rapport aux cartes (padding 20 vs 26)" }
+    finished: 2026-10-19
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
