@@ -1468,6 +1468,7 @@ lots:
     visible: true
     created: 2026-10-19
     started: 2026-10-19
+    review: { date: 2026-10-19, verdict: "compliant (2 notes mineures, dont « 16 daemons » du lot non reproductible : 8 daemons notables dans le seed et sur la page ; revue visuelle non faite, navigateur indisponible) — orchestré (vague 2026-10-19-wh-lore, 0 passe(s) de correction)", commit: 60a36662d9a8a683fb57187c154547cb22c4463d }
   - id: L152
     title: "Lore sommaire : titre « Concepts &amp; Lieux » affiché « &AMP; » (entité échappée par l'interpolation) ; à 320 px le hero coupe « IMPÉRIAL » et la fin du chapeau 10 px au-delà de sa bordure (padding 50 px, h1 ≥ 44 px) — padding réduit sous 600 px, min-width 0, clamp du h1 abaissé (WCAG 1.4.10) — issu de la revue UX L8"
     status: doing
