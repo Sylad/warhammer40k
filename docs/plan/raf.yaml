@@ -98,9 +98,15 @@ lots:
     finished: 2026-10-18
   - id: L8
     title: "Revue UX — Lore : sommaire"
-    status: todo
+    status: done
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-19
+    ux: { date: 2026-10-19, verdict: "non conforme : 3 majeurs — compteurs des cartes faux (Primarques 10/9/2, Concepts 14 au lieu de 15, Chronologie 29 au lieu de 35, Civils, Galaxie, Chaos), titre « CONCEPTS &AMP; LIEUX », hero rogné à 320 px (capture regardée par le lead : « IMPÉRIAL » coupé) ; corrections dans les lots suivants" }
+    notes:
+      - { date: 2026-10-19, text: "Mineurs (notes) : page très longue au téléphone (4 893 px à 390, maquette « cartes en rangées » sous 600 px à faire valider avant code) ; libellés du menu Lore ≠ cartes (Imperial Orgs, Titans & Knights…) ; icônes répétées (✠, ⚙) et 📜 en emoji ; case vide à 1440 (11 cartes en 4 colonnes) ; flèche collée au compteur (Civils, Titans) ; chapeau et note de bas de page inexacts ; nom accessible des cartes de ~250 caractères, focus par défaut au lieu de l'outline or. Captures ~/projects/developpeur/tmp/ux-wh-l8/." }
+      - { date: 2026-10-19, text: "Corrections : L151 (compteurs), L152 (titre &amp; et hero 320)." }
+    finished: 2026-10-19
   - id: L9
     title: "Revue UX — Lore : l'Empereur"
     status: todo
@@ -1455,6 +1461,18 @@ lots:
       - { date: 2026-10-18, text: "mineurs revue 18-10 : maquette galerie-filtres (maquette.html:101,107) montre encore Importer sans mode édition ; cadence spec check refuse fiche.yaml de galerie-filtres (« Nested mappings are not allowed » ligne 98, énoncé de R9, préexistant depuis le 12-10)" }
     review: { date: 2026-10-18, verdict: "conforme — fiche L49 R3/R4 alignée sur L144, test R3 couvre sans PIN et avec PIN, 2 mutations du composant le rendent rouge, autres cas de L49 intacts, 32/32", commit: 9a018f699804b105eb0ef0f0e2dce2a16d2ff500 }
     finished: 2026-10-18
+  - id: L151
+    title: "Lore sommaire : les compteurs des cartes contredisent les pages (Primarques 10/9/2 au lieu de 9/9/2, Concepts 14→15, Chronologie 29→35, Civils 10 org.→13 et 30+ fonctions→68, Galaxie 11 hot zones→69, Chaos 8 daemons→16) — compteurs tirés du seed ou de l'API, avec test qui compare carte et seed — issu de la revue UX L8"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-19
+  - id: L152
+    title: "Lore sommaire : titre « Concepts &amp; Lieux » affiché « &AMP; » (entité échappée par l'interpolation) ; à 320 px le hero coupe « IMPÉRIAL » et la fin du chapeau 10 px au-delà de sa bordure (padding 50 px, h1 ≥ 44 px) — padding réduit sous 600 px, min-width 0, clamp du h1 abaissé (WCAG 1.4.10) — issu de la revue UX L8"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-19
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
