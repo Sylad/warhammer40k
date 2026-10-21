@@ -1525,6 +1525,7 @@ lots:
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review: { date: 2026-10-21, verdict: "conforme : 0 bloquant, 0 majeur, 1 note (formulation du README) ; e2e L156 4/4 vert, suites styles/shared/lore-primarchs/primarch-detail 124/124 vertes, contrastes mesurés ≥ 4,5:1 sur les 20 cartes et les 20 fiches — orchestré (vague 2026-10-21-wh-prim, 0 passe(s) de correction)", commit: d8fb6ae6d0e81db9cf53b105dec27dc4651a91bd }
   - id: L157
     title: "Fiche Primarque, clavier : portrait, 3 images intercalées et image d'Origines en role=button sans Entrée/Espace → vrais boutons ; visionneuse figure-lightbox en dialogue (role=dialog, aria-modal, focus dedans et bouclé, rendu à l'origine) ; aria-pressed sur les filtres de la liste — WCAG 2.1.1, 2.4.3, 4.1.2 — revue UX L10"
     public: "Fiche d'un Primarque : images et visionneuse au clavier"
