@@ -1487,10 +1487,11 @@ lots:
   - id: L153
     title: "Lore Empereur, en-tête au téléphone : texte rogné de ~70 px à 320 px et collé au bord droit à 390 px (marge fixe 60 px, titre sans fit-title, bloc sans min-width:0 — WCAG 1.4.10) ; sous-titre à 4,29:1 sur l'image à 390 px (WCAG 1.4.3) → voile sous le texte — revue UX L9"
     public: "Lore de l'Empereur : en-tête lisible au téléphone"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-21
+    started: 2026-10-21
   - id: L154
     title: "Lore Empereur, sections : texte des sections 2, 4, 6 coincé dans une colonne de 200 px tant que l'image wiki manque (CLS 0,123) → deux colonnes seulement avec une image ; lignes de ~148 caractères à 1440 px → largeur de lecture bornée (~70ch) — revue UX L9"
     public: "Lore de l'Empereur : sections plus confortables à lire"
