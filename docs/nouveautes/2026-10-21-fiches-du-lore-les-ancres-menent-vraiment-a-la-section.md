@@ -4,7 +4,7 @@ date: 2026-10-21
 created: 2026-10-21T20:21+02:00
 lots: [L160]
 captures:
-  - { file: captures/L160-primarque-ancre-origines-1440.png, alt: "Fiche d'Horus après un clic sur « Origines » dans la barre des sections : la section Origines est en haut de page, sous la barre, et l'adresse se termine par #origines" }
+  - { file: captures/L160-primarque-ancre-origines-1440.png, alt: "Fiche d'Horus après un clic sur « Origines » dans la barre des sections : la section Origines est en haut de page, sous la barre, et l'adresse se termine par #origines" }
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---
