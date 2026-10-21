@@ -1520,10 +1520,11 @@ lots:
   - id: L156
     title: "Lore Primarques, contrastes : badges de statut sur l'image des cartes (Expurgé 1,13:1, Mort 1,4:1, Daemon-Prince 2,1:1, Disparu 2,6:1), numéro N° 2,1:1, monde natal 3,7:1, Expurgé de la fiche 2,05:1, titre de la visionneuse en primaryColor < 3:1 pour 15/20 → fond plein sous les badges, titre en or et couleur de légion en filet — WCAG 1.4.3 — revue UX L10"
     public: "Lore des Primarques : badges et titres lisibles"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-21
+    started: 2026-10-21
   - id: L157
     title: "Fiche Primarque, clavier : portrait, 3 images intercalées et image d'Origines en role=button sans Entrée/Espace → vrais boutons ; visionneuse figure-lightbox en dialogue (role=dialog, aria-modal, focus dedans et bouclé, rendu à l'origine) ; aria-pressed sur les filtres de la liste — WCAG 2.1.1, 2.4.3, 4.1.2 — revue UX L10"
     public: "Fiche d'un Primarque : images et visionneuse au clavier"
