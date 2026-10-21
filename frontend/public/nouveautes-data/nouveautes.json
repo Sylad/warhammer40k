@@ -1,7 +1,26 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-21 17:32",
+  "generated": "2026-10-21 18:31",
   "entries": [
+    {
+      "slug": "2026-10-21-lore-des-primarques-en-tetes-lisibles-au-telephone",
+      "title": "Lore des Primarques : en-têtes lisibles au téléphone",
+      "date": "2026-10-21",
+      "lots": [
+        "L155"
+      ],
+      "captures": [
+        "captures/L155-primarques-liste-320.png",
+        "captures/L155-primarques-fiche-320.png",
+        "captures/L155-primarques-liste-1440.png"
+      ],
+      "alts": [
+        "En-tête de la liste des Primarques sur un téléphone étroit (320 px) : le badge, le titre « Les Vingt Primarques » sur deux lignes, le chapeau et les compteurs tiennent entièrement dans le cadre",
+        "En-tête de la fiche de Sanguinius à 320 px : le titre « Sanguinius » s'affiche en entier, avec une seule marge de chaque côté",
+        "La liste des Primarques sur grand écran (1440 px), en-tête inchangé"
+      ],
+      "html": "<p>Sur les pages du Lore des Primarques, les titres s'affichent maintenant en entier sur téléphone, même sur les écrans les plus étroits. Dans la liste, le titre et le chapeau ne sont plus coupés à droite. Sur les fiches, des noms comme Sanguinius, Mortarion ou « Primarque-Perdu » ne sont plus tronqués, et la marge à gauche et à droite est plus étroite, ce qui laisse plus de place au texte.</p>\n<p>Sur grand écran, rien ne change.</p>"
+    },
     {
       "slug": "2026-10-21-lore-de-l-empereur-sections-plus-confortables-a-lire",
       "title": "Lore de l'Empereur : sections plus confortables à lire",
