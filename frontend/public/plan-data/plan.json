@@ -433,14 +433,16 @@
     {
       "id": "L153",
       "title": "Lore de l'Empereur : en-tête lisible au téléphone",
-      "status": "doing",
-      "started": "2026-10-21"
+      "status": "done",
+      "started": "2026-10-21",
+      "finished": "2026-10-21"
     },
     {
       "id": "L154",
       "title": "Lore de l'Empereur : sections plus confortables à lire",
-      "status": "doing",
-      "started": "2026-10-21"
+      "status": "done",
+      "started": "2026-10-21",
+      "finished": "2026-10-21"
     }
   ]
 }

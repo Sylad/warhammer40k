@@ -1487,21 +1487,25 @@ lots:
   - id: L153
     title: "Lore Empereur, en-tête au téléphone : texte rogné de ~70 px à 320 px et collé au bord droit à 390 px (marge fixe 60 px, titre sans fit-title, bloc sans min-width:0 — WCAG 1.4.10) ; sous-titre à 4,29:1 sur l'image à 390 px (WCAG 1.4.3) → voile sous le texte — revue UX L9"
     public: "Lore de l'Empereur : en-tête lisible au téléphone"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-21
     started: 2026-10-21
     review: { date: 2026-10-21, verdict: "compliant (1 mineur noté : sous-titre à 4,35:1 sur fond blanc à 801 px, voile limité à 800 px) — orchestré (vague 2026-10-21-wh-emp, 0 passe(s) de correction)", commit: 213c30b142a47af82706838e368309e13c66547a }
+    ux: { date: 2026-10-21, verdict: "conforme (lead, captures 320/390/1440 : titre et sous-titre entiers à 320 px, plus collés au bord à 390 ; voile sous le texte) ; 1 mineur : sous-titre à 4,35:1 sur fond clair à 801 px (voile limité à 800 px)" }
+    finished: 2026-10-21
   - id: L154
     title: "Lore Empereur, sections : texte des sections 2, 4, 6 coincé dans une colonne de 200 px tant que l'image wiki manque (CLS 0,123) → deux colonnes seulement avec une image ; lignes de ~148 caractères à 1440 px → largeur de lecture bornée (~70ch) — revue UX L9"
     public: "Lore de l'Empereur : sections plus confortables à lire"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-21
     started: 2026-10-21
-    review: { date: 2026-10-21, verdict: "compliant after 1 minor note (le texte Nouveautés promet « la page ne saute plus » alors que la colonne image n'est pas réservée) — orchestré (vague 2026-10-21-wh-emp, 0 passe(s) de correction)", commit: 64d5d645a89a0b3c793dd18809715877170be395 }
+    review: { date: 2026-10-21, verdict: "conforme (revue Sonnet de d291f38 : texte Nouveautés vrai par rapport au code has-img / grille 800 px ; revue antérieure conforme sur 3923389, 64d5d64)", commit: d291f38e16692f9e97945bbb28fff5b1ac3f0e06 }
+    ux: { date: 2026-10-21, verdict: "conforme (lead, captures 1440/390 : texte pleine largeur sans image, lignes ~70ch) ; texte Nouveautés corrigé par d291f38 (ne promet plus l'absence de saut quand l'image arrive)" }
+    finished: 2026-10-21
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
