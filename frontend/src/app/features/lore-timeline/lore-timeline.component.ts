@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -93,6 +93,7 @@ const TAG_LABEL: Record<string, string> = {
 })
 export class LoreTimelineComponent {
   private readonly service = inject(WarhammerService);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly events = toSafeSignal(this.service.timelineEvents$, [] as TimelineEvent[]);
 
@@ -158,6 +159,8 @@ export class LoreTimelineComponent {
     if (this.filterTag() !== 'all') this.filterTag.set('all');
     this.expandedId.set(null);
     setTimeout(() => {
+      const barre = this.host.nativeElement.querySelector<HTMLElement>('.era-nav');
+      this.host.nativeElement.style.setProperty('--era-nav-h', `${barre?.offsetHeight ?? 0}px`);
       revealSection(`era-${era}`);
     }, 50);
   }

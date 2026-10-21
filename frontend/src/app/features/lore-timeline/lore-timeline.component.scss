@@ -151,7 +151,12 @@
 .era-pill.active .pill-count { color: var(--gold-bright); border-color: var(--gold); }
 
 /* === Era section header === */
-.era-section { margin-bottom: 56px; }
+.era-section {
+  margin-bottom: 56px;
+  /* L160 : html pose déjà scroll-padding-top = bandeau + 8 px ; on ajoute la barre d'ères collée
+     (hauteur mesurée au clic dans --era-nav-h : les pastilles passent à la ligne) + 4 px. */
+  scroll-margin-top: calc(var(--era-nav-h, 0px) + 4px);
+}
 .era-section:first-of-type { margin-top: 0; }
 
 .era-header {
