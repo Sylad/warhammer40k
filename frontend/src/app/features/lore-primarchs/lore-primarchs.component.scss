@@ -79,7 +79,10 @@
       margin-bottom: 36px;
     }
 
+    .load-status { min-height: 1.4em; margin: -12px 0 14px; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
     .card {
+      position: relative; /* L159 : le lien du nom couvre la carte */
       display: flex;
       flex-direction: column;
       border: 1px solid var(--border);
@@ -88,6 +91,8 @@
       overflow: hidden;
     }
     .card:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+    /* L159 : l'anneau est sur la carte, pas sur le lien — overflow:hidden rogne les enfants, pas le contour de la carte. */
+    .card:has(.card-name-link:focus-visible) { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
 
     .card-img {
       position: relative;
@@ -95,10 +100,6 @@
       width: 100%;
       background-size: cover;
       background-position: center;
-      border: 0;
-      padding: 0;
-      cursor: pointer;
-      font-family: inherit;
       display: block;
     }
     .card-zoom {
@@ -114,7 +115,7 @@
       opacity: 0.6;
       transition: opacity 0.15s, color 0.15s, border-color 0.15s;
     }
-    .card-img:hover .card-zoom {
+    .card:hover .card-zoom {
       opacity: 1;
       color: var(--gold-bright);
       border-color: var(--gold);
@@ -153,6 +154,8 @@
     .card-head { margin-bottom: 10px; }
     .card-head h2 { margin: 0; font-size: 18px; color: var(--gold); line-height: 1.15; }
     .card-name-link { text-decoration: none; }
+    .card-name-link:focus-visible { outline: none; }
+    .card-name-link::after { content: ''; position: absolute; inset: 0; z-index: 2; } /* L159 : un seul lien, toute la carte cliquable */
     .card-name-link:hover h2 { color: var(--gold-bright); }
     .epithet {
       font-family: var(--serif);

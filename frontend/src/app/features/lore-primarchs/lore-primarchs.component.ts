@@ -48,6 +48,10 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
       </div>
     </section>
 
+    <div class="load-status" role="status">
+      @if (primarchs.pending()) { Chargement des Primarques… }
+    </div>
+
     @if (primarchs.failed()) {
       <app-load-error (retry)="primarchs.retry()" />
     }
@@ -70,12 +74,12 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
     <section class="grid">
       @for (p of filtered(); track p.id) {
         <article class="card" [attr.data-allegiance]="p.allegiance" [attr.data-status]="p.status">
-          <a class="card-img" [routerLink]="['/lore/primarchs', p.id]" [style.background-image]="primarchImg(p.id)" [style.background-color]="p.primaryColor || '#3a3a3a'" aria-label="Lire le lore complet">
+          <div class="card-img" [style.background-image]="primarchImg(p.id)" [style.background-color]="p.primaryColor || '#3a3a3a'">
             <div class="card-img-overlay"></div>
             <span class="number">{{ formatNumber(p.number) }}</span>
             <span class="status" [style.color]="statusColor(p.status)">{{ statusLabel(p.status) }}</span>
-            <span class="card-zoom">↗</span>
-          </a>
+            <span class="card-zoom" aria-hidden="true">↗</span>
+          </div>
           <div class="card-body">
             <div class="card-head">
               <a class="card-name-link" [routerLink]="['/lore/primarchs', p.id]"><h2>{{ p.name }}</h2></a>
@@ -104,7 +108,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             <div class="status-detail">{{ p.statusDetail }}</div>
             <div class="card-foot">
               <span class="allegiance" [class]="'a-' + p.allegiance">{{ allegianceLabel(p.allegiance) }}</span>
-              <a class="legion-link" [routerLink]="['/lore/primarchs', p.id]">Lire la fiche →</a>
+              <span class="legion-link" aria-hidden="true">Lire la fiche →</span>
             </div>
           </div>
         </article>
@@ -134,8 +138,8 @@ export class LorePrimarchsComponent {
   readonly primarchImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
 
-  /** L115 : « — » tant que la liste est en échec. */
-  nb(n: number): string { return compteur(n, this.primarchs.failed()); }
+  /** L115 / L159 : « — » tant que la liste est en échec ou en chargement (un « 0 » serait une valeur). */
+  nb(n: number): string { return compteur(n, this.primarchs.failed() || this.primarchs.pending()); }
 
   readonly filtered = computed(() => {
     const all = this.primarchs();
