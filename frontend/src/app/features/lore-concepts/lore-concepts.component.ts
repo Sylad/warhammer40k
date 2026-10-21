@@ -103,7 +103,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
                 <div class="related-grid">
                   @for (r of c.relatedConcepts; track r.name) {
                     @if (r.conceptId) {
-                      <a class="related-card" [href]="'/lore/concepts#' + r.conceptId" (click)="goToSection($event, r.conceptId)">
+                      <a class="related-card" [href]="'#' + r.conceptId" (click)="goToSection($event, r.conceptId)">
                         <div class="related-name">{{ r.name }}</div>
                         @if (r.description) { <p>{{ r.description }}</p> }
                         <span class="related-arrow">→</span>

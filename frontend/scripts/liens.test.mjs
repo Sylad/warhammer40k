@@ -104,6 +104,12 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     expect(staleDeclarations(inv)).toEqual(['frontend/src/app/features/faction-detail/faction-detail.component.ts|h.unitId']);
   });
 
+  it('ancre nue calculée (« [href]="\'#\' + r.conceptId" » avec (click)) : l\'expression est relevée (L160)', () => {
+    const f = page(`@Component({template: \`<a [href]="'#' + r.conceptId" (click)="go($event)">a</a>\`})`);
+    const a = codeLinks([f]).filter((l) => l.cls === 'anchor');
+    expect(a.map((l) => l.dynamic)).toEqual(['r.conceptId']);
+  });
+
   it('identifiant LITTÉRAL dans un tableau de commandes : vérifié contre les données', () => {
     const f = page(`@Component({template: \`<a [routerLink]="['/factions', 'nope']">a</a><a [routerLink]="['/factions', 'orks']">b</a>\`})`);
     const broken = checkInternal(codeLinks([f]), { routes, data, news: { entries: [] } });

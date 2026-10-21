@@ -291,7 +291,10 @@ export function codeLinks(files = sourceFiles()) {
       else if (/^#|^\{'#' \+/.test(h)) {
         // Ancre « nue » : avec <base href="/">, le navigateur la résout en « /#x » (accueil)
         // sauf si un gestionnaire (click) l'intercepte.
-        push({ cls: 'anchor', target: `~${h.startsWith('#') ? h : '#' + h}`, source: source(t.index), bare: true, click: click ?? null });
+        // Ancre nue calculée (« '#' + r.conceptId ») : l'expression est relevée pour que sa déclaration
+        // (DATA_LINKS, champ lu) ne soit pas orpheline.
+        const calc = /^\{\s*'#'\s*\+\s*(.+?)\s*\}$/.exec(h)?.[1] ?? null;
+        push({ cls: 'anchor', target: `~${h.startsWith('#') ? h : '#' + h}`, source: source(t.index), bare: true, click: click ?? null, dynamic: calc });
       } else if (h.startsWith('/')) push({ cls: /\.[a-z0-9]{2,5}$/i.test(h) ? 'asset' : 'route', target: h, source: source(t.index) });
       else push({ cls: 'route', target: h, source: source(t.index), dynamic: h });
     }
