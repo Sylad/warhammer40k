@@ -57,16 +57,16 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
     }
 
     <section class="filters">
-      <button class="filter" [class.active]="filterAllegiance() === 'all'" (click)="setFilter('all')">
+      <button type="button" class="filter" [class.active]="filterAllegiance() === 'all'" [attr.aria-pressed]="filterAllegiance() === 'all'" (click)="setFilter('all')">
         Tous · {{ nb(primarchs().length) }}
       </button>
-      <button class="filter" [class.active]="filterAllegiance() === 'loyalist'" (click)="setFilter('loyalist')">
+      <button type="button" class="filter" [class.active]="filterAllegiance() === 'loyalist'" [attr.aria-pressed]="filterAllegiance() === 'loyalist'" (click)="setFilter('loyalist')">
         Loyalistes · {{ nb(countLoyalist()) }}
       </button>
-      <button class="filter" [class.active]="filterAllegiance() === 'traitor'" (click)="setFilter('traitor')">
+      <button type="button" class="filter" [class.active]="filterAllegiance() === 'traitor'" [attr.aria-pressed]="filterAllegiance() === 'traitor'" (click)="setFilter('traitor')">
         Traîtres · {{ nb(countTraitor()) }}
       </button>
-      <button class="filter" [class.active]="filterAllegiance() === 'lost'" (click)="setFilter('lost')">
+      <button type="button" class="filter" [class.active]="filterAllegiance() === 'lost'" [attr.aria-pressed]="filterAllegiance() === 'lost'" (click)="setFilter('lost')">
         Perdus · {{ nb(countLost()) }}
       </button>
     </section>

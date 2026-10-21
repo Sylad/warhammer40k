@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { afterNextRender, Component, computed, effect, ElementRef, inject, Injector, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -44,11 +44,11 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
         <div class="hero-overlay"></div>
 
         <div class="hero-grid">
-          <div class="hero-portrait" [style.background-image]="heroImg()" [style.background-color]="p.primaryColor || '#1a3a6e'"
-               (click)="openHeroLightbox(p)" role="button" tabindex="0" aria-label="Agrandir le portrait">
-            <div class="hero-portrait-frame"></div>
-            <div class="hero-portrait-zoom">↗ AGRANDIR</div>
-          </div>
+          <button type="button" class="hero-portrait" [style.background-image]="heroImg()" [style.background-color]="p.primaryColor || '#1a3a6e'"
+               (click)="openHeroLightbox(p, $event)" [attr.aria-label]="'Agrandir le portrait de ' + p.name">
+            <span class="hero-portrait-frame"></span>
+            <span class="hero-portrait-zoom" aria-hidden="true">↗ AGRANDIR</span>
+          </button>
 
           <div class="hero-text">
             <div class="hero-eyebrow">
@@ -106,8 +106,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
               @let img1 = interImage(1);
               <div class="lore-flow" [class.has-img]="!!img1">
                 @if (img1) {
-                  <figure class="inline-figure inline-right" (click)="openImageLightbox(p, img1, 1)" role="button" tabindex="0">
-                    <div class="inline-figure-img" [style.background-image]="img1"></div>
+                  <figure class="inline-figure inline-right">
+                    <button type="button" class="inline-figure-img" [style.background-image]="img1"
+                            (click)="openImageLightbox(p, img1, 1, $event)" [attr.aria-label]="'Agrandir l’illustration de ' + p.name + ' — ' + (p.legion || p.name)"></button>
                     <figcaption>Iconographie · {{ p.legion || p.name }}</figcaption>
                   </figure>
                 }
@@ -143,8 +144,8 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
                 <p class="col-text">{{ p.earlyLife }}</p>
                 <aside class="info-card">
                   @if (img2) {
-                    <div class="info-card-img" [style.background-image]="img2"
-                         (click)="openImageLightbox(p, img2, 2)" role="button" tabindex="0" aria-label="Agrandir"></div>
+                    <button type="button" class="info-card-img" [style.background-image]="img2"
+                         (click)="openImageLightbox(p, img2, 2, $event)" [attr.aria-label]="'Agrandir l’illustration des origines de ' + p.name"></button>
                   }
                   <div class="info-card-body">
                     @if (p.homeworld) {
@@ -168,8 +169,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
               <div [class.two-col]="!!img3" [class.reverse]="!!img3">
                 <p class="col-text">{{ p.greatCrusade }}</p>
                 @if (img3) {
-                  <figure class="inline-figure" (click)="openImageLightbox(p, img3, 3)" role="button" tabindex="0">
-                    <div class="inline-figure-img" [style.background-image]="img3"></div>
+                  <figure class="inline-figure">
+                    <button type="button" class="inline-figure-img" [style.background-image]="img3"
+                            (click)="openImageLightbox(p, img3, 3, $event)" [attr.aria-label]="'Agrandir l’illustration de la Grande Croisade de ' + p.name"></button>
                     <figcaption>Grande Croisade · M30</figcaption>
                   </figure>
                 }
@@ -192,8 +194,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
                   </blockquote>
                 }
                 @if (img4) {
-                  <figure class="inline-figure full" (click)="openImageLightbox(p, img4, 4)" role="button" tabindex="0">
-                    <div class="inline-figure-img tall" [style.background-image]="img4"></div>
+                  <figure class="inline-figure full">
+                    <button type="button" class="inline-figure-img tall" [style.background-image]="img4"
+                            (click)="openImageLightbox(p, img4, 4, $event)" [attr.aria-label]="'Agrandir l’illustration de l’Hérésie de ' + p.name"></button>
                     <figcaption>{{ heresyCaption(p) }}</figcaption>
                   </figure>
                 }
@@ -274,7 +277,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
               <div class="iconography-grid">
                 @for (g of galleryImages(); track g; let i = $index) {
                   <button class="iconography-card" type="button"
-                          (click)="openImageLightboxRaw(p, g, i)"
+                          (click)="openImageLightboxRaw(p, g, i, $event)"
                           [style.background-image]="imgBgUrl(g)"
                           aria-label="Agrandir cette iconographie">
                     <span class="iconography-zoom">↗</span>
@@ -340,7 +343,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
       </section>
 
       <!-- LIGHTBOX -->
-      <app-figure-lightbox [style.--legion-color]="legionColor()" [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+      <app-figure-lightbox [style.--legion-color]="legionColor()" [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                           [attr.role]="lightbox() ? 'dialog' : null" [attr.aria-modal]="lightbox() ? 'true' : null"
+                           [attr.aria-label]="lightbox() ? 'Visionneuse — ' + p.name : null" (keydown)="onLightboxKey($event)" />
     } @else if (primarch.failed()) {
       <app-load-error [notFound]="primarch.notFound()" [heading]="primarch.notFound() ? 'Primarque introuvable' : 'Primarque indisponible'" backLink="/lore/primarchs" backLabel="Tous les Primarques" (retry)="retryAll(primarch, related)" />
     } @else {
@@ -359,6 +364,10 @@ export class PrimarchDetailComponent {
   readonly galleryImages = signal<string[]>([]);
   readonly relatedImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
+  /** Élément qui a ouvert la visionneuse : il récupère le focus à la fermeture. */
+  private opener: HTMLElement | null = null;
   /** L156 : couleur de la légion de la visionneuse, rendue en filet (le titre, lui, reste en or). */
   readonly legionColor = signal('');
 
@@ -462,22 +471,22 @@ export class PrimarchDetailComponent {
 
   scrollTo(e: Event, id: string): void { goToSection(e, id); }
 
-  openHeroLightbox(p: Primarch): void {
+  openHeroLightbox(p: Primarch, ev: Event): void {
     const url = this.heroImage();
     if (!url) return;
-    this.openLightboxAt(p, url, 0);
+    this.openLightboxAt(p, url, 0, ev);
   }
 
-  openImageLightbox(p: Primarch, cssUrl: string, idx: number): void {
+  openImageLightbox(p: Primarch, cssUrl: string, idx: number, ev: Event): void {
     // cssUrl is `url('...')` — extract raw url
     const m = /url\(['"]?(.*?)['"]?\)/.exec(cssUrl);
     const url = m?.[1];
     if (!url) return;
-    this.openLightboxAt(p, url, idx);
+    this.openLightboxAt(p, url, idx, ev);
   }
 
-  openImageLightboxRaw(p: Primarch, url: string, idx: number): void {
-    this.openLightboxAt(p, url, idx);
+  openImageLightboxRaw(p: Primarch, url: string, idx: number, ev: Event): void {
+    this.openLightboxAt(p, url, idx, ev);
   }
 
   imgBgUrl(url: string): string {
@@ -490,7 +499,8 @@ export class PrimarchDetailComponent {
     return "L'Empereur trahi par ses propres fils";
   }
 
-  private openLightboxAt(p: Primarch, mainUrl: string, idx: number): void {
+  private openLightboxAt(p: Primarch, mainUrl: string, idx: number, ev: Event): void {
+    this.opener = ev.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
     const allUrls = [
       ...(this.heroImage() ? [this.heroImage()!] : []),
       ...this.galleryImages(),
@@ -500,6 +510,7 @@ export class PrimarchDetailComponent {
     const selectedIdx = Math.max(0, thumbUrls.indexOf(mainUrl));
     const subtitle = p.legion ? `${p.legion} · ${ALLEGIANCE_LABEL[p.allegiance]}` : ALLEGIANCE_LABEL[p.allegiance];
     this.legionColor.set(p.primaryColor || '#c9a24a');
+    afterNextRender(() => this.host.nativeElement.querySelector<HTMLElement>('.lightbox-close')?.focus(), { injector: this.injector });
     this.lightbox.set({
       title: p.name,
       subtitle,
@@ -522,5 +533,22 @@ export class PrimarchDetailComponent {
     this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
   }
 
-  closeLightbox(): void { this.lightbox.set(null); }
+  closeLightbox(): void {
+    this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    if (origine?.isConnected) origine.focus();
+  }
+
+  /** WCAG 2.4.3 : le focus boucle dans la visionneuse (Tab sur le dernier → premier, Maj+Tab sur le premier → dernier). */
+  onLightboxKey(e: KeyboardEvent): void {
+    if (e.key !== 'Tab') return;
+    const items = Array.from((e.currentTarget as HTMLElement).querySelectorAll<HTMLElement>('button, a[href]'));
+    if (items.length === 0) return;
+    const [first, last] = [items[0], items[items.length - 1]];
+    const edge = e.shiftKey ? first : last;
+    if (document.activeElement !== edge) return;
+    e.preventDefault();
+    (e.shiftKey ? last : first).focus();
+  }
 }

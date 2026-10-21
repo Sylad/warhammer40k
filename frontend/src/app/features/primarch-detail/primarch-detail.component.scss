@@ -66,6 +66,10 @@
   min-height: 540px;
 }
 .hero-portrait {
+  display: block; /* L157 : vrai <button> (Entrée/Espace) */
+  padding: 0;
+  font: inherit;
+  color: inherit;
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -291,7 +295,6 @@ h1 {
    ========================= */
 .inline-figure {
   margin: 0;
-  cursor: pointer;
   transition: transform 0.25s, box-shadow 0.25s;
   &.inline-right {
     float: right;
@@ -317,6 +320,10 @@ h1 {
   }
 }
 .inline-figure-img {
+  display: block; /* L157 : vrai <button> (Entrée/Espace) */
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
   aspect-ratio: 4 / 3;
   background-size: cover;
   background-position: center top;
@@ -434,6 +441,10 @@ h1 {
   overflow: hidden;
 }
 .info-card-img {
+  display: block; /* L157 : vrai <button> (Entrée/Espace) */
+  width: 100%;
+  padding: 0;
+  border: 0;
   aspect-ratio: 4 / 3;
   background-size: cover;
   background-position: center top;
