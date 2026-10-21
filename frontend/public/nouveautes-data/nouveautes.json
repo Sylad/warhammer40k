@@ -1,7 +1,28 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-21 21:12",
+  "generated": "2026-10-21 21:35",
   "entries": [
+    {
+      "slug": "2026-10-21-fiche-d-un-primarque-images-et-visionneuse-au-clavier",
+      "title": "Fiche d'un Primarque : images et visionneuse au clavier",
+      "date": "2026-10-21",
+      "lots": [
+        "L157"
+      ],
+      "captures": [
+        "captures/L157-primarque-visionneuse-1440.png",
+        "captures/L157-primarque-visionneuse-390.png",
+        "captures/L157-primarque-image-focus-1440.png",
+        "captures/L157-primarque-image-focus-390.png"
+      ],
+      "alts": [
+        "Visionneuse de la fiche d'Horus Lupercal ouverte au clavier : le bouton Fermer en haut à droite porte un contour clair, il a le focus",
+        "Visionneuse de la fiche d'Horus Lupercal sur téléphone (390 px), ouverte au clavier, avec le focus sur le bouton Fermer",
+        "Fiche d'Horus Lupercal : l'image de la section Origines est entourée d'un contour clair, le focus du clavier",
+        "Image de la section Origines de la fiche d'Horus sur téléphone (390 px), entourée d'un contour clair quand elle a le focus du clavier"
+      ],
+      "html": "<p>Sur la fiche d'un Primarque, on peut maintenant tout faire au clavier. Le portrait, les images glissées dans le texte et l'image de la section Origines se choisissent avec Tab et s'agrandissent avec Entrée ou Espace, comme un bouton ; un lecteur d'écran les annonce comme des boutons, chacun avec son propre nom.</p>\n<p>La visionneuse s'ouvre avec le focus sur « Fermer ». Tab et Maj+Tab restent dans la fenêtre au lieu d'aller se perdre derrière elle. En la fermant, avec Échap ou avec « Fermer », on retrouve le focus sur l'image qu'on venait d'agrandir.</p>\n<p>Dans la liste des Primarques, les filtres Tous, Loyalistes, Traîtres et Perdus indiquent à un lecteur d'écran lequel est actif.</p>"
+    },
     {
       "slug": "2026-10-21-fiches-du-lore-les-ancres-menent-vraiment-a-la-section",
       "title": "Fiches du Lore : les ancres mènent vraiment à la section",
