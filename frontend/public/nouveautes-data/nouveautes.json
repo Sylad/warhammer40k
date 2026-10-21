@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-21 17:06",
+  "generated": "2026-10-21 17:32",
   "entries": [
     {
       "slug": "2026-10-21-lore-de-l-empereur-sections-plus-confortables-a-lire",
@@ -17,7 +17,7 @@
         "Une section de la page Lore de l'Empereur sur grand écran (1440 px) : le texte occupe une colonne de lecture confortable, avec des lignes plus courtes, sans colonne vide à côté",
         "La même section sur téléphone (390 px), le texte sur toute la largeur du cadre"
       ],
-      "html": "<p>Sur la page Lore de l'Empereur, le texte des sections ne reste plus coincé dans une étroite colonne quand l'illustration n'est pas disponible : il prend toute la largeur de lecture, et la page ne saute plus quand une image arrive.</p>\n<p>Sur grand écran, les lignes sont aussi plus courtes (environ 70 caractères de large au lieu de près de 150), ce qui rend les longs paragraphes plus faciles à suivre.</p>"
+      "html": "<p>Sur la page Lore de l'Empereur, le texte des sections ne reste plus coincé dans une étroite colonne quand l'illustration n'est pas disponible : il prend toute la largeur de lecture. Quand l'illustration est là, le texte se range à côté d'elle sur grand écran, et reste sur toute la largeur sur téléphone.</p>\n<p>Sur grand écran, les lignes sont aussi plus courtes (environ 70 caractères de large au lieu de près de 150), ce qui rend les longs paragraphes plus faciles à suivre.</p>"
     },
     {
       "slug": "2026-10-21-lore-de-l-empereur-en-tete-lisible-au-telephone",
