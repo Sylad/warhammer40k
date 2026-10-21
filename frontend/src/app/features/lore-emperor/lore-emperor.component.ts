@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { combineLatest, map, switchMap } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { longestWord } from '../../shared/longest-word';
 import { toSafeSignal } from '../../shared/safe-signal';
 
 @Component({
@@ -19,7 +20,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
         <div class="hero-grad"></div>
         <div class="hero-content">
           <div class="badge gold">✠ Maître de l'Humanité</div>
-          <h1>{{ e.title }}</h1>
+          <h1 [style.--longest-word]="longestWord(e.title)">{{ e.title }}</h1>
           <div class="subtitle">{{ e.subtitle }}</div>
           <p class="lede">{{ e.description }}</p>
           <div class="citation"><span class="quote">«</span>{{ e.citation }}<span class="quote">»</span></div>
@@ -74,6 +75,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
 export class LoreEmperorComponent {
   private readonly service = inject(WarhammerService);
 
+  readonly longestWord = longestWord;
   readonly emperor = toSafeSignal(this.service.emperor$, undefined);
 
   readonly heroBg = signal<string>('');
