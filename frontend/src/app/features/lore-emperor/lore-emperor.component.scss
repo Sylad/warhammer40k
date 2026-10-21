@@ -160,14 +160,16 @@
       grid-template-columns: 1fr;
       gap: 22px;
     }
-    .section[data-i="0"] .section-body,
-    .section[data-i="2"] .section-body,
-    .section[data-i="4"] .section-body {
+    /* Deux colonnes seulement quand l'image du wiki est là (classe has-img) : sans elle, le texte
+       garde toute la largeur de lecture au lieu d'une colonne de 200 px. */
+    .section[data-i="0"] .section-body.has-img,
+    .section[data-i="2"] .section-body.has-img,
+    .section[data-i="4"] .section-body.has-img {
       grid-template-columns: 1fr 200px;
     }
-    .section[data-i="1"] .section-body,
-    .section[data-i="3"] .section-body,
-    .section[data-i="5"] .section-body {
+    .section[data-i="1"] .section-body.has-img,
+    .section[data-i="3"] .section-body.has-img,
+    .section[data-i="5"] .section-body.has-img {
       grid-template-columns: 200px 1fr;
     }
     .section[data-i="1"] .section-img,
@@ -175,7 +177,7 @@
     .section[data-i="5"] .section-img { order: -1; }
 
     @media (max-width: 800px) {
-      .section[data-i] .section-body { grid-template-columns: 1fr !important; }
+      .section[data-i] .section-body.has-img { grid-template-columns: 1fr !important; }
       .section[data-i] .section-img { order: 0 !important; }
     }
 
@@ -184,6 +186,7 @@
       line-height: 1.75;
       font-size: 14.5px;
       margin: 0;
+      max-width: 70ch;
     }
     .section-img {
       width: 200px;

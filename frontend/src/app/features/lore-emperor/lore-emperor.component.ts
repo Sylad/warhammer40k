@@ -43,7 +43,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
               <span class="section-ico">{{ s.icon }}</span>
               <h2>{{ s.title }}</h2>
             </header>
-            <div class="section-body">
+            <div class="section-body" [class.has-img]="sectionImg(i)">
               <p>{{ s.body }}</p>
               @if (sectionImg(i); as img) {
                 <div class="section-img" [style.background-image]="'url(\\'' + img + '\\')'"></div>
