@@ -549,7 +549,9 @@ export class PrimarchDetailComponent {
   onFocusIn(e: FocusEvent): void {
     if (!this.lightbox()) return;
     const dialogue = this.host.nativeElement.querySelector('app-figure-lightbox');
-    if (dialogue && e.target instanceof Node && !dialogue.contains(e.target)) {
+    // La recherche globale (Ctrl+K) s'ouvre au-dessus de la visionneuse et y prend le focus : on le lui laisse.
+    const recherche = e.target instanceof Element && e.target.closest('.cmdk-panel');
+    if (dialogue && e.target instanceof Node && !dialogue.contains(e.target) && !recherche) {
       dialogue.querySelector<HTMLElement>('.lightbox-close')?.focus();
     }
   }

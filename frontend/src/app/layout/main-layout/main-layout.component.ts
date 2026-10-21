@@ -354,6 +354,8 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     /* .wrap crée un contexte d'empilement (z-index 1) : une visionneuse en dialogue qu'il contient doit
        passer au-dessus de la barre du haut (z-index 100), sinon « Fermer » s'y cache à 390 px. */
     .wrap:has(app-figure-lightbox[role='dialog']) { z-index: 1000; }
+    /* La recherche Ctrl+K est rendue dans la barre : ouverte, la barre repasse au-dessus de la visionneuse. */
+    .topbar:has(.cmdk-panel) { z-index: 2000; }
 
     .legal {
       padding: 22px 16px 28px;

@@ -145,6 +145,25 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, clavier (navigateur, dist
     await page.close();
   });
 
+  it('R9 — Ctrl+K avec la visionneuse ouverte : la recherche s’affiche au-dessus et garde le focus sur son champ', async () => {
+    const page = await open();
+    await page.locator('.hero-portrait').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[role="dialog"] .lightbox-close').waitFor();
+    await page.keyboard.press('Control+k');
+    await page.locator('.cmdk-panel').waitFor();
+    await page.waitForFunction(() => document.activeElement?.classList.contains('cmdk-input'));
+    const visible = await page.locator('.cmdk-panel .cmdk-input').evaluate((i) => {
+      const r = i.getBoundingClientRect();
+      const e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      return !!e && (e === i || i.contains(e));
+    });
+    expect(visible).toBe(true);
+    await page.keyboard.type('horus');
+    expect(await page.locator('.cmdk-input').inputValue()).toBe('horus');
+    await page.close();
+  });
+
   it('R6 — liste : le filtre actif est aria-pressed=true, un clic déplace l’état', async () => {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(`${base}/lore/primarchs`);
