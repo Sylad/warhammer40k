@@ -11,6 +11,7 @@ import { longestWord } from '../../shared/longest-word';
 import { artworkForFaction, videoForFaction } from './faction-media';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { goToSection } from '../../core/utils/section-anchor';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -891,9 +892,5 @@ export class FactionDetailComponent {
     return url ? `url('${url}')` : 'linear-gradient(135deg, #2a1c10, #050403)';
   }
 
-  scrollTo(e: Event, id: string): void {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

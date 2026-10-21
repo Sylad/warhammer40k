@@ -7,6 +7,7 @@ import type { Equipment, EquipmentType } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { subCategoryLabel } from '../../shared/sub-category-label';
+import { goToSection } from '../../core/utils/section-anchor';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Arme à distance',
@@ -148,9 +149,5 @@ export class EquipmentDetailComponent {
     return (e.factionIds ?? []).join(' · ');
   }
 
-  scrollTo(ev: Event, id: string): void {
-    ev.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

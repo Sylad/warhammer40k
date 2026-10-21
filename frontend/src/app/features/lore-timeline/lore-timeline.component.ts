@@ -6,6 +6,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { TimelineEra, TimelineEvent } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+import { revealSection } from '../../core/utils/section-anchor';
 
 interface EraDef {
   id: TimelineEra;
@@ -157,8 +158,7 @@ export class LoreTimelineComponent {
     if (this.filterTag() !== 'all') this.filterTag.set('all');
     this.expandedId.set(null);
     setTimeout(() => {
-      const el = document.getElementById(`era-${era}`);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      revealSection(`era-${era}`);
     }, 50);
   }
 

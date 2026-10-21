@@ -11,6 +11,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { isNotFound, retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { longestWord } from '../../shared/longest-word';
+import { goToSection } from '../../core/utils/section-anchor';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -459,11 +460,7 @@ export class PrimarchDetailComponent {
   statusLabel(s: PrimarchStatus): string { return STATUS_LABEL[s]; }
   statusColor(s: PrimarchStatus): string { return STATUS_COLOR[s]; }
 
-  scrollTo(e: Event, id: string): void {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 
   openHeroLightbox(p: Primarch): void {
     const url = this.heroImage();

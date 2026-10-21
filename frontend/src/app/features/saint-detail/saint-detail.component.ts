@@ -6,6 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { Saint, SaintCategory } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { goToSection } from '../../core/utils/section-anchor';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
   'living-saint': 'Sainte Vivante',
@@ -165,9 +166,5 @@ export class SaintDetailComponent {
 
   categoryLabel(c: SaintCategory): string { return CATEGORY_LABEL[c]; }
 
-  scrollTo(e: Event, id: string): void {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

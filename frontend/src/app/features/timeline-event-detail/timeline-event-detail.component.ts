@@ -122,10 +122,4 @@ export class TimelineEventDetailComponent {
       return url;
     }
   }
-
-  scrollTo(e: Event, id: string): void {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
 }

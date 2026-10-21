@@ -7,6 +7,7 @@ import type { LoreConcept, LoreConceptCategory } from '../../core/models/models'
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+import { revealSection } from '../../core/utils/section-anchor';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
   imperial: 'Impérial',
@@ -205,9 +206,7 @@ export class LoreConceptsComponent {
         // Scroll vers le fragment URL une fois les concepts rendus
         const frag = this.route.snapshot.fragment;
         if (frag && list.some(c => c.id === frag)) {
-          setTimeout(() => {
-            document.getElementById(frag)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 100);
+          setTimeout(() => revealSection(frag), 100);
         }
       });
     });

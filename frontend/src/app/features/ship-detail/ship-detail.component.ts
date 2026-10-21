@@ -6,6 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { LegendaryShip } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { goToSection } from '../../core/utils/section-anchor';
 
 @Component({
   selector: 'app-ship-detail',
@@ -174,9 +175,5 @@ export class ShipDetailComponent {
     return url ? `url('${url}')` : 'none';
   }
 
-  scrollTo(e: Event, id: string): void {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }
