@@ -117,9 +117,12 @@ lots:
     finished: 2026-10-21
   - id: L10
     title: "Revue UX — Lore : Primarques (liste + fiche)"
-    status: todo
+    status: done
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-21
+    ux: { date: 2026-10-21, verdict: "non conforme (lead, captures cartes 1440 et Sanguinius 320 regardées) : 3 bloquants → en-têtes rognés à 320, contrastes des badges et de la visionneuse, clavier ; 5 majeurs → lignes trop longues et colonnes vides, 3 liens par carte et compteurs à 0, ancres sans focus ; liste de 12 438 px au téléphone (carte compacte) : question à Sylvain. Lots : L155 L156 L157 L158 L159 L160. Mineurs en note : libellés différents liste/fiche (Retourné/Ressuscité, Daemon-Prince/Prince Démon, N°/№, Timeline/Chronologie), « 1 batailles », iconographie dupliquée et boutons de même nom, glyphe ↗ trompeur et openLightbox mort, petites cibles, h2→h4 dans la chronologie, chargement sans role=status, anneau de focus par défaut, épithète qui répète le titre" }
+    finished: 2026-10-21
   - id: L11
     title: "Revue UX — Lore : Dieux du Chaos"
     status: todo
@@ -1506,6 +1509,48 @@ lots:
     review: { date: 2026-10-21, verdict: "conforme (revue Sonnet de d291f38 : texte Nouveautés vrai par rapport au code has-img / grille 800 px ; revue antérieure conforme sur 3923389, 64d5d64)", commit: d291f38e16692f9e97945bbb28fff5b1ac3f0e06 }
     ux: { date: 2026-10-21, verdict: "conforme (lead, captures 1440/390 : texte pleine largeur sans image, lignes ~70ch) ; texte Nouveautés corrigé par d291f38 (ne promet plus l'absence de saut quand l'image arrive)" }
     finished: 2026-10-21
+  - id: L155
+    title: "Lore Primarques au téléphone : en-tête de la liste rogné de ~35 px à 320 px (marge fixe 50 px) et titre des fiches coupé à 320 px (Sanguinius, Mortarion, Primarque-Perdu II/XI — pas de fit-title, double gouttière 14+16 px, texte 218 px) — WCAG 1.4.10 — revue UX L10"
+    public: "Lore des Primarques : en-têtes lisibles au téléphone"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
+  - id: L156
+    title: "Lore Primarques, contrastes : badges de statut sur l'image des cartes (Expurgé 1,13:1, Mort 1,4:1, Daemon-Prince 2,1:1, Disparu 2,6:1), numéro N° 2,1:1, monde natal 3,7:1, Expurgé de la fiche 2,05:1, titre de la visionneuse en primaryColor < 3:1 pour 15/20 → fond plein sous les badges, titre en or et couleur de légion en filet — WCAG 1.4.3 — revue UX L10"
+    public: "Lore des Primarques : badges et titres lisibles"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
+  - id: L157
+    title: "Fiche Primarque, clavier : portrait, 3 images intercalées et image d'Origines en role=button sans Entrée/Espace → vrais boutons ; visionneuse figure-lightbox en dialogue (role=dialog, aria-modal, focus dedans et bouclé, rendu à l'origine) ; aria-pressed sur les filtres de la liste — WCAG 2.1.1, 2.4.3, 4.1.2 — revue UX L10"
+    public: "Fiche d'un Primarque : images et visionneuse au clavier"
+    status: todo
+    estimate: 0.5
+    visible: true
+    created: 2026-10-21
+  - id: L158
+    title: "Fiche Primarque, sections : lignes de 100–121 car. à 1440 (Hérésie, Héritage, Description sans image) → largeur bornée ~70ch ; colonne vide de 335 px quand l'image de Grande Croisade manque et dans Destin des Primarques perdus (2 citations) → deux colonnes seulement si le second bloc existe — revue UX L10"
+    public: "Fiche d'un Primarque : sections plus confortables à lire"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
+  - id: L159
+    title: "Liste des Primarques : un seul lien par carte (60 arrêts de tabulation, image nommée « Lire le lore complet » ×20, anneau de focus rogné par overflow:hidden) et compteurs à « 0 » pendant le chargement sans indicateur → « — » + role=status — revue UX L10"
+    public: "Liste des Primarques : un seul lien par carte"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
+  - id: L160
+    title: "Barres d'ancres des fiches (primarque, faction, saint, titan, vaisseau, équipement, événement, concepts, chronologie) : l'activation défile sans déplacer le focus ni écrire le hash → focus sur la section (tabindex=-1) et hash mis à jour — revue UX L10"
+    public: "Fiches du Lore : les ancres mènent vraiment à la section"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

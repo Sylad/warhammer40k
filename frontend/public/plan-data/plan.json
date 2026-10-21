@@ -443,6 +443,36 @@
       "status": "done",
       "started": "2026-10-21",
       "finished": "2026-10-21"
+    },
+    {
+      "id": "L155",
+      "title": "Lore des Primarques : en-têtes lisibles au téléphone",
+      "status": "todo"
+    },
+    {
+      "id": "L156",
+      "title": "Lore des Primarques : badges et titres lisibles",
+      "status": "todo"
+    },
+    {
+      "id": "L157",
+      "title": "Fiche d'un Primarque : images et visionneuse au clavier",
+      "status": "todo"
+    },
+    {
+      "id": "L158",
+      "title": "Fiche d'un Primarque : sections plus confortables à lire",
+      "status": "todo"
+    },
+    {
+      "id": "L159",
+      "title": "Liste des Primarques : un seul lien par carte",
+      "status": "todo"
+    },
+    {
+      "id": "L160",
+      "title": "Fiches du Lore : les ancres mènent vraiment à la section",
+      "status": "todo"
     }
   ]
 }
