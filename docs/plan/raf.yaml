@@ -1550,6 +1550,14 @@ lots:
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review:
+      {
+        date: 2026-10-21,
+        verdict: "compliant: 0 blocking, 0 major, 3 minor notes</verdict>
+
+          </invoke> — orchestré (vague 2026-10-21-wh-prim, 0 passe(s) de correction)",
+        commit: 4eb368c2b432e07f4972f44baa0becd67c72dbd3
+      }
   - id: L160
     title: "Barres d'ancres des fiches (primarque, faction, saint, titan, vaisseau, équipement, événement, concepts, chronologie) : l'activation défile sans déplacer le focus ni écrire le hash → focus sur la section (tabindex=-1) et hash mis à jour — revue UX L10"
     public: "Fiches du Lore : les ancres mènent vraiment à la section"
