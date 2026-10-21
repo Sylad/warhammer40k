@@ -11,6 +11,7 @@ const { built, stale } = distState([
   'src/app/features/primarch-detail/primarch-detail.component.scss',
   'src/app/features/primarch-detail/primarch-detail.component.ts',
   'src/app/features/lore-primarchs/lore-primarchs.component.ts',
+  'src/app/layout/main-layout/main-layout.component.ts',
 ]);
 let chromium: typeof import('playwright-core').chromium | null = null;
 try {
@@ -107,6 +108,40 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, clavier (navigateur, dist
       await page.locator('[role="dialog"]').waitFor({ state: 'detached' });
       expect(await page.evaluate(() => document.activeElement?.className), fermer).toContain('info-card-img');
     }
+    await page.close();
+  });
+
+  it('R7 — un clic dans une zone non focalisable du dialogue (description, image, titre) ne sort pas le focus : Tab y reste', async () => {
+    const page = await open();
+    await page.locator('.hero-portrait').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[role="dialog"] .lightbox-close').waitFor();
+    for (const zone of ['.lightbox-info .lightbox-desc', '.lightbox-image', '.lightbox-title']) {
+      await page.locator(`[role="dialog"] ${zone}`).click();
+      expect((await focus(page)).dansDialogue, `clic ${zone}`).toBe(true);
+      await page.keyboard.press('Tab');
+      expect((await focus(page)).dansDialogue, `Tab après ${zone}`).toBe(true);
+    }
+    await page.close();
+  });
+
+  it('R8 — à 390 px, « Fermer » n’est pas caché sous la barre du haut : le toucher en son centre ferme la visionneuse', async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    // une image distincte par requête : galerie à plusieurs miniatures, cadre aussi haut que sur une vraie fiche
+    await page.route('**/api/wiki-image*', (r) => r.fulfill({ json: { imageUrl: `${GREY}#${new URL(r.request().url()).searchParams.get('q')}` } }));
+    await page.goto(`${base}/lore/primarchs/horus`);
+    await page.locator('#croisade .inline-figure-img').waitFor();
+    await page.locator('.hero-portrait').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[role="dialog"] .lightbox-close').waitFor();
+    const dessus = await page.locator('.lightbox-close').evaluate((b) => {
+      const r = b.getBoundingClientRect();
+      const e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      return !!e && (e === b || b.contains(e));
+    });
+    expect(dessus).toBe(true);
+    await page.locator('.lightbox-close').click();
+    await page.locator('[role="dialog"]').waitFor({ state: 'detached' });
     await page.close();
   });
 

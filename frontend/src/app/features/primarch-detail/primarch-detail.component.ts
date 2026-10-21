@@ -1,4 +1,4 @@
-import { afterNextRender, Component, computed, effect, ElementRef, inject, Injector, signal } from '@angular/core';
+import { afterNextRender, Component, computed, effect, ElementRef, HostListener, inject, Injector, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -538,6 +538,20 @@ export class PrimarchDetailComponent {
     const origine = this.opener;
     this.opener = null;
     if (origine?.isConnected) origine.focus();
+  }
+
+  /**
+   * WCAG 2.4.3 : un clic dans une zone non focalisable du dialogue donne le focus à `main` (ancêtre
+   * focalisable le plus proche) ; ce que le voile masque ne doit pas le garder, il revient sur « Fermer ».
+   * Pas d'`inert` possible : le dialogue vit dans `main`, lui-même `inert` quand on l'applique.
+   */
+  @HostListener('document:focusin', ['$event'])
+  onFocusIn(e: FocusEvent): void {
+    if (!this.lightbox()) return;
+    const dialogue = this.host.nativeElement.querySelector('app-figure-lightbox');
+    if (dialogue && e.target instanceof Node && !dialogue.contains(e.target)) {
+      dialogue.querySelector<HTMLElement>('.lightbox-close')?.focus();
+    }
   }
 
   /** WCAG 2.4.3 : le focus boucle dans la visionneuse (Tab sur le dernier → premier, Maj+Tab sur le premier → dernier). */

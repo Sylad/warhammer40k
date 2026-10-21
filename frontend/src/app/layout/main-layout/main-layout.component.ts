@@ -351,6 +351,9 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       z-index: 1;
       min-height: calc(100vh - 70px - 48px);
     }
+    /* .wrap crée un contexte d'empilement (z-index 1) : une visionneuse en dialogue qu'il contient doit
+       passer au-dessus de la barre du haut (z-index 100), sinon « Fermer » s'y cache à 390 px. */
+    .wrap:has(app-figure-lightbox[role='dialog']) { z-index: 1000; }
 
     .legal {
       padding: 22px 16px 28px;
