@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-21 19:35",
+  "generated": "2026-10-21 20:10",
   "entries": [
+    {
+      "slug": "2026-10-21-liste-des-primarques-un-seul-lien-par-carte",
+      "title": "Liste des Primarques : un seul lien par carte",
+      "date": "2026-10-21",
+      "lots": [
+        "L159"
+      ],
+      "captures": [
+        "captures/L159-primarques-focus-1440.png",
+        "captures/L159-primarques-focus-390.png"
+      ],
+      "alts": [
+        "Liste des Primarques sur grand écran : la carte du Primarque-Perdu (II), atteinte au clavier, est entourée d'un cadre doré visible sur ses quatre côtés",
+        "Liste des Primarques sur téléphone (390 px) : la première carte, atteinte au clavier, est entourée d'un cadre doré"
+      ],
+      "html": "<p>Dans la liste des Primarques, chaque carte n'a plus qu'un seul lien : son nom. Toute la carte reste cliquable, image et « Lire la fiche → » compris, mais au clavier il suffit désormais d'une pression sur Tab par carte au lieu de trois, et un lecteur d'écran annonce « Lion El'Jonson » plutôt qu'un « Lire le lore complet » répété vingt fois.</p>\n<p>Quand une carte est atteinte au clavier, un cadre doré l'entoure entièrement, sans être rogné sur les bords.</p>\n<p>Pendant le chargement, les compteurs du bandeau et des onglets (« Tous · … », « Loyalistes · … ») affichent « — » au lieu d'un faux « 0 », et un message « Chargement des Primarques… » est annoncé aux lecteurs d'écran.</p>"
+    },
     {
       "slug": "2026-10-21-fiche-d-un-primarque-sections-plus-confortables-a-lire",
       "title": "Fiche d'un Primarque : sections plus confortables à lire",
