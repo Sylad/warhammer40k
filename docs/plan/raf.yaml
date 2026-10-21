@@ -1492,6 +1492,7 @@ lots:
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review: { date: 2026-10-21, verdict: "compliant (1 mineur noté : sous-titre à 4,35:1 sur fond blanc à 801 px, voile limité à 800 px) — orchestré (vague 2026-10-21-wh-emp, 0 passe(s) de correction)", commit: 213c30b142a47af82706838e368309e13c66547a }
   - id: L154
     title: "Lore Empereur, sections : texte des sections 2, 4, 6 coincé dans une colonne de 200 px tant que l'image wiki manque (CLS 0,123) → deux colonnes seulement avec une image ; lignes de ~148 caractères à 1440 px → largeur de lecture bornée (~70ch) — revue UX L9"
     public: "Lore de l'Empereur : sections plus confortables à lire"
