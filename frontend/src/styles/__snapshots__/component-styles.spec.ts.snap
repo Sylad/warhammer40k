@@ -2653,7 +2653,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "18px 0 0",
   },
   ".hero-text": {
+    "container-type": "inline-size",
     "max-width": "720px",
+    "min-width": "0",
   },
   ".hero.hero-lost": {
     "border-color": "rgba(120, 120, 120, 0.4)",
@@ -3248,7 +3250,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .hero-grid": {
     "gap": "20px",
-    "padding": "24px 18px",
+    "padding": "24px 16px",
   },
   "@media (max-width: 760px) .iconography-grid": {
     "grid-template-columns": "1fr 1fr",
@@ -3257,7 +3259,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "22px 20px",
   },
   "@media (max-width: 760px) :host": {
-    "padding": "20px 14px 60px",
+    "padding": "20px 0 60px",
   },
   "@media (max-width: 760px) :root": {
     "--anchor-nav-h": "44px",
@@ -3301,6 +3303,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 900px) .two-col.reverse .inline-figure": {
     "grid-column": "1",
     "grid-row": "1",
+  },
+  "@supports (width: 1cqi) h1": {
+    "font-size": "min(36px, 100cqi / (var(--longest-word, 1) * 0.85))",
   },
   "h1": {
     "color": "var(--gold-bright)",

@@ -9,6 +9,7 @@ import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/mo
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { isNotFound, retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { longestWord } from '../../shared/longest-word';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -62,7 +63,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
                 <span class="hero-legion">{{ p.legion }}</span>
               }
             </div>
-            <h1>{{ p.name }}</h1>
+            <h1 [style.--longest-word]="longestWord(p.name)">{{ p.name }}</h1>
             @if (p.epithet) {
               <p class="hero-epithet">{{ p.epithet }}</p>
             }
@@ -355,6 +356,7 @@ const STATUS_COLOR: Record<PrimarchStatus, string> = {
   styleUrls: ['./primarch-detail.component.scss'],
 })
 export class PrimarchDetailComponent {
+  readonly longestWord = longestWord;
   private readonly service = inject(WarhammerService);
   private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);

@@ -1,3 +1,5 @@
+@use '../../../styles/fit-title' as *;
+
     :host { display: block; }
 
     .back-link {
@@ -23,6 +25,10 @@
       display: flex;
       align-items: end;
       padding: 50px 50px 40px;
+      container-type: inline-size; /* L155 : le titre se mesure à l'en-tête */
+    }
+    @media (max-width: 760px) {
+      .hero { padding: 32px 16px 28px; } /* L155 : la marge fixe de 50 px rognait l'en-tête à 320 px */
     }
     .hero-overlay {
       position: absolute;
@@ -36,11 +42,12 @@
     .badge { display: inline-block; padding: 5px 12px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800; margin-bottom: 14px; }
     .badge.gold { color: var(--gold-bright); border: 1px solid rgba(201, 162, 74, 0.5); background: rgba(201, 162, 74, 0.1); }
     .hero h1 {
-      font-size: clamp(36px, 4.5vw, 56px);
       line-height: 1.05;
       margin: 0 0 14px;
       color: var(--gold-bright);
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
+      --longest-word: 10; /* « PRIMARQUES » */
+      @include fit-title(clamp(36px, 4.5vw, 56px));
     }
     .lede { font-size: 15px; color: var(--text); line-height: 1.6; margin: 0 0 18px; max-width: 640px; }
     .counters { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--border); }

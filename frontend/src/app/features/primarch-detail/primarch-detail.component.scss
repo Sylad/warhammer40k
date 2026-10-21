@@ -1,3 +1,5 @@
+@use '../../../styles/fit-title' as *;
+
 :host {
   display: block;
   max-width: 1480px;
@@ -119,7 +121,7 @@
   pointer-events: none;
 }
 
-.hero-text { max-width: 720px; }
+.hero-text { max-width: 720px; min-width: 0; container-type: inline-size; } /* L155 : le titre se mesure à sa colonne */
 .hero-eyebrow {
   display: flex;
   gap: 14px;
@@ -144,12 +146,12 @@
 }
 h1 {
   font-family: var(--serif);
-  font-size: clamp(44px, 6vw, 78px);
   line-height: 1.04;
   margin: 0 0 12px;
   color: var(--gold-bright);
   text-shadow: 0 4px 24px rgba(0,0,0,0.95);
   letter-spacing: 0.02em;
+  @include fit-title(clamp(44px, 6vw, 78px));
 }
 .hero-epithet {
   font-family: var(--serif);
@@ -786,9 +788,9 @@ h1 {
   .quotes-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
-  :host { padding: 20px 14px 60px; }
-  .hero-grid { padding: 24px 18px; gap: 20px; }
+  :host { padding: 20px 0 60px; } /* L155 : la gouttière de 16 px est celle de la mise en page, plus de double gouttière */
+  .hero-grid { padding: 24px 16px; gap: 20px; }
   .iconography-grid { grid-template-columns: 1fr 1fr; }
-  h1 { font-size: 36px; }
+  h1 { @include fit-title(36px); }
   .panel { padding: 22px 20px; }
 }
