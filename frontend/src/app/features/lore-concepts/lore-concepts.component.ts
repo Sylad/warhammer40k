@@ -7,7 +7,7 @@ import type { LoreConcept, LoreConceptCategory } from '../../core/models/models'
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
-import { revealSection } from '../../core/utils/section-anchor';
+import { goToSection, revealSection } from '../../core/utils/section-anchor';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
   imperial: 'Impérial',
@@ -103,7 +103,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
                 <div class="related-grid">
                   @for (r of c.relatedConcepts; track r.name) {
                     @if (r.conceptId) {
-                      <a class="related-card" [routerLink]="[]" [fragment]="r.conceptId">
+                      <a class="related-card" [href]="'/lore/concepts#' + r.conceptId" (click)="goToSection($event, r.conceptId)">
                         <div class="related-name">{{ r.name }}</div>
                         @if (r.description) { <p>{{ r.description }}</p> }
                         <span class="related-arrow">→</span>
@@ -211,6 +211,8 @@ export class LoreConceptsComponent {
       });
     });
   }
+
+  readonly goToSection = goToSection;
 
   setFilter(c: 'all' | LoreConceptCategory) {
     this.filterCategory.set(c);
