@@ -339,7 +339,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
       </section>
 
       <!-- LIGHTBOX -->
-      <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+      <app-figure-lightbox [style.--legion-color]="legionColor()" [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
     } @else if (primarch.failed()) {
       <app-load-error [notFound]="primarch.notFound()" [heading]="primarch.notFound() ? 'Primarque introuvable' : 'Primarque indisponible'" backLink="/lore/primarchs" backLabel="Tous les Primarques" (retry)="retryAll(primarch, related)" />
     } @else {
@@ -358,6 +358,8 @@ export class PrimarchDetailComponent {
   readonly galleryImages = signal<string[]>([]);
   readonly relatedImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
+  /** L156 : couleur de la légion de la visionneuse, rendue en filet (le titre, lui, reste en or). */
+  readonly legionColor = signal('');
 
   protected readonly retryAll = retryAll;
   readonly primarch = toSafeSignal(
@@ -500,12 +502,13 @@ export class PrimarchDetailComponent {
     const thumbUrls = Array.from(new Set(allUrls));
     const selectedIdx = Math.max(0, thumbUrls.indexOf(mainUrl));
     const subtitle = p.legion ? `${p.legion} · ${ALLEGIANCE_LABEL[p.allegiance]}` : ALLEGIANCE_LABEL[p.allegiance];
+    this.legionColor.set(p.primaryColor || '#c9a24a');
     this.lightbox.set({
       title: p.name,
       subtitle,
       description: p.epithet || p.description,
       contextName: 'Les Primarques',
-      contextColor: p.primaryColor || '#c9a24a',
+      contextColor: '#f0d276', // or vif : une teinte de légion sombre sous 4,5:1 sur le fond de la visionneuse
       contextSigil: '⚜',
       searchQuery: p.name,
       mainUrl,

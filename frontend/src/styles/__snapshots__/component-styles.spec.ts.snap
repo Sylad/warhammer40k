@@ -3308,6 +3308,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@supports (width: 1cqi) h1": {
     "font-size": "min(36px, 100cqi / (var(--longest-word, 1) * 0.85))",
   },
+  "app-figure-lightbox ::ng-deep .lightbox-title": {
+    "border-left": "4px solid var(--legion-color, var(--gold-soft))",
+    "padding-left": "12px",
+  },
   "h1": {
     "color": "var(--gold-bright)",
     "font-family": "var(--serif)",

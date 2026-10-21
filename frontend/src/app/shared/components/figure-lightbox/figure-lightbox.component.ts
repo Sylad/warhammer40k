@@ -30,7 +30,7 @@ export interface LightboxState {
               <span class="lightbox-org">{{ state()!.contextName }}</span>
               <span class="lightbox-sigil">{{ state()!.contextSigil }}</span>
             </div>
-            <h2 class="lightbox-title" [style.borderLeftColor]="state()!.contextColor">{{ state()!.title }}</h2>
+            <h2 class="lightbox-title" [style.color]="state()!.contextColor">{{ state()!.title }}</h2>
             <div class="lightbox-role">{{ state()!.subtitle }}</div>
             @if (state()!.description) {
               <p class="lightbox-desc">{{ state()!.description }}</p>
@@ -125,10 +125,8 @@ export interface LightboxState {
       font-size: clamp(22px, 3vw, 30px);
       letter-spacing: 0.02em;
       margin: 0 0 4px;
-      color: var(--gold-bright); /* L156 : l'or garantit le contraste ; la couleur de la fiche ne vit que dans le filet */
+      color: var(--gold-bright);
       line-height: 1.15;
-      border-left: 4px solid var(--gold-soft);
-      padding-left: 12px;
     }
     .lightbox-role {
       color: var(--gold-soft);

@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-21 18:56",
+  "generated": "2026-10-21 19:04",
   "entries": [
     {
       "slug": "2026-10-21-lore-des-primarques-badges-et-titres-lisibles",
@@ -21,7 +21,7 @@
         "Visionneuse de la fiche de Fulgrim : le nom est en or, avec un filet violet, la couleur de sa légion, à sa gauche",
         "Visionneuse de la fiche de Fulgrim sur téléphone (390 px) : le nom en or avec le filet de la couleur de sa légion"
       ],
-      "html": "<p>Dans le Lore des Primarques, les petites mentions posées sur les images se lisent mieux. Sur les cartes de la liste, le numéro et le statut (Mort, Disparu, Expurgé, Daemon-Prince…) reposent maintenant sur un fond uni, au lieu de se fondre dans l'image, et les teintes des statuts sont plus claires, les mêmes dans la liste et sur les fiches. Le monde natal est écrit en or plus lumineux.</p>\n<p>Sur les fiches, le numéro et les badges de l'en-tête ont eux aussi un fond uni, et le statut « Expurgé » ou « Mort » du panneau latéral est lisible. Dans la visionneuse d'images, le nom du Primarque est toujours en or ; la couleur de sa légion, trop sombre pour certains (Lion El'Jonson, Fulgrim, les Primarques perdus), est reprise dans un filet à gauche du nom. Les autres visionneuses du Lore (concepts, saints, vaisseaux…) montrent aussi leur titre en or avec ce filet.</p>"
+      "html": "<p>Dans le Lore des Primarques, les petites mentions posées sur les images se lisent mieux. Sur les cartes de la liste, le numéro et le statut (Mort, Disparu, Expurgé, Daemon-Prince…) reposent maintenant sur un fond uni, au lieu de se fondre dans l'image, et les teintes des statuts sont plus claires, les mêmes dans la liste et sur les fiches. Le monde natal est écrit en or plus lumineux.</p>\n<p>Sur les fiches, le numéro et les badges de l'en-tête ont eux aussi un fond uni, et le statut « Expurgé » ou « Mort » du panneau latéral est lisible. Dans la visionneuse d'images, le nom du Primarque est toujours en or ; la couleur de sa légion, trop sombre pour certains (Lion El'Jonson, Fulgrim, les Primarques perdus), est reprise dans un filet à gauche du nom.</p>"
     },
     {
       "slug": "2026-10-21-lore-des-primarques-en-tetes-lisibles-au-telephone",

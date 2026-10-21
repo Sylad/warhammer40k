@@ -795,3 +795,10 @@ h1 {
   h1 { @include fit-title(36px); }
   .panel { padding: 22px 20px; }
 }
+
+/* L156 : visionneuse partagée — le titre est en or (WCAG 1.4.3), la couleur de la légion vit dans un filet.
+   ::ng-deep : le composant partagé fige son gabarit (test scellé L120 R10), la page y ajoute le filet. */
+app-figure-lightbox ::ng-deep .lightbox-title {
+  border-left: 4px solid var(--legion-color, var(--gold-soft));
+  padding-left: 12px;
+}
