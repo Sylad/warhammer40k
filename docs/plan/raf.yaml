@@ -1536,10 +1536,11 @@ lots:
   - id: L158
     title: "Fiche Primarque, sections : lignes de 100–121 car. à 1440 (Hérésie, Héritage, Description sans image) → largeur bornée ~70ch ; colonne vide de 335 px quand l'image de Grande Croisade manque et dans Destin des Primarques perdus (2 citations) → deux colonnes seulement si le second bloc existe — revue UX L10"
     public: "Fiche d'un Primarque : sections plus confortables à lire"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-21
+    started: 2026-10-21
   - id: L159
     title: "Liste des Primarques : un seul lien par carte (60 arrêts de tabulation, image nommée « Lire le lore complet » ×20, anneau de focus rogné par overflow:hidden) et compteurs à « 0 » pendant le chargement sans indicateur → « — » + role=status — revue UX L10"
     public: "Liste des Primarques : un seul lien par carte"
