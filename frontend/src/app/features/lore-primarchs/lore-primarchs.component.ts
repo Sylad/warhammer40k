@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { STATUS_COLOR } from '../../core/utils/primarch-status';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
@@ -20,15 +21,6 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
   returned: 'Retourné',
   'daemon-prince': 'Daemon-Prince',
   expunged: 'Expurgé',
-};
-
-const STATUS_COLOR: Record<PrimarchStatus, string> = {
-  alive: '#5fc97a',
-  dead: '#9a3a3a',
-  missing: '#7d8a9c',
-  returned: '#f0d276',
-  'daemon-prince': '#c43a26',
-  expunged: '#3a3a3a',
 };
 
 @Component({

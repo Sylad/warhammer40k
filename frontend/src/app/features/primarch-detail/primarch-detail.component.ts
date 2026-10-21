@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { catchError, of, forkJoin, map, throwError } from 'rxjs';
+import { STATUS_COLOR } from '../../core/utils/primarch-status';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Primarch, PrimarchAllegiance, PrimarchStatus } from '../../core/models/models';
@@ -23,14 +24,6 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
   returned: 'Ressuscité',
   'daemon-prince': 'Prince Démon',
   expunged: 'Expurgé',
-};
-const STATUS_COLOR: Record<PrimarchStatus, string> = {
-  alive: '#5cb85c',
-  dead: '#888',
-  missing: '#a89060',
-  returned: '#f0c060',
-  'daemon-prince': '#c54040',
-  expunged: '#444',
 };
 
 @Component({

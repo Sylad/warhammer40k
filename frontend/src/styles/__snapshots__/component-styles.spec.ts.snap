@@ -2459,7 +2459,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   ".badge": {
     "align-items": "center",
-    "background": "rgba(0, 0, 0, 0.5)",
+    "background": "#080706",
     "border": "1px solid",
     "display": "inline-flex",
     "font-family": "var(--serif)",
@@ -2576,6 +2576,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "text-transform": "uppercase",
   },
   ".hero-number": {
+    "background": "#080706",
     "border": "1px solid var(--gold)",
     "color": "var(--gold)",
     "font-family": "var(--serif)",

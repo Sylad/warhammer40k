@@ -135,6 +135,7 @@
   letter-spacing: 0.2em;
   color: var(--gold);
   border: 1px solid var(--gold);
+  background: #080706; /* L156 : fond plein sur l'image du héros */
   padding: 4px 10px;
 }
 .hero-legion {
@@ -177,7 +178,7 @@ h1 {
   text-transform: uppercase;
   padding: 6px 12px;
   border: 1px solid;
-  background: rgba(0,0,0,0.5);
+  background: #080706; /* L156 : fond plein sur l'image du héros */
   &.a-loyalist { border-color: #5c8dbc; color: #8eb8e6; }
   &.a-traitor { border-color: var(--red); color: #d77070; }
   &.a-lost { border-color: #555; color: #999; }
