@@ -1529,10 +1529,11 @@ lots:
   - id: L157
     title: "Fiche Primarque, clavier : portrait, 3 images intercalées et image d'Origines en role=button sans Entrée/Espace → vrais boutons ; visionneuse figure-lightbox en dialogue (role=dialog, aria-modal, focus dedans et bouclé, rendu à l'origine) ; aria-pressed sur les filtres de la liste — WCAG 2.1.1, 2.4.3, 4.1.2 — revue UX L10"
     public: "Fiche d'un Primarque : images et visionneuse au clavier"
-    status: todo
+    status: doing
     estimate: 0.5
     visible: true
     created: 2026-10-21
+    started: 2026-10-21
   - id: L158
     title: "Fiche Primarque, sections : lignes de 100–121 car. à 1440 (Hérésie, Héritage, Description sans image) → largeur bornée ~70ch ; colonne vide de 335 px quand l'image de Grande Croisade manque et dans Destin des Primarques perdus (2 citations) → deux colonnes seulement si le second bloc existe — revue UX L10"
     public: "Fiche d'un Primarque : sections plus confortables à lire"
