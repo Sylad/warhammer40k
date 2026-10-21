@@ -429,6 +429,16 @@
       "status": "done",
       "started": "2026-10-19",
       "finished": "2026-10-19"
+    },
+    {
+      "id": "L153",
+      "title": "Lore de l'Empereur : en-tête lisible au téléphone",
+      "status": "todo"
+    },
+    {
+      "id": "L154",
+      "title": "Lore de l'Empereur : sections plus confortables à lire",
+      "status": "todo"
     }
   ]
 }

@@ -109,9 +109,12 @@ lots:
     finished: 2026-10-19
   - id: L9
     title: "Revue UX — Lore : l'Empereur"
-    status: todo
+    status: done
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-21
+    ux: { date: 2026-10-21, verdict: "non conforme (lead, captures 320/1440 regardées) : 2 bloquants → L153 (en-tête rogné à 320 px, sous-titre 4,29:1), 2 majeurs → L154 (texte coincé sans image, lignes de 148 car.). Mineurs en note : image en double (sections 1 et 5), pas de barre d'ancres (6 870 px à 390), citation et fiche sans dl/blockquote, glyphes décoratifs lus, chargement non annoncé (role=status), anneau de focus par défaut sur retour/fil d'Ariane/bouton final, lien retour 17 px de haut, « Perpetual » en anglais, badge qui répète le sous-titre, clés de fiche en 10 px" }
+    finished: 2026-10-21
   - id: L10
     title: "Revue UX — Lore : Primarques (liste + fiche)"
     status: todo
@@ -1481,6 +1484,20 @@ lots:
     review: { date: 2026-10-19, verdict: "compliant — orchestré (vague 2026-10-19-wh-lore, 0 passe(s) de correction)", commit: 513a154acdd67e25a4abe7cc617c2ed6f6e10987 }
     ux: { date: 2026-10-19, verdict: "conforme (lead, capture 320 px regardée : « LORE IMPÉRIAL » et le chapeau dans la bordure ; mesures : IMPÉRIAL à 85 px de la bordure, chapeau à 22 px ; « Concepts & Lieux » sans entité ; 1440 inchangé) ; note : sous 600 px le texte du hero est décalé de 6 px par rapport aux cartes (padding 20 vs 26)" }
     finished: 2026-10-19
+  - id: L153
+    title: "Lore Empereur, en-tête au téléphone : texte rogné de ~70 px à 320 px et collé au bord droit à 390 px (marge fixe 60 px, titre sans fit-title, bloc sans min-width:0 — WCAG 1.4.10) ; sous-titre à 4,29:1 sur l'image à 390 px (WCAG 1.4.3) → voile sous le texte — revue UX L9"
+    public: "Lore de l'Empereur : en-tête lisible au téléphone"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
+  - id: L154
+    title: "Lore Empereur, sections : texte des sections 2, 4, 6 coincé dans une colonne de 200 px tant que l'image wiki manque (CLS 0,123) → deux colonnes seulement avec une image ; lignes de ~148 caractères à 1440 px → largeur de lecture bornée (~70ch) — revue UX L9"
+    public: "Lore de l'Empereur : sections plus confortables à lire"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-21
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
