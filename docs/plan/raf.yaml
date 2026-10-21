@@ -1545,10 +1545,11 @@ lots:
   - id: L159
     title: "Liste des Primarques : un seul lien par carte (60 arrêts de tabulation, image nommée « Lire le lore complet » ×20, anneau de focus rogné par overflow:hidden) et compteurs à « 0 » pendant le chargement sans indicateur → « — » + role=status — revue UX L10"
     public: "Liste des Primarques : un seul lien par carte"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-21
+    started: 2026-10-21
   - id: L160
     title: "Barres d'ancres des fiches (primarque, faction, saint, titan, vaisseau, équipement, événement, concepts, chronologie) : l'activation défile sans déplacer le focus ni écrire le hash → focus sur la section (tabindex=-1) et hash mis à jour — revue UX L10"
     public: "Fiches du Lore : les ancres mènent vraiment à la section"
