@@ -2517,6 +2517,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "15px",
     "line-height": "1.78",
     "margin": "0",
+    "max-width": "70ch",
   },
   ".hero": {
     "background": "#0a0805",
@@ -2867,7 +2868,11 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "white-space": "pre-line",
   },
   ".lore-flow": {
+    "max-width": "70ch",
     "position": "relative",
+  },
+  ".lore-flow.has-img": {
+    "max-width": "calc(70ch + 304px)",
   },
   ".lore-flow::after": {
     "clear": "both",
@@ -2892,6 +2897,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "17px",
     "font-style": "italic",
     "margin-bottom": "20px",
+    "max-width": "70ch",
     "padding-left": "16px",
   },
   ".panel .status-detail-panel": {
@@ -2915,6 +2921,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "15px",
     "line-height": "1.78",
     "margin": "0 0 14px",
+    "max-width": "70ch",
   },
   ".panel p:last-child": {
     "margin-bottom": "0",
@@ -3195,6 +3202,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "15px",
     "line-height": "1.78",
     "margin": "0",
+    "max-width": "70ch",
   },
   ".two-col.reverse": {
     "grid-template-columns": "1fr 1.6fr",
