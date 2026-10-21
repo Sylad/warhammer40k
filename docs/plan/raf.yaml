@@ -1541,6 +1541,7 @@ lots:
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review: { date: 2026-10-21, verdict: "compliant : 3 commits relus (7a5b1af, 30b4d11, e06890e), suite vitest 122 fichiers / 1103 tests verts dont les 5 tests e2e L158 ; 1 note mineure (règle `.lore-flow.has-img` redondante avec `.panel p`), pas de sous-tâche — orchestré (vague 2026-10-21-wh-prim, 0 passe(s) de correction)", commit: e06890e44bb800e9c1231877acef4f5344f82524 }
   - id: L159
     title: "Liste des Primarques : un seul lien par carte (60 arrêts de tabulation, image nommée « Lire le lore complet » ×20, anneau de focus rogné par overflow:hidden) et compteurs à « 0 » pendant le chargement sans indicateur → « — » + role=status — revue UX L10"
     public: "Liste des Primarques : un seul lien par carte"
