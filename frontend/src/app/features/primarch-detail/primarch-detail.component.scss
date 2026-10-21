@@ -243,6 +243,7 @@ h1 {
     line-height: 1.78;
     color: #d8d0bf;
     margin: 0 0 14px;
+    max-width: 70ch; /* L158 : largeur de lecture (Héritage, statut) */
     &:last-child { margin-bottom: 0; }
   }
   .lead {
@@ -252,6 +253,7 @@ h1 {
     border-left: 3px solid var(--gold);
     padding-left: 16px;
     margin-bottom: 20px;
+    max-width: 70ch; /* L158 : largeur de lecture */
   }
   .status-detail-panel {
     color: var(--gold);
@@ -272,6 +274,8 @@ h1 {
    ========================= */
 .lore-flow {
   position: relative;
+  max-width: 70ch; /* L158 : largeur de lecture ; avec l'image flottante, sa largeur et sa marge s'y ajoutent */
+  &.has-img { max-width: calc(70ch + 304px); }
   &::after { content: ''; display: block; clear: both; }
 }
 .lore-block {
@@ -352,6 +356,7 @@ h1 {
     font-size: 15px;
     line-height: 1.78;
     color: #d8d0bf;
+    max-width: 70ch; /* L158 : largeur de lecture quand le texte est seul (sans second bloc) */
   }
 }
 
@@ -475,6 +480,7 @@ h1 {
   line-height: 1.78;
   color: #d8d0bf;
   margin: 0;
+  max-width: 70ch; /* L158 : largeur de lecture */
 }
 
 /* =========================

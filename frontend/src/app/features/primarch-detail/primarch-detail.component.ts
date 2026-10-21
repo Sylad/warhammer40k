@@ -103,7 +103,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             }
             @if (p.loreLong) {
               @let img1 = interImage(1);
-              <div class="lore-flow">
+              <div class="lore-flow" [class.has-img]="!!img1">
                 @if (img1) {
                   <figure class="inline-figure inline-right" (click)="openImageLightbox(p, img1, 1)" role="button" tabindex="0">
                     <div class="inline-figure-img" [style.background-image]="img1"></div>
@@ -120,7 +120,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             @let q1 = pullQuote(p, 1);
             <article class="panel" id="personnalite">
               <h2>Personnalité</h2>
-              <div class="two-col">
+              <div [class.two-col]="!!q1">
                 <p class="col-text">{{ p.personality }}</p>
                 @if (q1) {
                   <aside class="pull-quote">
@@ -164,7 +164,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             @let img3 = interImage(3);
             <article class="panel" id="croisade">
               <h2>Grande Croisade</h2>
-              <div class="two-col reverse">
+              <div [class.two-col]="!!img3" [class.reverse]="!!img3">
                 <p class="col-text">{{ p.greatCrusade }}</p>
                 @if (img3) {
                   <figure class="inline-figure" (click)="openImageLightbox(p, img3, 3)" role="button" tabindex="0">
@@ -205,7 +205,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             @let q3 = pullQuote(p, 3);
             <article class="panel" id="destin">
               <h2>Destin</h2>
-              <div class="two-col">
+              <div [class.two-col]="!!q3">
                 <p class="col-text">{{ p.finalFate }}</p>
                 @if (q3) {
                   <aside class="pull-quote">
