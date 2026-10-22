@@ -1660,10 +1660,11 @@ lots:
   - id: L167
     title: "Lore Chaos, contrastes : couleur des dieux en texte à 2,19:1 (Khorne), 2,91:1 (Slaanesh), 4,0:1 (Tzeentch, petits textes) — h2, raccourcis, titres de section, daemons, titres latéraux, Voir fiche, titre de visionneuse → teinte éclaircie ≥ 4,5:1 pour le texte, couleur d'origine sur bordures et sigils, titre de visionneuse en or — WCAG 1.4.3 (UX L11)"
     public: "Panthéon du Chaos : noms et titres des dieux lisibles sur fond sombre"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L168
     title: "Lore Chaos à 320 px : h1 et chapeau du hero coupés de 27 px, h2 Tzeentch coupé de 61 px, sphère et citation coupées, ⛶ sur la citation (padding fixe 50 px, h2 48 px, overflow hidden) → padding réduit sous 600 px, min-width 0, clamp du h2 — WCAG 1.4.10 (UX L11)"
     public: "Panthéon du Chaos : en-têtes entiers sur les petits téléphones"
