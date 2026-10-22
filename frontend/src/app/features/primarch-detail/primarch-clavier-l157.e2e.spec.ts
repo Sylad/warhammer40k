@@ -193,6 +193,28 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, clavier (navigateur, dist
     await page.close();
   });
 
+  it('R10 — même chose au retour arrière du navigateur (sans la recherche) : visionneuse fermée, focus sur le h1', async () => {
+    const page = await open();
+    // navigation interne (pas de rechargement) horus -> sanguinius par la recherche ; la visionneuse s’ouvre sur Sanguinius, puis retour
+    await page.keyboard.press('Control+k');
+    await page.locator('.cmdk-panel').waitFor();
+    await page.waitForFunction(() => document.activeElement?.classList.contains('cmdk-input'));
+    await page.keyboard.type('sanguinius');
+    await page.locator('.cmdk-item').first().waitFor();
+    await page.keyboard.press('Enter');
+    await page.waitForFunction(() => document.querySelector('h1')?.textContent?.trim() === 'Sanguinius');
+    await page.locator('#croisade .inline-figure-img').waitFor();
+    await page.locator('.hero-portrait').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[role="dialog"] .lightbox-close').waitFor();
+    await page.goBack();
+    await page.waitForFunction(() => document.querySelector('h1')?.textContent?.trim() === 'Horus Lupercal');
+    await page.locator('#croisade .inline-figure-img').waitFor();
+    expect(await page.locator('[role="dialog"]').count(), 'dialogue').toBe(0);
+    expect(await page.evaluate(() => (document.activeElement as HTMLElement).tagName)).toBe('H1');
+    await page.close();
+  });
+
   it('R11 — Échap avec la recherche ouverte par-dessus la visionneuse ne ferme que la recherche ; le suivant ferme la visionneuse', async () => {
     const page = await open();
     await page.locator('#origines .info-card-img').focus();
