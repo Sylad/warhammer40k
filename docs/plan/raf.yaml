@@ -1646,11 +1646,12 @@ lots:
     finished: 2026-10-22
   - id: L166
     title: "Test navigateur L47 R9 instable en CI (2 runs « Contrôles frontend » rouges sur 15, browserContext.waitForEvent Timeout 8000 ms, run 39809792648 du 22-10) : diagnostiquer sur la CI (traces, délai, charge des workers) ; un rouge aléatoire bloque cadence deliver qui attend tous les runs du sha"
-    status: doing
+    status: done
     estimate: 0.5
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "conforme : les constats de la revue précédente sont traités (concurrence présentée comme hypothèse, junit dans le path de l'artefact et vérifié par R2, charge échantillonnée toutes les 2 s gardée par R4, phrase L160 ajoutée au README), garde 7/7 vert ; 1 note mineure : le README dit que le délai L160 est passé « de 8 à 20 s », il est passé de 5 à 20 s. — orchestré (vague 2026-10-22-b283-l166, 2 passe(s) de correction + passe des mineurs)", commit: 601eda557e31bb01df3f1dadd3351a13beabe554 }
+    finished: 2026-10-22
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
