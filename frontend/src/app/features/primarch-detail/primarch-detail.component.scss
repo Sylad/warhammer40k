@@ -1,5 +1,10 @@
 @use '../../../styles/fit-title' as *;
 
+/* L158/t1 : largeur de lecture des textes en une colonne. Le « ch » est la largeur du chiffre 0 d'Inter (9,46 px à
+   15 px), un caractère moyen en français fait ≈ 7,1 px : 70ch donnait ~90 caractères par ligne. 36em = 540 px à 15 px,
+   soit ≈ 70 caractères, comme le texte des sections en deux colonnes (535 px à 1440 px). */
+$lecture: 36em;
+
 :host {
   display: block;
   max-width: 1480px;
@@ -247,7 +252,7 @@ h1 {
     line-height: 1.78;
     color: #d8d0bf;
     margin: 0 0 14px;
-    max-width: 70ch; /* L158 : largeur de lecture (Héritage, statut) */
+    max-width: 70ch; /* L158 : plafond général ; les textes de lecture sont resserrés plus bas ($lecture) */
     &:last-child { margin-bottom: 0; }
   }
   .lead {
@@ -257,7 +262,7 @@ h1 {
     border-left: 3px solid var(--gold);
     padding-left: 16px;
     margin-bottom: 20px;
-    max-width: 70ch; /* L158 : largeur de lecture */
+    max-inline-size: 34em; /* L158/t1 : chapeau à 17 px, ≈ 70 caractères par ligne (578 px) */
   }
   .status-detail-panel {
     color: var(--gold);
@@ -273,13 +278,24 @@ h1 {
   }
 }
 
+/* L158/t1 : même colonne de lecture pour Description, Hérésie, Héritage et les textes seuls (sans second bloc).
+   `.panel p` (0,1,1) l'emporte sur une classe seule : d'où `.panel .x` et `#heritage p`. */
+.panel .lore-block,
+.panel .heresy-text,
+.panel .col-text,
+#heritage p {
+  max-inline-size: $lecture;
+}
+/* Hérésie : la citation et l'image sont centrées sur le panneau, le texte partage leur axe (aligné à gauche dedans). */
+.panel .heresy-text { margin-inline: auto; }
+
 /* =========================
    LORE FLOW (texte + image floatante)
    ========================= */
 .lore-flow {
   position: relative;
-  max-width: 70ch; /* L158 : largeur de lecture ; avec l'image flottante, sa largeur et sa marge s'y ajoutent */
-  &.has-img { max-width: calc(70ch + 304px); }
+  /* L158/t1 : avec l'image flottante, sa largeur (280 px) et sa marge (24 px) s'ajoutent à la colonne de lecture. */
+  &.has-img { max-inline-size: calc(#{$lecture} + 304px); }
   &::after { content: ''; display: block; clear: both; }
 }
 .lore-block {
@@ -363,7 +379,6 @@ h1 {
     font-size: 15px;
     line-height: 1.78;
     color: #d8d0bf;
-    max-width: 70ch; /* L158 : largeur de lecture quand le texte est seul (sans second bloc) */
   }
 }
 
@@ -491,7 +506,6 @@ h1 {
   line-height: 1.78;
   color: #d8d0bf;
   margin: 0;
-  max-width: 70ch; /* L158 : largeur de lecture */
 }
 
 /* =========================

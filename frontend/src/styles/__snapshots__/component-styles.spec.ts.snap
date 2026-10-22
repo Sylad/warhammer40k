@@ -2409,6 +2409,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
 
 exports[`styles de composants — déclarations effectives inchangées (L29) > app/features/primarch-detail/primarch-detail.component.scss 1`] = `
 {
+  "#heritage p": {
+    "max-inline-size": "36em",
+  },
   ".anchor-nav": {
     "backdrop-filter": "blur(8px)",
     "background": "rgba(11, 9, 7, 0.92)",
@@ -2517,7 +2520,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "15px",
     "line-height": "1.78",
     "margin": "0",
-    "max-width": "70ch",
   },
   ".hero": {
     "background": "#0a0805",
@@ -2879,11 +2881,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "white-space": "pre-line",
   },
   ".lore-flow": {
-    "max-width": "70ch",
     "position": "relative",
   },
   ".lore-flow.has-img": {
-    "max-width": "calc(70ch + 304px)",
+    "max-inline-size": "calc(36em + 304px)",
   },
   ".lore-flow::after": {
     "clear": "both",
@@ -2902,14 +2903,24 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "28px 32px",
     "scroll-margin-top": "12px",
   },
+  ".panel .col-text": {
+    "max-inline-size": "36em",
+  },
+  ".panel .heresy-text": {
+    "margin-inline": "auto",
+    "max-inline-size": "36em",
+  },
   ".panel .lead": {
     "border-left": "3px solid var(--gold)",
     "color": "#ebe2ce",
     "font-size": "17px",
     "font-style": "italic",
     "margin-bottom": "20px",
-    "max-width": "70ch",
+    "max-inline-size": "34em",
     "padding-left": "16px",
+  },
+  ".panel .lore-block": {
+    "max-inline-size": "36em",
   },
   ".panel .status-detail-panel": {
     "color": "var(--gold)",
@@ -3213,7 +3224,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "15px",
     "line-height": "1.78",
     "margin": "0",
-    "max-width": "70ch",
   },
   ".two-col.reverse": {
     "grid-template-columns": "1fr 1.6fr",
