@@ -1694,10 +1694,11 @@ lots:
   - id: L171
     title: "Lore Chaos à 1440 px : description et lore sur 918 px (~137 caractères par ligne) ; grille des daemons notables à moitié vide (453/918 px) → largeur bornée ~70ch comme L154/L158, grille resserrée (UX L11)"
     public: "Panthéon du Chaos : textes à longueur de lecture confortable sur grand écran"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L172
     title: "Lore Chaos : focus de l'image d'en-tête (1364×389) rogné par overflow hidden (trait de 1 px à ~1,9:1) et 4 boutons nommés « Voir en grand » → contour intérieur or de 2 px, nom « Agrandir l'illustration de <dieu> » — WCAG 1.4.11, 2.4.6 (UX L11)"
     public: "Panthéon du Chaos : focus visible et nom précis sur l'image de chaque dieu"
