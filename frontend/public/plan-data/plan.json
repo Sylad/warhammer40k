@@ -566,6 +566,16 @@
       "status": "done",
       "started": "2026-10-22",
       "finished": "2026-10-22"
+    },
+    {
+      "id": "L174",
+      "title": "Panthéon du Chaos : l'image de chaque dieu s'ouvre aussi au clic",
+      "status": "todo"
+    },
+    {
+      "id": "L175",
+      "title": "Panthéon du Chaos : numéros des dieux lisibles sur téléphone",
+      "status": "todo"
     }
   ]
 }

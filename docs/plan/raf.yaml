@@ -1668,6 +1668,8 @@ lots:
     review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 145cf17efd90df9f11b22ed3ada9e455dea0a190 }
     ux: { date: 2026-10-22, verdict: "conforme (capture 1440 regardée par le lead : noms des dieux et raccourcis lisibles, couleur d'origine gardée sur les bordures)" }
     finished: 2026-10-22
+    notes:
+      - { date: 2026-10-22, text: "QA de prod 22-10 (552ed13) : L167–L173 conformes (contrastes ≥ 4,72 sur les h2, 5,05 sur les raccourcis, dialogue de la visionneuse complet, raccourcis vers l'article, 67 caractères par ligne, conclusion corrigée). Suites : L174 (image d'en-tête non cliquable à la souris, préexistant), L175 (numéros III/IV sous 4,5:1 au téléphone). Un 502 isolé sur /api/lore/god-machines pendant une salve de rechargements, non reproduit." }
   - id: L168
     title: "Lore Chaos à 320 px : h1 et chapeau du hero coupés de 27 px, h2 Tzeentch coupé de 61 px, sphère et citation coupées, ⛶ sur la citation (padding fixe 50 px, h2 48 px, overflow hidden) → padding réduit sous 600 px, min-width 0, clamp du h2 — WCAG 1.4.10 (UX L11)"
     public: "Panthéon du Chaos : en-têtes entiers sur les petits téléphones"
@@ -1734,6 +1736,20 @@ lots:
     review: { date: 2026-10-22, verdict: "compliant (0 bloquant, 0 majeur, 1 note mineure) — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 50c47cd4f02eddb8ed97d9ea89ad29204bb34fa3 }
     ux: { date: 2026-10-22, verdict: "conforme (conclusion : quatre primarques, dix mille ans ; captures regardées)" }
     finished: 2026-10-22
+  - id: L174
+    title: "Panthéon du Chaos : le bouton image d'en-tête (god-bg) n'est pas cliquable à la souris ni au toucher — .god-bg-overlay le recouvre avec pointer-events auto (lore-chaos-gods.component.scss:145) ; pointer-events:none sur l'overlay, test elementFromPoint + clic réel sur les 4 dieux à 1440 et 390 px (QA prod 22-10, suite de L172)"
+    public: "Panthéon du Chaos : l'image de chaque dieu s'ouvre aussi au clic"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-22
+  - id: L175
+    title: "Panthéon du Chaos : numéros « III / IV » et « IV / IV » (or 13 px sur l'image) entre 3,3 et 4,2:1 à 390 et 320 px — alourdir le voile ou éclaircir le texte (WCAG 1.4.3, QA prod 22-10, suite de L167)"
+    public: "Panthéon du Chaos : numéros des dieux lisibles sur téléphone"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-22
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
