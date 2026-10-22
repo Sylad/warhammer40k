@@ -2409,9 +2409,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
 
 exports[`styles de composants — déclarations effectives inchangées (L29) > app/features/primarch-detail/primarch-detail.component.scss 1`] = `
 {
-  "#heritage p": {
-    "max-inline-size": "36em",
-  },
   ".anchor-nav": {
     "backdrop-filter": "blur(8px)",
     "background": "rgba(11, 9, 7, 0.92)",
@@ -2883,9 +2880,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".lore-flow": {
     "position": "relative",
   },
-  ".lore-flow.has-img": {
-    "max-inline-size": "calc(36em + 304px)",
-  },
   ".lore-flow::after": {
     "clear": "both",
     "content": """",
@@ -2903,24 +2897,13 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "28px 32px",
     "scroll-margin-top": "12px",
   },
-  ".panel .col-text": {
-    "max-inline-size": "36em",
-  },
-  ".panel .heresy-text": {
-    "margin-inline": "auto",
-    "max-inline-size": "36em",
-  },
   ".panel .lead": {
     "border-left": "3px solid var(--gold)",
     "color": "#ebe2ce",
     "font-size": "17px",
     "font-style": "italic",
     "margin-bottom": "20px",
-    "max-inline-size": "34em",
     "padding-left": "16px",
-  },
-  ".panel .lore-block": {
-    "max-inline-size": "36em",
   },
   ".panel .status-detail-panel": {
     "color": "var(--gold)",
@@ -3333,6 +3316,25 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 900px) .two-col.reverse .inline-figure": {
     "grid-column": "1",
     "grid-row": "1",
+  },
+  "@media (min-width: 761px) #heritage p": {
+    "max-inline-size": "36em",
+  },
+  "@media (min-width: 761px) .lore-flow.has-img": {
+    "max-inline-size": "calc(36em + 304px)",
+  },
+  "@media (min-width: 761px) .panel .col-text": {
+    "max-inline-size": "36em",
+  },
+  "@media (min-width: 761px) .panel .heresy-text": {
+    "margin-inline": "auto",
+    "max-inline-size": "36em",
+  },
+  "@media (min-width: 761px) .panel .lead": {
+    "max-inline-size": "34em",
+  },
+  "@media (min-width: 761px) .panel .lore-block": {
+    "max-inline-size": "36em",
   },
   "@supports (width: 1cqi) h1": {
     "font-size": "min(36px, 100cqi / (var(--longest-word, 1) * 0.85))",
