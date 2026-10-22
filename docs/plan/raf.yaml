@@ -1589,10 +1589,11 @@ lots:
   - id: L161
     title: "Visionneuse partagée : sous-titre (.lightbox-role, --gold-soft #80652b, 12 px) à 3,72:1 sur #050403 — WCAG 1.4.3 ; passer à --gold (≈ 8,5:1) sur toutes les visionneuses du site — revue UX de L156"
     public: "Visionneuse d'images : sous-titre lisible"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L162
     title: "Concepts : une carte « lien inter-concepts » dont le concept visé est masqué par le filtre de catégorie ne fait rien au clic (15 liens sur 26 changent de catégorie ; filtre Impérial, Trône d'Or → Webway : adresse et focus inchangés) — remettre le filtre à « Tous » avant revealSection, comme la frise ; test (revue de L160)"
     public: "Concepts : un lien mène toujours au concept visé"
