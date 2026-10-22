@@ -1596,6 +1596,7 @@ lots:
     started: 2026-10-22
     notes:
       - { date: 2026-10-22, text: "test d'acceptation rescellé (lot livré L120, frontend/src/app/features/unit-detail/unit-detail-datasheet-l120.acceptation.spec.ts, fiche amendée en 3ccdfcc) : R10 figeait l'empreinte sha1 du composant partagé figure-lightbox : la règle dit que L120 n'y touche pas et que le rendu primarque reste (miniatures, lien galerie), pas qu'aucun lot ne pourra plus le corriger ; L161 y corrige le contraste du sous-titre (WCAG 1.4.3). Le test vérifie désormais les miniatures et le lien galerie." }
+    review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-l161b, 0 passe(s) de correction)", commit: 4e285d72804e7505d66f71b2d5fa4508002e9216 }
   - id: L162
     title: "Concepts : une carte « lien inter-concepts » dont le concept visé est masqué par le filtre de catégorie ne fait rien au clic (15 liens sur 26 changent de catégorie ; filtre Impérial, Trône d'Or → Webway : adresse et focus inchangés) — remettre le filtre à « Tous » avant revealSection, comme la frise ; test (revue de L160)"
     public: "Concepts : un lien mène toujours au concept visé"
