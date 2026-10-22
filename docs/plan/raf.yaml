@@ -1634,6 +1634,8 @@ lots:
     review: { date: 2026-10-22, verdict: "compliant (L164 : titre à 33–35 px sous la barre sur les 6 fiches à 1440 et 390 px, 25 tests e2e verts ; 2 notes mineures) — orchestré (vague 2026-10-22-wh-l161b, 0 passe(s) de correction)", commit: b43629e4c8f11902a3a960d52481f9bcfa771c02 }
     ux: { date: 2026-10-22, verdict: "conforme (titre à 33–35 px sous la barre d'ancres, capture Nouveauté 1440 et 390 regardées par le lead)" }
     finished: 2026-10-22
+    notes:
+      - { date: 2026-10-22, text: "QA de prod 22-10 (bce2a13) : L161–L164 conformes sur 10 pages à 1440 et 390 px (contraste 8,5:1, filtre remis à Tous, focus Ctrl+K rendu et recherche au-dessus de la visionneuse, titres à 27–34 px sous la barre). 502/530 à partir de 17:51 = redémarrage de dark-blue (4080), sans lien. Mineur hors lots : /factions/space-marines, 3 datasheets 404 en console (sm-sanguinius, sm-primaris-intercessor, sm-leman-russ-prim), repli portrait en 200, rien de cassé à l'écran." }
   - id: L165
     title: "Test navigateur L47 R9 rouge (déjà rouge sur origin/main le 22-10, sans lien avec L161–L164) : clic du milieu sur une vidéo — nouvel onglet attendu, page courante inchangée ; diagnostiquer (test ou comportement)"
     status: todo
