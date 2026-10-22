@@ -1701,10 +1701,11 @@ lots:
   - id: L172
     title: "Lore Chaos : focus de l'image d'en-tête (1364×389) rogné par overflow hidden (trait de 1 px à ~1,9:1) et 4 boutons nommés « Voir en grand » → contour intérieur or de 2 px, nom « Agrandir l'illustration de <dieu> » — WCAG 1.4.11, 2.4.6 (UX L11)"
     public: "Panthéon du Chaos : focus visible et nom précis sur l'image de chaque dieu"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L173
     title: "Lore Chaos, conclusion : « Trois primarques nommés ici » alors que 4 sont listés (Angron, Magnus, Mortarion, Fulgrim), « six millénaires » contre « dix mille ans » du chapeau (UX L11)"
     public: "Panthéon du Chaos : texte de conclusion corrigé"
