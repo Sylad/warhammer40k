@@ -1605,10 +1605,11 @@ lots:
   - id: L163
     title: "Recherche Ctrl+K : à la fermeture, le focus n'est rendu à personne (document.activeElement = BODY, command-palette.component.ts:280) et Tab sort de la recherche vers la page dessous (pas de boucle de focus) — rendre le focus à l'élément d'avant et boucler Tab, sur toutes les pages (WCAG 2.4.3, revue de L157)"
     public: "Recherche : le focus revient où il était"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L164
     title: "Ancres des fiches : titre de section à 47–54 px sous la barre d'ancres après un clic (attendu < 40 px par docs/qa/expectations.md, QA prod 22-10 sur phalanx, horus, space-marines, saint, titan, équipement, à 1440 et 390 px) — marge de défilement ou padding du panneau pour ramener le titre sous 40 px, mesure navigateur"
     public: "Fiches du Lore : la section visée s'arrête juste sous la barre"
