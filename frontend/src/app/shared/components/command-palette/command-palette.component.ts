@@ -273,6 +273,7 @@ export class CommandPaletteComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    window.removeEventListener('keydown', this.surEchap, true);
     this.annulerFocus();
   }
 
@@ -310,10 +311,24 @@ export class CommandPaletteComponent implements OnDestroy {
       e.preventDefault();
       if (this.isOpen()) this.close();
       else this.open();
-    } else if (e.key === 'Escape' && this.isOpen()) {
-      e.preventDefault();
-      this.close();
     }
+  }
+
+  /**
+   * Échap ferme la recherche SEULE (Nielsen n°3 : un Échap, une couche). Écoute en capture sur `window` :
+   * elle passe avant les écouteurs `document:keydown.escape` des couches du dessous (visionneuse
+   * `figure-lightbox`, tiroir), que `stopPropagation` ne laisse pas la voir — quel que soit l'ordre
+   * de création des composants. Le suivant, la recherche fermée, atteint la couche d'en dessous.
+   */
+  private readonly surEchap = (e: KeyboardEvent): void => {
+    if (e.key !== 'Escape' || !this.isOpen()) return;
+    e.preventDefault();
+    e.stopPropagation();
+    this.close();
+  };
+
+  constructor() {
+    window.addEventListener('keydown', this.surEchap, true);
   }
 
   typeLabel(t: SearchResult['type']): string { return TYPE_LABEL[t]; }

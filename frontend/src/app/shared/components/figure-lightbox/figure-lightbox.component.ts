@@ -176,14 +176,8 @@ export class FigureLightboxComponent {
   readonly closed = output<void>();
   readonly thumbSelected = output<number>();
 
-  /**
-   * Un Échap ferme la couche du dessus seulement (Nielsen n°3) : la recherche globale (Ctrl+K), ouverte
-   * par-dessus, prend l'Échap (`preventDefault`) ; son panneau peut aussi être déjà retiré du DOM quand
-   * cet écouteur passe, d'où le test des deux.
-   */
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscape(e: Event): void {
-    if (!this.state() || e.defaultPrevented || document.querySelector('.cmdk-panel')) return;
-    this.closed.emit();
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.state()) this.closed.emit();
   }
 }
