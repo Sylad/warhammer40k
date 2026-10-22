@@ -47,14 +47,15 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     expect(check([{ cls: 'anchor', target: '/lore/concepts#atlantide', source: 's' }])[0]).toMatch(/absente/);
   });
 
-  it('ancre nue sans (click) → cassée ; avec (click) → vérifiée sur la page même', () => {
-    const f = page('@Component({template: `<a href="#a">x</a><a href="#b" (click)="go($event)">y</a><section id="b"></section>`})');
+  it('ancre nue → cassée, avec ou sans (click) ; sectionAnchor → vérifiée sur la page même (L160)', () => {
+    const f = page('@Component({template: `<a href="#a">x</a><a href="#b" (click)="go($event)">y</a><a sectionAnchor="c">z</a><a sectionAnchor="absente">w</a><section id="c"></section>`})');
     const links = codeLinks([f]);
-    expect(links.filter((l) => l.cls === 'anchor').map((l) => l.target)).toEqual(['~#a', '~#b']);
+    expect(links.filter((l) => l.cls === 'anchor').map((l) => l.target)).toEqual(['~#a', '~#b', '~#c', '~#absente']);
     const causes = checkInternal(links, { routes, data, news: { entries: [] } });
-    expect(causes).toHaveLength(1);
-    expect(causes[0].target).toBe('~#a');
+    expect(causes.map((c) => c.target)).toEqual(['~#a', '~#b', '~#absente']);
     expect(causes[0].cause).toMatch(/ancre nue/);
+    expect(causes[1].cause).toMatch(/ancre nue/);
+    expect(causes[2].cause).toMatch(/absente/);
   });
 
   it('ancre calculée vers une page qui ne pose pas d’ancres de données → cassée', () => {
@@ -104,10 +105,10 @@ describe('vérificateur de liens (cas fabriqués)', () => {
     expect(staleDeclarations(inv)).toEqual(['frontend/src/app/features/faction-detail/faction-detail.component.ts|h.unitId']);
   });
 
-  it('ancre nue calculée (« [href]="\'#\' + r.conceptId" » avec (click)) : l\'expression est relevée (L160)', () => {
-    const f = page(`@Component({template: \`<a [href]="'#' + r.conceptId" (click)="go($event)">a</a>\`})`);
+  it('[sectionAnchor]="r.conceptId" : l\'expression est relevée pour que sa déclaration (DATA_LINKS) ne soit pas orpheline (L160)', () => {
+    const f = page(`@Component({template: \`<a [sectionAnchor]="r.conceptId">a</a><a [sectionAnchor]="'fixe'">b</a>\`})`);
     const a = codeLinks([f]).filter((l) => l.cls === 'anchor');
-    expect(a.map((l) => l.dynamic)).toEqual(['r.conceptId']);
+    expect(a.map((l) => [l.target, l.dynamic ?? null])).toEqual([['~#{r.conceptId}', 'r.conceptId'], ['~#fixe', null]]);
   });
 
   it('identifiant LITTÉRAL dans un tableau de commandes : vérifié contre les données', () => {
