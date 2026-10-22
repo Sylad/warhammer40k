@@ -461,8 +461,9 @@
     {
       "id": "L157",
       "title": "Fiche d'un Primarque : images et visionneuse au clavier",
-      "status": "doing",
-      "started": "2026-10-21"
+      "status": "done",
+      "started": "2026-10-21",
+      "finished": "2026-10-22"
     },
     {
       "id": "L158",
@@ -497,6 +498,11 @@
     {
       "id": "L162",
       "title": "Concepts : un lien mène toujours au concept visé",
+      "status": "todo"
+    },
+    {
+      "id": "L163",
+      "title": "Recherche : le focus revient où il était",
       "status": "todo"
     }
   ]

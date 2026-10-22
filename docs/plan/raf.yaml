@@ -1534,11 +1534,14 @@ lots:
   - id: L157
     title: "Fiche Primarque, clavier : portrait, 3 images intercalées et image d'Origines en role=button sans Entrée/Espace → vrais boutons ; visionneuse figure-lightbox en dialogue (role=dialog, aria-modal, focus dedans et bouclé, rendu à l'origine) ; aria-pressed sur les filtres de la liste — WCAG 2.1.1, 2.4.3, 4.1.2 — revue UX L10"
     public: "Fiche d'un Primarque : images et visionneuse au clavier"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review: { date: 2026-10-22, verdict: "conforme (revue Fable après 3 passes) : visionneuse fermée au changement de Primarque avec focus sur le h1 (Ctrl+K et retour arrière), Échap ne ferme que la couche du dessus (capture côté recherche), visionneuse partagée intacte (sha1 scellé L120 R10), captures refaites ; build OK, npm test 1197/1197, e2e L155/L157/L158/L160 63/63, liens 0 cassé ; notes : piège Tab écrit trois fois", commit: 5018be0159db1ccaac80753ac788fbb3414f743b }
+    ux: { date: 2026-10-22, verdict: "conforme : visionneuse en dialogue au-dessus de la barre du haut à 390 px, illustration, titre « Horus Lupercal », Fermer focalisé et visible (capture vue par le lead) ; mesures du relecteur sur Ctrl+K, Échap et retour du focus" }
+    finished: 2026-10-22
   - id: L158
     title: "Fiche Primarque, sections : lignes de 100–121 car. à 1440 (Hérésie, Héritage, Description sans image) → largeur bornée ~70ch ; colonne vide de 335 px quand l'image de Grande Croisade manque et dans Destin des Primarques perdus (2 citations) → deux colonnes seulement si le second bloc existe — revue UX L10"
     public: "Fiche d'un Primarque : sections plus confortables à lire"
@@ -1591,6 +1594,13 @@ lots:
   - id: L162
     title: "Concepts : une carte « lien inter-concepts » dont le concept visé est masqué par le filtre de catégorie ne fait rien au clic (15 liens sur 26 changent de catégorie ; filtre Impérial, Trône d'Or → Webway : adresse et focus inchangés) — remettre le filtre à « Tous » avant revealSection, comme la frise ; test (revue de L160)"
     public: "Concepts : un lien mène toujours au concept visé"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-22
+  - id: L163
+    title: "Recherche Ctrl+K : à la fermeture, le focus n'est rendu à personne (document.activeElement = BODY, command-palette.component.ts:280) et Tab sort de la recherche vers la page dessous (pas de boucle de focus) — rendre le focus à l'élément d'avant et boucler Tab, sur toutes les pages (WCAG 2.4.3, revue de L157)"
+    public: "Recherche : le focus revient où il était"
     status: todo
     estimate: 0.25
     visible: true
