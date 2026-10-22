@@ -90,9 +90,10 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
           @if (badge()) { <span class="news-badge" aria-hidden="true">{{ badge() }}</span> }
         </button>
       </div>
-
-      <app-command-palette #palette (navigated)="focusOnArrival = true" />
     </header>
+
+    <!-- L163 : hors de la barre du haut — son backdrop-filter ferait d'elle le bloc conteneur du fond (position: fixed). -->
+    <app-command-palette #palette (navigated)="focusOnArrival = true" />
 
     <div class="drawer-backdrop" [class.open]="menuOpen()" aria-hidden="true" (click)="closeMenu()"></div>
     <nav #drawer id="menu-telephone" class="drawer" [class.open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''"
@@ -416,7 +417,6 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .nav a { white-space: nowrap; }
     .topbar { gap: 16px; }
     .brand { margin-right: auto; }
-    .topbar > app-command-palette { position: absolute; }
     .topbar-actions { display: flex; align-items: center; gap: 10px; }
     .menu-toggle, .drawer-close {
       display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
