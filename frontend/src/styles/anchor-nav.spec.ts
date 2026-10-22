@@ -68,7 +68,7 @@ describe('barre d\'ancres des fiches (L89)', () => {
 
   it('fiche faction : CHAQUE cible de la barre laisse la place à l\'en-tête ET à la barre (scroll-padding + 12 px)', () => {
     const ts = readFileSync(resolve(src, 'app/features/faction-detail/faction-detail.component.ts'), 'utf8');
-    const ids = [...ts.matchAll(/<a href="#(\w+)" \(click\)="scrollTo/g)].map((m) => m[1]);
+    const ids = [...ts.matchAll(/<a sectionAnchor="(\w+)">/g)].map((m) => m[1]);
     expect(ids.length).toBeGreaterThan(5);
     const compiled = postcss.parse(sass.compile(resolve(src, 'app/features/faction-detail/faction-detail.component.scss')).css);
     for (const id of ids) {

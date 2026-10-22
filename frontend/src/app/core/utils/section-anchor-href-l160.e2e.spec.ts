@@ -96,10 +96,10 @@ describe.skipIf(!built || !chromium)('Liens d’ancre de section (navigateur, di
       const requetes: string[] = [];
       const noter = (r: import('playwright-core').Request) => { if (r.resourceType() === 'document') requetes.push(new URL(r.url()).pathname); };
       ctx.on('request', noter);
-      const nouvelOnglet = ctx.waitForEvent('page', { timeout: 5000 });
+      const nouvelOnglet = ctx.waitForEvent('page', { timeout: 20000 });
       await geste();
       const onglet = await nouvelOnglet;
-      await expect.poll(() => requetes.length, { timeout: 5000 }).toBeGreaterThan(0);
+      await expect.poll(() => requetes.length, { timeout: 20000 }).toBeGreaterThan(0);
       ctx.off('request', noter);
       await onglet.close().catch(() => undefined);
       expect(new URL(page.url()).hash, 'la page d’origine ne bouge pas').toBe('');

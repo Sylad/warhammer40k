@@ -264,7 +264,7 @@ describe('fiche faction — sans sous-faction (L135)', () => {
     expect(el.querySelector('h1')!.textContent).toContain('Inquisition');
     expect(el.querySelector('#subfactions')).toBeNull();
     expect(el.querySelector('.sf-card')).toBeNull();
-    expect(el.querySelector('a[href="#subfactions"]')).toBeNull();
+    expect(el.querySelector('.anchor-nav a[href$="#subfactions"]')).toBeNull();
     expect(el.querySelector('app-load-error')).toBeNull();
     expect(el.querySelector('a[href^="/units/"]')).not.toBeNull();
   });
@@ -272,7 +272,7 @@ describe('fiche faction — sans sous-faction (L135)', () => {
   it('R1 — des sous-factions : section, carte et lien d’ancre présents', async () => {
     const el = await render([{ id: 'ordo-xenos', nom: 'Ordo Xenos', factionId: 'inquisition', type: 'ordre' }]);
     expect(el.querySelector('#subfactions')).not.toBeNull();
-    expect(el.querySelector('a[href="#subfactions"]')).not.toBeNull();
+    expect(el.querySelector('.anchor-nav a[href$="#subfactions"]')).not.toBeNull();
   });
 });
 
