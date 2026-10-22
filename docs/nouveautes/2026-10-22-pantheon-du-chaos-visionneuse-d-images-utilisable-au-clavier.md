@@ -9,6 +9,6 @@ captures:
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---
-Dans le Panthéon du Chaos, l'agrandissement de l'illustration d'un dieu ou d'un daemon notable se comporte désormais comme celui des fiches de Primarques. Au clavier, le focus passe directement sur « Fermer », la touche Tab reste dans la fenêtre au lieu de repartir dans la page derrière, et Échap ou « Fermer » ramènent le focus sur l'image que vous aviez ouverte. Les lecteurs d'écran annoncent une fenêtre modale nommée « Visionneuse — Khorne », par exemple.
+Dans le Panthéon du Chaos, l'agrandissement de l'illustration d'un dieu ou d'un daemon notable se comporte désormais comme celui des fiches de Primarques. Au clavier, le focus passe directement sur « Fermer », la touche Tab reste dans la fenêtre au lieu de repartir dans la page derrière, et Échap ou « Fermer » ramènent le focus sur l'image que vous aviez ouverte. Les lecteurs d'écran annoncent une fenêtre modale nommée « Visionneuse — Khorne », par exemple.
 
 Sur téléphone, le bouton ✕ n'est plus caché sous la barre du haut et le bouton Menu : il se touche et ferme la visionneuse.
