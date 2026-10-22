@@ -1706,6 +1706,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "compliant after 1 minor note (the e2e test writes to `undefined/` when TMPDIR is unset) — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 4705427aff89f2bc9622bc66eeff81355f77eb62 }
   - id: L173
     title: "Lore Chaos, conclusion : « Trois primarques nommés ici » alors que 4 sont listés (Angron, Magnus, Mortarion, Fulgrim), « six millénaires » contre « dix mille ans » du chapeau (UX L11)"
     public: "Panthéon du Chaos : texte de conclusion corrigé"
