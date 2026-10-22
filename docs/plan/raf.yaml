@@ -1683,6 +1683,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "conforme — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 2cb24c9e40c70ef0e3cf7ca28fed07c63cf430a8 }
   - id: L170
     title: "Lore Chaos, raccourcis du hero : après Slaanesh, le Tab suivant revient à l'image de Khorne (3 573 px plus haut) → focus sur l'article visé (tabindex=-1), comme L160 — WCAG 2.4.3 (UX L11)"
     public: "Panthéon du Chaos : le raccourci vers un dieu y emmène aussi le clavier"
