@@ -59,6 +59,10 @@ jobs:
         shell: bash
         run: |
           nproc; uptime
+          # charge échantillonnée toutes les 2 s pendant les e2e : l'uptime d'avant le lancement ne mesure que le build
+          while true; do echo "$(date +%T) $(cat /proc/loadavg)" >> e2e-charge.log; sleep 2; done &
+          sampler=$!
+          trap 'kill $sampler 2>/dev/null' EXIT
           DEBUG=pw:api npm run test:e2e -- --reporter=default --reporter=junit --outputFile.junit=e2e-junit.xml 2>&1 | tee e2e-pwapi.log
 
       - name: Durées des cas e2e
@@ -69,4 +73,5 @@ jobs:
           path: |
             frontend/e2e-junit.xml
             frontend/e2e-pwapi.log
+            frontend/e2e-charge.log
           if-no-files-found: ignore

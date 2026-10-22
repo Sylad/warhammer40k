@@ -38,7 +38,7 @@ describe('vitest.config.ts — suite déterministe sous charge (L113)', () => {
 // L166 — « Acceptation de bout en bout » : trois fichiers (L47 vidéos, L49 galerie, L120 fiche unité),
 // chacun avec son Chromium, tournaient en parallèle sur le runner CI. Trois rouges aléatoires en
 // cinq jours sur des fichiers différents (clic du milieu de L47 R9 : waitForEvent 8 s ; R3 de L49 :
-// boundingBox 4 s), tous des délais, jamais une assertion fausse ; la même suite sans charge passe.
+// boundingBox 4 s), tous des délais, jamais une assertion fausse. Hypothèse, non prouvée sur la CI : la concurrence.
 // Garde : un seul fichier à la fois, donc un seul Chromium.
 describe('vitest.e2e.config.ts — un navigateur à la fois (L166)', () => {
   it('R1 — les fichiers e2e tournent l\'un après l\'autre, pas un Chromium par fichier en parallèle', () => {
@@ -52,6 +52,17 @@ describe('vitest.e2e.config.ts — un navigateur à la fois (L166)', () => {
     expect(wf).toMatch(/npm run test:e2e -- --reporter=default --reporter=junit --outputFile\.junit=\S+/);
     expect(wf).toMatch(/nproc/);
     expect(wf).toMatch(/if: always\(\)[\s\S]*actions\/upload-artifact@v4/);
+    // le fichier junit demandé doit faire partie du `path:` de l'artefact (sinon `if-no-files-found: ignore` se tait)
+    const junit = wf.match(/--outputFile\.junit=(\S+)/)[1];
+    expect(wf).toMatch(new RegExp('actions/upload-artifact@v4[\\s\\S]*path:[\\s\\S]*?frontend/' + junit.replace(/\./g, '\\.')));
+  });
+
+  // `uptime` relevé une seule fois avant vitest reflète le build qui précède, pas le cas qui expire :
+  // un échantillon horodaté pendant toute l'exécution, joint à l'artefact, donne la charge au moment du rouge.
+  it('R4 — la CI échantillonne la charge pendant les e2e (fichier horodaté joint à l\'artefact)', () => {
+    const wf = readFileSync(new URL('../../.github/workflows/frontend-checks.yml', import.meta.url), 'utf8');
+    expect(wf).toMatch(/while [^\n]*do[^\n]*\n?[^\n]*(date|uptime)[\s\S]*>>\s*(e2e-charge\.log)/);
+    expect(wf).toMatch(/actions\/upload-artifact@v4[\s\S]*path:[\s\S]*?frontend\/e2e-charge\.log/);
   });
 
   // Les specs scellées ne se touchent pas, mais DEBUG=pw:api journalise chaque appel Playwright (clic, onglet
