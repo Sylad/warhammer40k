@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 17:18",
+  "generated": "2026-10-22 20:06",
   "entries": [
+    {
+      "slug": "2026-10-22-pantheon-du-chaos-texte-de-conclusion-corrige",
+      "title": "Panthéon du Chaos : texte de conclusion corrigé",
+      "date": "2026-10-22",
+      "lots": [
+        "L173"
+      ],
+      "captures": [
+        "captures/L173-conclusion-1440.png",
+        "captures/L173-conclusion-390.png"
+      ],
+      "alts": [
+        "Bas de la page Panthéon du Chaos : la conclusion annonce « Quatre dieux. Quatre primarques nommés ici. Dix mille ans de corruption. »",
+        "La même conclusion au téléphone, sur plusieurs lignes, avec les deux liens en dessous"
+      ],
+      "html": "<p>La conclusion de la page Panthéon du Chaos disait « Trois primarques nommés ici » alors que quatre sont présentés (Angron, Magnus, Mortarion, Fulgrim). Elle en annonce désormais le nombre exact, calculé d'après les fiches affichées.</p>\n<p>Elle parlait aussi de « six millénaires de corruption » alors que l'introduction de la page dit dix mille ans : la conclusion dit maintenant « Dix mille ans de corruption ».</p>"
+    },
     {
       "slug": "2026-10-22-fiches-du-lore-la-section-visee-s-arrete-juste-sous-la-barre",
       "title": "Fiches du Lore : la section visée s'arrête juste sous la barre",
