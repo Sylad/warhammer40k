@@ -466,7 +466,11 @@
       "id": "L158",
       "title": "Fiche d'un Primarque : sections plus confortables à lire",
       "status": "doing",
-      "started": "2026-10-21"
+      "started": "2026-10-21",
+      "tasks": {
+        "done": 0,
+        "total": 1
+      }
     },
     {
       "id": "L159",
@@ -479,6 +483,11 @@
       "title": "Fiches du Lore : les ancres mènent vraiment à la section",
       "status": "doing",
       "started": "2026-10-21"
+    },
+    {
+      "id": "L161",
+      "title": "Visionneuse d'images : sous-titre lisible",
+      "status": "todo"
     }
   ]
 }
