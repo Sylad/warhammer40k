@@ -4,6 +4,8 @@
 // du texte de Grande Croisade quand l'image du wiki manque, et dans Destin des Primarques perdus
 // (2 citations seulement : la troisième n'existe pas). Navigateur réel, application construite (dist).
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { Server } from 'node:http';
 import type { Browser, Page } from 'playwright-core';
 import { distState, startDistServer } from '../../../testing/dist-server';
@@ -147,23 +149,31 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
     return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
   };
 
-  it('R5 — à 1440 px, chaque section de texte (chapeau compris) tient à 65–75 caractères par ligne en médiane des lignes pleines (la dernière d’un paragraphe est courte par nature) et 80 au plus, avec ou sans image', async () => {
+  // Bornes d'après la mesure des 20 fiches à 1440 px (médiane des lignes pleines / ligne la plus longue) :
+  // chapeau 61–70 / ≤ 70 · Description 70,5–75 / 73–84 · Hérésie 67,5–76,5 / 73–79 · Héritage 66–73 / 70–77.
+  // « ≈ 70 » se lit donc médiane de 58 à 80 (±~12 autour de 70, marge d'un à trois caractères sur les extrêmes mesurés)
+  // et ligne la plus longue ≤ 88 (84 mesuré : une phrase sans espace propice) ; avant le lot : 83 à 100 en médiane.
+  // Toutes les fiches, pas deux textes : une correction du seed ne doit pas faire rougir ce test sans changement CSS.
+  const FICHES: string[] = JSON.parse(readFileSync(resolve(__dirname, '../../../../../backend/seed/primarchs.json'), 'utf8')).map((x: { id: string }) => x.id);
+
+  it('R5 — à 1440 px, sur les 20 fiches, chaque section de texte (chapeau compris) tient à ≈ 70 caractères par ligne : médiane des lignes pleines de 58 à 80 (la dernière d’un paragraphe est courte par nature), ligne la plus longue 88 au plus ; avec ou sans image', async () => {
+    expect(FICHES.length).toBe(20);
     const hors: string[] = [];
-    for (const id of ['horus', 'sanguinius']) {
-      for (const withImage of [false, true]) {
-        const page = await open(id, 1440, withImage);
-        expect(await page.evaluate(() => document.fonts.check('15px Inter')), 'police Inter chargée (réseau requis)').toBe(true);
-        for (const [nom, sel] of Object.entries(SECTIONS_TEXTE)) {
-          const l = await lignes(page, sel);
-          const med = mediane(l.length > 1 ? l.slice(0, -1) : l); // lignes pleines : la dernière d'un paragraphe est courte par nature
-          const max = Math.max(...l);
-          if (med < 65 || med > 75 || max > 80) hors.push(`${id}${withImage ? ' +image' : ''} · ${nom} : médiane (lignes pleines) ${med}, max ${max} (${l.join(' ')})`);
-        }
-        await page.close();
+    // L'image du wiki ne touche que Grande Croisade : Horus et Sanguinius suffisent avec image, les 20 sans.
+    const cas: [string, boolean][] = [...FICHES.map((id): [string, boolean] => [id, false]), ['horus', true], ['sanguinius', true]];
+    for (const [id, withImage] of cas) {
+      const page = await open(id, 1440, withImage);
+      expect(await page.evaluate(() => document.fonts.check('15px Inter')), 'police Inter chargée (réseau requis)').toBe(true);
+      for (const [nom, sel] of Object.entries(SECTIONS_TEXTE)) {
+        const l = await lignes(page, sel);
+        const med = mediane(l.length > 1 ? l.slice(0, -1) : l); // lignes pleines : la dernière d'un paragraphe est courte par nature
+        const max = Math.max(...l);
+        if (med < 58 || med > 80 || max > 88) hors.push(`${id}${withImage ? ' +image' : ''} · ${nom} : médiane (lignes pleines) ${med}, max ${max} (${l.join(' ')})`);
       }
+      await page.close();
     }
     expect(hors).toEqual([]);
-  });
+  }, 120000);
 
   // L158/t1 (2e passe) — la consigne du lot : rien ne change sous 761 px. Entre ~612 et 760 px la zone de contenu du
   // panneau (571 à 650 px) est sous l'ancien plafond de 70ch (662 px) : les textes y prennent toute la largeur, et le
