@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 20:47",
+  "generated": "2026-10-22 20:55",
   "entries": [
+    {
+      "slug": "2026-10-22-pantheon-du-chaos-focus-visible-et-nom-precis-sur-l-image-de",
+      "title": "Panthéon du Chaos : focus visible et nom précis sur l'image de chaque dieu",
+      "date": "2026-10-22",
+      "lots": [
+        "L172"
+      ],
+      "captures": [
+        "captures/L172-chaos-focus-1440.png",
+        "captures/L172-chaos-focus-390.png"
+      ],
+      "alts": [
+        "L'en-tête de Khorne sur ordinateur, entouré d'un cadre doré de 2 pixels sur tout son pourtour : l'image est sélectionnée au clavier",
+        "L'en-tête de Khorne sur un téléphone de 390 pixels de large, entouré du même cadre doré, visible sur les quatre côtés"
+      ],
+      "html": "<p>Au clavier, quand la touche Tab arrive sur l'image d'un dieu du Panthéon du Chaos, un cadre doré de 2 pixels entoure désormais tout l'en-tête, bien visible sur ses quatre côtés. Avant, il n'en restait qu'un trait très fin, en partie coupé.</p>\n<p>Chaque image porte aussi un nom propre à son dieu, « Agrandir l'illustration de Khorne », « … de Nurgle », etc., au lieu de quatre boutons tous nommés « Voir en grand ». Les lecteurs d'écran distinguent ainsi les quatre images.</p>"
+    },
     {
       "slug": "2026-10-22-pantheon-du-chaos-le-raccourci-vers-un-dieu-y-emmene-aussi-l",
       "title": "Panthéon du Chaos : le raccourci vers un dieu y emmène aussi le clavier",
