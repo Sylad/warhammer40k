@@ -104,7 +104,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
                 <div class="related-grid">
                   @for (r of c.relatedConcepts; track r.name) {
                     @if (r.conceptId) {
-                      <a class="related-card" [sectionAnchor]="r.conceptId">
+                      <a class="related-card" [sectionAnchor]="r.conceptId" (click)="relatedClick($event, r.conceptId)">
                         <div class="related-name">{{ r.name }}</div>
                         @if (r.description) { <p>{{ r.description }}</p> }
                         <span class="related-arrow">→</span>
@@ -215,6 +215,18 @@ export class LoreConceptsComponent {
 
   setFilter(c: 'all' | LoreConceptCategory) {
     this.filterCategory.set(c);
+  }
+
+  /**
+   * L162 : un concept masqué par le filtre de catégorie n'a pas de section dans la page, le lien (directive
+   * sectionAnchor) ne trouverait rien. Le filtre repasse à « Tous », puis on rejoint la section une fois rendue
+   * (comme la frise). Un clic modifié ouvre l'href dans un autre onglet : rien à faire ici.
+   */
+  relatedClick(ev: MouseEvent, id: string): void {
+    if (ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+    if (this.filtered().some(c => c.id === id)) return;
+    this.filterCategory.set('all');
+    setTimeout(() => revealSection(id), 50);
   }
 
   conceptImg(id: string): string | null {
