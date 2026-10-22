@@ -1699,6 +1699,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "conforme après 2 corrections mineures (filets des titres de section en pleine largeur à 1440 px ; seuil « 760 px » faux dans le README et le commentaire SCSS) — orchestré (vague 2026-10-22-wh-chaos, 1 passe(s) de correction)", commit: 6c5181e391058b09c7e3fa01270336b7f61d781e }
   - id: L172
     title: "Lore Chaos : focus de l'image d'en-tête (1364×389) rogné par overflow hidden (trait de 1 px à ~1,9:1) et 4 boutons nommés « Voir en grand » → contour intérieur or de 2 px, nom « Agrandir l'illustration de <dieu> » — WCAG 1.4.11, 2.4.6 (UX L11)"
     public: "Panthéon du Chaos : focus visible et nom précis sur l'image de chaque dieu"
