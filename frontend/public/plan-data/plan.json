@@ -493,26 +493,30 @@
     {
       "id": "L161",
       "title": "Visionneuse d'images : sous-titre lisible",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L162",
       "title": "Concepts : un lien mène toujours au concept visé",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L163",
       "title": "Recherche : le focus revient où il était",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L164",
       "title": "Fiches du Lore : la section visée s'arrête juste sous la barre",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     }
   ]
 }
