@@ -11,7 +11,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { isNotFound, retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { longestWord } from '../../shared/longest-word';
-import { goToSection } from '../../core/utils/section-anchor';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -30,7 +30,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
 @Component({
   selector: 'app-primarch-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
   template: `
     @if (primarch(); as p) {
       @if (related.failed()) {
@@ -80,16 +80,16 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
 
       <!-- ANCHOR NAV -->
       <nav class="anchor-nav">
-        <a href="#description" (click)="scrollTo($event, 'description')">Description</a>
-        @if (p.personality) { <a href="#personnalite" (click)="scrollTo($event, 'personnalite')">Personnalité</a> }
-        @if (p.earlyLife) { <a href="#origines" (click)="scrollTo($event, 'origines')">Origines</a> }
-        @if (p.greatCrusade) { <a href="#croisade" (click)="scrollTo($event, 'croisade')">Grande Croisade</a> }
-        @if (p.heresy) { <a href="#heresie" (click)="scrollTo($event, 'heresie')">Hérésie</a> }
-        @if (p.finalFate) { <a href="#destin" (click)="scrollTo($event, 'destin')">Destin</a> }
-        @if (p.legacy) { <a href="#heritage" (click)="scrollTo($event, 'heritage')">Héritage</a> }
-        @if (p.notableBattles?.length) { <a href="#batailles" (click)="scrollTo($event, 'batailles')">Timeline</a> }
-        @if (p.quotes?.length) { <a href="#citations" (click)="scrollTo($event, 'citations')">Citations</a> }
-        @if (galleryImages().length > 0) { <a href="#iconographie" (click)="scrollTo($event, 'iconographie')">Iconographie</a> }
+        <a sectionAnchor="description">Description</a>
+        @if (p.personality) { <a sectionAnchor="personnalite">Personnalité</a> }
+        @if (p.earlyLife) { <a sectionAnchor="origines">Origines</a> }
+        @if (p.greatCrusade) { <a sectionAnchor="croisade">Grande Croisade</a> }
+        @if (p.heresy) { <a sectionAnchor="heresie">Hérésie</a> }
+        @if (p.finalFate) { <a sectionAnchor="destin">Destin</a> }
+        @if (p.legacy) { <a sectionAnchor="heritage">Héritage</a> }
+        @if (p.notableBattles?.length) { <a sectionAnchor="batailles">Timeline</a> }
+        @if (p.quotes?.length) { <a sectionAnchor="citations">Citations</a> }
+        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -469,7 +469,6 @@ export class PrimarchDetailComponent {
   statusLabel(s: PrimarchStatus): string { return STATUS_LABEL[s]; }
   statusColor(s: PrimarchStatus): string { return STATUS_COLOR[s]; }
 
-  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 
   openHeroLightbox(p: Primarch, ev: Event): void {
     const url = this.heroImage();

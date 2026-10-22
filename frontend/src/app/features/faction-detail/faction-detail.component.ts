@@ -11,7 +11,7 @@ import { longestWord } from '../../shared/longest-word';
 import { artworkForFaction, videoForFaction } from './faction-media';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
-import { goToSection } from '../../core/utils/section-anchor';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -74,7 +74,7 @@ const DEFAULT_RESOURCES = [
 @Component({
   selector: 'app-faction-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (faction(); as f) {
       @if (units.failed() || subFactions.failed() || videos.failed() || artworks.failed()) {
@@ -114,15 +114,15 @@ const DEFAULT_RESOURCES = [
       </section>
 
       <nav class="anchor-nav">
-        <a href="#histoire" (click)="scrollTo($event, 'histoire')">Histoire & Lore</a>
-        @if (f.longHistory) { <a href="#chronique" (click)="scrollTo($event, 'chronique')">Chronique Complète</a> }
-        @if (f.notableWars?.length) { <a href="#guerres" (click)="scrollTo($event, 'guerres')">Guerres Notables</a> }
-        @if (f.notableHeroes?.length) { <a href="#heros" (click)="scrollTo($event, 'heros')">Héros</a> }
-        @if (subFactions().length > 0) { <a href="#subfactions" (click)="scrollTo($event, 'subfactions')">{{ subFactionLabel() }}</a> }
-        @if (units().length > 0) { <a href="#units" (click)="scrollTo($event, 'units')">Unités</a> }
-        @if (f.currentState) { <a href="#etat" (click)="scrollTo($event, 'etat')">État Actuel</a> }
-        @if (f.legacy) { <a href="#heritage" (click)="scrollTo($event, 'heritage')">Héritage</a> }
-        @if (galleryImages().length > 0) { <a href="#iconographie" (click)="scrollTo($event, 'iconographie')">Iconographie</a> }
+        <a sectionAnchor="histoire">Histoire & Lore</a>
+        @if (f.longHistory) { <a sectionAnchor="chronique">Chronique Complète</a> }
+        @if (f.notableWars?.length) { <a sectionAnchor="guerres">Guerres Notables</a> }
+        @if (f.notableHeroes?.length) { <a sectionAnchor="heros">Héros</a> }
+        @if (subFactions().length > 0) { <a sectionAnchor="subfactions">{{ subFactionLabel() }}</a> }
+        @if (units().length > 0) { <a sectionAnchor="units">Unités</a> }
+        @if (f.currentState) { <a sectionAnchor="etat">État Actuel</a> }
+        @if (f.legacy) { <a sectionAnchor="heritage">Héritage</a> }
+        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -891,6 +891,4 @@ export class FactionDetailComponent {
     const url = this.galleryThumbUrl();
     return url ? `url('${url}')` : 'linear-gradient(135deg, #2a1c10, #050403)';
   }
-
-  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

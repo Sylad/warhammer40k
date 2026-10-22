@@ -6,7 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { Saint, SaintCategory } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
-import { goToSection } from '../../core/utils/section-anchor';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
   'living-saint': 'Sainte Vivante',
@@ -17,7 +17,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 @Component({
   selector: 'app-saint-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (saint(); as s) {
       <a class="back-btn" routerLink="/lore/saints">← RETOUR AUX SAINTS</a>
@@ -36,12 +36,12 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
       </section>
 
       <nav class="anchor-nav">
-        <a href="#description" (click)="scrollTo($event, 'description')">Description</a>
-        @if (s.longHistory) { <a href="#histoire" (click)="scrollTo($event, 'histoire')">Histoire</a> }
-        @if (s.miracles?.length) { <a href="#miracles" (click)="scrollTo($event, 'miracles')">Miracles</a> }
-        @if (s.notableBattles?.length) { <a href="#batailles" (click)="scrollTo($event, 'batailles')">Batailles</a> }
-        @if (s.quotes?.length) { <a href="#citations" (click)="scrollTo($event, 'citations')">Citations</a> }
-        @if (galleryImages().length > 0) { <a href="#iconographie" (click)="scrollTo($event, 'iconographie')">Iconographie</a> }
+        <a sectionAnchor="description">Description</a>
+        @if (s.longHistory) { <a sectionAnchor="histoire">Histoire</a> }
+        @if (s.miracles?.length) { <a sectionAnchor="miracles">Miracles</a> }
+        @if (s.notableBattles?.length) { <a sectionAnchor="batailles">Batailles</a> }
+        @if (s.quotes?.length) { <a sectionAnchor="citations">Citations</a> }
+        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -165,6 +165,4 @@ export class SaintDetailComponent {
   }
 
   categoryLabel(c: SaintCategory): string { return CATEGORY_LABEL[c]; }
-
-  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

@@ -6,12 +6,12 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { GodMachine } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
-import { goToSection } from '../../core/utils/section-anchor';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 @Component({
   selector: 'app-titan-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (machine(); as m) {
       @if (factions.failed()) {
@@ -33,11 +33,11 @@ import { goToSection } from '../../core/utils/section-anchor';
       </section>
 
       <nav class="anchor-nav">
-        <a href="#description" (click)="scrollTo($event, 'description')">Description</a>
-        @if (m.longHistory) { <a href="#histoire" (click)="scrollTo($event, 'histoire')">Histoire</a> }
-        @if (m.specs?.length) { <a href="#specs" (click)="scrollTo($event, 'specs')">Spécifications</a> }
-        @if (m.notableExamples?.length) { <a href="#exemples" (click)="scrollTo($event, 'exemples')">Exemples</a> }
-        @if (galleryImages().length > 0) { <a href="#iconographie" (click)="scrollTo($event, 'iconographie')">Iconographie</a> }
+        <a sectionAnchor="description">Description</a>
+        @if (m.longHistory) { <a sectionAnchor="histoire">Histoire</a> }
+        @if (m.specs?.length) { <a sectionAnchor="specs">Spécifications</a> }
+        @if (m.notableExamples?.length) { <a sectionAnchor="exemples">Exemples</a> }
+        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -167,6 +167,4 @@ export class TitanDetailComponent {
   categoryLabel(c: string): string {
     return c === 'titan' ? 'Titan' : c === 'knight' ? 'Chevalier' : 'Walker';
   }
-
-  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

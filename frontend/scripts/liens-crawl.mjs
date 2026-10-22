@@ -51,13 +51,13 @@ export function analyse(r) {
   for (const l of internal) {
     const bare = l.kind === 'href' && l.raw?.startsWith('#');
     if (bare && l.raw === '#') continue; // commandes de la carte (Leaflet gère le clic)
-    if (bare && !(l.listeners ?? []).includes('click')) {
+    if (bare) { // L160 : même avec un (click), « #x » nu mène à « /#x » pour un clic du milieu / Ctrl+clic
       out.ancresNues.push({ page: l.from, lien: l.raw, texte: l.text });
       continue;
     }
     if (!l.hash) continue;
-    const target = bare ? P.get(l.from) : P.get(l.to);
-    if (target && !target.ids.includes(l.hash)) out.ancresAbsentes.push({ page: l.from, lien: `${bare ? l.from : l.to}#${l.hash}`, texte: l.text });
+    const target = P.get(l.to);
+    if (target && !target.ids.includes(l.hash)) out.ancresAbsentes.push({ page: l.from, lien: `${l.to}#${l.hash}`, texte: l.text });
   }
   return out;
 }

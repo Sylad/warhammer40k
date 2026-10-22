@@ -250,8 +250,10 @@ Audit outillé de TOUS les liens (rapport du 2026-10-02 : `docs/liens/audit-2026
 - `npm run liens` (statique, sans réseau) : inventaire (gabarits, code, données d'amorçage, carte
   galactique) et vérification des liens internes — route servie par `app.routes.ts` (sinon le
   `**` renvoie en silence vers /factions), identifiant présent dans `backend/seed`, ancre posée par
-  la page cible, **pas d'ancre nue** `href="#x"` sans `(click)` (avec `<base href="/">` elle mène à
-  l'accueil : utiliser `[routerLink]="[]" [fragment]`), fichier présent (casse comprise), fiche
+  la page cible, **pas d'ancre nue** `href="#x"`, avec ou sans `(click)` (avec `<base href="/">` elle mène à
+  l'accueil au clic du milieu, au Ctrl+clic et à « copier l'adresse » : utiliser l'attribut `sectionAnchor`
+  de `shared/section-anchor.directive.ts` pour une section de la page courante — l'audit le vérifie sur
+  la page même —, ou `[routerLink]="[]" [fragment]`), fichier présent (casse comprise), fiche
   technique de chaque unité. Code 1 s'il y a un lien cassé.
 - **Garde en CI** : `scripts/liens.test.mjs` (Vitest, donc `npm test` et « Contrôles frontend »).
   Ce qu'elle vérifie, sans réseau : chaque lien interne écrit dans le code (gabarits, `route:`,

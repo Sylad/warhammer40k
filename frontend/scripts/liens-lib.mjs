@@ -260,6 +260,16 @@ export function codeLinks(files = sourceFiles()) {
       const href = attr(a, 'href');
       const hrefB = attr(a, '[href]') ?? attr(a, '[attr.href]');
       const click = attr(a, '(click)');
+      // L160 : directive sectionAnchor (shared/section-anchor.directive.ts) — son href réel est « page courante#id »,
+      // l'ancre est donc vérifiée sur la page même (id littéral : section posée ; expression : déclarée dans DATA_LINKS).
+      const sa = attr(a, 'sectionAnchor');
+      const saB = attr(a, '[sectionAnchor]');
+      if (t.tag === 'a' && (sa != null || saB != null)) {
+        const lit = sa ?? /^\s*'([^']*)'\s*$/.exec(saB)?.[1] ?? null;
+        if (lit != null) push({ cls: 'anchor', target: `~#${lit}`, source: source(t.index) });
+        else push({ cls: 'anchor', target: `~#{${saB.trim()}}`, source: source(t.index), dynamic: saB.trim() });
+        continue;
+      }
       let path = null;
       let dynamic = null;
       if (lit != null) path = lit;
@@ -289,10 +299,9 @@ export function codeLinks(files = sourceFiles()) {
         push({ cls: 'external', target: h, source: source(t.index), dynamic: h });
       }
       else if (/^#|^\{'#' \+/.test(h)) {
-        // Ancre « nue » : avec <base href="/">, le navigateur la résout en « /#x » (accueil)
-        // sauf si un gestionnaire (click) l'intercepte.
-        // Ancre nue calculée (« '#' + r.conceptId ») : l'expression est relevée pour que sa déclaration
-        // (DATA_LINKS, champ lu) ne soit pas orpheline.
+        // Ancre « nue » : avec <base href="/">, le navigateur la résout en « /#x » (accueil), pour un clic
+        // du milieu, Ctrl+clic ou « copier l'adresse » même si un (click) l'intercepte au clic simple (L160) :
+        // toujours cassée. Utiliser sectionAnchor (ancre de la page courante) ou [routerLink]="[]" [fragment].
         const calc = /^\{\s*'#'\s*\+\s*(.+?)\s*\}$/.exec(h)?.[1] ?? null;
         push({ cls: 'anchor', target: `~${h.startsWith('#') ? h : '#' + h}`, source: source(t.index), bare: true, click: click ?? null, dynamic: calc });
       } else if (h.startsWith('/')) push({ cls: /\.[a-z0-9]{2,5}$/i.test(h) ? 'asset' : 'route', target: h, source: source(t.index) });
@@ -577,8 +586,8 @@ export function checkInternal(links, { routes = readRoutes(), data = loadSeed(),
         }
       }
     } else if (l.cls === 'anchor') {
-      if (l.bare && !l.click) {
-        fail('ancre nue sans (click) : avec <base href="/">, le navigateur va à « /#… » (accueil)');
+      if (l.bare) {
+        fail('ancre nue : avec <base href="/">, le navigateur va à « /#… » (accueil) pour un clic du milieu, Ctrl+clic ou « copier l\'adresse » — utiliser sectionAnchor ou [routerLink]="[]" [fragment]');
         continue;
       }
       const [p, frag] = l.target.split('#');

@@ -6,12 +6,12 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { LegendaryShip } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
-import { goToSection } from '../../core/utils/section-anchor';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 @Component({
   selector: 'app-ship-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (ship(); as s) {
       <a class="back-btn" routerLink="/lore/ships">← RETOUR AUX VAISSEAUX</a>
@@ -37,11 +37,11 @@ import { goToSection } from '../../core/utils/section-anchor';
       </section>
 
       <nav class="anchor-nav">
-        <a href="#description" (click)="scrollTo($event, 'description')">Description</a>
-        @if (s.longHistory) { <a href="#histoire" (click)="scrollTo($event, 'histoire')">Histoire</a> }
-        @if (s.specs?.length) { <a href="#specs" (click)="scrollTo($event, 'specs')">Spécifications</a> }
-        @if (s.notableBattles?.length) { <a href="#batailles" (click)="scrollTo($event, 'batailles')">Batailles</a> }
-        @if (galleryImages().length > 0) { <a href="#iconographie" (click)="scrollTo($event, 'iconographie')">Iconographie</a> }
+        <a sectionAnchor="description">Description</a>
+        @if (s.longHistory) { <a sectionAnchor="histoire">Histoire</a> }
+        @if (s.specs?.length) { <a sectionAnchor="specs">Spécifications</a> }
+        @if (s.notableBattles?.length) { <a sectionAnchor="batailles">Batailles</a> }
+        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -174,6 +174,4 @@ export class ShipDetailComponent {
     const url = this.heroImage();
     return url ? `url('${url}')` : 'none';
   }
-
-  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }

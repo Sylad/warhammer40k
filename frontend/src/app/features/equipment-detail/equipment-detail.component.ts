@@ -7,7 +7,7 @@ import type { Equipment, EquipmentType } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { subCategoryLabel } from '../../shared/sub-category-label';
-import { goToSection } from '../../core/utils/section-anchor';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Arme à distance',
@@ -19,7 +19,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
 @Component({
   selector: 'app-equipment-detail',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink],
   template: `
     @if (equipment(); as e) {
       <a class="back-btn" routerLink="/lore/equipment">← RETOUR À L'ARSENAL</a>
@@ -38,11 +38,11 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
       </section>
 
       <nav class="anchor-nav">
-        <a href="#description" (click)="scrollTo($event, 'description')">Description</a>
-        @if (e.loreLong) { <a href="#histoire" (click)="scrollTo($event, 'histoire')">Histoire</a> }
-        @if (e.specs) { <a href="#specs" (click)="scrollTo($event, 'specs')">Spécifications</a> }
-        @if (e.notable?.length) { <a href="#notable" (click)="scrollTo($event, 'notable')">Porteurs notables</a> }
-        @if (e.citation) { <a href="#citation" (click)="scrollTo($event, 'citation')">Citation</a> }
+        <a sectionAnchor="description">Description</a>
+        @if (e.loreLong) { <a sectionAnchor="histoire">Histoire</a> }
+        @if (e.specs) { <a sectionAnchor="specs">Spécifications</a> }
+        @if (e.notable?.length) { <a sectionAnchor="notable">Porteurs notables</a> }
+        @if (e.citation) { <a sectionAnchor="citation">Citation</a> }
       </nav>
 
       <section class="layout">
@@ -148,6 +148,4 @@ export class EquipmentDetailComponent {
   factionsLabel(e: Equipment): string {
     return (e.factionIds ?? []).join(' · ');
   }
-
-  scrollTo(e: Event, id: string): void { goToSection(e, id); }
 }
