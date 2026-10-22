@@ -1614,6 +1614,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "conforme, avec 1 note mineure (aria-modal absent sur le panneau de recherche) — orchestré (vague 2026-10-22-wh-l161b, 2 passe(s) de correction)", commit: ac0879e296d6790d3bc3cbc1d9801d1f38764e9c }
   - id: L164
     title: "Ancres des fiches : titre de section à 47–54 px sous la barre d'ancres après un clic (attendu < 40 px par docs/qa/expectations.md, QA prod 22-10 sur phalanx, horus, space-marines, saint, titan, équipement, à 1440 et 390 px) — marge de défilement ou padding du panneau pour ramener le titre sous 40 px, mesure navigateur"
     public: "Fiches du Lore : la section visée s'arrête juste sous la barre"
