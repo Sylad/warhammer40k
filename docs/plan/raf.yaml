@@ -1674,6 +1674,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 6846f892ec4b05f6969841ce7353c7f73fac76c1 }
   - id: L169
     title: "Lore Chaos, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu ; à 390 px le ✕ est sous le bouton Menu (fermeture impossible au toucher) → comportement de dialogue de la fiche Primarque (L157), couche au-dessus de la barre — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L11)"
     public: "Panthéon du Chaos : visionneuse d'images utilisable au clavier et au téléphone"
