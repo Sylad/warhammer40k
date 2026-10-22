@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 15:33",
+  "generated": "2026-10-22 16:07",
   "entries": [
     {
       "slug": "2026-10-22-concepts-un-lien-mene-toujours-au-concept-vise",
@@ -11,13 +11,9 @@
       ],
       "captures": [
         "captures/L162-concepts-lien-filtre-1440.png",
-        "captures/L162-concepts-lien-filtre-390.png",
-        "captures/L162-concepts-lien-filtre-1440.png",
         "captures/L162-concepts-lien-filtre-390.png"
       ],
       "alts": [
-        "Page Concepts après un clic sur la carte Webway depuis le Trône d'Or avec le filtre Impérial : le filtre est revenu à Tous et la page montre la section du Webway",
-        "Page Concepts sur téléphone (390 px) : la section du Webway est affichée en haut après le clic, le filtre étant revenu à Tous",
         "Page Concepts après un clic sur la carte Webway depuis le Trône d'Or avec le filtre Impérial : le filtre est revenu à Tous et la page montre la section du Webway",
         "Page Concepts sur téléphone (390 px) : la section du Webway est affichée en haut après le clic, le filtre étant revenu à Tous"
       ],

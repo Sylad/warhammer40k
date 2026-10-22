@@ -52,6 +52,13 @@ function cadenceAvailable(): boolean {
 }
 
 describe('données des Nouveautés (public/nouveautes-data) — L23', () => {
+  it("L162 — aucune entrée ne déclare deux fois la même capture (lecteur d'écran, page publique)", () => {
+    const doublons = readJson().entries.flatMap((e) =>
+      e.captures.filter((c, i) => e.captures.indexOf(c) !== i).map((c) => `${e.slug} : ${String(c)}`),
+    );
+    expect(doublons).toEqual([]);
+  });
+
   it('le JSON versionné existe et porte une entrée par fichier de docs/nouveautes/', () => {
     expect(existsSync(JSON_FILE), 'nouveautes.json absent (cd frontend && npm run news)').toBe(true);
     const slugs = readJson().entries.map((e) => e.slug).sort();
