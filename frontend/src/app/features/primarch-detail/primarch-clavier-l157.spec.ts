@@ -7,7 +7,7 @@ import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -18,7 +18,7 @@ const PRIMARCHS = JSON.parse(readFileSync(resolve(__dirname, '../../../../../bac
 const HORUS = PRIMARCHS.find((p: { id: string }) => p.id === 'horus');
 const IMG = 'data:image/svg+xml;base64,PHN2Zy8+';
 
-async function monterFiche() {
+async function monterFiche(params$: BehaviorSubject<ReturnType<typeof convertToParamMap>> = new BehaviorSubject(convertToParamMap({ id: 'horus' }))) {
   const service = fakeWarhammerService({
     getPrimarch: () => of(HORUS),
     getWikiImage: (q: string) => of({ imageUrl: `${IMG}#${q}`, pageTitle: null, pageUrl: null }),
@@ -26,7 +26,7 @@ async function monterFiche() {
   await setupTestBed([PrimarchDetailComponent], [
     provideRouter([]),
     { provide: WarhammerService, useValue: service },
-    { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'horus' })), snapshot: { fragment: null } } },
+    { provide: ActivatedRoute, useValue: { paramMap: params$, snapshot: { fragment: null } } },
   ]);
   const f = TestBed.createComponent(PrimarchDetailComponent);
   const settle = async () => { f.detectChanges(); await f.whenStable(); f.detectChanges(); };
@@ -77,6 +77,20 @@ describe('Fiche Primarque — visionneuse en dialogue, attributs (L157 ; focus :
   it('R5 — le composant partagé figure-lightbox reste intact (test scellé L120 R10)', () => {
     const src = readFileSync(resolve(__dirname, '../../shared/components/figure-lightbox/figure-lightbox.component.ts'), 'utf8');
     expect(src).not.toMatch(/role=|aria-modal/);
+  });
+});
+
+describe('Fiche Primarque — changement de Primarque, visionneuse ouverte (L157, WCAG 4.1.2)', () => {
+  it('R10 — la fiche est réutilisée au changement d’id : la visionneuse ouverte est fermée, pas gardée au nom de l’ancien Primarque', async () => {
+    const params$ = new BehaviorSubject(convertToParamMap({ id: 'horus' }));
+    const { f, el, settle } = await monterFiche(params$);
+    el.querySelector<HTMLButtonElement>('.hero-portrait')!.click();
+    await settle();
+    expect(f.componentInstance.lightbox()).not.toBeNull();
+    params$.next(convertToParamMap({ id: 'sanguinius' }));
+    await settle();
+    expect(f.componentInstance.lightbox()).toBeNull();
+    expect(dialogue(el)).toBeNull();
   });
 });
 

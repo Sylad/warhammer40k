@@ -164,6 +164,52 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, clavier (navigateur, dist
     await page.close();
   });
 
+  it('R10 — visionneuse ouverte, choisir un autre Primarque par Ctrl+K la ferme : plus de dialogue au nom de l’ancien, le focus est sur le h1 de la nouvelle fiche', async () => {
+    const page = await open();
+    await page.locator('.hero-portrait').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[role="dialog"] .lightbox-close').waitFor();
+    await page.keyboard.press('Control+k');
+    await page.locator('.cmdk-panel').waitFor();
+    await page.waitForFunction(() => document.activeElement?.classList.contains('cmdk-input'));
+    await page.keyboard.type('sanguinius');
+    await page.locator('.cmdk-item').first().waitFor();
+    await page.keyboard.press('Enter');
+    await page.waitForFunction(() => document.querySelector('h1')?.textContent?.trim() === 'Sanguinius');
+    // la fiche est réutilisée : laisser les rendus asynchrones se poser avant de mesurer
+    await page.locator('#croisade .inline-figure-img').waitFor();
+    expect(await page.locator('[role="dialog"]').count(), 'dialogue').toBe(0);
+    expect(await page.locator('.lightbox').count(), 'visionneuse').toBe(0);
+    expect(await page.locator('.lightbox-title').count(), 'titre de la visionneuse').toBe(0);
+    expect(await page.evaluate(() => {
+      const a = document.activeElement as HTMLElement;
+      return { balise: a.tagName, dansMain: !!a.closest('main'), texte: a.textContent?.trim() };
+    })).toEqual({ balise: 'H1', dansMain: true, texte: 'Sanguinius' });
+    // la nouvelle fiche s’ouvre normalement et porte son propre nom
+    await page.locator('.hero-portrait').click();
+    await page.locator('[role="dialog"] .lightbox-title').waitFor();
+    expect(await page.locator('[role="dialog"]').getAttribute('aria-label')).toBe('Visionneuse — Sanguinius');
+    expect((await page.locator('.lightbox-title').textContent())?.trim()).toBe('Sanguinius');
+    await page.close();
+  });
+
+  it('R11 — Échap avec la recherche ouverte par-dessus la visionneuse ne ferme que la recherche ; le suivant ferme la visionneuse', async () => {
+    const page = await open();
+    await page.locator('#origines .info-card-img').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('[role="dialog"] .lightbox-close').waitFor();
+    await page.keyboard.press('Control+k');
+    await page.locator('.cmdk-panel').waitFor();
+    await page.waitForFunction(() => document.activeElement?.classList.contains('cmdk-input'));
+    await page.keyboard.press('Escape');
+    await page.locator('.cmdk-panel').waitFor({ state: 'detached' });
+    expect(await page.locator('[role="dialog"]').count(), 'visionneuse après le 1er Échap').toBe(1);
+    await page.keyboard.press('Escape');
+    await page.locator('[role="dialog"]').waitFor({ state: 'detached' });
+    expect(await page.evaluate(() => document.activeElement?.className)).toContain('info-card-img');
+    await page.close();
+  });
+
   it('R6 — liste : le filtre actif est aria-pressed=true, un clic déplace l’état', async () => {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(`${base}/lore/primarchs`);
