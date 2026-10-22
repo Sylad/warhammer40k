@@ -60,7 +60,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
   template: `
     @if (isOpen()) {
       <div class="cmdk-backdrop" (click)="close()"></div>
-      <div class="cmdk-panel" role="dialog" aria-label="Recherche globale">
+      <div class="cmdk-panel" role="dialog" aria-label="Recherche globale" (keydown)="boucler($event)">
         <div class="cmdk-header">
           <span class="cmdk-icon">⌕</span>
           <input
@@ -87,7 +87,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
                 class="cmdk-item"
                 [class.active]="selectedIndex() === i"
                 [routerLink]="r.routerLink"
-                (click)="navigated.emit(); close()"
+                (click)="navigated.emit(); close(false)"
                 (mouseenter)="selectedIndex.set(i)">
                 <span class="cmdk-type">{{ typeLabel(r.type) }}</span>
                 <span class="cmdk-label">{{ r.label }}</span>
@@ -249,6 +249,8 @@ export class CommandPaletteComponent implements OnDestroy {
   open(): void {
     this.relancerSourcesEnEchec();
     this.premiereOuverture$.next();
+    const actif = document.activeElement;
+    this.avant = actif instanceof HTMLElement && actif !== document.body ? actif : null;
     this.isOpen.set(true);
     this.query = '';
     this.queryS.set('');
@@ -277,8 +279,36 @@ export class CommandPaletteComponent implements OnDestroy {
     this.annulerFocus();
   }
 
-  close(): void {
+  /**
+   * L163 (WCAG 2.4.3) : fermée sans destination (Échap, fond, Ctrl+K), la recherche rend le focus à
+   * l'élément qui l'avait avant l'ouverture ; fermée sur un résultat (`rendreFocus = false`), elle ne
+   * le reprend pas : la mise en page place le focus sur le titre de la page d'arrivée.
+   */
+  close(rendreFocus = true): void {
     this.isOpen.set(false);
+    const avant = this.avant;
+    this.avant = null;
+    this.annulerFocus();
+    if (rendreFocus && avant?.isConnected) avant.focus();
+  }
+
+  private avant: HTMLElement | null = null;
+
+  /** L163 : Tab boucle dans la recherche (champ ↔ résultats) au lieu de sortir vers la page dessous. */
+  boucler(e: KeyboardEvent): void {
+    if (e.key !== 'Tab') return;
+    const panneau = e.currentTarget as HTMLElement;
+    const focalisables = Array.from(panneau.querySelectorAll<HTMLElement>('input, a[href]'));
+    const premier = focalisables[0];
+    const dernier = focalisables[focalisables.length - 1];
+    const actif = document.activeElement;
+    if (e.shiftKey && (actif === premier || !panneau.contains(actif))) {
+      e.preventDefault();
+      dernier?.focus();
+    } else if (!e.shiftKey && (actif === dernier || !panneau.contains(actif))) {
+      e.preventDefault();
+      premier?.focus();
+    }
   }
 
   onQueryChange(v: string): void {
@@ -300,7 +330,7 @@ export class CommandPaletteComponent implements OnDestroy {
       if (sel) {
         this.navigated.emit();
         this.router.navigate(sel.routerLink);
-        this.close();
+        this.close(false);
       }
     }
   }
