@@ -7,6 +7,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 /** Titre des visionneuses : l'or, lisible sur leur fond ; la couleur du dieu y est sous 4,5:1 (L167). */
 const TITRE_VISIONNEUSE = '#f0d276';
@@ -16,7 +17,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
 @Component({
   selector: 'app-lore-chaos-gods',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, SectionAnchorDirective],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -32,7 +33,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
         </p>
         <div class="quick-nav">
           @for (g of gods(); track g.id) {
-            <a class="quick-link" [routerLink]="[]" [fragment]="g.id" [style.color]="lisible(g.color)" [style.--god-color]="g.color">
+            <a class="quick-link" [sectionAnchor]="g.id" [style.color]="lisible(g.color)" [style.--god-color]="g.color">
               <span class="quick-sigil" [style.color]="g.color">{{ g.sigil }}</span>
               <span class="quick-name">{{ g.name }}</span>
             </a>
