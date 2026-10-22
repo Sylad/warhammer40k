@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 16:29",
+  "generated": "2026-10-22 17:18",
   "entries": [
+    {
+      "slug": "2026-10-22-fiches-du-lore-la-section-visee-s-arrete-juste-sous-la-barre",
+      "title": "Fiches du Lore : la section visée s'arrête juste sous la barre",
+      "date": "2026-10-22",
+      "lots": [
+        "L164"
+      ],
+      "captures": [
+        "captures/L164-ancre-titre-1440.png",
+        "captures/L164-ancre-titre-390.png"
+      ],
+      "alts": [
+        "Fiche du vaisseau Phalanx après un clic sur « Spécifications » : le titre de la section apparaît juste sous la barre des sections",
+        "Même fiche sur téléphone (390 px) : le titre « Spécifications » s'affiche juste sous la barre"
+      ],
+      "html": "<p>Sur les fiches du Lore (factions, primarques, vaisseaux, saints, titans, équipement), un clic sur un lien de la barre des sections amène désormais le titre de la section juste sous la barre, au lieu de le laisser une cinquantaine de pixels plus bas. On voit plus de la section dès l'arrivée, sur ordinateur comme sur téléphone.</p>"
+    },
     {
       "slug": "2026-10-22-recherche-le-focus-revient-ou-il-etait",
       "title": "Recherche : le focus revient où il était",

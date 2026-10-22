@@ -96,7 +96,7 @@
   background: rgba(11, 9, 7, 0.85);
   border: 1px solid var(--border);
   padding: 28px 32px;
-  scroll-margin-top: 12px; /* + scroll-padding-top (_anchor-nav) */
+  scroll-margin-top: -8px; /* + scroll-padding-top (_anchor-nav) : L164, le titre à < 40 px sous la barre */
 }
 .panel h2 {
   font-family: var(--serif);

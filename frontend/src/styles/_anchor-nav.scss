@@ -6,7 +6,7 @@
  * L89 : la barre se colle SOUS l'en-tête (top = --topbar-h, défini dans styles.scss et égal à la
  * hauteur du .topbar) ; à top 0 elle passait derrière lui. Sous 1320 px (les liens des fiches primarque à dix entrées passent sur deux lignes jusqu’à ~1297 px avec une barre de défilement de 17 px) elle tient sur une seule
  * ligne défilante de --anchor-nav-h (60 px, 44 px sous 760 px), bords estompés. --anchor-offset = place à laisser au-dessus
- * d'une cible d'ancre (scroll-margin-top) : en-tête + barre + un souffle. */
+ * d'une cible d'ancre : en-tête + barre + un souffle. L164 : les cibles reprennent 8 px de ce souffle (scroll-margin-top: -8px) pour que leur titre arrive à < 40 px sous la barre. */
 :root {
   --anchor-nav-h: 60px;
   --anchor-offset: calc(var(--topbar-h) + var(--anchor-nav-h) + 12px);

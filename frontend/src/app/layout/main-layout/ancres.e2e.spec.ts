@@ -109,7 +109,7 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
   });
 
   /** Haut de la cible par rapport au bas de la barre, une fois le défilement fini. */
-  async function gap(page: Page, id: string): Promise<{ gap: number; bar: number; bottom: boolean; stable: boolean }> {
+  async function gap(page: Page, id: string): Promise<{ gap: number; titre: number; bar: number; bottom: boolean; stable: boolean }> {
     await page.waitForFunction((x) => !!document.getElementById(x), id);
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
     // L105 : la mesure attend une position STABLE (défilement, hauteur de page et haut de la cible
@@ -139,7 +139,10 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       const bar = Math.max(document.querySelector('.topbar')!.getBoundingClientRect().bottom, nav ? nav.bottom : 0);
       // Bas de page atteint : la cible ne peut pas monter plus haut (page trop courte).
       const bottom = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 1;
-      return { gap: Math.round(document.getElementById(x)!.getBoundingClientRect().top - bar), bar: Math.round(bar), bottom };
+      const cible = document.getElementById(x)!;
+      // L164 : le titre de la section (premier h1-h3 de la cible, sinon la cible même) est ce que le visiteur cherche des yeux.
+      const titre = (cible.querySelector('h1, h2, h3') ?? cible).getBoundingClientRect().top;
+      return { gap: Math.round(cible.getBoundingClientRect().top - bar), titre: Math.round(titre - bar), bar: Math.round(bar), bottom };
     }, id).then((m) => ({ ...m, stable }));
   }
 
@@ -218,6 +221,8 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
         expect(m.bar).toBeGreaterThan(0);
         expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeGreaterThanOrEqual(0);
         if (!m.bottom) expect(m.gap, `${id} : ${m.gap} px sous la barre`).toBeLessThanOrEqual(40);
+        // L164 R1 — fiches à barre d'ancres : le TITRE de la section visée arrive à moins de 40 px sous la barre.
+        if (name.startsWith('Fiche ') && !m.bottom) expect(m.titre, `R1 — ${id} : titre à ${m.titre} px sous la barre`).toBeLessThan(40);
         // L47 : la mesure attend 700 ms de stabilité (20 s au plus) après des polices retardées de 2,5 s :
         // le délai par défaut de 5 s expirait au hasard de la charge de la machine.
       }, 45_000);
