@@ -49,7 +49,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
     @for (god of gods(); track god.id) {
       <article class="god" [id]="god.id" [style.--god-color]="god.color" [style.--god-text]="lisible(god.color)">
         <header class="god-head">
-          <button class="god-bg" type="button" [style.background-image]="godImg(god.id)" (click)="openGodLightbox(god)" aria-label="Voir en grand"></button>
+          <button class="god-bg" type="button" [style.background-image]="godImg(god.id)" (click)="openGodLightbox(god)" [attr.aria-label]="'Agrandir l’illustration de ' + god.name"></button>
           <div class="god-bg-overlay"></div>
           <span class="god-zoom" (click)="openGodLightbox(god)">⛶</span>
           <div class="god-head-content">

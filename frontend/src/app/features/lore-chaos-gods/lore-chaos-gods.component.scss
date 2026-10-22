@@ -115,6 +115,17 @@
       transition: opacity 0.2s;
     }
     .god-bg:hover { opacity: 0.5; }
+    /* Le bouton est à 32 % d'opacité (un contour y serait aussi terni) : le focus se trace par un cadre
+       intérieur sur l'en-tête, au-dessus du voile ; l'overflow:hidden ne le rogne pas, il est dedans. */
+    .god-bg:focus-visible { outline: none; opacity: 0.5; }
+    .god-head:has(.god-bg:focus-visible)::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid #c9a24a;
+      z-index: 3;
+      pointer-events: none;
+    }
     .god-zoom {
       position: absolute;
       bottom: 16px;
