@@ -1605,6 +1605,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "conforme — orchestré (vague 2026-10-22-wh-l161b, 1 passe(s) de correction)", commit: 8d345c7871f20bb3bbb52b79313c535248acdf58 }
   - id: L163
     title: "Recherche Ctrl+K : à la fermeture, le focus n'est rendu à personne (document.activeElement = BODY, command-palette.component.ts:280) et Tab sort de la recherche vers la page dessous (pas de boucle de focus) — rendre le focus à l'élément d'avant et boucler Tab, sur toutes les pages (WCAG 2.4.3, revue de L157)"
     public: "Recherche : le focus revient où il était"
