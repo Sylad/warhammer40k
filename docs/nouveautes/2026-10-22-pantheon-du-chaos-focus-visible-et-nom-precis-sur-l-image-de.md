@@ -9,4 +9,4 @@ captures:
 ---
 Au clavier, quand la touche Tab arrive sur l'image d'un dieu du Panthéon du Chaos, un cadre doré de 2 pixels entoure désormais tout l'en-tête, bien visible sur ses quatre côtés. Avant, il n'en restait qu'un trait très fin, en partie coupé.
 
-Chaque image porte aussi un nom propre à son dieu, « Agrandir l'illustration de Khorne », « … de Nurgle », etc., au lieu de quatre boutons tous nommés « Voir en grand ». Les lecteurs d'écran distinguent ainsi les quatre images.
+Chaque image porte aussi un nom propre à son dieu, « Agrandir l'illustration de Khorne », « … de Nurgle », etc., au lieu de quatre boutons tous nommés « Voir en grand ». Les lecteurs d'écran distinguent ainsi les quatre images.
