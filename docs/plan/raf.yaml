@@ -1573,14 +1573,24 @@ lots:
   - id: L160
     title: "Barres d'ancres des fiches (primarque, faction, saint, titan, vaisseau, équipement, événement, concepts, chronologie) : l'activation défile sans déplacer le focus ni écrire le hash → focus sur la section (tabindex=-1) et hash mis à jour — revue UX L10"
     public: "Fiches du Lore : les ancres mènent vraiment à la section"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review: { date: 2026-10-22, verdict: "conforme après 1 correction : directive sectionAnchor (href = page courante + #section sur les 7 pages), clic simple défilement + focus, Ctrl/Maj/clic du milieu non annulés, audit des liens durci (aucune ancre nue) ; build OK, npm test 1191/1191, liens 0 cassé, e2e L160 36/36 ; notes : garde de dist de l'e2e sans la directive, commentaire et champs morts du parcours des liens", commit: d401018915ef5f0899ccc230929aa7d88d4ca2f0 }
+    ux: { date: 2026-10-22, verdict: "conforme : section ciblée focalisée avec anneau visible sous la barre d'ancres (capture vue par le lead, Lion El'Jonson à 1440 px), chronologie et concepts mesurés sous leur bandeau ; carte de concept filtrée sans effet reprise en lot" }
+    finished: 2026-10-22
   - id: L161
     title: "Visionneuse partagée : sous-titre (.lightbox-role, --gold-soft #80652b, 12 px) à 3,72:1 sur #050403 — WCAG 1.4.3 ; passer à --gold (≈ 8,5:1) sur toutes les visionneuses du site — revue UX de L156"
     public: "Visionneuse d'images : sous-titre lisible"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-22
+  - id: L162
+    title: "Concepts : une carte « lien inter-concepts » dont le concept visé est masqué par le filtre de catégorie ne fait rien au clic (15 liens sur 26 changent de catégorie ; filtre Impérial, Trône d'Or → Webway : adresse et focus inchangés) — remettre le filtre à « Tous » avant revealSection, comme la frise ; test (revue de L160)"
+    public: "Concepts : un lien mène toujours au concept visé"
     status: todo
     estimate: 0.25
     visible: true
