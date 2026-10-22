@@ -70,7 +70,7 @@
       align-items: center;
       gap: 8px;
       padding: 8px 14px;
-      border: 1px solid currentColor;
+      border: 1px solid var(--god-color);
       background: rgba(0, 0, 0, 0.3);
       font-size: 12px;
       letter-spacing: 0.1em;
@@ -120,7 +120,7 @@
       display: flex; align-items: center; justify-content: center;
       background: rgba(8,7,6,0.7);
       border: 1px solid var(--god-color, rgba(201,162,74,0.4));
-      color: var(--god-color, var(--gold-soft));
+      color: var(--god-text, var(--gold-soft));
       font-size: 14px;
       cursor: pointer;
       opacity: 0.7;
@@ -209,7 +209,7 @@
       font-size: 14px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--god-color, var(--gold));
+      color: var(--god-text, var(--gold));
       margin: 24px 0 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
@@ -260,14 +260,14 @@
     .notable-zoom {
       position: absolute;
       top: 8px; right: 10px;
-      color: var(--god-color, var(--gold-soft));
+      color: var(--god-text, var(--gold-soft));
       font-size: 12px;
       opacity: 0.5;
       transition: opacity 0.15s;
     }
     .notable-card:hover .notable-zoom { opacity: 1; }
     .notable-name {
-      color: var(--god-color, var(--gold));
+      color: var(--god-text, var(--gold));
       font-family: var(--serif);
       font-size: 14px;
       letter-spacing: 0.06em;
@@ -295,7 +295,7 @@
       font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--god-color, var(--gold));
+      color: var(--god-text, var(--gold));
       font-weight: 800;
       margin-bottom: 10px;
       padding-bottom: 6px;
@@ -325,7 +325,7 @@
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--god-color, var(--gold));
+      color: var(--god-text, var(--gold));
     }
     .primarch-go:hover { color: var(--gold-bright); }
 

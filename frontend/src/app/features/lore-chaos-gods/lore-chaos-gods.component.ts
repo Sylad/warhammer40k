@@ -6,6 +6,10 @@ import type { ChaosGod, ChaosGodDaemon } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { teinteLisible } from '../../core/utils/teinte-lisible';
+
+/** Titre des visionneuses : l'or, lisible sur leur fond ; la couleur du dieu y est sous 4,5:1 (L167). */
+const TITRE_VISIONNEUSE = '#f0d276';
 
 const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit', 'Neuf', 'Dix'];
 
@@ -28,8 +32,8 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
         </p>
         <div class="quick-nav">
           @for (g of gods(); track g.id) {
-            <a class="quick-link" [routerLink]="[]" [fragment]="g.id" [style.color]="g.color">
-              <span class="quick-sigil">{{ g.sigil }}</span>
+            <a class="quick-link" [routerLink]="[]" [fragment]="g.id" [style.color]="lisible(g.color)" [style.--god-color]="g.color">
+              <span class="quick-sigil" [style.color]="g.color">{{ g.sigil }}</span>
               <span class="quick-name">{{ g.name }}</span>
             </a>
           }
@@ -42,7 +46,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
     }
 
     @for (god of gods(); track god.id) {
-      <article class="god" [id]="god.id" [style.--god-color]="god.color">
+      <article class="god" [id]="god.id" [style.--god-color]="god.color" [style.--god-text]="lisible(god.color)">
         <header class="god-head">
           <button class="god-bg" type="button" [style.background-image]="godImg(god.id)" (click)="openGodLightbox(god)" aria-label="Voir en grand"></button>
           <div class="god-bg-overlay"></div>
@@ -52,7 +56,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
             <div class="god-sigil-wrap">
               <span class="god-sigil" [style.color]="god.color">{{ god.sigil }}</span>
             </div>
-            <h2 [style.color]="god.color">{{ god.name }}</h2>
+            <h2 [style.color]="lisible(god.color)">{{ god.name }}</h2>
             <div class="god-title">{{ god.title }}</div>
             <div class="god-sphere">Sphère : {{ god.sphere }}</div>
             <p class="citation"><span class="quote">«</span> {{ god.citation }} <span class="quote">»</span></p>
@@ -186,6 +190,9 @@ export class LoreChaosGodsComponent {
     return url ? `url('${url}')` : null;
   }
 
+  /** Teinte de texte du dieu (≥ 4,5:1) ; `god.color` reste pour bordures et sigils. */
+  lisible(couleur: string): string { return teinteLisible(couleur); }
+
   formatNum(n: number): string {
     return ['I', 'II', 'III', 'IV'][n - 1] ?? String(n);
   }
@@ -198,7 +205,7 @@ export class LoreChaosGodsComponent {
       subtitle: `${g.title} — ${g.sphere}`,
       description: g.description,
       contextName: 'Panthéon Chaos',
-      contextColor: g.color,
+      contextColor: TITRE_VISIONNEUSE,
       contextSigil: g.sigil,
       searchQuery: g.name,
       mainUrl: baseUrl,
@@ -225,7 +232,7 @@ export class LoreChaosGodsComponent {
         subtitle: `Daemon de ${g.name}`,
         description: d.description,
         contextName: 'Panthéon Chaos',
-        contextColor: g.color,
+        contextColor: TITRE_VISIONNEUSE,
         contextSigil: g.sigil,
         searchQuery: d.name,
         mainUrl: r.imageUrl,
