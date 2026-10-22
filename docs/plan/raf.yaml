@@ -1638,9 +1638,10 @@ lots:
       - { date: 2026-10-22, text: "QA de prod 22-10 (bce2a13) : L161–L164 conformes sur 10 pages à 1440 et 390 px (contraste 8,5:1, filtre remis à Tous, focus Ctrl+K rendu et recherche au-dessus de la visionneuse, titres à 27–34 px sous la barre). 502/530 à partir de 17:51 = redémarrage de dark-blue (4080), sans lien. Mineur hors lots : /factions/space-marines, 3 datasheets 404 en console (sm-sanguinius, sm-primaris-intercessor, sm-leman-russ-prim), repli portrait en 200, rien de cassé à l'écran." }
   - id: L165
     title: "Test navigateur L47 R9 rouge (déjà rouge sur origin/main le 22-10, sans lien avec L161–L164) : clic du milieu sur une vidéo — nouvel onglet attendu, page courante inchangée ; diagnostiquer (test ou comportement)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-22
+    started: 2026-10-22
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
