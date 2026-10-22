@@ -806,7 +806,7 @@ h1 {
   .quotes-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
-  :host { padding: 20px 0 60px; } /* L155 : la gouttière de 16 px est celle de la mise en page, plus de double gouttière */
+  :host { padding: 20px 0 60px; } /* L155 : seule la gouttière de la mise en page reste (16 px sous 680 px, 34 px de 681 à 760 px), plus de double gouttière */
   .hero-grid { padding: 24px 16px; gap: 20px; }
   .iconography-grid { grid-template-columns: 1fr 1fr; }
   h1 { @include fit-title(36px); }
