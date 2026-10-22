@@ -52,17 +52,21 @@ jobs:
       - name: Chromium pour l'acceptation de bout en bout
         run: npx playwright-core install --with-deps chromium
 
-      # L166 : durée de chaque cas (junit) et charge du runner conservées, échec compris,
-      # pour qu'un rouge aléatoire qui revient laisse une mesure.
+      # L166 : durée de chaque cas (junit), charge du runner et journal horodaté de chaque appel Playwright
+      # (DEBUG=pw:api : clic, onglet ouvert, waitForEvent) conservés, échec compris, pour qu'un rouge
+      # aléatoire qui revient laisse de quoi distinguer clic manqué, onglet absent et onglet en retard.
       - name: Acceptation de bout en bout (application construite, Chromium)
+        shell: bash
         run: |
           nproc; uptime
-          npm run test:e2e -- --reporter=default --reporter=junit --outputFile.junit=e2e-junit.xml
+          DEBUG=pw:api npm run test:e2e -- --reporter=default --reporter=junit --outputFile.junit=e2e-junit.xml 2>&1 | tee e2e-pwapi.log
 
       - name: Durées des cas e2e
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: e2e-junit
-          path: frontend/e2e-junit.xml
+          path: |
+            frontend/e2e-junit.xml
+            frontend/e2e-pwapi.log
           if-no-files-found: ignore

@@ -53,4 +53,15 @@ describe('vitest.e2e.config.ts — un navigateur à la fois (L166)', () => {
     expect(wf).toMatch(/nproc/);
     expect(wf).toMatch(/if: always\(\)[\s\S]*actions\/upload-artifact@v4/);
   });
+
+  // Les specs scellées ne se touchent pas, mais DEBUG=pw:api journalise chaque appel Playwright (clic, onglet
+  // ouvert, waitForEvent) avec son horodatage, sans modifier un test : c'est ce qui sépare « clic jamais fait »,
+  // « clic fait sans onglet » et « onglet en retard ». Le journal doit être joint à l'artefact même en échec.
+  it('R3 — la CI journalise les appels Playwright (DEBUG=pw:api) dans un fichier joint à l\'artefact, même en échec', () => {
+    const wf = readFileSync(new URL('../../.github/workflows/frontend-checks.yml', import.meta.url), 'utf8');
+    expect(wf).toMatch(/DEBUG=pw:api\s+npm run test:e2e[^\n]*\|\s*tee\s+(\S+)/);
+    const log = wf.match(/\|\s*tee\s+(\S+)/)[1];
+    expect(wf).toMatch(/shell: bash/);
+    expect(wf).toMatch(new RegExp('if: always\\(\\)[\\s\\S]*actions/upload-artifact@v4[\\s\\S]*path:[\\s\\S]*?frontend/' + log.replace(/\./g, '\\.')));
+  });
 });
