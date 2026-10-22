@@ -1597,10 +1597,11 @@ lots:
   - id: L162
     title: "Concepts : une carte « lien inter-concepts » dont le concept visé est masqué par le filtre de catégorie ne fait rien au clic (15 liens sur 26 changent de catégorie ; filtre Impérial, Trône d'Or → Webway : adresse et focus inchangés) — remettre le filtre à « Tous » avant revealSection, comme la frise ; test (revue de L160)"
     public: "Concepts : un lien mène toujours au concept visé"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L163
     title: "Recherche Ctrl+K : à la fermeture, le focus n'est rendu à personne (document.activeElement = BODY, command-palette.component.ts:280) et Tab sort de la recherche vers la page dessous (pas de boucle de focus) — rendre le focus à l'élément d'avant et boucler Tab, sur toutes les pages (WCAG 2.4.3, revue de L157)"
     public: "Recherche : le focus revient où il était"
