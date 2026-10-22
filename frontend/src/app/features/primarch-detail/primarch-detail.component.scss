@@ -262,7 +262,9 @@ h1 {
     border-left: 3px solid var(--gold);
     padding-left: 16px;
     margin-bottom: 20px;
-    max-inline-size: 34em; /* L158/t1 : chapeau à 17 px, ≈ 70 caractères par ligne (578 px) */
+    @media (min-width: 761px) {
+      max-inline-size: 34em; /* L158/t1 : chapeau à 17 px, ≈ 70 caractères par ligne (578 px) ; sous 761 px rien ne change */
+    }
   }
   .status-detail-panel {
     color: var(--gold);
@@ -279,15 +281,19 @@ h1 {
 }
 
 /* L158/t1 : même colonne de lecture pour Description, Hérésie, Héritage et les textes seuls (sans second bloc).
-   `.panel p` (0,1,1) l'emporte sur une classe seule : d'où `.panel .x` et `#heritage p`. */
-.panel .lore-block,
-.panel .heresy-text,
-.panel .col-text,
-#heritage p {
-  max-inline-size: $lecture;
+   `.panel p` (0,1,1) l'emporte sur une classe seule : d'où `.panel .x` et `#heritage p`.
+   Bornée aux largeurs au-dessus de 760 px : en dessous, la zone de contenu du panneau (571 à 650 px entre ~612 et
+   760 px) est sous l'ancien plafond de 70ch et les textes y prennent toute la largeur (consigne du lot : rien ne change). */
+@media (min-width: 761px) {
+  .panel .lore-block,
+  .panel .heresy-text,
+  .panel .col-text,
+  #heritage p {
+    max-inline-size: $lecture;
+  }
+  /* Hérésie : la citation et l'image sont centrées sur le panneau, le texte partage leur axe (aligné à gauche dedans). */
+  .panel .heresy-text { margin-inline: auto; }
 }
-/* Hérésie : la citation et l'image sont centrées sur le panneau, le texte partage leur axe (aligné à gauche dedans). */
-.panel .heresy-text { margin-inline: auto; }
 
 /* =========================
    LORE FLOW (texte + image floatante)
@@ -295,7 +301,9 @@ h1 {
 .lore-flow {
   position: relative;
   /* L158/t1 : avec l'image flottante, sa largeur (280 px) et sa marge (24 px) s'ajoutent à la colonne de lecture. */
-  &.has-img { max-inline-size: calc(#{$lecture} + 304px); }
+  @media (min-width: 761px) {
+    &.has-img { max-inline-size: calc(#{$lecture} + 304px); }
+  }
   &::after { content: ''; display: block; clear: both; }
 }
 .lore-block {
