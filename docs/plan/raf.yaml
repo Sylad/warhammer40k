@@ -1690,6 +1690,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: a2248ed34d6e0e10e071ee985f0eefcfe6d50d25 }
   - id: L171
     title: "Lore Chaos à 1440 px : description et lore sur 918 px (~137 caractères par ligne) ; grille des daemons notables à moitié vide (453/918 px) → largeur bornée ~70ch comme L154/L158, grille resserrée (UX L11)"
     public: "Panthéon du Chaos : textes à longueur de lecture confortable sur grand écran"
