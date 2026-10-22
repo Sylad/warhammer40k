@@ -2,7 +2,6 @@
 // (docs/specs/unit-detail-datasheet/fiche.yaml). Test d'acceptation écrit AVANT le code, d'après la fiche seule.
 // Contrats simulés : A1 HEAD /api/images/datasheets/:id (fetch), A2 GET /api/wiki-image?q= (WarhammerService.getWikiImage).
 // Pas de maquette : sélecteurs sémantiques (figure du hero, bouton « Agrandir… », [role=dialog], h2 « Fiche technique »).
-import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as sass from 'sass';
@@ -371,8 +370,12 @@ describe('fiche unité — fiche technique en figure agrandissable (L120)', () =
 
   // ---------------------------------------------------------------- R10
   it('R10 — le composant partagé figure-lightbox est inchangé : rendu primarque identique (miniatures et lien galerie présents)', () => {
-    const shared = readFileSync(resolve(__dirname, '../../shared/components/figure-lightbox/figure-lightbox.component.ts'));
-    expect(createHash('sha1').update(shared).digest('hex')).toBe('4173db3dc6ea246d302319a920edf8978410808f');
+    // L120 ne touche pas au composant partagé ; un autre lot peut le faire évoluer (L161) :
+    // on garde le rendu primarque (miniatures et lien galerie), pas l'empreinte du fichier.
+    const shared = readFileSync(resolve(__dirname, '../../shared/components/figure-lightbox/figure-lightbox.component.ts'), 'utf8');
+    expect(shared).toMatch(/class="lightbox-thumbs"/);
+    expect(shared).toMatch(/class="lightbox-thumb"/);
+    expect(shared).toMatch(/\[routerLink\]="\['\/gallery'\]"/);
     // et la fenêtre dédiée vit dans features/unit-detail, à côté de la page
     const sources = readdirSync(__dirname).filter((n) => n.endsWith('.ts') && !/\.spec\.ts$/.test(n) && n !== 'unit-detail.component.ts');
     expect(sources.length).toBeGreaterThan(0);
