@@ -52,5 +52,17 @@ jobs:
       - name: Chromium pour l'acceptation de bout en bout
         run: npx playwright-core install --with-deps chromium
 
+      # L166 : durée de chaque cas (junit) et charge du runner conservées, échec compris,
+      # pour qu'un rouge aléatoire qui revient laisse une mesure.
       - name: Acceptation de bout en bout (application construite, Chromium)
-        run: npm run test:e2e
+        run: |
+          nproc; uptime
+          npm run test:e2e -- --reporter=default --reporter=junit --outputFile.junit=e2e-junit.xml
+
+      - name: Durées des cas e2e
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-junit
+          path: frontend/e2e-junit.xml
+          if-no-files-found: ignore

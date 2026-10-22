@@ -44,4 +44,13 @@ describe('vitest.e2e.config.ts — un navigateur à la fois (L166)', () => {
   it('R1 — les fichiers e2e tournent l\'un après l\'autre, pas un Chromium par fichier en parallèle', () => {
     expect(e2eConfig.test.fileParallelism).toBe(false);
   });
+
+  // Le remède est une hypothèse tant qu'un rouge n'a pas laissé de mesure : la CI doit conserver la durée de
+  // chaque cas et la charge du runner, pour qu'un rouge qui revient soit diagnostiquable.
+  it('R2 — la CI garde les durées par cas (rapport junit) et la charge du runner, même en cas d\'échec', () => {
+    const wf = readFileSync(new URL('../../.github/workflows/frontend-checks.yml', import.meta.url), 'utf8');
+    expect(wf).toMatch(/npm run test:e2e -- --reporter=default --reporter=junit --outputFile\.junit=\S+/);
+    expect(wf).toMatch(/nproc/);
+    expect(wf).toMatch(/if: always\(\)[\s\S]*actions\/upload-artifact@v4/);
+  });
 });
