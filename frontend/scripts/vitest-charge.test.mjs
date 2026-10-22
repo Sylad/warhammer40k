@@ -7,6 +7,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import config from '../vitest.config.ts';
+import e2eConfig from '../vitest.e2e.config.ts';
 
 describe('vitest.config.ts — suite déterministe sous charge (L113)', () => {
   const test = config.test;
@@ -31,5 +32,16 @@ describe('vitest.config.ts — suite déterministe sous charge (L113)', () => {
     expect(src).toMatch(/stable:\s*boolean/);
     expect(src).toMatch(/expect\(m\.stable,.*instable.*\.toBe\(true\)/);
     expect(src.indexOf('m.stable')).toBeLessThan(src.indexOf('m.gap'));
+  });
+});
+
+// L166 — « Acceptation de bout en bout » : trois fichiers (L47 vidéos, L49 galerie, L120 fiche unité),
+// chacun avec son Chromium, tournaient en parallèle sur le runner CI. Trois rouges aléatoires en
+// cinq jours sur des fichiers différents (clic du milieu de L47 R9 : waitForEvent 8 s ; R3 de L49 :
+// boundingBox 4 s), tous des délais, jamais une assertion fausse ; la même suite sans charge passe.
+// Garde : un seul fichier à la fois, donc un seul Chromium.
+describe('vitest.e2e.config.ts — un navigateur à la fois (L166)', () => {
+  it('R1 — les fichiers e2e tournent l\'un après l\'autre, pas un Chromium par fichier en parallèle', () => {
+    expect(e2eConfig.test.fileParallelism).toBe(false);
   });
 });
