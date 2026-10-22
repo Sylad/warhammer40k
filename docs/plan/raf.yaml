@@ -1669,10 +1669,11 @@ lots:
   - id: L168
     title: "Lore Chaos à 320 px : h1 et chapeau du hero coupés de 27 px, h2 Tzeentch coupé de 61 px, sphère et citation coupées, ⛶ sur la citation (padding fixe 50 px, h2 48 px, overflow hidden) → padding réduit sous 600 px, min-width 0, clamp du h2 — WCAG 1.4.10 (UX L11)"
     public: "Panthéon du Chaos : en-têtes entiers sur les petits téléphones"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L169
     title: "Lore Chaos, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu ; à 390 px le ✕ est sous le bouton Menu (fermeture impossible au toucher) → comportement de dialogue de la fiche Primarque (L157), couche au-dessus de la barre — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L11)"
     public: "Panthéon du Chaos : visionneuse d'images utilisable au clavier et au téléphone"
