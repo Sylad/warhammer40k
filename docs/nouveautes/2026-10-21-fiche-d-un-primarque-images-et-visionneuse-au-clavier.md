@@ -4,8 +4,8 @@ date: 2026-10-21
 created: 2026-10-21T21:30+02:00
 lots: [L157]
 captures:
-  - { file: captures/L157-primarque-visionneuse-1440.png, alt: "Visionneuse de la fiche d'Horus Lupercal ouverte au clavier : le bouton Fermer en haut à droite porte un contour clair, il a le focus" }
-  - { file: captures/L157-primarque-visionneuse-390.png, alt: "Visionneuse de la fiche d'Horus Lupercal sur téléphone (390 px), ouverte au clavier, avec le focus sur le bouton Fermer" }
+  - { file: captures/L157-primarque-visionneuse-1440.png, alt: "Visionneuse de la fiche d'Horus Lupercal ouverte au clavier, avec la photographie d'une figurine d'Horus ; la barre du haut est assombrie derrière le voile, le bouton Fermer en haut à droite porte un contour clair, il a le focus" }
+  - { file: captures/L157-primarque-visionneuse-390.png, alt: "Visionneuse de la fiche d'Horus Lupercal sur téléphone (390 px), ouverte au clavier, avec la photographie d'une figurine d'Horus ; la barre du haut est assombrie derrière le voile, le focus est sur le bouton Fermer" }
   - { file: captures/L157-primarque-image-focus-1440.png, alt: "Fiche d'Horus Lupercal : l'image de la section Origines est entourée d'un contour clair, le focus du clavier" }
   - { file: captures/L157-primarque-image-focus-390.png, alt: "Image de la section Origines de la fiche d'Horus sur téléphone (390 px), entourée d'un contour clair quand elle a le focus du clavier" }
 ---
@@ -14,3 +14,5 @@ Sur la fiche d'un Primarque, on peut maintenant tout faire au clavier. Le portra
 La visionneuse s'ouvre avec le focus sur « Fermer ». Tab et Maj+Tab restent dans la fenêtre au lieu d'aller se perdre derrière elle. En la fermant, avec Échap ou avec « Fermer », on retrouve le focus sur l'image qu'on venait d'agrandir.
 
 Dans la liste des Primarques, les filtres Tous, Loyalistes, Traîtres et Perdus indiquent à un lecteur d'écran lequel est actif.
+
+Si l'on change de Primarque pendant que la visionneuse est ouverte (par la recherche Ctrl+K), elle se ferme et le focus va au titre de la nouvelle fiche. Quand la recherche est ouverte par-dessus la visionneuse, Échap ne ferme que la recherche ; un second Échap ferme la visionneuse.

@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 09:55",
+  "generated": "2026-10-22 11:51",
   "entries": [
     {
       "slug": "2026-10-21-fiche-d-un-primarque-images-et-visionneuse-au-clavier",
@@ -16,12 +16,12 @@
         "captures/L157-primarque-image-focus-390.png"
       ],
       "alts": [
-        "Visionneuse de la fiche d'Horus Lupercal ouverte au clavier : le bouton Fermer en haut à droite porte un contour clair, il a le focus",
-        "Visionneuse de la fiche d'Horus Lupercal sur téléphone (390 px), ouverte au clavier, avec le focus sur le bouton Fermer",
+        "Visionneuse de la fiche d'Horus Lupercal ouverte au clavier, avec la photographie d'une figurine d'Horus ; la barre du haut est assombrie derrière le voile, le bouton Fermer en haut à droite porte un contour clair, il a le focus",
+        "Visionneuse de la fiche d'Horus Lupercal sur téléphone (390 px), ouverte au clavier, avec la photographie d'une figurine d'Horus ; la barre du haut est assombrie derrière le voile, le focus est sur le bouton Fermer",
         "Fiche d'Horus Lupercal : l'image de la section Origines est entourée d'un contour clair, le focus du clavier",
         "Image de la section Origines de la fiche d'Horus sur téléphone (390 px), entourée d'un contour clair quand elle a le focus du clavier"
       ],
-      "html": "<p>Sur la fiche d'un Primarque, on peut maintenant tout faire au clavier. Le portrait, les images glissées dans le texte et l'image de la section Origines se choisissent avec Tab et s'agrandissent avec Entrée ou Espace, comme un bouton ; un lecteur d'écran les annonce comme des boutons, chacun avec son propre nom.</p>\n<p>La visionneuse s'ouvre avec le focus sur « Fermer ». Tab et Maj+Tab restent dans la fenêtre au lieu d'aller se perdre derrière elle. En la fermant, avec Échap ou avec « Fermer », on retrouve le focus sur l'image qu'on venait d'agrandir.</p>\n<p>Dans la liste des Primarques, les filtres Tous, Loyalistes, Traîtres et Perdus indiquent à un lecteur d'écran lequel est actif.</p>"
+      "html": "<p>Sur la fiche d'un Primarque, on peut maintenant tout faire au clavier. Le portrait, les images glissées dans le texte et l'image de la section Origines se choisissent avec Tab et s'agrandissent avec Entrée ou Espace, comme un bouton ; un lecteur d'écran les annonce comme des boutons, chacun avec son propre nom.</p>\n<p>La visionneuse s'ouvre avec le focus sur « Fermer ». Tab et Maj+Tab restent dans la fenêtre au lieu d'aller se perdre derrière elle. En la fermant, avec Échap ou avec « Fermer », on retrouve le focus sur l'image qu'on venait d'agrandir.</p>\n<p>Dans la liste des Primarques, les filtres Tous, Loyalistes, Traîtres et Perdus indiquent à un lecteur d'écran lequel est actif.</p>\n<p>Si l'on change de Primarque pendant que la visionneuse est ouverte (par la recherche Ctrl+K), elle se ferme et le focus va au titre de la nouvelle fiche. Quand la recherche est ouverte par-dessus la visionneuse, Échap ne ferme que la recherche ; un second Échap ferme la visionneuse.</p>"
     },
     {
       "slug": "2026-10-21-fiches-du-lore-les-ancres-menent-vraiment-a-la-section",
