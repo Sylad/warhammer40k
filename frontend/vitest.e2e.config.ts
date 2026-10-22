@@ -12,6 +12,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: false,
     reporters: ['default'],
+    setupFiles: ['./src/testing/chromium-nouveau-headless.ts'],
     testTimeout: 30000,
     hookTimeout: 60000,
     include: acceptationBrowser(root).filter((f) => !pending.has(f)).map((f) => path.resolve(root, f)),
