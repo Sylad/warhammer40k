@@ -93,4 +93,24 @@ describe.skipIf(!built || !chromium)('Panthéon du Chaos, largeur de lecture (na
     expect(r.defile).toBe(false);
     await page.close();
   });
+
+  for (const w of [320, 390, 500]) {
+    it(`R4 — à ${w} px, la colonne principale tient dans le corps de fiche : rien n'est rogné par l'article`, async () => {
+      const page = await ouvrir(w);
+      const r = await page.evaluate(() =>
+        [...document.querySelectorAll<HTMLElement>('.god-body')].map((b) => {
+          const cs = getComputedStyle(b);
+          const dedans = b.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+          const cadre = b.getBoundingClientRect();
+          const trop = [...b.querySelectorAll<HTMLElement>('.god-main, .god-main p.loreLong, .daemons-hierarchy, .notable-grid, .notable-card')]
+            .filter((e) => e.getBoundingClientRect().right > cadre.right + 0.5 || e.getBoundingClientRect().width > dedans + 0.5)
+            .map((e) => e.className);
+          return { dedans, trop };
+        }),
+      );
+      expect(r).toHaveLength(4);
+      for (const b of r) expect(b.trop).toEqual([]);
+      await page.close();
+    });
+  }
 });

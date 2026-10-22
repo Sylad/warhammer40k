@@ -203,12 +203,12 @@
 
     .god-body {
       display: grid;
-      grid-template-columns: 1fr 320px;
+      grid-template-columns: minmax(0, 1fr) 320px;
       gap: 32px;
       padding: 36px 50px 50px;
     }
     @media (max-width: 1024px) {
-      .god-body { grid-template-columns: 1fr; padding: 28px; }
+      .god-body { grid-template-columns: minmax(0, 1fr); padding: 28px; }
     }
     @media (max-width: 600px) {
       .god-body { padding: 24px 20px; }
@@ -217,7 +217,9 @@
     /* L171 : colonne de lecture du corps de fiche. À 1440 px la colonne principale fait 918 px (≈ 137 caractères
        par ligne) : description, lore, hiérarchie et grille des daemons s'arrêtent à 31,5rem (504 px à 16 px,
        ≈ 70 caractères à 15,5 px, ≈ 77 à 14 px) ; rem et non ch pour que tous les blocs aient la même largeur et
-       suivent la taille de police du navigateur. En dessous, la colonne est plus étroite : la borne ne joue pas. */
+       suivent la taille de police du navigateur. En dessous, la colonne est plus étroite : la borne ne joue pas. `minmax(0, 1fr)` sur `.god-body` et
+       `min(220px, 100%)` sur la grille : sans eux le min-content de la grille (2 pistes de 220 px) élargissait la
+       colonne à 452 px et l'article (overflow hidden) rognait le texte sous 500 px. */
     .god-main { --lecture: 31.5rem; }
     .god-main p.description,
     .god-main p.loreLong,
@@ -272,7 +274,7 @@
 
     .notable-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
       gap: 12px;
     }
     .notable-card {
