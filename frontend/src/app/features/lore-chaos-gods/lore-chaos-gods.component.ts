@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -8,6 +8,7 @@ import { LoadErrorComponent } from '../../shared/components/load-error/load-erro
 import { toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 
 /** Titre des visionneuses : l'or, lisible sur leur fond ; la couleur du dieu y est sous 4,5:1 (L167). */
 const TITRE_VISIONNEUSE = '#f0d276';
@@ -17,7 +18,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
 @Component({
   selector: 'app-lore-chaos-gods',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, SectionAnchorDirective],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective, SectionAnchorDirective],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -49,9 +50,9 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
     @for (god of gods(); track god.id) {
       <article class="god" [id]="god.id" [style.--god-color]="god.color" [style.--god-text]="lisible(god.color)">
         <header class="god-head">
-          <button class="god-bg" type="button" [style.background-image]="godImg(god.id)" (click)="openGodLightbox(god)" [attr.aria-label]="'Agrandir l’illustration de ' + god.name"></button>
+          <button #bg class="god-bg" type="button" [style.background-image]="godImg(god.id)" (click)="openGodLightbox(god, $event)" [attr.aria-label]="'Agrandir l’illustration de ' + god.name"></button>
           <div class="god-bg-overlay"></div>
-          <span class="god-zoom" (click)="openGodLightbox(god)">⛶</span>
+          <span class="god-zoom" aria-hidden="true" (click)="bg.click()">⛶</span>
           <div class="god-head-content">
             <div class="number">{{ formatNum(god.number) }} / IV</div>
             <div class="god-sigil-wrap">
@@ -89,7 +90,7 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
               <h3 class="section-title">Daemons notables</h3>
               <div class="notable-grid">
                 @for (d of god.daemons.notable; track d.name) {
-                  <button class="notable-card" type="button" (click)="openDaemonLightbox(god, d)">
+                  <button class="notable-card" type="button" (click)="openDaemonLightbox(god, d, $event)">
                     <div class="notable-name">{{ d.name }}</div>
                     <p>{{ d.description }}</p>
                     <span class="notable-zoom">⛶</span>
@@ -151,12 +152,14 @@ const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
       </div>
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                         [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
   `,
   styleUrls: ['./lore-chaos-gods.component.scss'],
 })
 export class LoreChaosGodsComponent {
   private readonly service = inject(WarhammerService);
+  private readonly injector = inject(Injector);
   readonly gods = toSafeSignal(this.service.chaosGods$, [] as ChaosGod[]);
   /** Phrase de conclusion : le nombre de primarques est celui des fiches, pas un chiffre figé. */
   readonly conclusion = computed(() => {
@@ -166,6 +169,8 @@ export class LoreChaosGodsComponent {
   });
   readonly godImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
+  /** Élément qui a ouvert la visionneuse : il récupère le focus à la fermeture. */
+  private opener: HTMLElement | null = null;
 
   constructor() {
     effect(() => {
@@ -198,9 +203,10 @@ export class LoreChaosGodsComponent {
     return ['I', 'II', 'III', 'IV'][n - 1] ?? String(n);
   }
 
-  openGodLightbox(g: ChaosGod): void {
+  openGodLightbox(g: ChaosGod, ev?: Event): void {
     const baseUrl = this.godImages().get(g.id);
     if (!baseUrl) return;
+    this.opener = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
     this.lightbox.set({
       title: g.name,
       subtitle: `${g.title} — ${g.sphere}`,
@@ -223,7 +229,8 @@ export class LoreChaosGodsComponent {
     for (const q of variants) this.fetchVariant(q, g.name);
   }
 
-  openDaemonLightbox(g: ChaosGod, d: ChaosGodDaemon): void {
+  openDaemonLightbox(g: ChaosGod, d: ChaosGodDaemon, ev?: Event): void {
+    this.opener = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
     const query = d.wikiQuery ?? d.name;
     // Fetch base image first since daemons don't have pre-cached image
     this.service.getWikiImage(query).subscribe(r => {
@@ -271,5 +278,12 @@ export class LoreChaosGodsComponent {
     this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
   }
 
-  closeLightbox(): void { this.lightbox.set(null); }
+  closeLightbox(): void {
+    this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    // Après le rendu : la visionneuse est encore dans le DOM tant qu'il n'a pas eu lieu, et rendre le focus plus tôt
+    // le lui ferait reprendre (LightboxDialogDirective garde le focus dans un dialogue encore ouvert).
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
+  }
 }

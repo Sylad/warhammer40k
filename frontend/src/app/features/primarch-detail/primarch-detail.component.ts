@@ -1,4 +1,4 @@
-import { afterNextRender, Component, computed, effect, ElementRef, HostListener, inject, Injector, signal } from '@angular/core';
+import { afterNextRender, Component, computed, effect, ElementRef, inject, Injector, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
@@ -12,6 +12,7 @@ import { LoadErrorComponent } from '../../shared/components/load-error/load-erro
 import { isNotFound, retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { longestWord } from '../../shared/longest-word';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -30,7 +31,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
 @Component({
   selector: 'app-primarch-detail',
   standalone: true,
-  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     @if (primarch(); as p) {
       @if (related.failed()) {
@@ -344,8 +345,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
 
       <!-- LIGHTBOX -->
       <app-figure-lightbox [style.--legion-color]="legionColor()" [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
-                           [attr.role]="lightbox() ? 'dialog' : null" [attr.aria-modal]="lightbox() ? 'true' : null"
-                           [attr.aria-label]="lightbox() ? 'Visionneuse — ' + p.name : null" (keydown)="onLightboxKey($event)" />
+                           [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + p.name : null" />
     } @else if (primarch.failed()) {
       <app-load-error [notFound]="primarch.notFound()" [heading]="primarch.notFound() ? 'Primarque introuvable' : 'Primarque indisponible'" backLink="/lore/primarchs" backLabel="Tous les Primarques" (retry)="retryAll(primarch, related)" />
     } @else {
@@ -533,7 +533,6 @@ export class PrimarchDetailComponent {
     const selectedIdx = Math.max(0, thumbUrls.indexOf(mainUrl));
     const subtitle = p.legion ? `${p.legion} · ${ALLEGIANCE_LABEL[p.allegiance]}` : ALLEGIANCE_LABEL[p.allegiance];
     this.legionColor.set(p.primaryColor || '#c9a24a');
-    afterNextRender(() => this.host.nativeElement.querySelector<HTMLElement>('.lightbox-close')?.focus(), { injector: this.injector });
     this.lightbox.set({
       title: p.name,
       subtitle,
@@ -560,34 +559,8 @@ export class PrimarchDetailComponent {
     this.lightbox.set(null);
     const origine = this.opener;
     this.opener = null;
-    if (origine?.isConnected) origine.focus();
-  }
-
-  /**
-   * WCAG 2.4.3 : un clic dans une zone non focalisable du dialogue donne le focus à `main` (ancêtre
-   * focalisable le plus proche) ; ce que le voile masque ne doit pas le garder, il revient sur « Fermer ».
-   * Pas d'`inert` possible : le dialogue vit dans `main`, lui-même `inert` quand on l'applique.
-   */
-  @HostListener('document:focusin', ['$event'])
-  onFocusIn(e: FocusEvent): void {
-    if (!this.lightbox()) return;
-    const dialogue = this.host.nativeElement.querySelector('app-figure-lightbox');
-    // La recherche globale (Ctrl+K) s'ouvre au-dessus de la visionneuse et y prend le focus : on le lui laisse.
-    const recherche = e.target instanceof Element && e.target.closest('.cmdk-panel');
-    if (dialogue && e.target instanceof Node && !dialogue.contains(e.target) && !recherche) {
-      dialogue.querySelector<HTMLElement>('.lightbox-close')?.focus();
-    }
-  }
-
-  /** WCAG 2.4.3 : le focus boucle dans la visionneuse (Tab sur le dernier → premier, Maj+Tab sur le premier → dernier). */
-  onLightboxKey(e: KeyboardEvent): void {
-    if (e.key !== 'Tab') return;
-    const items = Array.from((e.currentTarget as HTMLElement).querySelectorAll<HTMLElement>('button, a[href]'));
-    if (items.length === 0) return;
-    const [first, last] = [items[0], items[items.length - 1]];
-    const edge = e.shiftKey ? first : last;
-    if (document.activeElement !== edge) return;
-    e.preventDefault();
-    (e.shiftKey ? last : first).focus();
+    // Après le rendu : la visionneuse est encore dans le DOM tant qu'il n'a pas eu lieu, et rendre le focus plus tôt
+    // le lui ferait reprendre (LightboxDialogDirective garde le focus dans un dialogue encore ouvert).
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
   }
 }
