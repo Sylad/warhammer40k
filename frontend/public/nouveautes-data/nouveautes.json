@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 11:51",
+  "generated": "2026-10-22 15:12",
   "entries": [
+    {
+      "slug": "2026-10-22-visionneuse-d-images-sous-titre-lisible",
+      "title": "Visionneuse d'images : sous-titre lisible",
+      "date": "2026-10-22",
+      "lots": [
+        "L161"
+      ],
+      "captures": [
+        "captures/L161-visionneuse-sous-titre-1440.png",
+        "captures/L161-visionneuse-sous-titre-390.png"
+      ],
+      "alts": [
+        "Visionneuse de la fiche d'Horus Lupercal : sous-titre « Sons of Horus (ex-Luna Wolves) · Traître » en capitales dorées claires sous le titre",
+        "Même visionneuse sur téléphone (390 px) : le sous-titre doré clair reste lisible sous le titre"
+      ],
+      "html": "<p>Dans la visionneuse d'images (fiches du Lore, couvertures de la page Romans), la petite ligne sous le titre — le rôle d'un personnage, l'auteur d'un roman — est désormais d'un or plus clair. Elle se lit plus facilement sur le fond noir, notamment pour les personnes qui voient mal les contrastes : le contraste passe d'environ 3,7:1 à 8,5:1.</p>"
+    },
     {
       "slug": "2026-10-21-fiche-d-un-primarque-images-et-visionneuse-au-clavier",
       "title": "Fiche d'un Primarque : images et visionneuse au clavier",
