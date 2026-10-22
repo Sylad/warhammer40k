@@ -1,7 +1,7 @@
 import { afterNextRender, Component, computed, effect, ElementRef, HostListener, inject, Injector, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { catchError, of, forkJoin, map, throwError } from 'rxjs';
 import { STATUS_COLOR } from '../../core/utils/primarch-status';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -392,10 +392,34 @@ export class PrimarchDetailComponent {
     },
     [] as Primarch[]);
 
+  /** Une visionneuse a été fermée par un changement de Primarque : le focus perdu va au h1 de la nouvelle fiche. */
+  private titreAFocaliser = false;
+
   constructor() {
+    // La fiche est réutilisée quand l'id change (Ctrl+K, retour arrière) : une visionneuse ouverte porterait
+    // le nom de l'ancien Primarque (WCAG 4.1.2) et son opener n'existe plus (2.4.3). Elle se ferme sans rendre
+    // le focus à l'opener ; la mise en page (résultat de la recherche) ou `titreAFocaliser` le place sur le h1.
+    this.route.paramMap.pipe(takeUntilDestroyed()).subscribe(() => {
+      if (!this.lightbox()) return;
+      this.lightbox.set(null);
+      this.opener = null;
+      this.titreAFocaliser = true;
+    });
+
     effect(() => {
       const p = this.primarch();
       if (!p) return;
+      if (this.titreAFocaliser) {
+        this.titreAFocaliser = false;
+        afterNextRender(() => {
+          const actif = document.activeElement;
+          if (actif && actif !== document.body) return; // la mise en page (ou l'utilisateur) a déjà placé le focus
+          const h1 = this.host.nativeElement.querySelector<HTMLElement>('h1');
+          if (!h1) return;
+          if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1');
+          h1.focus({ preventScroll: true });
+        }, { injector: this.injector });
+      }
       this.heroImage.set(null);
       this.galleryImages.set([]);
 
