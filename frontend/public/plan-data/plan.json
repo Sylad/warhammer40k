@@ -521,44 +521,51 @@
     {
       "id": "L167",
       "title": "Panthéon du Chaos : noms et titres des dieux lisibles sur fond sombre",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L168",
       "title": "Panthéon du Chaos : en-têtes entiers sur les petits téléphones",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L169",
       "title": "Panthéon du Chaos : visionneuse d'images utilisable au clavier et au téléphone",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L170",
       "title": "Panthéon du Chaos : le raccourci vers un dieu y emmène aussi le clavier",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L171",
       "title": "Panthéon du Chaos : textes à longueur de lecture confortable sur grand écran",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L172",
       "title": "Panthéon du Chaos : focus visible et nom précis sur l'image de chaque dieu",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     },
     {
       "id": "L173",
       "title": "Panthéon du Chaos : texte de conclusion corrigé",
-      "status": "doing",
-      "started": "2026-10-22"
+      "status": "done",
+      "started": "2026-10-22",
+      "finished": "2026-10-22"
     }
   ]
 }

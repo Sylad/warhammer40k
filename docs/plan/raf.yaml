@@ -1660,66 +1660,80 @@ lots:
   - id: L167
     title: "Lore Chaos, contrastes : couleur des dieux en texte à 2,19:1 (Khorne), 2,91:1 (Slaanesh), 4,0:1 (Tzeentch, petits textes) — h2, raccourcis, titres de section, daemons, titres latéraux, Voir fiche, titre de visionneuse → teinte éclaircie ≥ 4,5:1 pour le texte, couleur d'origine sur bordures et sigils, titre de visionneuse en or — WCAG 1.4.3 (UX L11)"
     public: "Panthéon du Chaos : noms et titres des dieux lisibles sur fond sombre"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 145cf17efd90df9f11b22ed3ada9e455dea0a190 }
+    ux: { date: 2026-10-22, verdict: "conforme (capture 1440 regardée par le lead : noms des dieux et raccourcis lisibles, couleur d'origine gardée sur les bordures)" }
+    finished: 2026-10-22
   - id: L168
     title: "Lore Chaos à 320 px : h1 et chapeau du hero coupés de 27 px, h2 Tzeentch coupé de 61 px, sphère et citation coupées, ⛶ sur la citation (padding fixe 50 px, h2 48 px, overflow hidden) → padding réduit sous 600 px, min-width 0, clamp du h2 — WCAG 1.4.10 (UX L11)"
     public: "Panthéon du Chaos : en-têtes entiers sur les petits téléphones"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 6846f892ec4b05f6969841ce7353c7f73fac76c1 }
+    ux: { date: 2026-10-22, verdict: "conforme (capture 320 regardée par le lead : TZEENTCH entier, citation et ⛶ dans le cadre ; e2e 5/5)" }
+    finished: 2026-10-22
   - id: L169
     title: "Lore Chaos, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu ; à 390 px le ✕ est sous le bouton Menu (fermeture impossible au toucher) → comportement de dialogue de la fiche Primarque (L157), couche au-dessus de la barre — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L11)"
     public: "Panthéon du Chaos : visionneuse d'images utilisable au clavier et au téléphone"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "conforme — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 2cb24c9e40c70ef0e3cf7ca28fed07c63cf430a8 }
+    ux: { date: 2026-10-22, verdict: "conforme (capture 390 regardée par le lead : visionneuse au-dessus de la barre, ✕ visible ; e2e 6/6)" }
+    finished: 2026-10-22
   - id: L170
     title: "Lore Chaos, raccourcis du hero : après Slaanesh, le Tab suivant revient à l'image de Khorne (3 573 px plus haut) → focus sur l'article visé (tabindex=-1), comme L160 — WCAG 2.4.3 (UX L11)"
     public: "Panthéon du Chaos : le raccourci vers un dieu y emmène aussi le clavier"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "compliant — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: a2248ed34d6e0e10e071ee985f0eefcfe6d50d25 }
+    ux: { date: 2026-10-22, verdict: "conforme (raccourci → focus sur l'article visé, captures regardées)" }
+    finished: 2026-10-22
   - id: L171
     title: "Lore Chaos à 1440 px : description et lore sur 918 px (~137 caractères par ligne) ; grille des daemons notables à moitié vide (453/918 px) → largeur bornée ~70ch comme L154/L158, grille resserrée (UX L11)"
     public: "Panthéon du Chaos : textes à longueur de lecture confortable sur grand écran"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "conforme après 2 corrections mineures (filets des titres de section en pleine largeur à 1440 px ; seuil « 760 px » faux dans le README et le commentaire SCSS) — orchestré (vague 2026-10-22-wh-chaos, 1 passe(s) de correction)", commit: 6c5181e391058b09c7e3fa01270336b7f61d781e }
+    ux: { date: 2026-10-22, verdict: "conforme après 2 corrections mineures (filets pleine largeur, seuil du README) ; e2e 7/7" }
+    finished: 2026-10-22
   - id: L172
     title: "Lore Chaos : focus de l'image d'en-tête (1364×389) rogné par overflow hidden (trait de 1 px à ~1,9:1) et 4 boutons nommés « Voir en grand » → contour intérieur or de 2 px, nom « Agrandir l'illustration de <dieu> » — WCAG 1.4.11, 2.4.6 (UX L11)"
     public: "Panthéon du Chaos : focus visible et nom précis sur l'image de chaque dieu"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "compliant after 1 minor note (the e2e test writes to `undefined/` when TMPDIR is unset) — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 4705427aff89f2bc9622bc66eeff81355f77eb62 }
+    ux: { date: 2026-10-22, verdict: "conforme, 1 note mineure (l'e2e écrit sous undefined/ sans TMPDIR) ; e2e 2/2" }
+    finished: 2026-10-22
   - id: L173
     title: "Lore Chaos, conclusion : « Trois primarques nommés ici » alors que 4 sont listés (Angron, Magnus, Mortarion, Fulgrim), « six millénaires » contre « dix mille ans » du chapeau (UX L11)"
     public: "Panthéon du Chaos : texte de conclusion corrigé"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-22
     started: 2026-10-22
     review: { date: 2026-10-22, verdict: "compliant (0 bloquant, 0 majeur, 1 note mineure) — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 50c47cd4f02eddb8ed97d9ea89ad29204bb34fa3 }
+    ux: { date: 2026-10-22, verdict: "conforme (conclusion : quatre primarques, dix mille ans ; captures regardées)" }
+    finished: 2026-10-22
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
