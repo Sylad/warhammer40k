@@ -1584,6 +1584,8 @@ lots:
     review: { date: 2026-10-22, verdict: "conforme après 1 correction : directive sectionAnchor (href = page courante + #section sur les 7 pages), clic simple défilement + focus, Ctrl/Maj/clic du milieu non annulés, audit des liens durci (aucune ancre nue) ; build OK, npm test 1191/1191, liens 0 cassé, e2e L160 36/36 ; notes : garde de dist de l'e2e sans la directive, commentaire et champs morts du parcours des liens", commit: d401018915ef5f0899ccc230929aa7d88d4ca2f0 }
     ux: { date: 2026-10-22, verdict: "conforme : section ciblée focalisée avec anneau visible sous la barre d'ancres (capture vue par le lead, Lion El'Jonson à 1440 px), chronologie et concepts mesurés sous leur bandeau ; carte de concept filtrée sans effet reprise en lot" }
     finished: 2026-10-22
+    notes:
+      - { date: 2026-10-22, text: "QA prod 22-10 (sha b4b870f) : 15/15 pages, promesses de L155 à L160 mesurées conformes ; titres à 47–54 px sous la barre d'ancres repris en lot" }
   - id: L161
     title: "Visionneuse partagée : sous-titre (.lightbox-role, --gold-soft #80652b, 12 px) à 3,72:1 sur #050403 — WCAG 1.4.3 ; passer à --gold (≈ 8,5:1) sur toutes les visionneuses du site — revue UX de L156"
     public: "Visionneuse d'images : sous-titre lisible"
@@ -1601,6 +1603,13 @@ lots:
   - id: L163
     title: "Recherche Ctrl+K : à la fermeture, le focus n'est rendu à personne (document.activeElement = BODY, command-palette.component.ts:280) et Tab sort de la recherche vers la page dessous (pas de boucle de focus) — rendre le focus à l'élément d'avant et boucler Tab, sur toutes les pages (WCAG 2.4.3, revue de L157)"
     public: "Recherche : le focus revient où il était"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-22
+  - id: L164
+    title: "Ancres des fiches : titre de section à 47–54 px sous la barre d'ancres après un clic (attendu < 40 px par docs/qa/expectations.md, QA prod 22-10 sur phalanx, horus, space-marines, saint, titan, équipement, à 1440 et 390 px) — marge de défilement ou padding du panneau pour ramener le titre sous 40 px, mesure navigateur"
+    public: "Fiches du Lore : la section visée s'arrête juste sous la barre"
     status: todo
     estimate: 0.25
     visible: true
