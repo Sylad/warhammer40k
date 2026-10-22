@@ -1685,10 +1685,11 @@ lots:
   - id: L170
     title: "Lore Chaos, raccourcis du hero : après Slaanesh, le Tab suivant revient à l'image de Khorne (3 573 px plus haut) → focus sur l'article visé (tabindex=-1), comme L160 — WCAG 2.4.3 (UX L11)"
     public: "Panthéon du Chaos : le raccourci vers un dieu y emmène aussi le clavier"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-22
   - id: L171
     title: "Lore Chaos à 1440 px : description et lore sur 918 px (~137 caractères par ligne) ; grille des daemons notables à moitié vide (453/918 px) → largeur bornée ~70ch comme L154/L158, grille resserrée (UX L11)"
     public: "Panthéon du Chaos : textes à longueur de lecture confortable sur grand écran"
