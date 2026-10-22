@@ -4,7 +4,7 @@ date: 2026-10-21
 created: 2026-10-21T19:35+02:00
 lots: [L158]
 captures:
-  - { file: captures/L158-primarque-heresie-1440.png, alt: "Section Hérésie d'Horus sur grand écran : le texte tient dans une colonne de lecture d'environ 70 caractères par ligne, la citation est centrée dessous" }
+  - { file: captures/L158-primarque-heresie-1440.png, alt: "Section Hérésie d'Horus sur grand écran : le texte, d'environ 70 caractères par ligne, forme une colonne centrée dans la section, sur le même axe que la citation placée dessous" }
   - { file: captures/L158-primarque-destin-perdu-1440.png, alt: "Section Destin du Second Primarque sur grand écran : le texte occupe sa colonne de lecture, sans colonne vide à droite" }
   - { file: captures/L158-primarque-destin-perdu-390.png, alt: "Section Destin du Second Primarque sur téléphone (390 px) : le texte sur toute la largeur de la section" }
 ---

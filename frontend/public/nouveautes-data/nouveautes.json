@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 09:11",
+  "generated": "2026-10-22 09:55",
   "entries": [
     {
       "slug": "2026-10-21-fiche-d-un-primarque-images-et-visionneuse-au-clavier",
@@ -68,7 +68,7 @@
         "captures/L158-primarque-destin-perdu-390.png"
       ],
       "alts": [
-        "Section Hérésie d'Horus sur grand écran : le texte tient dans une colonne de lecture d'environ 70 caractères par ligne, la citation est centrée dessous",
+        "Section Hérésie d'Horus sur grand écran : le texte, d'environ 70 caractères par ligne, forme une colonne centrée dans la section, sur le même axe que la citation placée dessous",
         "Section Destin du Second Primarque sur grand écran : le texte occupe sa colonne de lecture, sans colonne vide à droite",
         "Section Destin du Second Primarque sur téléphone (390 px) : le texte sur toute la largeur de la section"
       ],
