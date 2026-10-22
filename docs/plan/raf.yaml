@@ -1725,6 +1725,8 @@ lots:
     review: { date: 2026-10-22, verdict: "compliant after 1 minor note (the e2e test writes to `undefined/` when TMPDIR is unset) — orchestré (vague 2026-10-22-wh-chaos, 0 passe(s) de correction)", commit: 4705427aff89f2bc9622bc66eeff81355f77eb62 }
     ux: { date: 2026-10-22, verdict: "conforme, 1 note mineure (l'e2e écrit sous undefined/ sans TMPDIR) ; e2e 2/2" }
     finished: 2026-10-22
+    notes:
+      - { date: 2026-10-22, text: "Mineur confirmé le 22-10 : lancé sans TMPDIR, chaos-focus-l172.e2e.spec.ts écrit ses captures dans frontend/undefined/ (dossier retiré par le lead) — à corriger avec L174 (os.tmpdir())." }
   - id: L173
     title: "Lore Chaos, conclusion : « Trois primarques nommés ici » alors que 4 sont listés (Angron, Magnus, Mortarion, Fulgrim), « six millénaires » contre « dix mille ans » du chapeau (UX L11)"
     public: "Panthéon du Chaos : texte de conclusion corrigé"
