@@ -165,6 +165,44 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
     expect(hors).toEqual([]);
   });
 
+  // L158/t1 (2e passe) — la consigne du lot : rien ne change sous 761 px. Entre ~612 et 760 px la zone de contenu du
+  // panneau (571 à 650 px) est sous l'ancien plafond de 70ch (662 px) : les textes y prennent toute la largeur, et le
+  // texte d'Hérésie n'est pas recentré (il était à 56 px du bord à 720 px, contre 21 px pour les autres sections).
+  it.each([700, 760])('R8 — à %i px, les textes gardent leur largeur d’avant le lot (celle du panneau, plafonnée à 70ch) et le texte d’Hérésie est aligné sur son titre et sur les autres sections', async (w) => {
+    const page = await open('horus', w, false);
+    const r = await page.evaluate(() => {
+      const box = (s: string) => document.querySelector(s)!.getBoundingClientRect();
+      /** Largeur attendue sans le lot : zone de contenu du panneau, plafonnée à 70ch (mesuré avec la police de l'élément). */
+      const attendue = (sel: string, panneau: string, plafond: boolean) => {
+        const p = document.querySelector<HTMLElement>(panneau)!;
+        const cs = getComputedStyle(p);
+        const zone = p.getBoundingClientRect().width - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth) - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        const el = document.querySelector<HTMLElement>(sel)!;
+        const probe = document.createElement('span');
+        probe.style.cssText = `position:absolute;visibility:hidden;width:70ch;font:${getComputedStyle(el).font}`;
+        document.body.append(probe);
+        const ch70 = probe.getBoundingClientRect().width;
+        probe.remove();
+        return plafond ? Math.min(zone, ch70) : zone;
+      };
+      const textes: [string, string, boolean][] = [
+        ['#description .lead', '#description', false], // le chapeau n'avait pas de plafond de 70ch avant le lot (770 px)
+        ['#description .lore-block', '#description', true],
+        ['#heresie .heresy-text', '#heresie', true],
+        ['#heritage > p', '#heritage', true],
+      ];
+      return {
+        ecarts: textes.map(([sel, panneau, plafond]) => ({ sel, ecart: Math.round((box(sel).width - attendue(sel, panneau, plafond)) * 10) / 10 })),
+        heresieGauche: box('#heresie .heresy-text').left - box('#heresie h2').left,
+        heritageGauche: box('#heritage > p').left - box('#heritage h2').left,
+      };
+    });
+    expect(r.ecarts.filter((x) => Math.abs(x.ecart) > 1), `${w} px`).toEqual([]);
+    expect(Math.abs(r.heresieGauche), 'Hérésie : texte aligné sur son titre').toBeLessThanOrEqual(1);
+    expect(Math.abs(r.heresieGauche - r.heritageGauche), 'Hérésie comme les autres sections').toBeLessThanOrEqual(1);
+    await page.close();
+  });
+
   it('R6 — texte seul et colonne double ont la même largeur de lecture (à 1440 px, écart de 15 px au plus)', async () => {
     const page = await open('horus', 1440, false);
     const l = await page.evaluate(() => {
