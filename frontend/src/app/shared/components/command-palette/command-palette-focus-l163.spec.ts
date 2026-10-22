@@ -117,6 +117,20 @@ describe('focus de la recherche Ctrl+K (L163)', () => {
     expect(touche(champ, 'Tab').defaultPrevented).toBe(true);
     expect(document.activeElement).toBe(champ);
   });
+
+  it('R8 — un clic dans une zone non focalisable du panneau ne fait pas perdre le focus (Tab ne fuit pas)', async () => {
+    const { f, palette, el } = await monter();
+    palette.open(); f.detectChanges();
+    const champ = el_input(f);
+    champ.focus();
+    const pied = el.querySelector<HTMLElement>('.cmdk-footer')!;
+    const e = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
+    pied.dispatchEvent(e);
+    expect(e.defaultPrevented).toBe(true);
+    const surChamp = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
+    champ.dispatchEvent(surChamp);
+    expect(surChamp.defaultPrevented).toBe(false);
+  });
 });
 
 function el_input(f: { nativeElement: HTMLElement }): HTMLInputElement {

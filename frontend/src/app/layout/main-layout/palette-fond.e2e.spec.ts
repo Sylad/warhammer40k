@@ -32,6 +32,18 @@ describe.skipIf(!built || !chromium)('fond de la recherche Ctrl+K (navigateur, d
     expect(stale).toBe(false);
   });
 
+  it('R8 — un clic sur le pied de la recherche garde le focus dedans : Tab ne sort pas vers la page', async () => {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.goto(`${base}/factions`);
+    await page.locator('button.nav-search-btn').waitFor();
+    await page.locator('button.nav-search-btn').click();
+    await page.locator('.cmdk-input').fill('horus');
+    await page.locator('.cmdk-footer').click();
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => !!document.activeElement?.closest('.cmdk-panel'))).toBe(true);
+    await page.close();
+  });
+
   for (const [w, h] of [[1440, 900], [390, 844]]) {
     it(`R9 — ${w} px : le fond couvre la fenêtre, un clic à côté ferme la recherche sans activer la page`, async () => {
       const page = await browser.newPage({ viewport: { width: w, height: h } });

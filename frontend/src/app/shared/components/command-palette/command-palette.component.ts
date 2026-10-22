@@ -60,7 +60,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
   template: `
     @if (isOpen()) {
       <div class="cmdk-backdrop" (click)="close()"></div>
-      <div class="cmdk-panel" role="dialog" aria-label="Recherche globale" (keydown)="boucler($event)">
+      <div class="cmdk-panel" role="dialog" aria-label="Recherche globale" (keydown)="boucler($event)" (mousedown)="garderFocus($event)">
         <div class="cmdk-header">
           <span class="cmdk-icon">⌕</span>
           <input
@@ -108,7 +108,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
   `,
   styles: [`
     .cmdk-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 999;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000;
       backdrop-filter: blur(4px);
     }
     .cmdk-panel {
@@ -116,7 +116,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
       width: min(640px, 92vw); max-height: 70vh;
       background: rgba(11,9,7,0.97); border: 1px solid var(--border-strong);
       box-shadow: 0 24px 80px rgba(0,0,0,0.85);
-      z-index: 1000;
+      z-index: 2001;
       display: flex; flex-direction: column;
     }
     .cmdk-header {
@@ -309,6 +309,15 @@ export class CommandPaletteComponent implements OnDestroy {
       e.preventDefault();
       premier?.focus();
     }
+  }
+
+  /**
+   * L163 : un clic sur une zone non focalisable du panneau (pied, aide, « Aucun résultat ») donnerait le
+   * focus à `body` — le `keydown` de Tab ne traverserait plus le panneau et sortirait vers la page cachée.
+   * On annule la prise de focus par défaut ; champ et résultats gardent la leur.
+   */
+  garderFocus(e: MouseEvent): void {
+    if (!(e.target as HTMLElement).closest('input, a[href]')) e.preventDefault();
   }
 
   onQueryChange(v: string): void {
