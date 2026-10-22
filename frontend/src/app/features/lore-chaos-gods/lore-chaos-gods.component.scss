@@ -34,7 +34,7 @@
         radial-gradient(circle at 75% 90%, rgba(156, 38, 128, 0.28), transparent 45%),
         linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.94));
     }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; min-width: 0; }
 
     .badge {
       display: inline-block;
@@ -55,6 +55,10 @@
       margin: 0 0 14px;
       color: var(--gold-bright);
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 32px 20px 28px; }
+      h1 { font-size: 32px; overflow-wrap: break-word; }
     }
     .lede { font-size: 15px; color: var(--text); line-height: 1.7; margin: 0 0 22px; max-width: 720px; }
 
@@ -132,7 +136,11 @@
       inset: 0;
       background: linear-gradient(180deg, color-mix(in srgb, var(--god-color) 22%, transparent) 0%, rgba(0,0,0,0.85) 75%);
     }
-    .god-head-content { position: relative; z-index: 1; max-width: 760px; }
+    .god-head-content { position: relative; z-index: 1; max-width: 760px; min-width: 0; }
+    /* Au téléphone : marges de 20 px, et le texte s'arrête au-dessus du ⛶ (32 px à 16 px du bas). */
+    @media (max-width: 600px) {
+      .god-head { padding: 40px 20px 64px; }
+    }
 
     .number {
       font-family: var(--serif);
@@ -149,7 +157,8 @@
       filter: drop-shadow(0 0 16px currentColor);
     }
     h2 {
-      font-size: 48px;
+      font-size: clamp(30px, 9vw, 48px);
+      overflow-wrap: break-word;
       line-height: 1;
       margin: 0 0 8px;
       text-shadow: 0 0 30px currentColor;
@@ -189,6 +198,9 @@
     }
     @media (max-width: 1024px) {
       .god-body { grid-template-columns: 1fr; padding: 28px; }
+    }
+    @media (max-width: 600px) {
+      .god-body { padding: 24px 20px; }
     }
 
     .god-main p.description {
