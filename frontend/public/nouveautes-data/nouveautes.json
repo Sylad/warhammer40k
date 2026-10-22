@@ -1,7 +1,17 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 15:12",
+  "generated": "2026-10-22 15:31",
   "entries": [
+    {
+      "slug": "2026-10-22-concepts-un-lien-mene-toujours-au-concept-vise",
+      "title": "Concepts : un lien mène toujours au concept visé",
+      "date": "2026-10-22",
+      "lots": [
+        "L162"
+      ],
+      "captures": [],
+      "html": "<p>Sur la page Concepts, une carte « liens inter-concepts » mène maintenant toujours au concept qu'elle désigne. Avant, si un filtre de catégorie était actif (par exemple Impérial) et que le concept visé appartenait à une autre catégorie (du Trône d'Or vers le Webway, par exemple), le clic ne faisait rien : l'adresse et le focus restaient où ils étaient.</p>\n<p>Désormais, le filtre repasse à « Tous », puis la page défile jusqu'au concept visé, qui reçoit le focus. Quand le concept visé est déjà affiché, le filtre choisi est conservé.</p>"
+    },
     {
       "slug": "2026-10-22-visionneuse-d-images-sous-titre-lisible",
       "title": "Visionneuse d'images : sous-titre lisible",
