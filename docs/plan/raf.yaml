@@ -1623,6 +1623,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-22
+    review: { date: 2026-10-22, verdict: "compliant (L164 : titre à 33–35 px sous la barre sur les 6 fiches à 1440 et 390 px, 25 tests e2e verts ; 2 notes mineures) — orchestré (vague 2026-10-22-wh-l161b, 0 passe(s) de correction)", commit: b43629e4c8f11902a3a960d52481f9bcfa771c02 }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
