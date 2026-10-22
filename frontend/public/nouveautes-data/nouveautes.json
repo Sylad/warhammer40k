@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 20:20",
+  "generated": "2026-10-22 20:33",
   "entries": [
+    {
+      "slug": "2026-10-22-pantheon-du-chaos-en-tetes-entiers-sur-les-petits-telephones",
+      "title": "Panthéon du Chaos : en-têtes entiers sur les petits téléphones",
+      "date": "2026-10-22",
+      "lots": [
+        "L168"
+      ],
+      "captures": [
+        "captures/L168-chaos-tzeentch-320.png",
+        "captures/L168-chaos-hero-1440.png"
+      ],
+      "alts": [
+        "L'en-tête de Tzeentch sur un téléphone de 320 pixels de large : le nom, le titre, la sphère et la citation tiennent en entier, avec le bouton d'agrandissement sous la citation",
+        "Le début de la page du Panthéon du Chaos sur ordinateur, inchangé"
+      ],
+      "html": "<p>Sur un téléphone de 320 pixels de large, le titre et le chapeau du Panthéon du Chaos, le nom de chaque dieu (Tzeentch était coupé), sa sphère et sa citation s'affichent désormais en entier, avec des marges plus étroites.</p>\n<p>Le bouton d'agrandissement de l'image ne recouvre plus la citation : il se place sous le texte. Sur ordinateur, rien ne change.</p>"
+    },
     {
       "slug": "2026-10-22-pantheon-du-chaos-noms-et-titres-des-dieux-lisibles-sur-fond",
       "title": "Panthéon du Chaos : noms et titres des dieux lisibles sur fond sombre",
