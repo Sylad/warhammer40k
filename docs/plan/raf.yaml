@@ -1517,6 +1517,7 @@ lots:
     visible: true
     created: 2026-10-21
     started: 2026-10-21
+    review: { date: 2026-10-22, verdict: "conforme après 1 correction : captures téléphone à 390 px ajoutées aux Nouveautés (4a21971) et gouttière décrite exactement (ee7ca01) ; code et tests conformes, e2e 5/5 et sonde de 320 à 1460 px verts, rien de cassé par L156 à L160", commit: 4a2197175bc61ce51a875ef5e12a5cfff354458b }
   - id: L156
     title: "Lore Primarques, contrastes : badges de statut sur l'image des cartes (Expurgé 1,13:1, Mort 1,4:1, Daemon-Prince 2,1:1, Disparu 2,6:1), numéro N° 2,1:1, monde natal 3,7:1, Expurgé de la fiche 2,05:1, titre de la visionneuse en primaryColor < 3:1 pour 15/20 → fond plein sous les badges, titre en or et couleur de légion en filet — WCAG 1.4.3 — revue UX L10"
     public: "Lore des Primarques : badges et titres lisibles"
