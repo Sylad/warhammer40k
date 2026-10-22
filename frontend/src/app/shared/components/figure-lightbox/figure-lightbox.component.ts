@@ -129,7 +129,7 @@ export interface LightboxState {
       line-height: 1.15;
     }
     .lightbox-role {
-      color: var(--gold-soft);
+      color: var(--gold);
       font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
       margin-bottom: 14px;
     }
