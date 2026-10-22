@@ -214,6 +214,16 @@
       .god-body { padding: 24px 20px; }
     }
 
+    /* L171 : colonne de lecture du corps de fiche. À 1440 px la colonne principale fait 918 px (≈ 137 caractères
+       par ligne) : description, lore, hiérarchie et grille des daemons s'arrêtent à 31,5rem (504 px à 16 px,
+       ≈ 70 caractères à 15,5 px, ≈ 77 à 14 px) ; rem et non ch pour que tous les blocs aient la même largeur et
+       suivent la taille de police du navigateur. En dessous, la colonne est plus étroite : la borne ne joue pas. */
+    .god-main { --lecture: 31.5rem; }
+    .god-main p.description,
+    .god-main p.loreLong,
+    .daemons-hierarchy,
+    .notable-grid { max-inline-size: var(--lecture); }
+
     .god-main p.description {
       color: var(--gold-bright);
       font-size: 15.5px;
@@ -262,7 +272,7 @@
 
     .notable-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 12px;
     }
     .notable-card {
