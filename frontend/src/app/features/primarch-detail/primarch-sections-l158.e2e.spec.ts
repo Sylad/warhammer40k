@@ -110,4 +110,92 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
     expect(r).toBe(true);
     await complet.close();
   });
+
+  // L158/t1 (revue UX) — « 70ch » est la largeur du chiffre 0 d'Inter (9,46 px) alors qu'un caractère moyen en
+  // français en fait ~7,1 : 70ch donnait ~90 caractères par ligne (83 à 100 mesurés à 1440 px). On mesure donc le
+  // résultat, en caractères par ligne RENDUE (un Range par caractère), pas une largeur en unités CSS.
+  const SECTIONS_TEXTE: Record<string, string> = {
+    'Description (chapeau)': '#description .lead',
+    'Description (texte)': '#description .lore-block',
+    Hérésie: '#heresie .heresy-text',
+    Héritage: '#heritage > p',
+  };
+
+  /** Caractères par ligne rendue de chaque élément (espaces de fin de ligne exclus). */
+  async function lignes(page: Page, sel: string): Promise<number[]> {
+    return page.evaluate((s) => {
+      const el = document.querySelector(s)!;
+      const parLigne = new Map<number, string>();
+      const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode() as Text | null; n; n = w.nextNode() as Text | null) {
+        const t = n.data;
+        for (let i = 0; i < t.length; i++) {
+          const r = document.createRange();
+          r.setStart(n, i);
+          r.setEnd(n, i + 1);
+          const rect = r.getClientRects()[0];
+          if (!rect || rect.width === 0) continue; // saut de ligne conservé (pre-line) ou espace replié
+          const k = Math.round(rect.top);
+          parLigne.set(k, (parLigne.get(k) ?? '') + t[i]);
+        }
+      }
+      return [...parLigne.entries()].sort((a, b) => a[0] - b[0]).map(([, txt]) => txt.trim().length);
+    }, sel);
+  }
+  const mediane = (v: number[]) => {
+    const s = [...v].sort((a, b) => a - b);
+    return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+  };
+
+  it('R5 — à 1440 px, chaque section de texte (chapeau compris) tient à 65–75 caractères par ligne en médiane des lignes pleines (la dernière d’un paragraphe est courte par nature) et 80 au plus, avec ou sans image', async () => {
+    const hors: string[] = [];
+    for (const id of ['horus', 'sanguinius']) {
+      for (const withImage of [false, true]) {
+        const page = await open(id, 1440, withImage);
+        expect(await page.evaluate(() => document.fonts.check('15px Inter')), 'police Inter chargée (réseau requis)').toBe(true);
+        for (const [nom, sel] of Object.entries(SECTIONS_TEXTE)) {
+          const l = await lignes(page, sel);
+          const med = mediane(l.length > 1 ? l.slice(0, -1) : l); // lignes pleines : la dernière d'un paragraphe est courte par nature
+          const max = Math.max(...l);
+          if (med < 65 || med > 75 || max > 80) hors.push(`${id}${withImage ? ' +image' : ''} · ${nom} : médiane (lignes pleines) ${med}, max ${max} (${l.join(' ')})`);
+        }
+        await page.close();
+      }
+    }
+    expect(hors).toEqual([]);
+  });
+
+  it('R6 — texte seul et colonne double ont la même largeur de lecture (à 1440 px, écart de 15 px au plus)', async () => {
+    const page = await open('horus', 1440, false);
+    const l = await page.evaluate(() => {
+      const w = (s: string) => document.querySelector(s)!.getBoundingClientRect().width;
+      return { seul: w('#heritage > p'), heresie: w('#heresie .heresy-text'), lore: w('#description .lore-block'), double: w('#personnalite .col-text'), colonneDouble: document.querySelector('#personnalite .two-col') !== null };
+    });
+    expect(l.colonneDouble).toBe(true);
+    for (const k of ['seul', 'heresie', 'lore'] as const) expect(Math.abs(l[k] - l.double), k).toBeLessThanOrEqual(15);
+    await page.close();
+  });
+
+  it('R7 — Hérésie : le texte partage l’axe de la citation et de l’image (centré dans le panneau), toujours aligné à gauche', async () => {
+    const page = await open('horus', 1440, true);
+    await page.locator('#heresie .inline-figure').waitFor();
+    const r = await page.evaluate(() => {
+      const cx = (s: string) => {
+        const b = document.querySelector(s)!.getBoundingClientRect();
+        return b.left + b.width / 2;
+      };
+      return {
+        texte: cx('#heresie .heresy-text'),
+        citation: cx('#heresie .pull-quote-inline'),
+        image: cx('#heresie .inline-figure'),
+        panneau: cx('#heresie'),
+        align: getComputedStyle(document.querySelector('#heresie .heresy-text')!).textAlign,
+      };
+    });
+    expect(Math.abs(r.texte - r.citation)).toBeLessThanOrEqual(1);
+    expect(Math.abs(r.texte - r.image)).toBeLessThanOrEqual(1);
+    expect(Math.abs(r.texte - r.panneau)).toBeLessThanOrEqual(1);
+    expect(['left', 'start']).toContain(r.align);
+    await page.close();
+  });
 });
