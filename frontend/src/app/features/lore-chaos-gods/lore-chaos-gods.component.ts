@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, untracked } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -6,6 +6,8 @@ import type { ChaosGod, ChaosGodDaemon } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+
+const COMPTES = ['Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit', 'Neuf', 'Dix'];
 
 @Component({
   selector: 'app-lore-chaos-gods',
@@ -135,7 +137,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
     <section class="cta-bottom">
       <div class="ornament"><span class="line"></span><span class="aigle">✠</span><span class="line"></span></div>
       <p class="cta-text">
-        Quatre dieux. Trois primarques nommés ici. Six millénaires de corruption.<br>
+        {{ conclusion() }}<br>
         L'Imperium tient encore — mais l'Œil de la Terreur ne se ferme jamais.
       </p>
       <div class="cta-actions">
@@ -151,6 +153,12 @@ import { toSafeSignal } from '../../shared/safe-signal';
 export class LoreChaosGodsComponent {
   private readonly service = inject(WarhammerService);
   readonly gods = toSafeSignal(this.service.chaosGods$, [] as ChaosGod[]);
+  /** Phrase de conclusion : le nombre de primarques est celui des fiches, pas un chiffre figé. */
+  readonly conclusion = computed(() => {
+    const n = this.gods().reduce((total, g) => total + g.primarchsCorrupted.length, 0);
+    const primarques = n === 0 ? '' : n === 1 ? ' Un primarque nommé ici.' : ` ${COMPTES[n - 1] ?? n} primarques nommés ici.`;
+    return `Quatre dieux.${primarques} Dix mille ans de corruption.`;
+  });
   readonly godImages = signal<Map<string, string>>(new Map());
   readonly lightbox = signal<LightboxState | null>(null);
 
