@@ -2015,9 +2015,10 @@ lots:
     review: { date: 2026-10-23, verdict: "compliant — 0 blocking, 0 major, 2 minor (Aleya partage l'image de son organisation ; couvertures recadrées par la carte) — orchestré (vague 2026-10-23-wh-l188, 0 passe(s) de correction)", commit: a2edd4a756b7da59eba8c132b85004fea7b7a92f }
   - id: L190
     title: "Civils Impériaux : une seule résolution d'image par figure et par visite (Master of the Administratum : 5 requêtes /api/wiki-image en repli successif vers la même icône ; Malcador 2) (QA prod 23-10)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-23
+    started: 2026-10-23
   - id: L191
     title: "Civils Impériaux : coquille « qu'aucun mortal » → « mortel » dans imperial-orgs.json (QA prod 23-10)"
     status: doing
