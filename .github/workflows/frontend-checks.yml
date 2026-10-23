@@ -49,8 +49,35 @@ jobs:
       - name: Build (avec vérification de fuite du plan)
         run: npm run build
 
-      - name: Chromium pour l'acceptation de bout en bout
-        run: npx playwright-core install --with-deps chromium
+      # L188 : `install --with-deps chromium` se bloquait (téléchargement + apt) jusqu'au timeout du job.
+      # Le navigateur (~/.cache/ms-playwright) est mis en cache, clé sur la version de playwright-core ;
+      # les dépendances système (apt) restent hors cache : à cache trouvé, `install-deps` seul.
+      - name: Version de playwright-core (clé du cache de Chromium)
+        id: playwright-version
+        run: echo "version=$(node -p "require('playwright-core/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache de Chromium
+        id: chromium-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-core-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Chromium pour l'acceptation de bout en bout, sans cache
+        if: steps.chromium-cache.outputs.cache-hit != 'true'
+        timeout-minutes: 5
+        run: |
+          SECONDS=0
+          npx playwright-core install --with-deps chromium
+          echo "Chromium installé sans cache en ${SECONDS} s"
+
+      - name: Dépendances système de Chromium (Chromium en cache)
+        if: steps.chromium-cache.outputs.cache-hit == 'true'
+        timeout-minutes: 5
+        run: |
+          SECONDS=0
+          npx playwright-core install-deps chromium
+          echo "Dépendances système installées, Chromium en cache, en ${SECONDS} s"
 
       # L166 : durée de chaque cas (junit), charge du runner et journal horodaté de chaque appel Playwright
       # (DEBUG=pw:api : clic, onglet ouvert, waitForEvent) conservés, échec compris, pour qu'un rouge

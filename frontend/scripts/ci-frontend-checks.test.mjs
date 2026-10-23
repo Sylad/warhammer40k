@@ -51,4 +51,45 @@ describe('workflow frontend-checks.yml', () => {
     expect(pkg.scripts.build).toMatch(/plan-data\.mjs --leaks dist\/frontend\/browser$/);
     expect(pkg.scripts.plan).toBe('node scripts/plan-data.mjs');
   });
+
+  // L188 — « Chromium pour l'acceptation de bout en bout » se bloquait (timeout du job à 10 min).
+  describe('Chromium (L188)', () => {
+    const idx = (pred) => steps.findIndex(pred);
+    const cache = steps.find((s) => String(s.uses ?? '').startsWith('actions/cache@'));
+    const installs = steps.filter((s) => /playwright-core install/.test(String(s.run ?? '')));
+
+    it('R1 — ~/.cache/ms-playwright est mis en cache, clé sur la version de playwright-core, AVANT l’installation', () => {
+      expect(cache).toBeDefined();
+      expect(cache.with.path).toBe('~/.cache/ms-playwright');
+      expect(cache.id).toBeTruthy();
+      expect(cache.with.key).toMatch(/playwright-core/);
+      expect(cache.with.key).toMatch(/steps\.[\w-]+\.outputs\.\w+|hashFiles\(/);
+      const versionStep = steps.find((s) => /playwright-core/.test(String(s.run ?? '')) && /GITHUB_OUTPUT/.test(String(s.run ?? '')));
+      expect(versionStep, 'la version vient de node_modules, pas d’une valeur écrite en dur').toBeDefined();
+      expect(idx((s) => s === versionStep)).toBeLessThan(idx((s) => s === cache));
+      expect(idx((s) => s === cache)).toBeLessThan(idx((s) => installs.includes(s)));
+    });
+
+    it('R2 — cache trouvé : seules les dépendances système sont installées (install-deps) ; sinon install --with-deps', () => {
+      const hit = installs.find((s) => /install-deps/.test(s.run));
+      const miss = installs.find((s) => /install --with-deps/.test(s.run));
+      expect(hit).toBeDefined();
+      expect(miss).toBeDefined();
+      expect(hit.if).toContain(`steps.${cache.id}.outputs.cache-hit == 'true'`);
+      expect(miss.if).toContain(`steps.${cache.id}.outputs.cache-hit != 'true'`);
+    });
+
+    it('R3 — chaque étape d’installation a son propre timeout, plus court que celui du job', () => {
+      const job = Object.values(wf.jobs)[0];
+      expect(installs.length).toBeGreaterThan(0);
+      for (const s of installs) {
+        expect(s['timeout-minutes']).toBeGreaterThan(0);
+        expect(s['timeout-minutes']).toBeLessThan(job['timeout-minutes']);
+      }
+    });
+
+    it('R4 — la durée de l’étape est écrite dans le journal (mesure avant/après)', () => {
+      for (const s of installs) expect(String(s.run)).toMatch(/SECONDS|date \+%s/);
+    });
+  });
 });
