@@ -1837,10 +1837,11 @@ lots:
   - id: L183
     title: "Lore civils, filtres : aucun aria-pressed, le filtre actif n'est signalé que par son fond (lore-civilians.component.ts:59,63) → aria-pressed sur les 7 boutons — WCAG 4.1.2 (UX L12)"
     public: "Civils Impériaux : filtre actif annoncé aux lecteurs d'écran"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L184
     title: "Lore civils, chargement : compteurs « 0 Organisations », filtres « · 0 » et conclusion affichés avant la réponse, sans role=status → « — » et indicateur role=status tant que la liste n'est pas arrivée, conclusion après chargement — Nielsen 1 (UX L12)"
     public: "Civils Impériaux : chargement signalé, plus de compteurs à zéro"
