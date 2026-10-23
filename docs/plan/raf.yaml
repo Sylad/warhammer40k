@@ -2019,6 +2019,7 @@ lots:
     ux: { date: 2026-10-23, verdict: "conforme (verdict du lead d'après le rapport ux-reviewer et les captures 1440/390 regardées) — 0 bloquant, 0 majeur ; mineurs en notes : Aleya partage l'emblème de son organisation, couvertures recadrées par la carte" }
     notes:
       - { date: 2026-10-23, text: "Mineurs UX 23-10 : Aleya reçoit SoS_Icon.jpg, comme l'en-tête « Sœurs du Silence » (emblème d'organisation, accepté par la QA pour une institution) ; couvertures Voss/Oliton rognées en haut par le recadrage existant des cartes." }
+      - { date: 2026-10-23, text: "QA prod 23-10 (après livraison) : Master of the Administratum, Lord Marshal et Ecclésiarque affichent l'image du bandeau de leur organisation (emblème d'institution, accepté) ; 8 cartes sur 29 montrent un emblème ou une couverture, pas un portrait (attendu par le README)." }
     finished: 2026-10-23
   - id: L190
     title: "Civils Impériaux : une seule résolution d'image par figure et par visite (Master of the Administratum : 5 requêtes /api/wiki-image en repli successif vers la même icône ; Malcador 2) (QA prod 23-10)"
@@ -2047,6 +2048,12 @@ lots:
     title: "Civils Impériaux, visionneuse : une variante en erreur HTTP ou déjà listée arrête toute la chaîne des variantes suivantes (lore-civilians.component.ts:297/303, L190) — une erreur transitoire réduit la galerie à une image ; continuer à la variante suivante, test"
     status: todo
     estimate: 0.25
+    created: 2026-10-23
+  - id: L194
+    title: "Civils Impériaux : Sébastian Thor résolu par repli de recherche (q « Sebastian Thor » → pageTitle « Reign of Blood », Dark_Heresy_Ascension_2_by_faroldjo.jpg) — wikiQuery vers une page illustrée de son sujet comme L189, attente « pageTitle = sujet du wikiQuery » dans docs/qa/expectations.md ; remesurer le contraste des noms et rôles au pire pixel sur les 6 images changées (Voss, Oliton, Malys, Bismarck, Aleya, Thor) à 1440, 390 et 320 px (QA prod 23-10)"
+    status: todo
+    estimate: 0.25
+    visible: true
     created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
