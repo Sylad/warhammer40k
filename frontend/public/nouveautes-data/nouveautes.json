@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 12:15",
+  "generated": "2026-10-23 12:34",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-galerie-d-une-figure-sans-images-hors-sujet",
+      "title": "Civils Impériaux : galerie d'une figure sans images hors sujet",
+      "date": "2026-10-23",
+      "lots": [
+        "L185"
+      ],
+      "captures": [
+        "captures/L185-visionneuse-thor-1440.png",
+        "captures/L185-visionneuse-thor-390.png"
+      ],
+      "alts": [
+        "La visionneuse de Sébastian Thor sur ordinateur, sans vaisseau dans sa galerie",
+        "La même visionneuse sur téléphone"
+      ],
+      "html": "<p>Dans la visionneuse des Civils Impériaux, la galerie d’une figure — Sébastian Thor, par exemple — ne montre plus de vaisseau de bataille qui n’a rien à y faire. Seules les figures de l’Imperial Navy gardent des images de flotte. Les autres figures n’affichent que des illustrations qui les concernent.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-chargement-signale-plus-de-compteurs-a-zero",
       "title": "Civils Impériaux : chargement signalé, plus de compteurs à zéro",
