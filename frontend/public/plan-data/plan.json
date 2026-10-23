@@ -587,6 +587,51 @@
       "status": "done",
       "started": "2026-10-23",
       "finished": "2026-10-23"
+    },
+    {
+      "id": "L177",
+      "title": "Civils Impériaux : noms et titres des organisations lisibles sur fond sombre",
+      "status": "todo"
+    },
+    {
+      "id": "L178",
+      "title": "Civils Impériaux : catégories et filtres lisibles",
+      "status": "todo"
+    },
+    {
+      "id": "L179",
+      "title": "Civils Impériaux : fiches des figures notables lisibles sur leur illustration",
+      "status": "todo"
+    },
+    {
+      "id": "L180",
+      "title": "Civils Impériaux : en-têtes entiers sur les petits téléphones",
+      "status": "todo"
+    },
+    {
+      "id": "L181",
+      "title": "Civils Impériaux : visionneuse d'images utilisable au clavier et au téléphone",
+      "status": "todo"
+    },
+    {
+      "id": "L182",
+      "title": "Civils Impériaux : textes à longueur de lecture confortable sur grand écran",
+      "status": "todo"
+    },
+    {
+      "id": "L183",
+      "title": "Civils Impériaux : filtre actif annoncé aux lecteurs d'écran",
+      "status": "todo"
+    },
+    {
+      "id": "L184",
+      "title": "Civils Impériaux : chargement signalé, plus de compteurs à zéro",
+      "status": "todo"
+    },
+    {
+      "id": "L185",
+      "title": "Civils Impériaux : galerie d'une figure sans images hors sujet",
+      "status": "todo"
     }
   ]
 }

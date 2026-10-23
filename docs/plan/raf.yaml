@@ -135,10 +135,14 @@ lots:
     finished: 2026-10-22
   - id: L12
     title: "Revue UX — Lore : civils"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-23
+    ux: { date: 2026-10-23, verdict: "non conforme : 3 bloquants (couleurs d'organisation en texte 1,59–4,1:1, badges et filtres actifs 2,32–4,0:1, texte des cartes sur image 1,02–3,81:1 ; en-têtes et hero rognés à 390/320 px ; visionneuse sans dialogue, ✕ sous le bouton Menu au téléphone), 3 majeurs (lignes de 156 car. et grilles à 24 %, filtres sans aria-pressed, compteurs à 0 pendant le chargement) → 9 lots ; captures regardées par le lead (Arbites quasi invisible à 1440, REMEMBRA… coupé à 320)" }
+    notes:
+      - { date: 2026-10-23, text: "Mineurs gardés en note (revue UX L12) : nom accessible des cartes = tout leur texte (122–400 car.) précédé de ⛶, sigils ✎ ⚖ ✠ lus (ts:81, 105-115) ; « Rôle clé » et « Fonctions » en div et non en titres (ts:123,127, WCAG 1.3.1) ; libellés anglais (Lord Marshal, House Hawkshroud, Emperor-class Battleship, God-Engines…) ; en erreur les filtres restent cliquables à « — » et la conclusion reste affichée ; <br> forcé de la conclusion (ts:144) laisse « TRAVAILLENT » seul à 390 ; page de 26–31 k px au téléphone (relève de L40). Non vérifié : 3e vignette grise de la galerie de Malcador, contraste du ⛶ (opacité 0,55). Captures : ~/projects/developpeur/tmp/wh-l12/." }
+    finished: 2026-10-23
   - id: L13
     title: "Revue UX — Lore : concepts"
     status: todo
@@ -1776,6 +1780,69 @@ lots:
     notes:
       - { date: 2026-10-23, text: "Mineurs gardés en note (revue L176) : la règle .god-head:has(.god-bg:hover) .god-zoom { opacity: 1 } (scss:119) n'a pas de test ; la garde R2 de chaos-numeros-survol-l176.spec.ts:11 ne repère que .god-bg:hover/focus-visible suivi de « { ». Instables vus pendant la vague, hors lot : primarch-sections-l158 R5 (police Inter, réseau requis) et L47 R9 (nouvel onglet, CI du 23-10 relancée)." }
     finished: 2026-10-23
+  - id: L177
+    title: "Lore civils, contrastes : couleur d'organisation en texte — h2 sous 3:1 pour 7/13 (Arbites #3a3a3a 1,59, Knights 2,19, Navigators 2,23), titres de section, titres latéraux et noms de figures sous 4,5:1 pour 10/13, titre de visionneuse (contextColor) idem → teinte éclaircie ≥ 4,5:1 pour le texte, couleur d'origine sur bordures et sigils, titre de visionneuse en or, comme L167 — WCAG 1.4.3 (UX L12)"
+    public: "Civils Impériaux : noms et titres des organisations lisibles sur fond sombre"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L178
+    title: "Lore civils, contrastes : badges de catégorie 2,32–3,33:1 (11/13) et filtres actifs (#050403 sur Militaire 2,95, Commerce 3,08, Formation 3,57, Religion 3,89, Psyker 4,0) — CATEGORY_COLOR lore-civilians.component.ts:19-26, scss:86-90,131-138 → texte ≥ 4,5:1 au pire pixel — WCAG 1.4.3 (UX L12)"
+    public: "Civils Impériaux : catégories et filtres lisibles"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L179
+    title: "Lore civils, cartes de figures : nom sur l'image 1,02–3,12:1 (28/29), rôle --gold-soft 10 px ≤ 3,81:1 (29/29), description sous 4,5:1 pour 12/29 (Malcador 2,03) — voile scss:230-233 trop léger en haut de carte → voile renforcé sous le texte, rôle en --gold, mesure au pire pixel à 1440 et 390 px — WCAG 1.4.3 (UX L12)"
+    public: "Civils Impériaux : fiches des figures notables lisibles sur leur illustration"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L180
+    title: "Lore civils à 390 et 320 px : chapeau et compteurs du hero coupés (80 px à 320), h2 coupés (Administratum 52 px à 390, Remembrancers 138 px à 320, 8 en-têtes à 320) — flex min-width auto, padding 50/38 px fixe, h2 32 px, overflow hidden → padding réduit sous 600 px, min-width 0, clamp du h2, overflow-wrap, comme L168 — WCAG 1.4.10 (UX L12)"
+    public: "Civils Impériaux : en-têtes entiers sur les petits téléphones"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L181
+    title: "Lore civils, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu après Échap ; à 390 et 320 px le ✕ est sous le bouton Menu (clic intercepté) → [appLightboxDialog] et retour du focus comme Chaos L169 (lore-civilians.component.ts:152) — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L12)"
+    public: "Civils Impériaux : visionneuse d'images utilisable au clavier et au téléphone"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L182
+    title: "Lore civils à 1440 px : texte long sur 980 px (156 caractères par ligne), grille des figures remplie à 24 % (236/980 px) pour 8 organisations sur 13 → largeur bornée ~70ch, grille resserrée, comme L171 (UX L12)"
+    public: "Civils Impériaux : textes à longueur de lecture confortable sur grand écran"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L183
+    title: "Lore civils, filtres : aucun aria-pressed, le filtre actif n'est signalé que par son fond (lore-civilians.component.ts:59,63) → aria-pressed sur les 7 boutons — WCAG 4.1.2 (UX L12)"
+    public: "Civils Impériaux : filtre actif annoncé aux lecteurs d'écran"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L184
+    title: "Lore civils, chargement : compteurs « 0 Organisations », filtres « · 0 » et conclusion affichés avant la réponse, sans role=status → « — » et indicateur role=status tant que la liste n'est pas arrivée, conclusion après chargement — Nielsen 1 (UX L12)"
+    public: "Civils Impériaux : chargement signalé, plus de compteurs à zéro"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L185
+    title: "Lore civils, visionneuse : la variante de recherche « battlefleet » ajoutée à toutes les figures (lore-civilians.component.ts:260) met un vaisseau dans la galerie de Sébastian Thor → variante réservée aux vaisseaux de l'Imperial Navy (UX L12)"
+    public: "Civils Impériaux : galerie d'une figure sans images hors sujet"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
