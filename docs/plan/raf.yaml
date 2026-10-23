@@ -2040,35 +2040,44 @@ lots:
     finished: 2026-10-23
   - id: L192
     title: "CI Contrôles frontend : le cache Chromium n'est enregistré qu'en fin de job réussi (actions/cache@v4, post-if: success()) — un e2e intermittent rouge au premier run sans cache empêche tout enregistrement et chaque run suivant réinstalle ; actions/cache/save juste après l'installation (revue L188)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-l192, 0 passe(s) de correction)", commit: 40bb7dd99240a337652237f950771e9831909840 }
+    finished: 2026-10-23
   - id: L193
     title: "Civils Impériaux, visionneuse : une variante en erreur HTTP ou déjà listée arrête toute la chaîne des variantes suivantes (lore-civilians.component.ts:297/303, L190) — une erreur transitoire réduit la galerie à une image ; continuer à la variante suivante, test"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant (1 note : « déjà listée » volontairement laissé hors périmètre à cause de L190 R3) — orchestré (vague 2026-10-23-wh-l192, 0 passe(s) de correction)", commit: 1457eec591b2473bd0b4fe1c6dfa23f6269106bc }
+    notes:
+      - { date: 2026-10-23, text: "Choix de la session gardé (23-10) : seule l'erreur HTTP passe à la variante suivante ; « déjà listée » arrête toujours la chaîne (exigé par L190 R3)." }
+    finished: 2026-10-23
   - id: L194
     title: "Civils Impériaux : Sébastian Thor résolu par repli de recherche (q « Sebastian Thor » → pageTitle « Reign of Blood », Dark_Heresy_Ascension_2_by_faroldjo.jpg) — wikiQuery vers une page illustrée de son sujet comme L189, attente « pageTitle = sujet du wikiQuery » dans docs/qa/expectations.md ; remesurer le contraste des noms et rôles au pire pixel sur les 6 images changées (Voss, Oliton, Malys, Bismarck, Aleya, Thor) à 1440, 390 et 320 px (QA prod 23-10)"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "conforme : 0 bloquant, 0 majeur ; 1 mineur (la Nouveauté annonce un changement d'image invisible pour le visiteur : même fichier avant et après) ; contraste remesuré à 4,82:1 au moins sur les 6 cartes à 1440, 390 et 320 px — orchestré (vague 2026-10-23-wh-l192, 1 passe(s) de correction)", commit: 89bcc1958a5506d1e5b82205aef09dabb57da815 }
+    ux: { date: 2026-10-23, verdict: "conforme (verdict du lead d'après le rapport ux-reviewer et les captures 1440/390 regardées) — carte de Thor lisible, illustration de l'Apostasie ; contraste ≥ 4,82:1 sur les 6 cartes à 1440, 390, 320 ; Nouveauté corrigée par L195" }
+    finished: 2026-10-23
   - id: L195
     title: "Nouveauté de L194 (docs/nouveautes/2026-10-23-civils-imperiaux-sebastian-thor-resolu-par-repli-de-recherch.md) : elle annonce une nouvelle image pour Sébastian Thor alors que le fichier affiché est le même avant et après (Dark_Heresy_Ascension_2_by_faroldjo.jpg, seule la page source change : Reign of Blood → Age of Apostasy) — dire ce que le visiteur voit réellement (source de l'image rattachée à son époque, contraste des 6 cartes vérifié ≥ 4,82:1) ou retirer l'entrée ; capture inchangée si elle reste juste (revue de vague L194)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant : 0 bloquant, 0 majeur ; 1 mineur (vocabulaire interne dans une Nouveauté sans changement visible) ; entrée réécrite en accord avec le lot, JSON et plan.json régénérés, tests nouveautes-data (14) et plan-data (60) verts — orchestré (vague 2026-10-23-wh-l195, 0 passe(s) de correction)", commit: 0c19c22ee68f883de2b236e5292d234af2f7e0f8 }
+    notes:
+      - { date: 2026-10-23, text: "Mineur de revue (23-10) : la Nouveauté garde un peu de vocabulaire interne (« recherche de repli », « rattachée à la page ») — accepté, l'entrée dit vrai." }
+    finished: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
