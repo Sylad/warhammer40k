@@ -3,6 +3,8 @@
 // tracé dans l'en-tête, visible à 1440 et 390 px (le contour de 1 px d'avant était rogné par overflow hidden).
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import type { Browser } from 'playwright-core';
 import { distState, startDistServer } from '../../../testing/dist-server';
 
@@ -64,7 +66,7 @@ describe.skipIf(!built || !chromium)('Panthéon du Chaos, focus de l\'illustrati
       expect(m.nom).toMatch(/^Agrandir l’illustration de /);
       const tete = page.locator('.god-head').first();
       await tete.scrollIntoViewIfNeeded();
-      await tete.screenshot({ path: `${process.env.TMPDIR}/chaos-focus-${w}.png` });
+      await tete.screenshot({ path: join(process.env.TMPDIR ?? tmpdir(), `chaos-focus-${w}.png`) });
       await page.close();
     }
   });
