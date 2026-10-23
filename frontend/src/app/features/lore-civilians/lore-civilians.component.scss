@@ -75,6 +75,8 @@
     .counter strong { font-family: var(--serif); color: var(--gold-bright); font-size: 22px; line-height: 1; }
     .counter span { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 
+    .load-status { min-height: 1.4em; margin: -12px 0 14px; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
     .filters { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
     .filter {
       background: rgba(11, 9, 7, 0.6);

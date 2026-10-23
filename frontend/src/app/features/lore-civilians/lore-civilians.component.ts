@@ -56,6 +56,10 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
       </div>
     </section>
 
+    <div class="load-status" role="status">
+      @if (orgs.pending()) { Chargement des civils impériaux… }
+    </div>
+
     @if (orgs.failed()) {
       <app-load-error (retry)="orgs.retry()" />
     }
@@ -142,6 +146,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
       }
     </section>
 
+    @if (!orgs.pending()) {
     <section class="cta-bottom">
       <div class="ornament"><span class="line"></span><span class="aigle">⚜</span><span class="line"></span></div>
       <p class="cta-text">
@@ -153,6 +158,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
         <a routerLink="/lore" class="cta-link">Retour aux archives lore →</a>
       </div>
     </section>
+    }
 
     <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
                          [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
@@ -194,8 +200,8 @@ export class LoreCiviliansComponent {
     this.orgs().reduce((sum, o) => sum + o.notableFigures.length, 0),
   );
 
-  /** L115 : « — » tant que la liste est en échec. */
-  nb(n: number): string { return compteur(n, this.orgs.failed()); }
+  /** L115, L184 : « — » tant que la liste est en échec ou n'est pas arrivée (un « 0 » serait une valeur). */
+  nb(n: number): string { return compteur(n, this.orgs.failed() || this.orgs.pending()); }
 
   countByCategory(cat: ImperialOrgCategory): number {
     return this.orgs().filter(o => o.category === cat).length;
