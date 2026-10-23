@@ -54,6 +54,19 @@ describe('Concepts — visionneuse en dialogue (L13)', () => {
     el.remove();
   });
 
+  it('R2 bis — ouverte depuis le ⛶ (non focalisable), la fermeture rend le focus au bouton de l\'image du même concept', async () => {
+    const { f, el, settle } = await monter();
+    const zoom = el.querySelectorAll<HTMLElement>('.concept-zoom')[1];
+    const attendu = el.querySelectorAll<HTMLButtonElement>('.concept-bg')[1];
+    document.body.appendChild(el);
+    zoom.click();
+    await settle();
+    f.componentInstance.closeLightbox();
+    await settle();
+    expect(document.activeElement).toBe(attendu);
+    el.remove();
+  });
+
   it('R3 — le bouton d\'agrandissement de chaque concept est nommé d\'après lui, le ⛶ décoratif est masqué aux lecteurs', async () => {
     const { el } = await monter();
     const boutons = Array.from(el.querySelectorAll<HTMLButtonElement>('.concept-bg'));
