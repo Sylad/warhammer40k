@@ -1980,10 +1980,11 @@ lots:
   - id: L186
     title: "Lore civils : le pictogramme ⛶ (.figure-zoom, top 8px, 26 px, z-index 2) chevauche de 6 px le haut du nom des figures quand le texte remplit la carte (Bismarck, Titans, Malcador à 1440 ; Chevaliers-Errants à 390 ; Emperor-class à 320), nom à 4,32–4,47:1 au pire pixel → réserver la place du badge (padding droit ou haut du contenu), mesure au pire pixel à 1440/390/320 (QA prod 23-10)"
     public: "Civils Impériaux : noms des figures dégagés de l'icône d'agrandissement"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L187
     title: "QA : section ## /lore/civilians dans docs/qa/expectations.md — 13 organisations, 29 figures avec image, compteurs 13/68/29, 7 filtres avec aria-pressed (un seul true), visionneuse role=dialog aria-modal, h2 ≥ 3:1 et textes ≥ 4,5:1 au pire pixel à 1440/390/320, aucun défilement horizontal (QA prod 23-10)"
     status: todo
