@@ -2019,6 +2019,7 @@ lots:
     estimate: 0.25
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — 2 notes mineures (arrêt de la chaîne de variantes sur un doublon ou une erreur, hypothèse non mesurée) ; les trois choix de l'auteur tiennent dans le périmètre du lot — orchestré (vague 2026-10-23-wh-l188, 0 passe(s) de correction)", commit: 74636a6315fdf4e1f1ef79fdc500f415312abd68 }
   - id: L191
     title: "Civils Impériaux : coquille « qu'aucun mortal » → « mortel » dans imperial-orgs.json (QA prod 23-10)"
     status: doing
