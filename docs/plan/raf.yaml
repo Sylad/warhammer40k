@@ -145,10 +145,11 @@ lots:
     finished: 2026-10-23
   - id: L13
     title: "Revue UX — Lore : concepts"
-    status: todo
+    status: doing
     visible: true
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-23
   - id: L14
     title: "Revue UX — Lore : galaxie"
     status: todo
