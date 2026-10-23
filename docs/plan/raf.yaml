@@ -1819,10 +1819,11 @@ lots:
   - id: L181
     title: "Lore civils, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu après Échap ; à 390 et 320 px le ✕ est sous le bouton Menu (clic intercepté) → [appLightboxDialog] et retour du focus comme Chaos L169 (lore-civilians.component.ts:152) — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L12)"
     public: "Civils Impériaux : visionneuse d'images utilisable au clavier et au téléphone"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L182
     title: "Lore civils à 1440 px : texte long sur 980 px (156 caractères par ligne), grille des figures remplie à 24 % (236/980 px) pour 8 organisations sur 13 → largeur bornée ~70ch, grille resserrée, comme L171 (UX L12)"
     public: "Civils Impériaux : textes à longueur de lecture confortable sur grand écran"
