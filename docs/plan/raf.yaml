@@ -1741,10 +1741,11 @@ lots:
   - id: L174
     title: "Panthéon du Chaos : le bouton image d'en-tête (god-bg) n'est pas cliquable à la souris ni au toucher — .god-bg-overlay le recouvre avec pointer-events auto (lore-chaos-gods.component.scss:145) ; pointer-events:none sur l'overlay, test elementFromPoint + clic réel sur les 4 dieux à 1440 et 390 px (QA prod 22-10, suite de L172)"
     public: "Panthéon du Chaos : l'image de chaque dieu s'ouvre aussi au clic"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-22
+    started: 2026-10-23
   - id: L175
     title: "Panthéon du Chaos : numéros « III / IV » et « IV / IV » (or 13 px sur l'image) entre 3,3 et 4,2:1 à 390 et 320 px — alourdir le voile ou éclaircir le texte (WCAG 1.4.3, QA prod 22-10, suite de L167)"
     public: "Panthéon du Chaos : numéros des dieux lisibles sur téléphone"
