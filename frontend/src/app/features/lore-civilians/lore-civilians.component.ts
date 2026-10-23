@@ -1,7 +1,9 @@
 import { afterNextRender, Component, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { WarhammerService } from '../../core/services/warhammer.service';
+import { WarhammerService, type WikiImageResult } from '../../core/services/warhammer.service';
+import type { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs';
 import type { ImperialOrganization, ImperialOrgCategory, ImperialOrgFigure } from '../../core/models/models';
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
@@ -209,7 +211,7 @@ export class LoreCiviliansComponent {
 
   constructor() {
     // Hero image
-    this.service.getWikiImage('Imperium of Man Adeptus Terra Holy Terra').subscribe(r => {
+    this.resoudre('Imperium of Man Adeptus Terra Holy Terra').subscribe(r => {
       if (r.imageUrl) this.heroImg.set(`url('${r.imageUrl}')`);
     });
 
@@ -219,7 +221,7 @@ export class LoreCiviliansComponent {
       untracked(() => {
         list.forEach(org => {
           if (org.wikiQuery) {
-            this.service.getWikiImage(org.wikiQuery).subscribe(r => {
+            this.resoudre(org.wikiQuery).subscribe(r => {
               if (r.imageUrl) {
                 const m = new Map(this.orgImages());
                 m.set(org.id, r.imageUrl);
@@ -230,7 +232,7 @@ export class LoreCiviliansComponent {
           for (const fig of org.notableFigures) {
             const q = fig.wikiQuery ?? fig.name;
             if (!q) continue;
-            this.service.getWikiImage(q).subscribe(r => {
+            this.resoudre(q).subscribe(r => {
               if (r.imageUrl) {
                 const key = `${org.id}::${fig.name}`;
                 const m = new Map(this.figureImages());
@@ -242,6 +244,17 @@ export class LoreCiviliansComponent {
         });
       });
     });
+  }
+
+  /** L190 : une seule requête /api/wiki-image par requête de recherche et par visite (en vol ou terminée). */
+  private readonly resolutions = new Map<string, Observable<WikiImageResult>>();
+  private resoudre(query: string): Observable<WikiImageResult> {
+    let r = this.resolutions.get(query);
+    if (!r) {
+      r = this.service.getWikiImage(query).pipe(shareReplay({ bufferSize: 1, refCount: false }));
+      this.resolutions.set(query, r);
+    }
+    return r;
   }
 
   figureImg(orgId: string, figureName: string): string {
@@ -277,21 +290,22 @@ export class LoreCiviliansComponent {
       ...(org.id === 'imperial-navy' ? [`${baseQuery} battlefleet`] : []),
     ];
 
-    for (const q of variants) {
-      this.service.getWikiImage(q).subscribe({
+    // Une variante à la fois : la première qui retombe sur une image déjà listée (ou sur rien) est le repli du wiki,
+    // les suivantes y retomberaient aussi (L190 : 5 requêtes vers la même icône).
+    const ajouter = (i: number): void => {
+      if (i >= variants.length) return;
+      this.resoudre(variants[i]).subscribe({
         next: r => {
-          if (!r.imageUrl) return;
           const current = this.lightbox();
           if (!current || current.title !== figure.name) return;
-          if (current.thumbUrls.includes(r.imageUrl)) return;
-          this.lightbox.set({
-            ...current,
-            thumbUrls: [...current.thumbUrls, r.imageUrl],
-          });
+          if (!r.imageUrl || current.thumbUrls.includes(r.imageUrl)) return;
+          this.lightbox.set({ ...current, thumbUrls: [...current.thumbUrls, r.imageUrl] });
+          ajouter(i + 1);
         },
         error: () => {},
       });
-    }
+    };
+    ajouter(0);
   }
 
   selectThumb(idx: number): void {
