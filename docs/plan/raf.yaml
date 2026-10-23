@@ -150,6 +150,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "conforme — 0 bloquant, 0 majeur, 1 note mineure (README L13 muet sur l'anneau de focus) — orchestré (vague 2026-10-23-wh-l13, 2 passe(s) de correction)", commit: a3d0ff36fe7d872ff92035dd2ec6ba3f004efc14 }
   - id: L14
     title: "Revue UX — Lore : galaxie"
     status: todo
