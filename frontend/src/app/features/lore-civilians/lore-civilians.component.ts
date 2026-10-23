@@ -273,7 +273,8 @@ export class LoreCiviliansComponent {
       `${baseQuery} concept art`,
       `${figure.name} ${org.name}`,
       `${baseQuery} warhammer 40k`,
-      `${baseQuery} battlefleet`,
+      // « battlefleet » ramène des vaisseaux : pertinent pour l'Imperial Navy seulement.
+      ...(org.id === 'imperial-navy' ? [`${baseQuery} battlefleet`] : []),
     ];
 
     for (const q of variants) {
