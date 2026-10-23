@@ -57,7 +57,7 @@ describe('Civils Impériaux, catégories et filtres (L178)', () => {
     expect(bas.length).toBeGreaterThanOrEqual(5);
   });
 
-  it('R2 — le badge de chaque organisation porte la teinte lisible de sa catégorie, ≥ 4,5:1 sur le fond le plus clair du bandeau', async () => {
+  it('R2 — le badge de chaque organisation porte la teinte lisible de sa catégorie, ≥ 4,5:1 sur son fond', async () => {
     const f = await monter();
     const cmp = f.componentInstance;
     const badges = (f.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('article.org .category');
@@ -93,5 +93,14 @@ describe('Civils Impériaux, catégories et filtres (L178)', () => {
     }
     // « Toutes » : l'or par défaut sur le même fond
     expect(contraste('#c9a24a', melange('#c9a24a', base, part))).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('R5 — le badge a un fond uni et opaque (indépendant de l\'image du wiki) sur lequel chaque teinte est ≥ 4,5:1, à 1440 comme à 390 px', async () => {
+    const cmp = (await monter()).componentInstance;
+    const m = regle('.category').match(/(?:^|[\s;])background:\s*(#[0-9a-f]{6})\s*;/i);
+    expect(m, 'fond uni du badge').not.toBeNull();
+    for (const c of cmp.categories) {
+      expect(contraste(teinteLisible(cmp.categoryColor(c)), m![1]), c).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });
