@@ -125,6 +125,8 @@
       transition: opacity 0.2s;
     }
     .concept-bg:hover { opacity: 0.45; }
+    /* Anneau opaque et vers l'intérieur : le bouton remplit .concept-head (overflow: hidden) et reste estompé hors focus. */
+    .concept-bg:focus-visible { opacity: 1; outline: 3px solid #c9a24a; outline-offset: -3px; }
     .concept-zoom {
       position: absolute;
       bottom: 16px;
