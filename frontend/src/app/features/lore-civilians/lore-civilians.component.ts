@@ -61,11 +61,11 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
     }
 
     <section class="filters">
-      <button class="filter" [class.active]="filterCategory() === 'all'" (click)="setFilter('all')">
+      <button type="button" class="filter" [class.active]="filterCategory() === 'all'" [attr.aria-pressed]="filterCategory() === 'all'" (click)="setFilter('all')">
         Toutes · {{ nb(orgs().length) }}
       </button>
       @for (cat of categories; track cat) {
-        <button class="filter" [class.active]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)" [style.--cat-text]="categoryText(cat)">
+        <button type="button" class="filter" [class.active]="filterCategory() === cat" [attr.aria-pressed]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)" [style.--cat-text]="categoryText(cat)">
           {{ categoryLabel(cat) }} · {{ nb(countByCategory(cat)) }}
         </button>
       }
