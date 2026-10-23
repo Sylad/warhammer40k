@@ -2048,9 +2048,10 @@ lots:
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-l192, 0 passe(s) de correction)", commit: 40bb7dd99240a337652237f950771e9831909840 }
   - id: L193
     title: "Civils Impériaux, visionneuse : une variante en erreur HTTP ou déjà listée arrête toute la chaîne des variantes suivantes (lore-civilians.component.ts:297/303, L190) — une erreur transitoire réduit la galerie à une image ; continuer à la variante suivante, test"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-23
+    started: 2026-10-23
   - id: L194
     title: "Civils Impériaux : Sébastian Thor résolu par repli de recherche (q « Sebastian Thor » → pageTitle « Reign of Blood », Dark_Heresy_Ascension_2_by_faroldjo.jpg) — wikiQuery vers une page illustrée de son sujet comme L189, attente « pageTitle = sujet du wikiQuery » dans docs/qa/expectations.md ; remesurer le contraste des noms et rôles au pire pixel sur les 6 images changées (Voss, Oliton, Malys, Bismarck, Aleya, Thor) à 1440, 390 et 320 px (QA prod 23-10)"
     status: todo
