@@ -55,7 +55,7 @@ describe('workflow frontend-checks.yml', () => {
   // L188 — « Chromium pour l'acceptation de bout en bout » se bloquait (timeout du job à 10 min).
   describe('Chromium (L188)', () => {
     const idx = (pred) => steps.findIndex(pred);
-    const cache = steps.find((s) => String(s.uses ?? '').startsWith('actions/cache@'));
+    const cache = steps.find((s) => String(s.uses ?? '').startsWith('actions/cache/restore@'));
     const installs = steps.filter((s) => /playwright-core install/.test(String(s.run ?? '')));
 
     it('R1 — ~/.cache/ms-playwright est mis en cache, clé sur la version de playwright-core, AVANT l’installation', () => {
@@ -77,6 +77,19 @@ describe('workflow frontend-checks.yml', () => {
       expect(miss).toBeDefined();
       expect(hit.if).toContain(`steps.${cache.id}.outputs.cache-hit == 'true'`);
       expect(miss.if).toContain(`steps.${cache.id}.outputs.cache-hit != 'true'`);
+    });
+
+    it('R5 — le cache est enregistré juste après l’installation (actions/cache/save), pas en fin de job : un e2e rouge ne l’empêche pas', () => {
+      expect(steps.some((s) => String(s.uses ?? '').startsWith('actions/cache@')), 'actions/cache@ n’enregistre qu’en fin de job réussi').toBe(false);
+      const save = steps.find((s) => String(s.uses ?? '').startsWith('actions/cache/save@'));
+      expect(save).toBeDefined();
+      expect(save.with.path).toBe(cache.with.path);
+      expect(save.with.key).toBe(cache.with.key);
+      expect(save.if).toContain(`steps.${cache.id}.outputs.cache-hit != 'true'`);
+      const miss = installs.find((s) => /install --with-deps/.test(s.run));
+      const e2e = idx((s) => /test:e2e/.test(String(s.run ?? '')));
+      expect(idx((s) => s === save)).toBeGreaterThan(idx((s) => s === miss));
+      expect(idx((s) => s === save)).toBeLessThan(e2e);
     });
 
     it('R3 — chaque étape d’installation a son propre timeout, plus court que celui du job', () => {

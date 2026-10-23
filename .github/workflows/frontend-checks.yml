@@ -56,9 +56,11 @@ jobs:
         id: playwright-version
         run: echo "version=$(node -p "require('playwright-core/package.json').version")" >> "$GITHUB_OUTPUT"
 
+      # L192 : restore + save séparés. `actions/cache@v4` n'enregistre qu'en fin de job RÉUSSI : un e2e
+      # rouge au premier run (sans cache) empêchait tout enregistrement et chaque run réinstallait.
       - name: Cache de Chromium
         id: chromium-cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-core-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
@@ -70,6 +72,13 @@ jobs:
           SECONDS=0
           npx playwright-core install --with-deps chromium
           echo "Chromium installé sans cache en ${SECONDS} s"
+
+      - name: Enregistrement du cache de Chromium (tout de suite, avant les e2e)
+        if: steps.chromium-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-core-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
 
       - name: Dépendances système de Chromium (Chromium en cache)
         if: steps.chromium-cache.outputs.cache-hit == 'true'
