@@ -64,7 +64,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
         Toutes · {{ nb(orgs().length) }}
       </button>
       @for (cat of categories; track cat) {
-        <button class="filter" [class.active]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)">
+        <button class="filter" [class.active]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)" [style.--cat-text]="categoryText(cat)">
           {{ categoryLabel(cat) }} · {{ nb(countByCategory(cat)) }}
         </button>
       }
@@ -79,7 +79,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
             <div class="org-head-content">
               <div class="org-meta">
                 <span class="number">{{ formatNum(org.number) }}</span>
-                <span class="category" [style.color]="categoryColor(org.category)">{{ categoryLabel(org.category) }}</span>
+                <span class="category" [style.color]="categoryText(org.category)">{{ categoryLabel(org.category) }}</span>
               </div>
               <div class="org-sigil-row">
                 <span class="org-sigil" [style.color]="org.color">{{ org.sigil }}</span>
@@ -310,4 +310,6 @@ export class LoreCiviliansComponent {
 
   categoryLabel(c: ImperialOrgCategory): string { return CATEGORY_LABEL[c]; }
   categoryColor(c: ImperialOrgCategory): string { return CATEGORY_COLOR[c]; }
+  /** Teinte de texte de la catégorie (badge, filtre actif) : la couleur d'origine est sous 4,5:1 (L178). */
+  categoryText(c: ImperialOrgCategory): string { return teinteLisible(CATEGORY_COLOR[c]); }
 }

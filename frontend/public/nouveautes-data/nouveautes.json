@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 10:50",
+  "generated": "2026-10-23 10:56",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-categories-et-filtres-lisibles",
+      "title": "Civils Impériaux : catégories et filtres lisibles",
+      "date": "2026-10-23",
+      "lots": [
+        "L178"
+      ],
+      "captures": [
+        "captures/L178-civils-1440.png",
+        "captures/L178-civils-390.png"
+      ],
+      "alts": [
+        "La page Civils Impériaux sur ordinateur : les filtres de catégorie, Religion actif en texte clair sur fond sombre teinté, et le badge de catégorie d'une organisation, en texte clair lisible",
+        "Les mêmes filtres sur téléphone, le filtre Religion actif en texte clair sur fond sombre teinté"
+      ],
+      "html": "<p>Sur la page des Civils Impériaux, le badge de catégorie de chaque organisation (Militaire, Religion, Psyker, Commerce…) s'affiche dans une teinte plus claire de sa couleur, lisible sur le fond sombre.</p>\n<p>Les filtres de catégorie suivent la même règle : le filtre actif garde sa couleur en bordure et sur un fond sombre teinté, et son texte clair se lit sans effort, y compris pour Militaire et Commerce.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-noms-et-titres-des-organisations-lisibles-s",
       "title": "Civils Impériaux : noms et titres des organisations lisibles sur fond sombre",

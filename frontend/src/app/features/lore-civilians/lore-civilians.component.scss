@@ -84,8 +84,8 @@
     }
     .filter:hover { color: var(--text); border-color: var(--border-strong); }
     .filter.active {
-      color: var(--bg);
-      background: var(--cat-color, var(--gold));
+      color: var(--cat-text, var(--gold));
+      background: color-mix(in srgb, var(--cat-color, var(--gold)) 22%, #0b0907);
       border-color: var(--cat-color, var(--gold));
     }
 
