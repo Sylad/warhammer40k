@@ -1797,6 +1797,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "conforme (1 note mineure : README, le badge n'utilise pas --cat-text) — orchestré (vague 2026-10-23-wh-civils, 1 passe(s) de correction)", commit: 0751bbb28de493a0bb0ccc32dd20f106299e2db6 }
   - id: L179
     title: "Lore civils, cartes de figures : nom sur l'image 1,02–3,12:1 (28/29), rôle --gold-soft 10 px ≤ 3,81:1 (29/29), description sous 4,5:1 pour 12/29 (Malcador 2,03) — voile scss:230-233 trop léger en haut de carte → voile renforcé sous le texte, rôle en --gold, mesure au pire pixel à 1440 et 390 px — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : fiches des figures notables lisibles sur leur illustration"
