@@ -1783,10 +1783,11 @@ lots:
   - id: L177
     title: "Lore civils, contrastes : couleur d'organisation en texte — h2 sous 3:1 pour 7/13 (Arbites #3a3a3a 1,59, Knights 2,19, Navigators 2,23), titres de section, titres latéraux et noms de figures sous 4,5:1 pour 10/13, titre de visionneuse (contextColor) idem → teinte éclaircie ≥ 4,5:1 pour le texte, couleur d'origine sur bordures et sigils, titre de visionneuse en or, comme L167 — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : noms et titres des organisations lisibles sur fond sombre"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L178
     title: "Lore civils, contrastes : badges de catégorie 2,32–3,33:1 (11/13) et filtres actifs (#050403 sur Militaire 2,95, Commerce 3,08, Formation 3,57, Religion 3,89, Psyker 4,0) — CATEGORY_COLOR lore-civilians.component.ts:19-26, scss:86-90,131-138 → texte ≥ 4,5:1 au pire pixel — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : catégories et filtres lisibles"
