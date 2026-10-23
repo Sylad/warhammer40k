@@ -1,7 +1,26 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 11:19",
+  "generated": "2026-10-23 11:28",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-en-tetes-entiers-sur-les-petits-telephones",
+      "title": "Civils Impériaux : en-têtes entiers sur les petits téléphones",
+      "date": "2026-10-23",
+      "lots": [
+        "L180"
+      ],
+      "captures": [
+        "captures/L180-civils-hero-320.png",
+        "captures/L180-civils-administratum-320.png",
+        "captures/L180-civils-hero-1440.png"
+      ],
+      "alts": [
+        "Le début de la page des Civils Impériaux sur un téléphone de 320 pixels de large : le titre, le chapeau et les trois compteurs s'affichent en entier",
+        "L'en-tête de l'Adeptus Administratum sur un téléphone de 320 pixels de large : le nom, son titre et son emblème tiennent en entier",
+        "Le début de la page des Civils Impériaux sur ordinateur, inchangé"
+      ],
+      "html": "<p>Sur un téléphone de 320 ou 390 pixels de large, le titre, le chapeau et les compteurs de la page Civils Impériaux, ainsi que le nom de chaque organisation (Adeptus Administratum, Remembrancers…), s'affichent désormais en entier, avec des marges plus étroites. Les compteurs passent à la ligne quand la place manque.</p>\n<p>Sur ordinateur, rien ne change.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-fiches-des-figures-notables-lisibles-sur-le",
       "title": "Civils Impériaux : fiches des figures notables lisibles sur leur illustration",
