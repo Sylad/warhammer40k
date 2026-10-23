@@ -570,14 +570,16 @@
     {
       "id": "L174",
       "title": "Panthéon du Chaos : l'image de chaque dieu s'ouvre aussi au clic",
-      "status": "doing",
-      "started": "2026-10-23"
+      "status": "done",
+      "started": "2026-10-23",
+      "finished": "2026-10-23"
     },
     {
       "id": "L175",
       "title": "Panthéon du Chaos : numéros des dieux lisibles sur téléphone",
-      "status": "doing",
-      "started": "2026-10-23"
+      "status": "done",
+      "started": "2026-10-23",
+      "finished": "2026-10-23"
     }
   ]
 }
