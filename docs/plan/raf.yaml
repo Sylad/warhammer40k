@@ -1851,6 +1851,97 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review:
+      {
+        date: 2026-10-23,
+        verdict: "conforme — 0 constat. Commits revus : 9e8d5b4 feat(L184), 70522f9 docs(L184), 7872364 fix(L184).
+
+
+          **Ce que le lot fait, lu dans le code :**
+
+          - `nb()` affiche « — » tant que la liste est en chargement (`pending()`) ou en échec (`lore-civilians.component.ts:204`).
+
+          - Une région `.load-status role=status` est toujours présente dans le DOM (`ts:59-61`). Elle reprend le même gabarit et le même CSS que L159 sur la page Primarques (`lore-primarchs.component.ts:51`).
+
+          - La conclusion est enveloppée dans `@if (!orgs.pending())` (`ts:149-161`).
+
+          - Le README est à jour (passage L184).
+
+          - L'entrée Nouveautés a des guillemets avec U+202F et deux captures, 1440×900 et 390×844 (ratio inférieur à 6:1).
+
+          - `plan.json` et `nouveautes.json` ont été régénérés.
+
+
+          **Les 4 tests de `civils-chargement-l184.spec.ts` échoueraient sur l'ancien code :**
+
+          - R1 : l'ancien `nb()` affichait « 0 » pendant le chargement.
+
+          - R2 : il n'y avait pas de région `role=status`.
+
+          - R3 : `.cta-bottom` était rendue dès le départ.
+
+          - R4 : couvre l'échec (« — », région vide, conclusion présente).
+
+
+          **Commandes lancées :**
+
+          - `vitest run` sur lore-civilians, shared et nouveautes : 32 fichiers, 200 tests verts.
+
+          - `vitest run` sur `src/styles`, `plan-data.test.mjs` et nouveautes : 10 fichiers, 162 tests verts. Cela inclut `nouveautes-data.spec`, ce qui confirme le « rouge 1 » corrigé par 7872364.
+
+          - Suite complète `vitest run` : 160 fichiers, 1313 tests verts.
+
+          - `tsc --noEmit` : code 0.
+
+          - L'arbre de travail est propre.
+
+
+          **Mesures dans le navigateur** (http://localhost:4201/lore/civilians, `/api/lore/imperial-orgs` retenue) :
+
+          - Pendant le chargement, à 1440 et à 390 px :
+
+          \  - les compteurs affichent [—, —, —] et les 7 filtres « · — » ;
+
+          \  - la région de statut dit « Chargement des civils impériaux… » ;
+
+          \  - `.cta-bottom` est absente ;
+
+          \  - le message est en 12 px, couleur rgb(141,134,120), soit environ 5,6:1 sur le fond #050403, au-dessus de 4,5:1 (WCAG 1.4.3) ;
+
+          \  - pas de défilement horizontal (largeur de défilement 1434 et 384, la différence étant la barre de défilement).
+
+          - Une fois chargé : 13 organisations, 68 fonctions, 29 figures, et la région de statut est vide.
+
+          - En échec (réponse 500) : compteurs à « — », région de statut vide, conclusion affichée.
+
+
+          **Choix de l'auteur, relus :**
+
+          - Le libellé « Chargement des civils impériaux… » reprend le nom de la page et le modèle « Chargement des Primarques… » de L159.
+
+          - La conclusion reste affichée en cas d'échec. C'est conforme : la revue L12 a laissé ce point en note mineure (« en erreur … la conclusion reste affichée »), il est donc hors du lot.
+
+          - La région de statut toujours présente dans le DOM est le bon modèle pour une région live, comme L159.
+
+          - Pas de nouvelle capture pour les rouges : correct, ces correctifs ne touchaient aucun écran.
+
+
+          **Captures** (dans `/home/sylvain_ladoire/projects/developpeur/.cadence/runs/2026-10-23-wh-civils/warhammer40k--L184/playwright/`) :
+
+          - `civils-chargement-1440px.png`
+
+          - `civils-chargement-390px.png`
+
+          - `civils-charge-1440px.png`
+
+          - `civils-charge-390px.png`
+
+          - `civils-echec-390px.png`
+
+
+          conforme — orchestré (vague 2026-10-23-wh-civils, 1 passe(s) de correction)",
+        commit: 7872364c5cd82c72efa183a27e702466a32340ba
+      }
   - id: L185
     title: "Lore civils, visionneuse : la variante de recherche « battlefleet » ajoutée à toutes les figures (lore-civilians.component.ts:260) met un vaisseau dans la galerie de Sébastian Thor → variante réservée aux vaisseaux de l'Imperial Navy (UX L12)"
     public: "Civils Impériaux : galerie d'une figure sans images hors sujet"
