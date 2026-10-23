@@ -1801,10 +1801,11 @@ lots:
   - id: L179
     title: "Lore civils, cartes de figures : nom sur l'image 1,02–3,12:1 (28/29), rôle --gold-soft 10 px ≤ 3,81:1 (29/29), description sous 4,5:1 pour 12/29 (Malcador 2,03) — voile scss:230-233 trop léger en haut de carte → voile renforcé sous le texte, rôle en --gold, mesure au pire pixel à 1440 et 390 px — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : fiches des figures notables lisibles sur leur illustration"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L180
     title: "Lore civils à 390 et 320 px : chapeau et compteurs du hero coupés (80 px à 320), h2 coupés (Administratum 52 px à 390, Remembrancers 138 px à 320, 8 en-têtes à 320) — flex min-width auto, padding 50/38 px fixe, h2 32 px, overflow hidden → padding réduit sous 600 px, min-width 0, clamp du h2, overflow-wrap, comme L168 — WCAG 1.4.10 (UX L12)"
     public: "Civils Impériaux : en-têtes entiers sur les petits téléphones"
