@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -9,6 +9,7 @@ import { LoadErrorComponent } from '../../shared/components/load-error/load-erro
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { revealSection } from '../../core/utils/section-anchor';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
@@ -28,7 +29,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 @Component({
   selector: 'app-lore-concepts',
   standalone: true,
-  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -71,9 +72,9 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
       @for (c of filtered(); track c.id) {
         <article class="concept" [id]="c.id" [style.--c-color]="c.color">
           <header class="concept-head">
-            <button class="concept-bg" type="button" [style.background-image]="conceptImg(c.id)" (click)="openLightbox(c)" aria-label="Voir en grand"></button>
+            <button class="concept-bg" type="button" [style.background-image]="conceptImg(c.id)" (click)="openLightbox(c, $event)" [attr.aria-label]="'Voir en grand — ' + c.name"></button>
             <div class="concept-bg-overlay"></div>
-            <span class="concept-zoom" (click)="openLightbox(c)" [style.color]="c.color">⛶</span>
+            <span class="concept-zoom" aria-hidden="true" (click)="openLightbox(c, $event)" [style.color]="lisible(c.color)">⛶</span>
             <div class="concept-head-content">
               <div class="concept-meta">
                 <span class="number">{{ formatNum(c.number) }}</span>
@@ -148,19 +149,23 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
       </div>
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                         [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
   `,
   styleUrls: ['./lore-concepts.component.scss'],
 })
 export class LoreConceptsComponent {
   private readonly service = inject(WarhammerService);
   private readonly route = inject(ActivatedRoute);
+  private readonly injector = inject(Injector);
   readonly longestWord = longestWord;
   readonly concepts = toSafeSignal(this.service.loreConcepts$, [] as LoreConcept[]);
   readonly filterCategory = signal<'all' | LoreConceptCategory>('all');
   readonly conceptImages = signal<Map<string, string>>(new Map());
   readonly heroImg = signal<string>('');
   readonly lightbox = signal<LightboxState | null>(null);
+  /** Élément qui a ouvert la visionneuse : il récupère le focus à la fermeture. */
+  private opener: HTMLElement | null = null;
 
   readonly categories: LoreConceptCategory[] = ['imperial', 'warp', 'world', 'doctrine'];
 
@@ -241,12 +246,19 @@ export class LoreConceptsComponent {
 
   categoryLabel(c: LoreConceptCategory): string { return CATEGORY_LABEL[c]; }
   categoryColor(c: LoreConceptCategory): string { return CATEGORY_COLOR[c]; }
-  /** Teinte de la catégorie lisible en texte (≥ 4,5:1) ; `categoryColor` reste pour fonds et bordures. */
+  /** Teinte du concept lisible en texte (≥ 4,5:1) ; `c.color` reste sur le sigil et les bordures. */
+  lisible(couleur: string): string { return teinteLisible(couleur); }
+  /** Idem pour une catégorie ; `categoryColor` reste pour les fonds et bordures. */
   categoryText(c: LoreConceptCategory): string { return teinteLisible(CATEGORY_COLOR[c]); }
 
-  openLightbox(c: LoreConcept): void {
+  openLightbox(c: LoreConcept, ev?: Event): void {
     const baseUrl = this.conceptImages().get(c.id);
     if (!baseUrl) return;
+    // Le ⛶ n'est pas focalisable : le focus revient au bouton de l'image du même concept.
+    const cible = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
+    this.opener = cible?.classList.contains('concept-zoom')
+      ? cible.parentElement?.querySelector<HTMLElement>('.concept-bg') ?? null
+      : cible;
     this.lightbox.set({
       title: c.name,
       subtitle: c.title,
@@ -288,5 +300,12 @@ export class LoreConceptsComponent {
     this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
   }
 
-  closeLightbox(): void { this.lightbox.set(null); }
+  closeLightbox(): void {
+    this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    // Après le rendu : la visionneuse est encore dans le DOM tant qu'il n'a pas eu lieu, et rendre le focus plus tôt
+    // le lui ferait reprendre (LightboxDialogDirective garde le focus dans un dialogue encore ouvert).
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
+  }
 }
