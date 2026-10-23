@@ -2122,11 +2122,27 @@ lots:
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-2145, 0 passe(s) de correction)", commit: cb77eb3f3ac49c8e0b69e2d319e40898338a8cc1 }
     ux: { date: 2026-10-23, verdict: "conforme (ux-reviewer 23-10, 1 mineur) ; captures regardées par le lead : Cadia, Imperium Sanctus, Codex Astartes ont chacun leur image de sujet" }
     finished: 2026-10-23
+    notes:
+      - { date: 2026-10-23, text: "QA prod 23-10 : 15 images distinctes ; Codex Astartes = Severian.JPG (page wiki « Codex Astartes », un Ultramarine) et Imperium Sanctus = page « Imperium of Man » — choix de contenu soumis à Sylvain" }
   - id: L199
     title: "QA : section ## /lore/concepts dans docs/qa/expectations.md (15 concepts, compteurs, filtres aria-pressed, visionneuse modale et focus rendu, contraste du titre de visionneuse, images distinctes) (QA prod L13)"
     status: todo
     estimate: 0.1
     quickwin: true
+    created: 2026-10-23
+  - id: L200
+    title: "Concepts, galerie de la visionneuse : vignettes de repli ou hors sujet (Codex Astartes : Pict-File_Unavailable, Red_Templars_Biker ; Cadia : LorgarArt ; Imperium Sanctus : la carte d'Imperium Nihilus) et 8 concepts sur 15 dont les 3-4 requêtes de variantes retombent sur l'image de la carte — variantes filtrées comme L190 (QA prod L197/L198)"
+    public: "Concepts & Lieux : la visionneuse ne montre que des images du sujet"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L201
+    title: "Concepts : un clic sur l'image d'un concept n'ouvre pas la visionneuse (.concept-bg-overlay et .concept-meta en pointer-events auto couvrent le bouton .concept-bg) ; seule l'icône ⛶ de 26 px l'ouvre — défaut depuis L13 (QA prod L197/L198)"
+    public: "Concepts & Lieux : un clic sur l'image l'agrandit"
+    status: todo
+    estimate: 0.25
+    visible: true
     created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
