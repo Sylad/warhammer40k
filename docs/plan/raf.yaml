@@ -1792,10 +1792,11 @@ lots:
   - id: L178
     title: "Lore civils, contrastes : badges de catégorie 2,32–3,33:1 (11/13) et filtres actifs (#050403 sur Militaire 2,95, Commerce 3,08, Formation 3,57, Religion 3,89, Psyker 4,0) — CATEGORY_COLOR lore-civilians.component.ts:19-26, scss:86-90,131-138 → texte ≥ 4,5:1 au pire pixel — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : catégories et filtres lisibles"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L179
     title: "Lore civils, cartes de figures : nom sur l'image 1,02–3,12:1 (28/29), rôle --gold-soft 10 px ≤ 3,81:1 (29/29), description sous 4,5:1 pour 12/29 (Malcador 2,03) — voile scss:230-233 trop léger en haut de carte → voile renforcé sous le texte, rôle en --gold, mesure au pire pixel à 1440 et 390 px — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : fiches des figures notables lisibles sur leur illustration"
