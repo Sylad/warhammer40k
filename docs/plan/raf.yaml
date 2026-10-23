@@ -2040,10 +2040,11 @@ lots:
     finished: 2026-10-23
   - id: L192
     title: "CI Contrôles frontend : le cache Chromium n'est enregistré qu'en fin de job réussi (actions/cache@v4, post-if: success()) — un e2e intermittent rouge au premier run sans cache empêche tout enregistrement et chaque run suivant réinstalle ; actions/cache/save juste après l'installation (revue L188)"
-    status: todo
+    status: doing
     estimate: 0.1
     quickwin: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L193
     title: "Civils Impériaux, visionneuse : une variante en erreur HTTP ou déjà listée arrête toute la chaîne des variantes suivantes (lore-civilians.component.ts:297/303, L190) — une erreur transitoire réduit la galerie à une image ; continuer à la variante suivante, test"
     status: todo
