@@ -279,6 +279,8 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 3px;
+      /* Place du pictogramme .figure-zoom (8 px + 26 px + 6 px d'air) : le nom ne passe jamais dessous (L186). */
+      padding-right: 40px;
       text-shadow: 0 1px 6px rgba(0,0,0,0.85);
     }
     .figure-role {
