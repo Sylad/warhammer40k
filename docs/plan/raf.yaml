@@ -2126,12 +2126,13 @@ lots:
       - { date: 2026-10-23, text: "QA prod 23-10 : 15 images distinctes ; Codex Astartes = Severian.JPG (page wiki « Codex Astartes », un Ultramarine) et Imperium Sanctus = page « Imperium of Man » — choix de contenu soumis à Sylvain" }
   - id: L199
     title: "QA : section ## /lore/concepts dans docs/qa/expectations.md (15 concepts, compteurs, filtres aria-pressed, visionneuse modale et focus rendu, contraste du titre de visionneuse, images distinctes) (QA prod L13)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-2320, 0 passe(s) de correction)", commit: 0807fba717619edc66be7eb3e4e3cea885ee64a0 }
+    finished: 2026-10-23
   - id: L200
     title: "Concepts, galerie de la visionneuse : vignettes de repli ou hors sujet (Codex Astartes : Pict-File_Unavailable, Red_Templars_Biker ; Cadia : LorgarArt ; Imperium Sanctus : la carte d'Imperium Nihilus) et 8 concepts sur 15 dont les 3-4 requêtes de variantes retombent sur l'image de la carte — variantes filtrées comme L190 (QA prod L197/L198)"
     public: "Concepts & Lieux : la visionneuse ne montre que des images du sujet"
