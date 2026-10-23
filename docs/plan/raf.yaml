@@ -1810,10 +1810,11 @@ lots:
   - id: L180
     title: "Lore civils à 390 et 320 px : chapeau et compteurs du hero coupés (80 px à 320), h2 coupés (Administratum 52 px à 390, Remembrancers 138 px à 320, 8 en-têtes à 320) — flex min-width auto, padding 50/38 px fixe, h2 32 px, overflow hidden → padding réduit sous 600 px, min-width 0, clamp du h2, overflow-wrap, comme L168 — WCAG 1.4.10 (UX L12)"
     public: "Civils Impériaux : en-têtes entiers sur les petits téléphones"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L181
     title: "Lore civils, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu après Échap ; à 390 et 320 px le ✕ est sous le bouton Menu (clic intercepté) → [appLightboxDialog] et retour du focus comme Chaos L169 (lore-civilians.component.ts:152) — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L12)"
     public: "Civils Impériaux : visionneuse d'images utilisable au clavier et au téléphone"
