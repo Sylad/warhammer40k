@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 10:56",
+  "generated": "2026-10-23 11:19",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-fiches-des-figures-notables-lisibles-sur-le",
+      "title": "Civils Impériaux : fiches des figures notables lisibles sur leur illustration",
+      "date": "2026-10-23",
+      "lots": [
+        "L179"
+      ],
+      "captures": [
+        "captures/L179-civils-1440.png",
+        "captures/L179-civils-390.png"
+      ],
+      "alts": [
+        "La page Civils Impériaux sur ordinateur : une fiche de figure notable dont le nom, le rôle en or et la description se lisent sur un voile sombre posé sous le texte, l'illustration restant visible au-dessus",
+        "La même fiche de figure sur téléphone, nom, rôle et description lisibles sur le voile sombre"
+      ],
+      "html": "<p>Sur la page des Civils Impériaux, les fiches des figures notables affichent leur nom, leur rôle et leur description sur un voile sombre placé sous le texte : ils se lisent quelle que soit la clarté de l'illustration, y compris sur les images les plus claires.</p>\n<p>Le rôle de chaque figure passe de l'or sourd à l'or plein, plus net sur ce fond. L'illustration reste visible au-dessus du texte.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-categories-et-filtres-lisibles",
       "title": "Civils Impériaux : catégories et filtres lisibles",
