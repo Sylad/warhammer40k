@@ -146,46 +146,55 @@ lots:
   - id: L13
     title: "Revue UX — Lore : concepts"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L14
     title: "Revue UX — Lore : galaxie"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L15
     title: "Revue UX — Lore : équipement (liste + fiche)"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L16
     title: "Revue UX — Lore : chronologie (liste + fiche)"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L17
     title: "Revue UX — Lore : vaisseaux (liste + fiche)"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L18
     title: "Revue UX — Lore : Titans (liste + fiche)"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L19
     title: "Revue UX — Lore : Saints (liste + fiche)"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L20
     title: Revue UX — À propos
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L21
     title: "Revue UX — Gabarit commun : navigation, en-tête, pied, rendu téléphone"
     status: todo
+    visible: true
     estimate: 0.25
     created: 2026-09-28
   - id: L22
