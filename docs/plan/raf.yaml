@@ -2103,21 +2103,25 @@ lots:
   - id: L197
     title: "Concepts : titre de la visionneuse en teinte lisible (teinteLisible du contextColor) ≥ 4,5:1 — 11 titres sous 4,5:1 dont 5 sous 3:1 (Imperium Nihilus 1,8:1, Maelstrom 2,21:1) ; test sur les 15 concepts (QA prod L13)"
     public: "Concepts & Lieux : titre de la visionneuse lisible"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-23
-    review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-2145, 0 passe(s) de correction)", commit: e1373539384d48aaf7c372cc1e896d0a0684ebbd }
+    review: { date: 2026-10-23, verdict: "conforme (code-reviewer 23-10 : e137353 déjà conforme ; 0577c89 entrée Nouveautés — capture 390×844 identique en docs et public, U+202F vérifiés à l'octet, nouveautes 66/66, lore-concepts 23/23 ; 0 défaut)", commit: 0577c89ad50edf0789e24ff4fc1badf1e898931d }
+    ux: { date: 2026-10-23, verdict: "conforme (ux-reviewer 23-10, 0 réserve) ; captures du lead après fondu (L197-nihilus/maelstrom 1440 et 390) : titre lisible sur le panneau #050403, page masquée par le voile 0,92 ; entrée Nouveautés corrigée 0577c89 (capture, U+202F), suite 1370/1370" }
+    finished: 2026-10-23
   - id: L198
     title: "Concepts : images partagées ou de repli wiki — Cadia = Eye of Terror, Imperium Sanctus = Imperium Nihilus (carte galactique), Codex Astartes = livrée Ultramarines ; wikiQuery visant la page du sujet, 15 images distinctes (QA prod L13, comme L189)"
     public: "Concepts & Lieux : chaque concept a son image"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-2145, 0 passe(s) de correction)", commit: cb77eb3f3ac49c8e0b69e2d319e40898338a8cc1 }
+    ux: { date: 2026-10-23, verdict: "conforme (ux-reviewer 23-10, 1 mineur) ; captures regardées par le lead : Cadia, Imperium Sanctus, Codex Astartes ont chacun leur image de sujet" }
+    finished: 2026-10-23
   - id: L199
     title: "QA : section ## /lore/concepts dans docs/qa/expectations.md (15 concepts, compteurs, filtres aria-pressed, visionneuse modale et focus rendu, contraste du titre de visionneuse, images distinctes) (QA prod L13)"
     status: todo

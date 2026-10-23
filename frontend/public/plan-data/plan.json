@@ -680,14 +680,16 @@
     {
       "id": "L197",
       "title": "Concepts & Lieux : titre de la visionneuse lisible",
-      "status": "doing",
-      "started": "2026-10-23"
+      "status": "done",
+      "started": "2026-10-23",
+      "finished": "2026-10-23"
     },
     {
       "id": "L198",
       "title": "Concepts & Lieux : chaque concept a son image",
-      "status": "doing",
-      "started": "2026-10-23"
+      "status": "done",
+      "started": "2026-10-23",
+      "finished": "2026-10-23"
     }
   ]
 }
