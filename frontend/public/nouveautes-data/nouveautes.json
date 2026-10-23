@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 20:02",
+  "generated": "2026-10-23 20:06",
   "entries": [
     {
       "slug": "2026-10-23-revue-ux-lore-concepts",
@@ -17,7 +17,7 @@
         "Page Concepts & Lieux à 1440 px : la fiche de l'Imperium Nihilus, dont le titre gris clair se lit sur le fond noir",
         "La même fiche sur téléphone (390 px), titre lisible, sans défilement horizontal"
       ],
-      "html": "<p>Sur la page Concepts &amp; Lieux, les titres des concepts (Imperium Nihilus, Imperium Sanctus, Warp…) et les noms de catégorie s'affichent dans une teinte plus claire, lisible sur le fond noir ; la couleur d'origine reste sur le sigil et les bordures. Le filtre de catégorie actif prend un fond sombre teinté au lieu d'un aplat de couleur.</p>\n<p>Les filtres Tous, Impérial, Warp, Monde et Doctrine indiquent à un lecteur d'écran lequel est actif.</p>\n<p>La visionneuse d'images est une vraie fenêtre : le focus reste dedans (Tab et Maj+Tab y bouclent), Échap ou « Fermer » le rendent au bouton de l'image qu'on venait d'agrandir. Ce bouton porte le nom du concept (« Voir en grand — Cadia ») au lieu d'un libellé identique partout.</p>"
+      "html": "<p>Sur la page Concepts &amp; Lieux, les titres des concepts (Imperium Nihilus, Imperium Sanctus, Warp…) et les noms de catégorie s'affichent dans une teinte plus claire, lisible sur le fond noir ; la couleur d'origine reste sur le sigil et les bordures. Le filtre de catégorie actif prend un fond sombre teinté au lieu d'un aplat de couleur.</p>\n<p>Les filtres Tous, Impérial, Warp, Monde et Doctrine indiquent à un lecteur d'écran lequel est actif.</p>\n<p>La visionneuse d'images est une vraie fenêtre : le focus reste dedans (Tab et Maj+Tab y bouclent), Échap ou « Fermer » le rendent au bouton de l'image qu'on venait d'agrandir. Ce bouton porte le nom du concept (« Voir en grand — Cadia ») au lieu d'un libellé identique partout.</p>"
     },
     {
       "slug": "2026-10-23-civils-imperiaux-sebastian-thor-resolu-par-repli-de-recherch",

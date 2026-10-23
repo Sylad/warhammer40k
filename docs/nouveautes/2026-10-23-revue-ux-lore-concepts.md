@@ -13,4 +13,4 @@ Sur la page Concepts & Lieux, les titres des concepts (Imperium Nihilus, Imperiu
 
 Les filtres Tous, Impérial, Warp, Monde et Doctrine indiquent à un lecteur d'écran lequel est actif.
 
-La visionneuse d'images est une vraie fenêtre : le focus reste dedans (Tab et Maj+Tab y bouclent), Échap ou « Fermer » le rendent au bouton de l'image qu'on venait d'agrandir. Ce bouton porte le nom du concept (« Voir en grand — Cadia ») au lieu d'un libellé identique partout.
+La visionneuse d'images est une vraie fenêtre : le focus reste dedans (Tab et Maj+Tab y bouclent), Échap ou « Fermer » le rendent au bouton de l'image qu'on venait d'agrandir. Ce bouton porte le nom du concept (« Voir en grand — Cadia ») au lieu d'un libellé identique partout.
