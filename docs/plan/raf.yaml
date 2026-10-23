@@ -2007,10 +2007,11 @@ lots:
     review: { date: 2026-10-23, verdict: "conforme, 1 mineur (cache non enregistré si le job échoue) ; mesure après sur 3 runs poussés encore à faire avant raf done — orchestré (vague 2026-10-23-wh-l188, 2 passe(s) de correction)", commit: a379aa6d879acd7bd4c7a7c166533ba282e2acf0 }
   - id: L189
     title: "Civils Impériaux : images des figures hors sujet — Solomon Voss et Mersadie Oliton (même image, Iacton Qruze), Lady Aurelia Malys (kabal drukhari), Cornelius von Bismarck (The Despoiler, Abaddon), Aleya (Jenetia Krole) — choisir une wikiQuery ou une image vérifiée par figure, et ajouter l'attente « image de son sujet, jamais partagée » à ## /lore/civilians de docs/qa/expectations.md (QA prod 23-10)"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L190
     title: "Civils Impériaux : une seule résolution d'image par figure et par visite (Master of the Administratum : 5 requêtes /api/wiki-image en repli successif vers la même icône ; Malcador 2) (QA prod 23-10)"
     status: todo
