@@ -5,7 +5,11 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import type { ImperialOrganization, ImperialOrgCategory, ImperialOrgFigure } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+
+/** Titre des visionneuses : l'or, lisible sur leur fond ; la couleur de l'organisation y est sous 4,5:1 (L177). */
+const TITRE_VISIONNEUSE = '#f0d276';
 
 const CATEGORY_LABEL: Record<ImperialOrgCategory, string> = {
   governance: 'Gouvernance',
@@ -68,7 +72,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
 
     <section class="orgs">
       @for (org of filtered(); track org.id; let i = $index) {
-        <article class="org" [style.--org-color]="org.color" [attr.data-i]="i">
+        <article class="org" [style.--org-color]="org.color" [style.--org-text]="lisible(org.color)" [attr.data-i]="i">
           <header class="org-head">
             <div class="org-bg" [style.background-image]="orgImg(org.id)"></div>
             <div class="org-bg-overlay"></div>
@@ -80,7 +84,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
               <div class="org-sigil-row">
                 <span class="org-sigil" [style.color]="org.color">{{ org.sigil }}</span>
                 <div>
-                  <h2 [style.color]="org.color">{{ org.name }}</h2>
+                  <h2 [style.color]="lisible(org.color)">{{ org.name }}</h2>
                   <div class="org-title">{{ org.title }}</div>
                 </div>
               </div>
@@ -243,7 +247,7 @@ export class LoreCiviliansComponent {
       subtitle: figure.role,
       description: figure.description,
       contextName: org.name,
-      contextColor: org.color,
+      contextColor: TITRE_VISIONNEUSE,
       contextSigil: org.sigil,
       searchQuery: figure.name,
       mainUrl: baseUrl,
@@ -301,6 +305,8 @@ export class LoreCiviliansComponent {
   formatNum(n: number): string {
     return `N° ${String(n).padStart(2, '0')}`;
   }
+
+  lisible(couleur: string): string { return teinteLisible(couleur); }
 
   categoryLabel(c: ImperialOrgCategory): string { return CATEGORY_LABEL[c]; }
   categoryColor(c: ImperialOrgCategory): string { return CATEGORY_COLOR[c]; }
