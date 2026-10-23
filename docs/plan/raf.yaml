@@ -1846,10 +1846,11 @@ lots:
   - id: L184
     title: "Lore civils, chargement : compteurs « 0 Organisations », filtres « · 0 » et conclusion affichés avant la réponse, sans role=status → « — » et indicateur role=status tant que la liste n'est pas arrivée, conclusion après chargement — Nielsen 1 (UX L12)"
     public: "Civils Impériaux : chargement signalé, plus de compteurs à zéro"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L185
     title: "Lore civils, visionneuse : la variante de recherche « battlefleet » ajoutée à toutes les figures (lore-civilians.component.ts:260) met un vaisseau dans la galerie de Sébastian Thor → variante réservée aux vaisseaux de l'Imperial Navy (UX L12)"
     public: "Civils Impériaux : galerie d'une figure sans images hors sujet"
