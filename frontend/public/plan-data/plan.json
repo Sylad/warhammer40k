@@ -650,6 +650,11 @@
       "status": "done",
       "started": "2026-10-23",
       "finished": "2026-10-23"
+    },
+    {
+      "id": "L186",
+      "title": "Civils Impériaux : noms des figures dégagés de l'icône d'agrandissement",
+      "status": "todo"
     }
   ]
 }

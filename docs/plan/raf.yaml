@@ -1977,6 +1977,18 @@ lots:
     finished: 2026-10-23
     notes:
       - { date: 2026-10-23, text: "Re-vérifié par le lead le 23-10 : vitest 1314/1315, le rouge = section-anchor-href-l160.e2e (Ctrl+clic nouvel onglet), instable sous charge, 3/3 verts seul, aucun commit de la vague ne touche ce fichier ; build et --leaks verts." }
+  - id: L186
+    title: "Lore civils : le pictogramme ⛶ (.figure-zoom, top 8px, 26 px, z-index 2) chevauche de 6 px le haut du nom des figures quand le texte remplit la carte (Bismarck, Titans, Malcador à 1440 ; Chevaliers-Errants à 390 ; Emperor-class à 320), nom à 4,32–4,47:1 au pire pixel → réserver la place du badge (padding droit ou haut du contenu), mesure au pire pixel à 1440/390/320 (QA prod 23-10)"
+    public: "Civils Impériaux : noms des figures dégagés de l'icône d'agrandissement"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
+  - id: L187
+    title: "QA : section ## /lore/civilians dans docs/qa/expectations.md — 13 organisations, 29 figures avec image, compteurs 13/68/29, 7 filtres avec aria-pressed (un seul true), visionneuse role=dialog aria-modal, h2 ≥ 3:1 et textes ≥ 4,5:1 au pire pixel à 1440/390/320, aucun défilement horizontal (QA prod 23-10)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
