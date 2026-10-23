@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 11:46",
+  "generated": "2026-10-23 11:58",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-filtre-actif-annonce-aux-lecteurs-d-ecran",
+      "title": "Civils Impériaux : filtre actif annoncé aux lecteurs d'écran",
+      "date": "2026-10-23",
+      "lots": [
+        "L183"
+      ],
+      "captures": [
+        "captures/L183-civils-filtres-1440.png",
+        "captures/L183-civils-filtres-390.png"
+      ],
+      "alts": [
+        "Page Civils Impériaux sur ordinateur : la rangée des sept filtres, le filtre actif est teinté",
+        "Même rangée de filtres sur un téléphone de 390 pixels, avec le filtre actif teinté"
+      ],
+      "html": "<p>Sur la page Civils Impériaux, les sept boutons de filtre (« Toutes » et les six catégories) annoncent maintenant leur état aux lecteurs d'écran : le filtre en cours est dit « enfoncé », les autres non. Jusqu'ici, seul le fond du bouton indiquait le filtre actif, ce qu'une personne qui n'utilise pas la vue ne pouvait pas savoir.</p>\n<p>L'apparence ne change pas.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-textes-a-longueur-de-lecture-confortable-su",
       "title": "Civils Impériaux : textes à longueur de lecture confortable sur grand écran",
