@@ -125,8 +125,18 @@
       transition: opacity 0.2s;
     }
     .concept-bg:hover { opacity: 0.45; }
-    /* Anneau opaque et vers l'intérieur : le bouton remplit .concept-head (overflow: hidden) et reste estompé hors focus. */
-    .concept-bg:focus-visible { opacity: 1; outline: 3px solid #c9a24a; outline-offset: -3px; }
+    /* L'image reste à 0,28 au focus (le voile ne tient les textes à 4,5:1 qu'à cette opacité) : l'anneau, qui hériterait de
+       cette opacité sur le bouton, est dessiné par .concept-head, opaque et vers l'intérieur (overflow: hidden). */
+    .concept-bg:focus-visible { outline: none; }
+    .concept-head:has(.concept-bg:focus-visible)::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      outline: 3px solid #c9a24a;
+      outline-offset: -3px;
+    }
     .concept-zoom {
       position: absolute;
       bottom: 16px;
