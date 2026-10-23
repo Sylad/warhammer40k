@@ -2000,34 +2000,54 @@ lots:
     finished: 2026-10-23
   - id: L188
     title: "CI « Contrôles frontend » : l'étape « Chromium pour l'acceptation de bout en bout » (npx playwright-core install --with-deps chromium, frontend-checks.yml:53) se bloque et le job atteint son timeout de 10 min (annulé 22-10 et deux fois le 23-10 → livraison bloquée) — cache actions/cache de ~/.cache/ms-playwright clé sur la version de playwright-core, dépendances système seules hors cache ; mesurer la durée de l'étape avant/après sur 3 runs"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "conforme, 1 mineur (cache non enregistré si le job échoue) ; mesure après sur 3 runs poussés encore à faire avant raf done — orchestré (vague 2026-10-23-wh-l188, 2 passe(s) de correction)", commit: a379aa6d879acd7bd4c7a7c166533ba282e2acf0 }
+    notes:
+      - { date: 2026-10-23, text: "Re-vérifié par le lead le 23-10 : suite frontend 1343/1343 sur 2 passes (2 rouges e2e connus sous charge sur une 1re passe parallèle, piège CI). Mesure sur 3 runs poussés à faire après livraison." }
+    finished: 2026-10-23
   - id: L189
     title: "Civils Impériaux : images des figures hors sujet — Solomon Voss et Mersadie Oliton (même image, Iacton Qruze), Lady Aurelia Malys (kabal drukhari), Cornelius von Bismarck (The Despoiler, Abaddon), Aleya (Jenetia Krole) — choisir une wikiQuery ou une image vérifiée par figure, et ajouter l'attente « image de son sujet, jamais partagée » à ## /lore/civilians de docs/qa/expectations.md (QA prod 23-10)"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — 0 blocking, 0 major, 2 minor (Aleya partage l'image de son organisation ; couvertures recadrées par la carte) — orchestré (vague 2026-10-23-wh-l188, 0 passe(s) de correction)", commit: a2edd4a756b7da59eba8c132b85004fea7b7a92f }
+    ux: { date: 2026-10-23, verdict: "conforme (verdict du lead d'après le rapport ux-reviewer et les captures 1440/390 regardées) — 0 bloquant, 0 majeur ; mineurs en notes : Aleya partage l'emblème de son organisation, couvertures recadrées par la carte" }
+    notes:
+      - { date: 2026-10-23, text: "Mineurs UX 23-10 : Aleya reçoit SoS_Icon.jpg, comme l'en-tête « Sœurs du Silence » (emblème d'organisation, accepté par la QA pour une institution) ; couvertures Voss/Oliton rognées en haut par le recadrage existant des cartes." }
+    finished: 2026-10-23
   - id: L190
     title: "Civils Impériaux : une seule résolution d'image par figure et par visite (Master of the Administratum : 5 requêtes /api/wiki-image en repli successif vers la même icône ; Malcador 2) (QA prod 23-10)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — 2 notes mineures (arrêt de la chaîne de variantes sur un doublon ou une erreur, hypothèse non mesurée) ; les trois choix de l'auteur tiennent dans le périmètre du lot — orchestré (vague 2026-10-23-wh-l188, 0 passe(s) de correction)", commit: 74636a6315fdf4e1f1ef79fdc500f415312abd68 }
+    finished: 2026-10-23
   - id: L191
     title: "Civils Impériaux : coquille « qu'aucun mortal » → « mortel » dans imperial-orgs.json (QA prod 23-10)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-l188, 0 passe(s) de correction)", commit: 7a1f1e52a7a0740fa7e1ef3e0ba7610ae8a8fed9 }
+    finished: 2026-10-23
+  - id: L192
+    title: "CI Contrôles frontend : le cache Chromium n'est enregistré qu'en fin de job réussi (actions/cache@v4, post-if: success()) — un e2e intermittent rouge au premier run sans cache empêche tout enregistrement et chaque run suivant réinstalle ; actions/cache/save juste après l'installation (revue L188)"
+    status: todo
+    estimate: 0.1
+    quickwin: true
+    created: 2026-10-23
+  - id: L193
+    title: "Civils Impériaux, visionneuse : une variante en erreur HTTP ou déjà listée arrête toute la chaîne des variantes suivantes (lore-civilians.component.ts:297/303, L190) — une erreur transitoire réduit la galerie à une image ; continuer à la variante suivante, test"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
