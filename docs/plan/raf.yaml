@@ -1985,6 +1985,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-l186, 0 passe(s) de correction)", commit: 24385744338dd223227848d185c194da4d02fe1e }
   - id: L187
     title: "QA : section ## /lore/civilians dans docs/qa/expectations.md — 13 organisations, 29 figures avec image, compteurs 13/68/29, 7 filtres avec aria-pressed (un seul true), visionneuse role=dialog aria-modal, h2 ≥ 3:1 et textes ≥ 4,5:1 au pire pixel à 1440/390/320, aucun défilement horizontal (QA prod 23-10)"
     status: todo
