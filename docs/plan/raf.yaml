@@ -1998,6 +1998,11 @@ lots:
     notes:
       - { date: 2026-10-23, text: "Mineur gardé en note (revue L187) : expectations.md:83 « chacune sur une carte avec son image (aucune image cassée) » — les images des figures sont des fonds CSS (--fig-bg), pas des <img> : la vérification universelle des images cassées ne les voit pas." }
     finished: 2026-10-23
+  - id: L188
+    title: "CI « Contrôles frontend » : l'étape « Chromium pour l'acceptation de bout en bout » (npx playwright-core install --with-deps chromium, frontend-checks.yml:53) se bloque et le job atteint son timeout de 10 min (annulé 22-10 et deux fois le 23-10 → livraison bloquée) — cache actions/cache de ~/.cache/ms-playwright clé sur la version de playwright-core, dépendances système seules hors cache ; mesurer la durée de l'étape avant/après sur 3 runs"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
