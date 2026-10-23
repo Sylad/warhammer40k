@@ -74,6 +74,10 @@ Ajouté par L137 (QA prod du 17-10, après L5 et L136) : 38 séries Black Librar
 ## /lore
 - shows: les entrées vers les sous-pages du lore
 
+## /lore/chaos-gods
+- shows: quatre dieux du Chaos, chacun avec son numéro « I / IV » à « IV / IV » en haut de l'en-tête, son illustration et son bouton « Agrandir l'illustration de … »
+- never: un numéro sous 4,5:1 de contraste sur le pixel le plus clair de l'image, au repos, quand l'image est survolée et quand elle a le focus clavier, à 320, 390 et 1440 px (L176 : le survol n'éclaircit plus l'image) ; mesure au rendu réel, pas sur un fond figé
+
 ## /lore/primarchs
 - shows: 20 primarques
 

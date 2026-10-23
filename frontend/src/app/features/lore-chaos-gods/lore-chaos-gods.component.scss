@@ -114,10 +114,12 @@
       height: 100%;
       transition: opacity 0.2s;
     }
-    .god-bg:hover { opacity: 0.5; }
+    /* Ni survol ni focus n'éclaircissent l'image (L176) : à 0,5 d'opacité le numéro du dieu, posé sur le haut
+       de l'en-tête, tombait à 3,49:1. Le survol se signale par le ⛶, qui passe à pleine opacité. */
+    .god-head:has(.god-bg:hover) .god-zoom { opacity: 1; }
     /* Le bouton est à 32 % d'opacité (un contour y serait aussi terni) : le focus se trace par un cadre
        intérieur sur l'en-tête, au-dessus du voile ; l'overflow:hidden ne le rogne pas, il est dedans. */
-    .god-bg:focus-visible { outline: none; opacity: 0.5; }
+    .god-bg:focus-visible { outline: none; }
     .god-head:has(.god-bg:focus-visible)::after {
       content: '';
       position: absolute;
