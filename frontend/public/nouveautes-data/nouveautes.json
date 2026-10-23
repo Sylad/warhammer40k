@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 11:38",
+  "generated": "2026-10-23 11:42",
   "entries": [
     {
       "slug": "2026-10-23-civils-imperiaux-visionneuse-d-images-utilisable-au-clavier",
@@ -17,7 +17,7 @@
         "Visionneuse des Civils Impériaux ouverte sur une figure notable : illustration à gauche, titre, description et galerie à droite, bouton ✕ en haut à droite",
         "Même visionneuse sur téléphone (390 px) : le bouton ✕ est en haut à droite de l'illustration, pleinement visible et utilisable au toucher"
       ],
-      "html": "<p>Chez les Civils Impériaux, l'agrandissement de l'image d'une figure notable se comporte désormais comme celui des fiches de Primarques et du Panthéon du Chaos. Au clavier, le focus passe directement sur « Fermer », la touche Tab reste dans la fenêtre au lieu de repartir dans la page derrière, et Échap ou « Fermer » ramènent le focus sur la carte que vous aviez ouverte. Les lecteurs d'écran annoncent une fenêtre modale nommée « Visionneuse — Malcador », par exemple.</p>\n<p>Sur téléphone, y compris à 320 px, le bouton ✕ n'est plus caché sous la barre du haut et le bouton Menu : il se touche et ferme la visionneuse.</p>"
+      "html": "<p>Chez les Civils Impériaux, l'agrandissement de l'image d'une figure notable se comporte désormais comme celui des fiches de Primarques et du Panthéon du Chaos. Au clavier, le focus passe directement sur « Fermer », la touche Tab reste dans la fenêtre au lieu de repartir dans la page derrière, et Échap ou « Fermer » ramènent le focus sur la carte que vous aviez ouverte. Les lecteurs d'écran annoncent une fenêtre modale nommée « Visionneuse — Malcador », par exemple.</p>\n<p>Sur téléphone, y compris à 320 px, le bouton ✕ n'est plus caché sous la barre du haut et le bouton Menu : il se touche et ferme la visionneuse.</p>"
     },
     {
       "slug": "2026-10-23-civils-imperiaux-en-tetes-entiers-sur-les-petits-telephones",
