@@ -1765,12 +1765,16 @@ lots:
   - id: L176
     title: "Panthéon du Chaos : numéros « III / IV » et « IV / IV » sous 4,5:1 quand l'image d'en-tête est survolée ou focalisée (.god-bg:hover / :focus-visible → opacité 0,5, lore-chaos-gods.component.scss:117,120) — 3,49:1 à 320 px, 4,23:1 à 390 px au pire pixel (QA prod 23-10, état rendu atteignable par L174) ; contraste ≥ 4,5:1 au repos, en survol et en focus, test au rendu réel (pas un fond figé) ; section ## /lore/chaos-gods ajoutée à docs/qa/expectations.md"
     public: "Panthéon du Chaos : numéros lisibles aussi au survol de l'image"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "conforme (2 notes mineures, aucune sous-tâche) — orchestré (vague 2026-10-23-wh-l176, 1 passe(s) de correction)", commit: 21ea0ae9e5d4e5dbd83875d8edfc41ccb94f26e7 }
+    ux: { date: 2026-10-23, verdict: "conforme — l'image d'en-tête ne s'éclaircit plus au survol ni au focus (numéros ≥ 4,5:1 dans les trois états), le ⛶ passe à opacité 1 au survol ; captures 1440/390 relues par le lead ; 2 mineurs en note" }
+    notes:
+      - { date: 2026-10-23, text: "Mineurs gardés en note (revue L176) : la règle .god-head:has(.god-bg:hover) .god-zoom { opacity: 1 } (scss:119) n'a pas de test ; la garde R2 de chaos-numeros-survol-l176.spec.ts:11 ne repère que .god-bg:hover/focus-visible suivi de « { ». Instables vus pendant la vague, hors lot : primarch-sections-l158 R5 (police Inter, réseau requis) et L47 R9 (nouvel onglet, CI du 23-10 relancée)." }
+    finished: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

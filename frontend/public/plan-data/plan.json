@@ -584,8 +584,9 @@
     {
       "id": "L176",
       "title": "Panthéon du Chaos : numéros lisibles aussi au survol de l'image",
-      "status": "doing",
-      "started": "2026-10-23"
+      "status": "done",
+      "started": "2026-10-23",
+      "finished": "2026-10-23"
     }
   ]
 }
