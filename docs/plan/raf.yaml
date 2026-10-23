@@ -2124,6 +2124,7 @@ lots:
     finished: 2026-10-23
     notes:
       - { date: 2026-10-23, text: "QA prod 23-10 : 15 images distinctes ; Codex Astartes = Severian.JPG (page wiki « Codex Astartes », un Ultramarine) et Imperium Sanctus = page « Imperium of Man » — choix de contenu soumis à Sylvain" }
+      - { date: 2026-10-24, text: "24-10 : Sylvain valide les illustrations — Codex Astartes = Ultramarine (Severian.JPG), Imperium Sanctus = page Imperium of Man" }
   - id: L199
     title: "QA : section ## /lore/concepts dans docs/qa/expectations.md (15 concepts, compteurs, filtres aria-pressed, visionneuse modale et focus rendu, contraste du titre de visionneuse, images distinctes) (QA prod L13)"
     status: done
