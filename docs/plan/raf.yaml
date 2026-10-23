@@ -1824,6 +1824,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — 0 finding : role=dialog, aria-modal et nom « Visionneuse — <figure> » mesurés à 320, 390 et 1440 px ; focus sur Fermer, Tab qui boucle, focus rendu à la carte après Échap, ✕ cliquable (elementFromPoint) ; 29 tests verts, dont 6 e2e L181 ; README et Nouveauté à jour — orchestré (vague 2026-10-23-wh-civils, 0 passe(s) de correction)", commit: 7ad491299cb3be60ede2c5a93684c5c65103b3f8 }
   - id: L182
     title: "Lore civils à 1440 px : texte long sur 980 px (156 caractères par ligne), grille des figures remplie à 24 % (236/980 px) pour 8 organisations sur 13 → largeur bornée ~70ch, grille resserrée, comme L171 (UX L12)"
     public: "Civils Impériaux : textes à longueur de lecture confortable sur grand écran"
