@@ -2103,10 +2103,11 @@ lots:
   - id: L197
     title: "Concepts : titre de la visionneuse en teinte lisible (teinteLisible du contextColor) ≥ 4,5:1 — 11 titres sous 4,5:1 dont 5 sous 3:1 (Imperium Nihilus 1,8:1, Maelstrom 2,21:1) ; test sur les 15 concepts (QA prod L13)"
     public: "Concepts & Lieux : titre de la visionneuse lisible"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L198
     title: "Concepts : images partagées ou de repli wiki — Cadia = Eye of Terror, Imperium Sanctus = Imperium Nihilus (carte galactique), Codex Astartes = livrée Ultramarines ; wikiQuery visant la page du sujet, 15 images distinctes (QA prod L13, comme L189)"
     public: "Concepts & Lieux : chaque concept a son image"
