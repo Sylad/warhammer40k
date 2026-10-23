@@ -2045,6 +2045,7 @@ lots:
     quickwin: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-l192, 0 passe(s) de correction)", commit: 40bb7dd99240a337652237f950771e9831909840 }
   - id: L193
     title: "Civils Impériaux, visionneuse : une variante en erreur HTTP ou déjà listée arrête toute la chaîne des variantes suivantes (lore-civilians.component.ts:297/303, L190) — une erreur transitoire réduit la galerie à une image ; continuer à la variante suivante, test"
     status: todo
