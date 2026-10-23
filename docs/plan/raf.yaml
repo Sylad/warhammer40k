@@ -2000,9 +2000,10 @@ lots:
     finished: 2026-10-23
   - id: L188
     title: "CI « Contrôles frontend » : l'étape « Chromium pour l'acceptation de bout en bout » (npx playwright-core install --with-deps chromium, frontend-checks.yml:53) se bloque et le job atteint son timeout de 10 min (annulé 22-10 et deux fois le 23-10 → livraison bloquée) — cache actions/cache de ~/.cache/ms-playwright clé sur la version de playwright-core, dépendances système seules hors cache ; mesurer la durée de l'étape avant/après sur 3 runs"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-23
+    started: 2026-10-23
   - id: L189
     title: "Civils Impériaux : images des figures hors sujet — Solomon Voss et Mersadie Oliton (même image, Iacton Qruze), Lady Aurelia Malys (kabal drukhari), Cornelius von Bismarck (The Despoiler, Abaddon), Aleya (Jenetia Krole) — choisir une wikiQuery ou une image vérifiée par figure, et ajouter l'attente « image de son sujet, jamais partagée » à ## /lore/civilians de docs/qa/expectations.md (QA prod 23-10)"
     status: todo
