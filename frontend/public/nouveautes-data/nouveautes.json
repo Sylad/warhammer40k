@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 12:34",
+  "generated": "2026-10-23 13:11",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-noms-des-figures-degages-de-l-icone-d-agran",
+      "title": "Civils Impériaux : noms des figures dégagés de l'icône d'agrandissement",
+      "date": "2026-10-23",
+      "lots": [
+        "L186"
+      ],
+      "captures": [
+        "captures/L186-figure-1440.png",
+        "captures/L186-figure-390.png"
+      ],
+      "alts": [
+        "Fiche de Malcador à 1440 px : le nom de la figure s'arrête avant l'icône d'agrandissement",
+        "La même fiche sur téléphone (390 px) : le nom reste entier, l'icône est dans le coin"
+      ],
+      "html": "<p>Sur la page des Civils Impériaux, l'icône d'agrandissement ⛶ de chaque figure ne recouvre plus le haut de son nom. Quand le texte remplit la carte (Malcador, les Titans, Bismarck…), le nom s'arrête avant l'icône et reste lisible, sur ordinateur comme sur téléphone.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-galerie-d-une-figure-sans-images-hors-sujet",
       "title": "Civils Impériaux : galerie d'une figure sans images hors sujet",
