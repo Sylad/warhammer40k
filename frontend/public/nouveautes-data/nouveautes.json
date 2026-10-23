@@ -1,6 +1,6 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 21:58",
+  "generated": "2026-10-23 22:51",
   "entries": [
     {
       "slug": "2026-10-23-concepts-lieux-chaque-concept-a-son-image",
@@ -24,8 +24,13 @@
       "lots": [
         "L197"
       ],
-      "captures": [],
-      "html": "<p>Dans la visionneuse de la page « Concepts &amp; Lieux », le titre du concept s'affiche désormais dans une teinte plus claire de sa couleur, lisible sur le fond sombre. Onze titres étaient trop peu contrastés, dont ceux d'« Imperium Nihilus » et du « Maelstrom », presque invisibles. La couleur d'origine reste sur le sigil et les bordures.</p>"
+      "captures": [
+        "captures/L197-visionneuse-390.png"
+      ],
+      "alts": [
+        "Visionneuse du concept Imperium Nihilus sur téléphone (390 px) : le titre en capitales est lisible, en gris clair, au-dessus du sous-titre doré, sur le fond sombre du panneau"
+      ],
+      "html": "<p>Dans la visionneuse de la page « Concepts &amp; Lieux », le titre du concept s'affiche désormais dans une teinte plus claire de sa couleur, lisible sur le fond sombre. Onze titres étaient trop peu contrastés, dont ceux d'« Imperium Nihilus » et du « Maelstrom », presque invisibles. La couleur d'origine reste sur le sigil et les bordures.</p>"
     },
     {
       "slug": "2026-10-23-revue-ux-lore-concepts",
