@@ -2117,6 +2117,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-2145, 0 passe(s) de correction)", commit: cb77eb3f3ac49c8e0b69e2d319e40898338a8cc1 }
   - id: L199
     title: "QA : section ## /lore/concepts dans docs/qa/expectations.md (15 concepts, compteurs, filtres aria-pressed, visionneuse modale et focus rendu, contraste du titre de visionneuse, images distinctes) (QA prod L13)"
     status: todo
