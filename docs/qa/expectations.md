@@ -92,6 +92,17 @@ Ajouté par L187 (QA prod du 23-10, après L177 à L186) : 13 organisations, 68 
 - never: la même requête /api/wiki-image envoyée deux fois pendant la visite de la page, ni la visionneuse d'une figure qui enchaîne des requêtes retombant sur la même image (Malcador : 2 requêtes ; Master of the Administratum : 5 vers la même icône) (L190)
 - api: /api/lore/imperial-orgs (13 organisations), /api/wiki-image?q= (images des figures)
 
+## /lore/concepts
+Ajouté par L199 (QA prod du 23-10, après L13, L197 et L198) : 15 concepts, 76 faits et 44 liens le 23-10.
+- shows: le h1 « Concepts & Lieux Sacrés » et 15 concepts, chacun sur une carte avec son h2 (nom du concept), son numéro et sa catégorie
+- shows: les compteurs du bandeau 15 / 76 / 44 (Concepts, Faits documentés, Liens inter-concepts) ; « — » quand la liste échoue, jamais « 0 Concepts »
+- shows: 5 filtres (« Tous · 15 », « Impérial · 4 », « Warp · 5 », « Monde · 5 », « Doctrine · 1 »), des boutons type="button" avec aria-pressed, un seul à true (le filtre actif, « Tous » au chargement) ; un clic sur une catégorie ne laisse que ses cartes
+- shows: Visionneuse d'un concept (bouton de l'image « Voir en grand — <concept> ») : un dialogue role=dialog aria-modal="true" nommé « Visionneuse — <concept> » ; le focus entre sur « Fermer », Échap le ferme et rend le focus au bouton de l'image du même concept (le ⛶ n'est pas focalisable) (L13)
+- never: un texte sous contraste : le titre de la visionneuse (Imperium Nihilus à 1,8:1 et Maelstrom à 2,21:1 avant L197), les h2, les catégories (badges et filtre actif) à 4,5:1 au moins, mesurés au pire pixel de leur fond (image comprise) à 1440, 390 et 320 px (la couleur brute du concept reste sur le sigil et les bordures — L13)
+- never: un concept dont l'image n'est pas celle de son sujet, ou partagée avec un autre concept : les 15 cartes ont 15 images distinctes (Cadia affichait l'Œil de la Terreur, Imperium Sanctus la carte d'Imperium Nihilus, le Codex Astartes la livrée des Ultramarines — L198)
+- never: un défilement horizontal (scrollWidth > clientWidth) à 1440, 390 et 320 px
+- api: /api/lore/concepts (15 concepts), /api/wiki-image?q= (images des concepts)
+
 ## /lore/primarchs
 - shows: 20 primarques
 
