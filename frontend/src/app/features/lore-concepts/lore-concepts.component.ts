@@ -7,6 +7,7 @@ import type { LoreConcept, LoreConceptCategory } from '../../core/models/models'
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { revealSection } from '../../core/utils/section-anchor';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
@@ -56,11 +57,11 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
     }
 
     <section class="filters">
-      <button class="filter" [class.active]="filterCategory() === 'all'" (click)="setFilter('all')">
+      <button type="button" class="filter" [class.active]="filterCategory() === 'all'" [attr.aria-pressed]="filterCategory() === 'all'" (click)="setFilter('all')">
         Tous · {{ nb(concepts().length) }}
       </button>
       @for (cat of categories; track cat) {
-        <button class="filter" [class.active]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)">
+        <button type="button" class="filter" [class.active]="filterCategory() === cat" [attr.aria-pressed]="filterCategory() === cat" (click)="setFilter(cat)" [style.--cat-color]="categoryColor(cat)" [style.--cat-text]="categoryText(cat)">
           {{ categoryLabel(cat) }} · {{ nb(countByCategory(cat)) }}
         </button>
       }
@@ -240,6 +241,8 @@ export class LoreConceptsComponent {
 
   categoryLabel(c: LoreConceptCategory): string { return CATEGORY_LABEL[c]; }
   categoryColor(c: LoreConceptCategory): string { return CATEGORY_COLOR[c]; }
+  /** Teinte de la catégorie lisible en texte (≥ 4,5:1) ; `categoryColor` reste pour fonds et bordures. */
+  categoryText(c: LoreConceptCategory): string { return teinteLisible(CATEGORY_COLOR[c]); }
 
   openLightbox(c: LoreConcept): void {
     const baseUrl = this.conceptImages().get(c.id);
