@@ -2061,6 +2061,12 @@ lots:
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "conforme : 0 bloquant, 0 majeur ; 1 mineur (la Nouveauté annonce un changement d'image invisible pour le visiteur : même fichier avant et après) ; contraste remesuré à 4,82:1 au moins sur les 6 cartes à 1440, 390 et 320 px — orchestré (vague 2026-10-23-wh-l192, 1 passe(s) de correction)", commit: 89bcc1958a5506d1e5b82205aef09dabb57da815 }
+  - id: L195
+    title: "Nouveauté de L194 (docs/nouveautes/2026-10-23-civils-imperiaux-sebastian-thor-resolu-par-repli-de-recherch.md) : elle annonce une nouvelle image pour Sébastian Thor alors que le fichier affiché est le même avant et après (Dark_Heresy_Ascension_2_by_faroldjo.jpg, seule la page source change : Reign of Blood → Age of Apostasy) — dire ce que le visiteur voit réellement (source de l'image rattachée à son époque, contraste des 6 cartes vérifié ≥ 4,82:1) ou retirer l'entrée ; capture inchangée si elle reste juste (revue de vague L194)"
+    status: todo
+    estimate: 0.1
+    quickwin: true
+    created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
