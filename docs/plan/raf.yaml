@@ -1815,6 +1815,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — 0 finding : en-têtes et hero entiers à 320, 390 et 1440 px (mesuré), 4 tests e2e L180 verts, tests Nouveautés et plan verts — orchestré (vague 2026-10-23-wh-civils, 0 passe(s) de correction)", commit: e197b39ef70f3987a0eaf011ba58339361b7f806 }
   - id: L181
     title: "Lore civils, visionneuse : ni role=dialog ni aria-modal, focus resté sur la carte, Tab sort vers la page, focus non rendu après Échap ; à 390 et 320 px le ✕ est sous le bouton Menu (clic intercepté) → [appLightboxDialog] et retour du focus comme Chaos L169 (lore-civilians.component.ts:152) — WCAG 2.1.2, 2.4.3, 4.1.2 (UX L12)"
     public: "Civils Impériaux : visionneuse d'images utilisable au clavier et au téléphone"
