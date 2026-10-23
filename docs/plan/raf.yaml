@@ -1842,6 +1842,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-civils, 0 passe(s) de correction)", commit: f90adcf85648106ac8b78eeb057068de53861138 }
   - id: L184
     title: "Lore civils, chargement : compteurs « 0 Organisations », filtres « · 0 » et conclusion affichés avant la réponse, sans role=status → « — » et indicateur role=status tant que la liste n'est pas arrivée, conclusion après chargement — Nielsen 1 (UX L12)"
     public: "Civils Impériaux : chargement signalé, plus de compteurs à zéro"
