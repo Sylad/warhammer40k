@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 11:42",
+  "generated": "2026-10-23 11:46",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-textes-a-longueur-de-lecture-confortable-su",
+      "title": "Civils Impériaux : textes à longueur de lecture confortable sur grand écran",
+      "date": "2026-10-23",
+      "lots": [
+        "L182"
+      ],
+      "captures": [
+        "captures/L182-civils-lecture-1440.png",
+        "captures/L182-civils-lecture-390.png"
+      ],
+      "alts": [
+        "Corps de la fiche des Arbites sur ordinateur : la description, le texte du lore et la citation tiennent sur une colonne d'environ 500 pixels, la carte de la figure notable a la même largeur, le panneau Rôle clé et Fonctions reste à droite",
+        "Corps de la fiche des Arbites sur un téléphone de 390 pixels de large : textes et carte de figure occupent toute la largeur"
+      ],
+      "html": "<p>Sur grand écran, la description, le texte du lore et la citation de chaque organisation des Civils Impériaux se lisent maintenant sur une colonne plus étroite, d'environ 70 caractères par ligne au lieu de plus de 150. L'œil n'a plus à parcourir toute la largeur de la page pour retrouver le début de la ligne suivante.</p>\n<p>La grille des figures notables suit la même largeur : les cartes se partagent la colonne au lieu de laisser une grande partie de la grille vide. Sur téléphone, rien ne change : les textes et les cartes gardent toute la largeur.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-visionneuse-d-images-utilisable-au-clavier",
       "title": "Civils Impériaux : visionneuse d'images utilisable au clavier et au téléphone",
