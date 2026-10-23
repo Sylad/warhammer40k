@@ -176,16 +176,27 @@
 
     .org-body {
       display: grid;
-      grid-template-columns: 1fr 280px;
+      grid-template-columns: minmax(0, 1fr) 280px;
       gap: 28px;
       padding: 28px 38px 32px;
     }
     @media (max-width: 1024px) {
-      .org-body { grid-template-columns: 1fr; padding: 24px; }
+      .org-body { grid-template-columns: minmax(0, 1fr); padding: 24px; }
     }
     @media (max-width: 600px) {
       .org-body { padding: 24px 20px; }
     }
+
+    /* L182 : colonne de lecture du corps de fiche. À 1440 px la colonne principale fait 980 px (≈ 156 caractères
+       par ligne) : description, lore, citation et grille des figures s'arrêtent à 31,5rem (504 px à 16 px, ≈ 70
+       caractères à 15 px) ; rem et non ch pour que les quatre blocs aient la même largeur et suivent la taille de
+       police du navigateur. `minmax(0, 1fr)` sur `.org-body` et `min(220px, 100%)` sur la grille : sans eux le
+       min-content de la grille élargirait la colonne et l'article (overflow hidden) rognerait le texte au téléphone. */
+    .org-main { --lecture: 31.5rem; }
+    .org-main p.description,
+    .org-main p.loreLong,
+    .org-main .citation,
+    .figures-grid { max-inline-size: var(--lecture); }
 
     .org-main p.description {
       color: var(--gold-bright);
@@ -225,7 +236,7 @@
 
     .figures-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
       gap: 12px;
     }
     .figure-card {
