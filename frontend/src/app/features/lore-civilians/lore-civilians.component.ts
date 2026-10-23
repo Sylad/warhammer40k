@@ -1,8 +1,9 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { ImperialOrganization, ImperialOrgCategory, ImperialOrgFigure } from '../../core/models/models';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
@@ -32,7 +33,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
 @Component({
   selector: 'app-lore-civilians',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -106,7 +107,7 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
                 <h3 class="section-title">Figures notables</h3>
                 <div class="figures-grid">
                   @for (f of org.notableFigures; track f.name) {
-                    <button class="figure-card" type="button" [style.--fig-bg]="figureImg(org.id, f.name)" (click)="openLightbox(org, f)">
+                    <button class="figure-card" type="button" [style.--fig-bg]="figureImg(org.id, f.name)" (click)="openLightbox(org, f, $event)">
                       <div class="figure-card-overlay"></div>
                       <span class="figure-zoom">⛶</span>
                       <div class="figure-card-content">
@@ -153,18 +154,22 @@ const CATEGORY_COLOR: Record<ImperialOrgCategory, string> = {
       </div>
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                         [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
   `,
   styleUrls: ['./lore-civilians.component.scss'],
 })
 export class LoreCiviliansComponent {
   private readonly service = inject(WarhammerService);
+  private readonly injector = inject(Injector);
   readonly orgs = toSafeSignal(this.service.imperialOrgs$, [] as ImperialOrganization[]);
   readonly filterCategory = signal<'all' | ImperialOrgCategory>('all');
   readonly orgImages = signal<Map<string, string>>(new Map());
   readonly figureImages = signal<Map<string, string>>(new Map());
   readonly heroImg = signal<string>('');
   readonly lightbox = signal<LightboxState | null>(null);
+  /** Élément qui a ouvert la visionneuse : il récupère le focus à la fermeture. */
+  private opener: HTMLElement | null = null;
 
   readonly categories: ImperialOrgCategory[] = [
     'governance',
@@ -238,9 +243,10 @@ export class LoreCiviliansComponent {
     return url ? `url('${url}')` : 'linear-gradient(135deg, #1a0a08 0%, #050403 100%)';
   }
 
-  openLightbox(org: ImperialOrganization, figure: ImperialOrgFigure): void {
+  openLightbox(org: ImperialOrganization, figure: ImperialOrgFigure, ev?: Event): void {
     const baseUrl = this.figureImages().get(`${org.id}::${figure.name}`);
     if (!baseUrl) return;
+    this.opener = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
 
     this.lightbox.set({
       title: figure.name,
@@ -291,6 +297,11 @@ export class LoreCiviliansComponent {
 
   closeLightbox(): void {
     this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    // Après le rendu : la visionneuse est encore dans le DOM tant qu'il n'a pas eu lieu, et rendre le focus plus tôt
+    // le lui ferait reprendre (LightboxDialogDirective garde le focus dans un dialogue encore ouvert).
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
   }
 
   setFilter(c: 'all' | ImperialOrgCategory) {
