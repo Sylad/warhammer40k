@@ -27,6 +27,11 @@ describe('image de Sébastian Thor (Civils Impériaux)', () => {
     expect(l).toMatch(/sujet du wikiQuery/);
     expect(l).toMatch(/Reign of Blood/);
   });
+  it('R2 — l\'attente est bornée aux six figures corrigées, pas à toute figure', () => {
+    const l = section.split('\n').find(x => x.startsWith('- never:') && /pageTitle/.test(x)) ?? '';
+    expect(l).toMatch(/six figures/);
+    expect(l).not.toMatch(/never: une figure dont l.image vient d.un repli de recherche du wiki : pageTitle/);
+  });
   it('R3 — aucune autre figure ne partage la requête de Thor', () => {
     expect(figures.filter(f => f.wikiQuery.toLowerCase() === 'age of apostasy')).toHaveLength(1);
   });
