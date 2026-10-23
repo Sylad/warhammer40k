@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 15:04",
+  "generated": "2026-10-23 16:16",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-sebastian-thor-resolu-par-repli-de-recherch",
+      "title": "Civils Impériaux : l’image de Sébastian Thor vient d’une page qui le concerne",
+      "date": "2026-10-23",
+      "lots": [
+        "L194"
+      ],
+      "captures": [
+        "captures/L194-thor-1440.png"
+      ],
+      "alts": [
+        "La carte de Sébastian Thor, Réformateur (M37), sur une image de l’Apostasie"
+      ],
+      "html": "<p>Sur la page Civils Impériaux, la carte de Sébastian Thor n’avait pas de page du wiki à son nom : son image venait d’une recherche et provenait de la page « Reign of Blood », sans lien visible avec lui.</p>\n<p>Elle est maintenant tirée de la page « Age of Apostasy », l’Apostasie qu’il a mise à terme. C’est une illustration de l’époque, faute de portrait de Thor sur le wiki. Le texte des noms et des rôles de ces cartes reste lisible sur leurs images (Solomon Voss, Mersadie Oliton, Lady Aurelia Malys, Cornelius von Bismarck, Aleya, Sébastian Thor), sur grand écran comme sur téléphone.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-images-des-figures-hors-sujet-solomon-voss",
       "title": "Civils Impériaux : chaque figure a son image",
