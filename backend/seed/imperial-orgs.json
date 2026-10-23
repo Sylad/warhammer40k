@@ -117,7 +117,7 @@
         "name": "Lady Aurelia Malys",
         "role": "Rogue Trader célèbre",
         "description": "Commande la dynastie Malys, une des plus puissantes Charters de la Warhammer 40,000 Rogue Trader RPG.",
-        "wikiQuery": "Aurelia Malys Rogue Trader"
+        "wikiQuery": "Rogue Traders"
       }
     ]
   },
@@ -233,7 +233,7 @@
         "name": "Knight-Centura Aleya",
         "role": "Sœur du Silence légendaire",
         "description": "Combattit aux côtés des Custodes durant la Grande Croisade et l'Hérésie. Symbole de l'ordre.",
-        "wikiQuery": "Aleya Sister of Silence"
+        "wikiQuery": "Sisters of Silence"
       }
     ]
   },
@@ -291,13 +291,13 @@
         "name": "Solomon Voss",
         "role": "Remembrancer en chef",
         "description": "Auteur de Lectitio Divinitatus avant son interdiction. Premier à écrire que l'Empereur était un dieu.",
-        "wikiQuery": "Solomon Voss Remembrancer"
+        "wikiQuery": "The Last Remembrancer (Anthology Short Story)"
       },
       {
         "name": "Mersadie Oliton",
         "role": "Remembrancer attachée à Horus",
         "description": "Témoin direct de la chute du Warmaster. Rare survivante de l'Ordre.",
-        "wikiQuery": "Mersadie Oliton"
+        "wikiQuery": "Horus Rising"
       }
     ]
   },
@@ -358,7 +358,7 @@
         "name": "Lord-Admiral Cornelius von Bismarck",
         "role": "Lord-Admiral de Battlefleet Gothic",
         "description": "Vainqueur héroïque de la Gothic War contre Abaddon le Despoiler, il commanda la défense du Gothic Sector lors de la 12e Croisade Noire et sauva plusieurs Blackstone Fortresses de la capture totale. Figure tutélaire des cadets de la Schola Navis.",
-        "wikiQuery": "Cornelius von Bismarck Gothic War"
+        "wikiQuery": "Battlefleet Gothic"
       }
     ]
   },

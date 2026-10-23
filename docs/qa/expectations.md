@@ -87,6 +87,7 @@ Ajouté par L187 (QA prod du 23-10, après L177 à L186) : 13 organisations, 68 
 - shows: Visionneuse d'une figure (clic sur sa carte) : un dialogue role=dialog aria-modal="true" nommé « Visionneuse — <figure> » ; le focus entre sur « Fermer », Échap le ferme et rend le focus à la carte d'origine (L181)
 - never: un texte sous contraste : h2 des organisations à 3:1 au moins (texte large) et tous les autres textes (badges de catégorie, rôles et noms des figures, titre de la visionneuse) à 4,5:1 au moins, mesurés au pire pixel de leur fond (image comprise) à 1440, 390 et 320 px (Arbites à 1,59:1 avant L177, badges à 2,32–3,33:1 avant L178)
 - never: un défilement horizontal (scrollWidth > clientWidth) à 1440, 390 et 320 px ; un en-tête d'organisation ou le bandeau coupé par son bord droit (L180)
+- never: une figure dont l'image n'est pas celle de son sujet, ou partagée avec une autre figure : image de son sujet, jamais partagée (Solomon Voss et Mersadie Oliton affichaient la même image, Iacton Qruze ; Lady Aurelia Malys un kabal drukhari ; Cornelius von Bismarck The Despoiler ; Aleya un « Oblivion Knight » — L189). Les 29 cartes ont 29 images distinctes
 - api: /api/lore/imperial-orgs (13 organisations), /api/wiki-image?q= (images des figures)
 
 ## /lore/primarchs
