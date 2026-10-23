@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 08:49",
+  "generated": "2026-10-23 09:47",
   "entries": [
+    {
+      "slug": "2026-10-23-pantheon-du-chaos-numeros-lisibles-aussi-au-survol-de-l-imag",
+      "title": "Panthéon du Chaos : numéros lisibles aussi au survol de l'image",
+      "date": "2026-10-23",
+      "lots": [
+        "L176"
+      ],
+      "captures": [
+        "captures/L176-chaos-survol-1440.png",
+        "captures/L176-chaos-survol-390.png"
+      ],
+      "alts": [
+        "En-tête de Nurgle sur grand écran, image survolée : le numéro « III / IV » reste lisible",
+        "En-tête de Nurgle au téléphone, image survolée : le numéro « III / IV » reste lisible"
+      ],
+      "html": "<p>Dans le Panthéon du Chaos, le numéro de chaque dieu (« I / IV » à « IV / IV ») reste lisible quand on survole l’image de l’en-tête ou qu’on y place le focus au clavier. Auparavant, l’image s’éclaircissait à ce moment-là et le numéro se fondait dedans, surtout sur téléphone. L’image garde maintenant sa luminosité ; le survol se repère au petit bouton d’agrandissement, qui devient bien visible.</p>"
+    },
     {
       "slug": "2026-10-23-pantheon-du-chaos-numeros-des-dieux-lisibles-sur-telephone",
       "title": "Panthéon du Chaos : numéros des dieux lisibles sur téléphone",
