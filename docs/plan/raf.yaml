@@ -1828,10 +1828,11 @@ lots:
   - id: L182
     title: "Lore civils à 1440 px : texte long sur 980 px (156 caractères par ligne), grille des figures remplie à 24 % (236/980 px) pour 8 organisations sur 13 → largeur bornée ~70ch, grille resserrée, comme L171 (UX L12)"
     public: "Civils Impériaux : textes à longueur de lecture confortable sur grand écran"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-23
+    started: 2026-10-23
   - id: L183
     title: "Lore civils, filtres : aucun aria-pressed, le filtre actif n'est signalé que par son fond (lore-civilians.component.ts:59,63) → aria-pressed sur les 7 boutons — WCAG 4.1.2 (UX L12)"
     public: "Civils Impériaux : filtre actif annoncé aux lecteurs d'écran"
