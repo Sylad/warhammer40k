@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 08:25",
+  "generated": "2026-10-23 08:35",
   "entries": [
+    {
+      "slug": "2026-10-23-pantheon-du-chaos-numeros-des-dieux-lisibles-sur-telephone",
+      "title": "Panthéon du Chaos : numéros des dieux lisibles sur téléphone",
+      "date": "2026-10-23",
+      "lots": [
+        "L175"
+      ],
+      "captures": [
+        "captures/L175-chaos-numeros-390.png"
+      ],
+      "alts": [
+        "En-tête d'un dieu du Panthéon du Chaos au téléphone : le numéro « III / IV » en or clair au-dessus du nom"
+      ],
+      "html": "<p>Dans le Panthéon du Chaos, le numéro placé au-dessus du nom de chaque dieu (« I / IV » à « IV / IV ») est maintenant en or plus clair. Sur téléphone, « III / IV » et « IV / IV » se détachaient mal de l’image d’arrière-plan ; ils se lisent désormais sans effort.</p>"
+    },
     {
       "slug": "2026-10-23-pantheon-du-chaos-l-image-de-chaque-dieu-s-ouvre-aussi-au-cl",
       "title": "Panthéon du Chaos : l'image de chaque dieu s'ouvre aussi au clic",
