@@ -264,7 +264,7 @@ export class LoreConceptsComponent {
       subtitle: c.title,
       description: c.description,
       contextName: CATEGORY_LABEL[c.category],
-      contextColor: c.color,
+      contextColor: teinteLisible(c.color),
       contextSigil: c.sigil,
       searchQuery: c.name,
       mainUrl: baseUrl,

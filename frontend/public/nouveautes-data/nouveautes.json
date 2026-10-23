@@ -1,7 +1,17 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 20:06",
+  "generated": "2026-10-23 21:51",
   "entries": [
+    {
+      "slug": "2026-10-23-concepts-lieux-titre-de-la-visionneuse-lisible",
+      "title": "Concepts & Lieux : titre de la visionneuse lisible",
+      "date": "2026-10-23",
+      "lots": [
+        "L197"
+      ],
+      "captures": [],
+      "html": "<p>Dans la visionneuse de la page « Concepts &amp; Lieux », le titre du concept s'affiche désormais dans une teinte plus claire de sa couleur, lisible sur le fond sombre. Onze titres étaient trop peu contrastés, dont ceux d'« Imperium Nihilus » et du « Maelstrom », presque invisibles. La couleur d'origine reste sur le sigil et les bordures.</p>"
+    },
     {
       "slug": "2026-10-23-revue-ux-lore-concepts",
       "title": "Concepts & Lieux : filtres annoncés, visionneuse au clavier, titres lisibles",
