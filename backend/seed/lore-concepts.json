@@ -258,7 +258,7 @@
     "category": "imperial",
     "color": "#1d4ba0",
     "sigil": "✠",
-    "wikiQuery": "Imperium Sanctus M42",
+    "wikiQuery": "Imperium of Man",
     "description": "La moitié de la galaxie qui contient Terra — encore éclairée par l'Astronomican. Plus stable, plus défendable, mais aussi plus pressée par les forces ennemies qui s'y concentrent.",
     "loreLong": "Imperium Sanctus est la moitié 'lumineuse' de la galaxie post-Cicatrice. Elle contient Terra, le Trône d'Or, l'Astronomican source — donc tous les centres de pouvoir traditionnels de l'Imperium. Roboute Guilliman y a établi son Quartier Général pour la Croisade Indomitus. Mais Sanctus n'est pas safe : avec Cadia détruite, les invasions chaotiques arrivent désormais directement dans son territoire ; les Tyranides progressent depuis le sud galactique ; les Nécrons s'éveillent partout. La Croisade Indomitus combat sur tous les fronts.",
     "keyFacts": [
@@ -329,7 +329,7 @@
     "category": "doctrine",
     "color": "#a89060",
     "sigil": "⚔",
-    "wikiQuery": "Codex Astartes Guilliman",
+    "wikiQuery": "Codex Astartes",
     "description": "Doctrine militaire écrite par Roboute Guilliman après l'Hérésie d'Horus. Divise les anciennes Légions Astartes de plusieurs dizaines de milliers de marines en chapitres autonomes de 1.000 maximum.",
     "loreLong": "Après la fin de l'Hérésie d'Horus, Roboute Guilliman fit le constat amer que les Légions Astartes — colossales, avec parfois 100.000 marines chacune sous un seul primarque — étaient trop puissantes pour ne pas représenter un risque existentiel pour l'Imperium. Il rédigea le Codex Astartes : un manuel militaire qui scinda chaque Légion en multiples chapitres autonomes de 1.000 marines maximum, organisés en compagnies (Tactique / Assaut / Devastator / Scout / Veterans). Tous les chapitres post-Codex respectent cette structure ; certains chapitres Loyalistes Légions originelles refusèrent (Space Wolves, Black Templars) et restèrent en grandes formations. Le Codex est aussi un manuel tactique exhaustif — ses 600 stratégies sont étudiées encore au M42.",
     "keyFacts": [
@@ -462,7 +462,7 @@
     "category": "world",
     "color": "#5a6878",
     "sigil": "✠",
-    "wikiQuery": "Cadia fortress world Eye of Terror",
+    "wikiQuery": "Cadia",
     "description": "Monde-forteresse millénaire devant l'Œil de la Terreur. Dernière barrière entre les Légions Chaos et le reste de la galaxie pendant dix mille ans. Détruit par la 13ᵉ Croisade Noire d'Abaddon (M41).",
     "loreLong": "Cadia se tenait à l'embouchure de l'Œil de la Terreur, en première ligne de chaque Croisade Noire depuis dix mille ans. Sa population entière — les Cadiens — était formée à la guerre dès l'enfance. Les Cadian Shock Troops étaient considérés comme les meilleurs soldats humains de la Garde Impériale. Les Pylônes Cadiens, structures préhumaines mystérieuses, stabilisaient l'Œil de la Terreur et limitaient son expansion. À la 13ᵉ Croisade Noire (999.M41), Abaddon le Maudit lança son assaut le plus dévastateur : Cadia tomba, les Pylônes furent détruits, et l'Œil se déchaîna. La déstabilisation warp qui s'ensuivit créa la Cicatrix Maledictum. Ursarkar Creed, dernier héros cadien, déclara que 'Cadia tient toujours' — alors même que sa planète n'était plus.",
     "citation": "Cadia tient. Cadia tient. CADIA TIENT.",
