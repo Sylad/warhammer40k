@@ -1746,6 +1746,7 @@ lots:
     visible: true
     created: 2026-10-22
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — 0 bloquant, 0 majeur, 0 mineur — orchestré (vague 2026-10-23-wh-chaos, 0 passe(s) de correction)", commit: 5596b31f51189cf79e536b0cff7b0afd8ce7038d }
   - id: L175
     title: "Panthéon du Chaos : numéros « III / IV » et « IV / IV » (or 13 px sur l'image) entre 3,3 et 4,2:1 à 390 et 320 px — alourdir le voile ou éclaircir le texte (WCAG 1.4.3, QA prod 22-10, suite de L167)"
     public: "Panthéon du Chaos : numéros des dieux lisibles sur téléphone"
