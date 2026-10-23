@@ -1980,19 +1980,24 @@ lots:
   - id: L186
     title: "Lore civils : le pictogramme ⛶ (.figure-zoom, top 8px, 26 px, z-index 2) chevauche de 6 px le haut du nom des figures quand le texte remplit la carte (Bismarck, Titans, Malcador à 1440 ; Chevaliers-Errants à 390 ; Emperor-class à 320), nom à 4,32–4,47:1 au pire pixel → réserver la place du badge (padding droit ou haut du contenu), mesure au pire pixel à 1440/390/320 (QA prod 23-10)"
     public: "Civils Impériaux : noms des figures dégagés de l'icône d'agrandissement"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-wh-l186, 0 passe(s) de correction)", commit: 24385744338dd223227848d185c194da4d02fe1e }
+    ux: { date: 2026-10-23, verdict: "conforme — padding-right 40px sur .figure-name, plus de recouvrement du ⛶ (test de géométrie qui échouait avant) ; capture 390 relue par le lead" }
+    finished: 2026-10-23
   - id: L187
     title: "QA : section ## /lore/civilians dans docs/qa/expectations.md — 13 organisations, 29 figures avec image, compteurs 13/68/29, 7 filtres avec aria-pressed (un seul true), visionneuse role=dialog aria-modal, h2 ≥ 3:1 et textes ≥ 4,5:1 au pire pixel à 1440/390/320, aucun défilement horizontal (QA prod 23-10)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-23
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "compliant : 1 commit (e480f7b), les chiffres 13 / 68 / 29, les 7 filtres, le dialogue modal et l'endpoint /api/lore/imperial-orgs correspondent au seed et au code ; 9 tests verts ; 1 note mineure sur la formulation « aucune image cassée » — orchestré (vague 2026-10-23-wh-l186, 0 passe(s) de correction)", commit: e480f7be39ed6d36b498fa8025d151861d130e7f }
+    notes:
+      - { date: 2026-10-23, text: "Mineur gardé en note (revue L187) : expectations.md:83 « chacune sur une carte avec son image (aucune image cassée) » — les images des figures sont des fonds CSS (--fig-bg), pas des <img> : la vérification universelle des images cassées ne les voit pas." }
+    finished: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
