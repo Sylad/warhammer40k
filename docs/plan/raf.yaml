@@ -2108,6 +2108,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — orchestré (vague 2026-10-23-2145, 0 passe(s) de correction)", commit: e1373539384d48aaf7c372cc1e896d0a0684ebbd }
   - id: L198
     title: "Concepts : images partagées ou de repli wiki — Cadia = Eye of Terror, Imperium Sanctus = Imperium Nihilus (carte galactique), Codex Astartes = livrée Ultramarines ; wikiQuery visant la page du sujet, 15 images distinctes (QA prod L13, comme L189)"
     public: "Concepts & Lieux : chaque concept a son image"
