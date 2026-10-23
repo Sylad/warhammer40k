@@ -1833,6 +1833,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant — 0 blocking, 0 major, 1 minor : texte, citation et grille bornés à 31,5rem (504 px) à 1440 px, soit 65 à 77 caractères par ligne mesurés sur les 13 organisations, et pleine largeur à 390 px sans défilement horizontal (scrollWidth 384 pour 390) ; 7 tests e2e L182, 60 tests plan-data et 14 tests Nouveautés verts ; README et Nouveauté à jour — nit : soulignement de « Figures notables » resté à 980 px — orchestré (vague 2026-10-23-wh-civils, 0 passe(s) de correction)", commit: bedca956381d3e61f1129d7f69502301ea56c8b3 }
   - id: L183
     title: "Lore civils, filtres : aucun aria-pressed, le filtre actif n'est signalé que par son fond (lore-civilians.component.ts:59,63) → aria-pressed sur les 7 boutons — WCAG 4.1.2 (UX L12)"
     public: "Civils Impériaux : filtre actif annoncé aux lecteurs d'écran"
