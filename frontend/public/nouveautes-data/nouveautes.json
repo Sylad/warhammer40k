@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-22 21:57",
+  "generated": "2026-10-23 08:25",
   "entries": [
+    {
+      "slug": "2026-10-23-pantheon-du-chaos-l-image-de-chaque-dieu-s-ouvre-aussi-au-cl",
+      "title": "Panthéon du Chaos : l'image de chaque dieu s'ouvre aussi au clic",
+      "date": "2026-10-23",
+      "lots": [
+        "L174"
+      ],
+      "captures": [
+        "captures/L174-chaos-clic-1440.png"
+      ],
+      "alts": [
+        "En-tête du premier dieu du Panthéon du Chaos : l'image d'arrière-plan est cliquable"
+      ],
+      "html": "<p>Dans le Panthéon du Chaos, un clic de souris ou un toucher sur l’image qui orne l’en-tête de chaque dieu (Khorne, Nurgle, Tzeentch, Slaanesh) ouvre désormais l’illustration en grand. Jusqu’ici, seul le clavier y parvenait : le voile sombre posé sur l’image interceptait le clic.</p>"
+    },
     {
       "slug": "2026-10-22-pantheon-du-chaos-visionneuse-d-images-utilisable-au-clavier",
       "title": "Panthéon du Chaos : visionneuse d'images utilisable au clavier et au téléphone",
