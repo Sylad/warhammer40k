@@ -1788,6 +1788,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-23
+    review: { date: 2026-10-23, verdict: "compliant (1 note : phrase publique sur les noms de figures prématurée jusqu'à L179, fond de carte hors lot) — orchestré (vague 2026-10-23-wh-civils, 0 passe(s) de correction)", commit: 3bdb2eba4e57d0ab2b0d95efe65852004a0b6c08 }
   - id: L178
     title: "Lore civils, contrastes : badges de catégorie 2,32–3,33:1 (11/13) et filtres actifs (#050403 sur Militaire 2,95, Commerce 3,08, Formation 3,57, Religion 3,89, Psyker 4,0) — CATEGORY_COLOR lore-civilians.component.ts:19-26, scss:86-90,131-138 → texte ≥ 4,5:1 au pire pixel — WCAG 1.4.3 (UX L12)"
     public: "Civils Impériaux : catégories et filtres lisibles"
