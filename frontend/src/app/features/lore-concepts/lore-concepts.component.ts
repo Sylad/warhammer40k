@@ -70,7 +70,7 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
 
     <section class="concepts">
       @for (c of filtered(); track c.id) {
-        <article class="concept" [id]="c.id" [style.--c-color]="c.color">
+        <article class="concept" [id]="c.id" [style.--c-color]="c.color" [style.--c-text]="lisible(c.color)">
           <header class="concept-head">
             <button class="concept-bg" type="button" [style.background-image]="conceptImg(c.id)" (click)="openLightbox(c, $event)" [attr.aria-label]="'Voir en grand — ' + c.name"></button>
             <div class="concept-bg-overlay"></div>
@@ -78,12 +78,12 @@ const CATEGORY_COLOR: Record<LoreConceptCategory, string> = {
             <div class="concept-head-content">
               <div class="concept-meta">
                 <span class="number">{{ formatNum(c.number) }}</span>
-                <span class="category" [style.color]="categoryColor(c.category)">{{ categoryLabel(c.category) }}</span>
+                <span class="category" [style.color]="categoryText(c.category)">{{ categoryLabel(c.category) }}</span>
               </div>
               <div class="concept-sigil-row">
                 <span class="concept-sigil" [style.color]="c.color">{{ c.sigil }}</span>
                 <div class="concept-names">
-                  <h2 [style.color]="c.color" [style.--longest-word]="longestWord(c.name)">{{ c.name }}</h2>
+                  <h2 [style.color]="lisible(c.color)" [style.--longest-word]="longestWord(c.name)">{{ c.name }}</h2>
                   <div class="concept-title">{{ c.title }}</div>
                 </div>
               </div>

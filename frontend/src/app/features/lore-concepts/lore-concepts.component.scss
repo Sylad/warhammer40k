@@ -88,8 +88,8 @@
     }
     .filter:hover { color: var(--text); border-color: var(--border-strong); }
     .filter.active {
-      color: var(--bg);
-      background: var(--cat-color, var(--gold));
+      color: var(--cat-text, var(--gold-bright));
+      background: color-mix(in srgb, var(--cat-color, var(--gold)) 22%, #050403);
       border-color: var(--cat-color, var(--gold));
     }
 
@@ -228,13 +228,13 @@
       line-height: 1.6;
       margin: 16px 0 18px;
     }
-    .citation .quote { color: var(--c-color, var(--gold)); font-family: var(--serif); font-size: 18px; margin: 0 4px; }
+    .citation .quote { color: var(--c-text, var(--gold)); font-family: var(--serif); font-size: 18px; margin: 0 4px; }
 
     .section-title {
       font-size: 12px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--c-color, var(--gold));
+      color: var(--c-text, var(--gold));
       margin: 22px 0 12px;
       padding-bottom: 6px;
       border-bottom: 1px solid var(--border);
@@ -260,7 +260,7 @@
     }
     .related-card.static { cursor: default; opacity: 0.85; }
     .related-name {
-      color: var(--c-color, var(--gold));
+      color: var(--c-text, var(--gold));
       font-family: var(--serif);
       font-size: 13px;
       letter-spacing: 0.04em;
@@ -278,7 +278,7 @@
       top: 12px;
       right: 14px;
       font-size: 14px;
-      color: var(--c-color, var(--gold));
+      color: var(--c-text, var(--gold));
       opacity: 0.6;
     }
     .related-card:hover .related-arrow { opacity: 1; }
@@ -293,7 +293,7 @@
       font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--c-color, var(--gold));
+      color: var(--c-text, var(--gold));
       font-weight: 800;
       margin-bottom: 8px;
       padding-bottom: 4px;
