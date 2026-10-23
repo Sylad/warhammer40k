@@ -291,7 +291,7 @@ export class LoreCiviliansComponent {
     ];
 
     // Une variante à la fois : la première qui retombe sur une image déjà listée (ou sur rien) est le repli du wiki,
-    // les suivantes y retomberaient aussi (L190 : 5 requêtes vers la même icône).
+    // les suivantes y retomberaient aussi (L190 : 5 requêtes vers la même icône). Une erreur HTTP, elle, ne l'arrête pas (L193).
     const ajouter = (i: number): void => {
       if (i >= variants.length) return;
       this.resoudre(variants[i]).subscribe({
@@ -302,7 +302,11 @@ export class LoreCiviliansComponent {
           this.lightbox.set({ ...current, thumbUrls: [...current.thumbUrls, r.imageUrl] });
           ajouter(i + 1);
         },
-        error: () => {},
+        // Une erreur HTTP est transitoire, pas un repli du wiki : on passe à la variante suivante.
+        error: () => {
+          const current = this.lightbox();
+          if (current && current.title === figure.name) ajouter(i + 1);
+        },
       });
     };
     ajouter(0);
