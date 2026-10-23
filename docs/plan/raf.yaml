@@ -135,9 +135,10 @@ lots:
     finished: 2026-10-22
   - id: L12
     title: "Revue UX — Lore : civils"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-23
   - id: L13
     title: "Revue UX — Lore : concepts"
     status: todo
