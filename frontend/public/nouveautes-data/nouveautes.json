@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 13:11",
+  "generated": "2026-10-23 15:04",
   "entries": [
+    {
+      "slug": "2026-10-23-civils-imperiaux-images-des-figures-hors-sujet-solomon-voss",
+      "title": "Civils Impériaux : chaque figure a son image",
+      "date": "2026-10-23",
+      "lots": [
+        "L189"
+      ],
+      "captures": [
+        "captures/L189-remembrancers-1440.png"
+      ],
+      "alts": [
+        "Les deux figures des Remembrancers, Solomon Voss et Mersadie Oliton, chacune sur une carte avec une image différente"
+      ],
+      "html": "<p>Sur la page Civils Impériaux, cinq figures affichaient une image sans rapport avec elles. Solomon Voss et Mersadie Oliton montraient la même image, celle d’Iacton Qruze. Lady Aurelia Malys montrait un kabal drukhari, Cornelius von Bismarck « The Despoiler » (Abaddon) et Aleya un « Oblivion Knight ».</p>\n<p>Chacune de ces figures a maintenant sa propre image, tirée d’une page du wiki qui la concerne : la nouvelle *The Last Remembrancer* pour Solomon Voss, *Horus Rising* pour Mersadie Oliton, les Rogue Traders pour Lady Aurelia Malys, Battlefleet Gothic pour Cornelius von Bismarck, les Sœurs du Silence pour Aleya. Ce sont des couvertures ou des emblèmes, faute de portrait de ces personnages sur le wiki. Deux figures ne partagent plus la même image.</p>"
+    },
     {
       "slug": "2026-10-23-civils-imperiaux-noms-des-figures-degages-de-l-icone-d-agran",
       "title": "Civils Impériaux : noms des figures dégagés de l'icône d'agrandissement",
