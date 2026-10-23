@@ -671,6 +671,11 @@
       "status": "done",
       "started": "2026-10-23",
       "finished": "2026-10-23"
+    },
+    {
+      "id": "L196",
+      "title": "Concepts & Lieux : liens lisibles et texte plus confortable à lire",
+      "status": "todo"
     }
   ]
 }

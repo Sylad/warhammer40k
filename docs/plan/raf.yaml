@@ -145,12 +145,16 @@ lots:
     finished: 2026-10-23
   - id: L13
     title: "Revue UX — Lore : concepts"
-    status: doing
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-23
     review: { date: 2026-10-23, verdict: "conforme — 0 bloquant, 0 majeur, 1 note mineure (README L13 muet sur l'anneau de focus) — orchestré (vague 2026-10-23-wh-l13, 2 passe(s) de correction)", commit: a3d0ff36fe7d872ff92035dd2ec6ba3f004efc14 }
+    ux: { date: 2026-10-23, verdict: "conforme (verdict du lead d'après le rapport ux-reviewer de la vague 2026-10-23-wh-l13 et les captures regardées) — anneau de focus or visible, filtres annoncés, visionneuse au clavier ; mineurs en notes" }
+    notes:
+      - { date: 2026-10-23, text: "Mineurs UX 23-10 : filtre actif distingué surtout par la teinte (bordure et fond teintés, aria-pressed) ; R3 et R5 de concepts-contrastes-l13.spec.ts plus étroits que leur titre ; README L13 muet sur l'anneau de focus." }
+    finished: 2026-10-23
   - id: L14
     title: "Revue UX — Lore : galaxie"
     status: todo
@@ -2089,6 +2093,13 @@ lots:
     notes:
       - { date: 2026-10-23, text: "Mineur de revue (23-10) : la Nouveauté garde un peu de vocabulaire interne (« recherche de repli », « rattachée à la page ») — accepté, l'entrée dit vrai." }
     finished: 2026-10-23
+  - id: L196
+    title: "Lore Concepts & Lieux : une carte de liens affiche une route brute au visiteur (« Lien vers la fiche Empereur (/lore/emperor) », lore-concepts.json:34) — libellé sans chemin ; et largeur de lecture du loreLong (980 px, ~124 caractères par ligne) bornée vers 70 caractères ; tests (revue L13)"
+    public: "Concepts & Lieux : liens lisibles et texte plus confortable à lire"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
