@@ -2150,11 +2150,12 @@ lots:
     created: 2026-10-23
   - id: L202
     title: "Plan déplacé vers .cadence/raf.yaml avec raf migrate (cadence L284, L305) : --dry-run d'abord, chaque lecteur du chemin (scripts plan-data, tests, CI, CLAUDE.md, skills) mis à jour ou signalé ; un lecteur non traité (chemin construit à la main) corrigé à la main dans le même lot ; tests, build et raf check verts ; l'avertissement « ancien emplacement » disparaît"
-    status: doing
+    status: done
     estimate: 0.1
     created: 2026-10-24
     started: 2026-10-24
     review: { date: 2026-10-24, verdict: "compliant — orchestré (vague 2026-10-24-2005, 0 passe(s) de correction)", commit: 975721a6e3bac89ac7595c0aca68b3e8ba38e317 }
+    finished: 2026-10-24
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
@@ -2164,3 +2165,4 @@ acknowledged:
   - { sha: 99b23bd8e52674cd1a929cef2e9160c4a974030e, subject: "plan: visible: true sur les lots « Revue UX — » (règle raf check de cadence L271)", date: 2026-10-23, reason: "plan seul : pose visible: true sur les revues UX, cite un lot du dépôt cadence" }
   - { sha: 15f6a24bbea937de0f7300575864687dc43f9efb, subject: "config: précheck d'orchestrate sur le modèle local de cadence (décision du lead 24-10)", date: 2026-10-24, reason: "réglage d'outillage (précheck local de cadence), pas un lot du projet — lead 24-10" }
   - { sha: 4a9fb7b5bf56cf258af91538e166fb8c74a8e1e7, subject: "config: la documentation suit le code (docs.sync) et l'étude de cas du projet est déclarée (docs.articles) — outillage cadence, lead 24-10", date: 2026-10-24, reason: "réglage d'outillage cadence (docs.sync, docs.articles), pas un lot du projet — lead 24-10" }
+  - { sha: 38fddb42405dca2e6ea9b0c5098ca0e9d378a6e3, subject: "plan: L202 migration du plan vers .cadence/raf.yaml (cadence L284)", date: 2026-10-24, reason: "commit de plan du lead dont le message cite un lot de cadence, pas de ce dépôt — lead 24-10" }
