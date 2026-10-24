@@ -33,3 +33,17 @@ orchestrate:
   # puis tests d'acceptation rouges lancés par la commande dédiée ci-dessous (lanceur dans frontend/).
   spec: { dir: docs/specs }
   accept: cd frontend && npx vitest run -c vitest.acceptation.config.ts
+
+# Documentation qui suit le code (cadence docs.sync, L307 de cadence, 24-10) : raf check et la revue signalent un lot dont le code laisse sa doc en retard ; docs.articles = étude de cas du projet dans claude-code-codex (le bibliothécaire propose un lot là-bas).
+docs:
+  sync:
+    # API NestJS (units, factions, images, lore-feed…) : « Modules backend / endpoints clés » du CLAUDE.md et « Fonctionnalités » du README. Les données `backend/seed/` sont du contenu, hors règle.
+    - paths: ['backend/src/**', '!backend/src/__test-utils__/**', '!**/*.test.*', '!**/*.spec.*', '!**/__snapshots__/**']
+      docs: [README.md, CLAUDE.md]
+    # Écrans Angular (features, layout, shared, routes) : « Frontend features (12 pages) » du CLAUDE.md, « Fonctionnalités » du README ; une Nouveauté vaut pour un changement visible. SCSS et tests exclus.
+    - paths: ['frontend/src/**', '!**/*.scss', '!**/*.css', '!frontend/src/testing/**', '!**/*.test.*', '!**/*.spec.*', '!**/__snapshots__/**']
+      docs: [README.md, CLAUDE.md, 'docs/nouveautes/*.md']
+  since: 2026-10-24
+  articles:
+    - repo: ../claude-code-codex
+      file: frontend/src/pages/case-studies/warhammer40k.astro
