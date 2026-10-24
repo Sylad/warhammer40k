@@ -225,7 +225,7 @@ AOT absente) : `@ViewChild` dans les composants testés ainsi.
 
 La page `/plan` montre ce qui est en cours, prévu et livré ces 30 derniers jours, depuis
 `frontend/public/plan-data/plan.json`, **versionné** (le build Docker n'a pas `docs/`) et généré
-par `cd frontend && npm run plan` (`scripts/plan-data.mjs`) depuis `docs/plan/raf.yaml` et le
+par `cd frontend && npm run plan` (`scripts/plan-data.mjs`) depuis `.cadence/raf.yaml` et le
 journal compilé `public/nouveautes-data/nouveautes.json` (même entrée que le lien « Voir la
 nouveauté » : `npm run news` AVANT `npm run plan`). **Après toute commande `raf` qui touche un lot `visible`** (start, done, drop,
 add, sous-tâche…) ou toute nouvelle entrée Nouveautés : `npm run plan`, puis commiter `plan.json`
@@ -288,7 +288,7 @@ Une acceptation qui importe `playwright-core` (navigateur réel, `dist` requis) 
 
 ## Plan, sessions et revue UX (cadence)
 
-Le reste à faire vit dans `docs/plan/raf.yaml`, tenu par `raf`
+Le reste à faire vit dans `.cadence/raf.yaml`, tenu par `raf`
 ([cadence](https://github.com/Sylad/cadence)) : chaque commit cite son lot dans le
 message (`fix(L4): …`, `L2/t1`), `raf now` dit la suite, `raf check` repère les
 écarts. Début et fin de session : skills `/cadence:session-start` et

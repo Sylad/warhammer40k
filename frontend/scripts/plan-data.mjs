@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // L30 — données PUBLIQUES de la page « Plan de travail », tirées du plan raf
-// (docs/plan/raf.yaml). Reprise d'ol-companion L23 (lui-même repris de
+// (.cadence/raf.yaml). Reprise d'ol-companion L23 (lui-même repris de
 // finance-tracker L48), avec les leçons de ses revues : sous-tâches réduites à
 // l'avancement n/m (aucun titre de sous-tâche publié), abandonnées hors du compte.
 //
-//   node scripts/plan-data.mjs [--in ../docs/plan/raf.yaml] [--news public/nouveautes-data/nouveautes.json]
+//   node scripts/plan-data.mjs [--in ../.cadence/raf.yaml] [--news public/nouveautes-data/nouveautes.json]
 //        [--out public/plan-data/plan.json] [--check]
 //   node scripts/plan-data.mjs --leaks dist/frontend/browser   (fin de npm run build)
 //   node scripts/plan-data.mjs --hidden   (lots visibles masqués faute de titre public)
@@ -250,7 +250,7 @@ function main(argv) {
     const i = argv.indexOf(name);
     return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : def;
   };
-  const input = arg('--in', '../docs/plan/raf.yaml');
+  const input = arg('--in', '../.cadence/raf.yaml');
   const output = arg('--out', 'public/plan-data/plan.json');
   const newsDir = arg('--news', 'public/nouveautes-data/nouveautes.json');
   if (argv.includes('--leaks')) {

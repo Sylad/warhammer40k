@@ -1,6 +1,6 @@
 // @vitest-environment node
 // L30 — la CI doit rendre ROUGE le run d'un commit dont le plan publié est périmé
-// (commit qui ne touche que docs/plan, ex. `raf done`), dont un test Vitest échoue,
+// (commit qui ne touche que .cadence, ex. `raf done`), dont un test Vitest échoue,
 // ou dont l'application construite contient un texte privé du plan. Sans toucher
 // aux images : deploy.sh ne lit que les runs de build.yml.
 import { readFileSync } from 'node:fs';
