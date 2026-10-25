@@ -2158,11 +2158,14 @@ lots:
     finished: 2026-10-24
   - id: L203
     title: "config cadence : porte de tests et précheck Sonnet — orchestrate.test (suites backend et frontend, chacune vérifiée verte sur main avant d'être déclarée ; la CI « Contrôles frontend » a été rouge 4 fois du 18 au 23-10, une vague ne lançait jamais la suite) et orchestrate.build (build ou typecheck des deux côtés, vérifié vert), dans cadence.yaml avec un commentaire ; precheck: true au lieu de local (cadence L328 : le local plantait 1 lot sur 3 et disait « oui » à tort) ; les tests d'acceptation rouges restent hors de la commande (accept: dédiée) ; CLAUDE.md si la section cadence le décrit"
-    status: doing
+    status: done
     estimate: 0.1
     created: 2026-10-25
     started: 2026-10-25
     review: { date: 2026-10-25, verdict: "compliant — orchestré (vague 2026-10-25-2100, 0 passe(s) de correction)", commit: f44a339fa4c1a271ce32a4060362d25b8ccd7a0f }
+    finished: 2026-10-25
+    notes:
+      - { date: 2026-10-25, text: "Re-vérifié par le lead le 25-10 : test (backend 121, frontend 1041 hors e2e) et build (nest + ng) verts à la main, raf check propre. Config seule (cadence.yaml, CLAUDE.md) : rien à livrer en prod." }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
