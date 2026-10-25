@@ -2166,6 +2166,14 @@ lots:
     finished: 2026-10-25
     notes:
       - { date: 2026-10-25, text: "Re-vérifié par le lead le 25-10 : test (backend 121, frontend 1041 hors e2e) et build (nest + ng) verts à la main, raf check propre. Config seule (cadence.yaml, CLAUDE.md) : rien à livrer en prod." }
+  - id: L204
+    title: "config cadence : escalade en Fable avant de rendre un lot (orchestrate.escalation, cadence L337 / 1.12.0)"
+    status: done
+    estimate: 0.05
+    created: 2026-10-25
+    started: 2026-10-25
+    review: { date: 2026-10-25, verdict: "conforme (lead : clé de config d'une ligne, lue sans erreur par cadence orchestrate --dry-run 1.12)", commit: 42cdf1f469f9ae9c64495725cd7549f1ad6d2686 }
+    finished: 2026-10-25
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
