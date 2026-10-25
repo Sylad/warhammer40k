@@ -284,6 +284,13 @@ Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l
 ## Étape spec et acceptation (L106)
 
 `cadence.yaml` : `orchestrate.spec: { dir: docs/specs }` et `orchestrate.accept` (lanceur `frontend/vitest.acceptation.config.ts`, fichiers donnés par `CADENCE_ACCEPTATION`). `frontend/vitest.config.ts` (suite et CI) exclut les fichiers des `docs/specs/*/acceptation-<lot>.json` à `vert: false` via `frontend/scripts/acceptation-runner.mjs` (testé : `acceptation-runner.test.mjs`). Nommer les tests d'acceptation `*.acceptation.spec.ts` sous `frontend/src/`.
+
+**Porte de la vague (L203)** : `orchestrate.test` = suite backend (`npm test`) puis suite frontend
+(`npx vitest run --exclude '**/*.e2e.spec.ts'` : les e2e Chromium sur `dist` tournent par `npm run test:e2e`
+et en CI, l'un d'eux a expiré sous la charge de la suite complète) ; `orchestrate.build` = `nest build` puis
+`npm run build` du frontend. Les acceptations rouges restent hors de la porte (exclues par `vitest.config.ts`,
+lancées seules par `accept:`). `orchestrate.precheck: true` (Sonnet), plus `local` (cadence L328). Toute
+commande déclarée se vérifie verte sur main avant d'être écrite.
 Une acceptation qui importe `playwright-core` (navigateur réel, `dist` requis) tourne par `npm run test:e2e` (`vitest.e2e.config.ts`, 30 s par cas, après `npm run build`, Chromium installé) : `vitest.config.ts` l'exclut quel que soit `vert`.
 
 ## Plan, sessions et revue UX (cadence)

@@ -23,8 +23,17 @@ deliver:
 # Revue UX automatique des vagues (cadence orchestrate) : backend NestJS (3001) + frontend Angular (4201)
 # dans UN groupe de processus, tués ensemble par le programme.
 orchestrate:
-  # Précheck sur le modèle local (claude-local, hors quota) pour tout lot sans commit ; un « oui » local est confirmé par Sonnet (L146, L296 de cadence, 24-10).
-  precheck: local
+  # Précheck sur Sonnet pour tout lot sans commit (L203) : le modèle local (precheck: local) plantait 1 lot sur 3
+  # et répondait « oui » à tort (cadence L328, 25-10).
+  precheck: true
+  # Porte de tests de la vague (L203), lancée après chaque implement/fix : la CI « Contrôles frontend » a été rouge
+  # 4 fois du 18 au 23-10 faute que la vague lance la suite. Commandes vérifiées vertes sur main le 25-10 :
+  # backend 121 tests, frontend 1041 tests. Les `*.e2e.spec.ts` (Chromium + dist) sont exclus : sous la charge de
+  # la suite complète l'un d'eux a expiré (section-anchor-href-l160), ils tournent en CI (`npm run test:e2e`).
+  # Les acceptations rouges (vert: false) restent exclues par vitest.config.ts et ne passent que par `accept:`.
+  test: (cd backend && npm test) && (cd frontend && npx vitest run --exclude '**/*.e2e.spec.ts')
+  # Build backend (nest build) puis frontend (ng build + contrôle de fuite du plan), verts le 25-10.
+  build: (cd backend && npm run build) && (cd frontend && npm run build)
   ux:
     command: '(cd backend && npm run start:dev) & (cd frontend && npm start) & wait'
     url: http://localhost:4201
