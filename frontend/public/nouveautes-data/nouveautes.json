@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-27 17:29",
+  "generated": "2026-10-27 17:36",
   "entries": [
+    {
+      "slug": "2026-10-27-concepts-lieux-la-visionneuse-ne-montre-que-des-images-du-su",
+      "title": "Concepts & Lieux : la visionneuse ne montre que des images du sujet",
+      "date": "2026-10-27",
+      "lots": [
+        "L200"
+      ],
+      "captures": [
+        "captures/concepts-galerie-1440.png",
+        "captures/concepts-galerie-390.png"
+      ],
+      "alts": [
+        "La visionneuse du Codex Astartes : une seule image du sujet, sans vignette hors sujet (1440 px)",
+        "La même visionneuse sur téléphone (390 px)"
+      ],
+      "html": "<p>Dans la visionneuse de la page Concepts &amp; Lieux, la rangée de vignettes ne propose plus que des images du sujet. Les vignettes « image indisponible » et les illustrations d'une autre page (une moto des Red Templars pour le Codex Astartes, un portrait de Lorgar pour Cadia) ont disparu, et la carte de l'Imperium n'est plus répétée sous Imperium Sanctus. Quand le wiki n'a pas d'autre image du sujet, la visionneuse n'affiche que l'image du concept.</p>"
+    },
     {
       "slug": "2026-10-27-concepts-lieux-un-clic-sur-l-image-l-agrandit",
       "title": "Concepts & Lieux : un clic sur l'image l'agrandit",

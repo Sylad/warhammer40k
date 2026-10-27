@@ -694,13 +694,15 @@
     {
       "id": "L200",
       "title": "Concepts & Lieux : la visionneuse ne montre que des images du sujet",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-27"
     },
     {
       "id": "L201",
       "title": "Concepts & Lieux : un clic sur l'image l'agrandit",
-      "status": "doing",
-      "started": "2026-10-27"
+      "status": "done",
+      "started": "2026-10-27",
+      "finished": "2026-10-27"
     }
   ]
 }
