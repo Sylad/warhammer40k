@@ -156,8 +156,9 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, color-mix(in srgb, var(--c-color) 18%, transparent) 0%, rgba(0,0,0,0.85) 80%);
+      pointer-events: none; /* L201 : le clic traverse le voile jusqu'au bouton .concept-bg */
     }
-    .concept-head-content { position: relative; z-index: 1; max-width: 780px; flex: 1; }
+    .concept-head-content { position: relative; z-index: 1; max-width: 780px; flex: 1; pointer-events: none; /* L201 : idem pour le texte */ }
 
     .concept-meta { display: flex; gap: 14px; align-items: baseline; margin-bottom: 14px; }
     .number {
