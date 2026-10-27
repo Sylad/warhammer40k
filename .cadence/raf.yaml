@@ -2179,6 +2179,14 @@ lots:
     started: 2026-10-25
     review: { date: 2026-10-25, verdict: "conforme (lead : clé de config d'une ligne, lue sans erreur par cadence orchestrate --dry-run 1.12)", commit: 42cdf1f469f9ae9c64495725cd7549f1ad6d2686 }
     finished: 2026-10-25
+  - id: L205
+    title: Article warhammer40k à rafraîchir
+    status: todo
+    estimate: 0.5
+    created: 2026-10-27
+    repos: [ { path: ../claude-code-codex, cite: warhammer40k } ]
+    notes:
+      - { date: 2026-10-27, text: "Livraison 6ab2e1e : titres publics livrés « Concepts & Lieux : un clic sur l'image l'agrandit ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
