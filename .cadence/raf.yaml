@@ -2142,6 +2142,7 @@ lots:
     visible: true
     created: 2026-10-23
     started: 2026-10-27
+    review: { date: 2026-10-27, verdict: "compliant (1 minor note, no sub-task) — orchestré (vague 2026-10-27-1735, 0 passe(s) de correction)", commit: c61343413ab1c88addb3b7abc9e9af8cabebbc20 }
   - id: L201
     title: "Concepts : un clic sur l'image d'un concept n'ouvre pas la visionneuse (.concept-bg-overlay et .concept-meta en pointer-events auto couvrent le bouton .concept-bg) ; seule l'icône ⛶ de 26 px l'ouvre — défaut depuis L13 (QA prod L197/L198)"
     public: "Concepts & Lieux : un clic sur l'image l'agrandit"
