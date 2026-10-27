@@ -157,12 +157,16 @@ lots:
     finished: 2026-10-23
   - id: L14
     title: "Revue UX — Lore : galaxie"
-    status: doing
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-27
     review: { date: 2026-10-27, verdict: "compliant after 0 fix required (code of bc37c55 correct) — 3 minor notes: Nouveautés captures/alt inexact, map at 390 px 68 % empty, hot zones buried in a nested scroller — orchestré (vague 2026-10-27-2130, 0 passe(s) de correction)", commit: 6a585e97fc0eca97fc00fb903f4ba43488a27be3 }
+    ux: { date: 2026-10-27, verdict: "conforme (lead, captures 1440/390 regardées) : code de bc37c55 correct ; 3 mineurs — captures Nouveautés mal cadrées + alt inexact (lot correctif ouvert), carte à 390 px vide à 68 %, hot zones dans un défilement imbriqué (notes)" }
+    notes:
+      - { date: 2026-10-27, text: "Revue 27-10 soir (mineurs, pas des défauts du diff) : à 390 px la carte .leaflet-galaxy fait 352×633 px pour une image de 331×203 (68 % vide, 69 étiquettes superposées, le glissé panne la carte au lieu de défiler) ; légende max-height calc(100vh - 100px) : le bloc « Hot zones cliquables » (69 boutons) n'est visible qu'après défilement interne, sans indice. Pistes pour une future revue de la Galaxie." }
+    finished: 2026-10-27
   - id: L15
     title: "Revue UX — Lore : équipement (liste + fiche)"
     status: todo
@@ -2212,6 +2216,12 @@ lots:
     review: { date: 2026-10-27, verdict: "compliant : 1 mineur (page « Era Indomitus » redondante pour Cicatrix Maledictum), 0 bloquant, 0 majeur — orchestré (vague 2026-10-27-1950, 0 passe(s) de correction)", commit: f16d2aaa70b5203e49a39f4f86998babb43ec7fe }
     ux: { date: 2026-10-27, verdict: "lead (captures regardées : Cadia retrouve une galerie de 4 images du sujet, la vignette active encadrée) : conforme, 1 mineur (page Era Indomitus redondante pour Cicatrix)" }
     finished: 2026-10-27
+  - id: L208
+    title: "Galaxie : régénérer les captures Nouveautés de L14 (carte cadrée : attendre le cadrage avant la capture, 1440 et 390 px) et rendre leur texte alternatif fidèle à l'image"
+    status: todo
+    estimate: 0.25
+    quickwin: true
+    created: 2026-10-27
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
