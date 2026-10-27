@@ -2219,20 +2219,24 @@ lots:
     finished: 2026-10-27
   - id: L208
     title: "Galaxie : régénérer les captures Nouveautés de L14 (carte cadrée : attendre le cadrage avant la capture, 1440 et 390 px) et rendre leur texte alternatif fidèle à l'image"
-    status: doing
+    status: done
     estimate: 0.25
     quickwin: true
     created: 2026-10-27
     started: 2026-10-27
     review: { date: 2026-10-27, verdict: "Conforme : deux commits revus (3b23828, e2c2bcc), 0 bloquant, 0 majeur, 1 note mineure (le fond fixe se coupe à la hauteur de la fenêtre sur les captures en pleine page). Les deux captures font bien 1440 et 390 px de large, et la carte y est entièrement cadrée. Les textes alternatifs correspondent à ce que montrent les images : à 1440 px, les trois filtres actifs et la liste des segmenta à droite ; à 390 px, filtres sur deux lignes et carte entière. Les fichiers de docs/ et de public/ sont identiques. tailles.json est exact (390×2300, rapport 5,9:1). Les choix de l'auteur tiennent : le garde de la règle des 6:1 au téléphone existe déjà dans nouveautes-data.spec.ts:117, et le rognage coupe seulement la citation de bas de page. — orchestré (vague 2026-10-27-2303, 1 passe(s) de correction)", commit: e2c2bcc3b6b2852bbdef9c3ea437de12ab7e67d7 }
+    notes:
+      - { date: 2026-10-27, text: "Revue 27-10 (mineurs) : cassure de teinte du fond à la hauteur de la fenêtre sur les captures fullPage (y≈900 à 1440, y≈844 à 390) ; le test R1/R2 ne peut pas voir un écart image/alt ; garde des 6:1 non étendue à tous les -390.png (L151-lore-sommaire-390 à 10,61:1, autre lot)." }
+    finished: 2026-10-27
   - id: L209
     title: "Attendus QA : ajouter la section /lore/galaxy à docs/qa/expectations.md (brouillon de la QA prod L14 du 27-10 : h1, carte nommée, 3 filtres aria-pressed, légende, jamais .map-calib sans PIN, pas de défilement horizontal)"
-    status: doing
+    status: done
     estimate: 0.1
     quickwin: true
     created: 2026-10-27
     started: 2026-10-27
     review: { date: 2026-10-27, verdict: "compliant — orchestré (vague 2026-10-27-2303, 0 passe(s) de correction)", commit: 1323d6eea7957b1eb2d72b619903cd8aaa73a65f }
+    finished: 2026-10-27
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
