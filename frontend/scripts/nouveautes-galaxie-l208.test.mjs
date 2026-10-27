@@ -30,4 +30,9 @@ describe('Nouveautés de la Galaxie (L208)', () => {
     expect(captures[1].alt).toMatch(/carte entière/);
     expect(captures[1].alt).toMatch(/390 px/);
   });
+
+  it('R4 — la capture 390 px n\'est pas plus de 6 fois plus haute que large (6:1, CLAUDE.md « Nouveautés »)', () => {
+    const png = readFileSync(join(DOCS, captures[1].file));
+    expect(png.readUInt32BE(20) / png.readUInt32BE(16)).toBeLessThanOrEqual(6);
+  });
 });
