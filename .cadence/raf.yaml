@@ -162,6 +162,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-27
+    review: { date: 2026-10-27, verdict: "compliant after 0 fix required (code of bc37c55 correct) — 3 minor notes: Nouveautés captures/alt inexact, map at 390 px 68 % empty, hot zones buried in a nested scroller — orchestré (vague 2026-10-27-2130, 0 passe(s) de correction)", commit: 6a585e97fc0eca97fc00fb903f4ba43488a27be3 }
   - id: L15
     title: "Revue UX — Lore : équipement (liste + fiche)"
     status: todo
