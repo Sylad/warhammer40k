@@ -4,8 +4,8 @@ date: 2026-10-27
 created: 2026-10-27T19:48+01:00
 lots: [L14]
 captures:
-  - { file: captures/L14-galaxie-1440.png, alt: "Page La Galaxie à 1440 px : filtres Mondes et Segmenta actifs, Failles warp désactivé, carte des Cinq Segmenta" }
-  - { file: captures/L14-galaxie-390.png, alt: "La même page sur téléphone (390 px), sans défilement horizontal" }
+  - { file: captures/L14-galaxie-1440.png, alt: "Page La Galaxie à 1440 px : les trois filtres Mondes, Failles warp et Segmenta tous actifs, la carte des Cinq Segmenta entièrement cadrée avec ses pastilles, la liste des segmenta à droite" }
+  - { file: captures/L14-galaxie-390.png, alt: "La même page à 390 px de large : filtres sur deux lignes, carte entière cadrée dans son encadré, sans défilement horizontal" }
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---
