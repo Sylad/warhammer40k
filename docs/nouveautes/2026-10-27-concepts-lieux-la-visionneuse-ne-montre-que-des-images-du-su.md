@@ -9,4 +9,4 @@ captures:
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---
-Dans la visionneuse de la page Concepts & Lieux, la rangée de vignettes ne propose plus que des images du sujet. Les vignettes « image indisponible » et les illustrations d'une autre page (une moto des Red Templars pour le Codex Astartes, un portrait de Lorgar pour Cadia) ont disparu, et la carte de l'Imperium n'est plus répétée sous Imperium Sanctus. Quand le wiki n'a pas d'autre image du sujet, la visionneuse n'affiche que l'image du concept.
+Dans la visionneuse de la page Concepts & Lieux, la rangée de vignettes ne propose plus que des images du sujet. Les vignettes « image indisponible » et les illustrations d'une autre page (une moto des Red Templars pour le Codex Astartes, un portrait de Lorgar pour Cadia) ont disparu, et la carte de l'Imperium n'est plus répétée sous Imperium Sanctus. Quand le wiki n'a pas d'autre image du sujet, la visionneuse n'affiche que l'image du concept.
