@@ -2192,10 +2192,12 @@ lots:
       - { date: 2026-10-27, text: "Livraison 6ab2e1e : titres publics livrés « Concepts & Lieux : un clic sur l'image l'agrandit ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
   - id: L206
     title: "cadence.yaml : plan.onWrite régénère frontend/public/plan-data/plan.json à chaque écriture du plan — livraison de L200 refusée le 27-10 par la CI « Plan publié à jour » après un raf ux/done du lead"
-    status: doing
+    status: done
     estimate: 0.05
     created: 2026-10-27
     started: 2026-10-27
+    review: { date: 2026-10-27, verdict: "revue lead : 3 lignes de config, plan.json régénéré par la commande du projet (npm run plan) — conforme", commit: null }
+    finished: 2026-10-27
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
