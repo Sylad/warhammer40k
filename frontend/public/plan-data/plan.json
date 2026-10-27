@@ -694,8 +694,9 @@
     {
       "id": "L200",
       "title": "Concepts & Lieux : la visionneuse ne montre que des images du sujet",
-      "status": "doing",
-      "started": "2026-10-27"
+      "status": "done",
+      "started": "2026-10-27",
+      "finished": "2026-10-27"
     },
     {
       "id": "L201",
