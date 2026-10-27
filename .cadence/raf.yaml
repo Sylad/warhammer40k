@@ -2224,6 +2224,7 @@ lots:
     quickwin: true
     created: 2026-10-27
     started: 2026-10-27
+    review: { date: 2026-10-27, verdict: "Conforme : deux commits revus (3b23828, e2c2bcc), 0 bloquant, 0 majeur, 1 note mineure (le fond fixe se coupe à la hauteur de la fenêtre sur les captures en pleine page). Les deux captures font bien 1440 et 390 px de large, et la carte y est entièrement cadrée. Les textes alternatifs correspondent à ce que montrent les images : à 1440 px, les trois filtres actifs et la liste des segmenta à droite ; à 390 px, filtres sur deux lignes et carte entière. Les fichiers de docs/ et de public/ sont identiques. tailles.json est exact (390×2300, rapport 5,9:1). Les choix de l'auteur tiennent : le garde de la règle des 6:1 au téléphone existe déjà dans nouveautes-data.spec.ts:117, et le rognage coupe seulement la citation de bas de page. — orchestré (vague 2026-10-27-2303, 1 passe(s) de correction)", commit: e2c2bcc3b6b2852bbdef9c3ea437de12ab7e67d7 }
   - id: L209
     title: "Attendus QA : ajouter la section /lore/galaxy à docs/qa/expectations.md (brouillon de la QA prod L14 du 27-10 : h1, carte nommée, 3 filtres aria-pressed, légende, jamais .map-calib sans PIN, pas de défilement horizontal)"
     status: todo
