@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-27 19:40",
+  "generated": "2026-10-27 19:49",
   "entries": [
+    {
+      "slug": "2026-10-27-galaxie-filtres-annonces-carte-nommee-calibration-reservee",
+      "title": "Galaxie : filtres annoncés, carte nommée, calibration réservée",
+      "date": "2026-10-27",
+      "lots": [
+        "L14"
+      ],
+      "captures": [
+        "captures/L14-galaxie-1440.png",
+        "captures/L14-galaxie-390.png"
+      ],
+      "alts": [
+        "Page La Galaxie à 1440 px : filtres Mondes et Segmenta actifs, Failles warp désactivé, carte des Cinq Segmenta",
+        "La même page sur téléphone (390 px), sans défilement horizontal"
+      ],
+      "html": "<p>Sur la page La Galaxie, les trois filtres de la carte (Mondes, Failles warp, Segmenta) indiquent à un lecteur d'écran s'ils sont actifs, et la carte porte le nom « Carte de la galaxie ». Les filtres, les zones cliquables et les liens « Voir lore » montrent un anneau or quand on y arrive au clavier.</p>\n<p>Le bouton « Mode calibration », outil de repositionnement des pastilles, n'apparaît plus pour les visiteurs : il faut avoir saisi le PIN, comme pour l'édition de la galerie.</p>"
+    },
     {
       "slug": "2026-10-27-concepts-lieux-la-visionneuse-retrouve-ses-vignettes",
       "title": "Concepts & Lieux : la visionneuse retrouve ses vignettes",
