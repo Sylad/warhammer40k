@@ -123,6 +123,14 @@ Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine
 - shows: un clic sur un lien de la barre amène le titre de la section visée à moins de 40 px sous le bas de la barre d'ancres (ni masqué derrière elle, ni loin dessous) ; excepté pour les dernières sections quand la fin de page est atteinte et que la section ne peut plus monter (défilement au maximum)
 - never: une section cible cachée derrière l'en-tête ou la barre après un clic d'ancre ; une barre d'ancres à top 0
 
+## /lore/galaxy
+- shows: un h1 « La Galaxie »
+- shows: la carte, région nommée « Carte de la galaxie » (role=region, aria-label)
+- shows: 3 filtres avec aria-pressed, tous à true au chargement : Mondes, Failles warp, Segmenta ; un clic bascule l'état du filtre touché
+- shows: la légende « Les 5 Segmenta » avec ses cinq cartes
+- never: l'outil de calibration (`.map-calib`) sans PIN saisi (réservé à l'édition)
+- never: un défilement horizontal (scrollWidth > clientWidth) à 1440, 390 et 320
+
 ## /lore/timeline
 - shows: 35 événements
 
