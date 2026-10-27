@@ -100,6 +100,7 @@ Ajouté par L199 (QA prod du 23-10, après L13, L197 et L198) : 15 concepts, 76 
 - shows: Visionneuse d'un concept (bouton de l'image « Voir en grand — <concept> ») : un dialogue role=dialog aria-modal="true" nommé « Visionneuse — <concept> » ; le focus entre sur « Fermer », Échap le ferme et rend le focus au bouton de l'image du même concept (le ⛶ n'est pas focalisable) (L13)
 - never: un texte sous contraste : le titre de la visionneuse (Imperium Nihilus à 1,8:1 et Maelstrom à 2,21:1 avant L197), les h2, les catégories (badges et filtre actif) à 4,5:1 au moins, mesurés au pire pixel de leur fond (image comprise) à 1440, 390 et 320 px (la couleur brute du concept reste sur le sigil et les bordures — L13)
 - never: un concept dont l'image n'est pas celle de son sujet, ou partagée avec un autre concept : les 15 cartes ont 15 images distinctes (Cadia affichait l'Œil de la Terreur, Imperium Sanctus la carte d'Imperium Nihilus, le Codex Astartes la livrée des Ultramarines — L198)
+- never: dans la galerie de la visionneuse d'un concept, une vignette de repli du wiki (Pict-File_Unavailable), une image d'une autre page que le sujet (Red_Templars_Biker pour le Codex Astartes, LorgarArt pour Cadia) ou la carte de l'Imperium reprise en variante ; les variantes qui retombent sur l'image du concept s'arrêtent à la première requête (L200)
 - never: un défilement horizontal (scrollWidth > clientWidth) à 1440, 390 et 320 px
 - api: /api/lore/concepts (15 concepts), /api/wiki-image?q= (images des concepts)
 

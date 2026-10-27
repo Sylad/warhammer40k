@@ -10,6 +10,7 @@ import { compteur, toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { revealSection } from '../../core/utils/section-anchor';
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
+import { varianteDuSujet } from './concept-variantes';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
@@ -278,18 +279,27 @@ export class LoreConceptsComponent {
       `${c.name} warhammer 40k`,
       `${baseQuery} illustration`,
     ];
-    for (const q of variants) {
-      this.service.getWikiImage(q).subscribe({
+    // Une variante à la fois (L190) : la première qui ne ramène rien de nouveau est le repli du wiki, les suivantes y
+    // retomberaient aussi. Une variante hors sujet ou sans vraie image (L200) est écartée sans arrêter la chaîne,
+    // comme une erreur HTTP (L193).
+    const ajouter = (i: number): void => {
+      if (i >= variants.length) return;
+      this.service.getWikiImage(variants[i]).subscribe({
         next: r => {
-          if (!r.imageUrl) return;
           const cur = this.lightbox();
           if (!cur || cur.title !== c.name) return;
-          if (cur.thumbUrls.includes(r.imageUrl)) return;
+          if (!r.imageUrl || cur.thumbUrls.includes(r.imageUrl)) return;
+          if (!varianteDuSujet(c, r)) return ajouter(i + 1);
           this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+          ajouter(i + 1);
         },
-        error: () => {},
+        error: () => {
+          const cur = this.lightbox();
+          if (cur && cur.title === c.name) ajouter(i + 1);
+        },
       });
-    }
+    };
+    ajouter(0);
   }
 
   selectThumb(idx: number): void {
