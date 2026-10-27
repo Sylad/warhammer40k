@@ -2137,12 +2137,14 @@ lots:
   - id: L200
     title: "Concepts, galerie de la visionneuse : vignettes de repli ou hors sujet (Codex Astartes : Pict-File_Unavailable, Red_Templars_Biker ; Cadia : LorgarArt ; Imperium Sanctus : la carte d'Imperium Nihilus) et 8 concepts sur 15 dont les 3-4 requêtes de variantes retombent sur l'image de la carte — variantes filtrées comme L190 (QA prod L197/L198)"
     public: "Concepts & Lieux : la visionneuse ne montre que des images du sujet"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-23
     started: 2026-10-27
     review: { date: 2026-10-27, verdict: "compliant (1 minor note, no sub-task) — orchestré (vague 2026-10-27-1735, 0 passe(s) de correction)", commit: c61343413ab1c88addb3b7abc9e9af8cabebbc20 }
+    ux: { date: 2026-10-27, verdict: "lead (captures 1440 et 390 regardées : Codex Astartes et Cadia sans vignette hors sujet, galerie retirée quand il n'en reste qu'une) : conforme, 1 note mineure" }
+    finished: 2026-10-27
   - id: L201
     title: "Concepts : un clic sur l'image d'un concept n'ouvre pas la visionneuse (.concept-bg-overlay et .concept-meta en pointer-events auto couvrent le bouton .concept-bg) ; seule l'icône ⛶ de 26 px l'ouvre — défaut depuis L13 (QA prod L197/L198)"
     public: "Concepts & Lieux : un clic sur l'image l'agrandit"
