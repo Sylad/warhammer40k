@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, effect, ElementRef, OnDestroy, ViewChild, signal, inject } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, ElementRef, OnDestroy, ViewChild, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
+import { PinService } from '../../core/services/pin.service';
 import * as L from 'leaflet';
 import {
   buildPopupHtml as utilBuildPopupHtml,
@@ -50,22 +51,23 @@ interface Segmentum {
     <div class="layout">
       <main class="map-wrap">
         <div class="map-filters">
-          <button class="map-filter-btn" [class.active]="showWorlds()" (click)="showWorlds.set(!showWorlds())">
+          <button class="map-filter-btn" type="button" [class.active]="showWorlds()" [attr.aria-pressed]="showWorlds()" (click)="showWorlds.set(!showWorlds())">
             <span class="map-filter-dot" style="background:#f0d276;color:#f0d276"></span>
             Mondes <span class="map-filter-count">{{ countByType('world') }}</span>
           </button>
-          <button class="map-filter-btn" [class.active]="showRifts()" (click)="showRifts.set(!showRifts())">
+          <button class="map-filter-btn" type="button" [class.active]="showRifts()" [attr.aria-pressed]="showRifts()" (click)="showRifts.set(!showRifts())">
             <span class="map-filter-dot" style="background:#9c2680;color:#9c2680"></span>
             Failles warp <span class="map-filter-count">{{ countByType('rift') }}</span>
           </button>
-          <button class="map-filter-btn" [class.active]="showSegmenta()" (click)="showSegmenta.set(!showSegmenta())">
+          <button class="map-filter-btn" type="button" [class.active]="showSegmenta()" [attr.aria-pressed]="showSegmenta()" (click)="showSegmenta.set(!showSegmenta())">
             <span class="map-filter-dot" style="background:linear-gradient(135deg,#9c2680,#1d4ba0,#5fc97a,#3a6cc4,#f0d276);"></span>
             Segmenta
           </button>
         </div>
-        <div #leafletMap class="leaflet-galaxy"></div>
+        <div #leafletMap class="leaflet-galaxy" role="region" aria-label="Carte de la galaxie"></div>
         <div class="map-help">⊕ molette pour zoomer · clic-glissé pour déplacer · clic sur un point pour explorer</div>
 
+        @if (editMode()) {
         <div class="map-calib" [class.active]="calibrationMode()">
           <button class="calib-toggle" type="button" (click)="calibrationMode.set(!calibrationMode())"
                   [title]="calibrationMode() ? 'Désactiver le mode calibration' : 'Activer le mode calibration (markers draggables)'">
@@ -79,6 +81,7 @@ interface Segmentum {
             </button>
           }
         </div>
+        }
       </main>
 
       <aside class="legend">
@@ -146,6 +149,9 @@ interface Segmentum {
 export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly service = inject(WarhammerService);
+  private readonly pinService = inject(PinService);
+  /** Outil de calibration réservé à l'édition (PIN saisi), comme la galerie. */
+  readonly editMode = computed(() => !!this.pinService.pin());
 
   @ViewChild('leafletMap', { static: false }) leafletMapRef?: ElementRef<HTMLDivElement>;
   private map?: L.Map;
@@ -358,6 +364,7 @@ export class LoreGalaxyComponent implements AfterViewInit, OnDestroy {
         btn.href = '#';
         btn.title = 'Plein écran (Esc pour quitter)';
         btn.setAttribute('aria-label', 'Plein écran');
+        btn.setAttribute('role', 'button');
         btn.innerHTML = '⛶';
         L.DomEvent.disableClickPropagation(wrap);
         L.DomEvent.on(btn, 'click', (e: Event) => {
