@@ -10,7 +10,7 @@ import { compteur, toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { revealSection } from '../../core/utils/section-anchor';
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
-import { varianteDuSujet } from './concept-variantes';
+import { pageCiblee } from './concept-variantes';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {
@@ -272,25 +272,19 @@ export class LoreConceptsComponent {
       thumbUrls: [baseUrl],
       selectedIdx: 0,
     });
-    const baseQuery = c.wikiQuery;
-    const variants = [
-      `${baseQuery} art`,
-      `${baseQuery} concept art`,
-      `${c.name} warhammer 40k`,
-      `${baseQuery} illustration`,
-    ];
-    // Une variante à la fois (L190) : la première qui ne ramène rien de nouveau est le repli du wiki, les suivantes y
-    // retomberaient aussi. Une variante hors sujet ou sans vraie image (L200) est écartée sans arrêter la chaîne,
-    // comme une erreur HTTP (L193).
+    // Les pages du sujet (`galleryPages`, L207), une à la fois : le wiki ne rend qu'une image par page, une requête de
+    // variante retombait sur l'image du concept ou sur une page voisine. Une page qui répond sous un autre titre, sans
+    // vraie image ou avec une image déjà listée est écartée sans arrêter la chaîne, comme une erreur HTTP (L193).
+    const pages = c.galleryPages;
     const ajouter = (i: number): void => {
-      if (i >= variants.length) return;
-      this.service.getWikiImage(variants[i]).subscribe({
+      if (i >= pages.length) return;
+      this.service.getWikiImage(pages[i]).subscribe({
         next: r => {
           const cur = this.lightbox();
           if (!cur || cur.title !== c.name) return;
-          if (!r.imageUrl || cur.thumbUrls.includes(r.imageUrl)) return;
-          if (!varianteDuSujet(c, r)) return ajouter(i + 1);
-          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+          if (pageCiblee(pages[i], r) && !cur.thumbUrls.includes(r.imageUrl!)) {
+            this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl!] });
+          }
           ajouter(i + 1);
         },
         error: () => {

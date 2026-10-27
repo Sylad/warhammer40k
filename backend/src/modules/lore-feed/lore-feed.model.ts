@@ -159,6 +159,8 @@ export interface LoreConcept {
   color: string;
   sigil: string;
   wikiQuery: string;
+  /** Titres exacts de pages du wiki dont l'image alimente la galerie de la visionneuse (L207). */
+  galleryPages: string[];
   description: string;
   loreLong: string;
   citation?: string;
