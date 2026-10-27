@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-23 22:51",
+  "generated": "2026-10-27 17:29",
   "entries": [
+    {
+      "slug": "2026-10-27-concepts-lieux-un-clic-sur-l-image-l-agrandit",
+      "title": "Concepts & Lieux : un clic sur l'image l'agrandit",
+      "date": "2026-10-27",
+      "lots": [
+        "L201"
+      ],
+      "captures": [
+        "captures/concepts-visionneuse-1440.png",
+        "captures/concepts-visionneuse-390.png"
+      ],
+      "alts": [
+        "La visionneuse d'un concept ouverte par un clic sur le texte de l'en-tête, sur grand écran (1440 px)",
+        "La même visionneuse sur téléphone (390 px)"
+      ],
+      "html": "<p>Sur la page Concepts &amp; Lieux, un clic n'importe où sur l'image d'en-tête d'un concept, y compris sur son titre et son numéro, l'agrandit dans la visionneuse. Jusqu'ici, seule la petite icône ⛶ en bas à droite l'ouvrait.</p>"
+    },
     {
       "slug": "2026-10-23-concepts-lieux-chaque-concept-a-son-image",
       "title": "Concepts & Lieux : chaque concept a son image",
