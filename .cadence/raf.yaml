@@ -2202,12 +2202,14 @@ lots:
     finished: 2026-10-27
   - id: L207
     title: "Concepts, visionneuse : depuis L200 aucune des 15 galeries n'a de vignette (QA prod 27-10, .lightbox-thumb ×0) et Codex Astartes / Cadia font encore 4 appels /api/wiki-image sans effet — retrouver de vraies images du sujet (requêtes de variantes ciblées par titre de page wiki) ou supprimer les appels inutiles ; trancher l'attente dans docs/qa/expectations.md"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-27
     started: 2026-10-27
     review: { date: 2026-10-27, verdict: "compliant : 1 mineur (page « Era Indomitus » redondante pour Cicatrix Maledictum), 0 bloquant, 0 majeur — orchestré (vague 2026-10-27-1950, 0 passe(s) de correction)", commit: f16d2aaa70b5203e49a39f4f86998babb43ec7fe }
+    ux: { date: 2026-10-27, verdict: "lead (captures regardées : Cadia retrouve une galerie de 4 images du sujet, la vignette active encadrée) : conforme, 1 mineur (page Era Indomitus redondante pour Cicatrix)" }
+    finished: 2026-10-27
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
