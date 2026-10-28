@@ -3521,6 +3521,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "pointer-events": "none",
     "position": "absolute",
   },
+  ".hero-overlay.hero-overlay-chronologie": {
+    "background": "linear-gradient(135deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.76) 70%, rgba(0, 0, 0, 0.72) 100%)",
+  },
   ".hero-overlay.hero-overlay-releve": {
     "background": "linear-gradient(135deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.76) 70%, rgba(0, 0, 0, 0.72) 100%)",
   },

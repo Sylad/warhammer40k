@@ -25,7 +25,7 @@ const ERA_LABEL: Record<TimelineEra, string> = {
       <a class="back-btn" routerLink="/lore/timeline">← RETOUR À LA CHRONOLOGIE</a>
 
       <section class="hero" [style.--hero-img]="heroImg()">
-        <div class="hero-overlay"></div>
+        <div class="hero-overlay hero-overlay-chronologie"></div>
         <div class="hero-text">
           <div class="hero-eyebrow">
             <span class="hero-era">{{ eraLabel(e.era) }}</span>
