@@ -97,4 +97,20 @@ describe('Équipement, liste (L15)', () => {
     const mobile = scss.slice(scss.indexOf('@media (max-width: 600px)'));
     expect(mobile).toMatch(/\.filters\s*\{[^}]*position:\s*static/);
   });
+
+  it('R8 — le ⛶ (28 px à gauche 16 px) ne recouvre ni le sigil ni le libellé : l\'en-tête d\'une carte avec image est décalé d\'au moins 56 px', async () => {
+    const avec = await monter();
+    expect(el(avec).querySelector('article.card .card-head')!.classList.contains('with-zoom')).toBe(true);
+    const sans = await monter(null);
+    expect(el(sans).querySelector('article.card .card-head')!.classList.contains('with-zoom')).toBe(false);
+    const scss = readFileSync(join(__dirname, 'lore-equipment.component.scss'), 'utf8');
+    const decalage = Number(/\.card-head\.with-zoom\s*\{[^}]*padding-left:\s*(\d+)px/.exec(scss)?.[1]);
+    expect(decalage).toBeGreaterThanOrEqual(16 + 28 + 12);
+  });
+
+  it('R9 — à 600 px et moins, la recherche garde ses 36 px dans la colonne (flex: none, pas flex: 1 qui l\'écrase à 18 px)', () => {
+    const scss = readFileSync(join(__dirname, 'lore-equipment.component.scss'), 'utf8');
+    const mobile = scss.slice(scss.indexOf('@media (max-width: 600px)'));
+    expect(mobile).toMatch(/\.search\s*\{[^}]*flex:\s*none/);
+  });
 });

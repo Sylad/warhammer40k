@@ -176,6 +176,7 @@
       padding: 12px 16px;
       border-bottom: 1px solid rgba(201,162,74,0.18);
     }
+    .card-head.with-zoom { padding-left: 56px; }
     .card-sigil { font-size: 22px; line-height: 1; text-shadow: 0 0 14px rgba(0,0,0,0.7); }
     .card-type {
       color: var(--muted);
@@ -307,4 +308,5 @@
       .filters { position: static; }
       .filter-row.second { flex-direction: column; align-items: stretch; }
       .search, .faction-select { max-width: 100%; }
+      .search { flex: none; }
     }

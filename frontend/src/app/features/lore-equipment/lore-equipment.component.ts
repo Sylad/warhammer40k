@@ -94,7 +94,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
           @if (hasImg(item.id)) {
             <button class="card-zoom" type="button" (click)="$event.stopPropagation(); openLightbox(item)" [attr.aria-label]="'Voir en grand : ' + item.name">⛶</button>
           }
-          <div class="card-head">
+          <div class="card-head" [class.with-zoom]="hasImg(item.id)">
             <span class="card-sigil" [style.color]="typeColor(item.type)">{{ item.sigil || typeSigil(item.type) }}</span>
             <span class="card-type">{{ subCategoryLabel(item) }}</span>
           </div>
