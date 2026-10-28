@@ -66,13 +66,14 @@
 
               <article class="t-card"
                        [class.expanded]="expandedId() === ev.id"
-                       (click)="toggle(ev.id)"
-                       [attr.aria-expanded]="expandedId() === ev.id">
+                       (click)="toggle(ev.id)">
                 <div class="t-card-bg" [style.background-image]="eventImg(ev.id)"></div>
                 <div class="t-card-overlay"></div>
                 <div class="t-card-body">
                   <div class="t-card-date">{{ ev.date }}</div>
-                  <h3 class="t-card-title">{{ ev.title }}</h3>
+                  <h3 class="t-card-title">
+                    <button type="button" class="t-card-toggle" [attr.aria-expanded]="expandedId() === ev.id">{{ ev.title }}</button>
+                  </h3>
                   <p class="t-card-short">{{ ev.shortDescription }}</p>
                   <div class="t-card-tags">
                     @for (t of ev.tags; track t) {
