@@ -25,7 +25,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
       <a class="back-btn" routerLink="/lore/equipment">← RETOUR À L'ARSENAL</a>
 
       <section class="hero" [style.--hero-img]="heroImg()">
-        <div class="hero-overlay"></div>
+        <div class="hero-overlay hero-overlay-releve"></div>
         <div class="hero-text">
           <div class="hero-eyebrow">
             <span class="hero-class">{{ typeLabel(e.type) }} · {{ souscategorie(e.subCategory) }}</span>
