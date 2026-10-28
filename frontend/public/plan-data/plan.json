@@ -715,8 +715,9 @@
     {
       "id": "L211",
       "title": "Chronologie : étiquettes lisibles et barre des ères plus discrète au téléphone",
-      "status": "doing",
-      "started": "2026-10-28"
+      "status": "done",
+      "started": "2026-10-28",
+      "finished": "2026-10-28"
     }
   ]
 }

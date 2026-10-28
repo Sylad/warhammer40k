@@ -2258,12 +2258,14 @@ lots:
   - id: L211
     title: "Chronologie : étiquettes affichées en identifiant brut (« PRE-IMPERIUM », « COSMIC » sur la liste, « pre-imperium, necrons » sur la fiche) — libellés de TAG_LABEL partout ; à 390 px la barre d'ères collée couvre 36 % de l'écran (231 px + bandeau 70 sur 844) — la replier ou la rendre défilante"
     public: "Chronologie : étiquettes lisibles et barre des ères plus discrète au téléphone"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-28
     started: 2026-10-28
-    review: { date: 2026-10-28, verdict: "compliant (0 bloquant, 0 majeur, 1 mineur : commentaire périmé) — orchestré (vague 2026-10-28-2100, 0 passe(s) de correction)", commit: 7ccd6a23abc530ef84288e81bdbb527845797cc6 }
+    review: { date: 2026-10-28, verdict: "conforme : revue de la vague conforme + correctif 6d337c3 relu par le lead (tags de la fiche en ul/li, style des pastilles de la liste, 2 tests rouges avant / verts après, instantané de styles +2 règles) ; 1443 tests, build verts", commit: 6d337c39985f9f4116241493dc97588962ace58c }
+    ux: { date: 2026-10-28, verdict: "conforme : captures regardées — liste : libellés lisibles (TAG_LABEL), barre des ères repliée à 390 px ; fiche : défaut vu par le lead (tags collés « Pré-ImperiumNecrons… », manqué par la revue UX) corrigé par 6d337c3, 5 pastilles séparées à 1440 et 390 (tmp/wh-l211-fiche-*.png) ; mineur : commentaire périmé lore-timeline.component.ts:123" }
+    finished: 2026-10-28
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
