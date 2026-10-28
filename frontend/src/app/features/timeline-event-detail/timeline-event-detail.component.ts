@@ -47,11 +47,11 @@ const ERA_LABEL: Record<TimelineEra, string> = {
           @if (e.tags.length) {
             <article class="panel">
               <h2>Tags</h2>
-              <div class="tags">
+              <ul class="tags" aria-label="Tags">
                 @for (t of e.tags; track t) {
-                  <span class="tag">{{ tagLabel(t) }}</span>
+                  <li><span class="tag">{{ tagLabel(t) }}</span></li>
                 }
-              </div>
+              </ul>
             </article>
           }
 

@@ -5,7 +5,7 @@ created: 2026-10-28T20:52+01:00
 lots: [L211]
 captures:
   - { file: captures/L211-chronologie-liste-390.png, alt: "Liste de la chronologie au téléphone (390 px) : la barre des ères tient sur une seule ligne qui défile, les étiquettes des cartes sont lisibles (« Pré-Imperium », « Necrons »)" }
-  - { file: captures/L211-chronologie-fiche-390.png, alt: "Fiche d'un événement au téléphone (390 px) : les tags sont écrits en toutes lettres" }
+  - { file: captures/L211-chronologie-fiche-390.png, alt: "Fiche d'un événement au téléphone (390 px) : chaque tag est une pastille distincte, écrite en toutes lettres" }
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
 # nocapture: raison, quand une capture n'a pas de sens
 ---

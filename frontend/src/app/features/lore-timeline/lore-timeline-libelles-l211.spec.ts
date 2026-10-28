@@ -63,6 +63,39 @@ describe('Chronologie : libellés et barre d\'ères (L211)', () => {
     expect(tags).toEqual(['pre-imperium', 'cosmic', 'necrons'].map(tagLabel));
   });
 
+  it('R1 — la fiche rend chaque tag en pastille distincte d\'une liste (ul/li), pas des libellés collés sans séparateur', async () => {
+    await setupTestBed([TimelineEventDetailComponent], [
+      provideRouter([]),
+      { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ id: 'e1' })) } },
+      { provide: WarhammerService, useValue: fakeWarhammerService({ getTimelineEvent: () => of(evenement) }) },
+    ]);
+    const f = TestBed.createComponent(TimelineEventDetailComponent);
+    f.detectChanges(); await f.whenStable(); f.detectChanges();
+    const racine = f.nativeElement as HTMLElement;
+    const liste = racine.querySelector('ul.tags')!;
+    expect(liste, 'une liste sémantique <ul class="tags">').not.toBeNull();
+    expect(liste.getAttribute('aria-label')).toBe('Tags');
+    const items = Array.from(liste.querySelectorAll(':scope > li'));
+    expect(items).toHaveLength(evenement.tags.length);
+    expect(items.every(li => li.querySelectorAll('.tag').length === 1)).toBe(true);
+    const libelles = evenement.tags.map(tagLabel);
+    expect(items.map(li => li.textContent!.trim())).toEqual(libelles);
+    // le DOM n'a pas de texte nu à concaténer : un seul libellé par élément, jamais « Pré-ImperiumCosmiqueNecrons » dans un seul nœud
+    expect(items.every(li => libelles.every(l => l === li.textContent!.trim() || !li.textContent!.includes(l)))).toBe(true);
+  });
+
+  it('R1 — la pastille de la fiche a le style de celle de la liste (cadre, remplissage, majuscules, liste sans puces)', () => {
+    const css = postcss.parse(sass.compile(resolve(__dirname, '../ship-detail/ship-detail.component.scss')).css);
+    const decl = (sel: string, prop: string) => { let v = ''; css.walkRules(r => { if (r.selectors.includes(sel)) r.walkDecls(prop, d => { v = d.value; }); }); return v; };
+    expect(decl('.tags .tag', 'border')).toMatch(/1px solid/);
+    expect(decl('.tags .tag', 'padding')).not.toBe('');
+    expect(decl('.tags .tag', 'text-transform')).toBe('uppercase');
+    expect(decl('.tags', 'display')).toBe('flex');
+    expect(decl('.tags', 'flex-wrap')).toBe('wrap');
+    expect(decl('.tags', 'list-style')).toBe('none');
+    expect(decl('.tags', 'gap')).not.toBe('');
+  });
+
   it('R2 — jusqu\'à 760 px la barre d\'ères reste sur une ligne défilante (pas de retour à la ligne)', () => {
     const m = '(max-width: 760px)';
     expect(regle('.era-nav', m, 'flex-wrap')).toBe('nowrap');
