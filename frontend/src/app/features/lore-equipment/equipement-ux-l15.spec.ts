@@ -91,4 +91,10 @@ describe('Équipement, liste (L15)', () => {
       expect(contraste(hex, FOND_TEXTE_SOMBRE)).toBeGreaterThanOrEqual(4.5);
     });
   });
+
+  it('R7 — à 600 px et moins, le bandeau de filtres (≈ 230 px) ne reste pas collé au défilement : il prendrait 27 % d\'un écran de 844 px', () => {
+    const scss = readFileSync(join(__dirname, 'lore-equipment.component.scss'), 'utf8');
+    const mobile = scss.slice(scss.indexOf('@media (max-width: 600px)'));
+    expect(mobile).toMatch(/\.filters\s*\{[^}]*position:\s*static/);
+  });
 });
