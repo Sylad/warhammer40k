@@ -98,6 +98,9 @@
   align-items: start;
 }
 
+/* L211 : sans min-width: 0, la barre d'ères défilante élargit la colonne de grille à sa largeur de contenu. */
+.main { min-width: 0; }
+
 /* === Era sticky nav === */
 .era-nav {
   position: sticky;

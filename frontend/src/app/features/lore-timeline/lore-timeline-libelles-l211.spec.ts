@@ -69,4 +69,8 @@ describe('Chronologie : libellés et barre d\'ères (L211)', () => {
     expect(regle('.era-nav', m, 'overflow-x')).toBe('auto');
     expect(regle('.era-pill', m, 'flex-shrink')).toBe('0');
   });
+
+  it('R2 — la colonne principale a min-width: 0 : la barre défilante ne l\'élargit pas au-delà de l\'écran (page de 1232 px à 390 px sinon)', () => {
+    expect(regle('.main', null, 'min-width')).toBe('0');
+  });
 });
