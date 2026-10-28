@@ -114,12 +114,13 @@
         <div class="filter-group">
           <div class="filter-label">Par ère</div>
           <div class="filter-list">
-            <button class="filter" [class.active]="filterEra() === 'all'" (click)="filterEra.set('all')">
+            <button class="filter" [class.active]="filterEra() === 'all'" [attr.aria-pressed]="filterEra() === 'all'" (click)="filterEra.set('all')">
               Toutes · {{ nb(events().length) }}
             </button>
             @for (e of eras; track e.id) {
               <button class="filter"
                       [class.active]="filterEra() === e.id"
+                      [attr.aria-pressed]="filterEra() === e.id"
                       [disabled]="countByEra(e.id) === 0"
                       (click)="filterEra.set(e.id)">
                 <span class="filter-sigil">{{ e.sigil }}</span>{{ e.label }} · {{ nb(countByEra(e.id)) }}
@@ -129,8 +130,8 @@
         </div>
 
         <div class="filter-group">
-          <div class="filter-label">Par faction / thème</div>
-          <select class="tag-select"
+          <div class="filter-label" id="filtre-theme-libelle">Par faction / thème</div>
+          <select class="tag-select" aria-labelledby="filtre-theme-libelle"
                   [ngModel]="filterTag()"
                   (ngModelChange)="filterTag.set($event)">
             <option value="all">Tous les thèmes</option>

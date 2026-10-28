@@ -1,4 +1,4 @@
-import { Component, ElementRef, computed, effect, inject, signal } from '@angular/core';
+import { Component, DestroyRef, afterNextRender, ElementRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -165,6 +165,22 @@ export class LoreTimelineComponent {
     }, 50);
   }
 
+  /** Garde --era-nav-h à la hauteur de la barre d'ères collée (elle grandit quand les pastilles passent à la ligne). */
+  private suivreBarreDEres(): void {
+    if (typeof ResizeObserver === 'undefined') return;
+    const racine = this.host.nativeElement;
+    const mesurer = () => {
+      const barre = racine.querySelector<HTMLElement>('.era-nav');
+      if (barre) racine.style.setProperty('--era-nav-h', `${barre.offsetHeight}px`);
+    };
+    const obs = new ResizeObserver(mesurer);
+    afterNextRender(() => {
+      const barre = racine.querySelector<HTMLElement>('.era-nav');
+      if (barre) { obs.observe(barre); mesurer(); }
+    });
+    inject(DestroyRef).onDestroy(() => obs.disconnect());
+  }
+
   resetFilters(): void {
     this.filterEra.set('all');
     this.filterTag.set('all');
@@ -184,6 +200,7 @@ export class LoreTimelineComponent {
   }
 
   constructor() {
+    this.suivreBarreDEres();
     this.service.getWikiImage('Warhammer 40k Imperium history scroll codex').subscribe({
       next: r => { if (r.imageUrl) this.heroImage.set(r.imageUrl); },
       error: () => {},
