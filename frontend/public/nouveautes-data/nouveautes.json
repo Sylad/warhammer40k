@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-28 09:40",
+  "generated": "2026-10-28 11:41",
   "entries": [
+    {
+      "slug": "2026-10-28-revue-ux-lore-chronologie-liste-fiche",
+      "title": "Chronologie : l'en-tête d'un événement se lit mieux",
+      "date": "2026-10-28",
+      "lots": [
+        "L16"
+      ],
+      "captures": [
+        "captures/chronologie-fiche-1440.png",
+        "captures/chronologie-fiche-390.png"
+      ],
+      "alts": [
+        "Fiche d'un événement de la chronologie : l'ère en pastille, la date à côté, titre et accroche lisibles (1440 px)",
+        "La même fiche au téléphone (390 px)"
+      ],
+      "html": "<p>Sur la fiche d'un événement de la chronologie, le titre et l'accroche de l'en-tête restent lisibles même quand l'image du wiki est très claire, y compris sur téléphone. L'ère s'affiche en pastille encadrée et la date en or à côté d'elle : elles ne se lisent plus collées (« Pré-Imperium60 millions d'années avant »).</p>"
+    },
     {
       "slug": "2026-10-28-armement-reliques-cartes-et-filtres-utilisables-au-clavier",
       "title": "Armement & Reliques : cartes et filtres utilisables au clavier",

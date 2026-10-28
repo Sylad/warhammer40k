@@ -24,4 +24,12 @@ describe('Chronologie, fiche (L16)', () => {
     expect(alphas(/(?:^|\n)\.hero-overlay\s*\{[^}]*background:\s*linear-gradient\(([^;]*)\)\s*;/)).toEqual([0.85, 0.55, 0.4]);
     expect(alphas(/\.hero-overlay\.hero-overlay-releve\s*\{[^}]*background:\s*linear-gradient\(([^;]*)\)\s*;/)).toEqual([0.88, 0.76, 0.72]);
   });
+
+  it('R3 — l\'ère (pastille encadrée) et la date (or vif ≥ 4,5:1 sous le voile) ont une règle : plus de « Pré-Imperium60 millions d\'années avant » collé en une ligne', () => {
+    const era = /\.hero-era\s*\{([^}]*)\}/.exec(scss)![1];
+    const date = /\.hero-date\s*\{([^}]*)\}/.exec(scss)![1];
+    expect(era).toMatch(/border:\s*1px solid/);
+    expect(era).toMatch(/margin:[^;]*12px/);
+    expect(/color:\s*var\(--gold-bright\)/.test(date)).toBe(true);
+  });
 });
