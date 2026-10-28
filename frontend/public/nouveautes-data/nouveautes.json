@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-28 12:23",
+  "generated": "2026-10-28 20:53",
   "entries": [
+    {
+      "slug": "2026-10-28-chronologie-etiquettes-lisibles-et-barre-des-eres-plus-discr",
+      "title": "Chronologie : étiquettes lisibles et barre des ères plus discrète au téléphone",
+      "date": "2026-10-28",
+      "lots": [
+        "L211"
+      ],
+      "captures": [
+        "captures/L211-chronologie-liste-390.png",
+        "captures/L211-chronologie-fiche-390.png"
+      ],
+      "alts": [
+        "Liste de la chronologie au téléphone (390 px) : la barre des ères tient sur une seule ligne qui défile, les étiquettes des cartes sont lisibles (« Pré-Imperium », « Necrons »)",
+        "Fiche d'un événement au téléphone (390 px) : les tags sont écrits en toutes lettres"
+      ],
+      "html": "<p>Sur la chronologie, les étiquettes de thème ne montrent plus des identifiants bruts (« pre-imperium », « cosmic ») : elles se lisent « Pré-Imperium », « Cosmique », « Necrons », sur les cartes, dans le filtre par thème et sur la fiche d'un événement. Sur téléphone, la barre des ères qui reste collée en haut tient maintenant sur une seule ligne qu'on fait défiler du doigt : elle ne prend plus qu'environ 50 px de haut au lieu de 231 px, et laisse voir les événements.</p>"
+    },
     {
       "slug": "2026-10-28-revue-ux-lore-chronologie-liste-fiche",
       "title": "Chronologie : l'en-tête d'un événement se lit mieux",
