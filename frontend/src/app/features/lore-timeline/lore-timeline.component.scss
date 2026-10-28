@@ -45,6 +45,8 @@
   display: inline-block;
   padding: 4px 12px;
   border: 1px solid var(--border);
+  /* Fond uni : l'or à 11 px tombait à 2,29:1 sur l'image du wiki et le halo de .hero-flicker (WCAG 1.4.3). */
+  background: rgba(5,4,3,0.85);
   color: var(--gold);
   font-size: 11px;
   letter-spacing: 0.18em;
@@ -303,6 +305,12 @@
   gap: 12px;
 }
 .t-card-date {
+  /* Fond uni sous la date : en haut de la carte le voile ne fonce l'image qu'à 0,05 et l'or vif
+   * tombait à 4,12:1 au pire pixel (WCAG 1.4.3). La marge négative garde le texte aligné sur le titre. */
+  align-self: flex-start;
+  padding: 2px 10px;
+  margin: -2px 0 0 -10px;
+  background: rgba(5,4,3,0.85);
   font-family: var(--serif);
   font-size: 22px;
   color: var(--gold-bright);

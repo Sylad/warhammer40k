@@ -151,7 +151,15 @@ export class LoreTimelineComponent {
   tagLabel(tag: string): string { return TAG_LABEL[tag] ?? tag; }
 
   toggle(id: string): void {
+    const actif = document.activeElement;
     this.expandedId.set(this.expandedId() === id ? null : id);
+    // Un seul événement déplié : replier la carte du dessus remonte le contenu, et le bouton qui vient
+    // d'être activé peut finir sous le bandeau et la barre d'ères collée (WCAG 2.4.11). scroll-margin-top
+    // ne joue que pour un défilement provoqué par le focus : une fois la mise en page refaite, on ramène
+    // le bouton actif dans la zone visible (« nearest » respecte sa marge de défilement).
+    if (actif instanceof HTMLElement && actif.classList.contains('t-card-toggle')) {
+      setTimeout(() => actif.scrollIntoView({ block: 'nearest' }), 0);
+    }
   }
 
   scrollToEra(era: TimelineEra): void {

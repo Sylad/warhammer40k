@@ -83,3 +83,50 @@ describe('Chronologie : liste accessible (L16)', () => {
     expect(boutons.find((b) => b.textContent?.includes('Hérésie'))!.getAttribute('aria-pressed')).toBe('true');
   });
 });
+
+describe('Chronologie : liste accessible, seconde passe (L16)', () => {
+  it('R6 — après l\'activation d\'un bouton de carte, le bouton actif est ramené dans la zone visible (le repli de la carte du dessus le remontait sous la barre d\'ères)', async () => {
+    vi.useFakeTimers();
+    const f = await monter();
+    const el = f.nativeElement as HTMLElement;
+    const bouton = el.querySelector<HTMLButtonElement>('.t-card-toggle')!;
+    bouton.scrollIntoView = vi.fn();
+    bouton.focus();
+    expect(document.activeElement).toBe(bouton);
+    bouton.click();
+    f.detectChanges();
+    expect(bouton.scrollIntoView).not.toHaveBeenCalled(); // seulement une fois la mise en page refaite
+    vi.advanceTimersByTime(1);
+    expect(bouton.scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
+    vi.useRealTimers();
+  });
+
+  it('R6 — un clic qui ne vient pas d\'un bouton de carte focalisé ne provoque aucun défilement', async () => {
+    vi.useFakeTimers();
+    const f = await monter();
+    const el = f.nativeElement as HTMLElement;
+    const bouton = el.querySelector<HTMLButtonElement>('.t-card-toggle')!;
+    bouton.scrollIntoView = vi.fn();
+    (document.activeElement as HTMLElement | null)?.blur?.();
+    el.querySelector<HTMLElement>('.t-card')!.click();
+    f.detectChanges();
+    vi.advanceTimersByTime(1);
+    expect(bouton.scrollIntoView).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+
+  it('R7 — la date des cartes (or vif, 22 px) est posée sur un fond uni opaque à 85 % au moins : 4,12:1 au pire pixel de l\'image sinon', () => {
+    const fond = decl('.t-card-date', 'background');
+    const m = fond.match(/rgba\(\s*5,\s*4,\s*3,\s*(0?\.\d+)\)/);
+    expect(m, fond).toBeTruthy();
+    expect(parseFloat(m![1])).toBeGreaterThanOrEqual(0.85);
+    expect(decl('.t-card-date', 'align-self')).toBe('flex-start');
+  });
+
+  it('R8 — le badge du bandeau (or, 11 px) est posé sur un fond uni opaque à 85 % au moins : 2,29:1 sur l\'image et son halo sinon', () => {
+    const fond = decl('.badge', 'background');
+    const m = fond.match(/rgba\(\s*5,\s*4,\s*3,\s*(0?\.\d+)\)/);
+    expect(m, fond).toBeTruthy();
+    expect(parseFloat(m![1])).toBeGreaterThanOrEqual(0.85);
+  });
+});
