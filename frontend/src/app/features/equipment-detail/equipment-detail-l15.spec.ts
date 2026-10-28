@@ -1,5 +1,9 @@
-// L15 (revue UX Lore : équipement, fiche) — les factions liées portent leur nom, pas l'identifiant du seed.
+// L15 (revue UX Lore : équipement, fiche) — les factions liées portent leur nom, pas l'identifiant du seed ;
+// le texte de l'en-tête posé sur l'image tient 4,5:1 (WCAG 1.4.3) sous le voile, même sur une image blanche (feuille partagée avec la fiche vaisseau).
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { contraste } from '../../core/utils/teinte-lisible';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { of } from 'rxjs';
@@ -37,5 +41,20 @@ describe('Équipement, fiche (L15)', () => {
   it('R2 — la citation n\'a pas de style en ligne : sa mise en italique vient de la feuille de style', async () => {
     const e = await monter(of([]));
     expect(e.querySelector('#citation blockquote')!.getAttribute('style')).toBeNull();
+  });
+
+  it('R3 — .hero-epithet, .hero-faction et .hero-status sont ≥ 4,5:1 sur une image blanche sous le point le plus clair du voile .hero-overlay', () => {
+    const scss = readFileSync(join(__dirname, '../ship-detail/ship-detail.component.scss'), 'utf8');
+    const vars: Record<string, string> = { '--text': '#e6dfce', '--gold': '#c9a24a', '--gold-bright': '#f0d276' };
+    const voile = /\.hero-overlay\s*\{[^}]*background:\s*linear-gradient\(([^;]*)\)\s*;/.exec(scss)![1];
+    const alphas = Array.from(voile.matchAll(/rgba\(0,\s*0,\s*0,\s*([\d.]+)\)/g), m => Number(m[1]));
+    expect(alphas.length).toBeGreaterThanOrEqual(2);
+    const a = Math.min(...alphas);
+    const fond = '#' + Array(3).fill(Math.round(255 * (1 - a)).toString(16).padStart(2, '0')).join('');
+    for (const sel of ['.hero-epithet', '.hero-faction', '.hero-status, .hero-captain']) {
+      const corps = new RegExp(`(?:^|\\n)${sel.replace(/[.,]/g, c => '\\' + c)}\\s*\\{([^}]*)\\}`).exec(scss)![1];
+      const m = /(?:^|[\s;])color:\s*(?:var\((--[a-z-]+)\)|(#[0-9a-f]{6}))/.exec(corps)!;
+      expect(contraste(m[1] ? vars[m[1]] : m[2], fond), `${sel} sur ${fond} (voile ${a})`).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });
