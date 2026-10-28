@@ -179,11 +179,14 @@ lots:
     finished: 2026-10-28
   - id: L16
     title: "Revue UX — Lore : chronologie (liste + fiche)"
-    status: doing
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-28
+    review: { date: 2026-10-28, verdict: "conforme (revue complète du code en vague + revue courte du README 5306e4b) : contrastes de la fiche et de la liste relevés par modificateur propre, cartes dépliables au clavier, filtres aria-pressed, README à jour ; voile partagé intact", commit: 5306e4b80bc6def1bfdd48e1f3efc38fff4ffadb }
+    ux: { date: 2026-10-28, verdict: "conforme (lead, captures 390 regardées : date des cartes sur fond uni lisible, en-tête de la fiche lisible ; relecteur UX au navigateur 390/1440) — hors lot, en lot de suivi : étiquettes en identifiant brut, barre d'ères collée à 36 % de l'écran à 390 px" }
+    finished: 2026-10-28
   - id: L17
     title: "Revue UX — Lore : vaisseaux (liste + fiche)"
     status: todo
@@ -2251,6 +2254,13 @@ lots:
     started: 2026-10-28
     review: { date: 2026-10-28, verdict: "conforme (lead) : config seule, 3 lignes relues ; dry-run de L15 sans étape precheck", commit: 4cf3953a45f8fe220af9d77c719c0d34c67fdcf6 }
     finished: 2026-10-28
+  - id: L211
+    title: "Chronologie : étiquettes affichées en identifiant brut (« PRE-IMPERIUM », « COSMIC » sur la liste, « pre-imperium, necrons » sur la fiche) — libellés de TAG_LABEL partout ; à 390 px la barre d'ères collée couvre 36 % de l'écran (231 px + bandeau 70 sur 844) — la replier ou la rendre défilante"
+    public: "Chronologie : étiquettes lisibles et barre des ères plus discrète au téléphone"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-28
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
