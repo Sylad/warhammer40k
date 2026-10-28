@@ -113,4 +113,49 @@ describe('Équipement, liste (L15)', () => {
     const mobile = scss.slice(scss.indexOf('@media (max-width: 600px)'));
     expect(mobile).toMatch(/\.search\s*\{[^}]*flex:\s*none/);
   });
+
+  it('R10 — ⛶ ouvre un vrai dialogue modal (role=dialog, aria-modal, nom) et sa fermeture rend le focus au ⛶ d\'origine', async () => {
+    const f = await monter();
+    const zoom = el(f).querySelector<HTMLButtonElement>('article.card .card-zoom')!;
+    const nom = seed[0].name;
+    const boite = el(f).querySelector('app-figure-lightbox')!;
+    expect(boite.getAttribute('role')).toBeNull();
+    zoom.focus();
+    zoom.click();
+    f.detectChanges();
+    await f.whenStable();
+    expect(boite.getAttribute('role')).toBe('dialog');
+    expect(boite.getAttribute('aria-modal')).toBe('true');
+    expect(boite.getAttribute('aria-label')).toBe(`Visionneuse — ${nom}`);
+    f.componentInstance.closeLightbox();
+    f.detectChanges();
+    await f.whenStable();
+    expect(boite.getAttribute('role')).toBeNull();
+    expect(document.activeElement).toBe(zoom);
+  });
+
+  it('R11 — pastilles de faction, libellé de type, retour et valeurs mono sont ≥ 4,5:1 sur leur pire fond', () => {
+    const scss = readFileSync(join(__dirname, 'lore-equipment.component.scss'), 'utf8');
+    const vars: Record<string, string> = { '--gold': '#c9a24a', '--gold-soft': '#80652b', '--gold-bright': '#f0d276', '--text': '#e6dfce', '--muted': '#8d8678' };
+    const regle = (sel: string) => {
+      const m = new RegExp(`(?:^|\\n)\\s*${sel.replace(/[.]/g, '\\.')}\\s*\\{([^}]*)\\}`).exec(scss);
+      expect(m, sel).not.toBeNull();
+      return m![1];
+    };
+    const couleur = (corps: string) => vars[/(?:^|[\s;])color:\s*var\((--[a-z-]+)\)/.exec(corps)![1]];
+    // Fond : voile posé sur une image blanche (pire cas) ; sans fond propre, la page (#050403).
+    const surBlanc = (corps: string) => {
+      const m = /background:\s*rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/.exec(corps);
+      if (!m) return '#050403';
+      const a = Number(m[4]);
+      return '#' + [m[1], m[2], m[3]].map(v => Math.round(Number(v) * a + 255 * (1 - a)).toString(16).padStart(2, '0')).join('');
+    };
+    for (const sel of ['.faction-pill', '.card-type']) {
+      const corps = regle(sel);
+      expect(contraste(couleur(corps), surBlanc(corps)), sel).toBeGreaterThanOrEqual(4.5);
+    }
+    expect(contraste(couleur(regle('.back-link')), surBlanc(regle('.back-link'))), '.back-link').toBeGreaterThanOrEqual(4.5);
+    const mono = /\.detail-value\.mono\s*\{[^}]*color:\s*var\((--[a-z-]+)\)/.exec(scss)![1];
+    expect(contraste(vars[mono], '#2a2624'), '.detail-value.mono').toBeGreaterThanOrEqual(4.5);
+  });
 });

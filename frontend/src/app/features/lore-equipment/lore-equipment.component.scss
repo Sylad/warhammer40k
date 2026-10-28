@@ -3,7 +3,7 @@
     .back-link {
       display: inline-block;
       margin: 16px 0 24px;
-      color: var(--gold-soft);
+      color: var(--gold);
       font-size: 12px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -179,7 +179,9 @@
     .card-head.with-zoom { padding-left: 56px; }
     .card-sigil { font-size: 22px; line-height: 1; text-shadow: 0 0 14px rgba(0,0,0,0.7); }
     .card-type {
-      color: var(--muted);
+      color: var(--text);
+      background: rgba(8,7,6,0.85);
+      padding: 2px 6px;
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -207,12 +209,12 @@
     .faction-pill {
       padding: 2px 8px;
       border: 1px solid rgba(201,162,74,0.32);
-      color: var(--gold-soft);
+      color: var(--gold);
       font-size: 9.5px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 700;
-      background: rgba(8,7,6,0.55);
+      background: rgba(8,7,6,0.85);
     }
 
     .card-arrow {
@@ -278,7 +280,7 @@
       margin-bottom: 6px;
     }
     .detail-value { color: var(--text); font-size: 12.5px; line-height: 1.6; }
-    .detail-value.mono { font-family: ui-monospace, 'Cascadia Mono', Menlo, monospace; font-size: 11.5px; color: var(--gold-soft); }
+    .detail-value.mono { font-family: ui-monospace, 'Cascadia Mono', Menlo, monospace; font-size: 11.5px; color: var(--gold); }
     .notable-list { margin: 0; padding-left: 18px; color: var(--text); font-size: 12.5px; line-height: 1.55; }
     .notable-list li { margin-bottom: 4px; }
     .citation {
