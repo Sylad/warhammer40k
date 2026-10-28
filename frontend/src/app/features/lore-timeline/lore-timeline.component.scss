@@ -649,7 +649,15 @@
     justify-content: center;
     padding-top: 24px;
   }
-  .era-pill { padding: 7px 10px; font-size: 10px; }
+  /* L211 : une seule ligne défilante (les pastilles à la ligne couvraient 231 px sur 844). */
+  .era-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 8px 0;
+    margin-bottom: 20px;
+    scrollbar-width: thin;
+  }
+  .era-pill { padding: 7px 10px; font-size: 10px; flex-shrink: 0; white-space: nowrap; }
   .pill-label { font-size: 10px; }
   .era-titles h2 { font-size: 22px; }
 }

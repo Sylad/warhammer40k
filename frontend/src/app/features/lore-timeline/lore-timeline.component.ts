@@ -7,6 +7,7 @@ import type { TimelineEra, TimelineEvent } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
 import { revealSection } from '../../core/utils/section-anchor';
+import { tagLabel } from '../../core/utils/timeline-tags';
 
 interface EraDef {
   id: TimelineEra;
@@ -29,60 +30,6 @@ const ERA_LABEL: Record<TimelineEra, string> = ERAS.reduce((acc, e) => {
   return acc;
 }, {} as Record<TimelineEra, string>);
 
-const TAG_LABEL: Record<string, string> = {
-  emperor: "L'Empereur",
-  terra: 'Terra',
-  warp: 'Warp',
-  humanity: 'Humanité',
-  primarchs: 'Primarques',
-  'thunder-warriors': 'Thunder Warriors',
-  mechanicum: 'Mechanicum',
-  chaos: 'Chaos',
-  'great-crusade': 'Grande Croisade',
-  'space-marines': 'Space Marines',
-  'horus-heresy': 'Hérésie',
-  horus: 'Horus',
-  magnus: 'Magnus',
-  tzeentch: 'Tzeentch',
-  nurgle: 'Nurgle',
-  khorne: 'Khorne',
-  'space-wolves': 'Space Wolves',
-  'eye-of-terror': 'Œil de la Terreur',
-  sanguinius: 'Sanguinius',
-  guilliman: 'Guilliman',
-  primaris: 'Primaris',
-  imperium: 'Imperium',
-  'imperial-fists': 'Imperial Fists',
-  orks: 'Orks',
-  ecclesiarchy: 'Ecclésiarchie',
-  sororitas: 'Adepta Sororitas',
-  macharius: 'Macharius',
-  'imperial-guard': 'Astra Militarum',
-  'grey-knights': 'Grey Knights',
-  armageddon: 'Armageddon',
-  ghazghkull: 'Ghazghkull',
-  tyranids: 'Tyranides',
-  ultramarines: 'Ultramarines',
-  calgar: 'Calgar',
-  macragge: 'Macragge',
-  tau: "T'au",
-  cadia: 'Cadia',
-  abaddon: 'Abaddon',
-  'imperium-nihilus': 'Imperium Nihilus',
-  'imperium-sanctus': 'Imperium Sanctus',
-  'blood-angels': 'Blood Angels',
-  dante: 'Dante',
-  necrons: 'Necrons',
-  'death-guard': 'Death Guard',
-  ultramar: 'Ultramar',
-  aeldari: 'Aeldari',
-  ynnari: 'Ynnari',
-  psykers: 'Psykers',
-  'silent-king': 'Roi Silencieux',
-  vigilus: 'Vigilus',
-  custodes: 'Adeptus Custodes',
-  'hive-fleets': 'Flottes-Ruches',
-};
 
 @Component({
   selector: 'app-lore-timeline',
@@ -148,7 +95,7 @@ export class LoreTimelineComponent {
   }
 
   eraLabel(era: TimelineEra): string { return ERA_LABEL[era]; }
-  tagLabel(tag: string): string { return TAG_LABEL[tag] ?? tag; }
+  tagLabel(tag: string): string { return tagLabel(tag); }
 
   toggle(id: string): void {
     const actif = document.activeElement;

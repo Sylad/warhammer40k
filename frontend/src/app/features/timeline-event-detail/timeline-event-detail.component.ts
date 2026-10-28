@@ -6,6 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { TimelineEvent, TimelineEra } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { tagLabel } from '../../core/utils/timeline-tags';
 
 const ERA_LABEL: Record<TimelineEra, string> = {
   'pre-imperium': 'Pré-Imperium',
@@ -48,7 +49,7 @@ const ERA_LABEL: Record<TimelineEra, string> = {
               <h2>Tags</h2>
               <div class="tags">
                 @for (t of e.tags; track t) {
-                  <span class="tag">{{ t }}</span>
+                  <span class="tag">{{ tagLabel(t) }}</span>
                 }
               </div>
             </article>
@@ -111,6 +112,8 @@ export class TimelineEventDetailComponent {
     const url = this.heroImage();
     return url ? `url('${url}')` : 'none';
   }
+
+  tagLabel(tag: string): string { return tagLabel(tag); }
 
   eraLabel(era: TimelineEra): string { return ERA_LABEL[era]; }
 
