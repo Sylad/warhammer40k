@@ -4,7 +4,7 @@ date: 2026-10-28
 created: 2026-10-28T09:08+01:00
 lots: [L15]
 captures:
-  - { file: captures/equipement-filtres-1440.png, alt: "Armement & Reliques : le filtre « Armes de mêlée » actif, entouré d'un anneau de focus (1440 px)" }
+  - { file: captures/equipement-filtres-1440.png, alt: "Armement & Reliques : le filtre « Armes de mêlée » actif, entouré d'un anneau de focus (1440 px)" }
   - { file: captures/equipement-filtres-390.png, alt: "Les mêmes filtres au téléphone (390 px)" }
   - { file: captures/equipement-fiche-1440.png, alt: "Fiche du bolter Astartes : factions liées nommées (1440 px)" }
   - { file: captures/equipement-fiche-390.png, alt: "La même fiche au téléphone (390 px)" }
