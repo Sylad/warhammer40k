@@ -1,11 +1,12 @@
 import { subCategoryLabel } from '../../shared/sub-category-label';
-import { Component, computed, inject, signal, effect } from '@angular/core';
+import { afterNextRender, Component, computed, inject, Injector, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Equipment, EquipmentType, Faction } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
@@ -34,7 +35,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
 @Component({
   selector: 'app-lore-equipment',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, FormsModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     <a class="back-link" routerLink="/lore">← Retour aux archives lore</a>
 
@@ -92,7 +93,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
           <div class="card-bg" [style.background-image]="itemImg(item.id)"></div>
           <div class="card-overlay"></div>
           @if (hasImg(item.id)) {
-            <button class="card-zoom" type="button" (click)="$event.stopPropagation(); openLightbox(item)" [attr.aria-label]="'Voir en grand : ' + item.name">⛶</button>
+            <button class="card-zoom" type="button" (click)="$event.stopPropagation(); openLightbox(item, $event)" [attr.aria-label]="'Voir en grand : ' + item.name">⛶</button>
           }
           <div class="card-head" [class.with-zoom]="hasImg(item.id)">
             <span class="card-sigil" [style.color]="typeColor(item.type)">{{ item.sigil || typeSigil(item.type) }}</span>
@@ -148,12 +149,15 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
       }
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                         [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
   `,
   styleUrls: ['./lore-equipment.component.scss'],
 })
 export class LoreEquipmentComponent {
   private readonly service = inject(WarhammerService);
+  private readonly injector = inject(Injector);
+  private opener: HTMLElement | null = null;
 
   readonly typeKeys: EquipmentType[] = ['ranged', 'melee', 'armor', 'relic'];
 
@@ -228,9 +232,10 @@ export class LoreEquipmentComponent {
     this.expandedId.set(this.expandedId() === id ? null : id);
   }
 
-  openLightbox(item: Equipment): void {
+  openLightbox(item: Equipment, ev?: Event): void {
     const baseUrl = this.imgCache()[`eq:${item.id}`];
     if (!baseUrl) return;
+    this.opener = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
     const subtitle = `${this.subCategoryLabel(item)} — ${TYPE_LABEL[item.type]}`;
     this.lightbox.set({
       title: item.name,
@@ -273,7 +278,14 @@ export class LoreEquipmentComponent {
     this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
   }
 
-  closeLightbox(): void { this.lightbox.set(null); }
+  closeLightbox(): void {
+    this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    // Après le rendu : la visionneuse est encore dans le DOM tant qu'il n'a pas eu lieu, et rendre le focus plus tôt
+    // le lui ferait reprendre (LightboxDialogDirective garde le focus dans un dialogue encore ouvert).
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
+  }
 
   itemImg(id: string): string {
     const url = this.imgCache()[`eq:${id}`];
