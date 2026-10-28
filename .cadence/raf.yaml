@@ -169,11 +169,14 @@ lots:
     finished: 2026-10-27
   - id: L15
     title: "Revue UX — Lore : équipement (liste + fiche)"
-    status: doing
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-28
+    review: { date: 2026-10-28, verdict: "conforme (revue Opus neuve après reprise par le lead, 9d5a48f) : voile relevé limité à la fiche équipement, les 4 autres fiches gardent l'ancien ; 121 + 1084 tests et builds verts ; 2 mineurs en note (doc « image chargée » inexacte, titre de R4)", commit: 9d5a48fb14ef5d3dadcde0dd022773850e30f67e }
+    ux: { date: 2026-10-28, verdict: "conforme (lead, captures 1440/390 regardées : ⛶ sans recouvrement, recherche à 36 px à 390 px, en-tête de fiche lisible sur image claire) ; contrastes des fiches vaisseau/Titan/Saint/chronologie laissés à L16–L19" }
+    finished: 2026-10-28
   - id: L16
     title: "Revue UX — Lore : chronologie (liste + fiche)"
     status: todo
