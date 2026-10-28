@@ -8,6 +8,7 @@ import type { Equipment, EquipmentType, Faction } from '../../core/models/models
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { teinteLisible } from '../../core/utils/teinte-lisible';
 
 const TYPE_LABEL: Record<EquipmentType, string> = {
   ranged: 'Armes à distance',
@@ -64,23 +65,23 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
 
     <section class="filters">
       <div class="filter-row">
-        <button class="filter" [class.active]="filterType() === 'all'" (click)="filterType.set('all')">
+        <button type="button" class="filter" [class.active]="filterType() === 'all'" [attr.aria-pressed]="filterType() === 'all'" (click)="filterType.set('all')">
           Tous · {{ nb(items().length) }}
         </button>
         @for (t of typeKeys; track t) {
-          <button class="filter" [class.active]="filterType() === t" [style.--t-color]="typeColor(t)" (click)="filterType.set(t)">
+          <button type="button" class="filter" [class.active]="filterType() === t" [attr.aria-pressed]="filterType() === t" [style.--t-color]="typeColor(t)" [style.--t-text]="typeText(t)" (click)="filterType.set(t)">
             <span class="filter-sigil">{{ typeSigil(t) }}</span>{{ typeLabel(t) }} · {{ nb(countByType(t)) }}
           </button>
         }
       </div>
       <div class="filter-row second">
-        <select class="faction-select" [ngModel]="filterFaction()" (ngModelChange)="filterFaction.set($event)">
+        <select class="faction-select" aria-label="Filtrer par faction" [ngModel]="filterFaction()" (ngModelChange)="filterFaction.set($event)">
           <option value="all">Toutes les factions</option>
           @for (f of factionList(); track f.id) {
             <option [value]="f.id">{{ f.nom }} · {{ countByFaction(f.id) }}</option>
           }
         </select>
-        <input class="search" type="text" placeholder="Rechercher : bolter, plasma, mjalnar…"
+        <input class="search" type="text" aria-label="Rechercher dans l'arsenal" placeholder="Rechercher : bolter, plasma, mjalnar…"
                [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
       </div>
     </section>
@@ -90,13 +91,15 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
         <article class="card" [class.expanded]="expandedId() === item.id" [style.--t-color]="typeColor(item.type)" (click)="toggle(item.id)">
           <div class="card-bg" [style.background-image]="itemImg(item.id)"></div>
           <div class="card-overlay"></div>
-          <button class="card-zoom" type="button" (click)="$event.stopPropagation(); openLightbox(item)" aria-label="Voir en grand">⛶</button>
+          @if (hasImg(item.id)) {
+            <button class="card-zoom" type="button" (click)="$event.stopPropagation(); openLightbox(item)" [attr.aria-label]="'Voir en grand : ' + item.name">⛶</button>
+          }
           <div class="card-head">
             <span class="card-sigil" [style.color]="typeColor(item.type)">{{ item.sigil || typeSigil(item.type) }}</span>
             <span class="card-type">{{ subCategoryLabel(item) }}</span>
           </div>
           <div class="card-body">
-            <h3>{{ item.name }}</h3>
+            <h3><button type="button" class="card-toggle" [attr.aria-expanded]="expandedId() === item.id" (click)="$event.stopPropagation(); toggle(item.id)">{{ item.name }}</button></h3>
             @if (item.nameVO && item.nameVO !== item.name) {
               <div class="card-vo">{{ item.nameVO }}</div>
             }
@@ -137,7 +140,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
               </div>
             }
           </div>
-          <div class="card-arrow" [class.flipped]="expandedId() === item.id">›</div>
+          <div class="card-arrow" aria-hidden="true" [class.flipped]="expandedId() === item.id">›</div>
         </article>
       }
       @if (filtered().length === 0 && !items.failed()) {
@@ -208,6 +211,10 @@ export class LoreEquipmentComponent {
   typeLabel(t: EquipmentType): string { return TYPE_LABEL[t]; }
   typeSigil(t: EquipmentType): string { return TYPE_SIGIL[t]; }
   typeColor(t: EquipmentType): string { return TYPE_COLOR[t]; }
+  /** Teinte du texte du filtre actif : la couleur du type, éclaircie jusqu'à 4,5:1 (WCAG 1.4.3) ; l'originale reste sur bordures et sigils. */
+  typeText(t: EquipmentType): string { return teinteLisible(TYPE_COLOR[t]); }
+
+  hasImg(id: string): boolean { return !!this.imgCache()[`eq:${id}`]; }
 
   subCategoryLabel(item: Equipment): string {
     return subCategoryLabel(item.subCategory);

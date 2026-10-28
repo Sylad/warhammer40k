@@ -1,9 +1,9 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
-import type { Equipment, EquipmentType } from '../../core/models/models';
+import type { Equipment, EquipmentType, Faction } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { subCategoryLabel } from '../../shared/sub-category-label';
@@ -78,7 +78,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
           @if (e.citation) {
             <article class="panel" id="citation">
               <h2>Citation</h2>
-              <blockquote class="lead" style="font-style: italic">« {{ e.citation }} »</blockquote>
+              <blockquote class="lead">« {{ e.citation }} »</blockquote>
             </article>
           }
         </div>
@@ -96,7 +96,7 @@ const TYPE_LABEL: Record<EquipmentType, string> = {
               <h3>Factions liées</h3>
               @for (fid of e.factionIds; track fid) {
                 <a class="row-link" [routerLink]="['/factions', fid]">
-                  <span class="rl-label">{{ fid }}</span>
+                  <span class="rl-label">{{ factionName(fid) }}</span>
                   <span class="rl-arrow">›</span>
                 </a>
               }
@@ -124,6 +124,9 @@ export class EquipmentDetailComponent {
   readonly equipment = toSafeSignal(
     this.route.paramMap, p => this.service.getEquipmentItem(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
 
+  private readonly factions = toSafeSignal(this.service.factions$, [] as Faction[]);
+  private readonly noms = computed(() => new Map(this.factions().map(f => [f.id, f.nom])));
+
   constructor() {
     effect(() => {
       const e = this.equipment();
@@ -146,6 +149,9 @@ export class EquipmentDetailComponent {
   readonly souscategorie = subCategoryLabel;
 
   factionsLabel(e: Equipment): string {
-    return (e.factionIds ?? []).join(' · ');
+    return (e.factionIds ?? []).map(id => this.factionName(id)).join(' · ');
   }
+
+  /** Nom de la faction ; l'identifiant du seed tant que la liste n'est pas là ou si la faction est inconnue. */
+  factionName(id: string): string { return this.noms().get(id) ?? id; }
 }
