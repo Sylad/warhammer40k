@@ -89,7 +89,7 @@ const TYPE_COLOR: Record<EquipmentType, string> = {
 
     <section class="grid">
       @for (item of filtered(); track item.id) {
-        <article class="card" [class.expanded]="expandedId() === item.id" [style.--t-color]="typeColor(item.type)" (click)="toggle(item.id)">
+        <article class="card" [class.expanded]="expandedId() === item.id" [style.--t-color]="typeColor(item.type)" [style.--t-text]="typeText(item.type)" (click)="toggle(item.id)">
           <div class="card-bg" [style.background-image]="itemImg(item.id)"></div>
           <div class="card-overlay"></div>
           @if (hasImg(item.id)) {
@@ -215,8 +215,9 @@ export class LoreEquipmentComponent {
   typeLabel(t: EquipmentType): string { return TYPE_LABEL[t]; }
   typeSigil(t: EquipmentType): string { return TYPE_SIGIL[t]; }
   typeColor(t: EquipmentType): string { return TYPE_COLOR[t]; }
-  /** Teinte du texte du filtre actif : la couleur du type, éclaircie jusqu'à 4,5:1 (WCAG 1.4.3) ; l'originale reste sur bordures et sigils. */
-  typeText(t: EquipmentType): string { return teinteLisible(TYPE_COLOR[t]); }
+  /** Teinte du texte du filtre actif et du ⛶ : la couleur du type, éclaircie jusqu'à 4,5:1 (WCAG 1.4.3) ; l'originale reste sur
+   *  bordures et sigils. Type inconnu (hors seed) : `null`, comme `typeColor` ne pose rien. */
+  typeText(t: EquipmentType): string | null { return TYPE_COLOR[t] ? teinteLisible(TYPE_COLOR[t]) : null; }
 
   hasImg(id: string): boolean { return !!this.imgCache()[`eq:${id}`]; }
 

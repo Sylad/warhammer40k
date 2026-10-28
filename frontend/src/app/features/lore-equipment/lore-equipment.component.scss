@@ -203,7 +203,7 @@
       color: inherit;
       letter-spacing: inherit;
     }
-    .card-vo { color: var(--muted); font-size: 11px; font-style: italic; margin-bottom: 8px; letter-spacing: 0.04em; }
+    .card-vo { color: #bdb5a4; font-size: 11px; font-style: italic; margin-bottom: 8px; letter-spacing: 0.04em; } /* 6,2:1 sur #333333, le fond le plus clair sous le voile ; --muted y faisait 3,5:1 (L15) */
     .card-desc { color: var(--text); font-size: 13px; line-height: 1.55; margin: 4px 0 12px; flex: 1; }
     .card-factions { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
     .faction-pill {
@@ -235,16 +235,15 @@
       z-index: 2;
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(8,7,6,0.78);
+      background: rgba(8,7,6,0.85);
       border: 1px solid rgba(201,162,74,0.4);
-      color: var(--t-color, var(--gold-soft));
+      color: var(--t-text, var(--gold)); /* teinte éclaircie du type : ≥ 3:1 sur le voile même sur une image blanche (WCAG 1.4.11, L15) */
       font-size: 13px;
       cursor: pointer;
-      opacity: 0.6;
       font-family: inherit;
-      transition: opacity 0.15s, transform 0.15s, border-color 0.15s;
+      transition: transform 0.15s, border-color 0.15s;
     }
-    .card:hover .card-zoom, .card-zoom:focus-visible { opacity: 1; }
+    /* Visible au repos : un téléphone n'a pas de survol, et c'est la seule entrée de la visionneuse (L15). */
     .card-zoom:hover { transform: scale(1.1); border-color: var(--t-color, var(--gold)); }
 
     .card-detail {

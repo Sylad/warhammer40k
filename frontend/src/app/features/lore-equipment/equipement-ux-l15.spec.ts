@@ -1,5 +1,6 @@
 // L15 (revue UX Lore : équipement, liste) — filtres annoncés (WCAG 4.1.2), champs nommés (1.3.1, 4.1.2),
-// cartes ouvrables au clavier (2.1.1), ⛶ nommé et présent seulement s'il a une image (2.4.6), texte actif ≥ 4,5:1 (1.4.3).
+// cartes ouvrables au clavier (2.1.1), ⛶ nommé et présent seulement s'il a une image (2.4.6), texte actif ≥ 4,5:1 (1.4.3),
+// nom VO ≥ 4,5:1 et ⛶ visible au repos à ≥ 3:1 (1.4.11).
 import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { describe, expect, it } from 'vitest';
@@ -157,5 +158,30 @@ describe('Équipement, liste (L15)', () => {
     expect(contraste(couleur(regle('.back-link')), surBlanc(regle('.back-link'))), '.back-link').toBeGreaterThanOrEqual(4.5);
     const mono = /\.detail-value\.mono\s*\{[^}]*color:\s*var\((--[a-z-]+)\)/.exec(scss)![1];
     expect(contraste(vars[mono], '#2a2624'), '.detail-value.mono').toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('R12 — le nom VO de la carte (.card-vo) est ≥ 4,5:1 sur le fond le plus clair que le voile laisse (#333333)', () => {
+    const scss = readFileSync(join(__dirname, 'lore-equipment.component.scss'), 'utf8');
+    const vars: Record<string, string> = { '--gold': '#c9a24a', '--gold-soft': '#80652b', '--gold-bright': '#f0d276', '--text': '#e6dfce', '--muted': '#8d8678' };
+    const corps = /(?:^|\n)\s*\.card-vo\s*\{([^}]*)\}/.exec(scss)![1];
+    const m = /color:\s*(?:var\((--[a-z-]+)\)|(#[0-9a-f]{6}))/.exec(corps)!;
+    expect(contraste(m[1] ? vars[m[1]] : m[2], '#333333')).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('R13 — le ⛶ est visible au repos (pas d\'opacité réduite, un téléphone n\'a pas de survol) et son glyphe est ≥ 3:1 sur son voile, même sur une image blanche', async () => {
+    const scss = readFileSync(join(__dirname, 'lore-equipment.component.scss'), 'utf8');
+    const corps = /(?:^|\n)\s*\.card-zoom\s*\{([^}]*)\}/.exec(scss)![1];
+    expect(corps).not.toMatch(/opacity:\s*0?\.\d/);
+    expect(corps).toMatch(/color:\s*var\(--t-text/);
+    const [, r, g, b, a] = /background:\s*rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/.exec(corps)!;
+    const fond = '#' + [r, g, b].map(v => Math.round(Number(v) * Number(a) + 255 * (1 - Number(a))).toString(16).padStart(2, '0')).join('');
+    const f = await monter();
+    const cartes = Array.from(el(f).querySelectorAll<HTMLElement>('article.card'));
+    const parType = new Map(cartes.map(c => [c.style.getPropertyValue('--t-color'), c.style.getPropertyValue('--t-text')]));
+    expect(parType.size).toBe(4);
+    for (const [couleur, texte] of parType) {
+      expect(texte, couleur).toMatch(/^#[0-9a-f]{6}$/);
+      expect(contraste(texte, fond), `${couleur} → ${texte} sur ${fond}`).toBeGreaterThanOrEqual(3);
+    }
   });
 });
