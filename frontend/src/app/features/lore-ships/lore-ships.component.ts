@@ -41,11 +41,11 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
         chaque vaisseau légendaire est une légende en mouvement, une cathédrale de guerre, un mythe gravé
         dans la coque adamantine.
       </p>
-      <div class="filters">
-        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(ships().length) }}</button>
-        <button [class.active]="filter() === 'Imperium'" (click)="filter.set('Imperium')">Imperium</button>
-        <button [class.active]="filter() === 'Chaos'" (click)="filter.set('Chaos')">Chaos</button>
-        <button [class.active]="filter() === 'Xenos'" (click)="filter.set('Xenos')">Xenos</button>
+      <div class="filters" role="group" aria-label="Filtrer par camp">
+        <button type="button" [class.active]="filter() === 'all'" [attr.aria-pressed]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(ships().length) }}</button>
+        <button type="button" [class.active]="filter() === 'Imperium'" [attr.aria-pressed]="filter() === 'Imperium'" (click)="filter.set('Imperium')">Imperium</button>
+        <button type="button" [class.active]="filter() === 'Chaos'" [attr.aria-pressed]="filter() === 'Chaos'" (click)="filter.set('Chaos')">Chaos</button>
+        <button type="button" [class.active]="filter() === 'Xenos'" [attr.aria-pressed]="filter() === 'Xenos'" (click)="filter.set('Xenos')">Xenos</button>
       </div>
     </header>
 
@@ -55,9 +55,9 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
 
     <section class="grid">
       @for (s of filtered(); track s.id) {
+        <div class="card-wrap">
         <a class="card" [routerLink]="['/lore/ships', s.id]" [style.--card-color]="s.color">
           <div class="card-img" [style.background-image]="shipImg(s.id)" [style.background-color]="s.color"></div>
-          <button class="card-zoom" type="button" (click)="$event.stopPropagation(); $event.preventDefault(); openLightbox(s)" aria-label="Voir en grand">⛶</button>
           <div class="card-overlay">
             <div class="card-class">{{ s.class }}</div>
             <h2>{{ s.name }}</h2>
@@ -68,6 +68,10 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
             </div>
           </div>
         </a>
+        @if (shipImages().has(s.id)) {
+          <button class="card-zoom" type="button" (click)="openLightbox(s)" [attr.aria-label]="'Voir en grand : ' + s.name">⛶</button>
+        }
+        </div>
       }
     </section>
 

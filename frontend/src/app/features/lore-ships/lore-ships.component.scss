@@ -69,6 +69,8 @@
   gap: 18px;
 }
 
+.card-wrap { position: relative; }
+
 .card {
   position: relative;
   display: block;
@@ -102,10 +104,8 @@
   color: var(--gold);
   font-size: 13px;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
-.card:hover .card-zoom { opacity: 1; }
 .card-zoom:hover {
   background: rgba(201, 162, 74, 0.18);
   color: var(--gold-bright);
@@ -118,7 +118,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 22px 24px;
-  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.85) 100%);
+  background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.72) 45%, rgba(0,0,0,0.88) 100%);
 }
 .card-class {
   font-family: var(--serif);
@@ -164,7 +164,7 @@
   background: rgba(0,0,0,0.6);
 }
 .badge.a-imperium { border-color: #5c8dbc; color: #8eb8e6; }
-.badge.a-chaos { border-color: var(--red); color: #d77070; }
+.badge.a-chaos { border-color: var(--red); color: #e48a8a; }
 .badge.a-xenos { border-color: #5cb87b; color: #8ee6a8; }
 .card-faction {
   font-family: var(--serif);
