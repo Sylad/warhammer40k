@@ -8,6 +8,7 @@ import { badgeLabel, unseenLabel } from '../../features/nouveautes/news-badge';
 import { AboutMenuComponent } from '../about-menu/about-menu.component';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
+import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
 import { PageTitleService } from '../../core/services/page-title.service';
@@ -16,8 +17,10 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent, SectionAnchorDirective],
   template: `
+    <!-- L21 : premier élément focalisable — évite la barre (≈ 14 arrêts de Tab au bureau). -->
+    <a class="skip-link" sectionAnchor="contenu" [attr.inert]="pageInert()">Aller au contenu</a>
     <app-demo-banner [attr.inert]="pageInert()" />
     <header class="topbar">
       <a class="brand" routerLink="/" [attr.inert]="pageInert()">
@@ -25,28 +28,28 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         <strong>Warhammer 40,000</strong>
         <span class="brand-sub">Codex numérique</span>
       </a>
-      <nav class="nav" [class.about-open]="aboutOpen()" [attr.inert]="pageInert()">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <nav class="nav" aria-label="Menu principal" [class.about-open]="aboutOpen()" [attr.inert]="pageInert()">
+        <a routerLink="/" routerLinkActive="active" [ariaCurrentWhenActive]="true" [routerLinkActiveOptions]="{exact: true}">
           <span class="nav-ico" aria-hidden="true">⌂</span>Accueil
         </a>
-        <a routerLink="/factions" routerLinkActive="active">
+        <a routerLink="/factions" routerLinkActive="active" [ariaCurrentWhenActive]="true">
           <span class="nav-ico" aria-hidden="true">⚔</span>Factions
         </a>
-        <a routerLink="/romans" routerLinkActive="active">
+        <a routerLink="/romans" routerLinkActive="active" [ariaCurrentWhenActive]="true">
           <span class="nav-ico" aria-hidden="true">▤</span>Romans
         </a>
-        <a routerLink="/videos" routerLinkActive="active">
+        <a routerLink="/videos" routerLinkActive="active" [ariaCurrentWhenActive]="true">
           <span class="nav-ico" aria-hidden="true">▶</span>Vidéos
         </a>
         <a routerLink="/jeux-video" routerLinkActive="active" ariaCurrentWhenActive="page" data-testid="lien-navigation">
           <span class="nav-ico" aria-hidden="true" data-ico="✠"></span>Jeux vidéo
         </a>
-        <a routerLink="/gallery" routerLinkActive="active">
+        <a routerLink="/gallery" routerLinkActive="active" [ariaCurrentWhenActive]="true">
           <span class="nav-ico" aria-hidden="true">▦</span>Galerie
         </a>
         <!-- L30 : Lore et « À propos ▾ » jamais ouverts ensemble (le panneau couvrait « Guerre & Histoire »). -->
         <div class="nav-dropdown" (pointerenter)="aboutMenu.close()" (focusin)="aboutMenu.close()">
-          <a routerLink="/lore" routerLinkActive="active">
+          <a routerLink="/lore" routerLinkActive="active" [ariaCurrentWhenActive]="true">
             <span class="nav-ico" aria-hidden="true">✠</span>Lore<span class="nav-caret" aria-hidden="true">▾</span>
           </a>
           <div class="mega-menu">
@@ -104,25 +107,25 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
           <span aria-hidden="true">✕</span> Fermer
         </button>
       </div>
-      <a (click)="focusOnArrival = true" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
-      <a (click)="focusOnArrival = true" routerLink="/factions" routerLinkActive="active">Factions</a>
-      <a (click)="focusOnArrival = true" routerLink="/romans" routerLinkActive="active">Romans</a>
-      <a (click)="focusOnArrival = true" routerLink="/videos" routerLinkActive="active">Vidéos</a>
+      <a (click)="focusOnArrival = true" routerLink="/" routerLinkActive="active" [ariaCurrentWhenActive]="true" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+      <a (click)="focusOnArrival = true" routerLink="/factions" routerLinkActive="active" [ariaCurrentWhenActive]="true">Factions</a>
+      <a (click)="focusOnArrival = true" routerLink="/romans" routerLinkActive="active" [ariaCurrentWhenActive]="true">Romans</a>
+      <a (click)="focusOnArrival = true" routerLink="/videos" routerLinkActive="active" [ariaCurrentWhenActive]="true">Vidéos</a>
       <a (click)="focusOnArrival = true" routerLink="/jeux-video" routerLinkActive="active" ariaCurrentWhenActive="page" data-testid="lien-navigation-tiroir">Jeux vidéo</a>
-      <a (click)="focusOnArrival = true" routerLink="/gallery" routerLinkActive="active">Galerie</a>
-      <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Lore</a>
-      <a (click)="focusOnArrival = true" routerLink="/nouveautes" routerLinkActive="active">
+      <a (click)="focusOnArrival = true" routerLink="/gallery" routerLinkActive="active" [ariaCurrentWhenActive]="true">Galerie</a>
+      <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [ariaCurrentWhenActive]="true" [routerLinkActiveOptions]="{exact: true}">Lore</a>
+      <a (click)="focusOnArrival = true" routerLink="/nouveautes" routerLinkActive="active" [ariaCurrentWhenActive]="true">
         Nouveautés
         @if (badge()) {
           <span class="news-badge" aria-hidden="true">{{ badge() }}</span><span class="sr-only">, {{ unseenText() }}</span>
         }
       </a>
-      <a (click)="focusOnArrival = true" routerLink="/plan" routerLinkActive="active">Plan de travail</a>
-      <a (click)="focusOnArrival = true" routerLink="/about" routerLinkActive="active">À propos</a>
+      <a (click)="focusOnArrival = true" routerLink="/plan" routerLinkActive="active" [ariaCurrentWhenActive]="true">Plan de travail</a>
+      <a (click)="focusOnArrival = true" routerLink="/about" routerLinkActive="active" [ariaCurrentWhenActive]="true">À propos</a>
     </nav>
 
     @if (quota.hasError()) {
-      <div class="quota-banner" [attr.inert]="pageInert()">
+      <div class="quota-banner" role="alert" [attr.inert]="pageInert()">
         @switch (quota.errorKind()) {
           @case ('auth') {
             <span>⚠ Clé Claude invalide — régénère une clé sur
@@ -139,7 +142,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
             </span>
           }
         }
-        <button class="quota-dismiss" (click)="quota.dismiss()">✕</button>
+        <button class="quota-dismiss" type="button" aria-label="Fermer l'alerte" (click)="quota.dismiss()"><span aria-hidden="true">✕</span></button>
       </div>
     }
 
@@ -147,7 +150,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     <!-- L36 : changement de page annoncé aux lecteurs d'écran, sauf quand le focus va au h1. -->
     <p class="sr-only" aria-live="polite" aria-atomic="true">{{ pages.announcement() }}</p>
 
-    <main #main class="wrap" tabindex="-1" [attr.inert]="pageInert()">
+    <main #main id="contenu" class="wrap" tabindex="-1" [attr.inert]="pageInert()">
       <router-outlet />
     </main>
 
@@ -396,11 +399,20 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .legal-nav a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
     .legal-text {
       color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.75rem; /* L21 : 12 px (0,72rem faisait 11,5 px) */
       letter-spacing: 0.08em;
       text-align: center;
       max-width: 720px;
     }
+
+    /* L21 : lien d'évitement, hors écran tant qu'il n'a pas le focus. */
+    .skip-link {
+      position: fixed; top: 8px; left: 8px; z-index: 300; padding: 12px 16px; min-height: 44px; box-sizing: border-box;
+      background: var(--bg); color: var(--gold-bright); border: 2px solid var(--gold-bright);
+      font: 700 0.85rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transform: translateY(-200%);
+    }
+    .skip-link:focus { transform: none; }
 
     /* L23 : pastille des nouveautés non vues, menu du téléphone (tiroir). */
     .sr-only {

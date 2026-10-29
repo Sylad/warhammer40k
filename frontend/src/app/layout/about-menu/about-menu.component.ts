@@ -27,14 +27,14 @@ const GROUP = ['/nouveautes', '/plan', '/about'];
         @if (badge) { <span class="news-badge" aria-hidden="true">{{ badge }}</span> }
       </button>
       <div id="menu-a-propos" class="about-panel" [hidden]="!open()">
-        <a routerLink="/nouveautes" routerLinkActive="active" (click)="follow()">
+        <a routerLink="/nouveautes" routerLinkActive="active" [ariaCurrentWhenActive]="true" (click)="follow()">
           Nouveautés
           @if (badge) {
             <span class="news-badge" aria-hidden="true">{{ badge }}</span><span class="sr-only">, {{ unseenText }}</span>
           }
         </a>
-        <a routerLink="/plan" routerLinkActive="active" (click)="follow()">Plan de travail</a>
-        <a routerLink="/about" routerLinkActive="active" (click)="follow()">À propos du codex</a>
+        <a routerLink="/plan" routerLinkActive="active" [ariaCurrentWhenActive]="true" (click)="follow()">Plan de travail</a>
+        <a routerLink="/about" routerLinkActive="active" [ariaCurrentWhenActive]="true" (click)="follow()">À propos du codex</a>
       </div>
     </div>
   `,
