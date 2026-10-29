@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-29 20:37",
+  "generated": "2026-10-29 21:12",
   "entries": [
+    {
+      "slug": "2026-10-29-tiroir-mobile-lore-reste-en-exact-true-main-layout-component",
+      "title": "Au téléphone, le menu marque « Lore » sur les fiches du Lore",
+      "date": "2026-10-29",
+      "lots": [
+        "L216"
+      ],
+      "captures": [
+        "captures/L216-tiroir-lore-390.png"
+      ],
+      "alts": [
+        "Menu du téléphone ouvert sur la fiche de l'Empereur, avec l'entrée Lore marquée comme page courante"
+      ],
+      "html": "<p>Sur le téléphone, quand tu lis une fiche du Lore (l'Empereur, un Primarque, la chronologie…), le menu ouvert marque désormais l'entrée « Lore » comme page courante, comme le fait la barre sur ordinateur. Avant, aucune entrée n'était marquée.</p>"
+    },
     {
       "slug": "2026-10-29-un-lien-pour-passer-directement-au-contenu",
       "title": "Un lien pour passer directement au contenu",
