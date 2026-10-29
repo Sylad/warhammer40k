@@ -86,6 +86,16 @@
   padding: 4px 12px;
   margin-bottom: 16px;
 }
+/* L18 : taille (« 12 mètres · 410 tonnes ») sur sa propre ligne sous l'étiquette de classe ; --text tient 4,5:1 même
+   sur une image blanche sous le voile relevé. */
+.hero-size {
+  display: block;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
 .hero h1 {
   font-family: var(--serif);
   font-size: clamp(36px, 5.5vw, 60px);

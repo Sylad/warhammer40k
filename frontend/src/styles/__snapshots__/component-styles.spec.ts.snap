@@ -3546,6 +3546,14 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".hero-overlay.hero-overlay-releve": {
     "background": "linear-gradient(135deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.76) 70%, rgba(0, 0, 0, 0.72) 100%)",
   },
+  ".hero-size": {
+    "color": "var(--text)",
+    "display": "block",
+    "font-size": "15px",
+    "letter-spacing": "0.04em",
+    "margin": "0 0 16px",
+    "text-wrap": "balance",
+  },
   ".hero-status": {
     "color": "#c8c0ad",
     "font-size": "14px",
