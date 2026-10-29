@@ -2285,10 +2285,11 @@ lots:
   - id: L213
     title: "Visionneuse des vaisseaux : retirer les 4 requêtes de variante (warhammer 40k, starship art, Imperial Navy, concept art) qui ne donnent aucune vignette, ou une galerie par galleryPages comme L207 ; fiche Phalanx : « Star Fort Imperial » demandé 2 fois, image du haut de page répétée dans l'Iconographie (QA prod 29-10)"
     public: Visionneuse des vaisseaux plus légère
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-29
+    started: 2026-10-29
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
