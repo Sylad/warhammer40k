@@ -205,7 +205,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
-    review: { date: 2026-10-29, verdict: "compliant after 1 minor fix: `.hero-size` of the Titan sheet is still unstyled (collé au cadre de classe, coupé à 390 px) — orchestré (vague 2026-10-29-wh3, 0 passe(s) de correction)", commit: 67d51edb9fcc0928d43387e5f36ad5817a2f3772 }
+    review: { date: 2026-10-29, verdict: "compliant : .hero-size est sur sa propre ligne (19 px, 1 ligne, 16 px sous l'étiquette), 15 px en --text (≈7:1 sous le voile relevé), sans débordement ni mot orphelin sur les 10 fiches Titan à 1440, 390 et 320 px ; 1 note mineure (README sur le contraste de la fiche Saint) — orchestré (vague 2026-10-29-wh4, 0 passe(s) de correction)", commit: 2df57d90f9c3341333f1d2f57c61c08053047553 }
   - id: L19
     title: "Revue UX — Lore : Saints (liste + fiche)"
     status: todo
