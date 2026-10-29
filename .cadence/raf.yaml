@@ -2318,9 +2318,10 @@ lots:
     review: { date: 2026-10-29, verdict: "compliant : Drusus → « Calixis Sector » et Sanguinaire → « Blood Angels » sont des titres Fandom exacts avec image, et l'attente QA est ajoutée ; 2 notes mineures (test qui ne mesure que les requêtes, Thor et les autres Saints encore à la recherche plein texte) — orchestré (vague 2026-10-29-wo1, 0 passe(s) de correction)", commit: bfe84c2f8f199190f22154f8aa5587e22a8070c3 }
   - id: L215
     title: "Fiches Saints, Iconographie : vignettes en double (Célestine 2×2, Sabbat ×2) et hors sujet (Sanguinaire : Red Tear, Imperial_eagle, repli « Imperial Saint » partagé avec Sabbat) — dédoublonner, écarter le repli, attente QA ; au passage, la visionneuse lance 4 variantes /api/wiki-image qui retombent sur l'image de la carte (Sabbat) : galleryPages comme les concepts (L207) (QA prod de L19, 29-10)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-29
+    started: 2026-10-29
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
