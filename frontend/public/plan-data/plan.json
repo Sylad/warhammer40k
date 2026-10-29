@@ -750,8 +750,9 @@
     {
       "id": "L216",
       "title": "Au téléphone, le menu marque « Lore » sur les fiches du Lore",
-      "status": "doing",
-      "started": "2026-10-29"
+      "status": "done",
+      "started": "2026-10-29",
+      "finished": "2026-10-29"
     }
   ]
 }
