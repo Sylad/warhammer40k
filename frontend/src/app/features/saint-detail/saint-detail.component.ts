@@ -23,7 +23,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
       <a class="back-btn" routerLink="/lore/saints">← RETOUR AUX SAINTS</a>
 
       <section class="hero" [style.--hero-img]="heroImg()" [style.--hero-color]="s.color">
-        <div class="hero-overlay"></div>
+        <div class="hero-overlay hero-overlay-releve"></div>
         <div class="hero-text">
           <div class="hero-eyebrow">
             <span class="hero-class">{{ categoryLabel(s.category) }}</span>
@@ -35,7 +35,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
         </div>
       </section>
 
-      <nav class="anchor-nav">
+      <nav class="anchor-nav" aria-label="Sections de la fiche">
         <a sectionAnchor="description">Description</a>
         @if (s.longHistory) { <a sectionAnchor="histoire">Histoire</a> }
         @if (s.miracles?.length) { <a sectionAnchor="miracles">Miracles</a> }
@@ -99,8 +99,8 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
             <article class="panel" id="iconographie">
               <h2>Iconographie</h2>
               <div class="iconography-grid">
-                @for (g of galleryImages(); track g) {
-                  <a class="iconography-card" routerLink="/gallery"
+                @for (g of galleryImages(); track g; let i = $index) {
+                  <a class="iconography-card" routerLink="/gallery" [attr.aria-label]="'Galerie — illustration ' + (i + 1) + ' de ' + s.name"
                      [style.--g-img]="'url(' + g + ')'"></a>
                 }
               </div>

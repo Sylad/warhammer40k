@@ -1,11 +1,13 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { Saint, SaintCategory } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+import { teinteLisible } from '../../core/utils/teinte-lisible';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
   'living-saint': 'Sainte Vivante',
@@ -16,7 +18,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 @Component({
   selector: 'app-lore-saints',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     <a class="back-btn" routerLink="/lore">← RETOUR AU CODEX</a>
 
@@ -27,11 +29,11 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
         Chaque Saint manifeste un fragment de la grâce de l'Empereur — par miracles, par martyres, par la simple
         présence inspirante. Voici les figures qui galvanisent un trillion de fidèles à travers la galaxie.
       </p>
-      <div class="filters">
-        <button [class.active]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(saints().length) }}</button>
-        <button [class.active]="filter() === 'living-saint'" (click)="filter.set('living-saint')">Saintes Vivantes</button>
-        <button [class.active]="filter() === 'saint-canonized'" (click)="filter.set('saint-canonized')">Canonisés</button>
-        <button [class.active]="filter() === 'ecclesiarch-canonized'" (click)="filter.set('ecclesiarch-canonized')">Ecclésiarques</button>
+      <div class="filters" role="group" aria-label="Filtrer par catégorie">
+        <button type="button" [class.active]="filter() === 'all'" [attr.aria-pressed]="filter() === 'all'" (click)="filter.set('all')">Tous · {{ nb(saints().length) }}</button>
+        <button type="button" [class.active]="filter() === 'living-saint'" [attr.aria-pressed]="filter() === 'living-saint'" (click)="filter.set('living-saint')">Saintes Vivantes</button>
+        <button type="button" [class.active]="filter() === 'saint-canonized'" [attr.aria-pressed]="filter() === 'saint-canonized'" (click)="filter.set('saint-canonized')">Canonisés</button>
+        <button type="button" [class.active]="filter() === 'ecclesiarch-canonized'" [attr.aria-pressed]="filter() === 'ecclesiarch-canonized'" (click)="filter.set('ecclesiarch-canonized')">Ecclésiarques</button>
       </div>
     </header>
 
@@ -41,9 +43,9 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
 
     <section class="grid">
       @for (s of filtered(); track s.id) {
+        <div class="card-wrap">
         <a class="card" [routerLink]="['/lore/saints', s.id]" [style.--card-color]="s.color">
           <div class="card-img" [style.background-image]="saintImg(s.id)" [style.background-color]="s.color"></div>
-          <button class="card-zoom" type="button" (click)="$event.stopPropagation(); $event.preventDefault(); openLightbox(s)" aria-label="Voir en grand">⛶</button>
           <div class="card-overlay">
             <div class="card-class">{{ categoryLabel(s.category) }}</div>
             <h2>{{ s.name }}</h2>
@@ -54,20 +56,28 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
             </div>
           </div>
         </a>
+        @if (saintImages().has(s.id)) {
+          <button class="card-zoom" type="button" (click)="openLightbox(s, $event)" [attr.aria-label]="'Voir en grand : ' + s.name">⛶</button>
+        }
+        </div>
       }
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                         [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
   `,
   styleUrls: ['../lore-ships/lore-ships.component.scss'],
 })
 export class LoreSaintsComponent {
   private readonly service = inject(WarhammerService);
+  private readonly injector = inject(Injector);
 
   readonly saints = toSafeSignal(this.service.saints$, [] as Saint[]);
   readonly filter = signal<'all' | SaintCategory>('all');
   readonly saintImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);
+  /** Le ⛶ qui a ouvert la visionneuse : il récupère le focus à la fermeture. */
+  private opener: HTMLElement | null = null;
 
   /** L115 : « — » tant que la liste est en échec. */
   nb(n: number): string { return compteur(n, this.saints.failed()); }
@@ -102,15 +112,17 @@ export class LoreSaintsComponent {
 
   categoryLabel(c: SaintCategory): string { return CATEGORY_LABEL[c]; }
 
-  openLightbox(s: Saint): void {
+  openLightbox(s: Saint, ev?: Event): void {
     const baseUrl = this.saintImages().get(s.id);
     if (!baseUrl) return;
+    this.opener = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
     this.lightbox.set({
       title: s.name,
       subtitle: `${CATEGORY_LABEL[s.category]} — ${s.ordoOrChapter}`,
       description: s.epithet || undefined,
       contextName: 'Saintes & Saints',
-      contextColor: s.color,
+      // Teinte éclaircie (≥ 4,5:1) : certaines couleurs du seed (#a02020) sont illisibles sur le fond noir de la visionneuse.
+      contextColor: teinteLisible(s.color),
       contextSigil: '✠',
       searchQuery: s.name,
       mainUrl: baseUrl,
@@ -146,5 +158,11 @@ export class LoreSaintsComponent {
     this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
   }
 
-  closeLightbox(): void { this.lightbox.set(null); }
+  closeLightbox(): void {
+    this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    // Après le rendu : la visionneuse est encore dans le DOM avant, et lui rendre le focus plus tôt le lui ferait reprendre.
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
+  }
 }

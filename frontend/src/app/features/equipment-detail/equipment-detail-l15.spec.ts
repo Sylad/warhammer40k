@@ -1,7 +1,7 @@
 // L15 (revue UX Lore : équipement, fiche) — les factions liées portent leur nom, pas l'identifiant du seed ;
 // le texte de l'en-tête posé sur l'image tient 4,5:1 (WCAG 1.4.3) sous le voile, même sur une image blanche.
 // La feuille `ship-detail.component.scss` est partagée par cinq fiches (vaisseau, Titan, Saint, chronologie, équipement) : le voile relevé
-// est posé par les fiches équipement, vaisseau (L17) et Titan (L18) (classe `hero-overlay-releve`), le Saint garde l'ancien (0,85 → 0,55 → 0,4, R4) ; la chronologie a le sien (L16).
+// est posé par les fiches équipement, vaisseau (L17), Titan (L18) et Saint (L19) (classe `hero-overlay-releve`) ; la chronologie a le sien (L16), l'ancien voile (0,85 → 0,55 → 0,4, R4) ne reste qu'à elle.
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -60,14 +60,14 @@ describe('Équipement, fiche (L15)', () => {
     }
   });
 
-  it('R4 — le voile relevé (0,88 → 0,76 → 0,72) ne s\'applique qu\'aux fiches équipement, vaisseau (L17) et Titan (L18) ; le Saint garde 0,85 → 0,55 → 0,4', async () => {
+  it('R4 — le voile relevé (0,88 → 0,76 → 0,72) ne s\'applique qu\'aux fiches équipement, vaisseau (L17), Titan (L18) et Saint (L19) ; l\'ancien voile 0,85 → 0,55 → 0,4 reste à la chronologie', async () => {
     const dir = join(__dirname, '..');
     const scss = readFileSync(join(dir, 'ship-detail/ship-detail.component.scss'), 'utf8');
     const alphas = (sel: RegExp) => Array.from(sel.exec(scss)![1].matchAll(/rgba\(0,\s*0,\s*0,\s*([\d.]+)\)/g), m => Number(m[1]));
     expect(alphas(/(?:^|\n)\.hero-overlay\s*\{[^}]*background:\s*linear-gradient\(([^;]*)\)\s*;/)).toEqual([0.85, 0.55, 0.4]);
     expect(alphas(/\.hero-overlay\.hero-overlay-releve\s*\{[^}]*background:\s*linear-gradient\(([^;]*)\)\s*;/)).toEqual([0.88, 0.76, 0.72]);
     for (const [dossier, fichier, relevee] of [['ship-detail', 'ship-detail', true], ['titan-detail', 'titan-detail', true],
-      ['saint-detail', 'saint-detail', false], ['timeline-event-detail', 'timeline-event-detail', false],
+      ['saint-detail', 'saint-detail', true], ['timeline-event-detail', 'timeline-event-detail', false],
       ['equipment-detail', 'equipment-detail', true]] as const) {
       const ts = readFileSync(join(dir, dossier, `${fichier}.component.ts`), 'utf8');
       const balise = /<div class="(hero-overlay[^"]*)"/.exec(ts)![1].split(/\s+/);
