@@ -221,10 +221,11 @@ lots:
     finished: 2026-10-29
   - id: L20
     title: Revue UX — À propos
-    status: todo
+    status: doing
     visible: true
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-29
   - id: L21
     title: "Revue UX — Gabarit commun : navigation, en-tête, pied, rendu téléphone"
     status: todo
