@@ -77,4 +77,23 @@ describe('Vaisseaux, liste (L17)', () => {
     expect(alpha).toBeGreaterThanOrEqual(0.72);
     expect(pos).toBeLessThanOrEqual(45);
   });
+
+  it('R7 — ⛶ ouvre un vrai dialogue modal (role=dialog, aria-modal, nom) et sa fermeture rend le focus au ⛶ d\'origine', async () => {
+    const f = await monter();
+    const zoom = el(f).querySelector<HTMLButtonElement>('.card-wrap .card-zoom')!;
+    const boite = el(f).querySelector('app-figure-lightbox')!;
+    expect(boite.getAttribute('role')).toBeNull();
+    zoom.focus();
+    zoom.click();
+    f.detectChanges();
+    await f.whenStable();
+    expect(boite.getAttribute('role')).toBe('dialog');
+    expect(boite.getAttribute('aria-modal')).toBe('true');
+    expect(boite.getAttribute('aria-label')).toBe(`Visionneuse — ${seed[0].name}`);
+    f.componentInstance.closeLightbox();
+    f.detectChanges();
+    await f.whenStable();
+    expect(boite.getAttribute('role')).toBeNull();
+    expect(document.activeElement).toBe(zoom);
+  });
 });

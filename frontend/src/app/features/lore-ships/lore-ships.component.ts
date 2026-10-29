@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import type { LegendaryShip } from '../../core/models/models';
 import { FigureLightboxComponent, LightboxState } from '../../shared/components/figure-lightbox/figure-lightbox.component';
+import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
 
@@ -30,7 +31,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
 @Component({
   selector: 'app-lore-ships',
   standalone: true,
-  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent],
+  imports: [LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     <a class="back-btn" routerLink="/lore">← RETOUR AU CODEX</a>
 
@@ -75,7 +76,8 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
       }
     </section>
 
-    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)" />
+    <app-figure-lightbox [state]="lightbox()" (closed)="closeLightbox()" (thumbSelected)="selectThumb($event)"
+                         [appLightboxDialog]="lightbox() ? 'Visionneuse — ' + lightbox()!.title : null" />
   `,
   styleUrls: ['./lore-ships.component.scss'],
 })
