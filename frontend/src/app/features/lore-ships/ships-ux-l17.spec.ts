@@ -90,6 +90,9 @@ describe('Vaisseaux, liste (L17)', () => {
     expect(boite.getAttribute('role')).toBe('dialog');
     expect(boite.getAttribute('aria-modal')).toBe('true');
     expect(boite.getAttribute('aria-label')).toBe(`Visionneuse — ${seed[0].name}`);
+    // Le focus quitte réellement le ⛶ (comme au navigateur, où il passe sur « Fermer ») : sans restitution, il y reste perdu.
+    zoom.blur();
+    expect(document.activeElement).not.toBe(zoom);
     f.componentInstance.closeLightbox();
     f.detectChanges();
     await f.whenStable();

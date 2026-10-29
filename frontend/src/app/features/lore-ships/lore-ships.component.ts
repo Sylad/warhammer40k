@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { afterNextRender, Component, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -70,7 +70,7 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
           </div>
         </a>
         @if (shipImages().has(s.id)) {
-          <button class="card-zoom" type="button" (click)="openLightbox(s)" [attr.aria-label]="'Voir en grand : ' + s.name">⛶</button>
+          <button class="card-zoom" type="button" (click)="openLightbox(s, $event)" [attr.aria-label]="'Voir en grand : ' + s.name">⛶</button>
         }
         </div>
       }
@@ -83,11 +83,14 @@ const ALIGNMENT_BY_FACTION: Record<string, string> = {
 })
 export class LoreShipsComponent {
   private readonly service = inject(WarhammerService);
+  private readonly injector = inject(Injector);
 
   readonly ships = toSafeSignal(this.service.ships$, [] as LegendaryShip[]);
   readonly filter = signal<'all' | 'Imperium' | 'Chaos' | 'Xenos'>('all');
   readonly shipImages = signal(new Map<string, string>());
   readonly lightbox = signal<LightboxState | null>(null);
+  /** Le ⛶ qui a ouvert la visionneuse : il récupère le focus à la fermeture. */
+  private opener: HTMLElement | null = null;
 
   /** L115 : « — » tant que la liste est en échec. */
   nb(n: number): string { return compteur(n, this.ships.failed()); }
@@ -128,9 +131,10 @@ export class LoreShipsComponent {
     return this.alignment(factionId).toLowerCase();
   }
 
-  openLightbox(s: LegendaryShip): void {
+  openLightbox(s: LegendaryShip, ev?: Event): void {
     const baseUrl = this.shipImages().get(s.id);
     if (!baseUrl) return;
+    this.opener = ev?.currentTarget instanceof HTMLElement ? ev.currentTarget : null;
     this.lightbox.set({
       title: s.name,
       subtitle: `${s.class} — ${s.factionName}`,
@@ -172,5 +176,12 @@ export class LoreShipsComponent {
     this.lightbox.set({ ...cur, mainUrl: url, selectedIdx: idx });
   }
 
-  closeLightbox(): void { this.lightbox.set(null); }
+  closeLightbox(): void {
+    this.lightbox.set(null);
+    const origine = this.opener;
+    this.opener = null;
+    // Après le rendu : la visionneuse est encore dans le DOM avant, et lui rendre le focus plus tôt le lui ferait reprendre
+    // (LightboxDialogDirective garde le focus dans un dialogue encore ouvert).
+    afterNextRender(() => { if (origine?.isConnected) origine.focus(); }, { injector: this.injector });
+  }
 }
