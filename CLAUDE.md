@@ -45,6 +45,7 @@ Accueil · Factions · Romans · Vidéos · Jeux vidéo · Galerie · Lore ▾ �
 À propos du codex ; dès `106.25em` (1700 px), barre complète (icônes, sous-titre du logo). Le pied
 de page porte « Nouveautés · Plan de travail · À propos » sur chaque page. Une nouvelle page
 s'ajoute au tiroir ET à la barre (ou au panneau « À propos ▾ ») de `main-layout.component.ts`.
+Le premier élément focalisable est le lien « Aller au contenu » (L21, `.skip-link` → `<main id="contenu">`) ; les liens de navigation portent `[ariaCurrentWhenActive]="true"` (une nouvelle entrée de la barre, du tiroir ou du panneau « À propos ▾ » aussi).
 `topbar.e2e.spec.ts` mesure chaque seuil ±1 px avec la pastille « 9+ » dans quatre configurations
 (polices web, polices bloquées, police par défaut 18 et 20 px) : relancer `ng build` puis ce test
 après tout changement de la barre.
