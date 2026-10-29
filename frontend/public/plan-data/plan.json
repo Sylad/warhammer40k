@@ -729,7 +729,8 @@
     {
       "id": "L212",
       "title": "Vaisseaux : chaque vaisseau avec sa propre image",
-      "status": "todo"
+      "status": "doing",
+      "started": "2026-10-29"
     },
     {
       "id": "L213",

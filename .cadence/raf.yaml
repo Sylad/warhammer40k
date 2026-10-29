@@ -2276,10 +2276,11 @@ lots:
   - id: L212
     title: "Vaisseaux : une image par vaisseau, de son sujet — Indomitable Will et Or'es Tash'var partagent ApocalypseClassBattleship2.jpg, Khaine montre une bataille de Nurgle, Warp Skull un croiseur loyaliste, Remembrance Pathos.jpg ; wikiQuery ou image vérifiée (comme L189/L198) + attente « 15 images distinctes » dans docs/qa/expectations.md (QA prod 29-10)"
     public: "Vaisseaux : chaque vaisseau avec sa propre image"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-29
+    started: 2026-10-29
   - id: L213
     title: "Visionneuse des vaisseaux : retirer les 4 requêtes de variante (warhammer 40k, starship art, Imperial Navy, concept art) qui ne donnent aucune vignette, ou une galerie par galleryPages comme L207 ; fiche Phalanx : « Star Fort Imperial » demandé 2 fois, image du haut de page répétée dans l'Iconographie (QA prod 29-10)"
     public: Visionneuse des vaisseaux plus légère
