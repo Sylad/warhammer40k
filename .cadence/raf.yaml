@@ -233,10 +233,11 @@ lots:
     finished: 2026-10-29
   - id: L21
     title: "Revue UX — Gabarit commun : navigation, en-tête, pied, rendu téléphone"
-    status: todo
+    status: doing
     visible: true
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-29
   - id: L22
     title: "Sécurité : mode démo et PIN décidés sur X-Forwarded-Host forgeable ? (même motif que finance-tracker L1) — auditer puis corriger"
     status: done
