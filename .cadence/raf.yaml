@@ -238,6 +238,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "conforme après 1 correction (Lore jamais courant dans le tiroir sur /lore/*), 1 mineur en note — orchestré (vague 2026-10-29-wh21, 1 passe(s) de correction)", commit: 4abd298aeb6ea230f9bbbcd306972ef7aecf9b0d }
   - id: L22
     title: "Sécurité : mode démo et PIN décidés sur X-Forwarded-Host forgeable ? (même motif que finance-tracker L1) — auditer puis corriger"
     status: done
