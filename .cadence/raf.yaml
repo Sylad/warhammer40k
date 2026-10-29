@@ -194,6 +194,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "conforme — 0 bloquant, 0 majeur, 3 notes mineures (closeLightbox dupliqué ×3, L17 sans `public:` donc masqué du Plan, barre d'ancres défilante sans indice à 390 px — antérieur) — orchestré (vague 2026-10-29-wh, 3 passe(s) de correction)", commit: 8ce0539a6bb0ee33c2ca5d874473df4d4d9f750a }
   - id: L18
     title: "Revue UX — Lore : Titans (liste + fiche)"
     status: todo
