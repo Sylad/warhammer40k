@@ -211,7 +211,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     }
     .brand .brand-sub {
       color: var(--muted);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       letter-spacing: 0.18em;
     }
 
@@ -248,7 +248,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       display: inline-flex; align-items: center; gap: 6px;
       background: transparent; border: 1px solid var(--border);
       color: var(--gold); padding: 6px 10px; cursor: pointer;
-      font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.1em;
+      font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.1em;
       transition: all 0.18s; margin-left: 8px;
     }
     .nav-search-btn:hover {
@@ -257,7 +257,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     }
     /* L33 : or à 70 % d'opacité = 4,05:1 ; à 85 %, ≥ 4,5:1 mesuré sur les pixels rendus. */
     .nav-search-kbd {
-      font-size: 0.62rem; opacity: 0.85; letter-spacing: 0.08em; white-space: nowrap;
+      font-size: 0.75rem; opacity: 0.85; letter-spacing: 0.08em; white-space: nowrap;
       border-left: 1px solid var(--border); padding-left: 6px;
     }
 
@@ -293,7 +293,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .nav.about-open .mega-menu { display: none; }
     .mega-col h4 {
       font-family: var(--serif);
-      font-size: 0.62rem;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
       color: var(--gold-bright);
       margin: 0 0 12px;
@@ -304,7 +304,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .mega-col a {
       display: block;
       padding: 7px 0;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
       color: var(--text);
       opacity: 0.78;
@@ -399,7 +399,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .legal-nav a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
     .legal-text {
       color: var(--muted);
-      font-size: 0.75rem; /* L21 : 12 px (0,72rem faisait 11,5 px) */
+      font-size: 0.75rem; /* L21 : 12 px, seuil de texte lu du gabarit (R5) */
       letter-spacing: 0.08em;
       text-align: center;
       max-width: 720px;
@@ -421,7 +421,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     }
     .news-badge {
       display: inline-block; min-width: 1.35em; padding: 1px 5px; border-radius: 999px;
-      background: var(--gold); color: var(--bg); font-size: 0.66rem; line-height: 1.35;
+      background: var(--gold); color: var(--bg); font-size: 0.75rem; line-height: 1.35;
       letter-spacing: 0; text-align: center; text-shadow: none;
     }
     .nav a { white-space: nowrap; }
@@ -431,7 +431,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     .menu-toggle, .drawer-close {
       display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
       background: transparent; border: 1px solid var(--border-strong); color: var(--gold);
-      font: 700 0.72rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+      font: 700 0.75rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
     }
     .menu-toggle:hover, .drawer-close:hover { border-color: var(--gold); color: var(--gold-bright); }
     .drawer-close { display: inline-flex; }

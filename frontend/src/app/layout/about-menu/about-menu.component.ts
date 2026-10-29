@@ -55,7 +55,7 @@ const GROUP = ['/nouveautes', '/plan', '/about'];
     .nav-caret { margin-left: 4px; font-size: 0.65rem; opacity: 0.6; } /* = Lore ▾ (écart 8 + 4 px) */
     .news-badge {
       display: inline-block; min-width: 1.35em; padding: 1px 5px; border-radius: 999px;
-      background: var(--gold); color: var(--bg); font-size: 0.66rem; line-height: 1.35;
+      background: var(--gold); color: var(--bg); font-size: 0.75rem; line-height: 1.35;
       letter-spacing: 0; text-align: center; text-shadow: none;
     }
     .about-panel {

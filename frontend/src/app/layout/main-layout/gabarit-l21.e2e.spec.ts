@@ -61,6 +61,41 @@ describe.skipIf(!built || !chromium)('gabarit commun (navigateur, dist) — L21'
     });
   }
 
+  // Texte lu du gabarit (hors <main> et nœuds aria-hidden, symboles décoratifs) : en-tête, barre, panneaux, tiroir, fil d'Ariane, pied.
+  const petitsTextes = (page: import('playwright-core').Page) =>
+    page.evaluate(() => {
+      const out: string[] = [];
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+        const el = n.parentElement!;
+        const txt = n.textContent!.trim();
+        if (!txt || el.closest('[aria-hidden="true"], script, style, main') || !el.getClientRects().length) continue;
+        if (getComputedStyle(el).visibility === 'hidden') continue;
+        const px = parseFloat(getComputedStyle(el).fontSize);
+        if (px < 11.99) out.push(`${txt} (${px.toFixed(2)} px)`);
+      }
+      return out;
+    });
+
+  it('R5 — 390 px : tiroir ouvert, fil d\'Ariane, pastille et pied sans texte sous 12 px', async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.goto(`${base}/factions`);
+    await page.locator('button.menu-toggle').click();
+    await page.locator('#menu-telephone').waitFor({ state: 'visible' });
+    expect(await petitsTextes(page)).toEqual([]);
+    await page.close();
+  });
+
+  it('R5 — 1440 px : barre, panneau Lore et raccourci sans texte sous 12 px', async () => {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.goto(`${base}/factions`);
+    await page.locator('nav.nav').waitFor();
+    await page.locator('.nav-dropdown').hover();
+    await page.locator('.mega-menu').waitFor({ state: 'visible' });
+    expect(await petitsTextes(page)).toEqual([]);
+    await page.close();
+  });
+
   it('R3 — 1440 px : « Factions » est la seule entrée annoncée page courante dans la barre', async () => {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(`${base}/factions`);

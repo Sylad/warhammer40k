@@ -37,7 +37,7 @@ import { toSafeSignal } from '../../safe-signal';
     :host { display: block; }
     .bc {
       padding: 10px 34px;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 700;
