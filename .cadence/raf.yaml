@@ -226,6 +226,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "conforme : 0 bloquant, 0 majeur, 2 mineurs (sup « e » à 10 px, glyphes décoratifs ⚜ ⌬ › encore lus) — orchestré (vague 2026-10-29-wh20, 0 passe(s) de correction)", commit: 367579b07343312747005279fdfde394992f3cd5 }
   - id: L21
     title: "Revue UX — Gabarit commun : navigation, en-tête, pied, rendu téléphone"
     status: todo
