@@ -150,25 +150,6 @@ export class LoreShipsComponent {
       thumbUrls: [baseUrl],
       selectedIdx: 0,
     });
-    const baseQuery = s.wikiQuery ?? s.name;
-    const variants = [
-      `${baseQuery} warhammer 40k`,
-      `${baseQuery} starship art`,
-      `${baseQuery} Imperial Navy`,
-      `${baseQuery} concept art`,
-    ];
-    for (const q of variants) {
-      this.service.getWikiImage(q).subscribe({
-        next: r => {
-          if (!r.imageUrl) return;
-          const cur = this.lightbox();
-          if (!cur || cur.title !== s.name) return;
-          if (cur.thumbUrls.includes(r.imageUrl)) return;
-          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
-        },
-        error: () => {},
-      });
-    }
   }
 
   selectThumb(idx: number): void {

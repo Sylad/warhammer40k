@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -41,7 +41,7 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
         @if (s.longHistory) { <a sectionAnchor="histoire">Histoire</a> }
         @if (s.specs?.length) { <a sectionAnchor="specs">Spécifications</a> }
         @if (s.notableBattles?.length) { <a sectionAnchor="batailles">Batailles</a> }
-        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
+        @if (iconographie().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -86,11 +86,11 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
             </article>
           }
 
-          @if (galleryImages().length > 0) {
+          @if (iconographie().length > 0) {
             <article class="panel" id="iconographie">
               <h2>Iconographie</h2>
               <div class="iconography-grid">
-                @for (g of galleryImages(); track g; let i = $index) {
+                @for (g of iconographie(); track g; let i = $index) {
                   <a class="iconography-card" routerLink="/gallery" [attr.aria-label]="'Galerie — illustration ' + (i + 1) + ' de ' + s.name"
                      [style.--g-img]="'url(' + g + ')'"></a>
                 }
@@ -143,7 +143,12 @@ export class ShipDetailComponent {
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
-  readonly galleryImages = signal<string[]>([]);
+  private readonly galleryImages = signal<string[]>([]);
+  /** L213 : l'Iconographie n'a que des images distinctes entre elles et de celle du haut de page. */
+  readonly iconographie = computed(() => {
+    const hero = this.heroImage();
+    return this.galleryImages().filter((u, i, tous) => u !== hero && tous.indexOf(u) === i);
+  });
 
   readonly ship = toSafeSignal(
     this.route.paramMap, p => this.service.getShip(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
@@ -160,7 +165,8 @@ export class ShipDetailComponent {
           if (r.imageUrl) this.heroImage.set(r.imageUrl);
         });
       }
-      const queries = (s.galleryQueries ?? []).slice(0, 6);
+      const hero = s.wikiQuery?.toLowerCase();
+      const queries = (s.galleryQueries ?? []).filter(q => q.toLowerCase() !== hero).slice(0, 6);
       queries.forEach(q => {
         this.service.getWikiImage(q).subscribe({
           next: r => { if (r.imageUrl) this.galleryImages.update(arr => [...arr, r.imageUrl!]); },
