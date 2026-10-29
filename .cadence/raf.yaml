@@ -216,6 +216,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "conforme : aucun constat. Filtres en aria-pressed, ⛶ de 28 px nommé et conditionné à l'image, visionneuse modale avec retour du focus, voile relevé sur la fiche, affiliations du seed corrigées à la source, README et Nouveautés à jour ; captures 1440 et 390 px sans défilement horizontal. — orchestré (vague 2026-10-29-ew1, 0 passe(s) de correction)", commit: 7037759fa281509a56cfa8ccddccc73549ee7bd1 }
   - id: L20
     title: Revue UX — À propos
     status: todo
