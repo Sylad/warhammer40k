@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-28 21:10",
+  "generated": "2026-10-29 11:07",
   "entries": [
+    {
+      "slug": "2026-10-29-revue-ux-lore-vaisseaux-liste-fiche",
+      "title": "Vaisseaux légendaires : filtres, agrandissement et lecture plus clairs",
+      "date": "2026-10-29",
+      "lots": [
+        "L17"
+      ],
+      "captures": [
+        "captures/l17-vaisseaux-liste-1440.png",
+        "captures/l17-vaisseaux-liste-390.png"
+      ],
+      "alts": [
+        "La liste des vaisseaux légendaires : filtres de camp et cartes (1440 px)",
+        "La même liste sur téléphone, avec le bouton d'agrandissement en haut à droite de chaque carte (390 px)"
+      ],
+      "html": "<p>Dans la liste des vaisseaux légendaires, le bouton d'agrandissement ⛶ est visible sans survol, il porte le nom du vaisseau (« Voir en grand : Phalanx ») et s'ouvre dans une fenêtre qui prend le focus et le rend à la fermeture. Il n'apparaît que lorsque le vaisseau a une image. Les filtres Imperium, Chaos et Xenos indiquent celui qui est actif aux lecteurs d'écran, et le texte des cartes reste lisible même sur une image claire.</p>\n<p>Sur la fiche d'un vaisseau, l'en-tête est plus sombre sous le texte, ce qui rend le nom, l'accroche et le statut lisibles quelle que soit l'image. Les vignettes de l'iconographie ont chacune un nom (« Galerie — illustration 1 de Phalanx ») et la barre des sections s'annonce comme la navigation de la fiche.</p>"
+    },
     {
       "slug": "2026-10-28-chronologie-etiquettes-lisibles-et-barre-des-eres-plus-discr",
       "title": "Chronologie : étiquettes lisibles et barre des ères plus discrète au téléphone",
