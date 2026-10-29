@@ -75,6 +75,16 @@ describe('Gabarit — revue UX L21', () => {
     expect([...el(f).querySelectorAll('nav.nav [aria-current]')].map((a) => a.getAttribute('href'))).toEqual(['/lore']);
   });
 
+  it('R3 — L216 : sur une fiche du Lore, le tiroir marque Lore comme la barre, et Accueil reste réservé à /', async () => {
+    const f = await render('/lore/emperor');
+    const courants = (sel: string) => [...el(f).querySelectorAll(`${sel} [aria-current]`)].map((a) => a.getAttribute('href'));
+    expect(courants('nav.drawer')).toEqual(['/lore']);
+    expect(courants('nav.drawer')).toEqual(courants('nav.nav'));
+    await TestBed.inject(Router).navigateByUrl('/');
+    f.detectChanges();
+    expect(courants('nav.drawer')).toEqual(['/']);
+  });
+
   it('R4 — l\'alerte Claude est annoncée (role=alert) et son bouton de fermeture a un nom accessible', async () => {
     const f = await render();
     TestBed.inject(QuotaAlertService).setError('rate');

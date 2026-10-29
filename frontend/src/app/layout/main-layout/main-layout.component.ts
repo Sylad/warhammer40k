@@ -113,7 +113,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       <a (click)="focusOnArrival = true" routerLink="/videos" routerLinkActive="active" [ariaCurrentWhenActive]="true">Vidéos</a>
       <a (click)="focusOnArrival = true" routerLink="/jeux-video" routerLinkActive="active" ariaCurrentWhenActive="page" data-testid="lien-navigation-tiroir">Jeux vidéo</a>
       <a (click)="focusOnArrival = true" routerLink="/gallery" routerLinkActive="active" [ariaCurrentWhenActive]="true">Galerie</a>
-      <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [ariaCurrentWhenActive]="true" [routerLinkActiveOptions]="{exact: true}">Lore</a>
+      <a (click)="focusOnArrival = true" routerLink="/lore" routerLinkActive="active" [ariaCurrentWhenActive]="true">Lore</a>
       <a (click)="focusOnArrival = true" routerLink="/nouveautes" routerLinkActive="active" [ariaCurrentWhenActive]="true">
         Nouveautés
         @if (badge()) {
