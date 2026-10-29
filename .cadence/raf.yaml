@@ -2281,6 +2281,7 @@ lots:
     visible: true
     created: 2026-10-29
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "compliant — 2 notes mineures (3 cartes montrent un blason plutôt qu'un vaisseau ; le test garde les requêtes, pas les images) — orchestré (vague 2026-10-29-wh2, 0 passe(s) de correction)", commit: 98cc9ec465cfebe116485342812cc4835cd7b0aa }
   - id: L213
     title: "Visionneuse des vaisseaux : retirer les 4 requêtes de variante (warhammer 40k, starship art, Imperial Navy, concept art) qui ne donnent aucune vignette, ou une galerie par galleryPages comme L207 ; fiche Phalanx : « Star Fort Imperial » demandé 2 fois, image du haut de page répétée dans l'Iconographie (QA prod 29-10)"
     public: Visionneuse des vaisseaux plus légère
