@@ -20,7 +20,7 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
       <a class="back-btn" routerLink="/lore/titans">← RETOUR AUX DIEUX-MACHINES</a>
 
       <section class="hero" [style.--hero-img]="heroImg()" [style.--hero-color]="m.color">
-        <div class="hero-overlay"></div>
+        <div class="hero-overlay hero-overlay-releve"></div>
         <div class="hero-text">
           <div class="hero-eyebrow">
             <span class="hero-class">{{ m.scoutClass }}</span>
@@ -32,7 +32,7 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
         </div>
       </section>
 
-      <nav class="anchor-nav">
+      <nav class="anchor-nav" aria-label="Sections de la fiche">
         <a sectionAnchor="description">Description</a>
         @if (m.longHistory) { <a sectionAnchor="histoire">Histoire</a> }
         @if (m.specs?.length) { <a sectionAnchor="specs">Spécifications</a> }
@@ -83,8 +83,8 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
             <article class="panel" id="iconographie">
               <h2>Iconographie</h2>
               <div class="iconography-grid">
-                @for (g of galleryImages(); track g) {
-                  <a class="iconography-card" routerLink="/gallery"
+                @for (g of galleryImages(); track g; let i = $index) {
+                  <a class="iconography-card" routerLink="/gallery" [attr.aria-label]="'Galerie — illustration ' + (i + 1) + ' de ' + m.name"
                      [style.--g-img]="'url(' + g + ')'"></a>
                 }
               </div>

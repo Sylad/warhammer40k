@@ -166,6 +166,17 @@
 .badge.a-imperium { border-color: #5c8dbc; color: #8eb8e6; }
 .badge.a-chaos { border-color: var(--red); color: #e48a8a; }
 .badge.a-xenos { border-color: #5cb87b; color: #8ee6a8; }
+.size-badge {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--gold);
+  color: #d4c89a;
+  background: rgba(0,0,0,0.6);
+}
 .card-faction {
   font-family: var(--serif);
   font-size: 12px;
