@@ -2273,6 +2273,20 @@ lots:
     review: { date: 2026-10-28, verdict: "conforme : revue de la vague conforme + correctif 6d337c3 relu par le lead (tags de la fiche en ul/li, style des pastilles de la liste, 2 tests rouges avant / verts après, instantané de styles +2 règles) ; 1443 tests, build verts", commit: 6d337c39985f9f4116241493dc97588962ace58c }
     ux: { date: 2026-10-28, verdict: "conforme : captures regardées — liste : libellés lisibles (TAG_LABEL), barre des ères repliée à 390 px ; fiche : défaut vu par le lead (tags collés « Pré-ImperiumNecrons… », manqué par la revue UX) corrigé par 6d337c3, 5 pastilles séparées à 1440 et 390 (tmp/wh-l211-fiche-*.png) ; mineur : commentaire périmé lore-timeline.component.ts:123" }
     finished: 2026-10-28
+  - id: L212
+    title: "Vaisseaux : une image par vaisseau, de son sujet — Indomitable Will et Or'es Tash'var partagent ApocalypseClassBattleship2.jpg, Khaine montre une bataille de Nurgle, Warp Skull un croiseur loyaliste, Remembrance Pathos.jpg ; wikiQuery ou image vérifiée (comme L189/L198) + attente « 15 images distinctes » dans docs/qa/expectations.md (QA prod 29-10)"
+    public: "Vaisseaux : chaque vaisseau avec sa propre image"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-29
+  - id: L213
+    title: "Visionneuse des vaisseaux : retirer les 4 requêtes de variante (warhammer 40k, starship art, Imperial Navy, concept art) qui ne donnent aucune vignette, ou une galerie par galleryPages comme L207 ; fiche Phalanx : « Star Fort Imperial » demandé 2 fois, image du haut de page répétée dans l'Iconographie (QA prod 29-10)"
+    public: Visionneuse des vaisseaux plus légère
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-29
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
