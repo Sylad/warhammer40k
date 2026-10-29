@@ -53,7 +53,7 @@ interface Inspiration {
           Pages factions, romans Black Library, archives vidéo, galerie impériale —
           tout a été co-écrit avec
           <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">
-            Claude Code <span class="ext">⤤</span>
+            Claude Code <span class="ext" aria-hidden="true">⤤</span><span class="sr-only"> (nouvel onglet)</span>
           </a>.
           Mon rôle : tracer la vision, valider l'identité visuelle, repérer ce qui sonne faux.
           Le rôle de Claude : poser le code, expliquer chaque choix, itérer.
@@ -61,7 +61,7 @@ interface Inspiration {
         <p>
           Avant que Claude n'écrive la première ligne, un autre agent IA est passé par là —
           <a href="https://chatgpt.com/" target="_blank" rel="noopener">
-            ChatGPT <span class="ext">⤤</span>
+            ChatGPT <span class="ext" aria-hidden="true">⤤</span><span class="sr-only"> (nouvel onglet)</span>
           </a>
           a généré les logos, les premières maquettes UX et les schémas de pages
           (visibles dans le dossier <code>/UX/</code> du projet). Une vraie collab à trois :
@@ -109,26 +109,28 @@ interface Inspiration {
         <a class="inspi" [href]="i.url" target="_blank" rel="noopener">
           <div class="inspi-head">
             <span class="inspi-name">{{ i.name }}</span>
-            <span class="ext">⤤</span>
+            <span class="ext" aria-hidden="true">⤤</span>
           </div>
           <span class="inspi-by">par {{ i.by }}</span>
           <p>{{ i.why }}</p>
+          <span class="sr-only">(nouvel onglet)</span>
         </a>
       }
     </section>
 
     <section class="other-sites">
-      <h3>Mes autres sites</h3>
+      <h2>Mes autres sites</h2>
       <p class="other-intro">Quatre autres apps perso vibe-codées avec Claude Code, toutes en open-source.</p>
       <div class="other-grid">
         @for (s of otherSites; track s.url) {
           <a [href]="s.url" target="_blank" rel="noopener" class="other-card">
-            <span class="other-tag">{{ s.tag }}</span>
+            <span class="other-tag" aria-hidden="true">{{ s.tag }}</span>
             <span class="other-text">
               <strong>{{ s.name }}</strong>
               <em>{{ s.desc }}</em>
             </span>
-            <span class="other-arrow">↗</span>
+            <span class="other-arrow" aria-hidden="true">↗</span>
+            <span class="sr-only">(nouvel onglet)</span>
           </a>
         }
       </div>
