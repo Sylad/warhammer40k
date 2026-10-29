@@ -7,6 +7,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+import { pageCiblee } from '../../core/utils/page-ciblee';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
 
 const CATEGORY_LABEL: Record<SaintCategory, string> = {
@@ -129,25 +130,28 @@ export class LoreSaintsComponent {
       thumbUrls: [baseUrl],
       selectedIdx: 0,
     });
-    const baseQuery = s.wikiQuery ?? s.name;
-    const variants = [
-      `${baseQuery} warhammer 40k`,
-      `${baseQuery} art`,
-      `${baseQuery} Sisters of Battle`,
-      `${baseQuery} Imperial saint`,
-    ];
-    for (const q of variants) {
-      this.service.getWikiImage(q).subscribe({
+    // Les pages du sujet (`galleryPages`, L215), une à la fois, comme les Concepts (L207) : le wiki ne rend qu'une image par
+    // page, les quatre variantes de requête retombaient sur l'image de la carte. Une page qui répond sous un autre titre,
+    // sans vraie image ou avec une image déjà listée est écartée sans arrêter la chaîne, comme une erreur HTTP.
+    const pages = s.galleryPages ?? [];
+    const ajouter = (i: number): void => {
+      if (i >= pages.length) return;
+      this.service.getWikiImage(pages[i]).subscribe({
         next: r => {
-          if (!r.imageUrl) return;
           const cur = this.lightbox();
           if (!cur || cur.title !== s.name) return;
-          if (cur.thumbUrls.includes(r.imageUrl)) return;
-          this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl] });
+          if (pageCiblee(pages[i], r) && !cur.thumbUrls.includes(r.imageUrl!)) {
+            this.lightbox.set({ ...cur, thumbUrls: [...cur.thumbUrls, r.imageUrl!] });
+          }
+          ajouter(i + 1);
         },
-        error: () => {},
+        error: () => {
+          const cur = this.lightbox();
+          if (cur && cur.title === s.name) ajouter(i + 1);
+        },
       });
-    }
+    };
+    ajouter(0);
   }
 
   selectThumb(idx: number): void {

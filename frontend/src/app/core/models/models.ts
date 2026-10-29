@@ -373,7 +373,8 @@ export interface Saint {
   miracles?: string[];
   notableBattles?: SaintBattle[];
   quotes?: string[];
-  galleryQueries?: string[];
+  /** Titres exacts de pages du wiki dont l'image alimente la galerie (fiche et visionneuse, L215). */
+  galleryPages?: string[];
 }
 
 export type GodMachineCategory = 'titan' | 'knight' | 'war-machine';

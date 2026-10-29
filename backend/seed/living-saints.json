@@ -26,7 +26,7 @@
       "« L'Empereur n'a pas de mains, sauf les nôtres. L'Empereur n'a pas de lances, sauf les miennes. »",
       "« Sœurs ! L'Empereur regarde ! L'Empereur juge ! Que vos lames soient dignes de Lui ! »"
     ],
-    "galleryQueries": ["Saint Celestine art", "Living Saint warhammer 40k", "Adepta Sororitas Saint", "Celestine wings"]
+    "galleryPages": ["Order of Our Martyred Lady", "Adepta Sororitas", "Vigilus"]
   },
   {
     "id": "saint-katherine",
@@ -53,7 +53,7 @@
     "quotes": [
       "« L'Empereur n'a pas de hommes, sauf nous. L'Empereur n'a pas de lances, sauf les miennes. Frappons. »"
     ],
-    "galleryQueries": ["Saint Katherine art", "Sororitas Saint", "Adepta Sororitas first saint", "Hammer of Faith"]
+    "galleryPages": ["Saint Katherine", "Order of the Sacred Rose"]
   },
   {
     "id": "saint-sabbat",
@@ -79,7 +79,7 @@
     "quotes": [
       "« L'Empereur entend même les bergères. L'Empereur les écoute particulièrement. »"
     ],
-    "galleryQueries": ["Saint Sabbat art", "Sabbat Worlds Crusade", "Beati Sabbat", "Imperial Saint shepherdess"]
+    "galleryPages": ["Ibram Gaunt", "Tanith", "Sabbat Worlds"]
   },
   {
     "id": "saint-drusus",
@@ -104,7 +104,7 @@
     "quotes": [
       "« Calixis est aux Hérétiques. Calixis sera aux fidèles. Et je ne mourrai pas avant ce jour. »  — Apocryphe avant son assassinat"
     ],
-    "galleryQueries": ["Saint Drusus", "Calixis Sector", "Imperial Saint general", "Saint canonized warhammer"]
+    "galleryPages": ["Scintilla", "Dark Heresy"]
   },
   {
     "id": "sebastian-thor",
@@ -128,7 +128,7 @@
     "quotes": [
       "« L'Église doit servir l'Empereur. Pas l'inverse. Pas Vandire. Pas n'importe qui. L'Empereur seul. »"
     ],
-    "galleryQueries": ["Sebastian Thor", "Ecclesiarchy reform", "Sororitas creation", "Imperial Cult"]
+    "galleryPages": ["Age of Apostasy", "Adeptus Ministorum"]
   },
   {
     "id": "saint-silvana",
@@ -152,7 +152,7 @@
     "quotes": [
       "[ Silence — son sacrifice fut sans dernières paroles. ]"
     ],
-    "galleryQueries": ["Saint Silvana", "Argent Shroud", "Sororitas Daemon-fight", "Sister of Battle silver"]
+    "galleryPages": ["Saint Silvana", "Order of the Argent Shroud"]
   },
   {
     "id": "saint-praxedes",
@@ -177,7 +177,7 @@
     "quotes": [
       "« Cadia tient. Cadia tient toujours. Cadia tiendra encore. »"
     ],
-    "galleryQueries": ["Saint Praxedes", "Cadian Sororitas", "Cadia warhammer 40k", "Imperial Saint Cadia"]
+    "galleryPages": ["Saint Praxedes", "Cadia", "Cadian Shock Troops"]
   },
   {
     "id": "saint-sanguinaire",
@@ -201,6 +201,6 @@
     "quotes": [
       "« Mon père-Primarque pleure encore dans le Warp. Je l'écoute. Je le porte. »"
     ],
-    "galleryQueries": ["Saint Sanguinaire", "Blood Angels Saint", "Sanguinius tear", "Blood Angels lineage"]
+    "galleryPages": ["Sanguinius", "Flesh Tearers", "Black Rage"]
   }
 ]

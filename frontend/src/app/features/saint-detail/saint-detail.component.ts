@@ -1,10 +1,11 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import type { Saint, SaintCategory } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
+import { pageCiblee } from '../../core/utils/page-ciblee';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
@@ -41,7 +42,7 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
         @if (s.miracles?.length) { <a sectionAnchor="miracles">Miracles</a> }
         @if (s.notableBattles?.length) { <a sectionAnchor="batailles">Batailles</a> }
         @if (s.quotes?.length) { <a sectionAnchor="citations">Citations</a> }
-        @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
+        @if (iconographie().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
       <section class="layout">
@@ -95,11 +96,11 @@ const CATEGORY_LABEL: Record<SaintCategory, string> = {
             </article>
           }
 
-          @if (galleryImages().length > 0) {
+          @if (iconographie().length > 0) {
             <article class="panel" id="iconographie">
               <h2>Iconographie</h2>
               <div class="iconography-grid">
-                @for (g of galleryImages(); track g; let i = $index) {
+                @for (g of iconographie(); track g; let i = $index) {
                   <a class="iconography-card" routerLink="/gallery" [attr.aria-label]="'Galerie — illustration ' + (i + 1) + ' de ' + s.name"
                      [style.--g-img]="'url(' + g + ')'"></a>
                 }
@@ -133,7 +134,13 @@ export class SaintDetailComponent {
   private readonly route = inject(ActivatedRoute);
 
   readonly heroImage = signal<string | null>(null);
-  readonly galleryImages = signal<string[]>([]);
+  /** Image de chaque page de `galleryPages`, à sa place du seed (null : pas encore répondu, ou écartée). */
+  private readonly galleryImages = signal<(string | null)[]>([]);
+  /** L215 : l'Iconographie n'a que des images distinctes entre elles et de celle du haut de page. */
+  readonly iconographie = computed(() => {
+    const hero = this.heroImage();
+    return this.galleryImages().filter((u, i, tous): u is string => u !== null && u !== hero && tous.indexOf(u) === i);
+  });
 
   readonly saint = toSafeSignal(
     this.route.paramMap, p => this.service.getSaint(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
@@ -143,16 +150,20 @@ export class SaintDetailComponent {
       const s = this.saint();
       if (!s) return;
       this.heroImage.set(null);
-      this.galleryImages.set([]);
       if (s.wikiQuery) {
         this.service.getWikiImage(s.wikiQuery).subscribe(r => {
           if (r.imageUrl) this.heroImage.set(r.imageUrl);
         });
       }
-      const queries = (s.galleryQueries ?? []).slice(0, 6);
-      queries.forEach(q => {
-        this.service.getWikiImage(q).subscribe({
-          next: r => { if (r.imageUrl) this.galleryImages.update(arr => [...arr, r.imageUrl!]); },
+      // Les pages du sujet (`galleryPages`) : une page qui répond sous un autre titre ou sans vraie image est écartée (L215).
+      const pages = s.galleryPages ?? [];
+      this.galleryImages.set(pages.map(() => null));
+      pages.forEach((page, i) => {
+        this.service.getWikiImage(page).subscribe({
+          next: r => {
+            if (this.saint() !== s || !pageCiblee(page, r)) return;
+            this.galleryImages.update(arr => arr.map((u, j) => (j === i ? r.imageUrl : u)));
+          },
           error: () => {},
         });
       });

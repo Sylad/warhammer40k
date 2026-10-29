@@ -10,7 +10,7 @@ import { compteur, toSafeSignal } from '../../shared/safe-signal';
 import { teinteLisible } from '../../core/utils/teinte-lisible';
 import { revealSection } from '../../core/utils/section-anchor';
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
-import { pageCiblee } from './concept-variantes';
+import { pageCiblee } from '../../core/utils/page-ciblee';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 const CATEGORY_LABEL: Record<LoreConceptCategory, string> = {

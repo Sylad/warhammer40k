@@ -12,8 +12,8 @@ import { SaintDetailComponent } from './saint-detail.component';
 async function monter() {
   const service = fakeWarhammerService({
     getSaint: () => of({ id: 'saint-sabbat', name: 'Saint Sabbat', epithet: 'e', category: 'saint-canonized', ordoOrChapter: 'Ordo X',
-      era: 'M33', color: '#c9a44a', description: 'd', wikiQuery: 'Saint Sabbat', galleryQueries: ['a', 'b'] }),
-    getWikiImage: (q: string) => of({ imageUrl: `http://img/${q}.jpg`, pageTitle: null, pageUrl: null }),
+      era: 'M33', color: '#c9a44a', description: 'd', wikiQuery: 'Saint Sabbat', galleryPages: ['a', 'b'] }),
+    getWikiImage: (q: string) => of({ imageUrl: `http://img/${q}.jpg`, pageTitle: q, pageUrl: null }),
   });
   await setupTestBed([SaintDetailComponent as never], [
     provideRouter([]),

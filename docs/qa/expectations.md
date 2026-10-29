@@ -144,6 +144,7 @@ Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine
 ## /lore/saints
 - shows: 8 saints
 - shows: 8 images distinctes, pageTitle = sujet (L214 : Drusus → « Calixis Sector », Sanguinaire → « Blood Angels », jamais « Drusus Shrine World » ni « Sanguinary Priest »)
+- shows: sur la fiche d'un saint (ex. saint-celestine, saint-sanguinaire), Iconographie sans vignette en double ni de celle du haut de page (L215), chaque vignette venant d'une page de `galleryPages` ; la visionneuse (⛶ d'une carte) lance au plus autant d'appels /api/wiki-image que de `galleryPages`, jamais « … Imperial saint »
 
 ## /nouveautes
 - shows: des entrées datées, chacune avec un titre et une capture chargée

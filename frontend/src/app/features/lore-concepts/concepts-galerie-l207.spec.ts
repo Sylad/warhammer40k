@@ -12,7 +12,7 @@ import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { LoreConceptsComponent } from './lore-concepts.component';
-import { pageCiblee } from './concept-variantes';
+import { pageCiblee } from '../../core/utils/page-ciblee';
 
 type Seed = { id: string; name: string; wikiQuery: string; galleryPages?: string[] };
 const seed: Seed[] = JSON.parse(readFileSync(join(process.cwd(), '../backend/seed/lore-concepts.json'), 'utf8'));
