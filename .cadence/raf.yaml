@@ -233,12 +233,16 @@ lots:
     finished: 2026-10-29
   - id: L21
     title: "Revue UX — Gabarit commun : navigation, en-tête, pied, rendu téléphone"
-    status: doing
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
     review: { date: 2026-10-29, verdict: "conforme après 1 correction (Lore jamais courant dans le tiroir sur /lore/*), 1 mineur en note — orchestré (vague 2026-10-29-wh21, 1 passe(s) de correction)", commit: 4abd298aeb6ea230f9bbbcd306972ef7aecf9b0d }
+    ux: { date: 2026-10-29, verdict: "conforme : captures 390 regardées par le lead (tiroir : entrée courante marquée, cibles larges ; lien d'évitement ; pied à 12 px) ; mineur visible ouvert en lot (Lore du tiroir sans état courant sur /lore/<fiche>)" }
+    notes:
+      - { date: 2026-10-29, text: "Mineur de la revue (note) : aria-current mêlé (true sur la plupart, page sur Jeux vidéo) dans une même navigation" }
+    finished: 2026-10-29
   - id: L22
     title: "Sécurité : mode démo et PIN décidés sur X-Forwarded-Host forgeable ? (même motif que finance-tracker L1) — auditer puis corriger"
     status: done
@@ -2338,6 +2342,14 @@ lots:
     notes:
       - { date: 2026-10-29, text: "Mineurs de la revue (notes) : README.md:62 cite encore concept-variantes.ts (supprimé, pageCiblee vit dans core/utils/page-ciblee.ts) ; lore-feed.model.ts:213 garde galleryQueries sans galleryPages ; R3 du test de galerie ne peut pas échouer sur le dédoublonnage ; titres de galerie choisis (Order of the Sacred Rose, Vigilus, Dark Heresy, Black Rage, Ibram Gaunt, Tanith) posent un lien de lore non tranché par le seed" }
     finished: 2026-10-29
+  - id: L216
+    title: "Tiroir mobile : Lore reste en exact: true (main-layout.component.ts:116), donc sur /lore/<fiche> aucune entrée n'est marquée courante au téléphone alors que la barre du bureau marque Lore — aligner sur la barre (revue de L21, 29-10)"
+    status: todo
+    estimate: 0.05
+    quickwin: true
+    visible: true
+    screen: component
+    created: 2026-10-29
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
