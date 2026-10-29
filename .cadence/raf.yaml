@@ -2276,21 +2276,27 @@ lots:
   - id: L212
     title: "Vaisseaux : une image par vaisseau, de son sujet — Indomitable Will et Or'es Tash'var partagent ApocalypseClassBattleship2.jpg, Khaine montre une bataille de Nurgle, Warp Skull un croiseur loyaliste, Remembrance Pathos.jpg ; wikiQuery ou image vérifiée (comme L189/L198) + attente « 15 images distinctes » dans docs/qa/expectations.md (QA prod 29-10)"
     public: "Vaisseaux : chaque vaisseau avec sa propre image"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-29
     started: 2026-10-29
     review: { date: 2026-10-29, verdict: "compliant — 2 notes mineures (3 cartes montrent un blason plutôt qu'un vaisseau ; le test garde les requêtes, pas les images) — orchestré (vague 2026-10-29-wh2, 0 passe(s) de correction)", commit: 98cc9ec465cfebe116485342812cc4835cd7b0aa }
+    ux: { date: 2026-10-29, verdict: "conforme : vu par le lead (capture 1440 px de la revue UX 29-10) — 15 images distinctes, plus aucun vaisseau d'un autre camp ; Indomitable Will, Remembrance et Warp Skull montrent le blason de leur légion faute d'image du vaisseau (noté)" }
+    notes:
+      - { date: 2026-10-29, text: "29-10 lead : 3 cartes (Indomitable Will, Remembrance, Warp Skull) affichent un blason de légion, pas un vaisseau — accepté faute d'image du vaisseau sur le wiki ; à reprendre si une image de vaisseau sourcée existe" }
+    finished: 2026-10-29
   - id: L213
     title: "Visionneuse des vaisseaux : retirer les 4 requêtes de variante (warhammer 40k, starship art, Imperial Navy, concept art) qui ne donnent aucune vignette, ou une galerie par galleryPages comme L207 ; fiche Phalanx : « Star Fort Imperial » demandé 2 fois, image du haut de page répétée dans l'Iconographie (QA prod 29-10)"
     public: Visionneuse des vaisseaux plus légère
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-29
     started: 2026-10-29
     review: { date: 2026-10-29, verdict: "compliant — orchestré (vague 2026-10-29-wh2, 0 passe(s) de correction)", commit: 9265a6d5ca62728a961d6ee19d7d2fd7d274d6f6 }
+    ux: { date: 2026-10-29, verdict: "conforme : visionneuse sans requêtes de variante inutiles, fiche Phalanx sans requête en double ni image répétée (revue UX 29-10, captures 1440/390)" }
+    finished: 2026-10-29
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

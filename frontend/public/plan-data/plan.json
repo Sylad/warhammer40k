@@ -729,14 +729,16 @@
     {
       "id": "L212",
       "title": "Vaisseaux : chaque vaisseau avec sa propre image",
-      "status": "doing",
-      "started": "2026-10-29"
+      "status": "done",
+      "started": "2026-10-29",
+      "finished": "2026-10-29"
     },
     {
       "id": "L213",
       "title": "Visionneuse des vaisseaux plus légère",
-      "status": "doing",
-      "started": "2026-10-29"
+      "status": "done",
+      "started": "2026-10-29",
+      "finished": "2026-10-29"
     }
   ]
 }
