@@ -189,10 +189,11 @@ lots:
     finished: 2026-10-28
   - id: L17
     title: "Revue UX — Lore : vaisseaux (liste + fiche)"
-    status: todo
+    status: doing
     visible: true
     estimate: 0.25
     created: 2026-09-28
+    started: 2026-10-29
   - id: L18
     title: "Revue UX — Lore : Titans (liste + fiche)"
     status: todo
