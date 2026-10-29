@@ -4,7 +4,7 @@ date: 2026-10-29
 created: 2026-10-29T12:06+01:00
 lots: [L213]
 # une capture peut dire ce qu'elle montre : captures: [{ file: captures/x.png, alt: "texte alternatif" }]
-nocapture: la visionneuse garde son image et son rendu ; ce qui change, ce sont des requêtes en moins que l'écran ne montrait pas
+captures: [{ file: captures/2026-10-29-phalanx-iconographie.png, alt: "Fiche du Phalanx : l'Iconographie montre trois images différentes, sans répéter celle du haut de page" }]
 ---
 La visionneuse d'un vaisseau s'ouvre sans lancer quatre recherches d'images qui ne ramenaient jamais de vignette : elle montre l'image du vaisseau, et c'est tout.
 

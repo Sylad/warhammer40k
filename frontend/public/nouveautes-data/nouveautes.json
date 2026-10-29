@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-29 12:00",
+  "generated": "2026-10-29 12:09",
   "entries": [
+    {
+      "slug": "2026-10-29-visionneuse-des-vaisseaux-plus-legere",
+      "title": "Visionneuse des vaisseaux plus légère",
+      "date": "2026-10-29",
+      "lots": [
+        "L213"
+      ],
+      "captures": [
+        "captures/2026-10-29-phalanx-iconographie.png"
+      ],
+      "alts": [
+        "Fiche du Phalanx : l'Iconographie montre trois images différentes, sans répéter celle du haut de page"
+      ],
+      "html": "<p>La visionneuse d'un vaisseau s'ouvre sans lancer quatre recherches d'images qui ne ramenaient jamais de vignette : elle montre l'image du vaisseau, et c'est tout.</p>\n<p>Sur la fiche du Phalanx, la même image n'est plus demandée deux fois, et l'Iconographie ne répète plus l'image déjà affichée en haut de page. Il en va de même pour la Forteresse Noire, l'Arche Mechanicus et le Stormbird. Une illustration déjà présente dans l'Iconographie n'y revient plus non plus.</p>"
+    },
     {
       "slug": "2026-10-29-vaisseaux-chaque-vaisseau-avec-sa-propre-image",
       "title": "Vaisseaux : chaque vaisseau avec sa propre image",
