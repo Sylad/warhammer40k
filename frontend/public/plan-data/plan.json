@@ -3,6 +3,13 @@
   "project": "warhammer40k",
   "lots": [
     {
+      "id": "L17",
+      "title": "Lore des vaisseaux : liste et fiche plus lisibles",
+      "status": "done",
+      "started": "2026-10-29",
+      "finished": "2026-10-29"
+    },
+    {
       "id": "L23",
       "title": "Une page Nouveautés, et un menu au téléphone",
       "status": "done",

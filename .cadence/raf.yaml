@@ -189,12 +189,15 @@ lots:
     finished: 2026-10-28
   - id: L17
     title: "Revue UX — Lore : vaisseaux (liste + fiche)"
-    status: doing
+    public: "Lore des vaisseaux : liste et fiche plus lisibles"
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
     review: { date: 2026-10-29, verdict: "conforme — 0 bloquant, 0 majeur, 3 notes mineures (closeLightbox dupliqué ×3, L17 sans `public:` donc masqué du Plan, barre d'ancres défilante sans indice à 390 px — antérieur) — orchestré (vague 2026-10-29-wh, 3 passe(s) de correction)", commit: 8ce0539a6bb0ee33c2ca5d874473df4d4d9f750a }
+    ux: { date: 2026-10-29, verdict: "conforme : vu par le lead (captures 390 px liste et fiche de la revue UX 29-10) — cartes et fiche lisibles, voile relevé sur la fiche, visionneuse au focus restitué ; notes mineures en suite (focus-visible du ⛶, barre d'ancres sans indice à 390 px, antérieure)" }
+    finished: 2026-10-29
   - id: L18
     title: "Revue UX — Lore : Titans (liste + fiche)"
     status: todo
