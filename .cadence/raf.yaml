@@ -221,12 +221,16 @@ lots:
     finished: 2026-10-29
   - id: L20
     title: Revue UX — À propos
-    status: doing
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
     review: { date: 2026-10-29, verdict: "conforme : 0 bloquant, 0 majeur, 2 mineurs (sup « e » à 10 px, glyphes décoratifs ⚜ ⌬ › encore lus) — orchestré (vague 2026-10-29-wh20, 0 passe(s) de correction)", commit: 367579b07343312747005279fdfde394992f3cd5 }
+    ux: { date: 2026-10-29, verdict: "conforme : captures 390 regardées par le lead (en-tête, carte co-auteur, histoire lisibles, sans débordement) ; liens externes annoncés, focus visible, textes ≥ 12 px ; mineurs en note : sup « e » à 10 px, glyphes ⚜ ⌬ › encore lus" }
+    notes:
+      - { date: 2026-10-29, text: "Mineurs de la revue (notes) : about.component.ts:27 le sup « e » de « 41e » rendu à 10 px (R4 dit ≥ 12) ; :43/:83/:86 glyphes ⚜ ⌬ ⚒ ⛯ › encore lus par les lecteurs d'écran" }
+    finished: 2026-10-29
   - id: L21
     title: "Revue UX — Gabarit commun : navigation, en-tête, pied, rendu téléphone"
     status: todo
