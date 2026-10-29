@@ -205,6 +205,7 @@ lots:
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "compliant after 1 minor fix: `.hero-size` of the Titan sheet is still unstyled (collé au cadre de classe, coupé à 390 px) — orchestré (vague 2026-10-29-wh3, 0 passe(s) de correction)", commit: 67d51edb9fcc0928d43387e5f36ad5817a2f3772 }
   - id: L19
     title: "Revue UX — Lore : Saints (liste + fiche)"
     status: todo
