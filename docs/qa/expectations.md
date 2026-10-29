@@ -143,6 +143,7 @@ Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine
 
 ## /lore/saints
 - shows: 8 saints
+- shows: 8 images distinctes, pageTitle = sujet (L214 : Drusus → « Calixis Sector », Sanguinaire → « Blood Angels », jamais « Drusus Shrine World » ni « Sanguinary Priest »)
 
 ## /nouveautes
 - shows: des entrées datées, chacune avec un titre et une capture chargée
