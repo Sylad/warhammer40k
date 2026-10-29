@@ -2309,6 +2309,16 @@ lots:
     review: { date: 2026-10-29, verdict: "compliant — orchestré (vague 2026-10-29-wh2, 0 passe(s) de correction)", commit: 9265a6d5ca62728a961d6ee19d7d2fd7d274d6f6 }
     ux: { date: 2026-10-29, verdict: "conforme : visionneuse sans requêtes de variante inutiles, fiche Phalanx sans requête en double ni image répétée (revue UX 29-10, captures 1440/390)" }
     finished: 2026-10-29
+  - id: L214
+    title: "Saints : images hors sujet — Drusus (Sentinel-0.png, page « Drusus Shrine World ») et Sanguinaire (« Sanguinary Priest ») sur carte et fiche ; viser une page du sujet ou un repli neutre, et ajouter l'attente « 8 images distinctes, pageTitle = sujet » à ## /lore/saints de docs/qa/expectations.md (QA prod de L19, 29-10)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-29
+  - id: L215
+    title: "Fiches Saints, Iconographie : vignettes en double (Célestine 2×2, Sabbat ×2) et hors sujet (Sanguinaire : Red Tear, Imperial_eagle, repli « Imperial Saint » partagé avec Sabbat) — dédoublonner, écarter le repli, attente QA ; au passage, la visionneuse lance 4 variantes /api/wiki-image qui retombent sur l'image de la carte (Sabbat) : galleryPages comme les concepts (L207) (QA prod de L19, 29-10)"
+    status: todo
+    estimate: 0.25
+    created: 2026-10-29
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
