@@ -333,7 +333,7 @@
     "color": "#d4a020",
     "captainOrLord": "Conseil d'Iyanden",
     "currentStatus": "Actif — partiellement décimé par Tyranides",
-    "wikiQuery": "Craftworld",
+    "wikiQuery": "Wraithbone",
     "description": "Vaisseau-Monde Aeldari. Une des cinq planètes-vaisseaux mineures qui survécurent à la Chute. Maison de millions d'Aeldari.",
     "longHistory": "Iyanden, comme tous les Craftworlds, fut construit pendant les derniers siècles avant la Chute aeldari. À l'origine simple vaisseau-monde de transit, il devint refuge permanent pour ses millions d'habitants quand le berceau aeldari fut englouti dans l'Œil de la Terreur. Pendant 10 000 ans, Iyanden navigua dans la galaxie. En M41, la Flotte-Ruche Kraken arriva sur Iyanden — bataille catastrophique. Une grande partie de la population aeldari fut tuée. Iyanden, désormais semi-vide, ramène ses morts à la vie via Wraithguards et Wraithlords — armures wraithbone animées par les âmes. Le Prince Yriel défendit Iyanden contre Kraken et est désormais légende.",
     "specs": [
@@ -460,7 +460,7 @@
     "color": "#5a6a3a",
     "captainOrLord": "Typhus",
     "currentStatus": "Actif",
-    "wikiQuery": "Typhus",
+    "wikiQuery": "Death Guard",
     "description": "Vaisseau-amiral de Typhus, second en command de la Death Guard.",
     "longHistory": "Le Remembrance est un Cruiser de l'âge Heresy modifié progressivement. Sous le commandement de Typhus, il a subi corruption Nurgle progressive — coque pourrie, équipage Plague Marines transformés. Vaisseau-amiral des opérations Death Guard mineures quand Mortarion erre dans le Warp. Typhus utilise le Remembrance pour ses propres campagnes de pestilence.",
     "specs": [
