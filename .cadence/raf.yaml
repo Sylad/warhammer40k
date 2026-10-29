@@ -2315,6 +2315,7 @@ lots:
     estimate: 0.25
     created: 2026-10-29
     started: 2026-10-29
+    review: { date: 2026-10-29, verdict: "compliant : Drusus → « Calixis Sector » et Sanguinaire → « Blood Angels » sont des titres Fandom exacts avec image, et l'attente QA est ajoutée ; 2 notes mineures (test qui ne mesure que les requêtes, Thor et les autres Saints encore à la recherche plein texte) — orchestré (vague 2026-10-29-wo1, 0 passe(s) de correction)", commit: bfe84c2f8f199190f22154f8aa5587e22a8070c3 }
   - id: L215
     title: "Fiches Saints, Iconographie : vignettes en double (Célestine 2×2, Sabbat ×2) et hors sujet (Sanguinaire : Red Tear, Imperial_eagle, repli « Imperial Saint » partagé avec Sabbat) — dédoublonner, écarter le repli, attente QA ; au passage, la visionneuse lance 4 variantes /api/wiki-image qui retombent sur l'image de la carte (Sabbat) : galleryPages comme les concepts (L207) (QA prod de L19, 29-10)"
     status: todo
