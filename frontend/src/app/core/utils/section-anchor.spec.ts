@@ -108,7 +108,7 @@ describe('chaque barre d’ancres, la frise et les concepts passent par section-
       ['equipment-detail', 'faction-detail', 'primarch-detail', 'saint-detail', 'ship-detail', 'titan-detail'],
     );
     for (const f of fiches) {
-      const barre = /<nav class="anchor-nav">([\s\S]*?)<\/nav>/.exec(f.src)![1];
+      const barre = /<nav class="anchor-nav"[^>]*>([\s\S]*?)<\/nav>/.exec(f.src)![1];
       const liens = barre.match(/<a\b[^>]*>/g) ?? [];
       expect(liens.length, f.nom).toBeGreaterThan(2);
       for (const a of liens) expect(a, f.nom).toMatch(/\bsectionAnchor="[a-z]+"/);
