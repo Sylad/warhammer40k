@@ -136,6 +136,7 @@ Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine
 
 ## /lore/ships
 - shows: 15 vaisseaux
+- never: un vaisseau dont l'image n'est pas celle de son sujet, ou partagée avec un autre vaisseau : les 15 cartes ont 15 images distinctes (Indomitable Will et Or'es Tash'var affichaient le même Battleship, Khaine une bataille de Nurgle, Warp Skull un croiseur loyaliste, Remembrance « Pathos.jpg » — L212)
 
 ## /lore/titans
 - shows: 10 titans

@@ -199,7 +199,7 @@
     "color": "#a02020",
     "captainOrLord": "Sanguinius (mort) → Dante",
     "currentStatus": "Actif",
-    "wikiQuery": "Imperial Navy battleship",
+    "wikiQuery": "Blood Angels",
     "description": "Vaisseau-amiral des Blood Angels. Lieu d'origine ailée. Aujourd'hui propriété cérémonielle du Maître de Chapitre Dante.",
     "longHistory": "Le Indomitable Will fut le vaisseau-amiral personnel de Sanguinius pendant la Grande Croisade. Cathédrale aérienne, lourdement décorée d'aigles dorés et d'aigles blancs, il transportait la Compagnie 1ère des Blood Angels. Pendant l'Hérésie, il participa au Massacre de Signus Prime, à la Bataille de Pluto, à la défense de la Porte Éternelle de Terra. Après la mort de Sanguinius, il fut ramené à Baal et transformé en mausolée mobile — vaisseau-cathédrale gardant les reliques sanguinaires. Aujourd'hui, il sert de vaisseau-amiral à Dante.",
     "specs": [
@@ -333,7 +333,7 @@
     "color": "#d4a020",
     "captainOrLord": "Conseil d'Iyanden",
     "currentStatus": "Actif — partiellement décimé par Tyranides",
-    "wikiQuery": "Iyanden Craftworld",
+    "wikiQuery": "Craftworld",
     "description": "Vaisseau-Monde Aeldari. Une des cinq planètes-vaisseaux mineures qui survécurent à la Chute. Maison de millions d'Aeldari.",
     "longHistory": "Iyanden, comme tous les Craftworlds, fut construit pendant les derniers siècles avant la Chute aeldari. À l'origine simple vaisseau-monde de transit, il devint refuge permanent pour ses millions d'habitants quand le berceau aeldari fut englouti dans l'Œil de la Terreur. Pendant 10 000 ans, Iyanden navigua dans la galaxie. En M41, la Flotte-Ruche Kraken arriva sur Iyanden — bataille catastrophique. Une grande partie de la population aeldari fut tuée. Iyanden, désormais semi-vide, ramène ses morts à la vie via Wraithguards et Wraithlords — armures wraithbone animées par les âmes. Le Prince Yriel défendit Iyanden contre Kraken et est désormais légende.",
     "specs": [
@@ -460,7 +460,7 @@
     "color": "#5a6a3a",
     "captainOrLord": "Typhus",
     "currentStatus": "Actif",
-    "wikiQuery": "Death Guard Plague Fleet",
+    "wikiQuery": "Typhus",
     "description": "Vaisseau-amiral de Typhus, second en command de la Death Guard.",
     "longHistory": "Le Remembrance est un Cruiser de l'âge Heresy modifié progressivement. Sous le commandement de Typhus, il a subi corruption Nurgle progressive — coque pourrie, équipage Plague Marines transformés. Vaisseau-amiral des opérations Death Guard mineures quand Mortarion erre dans le Warp. Typhus utilise le Remembrance pour ses propres campagnes de pestilence.",
     "specs": [
@@ -576,7 +576,7 @@
     "color": "#1a4a5c",
     "captainOrLord": "Caste de l'Air (Kor)",
     "currentStatus": "Actif",
-    "wikiQuery": "Tau battleship Empire fleet",
+    "wikiQuery": "Or'es El'leath (Custodian)-class Battleship",
     "description": "Vaisseau-amiral d'une flotte Tau majeure. Symbole de la puissance technologique de l'Empire T'au.",
     "longHistory": "Construit en M41, le Or'es Tash'var (« Étoile-Vague ») est un battleship Tau — plus petit qu'un Imperial Gloriana mais plus moderne. Port de propulsion gravitique avancée, batteries plasma-rail, drones de défense automatisés. Sert de vaisseau-amiral pendant la 4ème Sphère d'Expansion. Capable de manœuvres impossibles pour un vaisseau Imperial.",
     "specs": [
@@ -615,7 +615,7 @@
     "color": "#1a3a3a",
     "captainOrLord": "Alpharius (l'un des deux)",
     "currentStatus": "Statut inconnu",
-    "wikiQuery": "Astartes Strike Cruiser",
+    "wikiQuery": "Alpha Legion",
     "description": "Vaisseau-cellule de l'Alpha Legion. Capable de devenir invisible aux scanners. Probablement plusieurs vaisseaux portant le même nom (signature Alpha Legion).",
     "longHistory": "L'Alpha Legion utilise des vaisseaux modifiés pour la furtivité — coques absorbantes, signatures réduites, équipage minimal. Le Warp Skull (un nom utilisé par plusieurs vaisseaux différents — méthode Alpha Legion classique pour confondre l'Imperium) opère en cellules clandestines. Pendant l'Hérésie, plusieurs furent vus à différents fronts. Aujourd'hui, des vaisseaux portant ce nom ré-apparaissent périodiquement, jamais identifiés.",
     "specs": [
