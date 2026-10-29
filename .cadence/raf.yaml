@@ -200,12 +200,15 @@ lots:
     finished: 2026-10-29
   - id: L18
     title: "Revue UX — Lore : Titans (liste + fiche)"
-    status: doing
+    public: "Lore des Titans : liste et fiche plus lisibles"
+    status: done
     visible: true
     estimate: 0.25
     created: 2026-09-28
     started: 2026-10-29
     review: { date: 2026-10-29, verdict: "compliant : .hero-size est sur sa propre ligne (19 px, 1 ligne, 16 px sous l'étiquette), 15 px en --text (≈7:1 sous le voile relevé), sans débordement ni mot orphelin sur les 10 fiches Titan à 1440, 390 et 320 px ; 1 note mineure (README sur le contraste de la fiche Saint) — orchestré (vague 2026-10-29-wh4, 0 passe(s) de correction)", commit: 2df57d90f9c3341333f1d2f57c61c08053047553 }
+    ux: { date: 2026-10-29, verdict: "conforme : vu par le lead (capture 390 px après correction, 29-10) — taille et tonnage sur leur propre ligne sous l'étiquette de classe, plus d'étiquette collée ni de mot orphelin ; vérifié sur les 10 fiches Titan à 1440/390/320 par la revue" }
+    finished: 2026-10-29
   - id: L19
     title: "Revue UX — Lore : Saints (liste + fiche)"
     status: todo
