@@ -7,6 +7,7 @@ import { FigureLightboxComponent, LightboxState } from '../../shared/components/
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { compteur, toSafeSignal } from '../../shared/safe-signal';
+import { teinteLisible } from '../../core/utils/teinte-lisible';
 
 const ALIGNMENT_BY_FACTION: Record<string, string> = {
   'space-marines': 'Imperium',
@@ -140,7 +141,9 @@ export class LoreShipsComponent {
       subtitle: `${s.class} — ${s.factionName}`,
       description: s.epithet || undefined,
       contextName: 'Vaisseaux Légendaires',
-      contextColor: s.color,
+      // Titre de la visionneuse : teinte éclaircie du vaisseau (≥ 4,5:1), la couleur brute du seed (Eternal Crusader #000000)
+      // était invisible sur le fond noir ; la couleur d'origine reste sur la carte (--card-color).
+      contextColor: teinteLisible(s.color),
       contextSigil: '⚓',
       searchQuery: s.name,
       mainUrl: baseUrl,

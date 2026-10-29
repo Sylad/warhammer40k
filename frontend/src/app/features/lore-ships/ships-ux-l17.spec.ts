@@ -1,6 +1,6 @@
 // L17 (revue UX Lore : vaisseaux, liste) — filtres annoncés (WCAG 4.1.2), ⛶ hors du lien de la carte (4.1.2),
 // nommé par le vaisseau et présent seulement s'il a une image (2.4.6), visible au repos (1.4.11),
-// texte des cartes ≥ 4,5:1 sous le voile (1.4.3).
+// texte des cartes ≥ 4,5:1 sous le voile (1.4.3), titre de la visionneuse en teinte lisible (1.4.3).
 import { setupTestBed } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { describe, expect, it } from 'vitest';
@@ -10,8 +10,9 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
-import { contraste, FOND_TEXTE_SOMBRE } from '../../core/utils/teinte-lisible';
+import { contraste, FOND_TEXTE_SOMBRE, teinteLisible } from '../../core/utils/teinte-lisible';
 import { LoreShipsComponent } from './lore-ships.component';
+import type { LegendaryShip } from '../../core/models/models';
 
 const seed = JSON.parse(readFileSync(join(process.cwd(), '../backend/seed/legendary-ships.json'), 'utf8'));
 const scss = readFileSync(join(__dirname, 'lore-ships.component.scss'), 'utf8');
@@ -98,5 +99,18 @@ describe('Vaisseaux, liste (L17)', () => {
     await f.whenStable();
     expect(boite.getAttribute('role')).toBeNull();
     expect(document.activeElement).toBe(zoom);
+  });
+
+  it('R8 — le titre de la visionneuse de chacun des 15 vaisseaux est en teinte lisible (teinteLisible), ≥ 4,5:1 ; 13 couleurs brutes du seed sont sous 4,5:1 sur le fond de référence (12 sur le noir de la visionneuse)', async () => {
+    const f = await monter();
+    const cmp = f.componentInstance;
+    expect(seed.length).toBe(15);
+    expect(seed.filter((s: { color: string }) => contraste(s.color, FOND_TEXTE_SOMBRE) < 4.5).length).toBe(13);
+    for (const s of seed as LegendaryShip[]) {
+      cmp.openLightbox(s);
+      const couleur = cmp.lightbox()!.contextColor;
+      expect(couleur, s.id).toBe(teinteLisible(s.color));
+      expect(contraste(couleur, FOND_TEXTE_SOMBRE), s.id).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });
