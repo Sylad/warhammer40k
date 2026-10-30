@@ -43,6 +43,12 @@ describe('liens externes morts (L41)', () => {
     expect(suite).not.toMatch(/proposition/i);
   });
 
+  it('R10 — l’audit distingue la décision de Sylvain (chaînes) des choix de la session à confirmer (Fandom, Imperial Knights)', () => {
+    const audit = readFileSync(join(__dirname, '../../../docs/liens/audit-2026-10-02.md'), 'utf8');
+    const suite = audit.slice(audit.indexOf('## Suite (L41'), audit.indexOf('## Non vérifié'));
+    expect(suite).toMatch(/Choix de la session, à confirmer par Sylvain/);
+  });
+
   it('R4 — chaque événement garde au moins une source (Lexicanum) après les retraits', () => {
     for (const e of evenements) expect(e.sources.length, e.id).toBeGreaterThan(0);
   });
