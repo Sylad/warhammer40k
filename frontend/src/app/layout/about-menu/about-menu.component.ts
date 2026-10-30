@@ -116,10 +116,10 @@ export class AboutMenuComponent {
     update();
   }
 
-  /** Ouvert / fermé : la barre masque le méga-menu Lore pendant que le panneau est ouvert. */
+  /** Ouvert / fermé : la mise en page referme « Lore ▾ » quand ce panneau s'ouvre. */
   @Output() readonly openChange = new EventEmitter<boolean>();
 
-  /** Fermeture sans déplacer le focus (survol ou focus du méga-menu Lore). */
+  /** Fermeture sans déplacer le focus (la mise en page l'appelle quand « Lore ▾ » s'ouvre). */
   close(): void {
     this.setOpen(false);
   }
