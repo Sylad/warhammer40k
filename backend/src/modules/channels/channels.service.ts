@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
+import { estChaineRetiree } from '../../common/chaines-retirees.js';
 import { readContent, userDataPath } from '../../common/content.js';
 import type { Channel } from '../videos/video.model.js';
 
@@ -13,7 +14,9 @@ export class ChannelsService {
   constructor() {
     // L74 : chaînes ajoutées par POST /videos/import → volume ; à défaut, le seed.
     this.channels = fs.existsSync(userDataPath('channels.json'))
-      ? (JSON.parse(fs.readFileSync(userDataPath('channels.json'), 'utf-8')) as Channel[])
+      ? (JSON.parse(fs.readFileSync(userDataPath('channels.json'), 'utf-8')) as Channel[]).filter(
+          c => !estChaineRetiree(c.url),
+        )
       : readContent<Channel[]>('channels.json', []);
   }
 

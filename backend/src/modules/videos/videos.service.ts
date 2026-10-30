@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
+import { estChaineRetiree } from '../../common/chaines-retirees.js';
 import { readContent, userDataPath } from '../../common/content.js';
 import type { Video } from './video.model.js';
 
@@ -16,7 +17,9 @@ export class VideosService {
     // (throw dans le constructor = bootstrap Nest avorté). Review 2026-08-14.
     try {
       this.videos = fs.existsSync(userDataPath('videos.json'))
-        ? (JSON.parse(fs.readFileSync(userDataPath('videos.json'), 'utf-8')) as Video[])
+        ? (JSON.parse(fs.readFileSync(userDataPath('videos.json'), 'utf-8')) as Video[]).filter(
+            v => !estChaineRetiree(v.url),
+          )
         : readContent<Video[]>('videos.json', []); // L74 : vidéos ajoutées → volume ; à défaut, le seed
     } catch {
       this.videos = [];

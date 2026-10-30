@@ -109,6 +109,17 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
       expect(new ChannelsService().findAll().map((c) => c.id)).toEqual(['user']);
     });
 
+    it('R6 — les chaînes retirées (L41) disparaissent aussi du volume, sans toucher au reste ni au fichier', () => {
+      const morte = (id: string, handle: string) => ({ id, url: `https://www.youtube.com/@${handle}` });
+      const volume = [morte('indomitus-40k', 'Indomitus40k'), morte('warfo40k', 'warfo40k'), morte('vivante', 'Vivante')];
+      write('data', 'channels.json', volume);
+      write('data', 'videos.json', volume);
+      expect(new ChannelsService().findAll().map((c) => c.id)).toEqual(['vivante']);
+      expect(new ChannelsService().findPriority()).toEqual([]);
+      expect(new VideosService().findAll().map((v) => v.id)).toEqual(['vivante']);
+      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels.json'), 'utf-8'))).toHaveLength(3);
+    });
+
     it('ni volume ni seed : vide', () => {
       expect(new VideosService().findAll()).toEqual([]);
       expect(new ChannelsService().findAll()).toEqual([]);
