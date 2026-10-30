@@ -149,7 +149,7 @@ des données.
 - `artworks.json` + `artwork-collections.json` (35 artworks + collections)
 - `lore-feed.json` (40 entrées atmosphériques ticker)
 - `emperor.json` (6 sections narratives)
-- `primarchs.json` (20 fiches : 9 loyalistes / 9 traîtres / 2 expurgés)
+- `primarchs.json` (20 fiches : 9 loyalistes / 9 traîtres / 2 expurgés) — `subFactionId` : sous-faction (Légion ou Chapitre) ouverte par « Voir la Légion » de la fiche (absent pour les 2 expurgés, qui n'ont pas de lien) ; les liens « Faction · … » des fiches vaisseau et Dieu-Machine portent le nom de la faction ouverte (`core/utils/faction-label.ts`), la sous-organisation (« Collegia Titanica », « Death Guard ») restant dans la fiche — L43
 - `chaos-gods.json` (4 dieux + 8 daemons notables — Bloodthirster, Lord of Change, GUO, Keeper of Secrets en visuels)
 - `imperial-orgs.json` (13 organisations : Administratum, Ministorum, Arbites, Rogue Traders, Schola, Navigators, Astropaths, Sœurs du Silence, Knights, Remembrancers, **Imperial Navy** avec classes de vaisseaux, **Collegia Titanica** avec classes de Titans, **Conseil du Sigillite** — Malcador & Valdor)
 - `lore-concepts.json` (15 concepts : Trône d'Or, Astronomican, Webway, Cicatrix, Cadia, Baal, etc.)
