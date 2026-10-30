@@ -7,7 +7,7 @@ import { estChaineRetiree } from './chaines-retirees';
 // L41 : liens externes morts relevés par l'audit du 2026-10-02
 // (docs/liens/audit-2026-10-02.md). Contrôle hors réseau sur les adresses.
 interface Chaine { id: string; url: string }
-interface Video { id: string; url: string }
+interface Video { id: string; url: string; channelId?: string }
 interface Evenement { id: string; sources: string[] }
 
 const chaines = readContent<Chaine[]>('channels.json', []);
@@ -33,14 +33,28 @@ describe('liens externes morts (L41)', () => {
     expect(e.sources).toContain('https://warhammer40k.fandom.com/wiki/War_in_Heaven_(Necron)');
   });
 
-  it('R5 — l’audit consigne la décision de Sylvain du 30-10 (six chaînes retirées, aucune remplacée) et plus aucune attente', () => {
+  it('R5 — le fond de la décision du 30-10 : les six chaînes sont retirées, aucune remplacée, et l’audit la consigne comme confirmée', () => {
+    // le fond : aucune des six adresses ne subsiste, et le retrait n’a pas été compensé par une chaîne de remplacement
+    expect(chaines.length).toBe(6);
+    const tout = [...chaines, ...videos].map((x) => x.url);
+    expect(tout.filter((u) => estChaineRetiree(u))).toEqual([]);
+    // l’audit : décision confirmée, plus aucune attente sur ces six chaînes
     const audit = readFileSync(join(__dirname, '../../../docs/liens/audit-2026-10-02.md'), 'utf8');
     const suite = audit.slice(audit.indexOf('## Suite (L41'), audit.indexOf('## Non vérifié'));
     expect(suite).toMatch(/Décision de Sylvain \(30-10\)/);
-    expect(suite).toMatch(/nouveau lot/);
     expect(suite).not.toMatch(/en attente de/i);
-    expect(suite).not.toMatch(/Reste à faire sur la prod/);
-    expect(suite).not.toMatch(/proposition/i);
+    const lignes = audit.split('\n').filter((l) => l.startsWith('| `https://www.youtube.com/@'));
+    expect(lignes.length).toBe(6);
+    for (const l of lignes) {
+      expect(l, l).toMatch(/\*\*retirée\*\*/);
+      expect(l, l).not.toMatch(/à retirer|retrouver le nouveau nom/);
+    }
+  });
+
+  it('R11 — aucune vidéo ne garde le channelId d’une chaîne retirée ou absente de channels.json', () => {
+    const ids = new Set(readContent<{ id: string }[]>('channels.json', []).map((c) => c.id));
+    const orphelines = videos.filter((v) => v.channelId && !ids.has(v.channelId)).map((v) => `${v.id}→${v.channelId}`);
+    expect(orphelines).toEqual([]);
   });
 
   it('R10 — l’audit distingue la décision de Sylvain (chaînes) des choix de la session à confirmer (Fandom, Imperial Knights)', () => {
