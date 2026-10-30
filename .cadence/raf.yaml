@@ -409,6 +409,7 @@ lots:
   - id: L37
     title: "Méga-menu Lore : bouton à divulgation, ses 11 liens hors de l'ordre de tabulation tant qu'il est fermé (20 tabulations pour atteindre la suite, revue UX L30)"
     status: doing
+    visible: true
     estimate: 0.5
     created: 2026-10-02
     started: 2026-10-30
