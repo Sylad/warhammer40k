@@ -251,29 +251,6 @@
     "featured": false
   },
   {
-    "id": "baldermort",
-    "titre": "Baldermort's Guide to Warhammer",
-    "createur": "Baldermort",
-    "description": "Excellentes vidéos lore avec un style de narration posé et agréable. Spécialisé dans les guides d'entrée dans l'univers et les récapitulatifs de factions. Parfait pour les nouveaux venus.",
-    "url": "https://www.youtube.com/@BaldermortGW",
-    "embedId": null,
-    "embedType": null,
-    "type": "Chaîne lore",
-    "langue": "EN",
-    "tags": [
-      "Lore",
-      "Guide",
-      "Débutants",
-      "Factions"
-    ],
-    "incontournable": false,
-    "thumbnail": "warhammer 40k codex book",
-    "duration": "Chaîne",
-    "category": "lore",
-    "language": "EN",
-    "featured": false
-  },
-  {
     "id": "warhammer-fr-officiel",
     "titre": "Warhammer — Chaîne officielle FR",
     "createur": "Games Workshop (officiel FR)",
@@ -293,29 +270,6 @@
     "thumbnail": "warhammer 40k logo aquila",
     "duration": "Chaîne",
     "category": "official",
-    "language": "FR",
-    "featured": false
-  },
-  {
-    "id": "warfo40k",
-    "titre": "WarFo 40k",
-    "createur": "WarFo 40k",
-    "description": "Chaîne française dédiée au lore Warhammer 40 000. Vidéos de lore en français sur les factions, l'histoire et les personnages de l'univers. L'une des rares ressources lore de qualité en français.",
-    "url": "https://www.youtube.com/@WarFo40k",
-    "embedId": null,
-    "embedType": null,
-    "type": "Chaîne lore",
-    "langue": "FR",
-    "tags": [
-      "Lore",
-      "FR",
-      "Factions",
-      "Histoire"
-    ],
-    "incontournable": true,
-    "thumbnail": "warhammer 40k space marine combat",
-    "duration": "Chaîne",
-    "category": "lore",
     "language": "FR",
     "featured": false
   },

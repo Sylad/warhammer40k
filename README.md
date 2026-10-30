@@ -146,7 +146,7 @@ des données.
 - `subfactions.json` (182 sous-factions enrichies, dont 71 successeurs Space Marines lore-ifiés, 200+ notableUnits avec personnages Hérésie d'Horus)
 - `units.json` (133 unités)
 - `series.json` (38 séries Black Library)
-- `videos.json` + `channels.json` (vidéos + 8 chaînes YT)
+- `videos.json` + `channels.json` (vidéos + 6 chaînes YT)
 - `artworks.json` + `artwork-collections.json` (35 artworks + collections)
 - `lore-feed.json` (40 entrées atmosphériques ticker)
 - `emperor.json` (6 sections narratives)
