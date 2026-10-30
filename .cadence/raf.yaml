@@ -450,6 +450,7 @@ lots:
     estimate: 0.5
     created: 2026-10-02
     started: 2026-10-30
+    review: { date: 2026-10-30, verdict: "conforme (1 note mineure : CLAUDE.md:132 dit « finit par /@<handle> » alors que le filtre reconnaît aussi un suffixe) — orchestré (vague 2026-10-30-1930-wh, 3 passe(s) de correction + passe des mineurs)", commit: d0b06f37d5f827a1a437e509e3081b028bfd134e }
   - id: L42
     title: "Bloc Médias des pages faction : vidéo et galerie filtrées par faction (aujourd'hui le même contenu partout — la page Nécrons montre une vidéo sur l'Empereur et un bouclier Ultramarines), ou visuel neutre faute de correspondance (revue UX des liens)"
     public: "Pages faction : des vidéos et des images de la bonne faction"
