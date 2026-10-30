@@ -623,6 +623,7 @@ lots:
     visible: true
     created: 2026-10-04
     started: 2026-10-30
+    review: { date: 2026-10-30, verdict: "compliant : 0 bloquant, 0 majeur, 1 mineur (la capture Nouveautés montre le ▶ sur le titre de carte, déjà suivi par L107) — orchestré (vague 2026-10-30-1610-wh, 0 passe(s) de correction)", commit: a011173479f01fb7ccc156ab7ba14cc5be1fdf0c }
   - id: L58
     title: "QA /gallery : accord du pluriel « 1 œuvres » (House Terryn)"
     status: done
