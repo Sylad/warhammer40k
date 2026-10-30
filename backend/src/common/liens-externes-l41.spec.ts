@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { readContent } from './content';
 
 // L41 : liens externes morts relevés par l'audit du 2026-10-02
@@ -28,6 +30,15 @@ describe('liens externes morts (L41)', () => {
   it('R3 — la Guerre dans le Ciel cite la page Fandom existante « War in Heaven (Necron) »', () => {
     const e = evenements.find((x) => x.id === 'war-in-heaven')!;
     expect(e.sources).toContain('https://warhammer40k.fandom.com/wiki/War_in_Heaven_(Necron)');
+  });
+
+  it('R5 — l’audit présente les retraits comme proposés, en attente de la décision de Sylvain, et garde ouverte l’action sur la prod', () => {
+    const audit = readFileSync(join(__dirname, '../../../docs/liens/audit-2026-10-02.md'), 'utf8');
+    const suite = audit.slice(audit.indexOf('## Suite (L41'), audit.indexOf('## Non vérifié'));
+    expect(suite).toMatch(/proposition/i);
+    expect(suite).toMatch(/en attente de (la )?(confirmation|décision) de Sylvain/i);
+    expect(suite).toMatch(/Reste à faire sur la prod/);
+    expect(suite).not.toMatch(/\| \*\*Décision\*\*|\| Décision \|/);
   });
 
   it('R4 — chaque événement garde au moins une source (Lexicanum) après les retraits', () => {
