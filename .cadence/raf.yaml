@@ -669,8 +669,10 @@ lots:
     created: 2026-10-05
   - id: L62
     title: "Débordement horizontal : /videos (panneau latéral, 1511 px pour 1434 à 1440 ; 493 pour 384 à 390) et /romans à 390 (tiroir de menu, 490 pour 384) — mesurer et corriger — QA prod 05-10"
+    public: "Vidéos : la barre latérale reste dans la page, sans défilement horizontal"
     status: doing
     estimate: 1
+    visible: true
     created: 2026-10-05
     notes:
       - { date: 2026-10-17, text: "revue UX L5 17-10 : le défilement horizontal de /romans à 390 px vient de la barre d'onglets (.tabs en flex nowrap, scrollWidth 492), pas du tiroir du menu (fixed, visibility hidden, inert, sans effet sur scrollWidth) ; corrigé par L5/t1" }

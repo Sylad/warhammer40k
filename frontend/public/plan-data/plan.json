@@ -171,6 +171,12 @@
       "finished": "2026-10-05"
     },
     {
+      "id": "L62",
+      "title": "Vidéos : la barre latérale reste dans la page, sans défilement horizontal",
+      "status": "doing",
+      "started": "2026-10-30"
+    },
+    {
       "id": "L64",
       "title": "Galerie : des compteurs justes et une pagination lisible",
       "status": "done",
