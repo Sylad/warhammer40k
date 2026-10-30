@@ -75,4 +75,15 @@ describe('libellés de liens exacts (L43)', () => {
     expect([...el.querySelectorAll('a.row-link')].some(a => a.textContent!.includes('Voir la Légion'))).toBe(false);
     expect(el.querySelector('a[href="/factions/chaos-space-marines"]')).toBeNull();
   });
+
+  it('R6 — le libellé de « Voir la Légion » nomme la sous-faction ouverte (Horus → Black Legion)', async () => {
+    const el = await monter(PrimarchDetailComponent, {
+      getPrimarch: () => of(primarch({ id: 'horus', name: 'Horus Lupercal', legion: 'Sons of Horus (ex-Luna Wolves)', subFactionId: 'black-legion' })),
+      getSubFaction: () => of({ id: 'black-legion', name: 'Black Legion' }),
+    }, 'horus');
+    const lien = [...el.querySelectorAll<HTMLAnchorElement>('a.row-link')].find(a => a.textContent!.includes('Voir la Légion'))!;
+    expect(lien.getAttribute('href')).toBe('/subfactions/black-legion');
+    expect(lien.textContent).toContain('Voir la Légion Black Legion');
+    expect(lien.textContent).not.toContain('Sons of Horus');
+  });
 });

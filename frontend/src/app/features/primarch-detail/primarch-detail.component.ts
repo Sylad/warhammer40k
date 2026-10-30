@@ -315,7 +315,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
               <h3>Légion</h3>
               <a class="row-link" [routerLink]="['/subfactions', p.subFactionId]">
                 <span class="rl-ico">⚔</span>
-                <span class="rl-label">Voir la Légion {{ p.legion }}</span>
+                <span class="rl-label">Voir la Légion {{ legionLinkLabel() ?? p.legion }}</span>
                 <span class="rl-arrow">›</span>
               </a>
             </section>
@@ -374,6 +374,14 @@ export class PrimarchDetailComponent {
   protected readonly retryAll = retryAll;
   readonly primarch = toSafeSignal(
     this.route.paramMap, p => this.service.getPrimarch(p.get('id')!).pipe(namedPage(this.pages, x => x.name)), undefined);
+
+  // L43 : le libellé du lien « Voir la Légion » nomme la sous-faction qu'il ouvre (Horus → « Black Legion »),
+  // la `legion` de la fiche ne sert que le temps du chargement ou si la sous-faction est inconnue.
+  readonly legionLinkLabel = computed(() => this.subFaction()?.name ?? null);
+  private readonly subFaction = toSafeSignal(
+    toObservable(this.primarch),
+    prim => prim?.subFactionId ? this.service.getSubFaction(prim.subFactionId).pipe(catchError(() => of(null))) : of(null),
+    null);
 
   // L97 : les apparentés se déduisent du primarque déjà chargé (un seul getPrimarch par affichage).
   readonly related = toSafeSignal(
