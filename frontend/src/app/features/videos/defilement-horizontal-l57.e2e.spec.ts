@@ -122,4 +122,33 @@ describe.skipIf(!built || !chromium)('L57 — /videos et /romans : pas de défil
     expect(m.left).toBeGreaterThan(0);
     expect(m.right).toBeLessThanOrEqual(m.vw);
   }, 60_000);
+
+  // L62 — relevé QA en prod après L57 : /videos défilait quand même (panneau latéral à x=1518 pour 1440, colonne
+  // principale de 494 pour 390). Cause : les trois « Vidéos récentes » aux titres longs (données du volume, plus
+  // longues que celles du seed) élargissaient la piste implicite `auto` de la barre latérale (nowrap + ellipsis
+  // ne réduisent pas la largeur min-content d'un élément de grille).
+  const TITRE_LONG = 'Unleash the Wulfen — Epic Power Metal Space Wolves War Anthem avec un titre vraiment très long pour la prod';
+  async function ouvrirTitresLongs(width: number): Promise<Page> {
+    const page = await browser.newPage({ viewport: { width, height: width < 600 ? 844 : 900 } });
+    await page.route('**/api/videos', async (route) => {
+      const videos = (await (await route.fetch()).json()) as { titre: string }[];
+      videos.slice(-3).forEach((v) => { v.titre = TITRE_LONG; });
+      await route.fulfill({ json: videos });
+    });
+    await page.goto(base + '/videos', { waitUntil: 'networkidle' });
+    await page.locator('.recent-row').first().waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    return page;
+  }
+
+  for (const w of [1440, 390, 320]) {
+    it(`R5 — /videos à ${w} px avec des titres de vidéos récentes très longs : ni défilement, ni panneau hors de la fenêtre`, async () => {
+      const page = await ouvrirTitresLongs(w);
+      const m = await page.evaluate(mesure);
+      const lignes = await page.evaluate(() => [...document.querySelectorAll('.recent-row')].map((e) => Math.round(e.getBoundingClientRect().right) <= innerWidth));
+      await page.close();
+      expect(m).toEqual({ scroll: 0, debordent: [] });
+      expect(lignes).toEqual([true, true, true]);
+    }, 60_000);
+  }
 });

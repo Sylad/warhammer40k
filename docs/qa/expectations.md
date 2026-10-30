@@ -58,7 +58,7 @@ Ajouté par L137 (QA prod du 17-10, après L5 et L136) : 38 séries Black Librar
 - api: /api/series (38 séries), /api/wiki-image?q= (couvertures)
 
 ## /videos
-- never: le panneau latéral (section.side-panel) qui dépasse à droite et crée un défilement horizontal (1511 px pour 1434 à 1440, 493 pour 384 à 390 le 05-10, mesuré à nouveau le 30-10 par L57 : 0 px à 1440 et 390, plus de 27 px à 320 sur « Incontournables » ; gardé par `features/videos/defilement-horizontal-l57.e2e.spec.ts`, aussi pour /romans)
+- never: le panneau latéral (section.side-panel) qui dépasse à droite et crée un défilement horizontal (1511 px pour 1434 à 1440, 493 pour 384 à 390 le 05-10, mesuré à nouveau le 30-10 par L57 : 0 px à 1440 et 390, plus de 27 px à 320 sur « Incontournables » ; reproduit en prod le 30-10 par L62 (1518 / 494), cause : piste de grille `auto` de la barre latérale élargie par les titres récents longs, corrigée en `minmax(0, 1fr)` ; gardé par `features/videos/defilement-horizontal-l57.e2e.spec.ts`, aussi pour /romans)
 
 ## /gallery
 - shows: les statistiques Œuvres et Artistes, chacune avec un nombre (39 et 20 le 05-10) ; la pastille « Collections » n'apparaît que si au moins une collection compte une œuvre ; depuis L70 (17 œuvres rattachées) elle est là avec le nombre 3, donc 3 pastilles (Œuvres, Artistes, Collections 3) ; les catégories (8 le 05-10) ; des cartes d'œuvre (.art-card) avec leur image

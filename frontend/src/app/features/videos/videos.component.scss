@@ -601,6 +601,7 @@
       top: 96px;
       align-self: start;
       display: grid;
+      grid-template-columns: minmax(0, 1fr); /* L62 : une piste `auto` suit le min-content des titres nowrap */
       gap: 18px;
     }
     .side-panel {
@@ -814,8 +815,8 @@
     /* RESPONSIVE */
     @media (max-width: 1220px) {
       .hero-content { grid-template-columns: minmax(0, 1fr); }
-      .layout { grid-template-columns: 1fr; }
-      .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, 1fr); }
+      .layout { grid-template-columns: minmax(0, 1fr); }
+      .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .featured-grid { grid-template-columns: 1fr; }
       .channel-grid { grid-template-columns: repeat(2, 1fr); }
       .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -827,7 +828,7 @@
       .hero h1 { font-size: clamp(24px, 7vw, 44px); overflow-wrap: anywhere; }
       .toolbar { grid-template-columns: 1fr; }
       .video-grid, .channel-grid { grid-template-columns: 1fr; }
-      .sidebar { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: minmax(0, 1fr); }
       .video-card.large, .video-card { min-height: 270px; }
       .section-head { flex-direction: column; align-items: flex-start; }
       /* L57 : « INCONTOURNABLES » (26 px, interlettrage 0,09em) mesure 317 px pour 260 de colonne à 320 px. */
