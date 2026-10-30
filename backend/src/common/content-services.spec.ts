@@ -120,6 +120,26 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
       expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels.json'), 'utf-8'))).toHaveLength(3);
     });
 
+    it('R7 — ChannelsService.add refuse une chaîne retirée (L41) : erreur explicite, rien n’est écrit', () => {
+      write('data', 'channels.json', [{ id: 'vivante', url: 'https://www.youtube.com/@Vivante' }]);
+      const s = new ChannelsService();
+      expect(() => s.add({ id: 'indomitus-40k', name: 'Indomitus', url: 'https://www.youtube.com/@Indomitus40k/' } as never)).toThrow(
+        /@Indomitus40k.*retirée/,
+      );
+      expect(s.findAll().map((c) => c.id)).toEqual(['vivante']);
+      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels.json'), 'utf-8'))).toHaveLength(1);
+    });
+
+    it('R8 — VideosService.add refuse une vidéo dont l’adresse est une chaîne retirée (L41)', () => {
+      write('data', 'videos.json', [{ id: 'vivante', url: 'https://youtu.be/abc' }]);
+      const s = new VideosService();
+      expect(() => s.add({ id: 'astartes-chaine', titre: 'Astartes', url: 'https://www.youtube.com/@Astartes40k' } as never)).toThrow(
+        /@Astartes40k.*retirée/,
+      );
+      expect(s.findAll().map((v) => v.id)).toEqual(['vivante']);
+      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'videos.json'), 'utf-8'))).toHaveLength(1);
+    });
+
     it('ni volume ni seed : vide', () => {
       expect(new VideosService().findAll()).toEqual([]);
       expect(new ChannelsService().findAll()).toEqual([]);

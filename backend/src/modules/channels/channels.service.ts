@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
-import { estChaineRetiree } from '../../common/chaines-retirees.js';
+import { estChaineRetiree, motifChaineRetiree } from '../../common/chaines-retirees.js';
 import { readContent, userDataPath } from '../../common/content.js';
 import type { Channel } from '../videos/video.model.js';
 
@@ -51,6 +51,8 @@ export class ChannelsService {
     if (this.exists(channel.id)) {
       throw new BadRequestException(`Channel ${channel.id} already exists`);
     }
+    const retiree = motifChaineRetiree(channel.url); // L41 R7 : sinon l'entrée serait filtrée au prochain démarrage
+    if (retiree) throw new BadRequestException(retiree);
     this.channels.push(channel);
     atomicWriteJsonSync(userDataPath('channels.json'), this.channels);
     return channel;

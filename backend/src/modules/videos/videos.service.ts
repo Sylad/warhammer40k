@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import * as fs from 'fs';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
-import { estChaineRetiree } from '../../common/chaines-retirees.js';
+import { estChaineRetiree, motifChaineRetiree } from '../../common/chaines-retirees.js';
 import { readContent, userDataPath } from '../../common/content.js';
 import type { Video } from './video.model.js';
 
@@ -44,6 +44,8 @@ export class VideosService {
     if (this.exists(video.id)) {
       throw new BadRequestException(`Video ${video.id} already exists`);
     }
+    const retiree = motifChaineRetiree(video.url); // L41 R8 : sinon l'entrée serait filtrée au prochain démarrage
+    if (retiree) throw new BadRequestException(retiree);
     this.videos.push(video);
     atomicWriteJsonSync(userDataPath('videos.json'), this.videos);
     return video;

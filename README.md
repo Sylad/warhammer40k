@@ -146,7 +146,7 @@ des données.
 - `subfactions.json` (182 sous-factions enrichies, dont 71 successeurs Space Marines lore-ifiés, 200+ notableUnits avec personnages Hérésie d'Horus)
 - `units.json` (133 unités)
 - `series.json` (38 séries Black Library)
-- `videos.json` + `channels.json` (vidéos + 6 chaînes YT)
+- `videos.json` + `channels.json` (vidéos + 6 chaînes YT) — données utilisateur : en prod le volume `data/` prime sur le seed. Six chaînes introuvables (audit des liens du 02-10, L41, décision de Sylvain du 30-10 : `@Indomitus40k`, `@Astartes40k`, `@SireLambert`, `@LaVoxObscura`, `@BaldermortGW`, `@WarFo40k`) sont filtrées à la lecture du volume par `backend/src/common/chaines-retirees.ts` et leur import est refusé avec un message explicite tant qu'elles figurent dans cette liste (`content-services.spec.ts`, R6 à R8)
 - `artworks.json` + `artwork-collections.json` (35 artworks + collections)
 - `lore-feed.json` (40 entrées atmosphériques ticker)
 - `emperor.json` (6 sections narratives)
