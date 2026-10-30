@@ -468,6 +468,7 @@ lots:
     visible: true
     created: 2026-10-02
     started: 2026-10-30
+    review: { date: 2026-10-30, verdict: "conforme : le constat mineur (le libellé de « Voir la Légion » pour Horus) est corrigé par d94df5d et testé par R6 ; il reste 1 mineur en note (branche d'erreur de getSubFaction sans test) — orchestré (vague 2026-10-30-1610-wh, 1 passe(s) de correction + passe des mineurs)", commit: d94df5d05fb465fd7fb7fba4ba209ae13068ff4e }
   - id: L44
     title: "Veille et enrichissement régulier du contenu (consigne Sylvain 02-10) : rechercher les informations à jour (jeux vidéo et sorties à venir, romans et séries, nouvelles éditions, actualités de l'univers), les vérifier sur des sources en ligne citées et datées, compléter et corriger les pages concernées ; images seulement si libres de droits ou créées pour le site ; fixer un rythme de revue et afficher la date de dernière mise à jour"
     public: "Un codex tenu à jour : actualités de l'univers et pages révisées"
