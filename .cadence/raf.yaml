@@ -408,9 +408,10 @@ lots:
     finished: 2026-10-02
   - id: L37
     title: "Méga-menu Lore : bouton à divulgation, ses 11 liens hors de l'ordre de tabulation tant qu'il est fermé (20 tabulations pour atteindre la suite, revue UX L30)"
-    status: todo
+    status: doing
     estimate: 0.5
     created: 2026-10-02
+    started: 2026-10-30
   - id: L38
     title: "Erreur d'API (404/500, backend absent) : les signaux de données lèvent pendant la détection de changements et figent tout le rendu (menu À propos, recherche Ctrl+K) — état d'erreur par page au lieu d'une exception (vu en L30)"
     status: done
