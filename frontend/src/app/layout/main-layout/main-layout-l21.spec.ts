@@ -72,16 +72,17 @@ describe('Gabarit — revue UX L21', () => {
     expect([...el(f).querySelectorAll('nav.nav [aria-current]')].map((a) => a.getAttribute('href'))).toEqual(['/']);
     await TestBed.inject(Router).navigateByUrl('/lore/emperor');
     f.detectChanges();
-    // L37 : Lore est un bouton ; la fiche courante est annoncée sur son lien dans le panneau (fermé, mais présent).
-    expect([...el(f).querySelectorAll('nav.nav [aria-current]')].map((a) => a.getAttribute('href'))).toEqual(['/lore/emperor']);
+    // L37 : Lore est un bouton (sans href) qui annonce la page courante, puis la fiche sur son lien dans le panneau (fermé, mais présent).
+    expect([...el(f).querySelectorAll('nav.nav [aria-current]')].map((a) => a.getAttribute('href'))).toEqual([null, '/lore/emperor']);
   });
 
   it('R3 — L216 : sur une fiche du Lore, le tiroir marque Lore (la barre, la fiche dans le panneau Lore, L37), et Accueil reste réservé à /', async () => {
     const f = await render('/lore/emperor');
     const courants = (sel: string) => [...el(f).querySelectorAll(`${sel} [aria-current]`)].map((a) => a.getAttribute('href'));
     expect(courants('nav.drawer')).toEqual(['/lore']);
-    expect(courants('nav.nav')).toEqual(['/lore/emperor']);
+    expect(courants('nav.nav')).toEqual([null, '/lore/emperor']); // le bouton « Lore ▾ » (sans href), puis la fiche dans le panneau
     expect(el(f).querySelector('button.lore-toggle')!.classList.contains('active')).toBe(true);
+    expect(el(f).querySelector('button.lore-toggle')!.getAttribute('aria-current')).toBe('true');
     await TestBed.inject(Router).navigateByUrl('/');
     f.detectChanges();
     expect(courants('nav.drawer')).toEqual(['/']);

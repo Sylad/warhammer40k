@@ -23,7 +23,7 @@ const isLorePath = (url: string): boolean => /^\/lore(\/|$)/.test(url.split(/[?#
   template: `
     <div class="lore-menu" (focusout)="onFocusOut($event)" (keydown.escape)="closeAndFocus()">
       <button #toggleButton type="button" class="lore-toggle" [class.active]="groupActive()"
-              aria-controls="menu-lore" [attr.aria-expanded]="open()" (click)="toggle()">
+              [attr.aria-current]="groupActive() ? 'true' : null" aria-controls="menu-lore" [attr.aria-expanded]="open()" (click)="toggle()">
         <span class="nav-ico" aria-hidden="true">✠</span>Lore<span class="nav-caret" aria-hidden="true">▾</span>
       </button>
       <div id="menu-lore" class="mega-menu" [hidden]="!open()">

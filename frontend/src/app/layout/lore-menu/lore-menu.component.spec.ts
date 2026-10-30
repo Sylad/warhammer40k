@@ -37,7 +37,7 @@ describe('« Lore ▾ » — bouton à divulgation (L37)', () => {
   beforeEach(async () => {
     document.body.innerHTML = '';
     await setupTestBed([Host], [provideRouter([
-      { path: 'lore', component: Page }, { path: 'lore/emperor', component: Page }, { path: 'factions', component: Page }, { path: '', component: Page },
+      { path: 'lore', component: Page }, { path: 'lore/emperor', component: Page }, { path: 'factions', component: Page }, { path: 'lorem', component: Page }, { path: '', component: Page },
     ])]);
   });
 
@@ -139,10 +139,13 @@ describe('« Lore ▾ » — bouton à divulgation (L37)', () => {
     const f = await render();
     const router = TestBed.inject(Router);
     expect(button(f).classList.contains('active')).toBe(false);
-    for (const [url, actif] of [['/lore/emperor', true], ['/lore', true], ['/factions', false]] as const) {
+    expect(button(f).hasAttribute('aria-current')).toBe(false);
+    for (const [url, actif] of [['/lore/emperor', true], ['/lore', true], ['/factions', false], ['/lorem', false]] as const) {
       await router.navigateByUrl(url);
       f.detectChanges();
       expect(button(f).classList.contains('active'), url).toBe(actif);
+      // WCAG 1.3.1 : l'état « page courante » est exposé comme sur les autres entrées de la barre.
+      expect(button(f).getAttribute('aria-current'), url).toBe(actif ? 'true' : null);
     }
   });
 
