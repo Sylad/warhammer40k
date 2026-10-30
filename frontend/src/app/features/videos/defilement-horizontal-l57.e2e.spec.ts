@@ -68,7 +68,7 @@ describe.skipIf(!built || !chromium)('L57 — /videos et /romans : pas de défil
   });
 
   for (const { route } of PAGES) {
-    for (const w of [1440, 390, 320]) {
+    for (const w of [1440, 1024, 800, 390, 320]) {
       it(`R1 — ${route} à ${w} px : le document ne défile pas et rien (hors fixe) ne dépasse à droite`, async () => {
         const page = await ouvrir(route, w);
         const m = await page.evaluate(mesure);
@@ -141,7 +141,7 @@ describe.skipIf(!built || !chromium)('L57 — /videos et /romans : pas de défil
     return page;
   }
 
-  for (const w of [1440, 390, 320]) {
+  for (const w of [1440, 1024, 800, 390, 320]) {
     it(`R5 — /videos à ${w} px avec des titres de vidéos récentes très longs : ni défilement, ni panneau hors de la fenêtre`, async () => {
       const page = await ouvrirTitresLongs(w);
       const m = await page.evaluate(mesure);
