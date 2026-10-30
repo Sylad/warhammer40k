@@ -669,11 +669,12 @@ lots:
     created: 2026-10-05
   - id: L62
     title: "Débordement horizontal : /videos (panneau latéral, 1511 px pour 1434 à 1440 ; 493 pour 384 à 390) et /romans à 390 (tiroir de menu, 490 pour 384) — mesurer et corriger — QA prod 05-10"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-10-05
     notes:
       - { date: 2026-10-17, text: "revue UX L5 17-10 : le défilement horizontal de /romans à 390 px vient de la barre d'onglets (.tabs en flex nowrap, scrollWidth 492), pas du tiroir du menu (fixed, visibility hidden, inert, sans effet sur scrollWidth) ; corrigé par L5/t1" }
+    started: 2026-10-30
   - id: L63
     title: "Galerie (mineurs revue L60) : bandeau de stats mesuré aussi polices web bloquées au-dessus de 1024 px (h1 449 contre 451) avec seuil relatif ; retirer min-width 92px sans effet de .stat-card ; recadrer le commentaire L54 de gallery.component.scss:644"
     status: done
