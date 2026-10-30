@@ -2363,9 +2363,10 @@ lots:
     finished: 2026-10-29
   - id: L217
     title: "CI rouge après L37 (run 41037678770, 8e72acf) : l'acceptation navigateur galerie-filtres-l49.acceptation.spec.ts R10 « Artistes et Collections après la pagination dans l'ordre de tabulation » échoue (expected 32 to be greater than 84) — établir si L37 (liens du méga-menu Lore sortis de la tabulation, fermeture mutuelle) a cassé l'ordre réel de /gallery ou seulement l'hypothèse du test (comptage de tabulations depuis le haut de page), corriger la bonne cause, rejouer npm run test:e2e (frontend) en local ; la livraison de L37 attend ce lot"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-30
+    started: 2026-10-30
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
