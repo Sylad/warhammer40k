@@ -546,8 +546,12 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
   it('R10 — Artistes et Collections après la pagination dans l\'ordre de tabulation', async () => {
     await fresh();
     await open(page, 1440);
-    const seq = await tabSequence(page, 'recherche', 90);
+    const tour = await tabSequence(page, 'recherche', 90);
     await done();
+    // Un seul tour de page : 90 tabulations font le tour quand la barre a peu d'arrêts (L37), et le
+    // second tour repasse sur la pagination (L217). On coupe au retour sur la recherche.
+    const fin = tour.indexOf('recherche');
+    const seq = fin >= 0 ? tour.slice(0, fin) : tour;
     const iPage = first(seq, 'pagination');
     const iArt = first(seq, 'artistes');
     const iCol = first(seq, 'collections');

@@ -6,7 +6,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "0d663d7565999535f99dc7d03998d6929f45ba0d"
+    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "3726ff3e1b1ed24eca60403bf6857768191182d3"
   },
   "resceaux": [
     {
@@ -31,6 +31,14 @@
       "apres": "0d663d7565999535f99dc7d03998d6929f45ba0d",
       "porteur": "L150",
       "ficheAmendee": "7b53bfa"
+    },
+    {
+      "test": "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts",
+      "raison": "R10 : 90 tabulations depuis la recherche faisaient le tour de la page depuis que L37 a retiré les 11 liens du méga-menu Lore de la tabulation ; le second tour repassait sur la pagination (lastIndexOf = 84). Le test ne lit plus que le premier tour, coupé au retour sur la recherche ; l'ordre réel de /gallery est inchangé et conforme, contrat de la fiche intact.",
+      "date": "2026-10-30",
+      "avant": "0d663d7565999535f99dc7d03998d6929f45ba0d",
+      "apres": "3726ff3e1b1ed24eca60403bf6857768191182d3",
+      "porteur": "L217"
     }
   ]
 }
