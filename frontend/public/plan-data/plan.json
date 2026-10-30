@@ -66,6 +66,13 @@
       "finished": "2026-10-12"
     },
     {
+      "id": "L37",
+      "title": "Le menu Lore s'ouvre et se ferme au clic ou au clavier",
+      "status": "done",
+      "started": "2026-10-30",
+      "finished": "2026-10-30"
+    },
+    {
       "id": "L39",
       "title": "Liens internes réparés : fil d'Ariane, ancres et images vérifiés",
       "status": "done",

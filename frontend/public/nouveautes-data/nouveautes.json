@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-29 21:12",
+  "generated": "2026-10-30 11:15",
   "entries": [
+    {
+      "slug": "2026-10-30-le-menu-lore-s-ouvre-et-se-ferme-au-clic-ou-au-clavier",
+      "title": "Le menu Lore s'ouvre et se ferme au clic ou au clavier",
+      "date": "2026-10-30",
+      "lots": [
+        "L37"
+      ],
+      "captures": [
+        "captures/L37-menu-lore-ouvert.png"
+      ],
+      "alts": [
+        "La barre du haut à 1440 px avec le menu Lore ouvert : Vue d'ensemble, puis trois colonnes de liens (Origines, Cosmologie, Guerre et Histoire)"
+      ],
+      "html": "<p>Dans la barre du haut, « Lore ▾ » est maintenant un vrai bouton : il ouvre et ferme le menu Lore d'un clic, ou au clavier avec Entrée ou Espace, et Échap le referme.</p>\n<ul><li>Le menu ne s'ouvre plus au simple survol de la souris.</li><li>Tant qu'il est fermé, ses liens ne gênent plus la navigation au clavier : on atteint le contenu de la page en 12 appuis sur Tab au lieu de 20.</li><li>Ouvrir « À propos ▾ » referme le menu Lore.</li><li>Les lecteurs d'écran annoncent la section dans laquelle on se trouve.</li></ul>\n<p>Cela concerne la barre des écrans larges, à partir de 1344 px.</p>"
+    },
     {
       "slug": "2026-10-29-tiroir-mobile-lore-reste-en-exact-true-main-layout-component",
       "title": "Au téléphone, le menu marque « Lore » sur les fiches du Lore",
