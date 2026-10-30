@@ -89,8 +89,9 @@
     {
       "id": "L43",
       "title": "Liens et fil d'Ariane : des libellés exacts, le titre de la page en dernier",
-      "status": "doing",
-      "started": "2026-10-30"
+      "status": "done",
+      "started": "2026-10-30",
+      "finished": "2026-10-30"
     },
     {
       "id": "L44",
@@ -151,8 +152,9 @@
     {
       "id": "L57",
       "title": "Vidéos et Romans : plus de défilement horizontal parasite",
-      "status": "doing",
-      "started": "2026-10-30"
+      "status": "done",
+      "started": "2026-10-30",
+      "finished": "2026-10-30"
     },
     {
       "id": "L58",
