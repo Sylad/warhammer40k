@@ -669,13 +669,13 @@ lots:
     created: 2026-10-05
   - id: L62
     title: "Débordement horizontal : /videos (panneau latéral, 1511 px pour 1434 à 1440 ; 493 pour 384 à 390) et /romans à 390 (tiroir de menu, 490 pour 384) — mesurer et corriger — QA prod 05-10"
-    status: doing
+    status: todo
     estimate: 1
     created: 2026-10-05
     notes:
       - { date: 2026-10-17, text: "revue UX L5 17-10 : le défilement horizontal de /romans à 390 px vient de la barre d'onglets (.tabs en flex nowrap, scrollWidth 492), pas du tiroir du menu (fixed, visibility hidden, inert, sans effet sur scrollWidth) ; corrigé par L5/t1" }
       - { date: 2026-10-30, text: "Pas un doublon (30-10) : la QA de L41 a mesuré en prod, après la livraison de L57, /videos qui déborde horizontalement (1511 px pour 1434 à 1440, 493 pour 384 à 390), alors que expectations.md dit L57 corrigé. La prochaine passe reproduit d'abord la mesure sur https://warhammer.sladoire.dev/videos (scrollWidth > clientWidth) et cherche l'élément qui déborde, avant de conclure." }
-    started: 2026-10-30
+      - { date: 2026-10-30, text: "remis en attente : rendu sans commit le 30-10 (vague 2026-10-30-2025-wh) : la session l'a cru doublon de L57, alors que la QA mesure le débordement en prod (voir note)" }
   - id: L63
     title: "Galerie (mineurs revue L60) : bandeau de stats mesuré aussi polices web bloquées au-dessus de 1024 px (h1 449 contre 451) avec seuil relatif ; retirer min-width 92px sans effet de .stat-card ; recadrer le commentaire L54 de gallery.component.scss:644"
     status: done
