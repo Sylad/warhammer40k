@@ -7,9 +7,9 @@
 // en ligne revient par un lot qui la retire de cette liste.
 const HANDLES_RETIRES = ['indomitus40k', 'astartes40k', 'sirelambert', 'lavoxobscura', 'baldermortgw', 'warfo40k'];
 
-/** Handle YouTube (`Nom`, casse conservée) d'une adresse `…/@Nom[/]`, sinon `undefined`. */
+/** Handle YouTube (`Nom`, casse conservée) d'une adresse `…/@Nom[/…]` (même jeu de caractères que `YouTubeOEmbedService.extractHandle`), sinon `undefined`. */
 function handleDe(url: string | undefined): string | undefined {
-  return (url ?? '').replace(/\/+$/, '').split('/@')[1];
+  return /\/@([A-Za-z0-9._-]+)/.exec(url ?? '')?.[1];
 }
 
 export function estChaineRetiree(url: string | undefined): boolean {

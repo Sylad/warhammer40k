@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { readContent } from './content';
+import { estChaineRetiree } from './chaines-retirees';
 
 // L41 : liens externes morts relevés par l'audit du 2026-10-02
 // (docs/liens/audit-2026-10-02.md). Contrôle hors réseau sur les adresses.
@@ -44,5 +45,12 @@ describe('liens externes morts (L41)', () => {
 
   it('R4 — chaque événement garde au moins une source (Lexicanum) après les retraits', () => {
     for (const e of evenements) expect(e.sources.length, e.id).toBeGreaterThan(0);
+  });
+
+  it('R9 — une adresse de chaîne retirée est reconnue avec un suffixe (/videos, ?query) comme sans', () => {
+    for (const u of ['https://www.youtube.com/@Astartes40k', 'https://www.youtube.com/@Astartes40k/', 'https://www.youtube.com/@Astartes40k/videos', 'https://www.youtube.com/@astartes40k?si=x'])
+      expect(estChaineRetiree(u), u).toBe(true);
+    expect(estChaineRetiree('https://www.youtube.com/@Astartes40kFan/videos')).toBe(false);
+    expect(estChaineRetiree(undefined)).toBe(false);
   });
 });
