@@ -90,8 +90,8 @@ describe.skipIf(!built || !chromium)('gabarit commun (navigateur, dist) — L21'
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(`${base}/factions`);
     await page.locator('nav.nav').waitFor();
-    await page.locator('.nav-dropdown').hover();
-    await page.locator('.mega-menu').waitFor({ state: 'visible' });
+    await page.locator('button.lore-toggle').click();
+    await page.locator('#menu-lore').waitFor({ state: 'visible' });
     expect(await petitsTextes(page)).toEqual([]);
     await page.close();
   });

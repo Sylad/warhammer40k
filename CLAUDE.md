@@ -40,7 +40,7 @@ quand le focus va au h1). Une nouvelle fiche : `title:` sur la route + `namedPag
 Navigation (L23, L30 option b) — seuils en **em** (suivent la taille de police par défaut du
 navigateur) : sous `84em` (1344 px à 16 px), bouton **Menu** → tiroir `#menu-telephone` (inerte
 quand il est fermé, Échap le ferme, Tab y boucle), liens à plat ; dès `84em`, barre compacte :
-Accueil · Factions · Romans · Vidéos · Jeux vidéo · Galerie · Lore ▾ · **« À propos ▾ »**, bouton à divulgation
+Accueil · Factions · Romans · Vidéos · Jeux vidéo · Galerie · **« Lore ▾ »** (L37 : bouton à divulgation, `layout/lore-menu/`, 12 liens dont « Vue d'ensemble » → /lore, hors tabulation tant qu'il est fermé, plus de survol) · **« À propos ▾ »**, bouton à divulgation
 (`layout/about-menu/`, pas un `role=menu`) qui montre Nouveautés (pastille), Plan de travail et
 À propos du codex ; dès `106.25em` (1700 px), barre complète (icônes, sous-titre du logo). Le pied
 de page porte « Nouveautés · Plan de travail · À propos » sur chaque page. Une nouvelle page

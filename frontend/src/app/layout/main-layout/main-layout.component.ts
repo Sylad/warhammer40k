@@ -5,6 +5,7 @@ import { NavigationEnd, NavigationSkipped, Router, RouterOutlet, RouterLink, Rou
 import { filter } from 'rxjs/operators';
 import { NewsService } from '../../features/nouveautes/news.service';
 import { badgeLabel, unseenLabel } from '../../features/nouveautes/news-badge';
+import { LoreMenuComponent } from '../lore-menu/lore-menu.component';
 import { AboutMenuComponent } from '../about-menu/about-menu.component';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { CommandPaletteComponent } from '../../shared/components/command-palette/command-palette.component';
@@ -17,7 +18,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent, SectionAnchorDirective],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, LoreMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent, SectionAnchorDirective],
   template: `
     <!-- L21 : premier élément focalisable — évite la barre (≈ 14 arrêts de Tab au bureau). -->
     <a class="skip-link" sectionAnchor="contenu" [attr.inert]="pageInert()">Aller au contenu</a>
@@ -28,7 +29,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         <strong>Warhammer 40,000</strong>
         <span class="brand-sub">Codex numérique</span>
       </a>
-      <nav class="nav" aria-label="Menu principal" [class.about-open]="aboutOpen()" [attr.inert]="pageInert()">
+      <nav class="nav" aria-label="Menu principal" [attr.inert]="pageInert()">
         <a routerLink="/" routerLinkActive="active" [ariaCurrentWhenActive]="true" [routerLinkActiveOptions]="{exact: true}">
           <span class="nav-ico" aria-hidden="true">⌂</span>Accueil
         </a>
@@ -47,36 +48,10 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         <a routerLink="/gallery" routerLinkActive="active" [ariaCurrentWhenActive]="true">
           <span class="nav-ico" aria-hidden="true">▦</span>Galerie
         </a>
-        <!-- L30 : Lore et « À propos ▾ » jamais ouverts ensemble (le panneau couvrait « Guerre & Histoire »). -->
-        <div class="nav-dropdown" (pointerenter)="aboutMenu.close()" (focusin)="aboutMenu.close()">
-          <a routerLink="/lore" routerLinkActive="active" [ariaCurrentWhenActive]="true">
-            <span class="nav-ico" aria-hidden="true">✠</span>Lore<span class="nav-caret" aria-hidden="true">▾</span>
-          </a>
-          <div class="mega-menu">
-            <div class="mega-col">
-              <h4>Origines</h4>
-              <a routerLink="/lore/emperor">L'Empereur</a>
-              <a routerLink="/lore/primarchs">Primarques</a>
-              <a routerLink="/lore/saints">Saints & Saintes</a>
-            </div>
-            <div class="mega-col">
-              <h4>Cosmologie</h4>
-              <a routerLink="/lore/chaos-gods">Dieux du Chaos</a>
-              <a routerLink="/lore/galaxy">Galaxie</a>
-              <a routerLink="/lore/concepts">Concepts</a>
-              <a routerLink="/lore/civilians">Imperial Orgs</a>
-            </div>
-            <div class="mega-col">
-              <h4>Guerre & Histoire</h4>
-              <a routerLink="/lore/timeline">Chronologie</a>
-              <a routerLink="/lore/equipment">Armement</a>
-              <a routerLink="/lore/ships">Vaisseaux</a>
-              <a routerLink="/lore/titans">Titans & Knights</a>
-            </div>
-          </div>
-        </div>
+        <!-- L37 : Lore en bouton à divulgation, comme « À propos ▾ » ; jamais ouverts ensemble (le panneau couvrirait l'autre). -->
+        <app-lore-menu #loreMenu (navigated)="focusOnArrival = true" (openChange)="$event && aboutMenu.close()" />
         <!-- L30 (option b) : Nouveautés, Plan de travail et À propos regroupés sous un bouton à divulgation. -->
-        <app-about-menu #aboutMenu [badge]="badge()" [unseenText]="unseenText()" (navigated)="focusOnArrival = true" (openChange)="aboutOpen.set($event)" />
+        <app-about-menu #aboutMenu [badge]="badge()" [unseenText]="unseenText()" (navigated)="focusOnArrival = true" (openChange)="$event && loreMenu.close()" />
       </nav>
 
       <div class="topbar-actions">
@@ -261,63 +236,6 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       border-left: 1px solid var(--border); padding-left: 6px;
     }
 
-    /* Mega-menu Lore */
-    .nav-dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-    .nav-caret {
-      margin-left: 4px;
-      font-size: 0.65rem;
-      opacity: 0.6;
-    }
-    .mega-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      min-width: 540px;
-      background: rgba(11, 9, 7, 0.97);
-      border: 1px solid var(--border-strong);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
-      padding: 22px 24px;
-      display: none;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 22px;
-      z-index: 100;
-    }
-    .nav-dropdown:hover .mega-menu,
-    .nav-dropdown:focus-within .mega-menu {
-      display: grid;
-    }
-    .nav.about-open .mega-menu { display: none; }
-    .mega-col h4 {
-      font-family: var(--serif);
-      font-size: 0.75rem;
-      letter-spacing: 0.22em;
-      color: var(--gold-bright);
-      margin: 0 0 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-      text-transform: uppercase;
-    }
-    .mega-col a {
-      display: block;
-      padding: 7px 0;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      opacity: 0.78;
-      text-decoration: none;
-      text-transform: none;
-      font-weight: 500;
-      border-bottom: 1px solid rgba(201, 162, 74, 0.08);
-    }
-    .mega-col a:last-child { border-bottom: none; }
-    .mega-col a:hover {
-      color: var(--gold-bright);
-      opacity: 1;
-    }
     .nav-ico { font-size: 1rem; line-height: 1; }
     .nav-ico[data-ico]::before { content: attr(data-ico); }
 
@@ -523,8 +441,6 @@ export class MainLayoutComponent implements OnInit {
   readonly badge = computed(() => badgeLabel(this.news.unseen()));
   readonly unseenText = computed(() => unseenLabel(this.news.unseen()));
   readonly menuOpen = signal(false);
-  /** Panneau « À propos ▾ » ouvert : le méga-menu Lore est masqué. */
-  readonly aboutOpen = signal(false);
   /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
   readonly pageInert = computed(() => (this.menuOpen() ? '' : null));
   /**

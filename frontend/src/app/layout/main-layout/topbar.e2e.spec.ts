@@ -74,7 +74,7 @@ export async function measureBar(page: Page) {
       ? document.querySelector('nav.nav > a')!
       : document.querySelector('.topbar-actions')!;
     const search = box(document.querySelector('.nav-search-btn')!);
-    const items = navOn ? [...document.querySelectorAll('nav.nav > a, .nav-dropdown > a, .about-toggle')] : [];
+    const items = navOn ? [...document.querySelectorAll('nav.nav > a, .lore-toggle, .about-toggle')] : [];
     return {
       mode: !navOn ? 'tiroir' : visible(document.querySelector('.brand-sub')) ? 'complète' : 'compacte',
       overflow: bar.scrollWidth - bar.clientWidth,
@@ -193,29 +193,33 @@ describe.skipIf(!built || !chromium)('barre du haut, seuils en em ±1 px, pastil
     await page.close();
   });
 
-  it('1440 px : « À propos ▾ » et le méga-menu Lore jamais visibles ensemble (souris et clavier)', async () => {
+  it('1440 px : « À propos ▾ » et « Lore ▾ » jamais visibles ensemble (souris et clavier) ; Lore fermé, ses 12 liens hors de la tabulation (L37)', async () => {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(`${base}/about`);
     await page.waitForSelector('button.about-toggle');
     const both = () => page.evaluate(() => ({
       about: !(document.getElementById('menu-a-propos') as HTMLElement).hidden,
-      lore: getComputedStyle(document.querySelector('.mega-menu')!).display !== 'none',
+      lore: getComputedStyle(document.getElementById('menu-lore')!).display !== 'none',
     }));
+    expect(await both()).toEqual({ about: false, lore: false });
+    // Fermé : aucun lien du panneau n'est focalisable (display: none) — Tab saute de Galerie à « Lore ▾ » puis « À propos ▾ ».
+    await page.focus('nav.nav a[href="/gallery"]');
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => document.activeElement?.classList.contains('lore-toggle'))).toBe(true);
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => document.activeElement?.classList.contains('about-toggle'))).toBe(true);
     await page.click('button.about-toggle');
     await page.waitForSelector('#menu-a-propos:not([hidden])');
-    await page.hover('.nav-dropdown > a');
-    await page.waitForTimeout(80);
+    await page.click('button.lore-toggle');
+    await page.waitForSelector('#menu-lore:not([hidden])');
     expect(await both()).toEqual({ about: false, lore: true });
-    // Pointeur resté sur Lore, « À propos » ouvert au clavier : Lore se masque.
+    // Ouvert, Tab entre dans le panneau.
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => document.activeElement?.getAttribute('href'))).toBe('/lore');
     await page.focus('button.about-toggle');
     await page.keyboard.press('Enter');
     await page.waitForSelector('#menu-a-propos:not([hidden])');
-    await page.waitForTimeout(80);
     expect(await both()).toEqual({ about: true, lore: false });
-    // Focus clavier sur Lore : « À propos » se referme.
-    await page.focus('.nav-dropdown > a');
-    await page.waitForTimeout(80);
-    expect((await both()).about).toBe(false);
     await page.close();
   });
 
@@ -231,7 +235,7 @@ describe.skipIf(!built || !chromium)('barre du haut, seuils en em ±1 px, pastil
         r.selectNodeContents(t!);
         return Math.round(caret.getBoundingClientRect().left - r.getBoundingClientRect().right);
       };
-      return { lore: gap(document.querySelector('.nav-dropdown .nav-caret')!), about: gap(document.querySelector('.about-toggle .nav-caret')!) };
+      return { lore: gap(document.querySelector('.lore-toggle .nav-caret')!), about: gap(document.querySelector('.about-toggle .nav-caret')!) };
     });
     await page.close();
     expect(gaps.about).toBe(gaps.lore);

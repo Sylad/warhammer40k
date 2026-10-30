@@ -51,7 +51,7 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     document.body.style.overflow = '';
     stubFetch({ '/nouveautes-data/nouveautes.json': NEWS, '/nouveautes-data/tailles.json': {} });
     await setupTestBed([MainLayoutComponent], [
-      provideRouter([{ path: 'about', component: ArrivalPage }, { path: 'plan', component: ArrivalPage }, { path: 'lente', component: SlowPage }, { path: '', component: ArrivalPage }]),
+      provideRouter([{ path: 'about', component: ArrivalPage }, { path: 'lore', component: ArrivalPage }, { path: 'plan', component: ArrivalPage }, { path: 'lente', component: SlowPage }, { path: '', component: ArrivalPage }]),
       provideHttpClient(), provideHttpClientTesting(),
       { provide: TitleStrategy, useClass: PageTitleStrategy },
     ]);
@@ -67,8 +67,11 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
   it('barre du bureau (option b) : Accueil … Lore, puis le bouton « À propos ▾ » qui regroupe Nouveautés, Plan de travail, À propos du codex (L30)', async () => {
     const f = await render();
     const nav = el(f).querySelector('nav.nav')!;
-    const top = [...nav.querySelectorAll<HTMLAnchorElement>(':scope > a, :scope > .nav-dropdown > a')].map((a) => a.getAttribute('href'));
-    expect(top).toEqual(['/', '/factions', '/romans', '/videos', '/jeux-video', '/gallery', '/lore']);
+    const top = [...nav.querySelectorAll<HTMLAnchorElement>(':scope > a')].map((a) => a.getAttribute('href'));
+    expect(top).toEqual(['/', '/factions', '/romans', '/videos', '/jeux-video', '/gallery']);
+    const lore = nav.querySelector('app-lore-menu')!;
+    expect(lore.previousElementSibling!.getAttribute('href')).toBe('/gallery'); // L37 : Lore ▾ = bouton, après Galerie
+    expect(lore.nextElementSibling).toBe(nav.lastElementChild);
     const menu = nav.lastElementChild!;
     expect(menu.tagName.toLowerCase()).toBe('app-about-menu');
     expect([...menu.querySelectorAll('#menu-a-propos a')].map((a) => a.getAttribute('href'))).toEqual(['/nouveautes', '/plan', '/about']);
@@ -258,23 +261,32 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(document.activeElement).toBe(el(f).querySelector('main h1'));
   });
 
-  it('« À propos ▾ » et le méga-menu Lore jamais ouverts ensemble : survol ou focus de Lore referme « À propos » ; « À propos » ouvert masque Lore (L30)', async () => {
+  it('L37 — « À propos ▾ » et « Lore ▾ » jamais ouverts ensemble : l\u2019ouverture de l\u2019un referme l\u2019autre', async () => {
     const f = await render();
-    const toggle = el(f).querySelector<HTMLButtonElement>('button.about-toggle')!;
-    const lore = el(f).querySelector<HTMLElement>('.nav-dropdown')!;
-    const nav = el(f).querySelector('nav.nav')!;
-    toggle.click();
+    const about = el(f).querySelector<HTMLButtonElement>('button.about-toggle')!;
+    const lore = el(f).querySelector<HTMLButtonElement>('button.lore-toggle')!;
+    about.click();
     f.detectChanges();
-    expect(nav.classList.contains('about-open')).toBe(true); // règle CSS : .about-open .mega-menu masqué
-    lore.dispatchEvent(new Event('pointerenter'));
+    expect(about.getAttribute('aria-expanded')).toBe('true');
+    lore.click();
     f.detectChanges();
-    expect(toggle.getAttribute('aria-expanded')).toBe('false');
-    expect(nav.classList.contains('about-open')).toBe(false);
-    toggle.click();
+    expect(lore.getAttribute('aria-expanded')).toBe('true');
+    expect(about.getAttribute('aria-expanded')).toBe('false');
+    about.click();
     f.detectChanges();
-    lore.querySelector('a')!.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    expect(about.getAttribute('aria-expanded')).toBe('true');
+    expect(lore.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('L37 — un lien du panneau Lore place le focus sur le titre de la page d\u2019arrivée', async () => {
+    const f = await render();
+    el(f).querySelector<HTMLButtonElement>('button.lore-toggle')!.click();
     f.detectChanges();
-    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    el(f).querySelector<HTMLAnchorElement>('#menu-lore a[href="/lore"]')!.click();
+    await f.whenStable();
+    f.detectChanges();
+    await new Promise((r) => setTimeout(r, 20));
+    expect(document.activeElement).toBe(el(f).querySelector('main h1'));
   });
 
   it('navigation hors tiroir : le focus n’est pas déplacé', async () => {
