@@ -7,19 +7,19 @@
 // en ligne revient par un lot qui la retire de cette liste.
 const HANDLES_RETIRES = ['indomitus40k', 'astartes40k', 'sirelambert', 'lavoxobscura', 'baldermortgw', 'warfo40k'];
 
-/** Handle YouTube (`@Nom` → `nom`) d'une adresse `…/@Nom[/]`, sinon `undefined`. */
+/** Handle YouTube (`Nom`, casse conservée) d'une adresse `…/@Nom[/]`, sinon `undefined`. */
 function handleDe(url: string | undefined): string | undefined {
-  return (url ?? '').replace(/\/+$/, '').toLowerCase().split('/@')[1];
+  return (url ?? '').replace(/\/+$/, '').split('/@')[1];
 }
 
 export function estChaineRetiree(url: string | undefined): boolean {
-  const handle = handleDe(url);
+  const handle = handleDe(url)?.toLowerCase();
   return handle !== undefined && HANDLES_RETIRES.includes(handle);
 }
 
 /** Message d'erreur à renvoyer quand on tente d'enregistrer une chaîne retirée, sinon `undefined`. */
 export function motifChaineRetiree(url: string | undefined): string | undefined {
   if (!estChaineRetiree(url)) return undefined;
-  const handle = (url ?? '').replace(/\/+$/, '').split('/@')[1];
+  const handle = handleDe(url);
   return `Chaîne YouTube @${handle} retirée du codex (audit des liens du 2026-10-02, L41) : elle ne peut pas être enregistrée tant qu'elle figure dans la liste des chaînes retirées (backend/src/common/chaines-retirees.ts)`;
 }
