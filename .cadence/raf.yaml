@@ -413,6 +413,7 @@ lots:
     estimate: 0.5
     created: 2026-10-02
     started: 2026-10-30
+    review: { date: 2026-10-30, verdict: "conforme : le constat 2 (commentaires faux d'AboutMenuComponent) est corrigé, rien n'est cassé ; seule la duplication lore-menu / about-menu reste, en note du lot — orchestré (vague 2026-10-30-1105-wh, 2 passe(s) de correction + passe des mineurs)", commit: 8433d1f050ac22b57259e406399a7a67c249d280 }
   - id: L38
     title: "Erreur d'API (404/500, backend absent) : les signaux de données lèvent pendant la détection de changements et figent tout le rendu (menu À propos, recherche Ctrl+K) — état d'erreur par page au lieu d'une exception (vu en L30)"
     status: done
