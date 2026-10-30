@@ -618,10 +618,11 @@ lots:
   - id: L57
     title: "QA /videos et /romans : défilement horizontal (side-panel à x=1511 à 1440 px ; drawer à x=704 à 390 px) — vérifier et contenir"
     public: "Vidéos et Romans : plus de défilement horizontal parasite"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-04
+    started: 2026-10-30
   - id: L58
     title: "QA /gallery : accord du pluriel « 1 œuvres » (House Terryn)"
     status: done
