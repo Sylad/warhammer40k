@@ -462,9 +462,10 @@ lots:
     finished: 2026-10-02
   - id: L43
     title: "Fil d'Ariane : dernier élément = titre de la page et non l'identifiant de l'URL (« Sm Calgar », « War In Heaven ») — avec le lot des titres par route ; libellés de liens exacts (Légion Death Guard → sa sous-faction, Collegia Titanica) ; titre « L'ASTRONOMICAN » coupé à 390 px sur Concepts (revue UX des liens)"
-    status: todo
+    status: doing
     estimate: 0.5
     created: 2026-10-02
+    started: 2026-10-30
   - id: L44
     title: "Veille et enrichissement régulier du contenu (consigne Sylvain 02-10) : rechercher les informations à jour (jeux vidéo et sorties à venir, romans et séries, nouvelles éditions, actualités de l'univers), les vérifier sur des sources en ligne citées et datées, compléter et corriger les pages concernées ; images seulement si libres de droits ou créées pour le site ; fixer un rythme de revue et afficher la date de dernière mise à jour"
     public: "Un codex tenu à jour : actualités de l'univers et pages révisées"
