@@ -408,6 +408,8 @@ export interface Primarch {
   name: string;
   legion?: string;
   legionId?: string;
+  /** Sous-faction (Légion ou Chapitre) de ce Primarque : cible du lien « Voir la Légion ». */
+  subFactionId?: string;
   allegiance: PrimarchAllegiance;
   status: PrimarchStatus;
   statusDetail: string;

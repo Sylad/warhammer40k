@@ -116,7 +116,7 @@ const T = (file, expr) => `frontend/src/app/features/${file}|${expr}`;
 export const DATA_LINKS = [
   { seed: 'factions', field: 'notableHeroes[].unitId', to: '/units/:id', templates: [T('faction-detail/faction-detail.component.ts', 'h.unitId')] },
   { seed: 'factions', field: 'notableHeroes[].primarchId', to: '/lore/primarchs/:id', templates: [T('faction-detail/faction-detail.component.ts', 'h.primarchId')] },
-  { seed: 'primarchs', field: 'legionId', to: '/factions/:id', templates: [T('primarch-detail/primarch-detail.component.ts', 'p.legionId')] },
+  { seed: 'primarchs', field: 'subFactionId', to: '/subfactions/:id', templates: [T('primarch-detail/primarch-detail.component.ts', 'p.subFactionId')] },
   // Les apparentés sont chargés un par un (`r` = fiche obtenue) : lien sur r.id, valeurs vérifiées ici.
   { seed: 'primarchs', field: 'relatedPrimarchIds[]', to: '/lore/primarchs/:id', templates: [T('primarch-detail/primarch-detail.component.ts', 'r.id')] },
   { seed: 'subfactions', field: 'factionId', to: '/factions/:id', templates: [T('subfaction-detail/subfaction-detail.component.ts', 'd.subfaction.factionId')] },

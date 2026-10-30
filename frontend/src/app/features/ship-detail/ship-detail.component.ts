@@ -6,6 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { LegendaryShip } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { factionLabel } from '../../core/utils/faction-label';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 @Component({
@@ -114,7 +115,7 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
             <h3>Liens</h3>
             @if (s.factionId) {
               <a class="row-link" [routerLink]="['/factions', s.factionId]">
-                <span class="rl-label">Faction · {{ s.factionName }}</span>
+                <span class="rl-label">Faction · {{ label(s.factionId, s.factionName) }}</span>
                 <span class="rl-arrow">›</span>
               </a>
             }
@@ -141,6 +142,9 @@ export class ShipDetailComponent {
   private readonly service = inject(WarhammerService);
   private readonly pages = inject(PageTitleService);
   private readonly route = inject(ActivatedRoute);
+
+  private readonly factions = toSafeSignal(this.service.factions$, []);
+  protected label(id: string | undefined, fallback: string): string { return factionLabel(this.factions(), id, fallback); }
 
   readonly heroImage = signal<string | null>(null);
   private readonly galleryImages = signal<string[]>([]);

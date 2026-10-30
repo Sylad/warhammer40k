@@ -6,6 +6,7 @@ import { namedPage, PageTitleService } from '../../core/services/page-title.serv
 import type { GodMachine } from '../../core/models/models';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { factionLabel } from '../../core/utils/faction-label';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 
 @Component({
@@ -105,7 +106,7 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
             <section class="sp">
               <h3>Liens</h3>
               <a class="row-link" [routerLink]="['/factions', m.factionId]">
-                <span class="rl-label">Faction · {{ m.factionName }}</span>
+                <span class="rl-label">Faction · {{ label(m.factionId, m.factionName) }}</span>
                 <span class="rl-arrow">›</span>
               </a>
             </section>
@@ -133,6 +134,7 @@ export class TitanDetailComponent {
   /** L39 : on ne lie que les factions qui ont une fiche (« imperial-knights » n'en a pas). */
   protected readonly factions = toSafeSignal(this.service.factions$, []);
   readonly factionIds = computed(() => new Set(this.factions().map(f => f.id)));
+  protected label(id: string | undefined, fallback: string): string { return factionLabel(this.factions(), id, fallback); }
 
   protected readonly retryAll = retryAll;
   readonly machine = toSafeSignal(

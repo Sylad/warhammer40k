@@ -310,10 +310,10 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             }
           </section>
 
-          @if (p.legionId) {
+          @if (p.subFactionId) {
             <section class="sp">
               <h3>Légion</h3>
-              <a class="row-link" [routerLink]="['/factions', p.legionId]">
+              <a class="row-link" [routerLink]="['/subfactions', p.subFactionId]">
                 <span class="rl-ico">⚔</span>
                 <span class="rl-label">Voir la Légion {{ p.legion }}</span>
                 <span class="rl-arrow">›</span>
