@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-30 11:15",
+  "generated": "2026-10-30 13:59",
   "entries": [
+    {
+      "slug": "2026-10-30-videos-et-romans-plus-de-defilement-horizontal-parasite",
+      "title": "Vidéos et Romans : plus de défilement horizontal parasite",
+      "date": "2026-10-30",
+      "lots": [
+        "L57"
+      ],
+      "captures": [
+        "captures/L57-videos-320.png"
+      ],
+      "alts": [
+        "La page Vidéos sur un écran de 320 px : le titre « Incontournables » tient en entier dans la colonne, sans faire défiler la page de côté"
+      ],
+      "html": "<p>Sur les pages Vidéos et Romans, la page ne glisse plus de côté, ni sur ordinateur (1440 px) ni sur téléphone (390 px et 320 px).</p>\n<ul><li>Sur un très petit écran (320 px), le titre « Incontournables » de la page Vidéos dépassait de la colonne et décalait la page de 27 px : il s'adapte maintenant à la largeur.</li><li>Le menu du téléphone, ouvert ou fermé, ne déborde plus de l'écran sur ces deux pages.</li></ul>"
+    },
     {
       "slug": "2026-10-30-le-menu-lore-s-ouvre-et-se-ferme-au-clic-ou-au-clavier",
       "title": "Le menu Lore s'ouvre et se ferme au clic ou au clavier",
