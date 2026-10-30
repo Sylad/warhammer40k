@@ -408,12 +408,14 @@ lots:
     finished: 2026-10-02
   - id: L37
     title: "Méga-menu Lore : bouton à divulgation, ses 11 liens hors de l'ordre de tabulation tant qu'il est fermé (20 tabulations pour atteindre la suite, revue UX L30)"
-    status: doing
+    status: done
     visible: true
     estimate: 0.5
     created: 2026-10-02
     started: 2026-10-30
-    review: { date: 2026-10-30, verdict: "conforme : le constat 2 (commentaires faux d'AboutMenuComponent) est corrigé, rien n'est cassé ; seule la duplication lore-menu / about-menu reste, en note du lot — orchestré (vague 2026-10-30-1105-wh, 2 passe(s) de correction + passe des mineurs)", commit: 8433d1f050ac22b57259e406399a7a67c249d280 }
+    review: { date: 2026-10-30, verdict: "conforme : revue de code de la vague conforme après 2 corrections ; correctif UX c7fdf87 (aria-current sur le bouton « Lore ▾ », R9 couvre /lorem, assertions R3 de main-layout-l21 mises à jour) relu par le lead, porte frontend verte 1181/1181", commit: c7fdf87e9118d14fa5c3034bbdca21fcb7c36c15 }
+    ux: { date: 2026-10-30, verdict: "conforme après correctif c7fdf87 : ux-reviewer (app lancée, 1440) — 12 arrêts de tabulation menu fermé, Échap et retour du focus, aria-expanded, fermeture mutuelle Lore/À propos ; aria-current exposé sur /lore/* ; 390 sans objet (tiroir inchangé) ; mineurs en note : lien actif du panneau distingué par la couleur seule, colonne « Guerre & Histoire » sur deux lignes, « Vue d'ensemble » peu hiérarchisé" }
+    finished: 2026-10-30
   - id: L38
     title: "Erreur d'API (404/500, backend absent) : les signaux de données lèvent pendant la détection de changements et figent tout le rendu (menu À propos, recherche Ctrl+K) — état d'erreur par page au lieu d'une exception (vu en L30)"
     status: done
