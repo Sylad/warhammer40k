@@ -2432,9 +2432,10 @@ lots:
     created: 2026-10-31
   - id: L221
     title: "Galerie : rejouer la réécriture différée après une sortie en erreur ou annulée ne doit pas relancer une navigation vers l'adresse actuelle (NavigationSkipped → retour en haut, position non rétablie) ; libellés « vos images personnelles » / « Mes images » / « Collection personnelle » à unifier (suite revue de L48)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-31
+    started: 2026-10-31
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
