@@ -1,7 +1,22 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-30 21:29",
+  "generated": "2026-10-31 11:35",
   "entries": [
+    {
+      "slug": "2026-10-31-barre-du-haut-plus-de-debordement-avec-une-grande-police-du",
+      "title": "Barre du haut : plus de débordement avec une grande police du navigateur",
+      "date": "2026-10-31",
+      "lots": [
+        "L46"
+      ],
+      "captures": [
+        "captures/l46-barre-320-police-20px.png"
+      ],
+      "alts": [
+        "Barre du haut à 320 px avec une police de 20 px : le logo, la loupe et le bouton ☰ tiennent dans la largeur de l'écran"
+      ],
+      "html": "<p>Si votre navigateur affiche le texte en grand (police par défaut de 18 ou 20 px), la barre du haut ne dépasse plus de l'écran sur un petit téléphone : plus de défilement horizontal, le logo, la loupe et le bouton de menu tiennent tous. Pour y arriver, le mot « Menu » s'efface de ce bouton (il reste « ☰ », annoncé « Menu » par les lecteurs d'écran), et sur les écrans les plus étroits l'aigle ⚜ du logo disparaît. Avec la taille de texte habituelle, rien ne change, sauf entre 480 et 495 px de large où l'indication « Ctrl K » est masquée un peu plus longtemps.</p>"
+    },
     {
       "slug": "2026-10-30-videos-la-barre-laterale-reste-dans-la-page",
       "title": "Vidéos : la barre latérale reste dans la page",
