@@ -424,9 +424,12 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     }
     /* L46 : police par défaut de 18 ou 20 px, 320–371 px — « ⚜ WARHAMMER 40,000 » + « ☰ Menu » ne
        tiennent plus côte à côte : le mot s'efface aussi sans pastille (« ☰ » seul, nom accessible
-       « Menu »), et l'aigle du logo sous 19em. 20em = 320 px à 16 px, 360 px à 18 px,
-       400 px à 20 px ; 19em = 304 px à 16 px, 342 px à 18 px, 380 px à 20 px. */
-    @media (width < 20em) {
+       « Menu »), et l'aigle du logo sous 19em. 20.5em = 328 px à 16 px, 369 px à 18 px,
+       410 px à 20 px ; 19em = 304 px à 16 px, 342 px à 18 px, 380 px à 20 px. 20.5em et non 20em :
+       la media query compte la barre de défilement (6 px) dans la largeur, et à 20em (320 px à
+       16 px, le cas WCAG 1.4.10 d'une fenêtre de 1280 px zoomée à 400 %) la page défilait de 1 à
+       3 px entre 320 et 322 px. */
+    @media (width < 20.5em) {
       .menu-toggle .menu-word { display: none; }
     }
     @media (width < 19em) {

@@ -21,7 +21,9 @@ describe.skipIf(!built || !chromium)('bouton de recherche : raccourci de la plat
   let base: string;
   beforeAll(async () => {
     ({ base, server } = await startDistServer());
-    browser = await chromium!.launch();
+    // Barre de défilement VISIBLE (celle du site, 6 px) : Playwright sans écran lance Chromium avec
+    // --hide-scrollbars, ce qui masquait le débordement de 1 à 3 px à 320 px (WCAG 1.4.10).
+    browser = await chromium!.launch({ ignoreDefaultArgs: ['--hide-scrollbars'] });
   });
   afterAll(async () => {
     await browser?.close();
