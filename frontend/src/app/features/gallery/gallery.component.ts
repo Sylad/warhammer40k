@@ -1,9 +1,9 @@
 import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, signal, computed, effect, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { toSafeSignal } from '../../shared/safe-signal';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
 import { BehaviorSubject, catchError, concat, filter, map, of, switchMap, type Observable } from 'rxjs';
 import { PinService } from '../../core/services/pin.service';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
@@ -225,6 +225,12 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <div class="empty">
                 <p data-testid="message-erreur" role="alert">Impossible de charger la galerie.</p>
                 <button type="button" class="import-btn-hero" data-testid="bouton-reessayer" (click)="retryCatalog()">Réessayer</button>
+              </div>
+            }
+            @if (imagesFailed()) {
+              <div class="empty">
+                <p data-testid="message-erreur-images" role="alert">Impossible de charger vos images personnelles.</p>
+                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer-images" (click)="retryImages()">Réessayer</button>
               </div>
             }
             @if (catalogLoading()) {
@@ -573,6 +579,7 @@ export class GalleryComponent {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly viewportScroller = inject(ViewportScroller);
   private readonly pinService = inject(PinService);
 
   /** L144 : l'édition (importer, catégoriser) n'est offerte qu'une fois le PIN saisi, comme Vidéos. */
@@ -586,6 +593,14 @@ export class GalleryComponent {
   private written: { q: string; faction: string } | null = null;
   /** Adresse visée par la dernière réécriture de syncUrl() (pour reconnaître SA navigation). */
   private ownUrl: string | null = null;
+  /** L48 : une navigation d'ailleurs (sortie de la page) est en vol — syncUrl() ne doit pas la supplanter. */
+  private leaving = false;
+  /** L48 : une réécriture demandée pendant cette navigation, rejouée si elle n'emmène pas ailleurs. */
+  private syncDeferred = false;
+  /** L48 : une frappe attend son anti-rebond (la réécriture de ?q= n'est pas encore partie). */
+  private searchPending = false;
+  /** L48 : rétablissement du défilement après une réécriture d'adresse (annulé si la page est quittée). */
+  private scrollTimer: ReturnType<typeof setTimeout> | undefined;
 
   readonly categories = CATEGORIES;
 
@@ -627,7 +642,20 @@ export class GalleryComponent {
   retryCatalog(): void { this.catalogReload.next(); }
   /** L49 : panneau Filtres déplié (téléphone ; au-dessus de 760 px il est toujours affiché). */
   readonly filtersOpen = signal(false);
-  private readonly localImages = toSignal(this.service.images$.pipe(catchError(() => of([] as string[]))), { initialValue: [] as string[] });
+  // L48 : une lecture des images personnelles en échec se dit (message + Réessayer) au lieu d'une liste vide muette.
+  private readonly imagesReload = new BehaviorSubject<void>(undefined);
+  private readonly imagesState = toSignal(
+    this.imagesReload.pipe(
+      switchMap(() => this.service.images$.pipe(
+        map((list) => ({ failed: false, list })),
+        catchError(() => of({ failed: true, list: [] as string[] })),
+      )),
+    ),
+    { initialValue: { failed: false, list: [] as string[] } },
+  );
+  private readonly localImages = computed(() => this.imagesState().list);
+  readonly imagesFailed = computed(() => this.imagesState().failed);
+  retryImages(): void { this.imagesReload.next(); }
   readonly collections = toSafeSignal(this.service.artworkCollections$, [] as ArtworkCollection[]);
   /** L64 : une collection à 0 œuvre est une impasse (filtre → grille vide) — jamais proposée ni comptée. */
   readonly nonEmptyCollections = computed(() => this.collections().filter((c) => c.count > 0));
@@ -1002,27 +1030,34 @@ export class GalleryComponent {
       this.written = null;
       // Écho de notre propre réécriture : l'état est déjà juste (ou en avance, frappe en cours).
       if (own && own.q === q && own.faction === faction) return;
-      if (q !== this.searchQuery()) {
-        this.searchQuery.set(q);
-        this.currentPage.set(1);
-      }
-      if (faction !== this.filterFaction()) {
-        this.filterFaction.set(faction);
-        this.currentPage.set(1);
-      }
+      this.applyAddress(q, faction);
     });
     // 2e relecture : toute AUTRE navigation qui démarre (clic vers une page, même en chargement
-    // différé — la galerie vit encore) annule l'anti-rebond en attente, qui sinon la supplantait.
-    const navStarts = this.router.events
-      .pipe(filter((e): e is NavigationStart => e instanceof NavigationStart))
-      .subscribe(e => {
-        if (e.url !== this.ownUrl) clearTimeout(this.searchTimer);
-      });
+    // différé — la galerie vit encore) ne doit pas être supplantée par une réécriture d'adresse :
+    // l'anti-rebond et les choix de la page attendent sa fin (L48 : syncUrl() les diffère).
+    const navEvents = this.router.events.subscribe(e => {
+      if (e instanceof NavigationStart) {
+        if (e.url !== this.ownUrl) this.leaving = true;
+      } else if (e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError) {
+        if (!this.leaving) return;
+        this.leaving = false;
+        // La sortie n'a pas eu lieu (annulée, ou elle aboutit sur la galerie) : rejouer ce qui attendait.
+        if (this.syncDeferred) { this.syncDeferred = false; this.syncUrl(); }
+      } else if (e instanceof NavigationSkipped && this.searchPending) {
+        // « Galerie » cliqué sur l'adresse même de la galerie : navigation ignorée par le routeur, mais la
+        // frappe en attente ne doit pas écrire ?q= après ce clic — l'adresse fait foi, comme pour une vraie navigation.
+        clearTimeout(this.searchTimer);
+        this.searchPending = false;
+        const params = this.route.snapshot.queryParamMap;
+        this.applyAddress(params.get('q') ?? params.get('search') ?? '', params.get('faction') ?? '');
+      }
+    });
     const live = setTimeout(() => this.liveReady.set(true), GalleryComponent.LIVE_REGION_DELAY_MS);
     this.destroyRef.onDestroy(() => {
       clearTimeout(this.searchTimer);
+      clearTimeout(this.scrollTimer);
       clearTimeout(live);
-      navStarts.unsubscribe();
+      navEvents.unsubscribe();
     });
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
@@ -1133,10 +1168,23 @@ export class GalleryComponent {
     this.currentPage.set(1);
   }
 
+  /** L42 : l'état suit l'adresse (paramètre absent → recherche vide / plus de filtre). */
+  private applyAddress(q: string, faction: string): void {
+    if (q !== this.searchQuery()) {
+      this.searchQuery.set(q);
+      this.currentPage.set(1);
+    }
+    if (faction !== this.filterFaction()) {
+      this.filterFaction.set(faction);
+      this.currentPage.set(1);
+    }
+  }
+
   onSearchChange(q: string): void {
     this.searchQuery.set(q);
     this.currentPage.set(1); // page 5 + recherche → grille vide sans ça
     clearTimeout(this.searchTimer);
+    this.searchPending = true;
     this.searchTimer = setTimeout(() => this.syncUrl(), GalleryComponent.SEARCH_URL_DEBOUNCE_MS);
   }
 
@@ -1173,6 +1221,10 @@ export class GalleryComponent {
    */
   private syncUrl(): void {
     clearTimeout(this.searchTimer);
+    this.searchPending = false;
+    // L48 : une navigation d'ailleurs est en vol (sortie de la page, route à charger) — la supplanter
+    // ferait perdre le clic. L'état est déjà à jour ; l'adresse est réécrite si la sortie n'aboutit pas.
+    if (this.leaving) { this.syncDeferred = true; return; }
     const q = this.searchQuery();
     const faction = this.filterFaction();
     const target = this.router.createUrlTree([], {
@@ -1189,9 +1241,18 @@ export class GalleryComponent {
     const armed = { q, faction };
     this.written = armed;
     this.ownUrl = url;
+    // L45/L48 : scrollPositionRestoration: 'enabled' ramène en haut après CHAQUE navigation, même cette
+    // réécriture d'adresse (390 px : choisir une faction renvoyait en haut, focus hors écran).
+    const scroll = this.viewportScroller.getScrollPosition();
     void this.router.navigateByUrl(target, { replaceUrl: true }).then(ok => {
-      // Navigation annulée ou supplantée sans écho : désarmer (sauf si une réécriture plus récente a réarmé).
-      if (!ok && this.written === armed) this.written = null;
+      // L'écho (queryParamMap) a lieu avant cette résolution : encore armé = la navigation n'en a pas
+      // émis (annulée, supplantée, ou seul le fragment change) — désarmer, sauf réécriture plus récente.
+      if (this.written === armed) this.written = null;
+      // Le défilement du routeur part d'un setTimeout(0) planifié à la fin de la navigation, donc avant celui-ci.
+      if (ok) this.scrollTimer = setTimeout(() => {
+        const now = this.viewportScroller.getScrollPosition();
+        if (now[0] !== scroll[0] || now[1] !== scroll[1]) this.viewportScroller.scrollToPosition(scroll);
+      });
     });
   }
 
