@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-31 18:47",
+  "generated": "2026-10-31 19:33",
   "entries": [
+    {
+      "slug": "2026-10-31-galerie-reessayer-des-images-personnelles-sans-retour-visibl",
+      "title": "Galerie : « Réessayer » des images personnelles enfin visible",
+      "date": "2026-10-31",
+      "lots": [
+        "L220"
+      ],
+      "captures": [
+        "captures/l220-chargement-1440.png",
+        "captures/l220-chargement-390.png"
+      ],
+      "alts": [
+        "Galerie à 1440 px : deux encadrés compacts, « Impossible de charger la galerie. » et « Chargement de Mes images… », chacun avec son bouton Réessayer",
+        "Galerie sur téléphone (390 px) : deux encadrés compacts et séparés, le second dit « Chargement de Mes images… » et son bouton Réessayer est estompé"
+      ],
+      "html": "<p>Quand la galerie n'arrive pas à lire vos images personnelles, « Réessayer » réagit maintenant : le message devient « Chargement de Mes images… » pendant la nouvelle tentative, le bouton reste en place (et garde le focus au clavier), puis, si la lecture échoue encore, l'échec est de nouveau annoncé par un lecteur d'écran.</p>\n<p>Si la galerie et vos images personnelles échouent en même temps, les deux boutons ont chacun leur nom pour un lecteur d'écran : « Réessayer le chargement de la galerie » et « Réessayer le chargement de Mes images ». Les deux encadrés d'erreur sont plus petits et ne sont plus collés l'un à l'autre.</p>"
+    },
     {
       "slug": "2026-10-31-galerie-filtres-et-adresse-accordes-images-personnelles-en-e",
       "title": "Galerie : filtres et adresse accordés, images personnelles en échec signalées",
