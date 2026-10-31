@@ -66,6 +66,21 @@ describe('galerie — liaison adresse ↔ filtres, cas étroits (L48)', () => {
     expect(router.url).toBe('/videos');
   });
 
+  it('R1 — deux sorties successives pendant le chargement lent de la première : la seconde aboutit', async () => {
+    const { routes, release } = lazyVideos();
+    const all: Routes = [...routes, { path: 'romans', component: OtherPage }];
+    const { go, router } = await setup(all);
+    const c = await go('/gallery');
+    const first = router.navigateByUrl('/videos');
+    c.onFactionChange('necrons');
+    const second = router.navigateByUrl('/romans');
+    await wait(50);
+    release();
+    await first;
+    expect(await second, 'seconde sortie supplantée par la réécriture rejouée').toBe(true);
+    expect(router.url).toBe('/romans');
+  });
+
   it('R1 — « Réinitialiser » pendant une navigation de sortie lente : la sortie aboutit', async () => {
     const { routes, release } = lazyVideos();
     const { go, router } = await setup(routes);

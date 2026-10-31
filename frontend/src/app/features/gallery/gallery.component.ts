@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationCancel, NavigationCancellationCode, NavigationEnd, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
 import { BehaviorSubject, catchError, concat, filter, map, of, switchMap, type Observable } from 'rxjs';
 import { PinService } from '../../core/services/pin.service';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
@@ -1040,6 +1040,8 @@ export class GalleryComponent {
         if (e.url !== this.ownUrl) this.leaving = true;
       } else if (e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError) {
         if (!this.leaving) return;
+        // Supplantée par une autre navigation : elle démarre juste après, la sortie continue (rien à rejouer).
+        if (e instanceof NavigationCancel && e.code === NavigationCancellationCode.SupersededByNewNavigation) return;
         this.leaving = false;
         // La sortie n'a pas eu lieu (annulée, ou elle aboutit sur la galerie) : rejouer ce qui attendait.
         if (this.syncDeferred) { this.syncDeferred = false; this.syncUrl(); }
