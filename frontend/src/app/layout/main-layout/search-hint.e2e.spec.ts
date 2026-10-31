@@ -109,7 +109,7 @@ describe.skipIf(!built || !chromium)('bouton de recherche : raccourci de la plat
         await page.evaluate(() => document.fonts.ready);
         expect((await page.locator('.nav-search-kbd').textContent())!.trim()).toBe(cfg.mac ? '⌘K' : 'Ctrl K');
         expect(await page.locator('.menu-toggle .news-badge').count()).toBe(badge ? 1 : 0);
-        const bad: string[] = [];
+        const bad: number[] = [];
         for (let width = cfg.from; width <= 1800; width++) {
           await page.setViewportSize({ width, height: 600 });
           const m = await page.evaluate(() => {
@@ -120,7 +120,7 @@ describe.skipIf(!built || !chromium)('bouton de recherche : raccourci de la plat
         }
         await context.close();
         // Plages (« 320–324 px »), pas une liste de 50 largeurs : lisible quand elle échoue.
-        const plages = bad.reduce<string[]>((acc, w, i) => (bad[i - 1] === w - 1 ? [...acc.slice(0, -1), `${acc[acc.length - 1].split('–')[0]}–${w} px`] : [...acc, `${w} px`]), []);
+        const plages = bad.reduce<string[]>((acc, w, i) => (bad[i - 1] === w - 1 ? [...acc.slice(0, -1), `${acc[acc.length - 1].split(/[ –]/)[0]}–${w} px`] : [...acc, `${w} px`]), []);
         expect(plages).toEqual([]);
       }, 180_000);
     }
