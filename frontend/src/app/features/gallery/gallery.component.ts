@@ -229,7 +229,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             }
             @if (imagesFailed()) {
               <div class="empty">
-                <p data-testid="message-erreur-images" role="alert">Impossible de charger vos images personnelles.</p>
+                <p data-testid="message-erreur-images" role="alert">Impossible de charger Mes images.</p>
                 <button type="button" class="import-btn-hero" data-testid="bouton-reessayer-images" (click)="retryImages()">Réessayer</button>
               </div>
             }
@@ -697,7 +697,7 @@ export class GalleryComponent {
       return {
         id: `local-${idx}`,
         title: m?.title || `Œuvre #${idx + 1}`,
-        artist: m?.artist || 'Collection personnelle',
+        artist: m?.artist || 'Mes images',
         image: filename,
         category: primary,
         extraCategories: extra.length ? extra : undefined,
@@ -1044,7 +1044,7 @@ export class GalleryComponent {
         if (e instanceof NavigationCancel && e.code === NavigationCancellationCode.SupersededByNewNavigation) return;
         this.leaving = false;
         // La sortie n'a pas eu lieu (annulée, ou elle aboutit sur la galerie) : rejouer ce qui attendait.
-        if (this.syncDeferred) { this.syncDeferred = false; this.syncUrl(); }
+        this.replayDeferred();
       } else if (e instanceof NavigationSkipped) {
         if (this.searchPending) {
           // « Galerie » cliqué sur l'adresse même de la galerie : navigation ignorée par le routeur, mais la
@@ -1057,7 +1057,7 @@ export class GalleryComponent {
         // Une sortie supplantée par cette navigation ignorée n'aura pas de fin : rejouer ce qui attendait.
         if (this.leaving) {
           this.leaving = false;
-          if (this.syncDeferred) { this.syncDeferred = false; this.syncUrl(); }
+          this.replayDeferred();
         }
       }
     });
@@ -1228,7 +1228,7 @@ export class GalleryComponent {
    * depuis l'état (autres paramètres conservés, historique remplacé). Sinon un rechargement ramène
    * l'ancien filtre, et l'écho d'une fusion partielle ressuscite l'ancienne recherche.
    */
-  private syncUrl(): void {
+  private syncUrl(replay = false): void {
     clearTimeout(this.searchTimer);
     this.searchPending = false;
     // L48 : une navigation d'ailleurs est en vol (sortie de la page, route à charger) — la supplanter
@@ -1246,7 +1246,9 @@ export class GalleryComponent {
     // routeur ignorerait la navigation et l'écho attendu resterait armé, prêt à avaler plus tard
     // une vraie navigation aux mêmes q/faction. Rien à écrire — sauf si une navigation est en vol
     // (router.url n'est pas encore l'adresse qu'elle va écrire).
-    if (url === this.router.url && !this.router.getCurrentNavigation()) return;
+    // Rejouée depuis la fin d'une sortie (replay), la navigation « en vol » est celle qui se termine : elle
+    // n'écrit rien, donc une adresse déjà juste n'a pas à être renavigée (NavigationSkipped, retour en haut).
+    if (url === this.router.url && (replay || !this.router.getCurrentNavigation())) return;
     const armed = { q, faction };
     this.written = armed;
     this.ownUrl = url;
@@ -1263,6 +1265,13 @@ export class GalleryComponent {
         if (now[0] !== scroll[0] || now[1] !== scroll[1]) this.viewportScroller.scrollToPosition(scroll);
       });
     });
+  }
+
+  /** Fin d'une sortie sans départ de la galerie : réécrire l'adresse que syncUrl() avait différée. */
+  private replayDeferred(): void {
+    if (!this.syncDeferred) return;
+    this.syncDeferred = false;
+    this.syncUrl(true);
   }
 
   resetFilters(): void {
@@ -1337,7 +1346,7 @@ export class GalleryComponent {
     this.catSelectedTags.set(tags);
     this.catInput.set('');
     this.catTitle.set(a.title.startsWith('Œuvre #') ? '' : a.title);
-    this.catArtist.set(a.artist === 'Collection personnelle' ? '' : a.artist);
+    this.catArtist.set(a.artist === 'Mes images' ? '' : a.artist);
     this.catFaction.set(a.faction ?? '');
     this.catError.set('');
     this.catModalOpen.set(true);

@@ -123,6 +123,41 @@ describe('galerie — liaison adresse ↔ filtres, cas étroits (L48)', () => {
     expect(c.filterFaction()).toBe('necrons');
   });
 
+  // L221 : la réécriture différée rejouée à la fin d'une sortie annulée ou en erreur visait l'adresse
+  // ACTUELLE (le choix fait pendant l'attente n'est pas dans l'adresse, ex. « Réinitialiser » sur /gallery) :
+  // le routeur l'ignorait (NavigationSkipped) et le défilement revenait en haut.
+  it('L221 R1 — sortie annulée puis réécriture déjà à jour : aucune navigation lancée vers l’adresse actuelle', async () => {
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    const routes: Routes = [...GALLERY, { path: 'videos', component: OtherPage, canActivate: [() => gate.then(() => false)] }];
+    const { go, settle, router } = await setup(routes);
+    const c = await go('/gallery');
+    const events: string[] = [];
+    router.events.subscribe(e => events.push(e.constructor.name));
+    const leaving = router.navigateByUrl('/videos');
+    c.resetFilters(); // adresse déjà /gallery : rien à écrire, mais différé pendant la sortie
+    await wait(50);
+    release();
+    expect(await leaving).toBe(false);
+    await settle(50);
+    expect(router.url).toBe('/gallery');
+    expect(events.filter(n => n === 'NavigationSkipped'), 'navigation vers l’adresse actuelle').toEqual([]);
+  });
+
+  it('L221 R1 — sortie en erreur puis réécriture déjà à jour : aucune navigation lancée vers l’adresse actuelle', async () => {
+    const routes: Routes = [...GALLERY, { path: 'videos', loadComponent: () => new Promise<never>((_, rej) => setTimeout(() => rej(new Error('chunk')), 30)) }];
+    const { go, settle, router } = await setup(routes);
+    const c = await go('/gallery');
+    const events: string[] = [];
+    router.events.subscribe(e => events.push(e.constructor.name));
+    const leaving = router.navigateByUrl('/videos').catch(() => 'erreur');
+    c.resetFilters();
+    expect(await leaving).toBe('erreur');
+    await settle(50);
+    expect(router.url).toBe('/gallery');
+    expect(events.filter(n => n === 'NavigationSkipped')).toEqual([]);
+  });
+
   // Clic sur « Galerie » (routerLink="/gallery") alors qu'on est déjà sur /gallery : navigation
   // ignorée, l'anti-rebond restait en attente et écrivait ?q= après le clic.
   it('R2 — taper puis cliquer « Galerie » (adresse déjà /gallery) avant l’anti-rebond : recherche vidée, adresse inchangée', async () => {
@@ -214,13 +249,21 @@ describe('galerie — liaison adresse ↔ filtres, cas étroits (L48)', () => {
     const c = await go('/gallery');
     await settle(50);
     const msg = h.routeNativeElement!.querySelector('[data-testid="message-erreur-images"]');
-    expect(msg?.textContent).toContain('images personnelles');
+    expect(msg?.textContent).toBe('Impossible de charger Mes images.');
     expect(msg?.getAttribute('role')).toBe('alert');
     expect(c.filteredArtworks().map((a) => a.id)).toEqual(['aw-001', 'aw-n']);
     h.routeNativeElement!.querySelector<HTMLButtonElement>('[data-testid="bouton-reessayer-images"]')!.click();
     await settle(50);
     expect(h.routeNativeElement!.querySelector('[data-testid="message-erreur-images"]')).toBeNull();
     expect(c.filteredArtworks().map((a) => a.id)).toEqual(['aw-001', 'aw-n', 'local-0']);
+  });
+
+  it('L221 R2 — une image personnelle sans métadonnées porte le libellé « Mes images » (catégorie et artiste), pas « Collection personnelle »', async () => {
+    const { go, settle } = await setup(GALLERY, of(['perso.jpg']));
+    const c = await go('/gallery');
+    await settle(50);
+    const perso = c.filteredArtworks().find((x) => x.id === 'local-0')!;
+    expect([perso.category, perso.artist]).toEqual(['Mes images', 'Mes images']);
   });
 
   it('R4 — images personnelles lues : aucun message d’échec', async () => {
