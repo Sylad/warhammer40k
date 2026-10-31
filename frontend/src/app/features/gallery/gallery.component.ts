@@ -1045,13 +1045,20 @@ export class GalleryComponent {
         this.leaving = false;
         // La sortie n'a pas eu lieu (annulée, ou elle aboutit sur la galerie) : rejouer ce qui attendait.
         if (this.syncDeferred) { this.syncDeferred = false; this.syncUrl(); }
-      } else if (e instanceof NavigationSkipped && this.searchPending) {
-        // « Galerie » cliqué sur l'adresse même de la galerie : navigation ignorée par le routeur, mais la
-        // frappe en attente ne doit pas écrire ?q= après ce clic — l'adresse fait foi, comme pour une vraie navigation.
-        clearTimeout(this.searchTimer);
-        this.searchPending = false;
-        const params = this.route.snapshot.queryParamMap;
-        this.applyAddress(params.get('q') ?? params.get('search') ?? '', params.get('faction') ?? '');
+      } else if (e instanceof NavigationSkipped) {
+        if (this.searchPending) {
+          // « Galerie » cliqué sur l'adresse même de la galerie : navigation ignorée par le routeur, mais la
+          // frappe en attente ne doit pas écrire ?q= après ce clic — l'adresse fait foi, comme pour une vraie navigation.
+          clearTimeout(this.searchTimer);
+          this.searchPending = false;
+          const params = this.route.snapshot.queryParamMap;
+          this.applyAddress(params.get('q') ?? params.get('search') ?? '', params.get('faction') ?? '');
+        }
+        // Une sortie supplantée par cette navigation ignorée n'aura pas de fin : rejouer ce qui attendait.
+        if (this.leaving) {
+          this.leaving = false;
+          if (this.syncDeferred) { this.syncDeferred = false; this.syncUrl(); }
+        }
       }
     });
     const live = setTimeout(() => this.liveReady.set(true), GalleryComponent.LIVE_REGION_DELAY_MS);

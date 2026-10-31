@@ -81,6 +81,19 @@ describe('galerie — liaison adresse ↔ filtres, cas étroits (L48)', () => {
     expect(router.url).toBe('/romans');
   });
 
+  it('R1 — sortie lente supplantée par « Galerie » (adresse courante, ignorée) : le choix fait ensuite est écrit dans l’adresse', async () => {
+    const { routes, release } = lazyVideos();
+    const { go, settle, router } = await setup(routes);
+    const c = await go('/gallery');
+    const leaving = router.navigateByUrl('/videos');
+    await router.navigateByUrl('/gallery'); // supplante la sortie, puis est ignorée (même adresse)
+    release();
+    await leaving;
+    c.onFactionChange('necrons');
+    await settle(50);
+    expect(router.url, 'réécriture restée différée').toBe('/gallery?faction=necrons');
+  });
+
   it('R1 — « Réinitialiser » pendant une navigation de sortie lente : la sortie aboutit', async () => {
     const { routes, release } = lazyVideos();
     const { go, router } = await setup(routes);
