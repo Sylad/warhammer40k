@@ -4,7 +4,7 @@ import { toSafeSignal } from '../../shared/safe-signal';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationCancel, NavigationCancellationCode, NavigationEnd, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
-import { BehaviorSubject, catchError, concat, filter, map, of, switchMap, type Observable } from 'rxjs';
+import { BehaviorSubject, catchError, concat, EMPTY, filter, map, of, switchMap, type Observable } from 'rxjs';
 import { PinService } from '../../core/services/pin.service';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import { GalleryModalDirective } from './gallery-modal.directive';
@@ -222,15 +222,21 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 
             @if (catalogFailed()) {
               <!-- R9 : l'échec n'est jamais avalé, même quand des images perso restent affichées dessous. -->
-              <div class="empty">
+              <div class="etat-erreur">
                 <p data-testid="message-erreur" role="alert">Impossible de charger la galerie.</p>
-                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer" (click)="retryCatalog()">Réessayer</button>
+                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer" aria-label="Réessayer le chargement de la galerie" (click)="retryCatalog()">Réessayer</button>
               </div>
             }
-            @if (imagesFailed()) {
-              <div class="empty">
-                <p data-testid="message-erreur-images" role="alert">Impossible de charger Mes images.</p>
-                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer-images" (click)="retryImages()">Réessayer</button>
+            @if (imagesFailed() || imagesRetrying()) {
+              <!-- L220 : le bloc (et le bouton, donc le focus) survit à la relecture ; seul le message est remplacé,
+                   si bien qu'un nouvel échec réinsère l'alerte et se ré-annonce. -->
+              <div class="etat-erreur">
+                @if (imagesRetrying()) {
+                  <p data-testid="message-chargement-images" role="status">Chargement de Mes images…</p>
+                } @else {
+                  <p data-testid="message-erreur-images" role="alert">Impossible de charger Mes images.</p>
+                }
+                <button type="button" class="import-btn-hero" data-testid="bouton-reessayer-images" aria-label="Réessayer le chargement de Mes images" [attr.aria-disabled]="imagesRetrying() ? 'true' : null" (click)="retryImages()">Réessayer</button>
               </div>
             }
             @if (catalogLoading()) {
@@ -643,19 +649,27 @@ export class GalleryComponent {
   /** L49 : panneau Filtres déplié (téléphone ; au-dessus de 760 px il est toujours affiché). */
   readonly filtersOpen = signal(false);
   // L48 : une lecture des images personnelles en échec se dit (message + Réessayer) au lieu d'une liste vide muette.
-  private readonly imagesReload = new BehaviorSubject<void>(undefined);
+  /** `true` = relecture demandée par « Réessayer » (la première lecture ne montre pas de message de chargement). */
+  private readonly imagesReload = new BehaviorSubject<boolean>(false);
   private readonly imagesState = toSignal(
     this.imagesReload.pipe(
-      switchMap(() => this.service.images$.pipe(
-        map((list) => ({ failed: false, list })),
-        catchError(() => of({ failed: true, list: [] as string[] })),
+      switchMap((retry) => concat(
+        retry ? of({ status: 'loading' as const, list: [] as string[] }) : EMPTY,
+        this.service.images$.pipe(
+          map((list) => ({ status: 'ok' as const, list })),
+          catchError(() => of({ status: 'error' as const, list: [] as string[] })),
+        ),
       )),
     ),
-    { initialValue: { failed: false, list: [] as string[] } },
+    { initialValue: { status: 'ok' as 'ok' | 'error' | 'loading', list: [] as string[] } },
   );
   private readonly localImages = computed(() => this.imagesState().list);
-  readonly imagesFailed = computed(() => this.imagesState().failed);
-  retryImages(): void { this.imagesReload.next(); }
+  readonly imagesFailed = computed(() => this.imagesState().status === 'error');
+  /** L220 : une relecture lancée par « Réessayer » est en cours. */
+  readonly imagesRetrying = computed(() => this.imagesState().status === 'loading');
+  retryImages(): void {
+    if (!this.imagesRetrying()) this.imagesReload.next(true);
+  }
   readonly collections = toSafeSignal(this.service.artworkCollections$, [] as ArtworkCollection[]);
   /** L64 : une collection à 0 œuvre est une impasse (filtre → grille vide) — jamais proposée ni comptée. */
   readonly nonEmptyCollections = computed(() => this.collections().filter((c) => c.count > 0));
