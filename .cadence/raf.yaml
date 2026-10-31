@@ -2426,10 +2426,11 @@ lots:
     created: 2026-10-31
   - id: L220
     title: "Galerie : « Réessayer » des images personnelles sans retour visible (ni état de chargement ni nouvelle annonce après un nouvel échec, Nielsen 1) ; deux « Réessayer » de même nom accessible quand catalogue et images perso échouent ensemble (WCAG 2.4.6), encadrés collés et surdimensionnés (suite revue UX de L48)"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-31
+    started: 2026-10-31
   - id: L221
     title: "Galerie : rejouer la réécriture différée après une sortie en erreur ou annulée ne doit pas relancer une navigation vers l'adresse actuelle (NavigationSkipped → retour en haut, position non rétablie) ; libellés « vos images personnelles » / « Mes images » / « Collection personnelle » à unifier (suite revue de L48)"
     status: doing
