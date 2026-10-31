@@ -789,8 +789,9 @@
     {
       "id": "L220",
       "title": "Galerie : « Réessayer » des images personnelles enfin visible",
-      "status": "doing",
-      "started": "2026-10-31"
+      "status": "done",
+      "started": "2026-10-31",
+      "finished": "2026-10-31"
     }
   ]
 }
