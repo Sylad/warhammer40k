@@ -505,6 +505,7 @@ lots:
     visible: true
     created: 2026-10-02
     started: 2026-10-31
+    review: { date: 2026-10-31, verdict: "compliant (1 note mineure : la Nouveauté et le README disent « sans effet à 16 px » alors que le mot « Menu » disparaît maintenant à 320–327 px) — orchestré (vague 2026-10-31-1130-wh, 1 passe(s) de correction + passe des mineurs)", commit: ade29972cc9e698844f71ec362d57bad3a3a8a8d }
   - id: L47
     title: "Bloc Médias : la carte « Vidéo à la une » ouvre cette vidéo — la page /videos n'a aujourd'hui ni paramètre d'adresse ni ancre pour ouvrir une vidéo précise, à créer (revue UX L42, Nielsen #2/#4)"
     public: "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo"
