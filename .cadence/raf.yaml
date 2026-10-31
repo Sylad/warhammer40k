@@ -531,7 +531,7 @@ lots:
   - id: L48
     title: "Galerie : cas étroits de la liaison adresse ↔ filtres — action pendant une navigation de sortie lente qui l'annule, clic sur « Galerie » pendant l'anti-rebond perdu, écho resté armé sur une réécriture de fragment seul, échec silencieux des images personnelles ; deux chemins de 6da3576 sans test dédié (3e relecture L42)"
     public: "Galerie : filtres et adresse accordés, images personnelles en échec signalées"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-10-02
@@ -539,6 +539,8 @@ lots:
       - { date: 2026-10-03, text: "Revue UX de L45 (03-10) : à 390 px, choisir une Faction ramène la page en haut (scrollY 2993 → 0) et laisse le focus hors écran ; Catégorie et Tri ne le font pas. Probablement la navigation d'adresse de L42, non vérifié dans le code. À traiter ici." }
     started: 2026-10-31
     review: { date: 2026-10-31, verdict: "conforme, 2 notes mineures (rejeu de la réécriture vers l'adresse actuelle après une sortie en échec ; clic « Galerie » après un anti-rebond différé) — orchestré (vague 2026-10-31-1830-wh, 3 passe(s) de correction)", commit: 7b267017893f5c2c7dd8a1375981bc580b495bd8 }
+    ux: { date: 2026-10-31, verdict: "conforme : 0 bloquant, 0 majeur, 6 mineurs (repris en L220 et L221 ; captures vérifiées : échec des images perso signalé avec Réessayer, catalogue affiché, défilement conservé au choix d'une faction à 390 px)" }
+    finished: 2026-10-31
   - id: L49
     title: "Galerie : panneau Filtres avant la grille (ordre de focus WCAG 2.4.3 — filtres à la 34e tabulation) ; au téléphone, bouton « Filtres » sous la recherche (panneau à y = 4179 sur 5514 px) — maquette à valider par Sylvain avant tout code"
     public: "Galerie : les filtres accessibles avant la grille, bouton Filtres au téléphone"
