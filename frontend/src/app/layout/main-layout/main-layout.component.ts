@@ -421,6 +421,10 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       .menu-toggle { padding: 0 10px; min-width: 44px; justify-content: center; }
       /* L30 : avec la pastille, « ☰ + pastille » — le mot reste le nom accessible (aria-label). */
       .menu-toggle.has-badge .menu-word { display: none; }
+      /* L61 : l'espacement de texte WCAG 1.4.12 (lettres 0,12em !important) écrase le letter-spacing: 0
+         de la pastille et élargit « ☰ 9+ » : police par défaut de 20 px, la barre débordait de 3 à 5 px
+         à 320–324 px. Marges réduites : le bouton reste ≥ 44 px (min-width, min-height). */
+      .menu-toggle.has-badge { padding: 0 6px; gap: 4px; }
     }
     /* L46 : police par défaut de 18 ou 20 px, 320–371 px — « ⚜ WARHAMMER 40,000 » + « ☰ Menu » ne
        tiennent plus côte à côte : le mot s'efface aussi sans pastille (« ☰ » seul, nom accessible
