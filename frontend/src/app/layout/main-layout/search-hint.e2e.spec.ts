@@ -78,15 +78,14 @@ describe.skipIf(!built || !chromium)('bouton de recherche : raccourci de la plat
   // à 437 px de contenu pour 421 px de large) : l'indication ne se masquait qu'à 26,25em (420 px).
   // Avec la pastille (« ☰ Menu 9+ » au-delà de 26,25em), le défilement allait jusqu'à 465 px, et
   // jusqu'à 454 px sur Mac. Balayage px par px, avec et sans pastille, dans les configurations de la
-  // barre du haut (topbar.e2e.spec.ts) et sur Mac. Police par défaut 18 / 20 px : à partir de 400 px
-  // seulement — en dessous, « ⚜ WARHAMMER 40,000 » + « ☰ Menu » déborde déjà sans l'indication
-  // (défaut antérieur, hors L33, signalé à part).
+  // barre du haut (topbar.e2e.spec.ts) et sur Mac. L46 : police par défaut 18 / 20 px aussi dès
+  // 320 px (avant : à partir de 400 px, « ⚜ WARHAMMER 40,000 » + « ☰ Menu » débordait déjà).
   const MAC_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
   const CONFIGS = [
     { name: 'polices web', fontSize: 16, webFonts: true, mac: false, from: 320 },
     { name: 'polices web bloquées', fontSize: 16, webFonts: false, mac: false, from: 320 },
-    { name: 'police par défaut 18 px', fontSize: 18, webFonts: true, mac: false, from: 400 },
-    { name: 'police par défaut 20 px', fontSize: 20, webFonts: true, mac: false, from: 400 },
+    { name: 'police par défaut 18 px', fontSize: 18, webFonts: true, mac: false, from: 320 },
+    { name: 'police par défaut 20 px', fontSize: 20, webFonts: true, mac: false, from: 320 },
     { name: 'Mac (« ⌘K »)', fontSize: 16, webFonts: true, mac: true, from: 320 },
   ];
   const news = (n: number) => ({
@@ -117,10 +116,12 @@ describe.skipIf(!built || !chromium)('bouton de recherche : raccourci de la plat
             const s = document.querySelector('.nav-search-btn')!.getBoundingClientRect();
             return { scroll: document.documentElement.scrollWidth - document.documentElement.clientWidth, on: s.left >= 0 && s.right <= innerWidth };
           });
-          if (m.scroll > 0 || !m.on) bad.push(`${width} px (+${m.scroll})`);
+          if (m.scroll > 0 || !m.on) bad.push(width);
         }
         await context.close();
-        expect(bad).toEqual([]);
+        // Plages (« 320–324 px »), pas une liste de 50 largeurs : lisible quand elle échoue.
+        const plages = bad.reduce<string[]>((acc, w, i) => (bad[i - 1] === w - 1 ? [...acc.slice(0, -1), `${acc[acc.length - 1].split('–')[0]}–${w} px`] : [...acc, `${w} px`]), []);
+        expect(plages).toEqual([]);
       }, 180_000);
     }
   }

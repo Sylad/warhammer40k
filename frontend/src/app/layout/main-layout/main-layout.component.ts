@@ -62,7 +62,7 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         </button>
         <!-- L23 : sous 84em (1344 px), la navigation passe dans un tiroir (inerte quand il est fermé). -->
         <button #menuButton class="menu-toggle" type="button" aria-controls="menu-telephone" [class.has-badge]="badge()"
-                [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : null"
+                [attr.aria-expanded]="menuOpen()" [attr.aria-label]="badge() ? 'Menu, ' + unseenText() : 'Menu'"
                 (click)="toggleMenu()">
           <span aria-hidden="true">☰</span> <span class="menu-word">Menu</span>
           @if (badge()) { <span class="news-badge" aria-hidden="true">{{ badge() }}</span> }
@@ -409,9 +409,9 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     @media (max-width: 680px) {
       .wrap { padding: 22px 16px 40px; }
     }
-    /* L33 (relecture) : 30em, plus 26,25em — entre 421 et 465 px (16 px), « Ctrl K » et
+    /* L33 (relecture) : 30em, plus 26,25em ; L46 : 31em (polices web bloquées + pastille : 480–483 px débordaient) — entre 421 et 465 px (16 px), « Ctrl K » et
        « ☰ Menu 9+ » faisaient déborder la barre. Balayé px par px par search-hint.e2e.spec.ts. */
-    @media (width < 30em) {
+    @media (width < 31em) {
       .topbar { padding: 0 12px; gap: 8px; }
       .topbar-actions { gap: 6px; }
       .nav-search-btn { padding: 0 12px; }
@@ -421,6 +421,16 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       .menu-toggle { padding: 0 10px; min-width: 44px; justify-content: center; }
       /* L30 : avec la pastille, « ☰ + pastille » — le mot reste le nom accessible (aria-label). */
       .menu-toggle.has-badge .menu-word { display: none; }
+    }
+    /* L46 : police par défaut de 18 ou 20 px, 320–371 px — « ⚜ WARHAMMER 40,000 » + « ☰ Menu » ne
+       tiennent plus côte à côte : le mot s'efface aussi sans pastille (« ☰ » seul, nom accessible
+       « Menu »), et l'aigle du logo sous 19em. 20em = 320 px à 16 px, 360 px à 18 px,
+       400 px à 20 px ; 19em = 304 px à 16 px, 342 px à 18 px, 380 px à 20 px. */
+    @media (width < 20em) {
+      .menu-toggle .menu-word { display: none; }
+    }
+    @media (width < 19em) {
+      .brand .aigle { display: none; }
     }
   `],
 })

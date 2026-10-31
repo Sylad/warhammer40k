@@ -48,7 +48,7 @@ s'ajoute au tiroir ET à la barre (ou au panneau « À propos ▾ ») de `main-l
 Le premier élément focalisable est le lien « Aller au contenu » (L21, `.skip-link` → `<main id="contenu">`) ; les liens de navigation portent `[ariaCurrentWhenActive]="true"` (une nouvelle entrée de la barre, du tiroir ou du panneau « À propos ▾ » aussi).
 `topbar.e2e.spec.ts` mesure chaque seuil ±1 px avec la pastille « 9+ » dans quatre configurations
 (polices web, polices bloquées, police par défaut 18 et 20 px) : relancer `ng build` puis ce test
-après tout changement de la barre.
+après tout changement de la barre. L46 : `search-hint.e2e.spec.ts` balaie 320–1800 px à 16, 18 et 20 px (mot « Menu » masqué sous 20em, aigle sous 19em, bascule compacte à 31em).
 
 ## Workflow dev
 

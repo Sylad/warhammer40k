@@ -363,6 +363,14 @@ describe('navigation — Nouveautés et menu du téléphone (L23)', () => {
     expect(el(f).querySelector('button.menu-toggle')!.getAttribute('aria-label')).toContain('1 nouveauté non vue');
   });
 
+  it('L46 — sans nouveauté non vue, le bouton Menu garde le nom « Menu » même quand le mot est masqué par la feuille de style', async () => {
+    localStorage.setItem(NEWS_SEEN_KEY, JSON.stringify({ date: '2099-01-01', slugs: [] }));
+    const f = await render();
+    const button = el(f).querySelector('button.menu-toggle')!;
+    expect(button.querySelector('.news-badge')).toBeNull();
+    expect(button.getAttribute('aria-label')).toBe('Menu');
+  });
+
   it('la recherche rapide (Ctrl+K) propose la page Nouveautés', () => {
     const src = readFileSync(resolve(__dirname, '../../shared/components/command-palette/command-palette.component.ts'), 'utf8');
     expect(src).toMatch(/label: 'Nouveautés'.*routerLink: \['\/nouveautes'\]/);
