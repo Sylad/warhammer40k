@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-10-31 11:35",
+  "generated": "2026-10-31 18:46",
   "entries": [
+    {
+      "slug": "2026-10-31-galerie-filtres-et-adresse-accordes-images-personnelles-en-e",
+      "title": "Galerie : filtres et adresse accordés, images personnelles en échec signalées",
+      "date": "2026-10-31",
+      "lots": [
+        "L48"
+      ],
+      "captures": [
+        "captures/l48-images-perso-echec-1440.png",
+        "captures/l48-images-perso-echec-390.png"
+      ],
+      "alts": [
+        "Galerie à 1440 px quand la lecture de vos images personnelles échoue : le message « Impossible de charger vos images personnelles. » et le bouton Réessayer remplacent la liste muette",
+        "Galerie sur téléphone (390 px) : le message « Impossible de charger vos images personnelles. » et le bouton Réessayer sont affichés au-dessus des œuvres"
+      ],
+      "html": "<p>Dans la galerie, quand vos images personnelles ne se chargent pas, la page le dit maintenant (« Impossible de charger vos images personnelles. ») et propose « Réessayer », au lieu d'afficher une liste vide sans explication.</p>\n<p>Les filtres et l'adresse restent d'accord dans les cas limites : si vous choisissez une faction ou tapez une recherche pendant qu'une autre page est en train de s'ouvrir, puis cliquez sur une seconde page, c'est bien cette page qui s'ouvre. Un clic sur « Galerie » pendant la frappe d'une recherche applique l'adresse au lieu de perdre le clic, et choisir une faction ne ramène plus en haut de la page.</p>"
+    },
     {
       "slug": "2026-10-31-barre-du-haut-plus-de-debordement-avec-une-grande-police-du",
       "title": "Barre du haut : plus de débordement avec une grande police du navigateur",
