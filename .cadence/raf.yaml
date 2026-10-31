@@ -530,8 +530,10 @@ lots:
     finished: 2026-10-12
   - id: L48
     title: "Galerie : cas étroits de la liaison adresse ↔ filtres — action pendant une navigation de sortie lente qui l'annule, clic sur « Galerie » pendant l'anti-rebond perdu, écho resté armé sur une réécriture de fragment seul, échec silencieux des images personnelles ; deux chemins de 6da3576 sans test dédié (3e relecture L42)"
+    public: "Galerie : filtres et adresse accordés, images personnelles en échec signalées"
     status: doing
     estimate: 1
+    visible: true
     created: 2026-10-02
     notes:
       - { date: 2026-10-03, text: "Revue UX de L45 (03-10) : à 390 px, choisir une Faction ramène la page en haut (scrollY 2993 → 0) et laisse le focus hors écran ; Catégorie et Tri ne le font pas. Probablement la navigation d'adresse de L42, non vérifié dans le code. À traiter ici." }
