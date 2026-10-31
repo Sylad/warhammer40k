@@ -17,6 +17,10 @@ export default defineConfig({
     fileParallelism: false,
     testTimeout: 30000,
     hookTimeout: 60000,
-    include: acceptationBrowser(root).filter((f) => !pending.has(f)).map((f) => path.resolve(root, f)),
+    include: [
+      ...acceptationBrowser(root).filter((f) => !pending.has(f)).map((f) => path.resolve(root, f)),
+      // L61 : la garde de l'espacement de texte (WCAG 1.4.12) ne tournait nulle part en CI (`vitest run` passe avant le build, dist absent).
+      path.resolve(__dirname, 'src/app/layout/main-layout/espacement-texte.e2e.spec.ts'),
+    ],
   },
 });

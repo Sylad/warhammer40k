@@ -9,7 +9,11 @@ import type { Server } from 'node:http';
 import type { Browser } from 'playwright-core';
 import { distState, startDistServer } from '../../../testing/dist-server';
 
-const { built, stale } = distState(['src/styles.scss', 'src/app/layout/main-layout/main-layout.component.ts']);
+const { built, stale } = distState([
+  'src/styles.scss',
+  'src/app/layout/main-layout/main-layout.component.ts',
+  'src/app/features/about/about.component.scss',
+]);
 let chromium: typeof import('playwright-core').chromium | null = null;
 try {
   chromium = (await import('playwright-core')).chromium;
