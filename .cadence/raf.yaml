@@ -2285,6 +2285,7 @@ lots:
       - { date: 2026-10-30, text: "Livraison 6c555fe : titres publics livrés « Vidéos : la barre latérale reste dans la page, sans défilement horizontal ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
       - { date: 2026-10-31, text: "Livraison c103949 : titres publics livrés « Barre du haut : plus de débordement avec une grande police du navigateur ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
       - { date: 2026-10-31, text: "Livraison 7b26701 : titres publics livrés « Galerie : filtres et adresse accordés, images personnelles en échec signalées ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
+      - { date: 2026-10-31, text: "Livraison 98e1a79 : titres publics livrés « Galerie : « Réessayer » des images personnelles enfin visible ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
   - id: L206
     title: "cadence.yaml : plan.onWrite régénère frontend/public/plan-data/plan.json à chaque écriture du plan — livraison de L200 refusée le 27-10 par la CI « Plan publié à jour » après un raf ux/done du lead"
     status: done
@@ -2434,6 +2435,8 @@ lots:
     review: { date: 2026-10-31, verdict: "compliant after 0 blocking fixes — 2 minor notes (focus lost after a successful retry; status region inserted already filled) — orchestré (vague 2026-10-31-1940-wh, 0 passe(s) de correction)", commit: 98e1a79a67c5ee4bd95ed922cde1c9aa6e8dcb73 }
     ux: { date: 2026-10-31, verdict: "conforme après 0 correction bloquante (captures 390/1440 relues : chargement annoncé, Réessayer estompé pendant l'essai, échecs distincts catalogue / Mes images, encadrés compacts) — 2 notes mineures : focus perdu après un Réessayer réussi ; région de statut insérée déjà remplie" }
     finished: 2026-10-31
+    notes:
+      - { date: 2026-10-31, text: "Mineurs UX non traités (31-10) : focus sur BODY après un « Réessayer » réussi des images perso (bloc retiré) ; région role=status insérée déjà remplie (annonce possiblement non lue)" }
   - id: L221
     title: "Galerie : rejouer la réécriture différée après une sortie en erreur ou annulée ne doit pas relancer une navigation vers l'adresse actuelle (NavigationSkipped → retour en haut, position non rétablie) ; libellés « vos images personnelles » / « Mes images » / « Collection personnelle » à unifier (suite revue de L48)"
     status: done
