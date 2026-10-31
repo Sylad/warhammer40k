@@ -2431,6 +2431,7 @@ lots:
     visible: true
     created: 2026-10-31
     started: 2026-10-31
+    review: { date: 2026-10-31, verdict: "compliant after 0 blocking fixes — 2 minor notes (focus lost after a successful retry; status region inserted already filled) — orchestré (vague 2026-10-31-1940-wh, 0 passe(s) de correction)", commit: 98e1a79a67c5ee4bd95ed922cde1c9aa6e8dcb73 }
   - id: L221
     title: "Galerie : rejouer la réécriture différée après une sortie en erreur ou annulée ne doit pas relancer une navigation vers l'adresse actuelle (NavigationSkipped → retour en haut, position non rétablie) ; libellés « vos images personnelles » / « Mes images » / « Collection personnelle » à unifier (suite revue de L48)"
     status: done
