@@ -2,7 +2,7 @@
 // L61 — WCAG 1.4.12 (espacement du texte) sur la barre du haut, application CONSTRUITE (dist) :
 // interligne 1,5, lettres 0,12em, mots 0,16em, paragraphes 2em, injectés avec !important comme le
 // ferait une extension. À 320 px (et jusqu'à 400 px, polices web chargées ou bloquées, police par
-// défaut 16 et 20 px), le bouton « Menu » ne coupe plus son contenu et la barre ne déborde pas de la fenêtre
+// défaut 16 et 20 px), le bouton « Menu » ne coupe plus son contenu et la page ne défile pas horizontalement
 // (barre de défilement visible, avec ou sans la pastille « 9+ » des nouveautés). Chromium via playwright-core (sauté s'il manque).
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
@@ -47,7 +47,7 @@ describe.skipIf(!built || !chromium)('barre du haut — espacement de texte WCAG
     { name: 'police par défaut 16 px, pastille « 9+ »', fontSize: 16, webFonts: true, badge: true },
   ];
   for (const cfg of CONFIGS) {
-    it(`R1 — ${cfg.name} : de 320 à 400 px, ni débordement de la barre ni contenu du bouton Menu coupé`, async () => {
+    it(`R1 — ${cfg.name} : de 320 à 400 px, ni défilement horizontal ni contenu du bouton Menu coupé`, async () => {
       const context = await browser.newContext({ viewport: { width: 320, height: 700 } });
       const page = await context.newPage();
       if (cfg.fontSize !== 16) {
@@ -69,9 +69,7 @@ describe.skipIf(!built || !chromium)('barre du haut — espacement de texte WCAG
           const enfants = [...b.children].map((c) => c.getBoundingClientRect()).filter((c) => c.width > 0);
           const sortie = enfants.some((c) => c.left < r.left - 0.5 || c.right > r.right + 0.5);
           return {
-            // Débordement dû à la barre seule (le contenu de la page, ex. les cartes de /about avec
-            // les polices web bloquées, n'est pas l'objet de ce lot).
-            page: Math.round(Math.max(...[...document.querySelectorAll('.topbar, .topbar *')].map((e) => e.getBoundingClientRect().right)) - document.documentElement.clientWidth),
+            page: document.documentElement.scrollWidth - document.documentElement.clientWidth,
             bouton: b.scrollWidth - b.clientWidth,
             sortie,
             barre: document.querySelector<HTMLElement>('.topbar')!.scrollWidth - document.querySelector<HTMLElement>('.topbar')!.clientWidth,

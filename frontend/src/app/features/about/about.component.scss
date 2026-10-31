@@ -156,6 +156,7 @@
       border: 1px solid var(--border);
       background: rgba(11, 9, 7, 0.7);
       padding: 22px 22px 24px;
+      overflow-wrap: anywhere;
       transition: border-color 0.2s, transform 0.2s;
     }
     .stack-card:hover {
@@ -273,7 +274,7 @@
     }
 
     @media (max-width: 1024px) {
-      .stack { grid-template-columns: 1fr; }
+      .stack { grid-template-columns: minmax(0, 1fr); }
       .inspirations { grid-template-columns: 1fr; }
       .story { grid-template-columns: 1fr; padding: 28px; }
       .story-side {
