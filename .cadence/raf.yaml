@@ -500,12 +500,14 @@ lots:
   - id: L46
     title: "Barre du haut : débordement horizontal avec une police par défaut du navigateur de 18 ou 20 px (1 px à 320 px en 18 px ; 320–371 px en 20 px) — logo + « Menu » trop larges, choix de design à faire (relecture L33)"
     public: "Barre du haut : plus de débordement avec une grande police du navigateur"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-10-02
     started: 2026-10-31
     review: { date: 2026-10-31, verdict: "compliant (1 note mineure : la Nouveauté et le README disent « sans effet à 16 px » alors que le mot « Menu » disparaît maintenant à 320–327 px) — orchestré (vague 2026-10-31-1130-wh, 1 passe(s) de correction + passe des mineurs)", commit: ade29972cc9e698844f71ec362d57bad3a3a8a8d }
+    ux: { date: 2026-10-31, verdict: "conforme (ux-reviewer + captures regardées par le lead : barre sans débordement de 320 à 1400 px en police 16, 18 et 20 px, avec et sans pastille) — mineurs repris dans un lot de suite : texte de la Nouveauté inexact (« Menu » s'efface aussi de 320 à 327 px en 16 px), loupe ⌕ de 7×7 px peu lisible, logo sur deux lignes à 620 px en police 20" }
+    finished: 2026-10-31
   - id: L47
     title: "Bloc Médias : la carte « Vidéo à la une » ouvre cette vidéo — la page /videos n'a aujourd'hui ni paramètre d'adresse ni ancre pour ouvrir une vidéo précise, à créer (revue UX L42, Nielsen #2/#4)"
     public: "Médias : la carte « Vidéo à la une » ouvre directement cette vidéo"
@@ -2408,6 +2410,12 @@ lots:
     started: 2026-10-30
     review: { date: 2026-10-30, verdict: "compliant — orchestré (vague 2026-10-30-2025-wh, 0 passe(s) de correction)", commit: 65525c6709bb8922fa9144a00ee37321709452a7 }
     finished: 2026-10-30
+  - id: L219
+    title: "Barre du haut, suite de L46 : corriger le texte de la Nouveauté L46 (le mot « Menu » s'efface aussi de 320 à 327 px en police 16, puis npm run news et npm run plan), agrandir la loupe ⌕ (dessin de 7×7 px dans un bouton de 36×44, ~1.25rem), logo « WARHAMMER 40,000 » qui dépasse la barre à 620 px en police 20"
+    status: todo
+    estimate: 0.25
+    visible: true
+    created: 2026-10-31
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
