@@ -675,7 +675,7 @@ lots:
   - id: L61
     title: "En-tête du site : bouton MENU tronqué à 320 px avec l'espacement de texte WCAG 1.4.12 (+4 px de défilement horizontal) — relevé en revue UX L54"
     public: "Menu et page À propos : rien ne déborde avec un espacement de texte agrandi"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-10-05
@@ -683,6 +683,9 @@ lots:
     notes:
       - { date: 2026-10-31, text: "31-10 22:47 : rendu par la vague 2026-10-31-2135-wh — tests rouges après 4 corrections, escalade fable jouée (sa revue était conforme, puis la correction des mineurs a cassé la suite) ; le dernier commit annoncé (/about sans défilement horizontal à 320 px, garde sur scrollWidth) est absent de git. Lot devenu visible en cours de vague. Reprise demain : lire la suite rouge au dernier commit du lot, corriger, revue neuve, étape UX." }
       - { date: 2026-10-31, text: "Précision : le commit /about à 320 px existe (8ccfa16) ; l'avertissement « commit annoncé absent de git » de la vague était faux (titre légèrement différent ?). Les 5 commits du lot ne sont pas poussés." }
+    review: { date: 2026-11-01, verdict: "conforme : 0 bloquant ; majeur README (test:e2e lance aussi espacement-texte.e2e.spec.ts, « quatre fichiers ») corrigé en 7febeec ; non vérifié : mutation de la garde, run CI réel", commit: 7febeec7cc82026aafee65c74da7e7e7a6234ebd }
+    ux: { date: 2026-11-01, verdict: "conforme — 0 constat : défilement horizontal 0 px à 320/360/390 avec et sans espacement WCAG 1.4.12, bouton Menu « 9+ » 58,7 × 44 px non tronqué, /about sans débordement ; captures regardées par le lead ; Nouveautés à jour" }
+    finished: 2026-11-01
   - id: L62
     title: "Débordement horizontal : /videos (panneau latéral, 1511 px pour 1434 à 1440 ; 493 pour 384 à 390) et /romans à 390 (tiroir de menu, 490 pour 384) — mesurer et corriger — QA prod 05-10"
     public: "Vidéos : la barre latérale reste dans la page, sans défilement horizontal"
