@@ -182,8 +182,9 @@
     {
       "id": "L61",
       "title": "Menu et page À propos : rien ne déborde avec un espacement de texte agrandi",
-      "status": "doing",
-      "started": "2026-10-31"
+      "status": "done",
+      "started": "2026-10-31",
+      "finished": "2026-11-01"
     },
     {
       "id": "L62",
