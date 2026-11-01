@@ -375,7 +375,9 @@ describe('plan publié (.cadence/raf.yaml → public/plan-data/plan.json)', () =
 
   // L'application construite (npm run build, qui relance aussi cette vérification) :
   // aucune note, aucun verdict UX, aucun titre brut du plan dans les fichiers servis.
+  // Le balayage lit ~63 Mo (25 s à vide) : délai de 120 s, sinon les 30 s par défaut
+  // sautent dès que la suite tourne en parallèle.
   it.skipIf(!existsSync(DIST))('dist/ (application construite) ne contient aucun texte privé du plan', () => {
     expect(scanDir(realRaf, committed(), DIST)).toEqual([]);
-  });
+  }, 120_000);
 });
