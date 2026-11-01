@@ -6,7 +6,8 @@
 #      possible (ETag, Last-Modified) ;
 #   3. fichier à empreinte (main-, polyfills-, chunk-, styles-, media/) : cache
 #      d'un an immutable ; script, feuille de style, police, image ou JSON
-#      absent : 404 `no-store`, jamais le repli HTML ;
+#      absent : 404 `no-store`, jamais le repli HTML ; une plage d'octets (valide ou
+#      hors limites) reçoit le fichier entier en 200 (`max_ranges 0`, L52) ;
 #   4. chaque fichier du build : copié de public/ (favicon, carte, Nouveautés,
 #      plan) = `no-cache` ; produit par le build = empreinte dans le nom, sinon
 #      échec (il serait gardé un an sous un nom qui ne change pas) ;
@@ -245,6 +246,12 @@ expect "/$css"                              "/$css"                  200 text/cs
   expect "/$media"                          "/$media"                200 image/png "$IMMUTABLE"
 probe "/$js"
 expect "/$js + If-None-Match"               "/$js"                   304 - "$IMMUTABLE" -H "If-None-Match: $ETAG"
+# plage (L52) : `max_ranges 0` — le fichier est servi en entier (200), jamais en
+# 206 ni en 416. Une plage hors limites ne produit donc plus la réponse d'erreur
+# 416, qui portait le Cache-Control immutable en double
+expect "/$js + Range hors limites"          "/$js"                   200 application/javascript "$IMMUTABLE" -H 'Range: bytes=999999999-'
+expect "/$js + Range valide"                "/$js"                   200 application/javascript "$IMMUTABLE" -H 'Range: bytes=0-9'
+expect '/favicon.svg + Range hors limites'  /favicon.svg             200 image/svg+xml no-cache -H 'Range: bytes=999999999-'
 expect '/chunk-00000000.js (absent)'        /chunk-00000000.js       404 text/html no-store
 expect '/main-00000000.js (absent)'         /main-00000000.js        404 text/html no-store
 expect '/styles-00000000.css (absent)'      /styles-00000000.css     404 text/html no-store
