@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',
       }),
-      // L52 : un morceau d'une ancienne version répond 404 → recharger la page (une fois par minute).
+      // L52 : un morceau d'une ancienne version répond 404 (confirmé par HEAD, navigateur en ligne) → recharger la page (une fois par minute).
       withNavigationErrorHandler(surEchecDeNavigation),
     ),
     // L36 : un titre de document par page (WCAG 2.4.2).

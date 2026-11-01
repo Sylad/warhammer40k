@@ -21,6 +21,8 @@ export default defineConfig({
       ...acceptationBrowser(root).filter((f) => !pending.has(f)).map((f) => path.resolve(root, f)),
       // L61 : la garde de l'espacement de texte (WCAG 1.4.12) ne tournait nulle part en CI (`vitest run` passe avant le build, dist absent).
       path.resolve(__dirname, 'src/app/layout/main-layout/espacement-texte.e2e.spec.ts'),
+      // L52 : le rechargement sur « morceau absent » se mesure avec le réseau coupé et des réponses 404/502 : navigateur réel.
+      path.resolve(__dirname, 'src/app/core/utils/morceau-absent.e2e.spec.ts'),
     ],
   },
 });
