@@ -49,6 +49,14 @@ jobs:
       - name: Build (avec vérification de fuite du plan)
         run: npm run build
 
+      # L52 : nginx.conf sur un vrai nginx (Docker, présent sur ubuntu-latest) : en-têtes de cache
+      # d'index.html, des fichiers à empreinte, des absents (404 no-store), des plages d'octets.
+      # Sert frontend/dist, d'où sa place après le build ; le script se place lui-même à la racine.
+      - name: nginx.conf, en-têtes de cache sur un vrai nginx
+        working-directory: .
+        timeout-minutes: 3
+        run: scripts/test-nginx-cache.sh
+
       # L188 : `install --with-deps chromium` se bloquait (téléchargement + apt) jusqu'au timeout du job.
       # Le navigateur (~/.cache/ms-playwright) est mis en cache, clé sur la version de playwright-core ;
       # les dépendances système (apt) restent hors cache : à cache trouvé, `install-deps` seul.

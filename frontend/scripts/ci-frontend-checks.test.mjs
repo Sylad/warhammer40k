@@ -105,4 +105,15 @@ describe('workflow frontend-checks.yml', () => {
       for (const s of installs) expect(String(s.run)).toMatch(/SECONDS|date \+%s/);
     });
   });
+
+  // L52 — la preuve de nginx.conf sur un vrai nginx n'était jouée qu'à la main.
+  it('L52 — scripts/test-nginx-cache.sh est joué APRÈS le build (il sert dist) et à la racine du dépôt', () => {
+    const at = steps.findIndex((s) => /scripts\/test-nginx-cache\.sh/.test(String(s.run ?? '')));
+    const build = steps.findIndex((s) => /npm run build/.test(String(s.run ?? '')));
+    expect(at, 'étape manquante').toBeGreaterThan(-1);
+    expect(at).toBeGreaterThan(build);
+    expect(steps[at]['working-directory']).toBe('.');
+    expect(steps[at]['continue-on-error']).toBeUndefined();
+    expect(steps[at]['timeout-minutes']).toBeGreaterThan(0);
+  });
 });
