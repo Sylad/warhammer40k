@@ -44,6 +44,9 @@ const COLLECTIONS: Record<string, string> = {
 const OBJECTS = ['demo', 'wiki-image', 'image-meta'];
 const TYPES: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' };
 
+/** Les extensions de frontend/nginx.conf dont un fichier absent répond 404 (L51) et non le repli HTML. */
+const RESSOURCE = /\.(?:js|mjs|css|map|json|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf|eot)$/i;
+
 const cache = new Map<string, unknown>();
 function seed(file: string): unknown {
   if (!cache.has(file)) cache.set(file, JSON.parse(readFileSync(join(SEED, file), 'utf8')));
@@ -78,7 +81,13 @@ export async function startDistServer(): Promise<{ base: string; server: Server 
       return;
     }
     let file = join(DIST, path);
-    if (path.includes('..') || !existsSync(file) || statSync(file).isDirectory()) file = join(DIST, 'index.html');
+    if (path.includes('..') || !existsSync(file) || statSync(file).isDirectory()) {
+      if (RESSOURCE.test(path)) {
+        res.writeHead(404, { 'content-type': 'text/plain', 'cache-control': 'no-store' }).end('Not found');
+        return;
+      }
+      file = join(DIST, 'index.html');
+    }
     res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
     res.end(readFileSync(file));
   });
