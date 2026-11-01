@@ -583,11 +583,12 @@ lots:
     finished: 2026-10-03
   - id: L52
     title: "Cache HTTP, suites de la relecture du 03-10 : une plage hors limites (416) sur un fichier à empreinte ne doit pas porter immutable (retirer le 206 mort, corriger le commentaire, cas Range dans le test) ; jouer test-nginx-cache.sh en CI ; dist-server.ts doit répondre 404 sur un fichier absent comme la prod ; recharger la page quand un morceau d'une ancienne version répond 404"
-    status: doing
+    status: done
     estimate: 0.5
     created: 2026-10-03
     started: 2026-11-01
     review: { date: 2026-11-01, verdict: "conforme : 0 défaut ; test-nginx-cache.sh vert sur la conf du lot (50 OK, 3 cas Range en 200) et rouge sur l'ancienne (416 immutable en double, 206) ; morceau-absent.e2e 4/4 verts sur Chromium (hors ligne, 404 → un rechargement, 502 → rien) ; docs à jour — orchestré (vague 2026-11-01-0925-mix, 3 passe(s) de correction)", commit: 219b7d9c381c454dd4cf205859a9c5377d487d0d }
+    finished: 2026-11-01
   - id: L53
     title: "Galerie : voile sombre sur .hero-bg — surtitre, description et bouton Importer ≥ 4,5:1 sur image claire (même cause que L45/L50) ; vérifier sur une vraie image claire"
     public: "Galerie : textes et bouton Importer lisibles sur une image d'en-tête claire"
