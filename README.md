@@ -159,6 +159,8 @@ des données.
 
 `backend/public/datasheets/` contient **119 fiches techniques** (scans 898×596, curés à la main, bundlés dans l'image Docker), servies via `/api/images/datasheets/:unitId` ; `backend/public/portraits/` contient **14 portraits et insignes** d'unités, servis via `/api/images/portraits/:unitId` et présentés comme illustrations, jamais comme fiches techniques. Un scan va dans `datasheets/`, tout le reste dans `portraits/`.
 
+`GET /api/images/unit-images` renvoie `{ datasheets: [id…], portraits: [id…] }`, le contenu de ces deux mêmes dossiers (lus sous `process.cwd()/public/<dossier>`, donc à ne pas renommer ni déplacer sans ce point) ; la fiche faction le lit une fois pour ne sonder par HEAD que les images qui existent.
+
 ## Étape spec (cadence)
 
 **Onglets de la fiche unité (L121)** — la barre Aperçu · Équipement · Histoire & Lore · Variantes est une `<nav aria-label="Sections de la fiche">` ; le bouton actif porte `aria-current="true"` (absent sur les autres), pour que l’état soit annoncé et pas seulement coloré (WCAG 4.1.2). Gardé par `features/unit-detail/unit-detail.component.spec.ts`.
