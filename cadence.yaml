@@ -39,7 +39,12 @@ orchestrate:
   # backend 121 tests, frontend 1041 tests. Les `*.e2e.spec.ts` (Chromium + dist) sont exclus : sous la charge de
   # la suite complète l'un d'eux a expiré (section-anchor-href-l160), ils tournent en CI (`npm run test:e2e`).
   # Les acceptations rouges (vert: false) restent exclues par vitest.config.ts et ne passent que par `accept:`.
-  test: (cd backend && npm test) && (cd frontend && npx vitest run --exclude '**/*.e2e.spec.ts')
+  # Porte déclarée en parties (cadence L512, 01-11) : chaque partie est lancée seule dans son dossier, un rouge
+  # est attribué à la partie qui l'a imprimé, et le frontend rejoue seuls ses rouges (faux rouges sous charge :
+  # L61 du 31-10, 4 corrections + escalade pour un test plan-data trop lent).
+  test:
+    - { dir: backend, run: npm test }
+    - { dir: frontend, run: "npx vitest run --exclude '**/*.e2e.spec.ts'", replay: "npx vitest run --minWorkers=1 --maxWorkers=$CADENCE_TEST_WORKERS {files}" }
   # Build backend (nest build) puis frontend (ng build + contrôle de fuite du plan), verts le 25-10.
   build: (cd backend && npm run build) && (cd frontend && npm run build)
   ux:
