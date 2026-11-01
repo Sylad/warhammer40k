@@ -20,6 +20,18 @@ export class ImagesService {
     return `${m(IMAGES_DIR)}|${m(IMPORTED_DIR)}`;
   }
 
+  /** Identifiants (noms sans `.jpg`, triés) des images locales d'unités de `public/<dir>/` ; dossier absent → liste vide. */
+  listUnitImageIds(dir: 'datasheets' | 'portraits'): string[] {
+    try {
+      return fs.readdirSync(path.resolve(process.cwd(), 'public', dir))
+        .filter((n) => n.endsWith('.jpg'))
+        .map((n) => n.slice(0, -4))
+        .sort();
+    } catch {
+      return [];
+    }
+  }
+
   listImages(): string[] {
     // Invalidation par mtime des dossiers : la façon documentée d'ajouter des
     // images est de les déposer dans IMAGES_DIR — le cache process-lifetime

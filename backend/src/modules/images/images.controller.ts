@@ -34,6 +34,16 @@ export class ImagesController {
     res.sendFile(fullPath);
   }
 
+  /**
+   * L222 : identifiants des fiches techniques et des portraits locaux. Le frontend sait ainsi, en une requête, quelle image
+   * existe, au lieu de sonder chaque unité par un HEAD qui répond 404 (erreur dans la console du navigateur).
+   * Déclaré avant les routes `:unitId` ; `unit-images` n'est pas un segment que ces routes captent.
+   */
+  @Get('unit-images')
+  unitImages() {
+    return { datasheets: this.service.listUnitImageIds('datasheets'), portraits: this.service.listUnitImageIds('portraits') };
+  }
+
   /** Fiches techniques : scans 898×596 du profil, des armes et des aptitudes (jamais un portrait ni un insigne). */
   @Get('datasheets/:unitId')
   serveDatasheet(@Param('unitId') unitId: string, @Res() res: Response) {
