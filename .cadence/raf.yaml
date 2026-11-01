@@ -589,6 +589,8 @@ lots:
     started: 2026-11-01
     review: { date: 2026-11-01, verdict: "conforme : 0 défaut ; test-nginx-cache.sh vert sur la conf du lot (50 OK, 3 cas Range en 200) et rouge sur l'ancienne (416 immutable en double, 206) ; morceau-absent.e2e 4/4 verts sur Chromium (hors ligne, 404 → un rechargement, 502 → rien) ; docs à jour — orchestré (vague 2026-11-01-0925-mix, 3 passe(s) de correction)", commit: 219b7d9c381c454dd4cf205859a9c5377d487d0d }
     finished: 2026-11-01
+    notes:
+      - { date: 2026-11-01, text: "QA du 01-11 : l'origine répond 200 complet à un Range (max_ranges 0 tenu) ; le 206 et le 416 « immutable » viennent de l'edge Cloudflare qui découpe son objet en cache (cf-cache-status HIT), hors de notre nginx — pas un défaut de L52" }
   - id: L53
     title: "Galerie : voile sombre sur .hero-bg — surtitre, description et bouton Importer ≥ 4,5:1 sur image claire (même cause que L45/L50) ; vérifier sur une vraie image claire"
     public: "Galerie : textes et bouton Importer lisibles sur une image d'en-tête claire"
@@ -2458,6 +2460,11 @@ lots:
     started: 2026-10-31
     review: { date: 2026-10-31, verdict: "conforme, 1 note mineure (entrée Nouveautés de L48 encore à l'ancien libellé) — orchestré (vague 2026-10-31-1920-wh, 1 passe(s) de correction)", commit: 0e029d38b51f4b4edb0c35d77c146ff3283b8626 }
     finished: 2026-10-31
+  - id: L222
+    title: "Fiche faction Inquisition : 3 images de datasheet en 404 (inq-ravenor, inq-valeria, inq-henchmen) → erreurs console sur /factions/inquisition — ajouter les images ou retirer les références (QA de L52 du 01-11)"
+    status: todo
+    estimate: 1
+    created: 2026-11-01
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
