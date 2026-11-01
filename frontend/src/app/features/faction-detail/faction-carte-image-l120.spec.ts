@@ -19,7 +19,7 @@ describe('fiche faction — image de la carte d’unité (L120)', () => {
   beforeEach(() => { globalThis.fetch = realFetch; });
   afterEach(() => { globalThis.fetch = realFetch; });
 
-  async function render(heads: Record<string, number>) {
+  async function render(heads: Record<string, number>, index: { datasheets: string[]; portraits: string[] } | null = null) {
     const fetched: string[] = [];
     globalThis.fetch = (async (url: RequestInfo | URL, init?: RequestInit) => {
       const u = String(url);
@@ -34,6 +34,7 @@ describe('fiche faction — image de la carte d’unité (L120)', () => {
       getSubFactions: () => of([]),
       datasheetUrl: (id: string) => `/api/images/datasheets/${id}`,
       portraitUrl: (id: string) => `/api/images/portraits/${id}`,
+      unitImageIndex: () => of(index),
       getWikiImage: (q: string) => { wikiQueries.push(q); return of({ imageUrl: WIKI, pageTitle: null, pageUrl: null }); },
     });
     await setupTestBed([FactionDetailComponent], [
@@ -70,6 +71,31 @@ describe('fiche faction — image de la carte d’unité (L120)', () => {
     const r = await render({ [DATASHEET]: 404, [PORTRAIT]: 404 });
     expect(r.fetched).toEqual([`HEAD ${DATASHEET}`, `HEAD ${PORTRAIT}`]);
     expect(r.wikiQueries).toContain('Boyz');
+    expect(r.image).toBe(WIKI);
+  });
+
+  // L222 — avec l'index des images locales, une image absente n'est jamais sondée (un HEAD 404 = erreur console).
+  it('L222 — index : portrait seul listé → un seul HEAD, sur le portrait, aucune requête vers la fiche absente', async () => {
+    const r = await render({ [PORTRAIT]: 200 }, { datasheets: [], portraits: ['u1'] });
+    expect(r.image).toBe(PORTRAIT);
+    expect(r.fetched).toEqual([`HEAD ${PORTRAIT}`]);
+  });
+
+  it('L222 — index : fiche listée → un seul HEAD, sur la fiche', async () => {
+    const r = await render({ [DATASHEET]: 200 }, { datasheets: ['u1'], portraits: [] });
+    expect(r.image).toBe(DATASHEET);
+    expect(r.fetched).toEqual([`HEAD ${DATASHEET}`]);
+  });
+
+  it('L222 — index : rien de listé → aucune requête locale, repli direct sur le wiki', async () => {
+    const r = await render({}, { datasheets: [], portraits: [] });
+    expect(r.fetched).toEqual([]);
+    expect(r.image).toBe(WIKI);
+  });
+
+  it('L222 — index listé mais fichier disparu (HEAD 404) : repli sur le portrait puis le wiki', async () => {
+    const r = await render({}, { datasheets: ['u1'], portraits: ['u1'] });
+    expect(r.fetched).toEqual([`HEAD ${DATASHEET}`, `HEAD ${PORTRAIT}`]);
     expect(r.image).toBe(WIKI);
   });
 });

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, shareReplay, switchMap } from 'rxjs';
+import type { UnitImageIndex } from '../utils/local-unit-image';
 import { environment } from '../../../environments/environment';
 import {
   Faction, Unit, DescriptionResponse, Serie, Video,
@@ -97,6 +98,16 @@ export class WarhammerService {
       return `${this.base}/images/imported/${encodeURIComponent(filename.slice('imported/'.length))}`;
     }
     return `${this.base}/images/file/${encodeURIComponent(filename)}`;
+  }
+
+  private unitImageIndex$?: Observable<UnitImageIndex | null>;
+
+  /** Index des images locales d'unités (L222), demandé une fois ; `null` si l'API échoue (l'appelant sonde alors par HEAD). */
+  unitImageIndex(): Observable<UnitImageIndex | null> {
+    return (this.unitImageIndex$ ??= this.http.get<UnitImageIndex>(`${this.base}/images/unit-images`).pipe(
+      catchError(() => of(null)),
+      shareReplay(1),
+    ));
   }
 
   datasheetUrl(unitId: string): string {

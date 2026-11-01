@@ -167,6 +167,8 @@ Images locales d'unités, dans l'image Docker (`backend/public/`, copié en enti
 - `datasheets/<unit-id>.jpg` — **119 fiches techniques**, scans 898×596 (profil, armes, aptitudes), servis par `GET|HEAD /api/images/datasheets/:unitId`. Seul un scan va là : la fiche unité les présente « Fiche technique de … » avec le panneau Aperçu. Un test backend (`images/datasheets-l120.spec.ts`) refuse tout fichier hors du rapport [1,4 ; 1,6] ou de moins de 800 px de large.
 - `portraits/<unit-id>.jpg` — **14 portraits et insignes locaux** (800×800, 350×260, …), servis par `GET|HEAD /api/images/portraits/:unitId` ; la fiche les présente « Illustration de … » (type `portrait`, pas de panneau Aperçu).
 
+**Index (L222)** : `GET /api/images/unit-images` → `{ datasheets: [id…], portraits: [id…] }` (contenu des deux dossiers). La fiche faction le lit une fois (`WarhammerService.unitImageIndex()`) et ne sonde par HEAD que les images listées : plus de 404 dans la console pour une unité qui n'a qu'un portrait (inq-ravenor, inq-valeria, inq-henchmen). Index indisponible → sondage HEAD comme avant ; la fiche unité sonde encore sans index.
+
 **Pour ajouter une image locale** : un scan 898×596 → `datasheets/`, tout le reste (portrait, insigne, illustration) → `portraits/`, puis rebuild image backend. Pas de code à toucher, détection auto (fiche, sinon portrait local, sinon wiki). Ne jamais déposer un portrait dans `datasheets/`.
 
 **`wikiQuery` toujours en EN** dans les seeds — le scrape MediaWiki en FR (em-dash, accents) renvoie NULL.

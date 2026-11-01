@@ -1,5 +1,6 @@
 import { afterNextRender, Component, computed, DestroyRef, effect, ElementRef, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule, ViewportScroller } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
@@ -711,7 +712,10 @@ export class FactionDetailComponent {
       list.forEach(u => {
         if (this.unitImgInflight.has(u.id) || untracked(() => this.unitImages()).has(u.id)) return;
         this.unitImgInflight.add(u.id);
-        localUnitImage({ datasheet: this.service.datasheetUrl(u.id), portrait: this.service.portraitUrl(u.id) }).then(local => {
+        firstValueFrom(this.service.unitImageIndex()).then(index => localUnitImage(
+          { datasheet: this.service.datasheetUrl(u.id), portrait: this.service.portraitUrl(u.id) },
+          { index, unitId: u.id },
+        )).then(local => {
           if (local) {
             this.unitImages.update(m => new Map(m).set(u.id, local.url));
           } else {
