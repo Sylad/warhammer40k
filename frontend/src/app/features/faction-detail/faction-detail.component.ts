@@ -13,6 +13,9 @@ import { artworkForFaction, videoForFaction } from './faction-media';
 import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
+import { TexteRepliableComponent } from '../../shared/components/texte-repliable/texte-repliable.component';
+import { estTelephone, LISTE_MAX } from '../../core/utils/densite';
+import { Pagination } from '../../core/utils/pagination';
 
 const FACTION_WIKI: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -75,7 +78,7 @@ const DEFAULT_RESOURCES = [
 @Component({
   selector: 'app-faction-detail',
   standalone: true,
-  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, FormsModule, RouterLink],
+  imports: [SectionAnchorDirective, TexteRepliableComponent, LoadErrorComponent, CommonModule, FormsModule, RouterLink],
   template: `
     @if (faction(); as f) {
       @if (units.failed() || subFactions.failed() || videos.failed() || artworks.failed()) {
@@ -114,7 +117,7 @@ const DEFAULT_RESOURCES = [
         </div>
       </section>
 
-      <nav class="anchor-nav">
+      <nav class="anchor-nav" aria-label="Sommaire de la page">
         <a sectionAnchor="histoire">Histoire & Lore</a>
         @if (f.longHistory) { <a sectionAnchor="chronique">Chronique Complète</a> }
         @if (f.notableWars?.length) { <a sectionAnchor="guerres">Guerres Notables</a> }
@@ -134,15 +137,21 @@ const DEFAULT_RESOURCES = [
               <div class="lore-cols">
                 <article class="lore-col">
                   <div class="lc-head"><span class="lc-ico">⊛</span><strong>Origine</strong></div>
-                  <p>{{ f.lore?.origine || loreFallback(f, 'origine') }}</p>
+                  <app-texte-repliable [texte]="f.lore?.origine || loreFallback(f, 'origine')" sujet="Origine">
+                    <p>{{ f.lore?.origine || loreFallback(f, 'origine') }}</p>
+                  </app-texte-repliable>
                 </article>
                 <article class="lore-col">
                   <div class="lc-head"><span class="lc-ico">⚜</span><strong>Organisation</strong></div>
-                  <p>{{ f.lore?.organisation || loreFallback(f, 'organisation') }}</p>
+                  <app-texte-repliable [texte]="f.lore?.organisation || loreFallback(f, 'organisation')" sujet="Organisation">
+                    <p>{{ f.lore?.organisation || loreFallback(f, 'organisation') }}</p>
+                  </app-texte-repliable>
                 </article>
                 <article class="lore-col">
                   <div class="lc-head"><span class="lc-ico">⚔</span><strong>Doctrine</strong></div>
-                  <p>{{ f.lore?.doctrine || loreFallback(f, 'doctrine') }}</p>
+                  <app-texte-repliable [texte]="f.lore?.doctrine || loreFallback(f, 'doctrine')" sujet="Doctrine">
+                    <p>{{ f.lore?.doctrine || loreFallback(f, 'doctrine') }}</p>
+                  </app-texte-repliable>
                 </article>
               </div>
               <div class="lore-image"></div>
@@ -152,7 +161,9 @@ const DEFAULT_RESOURCES = [
           @if (f.longHistory) {
             <section class="bible-panel" id="chronique">
               <h2 class="section-title"><span class="t-flourish">✠</span>Chronique Complète</h2>
-              <p class="bible-text">{{ f.longHistory }}</p>
+              <app-texte-repliable [texte]="f.longHistory" sujet="Chronique complète">
+                <p class="bible-text lecture">{{ f.longHistory }}</p>
+              </app-texte-repliable>
             </section>
           }
 
@@ -243,9 +254,10 @@ const DEFAULT_RESOURCES = [
                 }
               </div>
               @if (extraSubFactionCount() > 0) {
-                <div class="sf-load-more-wrap">
+                <div class="voir-plus">
+                  <p class="voir-plus-compte" role="status">{{ displayedSubFactions().length }} sur {{ sfPages.total() }} affichés</p>
                   <button type="button" class="sf-load-more" (click)="loadMoreSubFactions()">
-                    Voir plus ({{ subFactionsPageSize }} de plus, {{ extraSubFactionCount() }} restants)
+                    Afficher {{ sfPages.prochain() }} de plus
                   </button>
                 </div>
               }
@@ -303,14 +315,18 @@ const DEFAULT_RESOURCES = [
           @if (f.currentState) {
             <section class="bible-panel" id="etat">
               <h2 class="section-title"><span class="t-flourish">✠</span>État Actuel · M42</h2>
-              <p class="bible-text">{{ f.currentState }}</p>
+              <app-texte-repliable [texte]="f.currentState" sujet="État actuel">
+                <p class="bible-text lecture">{{ f.currentState }}</p>
+              </app-texte-repliable>
             </section>
           }
 
           @if (f.legacy) {
             <section class="bible-panel" id="heritage">
               <h2 class="section-title"><span class="t-flourish">✠</span>Héritage</h2>
-              <p class="bible-text">{{ f.legacy }}</p>
+              <app-texte-repliable [texte]="f.legacy" sujet="Héritage">
+                <p class="bible-text lecture">{{ f.legacy }}</p>
+              </app-texte-repliable>
             </section>
           }
 
@@ -329,11 +345,6 @@ const DEFAULT_RESOURCES = [
         </div>
 
         <aside class="sidebar">
-          <section class="sp">
-            <h3>À propos des {{ f.nom }}</h3>
-            <p>{{ f.description }}</p>
-          </section>
-
           <section class="sp">
             <h3>Liens rapides</h3>
             @for (l of liensRapides(); track l.label) {
@@ -439,12 +450,6 @@ const DEFAULT_RESOURCES = [
               }
             }
           </section>
-
-          @if (f.citation) {
-            <blockquote class="side-quote">
-              « {{ f.citation }} »
-            </blockquote>
-          }
         </aside>
       </section>
     } @else if (faction.failed()) {
@@ -479,14 +484,12 @@ export class FactionDetailComponent {
   readonly typeFilter = signal<UnitType | 'Tous'>('Tous');
   readonly searchQuery = signal('');
   readonly showAllUnits = signal(false);
+  /** L40 (D4) : moins de cartes au téléphone (une colonne) qu'au bureau (trois ou quatre). */
+  readonly telephone = estTelephone();
   readonly heroImage = signal<string | null>(null);
   readonly loreImage = signal<string | null>(null);
   readonly unitImages = signal(new Map<string, string>());
   readonly galleryImages = signal<string[]>([]);
-  /** Pagination 12 cards par lot pour les sous-factions (utile sur Space
-      Marines : 113 entries dont 71 successors, sinon le DOM explose). */
-  readonly subFactionsPageSize = 12;
-  readonly subFactionsLimit = signal(12);
   /** Recherche par nom de chapitre — match aussi tous les successeurs
       d'un chapitre dont le NOM matche (taper 'Ultramarines' → Ultramarines
       + ses 26 successeurs). */
@@ -564,16 +567,21 @@ export class FactionDetailComponent {
     });
   });
 
-  readonly displayedSubFactions = computed(() =>
-    this.filteredSortedSubFactions().slice(0, this.subFactionsLimit()),
+  /** L40 (D4) : sous-factions par pages de 12 au bureau, 6 au téléphone (Space Marines : 81). */
+  readonly sfPages = new Pagination(
+    this.filteredSortedSubFactions,
+    computed(() => (this.telephone() ? LISTE_MAX.telephone : LISTE_MAX.bureau)),
   );
+  readonly displayedSubFactions = this.sfPages.affiches;
+  readonly extraSubFactionCount = this.sfPages.restants;
 
-  readonly extraSubFactionCount = computed(() =>
-    Math.max(0, this.filteredSortedSubFactions().length - this.subFactionsLimit()),
-  );
-
+  /** Le bouton reste : le focus passe à la première carte ajoutée (WCAG 2.4.3), le compte est annoncé. */
   loadMoreSubFactions(): void {
-    this.subFactionsLimit.update(n => n + this.subFactionsPageSize);
+    const premier = this.sfPages.plus();
+    afterNextRender(
+      () => this.host.nativeElement.querySelectorAll<HTMLElement>('a.sf-card')[premier]?.focus(),
+      { injector: this.injector },
+    );
   }
 
   subFactionTypeLabel(type: SubFactionType): string {
@@ -617,11 +625,13 @@ export class FactionDetailComponent {
     return out;
   });
 
+  /** Unités au repos : 7 + la carte « Voir toutes » (deux rangées de 4) au bureau, 5 + 1 au téléphone (D4). */
+  private readonly unitsAuRepos = computed(() => (this.telephone() ? LISTE_MAX.telephone : 8) - 1);
   readonly displayedUnits = computed(() =>
-    this.showAllUnits() ? this.visibleUnits() : this.visibleUnits().slice(0, 7),
+    this.showAllUnits() ? this.visibleUnits() : this.visibleUnits().slice(0, this.unitsAuRepos()),
   );
   readonly extraUnitCount = computed(() =>
-    this.showAllUnits() ? 0 : Math.max(0, this.visibleUnits().length - 7),
+    this.showAllUnits() ? 0 : Math.max(0, this.visibleUnits().length - this.unitsAuRepos()),
   );
 
   /** L42 : vidéo étiquetée du nom de la faction ou d'une de ses sous-factions (faction-media.ts). */
@@ -669,7 +679,7 @@ export class FactionDetailComponent {
     // Reset la pagination des sub-factions quand la recherche change.
     effect(() => {
       this.subFactionSearch();
-      this.subFactionsLimit.set(this.subFactionsPageSize);
+      untracked(() => this.sfPages.reinitialiser());
     });
 
     effect(() => {
@@ -679,7 +689,7 @@ export class FactionDetailComponent {
       this.loreImage.set(null);
       this.showAllUnits.set(false);
       this.subFactionSearch.set('');
-      this.subFactionsLimit.set(this.subFactionsPageSize);
+      this.sfPages.reinitialiser();
 
       const heroQ = FACTION_WIKI[f.id] ?? f.nom;
       this.service.getWikiImage(heroQ).subscribe({

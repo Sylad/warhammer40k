@@ -114,6 +114,16 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 - **Budget CSS Angular** : `anyComponentStyle` à 17.5kB warning / 28kB error dans `angular.json` (L29). Seule la galerie dépasse 16 kB (17,03 kB : page + trois modales visionneuse / catégoriser / importer). L49 : les règles du panneau Filtres, du bouton « Filtres » et des états chargement/erreur/vide vivent dans le partiel global `src/styles/_gallery-filtres.scss` (préfixé `.gallery-page`, déclaré dans `component-styles.spec.ts`) pour tenir le budget. Avant de relever encore : factoriser (la barre d'ancres des pages détail vit dans `src/styles/_anchor-nav.scss`), le test `src/styles/component-styles.spec.ts` mesure chaque feuille comme `ng build` et garde un instantané des déclarations effectives.
 - **`isolatedModules` TS** : `import type` obligatoire pour types utilisés dans décorateurs (`@Body() body: MonType` → `import type { MonType }`).
 
+## Densité des pages (L40)
+
+Règles communes D1 à D6, seuils et sources : `docs/densite/regles.md` (sommaire de page au-delà de 3 écrans au
+téléphone, texte replié au-delà de 8 lignes, 40 à 80 caractères par ligne, listes par 12 / 6 au téléphone,
+pas de texte répété, titres sans niveau sauté). Briques : `<app-texte-repliable [texte] sujet><p>…</p></app-texte-repliable>`
+(paragraphe projeté, styles dans `src/styles/_densite.scss`), `.lecture` (36em), `Pagination` (`core/utils/pagination.ts`)
+avec `estTelephone()` / `LISTE_MAX` (`core/utils/densite.ts`). Mesure : `cd frontend && npm run densite [-- --page <adresse>]`
+(appli lancée en local). Garde : `densite-pilotes-l40.e2e.spec.ts` (chaque faction et chaque primarque, 1440 et 390 px, dans `npm run test:e2e`).
+Une revue page par page part de `docs/densite/mesures-2026-11-14.md`.
+
 ## Galerie, édition derrière le PIN (L144)
 
 Comme Vidéos : « + Importer » et « ✦ Catégoriser » n'existent qu'une fois le PIN saisi (`editMode = !!PinService.pin()`), bouton « Mode édition » (`aria-pressed`) en pied de page ; un « Enregistrer » refusé affiche son échec (`catError`, `role=alert`). Un test navigateur qui vise « + Importer » doit poser `sessionStorage['wh40k.pin']` avant `goto`.

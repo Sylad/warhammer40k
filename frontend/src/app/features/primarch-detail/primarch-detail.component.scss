@@ -293,6 +293,8 @@ h1 {
   }
   /* Hérésie : la citation et l'image sont centrées sur le panneau, le texte partage leur axe (aligné à gauche dedans). */
   .panel .heresy-text { margin-inline: auto; }
+  /* L40 : le bloc repliable (texte + « Lire la suite ») prend la colonne centrée, le bouton reste sous le texte. */
+  #heresie app-texte-repliable { max-inline-size: $lecture; margin-inline: auto; }
 }
 
 /* =========================
@@ -380,7 +382,8 @@ h1 {
   gap: 28px;
   align-items: start;
   &.reverse { grid-template-columns: 1fr 1.6fr; }
-  &.reverse .col-text { grid-column: 2; grid-row: 1; }
+  /* L40 : le texte est dans <app-texte-repliable> (repli « Lire la suite »), qui occupe la cellule. */
+  &.reverse .col-text, &.reverse app-texte-repliable { grid-column: 2; grid-row: 1; }
   &.reverse .inline-figure { grid-column: 1; grid-row: 1; }
   .col-text {
     margin: 0;
@@ -573,12 +576,14 @@ h1 {
   background: rgba(0, 0, 0, 0.32);
   border-left: 2px solid var(--gold-soft);
   padding: 14px 18px;
-  h4 {
+  /* L40 (D6) : h3 et non plus h4 (h2 → h4 sautait un niveau) ; même rendu qu'avant (pas de capitales). */
+  h3 {
     font-family: var(--serif);
     font-size: 16px;
     color: var(--gold-bright);
     margin: 0 0 6px;
     letter-spacing: 0.03em;
+    text-transform: none;
   }
   p {
     margin: 0;
@@ -815,7 +820,7 @@ h1 {
   .two-col, .two-col.reverse {
     grid-template-columns: 1fr !important;
   }
-  .two-col.reverse .col-text { grid-column: 1; grid-row: 2; }
+  .two-col.reverse .col-text, .two-col.reverse app-texte-repliable { grid-column: 1; grid-row: 2; }
   .two-col.reverse .inline-figure { grid-column: 1; grid-row: 1; }
   .inline-figure {
     &.inline-right, &.inline-left {
@@ -833,6 +838,9 @@ h1 {
   .iconography-grid { grid-template-columns: 1fr 1fr; }
   h1 { @include fit-title(36px); }
   .panel { padding: 22px 20px; }
+  /* L40 (D2, D3) : à 390 px la citation centrée tenait en ~21 caractères par ligne (10 lignes pour Guilliman). */
+  .pull-quote-inline { padding: 22px 12px; }
+  .pull-quote-inline p { font-size: 16px; }
 }
 
 /* L156 : visionneuse partagée — le titre est en or (WCAG 1.4.3), la couleur de la légion vit dans un filet.

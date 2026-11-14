@@ -22,7 +22,7 @@ try {
 }
 
 const GREY = 'data:image/svg+xml;base64,' + Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8" fill="#555"/></svg>').toString('base64');
-const TEXTES = '#description .lead, #description .lore-block, #heresie .heresy-text, #heritage > p';
+const TEXTES = '#description .lead, #description .lore-block, #heresie .heresy-text, #heritage p';
 
 describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dist) — L158', () => {
   let server: Server;
@@ -67,7 +67,8 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
           document.body.append(probe);
           const ch70 = probe.getBoundingClientRect().width;
           probe.remove();
-          const lignes = Math.round(p.getBoundingClientRect().height / parseFloat(cs.lineHeight));
+          // L40 : texte long replié (« Lire la suite ») : on compte les lignes du texte entier (scrollHeight).
+          const lignes = Math.round(p.scrollHeight / parseFloat(cs.lineHeight));
           return { id: p.className || p.tagName, largeur: p.getBoundingClientRect().width, ch70, car: (p.textContent ?? '').trim().length / lignes };
         });
         return mesures;
@@ -120,7 +121,7 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
     'Description (chapeau)': '#description .lead',
     'Description (texte)': '#description .lore-block',
     Hérésie: '#heresie .heresy-text',
-    Héritage: '#heritage > p',
+    Héritage: '#heritage p',
   };
 
   /** Caractères par ligne rendue de chaque élément (espaces de fin de ligne exclus). */
@@ -199,12 +200,12 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
         ['#description .lead', '#description', false], // le chapeau n'avait pas de plafond de 70ch avant le lot (770 px)
         ['#description .lore-block', '#description', true],
         ['#heresie .heresy-text', '#heresie', true],
-        ['#heritage > p', '#heritage', true],
+        ['#heritage p', '#heritage', true],
       ];
       return {
         ecarts: textes.map(([sel, panneau, plafond]) => ({ sel, ecart: Math.round((box(sel).width - attendue(sel, panneau, plafond)) * 10) / 10 })),
         heresieGauche: box('#heresie .heresy-text').left - box('#heresie h2').left,
-        heritageGauche: box('#heritage > p').left - box('#heritage h2').left,
+        heritageGauche: box('#heritage p').left - box('#heritage h2').left,
       };
     });
     expect(r.ecarts.filter((x) => Math.abs(x.ecart) > 1), `${w} px`).toEqual([]);
@@ -217,7 +218,7 @@ describe.skipIf(!built || !chromium)('Fiche Primarque, sections (navigateur, dis
     const page = await open('horus', 1440, false);
     const l = await page.evaluate(() => {
       const w = (s: string) => document.querySelector(s)!.getBoundingClientRect().width;
-      return { seul: w('#heritage > p'), heresie: w('#heresie .heresy-text'), lore: w('#description .lore-block'), double: w('#personnalite .col-text'), colonneDouble: document.querySelector('#personnalite .two-col') !== null };
+      return { seul: w('#heritage p'), heresie: w('#heresie .heresy-text'), lore: w('#description .lore-block'), double: w('#personnalite .col-text'), colonneDouble: document.querySelector('#personnalite .two-col') !== null };
     });
     expect(l.colonneDouble).toBe(true);
     for (const k of ['seul', 'heresie', 'lore'] as const) expect(Math.abs(l[k] - l.double), k).toBeLessThanOrEqual(15);

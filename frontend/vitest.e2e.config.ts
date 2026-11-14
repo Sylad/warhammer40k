@@ -23,6 +23,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/layout/main-layout/espacement-texte.e2e.spec.ts'),
       // L52 : le rechargement sur « morceau absent » se mesure avec le réseau coupé et des réponses 404/502 : navigateur réel.
       path.resolve(__dirname, 'src/app/core/utils/morceau-absent.e2e.spec.ts'),
+      // L40 : les pages pilotes de la densité (fiches faction et primarque) tiennent les règles D1 à D6 à 1440 et 390 px.
+      path.resolve(__dirname, 'src/app/features/densite-pilotes-l40.e2e.spec.ts'),
     ],
   },
 });

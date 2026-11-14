@@ -13,6 +13,7 @@ import { isNotFound, retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { longestWord } from '../../shared/longest-word';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 import { LightboxDialogDirective } from '../../shared/lightbox-dialog.directive';
+import { TexteRepliableComponent } from '../../shared/components/texte-repliable/texte-repliable.component';
 
 const ALLEGIANCE_LABEL: Record<PrimarchAllegiance, string> = {
   loyalist: 'Loyaliste',
@@ -31,7 +32,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
 @Component({
   selector: 'app-primarch-detail',
   standalone: true,
-  imports: [SectionAnchorDirective, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
+  imports: [SectionAnchorDirective, TexteRepliableComponent, LoadErrorComponent, CommonModule, RouterLink, FigureLightboxComponent, LightboxDialogDirective],
   template: `
     @if (primarch(); as p) {
       @if (related.failed()) {
@@ -80,7 +81,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
       </section>
 
       <!-- ANCHOR NAV -->
-      <nav class="anchor-nav">
+      <nav class="anchor-nav" aria-label="Sommaire de la page">
         <a sectionAnchor="description">Description</a>
         @if (p.personality) { <a sectionAnchor="personnalite">Personnalité</a> }
         @if (p.earlyLife) { <a sectionAnchor="origines">Origines</a> }
@@ -89,7 +90,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
         @if (p.finalFate) { <a sectionAnchor="destin">Destin</a> }
         @if (p.legacy) { <a sectionAnchor="heritage">Héritage</a> }
         @if (p.notableBattles?.length) { <a sectionAnchor="batailles">Timeline</a> }
-        @if (p.quotes?.length) { <a sectionAnchor="citations">Citations</a> }
+        @if (otherQuotes(p).length) { <a sectionAnchor="citations">Citations</a> }
         @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
@@ -113,7 +114,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
                     <figcaption>Iconographie · {{ p.legion || p.name }}</figcaption>
                   </figure>
                 }
-                <p class="lore-block">{{ p.loreLong }}</p>
+                <app-texte-repliable [texte]="p.loreLong" sujet="Description">
+                  <p class="lore-block">{{ p.loreLong }}</p>
+                </app-texte-repliable>
               </div>
             }
           </article>
@@ -124,7 +127,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             <article class="panel" id="personnalite">
               <h2>Personnalité</h2>
               <div [class.two-col]="!!q1">
-                <p class="col-text">{{ p.personality }}</p>
+                <app-texte-repliable [texte]="p.personality" sujet="Personnalité">
+                  <p class="col-text">{{ p.personality }}</p>
+                </app-texte-repliable>
                 @if (q1) {
                   <aside class="pull-quote">
                     <span class="pq-mark">«</span>
@@ -142,7 +147,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             <article class="panel" id="origines">
               <h2>Origines & Monde Natal</h2>
               <div class="two-col">
-                <p class="col-text">{{ p.earlyLife }}</p>
+                <app-texte-repliable [texte]="p.earlyLife" sujet="Origines">
+                  <p class="col-text">{{ p.earlyLife }}</p>
+                </app-texte-repliable>
                 <aside class="info-card">
                   @if (img2) {
                     <button type="button" class="info-card-img" [style.background-image]="img2"
@@ -168,7 +175,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             <article class="panel" id="croisade">
               <h2>Grande Croisade</h2>
               <div [class.two-col]="!!img3" [class.reverse]="!!img3">
-                <p class="col-text">{{ p.greatCrusade }}</p>
+                <app-texte-repliable [texte]="p.greatCrusade" sujet="Grande Croisade">
+                  <p class="col-text">{{ p.greatCrusade }}</p>
+                </app-texte-repliable>
                 @if (img3) {
                   <figure class="inline-figure">
                     <button type="button" class="inline-figure-img" [style.background-image]="img3"
@@ -187,7 +196,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             <article class="panel" [class.panel-heresy]="p.allegiance === 'traitor'" id="heresie">
               <h2>Hérésie d'Horus</h2>
               <div class="heresy-content">
-                <p class="heresy-text">{{ p.heresy }}</p>
+                <app-texte-repliable [texte]="p.heresy" sujet="Hérésie d’Horus">
+                  <p class="heresy-text">{{ p.heresy }}</p>
+                </app-texte-repliable>
                 @if (q2) {
                   <blockquote class="pull-quote-inline">
                     <span class="pq-mark">«</span>
@@ -211,7 +222,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
             <article class="panel" id="destin">
               <h2>Destin</h2>
               <div [class.two-col]="!!q3">
-                <p class="col-text">{{ p.finalFate }}</p>
+                <app-texte-repliable [texte]="p.finalFate" sujet="Destin">
+                  <p class="col-text">{{ p.finalFate }}</p>
+                </app-texte-repliable>
                 @if (q3) {
                   <aside class="pull-quote">
                     <span class="pq-mark">«</span>
@@ -227,7 +240,9 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
           @if (p.legacy) {
             <article class="panel" id="heritage">
               <h2>Héritage</h2>
-              <p>{{ p.legacy }}</p>
+              <app-texte-repliable [texte]="p.legacy" sujet="Héritage">
+                <p>{{ p.legacy }}</p>
+              </app-texte-repliable>
             </article>
           }
 
@@ -245,7 +260,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
                       }
                     </div>
                     <div class="tl-content">
-                      <h4>{{ b.name }}</h4>
+                      <h3>{{ b.name }}</h3>
                       <p>{{ b.summary }}</p>
                     </div>
                   </div>
@@ -255,11 +270,11 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
           }
 
           <!-- CITATIONS - pull-quotes complètes -->
-          @if (p.quotes?.length) {
+          @if (otherQuotes(p).length) {
             <article class="panel" id="citations">
-              <h2>Citations Canon</h2>
+              <h2>{{ otherQuotes(p).length < p.quotes!.length ? 'Autres citations' : 'Citations Canon' }}</h2>
               <div class="quotes-grid">
-                @for (q of p.quotes; track q) {
+                @for (q of otherQuotes(p); track q) {
                   <blockquote class="quote-card">
                     <span class="qm">«</span>
                     <p>{{ q }}</p>
@@ -481,6 +496,19 @@ export class PrimarchDetailComponent {
     if (imgs.length === 0) return null;
     const idx = slot % imgs.length;
     return `url('${imgs[idx]}')`;
+  }
+
+  /**
+   * L40 (D5 : un texte n'apparaît qu'une fois par page) — citations que le texte n'a pas déjà mises
+   * en exergue : la n° 1 dans Personnalité, la 2 dans l'Hérésie, la 3 dans Destin, quand ces
+   * sections existent (pullQuote).
+   */
+  otherQuotes(p: Primarch): string[] {
+    const shown = new Set<number>();
+    if (p.personality) shown.add(0);
+    if (p.heresy) shown.add(1);
+    if (p.finalFate) shown.add(2);
+    return (p.quotes ?? []).filter((_, i) => !shown.has(i));
   }
 
   /** Returns a quote at the given slot if available. Slot 0 = hero (citation), slot 1+ = quotes[]. */

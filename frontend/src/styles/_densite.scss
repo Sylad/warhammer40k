@@ -1,0 +1,62 @@
+/* L40 — règles communes de densité (docs/densite/regles.md), partie styles.
+ *
+ * D2 repli : le premier élément projeté dans <app-texte-repliable> n'affiche au repos que
+ *    --tr-lignes lignes ; « Lire la suite » le déplie. Global (et non dans la feuille du
+ *    composant) : le paragraphe projeté appartient à la page qui l'emploie.
+ * D3 largeur de lecture : .lecture borne le texte courant à 36em, environ 70 caractères (45 à 75
+ *    conseillés, WCAG 1.4.8 : au plus 80 ; « 68ch » laissait passer 82 caractères : le « 0 » qui
+ *    sert d'unité est plus large que la lettre moyenne). Même colonne que la fiche primarque (L158).
+ */
+.texte-repliable { display: block; }
+.tr-replie > * {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--tr-lignes, 6);
+  line-clamp: var(--tr-lignes, 6);
+  overflow: hidden;
+}
+.tr-bouton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 0 2px;
+  background: none;
+  border: 0;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 162, 74, 0.45);
+  text-underline-offset: 4px;
+}
+.tr-bouton:hover { color: var(--gold-bright); text-decoration-color: currentColor; }
+.tr-bouton[aria-expanded='false']::after { content: ' ↓'; }
+.tr-bouton[aria-expanded='true']::after { content: ' ↑'; }
+.tr-sujet {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+@media print {
+  .tr-replie > * { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible; }
+  .tr-bouton { display: none; }
+}
+
+.lecture { max-width: 36em; }
+
+/* D4 pagination : « Afficher N de plus » et le compte affiché sur le total. */
+.voir-plus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+.voir-plus-compte {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}

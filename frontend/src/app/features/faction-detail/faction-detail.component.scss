@@ -174,16 +174,19 @@
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
       gap: 26px;
     }
+    /* L40 (D3) : les trois blocs l'un sous l'autre ; en trois colonnes, ~25 caractères par ligne
+       et jusqu'à 14 lignes par bloc à 1440 px. */
     .lore-cols {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      grid-template-columns: 1fr;
+      gap: 18px;
     }
     .lore-col p {
       margin: 0;
       color: #c3baaa;
       font-size: 13px;
       line-height: 1.65;
+      max-width: 36em; /* L40 (D3) : ~70 caractères par ligne quand la colonne s'élargit (≤ 1280 px) */
     }
     .lc-head {
       display: flex;
@@ -365,11 +368,6 @@
       border-color: var(--gold);
       background: rgba(0, 0, 0, 0.78);
       box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.18);
-    }
-    .sf-load-more-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 32px;
     }
     .sf-load-more {
       padding: 14px 32px;
@@ -594,12 +592,6 @@
       letter-spacing: 0.1em;
       font-size: 14px;
     }
-    .sp p {
-      margin: 0;
-      color: #c3baaa;
-      font-size: 13px;
-      line-height: 1.6;
-    }
 
     .row-link {
       display: flex;
@@ -717,18 +709,6 @@
       letter-spacing: 0.08em;
     }
 
-    .side-quote {
-      margin: 0;
-      padding: 18px 22px;
-      border: 1px solid rgba(201, 162, 74, 0.22);
-      background: rgba(5, 4, 3, 0.78);
-      color: #d4c8aa;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 13px;
-      line-height: 1.65;
-      text-align: center;
-    }
 
     .loading {
       padding: 60px;
@@ -866,7 +846,7 @@
     }
     @media (max-width: 900px) {
       .lore-grid { grid-template-columns: 1fr; }
-      .lore-cols { grid-template-columns: 1fr; gap: 16px; }
+      .lore-cols { gap: 16px; }
       .lore-image { min-height: 180px; }
     }
     @media (max-width: 760px) {

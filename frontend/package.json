@@ -13,7 +13,8 @@
     "plan": "node scripts/plan-data.mjs",
     "liens": "node scripts/liens.mjs",
     "liens:crawl": "node scripts/liens-crawl.mjs",
-    "liens:externes": "node scripts/liens-externes.mjs"
+    "liens:externes": "node scripts/liens-externes.mjs",
+    "densite": "node scripts/densite.mjs"
   },
   "dependencies": {
     "@angular/animations": "^19.0.0",
