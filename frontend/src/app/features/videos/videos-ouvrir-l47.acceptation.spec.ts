@@ -469,14 +469,22 @@ describe('vidéos — ouvrir une vidéo précise par l\'adresse (navigateur, dis
     try {
       await page.goto(`${base}/videos`);
       await settle();
-      const [tab] = await Promise.all([
-        ctx.waitForEvent('page'),
-        cardLink(page, 'astartes-2').click({ button: 'middle' }),
-      ]);
-      // le nouvel onglet démarre à about:blank : attendre sa vraie adresse, pas seulement le chargement
-      await tab.waitForURL(/\/videos\?video=astartes-2$/);
-      await tab.waitForLoadState();
-      expect(new URL(tab.url()).pathname + new URL(tab.url()).search).toBe('/videos?video=astartes-2');
+      // L227 : le suivi d'onglets de Playwright perd parfois la navigation d'un onglet ouvert en arrière-plan
+      // (événement « page » jamais émis, ou adresse et « load » jamais reçus) : on lit les onglets du contexte
+      // dans Chromium même (cibles CDP), pas dans ce suivi.
+      const cdp = await browser.newBrowserCDPSession();
+      try {
+        const self = await ctx.newCDPSession(page);
+        const { targetInfo: me } = await self.send('Target.getTargetInfo');
+        await self.detach();
+        const nouveaux = async () => (await cdp.send('Target.getTargets')).targetInfos
+          .filter((t) => t.type === 'page' && t.browserContextId === me.browserContextId && t.targetId !== me.targetId)
+          .map((t) => t.url);
+        expect(await nouveaux()).toEqual([]);
+        await cardLink(page, 'astartes-2').click({ button: 'middle' });
+        await expect.poll(async () => (await nouveaux()).map((u) => { const x = new URL(u); return x.origin + x.pathname + x.search; }), { timeout: 8000 })
+          .toEqual([`${base}/videos?video=astartes-2`]);
+      } finally { await cdp.detach(); }
       expect(videoParam(page)).toBeNull();
       expect(await tid(page, 'modale-video').count()).toBe(0);
     } finally { await done(); }
