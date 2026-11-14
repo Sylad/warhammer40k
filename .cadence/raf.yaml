@@ -2488,6 +2488,7 @@ lots:
     title: "Fiche primarque, chronologie : au téléphone l'étiquette de date chevauche le titre de la bataille (vu aux revues de L40, déjà présent avant)"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-14, sha: ab97dd26bfcee62e09299ca960a9764d7758c18c }
     created: 2026-11-14
     started: 2026-11-14
     review: { date: 2026-11-14, verdict: "conforme : la date de la chronologie ne chevauche plus le titre (pastille en flux normal), test e2e 20 primarques × 320/390/1440, instantané de styles à jour ; e2e non rejoué par le relecteur, joué par la CI", commit: ab97dd26bfcee62e09299ca960a9764d7758c18c }
