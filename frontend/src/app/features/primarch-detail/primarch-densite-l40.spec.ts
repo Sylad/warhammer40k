@@ -37,6 +37,7 @@ describe('fiche primarque — densité (L40)', () => {
     const el = await rendre({ personality: 'p', heresy: 'h', finalFate: 'f' });
     expect([...el.querySelectorAll('#citations .quote-card p')].map(texte)).toEqual([QUOTES[3]]);
     expect(texte(el.querySelector('#citations h2')!)).toBe('Autres citations');
+    expect(texte(el.querySelector('nav.anchor-nav a[href$="#citations"]')!)).toBe('Autres citations'); // D1 : ancre = titre
     for (const q of QUOTES) expect(texte(el).split(q).length - 1).toBe(1); // chaque citation une seule fois
   });
 
@@ -50,6 +51,7 @@ describe('fiche primarque — densité (L40)', () => {
     const el = await rendre({});
     expect(el.querySelectorAll('#citations .quote-card')).toHaveLength(4);
     expect(texte(el.querySelector('#citations h2')!)).toBe('Citations Canon');
+    expect(texte(el.querySelector('nav.anchor-nav a[href$="#citations"]')!)).toBe('Citations Canon');
   });
 
   it('batailles en h3, aucun h4 ; textes longs repliés avec « Lire la suite » ; sommaire nommé', async () => {

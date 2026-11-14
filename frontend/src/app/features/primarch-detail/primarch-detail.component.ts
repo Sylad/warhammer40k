@@ -90,7 +90,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
         @if (p.finalFate) { <a sectionAnchor="destin">Destin</a> }
         @if (p.legacy) { <a sectionAnchor="heritage">Héritage</a> }
         @if (p.notableBattles?.length) { <a sectionAnchor="batailles">Timeline</a> }
-        @if (otherQuotes(p).length) { <a sectionAnchor="citations">Citations</a> }
+        @if (otherQuotes(p).length) { <a sectionAnchor="citations">{{ titreCitations(p) }}</a> }
         @if (galleryImages().length > 0) { <a sectionAnchor="iconographie">Iconographie</a> }
       </nav>
 
@@ -272,7 +272,7 @@ const STATUS_LABEL: Record<PrimarchStatus, string> = {
           <!-- CITATIONS - pull-quotes complètes -->
           @if (otherQuotes(p).length) {
             <article class="panel" id="citations">
-              <h2>{{ otherQuotes(p).length < p.quotes!.length ? 'Autres citations' : 'Citations Canon' }}</h2>
+              <h2>{{ titreCitations(p) }}</h2>
               <div class="quotes-grid">
                 @for (q of otherQuotes(p); track q) {
                   <blockquote class="quote-card">
@@ -509,6 +509,11 @@ export class PrimarchDetailComponent {
     if (p.heresy) shown.add(1);
     if (p.finalFate) shown.add(2);
     return (p.quotes ?? []).filter((_, i) => !shown.has(i));
+  }
+
+  /** Titre de la section des citations, repris tel quel par son ancre du sommaire (D1). */
+  titreCitations(p: Primarch): string {
+    return this.otherQuotes(p).length < (p.quotes?.length ?? 0) ? 'Autres citations' : 'Citations Canon';
   }
 
   /** Returns a quote at the given slot if available. Slot 0 = hero (citation), slot 1+ = quotes[]. */

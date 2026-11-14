@@ -32,11 +32,11 @@ function largeurTelephone() {
   })) as unknown as typeof window.matchMedia;
 }
 
-async function rendre() {
+async function rendre(units = UNITS, sf: { type: string }[] = SF) {
   const service = fakeWarhammerService({
     getFaction: () => of(FACTION),
-    getUnits: () => of(UNITS),
-    getSubFactions: () => of(SF),
+    getUnits: () => of(units),
+    getSubFactions: () => of(sf),
   });
   await setupTestBed([FactionDetailComponent], [
     provideRouter([]),
@@ -52,12 +52,12 @@ async function rendre() {
 }
 
 describe('fiche faction — densité (L40)', () => {
-  it('bureau : 12 sous-factions sur 20, compte affiché, « Afficher 8 de plus » ; le focus va à la 13e', async () => {
+  it('bureau : 12 sous-factions sur 20, compte et bouton nomment la liste, « Afficher 8 chapitres de plus » ; le focus va à la 13e', async () => {
     const { f, el } = await rendre();
     expect(el.querySelectorAll('a.sf-card')).toHaveLength(12);
-    expect(el.querySelector('.voir-plus-compte')!.textContent!.trim()).toBe('12 sur 20 affichés');
+    expect(el.querySelector('.voir-plus-compte')!.textContent!.trim()).toBe('12 chapitres sur 20 affichés');
     const b = el.querySelector<HTMLButtonElement>('button.sf-load-more')!;
-    expect(b.textContent!.trim()).toBe('Afficher 8 de plus');
+    expect(b.textContent!.trim()).toBe('Afficher 8 chapitres de plus');
     b.click();
     f.detectChanges();
     await f.whenStable();
@@ -73,7 +73,7 @@ describe('fiche faction — densité (L40)', () => {
     largeurTelephone();
     const { f, el } = await rendre();
     expect(el.querySelectorAll('a.sf-card')).toHaveLength(6);
-    expect(el.querySelector('.voir-plus-compte')!.textContent!.trim()).toBe('6 sur 20 affichés');
+    expect(el.querySelector('.voir-plus-compte')!.textContent!.trim()).toBe('6 chapitres sur 20 affichés');
     expect(el.querySelectorAll('a.unit-card')).toHaveLength(5);
     expect(el.querySelector('button.unit-extra')!.textContent).toContain('+14 autres unités');
     f.nativeElement.remove();
@@ -97,6 +97,28 @@ describe('fiche faction — densité (L40)', () => {
     expect(bouton('etat')).toBeNull();
     expect(el.querySelector('#chronique p.bible-text.lecture')).not.toBeNull();
     expect(el.querySelector('nav.anchor-nav')!.getAttribute('aria-label')).toBe('Sommaire de la page');
+    f.nativeElement.remove();
+  });
+
+  it('D4, tolérance : la carte « Voir toutes » ne cache jamais 1 ou 2 unités', async () => {
+    for (const [n, cartes, extra] of [[9, 9, null], [10, 7, '+3 autres unités']] as const) {
+      const { f, el } = await rendre(UNITS.slice(0, n));
+      expect(el.querySelectorAll('a.unit-card')).toHaveLength(cartes);
+      expect(el.querySelector('button.unit-extra')?.textContent ?? null).toEqual(extra === null ? null : expect.stringContaining(extra));
+      f.nativeElement.remove();
+    }
+    largeurTelephone();
+    for (const [n, cartes] of [[7, 7], [8, 5]] as const) {
+      const { f, el } = await rendre(UNITS.slice(0, n));
+      expect(el.querySelectorAll('a.unit-card')).toHaveLength(cartes);
+      f.nativeElement.remove();
+    }
+  });
+
+  it('accord du compte au féminin (« dynasties … affichées »)', async () => {
+    const { f, el } = await rendre(UNITS, SF.map((s) => ({ ...s, type: 'dynasty' })));
+    expect(el.querySelector('.voir-plus-compte')!.textContent!.trim()).toBe('12 dynasties sur 20 affichées');
+    expect(el.querySelector('button.sf-load-more')!.textContent!.trim()).toBe('Afficher 8 dynasties de plus');
     f.nativeElement.remove();
   });
 });

@@ -66,7 +66,7 @@ describe('texte repliable (L40, D2)', () => {
     expect(bouton()!.getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('mesuré à 8 lignes au plus (il tient en entier) : ni repli ni bouton', async () => {
+  it('mesuré sans gain d’au moins 3 lignes (texte court, encart voisin plus haut) : ni repli ni bouton', async () => {
     const { f, bouton, corps } = await rendre();
     const c = f.debugElement.children[0].componentInstance as TexteRepliableComponent;
     c.deborde.set(false);
@@ -74,4 +74,44 @@ describe('texte repliable (L40, D2)', () => {
     expect(corps().classList).not.toContain('tr-replie');
     expect(bouton()).toBeNull();
   });
+
+  it('« Réduire » ramène la section (son titre) sous la barre collante quand le titre est caché', async () => {
+    await setupTestBed([SectionComponent], []);
+    const f = TestBed.createComponent(SectionComponent);
+    document.body.appendChild(f.nativeElement);
+    f.detectChanges();
+    await f.whenStable();
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    const section = el.querySelector<HTMLElement>('section#chronique')!;
+    const h2 = section.querySelector('h2')!;
+    const vers: Element[] = [];
+    section.scrollIntoView = function (this: Element) { vers.push(this); };
+    el.querySelector<HTMLElement>('.tr-corps')!.scrollIntoView = function (this: Element) { vers.push(this); };
+    const bouton = el.querySelector<HTMLButtonElement>('button.tr-bouton')!;
+    bouton.click(); // déplie
+    f.detectChanges();
+    h2.getBoundingClientRect = () => ({ top: 40 } as DOMRect); // sous l'en-tête et la barre d'ancres
+    document.documentElement.style.scrollPaddingTop = '114px';
+    bouton.click(); // replie
+    f.detectChanges();
+    await Promise.resolve();
+    expect(vers).toEqual([section]);
+    h2.getBoundingClientRect = () => ({ top: 300 } as DOMRect); // titre visible : on ne bouge pas
+    bouton.click();
+    bouton.click();
+    await Promise.resolve();
+    expect(vers).toEqual([section]);
+    document.documentElement.style.scrollPaddingTop = '';
+    f.nativeElement.remove();
+  });
 });
+
+@Component({
+  standalone: true,
+  imports: [TexteRepliableComponent],
+  template: `<section id="chronique"><h2>Chronique</h2><app-texte-repliable [texte]="texte" sujet="Chronique"><p>{{ texte }}</p></app-texte-repliable></section>`,
+})
+class SectionComponent {
+  readonly texte = LONG;
+}

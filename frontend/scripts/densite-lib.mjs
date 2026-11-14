@@ -12,7 +12,10 @@ export const LARGEURS = [
  * Seuils des règles communes (D1 à D6, voir docs/densite/regles.md).
  * - D1 sommaire : au-delà de `ecransSansSommaire` écrans au téléphone, la page a un sommaire de
  *   page d'au moins `ancresMin` ancres.
- * - D2 repli : au repos, aucun bloc de texte de plus de `lignesMax` lignes n'est affiché en entier.
+ * - D2 repli : un texte replié montre `repli.lignes` lignes et le bouton (`repli.boutonPx`) ; il se
+ *   replie si et seulement si la page y gagne au moins `repli.gainMinLignes` lignes, rangée de grille
+ *   comprise (un encart voisin plus haut que le texte entier : gain nul). Mêmes valeurs que REPLI
+ *   (src/app/core/utils/densite.ts), même calcul que gainDuRepli / hauteurVoisine.
  * - D3 largeur de lecture : au plus `caracteresParLigneMax` caractères par ligne de texte courant ;
  *   au bureau, au moins `caracteresParLigneMin` (colonnes trop étroites : blocs très hauts).
  * - D4 pagination : une liste montre au plus `listeMax[largeur]` éléments avant « Afficher plus »,
@@ -23,7 +26,7 @@ export const LARGEURS = [
 export const SEUILS = {
   ecransSansSommaire: 3,
   ancresMin: 3,
-  lignesMax: 8,
+  repli: { lignes: 6, boutonPx: 48, gainMinLignes: 3 },
   caracteresParLigneMax: 80,
   caracteresParLigneMin: 40,
   listeMax: { bureau: 12, 'téléphone': 6 },
@@ -70,6 +73,9 @@ export const PAGES = [
  * contenu de <main> visible au repos (rien n'est déplié).
  */
 export function mesurer() {
+  // Copie de SEUILS.repli (la fonction est envoyée seule au navigateur ; densite.test.mjs les compare).
+  const REPLI_LIGNES = 6;
+  const REPLI_BOUTON_PX = 48;
   const main = document.querySelector('main') || document.body;
   const vis = (e) => {
     if (!e.getClientRects().length) return false;
@@ -111,9 +117,33 @@ export function mesurer() {
     const r = e.getBoundingClientRect();
     const lignesAffichees = Math.round(r.height / lh);
     const lignesTotales = Math.round(e.scrollHeight / lh);
+    // D2 : gain (en lignes) d'un repli de ce bloc, qu'il soit replié ou non. Cellule de la rangée :
+    // le composant de repli s'il y en a un, sinon le bloc ; voisin = plus haut encart de la même
+    // rangée d'une grille ou d'une flexbox en ligne, non étiré (même calcul que l'application).
+    const cellule = e.closest('app-texte-repliable') || e;
+    let voisin = 0;
+    const parent = cellule.parentElement;
+    if (parent) {
+      const sp = getComputedStyle(parent);
+      if (/grid/.test(sp.display) || (/flex/.test(sp.display) && !sp.flexDirection.startsWith('column'))) {
+        const haut = cellule.getBoundingClientRect().top;
+        for (const v of parent.children) {
+          if (v === cellule) continue;
+          const rv = v.getBoundingClientRect();
+          if (!rv.height || Math.abs(rv.top - haut) > 2) continue;
+          const self = getComputedStyle(v).alignSelf;
+          const align = self === 'auto' || !self ? sp.alignItems : self;
+          if (!align || align === 'normal' || align === 'stretch') continue;
+          voisin = Math.max(voisin, rv.height);
+        }
+      }
+    }
+    const replie = e.scrollHeight > r.height + 1;
+    const gainPx = Math.max(0, Math.max(e.scrollHeight, voisin) - Math.max(REPLI_LIGNES * lh + REPLI_BOUTON_PX, voisin));
+    const gainLignes = Math.round((gainPx / lh) * 10) / 10;
     // Caractères par ligne : texte / lignes du texte entier (scrollHeight : replié ou non).
     const cpl = lignesTotales > 1 ? Math.round(t.length / lignesTotales) : null;
-    prose.push({ debut: t.slice(0, 40), caracteres: t.length, lignesAffichees, lignesTotales, cpl });
+    prose.push({ debut: t.slice(0, 40), caracteres: t.length, lignesAffichees, lignesTotales, cpl, replie, gainLignes });
   }
 
   // Listes : conteneurs de 4 éléments ou plus de même balise et même classe (cartes, entrées).
@@ -170,9 +200,14 @@ export function ecarts(m, largeur, seuils = SEUILS) {
   if (largeur === 'téléphone' && m.ecrans > seuils.ecransSansSommaire && m.sections >= 3 && m.ancres < seuils.ancresMin) {
     out.push({ regle: 'D1', detail: `${m.ecrans} écrans sans sommaire (${m.ancres} ancre(s))` });
   }
-  const longs = m.prose.filter((p) => p.lignesAffichees > seuils.lignesMax);
-  if (longs.length) {
-    out.push({ regle: 'D2', detail: `${longs.length} bloc(s) de plus de ${seuils.lignesMax} lignes affichés en entier (max ${m.blocLePlusLong})` });
+  const gainMin = seuils.repli.gainMinLignes;
+  const aReplier = m.prose.filter((p) => !p.replie && p.gainLignes >= gainMin);
+  if (aReplier.length) {
+    out.push({ regle: 'D2', detail: `${aReplier.length} bloc(s) affiché(s) en entier dont le repli gagnerait ${gainMin} lignes ou plus (max ${Math.max(...aReplier.map((p) => p.gainLignes))})` });
+  }
+  const sansGain = m.prose.filter((p) => p.replie && p.gainLignes < gainMin);
+  if (sansGain.length) {
+    out.push({ regle: 'D2', detail: `${sansGain.length} bloc(s) replié(s) pour moins de ${gainMin} lignes gagnées (${sansGain.map((p) => `« ${p.debut}… » ${p.gainLignes}`).join(', ')})` });
   }
   if (m.cplMax > seuils.caracteresParLigneMax) {
     out.push({ regle: 'D3', detail: `${m.cplMax} caractères par ligne` });

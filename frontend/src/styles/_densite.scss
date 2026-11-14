@@ -34,8 +34,10 @@
   text-underline-offset: 4px;
 }
 .tr-bouton:hover { color: var(--gold-bright); text-decoration-color: currentColor; }
-.tr-bouton[aria-expanded='false']::after { content: ' ↓'; }
-.tr-bouton[aria-expanded='true']::after { content: ' ↑'; }
+/* Flèche décorative, hors du nom accessible (texte de remplacement vide) ; la 1re déclaration sert
+ * aux navigateurs qui ne connaissent pas « / » (ils ignorent la seconde). */
+.tr-bouton[aria-expanded='false']::after { content: ' ↓'; content: ' ↓' / ''; }
+.tr-bouton[aria-expanded='true']::after { content: ' ↑'; content: ' ↑' / ''; }
 .tr-sujet {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;

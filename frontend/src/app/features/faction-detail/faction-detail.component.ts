@@ -14,7 +14,7 @@ import { LoadErrorComponent } from '../../shared/components/load-error/load-erro
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 import { TexteRepliableComponent } from '../../shared/components/texte-repliable/texte-repliable.component';
-import { estTelephone, LISTE_MAX } from '../../core/utils/densite';
+import { estTelephone, LISTE_MAX, LISTE_TOLERANCE } from '../../core/utils/densite';
 import { Pagination } from '../../core/utils/pagination';
 
 const FACTION_WIKI: Record<string, string> = {
@@ -255,9 +255,9 @@ const DEFAULT_RESOURCES = [
               </div>
               @if (extraSubFactionCount() > 0) {
                 <div class="voir-plus">
-                  <p class="voir-plus-compte" role="status">{{ displayedSubFactions().length }} sur {{ sfPages.total() }} affichés</p>
+                  <p class="voir-plus-compte" role="status">{{ displayedSubFactions().length }} {{ subFactionLabelLower() }} sur {{ sfPages.total() }} {{ sfAffiches() }}</p>
                   <button type="button" class="sf-load-more" (click)="loadMoreSubFactions()">
-                    Afficher {{ sfPages.prochain() }} de plus
+                    Afficher {{ sfPages.prochain() }} {{ subFactionLabelLower() }} de plus
                   </button>
                 </div>
               }
@@ -528,6 +528,9 @@ export class FactionDetailComponent {
   });
 
   readonly subFactionLabelLower = computed(() => this.subFactionLabel().toLowerCase());
+  /** L40 : le compte nomme la liste (« 6 chapitres sur 81 affichés ») ; accord au féminin. */
+  readonly sfAffiches = computed(() =>
+    ['Flottes-Ruches', 'Dynasties', 'Légions', 'Kabales', 'Sous-factions'].includes(this.subFactionLabel()) ? 'affichées' : 'affichés');
 
   /**
    * Tri stable : chapitres fondateurs (sans parent) en premier, puis successeurs.
@@ -625,8 +628,14 @@ export class FactionDetailComponent {
     return out;
   });
 
-  /** Unités au repos : 7 + la carte « Voir toutes » (deux rangées de 4) au bureau, 5 + 1 au téléphone (D4). */
-  private readonly unitsAuRepos = computed(() => (this.telephone() ? LISTE_MAX.telephone : 8) - 1);
+  /**
+   * Unités au repos : 7 + la carte « Voir toutes » (deux rangées de 4) au bureau, 5 + 1 au téléphone
+   * (D4). Tolérance D4 : la carte ne cache jamais 1 ou 2 unités, elle prendrait leur place.
+   */
+  private readonly unitsAuRepos = computed(() => {
+    const pas = (this.telephone() ? LISTE_MAX.telephone : 8) - 1;
+    return this.visibleUnits().length <= pas + LISTE_TOLERANCE ? Infinity : pas;
+  });
   readonly displayedUnits = computed(() =>
     this.showAllUnits() ? this.visibleUnits() : this.visibleUnits().slice(0, this.unitsAuRepos()),
   );

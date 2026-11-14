@@ -1,4 +1,5 @@
 import { computed, signal, type Signal } from '@angular/core';
+import { LISTE_TOLERANCE } from './densite';
 
 /**
  * L40, règle D4 (docs/densite/regles.md) — une liste longue s'affiche par pages : `pas` éléments,
@@ -12,7 +13,7 @@ export class Pagination<T> {
   constructor(
     private readonly source: Signal<readonly T[]>,
     private readonly pas: Signal<number>,
-    private readonly tolerance = 2,
+    private readonly tolerance = LISTE_TOLERANCE,
   ) {}
 
   readonly limite = computed(() => {

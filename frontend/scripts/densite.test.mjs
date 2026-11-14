@@ -8,7 +8,7 @@ import { APP, readRoutes } from './liens-lib.mjs';
 
 const base = {
   hauteur: 2000, ecrans: 2.4, titres: 5, sections: 4, h1: 1, sauts: [], ancres: 0, liens: 10, liensParEcran: 4,
-  blocsTexte: 1, blocLePlusLong: 6, cplMax: 68, prose: [{ debut: 'x', caracteres: 400, lignesAffichees: 6, lignesTotales: 10, cpl: null }],
+  blocsTexte: 1, blocLePlusLong: 6, cplMax: 68, prose: [{ debut: 'x', caracteres: 400, lignesAffichees: 6, lignesTotales: 14, cpl: null, replie: true, gainLignes: 6 }],
   listeMax: { n: 6, ou: 'grid > A.card' }, doublons: [],
 };
 const regles = (m, l = 'téléphone') => ecarts({ ...base, ...m }, l).map((e) => e.regle);
@@ -24,8 +24,13 @@ describe('règles de densité (L40)', () => {
     expect(regles({ ecrans: 5, sections: 1 })).toEqual([]); // une liste : D4, pas D1
     expect(regles({ ecrans: 5 }, 'bureau')).toEqual([]);
   });
-  it('D2 : bloc de plus de 8 lignes affiché en entier', () => {
-    expect(regles({ prose: [{ ...base.prose[0], lignesAffichees: 9 }], blocLePlusLong: 9 })).toEqual(['D2']);
+  it('D2 : replié si et seulement si le repli gagne au moins 3 lignes', () => {
+    const bloc = (replie, gainLignes) => ({ prose: [{ ...base.prose[0], replie, gainLignes }] });
+    expect(regles(bloc(false, 3))).toEqual(['D2']); // entier alors que replier gagnerait 3 lignes
+    expect(regles(bloc(false, 2.9))).toEqual([]); // 9 ou 10 lignes : on le laisse entier
+    expect(regles(bloc(true, 2.9))).toEqual(['D2']); // replié pour presque rien
+    expect(regles(bloc(true, 0))).toEqual(['D2']); // replié à côté d'un encart plus haut que lui
+    expect(regles(bloc(true, 3))).toEqual([]);
   });
   it('D3 : plus de 80 caractères par ligne ; au bureau, colonne de moins de 40', () => {
     expect(regles({ cplMax: 81 }, 'bureau')).toEqual(['D3']);
@@ -57,17 +62,26 @@ describe('seuils partagés avec l\'application', () => {
     expect(m).not.toBeNull();
     expect(SEUILS.listeMax).toEqual({ bureau: Number(m[1]), 'téléphone': Number(m[2]) });
   });
-  it('texte repliable : replie au-delà du seuil D2, à moins de lignes que lui', () => {
-    const src = readFileSync(join(APP, 'shared/components/texte-repliable/texte-repliable.component.ts'), 'utf8');
-    const lignes = Number(/@Input\(\) lignes = (\d+)/.exec(src)?.[1]);
-    const max = Number(/@Input\(\) max = (\d+)/.exec(src)?.[1]);
-    expect(max).toBe(SEUILS.lignesMax);
-    expect(lignes).toBeGreaterThan(0);
-    expect(lignes).toBeLessThan(max);
+  it('texte repliable : lignes, bouton et gain minimal de D2 = REPLI (core/utils/densite.ts), employé par le composant', () => {
+    const src = readFileSync(join(APP, 'core/utils/densite.ts'), 'utf8');
+    const m = /REPLI = \{ lignes: (\d+), boutonPx: (\d+), gainMinLignes: (\d+) \}/.exec(src);
+    expect(m).not.toBeNull();
+    expect(SEUILS.repli).toEqual({ lignes: Number(m[1]), boutonPx: Number(m[2]), gainMinLignes: Number(m[3]) });
+    const lib = readFileSync(join(APP, '../../scripts/densite-lib.mjs'), 'utf8');
+    expect(Number(/const REPLI_LIGNES = (\d+)/.exec(lib)?.[1])).toBe(SEUILS.repli.lignes);
+    expect(Number(/const REPLI_BOUTON_PX = (\d+)/.exec(lib)?.[1])).toBe(SEUILS.repli.boutonPx);
+    const comp = readFileSync(join(APP, 'shared/components/texte-repliable/texte-repliable.component.ts'), 'utf8');
+    expect(comp).toContain('@Input() lignes: number = REPLI.lignes;');
+    expect(comp).toContain('@Input() gainMin: number = REPLI.gainMinLignes;');
+    // Bouton : 44 px de haut et 4 px de marge (src/styles/_densite.scss).
+    const css = readFileSync(join(APP, '../styles/_densite.scss'), 'utf8');
+    const bouton = /\.tr-bouton \{[^}]*min-height: (\d+)px;[^}]*margin-top: (\d+)px;/.exec(css);
+    expect(Number(bouton?.[1]) + Number(bouton?.[2])).toBe(SEUILS.repli.boutonPx);
   });
-  it('tolérance de la pagination (core/utils/pagination.ts) = celle de D4', () => {
-    const src = readFileSync(join(APP, 'core/utils/pagination.ts'), 'utf8');
-    expect(Number(/private readonly tolerance = (\d+)/.exec(src)?.[1])).toBe(SEUILS.listeTolerance);
+  it('tolérance de la pagination (LISTE_TOLERANCE, core/utils/densite.ts) = celle de D4', () => {
+    const src = readFileSync(join(APP, 'core/utils/densite.ts'), 'utf8');
+    expect(Number(/LISTE_TOLERANCE = (\d+)/.exec(src)?.[1])).toBe(SEUILS.listeTolerance);
+    expect(readFileSync(join(APP, 'core/utils/pagination.ts'), 'utf8')).toContain('private readonly tolerance = LISTE_TOLERANCE');
   });
   it('chaque gabarit de app.routes.ts (hors redirections) a sa page de mesure', () => {
     const gabarits = readRoutes().filter((r) => !r.redirect && r.path !== '/**').map((r) => r.path);

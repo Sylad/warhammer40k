@@ -117,10 +117,11 @@ DEMO_FORCED=                 # true → toute l'instance en démo verrouillée (
 ## Densité des pages (L40)
 
 Règles communes D1 à D6, seuils et sources : `docs/densite/regles.md` (sommaire de page au-delà de 3 écrans au
-téléphone, texte replié au-delà de 8 lignes, 40 à 80 caractères par ligne, listes par 12 / 6 au téléphone,
+téléphone, texte replié à 6 lignes seulement si la page y gagne au moins 3 lignes, encart voisin de la rangée compris, 40 à 80 caractères par ligne, listes par 12 / 6 au téléphone,
 pas de texte répété, titres sans niveau sauté). Briques : `<app-texte-repliable [texte] sujet><p>…</p></app-texte-repliable>`
 (paragraphe projeté, styles dans `src/styles/_densite.scss`), `.lecture` (36em), `Pagination` (`core/utils/pagination.ts`)
-avec `estTelephone()` / `LISTE_MAX` (`core/utils/densite.ts`). Mesure : `cd frontend && npm run densite [-- --page <adresse>]`
+avec `estTelephone()` / `LISTE_MAX` / `LISTE_TOLERANCE` et `REPLI` / `gainDuRepli` (`core/utils/densite.ts`, mêmes valeurs que
+`scripts/densite-lib.mjs`, comparées par `densite.test.mjs`). Les libellés d'une liste paginée la nomment (« Afficher 6 chapitres de plus »). Mesure : `cd frontend && npm run densite [-- --page <adresse>]`
 (appli lancée en local). Garde : `densite-pilotes-l40.e2e.spec.ts` (chaque faction et chaque primarque, 1440 et 390 px, dans `npm run test:e2e`).
 Une revue page par page part de `docs/densite/mesures-2026-11-14.md`.
 
@@ -299,8 +300,8 @@ Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l
 `cadence.yaml` : `orchestrate.spec: { dir: docs/specs }` et `orchestrate.accept` (lanceur `frontend/vitest.acceptation.config.ts`, fichiers donnés par `CADENCE_ACCEPTATION`). `frontend/vitest.config.ts` (suite et CI) exclut les fichiers des `docs/specs/*/acceptation-<lot>.json` à `vert: false` via `frontend/scripts/acceptation-runner.mjs` (testé : `acceptation-runner.test.mjs`). Nommer les tests d'acceptation `*.acceptation.spec.ts` sous `frontend/src/`.
 
 **Porte de la vague (L203)** : `orchestrate.test` = suite backend (`npm test`) puis suite frontend
-(`npx vitest run --exclude '**/*.e2e.spec.ts'` : les e2e Chromium sur `dist` tournent à la main ; en CI, `npm run test:e2e` ne lance que les acceptations de navigateur et
-`espacement-texte.e2e.spec.ts` (L61), pas `topbar`/`search-hint`, l'un d'eux a expiré sous la charge de la suite complète) ; `orchestrate.build` = `nest build` puis
+(`npx vitest run --exclude '**/*.e2e.spec.ts'` : les e2e Chromium sur `dist` tournent à la main ; en CI, `npm run test:e2e` ne lance que les acceptations de navigateur,
+`espacement-texte.e2e.spec.ts` (L61), `morceau-absent.e2e.spec.ts` (L52) et `densite-pilotes-l40.e2e.spec.ts` (L40), pas `topbar`/`search-hint`, l'un d'eux a expiré sous la charge de la suite complète) ; `orchestrate.build` = `nest build` puis
 `npm run build` du frontend. Les acceptations rouges restent hors de la porte (exclues par `vitest.config.ts`,
 lancées seules par `accept:`). `orchestrate.precheck: true` (Sonnet), plus `local` (cadence L328). Toute
 commande déclarée se vérifie verte sur main avant d'être écrite.
