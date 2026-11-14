@@ -2510,6 +2510,8 @@ lots:
     estimate: 0.25
     created: 2026-11-14
     started: 2026-11-14
+    notes:
+      - { date: 2026-11-14, text: "test d'acceptation rescellé (lot livré L47, frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts, fiche amendée en ad1b65f) : R9 instable en CI : le suivi d'onglets de Playwright 1.63 perd parfois l'onglet ouvert en arrière-plan (événement page jamais émis, vu sur 158e771 le 14-11) ; même vérification lue dans Chromium (cibles CDP), contrat inchangé, 20/20 sous charge contre 3 échecs sur 17" }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
