@@ -2508,6 +2508,7 @@ lots:
     title: "Acceptation L47 R9 (clic du milieu : nouvel onglet sur la vidéo) instable en CI : rouge le 14-11 sur 158e771 (browserContext.waitForEvent page, délai 8 s), vert à la relance sans changement — rendre le test déterministe"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-14, sha: 2a81dfa308f5c29842f62b257ebbb4cd11a0f39d }
     created: 2026-11-14
     started: 2026-11-14
     notes:
