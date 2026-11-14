@@ -441,9 +441,10 @@ lots:
     finished: 2026-10-02
   - id: L40
     title: "Campagne UX densité : les pages du site sont très denses (consigne Sylvain 02-10, « un gros travail ») — avant les revues page par page, mesurer la densité de chaque gabarit (longueur, nombre de blocs et de liens par écran, hiérarchie des titres), fixer des règles communes (sommaire de page, repli des sections, largeur de lecture, pagination des listes) et les maquetter sur 2 pages pilotes (fiche faction, fiche Lore) ; les revues L2 à L21 s'appuient ensuite sur ces règles et sont à réestimer"
-    status: todo
+    status: doing
     estimate: 2
     created: 2026-10-02
+    started: 2026-11-14
   - id: L41
     title: "Liens externes morts (audit du 02-10, docs/liens/audit-2026-10-02.md) : 6 chaînes YouTube introuvables, 5 pages Fandom disparues, 6 icônes de faction — remplacer ou retirer, décision de Sylvain lien par lien ; page faction Imperial Knights jamais écrite (à écrire ou non) ; volume data/ de la prod à réaligner sur les fichiers source (primarchs, videos, timeline-events)"
     status: done
