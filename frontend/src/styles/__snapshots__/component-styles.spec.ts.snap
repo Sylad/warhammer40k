@@ -3146,7 +3146,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".tl-content": {
     "background": "rgba(0, 0, 0, 0.32)",
     "border-left": "2px solid var(--gold-soft)",
-    "margin-top": "28px",
+    "margin-top": "8px",
     "padding": "14px 18px",
   },
   ".tl-content h3": {
@@ -3193,9 +3193,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "align-items": "center",
     "display": "flex",
     "gap": "8px",
-    "left": "-24px",
-    "position": "absolute",
-    "top": "0",
+    "margin-left": "-48px",
   },
   ".two-col": {
     "align-items": "start",

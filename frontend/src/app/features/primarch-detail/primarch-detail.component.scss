@@ -545,9 +545,9 @@ h1 {
   &.tl-last { padding-bottom: 0; }
 }
 .tl-marker {
-  position: absolute;
-  left: -24px;
-  top: 0;
+  /* L224 : dans le flux, au-dessus du contenu. En absolu (top: 0), la marge haute de .tl-content
+     traversait .tl-event (fusion des marges) et emportait le repère : la date chevauchait le titre. */
+  margin-left: -48px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -572,7 +572,7 @@ h1 {
   white-space: nowrap;
 }
 .tl-content {
-  margin-top: 28px;
+  margin-top: 8px;
   background: rgba(0, 0, 0, 0.32);
   border-left: 2px solid var(--gold-soft);
   padding: 14px 18px;
