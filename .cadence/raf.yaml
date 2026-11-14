@@ -441,10 +441,15 @@ lots:
     finished: 2026-10-02
   - id: L40
     title: "Campagne UX densité : les pages du site sont très denses (consigne Sylvain 02-10, « un gros travail ») — avant les revues page par page, mesurer la densité de chaque gabarit (longueur, nombre de blocs et de liens par écran, hiérarchie des titres), fixer des règles communes (sommaire de page, repli des sections, largeur de lecture, pagination des listes) et les maquetter sur 2 pages pilotes (fiche faction, fiche Lore) ; les revues L2 à L21 s'appuient ensuite sur ces règles et sont à réestimer"
-    status: doing
+    status: done
     estimate: 2
     created: 2026-10-02
     started: 2026-11-14
+    review: { date: 2026-11-14, verdict: "conforme : les 7 points de revue corrigés et testés (repli seulement s'il gagne 3 lignes, nom accessible sans flèche, pagination nommée, titre après Réduire, ancre Autres citations, tolérance D4 des unités, README/CLAUDE.md) ; mineur noté : arrondi de gainLignes de densite-lib.mjs différent de l'app entre 2,95 et 2,99 lignes", commit: 158e771a4564691aba1e37713068d11a151e4afe }
+    ux: { date: 2026-11-14, verdict: "conforme : captures 1440/390 regardées par le lead — replis utiles seulement (Lion Origines entier à 1440), Lire la suite/Réduire au clavier avec focus, titre visible après Réduire, pagination nommée, 9 unités Mechanicus visibles, contraste ≥ 5,5:1, pas de défilement horizontal ; rien de perdu par le retrait de l'encart À propos" }
+    notes:
+      - { date: 2026-11-14, text: "Mineurs laissés : arrondi gainLignes (outil vs app, 2,95–2,99 lignes) ; 7 Lire la suite sur une fiche primarque au téléphone, pas de Tout déplier (goût) ; liens du sommaire 29 px. Mesures avant/après de docs/densite/mesures-2026-11-14.md non remesurées après le correctif." }
+    finished: 2026-11-14
   - id: L41
     title: "Liens externes morts (audit du 02-10, docs/liens/audit-2026-10-02.md) : 6 chaînes YouTube introuvables, 5 pages Fandom disparues, 6 icônes de faction — remplacer ou retirer, décision de Sylvain lien par lien ; page faction Imperial Knights jamais écrite (à écrire ou non) ; volume data/ de la prod à réaligner sur les fichiers source (primarchs, videos, timeline-events)"
     status: done
@@ -2477,6 +2482,21 @@ lots:
     started: 2026-11-01
     review: { date: 2026-11-01, verdict: "conforme : config seule, relue par le lead ; porte en parties rejouée verte (backend puis frontend séparés)", commit: f921e2d3675c3e03a39e024f637178ed6d7d83ab }
     finished: 2026-11-01
+  - id: L224
+    title: "Fiche primarque, chronologie : au téléphone l'étiquette de date chevauche le titre de la bataille (vu aux revues de L40, déjà présent avant)"
+    status: todo
+    estimate: 0.25
+    created: 2026-11-14
+  - id: L225
+    title: Titre « Iconographie » qui déborde de 4 px à 320 px (vu à la revue UX de L40)
+    status: todo
+    estimate: 0.1
+    created: 2026-11-14
+  - id: L226
+    title: Le test L21 écrit ses captures dans frontend/undefined/ pendant la suite complète (chemin de sortie indéfini) — vu au run de L40
+    status: todo
+    estimate: 0.1
+    created: 2026-11-14
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
