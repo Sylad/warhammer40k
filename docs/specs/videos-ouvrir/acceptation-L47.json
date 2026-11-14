@@ -6,7 +6,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "84b1cff9f1deacec184c83f1cf4488c9a3a55f68"
+    "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": "efeddbd62d35768b13123b75e71f59157e1034d1"
   },
   "resceaux": [
     {
@@ -33,6 +33,23 @@
       "apres": "84b1cff9f1deacec184c83f1cf4488c9a3a55f68",
       "porteur": "L6",
       "ficheAmendee": "8a9f11a"
+    },
+    {
+      "test": "frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts",
+      "raison": "R9 instable en CI : le suivi d'onglets de Playwright 1.63 perd parfois l'onglet ouvert en arrière-plan (événement page jamais émis, vu sur 158e771 le 14-11) ; même vérification lue dans Chromium (cibles CDP), contrat inchangé, 20/20 sous charge contre 3 échecs sur 17",
+      "date": "2026-11-14",
+      "avant": "84b1cff9f1deacec184c83f1cf4488c9a3a55f68",
+      "apres": "efeddbd62d35768b13123b75e71f59157e1034d1",
+      "porteur": "L227",
+      "ficheAmendee": "ad1b65f",
+      "amendements": [
+        {
+          "sha": "ad1b65f",
+          "lot": "L6",
+          "etat": "done",
+          "raison": "lot L6 fini : son commit de la fiche est publié et ne se réécrit pas, la fiche vivante fait foi"
+        }
+      ]
     }
   ]
 }
