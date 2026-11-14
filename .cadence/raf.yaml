@@ -2515,6 +2515,11 @@ lots:
       - { date: 2026-11-14, text: "test d'acceptation rescellé (lot livré L47, frontend/src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts, fiche amendée en ad1b65f) : R9 instable en CI : le suivi d'onglets de Playwright 1.63 perd parfois l'onglet ouvert en arrière-plan (événement page jamais émis, vu sur 158e771 le 14-11) ; même vérification lue dans Chromium (cibles CDP), contrat inchangé, 20/20 sous charge contre 3 échecs sur 17" }
     review: { date: 2026-11-14, verdict: "conforme : R9 lit les onglets dans Chromium (cibles CDP), aussi strict que l'original (aucun onglet avant, exactement un après sur la bonne adresse, page courante inchangée) ; rescellé par le lead (porteur L227), 20/20 sous charge", commit: af33650e5624b91aee2c9d7051b052a1b562a429 }
     finished: 2026-11-14
+  - id: L228
+    title: "Test e2e section-anchor-href-l160 (Ctrl/Maj/clic du milieu, waitForEvent('page')) exposé à la même course que L227 : le suivi d'onglets de Playwright perd parfois l'onglet ouvert en arrière-plan — passer au même procédé (cibles CDP), stabilité prouvée par exécutions répétées sous charge"
+    status: todo
+    estimate: 0.25
+    created: 2026-11-14
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
