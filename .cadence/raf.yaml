@@ -443,6 +443,7 @@ lots:
     title: "Campagne UX densité : les pages du site sont très denses (consigne Sylvain 02-10, « un gros travail ») — avant les revues page par page, mesurer la densité de chaque gabarit (longueur, nombre de blocs et de liens par écran, hiérarchie des titres), fixer des règles communes (sommaire de page, repli des sections, largeur de lecture, pagination des listes) et les maquetter sur 2 pages pilotes (fiche faction, fiche Lore) ; les revues L2 à L21 s'appuient ensuite sur ces règles et sont à réestimer"
     status: done
     estimate: 2
+    delivered: { date: 2026-11-14, sha: 158e771a4564691aba1e37713068d11a151e4afe }
     created: 2026-10-02
     started: 2026-11-14
     review: { date: 2026-11-14, verdict: "conforme : les 7 points de revue corrigés et testés (repli seulement s'il gagne 3 lignes, nom accessible sans flèche, pagination nommée, titre après Réduire, ancre Autres citations, tolérance D4 des unités, README/CLAUDE.md) ; mineur noté : arrondi de gainLignes de densite-lib.mjs différent de l'app entre 2,95 et 2,99 lignes", commit: 158e771a4564691aba1e37713068d11a151e4afe }
@@ -2478,6 +2479,7 @@ lots:
     title: "Porte de la vague déclarée en parties (cadence L512) : backend et frontend lancés séparément, rejeu isolé des rouges du frontend"
     status: done
     estimate: 0.05
+    delivered: { date: 2026-11-14, sha: 158e771a4564691aba1e37713068d11a151e4afe }
     created: 2026-11-01
     started: 2026-11-01
     review: { date: 2026-11-01, verdict: "conforme : config seule, relue par le lead ; porte en parties rejouée verte (backend puis frontend séparés)", commit: f921e2d3675c3e03a39e024f637178ed6d7d83ab }
