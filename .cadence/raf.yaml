@@ -2486,9 +2486,10 @@ lots:
     finished: 2026-11-01
   - id: L224
     title: "Fiche primarque, chronologie : au téléphone l'étiquette de date chevauche le titre de la bataille (vu aux revues de L40, déjà présent avant)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-11-14
+    started: 2026-11-14
   - id: L225
     title: Titre « Iconographie » qui déborde de 4 px à 320 px (vu à la revue UX de L40)
     status: todo
