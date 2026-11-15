@@ -2496,9 +2496,13 @@ lots:
     finished: 2026-11-14
   - id: L225
     title: Titre « Iconographie » qui déborde de 4 px à 320 px (vu à la revue UX de L40)
-    status: todo
+    status: done
     estimate: 0.1
     created: 2026-11-14
+    started: 2026-11-15
+    review: { date: 2026-11-15, verdict: "conforme : sous 760 px marge et titres réduits sur la fiche faction seule ; test e2e 17 factions + 20 primarques à 320/390/1440, rouge sur l'ancien CSS (débordement 45 px)", commit: 08fea9ab3bd133522e0e6eeff8b9eae9bcd5e459 }
+    ux: { date: 2026-11-15, verdict: "conforme : capture 320 px regardée par le lead, « Iconographie » tient dans le panneau, 1440 inchangé" }
+    finished: 2026-11-15
   - id: L226
     title: Le test L21 écrit ses captures dans frontend/undefined/ pendant la suite complète (chemin de sortie indéfini) — vu au run de L40
     status: todo
@@ -2519,6 +2523,7 @@ lots:
     title: "Test e2e section-anchor-href-l160 (Ctrl/Maj/clic du milieu, waitForEvent('page')) exposé à la même course que L227 : le suivi d'onglets de Playwright perd parfois l'onglet ouvert en arrière-plan — passer au même procédé (cibles CDP), stabilité prouvée par exécutions répétées sous charge"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-15, sha: 808b39264f60d1b0b76528ae18cc8d439f65e8aa }
     created: 2026-11-14
     started: 2026-11-15
     review: { date: 2026-11-15, verdict: "conforme : ancres de section, onglet ouvert lu dans Chromium (cibles CDP), 22/22 sous charge contre 6 échecs sur 10, mutants attrapés", commit: 808b39264f60d1b0b76528ae18cc8d439f65e8aa }
