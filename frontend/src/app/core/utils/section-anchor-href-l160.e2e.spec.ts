@@ -5,7 +5,7 @@
 // annulé (le navigateur ouvre l'onglet). Navigateur réel, application construite (dist).
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import type { Server } from 'node:http';
-import type { Browser, BrowserContext, Page } from 'playwright-core';
+import type { Browser, BrowserContext, Locator, Page } from 'playwright-core';
 import { distState, startDistServer } from '../../../testing/dist-server';
 
 const { built, stale } = distState([
@@ -89,36 +89,42 @@ describe.skipIf(!built || !chromium)('Liens d’ancre de section (navigateur, di
       await page.close();
     });
 
-    // Un onglet ouvert en arrière-plan n'expose pas son URL en navigateur sans écran (url() reste vide) : on
-    // mesure donc la requête de document qu'il émet (chemin, le fragment n'étant jamais envoyé) ; le href
-    // résolu, fragment compris, est vérifié par le premier cas.
-    async function ouvreOnglet(page: Page, geste: () => Promise<void>): Promise<string[]> {
-      const requetes: string[] = [];
-      const noter = (r: import('playwright-core').Request) => { if (r.resourceType() === 'document') requetes.push(new URL(r.url()).pathname); };
-      ctx.on('request', noter);
-      const nouvelOnglet = ctx.waitForEvent('page', { timeout: 20000 });
-      await geste();
-      const onglet = await nouvelOnglet;
-      await expect.poll(() => requetes.length, { timeout: 20000 }).toBeGreaterThan(0);
-      ctx.off('request', noter);
-      await onglet.close().catch(() => undefined);
-      expect(new URL(page.url()).hash, 'la page d’origine ne bouge pas').toBe('');
-      return requetes;
+    // L228 : le suivi d'onglets de Playwright perd parfois un onglet ouvert en arrière-plan (événement « page »
+    // jamais émis, ou adresse et requêtes jamais reçues), même course que L227 : on lit les onglets du contexte
+    // dans Chromium même (cibles CDP), pas dans ce suivi. L'adresse d'une cible est celle que l'onglet a
+    // validée, fragment compris : on attend exactement un nouvel onglet, sur la page courante + #id du lien.
+    async function ouvreOnglet(page: Page, path: string, lien: Locator, geste: () => Promise<void>): Promise<void> {
+      const attendu = `${base}${path}${await lien.evaluate((a) => new URL((a as HTMLAnchorElement).href).hash)}`;
+      expect(attendu).toMatch(/#[^/]+$/);
+      const cdp = await browser.newBrowserCDPSession();
+      try {
+        const self = await ctx.newCDPSession(page);
+        const { targetInfo: me } = await self.send('Target.getTargetInfo');
+        await self.detach();
+        const onglets = async () => (await cdp.send('Target.getTargets')).targetInfos
+          .filter((t) => t.type === 'page' && t.browserContextId === me.browserContextId && t.targetId !== me.targetId);
+        const avant = new Set((await onglets()).map((t) => t.targetId));
+        const nouveaux = async () => (await onglets()).filter((t) => !avant.has(t.targetId));
+        await geste();
+        await expect.poll(async () => (await nouveaux()).map((t) => t.url), { timeout: 20000 }).toEqual([attendu]);
+        for (const t of await nouveaux()) await cdp.send('Target.closeTarget', { targetId: t.targetId }).catch(() => undefined);
+      } finally { await cdp.detach(); }
+      expect(page.url(), 'la page d’origine ne bouge pas').toBe(base + path);
     }
 
     for (const modifiers of [['Control'], ['Shift']] as const) {
       it(`${p.nom} — ${modifiers.join('+')}+clic ouvre un nouvel onglet sur la bonne page (clic non annulé)`, async () => {
         const page = await ouvre(p.path, p.attend);
-        const requetes = await ouvreOnglet(page, () => page.locator(p.liens).first().click({ modifiers: [...modifiers] }));
-        expect(requetes).toEqual([p.path]);
+        const lien = page.locator(p.liens).first();
+        await ouvreOnglet(page, p.path, lien, () => lien.click({ modifiers: [...modifiers] }));
         await page.close();
       });
     }
 
     it(`${p.nom} — clic du milieu : l’onglet ouvert est la bonne page, pas l’accueil`, async () => {
       const page = await ouvre(p.path, p.attend);
-      const requetes = await ouvreOnglet(page, () => page.locator(p.liens).first().click({ button: 'middle' }));
-      expect(requetes).toEqual([p.path]);
+      const lien = page.locator(p.liens).first();
+      await ouvreOnglet(page, p.path, lien, () => lien.click({ button: 'middle' }));
       await page.close();
     });
   }
