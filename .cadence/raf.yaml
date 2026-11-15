@@ -2498,6 +2498,7 @@ lots:
     title: Titre « Iconographie » qui déborde de 4 px à 320 px (vu à la revue UX de L40)
     status: done
     estimate: 0.1
+    delivered: { date: 2026-11-15, sha: 08fea9ab3bd133522e0e6eeff8b9eae9bcd5e459 }
     created: 2026-11-14
     started: 2026-11-15
     review: { date: 2026-11-15, verdict: "conforme : sous 760 px marge et titres réduits sur la fiche faction seule ; test e2e 17 factions + 20 primarques à 320/390/1440, rouge sur l'ancien CSS (débordement 45 px)", commit: 08fea9ab3bd133522e0e6eeff8b9eae9bcd5e459 }
