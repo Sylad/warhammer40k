@@ -854,4 +854,7 @@
       .hero-text { max-width: 100%; }
       .toolbar { grid-template-columns: 1fr; }
       .bible-heroes { grid-template-columns: minmax(0, 1fr); } /* L31 : deux colonnes poussaient à 353–409 px */
+      /* L225 : « ✠ ICONOGRAPHIE », un seul mot en capitales à 26 px, débordait du panneau à 320 px */
+      .bible-panel { padding: 24px 18px; }
+      .section-title { font-size: 22px; gap: 10px; }
     }

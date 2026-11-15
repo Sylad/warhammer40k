@@ -27,6 +27,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/densite-pilotes-l40.e2e.spec.ts'),
       // L224 : la date de la chronologie d'un Primarque ne chevauche plus le titre de sa bataille (320, 390, 1440 px).
       path.resolve(__dirname, 'src/app/features/primarch-detail/primarch-chronologie-l224.e2e.spec.ts'),
+      // L225 : les titres h2 des fiches faction et Primarque tiennent dans leur panneau à 320 px (« ✠ ICONOGRAPHIE » débordait).
+      path.resolve(__dirname, 'src/app/features/faction-detail/fiche-titres-l225.e2e.spec.ts'),
     ],
   },
 });

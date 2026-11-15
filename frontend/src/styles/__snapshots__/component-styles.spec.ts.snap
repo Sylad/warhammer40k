@@ -969,11 +969,18 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   "@media (max-width: 760px) .bible-heroes": {
     "grid-template-columns": "minmax(0, 1fr)",
   },
+  "@media (max-width: 760px) .bible-panel": {
+    "padding": "24px 18px",
+  },
   "@media (max-width: 760px) .hero": {
     "padding": "26px 22px",
   },
   "@media (max-width: 760px) .hero-text": {
     "max-width": "100%",
+  },
+  "@media (max-width: 760px) .section-title": {
+    "font-size": "22px",
+    "gap": "10px",
   },
   "@media (max-width: 760px) .toolbar": {
     "grid-template-columns": "1fr",
