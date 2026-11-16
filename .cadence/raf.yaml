@@ -2529,6 +2529,12 @@ lots:
     started: 2026-11-15
     review: { date: 2026-11-15, verdict: "conforme : ancres de section, onglet ouvert lu dans Chromium (cibles CDP), 22/22 sous charge contre 6 échecs sur 10, mutants attrapés", commit: 808b39264f60d1b0b76528ae18cc8d439f65e8aa }
     finished: 2026-11-15
+  - id: L229
+    title: "Mise à jour mensuelle des technos et dépendances (D-1 du registre parent) : versions mineures et correctifs, majeures proposées à part ; noter chaque régression trouvée et sa correction"
+    status: todo
+    estimate: 0.5
+    every: 30
+    created: 2026-11-16
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
