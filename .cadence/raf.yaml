@@ -771,9 +771,10 @@ lots:
     created: 2026-10-05
   - id: L68
     title: "QA : parcourir le reste des pages (lore, nouveautes, about, gallery) à 1440 et 390 px avec les comptes de docs/qa/expectations.md (QA prod 05-10 partielle)"
-    status: todo
+    status: doing
     estimate: 0.3
     created: 2026-10-05
+    started: 2026-11-17
   - id: L69
     title: "Galerie : une seule fonction d'accord (exporter plural de plan.utils ou pipe) pour les compteurs « œuvre(s) » de gallery.component.ts (l. 45, 111, 239, 254) + dashboard.component.ts:193 countLabel fixe « œuvres » — revue de code L58"
     status: todo
