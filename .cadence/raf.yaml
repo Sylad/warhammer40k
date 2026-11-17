@@ -2551,9 +2551,10 @@ lots:
     created: 2026-11-17
   - id: L232
     title: "Vidéos : 2 vidéos retirées de YouTube (vignette 404, erreur console sur /videos) — les retirer ou les remplacer ; relevé par la QA de L229 le 17-11"
-    status: todo
+    status: doing
     estimate: 0.1
     created: 2026-11-17
+    started: 2026-11-17
   - id: L233
     title: "Attendus QA ## /factions/:id : permettre le 404 console d'une faction inexistante — relevé par la QA de L229 le 17-11"
     status: todo
