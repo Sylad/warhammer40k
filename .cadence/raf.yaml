@@ -2560,10 +2560,12 @@ lots:
     finished: 2026-11-17
   - id: L233
     title: "Attendus QA ## /factions/:id : permettre le 404 console d'une faction inexistante — relevé par la QA de L229 le 17-11"
-    status: doing
+    status: done
     estimate: 0.05
     created: 2026-11-17
     started: 2026-11-17
+    review: { date: 2026-11-17, verdict: "conforme (relu par le lead) : attendu QA ajouté, texte fidèle au constat de la QA ; docs/tests seulement", commit: ac30cc718bb52e04bf3621a656ee1589af3f2720 }
+    finished: 2026-11-17
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
