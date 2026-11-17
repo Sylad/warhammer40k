@@ -2541,9 +2541,10 @@ lots:
     finished: 2026-11-17
   - id: L230
     title: "Node 20 → 22 LTS (fin de vie avril 2026) : Dockerfile backend et frontend, CI, engines ; build Docker et CI vertes — proposé par L229 le 17-11"
-    status: todo
+    status: doing
     estimate: 0.5
     created: 2026-11-17
+    started: 2026-11-17
   - id: L231
     title: Angular 19 → 20 (seule voie vers les correctifs de sécurité du framework ; 2 failles modérées d'assainissement en théorie) — proposé par L229 le 17-11
     status: todo
