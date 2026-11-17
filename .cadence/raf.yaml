@@ -2553,6 +2553,7 @@ lots:
     title: "Vidéos : 2 vidéos retirées de YouTube (vignette 404, erreur console sur /videos) — les retirer ou les remplacer ; relevé par la QA de L229 le 17-11"
     status: done
     estimate: 0.1
+    delivered: { date: 2026-11-17, sha: 82b31fd5225ca8b566a06de92018508a3fd5eea1 }
     created: 2026-11-17
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme : 0 bloquant ; filtre limité aux 2 vidéos mortes, R1/R2 échouent sans le garde ; seed et PVC intacts ; README complété (82b31fd) ; non vérifié : prod 28 vidéos, e2e vidéos", commit: 82b31fd5225ca8b566a06de92018508a3fd5eea1 }
