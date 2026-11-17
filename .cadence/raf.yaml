@@ -2543,6 +2543,7 @@ lots:
     title: "Node 20 → 22 LTS (fin de vie avril 2026) : Dockerfile backend et frontend, CI, engines ; build Docker et CI vertes — proposé par L229 le 17-11"
     status: done
     estimate: 0.5
+    delivered: { date: 2026-11-17, sha: de7d88af236e15c6928f16a9b4fd216c89ae8ab2 }
     created: 2026-11-17
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme : 0 bloquant ; versions concordantes (engines, .nvmrc, CI, node:22-alpine) ; @types/node ^22 compile ; lockfiles sans libc sans effet (déjà le cas sous node:20-alpine) ; non vérifié : CI GitHub avant push", commit: de7d88af236e15c6928f16a9b4fd216c89ae8ab2 }
@@ -2565,6 +2566,7 @@ lots:
     title: "Attendus QA ## /factions/:id : permettre le 404 console d'une faction inexistante — relevé par la QA de L229 le 17-11"
     status: done
     estimate: 0.05
+    delivered: { date: 2026-11-17, sha: de7d88af236e15c6928f16a9b4fd216c89ae8ab2 }
     created: 2026-11-17
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme (relu par le lead) : attendu QA ajouté, texte fidèle au constat de la QA ; docs/tests seulement", commit: ac30cc718bb52e04bf3621a656ee1589af3f2720 }
