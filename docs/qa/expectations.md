@@ -26,6 +26,7 @@ Visiter space-marines.
 - api: `/api/subfactions?factionId=inquisition` répond `[]` (200), ce n'est pas une erreur (QA prod 15-10, L135)
 
 - never: pour un identifiant inconnu (visiter /factions/n-existe-pas) : « Chargement… » sans fin ; le titre est alors « Faction introuvable » avec un lien vers /factions et sans bouton Réessayer (L97)
+- 404 (visiter /factions/n-existe-pas) : à la place de la fiche, le message d'absence (h1 « Faction introuvable » + lien « Toutes les factions » vers /factions, pas de Réessayer) ; `/api/factions/n-existe-pas` répond 404 et l'erreur 404 qu'il laisse dans la console est permise, comme pour /subfactions (QA prod 17-11, L233)
 
 ## /subfactions/:id
 Visiter un lien de la fiche faction.

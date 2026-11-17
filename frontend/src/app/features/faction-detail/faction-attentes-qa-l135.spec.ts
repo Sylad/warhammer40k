@@ -14,4 +14,12 @@ describe('attendus QA de /factions/:id', () => {
     expect(section).toMatch(/sans sous-faction[^\n]*(section|lien)/);
     expect(section).toMatch(/api:[^\n]*subfactions\?factionId=[^\n]*\[\]/);
   });
+
+  it('L233 — une faction inexistante affiche le message d’absence, et son 404 en console est permis', () => {
+    const ligne = section.split('\n').find(l => l.startsWith('- 404 (visiter /factions/n-existe-pas)'));
+    expect(ligne).toBeDefined();
+    expect(ligne).toMatch(/Faction introuvable/);
+    expect(ligne).toMatch(/\/api\/factions\/n-existe-pas[^\n]*404/);
+    expect(ligne).toMatch(/erreur 404[^\n]*console est permise/);
+  });
 });
