@@ -1,13 +1,13 @@
 # Warhammer 40K Codex — guide Claude Code
 
-Codex numérique fan Warhammer 40,000. Frontend Angular 19 (custom gothique noir/or), backend NestJS, stockage JSON local. En production sur le k3s de dark-blue (namespace `preprod`, chart `developpeur-gitops/charts/warhammer40k`), public via le tunnel Cloudflare sur https://warhammer.sladoire.dev.
+Codex numérique fan Warhammer 40,000. Frontend Angular 20 (custom gothique noir/or), backend NestJS, stockage JSON local. En production sur le k3s de dark-blue (namespace `preprod`, chart `developpeur-gitops/charts/warhammer40k`), public via le tunnel Cloudflare sur https://warhammer.sladoire.dev.
 
 ## Architecture
 
 | | |
 |---|---|
 | Backend | NestJS 11 sur port `3001`, préfixe `/api` |
-| Frontend | Angular 19 + Material 19 (legacy en retrait) sur port `4201` (nginx) |
+| Frontend | Angular 20 (zone.js) + Material 19 (legacy en retrait) sur port `4201` (nginx) |
 | Stockage | contenu éditorial : `backend/seed/*.json` (dans l'image) · données utilisateur : `data/` (volume) |
 | AI | Anthropic SDK — descriptions narratives unités/séries (claude-sonnet-4-6, max 1024 tokens) |
 | Wiki proxy | `/api/wiki-image?q=...` → Warhammer 40k Fandom + cache in-memory |
@@ -217,7 +217,7 @@ Modal "Importer une image" (frontend) supporte 3 modes : Wiki Fandom, Reddit r/W
 
 ## Stack précise
 
-- Angular 19, Material 19 (legacy), RxJS 7, Signals, SCSS, Cinzel + Inter
+- Angular 20.3 (zone.js, sans zoneless, L231), TypeScript 5.9, Material 19 (legacy), RxJS 7, Signals, SCSS, Cinzel + Inter
 - NestJS 11, Anthropic SDK 0.91
 - Docker multi-stage (`node:22-alpine` → `nginx:alpine`), Node 22 LTS partout (`.nvmrc` 22.23.5, `engines.node >=22.12.0`, CI `node-version-file: .nvmrc`), images sur GHCR, k3s dark-blue via ArgoCD
 

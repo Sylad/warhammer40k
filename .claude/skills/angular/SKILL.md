@@ -1,6 +1,6 @@
 ---
 name: angular
-description: Angular 19 expert for the warhammer40k frontend (Angular 19.2, zone.js, no SSR) — Signals, standalone components, signal inputs/queries, routing, DI, @defer. Anything that only exists from v20 on (zoneless, provideZonelessChangeDetection, Signal Forms, stable incremental hydration…) is marked "v20+ — non applicable ici".
+description: Angular expert for the warhammer40k frontend (Angular 20.3 since L231, zone.js kept, no zoneless, no SSR) — Signals, standalone components, signal inputs/queries, routing, DI, @defer. Anything that only exists from v20 on (zoneless, provideZonelessChangeDetection, Signal Forms, stable incremental hydration…) is marked "v20+ — non applicable ici".
 risk: safe
 source: "Antigravity Awesome Skills (Angular Expert v1.0.0, v20+) — adapté à Angular 19 pour warhammer40k le 2026-09-29"
 date_added: '2026-02-27'
@@ -14,6 +14,13 @@ Master modern Angular development with Signals, Standalone Components and the re
 > **Angular 19** et n'y montera pas dans le cadre de ce skill : tout ce qui n'existe ou
 > n'est stable qu'à partir de la v20 est retiré ou marqué **« v20+ — non applicable ici »**.
 > Ne jamais proposer une montée de version d'Angular pour appliquer une recette de ce skill.
+
+> **Mise à jour du 2026-11-17 (L231).** Le frontend est passé en **Angular 20.3.35** (TypeScript
+> 5.9), à périmètre constant : **zone.js conservé, pas de zoneless, pas de SSR**. Les API marquées
+> « v20+ » existent désormais dans `node_modules`, mais ne sont **pas adoptées** : les utiliser
+> (zoneless, `provideZonelessChangeDetection`…) reste un changement d'architecture, à faire dans
+> un lot dédié. Les versions relevées plus bas datent de la v19 ; la source de vérité est
+> `frontend/package.json`. Détails de la montée : `docs/technos/2026-11.md`, section L231.
 
 ## Ce projet (warhammer40k/frontend) — à lire avant tout
 

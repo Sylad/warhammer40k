@@ -157,7 +157,7 @@ export class AboutComponent {
       group: 'Frontend',
       ico: '⌬',
       items: [
-        'Angular 19 + TypeScript 5.6',
+        'Angular 20 + TypeScript 5.9',
         'Standalone components (zéro NgModule)',
         'RxJS 7 + Signals (toSignal interop)',
         'SCSS custom — tokens gothiques',
