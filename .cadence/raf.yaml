@@ -2555,6 +2555,7 @@ lots:
     estimate: 0.1
     created: 2026-11-17
     started: 2026-11-17
+    review: { date: 2026-11-17, verdict: "conforme : 0 bloquant ; filtre limité aux 2 vidéos mortes, R1/R2 échouent sans le garde ; seed et PVC intacts ; README complété (82b31fd) ; non vérifié : prod 28 vidéos, e2e vidéos", commit: 82b31fd5225ca8b566a06de92018508a3fd5eea1 }
   - id: L233
     title: "Attendus QA ## /factions/:id : permettre le 404 console d'une faction inexistante — relevé par la QA de L229 le 17-11"
     status: todo
