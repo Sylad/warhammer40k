@@ -2545,6 +2545,7 @@ lots:
     estimate: 0.5
     created: 2026-11-17
     started: 2026-11-17
+    review: { date: 2026-11-17, verdict: "conforme : 0 bloquant ; versions concordantes (engines, .nvmrc, CI, node:22-alpine) ; @types/node ^22 compile ; lockfiles sans libc sans effet (déjà le cas sous node:20-alpine) ; non vérifié : CI GitHub avant push", commit: de7d88af236e15c6928f16a9b4fd216c89ae8ab2 }
   - id: L231
     title: Angular 19 → 20 (seule voie vers les correctifs de sécurité du framework ; 2 failles modérées d'assainissement en théorie) — proposé par L229 le 17-11
     status: todo
