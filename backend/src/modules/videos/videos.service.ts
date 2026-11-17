@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 import { estChaineRetiree, motifChaineRetiree } from '../../common/chaines-retirees.js';
 import { readContent, userDataPath } from '../../common/content.js';
+import { estVideoRetiree, motifVideoRetiree } from '../../common/videos-retirees.js';
 import type { Video } from './video.model.js';
 
 
@@ -16,11 +17,11 @@ export class VideosService {
     // videos.json manquant/tronqué faisait crash-looper TOUT le backend
     // (throw dans le constructor = bootstrap Nest avorté). Review 2026-08-14.
     try {
-      this.videos = fs.existsSync(userDataPath('videos.json'))
-        ? (JSON.parse(fs.readFileSync(userDataPath('videos.json'), 'utf-8')) as Video[]).filter(
-            v => !estChaineRetiree(v.url),
-          )
+      const lues = fs.existsSync(userDataPath('videos.json'))
+        ? (JSON.parse(fs.readFileSync(userDataPath('videos.json'), 'utf-8')) as Video[])
         : readContent<Video[]>('videos.json', []); // L74 : vidéos ajoutées → volume ; à défaut, le seed
+      // L41 (chaînes retirées) et L232 (vidéos supprimées de YouTube) : filtrées à la lecture.
+      this.videos = lues.filter(v => !estChaineRetiree(v.url) && !estVideoRetiree(v));
     } catch {
       this.videos = [];
     }
@@ -46,6 +47,8 @@ export class VideosService {
     }
     const retiree = motifChaineRetiree(video.url); // L41 R8 : sinon l'entrée serait filtrée au prochain démarrage
     if (retiree) throw new BadRequestException(retiree);
+    const supprimee = motifVideoRetiree(video); // L232 : même raison
+    if (supprimee) throw new BadRequestException(supprimee);
     this.videos.push(video);
     atomicWriteJsonSync(userDataPath('videos.json'), this.videos);
     return video;
