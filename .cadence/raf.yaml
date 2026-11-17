@@ -2552,6 +2552,7 @@ lots:
     title: Angular 19 → 20 (seule voie vers les correctifs de sécurité du framework ; 2 failles modérées d'assainissement en théorie) — proposé par L229 le 17-11
     status: done
     estimate: 1
+    delivered: { date: 2026-11-17, sha: 6acdd98332a5f08b69187f270228b8c3a906e77c }
     created: 2026-11-17
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme : 0 bloquant ; Angular 20.3 à périmètre constant, npm audit --omit=dev 0 ; 3 corrections de la note et retrait de Material 19 faits en 6acdd98, relus par le lead", commit: 6acdd98332a5f08b69187f270228b8c3a906e77c }
