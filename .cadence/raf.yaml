@@ -2531,12 +2531,13 @@ lots:
     finished: 2026-11-15
   - id: L229
     title: "Mise à jour mensuelle des technos et dépendances (D-1 du registre parent) : versions mineures et correctifs, majeures proposées à part ; noter chaque régression trouvée et sa correction"
-    status: doing
+    status: done
     estimate: 0.5
     every: 30
     created: 2026-11-16
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme : 0 bloquant ; aucune majeure directe ; npm ci OK sous Node 20.20.2 / npm 10.8.2 ; backend 147 tests, frontend 1278 verts ; non vérifié : images Docker, CI", commit: d55db81a99117cfe706777caec7516555387e724 }
+    finished: 2026-11-17
   - id: L230
     title: "Node 20 → 22 LTS (fin de vie avril 2026) : Dockerfile backend et frontend, CI, engines ; build Docker et CI vertes — proposé par L229 le 17-11"
     status: todo
