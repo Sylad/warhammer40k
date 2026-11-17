@@ -73,7 +73,22 @@ Ajouté par L137 (QA prod du 17-10, après L5 et L136) : 38 séries Black Librar
 - api: /api/images
 
 ## /lore
-- shows: les entrées vers les sous-pages du lore
+Complété par L235 (QA prod du 17-11, L68) : comptes du 17-11, calculés par `lore-hub.counts.ts` depuis les mêmes données que les pages.
+- shows: le h1 « Lore Impérial »
+- shows: 11 cartes, chacune un lien vers sa page : /lore/emperor, /lore/primarchs, /lore/chaos-gods, /lore/civilians, /lore/concepts, /lore/galaxy, /lore/equipment, /lore/timeline, /lore/ships, /lore/titans, /lore/saints
+- shows: les compteurs des cartes : « 20 fiches », « 4 dieux · 8 daemons notables », « 13 organisations · 68 fonctions », « 15 concepts · 4 catégories », « 69 hot zones · 12 failles warp », « 69 pièces · 4 types », « 35 événements · 6 ères », « 15 vaisseaux · toutes factions », « 10 dieux-machines · 3 catégories », « 8 figures · 3 catégories » ; la carte des Primarques dit « 9 Loyalistes, 9 Traîtres, 2 Perdus. »
+- never: un compteur à 0 ou périmé : un jeu de données vide ou en échec n'affiche aucun chiffre sur sa carte, les autres cartes gardent les leurs (L151)
+- never: une carte « À venir » (toutes les sous-pages existent) ou une carte sans lien
+- api: /api/lore/primarchs, /api/lore/chaos-gods, /api/lore/imperial-orgs, /api/lore/concepts, /api/timeline-events, /api/lore/equipment, /api/lore/ships, /api/lore/god-machines, /api/lore/saints (les zones de la carte galactique sont dans le code, sans appel)
+
+## /lore/emperor
+Ajouté par L235 (QA prod du 17-11, L68).
+- shows: le h1 « L'Empereur de l'Humanité », le lien « ← Retour aux archives lore » vers /lore et l'image du bandeau
+- shows: 5 lignes de données : Naissance, Nature, Statut actuel, Pouvoir maintenu, Successeur désigné
+- shows: 6 sections, chacune avec son h2 et son image (`.section-img`, fond chargé ; 7 images de fond avec le bandeau le 17-11) : « Origine mystique », « La Grande Croisade », « L'Hérésie d'Horus », « Le Trône d'Or », « Apparitions au M42 », « Statut actuel — un dieu en gestation ? »
+- shows: le lien « Voir les vingt Primarques → » vers /lore/primarchs
+- never: « Chargement des archives sacrées… » sans fin ; une section sans image alors que sa requête /api/wiki-image a rendu une imageUrl
+- api: /api/lore/emperor (un objet, 6 sections) ; 7 requêtes /api/wiki-image?q= (le bandeau, puis une par section)
 
 ## /lore/chaos-gods
 - shows: quatre dieux du Chaos, chacun avec son numéro « I / IV » à « IV / IV » en haut de l'en-tête, son illustration et son bouton « Agrandir l'illustration de … »
@@ -108,6 +123,8 @@ Ajouté par L199 (QA prod du 23-10, après L13, L197 et L198) : 15 concepts, 76 
 
 ## /lore/primarchs
 - shows: 20 primarques
+- shows: 4 filtres « Tous · 20 », « Loyalistes · 9 », « Traîtres · 9 », « Perdus · 2 » : boutons type="button" avec aria-pressed, « Tous » seul à true au chargement ; un clic sur une allégeance ne laisse que ses cartes (L235, 17-11)
+- api: /api/lore/primarchs, /api/wiki-image?q= (une image par carte)
 
 ## /lore/primarchs/:id
 Visiter lion-eljonson.
@@ -115,6 +132,8 @@ Visiter lion-eljonson.
 
 ## /lore/equipment
 - shows: 69 équipements
+- shows: 5 filtres de type « Tous · 69 », « Armes à distance · 26 », « Armes de mêlée · 16 », « Armures · 15 », « Reliques · 12 » : boutons type="button" avec aria-pressed, « Tous » seul à true au chargement ; puis la liste « Filtrer par faction » (« Toutes les factions » au départ) et le champ « Rechercher dans l'arsenal » (L235, 17-11)
+- api: /api/lore/equipment, /api/factions, /api/wiki-image?q= (une image par carte)
 
 ## Fiches de lore (/lore/ships/:id, /lore/saints/:id, /lore/titans/:id, /lore/equipment/:id)
 Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine (saint), warhound-titan (titan), boltgun-astartes (équipement), ou le lien d'une carte de la liste. Les quatre fiches partagent la barre d'ancres (`.anchor-nav`, `_anchor-nav.scss`, L89) : mêmes attendus.
@@ -134,24 +153,48 @@ Ajouté par L103 (QA prod du 11-10). Visiter phalanx (vaisseau), saint-celestine
 
 ## /lore/timeline
 - shows: 35 événements
+- shows: 7 filtres d'ère « Toutes · 35 », « Pré-Imperium · 12 », « Hérésie d'Horus · 5 », « Temps de la Renaissance · 1 », « Long Crépuscule · 3 », « 41ᵉ Millénaire · 6 », « Cicatrix & Indomitus · 8 » : boutons avec aria-pressed, « Toutes » seul à true au chargement ; puis la liste « Par faction / thème » (« Tous les thèmes » au départ) (L235, 17-11)
+- shows: une carte dépliée (clic sur son titre, aria-expanded="true") montre le récit, ses sources et le lien « Lire la fiche complète → » vers /lore/timeline/<id> ; repliée, la carte n'a aucun lien vers sa fiche
+- api: /api/timeline-events (35 événements), /api/wiki-image?q= (une image par événement, plus le bandeau)
+
+## /lore/timeline/:id
+Ajouté par L235 (QA prod du 17-11 : la page n'avait pas été parcourue, faute d'id). Visiter siege-of-terra, ou déplier une carte de /lore/timeline et suivre « Lire la fiche complète → » (le seul lien vers une fiche, visible seulement dans une carte dépliée).
+- shows: le h1 « Le Siège de Terra » (titre de l'onglet « Le Siège de Terra — Warhammer 40 000 »), l'ère « Hérésie d'Horus » et la date 014.M31 dans le bandeau
+- shows: les panneaux h2 Récit Complet, Tags (5), Sources (2) en liens externes ; la colonne « Données » (Ère, Date) ; les liens « ← RETOUR À LA CHRONOLOGIE » et « RETOUR CHRONOLOGIE » vers /lore/timeline
+- never: « Chargement de l'événement... » sans fin ; le titre générique de la route ou « introuvable » pour un id du seed
+- 404 (visiter /lore/timeline/n-existe-pas) : h1 « Événement introuvable » + lien « Toute la chronologie » vers /lore/timeline, pas de Réessayer ; l'erreur 404 de `/api/timeline-events/n-existe-pas` dans la console est permise
+- api: /api/timeline-events/siege-of-terra (un objet), /api/wiki-image?q= (image du bandeau)
 
 ## /lore/ships
 - shows: 15 vaisseaux
+- shows: 4 filtres (groupe « Filtrer par camp ») « Tous · 15 », « Imperium », « Chaos », « Xenos » : boutons type="button" avec aria-pressed, « Tous » seul à true au chargement ; chaque carte avec son image (L235, 17-11)
+- api: /api/lore/ships, /api/wiki-image?q= (une image par carte)
 - never: un vaisseau dont l'image n'est pas celle de son sujet, ou partagée avec un autre vaisseau : les 15 cartes ont 15 images distinctes (Indomitable Will et Or'es Tash'var affichaient le même Battleship, Khaine une bataille de Nurgle, Warp Skull un croiseur loyaliste, Remembrance « Pathos.jpg » — L212)
 
 ## /lore/titans
 - shows: 10 titans
+- shows: 4 filtres (groupe « Filtrer par catégorie ») « Tous · 10 », « Titans », « Chevaliers », « Walkers » : boutons type="button" avec aria-pressed, « Tous » seul à true au chargement ; chaque carte avec son image (L235, 17-11)
+- api: /api/lore/god-machines, /api/wiki-image?q= (une image par carte)
 
 ## /lore/saints
 - shows: 8 saints
+- shows: 4 filtres (groupe « Filtrer par catégorie ») « Tous · 8 », « Saintes Vivantes », « Canonisés », « Ecclésiarques » : boutons type="button" avec aria-pressed, « Tous » seul à true au chargement ; chaque carte avec son image (L235, 17-11)
+- api: /api/lore/saints, /api/wiki-image?q= (une image par carte)
 - shows: 8 images distinctes, pageTitle = sujet (L214 : Drusus → « Calixis Sector », Sanguinaire → « Blood Angels », jamais « Drusus Shrine World » ni « Sanguinary Priest »)
 - shows: sur la fiche d'un saint (ex. saint-celestine, saint-sanguinaire), Iconographie sans vignette en double ni de celle du haut de page (L215), chaque vignette venant d'une page de `galleryPages` ; la visionneuse (⛶ d'une carte) lance au plus autant d'appels /api/wiki-image que de `galleryPages`, jamais « … Imperial saint »
 
 ## /nouveautes
-- shows: des entrées datées, chacune avec un titre et une capture chargée
+Complété par L235 (QA prod du 17-11, L68).
+- shows: le h1 « Ce qui a changé »
+- shows: au moins 107 entrées le 17-11 (une liste `ol.news-list`, la plus récente en haut), chacune avec sa date (`time[datetime]`), son h2, son bouton « Copier le lien : <titre> » et ses captures chargées (195 captures au total le 17-11, aucune image cassée)
+- never: « Le journal des nouveautés n’a pas pu être chargé » ou « Aucune nouveauté publiée pour l’instant » ; les mots « introuvable », « indisponible », « impossible de charger » ou « 0 Organisations » dans le texte d'une entrée ne sont pas des erreurs (récit des corrections)
+- api: aucun appel /api/ ; /nouveautes-data/nouveautes.json et /nouveautes-data/tailles.json, fichiers statiques lus par fetch, 200 et non vides
 
 ## /plan
 - shows: les sections du plan publié (en cours, prévu, récemment livré)
 
 ## /about
-- shows: le titre de la page et ses sections
+Complété par L235 (QA prod du 17-11, L68).
+- shows: le h1 « Le Scribe et son Daemon »
+- shows: 4 sections h2 : « L'histoire courte », « Composantes techniques », « Inspirations & sources », « Mes autres sites »
+- api: aucun appel /api/ (page sans données chargées) ; les liens externes s'ouvrent dans un nouvel onglet (target="_blank", rel="noopener")
