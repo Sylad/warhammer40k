@@ -163,7 +163,6 @@ export class AboutComponent {
         'SCSS custom — tokens gothiques',
         'Polices : Cinzel (titres) + Inter (corps)',
         'Leaflet 1.9 (carte galactique SVG calibrée)',
-        'Material 19 (legacy, retiré progressivement)',
       ],
     },
     {
