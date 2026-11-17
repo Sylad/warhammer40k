@@ -2550,9 +2550,10 @@ lots:
     finished: 2026-11-17
   - id: L231
     title: Angular 19 → 20 (seule voie vers les correctifs de sécurité du framework ; 2 failles modérées d'assainissement en théorie) — proposé par L229 le 17-11
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-11-17
+    started: 2026-11-17
   - id: L232
     title: "Vidéos : 2 vidéos retirées de YouTube (vignette 404, erreur console sur /videos) — les retirer ou les remplacer ; relevé par la QA de L229 le 17-11"
     status: done
