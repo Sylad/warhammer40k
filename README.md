@@ -105,14 +105,14 @@ En amont du code, [ChatGPT](https://chat.openai.com) a aidé à générer les pr
 | Backend | NestJS 11 + TypeScript 5 + Anthropic SDK |
 | Storage | JSON local (pas de DB) |
 | Sources externes | Wikipedia Fandom EN (wiki-image proxy), Reddit JSON public, 40k.gallery |
-| Build | Docker multi-stage (node:20-alpine → nginx:alpine) |
+| Build | Docker multi-stage (node:22-alpine → nginx:alpine) |
 | Déploiement | Images sur GHCR (CI GitHub), chart Helm sur k3s via ArgoCD (GitOps), exposé par un tunnel Cloudflare |
 | Cache HTTP | nginx sert `index.html` et les fichiers aux noms fixes (favicon, carte, Nouveautés, plan) en `no-cache` (revalidés à chaque visite), les fichiers à empreinte du build en cache d'un an ; un script, une feuille de style, une police ou une image absents répondent 404, jamais la page ; pas de plages d'octets sur ces fichiers (`max_ranges 0` : un 416 n'est plus servi avec `immutable`) ; `scripts/test-nginx-cache.sh` rejoue ces règles sur un vrai nginx dans « Contrôles frontend » (L52) ; si un ancien `index.html` demande un morceau retiré, le routeur recharge la page, une fois par minute au plus, seulement si le navigateur est en ligne et qu'une requête HEAD confirme le 404 du morceau (le message d'erreur est le même quand le réseau est coupé ou sur un 502 : on reste alors sur la page lue ; `core/utils/morceau-absent.ts`, `morceau-absent.e2e.spec.ts` dans `npm run test:e2e`) |
 
 ## Setup local
 
 ### Prérequis
-- Node.js 20+
+- Node.js 22 LTS (`.nvmrc` : 22.23.5 ; `nvm use` à la racine)
 - Une [clé API Anthropic](https://console.anthropic.com/settings/keys)
 
 ### Lancement

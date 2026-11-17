@@ -219,7 +219,7 @@ Modal "Importer une image" (frontend) supporte 3 modes : Wiki Fandom, Reddit r/W
 
 - Angular 19, Material 19 (legacy), RxJS 7, Signals, SCSS, Cinzel + Inter
 - NestJS 11, Anthropic SDK 0.91
-- Docker multi-stage (`node:20-alpine` → `nginx:alpine`), images sur GHCR, k3s dark-blue via ArgoCD
+- Docker multi-stage (`node:22-alpine` → `nginx:alpine`), Node 22 LTS partout (`.nvmrc` 22.23.5, `engines.node >=22.12.0`, CI `node-version-file: .nvmrc`), images sur GHCR, k3s dark-blue via ArgoCD
 
 ## Nouveautés (cadence news, L23)
 
