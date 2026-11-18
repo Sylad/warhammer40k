@@ -805,7 +805,10 @@ lots:
     estimate: 1
     created: 2026-10-06
     started: 2026-11-18
-    review: { date: 2026-11-18, verdict: "conforme : focus sur la grille et « Page N sur M » en région polite, testé ; e2e de la CI déjà rouge avant le lot (23 échecs à 391db5e, hors lot)", commit: 0c138db5e550a9617945085603277287f1bbf003 }
+    review: { date: 2026-11-18, verdict: "conforme : 918aedd relu par le lead — defilementSelonPreference() factorise la règle de section-anchor (une seule source), utilisée par goToPage ; tests unitaire et e2e ajoutés", commit: 918aeddfd3d0498a784fa9f331cc70566f2eb713 }
+    ux: { date: 2026-11-18, verdict: "conforme (lead, d'après ux-reviewer 4/5 et captures scratchpad/revues/warhammer-L71-ux/) : focus sur la grille et annonce « Page N sur M » ; constat 1 (défilement doux malgré prefers-reduced-motion) corrigé en 918aedd" }
+    notes:
+      - { date: 2026-11-18, text: "mineur noté (UX, Nielsen 1) : après un changement de page, l'indicateur visible « Page 2 sur 2 » sort de l'écran — non bloquant, à reprendre si Sylvain le juge utile" }
   - id: L72
     title: "Specs galerie : partager le render() TestBed (5 copies du bouchon de service : collections-count, collections-hidden-l64, plural-count, filters-a11y, faction-param) — revue de code L64"
     status: todo
