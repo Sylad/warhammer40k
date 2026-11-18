@@ -12,3 +12,13 @@
   au seed (`backend/seed`), aux gabarits des composants, à `lore-hub.counts.ts` et au journal
   `nouveautes.json`. Un changement de données qui change un compte de ces pages fait échouer ce test :
   mettre à jour l'attente dans le même commit. Pour /nouveautes, les nombres sont des minimums.
+
+## Galerie — changement de page (L71)
+
+- `goToPage` : focus sur la grille (`tabindex=-1`), « Page N sur M » dans la région `pagination-annonce`,
+  puis défilement vers la grille.
+- Suite de la revue UX (18-11) : ce défilement suit `prefers-reduced-motion` — instantané (`auto`) si
+  « reduce », doux sinon. Préférence lue par `defilementSelonPreference()` (`core/utils/section-anchor.ts`),
+  aussi utilisée par `revealSection` : tout nouveau `scrollIntoView` programmé passe par elle.
+- Gardes : `gallery-pagination-l71.spec.ts` (R5, R6) et `gallery-pagination-l71.e2e.spec.ts` (390 px, reduce /
+  no-preference, scrollY mesuré juste après Entrée).

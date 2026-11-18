@@ -24,9 +24,14 @@ export function sectionHref(id: string): string {
 export function revealSection(id: string): void {
   const el = document.getElementById(id);
   if (!el) return;
-  const reduit = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
   el.focus({ preventScroll: true });
-  el.scrollIntoView({ behavior: reduit ? 'auto' : 'smooth', block: 'start' });
+  el.scrollIntoView({ behavior: defilementSelonPreference(), block: 'start' });
   history.replaceState(history.state, '', sectionHref(id));
+}
+
+/** Défilement programmé : instantané si l'utilisateur demande moins de mouvement (prefers-reduced-motion), doux sinon. */
+export function defilementSelonPreference(): ScrollBehavior {
+  const reduit = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return reduit ? 'auto' : 'smooth';
 }

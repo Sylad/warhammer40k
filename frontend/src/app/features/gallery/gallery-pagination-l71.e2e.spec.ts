@@ -53,4 +53,28 @@ describe.skipIf(!built || !chromium)('galerie — changement de page au clavier 
       await page.close();
     });
   }
+
+  // Suite de la revue UX L71 (constat 1, WCAG 2.3.3) : avec « reduce », le saut vers la grille est instantané
+  // (mesuré avant : ~2 000 px encore en mouvement à 482 ms à 390 px) ; sans préférence il reste animé.
+  for (const reducedMotion of ['reduce', 'no-preference'] as const) {
+    it(`390 px, prefers-reduced-motion: ${reducedMotion} → défilement ${reducedMotion === 'reduce' ? 'instantané' : 'doux'}`, async () => {
+      const page = await browser.newPage({ reducedMotion });
+      await page.route((u) => !u.host.startsWith('127.0.0.1'), (r) => r.abort());
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(base + '/gallery');
+      const suivante = page.getByRole('button', { name: 'Page suivante' });
+      await suivante.waitFor();
+      await suivante.focus();
+      const avant = await page.evaluate(() => scrollY);
+      // position juste après Entrée (« auto » défile dans le gestionnaire même), puis une fois tout défilement fini
+      await page.keyboard.press('Enter');
+      const aussitot = await page.evaluate(() => scrollY);
+      await page.waitForTimeout(1500);
+      const fin = await page.evaluate(() => scrollY);
+      expect(avant - fin).toBeGreaterThan(500); // le saut mesuré est réel
+      if (reducedMotion === 'reduce') expect(aussitot).toBe(fin);
+      else expect(Math.abs(aussitot - fin)).toBeGreaterThan(100); // encore en mouvement
+      await page.close();
+    });
+  }
 });

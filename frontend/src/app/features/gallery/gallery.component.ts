@@ -10,6 +10,7 @@ import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '..
 import { GalleryModalDirective } from './gallery-modal.directive';
 import { PlurielPipe } from '../../shared/pluriel.pipe';
 import { plural } from '../../core/utils/pluriel';
+import { defilementSelonPreference } from '../../core/utils/section-anchor';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
 interface CategoryDef {
@@ -1320,10 +1321,10 @@ export class GalleryComponent {
     this.currentPage.set(page);
     this.pageChangee.set({ page, liste: this.filteredArtworks() });
     // L71 (WCAG 2.4.3) : le focus suit le contenu remplacé, au lieu de rester sur un bouton peut-être désactivé ;
-    // défilement en haut de la grille pour ne pas rester en bas.
+    // défilement en haut de la grille pour ne pas rester en bas, instantané si prefers-reduced-motion: reduce.
     const grid = this.host.nativeElement.querySelector<HTMLElement>('.art-grid[data-testid="grille-oeuvres"]');
     grid?.focus({ preventScroll: true });
-    grid?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+    grid?.scrollIntoView?.({ behavior: defilementSelonPreference(), block: 'start' });
   }
   nextPage(): void { this.goToPage(this.currentPage() + 1); }
   prevPage(): void { this.goToPage(this.currentPage() - 1); }

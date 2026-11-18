@@ -2,7 +2,7 @@
 // est annoncé dans une région d'état polie persistante (WCAG 2.4.3, 4.1.3 ; constat de la revue UX L64).
 import { setupTestBed, polyfillDialog } from '../../../testing/angular-testbed';
 import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { of } from 'rxjs';
@@ -83,5 +83,35 @@ describe('galerie — changement de page au clavier (L71, WCAG 2.4.3 / 4.1.3)', 
     f.componentInstance.toggleCategoryFilter('Xénos');
     f.detectChanges();
     expect(annonce(root)!.textContent!.trim()).toBe('');
+  });
+
+  // Suite de la revue UX L71 (constat 1, WCAG 2.3.3) : à 390 px avec « reduce », ~2 000 px de
+  // défilement encore en mouvement à 482 ms. Le défilement vers la grille suit prefers-reduced-motion.
+  describe('défilement vers la grille et prefers-reduced-motion', () => {
+    const matchMediaOrigine = window.matchMedia;
+    afterEach(() => { window.matchMedia = matchMediaOrigine; });
+    const media = (reduit: boolean) => {
+      window.matchMedia = ((q: string) => ({ matches: reduit && q === '(prefers-reduced-motion: reduce)', media: q })) as unknown as typeof window.matchMedia;
+    };
+
+    it('R5 — « reduce » : défilement instantané (behavior « auto »)', async () => {
+      media(true);
+      const f = await render();
+      const root = f.nativeElement as HTMLElement;
+      const defile = vi.fn();
+      grille(root).scrollIntoView = defile;
+      bouton(root, 'Page suivante').click();
+      expect(defile).toHaveBeenCalledWith({ behavior: 'auto', block: 'start' });
+    });
+
+    it('R6 — sans préférence : défilement doux (behavior « smooth »)', async () => {
+      media(false);
+      const f = await render();
+      const root = f.nativeElement as HTMLElement;
+      const defile = vi.fn();
+      grille(root).scrollIntoView = defile;
+      bouton(root, 'Page suivante').click();
+      expect(defile).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
+    });
   });
 });
