@@ -782,6 +782,7 @@ lots:
     title: "Galerie : une seule fonction d'accord (exporter plural de plan.utils ou pipe) pour les compteurs « œuvre(s) » de gallery.component.ts (l. 45, 111, 239, 254) + dashboard.component.ts:193 countLabel fixe « œuvres » — revue de code L58"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-18, sha: bb65d88f837970d450333863b72102aaa05899ee }
     created: 2026-10-06
     started: 2026-11-18
     review: { date: 2026-11-18, verdict: "conforme (revue du lead) : plural/accord dans core/utils/pluriel.ts (0 et 1 au singulier, règle française), pipe pluriel, plan.utils et gallery/dashboard branchés dessus ; tests 0/1/2 et dashboard (« 1 œuvre ») ; porte rejouée verte à bb65d88", commit: bb65d88f837970d450333863b72102aaa05899ee }
@@ -2591,6 +2592,7 @@ lots:
     title: "QA attentes : ajouter à docs/qa/expectations.md /lore/emperor, /lore, /nouveautes, /about, les filtres du lore et un id réel pour /lore/timeline/:id (suite QA L68 du 17-11)"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-18, sha: bb65d88f837970d450333863b72102aaa05899ee }
     created: 2026-11-17
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme (relu par le lead) : attentes précises et mesurées pour /lore, /lore/emperor, les filtres, /lore/timeline/:id (siege-of-terra) et sa 404, /nouveautes, /about ; spec qui les garde", commit: e409f5179fa8fad45e72dc61542606391c20413a }
