@@ -5,6 +5,7 @@
  * depuis le plan raf : lots visibles, titres PUBLICS et états seulement.
  */
 import { formatDay } from '../nouveautes/nouveautes.utils';
+import { plural } from '../../core/utils/pluriel';
 
 export type PlanStatus = 'doing' | 'todo' | 'done';
 
@@ -70,8 +71,6 @@ export function dateLine(lot: PlanLot): { day: string; text: string } | null {
   if (lot.status === 'doing' && lot.started) return { day: lot.started, text: `Démarré le ${formatDay(lot.started)}` };
   return null;
 }
-
-const plural = (n: number, one: string, many: string) => `${n} ${n > 1 ? many : one}`;
 
 /**
  * Avancement en mots. Toutes les étapes faites d'un lot pas encore livré : « prêt, en

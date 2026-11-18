@@ -5,6 +5,7 @@ import { WarhammerService } from '../../core/services/warhammer.service';
 import { take, type Observable } from 'rxjs';
 import type { LoreEvent } from '../../core/models/models';
 import { wikiThumbWidth } from '../../shared/media-thumb';
+import { accord } from '../../core/utils/pluriel';
 
 /** L84 : largeurs demandées à Fandom — le héros s'étale sur tout l'écran, les cartes font ~330 px (écrans 2x). */
 const HERO_WIDTH = 1400;
@@ -16,7 +17,8 @@ interface ShortcutCard {
   subtitle: string;
   ico: string;
   count: () => number | null;
-  countLabel: string;
+  /** Nom du compteur, singulier puis pluriel (accordé par `accord`, L69). */
+  countLabel: [one: string, many: string];
   wikiQuery: string;
   /** Image trop claire pour le texte : assombrie (L78). */
   dim?: boolean;
@@ -100,7 +102,7 @@ const TYPE_LABEL: Record<string, string> = {
             <p [innerHTML]="s.subtitle"></p>
             <div class="shortcut-foot">
               <span class="num">{{ shown(s.count()) }}</span>
-              <span class="lbl">{{ s.countLabel }}</span>
+              <span class="lbl">{{ countLabel(s) }}</span>
               <span class="arrow" aria-hidden="true">→</span>
             </div>
             @if (s.route === '/factions') {
@@ -182,7 +184,7 @@ export class DashboardComponent {
       subtitle: 'Les peuples du 41<sup>e</sup> millénaire — Imperium, Chaos, xénos.',
       ico: '⚔',
       count: () => this.factions(),
-      countLabel: 'factions majeures',
+      countLabel: ['faction majeure', 'factions majeures'],
       wikiQuery: 'Space Marines battle Adeptus Astartes',
     },
     {
@@ -191,7 +193,7 @@ export class DashboardComponent {
       subtitle: 'La bibliothèque Black Library — Hérésie d\'Horus, Eisenhorn…',
       ico: '▤',
       count: () => this.series(),
-      countLabel: 'séries',
+      countLabel: ['série', 'séries'],
       wikiQuery: 'Horus Rising',
       dim: true,
     },
@@ -201,7 +203,7 @@ export class DashboardComponent {
       subtitle: 'Archives cinématiques — chaînes lore, animations cultes.',
       ico: '▶',
       count: () => this.videos(),
-      countLabel: 'vidéos',
+      countLabel: ['vidéo', 'vidéos'],
       wikiQuery: 'Warhammer 40,000: Space Marine 2',
     },
     {
@@ -210,7 +212,7 @@ export class DashboardComponent {
       subtitle: 'Galerie impériale — artworks, illustrations, visuels.',
       ico: '▦',
       count: () => this.artworks(),
-      countLabel: 'œuvres',
+      countLabel: ['œuvre', 'œuvres'],
       wikiQuery: 'Warhammer 40k art fresco imperial',
     },
   ];
@@ -255,6 +257,13 @@ export class DashboardComponent {
         error: () => this.failed.set(true),
       });
     }
+  }
+
+  /** Nom accordé au compteur ; pluriel tant que le nombre n'est pas connu (« — œuvres »). */
+  countLabel(s: ShortcutCard): string {
+    const [one, many] = s.countLabel;
+    const n = s.count();
+    return n === null ? many : accord(n, one, many);
   }
 
   shown(n: number | null): string {

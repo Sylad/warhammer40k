@@ -8,6 +8,8 @@ import { BehaviorSubject, catchError, concat, EMPTY, filter, map, of, switchMap,
 import { PinService } from '../../core/services/pin.service';
 import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '../../core/services/warhammer.service';
 import { GalleryModalDirective } from './gallery-modal.directive';
+import { PlurielPipe } from '../../shared/pluriel.pipe';
+import { plural } from '../../core/utils/pluriel';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
 interface CategoryDef {
@@ -32,7 +34,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule, FormsModule, GalleryModalDirective],
+  imports: [CommonModule, FormsModule, GalleryModalDirective, PlurielPipe],
   template: `
     <section class="gallery-page">
 
@@ -46,7 +48,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <p class="hero-desc">
               Explorez les illustrations, artworks et visuels du 41e millénaire.<br/>
               @if (catalogOk()) {
-                {{ artworks().length }} {{ artworks().length > 1 ? 'œuvres triées, classées et archivées' : 'œuvre triée, classée et archivée' }}.
+                {{ artworks().length | pluriel:'œuvre triée, classée et archivée':'œuvres triées, classées et archivées' }}.
               }
             </p>
             <div class="search-bar-wrap">
@@ -178,7 +180,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                     [style.--cat-bg]="categoryBg(cat.key)"
                     (click)="toggleCategoryFilter(cat.key)">
                     <span class="cat-name">{{ cat.label }}</span>
-                    <span class="cat-count">{{ categoryCount(cat.key) }} œuvre{{ categoryCount(cat.key) > 1 ? 's' : '' }}</span>
+                    <span class="cat-count">{{ categoryCount(cat.key) | pluriel:'œuvre':'œuvres' }}</span>
                   </button>
                 }
               } @else {
@@ -303,7 +305,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <span class="ar-avatar">{{ initials(a.name) }}</span>
                 <span class="ar-info">
                   <strong>{{ a.name }}</strong>
-                  <small>{{ a.artworkCount }} œuvre{{ a.artworkCount > 1 ? 's' : '' }}</small>
+                  <small>{{ a.artworkCount | pluriel:'œuvre':'œuvres' }}</small>
                 </span>
               </button>
             }
@@ -320,7 +322,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <span class="col-icon">▤</span>
                 <span class="col-info">
                   <strong>{{ col.name }}</strong>
-                  <small>{{ col.count }} œuvre{{ col.count > 1 ? 's' : '' }}</small>
+                  <small>{{ col.count | pluriel:'œuvre':'œuvres' }}</small>
                 </span>
               </button>
             }
@@ -997,7 +999,7 @@ export class GalleryComponent {
     const active = this.filterCategory();
     return [...new Set(keys)].filter((k) => present.has(k) || k === active).map((k) => ({ key: k, label: k }));
   });
-  readonly resultsLabel = computed(() => `${this.totalFiltered()} résultat${this.totalFiltered() > 1 ? 's' : ''}`);
+  readonly resultsLabel = computed(() => plural(this.totalFiltered(), 'résultat', 'résultats'));
 
   readonly filteredArtworks = computed(() => {
     const cat = this.filterCategory();
