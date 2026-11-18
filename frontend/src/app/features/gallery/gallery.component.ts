@@ -216,6 +216,9 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                     <span class="sr-only">Aucune œuvre ne correspond à ces filtres.</span>
                   }
                 </span>
+                <!-- L71 (WCAG 4.1.3) : région PERSISTANTE, distincte du nombre de résultats ; « Page N sur M »
+                     y entre après un changement de page (boutons de pagination), et s'efface au filtre suivant. -->
+                <span class="sr-only" role="status" aria-live="polite" data-testid="pagination-annonce">{{ pageAnnonce() }}</span>
               </div>
               @if (catalogReady() && hasActiveFilters()) {
                 <button class="see-all" type="button" (click)="resetFilters()">Réinitialiser →</button>
@@ -257,7 +260,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             } @else if (totalFiltered() === 0) {
               <div class="empty" data-testid="message-vide">Aucune œuvre ne correspond à ces filtres.</div>
             } @else {
-              <div class="art-grid" data-testid="grille-oeuvres">
+              <!-- L71 (WCAG 2.4.3) : tabindex=-1, le focus y va après un changement de page (le bouton activé peut devenir inactif). -->
+              <div class="art-grid" data-testid="grille-oeuvres" tabindex="-1">
                 @for (art of pagedArtworks(); track art.id; let i = $index) {
                   <article class="art-card"
                     [style.--art]="artBg(art)">
@@ -1301,14 +1305,25 @@ export class GalleryComponent {
     this.cdr.detectChanges();
   }
 
+  /** L71 : page annoncée et liste filtrée à laquelle elle se rapporte (tout filtre la rend caduque). */
+  private readonly pageChangee = signal<{ page: number; liste: Artwork[] } | null>(null);
+  readonly pageAnnonce = computed(() => {
+    const p = this.pageChangee();
+    return p && p.liste === this.filteredArtworks() && p.page === this.currentPage()
+      ? `Page ${p.page} sur ${this.totalPages()}` : '';
+  });
+
   goToPage(n: number): void {
     const total = this.totalPages();
-    this.currentPage.set(Math.max(1, Math.min(total, n)));
-    // Scroll to top of grid pour ne pas rester en bas après changement de page.
-    if (typeof window !== 'undefined') {
-      const grid = document.querySelector('.art-grid');
-      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    const page = Math.max(1, Math.min(total, n));
+    if (page === this.currentPage()) return;
+    this.currentPage.set(page);
+    this.pageChangee.set({ page, liste: this.filteredArtworks() });
+    // L71 (WCAG 2.4.3) : le focus suit le contenu remplacé, au lieu de rester sur un bouton peut-être désactivé ;
+    // défilement en haut de la grille pour ne pas rester en bas.
+    const grid = this.host.nativeElement.querySelector<HTMLElement>('.art-grid[data-testid="grille-oeuvres"]');
+    grid?.focus({ preventScroll: true });
+    grid?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
   }
   nextPage(): void { this.goToPage(this.currentPage() + 1); }
   prevPage(): void { this.goToPage(this.currentPage() - 1); }

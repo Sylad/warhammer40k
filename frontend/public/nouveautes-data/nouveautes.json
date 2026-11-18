@@ -3,6 +3,23 @@
   "generated": "2026-10-31 22:27",
   "entries": [
     {
+      "slug": "2026-11-18-galerie-changer-de-page-au-clavier-ramene-sur-les-oeuvres",
+      "title": "Galerie : changer de page au clavier ramène sur les œuvres",
+      "date": "2026-11-18",
+      "lots": [
+        "L71"
+      ],
+      "captures": [
+        "captures/l71-page2-1440.png",
+        "captures/l71-page2-telephone.png"
+      ],
+      "alts": [
+        "Galerie à 1440 px après « Page suivante » : la grille des œuvres de la page 2 est en haut de l'écran, entourée de l'anneau de focus",
+        "Galerie sur téléphone (390 px) après « Page suivante » : la grille de la page 2 commence juste sous la barre du haut, entourée de l'anneau de focus"
+      ],
+      "html": "<p>Dans la galerie, les boutons de pagination (« Page suivante », « Page précédente », première et dernière page) amènent maintenant le clavier sur les œuvres de la nouvelle page : la touche Tab repart de la première œuvre au lieu de rester en bas, sur un bouton parfois devenu inactif.</p>\n<p>Un lecteur d'écran annonce aussi la page atteinte, par exemple « Page 2 sur 3 », sans interrompre ce qu'il est en train de lire.</p>"
+    },
+    {
       "slug": "2026-10-31-menu-et-page-a-propos-rien-ne-deborde-avec-un-espacement-de",
       "title": "Menu et page À propos : rien ne déborde avec un espacement de texte agrandi",
       "date": "2026-10-31",

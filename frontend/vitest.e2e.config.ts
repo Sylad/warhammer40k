@@ -29,6 +29,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/primarch-detail/primarch-chronologie-l224.e2e.spec.ts'),
       // L225 : les titres h2 des fiches faction et Primarque tiennent dans leur panneau à 320 px (« ✠ ICONOGRAPHIE » débordait).
       path.resolve(__dirname, 'src/app/features/faction-detail/fiche-titres-l225.e2e.spec.ts'),
+      // L71 : galerie, Entrée sur « Page suivante » → focus sur la grille et « Page 2 sur N » dans la région d'état.
+      path.resolve(__dirname, 'src/app/features/gallery/gallery-pagination-l71.e2e.spec.ts'),
     ],
   },
 });
