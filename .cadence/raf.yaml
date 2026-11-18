@@ -780,11 +780,12 @@ lots:
     finished: 2026-11-17
   - id: L69
     title: "Galerie : une seule fonction d'accord (exporter plural de plan.utils ou pipe) pour les compteurs « œuvre(s) » de gallery.component.ts (l. 45, 111, 239, 254) + dashboard.component.ts:193 countLabel fixe « œuvres » — revue de code L58"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-06
     started: 2026-11-18
     review: { date: 2026-11-18, verdict: "conforme (revue du lead) : plural/accord dans core/utils/pluriel.ts (0 et 1 au singulier, règle française), pipe pluriel, plan.utils et gallery/dashboard branchés dessus ; tests 0/1/2 et dashboard (« 1 œuvre ») ; porte rejouée verte à bb65d88", commit: bb65d88f837970d450333863b72102aaa05899ee }
+    finished: 2026-11-18
   - id: L70
     title: "Galerie : rattacher les œuvres aux collections (Horus Heresy, 40K Core Book, Black Library Covers) — 1) proposer la liste œuvre→collection depuis titre/artiste/source, 2) VALIDATION de Sylvain avant toute écriture, 3) seed + volume de prod (migration au boot ou API derrière PIN), 4) capture Nouveauté du panneau rempli ; collection sans œuvre → demander suppression ou masquage (accord de Sylvain 06-10)"
     status: done
