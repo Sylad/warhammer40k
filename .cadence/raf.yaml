@@ -801,9 +801,10 @@ lots:
     finished: 2026-10-06
   - id: L71
     title: "Galerie : après un changement de page au clavier, focus sur la grille (tabindex=-1) et « Page N sur M » dans la région polite (WCAG 2.4.3, 4.1.3) — revue UX L64, antérieur au lot"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-10-06
+    started: 2026-11-18
   - id: L72
     title: "Specs galerie : partager le render() TestBed (5 copies du bouchon de service : collections-count, collections-hidden-l64, plural-count, filters-a11y, faction-param) — revue de code L64"
     status: todo
