@@ -805,6 +805,7 @@ lots:
     estimate: 1
     created: 2026-10-06
     started: 2026-11-18
+    review: { date: 2026-11-18, verdict: "conforme : focus sur la grille et « Page N sur M » en région polite, testé ; e2e de la CI déjà rouge avant le lot (23 échecs à 391db5e, hors lot)", commit: 0c138db5e550a9617945085603277287f1bbf003 }
   - id: L72
     title: "Specs galerie : partager le render() TestBed (5 copies du bouchon de service : collections-count, collections-hidden-l64, plural-count, filters-a11y, faction-param) — revue de code L64"
     status: todo
