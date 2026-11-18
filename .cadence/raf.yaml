@@ -801,7 +801,7 @@ lots:
     finished: 2026-10-06
   - id: L71
     title: "Galerie : après un changement de page au clavier, focus sur la grille (tabindex=-1) et « Page N sur M » dans la région polite (WCAG 2.4.3, 4.1.3) — revue UX L64, antérieur au lot"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-10-06
     started: 2026-11-18
@@ -809,6 +809,7 @@ lots:
     ux: { date: 2026-11-18, verdict: "conforme (lead, d'après ux-reviewer 4/5 et captures scratchpad/revues/warhammer-L71-ux/) : focus sur la grille et annonce « Page N sur M » ; constat 1 (défilement doux malgré prefers-reduced-motion) corrigé en 918aedd" }
     notes:
       - { date: 2026-11-18, text: "mineur noté (UX, Nielsen 1) : après un changement de page, l'indicateur visible « Page 2 sur 2 » sort de l'écran — non bloquant, à reprendre si Sylvain le juge utile" }
+    finished: 2026-11-18
   - id: L72
     title: "Specs galerie : partager le render() TestBed (5 copies du bouchon de service : collections-count, collections-hidden-l64, plural-count, filters-a11y, faction-param) — revue de code L64"
     status: todo
