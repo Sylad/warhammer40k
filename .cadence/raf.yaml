@@ -2592,6 +2592,12 @@ lots:
     started: 2026-11-17
     review: { date: 2026-11-17, verdict: "conforme (relu par le lead) : attentes précises et mesurées pour /lore, /lore/emperor, les filtres, /lore/timeline/:id (siege-of-terra) et sa 404, /nouveautes, /about ; spec qui les garde", commit: e409f5179fa8fad45e72dc61542606391c20413a }
     finished: 2026-11-17
+  - id: L236
+    title: "Revue UX — bonnes pratiques d'une appli web standard (D-13 du registre parent) : chaque page en vrai navigateur à 390 et 1440 px, au clavier, contre WCAG 2.2 AA, les heuristiques de Nielsen et la skill interface-utilisable (tailles de texte en rem ≥ 12 px, cibles ≥ 24 px, contrastes, focus visible, états vides et d'erreur) ; constats mesurés, sous-lots proposés"
+    status: todo
+    estimate: 0.5
+    visible: true
+    created: 2026-11-18
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
