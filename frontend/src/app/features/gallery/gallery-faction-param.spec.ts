@@ -3,14 +3,10 @@
 // Relecture : le filtre restait collé (/gallery?faction=necrons puis /gallery : toujours Nécrons ;
 // choisir « Toutes » laissait ?faction=necrons dans l'adresse) et un identifiant inconnu donnait
 // une grille vide sans explication. Le filtre faction suit désormais l'adresse, dans les deux sens.
-import { setupTestBed } from '../../../testing/angular-testbed';
-import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
+import { renderGallery, routedGallery } from '../../../testing/gallery-testbed';
 import { describe, expect, it, vi } from 'vitest';
-import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, convertToParamMap, provideRouter } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
+import { type RouterTestingHarness } from '@angular/router/testing';
 import { NEVER, Subject, of, throwError, type Observable } from 'rxjs';
-import { WarhammerService } from '../../core/services/warhammer.service';
 import { GalleryComponent } from './gallery.component';
 import { Component } from '@angular/core';
 
@@ -28,32 +24,11 @@ const FACTIONS = [
 ];
 
 function service(factions$: Observable<unknown> = of(FACTIONS), artworks$: Observable<unknown> = of(ARTWORKS)) {
-  return fakeWarhammerService({
-    artworks$,
-    factions$,
-    getImageMeta: () => of({}),
-    getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
-  });
+  return { artworks$, factions$ };
 }
 
 /** Routeur réel : /gallery?… → GalleryComponent (réutilisé d'une adresse à l'autre, comme en vrai). */
-async function harness(factions$?: Observable<unknown>, artworks$?: Observable<unknown>) {
-  await setupTestBed([GalleryComponent], [
-    provideRouter([{ path: 'gallery', component: GalleryComponent }]),
-    { provide: WarhammerService, useValue: service(factions$, artworks$) },
-  ]);
-  const h = await RouterTestingHarness.create();
-  const go = async (url: string) => {
-    const c = await h.navigateByUrl(url, GalleryComponent);
-    h.detectChanges();
-    return c;
-  };
-  const settle = async () => {
-    await new Promise((r) => setTimeout(r));
-    h.detectChanges();
-  };
-  return { h, go, settle, router: TestBed.inject(Router) };
-}
+const harness = (factions$?: Observable<unknown>, artworks$?: Observable<unknown>) => routedGallery(service(factions$, artworks$));
 
 const ids = (c: GalleryComponent) => c.filteredArtworks().map((a) => a.id);
 /** Région d'état de la galerie (toujours présente, L42 R5) ; null tant qu'elle est vide. */
@@ -66,14 +41,7 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 describe('galerie — filtre faction par l’adresse (L42)', () => {
   it('/gallery?faction=necrons : seules les illustrations Nécrons', async () => {
-    const svc = service();
-    await setupTestBed([GalleryComponent], [
-      provideRouter([]),
-      { provide: WarhammerService, useValue: svc },
-      { provide: ActivatedRoute, useValue: { queryParamMap: of(convertToParamMap({ faction: 'necrons' })), paramMap: of(convertToParamMap({})), snapshot: { fragment: null, queryParamMap: convertToParamMap({ faction: 'necrons' }) } } },
-    ]);
-    const f = TestBed.createComponent(GalleryComponent);
-    f.detectChanges();
+    const f = await renderGallery(service(), { faction: 'necrons' });
     const c = f.componentInstance;
     expect(c.filterFaction()).toBe('necrons');
     expect(c.filteredArtworks().map((a) => a.id)).toEqual(['aw-n']);
@@ -219,16 +187,11 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
   it('frappe puis clic vers une page en chargement différé : l’anti-rebond ne supplante pas la navigation de sortie', async () => {
     let release!: () => void;
     const chunk = new Promise<void>((r) => (release = r));
-    await setupTestBed([GalleryComponent], [
-      provideRouter([
-        { path: 'gallery', component: GalleryComponent },
-        { path: 'videos', loadComponent: () => chunk.then(() => OtherPage) },
-      ]),
-      { provide: WarhammerService, useValue: service() },
+    const { h, router } = await routedGallery(service(), [
+      { path: 'gallery', component: GalleryComponent },
+      { path: 'videos', loadComponent: () => chunk.then(() => OtherPage) },
     ]);
-    const h = await RouterTestingHarness.create();
     const c = await h.navigateByUrl('/gallery', GalleryComponent);
-    const router = TestBed.inject(Router);
     c.onSearchChange('abc');
     const leaving = router.navigateByUrl('/videos'); // clic : le morceau de la page n'est pas chargé
     await wait(600); // l'anti-rebond (400 ms) tombe pendant le chargement
@@ -241,18 +204,7 @@ describe('galerie — filtre faction par l’adresse (L42)', () => {
   // (images$ + getImageMeta(), faction en texte libre de la modale « Catégoriser »). Factions
   // arrivées avant elles → « Faction inconnue » annoncé à tort, ou « Aucune illustration » à tort.
   async function withSources(images$: Observable<unknown>, meta$: Observable<unknown>, artworks$: Observable<unknown> = of(ARTWORKS), factions$: Observable<unknown> = of(FACTIONS)) {
-    await setupTestBed([GalleryComponent], [
-      provideRouter([{ path: 'gallery', component: GalleryComponent }]),
-      { provide: WarhammerService, useValue: fakeWarhammerService({
-        artworks$, factions$, images$,
-        getImageMeta: () => meta$,
-        getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
-      }) },
-    ]);
-    const h = await RouterTestingHarness.create();
-    const go = async (url: string) => { const c = await h.navigateByUrl(url, GalleryComponent); h.detectChanges(); return c; };
-    const settle = async (ms = 0) => { await wait(ms); h.detectChanges(); };
-    return { h, go, settle };
+    return routedGallery({ artworks$, factions$, images$, getImageMeta: () => meta$ });
   }
 
   it('faction perso (« Foo », images perso seulement) : rien d’annoncé tant que images et métadonnées ne sont pas là, puis filtre appliqué', async () => {

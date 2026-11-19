@@ -1,34 +1,13 @@
 // L58 — Galerie : l'en-tête et les pastilles de catégories accordent « œuvre » (0 et 1 au
 // singulier, 2 et plus au pluriel), jamais « 1 œuvres » (relevé QA du 04-10).
-import { setupTestBed } from '../../../testing/angular-testbed';
-import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
+import { renderGallery } from '../../../testing/gallery-testbed';
 import { describe, expect, it } from 'vitest';
-import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { of } from 'rxjs';
-import { WarhammerService } from '../../core/services/warhammer.service';
-import { GalleryComponent } from './gallery.component';
 
 const art = (id: string, category: string) => ({ id, title: id, artist: 'A', image: `${id}.jpg`, category, faction: 'x', likes: 1 });
 
 async function render(artworks: unknown[]): Promise<HTMLElement> {
-  await setupTestBed([GalleryComponent], [
-    provideRouter([]),
-    {
-      provide: WarhammerService,
-      useValue: fakeWarhammerService({
-        artworks$: of(artworks),
-        factions$: of([]),
-        getImageMeta: () => of({}),
-        images$: of([]),
-        getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
-      }),
-    },
-    { provide: ActivatedRoute, useValue: { queryParamMap: of(convertToParamMap({})), paramMap: of(convertToParamMap({})), snapshot: { fragment: null, queryParamMap: convertToParamMap({}) } } },
-  ]);
-  const f = TestBed.createComponent(GalleryComponent);
-  f.detectChanges();
-  return f.nativeElement as HTMLElement;
+  return (await renderGallery({ artworks$: of(artworks), factions$: of([]), images$: of([]) })).nativeElement as HTMLElement;
 }
 
 const compact = (s: string | null | undefined) => (s ?? '').replace(/\s+/g, ' ').trim();

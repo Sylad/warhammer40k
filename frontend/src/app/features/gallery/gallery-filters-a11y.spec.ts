@@ -1,13 +1,10 @@
 // L45 — Galerie : chaque filtre (Faction, Catégorie, Trier par, recherche) a un libellé associé à
 // son contrôle (WCAG 1.3.1 / 4.1.2 / 3.3.2) ; la liste « Faction » montre des noms lisibles
 // (« Nécrons »), plus des identifiants bruts (« necrons »). Constats de la revue UX L42.
-import { setupTestBed } from '../../../testing/angular-testbed';
-import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
+import { renderGallery } from '../../../testing/gallery-testbed';
 import { describe, expect, it } from 'vitest';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
+import { type ComponentFixture } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { WarhammerService } from '../../core/services/warhammer.service';
 import { GalleryComponent } from './gallery.component';
 
 const ARTWORKS = [
@@ -34,23 +31,7 @@ async function render(
   factions: unknown[] = FACTIONS,
   query: Record<string, string> = {},
 ): Promise<ComponentFixture<GalleryComponent>> {
-  await setupTestBed([GalleryComponent], [
-    provideRouter([]),
-    {
-      provide: WarhammerService,
-      useValue: fakeWarhammerService({
-        artworks$: of(ARTWORKS),
-        factions$: of(factions),
-        getImageMeta: () => of(meta),
-        images$: of(images),
-        getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
-      }),
-    },
-    { provide: ActivatedRoute, useValue: { queryParamMap: of(convertToParamMap(query)), paramMap: of(convertToParamMap({})), snapshot: { fragment: null, queryParamMap: convertToParamMap(query) } } },
-  ]);
-  const f = TestBed.createComponent(GalleryComponent);
-  f.detectChanges();
-  return f;
+  return renderGallery({ artworks$: of(ARTWORKS), factions$: of(factions), getImageMeta: () => of(meta), images$: of(images) }, query);
 }
 
 /**

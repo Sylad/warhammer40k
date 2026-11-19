@@ -1,30 +1,11 @@
 // L64/t2 : les collections à 0 œuvre ne sont jamais proposées (impasse) ; le panneau vide disparaît ;
 // la pastille « Collections » du bandeau compte les collections non vides.
-import { setupTestBed } from '../../../testing/angular-testbed';
-import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
+import { renderGallery } from '../../../testing/gallery-testbed';
 import { describe, expect, it } from 'vitest';
-import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { of } from 'rxjs';
-import { WarhammerService } from '../../core/services/warhammer.service';
-import { GalleryComponent } from './gallery.component';
 
 async function render(collections: { id: string; name: string; count: number }[]): Promise<HTMLElement> {
-  await setupTestBed([GalleryComponent], [
-    provideRouter([]),
-    {
-      provide: WarhammerService,
-      useValue: fakeWarhammerService({
-        artworkCollections$: of(collections),
-        getImageMeta: () => of({}),
-        getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [] }),
-      }),
-    },
-    { provide: ActivatedRoute, useValue: { queryParamMap: of(convertToParamMap({})), paramMap: of(convertToParamMap({})), snapshot: { fragment: null, queryParamMap: convertToParamMap({}) } } },
-  ]);
-  const f = TestBed.createComponent(GalleryComponent);
-  f.detectChanges();
-  return f.nativeElement as HTMLElement;
+  return (await renderGallery({ artworkCollections$: of(collections) })).nativeElement as HTMLElement;
 }
 const panneau = (el: HTMLElement) => Array.from(el.querySelectorAll('.side-panel'))
   .find((s) => s.querySelector('h3')?.textContent?.includes('Collections populaires'));
