@@ -2670,6 +2670,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-20, sha: 4ca5327e7d4e2de015b530e1484165cbaf017702 }
     created: 2026-11-20
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme r2 lead : test .col-row à 390 et 1440 ajouté, 14/33 cas échouent sans le correctif, porte verte", commit: 0515793a5e2deedf9906855bb610dd609b3adc24 }
