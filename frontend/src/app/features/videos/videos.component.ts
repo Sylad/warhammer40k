@@ -8,7 +8,7 @@ import { WarhammerService, VideoPreview, VideoImportBody } from '../../core/serv
 import type { Video, Channel } from '../../core/models/models';
 import { PinService } from '../../core/services/pin.service';
 import { toSafeSignal } from '../../shared/safe-signal';
-import { garderResultatsEnVue } from '../../core/utils/resultats-en-vue';
+import { avantFiltre } from '../../core/utils/resultats-en-vue';
 
 type FilterKey = 'all' | 'lore' | 'animation' | 'official' | 'FR' | 'EN';
 type SortKey = 'recommended' | 'duration' | 'channel' | 'recent';
@@ -641,23 +641,25 @@ export class VideosComponent {
   toggleSidebar(key: SidebarFilter): void {
     const set = new Set(this.sidebarFilters());
     if (set.has(key)) set.delete(key); else set.add(key);
-    this.sidebarFilters.set(set);
-    this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
-    this.resultatsEnVue();
+    this.filtrer(() => {
+      this.sidebarFilters.set(set);
+      this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
+    });
   }
 
   choisirFiltre(key: FilterKey): void {
-    this.activeFilter.set(key);
-    this.resultatsEnVue();
+    this.filtrer(() => this.activeFilter.set(key));
   }
 
   /**
-   * L239 : « Filtres avancés » est sous la liste à 390 px ; « Durée courte » la raccourcit et le navigateur
-   * ramenait la page au nouveau bas (saut de 858 px, bouton sorti de l'écran). Après le rendu, le haut de
-   * « Toutes les vidéos » revient en vue s'il en est sorti ; sinon rien ne bouge.
+   * L239 : puces au-dessus de « Toutes les vidéos », « Filtres avancés » dessous au téléphone (à côté, collés, au
+   * bureau). Pendant le changement, ni ancrage ni rabattement ne déplacent la page ; après le rendu, le titre et le
+   * compte de la liste sont en vue (sinon un défilement les y amène, focus sur la liste) — voir avantFiltre().
    */
-  private resultatsEnVue(): void {
-    afterNextRender(() => garderResultatsEnVue(this.listeVideos?.nativeElement), { injector: this.injector });
+  private filtrer(appliquer: () => void): void {
+    const fin = avantFiltre();
+    appliquer();
+    afterNextRender(() => fin(this.listeVideos?.nativeElement), { injector: this.injector });
   }
 
   loadMoreFeatured(): void {

@@ -12,7 +12,7 @@ import { PlurielPipe } from '../../shared/pluriel.pipe';
 import { plural } from '../../core/utils/pluriel';
 import { nombreOeuvresGalerie } from '../../core/utils/galerie';
 import { defilementSelonPreference } from '../../core/utils/section-anchor';
-import { garderResultatsEnVue } from '../../core/utils/resultats-en-vue';
+import { avantFiltre } from '../../core/utils/resultats-en-vue';
 import { creditImage, SOURCES_IMAGES } from '../../core/credits/credit-image';
 import { CreditLegendeComponent } from '../../shared/components/credit-legende/credit-legende.component';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
@@ -1307,31 +1307,29 @@ export class GalleryComponent {
   }
 
   toggleCategoryFilter(key: string): void {
-    this.filterCategory.set(this.filterCategory() === key ? null : key);
-    this.currentPage.set(1);
-    this.resultatsEnVue();
+    this.filtrer(() => this.filterCategory.set(this.filterCategory() === key ? null : key));
   }
 
   toggleArtistFilter(name: string): void {
-    this.filterArtist.set(this.filterArtist() === name ? '' : name);
-    this.currentPage.set(1);
-    this.resultatsEnVue();
+    this.filtrer(() => this.filterArtist.set(this.filterArtist() === name ? '' : name));
   }
 
   toggleCollectionFilter(id: string): void {
-    this.filterCollection.set(this.filterCollection() === id ? '' : id);
-    this.currentPage.set(1);
-    this.resultatsEnVue();
+    this.filtrer(() => this.filterCollection.set(this.filterCollection() === id ? '' : id));
   }
 
   /**
-   * L239 : « Artistes à découvrir » et « Collections populaires » sont sous la grille à 390 px ; le filtre la
-   * raccourcit et le navigateur ramenait la page au nouveau bas (saut de 309 px, bouton sorti de l'écran).
-   * Après le rendu, le haut des résultats revient en vue s'il en est sorti ; sinon rien ne bouge.
+   * L239 : filtre appelé par un bouton (carte de catégorie au-dessus de la grille ; « Artistes à découvrir » et
+   * « Collections populaires » dessous au téléphone, à côté au bureau). Pendant le changement, ni ancrage ni
+   * rabattement ne déplacent la page ; après le rendu, le titre et le compte des résultats sont en vue (sinon un
+   * défilement les y amène, focus sur la liste) — voir avantFiltre().
    */
-  private resultatsEnVue(): void {
+  private filtrer(appliquer: () => void): void {
+    const fin = avantFiltre();
+    appliquer();
+    this.currentPage.set(1);
     afterNextRender(
-      () => garderResultatsEnVue(this.host.nativeElement.querySelector<HTMLElement>('[data-testid="section-resultats"]')),
+      () => fin(this.host.nativeElement.querySelector<HTMLElement>('[data-testid="section-resultats"]')),
       { injector: this.injector },
     );
   }
