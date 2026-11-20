@@ -80,8 +80,8 @@ async function tabSequence(page: Page, from: string, steps: number): Promise<str
 
 const first = (seq: string[], label: string) => seq.indexOf(label);
 
-async function open(page: Page, width: number, mode: Mode = 'ok'): Promise<Sim> {
-  await page.setViewportSize({ width, height: 844 });
+async function open(page: Page, width: number, mode: Mode = 'ok', height = 844): Promise<Sim> {
+  await page.setViewportSize({ width, height });
   const sim = await simulate(page, mode);
   await page.goto(base + '/gallery');
   if (mode === 'ok' || mode === 'erreur-puis-ok') {
@@ -362,26 +362,48 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
     expect(cards).toBe(6);
   }, 30_000);
 
-  // L240 (revue r2 de L239, m3) : le rappel est passé du bas du panneau (sous Trier par) à son haut, au-dessus de Faction ;
-  // sous Trier par il tombait sous le pli à 390×667 après un choix dans Faction (174 px sous la liste).
-  it('R6 — 390 px : « 6 résultats » visible dans le panneau, au-dessus de Faction, sans défilement vers la grille', async () => {
+  // R6 amendée le 2026-11-20 (L240, revue UX r2 de L239, m3) : le rappel est en haut du panneau, sous le titre
+  // « Filtres » et juste au-dessus de la liste Faction (plus sous Trier par) ; à 390×667, après un choix dans
+  // Faction, il est entièrement à l'écran sans que la page défile ni que le focus quitte la liste.
+  it('R6 — 390×667 : « 6 résultats » visible dans le panneau, sous le titre Filtres et au-dessus de Faction, sans déplacer page ni focus', async () => {
     await fresh();
-    await open(page, 390);
+    await open(page, 390, 'ok', 667);
     await openPanelIfPhone(page);
+    const scrollAvant = await page.evaluate(() => window.scrollY);
     await choose(page, 'filtre-faction', 'Space Marines');
-    await tid(page, 'resultats-panneau').waitFor({ state: 'visible' });
+    await tid(page, 'resultats-panneau').filter({ hasText: '6 résultats' }).waitFor({ state: 'visible' });
     const text = (await tid(page, 'resultats-panneau').textContent())?.trim();
-    const r = await box(page, 'resultats-panneau');
-    const faction = await box(page, 'filtre-faction');
-    const scrollY = await page.evaluate(() => window.scrollY);
     const inPanel = await tid(page, 'panneau-filtres').locator('[data-testid="resultats-panneau"]').count();
+    const m = await page.evaluate(() => {
+      const rect = (e: Element | null) => e!.getBoundingClientRect();
+      const rappel = document.querySelector('[data-testid="resultats-panneau"]');
+      const faction = document.querySelector('[data-testid="filtre-faction"]');
+      const titre = document.querySelector('[data-testid="panneau-filtres"] #filtres-titre');
+      const r = rect(rappel);
+      // « juste au-dessus » : aucune autre liste du panneau entre le rappel et Faction (ordre du document).
+      const listes = [...document.querySelectorAll('[data-testid="panneau-filtres"] select')];
+      const suivantes = listes.filter((l) => !!(rappel!.compareDocumentPosition(l) & Node.DOCUMENT_POSITION_FOLLOWING));
+      return {
+        top: r.top, bottom: r.bottom, vh: window.innerHeight,
+        titreBas: rect(titre).bottom, titreTexte: titre?.textContent?.trim(),
+        factionHaut: rect(faction).top,
+        premiereListeApres: suivantes[0]?.getAttribute('data-testid'),
+        scrollY: window.scrollY,
+        focus: (document.activeElement as HTMLElement | null)?.getAttribute('data-testid'),
+      };
+    });
     await done();
     expect(text).toBe('6 résultats');
     expect(inPanel).toBe(1);
-    expect(r.y + r.height).toBeLessThanOrEqual(faction.y + 1);
-    expect(faction.y - (r.y + r.height)).toBeLessThanOrEqual(60);
-    expect(r.y + r.height).toBeLessThanOrEqual(844);
-    expect(scrollY).toBe(0);
+    expect(m.titreTexte).toBe('Filtres');
+    expect(m.top).toBeGreaterThanOrEqual(m.titreBas - 1);
+    expect(m.bottom).toBeLessThanOrEqual(m.factionHaut + 1);
+    expect(m.premiereListeApres).toBe('filtre-faction');
+    expect(m.top).toBeGreaterThanOrEqual(0);
+    expect(m.bottom).toBeLessThanOrEqual(m.vh);
+    expect(m.vh).toBe(667);
+    expect(m.scrollY).toBe(scrollAvant);
+    expect(m.focus).toBe('filtre-faction');
   }, 30_000);
 
   it('R6 — une seule région role=status porte le total (le rappel du panneau est aria-hidden)', async () => {
