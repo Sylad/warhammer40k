@@ -2653,13 +2653,14 @@ lots:
       - { date: 2026-11-20, text: "QA prod 20-11 conforme : 4 sujets en texte simple, liens suivis 200, 0 erreur console (qa-L237.md)" }
   - id: L238
     title: "Crédits et droits (D-1) : mentionner les droits de Games Workshop (marques, images, textes) et la source réelle de chaque image et texte affichés (datasheets, portraits wiki, vidéos…), discrètement — sous les images ou dans le pied de page, et en détail dans À propos — pour un site complet, comme le crédit d'avatar-pandora"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "non-conforme 20-11 r3 : majeur — panne Fandom (ECONNRESET, 429 HTML) → backend wiki-image.service.ts:64-69 répond 200 {imageUrl:null} → visionneuse « absente » sans Réessayer ; Nouveauté fausse sur ce point. Mineur — Réessayer perd le focus (gallery.component.ts:388-393, WCAG 2.4.3). Rapport tmp/revue-L238-r3.md", commit: 05e3ef6c33b70385e4aa375c1d465c06dab153ec }
+    review: { date: 2026-11-20, verdict: "conforme 20-11 r4 (bf38650) : 2 constats r3 corrigés, aucun nouveau ; 60 appelants de getWikiImage sans régression — tmp/revue-L238-r4.md", commit: bf386506e0cce664fa0def247688de7ec7fbe243 }
     ux: { date: 2026-11-20, verdict: "conforme 20-11 lead (r2, captures 05e3ef6) : visionneuse — recherche, panne avec Réessayer souligné ≥ 24 px, absence vraie distinguées ; crédit et lien « Page du fichier » lisibles à 1440 et 390. Captures chargement/absente prises pendant le fondu de 0,2 s (pas d'attente, contrairement à panne) : défaut de capture, pas d'interface. Cadre image plus étroit que la légende à 1440, antérieur (r1)." }
+    finished: 2026-11-20
   - id: L239
     title: "Galerie et Vidéos à 390 px : appliquer un filtre fait sauter la page de 309 à 858 px avec un défilement non demandé (revue UX de L238, antérieur au lot)"
     status: todo
