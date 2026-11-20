@@ -113,4 +113,83 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
     fin(null);
     expect(grille.style.minHeight).toBe('');
   });
+
+  // L240, revue UX r2 (M1-bis) : colonne collée gardée à sa place d'avant le clic. Modèle de mise en page (jsdom n'en a
+  // pas) : conteneur au haut du document, contenu naturel `nat` px ou sa `min-height` ; colonne de 430 px, collée à
+  // 96 px, dans le flux à 0 : à scrollY S elle est à min(max(96, −S), fin − 430 − S) ; liste des résultats, en-tête à
+  // `tete` px du haut du document ; fenêtre de 768 px (jsdom), sans barre (`scroll-padding-top` non lu par jsdom).
+  function colonneCollee(depart: number, nat: { avant: number; apres: number }, tete: number) {
+    document.body.innerHTML = `<div class="grille"><main><section tabindex="-1"><header>2 résultats</header></section></main>`
+      + `<aside style="position: sticky; top: 96px"><button>Durée courte</button></aside></div>`;
+    const grille = document.querySelector<HTMLElement>('.grille')!;
+    const aside = document.querySelector('aside')!;
+    const bouton = document.querySelector('button')!;
+    const section = document.querySelector('section')!;
+    const etat = { y: depart, nat: nat.avant };
+    Object.defineProperty(window, 'scrollY', { configurable: true, get: () => etat.y });
+    const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(((o: ScrollToOptions) => { etat.y = o.top!; }) as typeof window.scrollTo);
+    const rect = (top: number, h: number) => ({ top, bottom: top + h, left: 0, right: 0, width: 0, height: h, x: 0, y: top, toJSON: () => ({}) }) as DOMRect;
+    const fin = () => Math.max(etat.nat, parseFloat(grille.style.minHeight) || 0);
+    const colonne = () => {
+      if (aside.style.position === 'static') return -etat.y;
+      return Math.min(Math.max(parseFloat(aside.style.top), -etat.y), fin() - 430 - etat.y);
+    };
+    grille.getBoundingClientRect = () => rect(-etat.y, fin());
+    aside.getBoundingClientRect = () => rect(colonne(), 430);
+    bouton.getBoundingClientRect = () => rect(colonne() + 54, 36);
+    section.getBoundingClientRect = () => rect(tete - etat.y, 300);
+    section.querySelector('header')!.getBoundingClientRect = () => rect(tete - etat.y, 60);
+    document.body.getBoundingClientRect = () => rect(-etat.y, fin() + 200);
+    return { grille, aside, bouton, section, scroll, etat, colonne, filtrer: (apres = nat.apres) => {
+      const f = avantFiltre(bouton);
+      etat.nat = apres;
+      return f(section);
+    } };
+  }
+
+  it('colonne à son top, rien à défiler (bande 1460-1540) : la liste raccourcie ne la repousse plus, conteneur tenu', () => {
+    const c = colonneCollee(1500, { avant: 2100, apres: 1600 }, 1500);
+    expect(c.colonne()).toBe(96);
+    expect(c.filtrer()).toBe(false);
+    expect(c.scroll).not.toHaveBeenCalled();
+    expect(c.colonne()).toBe(96); // sans la tenue : 1600 − 430 − 1500 = −330
+    expect(c.grille.style.minHeight).toBe(`${96 + 430 + 1500}px`);
+    expect(document.activeElement).not.toBe(c.section);
+    window.dispatchEvent(new Event('resize')); // redimensionnement : hauteur rendue
+    expect(c.grille.style.minHeight).toBe('');
+  });
+
+  it('fin de page, colonne repoussée au-dessus de son top : la page défile vers les résultats, la colonne ne bouge pas', () => {
+    const c = colonneCollee(1700, { avant: 2100, apres: 1600 }, 1200);
+    const place = c.colonne();
+    expect(place).toBe(2100 - 430 - 1700); // −30 : repoussée par le bas du conteneur
+    expect(c.filtrer()).toBe(true);
+    expect(c.etat.y).toBe(1200);
+    expect(c.colonne()).toBe(place); // l'ancien code la ramenait à 96 (+126 px)
+    expect(document.activeElement).toBe(c.section);
+    // second clic : la liste reprend sa longueur ; la page revient là où la colonne reste à sa place, en-tête hors de vue,
+    // focus sur la rangée (il n'est pas déplacé)
+    c.bouton.focus();
+    expect(c.filtrer(2100)).toBe(true);
+    expect(c.etat.y).toBe(1700);
+    expect(c.colonne()).toBe(place);
+    expect(document.activeElement).toBe(c.bouton);
+  });
+
+  it('glissé : top collé posé à la place de la colonne pendant le défilement, rétabli à la fin, conteneur tenu', () => {
+    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false } as MediaQueryList);
+    const c = colonneCollee(1700, { avant: 2100, apres: 1600 }, 1200);
+    const place = c.colonne();
+    expect(c.filtrer()).toBe(true);
+    expect(c.scroll).toHaveBeenCalledWith({ top: 1200, behavior: 'smooth' });
+    expect(c.aside.style.top).toBe(`${place}px`);
+    for (const y of [1650, 1400, 1200]) {
+      c.etat.y = y;
+      expect(c.colonne(), `scrollY ${y}`).toBe(place);
+    }
+    window.dispatchEvent(new Event('scrollend'));
+    expect(c.aside.style.top).toBe('96px');
+    expect(c.colonne()).toBe(place);
+    expect(c.grille.style.minHeight).toBe(`${place + 430 + 1200}px`);
+  });
 });
