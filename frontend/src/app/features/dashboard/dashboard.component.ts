@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
-import { take, type Observable } from 'rxjs';
+import { combineLatest, map, take, type Observable } from 'rxjs';
 import type { LoreEvent } from '../../core/models/models';
 import { wikiThumbWidth } from '../../shared/media-thumb';
 import { accord } from '../../core/utils/pluriel';
+import { nombreOeuvresGalerie } from '../../core/utils/galerie';
 
 /** L84 : largeurs demandées à Fandom — le héros s'étale sur tout l'écran, les cartes font ~330 px (écrans 2x). */
 const HERO_WIDTH = 1400;
@@ -243,17 +244,21 @@ export class DashboardComponent {
   /** Charge les cinq compteurs ; un échec laisse « — » et affiche le message avec « Réessayer ». */
   loadCounts(): void {
     this.failed.set(false);
-    const sources: Array<[Observable<unknown[]>, typeof this.factions]> = [
-      [this.service.factions$, this.factions],
-      [this.service.series$, this.series],
-      [this.service.videos$, this.videos],
-      [this.service.artworks$, this.artworks],
-      [this.service.getSubFactions(), this.subFactions],
+    const count = (source: Observable<unknown[]>) => source.pipe(take(1), map((list) => list.length));
+    // L73 : « Œuvres » = ce que montre la galerie (catalogue + images perso), même calcul qu'elle.
+    const oeuvres = combineLatest([this.service.artworks$.pipe(take(1)), this.service.images$.pipe(take(1))])
+      .pipe(map(([catalogue, images]) => nombreOeuvresGalerie(catalogue, images)));
+    const sources: Array<[Observable<number>, typeof this.factions]> = [
+      [count(this.service.factions$), this.factions],
+      [count(this.service.series$), this.series],
+      [count(this.service.videos$), this.videos],
+      [oeuvres, this.artworks],
+      [count(this.service.getSubFactions()), this.subFactions],
     ];
     for (const [source, target] of sources) {
       target.set(null);
-      source.pipe(take(1)).subscribe({
-        next: (list) => target.set(list.length),
+      source.subscribe({
+        next: (n) => target.set(n),
         error: () => this.failed.set(true),
       });
     }

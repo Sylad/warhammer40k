@@ -13,6 +13,9 @@ libellés en capitales).
 
 ## /
 - shows: la page d'accueil avec ses entrées vers les factions, le lore et la galerie
+- shows: le nombre « Œuvres » (carte « Galerie » et bandeau des chiffres, masqué au téléphone) égal au nombre « Œuvres » du bandeau de /gallery : tout ce que la galerie montre, images personnelles comprises (/api/artworks + /api/images : 35 + 4 = 39 le 06-10 ; avant L73, l'accueil disait 35) ; « — » tant que l'une des deux réponses manque, jamais le seul compte du catalogue
+- api: /api/artworks
+- api: /api/images
 
 ## /factions
 - shows: 17 cartes de faction, chacune avec son icône ou le symbole de repli de la faction

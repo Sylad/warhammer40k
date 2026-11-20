@@ -10,6 +10,7 @@ import { WarhammerService, ImageMeta, RedditPost, SuggestedCategories } from '..
 import { GalleryModalDirective } from './gallery-modal.directive';
 import { PlurielPipe } from '../../shared/pluriel.pipe';
 import { plural } from '../../core/utils/pluriel';
+import { nombreOeuvresGalerie } from '../../core/utils/galerie';
 import { defilementSelonPreference } from '../../core/utils/section-anchor';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
@@ -49,7 +50,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <p class="hero-desc">
               Explorez les illustrations, artworks et visuels du 41e millénaire.<br/>
               @if (catalogOk()) {
-                {{ artworks().length | pluriel:'œuvre triée, classée et archivée':'œuvres triées, classées et archivées' }}.
+                {{ nombreOeuvres() | pluriel:'œuvre triée, classée et archivée':'œuvres triées, classées et archivées' }}.
               }
             </p>
             <div class="search-bar-wrap">
@@ -94,7 +95,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <aside class="hero-stats" [class.filtres-ouverts]="filtersOpen()">
             <div class="stat-card">
               <div class="stat-icon">▦</div>
-              <div class="stat-num">{{ catalogOk() ? artworks().length : '–' }}</div>
+              <div class="stat-num">{{ catalogOk() ? nombreOeuvres() : '–' }}</div>
               <div class="stat-label">Œuvres</div>
             </div>
             <div class="stat-card">
@@ -729,6 +730,9 @@ export class GalleryComponent {
     });
     return [...catalog, ...local];
   });
+
+  /** L73 : compte du bandeau « Œuvres », même calcul que celui de l'accueil (`nombreOeuvresGalerie`). */
+  readonly nombreOeuvres = computed(() => nombreOeuvresGalerie(this.catalogArtworks(), this.localImages()));
 
   readonly customCategories = computed(() => {
     const builtIn = new Set<string>(CATEGORIES.map(c => c.key as string));
