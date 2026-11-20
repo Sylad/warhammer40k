@@ -301,7 +301,7 @@ Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l
 
 **Porte de la vague (L203)** : `orchestrate.test` = suite backend (`npm test`) puis suite frontend
 (`npx vitest run --exclude '**/*.e2e.spec.ts'` : les e2e Chromium sur `dist` tournent à la main ; en CI, `npm run test:e2e` ne lance que les acceptations de navigateur,
-`espacement-texte.e2e.spec.ts` (L61), `morceau-absent.e2e.spec.ts` (L52) et `densite-pilotes-l40.e2e.spec.ts` (L40), pas `topbar`/`search-hint`, l'un d'eux a expiré sous la charge de la suite complète) ; `orchestrate.build` = `nest build` puis
+`espacement-texte.e2e.spec.ts` (L61), `morceau-absent.e2e.spec.ts` (L52), `densite-pilotes-l40.e2e.spec.ts` (L40) et `plan.e2e.spec.ts` (L67) — la liste complète est l'`include` de `vitest.e2e.config.ts` —, pas `topbar`/`search-hint`, l'un d'eux a expiré sous la charge de la suite complète) ; `orchestrate.build` = `nest build` puis
 `npm run build` du frontend. Les acceptations rouges restent hors de la porte (exclues par `vitest.config.ts`,
 lancées seules par `accept:`). `orchestrate.precheck: true` (Sonnet), plus `local` (cadence L328). Toute
 commande déclarée se vérifie verte sur main avant d'être écrite.

@@ -22,3 +22,19 @@
   aussi utilisée par `revealSection` : tout nouveau `scrollIntoView` programmé passe par elle.
 - Gardes : `gallery-pagination-l71.spec.ts` (R5, R6) et `gallery-pagination-l71.e2e.spec.ts` (390 px, reduce /
   no-preference, scrollY mesuré juste après Entrée).
+
+## Plan de travail — ancre d'un lot (L67)
+
+- `/plan#<lot>` amène la carte visée à 90 px (sous la barre), même la dernière : l'espace qui manque au
+  défilement est posé en `padding-bottom` de `section.plan`, seulement tant qu'une ancre vise un lot.
+- L'ancre est relue sur `hashchange` ET sur chaque `NavigationEnd` du routeur (dans un `setTimeout`, après le
+  défilement du routeur) : un lien interne vers /plan (pied de page, « À propos ▾ », Ctrl+K) passe par
+  `pushState`, réutilise le composant et ne déclenche pas `hashchange`. Le routeur REMPLACE l'entrée
+  d'historique quand seul le fragment change.
+- Redimensionnement / polices tardives : `realign()` recale l'espace puis le défilement, seulement si la carte
+  a le focus et que le visiteur n'a pas fait défiler depuis (`pinned`, levé par wheel/touchstart/keydown/
+  pointerdown : la barre d'adresse d'un téléphone émet `resize` pendant un défilement au doigt).
+- Garde : `plan.e2e.spec.ts`, joué en CI par `npm run test:e2e` (include de `vitest.e2e.config.ts`).
+- Nouveautés écrites à la main sans cadence : ajouter l'entrée en tête de `nouveautes.json` (même forme que
+  `cadence news build`, `<p>` par paragraphe), copier les captures, `node scripts/nouveautes-tailles.mjs` ;
+  `nouveautes-data.spec.ts` compare au rendu de cadence quand il est installé.

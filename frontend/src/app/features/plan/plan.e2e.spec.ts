@@ -315,6 +315,92 @@ describe.skipIf(!built || !chromium)('page Plan de travail : ancre du dernier lo
     expect(m.pad).toBe('0px');
   });
 
+  // Revue r1 : depuis /plan#<lot>, un lien interne vers /plan (routerLink : pushState, AUCUN hashchange,
+  // composant réutilisé) laissait 416 px de vide en bas et la carte encore surlignée.
+  const sansAncre = async (page: Page) => {
+    await page.waitForFunction(() => location.hash === '' && location.pathname === '/plan');
+    await page.waitForTimeout(150);
+    return page.evaluate(() => ({
+      pad: getComputedStyle(document.querySelector('section.plan')!).paddingBottom,
+      targets: document.querySelectorAll('li.plan-lot.is-target').length,
+    }));
+  };
+
+  it.each([1440, 390])('%i px : /plan#<dernier lot> puis lien « Plan de travail » du pied de page → aucun espace, aucune carte surlignée', async (width) => {
+    const page = await open(width, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    expect((await mesure(page, LAST)).pad).not.toBe('0px'); // l'espace était bien réservé
+    await page.locator('footer nav.legal-nav a[href="/plan"]').click();
+    const m = await sansAncre(page);
+    await page.close();
+    expect(m).toEqual({ pad: '0px', targets: 0 });
+  });
+
+  it('1440 px : /plan#<dernier lot> puis « À propos ▾ › Plan de travail » → aucun espace, aucune carte surlignée', async () => {
+    const page = await open(1440, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    await page.locator('nav.nav button.about-toggle').click();
+    await page.locator('#menu-a-propos a[href="/plan"]').click();
+    const m = await sansAncre(page);
+    await page.close();
+    expect(m).toEqual({ pad: '0px', targets: 0 });
+  });
+
+  it('1440 px : /plan#<dernier lot> puis recherche rapide (Ctrl+K) « Plan de travail » → aucun espace, aucune carte surlignée', async () => {
+    const page = await open(1440, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    await page.keyboard.press('Control+k');
+    await page.locator('.cmdk-input').fill('Plan de travail');
+    await page.waitForTimeout(100);
+    await page.locator('.cmdk-input').press('Enter');
+    const m = await sansAncre(page);
+    await page.close();
+    expect(m).toEqual({ pad: '0px', targets: 0 });
+  });
+
+  // Le routeur REMPLACE l'entrée d'historique quand seul le fragment change (même chemin) : le retour
+  // arrière vers /plan#<lot> se fait donc depuis une autre page.
+  it('1440 px : /plan#<dernier lot> → Nouveautés (pied de page) → retour arrière : la carte revient sous la barre', async () => {
+    const page = await open(1440, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    await page.locator('footer nav.legal-nav a[href="/nouveautes"]').click();
+    await page.waitForFunction(() => location.pathname === '/nouveautes');
+    await page.evaluate(() => history.back()); // goBack() attend un événement load qui ne vient pas (même document)
+    await page.waitForSelector('li.plan-lot.is-target');
+    const m = await mesure(page, LAST);
+    await page.close();
+    expect(Math.abs(m.top - 90)).toBeLessThanOrEqual(2);
+  });
+
+  // Mineur de la revue r1 : l'espace était recalculé au redimensionnement, pas le défilement (sans
+  // recalage, 900 → 500 → 900 px de haut laissait la carte à 474 px).
+  it('1440 px : fenêtre redimensionnée sur /plan#<dernier lot> (hauteur 500 puis 900, puis 390 de large) → carte recalée sous la barre à chaque fois', async () => {
+    const page = await open(1440, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    await mesure(page, LAST);
+    const tops: number[] = [];
+    for (const [width, height] of [[1440, 500], [1440, 900], [600, 700], [390, 844]]) {
+      await page.setViewportSize({ width, height });
+      tops.push(Math.round((await mesure(page, LAST)).top));
+    }
+    await page.close();
+    for (const top of tops) expect(Math.abs(top - 90), `positions : ${tops.join(', ')}`).toBeLessThanOrEqual(2);
+  });
+
+  it('390 px : le visiteur fait défiler (doigt) puis la barre d’adresse change la hauteur → la page reste où il l’a mise', async () => {
+    const page = await open(390, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    await mesure(page, LAST);
+    await page.mouse.wheel(0, -300); // geste du visiteur (la molette tient lieu du doigt : même garde)
+    await page.waitForFunction(() => document.getElementById('L23')!.getBoundingClientRect().top > 300);
+    const avant = await page.evaluate(() => scrollY);
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.waitForTimeout(150);
+    const apres = await page.evaluate(() => scrollY);
+    await page.close();
+    expect(Math.abs(apres - avant)).toBeLessThanOrEqual(2);
+  });
+
   it('1440 px : une ancre vers un lot du haut de page n’ajoute aucun espace (il atteint déjà le haut)', async () => {
     const page = await open(1440, '/plan#LT0');
     await page.waitForSelector('li.plan-lot.is-target');

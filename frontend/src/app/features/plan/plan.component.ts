@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, DestroyRef, ElementRef, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { filter } from 'rxjs';
 import { NewsService } from '../nouveautes/news.service';
 import {
   RECENT_DAYS, dateLine, fetchPlan, groupPlan, isEmpty, newsSlugByLot, progressText, statusLabel, summary,
@@ -24,7 +26,9 @@ interface Group {
  * - identifiant du lot jamais montré : il ne sert que d'ancre /plan#<id> ;
  * - arrivée sur une ancre : la carte est signalée, défile et reçoit le focus, une fois par arrivée ;
  * - L67 : la carte visée arrive juste sous la barre même en fin de page : l'espace qui manque au
- *   défilement est réservé en bas de la page, seulement tant qu'une ancre vise un lot ;
+ *   défilement est réservé en bas de la page, seulement tant qu'une ancre vise un lot ; l'ancre est
+ *   relue à chaque changement d'adresse : `hashchange` ET fin de navigation du routeur (un lien
+ *   interne vers /plan — pied de page, « À propos ▾ », recherche rapide — ne déclenche pas `hashchange`) ;
  * - un lot livré renvoie à son entrée des Nouveautés.
  */
 @Component({
@@ -115,6 +119,8 @@ interface Group {
 export class PlanComponent implements OnInit, OnDestroy {
   private readonly news = inject(NewsService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly state = signal<'loading' | 'ready' | 'none' | 'error'>('loading');
   private readonly data = signal<PlanData | null>(null);
@@ -149,18 +155,39 @@ export class PlanComponent implements OnInit, OnDestroy {
   private revealedHash: string | null = null;
   private readonly onHashChange = () => this.reveal(true);
   /** Largeur ou hauteur d'écran changée (rotation, barre d'adresse du téléphone) : réajuster l'espace. */
-  private readonly onResize = () => this.reserveSpace(this.targetEl());
+  private readonly onResize = () => this.realign();
+  /**
+   * La carte visée a été amenée sous la barre et le visiteur n'a pas encore fait défiler lui-même :
+   * seul ce cas autorise un recalage. Sur téléphone, la barre d'adresse qui se rétracte pendant un
+   * défilement au doigt émet `resize` : sans cette garde, la page reviendrait de force sur la carte.
+   */
+  private pinned = false;
+  private readonly onUserScrollIntent = () => { this.pinned = false; };
+  private static readonly INTENTS = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
+  private destroyed = false;
 
   ngOnInit(): void {
     window.addEventListener('hashchange', this.onHashChange);
     window.addEventListener('resize', this.onResize);
+    for (const t of PlanComponent.INTENTS) window.addEventListener(t, this.onUserScrollIntent, { passive: true, capture: true });
+    // Revue r1 de L67 : depuis /plan#<lot>, un lien interne vers /plan passe par `pushState` (aucun
+    // `hashchange`) et réutilise ce composant : sans cette relecture, l'espace réservé et le surlignage
+    // restaient sans ancre. Après le défilement du routeur (anchorScrolling / scrollPositionRestoration,
+    // planifié par un setTimeout à la fin de la navigation) : le nôtre passe ensuite.
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => setTimeout(() => {
+        if (!this.destroyed) this.reveal(true);
+      }));
     void this.news.load();
     void this.load();
   }
 
   ngOnDestroy(): void {
+    this.destroyed = true;
     window.removeEventListener('hashchange', this.onHashChange);
     window.removeEventListener('resize', this.onResize);
+    for (const t of PlanComponent.INTENTS) window.removeEventListener(t, this.onUserScrollIntent, { capture: true });
   }
 
   /** Heure (HH:MM) du dernier « Réessayer » en échec, annoncée dans l'alerte. */
@@ -195,13 +222,18 @@ export class PlanComponent implements OnInit, OnDestroy {
     setTimeout(() => this.reveal(false));
     // Les polices web arrivent parfois après : le texte se reflue et la carte quitte sa place (L55).
     // Recaler une fois, seulement si la carte garde le focus (le visiteur n'est pas parti ailleurs).
-    void document.fonts?.ready.then(() => {
-      const el = this.targetEl();
-      if (el && document.activeElement === el) {
-        this.reserveSpace(el);
-        el.scrollIntoView?.({ block: 'start' });
-      }
-    });
+    void document.fonts?.ready.then(() => this.realign());
+  }
+
+  /**
+   * Recalage de la carte visée (polices arrivées tard, fenêtre redimensionnée, rotation) : espace
+   * réajusté, puis carte remise sous la barre — seulement si elle garde le focus et que le visiteur
+   * n'a pas fait défiler la page depuis (`pinned`).
+   */
+  private realign(): void {
+    const el = this.targetEl();
+    this.reserveSpace(el);
+    if (el && this.pinned && document.activeElement === el) el.scrollIntoView?.({ block: 'start' });
   }
 
   /** Carte visée par l'ancre de l'URL : signalée ; défilement et focus une seule fois par arrivée. */
@@ -218,9 +250,11 @@ export class PlanComponent implements OnInit, OnDestroy {
       : null;
     this.target.set(el ? id : null);
     this.reserveSpace(el);
+    if (!el) this.pinned = false;
     if (!el || (!force && this.revealedHash === hash)) return;
     this.revealedHash = hash;
     el.scrollIntoView?.({ block: 'start' });
+    this.pinned = true;
     el.focus({ preventScroll: true });
   }
 
