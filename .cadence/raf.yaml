@@ -765,7 +765,7 @@ lots:
   - id: L67
     title: "ancres : /plan#<dernier lot> reste à 372 px sous la barre (fin de page, défilement au maximum) — décider si un espace en bas de page est voulu (QA prod 05-10)"
     public: "Plan : le dernier lot s'affiche sous la barre quand on suit son lien"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-10-05
@@ -774,6 +774,7 @@ lots:
     notes:
       - { date: 2026-11-20, text: "20-11 : choix du correctif r1 accepté par le lead — recalage après redimensionnement seulement si la carte a le focus et sans défilement du visiteur depuis (évite de confisquer le défilement au doigt sur téléphone)" }
     ux: { date: 2026-11-20, verdict: "conforme (lead, capture 390 de la Nouveauté) : le dernier lot arrive sous la barre, surligné ; l'espace réservé sous lui n'existe que sur un lien d'ancre (0 px sur /plan ordinaire, mesuré par la revue r2)" }
+    finished: 2026-11-20
   - id: L68
     title: "QA : parcourir le reste des pages (lore, nouveautes, about, gallery) à 1440 et 390 px avec les comptes de docs/qa/expectations.md (QA prod 05-10 partielle)"
     status: done
