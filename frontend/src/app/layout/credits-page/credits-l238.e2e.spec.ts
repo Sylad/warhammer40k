@@ -164,6 +164,69 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
     await page.close();
   });
 
+  // r2 — la visionneuse ne dit « Aucune image trouvée » que si le wiki a répondu sans image.
+  it('r2 390 px : visionneuse — recherche en cours, panne du wiki (502) puis « Réessayer », vraie absence : trois messages distincts', async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await brancher(page);
+    let mode: 'attente' | 'panne' | 'absente' | 'ok' = 'attente';
+    let liberer = (): void => {};
+    await page.route('**/api/wiki-image**', async (r) => {
+      if (mode === 'attente') await new Promise<void>((ok) => { const avant = liberer; liberer = () => { avant(); ok(); }; });
+      if (mode === 'panne') return r.fulfill({ status: 502, body: 'Bad Gateway' });
+      if (mode === 'absente') return r.fulfill({ json: { imageUrl: null, pageTitle: null, pageUrl: null } });
+      return r.fulfill({ json: { imageUrl: WIKI, pageTitle: 'Adeptus Astartes', pageUrl: null } });
+    });
+    const ouvrir = async () => {
+      await page.goto(`${base}/gallery`);
+      const carte = page.locator('.art-card').first();
+      await carte.waitFor();
+      await carte.locator('.art-open').click();
+      const d = page.locator('dialog.modal');
+      await d.waitFor();
+      return d.locator('[data-testid="viewer-ecart"]');
+    };
+
+    // 1. Recherche en cours : jamais une absence affirmée.
+    let ecart = await ouvrir();
+    await expect(ecart.innerText()).resolves.toBe('Recherche de l’image sur le Warhammer 40k Wiki…');
+    expect(await ecart.getAttribute('data-etat')).toBe('chargement');
+    expect(await page.locator('dialog.modal [data-testid="credit-legende"]').count()).toBe(0);
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/l238r2-visionneuse-chargement-390.png` });
+    // … puis l'image arrive.
+    mode = 'ok';
+    liberer();
+    await expect.poll(() => ecart.innerText()).toMatch(/^Image trouvée sur le Warhammer 40k Wiki/);
+
+    // 2. Panne du wiki : l'échec est dit, avec de quoi réessayer.
+    mode = 'panne';
+    ecart = await ouvrir();
+    await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
+    expect(await ecart.getAttribute('role')).toBe('alert');
+    expect(await ecart.innerText()).toContain('La recherche de l’image a échoué : le wiki n’a pas répondu.');
+    expect(await page.locator('dialog.modal').innerText()).not.toContain('Aucune image trouvée');
+    const bouton = ecart.locator('[data-testid="viewer-reessayer"]');
+    const b = (await bouton.boundingBox())!;
+    expect(b.height).toBeGreaterThanOrEqual(24); // WCAG 2.5.8
+    expect(b.x + b.width).toBeLessThanOrEqual(390);
+    expect(await bouton.evaluate((e) => getComputedStyle(e).textDecorationLine)).toContain('underline');
+    if (CAPTURES) {
+      await page.waitForTimeout(400);
+      await page.screenshot({ path: `${CAPTURES}/l238r2-visionneuse-panne-390.png` });
+    }
+    mode = 'ok';
+    await bouton.click();
+    await expect.poll(() => ecart.innerText()).toMatch(/^Image trouvée sur le Warhammer 40k Wiki/);
+    await expect.poll(() => page.locator('dialog.modal [data-testid="credit-legende"]').count()).toBe(1);
+
+    // 3. Le wiki répond sans image : là seulement, « Aucune image trouvée ».
+    mode = 'absente';
+    ecart = await ouvrir();
+    await expect.poll(() => ecart.getAttribute('data-etat')).toBe('absente');
+    expect(await ecart.innerText()).toBe('Aucune image trouvée pour cette œuvre.');
+    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/l238r2-visionneuse-absente-390.png` });
+    await page.close();
+  });
+
   for (const [w, h] of [[1440, 900], [390, 844]] as const) {
     it(`r1 ${w} px : galerie — artiste « Catalogue : », source réelle de l’image, visionneuse avec l’écart et le crédit en légende 12 px`, async () => {
       const page = await browser.newPage({ viewport: { width: w, height: h } });

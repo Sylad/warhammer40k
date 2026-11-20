@@ -68,6 +68,12 @@ describe('adressesImages (L238)', () => {
 });
 
 describe('crédit — r1 (L238)', () => {
+  it('r2 — droits de la source Reddit : l’aperçu nomme le compte qui a publié, pas « l’auteur » de l’image', () => {
+    const d = SOURCES_IMAGES.reddit.droits;
+    expect(d).toContain('nomme le compte qui a publié l’image, pas forcément son auteur');
+    expect(d).not.toContain('nomme l’auteur');
+  });
+
   it('aperçu Reddit (i.redd.it, preview.redd.it) : source Reddit, auteur non lisible dans l’adresse (rien deviné)', () => {
     for (const a of ['https://i.redd.it/abc.jpg', 'https://preview.redd.it/x.png?width=640']) {
       const c = creditImage(a)!;

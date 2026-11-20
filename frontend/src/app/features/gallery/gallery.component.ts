@@ -1,4 +1,4 @@
-import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, signal, computed, effect, HostListener } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, signal, computed, effect, untracked, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { CommonModule, ViewportScroller } from '@angular/common';
@@ -376,10 +376,23 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             <!-- L238 r1 : crédit réel de l'image affichée ; pour une œuvre du catalogue, l'écart est dit. -->
             <div class="vi-credit" data-testid="viewer-credit">
               @if (!art.isLocal) {
-                @if (viewerImageUrl()) {
-                  <p class="vi-ecart" data-testid="viewer-ecart">Image trouvée sur le Warhammer 40k Wiki d’après le titre de l’œuvre : rien n’indique qu’elle soit de {{ art.artist }}.</p>
-                } @else {
-                  <p class="vi-ecart" data-testid="viewer-ecart">Aucune image trouvée pour cette œuvre.</p>
+                <!-- r2 : chargement, panne du wiki et vraie absence sont trois états distincts (un échec se voit comme un échec). -->
+                @switch (viewerEtatImage()) {
+                  @case ('trouvee') {
+                    <p class="vi-ecart" data-testid="viewer-ecart">Image trouvée sur le Warhammer 40k Wiki d’après le titre de l’œuvre : rien n’indique qu’elle soit de {{ art.artist }}.</p>
+                  }
+                  @case ('chargement') {
+                    <p class="vi-ecart" data-testid="viewer-ecart" data-etat="chargement" role="status">Recherche de l’image sur le Warhammer 40k Wiki…</p>
+                  }
+                  @case ('erreur') {
+                    <p class="vi-ecart vi-ecart-erreur" data-testid="viewer-ecart" data-etat="erreur" role="alert">
+                      La recherche de l’image a échoué : le wiki n’a pas répondu.
+                      <button type="button" class="vi-reessayer" data-testid="viewer-reessayer" (click)="reessayerImage(art)">Réessayer</button>
+                    </p>
+                  }
+                  @default {
+                    <p class="vi-ecart" data-testid="viewer-ecart" data-etat="absente">Aucune image trouvée pour cette œuvre.</p>
+                  }
                 }
               }
               <app-credit-legende [adresse]="viewerImageUrl()" [texte]="art.isLocal ? creditLocal(art) : null" />
@@ -914,6 +927,8 @@ export class GalleryComponent {
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
   private readonly imgCache = signal<Record<string, string>>({});
   private readonly imgInflight = new Set<string>();
+  /** r2 — issue d'une recherche sans image : le wiki a répondu « rien » (`absente`) ou n'a pas répondu (`erreur`). */
+  private readonly imgIssue = signal<Record<string, 'absente' | 'erreur'>>({});
 
   /** Cap simultaneous wiki-image fetches to ease load on the backend proxy. */
   private static readonly FETCH_QUEUE_LIMIT = 6;
@@ -1134,7 +1149,7 @@ export class GalleryComponent {
       for (const a of list) {
         if (a.isLocal) continue;
         const key = `art:${a.id}`;
-        if (cache[key] || this.imgInflight.has(key)) continue;
+        if (cache[key] || this.imgInflight.has(key) || untracked(this.imgIssue)[key]) continue;
         this.fetchImage(key, a.wikiQuery ?? `${a.title} warhammer 40k`);
       }
     });
@@ -1147,10 +1162,12 @@ export class GalleryComponent {
       this.service.getWikiImage(query).subscribe({
         next: r => {
           if (r.imageUrl) this.imgCache.update(c => ({ ...c, [key]: r.imageUrl! }));
+          else this.imgIssue.update(c => ({ ...c, [key]: 'absente' }));
           this.imgInflight.delete(key);
           this.releaseFetchSlot();
         },
         error: () => {
+          this.imgIssue.update(c => ({ ...c, [key]: 'erreur' }));
           this.imgInflight.delete(key);
           this.releaseFetchSlot();
         },
@@ -1204,6 +1221,23 @@ export class GalleryComponent {
     if (!a) return null;
     if (a.isLocal) return this.service.imageUrl(a.image);
     return this.imgCache()[`art:${a.id}`] ?? null;
+  }
+
+  /**
+   * L238 r2 — où en est l'image d'une œuvre du catalogue dans la visionneuse : `trouvee`, `chargement` (recherche
+   * en file ou en cours), `erreur` (le wiki n'a pas répondu) ou `absente` (le wiki a répondu sans image).
+   */
+  viewerEtatImage(): 'trouvee' | 'chargement' | 'erreur' | 'absente' {
+    if (this.viewerImageUrl()) return 'trouvee';
+    const a = this.selectedArt();
+    return (a && this.imgIssue()[`art:${a.id}`]) || 'chargement';
+  }
+
+  /** L238 r2 — relance la recherche d'une image après une panne du wiki. */
+  reessayerImage(art: Artwork): void {
+    const key = `art:${art.id}`;
+    this.imgIssue.update(c => { const { [key]: _, ...reste } = c; return reste; });
+    this.fetchImage(key, art.wikiQuery ?? `${art.title} warhammer 40k`);
   }
 
   /**

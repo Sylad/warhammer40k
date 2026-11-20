@@ -2390,6 +2390,9 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "line-height": "1.5",
     "margin": "0",
   },
+  "app-gallery .vi-ecart-erreur": {
+    "color": "var(--text)",
+  },
   "app-gallery .vi-meta": {
     "align-items": "center",
     "color": "#c9beaa",
@@ -2397,6 +2400,17 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "flex-wrap": "wrap",
     "font-size": "13px",
     "gap": "8px",
+  },
+  "app-gallery .vi-reessayer": {
+    "background": "none",
+    "border": "0",
+    "color": "var(--gold)",
+    "cursor": "pointer",
+    "font": "inherit",
+    "margin-left": "6px",
+    "min-height": "24px",
+    "padding": "0 4px",
+    "text-decoration": "underline",
   },
   "app-gallery .vi-title": {
     "color": "var(--gold-bright)",

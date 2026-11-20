@@ -6,7 +6,7 @@ import { fakeWarhammerService } from '../../../testing/fake-warhammer-service';
 import { afterEach, describe, expect, it } from 'vitest';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
-import { of } from 'rxjs';
+import { of, Subject, throwError, type Observable } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { GalleryComponent } from './gallery.component';
 import { creditDeclare, creditImage } from '../../core/credits/credit-image';
@@ -18,7 +18,10 @@ const ARTWORKS = [
 ];
 const POST = { id: 'p', title: 'Mon Ultra', imageUrl: 'https://i.redd.it/abc.jpg', permalink: 'https://reddit.com/r/Warhammer40k/comments/p/x/', author: 'peintre', upvotes: 3, thumbnail: null, postedAt: 0 };
 
-async function render(): Promise<ComponentFixture<GalleryComponent>> {
+type Wiki = { imageUrl: string | null; pageTitle: null; pageUrl: null };
+const wikiParDefaut = (q: string): Observable<Wiki> => of({ imageUrl: q === 'Ultramarines' ? WIKI : null, pageTitle: null, pageUrl: null });
+
+async function render(getWikiImage: (q: string) => Observable<Wiki> = wikiParDefaut): Promise<ComponentFixture<GalleryComponent>> {
   polyfillDialog();
   await setupTestBed([GalleryComponent], [
     provideRouter([]),
@@ -28,7 +31,7 @@ async function render(): Promise<ComponentFixture<GalleryComponent>> {
         artworks$: of(ARTWORKS),
         images$: of(['perso.jpg', 'sans.jpg']),
         getImageMeta: () => of({ 'perso.jpg': { categories: ['Imperium'], artist: 'Moi-même' } }),
-        getWikiImage: (q: string) => of({ imageUrl: q === 'Ultramarines' ? WIKI : null, pageTitle: null, pageUrl: null }),
+        getWikiImage,
         searchReddit: () => of([POST]),
         imageUrl: (f: string) => `/api/images/file/${f}`,
         getSuggestedCategories: () => of({ factions: [], subfactions: [], primarchs: [], characters: [], custom: [] }),
@@ -94,8 +97,54 @@ describe('galerie — crédit réel de l’image affichée (L238 r1)', () => {
   it('visionneuse (catalogue, aucune image) : « Aucune image trouvée », aucun crédit inventé', async () => {
     const f = await render();
     const d = ouvrir(f, 'Nécron');
-    expect(d.querySelector('[data-testid="viewer-ecart"]')!.textContent).toContain('Aucune image trouvée pour cette œuvre.');
+    const ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.textContent).toContain('Aucune image trouvée pour cette œuvre.');
+    expect(ecart.dataset['etat']).toBe('absente');
     expect(d.querySelector('[data-testid="credit-legende"]')).toBeNull();
+  });
+
+  it('r2 — visionneuse pendant la recherche : « Recherche de l’image… », jamais « Aucune image trouvée » ; puis l’image arrive', async () => {
+    const enAttente = new Subject<Wiki>(); // seule la recherche de cette œuvre reste sans réponse
+    const f = await render((q) => (q === 'Ultramarines' ? enAttente : wikiParDefaut(q)));
+    const d = ouvrir(f, 'Ultramarines');
+    let ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.dataset['etat']).toBe('chargement');
+    expect(ecart.getAttribute('role')).toBe('status');
+    expect(ecart.textContent!.trim()).toBe('Recherche de l’image sur le Warhammer 40k Wiki…');
+    expect(d.textContent).not.toContain('Aucune image trouvée');
+    expect(d.querySelector('[data-testid="credit-legende"]')).toBeNull();
+
+    enAttente.next({ imageUrl: WIKI, pageTitle: null, pageUrl: null });
+    f.detectChanges();
+    ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.dataset['etat']).toBeUndefined();
+    expect(ecart.textContent).toContain('rien n’indique qu’elle soit de John Stone');
+    expect(d.querySelector('[data-testid="credit-legende"]')!.textContent).toContain('Ultramarines Art.jpg');
+  });
+
+  it('r2 — visionneuse sur une panne du wiki (502) : l’échec est dit (alerte), pas « Aucune image trouvée » ; « Réessayer » relance', async () => {
+    let panne = true;
+    const appels: string[] = [];
+    const f = await render((q) => {
+      appels.push(q);
+      return panne ? throwError(() => new Error('502')) : wikiParDefaut(q);
+    });
+    const d = ouvrir(f, 'Ultramarines');
+    const ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.dataset['etat']).toBe('erreur');
+    expect(ecart.getAttribute('role')).toBe('alert');
+    expect(ecart.textContent).toContain('La recherche de l’image a échoué : le wiki n’a pas répondu.');
+    expect(d.textContent).not.toContain('Aucune image trouvée');
+    expect(d.querySelector('[data-testid="credit-legende"]')).toBeNull();
+    // Une panne n'est pas relancée en boucle : une seule recherche par œuvre tant qu'on ne le demande pas.
+    expect(appels.filter((q) => q === 'Ultramarines')).toHaveLength(1);
+
+    panne = false;
+    d.querySelector<HTMLButtonElement>('[data-testid="viewer-reessayer"]')!.click();
+    f.detectChanges();
+    expect(appels.filter((q) => q === 'Ultramarines')).toHaveLength(2);
+    expect(d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!.textContent).toContain('rien n’indique qu’elle soit de John Stone');
+    expect(d.querySelector('[data-testid="viewer-reessayer"]')).toBeNull();
   });
 
   it('visionneuse (collection perso) : la légende nomme l’artiste indiqué, sinon « auteur d’origine non conservé »', async () => {

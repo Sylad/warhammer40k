@@ -42,7 +42,7 @@ export const SOURCES_IMAGES: Record<SourceImage, { nom: string; droits: string }
   perso: { nom: 'Collection personnelle', droits: 'Images rassemblées par l’auteur du site ; auteur d’origine non conservé.' },
   import: { nom: 'Images importées', droits: 'Importées depuis Reddit, le wiki ou une adresse directe ; source d’origine non conservée.' },
   youtube: { nom: 'YouTube', droits: 'Miniatures © la chaîne de chaque vidéo.' },
-  reddit: { nom: 'Reddit', droits: 'Images publiées sur Reddit, © leurs auteurs ; l’aperçu d’import nomme l’auteur et mène au post.' },
+  reddit: { nom: 'Reddit', droits: 'Images publiées sur Reddit, © leurs auteurs (souvent Games Workshop) ; l’aperçu d’import nomme le compte qui a publié l’image, pas forcément son auteur, et mène au post.' },
   carte: { nom: 'Carte de la galaxie', droits: '© Games Workshop Limited. Publication d’origine non identifiée.' },
   externe: { nom: 'Autres sites', droits: 'Image d’un autre site ; source non identifiée.' },
 };

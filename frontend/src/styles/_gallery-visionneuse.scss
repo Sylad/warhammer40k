@@ -77,4 +77,10 @@ app-gallery {
   .art-source { margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.4; }
   .vi-credit { margin-top: 8px; display: grid; gap: 2px; }
   .vi-ecart { margin: 0; color: #c9beaa; font-size: 12px; line-height: 1.5; }
+  /* r2 — panne du wiki : texte clair, bouton souligné d'au moins 24 px de haut (WCAG 2.5.8). */
+  .vi-ecart-erreur { color: var(--text); }
+  .vi-reessayer {
+    min-height: 24px; margin-left: 6px; padding: 0 4px; border: 0; background: none; cursor: pointer;
+    color: var(--gold); font: inherit; text-decoration: underline;
+  }
 }
