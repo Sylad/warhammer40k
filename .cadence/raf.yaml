@@ -1075,10 +1075,13 @@ lots:
   - id: L94
     title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
     public: "Fiches faction : des liens latéraux qui mènent où ils le disent"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-11-20
+    review: { date: 2026-11-20, verdict: "conforme r1 (20-11, 22ccc17) : /gallery lit ?faction= (gallery.component.ts:1051), 22/22 rouges sans le correctif, Nouveautés à jour ; mineurs : sujet « Croisades Noires d'Abaddon » perdu au dédoublonnage (→ L284 ou lot suivant), galerie filtrée vide pour 3 factions (annoncé, honnête)", commit: 22ccc17064cb699e9b1fca48f3ebec57dcee3a2e }
+    ux: { date: 2026-11-20, verdict: "conforme (lead, captures 1440 et 390) : les lignes qui mènent quelque part ont une flèche, les sujets sans page sont en texte simple sans flèche, libellés qui disent la destination (« Chronologie générale », « Tous les romans ») ; contraste et taille inchangés" }
   - id: L95
     title: "Fiche faction sans unité (6 factions) : bouton « Explorer les unités », filtres et « Aucune unité ne correspond » sur un ensemble vide — masquer, message juste (revue UX L3)"
     public: "Fiches faction sans unité : plus de recherche d'unités vide"
@@ -2629,6 +2632,12 @@ lots:
     estimate: 0.5
     visible: true
     created: 2026-11-18
+  - id: L237
+    title: "Fiche faction Chaos Space Marines : le sujet « Croisades Noires d'Abaddon » disparaît des liens rapides (renommé « Chronologie générale » puis retiré comme doublon par sansDoublon, faction-detail.component.ts:77 et :880) alors que la Nouveauté de L94 dit que les autres sujets restent en texte simple — revue r1 de L94"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-11-20
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
