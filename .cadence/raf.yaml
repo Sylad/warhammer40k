@@ -768,6 +768,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-20, sha: 7be46d60f9074e5e9d85159593d404ce324c8961 }
     created: 2026-10-05
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme : 3 majeurs et 1 mineur de r1 traités — navigation Angular vers /plan (pied de page, À propos, Ctrl+K) : 0 px ajouté, carte non surlignée ; plan.e2e.spec.ts joué en CI après le build ; Nouveauté au format (= cadence news build) ; recalage au redimensionnement gardé et testé, pas de fuite d'écouteurs ; spec échoue sur l'ancien code (revue r2 du 20-11)", commit: 7be46d60f9074e5e9d85159593d404ce324c8961 }
