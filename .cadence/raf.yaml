@@ -2683,10 +2683,12 @@ lots:
     estimate: 0.25
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "conforme — 1 mineur en note (repli « contrôle seul » sans conteneur gardé ni test, inatteignable sur la page actuelle) — tmp/revue-L240-r3.md", commit: 78ff04d476920d75a965ac69bc0460358c671ec3 }
+    review: { date: 2026-11-20, verdict: "conforme r4 (2 mineurs : min-height tenue non rendue au changement de puce, écouteur resize qui survit au composant) ; abd9ca6 équivalent à l'ancien balayage (0 écart sur 500 cas piégés et sur dist/) — tmp/revue-L240-r4.md", commit: abd9ca6daf5cc542797cc481716158dba321a425 }
     notes:
       - { date: 2026-11-20, text: "test d'acceptation rescellé (lot livré L49, frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche amendée en 60452a7) : R6 amendée le 20-11 (compte au-dessus de Faction, revue UX r2 de L239 m3) ; test réécrit d'après la fiche par une session distincte de celle qui a codé ; borne 60 px non sourcée retirée" }
     ux: { date: 2026-11-20, verdict: "non conforme r2 : saut résiduel de la rangée pressée sur /videos à 1440 (scrollY 1460-1540 et fin de page, 2e clic sur un autre filtre) — tmp/ux-L240-r2.md" }
+    tasks:
+      - { id: t1, title: "Vidéos 1440 : la min-height tenue du conteneur survit à un changement de puce (choisirFiltre appelle avantFiltre sans la rendre, resultats-en-vue.ts:198-212, videos.component.ts:652-664) ; écouteur resize actif après destruction du composant (resultats-en-vue.ts:146, 209-211) ; un test pour chacun — tmp/revue-L240-r4.md", status: todo }
   - id: L241
     title: "Vidéos 768/1024 : filtre avancé — la rangée bouge de 35 à 200 px avec le défilement vers les résultats de L239 ; à 768 le second clic active la rangée voisine (identique prod ; tmp/ux-L240-r2.md)"
     status: todo
