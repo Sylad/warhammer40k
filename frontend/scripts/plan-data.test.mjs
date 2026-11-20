@@ -236,6 +236,23 @@ describe('textes privés et fuites', () => {
     expect(findLeaks(r, `${ui} court mais privé`, p)).toEqual(['court mais privé']);
   });
 
+  // Recherche en un passage (porte rouge du 20-11 : 64 s de balayage de dist/ sous charge, délai RPC du worker
+  // dépassé) : textes au même préfixe de 12 caractères, chevauchés, en fin de texte, chacun vu à part.
+  it('findLeaks : textes au même préfixe, chevauchés ou en toute fin du fichier, chacun trouvé, dans l’ordre du plan', () => {
+    const r = {
+      project: 'x',
+      lots: [{
+        id: 'L1', title: 'Lot', status: 'doing', visible: true,
+        notes: [{ text: 'note privée : réglage A du serveur' }, { text: 'note privée : réglage B du serveur' }, { text: 'serveur maison caché' }],
+      }],
+    };
+    const p = buildPlan(r);
+    expect(findLeaks(r, 'x note privée : réglage B du serveur', p)).toEqual(['note privée : réglage B du serveur']);
+    expect(findLeaks(r, 'note priv\\u00e9e : r\\u00e9glage B du serveur maison caché', p)).toEqual(['note privée : réglage B du serveur', 'serveur maison caché']);
+    expect(findLeaks(r, 'note privée : réglage A du serveu', p)).toEqual([]);
+    expect(findLeaks(r, 'serveur maison caché note privée : réglage A du serveur', p)).toEqual(['note privée : réglage A du serveur', 'serveur maison caché']);
+  });
+
   it('un titre brut long est toujours une fuite ; notes, verdicts et raisons restent cherchés dès 12 caractères', () => {
     const texts = privateTexts(raf, buildPlan(raf, { newsTitles: news }));
     expect(texts).toContain('Page publique (route /x, localStorage)');

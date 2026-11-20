@@ -223,7 +223,43 @@ function forms(s) {
 
 /** Textes privés du plan présents dans `text`. */
 export function findLeaks(raf, text, plan) {
-  return privateTexts(raf, plan).filter((s) => forms(s).some((f) => text.includes(f)));
+  return chercheur(privateTexts(raf, plan))(text);
+}
+
+/**
+ * Cherche toutes les formes de `texts` en UN passage sur le texte, au lieu d'un `includes` par
+ * forme (578 textes × 6 formes sur les 65 Mo de dist/ : 64 s, assez pour bloquer le worker de
+ * Vitest au-delà de son délai RPC sous charge). Chaque position passe un filtre sur ses 3 premiers
+ * caractères, puis la table des préfixes de K caractères, puis `startsWith` : même résultat
+ * qu'`includes` (une forme plus courte que K, impossible aujourd'hui, est cherchée par `includes`).
+ * Rend les textes trouvés dans l'ordre de `texts`.
+ */
+function chercheur(texts) {
+  const K = MIN_PRIVATE;
+  const cle3 = (t, i) => (t.charCodeAt(i) * 961 + t.charCodeAt(i + 1) * 31 + t.charCodeAt(i + 2)) & 0xffffff;
+  const filtre = new Uint8Array(1 << 24);
+  const parPrefixe = new Map();
+  const courtes = [];
+  for (const s of texts) {
+    for (const f of forms(s)) {
+      if (f.length < K) { courtes.push([f, s]); continue; }
+      filtre[cle3(f, 0)] = 1;
+      const k = f.slice(0, K);
+      if (!parPrefixe.has(k)) parPrefixe.set(k, []);
+      parPrefixe.get(k).push([f, s]);
+    }
+  }
+  return (text) => {
+    const trouves = new Set();
+    for (const [f, s] of courtes) if (!trouves.has(s) && text.includes(f)) trouves.add(s);
+    for (let i = 0, n = text.length - K; i <= n; i++) {
+      if (!filtre[cle3(text, i)]) continue;
+      const candidats = parPrefixe.get(text.substr(i, K));
+      if (!candidats) continue;
+      for (const [f, s] of candidats) if (!trouves.has(s) && text.startsWith(f, i)) trouves.add(s);
+    }
+    return texts.filter((s) => trouves.has(s));
+  };
 }
 
 /** Parcourt un dossier construit ; retourne { file, text } pour chaque fuite. */
@@ -234,9 +270,10 @@ export function scanDir(raf, plan, dir) {
       return statSync(p).isDirectory() ? walk(p) : [p];
     });
   const out = [];
+  const chercher = chercheur(privateTexts(raf, plan));
   for (const file of walk(dir).sort()) {
     const text = readFileSync(file).toString('utf8');
-    for (const t of findLeaks(raf, text, plan)) out.push({ file: relative(dir, file), text: t });
+    for (const t of chercher(text)) out.push({ file: relative(dir, file), text: t });
   }
   return out;
 }
