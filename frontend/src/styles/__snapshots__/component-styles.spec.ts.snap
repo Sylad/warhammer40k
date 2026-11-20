@@ -497,10 +497,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "cursor": "default",
     "opacity": "0.78",
   },
-  ".row-link:first-of-type": {
-    "border-top": "0",
-    "padding-top": "2px",
-  },
   ".row-link:hover": {
     "opacity": "0.78",
   },
@@ -521,10 +517,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-family": "var(--serif)",
     "font-size": "14px",
     "letter-spacing": "0.08em",
-  },
-  ".row-stat:first-of-type": {
-    "border-top": "0",
-    "padding-top": "2px",
   },
   ".search": {
     "background": "rgba(5, 4, 3, 0.78)",
@@ -999,6 +991,14 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@supports (width: 1cqi) .hero h1": {
     "font-size": "min(clamp(48px, 5.5vw, 92px), 100cqi / (var(--longest-word, 1) * 0.85))",
+  },
+  "h3 + .row-link": {
+    "border-top": "0",
+    "padding-top": "2px",
+  },
+  "h3 + .row-stat": {
+    "border-top": "0",
+    "padding-top": "2px",
   },
   "html:has(.anchor-nav)": {
     "scroll-padding-top": "var(--anchor-offset)",

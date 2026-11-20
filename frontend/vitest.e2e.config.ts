@@ -25,6 +25,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/core/utils/morceau-absent.e2e.spec.ts'),
       // L40 : les pages pilotes de la densité (fiches faction et primarque) tiennent les règles D1 à D6 à 1440 et 390 px.
       path.resolve(__dirname, 'src/app/features/densite-pilotes-l40.e2e.spec.ts'),
+      // L237 : sur la fiche faction, une rangée en texte simple garde le filet et la hauteur d'une rangée lien.
+      path.resolve(__dirname, 'src/app/features/faction-detail/faction-rangees-l237.e2e.spec.ts'),
       // L224 : la date de la chronologie d'un Primarque ne chevauche plus le titre de sa bataille (320, 390, 1440 px).
       path.resolve(__dirname, 'src/app/features/primarch-detail/primarch-chronologie-l224.e2e.spec.ts'),
       // L225 : les titres h2 des fiches faction et Primarque tiennent dans leur panneau à 320 px (« ✠ ICONOGRAPHIE » débordait).

@@ -604,7 +604,9 @@
       text-decoration: none;
       transition: opacity 0.2s;
     }
-    .row-link:first-of-type, .row-stat:first-of-type { border-top: 0; padding-top: 2px; }
+    // L237 : seule la rangée collée au titre perd son filet (lien, texte simple ou statistique) ;
+    // :first-of-type visait le premier <div>, donc une rangée en texte après un lien.
+    h3 + .row-link, h3 + .row-stat { border-top: 0; padding-top: 2px; }
     .row-link:hover { opacity: 0.78; }
     .row-link.static {
       cursor: default;
