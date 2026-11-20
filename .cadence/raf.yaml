@@ -2663,6 +2663,8 @@ lots:
     review: { date: 2026-11-20, verdict: "conforme 20-11 r4 (bf38650) : 2 constats r3 corrigés, aucun nouveau ; 60 appelants de getWikiImage sans régression — tmp/revue-L238-r4.md", commit: bf386506e0cce664fa0def247688de7ec7fbe243 }
     ux: { date: 2026-11-20, verdict: "conforme 20-11 lead (r2, captures 05e3ef6) : visionneuse — recherche, panne avec Réessayer souligné ≥ 24 px, absence vraie distinguées ; crédit et lien « Page du fichier » lisibles à 1440 et 390. Captures chargement/absente prises pendant le fondu de 0,2 s (pas d'attente, contrairement à panne) : défaut de capture, pas d'interface. Cadre image plus étroit que la légende à 1440, antérieur (r1)." }
     finished: 2026-11-20
+    notes:
+      - { date: 2026-11-20, text: "QA prod conforme 31/31 routes, 1440 et 390 px (tmp/qa-L238.md, captures tmp/qa-L238/)" }
   - id: L239
     title: "Galerie et Vidéos à 390 px : appliquer un filtre fait sauter la page de 309 à 858 px avec un défilement non demandé (revue UX de L238, antérieur au lot)"
     status: doing
