@@ -23,6 +23,8 @@ interface Group {
  * - état écrit en toutes lettres (la couleur ne fait que le souligner) ;
  * - identifiant du lot jamais montré : il ne sert que d'ancre /plan#<id> ;
  * - arrivée sur une ancre : la carte est signalée, défile et reçoit le focus, une fois par arrivée ;
+ * - L67 : la carte visée arrive juste sous la barre même en fin de page : l'espace qui manque au
+ *   défilement est réservé en bas de la page, seulement tant qu'une ancre vise un lot ;
  * - un lot livré renvoie à son entrée des Nouveautés.
  */
 @Component({
@@ -146,15 +148,19 @@ export class PlanComponent implements OnInit, OnDestroy {
   /** Ancre déjà révélée : un nouveau rendu ne refait ni défilement ni focus. */
   private revealedHash: string | null = null;
   private readonly onHashChange = () => this.reveal(true);
+  /** Largeur ou hauteur d'écran changée (rotation, barre d'adresse du téléphone) : réajuster l'espace. */
+  private readonly onResize = () => this.reserveSpace(this.targetEl());
 
   ngOnInit(): void {
     window.addEventListener('hashchange', this.onHashChange);
+    window.addEventListener('resize', this.onResize);
     void this.news.load();
     void this.load();
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('hashchange', this.onHashChange);
+    window.removeEventListener('resize', this.onResize);
   }
 
   /** Heure (HH:MM) du dernier « Réessayer » en échec, annoncée dans l'alerte. */
@@ -190,8 +196,11 @@ export class PlanComponent implements OnInit, OnDestroy {
     // Les polices web arrivent parfois après : le texte se reflue et la carte quitte sa place (L55).
     // Recaler une fois, seulement si la carte garde le focus (le visiteur n'est pas parti ailleurs).
     void document.fonts?.ready.then(() => {
-      const el = this.host.nativeElement.querySelector<HTMLElement>('li.plan-lot.is-target');
-      if (el && document.activeElement === el) el.scrollIntoView?.({ block: 'start' });
+      const el = this.targetEl();
+      if (el && document.activeElement === el) {
+        this.reserveSpace(el);
+        el.scrollIntoView?.({ block: 'start' });
+      }
     });
   }
 
@@ -208,9 +217,38 @@ export class PlanComponent implements OnInit, OnDestroy {
       ? Array.from(this.host.nativeElement.querySelectorAll<HTMLElement>('li.plan-lot')).find((li) => li.id === id) ?? null
       : null;
     this.target.set(el ? id : null);
+    this.reserveSpace(el);
     if (!el || (!force && this.revealedHash === hash)) return;
     this.revealedHash = hash;
     el.scrollIntoView?.({ block: 'start' });
     el.focus({ preventScroll: true });
+  }
+
+  private targetEl(): HTMLElement | null {
+    const id = this.target();
+    return id ? Array.from(this.host.nativeElement.querySelectorAll<HTMLElement>('li.plan-lot')).find((li) => li.id === id) ?? null : null;
+  }
+
+  /**
+   * L67 — en fin de page, le défilement maximal ne suffit pas à amener la carte visée sous la barre
+   * (QA prod du 05-10 : dernier lot à 372 px). On ajoute en bas de la page (padding de `.plan`)
+   * exactement l'espace qui manque, seulement tant qu'une ancre vise un lot : la navigation
+   * ordinaire n'a aucun vide. Synchrone (style posé directement) pour que le `scrollIntoView` qui
+   * suit en tienne compte.
+   */
+  private reserveSpace(el: HTMLElement | null): void {
+    const page = this.host.nativeElement.querySelector<HTMLElement>('section.plan');
+    if (!page) return;
+    if (!el) {
+      page.style.paddingBottom = '';
+      return;
+    }
+    const root = document.documentElement;
+    const current = parseFloat(page.style.paddingBottom) || 0;
+    const offset = (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0) + (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+    const wanted = el.getBoundingClientRect().top + window.scrollY - offset; // défilement qui met la carte sous la barre
+    const max = root.scrollHeight - current - window.innerHeight; // défilement maximal sans l'espace réservé
+    const missing = Math.ceil(wanted - max);
+    page.style.paddingBottom = missing > 0 ? `${missing}px` : '';
   }
 }

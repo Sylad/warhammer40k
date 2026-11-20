@@ -224,3 +224,103 @@ describe.skipIf(!built || !chromium)('page Plan de travail (navigateur, dist) �
     expect(m.top).toBeGreaterThanOrEqual(70); // pas sous la barre collante
   });
 });
+
+// L67 — le DERNIER lot visé par une ancre arrive juste sous la barre, comme les autres : sans
+// espace réservé, le défilement est au maximum et la carte restait 372 px plus bas (QA prod du 05-10).
+// Position attendue : barre (70) + scroll-padding (8) + scroll-margin de la carte (12) = 90 px.
+describe.skipIf(!built || !chromium)('page Plan de travail : ancre du dernier lot (navigateur, dist) — L67', () => {
+  let server: Server;
+  let browser: Browser;
+  let base: string;
+
+  beforeAll(async () => {
+    server = createServer((req, res) => {
+      const path = normalize(decodeURIComponent(new URL(req.url!, 'http://x').pathname));
+      if (path.startsWith('/api/')) {
+        res.writeHead(200, { 'content-type': 'application/json' }).end(path.startsWith('/api/demo') ? '{}' : '[]');
+        return;
+      }
+      let file = join(DIST, path);
+      if (path.includes('..') || !existsSync(file) || statSync(file).isDirectory()) file = join(DIST, 'index.html');
+      res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
+      res.end(readFileSync(file));
+    });
+    await new Promise<void>((r) => server.listen(0, '127.0.0.1', () => r()));
+    base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+    browser = await chromium!.launch();
+  });
+  afterAll(async () => {
+    await browser?.close();
+    server?.close();
+  });
+
+  /** Plan réaliste : assez de lots pour que la page dépasse l'écran, le dernier lot est livré. */
+  const LONG = {
+    ...PLAN,
+    lots: [
+      ...Array.from({ length: 6 }, (_, i) => ({ id: `LT${i}`, title: `Évolution prévue numéro ${i}`, status: 'todo' })),
+      ...PLAN.lots,
+    ],
+  };
+  const LAST = 'L23'; // dernier lot affiché (L5, trop ancien, n'est pas montré)
+  const viewport = (width: number) => ({ width, height: width >= 1280 ? 900 : 844 });
+
+  async function open(width: number, path: string): Promise<Page> {
+    const page = await browser.newPage({ viewport: viewport(width) });
+    await page.route('**/plan-data/plan.json', (r) => r.fulfill({ json: LONG }));
+    await page.goto(`${base}${path}`);
+    await page.waitForSelector('li.plan-lot');
+    return page;
+  }
+
+  /** Mesure après stabilisation (polices chargées, recalage éventuel passé). */
+  const mesure = async (page: Page, id: string) => {
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(150);
+    return page.evaluate((id) => {
+      const el = document.getElementById(id)!;
+      const last = [...document.querySelectorAll('li.plan-lot')].pop()!;
+      return {
+        top: el.getBoundingClientRect().top,
+        focused: document.activeElement === el,
+        isLast: last === el,
+        pad: getComputedStyle(document.querySelector('section.plan')!).paddingBottom,
+      };
+    }, id);
+  };
+
+  it.each([1440, 390])('%i px : arrivée sur /plan#<dernier lot> → la carte est à 90 px du haut (sous la barre), focalisée', async (width) => {
+    const page = await open(width, `/plan#${LAST}`);
+    await page.waitForSelector('li.plan-lot.is-target');
+    const m = await mesure(page, LAST);
+    await page.close();
+    expect(m.isLast).toBe(true);
+    expect(m.focused).toBe(true);
+    expect(Math.abs(m.top - 90)).toBeLessThanOrEqual(2);
+  });
+
+  it.each([1440, 390])('%i px : depuis /plan, changement d’ancre vers le dernier lot → même position', async (width) => {
+    const page = await open(width, '/plan');
+    await page.evaluate((id) => { location.hash = id; }, LAST);
+    await page.waitForSelector('li.plan-lot.is-target');
+    const m = await mesure(page, LAST);
+    await page.close();
+    expect(Math.abs(m.top - 90)).toBeLessThanOrEqual(2);
+  });
+
+  it.each([1440, 390])('%i px : navigation ordinaire (/plan sans ancre) → aucun espace ajouté en bas', async (width) => {
+    const page = await open(width, '/plan');
+    const m = await mesure(page, LAST);
+    await page.close();
+    expect(m.pad).toBe('0px');
+  });
+
+  it('1440 px : une ancre vers un lot du haut de page n’ajoute aucun espace (il atteint déjà le haut)', async () => {
+    const page = await open(1440, '/plan#LT0');
+    await page.waitForSelector('li.plan-lot.is-target');
+    const m = await mesure(page, 'LT0');
+    await page.close();
+    expect(m.pad).toBe('0px');
+    expect(Math.abs(m.top - 90)).toBeLessThanOrEqual(2);
+  });
+});
