@@ -8,6 +8,7 @@ import { WarhammerService, VideoPreview, VideoImportBody } from '../../core/serv
 import type { Video, Channel } from '../../core/models/models';
 import { PinService } from '../../core/services/pin.service';
 import { toSafeSignal } from '../../shared/safe-signal';
+import { garderResultatsEnVue } from '../../core/utils/resultats-en-vue';
 
 type FilterKey = 'all' | 'lore' | 'animation' | 'official' | 'FR' | 'EN';
 type SortKey = 'recommended' | 'duration' | 'channel' | 'recent';
@@ -94,7 +95,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
             <button class="filter" type="button"
               [class.active]="activeFilter() === f.key"
               [attr.aria-pressed]="activeFilter() === f.key"
-              (click)="activeFilter.set(f.key)">{{ f.label }}</button>
+              (click)="choisirFiltre(f.key)">{{ f.label }}</button>
           }
         </div>
         <select class="select" aria-label="Trier par"
@@ -642,6 +643,21 @@ export class VideosComponent {
     if (set.has(key)) set.delete(key); else set.add(key);
     this.sidebarFilters.set(set);
     this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
+    this.resultatsEnVue();
+  }
+
+  choisirFiltre(key: FilterKey): void {
+    this.activeFilter.set(key);
+    this.resultatsEnVue();
+  }
+
+  /**
+   * L239 : « Filtres avancés » est sous la liste à 390 px ; « Durée courte » la raccourcit et le navigateur
+   * ramenait la page au nouveau bas (saut de 858 px, bouton sorti de l'écran). Après le rendu, le haut de
+   * « Toutes les vidéos » revient en vue s'il en est sorti ; sinon rien ne bouge.
+   */
+  private resultatsEnVue(): void {
+    afterNextRender(() => garderResultatsEnVue(this.listeVideos?.nativeElement), { injector: this.injector });
   }
 
   loadMoreFeatured(): void {

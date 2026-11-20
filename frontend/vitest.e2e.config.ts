@@ -35,6 +35,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/faction-detail/fiche-titres-l225.e2e.spec.ts'),
       // L71 : galerie, Entrée sur « Page suivante » → focus sur la grille et « Page 2 sur N » dans la région d'état.
       path.resolve(__dirname, 'src/app/features/gallery/gallery-pagination-l71.e2e.spec.ts'),
+      // L239 : un filtre de la Galerie ou des Vidéos ne fait plus sauter la page (scrollY mesuré, 390 et 1440 px).
+      path.resolve(__dirname, 'src/app/features/filtres-defilement-l239.e2e.spec.ts'),
       // L67 : /plan#<lot> amène la carte sous la barre (espace réservé en fin de page), sans vide en navigation ordinaire.
       path.resolve(__dirname, 'src/app/features/plan/plan.e2e.spec.ts'),
     ],

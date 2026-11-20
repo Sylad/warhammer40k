@@ -1,4 +1,4 @@
-import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, signal, computed, effect, untracked, HostListener } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, Injector, signal, computed, effect, untracked, HostListener } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { toSafeSignal } from '../../shared/safe-signal';
 import { CommonModule, ViewportScroller } from '@angular/common';
@@ -12,6 +12,7 @@ import { PlurielPipe } from '../../shared/pluriel.pipe';
 import { plural } from '../../core/utils/pluriel';
 import { nombreOeuvresGalerie } from '../../core/utils/galerie';
 import { defilementSelonPreference } from '../../core/utils/section-anchor';
+import { garderResultatsEnVue } from '../../core/utils/resultats-en-vue';
 import { creditImage, SOURCES_IMAGES } from '../../core/credits/credit-image';
 import { CreditLegendeComponent } from '../../shared/components/credit-legende/credit-legende.component';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
@@ -199,8 +200,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
             </div>
           </section>
 
-          <!-- ARTWORKS GRID -->
-          <section class="section">
+          <!-- ARTWORKS GRID — L239 : tabindex=-1, le focus y va quand un filtre placé sous la liste la fait défiler. -->
+          <section class="section" data-testid="section-resultats" tabindex="-1">
             <header class="section-head">
               <div>
                 <h2 class="section-title">
@@ -627,6 +628,7 @@ export class GalleryComponent {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly injector = inject(Injector);
   private readonly viewportScroller = inject(ViewportScroller);
   private readonly pinService = inject(PinService);
 
@@ -1307,16 +1309,31 @@ export class GalleryComponent {
   toggleCategoryFilter(key: string): void {
     this.filterCategory.set(this.filterCategory() === key ? null : key);
     this.currentPage.set(1);
+    this.resultatsEnVue();
   }
 
   toggleArtistFilter(name: string): void {
     this.filterArtist.set(this.filterArtist() === name ? '' : name);
     this.currentPage.set(1);
+    this.resultatsEnVue();
   }
 
   toggleCollectionFilter(id: string): void {
     this.filterCollection.set(this.filterCollection() === id ? '' : id);
     this.currentPage.set(1);
+    this.resultatsEnVue();
+  }
+
+  /**
+   * L239 : « Artistes à découvrir » et « Collections populaires » sont sous la grille à 390 px ; le filtre la
+   * raccourcit et le navigateur ramenait la page au nouveau bas (saut de 309 px, bouton sorti de l'écran).
+   * Après le rendu, le haut des résultats revient en vue s'il en est sorti ; sinon rien ne bouge.
+   */
+  private resultatsEnVue(): void {
+    afterNextRender(
+      () => garderResultatsEnVue(this.host.nativeElement.querySelector<HTMLElement>('[data-testid="section-resultats"]')),
+      { injector: this.injector },
+    );
   }
 
   /** L42 : l'état suit l'adresse (paramètre absent → recherche vide / plus de filtre). */

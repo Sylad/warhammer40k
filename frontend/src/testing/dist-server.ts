@@ -53,10 +53,20 @@ function seed(file: string): unknown {
   return cache.get(file);
 }
 
+/** Artistes du catalogue, triés par nombre d'œuvres (copie de `ArtworksService.deriveArtists`). */
+function artists(): { id: string; name: string; artworkCount: number }[] {
+  const counts = new Map<string, number>();
+  for (const a of seed('artworks.json') as { artist: string }[]) counts.set(a.artist, (counts.get(a.artist) ?? 0) + 1);
+  return [...counts.entries()]
+    .map(([name, artworkCount]) => ({ id: name.toLowerCase().replace(/\s+/g, '-'), name, artworkCount }))
+    .sort((a, b) => b.artworkCount - a.artworkCount);
+}
+
 function api(path: string, query: URLSearchParams): [number, unknown] {
   const p = path.replace(/^\/api\//, '').replace(/\/$/, '');
   if (p.startsWith('images/portraits/')) return [404, { statusCode: 404 }]; // L120 : aucun portrait local dans l'API bouchonnée
   if (OBJECTS.some((o) => p === o || p.startsWith(o + '/'))) return [200, p.startsWith('wiki-image') ? { imageUrl: null } : {}];
+  if (p === 'artwork-artists') return [200, artists()]; // L239 : même dérivation que ArtworksService (backend)
   if (COLLECTIONS[p]) {
     let data = seed(COLLECTIONS[p]);
     const fid = query.get('factionId');

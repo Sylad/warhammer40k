@@ -129,6 +129,10 @@ Une revue page par page part de `docs/densite/mesures-2026-11-14.md`.
 
 Comme Vidéos : « + Importer » et « ✦ Catégoriser » n'existent qu'une fois le PIN saisi (`editMode = !!PinService.pin()`), bouton « Mode édition » (`aria-pressed`) en pied de page ; un « Enregistrer » refusé affiche son échec (`catError`, `role=alert`). Un test navigateur qui vise « + Importer » doit poser `sessionStorage['wh40k.pin']` avant `goto`.
 
+## Filtres sous la liste (L239)
+
+Au téléphone, « Artistes à découvrir » / « Collections populaires » (galerie) et « Filtres avancés » (vidéos) sont sous la liste : filtrer raccourcit le document et le navigateur ramenait `scrollY` au nouveau bas (saut de 309 à 858 px). Chaque filtre appelé par un bouton passe par `garderResultatsEnVue()` (`core/utils/resultats-en-vue.ts`, après le rendu) : haut des résultats encore visible → rien ne bouge ; sorti par le haut → un défilement jusqu'à lui (sous `scroll-padding-top`, instantané avec reduce) et le focus y va. Un nouveau filtre de ces pages fait de même. Garde : `filtres-defilement-l239.e2e.spec.ts` (390 et 1440 px, `scrollY` avant/après).
+
 ## Jeux vidéo (L35)
 
 `/jeux-video` lit `frontend/public/jeux-data/jeux.json` (versionné, `verifieLe` = date de vérification en ligne). `aVenir[].sortie` est affichée telle quelle (jour, mois, trimestre, année) suivie de « annoncée », `null` → « Date non communiquée » : **jamais de date devinée**. Bascule automatique : `repartirJeux` (`jeux-video.component.ts`) fait passer un jeu à venir dont le **jour complet** annoncé est atteint (horloge `JEUX_VIDEO_NOW`, horloge réelle par défaut, figée au 2026-10-12 sous TestBed) en tête de « Déjà sortis » (année seule, résumé d'annonce) ; une date imprécise (mois, trimestre, année) ne bascule jamais. Quand un jeu est sorti, le déplacer de `aVenir` vers `existants` dans `jeux.json` avec son vrai résumé et ses plateformes, à partir de sources en ligne, et changer `verifieLe`.
