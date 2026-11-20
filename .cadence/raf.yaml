@@ -2656,6 +2656,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-20, sha: d7ec3d2ecd70b44fb3fab8ef983428852cf3a187 }
     created: 2026-11-20
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme 20-11 r4 (bf38650) : 2 constats r3 corrigés, aucun nouveau ; 60 appelants de getWikiImage sans régression — tmp/revue-L238-r4.md", commit: bf386506e0cce664fa0def247688de7ec7fbe243 }
