@@ -362,7 +362,9 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
     expect(cards).toBe(6);
   }, 30_000);
 
-  it('R6 — 390 px : « 6 résultats » visible dans le panneau, sous Trier par, sans défilement vers la grille', async () => {
+  // L240 (revue r2 de L239, m3) : le rappel est passé du bas du panneau (sous Trier par) à son haut, au-dessus de Faction ;
+  // sous Trier par il tombait sous le pli à 390×667 après un choix dans Faction (174 px sous la liste).
+  it('R6 — 390 px : « 6 résultats » visible dans le panneau, au-dessus de Faction, sans défilement vers la grille', async () => {
     await fresh();
     await open(page, 390);
     await openPanelIfPhone(page);
@@ -370,13 +372,14 @@ describe('galerie — panneau Filtres avant la grille (navigateur, dist) — L49
     await tid(page, 'resultats-panneau').waitFor({ state: 'visible' });
     const text = (await tid(page, 'resultats-panneau').textContent())?.trim();
     const r = await box(page, 'resultats-panneau');
-    const tri = await box(page, 'filtre-tri');
+    const faction = await box(page, 'filtre-faction');
     const scrollY = await page.evaluate(() => window.scrollY);
     const inPanel = await tid(page, 'panneau-filtres').locator('[data-testid="resultats-panneau"]').count();
     await done();
     expect(text).toBe('6 résultats');
     expect(inPanel).toBe(1);
-    expect(r.y).toBeGreaterThanOrEqual(tri.y + tri.height - 1);
+    expect(r.y + r.height).toBeLessThanOrEqual(faction.y + 1);
+    expect(faction.y - (r.y + r.height)).toBeLessThanOrEqual(60);
     expect(r.y + r.height).toBeLessThanOrEqual(844);
     expect(scrollY).toBe(0);
   }, 30_000);

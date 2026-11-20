@@ -23,6 +23,12 @@ import { defilementSelonPreference } from './section-anchor';
  *    instantané avec prefers-reduced-motion, et le focus suit le contenu remplacé (WCAG 2.4.3, comme la pagination
  *    L71) au lieu de rester sur un bouton sorti de l'écran (WCAG 2.4.11).
  * La hauteur gardée est rendue à la fin du défilement (`scrollend`, ou au plus tard après un délai).
+ *
+ * L240 (revue r2 de L239, m1) : au bureau, « Filtres avancés » des Vidéos est dans une colonne COLLÉE ; la liste
+ * filtrée raccourcit la mise en page, la colonne remonte avec le bas de son conteneur et le bouton pressé finissait à
+ * 54-90 px, sous la barre du haut (70 px). `fin(resultats, controle)` borne le défilement pour que la colonne collée
+ * entière reste sous la barre si l'en-tête des résultats tient encore dans la fenêtre, sinon le contrôle pressé seul
+ * (voir `limiteCollee()`).
  */
 
 /** Délai maximal avant de rendre au document sa hauteur (navigateur sans `scrollend`, rendu qui n'arrive pas). */
@@ -31,7 +37,7 @@ export const GEL_MAX_MS = 1500;
 let gelActif: (() => void) | null = null;
 
 /** Coupe l'ancrage et garde la hauteur du document le temps d'un filtre. Rend la fonction à appeler après le rendu. */
-export function avantFiltre(): (resultats: HTMLElement | null | undefined) => boolean {
+export function avantFiltre(): (resultats: HTMLElement | null | undefined, controle?: HTMLElement | null) => boolean {
   gelActif?.();
   const html = document.documentElement;
   // ce qui dépasse le bas du <body> (marge du dernier élément, qui traverse celle du body) : la hauteur gardée
@@ -53,9 +59,9 @@ export function avantFiltre(): (resultats: HTMLElement | null | undefined) => bo
   };
   gelActif = liberer;
   delai = setTimeout(liberer, GEL_MAX_MS);
-  return (resultats) => {
+  return (resultats, controle) => {
     if (gelActif !== liberer) return false; // un filtre plus récent a pris la main
-    const bouge = garderResultatsEnVue(resultats, basDuCorps() + surplus);
+    const bouge = garderResultatsEnVue(resultats, basDuCorps() + surplus, controle);
     if (bouge && defilementSelonPreference() === 'smooth') {
       window.addEventListener('scrollend', liberer, { once: true });
       clearTimeout(delai); // le glissé (0,5 à 0,8 s mesurés) a tout son délai, compté de son départ
@@ -77,6 +83,7 @@ export function enteteEnVue(resultats: HTMLElement): boolean {
 export function garderResultatsEnVue(
   resultats: HTMLElement | null | undefined,
   hauteur = document.documentElement.scrollHeight,
+  controle?: HTMLElement | null,
 ): boolean {
   if (!resultats?.isConnected || enteteEnVue(resultats)) return false;
   const marge = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
@@ -84,6 +91,46 @@ export function garderResultatsEnVue(
   // irait plus bas qu'elle ne le permet et la page sauterait de la différence quand on lui rend sa hauteur.
   const cible = window.scrollY + resultats.getBoundingClientRect().top - marge;
   resultats.focus({ preventScroll: true });
-  window.scrollTo({ top: Math.max(0, Math.min(cible, hauteur - window.innerHeight)), behavior: defilementSelonPreference() });
+  const tete = (resultats.querySelector(':scope > header') as HTMLElement | null) ?? resultats;
+  const r = tete.getBoundingClientRect();
+  // L240 : contrôle dans une colonne collée → on garde la colonne entière sous la barre si l'en-tête des résultats
+  // reste alors entièrement dans la fenêtre, sinon le contrôle pressé seul
+  const enteteVisibleA = (s: number) => r.bottom + window.scrollY - s <= window.innerHeight;
+  const colonne = limiteCollee(controle, marge, true);
+  const limite = enteteVisibleA(Math.min(cible, colonne)) ? colonne : limiteCollee(controle, marge);
+  const haut = Math.min(cible, hauteur - window.innerHeight, limite);
+  window.scrollTo({ top: Math.max(0, haut), behavior: defilementSelonPreference() });
   return true;
+}
+
+/** Premier ancêtre (ou l'élément même) en `position: sticky`, sinon null. */
+function ancetreColle(el: HTMLElement): HTMLElement | null {
+  for (let e: HTMLElement | null = el; e && e !== document.body; e = e.parentElement) {
+    if (getComputedStyle(e).position === 'sticky') return e;
+  }
+  return null;
+}
+
+/**
+ * L240 — plus grand `scrollY` qui laisse le haut de `controle` sous la barre (`marge`) quand il est dans un bloc collé
+ * (`position: sticky`) ; +∞ sinon (contrôle hors bloc collé, ou absent). `blocEntier` : le haut du bloc collé lui-même.
+ *
+ * Un bloc collé de hauteur H, dans un conteneur dont le contenu finit à B (coordonnées du document), a son haut à
+ * D(S) = borne(S + top, position dans le flux, B − H) : au défilement S, le contrôle (décalé de `d` dans le bloc) est à
+ * min(max(top, flux − S), B − H − S) + d dans la fenêtre. Le premier terme vaut au moins top + d (le bloc collé est
+ * posé sous la barre) ; le second passe sous la marge dès que S > B − H + d − marge. D'où la borne, sans connaître la
+ * position dans le flux (inconnue tant que le bloc est collé).
+ */
+export function limiteCollee(controle: HTMLElement | null | undefined, marge: number, blocEntier = false): number {
+  if (!controle?.isConnected) return Infinity;
+  const bloc = ancetreColle(controle);
+  const conteneur = bloc?.parentElement;
+  if (!bloc || !conteneur) return Infinity;
+  const cs = getComputedStyle(conteneur);
+  const finConteneur = conteneur.getBoundingClientRect().bottom + window.scrollY
+    - (parseFloat(cs.paddingBottom) || 0) - (parseFloat(cs.borderBottomWidth) || 0);
+  const r = bloc.getBoundingClientRect();
+  const hauteurBloc = r.height + (parseFloat(getComputedStyle(bloc).marginBottom) || 0);
+  const decalage = blocEntier ? 0 : controle.getBoundingClientRect().top - r.top;
+  return finConteneur - hauteurBloc + decalage - marge;
 }

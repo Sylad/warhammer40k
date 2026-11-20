@@ -77,10 +77,10 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
     expect(stale).toBe(false);
   });
 
-  async function ouvrir(width: number, adresse: string, reducedMotion: 'reduce' | 'no-preference' = 'reduce'): Promise<Page> {
+  async function ouvrir(width: number, adresse: string, reducedMotion: 'reduce' | 'no-preference' = 'reduce', height = width > 500 ? 900 : 844): Promise<Page> {
     const page = await browser.newPage({ reducedMotion });
     await page.route((u) => !u.host.startsWith('127.0.0.1'), (r) => r.abort()); // aucune requête externe
-    await page.setViewportSize({ width, height: width > 500 ? 900 : 844 });
+    await page.setViewportSize({ width, height });
     await page.goto(base + adresse, { waitUntil: 'networkidle' }); // vignettes en échec posées : la page ne bouge plus
     return page;
   }
@@ -148,12 +148,27 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       expect(Math.abs(apres.y - avant.y), `la page a bougé : ${ctx}`).toBeLessThanOrEqual(1);
       expect(apres.focusResultats, ctx).toBe(false);
     } else {
-      // sous la barre ; plus bas seulement si la page filtrée finit avant (on ne défile pas au-delà de sa fin)
-      if (!apres.finDePage) expect(Math.abs(apres.haut - apres.marge), `haut des résultats pas sous la barre : ${ctx}`).toBeLessThanOrEqual(2);
+      // sous la barre ; plus bas seulement si la page filtrée finit avant (on ne défile pas au-delà de sa fin), ou si le
+      // contrôle pressé, dans une colonne collée, serait passé sous la barre (L240 : il reste juste dessous)
+      const colle = await placeColle(controle);
+      const borneParLeControle = colle !== null && (Math.abs(colle.haut - apres.marge) <= 2 || Math.abs(colle.colonne - apres.marge) <= 2);
+      if (!apres.finDePage && !borneParLeControle) expect(Math.abs(apres.haut - apres.marge), `haut des résultats pas sous la barre : ${ctx}`).toBeLessThanOrEqual(2);
       expect(apres.focusResultats, `focus pas sur la liste : ${ctx}`).toBe(true);
     }
+    // L240 (revue r2, m1) : un contrôle d'une colonne collée reste entièrement sous la barre après le défilement
+    const colle = await placeColle(controle);
+    if (colle) expect(colle.haut, `contrôle collé sous la barre (${colle.haut}–${colle.bas} px, barre ${apres.marge}) : ${ctx}`).toBeGreaterThanOrEqual(apres.marge - 2);
     expect(await controle.getAttribute('aria-pressed')).toBe('true');
   }
+
+  /** Haut et bas du contrôle, et haut de sa colonne, dans la fenêtre s'il est dans un bloc `position: sticky`, sinon null. */
+  const placeColle = (controle: Locator) =>
+    controle.evaluate((e) => {
+      let colle: Element | null = null;
+      for (let x: Element | null = e; x && x !== document.body; x = x.parentElement) if (getComputedStyle(x).position === 'sticky') colle = x;
+      const r = e.getBoundingClientRect();
+      return colle ? { haut: Math.round(r.top), bas: Math.round(r.bottom), colonne: Math.round(colle.getBoundingClientRect().top) } : null;
+    });
 
   for (const width of [390, 1440]) {
     for (const c of CAS) {
@@ -202,6 +217,94 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
       await page.waitForTimeout(400);
       await verifier(page, c, controle, avant, await mesure(page, c.resultats), 1440);
+      await page.close();
+    });
+  }
+
+  // L240 (revue r2 de L239, m1) : à 1440 px, « Durée courte » cliqué depuis scrollY 400 et 1700 (départs de la revue) ;
+  // avec 2 résultats la mise en page devient plus courte que la colonne collée, qui remonte avec le bas de son conteneur :
+  // la rangée pressée finissait à 54-90 px, sous la barre (70 px). Le défilement est borné pour la garder dessous.
+  for (const [nom, depart] of [['Durée courte', 400], ['Durée courte', 1700], ['Animations » (filtres', 1700]] as const) {
+    it(`1440 px, /videos : « ${nom.replace(/[»(].*$/, '').trim()} » des filtres avancés depuis scrollY ${depart} → la rangée pressée reste sous la barre`, async () => {
+      const c = cas(nom);
+      const page = await ouvrir(1440, c.page);
+      const controle = await pret(page, c);
+      await page.evaluate((y) => window.scrollTo(0, y), depart);
+      await page.waitForTimeout(100);
+      const avant = await mesure(page, c.resultats);
+      const box = (await controle.boundingBox())!;
+      expect(box.y >= avant.marge && box.y + box.height <= avant.fenetre, `contrôle à ${box.y} px`).toBe(true);
+      await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+      await page.waitForTimeout(400);
+      const apres = await mesure(page, c.resultats);
+      await verifier(page, c, controle, avant, apres, 1440);
+      const colle = (await placeColle(controle))!;
+      expect(colle, 'la colonne des filtres avancés est collée à 1440 px').not.toBeNull();
+      expect(colle.haut, `rangée pressée à ${colle.haut}–${colle.bas} px, barre ${apres.marge}`).toBeGreaterThanOrEqual(apres.marge - 2);
+      // la colonne entière (titre « Filtres avancés » compris) tient sous la barre avec l'en-tête des résultats
+      expect(colle.colonne, `haut de la colonne à ${colle.colonne} px, barre ${apres.marge}`).toBeGreaterThanOrEqual(apres.marge - 2);
+      await page.close();
+    });
+  }
+
+  // L240 (revue r2 de L239, m2) : un clic sur la puce déjà active (« Tous » au chargement, ou Lore cliquée deux fois)
+  // faisait défiler la page de 1554 px (1440) ou 2737 px (390) sans changer la liste. Attendu : rien ne bouge.
+  for (const width of [390, 1440]) {
+    for (const puce of ['Tous', 'Lore'] as const) {
+      it(`${width} px, /videos : clic sur la puce « ${puce} » déjà active → ni défilement ni déplacement du focus`, async () => {
+        const page = await ouvrir(width, '/videos');
+        const controle = page.locator('.toolbar .filter', { hasText: puce });
+        await controle.waitFor();
+        if (puce !== 'Tous') {
+          await controle.click();
+          await expect.poll(() => controle.getAttribute('aria-pressed')).toBe('true');
+          await page.waitForTimeout(400);
+        }
+        expect(await controle.getAttribute('aria-pressed')).toBe('true');
+        await controle.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(100);
+        const avant = await mesure(page, VIDEOS);
+        const nombre = await page.locator(`${VIDEOS} .card-link`).count();
+        await controle.click();
+        await page.waitForTimeout(400);
+        const apres = await mesure(page, VIDEOS);
+        expect(Math.abs(apres.y - avant.y), `scrollY ${avant.y} → ${apres.y}`).toBeLessThanOrEqual(1);
+        expect(apres.focusResultats).toBe(false);
+        expect(await controle.evaluate((e) => e === document.activeElement)).toBe(true);
+        expect(await page.locator(`${VIDEOS} .card-link`).count()).toBe(nombre);
+        await page.close();
+      });
+    }
+  }
+
+  // L240 (revue r2 de L239, m3) : téléphone bas (390×667), liste Faction entièrement visible au bas de l'écran (631-667
+  // px dans la revue). Le choix ne déplace ni la page ni le focus (WCAG 3.2.2) ; le rappel du compte du panneau était
+  // sous Trier par, 174 px plus bas (805 px, hors de la fenêtre). Attendu : le compte est dans la fenêtre, page et focus
+  // immobiles. Départ : bas de la liste à `marge` px du bas de l'écran.
+  for (const [hauteur, marge] of [[667, 0], [667, 40], [844, 0], [844, 300]] as const) {
+    it(`390×${hauteur}, /gallery, liste Faction à ${marge} px du bas de l'écran : choix → le compte du panneau est à l'écran, rien ne bouge`, async () => {
+      const c = cas('faction');
+      const page = await ouvrir(390, c.page, 'reduce', hauteur);
+      const controle = await pret(page, c);
+      await controle.evaluate((e, m) => window.scrollBy(0, e.getBoundingClientRect().bottom - innerHeight + m), marge);
+      await page.waitForTimeout(100);
+      const liste = (await controle.boundingBox())!;
+      expect(liste.y >= 70 && liste.y + liste.height <= hauteur + 1, `liste Faction à ${liste.y} px`).toBe(true);
+      const avant = await mesure(page, c.resultats);
+      await c.appliquer(controle);
+      await expect.poll(() => page.getByTestId('resultats-panneau').textContent()).toMatch(/^\s*\d+ résultats?\s*$/);
+      await page.waitForTimeout(300);
+      const apres = await mesure(page, c.resultats);
+      expect(Math.abs(apres.y - avant.y), `scrollY ${avant.y} → ${apres.y}`).toBeLessThanOrEqual(1);
+      expect(await controle.evaluate((e) => e === document.activeElement)).toBe(true);
+      const r = await page.getByTestId('resultats-panneau').evaluate((e) => {
+        const b = e.getBoundingClientRect();
+        return { haut: Math.round(b.top), bas: Math.round(b.bottom), h: b.height };
+      });
+      expect(r.h).toBeGreaterThan(0);
+      expect(r.haut >= apres.marge - 2 && r.bas <= hauteur, `compte à ${r.haut}–${r.bas} px (fenêtre ${hauteur}, barre ${apres.marge})`).toBe(true);
+      // la région d'état de la grille annonce le même compte (le rappel du panneau est aria-hidden)
+      expect((await page.getByTestId('resultats-statut').textContent())?.trim()).toBe((await page.getByTestId('resultats-panneau').textContent())?.trim());
       await page.close();
     });
   }

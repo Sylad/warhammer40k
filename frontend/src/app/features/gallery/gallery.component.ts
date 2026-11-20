@@ -128,6 +128,11 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <button class="reset-btn" type="button" data-testid="bouton-reinitialiser" (click)="resetFilters()">Réinitialiser</button>
             }
           </div>
+          @if (catalogReady()) {
+            <!-- L49/R6 : rappel visible au téléphone ; aria-hidden, la région d'état de la grille reste la seule annoncée.
+                 L240 : en tête du panneau, au-dessus de Faction (plus sous Trier par, 174 px plus bas : sous le pli à 390×667). -->
+            <p class="panel-count" data-testid="resultats-panneau" aria-hidden="true">{{ resultsLabel() }}</p>
+          }
           <!-- L45 (WCAG 1.3.1 / 4.1.2 / 3.3.2) : chaque libellé visible est associé à sa liste (for/id). -->
           <div class="filter-row">
             <label for="gallery-filter-faction">Faction</label>
@@ -155,10 +160,6 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <option value="alpha">A — Z</option>
             </select>
           </div>
-          @if (catalogReady()) {
-            <!-- L49/R6 : rappel visible au téléphone ; aria-hidden, la région d'état de la grille reste la seule annoncée. -->
-            <p class="panel-count" data-testid="resultats-panneau" aria-hidden="true">{{ resultsLabel() }}</p>
-          }
         </section>
 
         <div class="main-col">

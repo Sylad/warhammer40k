@@ -1659,14 +1659,12 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "grid-row": "1",
   },
   ".gallery-page .panel-count": {
-    "border-top": "1px solid var(--border)",
     "color": "var(--gold)",
     "display": "none",
     "font-size": "11px",
     "font-weight": "900",
     "letter-spacing": "0.12em",
-    "margin": "14px 0 0",
-    "padding-top": "12px",
+    "margin": "-6px 0 12px",
     "text-transform": "uppercase",
   },
   ".gallery-page .rappel-vide": {
@@ -2278,8 +2276,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   },
   "@media (max-width: 760px) .gallery-page .panel-count": {
     "display": "block",
-    "margin-top": "10px",
-    "padding-top": "10px",
   },
   "@media (max-width: 760px) .gallery-page .rappel-vide": {
     "align-items": "center",

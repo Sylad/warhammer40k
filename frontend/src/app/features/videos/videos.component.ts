@@ -346,7 +346,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
               <button class="check-row" type="button"
                 [class.active]="sidebarFilters().has(sf.key)"
                 [attr.aria-pressed]="sidebarFilters().has(sf.key)"
-                (click)="toggleSidebar(sf.key)">
+                (click)="toggleSidebar(sf.key, $any($event.currentTarget))">
                 <span class="cr-label">
                   <span class="dot" [class.on]="sidebarFilters().has(sf.key)"></span>
                   {{ sf.label }}
@@ -638,16 +638,19 @@ export class VideosComponent {
     return `url('${url}')`;
   }
 
-  toggleSidebar(key: SidebarFilter): void {
+  /** `bouton` : la rangée pressée ; au bureau la colonne est collée, le défilement la garde sous la barre (L240). */
+  toggleSidebar(key: SidebarFilter, bouton?: HTMLElement | null): void {
     const set = new Set(this.sidebarFilters());
     if (set.has(key)) set.delete(key); else set.add(key);
     this.filtrer(() => {
       this.sidebarFilters.set(set);
       this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
-    });
+    }, bouton);
   }
 
+  /** L240 : la puce déjà active ne change rien, donc rien ne bouge (ni page, ni focus). */
   choisirFiltre(key: FilterKey): void {
+    if (key === this.activeFilter()) return;
     this.filtrer(() => this.activeFilter.set(key));
   }
 
@@ -656,10 +659,10 @@ export class VideosComponent {
    * bureau). Pendant le changement, ni ancrage ni rabattement ne déplacent la page ; après le rendu, le titre et le
    * compte de la liste sont en vue (sinon un défilement les y amène, focus sur la liste) — voir avantFiltre().
    */
-  private filtrer(appliquer: () => void): void {
+  private filtrer(appliquer: () => void, controle?: HTMLElement | null): void {
     const fin = avantFiltre();
     appliquer();
-    afterNextRender(() => fin(this.listeVideos?.nativeElement), { injector: this.injector });
+    afterNextRender(() => fin(this.listeVideos?.nativeElement, controle), { injector: this.injector });
   }
 
   loadMoreFeatured(): void {
