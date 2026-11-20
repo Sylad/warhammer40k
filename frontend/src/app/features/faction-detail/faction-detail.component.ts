@@ -68,6 +68,22 @@ const DEFAULT_LIENS = [
   { ico: '⚔', label: 'Relations et alliances' },
 ];
 
+/** Minuscules sans accents ni ligature (« Œil » → « oeil »). */
+function plier(texte: string): string {
+  return texte.toLowerCase().replace(/œ/g, 'oe').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+/** Un seul lien par destination ; un libellé sans lien n'apparaît qu'une fois. */
+function sansDoublon(liens: SidebarLink[]): SidebarLink[] {
+  const vus = new Set<string>();
+  return liens.filter(l => {
+    const cle = l.route || l.fragment ? `${l.route ?? ''}#${l.fragment ?? ''}` : `texte:${l.label}`;
+    if (vus.has(cle)) return false;
+    vus.add(cle);
+    return true;
+  });
+}
+
 const DEFAULT_RESOURCES = [
   { ico: '▤', label: 'Lexique Warhammer 40,000' },
   { ico: '⊛', label: 'Carte galactique' },
@@ -335,9 +351,9 @@ const DEFAULT_RESOURCES = [
               <h2 class="section-title"><span class="t-flourish">✠</span>Iconographie</h2>
               <div class="iconography-grid">
                 @for (g of galleryImages(); track g) {
-                  <a class="iconography-card" routerLink="/gallery"
+                  <a class="iconography-card" routerLink="/gallery" [queryParams]="{ faction: f.id }"
                      [style.--g-img]="'url(' + g + ')'"
-                     aria-label="Voir dans la galerie"></a>
+                     [attr.aria-label]="'Illustrations ' + f.nom + ' dans la galerie'"></a>
                 }
               </div>
             </section>
@@ -840,50 +856,65 @@ export class FactionDetailComponent {
     }
   }
 
+  /**
+   * L94 (WCAG 2.4.4) : chaque lien latéral mène où il le dit. Un sujet propre à la faction ne devient
+   * un lien que vers une section de CETTE fiche, présente à l'écran (héros, sous-factions du type
+   * nommé) ; un sujet qui mènerait à une page générale (chronologie, carte, concepts, romans) prend
+   * le nom de cette page ; le reste est affiché sans lien. Deux liens vers la même destination n'en
+   * font qu'un.
+   */
   liensRapides(): SidebarLink[] {
     const f = this.faction();
     const labels = f?.liensRapides?.length ? f.liensRapides : DEFAULT_LIENS.map(l => l.label);
-    return labels.map((label, i) => this.toQuickLink(label, DEFAULT_LIENS[i % DEFAULT_LIENS.length].ico));
+    return sansDoublon(labels.map((label, i) => this.toQuickLink(label, DEFAULT_LIENS[i % DEFAULT_LIENS.length].ico)));
   }
 
   ressources(): SidebarLink[] {
     const f = this.faction();
     const labels = f?.resources?.length ? f.resources : DEFAULT_RESOURCES.map(r => r.label);
-    return labels.map((label, i) => this.toResourceLink(label, DEFAULT_RESOURCES[i % DEFAULT_RESOURCES.length].ico));
+    return sansDoublon(labels.map((label, i) => this.toResourceLink(label, DEFAULT_RESOURCES[i % DEFAULT_RESOURCES.length].ico)));
   }
 
   private toQuickLink(label: string, ico: string): SidebarLink {
-    const l = label.toLowerCase();
-    if (l.includes('chronologie') || l.includes('hérésie') || l.includes('heresie') || l.includes('croisade')) {
-      return { ico, label, route: '/lore/timeline' };
+    const l = plier(label);
+    if (l.includes('chronologie') || l.includes('heresie') || l.includes('croisade')) {
+      return { ico, label: 'Chronologie générale', route: '/lore/timeline' };
     }
-    if (l.includes('personnage') || l.includes('héros') || l.includes('heros') || l.includes('warlord') || l.includes('champion')) {
-      return { ico, label, fragment: 'heros' };
+    if (/personnage|heros|warlord|champion|celebre/.test(l)) {
+      return this.faction()?.notableHeroes?.length ? { ico, label, fragment: 'heros' } : { ico, label };
     }
-    if (l.includes('monde') || l.includes('craftworld') || l.includes('oeil') || l.includes('œil') || l.includes('webway') || l.includes('carte')) {
-      return { ico, label, route: '/lore/galaxy' };
+    if (/monde|craftworld|oeil|webway|carte/.test(l)) {
+      return { ico, label: 'Carte de la galaxie', route: '/lore/galaxy' };
     }
-    if (l.includes('héraldique') || l.includes('symbol') || l.includes('clan') || l.includes('légion') || l.includes('legion') || l.includes('chapitre')) {
+    if (this.nommeLesSousFactions(l)) {
       return { ico, label, fragment: 'subfactions' };
-    }
-    if (l.includes('relation') || l.includes('alliance') || l.includes('bio-forme') || l.includes('anatomie')) {
-      return { ico, label, fragment: 'heritage' };
     }
     return { ico, label };
   }
 
   private toResourceLink(label: string, ico: string): SidebarLink {
-    const l = label.toLowerCase();
-    if (l.includes('roman') || l.includes('black library') || l.includes('bibliothèque') || l.includes('archives') || l.includes('hérésie')) {
-      return { ico, label, route: '/romans' };
+    const l = plier(label);
+    if (l.includes('roman') || l.includes('black library')) {
+      return { ico, label: 'Tous les romans', route: '/romans' };
     }
-    if (l.includes('carte') || l.includes('galactique') || l.includes('craftworld') || l.includes('œil') || l.includes('oeil')) {
-      return { ico, label, route: '/lore/galaxy' };
+    if (l.includes('chronologie')) {
+      return { ico, label: 'Chronologie générale', route: '/lore/timeline' };
     }
-    if (l.includes('lexique') || l.includes('glossaire') || l.includes('catalogue') || l.includes('mythe')) {
-      return { ico, label, route: '/lore/concepts' };
+    if (/carte|galactique|craftworld|oeil/.test(l)) {
+      return { ico, label: 'Carte de la galaxie', route: '/lore/galaxy' };
+    }
+    if (/lexique|glossaire|catalogue|mythe/.test(l)) {
+      return { ico, label: 'Concepts et lieux du lore', route: '/lore/concepts' };
     }
     return { ico, label };
+  }
+
+  /** Le libellé nomme ce que liste la section des sous-factions (« Les neuf Légions traîtresses » → Légions). */
+  private nommeLesSousFactions(l: string): boolean {
+    if (!this.subFactions().length) return false;
+    const section = plier(this.subFactionLabel());
+    if (section === 'sous-factions') return false;
+    return l.includes(section) || (section === 'klans' && l.includes('clans'));
   }
 
   hasStats(): boolean {
