@@ -2649,6 +2649,8 @@ lots:
     review: { date: 2026-11-20, verdict: "conforme (r2 du lead sur 04552a9 : sélecteur h3 + .row-link/.row-stat, test e2e rouge avant/vert après, instantané des styles mis à jour ; relu le diff)", commit: 04552a9113db7c2f83666fe8d1bfa897c0c75c7e }
     ux: { date: 2026-11-20, verdict: "conforme (lead : ux-reviewer r1 conforme + mineur du filet corrigé ; captures CSM 390 et Aeldari 1440 du correctif relues, filet et hauteur réguliers)" }
     finished: 2026-11-20
+    notes:
+      - { date: 2026-11-20, text: "QA prod 20-11 conforme : 4 sujets en texte simple, liens suivis 200, 0 erreur console (qa-L237.md)" }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
