@@ -1075,13 +1075,14 @@ lots:
   - id: L94
     title: "Fiche faction : liens latéraux trompeurs (« Chronologie du Chapitre » → chronologie générale, « Héraldique » → chapitres, 2 liens /romans), Iconographie vers /gallery non filtrée (?faction=) (WCAG 2.4.4, revue UX L3)"
     public: "Fiches faction : des liens latéraux qui mènent où ils le disent"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme r1 (20-11, 22ccc17) : /gallery lit ?faction= (gallery.component.ts:1051), 22/22 rouges sans le correctif, Nouveautés à jour ; mineurs : sujet « Croisades Noires d'Abaddon » perdu au dédoublonnage (→ L284 ou lot suivant), galerie filtrée vide pour 3 factions (annoncé, honnête)", commit: 22ccc17064cb699e9b1fca48f3ebec57dcee3a2e }
     ux: { date: 2026-11-20, verdict: "conforme (lead, captures 1440 et 390) : les lignes qui mènent quelque part ont une flèche, les sujets sans page sont en texte simple sans flèche, libellés qui disent la destination (« Chronologie générale », « Tous les romans ») ; contraste et taille inchangés" }
+    finished: 2026-11-20
   - id: L95
     title: "Fiche faction sans unité (6 factions) : bouton « Explorer les unités », filtres et « Aucune unité ne correspond » sur un ensemble vide — masquer, message juste (revue UX L3)"
     public: "Fiches faction sans unité : plus de recherche d'unités vide"
