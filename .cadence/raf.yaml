@@ -2683,7 +2683,7 @@ lots:
     estimate: 0.25
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "non conforme : 1 majeur (fiche R6 contradictoire, acceptation L49 non rescellée, borne 60 px hors fiche) — code des 3 mineurs et WCAG 3.2.2 conformes", commit: 6a7ff46bc7bb97a75d204749ecd35c1f9dedc55a }
+    review: { date: 2026-11-20, verdict: "conforme (r2 du lead : R6 amendée 60452a7, acceptation L49 réécrite d'après la fiche et rescellée c5f1029, 32/32 verts)", commit: c5f1029ebf2b04b624e3921cc2617f8119674a08 }
     notes:
       - { date: 2026-11-20, text: "test d'acceptation rescellé (lot livré L49, frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche amendée en 60452a7) : R6 amendée le 20-11 (compte au-dessus de Faction, revue UX r2 de L239 m3) ; test réécrit d'après la fiche par une session distincte de celle qui a codé ; borne 60 px non sourcée retirée" }
 acknowledged:
