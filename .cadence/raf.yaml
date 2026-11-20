@@ -1078,6 +1078,7 @@ lots:
     status: done
     estimate: 0.25
     visible: true
+    delivered: { date: 2026-11-20, sha: 05068ee7ed6f0e86dddb41c5e65d24a4054ad1cb }
     created: 2026-10-10
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme r1 (20-11, 22ccc17) : /gallery lit ?faction= (gallery.component.ts:1051), 22/22 rouges sans le correctif, Nouveautés à jour ; mineurs : sujet « Croisades Noires d'Abaddon » perdu au dédoublonnage (→ L284 ou lot suivant), galerie filtrée vide pour 3 factions (annoncé, honnête)", commit: 22ccc17064cb699e9b1fca48f3ebec57dcee3a2e }
