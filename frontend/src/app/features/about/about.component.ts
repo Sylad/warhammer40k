@@ -38,8 +38,8 @@ export const CREDITS: CreditLigne[] = [
   { id: 'carte', nom: SOURCES_IMAGES.carte.nom, usage: 'Fond de la carte galactique.', droits: SOURCES_IMAGES.carte.droits },
   {
     id: 'galerie', nom: 'Galerie',
-    usage: 'Catalogue d’œuvres (titre et artiste du catalogue, image cherchée sur le Warhammer 40k Wiki d’après le titre), collection personnelle et images importées.',
-    droits: SOURCES_IMAGES.perso.droits + ' ' + SOURCES_IMAGES.import.droits,
+    usage: 'Catalogue d’œuvres (titre et artiste du catalogue, image cherchée sur le Warhammer 40k Wiki d’après le titre : elle n’est pas forcément de cet artiste, la carte et la visionneuse le disent), collection personnelle et images importées.',
+    droits: SOURCES_IMAGES.perso.droits + ' ' + SOURCES_IMAGES.import.droits + ' ' + SOURCES_IMAGES.reddit.droits,
   },
   {
     id: 'youtube', nom: 'YouTube', url: 'https://www.youtube.com/',
@@ -199,24 +199,31 @@ interface Inspiration {
       <h2 class="section-title" id="credits-titre">Crédits et droits</h2>
       <p class="section-lede">
         Site de fan non officiel, sans approbation de Games Workshop et sans lien avec elle. Chaque image
-        d’un tiers porte son crédit en infobulle ; le pied de chaque page liste les images de la page et
-        leur fichier d’origine.
+        d’un tiers porte son crédit au survol, et dans la liste en bas de page « Crédits des images de cette
+        page », avec son fichier d’origine ; une image vue en grand l’affiche en légende.
       </p>
-      <ul class="credits-liste" data-testid="credits-liste">
-        @for (c of credits; track c.id) {
-          <li [attr.data-credit-id]="c.id">
-            <span class="credit-nom">
-              @if (c.url) {
-                <a [href]="c.url" target="_blank" rel="noopener noreferrer">{{ c.nom }}<span class="sr-only"> (nouvel onglet)</span></a>
-              } @else {
-                {{ c.nom }}
-              }
-            </span>
-            <span class="credit-usage">{{ c.usage }}</span>
-            <span class="credit-droits">{{ c.droits }}</span>
-          </li>
-        }
-      </ul>
+      <!-- L238 r1 : vrai tableau, en-têtes de colonnes (Source, Usage, Droits) ; empilé sous 1024 px, les rôles
+           explicites gardent la sémantique de tableau malgré display:block. -->
+      <table class="credits-liste" data-testid="credits-liste" role="table">
+        <thead role="rowgroup">
+          <tr role="row"><th scope="col" role="columnheader">Source</th><th scope="col" role="columnheader">Usage</th><th scope="col" role="columnheader">Droits</th></tr>
+        </thead>
+        <tbody role="rowgroup">
+          @for (c of credits; track c.id) {
+            <tr role="row" [attr.data-credit-id]="c.id">
+              <th scope="row" role="rowheader" class="credit-nom">
+                @if (c.url) {
+                  <a [href]="c.url" target="_blank" rel="noopener noreferrer">{{ c.nom }}<span class="sr-only"> (nouvel onglet)</span></a>
+                } @else {
+                  {{ c.nom }}
+                }
+              </th>
+              <td role="cell" class="credit-usage" data-col="Usage">{{ c.usage }}</td>
+              <td role="cell" class="credit-droits" data-col="Droits">{{ c.droits }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </section>
 
     <section class="other-sites">

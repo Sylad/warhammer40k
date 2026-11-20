@@ -5,11 +5,11 @@ import { UnitDatasheetDialogComponent } from './unit-datasheet-dialog.component'
 
 // L120 (revue UX, F2) : la fenêtre défile (conteneur .ds-scroll) ; le focus restant sur « Fermer », le clavier
 // fait défiler l'image (WCAG 2.1.1). Les mesures de largeur sont dans le test e2e (navigateur).
-async function mount() {
+async function mount(src = '/x.jpg') {
   polyfillDialog();
   await setupTestBed([UnitDatasheetDialogComponent]);
   const f = TestBed.createComponent(UnitDatasheetDialogComponent);
-  f.componentRef.setInput('src', '/x.jpg');
+  f.componentRef.setInput('src', src);
   f.componentRef.setInput('alt', 'alt');
   f.componentRef.setInput('label', 'label');
   f.detectChanges();
@@ -29,7 +29,7 @@ describe('fenêtre d\'agrandissement — défilement au clavier (L120)', () => {
   it('l\'image est dans un conteneur .ds-scroll, après le bouton Fermer', async () => {
     const { dlg, scroll } = await mount();
     expect(scroll.querySelector('img.ds-img')).not.toBeNull();
-    expect(Array.from(dlg.children).map((c) => c.className)).toEqual(['ds-close', 'ds-scroll']);
+    expect(Array.from(dlg.children).map((c) => c.className)).toEqual(['ds-close', 'ds-scroll', 'ds-credit']); // L238 r1 : crédit après l'image
   });
 
   it('les flèches, pages, Début et Fin font défiler le conteneur et ne laissent pas la page défiler', async () => {
@@ -63,5 +63,28 @@ describe('fenêtre d\'agrandissement — défilement au clavier (L120)', () => {
     const { scrollBy, press } = await mount();
     expect(press('a').defaultPrevented).toBe(false);
     expect(scrollBy).not.toHaveBeenCalled();
+  });
+});
+
+describe('fenêtre d\'agrandissement — crédit visible de l\'image (L238 r1)', () => {
+  const WIKI = 'https://static.wikia.nocookie.net/warhammer40k/images/a/ab/Cawl.jpg/revision/latest';
+
+  it('fiche technique : légende « Fiche technique © Games Workshop », sans lien', async () => {
+    const { dlg } = await mount('/api/images/datasheets/admech-cawl');
+    const l = dlg.querySelector('[data-testid="credit-legende"]')!;
+    expect(l.textContent!.trim()).toBe('Fiche technique © Games Workshop');
+    expect(l.querySelector('a')).toBeNull();
+  });
+
+  it('image du wiki : légende avec le fichier et le lien vers sa page ; Tab boucle entre Fermer et ce lien', async () => {
+    const { dlg, press } = await mount(WIKI);
+    const l = dlg.querySelector('[data-testid="credit-legende"]')!;
+    expect(l.textContent).toContain('via le Warhammer 40k Wiki (Fandom), fichier « Cawl.jpg »');
+    const a = l.querySelector('a')!;
+    expect(a.getAttribute('href')).toBe('https://warhammer40k.fandom.com/wiki/File:Cawl.jpg');
+    expect(press('Tab').defaultPrevented).toBe(true);
+    expect(document.activeElement).toBe(a);
+    press('Tab');
+    expect(document.activeElement?.className).toBe('ds-close');
   });
 });

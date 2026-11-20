@@ -13,11 +13,13 @@
  * - `/api/images/file/<nom>` : collection personnelle de la galerie (auteur d'origine non conservé).
  * - `/api/images/imported/<nom>` : images importées (Reddit, wiki, adresse directe ; source non conservée).
  * - `i.ytimg.com` / `img.youtube.com` : miniatures YouTube, © la chaîne de la vidéo.
+ * - `i.redd.it` / `preview.redd.it` : aperçus d'import Reddit (galerie, mode édition) ; l'auteur et le
+ *   post ne se lisent pas dans l'adresse : l'élément les donne (`data-credit-*`, voir `creditDeclare`).
  * - `/galaxy-map.jpg` : carte de la galaxie © Games Workshop (publication d'origine non identifiée).
  * Les captures des Nouveautés et le favicon sont produits par le site : pas de crédit.
  */
 
-export type SourceImage = 'fandom' | 'fiche' | 'portrait' | 'perso' | 'import' | 'youtube' | 'carte' | 'externe';
+export type SourceImage = 'fandom' | 'fiche' | 'portrait' | 'perso' | 'import' | 'youtube' | 'reddit' | 'carte' | 'externe';
 
 export interface CreditImage {
   source: SourceImage;
@@ -40,11 +42,13 @@ export const SOURCES_IMAGES: Record<SourceImage, { nom: string; droits: string }
   perso: { nom: 'Collection personnelle', droits: 'Images rassemblées par l’auteur du site ; auteur d’origine non conservé.' },
   import: { nom: 'Images importées', droits: 'Importées depuis Reddit, le wiki ou une adresse directe ; source d’origine non conservée.' },
   youtube: { nom: 'YouTube', droits: 'Miniatures © la chaîne de chaque vidéo.' },
+  reddit: { nom: 'Reddit', droits: 'Images publiées sur Reddit, © leurs auteurs ; l’aperçu d’import nomme l’auteur et mène au post.' },
   carte: { nom: 'Carte de la galaxie', droits: '© Games Workshop Limited. Publication d’origine non identifiée.' },
   externe: { nom: 'Autres sites', droits: 'Image d’un autre site ; source non identifiée.' },
 };
 
 const HOTES_YOUTUBE = new Set(['i.ytimg.com', 'img.youtube.com']);
+const HOTES_REDDIT = new Set(['i.redd.it', 'preview.redd.it']);
 
 /** Crédit de l'image à cette adresse, ou `null` si l'image est produite par le site. */
 export function creditImage(adresse: string, origine = 'http://localhost'): CreditImage | null {
@@ -77,6 +81,9 @@ export function creditImage(adresse: string, origine = 'http://localhost'): Cred
       detail: id,
       lien: id ? `https://www.youtube.com/watch?v=${id}` : undefined,
     };
+  }
+  if (HOTES_REDDIT.has(url.hostname)) {
+    return { source: 'reddit', texte: 'Image publiée sur Reddit — auteur non lisible dans l’adresse', detail: url.hostname };
   }
   if (memeSite) {
     const local = /^\/api\/images\/(datasheets|portraits|file|imported)\/([^/?#]+)/.exec(chemin);
@@ -113,4 +120,21 @@ export function adressesImages(el: Element): string[] {
     }
   }
   return out;
+}
+
+/**
+ * Crédit d'un élément dont la source est connue autrement que par l'adresse de l'image (auteur et post
+ * d'un aperçu Reddit…) : `data-credit-texte` (obligatoire), `data-credit-lien`, `data-credit-detail`,
+ * `data-credit-source`. Ce crédit déclaré remplace celui déduit de l'adresse.
+ */
+export function creditDeclare(el: HTMLElement, deduit: CreditImage): CreditImage {
+  const texte = el.dataset['creditTexte'];
+  if (!texte) return deduit;
+  const source = el.dataset['creditSource'];
+  return {
+    source: source && source in SOURCES_IMAGES ? (source as SourceImage) : deduit.source,
+    texte,
+    detail: el.dataset['creditDetail'] || deduit.detail,
+    lien: el.dataset['creditLien'] || deduit.lien,
+  };
 }

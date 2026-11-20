@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { CreditLegendeComponent } from '../../shared/components/credit-legende/credit-legende.component';
 
 const STEP = 48;
 const SCROLL_KEYS: Record<string, (c: HTMLElement) => [number, number]> = {
@@ -15,6 +16,7 @@ const SCROLL_KEYS: Record<string, (c: HTMLElement) => [number, number]> = {
 @Component({
   selector: 'app-unit-datasheet-dialog',
   standalone: true,
+  imports: [CreditLegendeComponent],
   template: `
     <dialog #dlg class="ds-dialog" role="dialog" aria-modal="true" [attr.aria-label]="label"
             (keydown)="onKey($event)" (cancel)="$event.preventDefault(); closed.emit()" (click)="onBackdrop($event)">
@@ -22,6 +24,8 @@ const SCROLL_KEYS: Record<string, (c: HTMLElement) => [number, number]> = {
       <div #scroll class="ds-scroll">
         <img class="ds-img" [src]="src" [alt]="alt" [style.--ds-min-w]="minWidth + 'px'" [style.--ds-min-h]="minHeight + 'px'" (error)="failed.emit()" />
       </div>
+      <!-- L238 r1 : crédit visible de l'image vue en grand (l'infobulle n'existe pas au toucher). -->
+      <app-credit-legende class="ds-credit" [adresse]="src" />
     </dialog>
   `,
   styleUrl: './unit-datasheet-dialog.component.scss',
@@ -57,9 +61,11 @@ export class UnitDatasheetDialogComponent implements AfterViewInit, OnDestroy {
       e.preventDefault();
       this.closed.emit();
     } else if (e.key === 'Tab') {
-      // Le bouton Fermer est le seul élément focalisable : le focus y reste.
+      // Boucle entre Fermer et le lien du crédit (s'il existe) : le focus ne sort pas de la fenêtre.
+      const pieges = [this.closeBtn.nativeElement, ...Array.from(this.dlg.nativeElement.querySelectorAll<HTMLElement>('.ds-credit a'))];
+      const i = pieges.indexOf(document.activeElement as HTMLElement);
       e.preventDefault();
-      this.closeBtn.nativeElement.focus();
+      pieges[(i + (e.shiftKey ? pieges.length - 1 : 1)) % pieges.length].focus();
     } else if (SCROLL_KEYS[e.key]) {
       // Le focus reste sur Fermer : les flèches, pages, Début et Fin font défiler l'image (WCAG 2.1.1).
       const c = this.scroll.nativeElement;

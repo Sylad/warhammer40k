@@ -70,3 +70,11 @@ app-gallery {
     margin-top: 12px;
   }
 }
+
+/* L238 r1 — crédit réel de l'image affichée : ligne « Image : … » des cartes du catalogue, écart et crédit
+   de la visionneuse (12 px, --muted). Ici et non dans la feuille du composant (budget, L29). */
+app-gallery {
+  .art-source { margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+  .vi-credit { margin-top: 8px; display: grid; gap: 2px; }
+  .vi-ecart { margin: 0; color: #c9beaa; font-size: 12px; line-height: 1.5; }
+}

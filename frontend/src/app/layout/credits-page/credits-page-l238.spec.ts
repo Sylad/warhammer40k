@@ -4,6 +4,8 @@ import { setupTestBed, stubFetch } from '../../../testing/angular-testbed';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, type Route } from '@angular/router';
@@ -24,12 +26,18 @@ const WIKI = 'https://static.wikia.nocookie.net/warhammer40k/images/3/36/Orks_sy
       <div id="fond" [style.background-image]="fond()"></div>
       <img id="titre" src="${WIKI}" title="Titre de la page" alt="" />
       <img id="capture" src="/nouveautes-data/captures/x.png" alt="" />
+      @if (reddit()) {
+        <div id="reddit" style="background-image: url('https://i.redd.it/abc.jpg')" data-credit-source="reddit"
+          data-credit-texte="Image publiée sur Reddit par u/peintre" data-credit-lien="https://reddit.com/r/Warhammer40k/comments/p/x/"
+          data-credit-detail="post de u/peintre"></div>
+      }
     </main>
     <app-credits-page [cible]="main" />
   `,
 })
 class Hote {
   readonly fond = signal(`url('${WIKI}')`);
+  readonly reddit = signal(false);
 }
 
 const attendre = () => new Promise((r) => setTimeout(r, 200));
@@ -81,6 +89,35 @@ describe('crédits des images de la page (L238)', () => {
   });
 });
 
+describe('crédits — r1 (L238)', () => {
+  beforeEach(async () => {
+    await setupTestBed([Hote], [provideRouter([])]);
+  });
+
+  it('un crédit déclaré par l’élément (aperçu Reddit : auteur, post) remplace « source non identifiée »', async () => {
+    const f = TestBed.createComponent(Hote);
+    f.componentInstance.reddit.set(true);
+    f.detectChanges();
+    await attendre();
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('#reddit')!.getAttribute('title')).toBe('Image publiée sur Reddit par u/peintre');
+    const lignes = [...el.querySelectorAll('[data-testid="credits-page"] li')];
+    expect(lignes.map((l) => l.getAttribute('data-source'))).toEqual(['fandom', 'fiche', 'reddit']);
+    const reddit = lignes[2];
+    expect(reddit.textContent).toContain(SOURCES_IMAGES.reddit.droits);
+    expect(reddit.textContent).not.toContain('non identifiée');
+    expect([...reddit.querySelectorAll('a')].map((a) => [a.getAttribute('href'), a.textContent!.replace(' (nouvel onglet)', '')]))
+      .toEqual([['https://reddit.com/r/Warhammer40k/comments/p/x/', 'post de u/peintre']]);
+  });
+
+  it('WCAG 1.4.1 : les liens de la liste et « Tous les crédits » sont soulignés, comme celui de la mention', () => {
+    const src = (f: string) => readFileSync(resolve(__dirname, f), 'utf8');
+    expect(src('credits-page.component.ts')).toMatch(/\.credits-liens a, \.credits-tout \{[^}]*text-decoration: underline/);
+    expect(src('../main-layout/main-layout.component.ts')).toMatch(/\.legal-text a \{[^}]*text-decoration: underline/);
+  });
+});
+
 describe('mention des droits sur chaque route (L238)', () => {
   it('toute route servie est enfant de la mise en page, qui porte le pied de page', () => {
     const layout = routes.find((r) => r.component === MainLayoutComponent)!;
@@ -111,7 +148,7 @@ describe('À propos — Crédits et droits (L238)', () => {
     f.detectChanges();
     const section = (f.nativeElement as HTMLElement).querySelector('section#credits')!;
     expect(section.querySelector('h2')!.textContent).toBe('Crédits et droits');
-    const lignes = [...section.querySelectorAll('[data-testid="credits-liste"] li')];
+    const lignes = [...section.querySelectorAll('[data-testid="credits-liste"] tbody tr')];
     expect(lignes).toHaveLength(CREDITS.length);
     expect(new Set(CREDITS.map((c) => c.id)).size).toBe(CREDITS.length);
     const tout = section.textContent!;
@@ -120,5 +157,21 @@ describe('À propos — Crédits et droits (L238)', () => {
       expect(tout, cle).toContain(s.droits);
     }
     expect(tout).toContain('© Games Workshop Limited');
+  });
+
+  it('r1 : tableau à en-têtes de colonnes ; un nom de source sans lien n’est pas en or ; texte « au survol, et dans la liste en bas de page »', async () => {
+    await setupTestBed([AboutComponent], [provideRouter([])]);
+    const f = TestBed.createComponent(AboutComponent);
+    f.detectChanges();
+    const section = (f.nativeElement as HTMLElement).querySelector('section#credits')!;
+    const table = section.querySelector('table[data-testid="credits-liste"]')!;
+    expect([...table.querySelectorAll('thead th[scope="col"]')].map((t) => t.textContent!.trim())).toEqual(['Source', 'Usage', 'Droits']);
+    expect(table.querySelectorAll('tbody th[scope="row"]')).toHaveLength(CREDITS.length);
+    const lede = section.querySelector('.section-lede')!.textContent!.replace(/\s+/g, ' ');
+    expect(lede).toContain('porte son crédit au survol, et dans la liste en bas de page');
+    expect(lede).not.toContain('en infobulle');
+    const scss = readFileSync(resolve(__dirname, '../../features/about/about.component.scss'), 'utf8');
+    expect(scss).toMatch(/\.credit-nom \{[^}]*color: var\(--text\)/);
+    expect(scss).toMatch(/\.credit-nom a \{[^}]*color: var\(--gold\);[^}]*text-decoration: underline/);
   });
 });

@@ -1,6 +1,6 @@
 // L238 — crédit d'une image déduit de son adresse : chaque source réelle recensée, rien de deviné.
 import { describe, expect, it } from 'vitest';
-import { adressesImages, creditImage, SOURCES_IMAGES } from './credit-image';
+import { adressesImages, creditDeclare, creditImage, SOURCES_IMAGES } from './credit-image';
 
 const SITE = 'https://warhammer.sladoire.dev';
 
@@ -44,7 +44,7 @@ describe('creditImage (L238)', () => {
   });
 
   it('autre site : signalé comme source non identifiée, avec son hôte (jamais deviné)', () => {
-    expect(creditImage('https://i.redd.it/abc.jpg', SITE)).toMatchObject({ source: 'externe', detail: 'i.redd.it', texte: 'Image de i.redd.it — source non identifiée' });
+    expect(creditImage('https://i.imgur.com/abc.jpg', SITE)).toMatchObject({ source: 'externe', detail: 'i.imgur.com', texte: 'Image de i.imgur.com — source non identifiée' }); // i.redd.it : source Reddit (r1)
   });
 
   it('chaque source a un nom et des droits', () => {
@@ -64,5 +64,28 @@ describe('adressesImages (L238)', () => {
     div.style.backgroundImage = "url('https://i.ytimg.com/vi/x/hqdefault.jpg')";
     div.style.setProperty('--art', 'url(/galaxy-map.jpg)');
     expect(adressesImages(div)).toEqual(expect.arrayContaining(['https://i.ytimg.com/vi/x/hqdefault.jpg', '/galaxy-map.jpg']));
+  });
+});
+
+describe('crédit — r1 (L238)', () => {
+  it('aperçu Reddit (i.redd.it, preview.redd.it) : source Reddit, auteur non lisible dans l’adresse (rien deviné)', () => {
+    for (const a of ['https://i.redd.it/abc.jpg', 'https://preview.redd.it/x.png?width=640']) {
+      const c = creditImage(a)!;
+      expect(c.source).toBe('reddit');
+      expect(c.texte).toBe('Image publiée sur Reddit — auteur non lisible dans l’adresse');
+      expect(c.lien).toBeUndefined();
+    }
+  });
+
+  it('crédit déclaré par l’élément : remplace texte, lien, détail et source ; sans data-credit-texte, rien ne change', () => {
+    const el = document.createElement('div');
+    const deduit = creditImage('https://example.org/a.jpg')!;
+    expect(creditDeclare(el, deduit)).toBe(deduit);
+    el.dataset['creditTexte'] = 'Image publiée sur Reddit par u/x';
+    el.dataset['creditSource'] = 'reddit';
+    el.dataset['creditLien'] = 'https://reddit.com/r/a/comments/1/';
+    expect(creditDeclare(el, deduit)).toEqual({ source: 'reddit', texte: 'Image publiée sur Reddit par u/x', detail: 'example.org', lien: 'https://reddit.com/r/a/comments/1/' });
+    el.dataset['creditSource'] = 'inconnue';
+    expect(creditDeclare(el, deduit).source).toBe('externe');
   });
 });

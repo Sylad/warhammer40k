@@ -1,6 +1,6 @@
 import { Component, DestroyRef, Input, NgZone, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SOURCES_IMAGES, adressesImages, creditImage, type SourceImage } from '../../core/credits/credit-image';
+import { SOURCES_IMAGES, adressesImages, creditDeclare, creditImage, type SourceImage } from '../../core/credits/credit-image';
 
 export interface GroupeCredits {
   source: SourceImage;
@@ -59,7 +59,9 @@ const SELECTEUR = 'img[src], [style]';
     ul { margin: 4px 0 8px; padding-left: 1.2em; }
     li { margin: 6px 0; overflow-wrap: anywhere; }
     .credits-liens { display: flex; flex-wrap: wrap; column-gap: 12px; }
-    .credits-liens a, .credits-tout { color: var(--gold); display: inline-flex; align-items: center; min-height: 24px; }
+    /* L238 r1 (WCAG 1.4.1) : souligné, l'or seul ne se distingue pas assez du texte voisin (1,51:1). */
+    .credits-liens a, .credits-tout { color: var(--gold); display: inline-flex; align-items: center; min-height: 24px; text-decoration: underline; text-underline-offset: 3px; }
+    .credits-liens a:hover, .credits-tout:hover { color: var(--gold-bright); }
     .credits-tout { min-height: 44px; }
     .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   `],
@@ -95,6 +97,8 @@ export class CreditsPageComponent implements OnInit {
     const parSource = new Map<SourceImage, { nombre: number; liens: Map<string, string>; vues: Set<string> }>();
     for (const el of Array.from(racine.querySelectorAll<HTMLElement>(SELECTEUR))) {
       const credits = adressesImages(el).map((a) => ({ a, c: creditImage(a, origine) })).filter((x) => x.c);
+      // Source connue par l'élément (auteur et post d'un aperçu Reddit…) : remplace le crédit déduit de l'adresse.
+      if (credits.length) credits[0].c = creditDeclare(el, credits[0].c!);
       if (!credits.length) {
         if (el.dataset['credit']) { delete el.dataset['credit']; if (el.dataset['creditTitre']) { el.removeAttribute('title'); delete el.dataset['creditTitre']; } }
         continue;

@@ -12,6 +12,8 @@ import { PlurielPipe } from '../../shared/pluriel.pipe';
 import { plural } from '../../core/utils/pluriel';
 import { nombreOeuvresGalerie } from '../../core/utils/galerie';
 import { defilementSelonPreference } from '../../core/utils/section-anchor';
+import { creditImage, SOURCES_IMAGES } from '../../core/credits/credit-image';
+import { CreditLegendeComponent } from '../../shared/components/credit-legende/credit-legende.component';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
 
 interface CategoryDef {
@@ -36,7 +38,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule, FormsModule, GalleryModalDirective, PlurielPipe],
+  imports: [CommonModule, FormsModule, GalleryModalDirective, PlurielPipe, CreditLegendeComponent],
   template: `
     <section class="gallery-page">
 
@@ -273,9 +275,14 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                     <div class="art-content">
                       <div class="art-title" aria-hidden="true">{{ art.title }}</div>
                       <div class="art-meta">
-                        <span class="art-artist">{{ art.artist }}</span>
+                        <!-- L238 r1 : l'artiste est celui de l'œuvre au catalogue, pas forcément de l'image affichée
+                             (cherchée sur le wiki d'après le titre) ; la source réelle de l'image est dite dessous. -->
+                        <span class="art-artist">{{ art.isLocal ? art.artist : 'Catalogue : ' + art.artist }}</span>
                         <span class="art-likes">♥ {{ art.likes ?? 0 }}</span>
                       </div>
+                      @if (sourceImageCatalogue(art); as src) {
+                        <div class="art-source" data-testid="source-image">Image : {{ src }}</div>
+                      }
                     </div>
                   </article>
                 }
@@ -358,13 +365,24 @@ type SortBy = 'recent' | 'popular' | 'alpha';
           <div class="viewer-info">
             <div class="vi-title" id="viewer-titre">{{ art.title }}</div>
             <div class="vi-meta">
-              <span>{{ art.artist }}</span>
+              <span>{{ art.isLocal ? art.artist : 'Artiste au catalogue : ' + art.artist }}</span>
               <span class="vi-dot">·</span>
               <span>{{ art.category }}</span>
               @if (art.likes) {
                 <span class="vi-dot">·</span>
                 <span>♥ {{ art.likes }}</span>
               }
+            </div>
+            <!-- L238 r1 : crédit réel de l'image affichée ; pour une œuvre du catalogue, l'écart est dit. -->
+            <div class="vi-credit" data-testid="viewer-credit">
+              @if (!art.isLocal) {
+                @if (viewerImageUrl()) {
+                  <p class="vi-ecart" data-testid="viewer-ecart">Image trouvée sur le Warhammer 40k Wiki d’après le titre de l’œuvre : rien n’indique qu’elle soit de {{ art.artist }}.</p>
+                } @else {
+                  <p class="vi-ecart" data-testid="viewer-ecart">Aucune image trouvée pour cette œuvre.</p>
+                }
+              }
+              <app-credit-legende [adresse]="viewerImageUrl()" [texte]="art.isLocal ? creditLocal(art) : null" />
             </div>
             <div class="vi-actions">
               @if (art.isLocal && editMode()) {
@@ -502,7 +520,10 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 <div class="reddit-grid">
                   @for (p of importRedditPosts(); track p.id) {
                     <article class="reddit-card">
-                      <div class="reddit-thumb" [style.background-image]="'url(' + p.imageUrl + ')'"></div>
+                      <!-- L238 r1 : auteur et post connus par l'API, pas par l'adresse de l'image (crédit déclaré). -->
+                      <div class="reddit-thumb" [style.background-image]="'url(' + p.imageUrl + ')'"
+                        data-credit-source="reddit" [attr.data-credit-texte]="creditReddit(p)"
+                        [attr.data-credit-lien]="p.permalink || null" [attr.data-credit-detail]="'post de u/' + p.author"></div>
                       <div class="reddit-info">
                         <div class="reddit-title">{{ p.title }}</div>
                         <div class="reddit-meta">u/{{ p.author }} · ▲ {{ p.upvotes }}</div>
@@ -1173,13 +1194,40 @@ export class GalleryComponent {
   }
 
   viewerBg(): string {
-    const a = this.selectedArt();
-    if (!a) return '';
-    if (a.isLocal) {
-      return `url('${this.service.imageUrl(a.image)}')`;
-    }
-    const url = this.imgCache()[`art:${a.id}`];
+    const url = this.viewerImageUrl();
     return url ? `url('${url}')` : '';
+  }
+
+  /** Adresse de l'image de la visionneuse (collection perso, ou image du wiki trouvée d'après le titre). */
+  viewerImageUrl(): string | null {
+    const a = this.selectedArt();
+    if (!a) return null;
+    if (a.isLocal) return this.service.imageUrl(a.image);
+    return this.imgCache()[`art:${a.id}`] ?? null;
+  }
+
+  /**
+   * L238 r1 — source réelle de l'image affichée par une carte du catalogue (« Warhammer 40k Wiki »),
+   * `null` pour une image de la collection perso ou tant qu'aucune image n'est trouvée.
+   */
+  sourceImageCatalogue(art: Artwork): string | null {
+    if (art.isLocal) return null;
+    const url = this.imgCache()[`art:${art.id}`];
+    const c = url ? creditImage(url, location.origin) : null;
+    if (!c) return null;
+    return c.source === 'fandom' ? 'Warhammer 40k Wiki' : SOURCES_IMAGES[c.source].nom;
+  }
+
+  /** L238 r1 — crédit d'une image de la collection perso : l'artiste indiqué à la catégorisation, s'il y en a un. */
+  creditLocal(art: Artwork): string | null {
+    return art.artist && art.artist !== 'Mes images'
+      ? `Collection personnelle — artiste indiqué à la catégorisation : ${art.artist}`
+      : null;
+  }
+
+  /** L238 r1 — crédit d'un aperçu Reddit : l'auteur du post (le lien du post est posé à côté). */
+  creditReddit(p: RedditPost): string {
+    return `Image publiée sur Reddit par u/${p.author}${p.permalink ? '' : ' — lien du post non fourni'}`;
   }
 
   categoryCount(key: string): number {

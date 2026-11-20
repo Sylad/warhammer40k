@@ -4,7 +4,7 @@
 // leur crédit (infobulle + liste « Crédits des images de cette page ») ; pas de débordement à 320/390 px.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
-import { readFileSync, existsSync } from 'node:fs';
+import { mkdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Browser, Page } from 'playwright-core';
 import { distState, startDistServer, FRONTEND } from '../../../testing/dist-server';
@@ -14,6 +14,9 @@ const { built, stale } = distState([
   'src/app/layout/credits-page/credits-page.component.ts',
   'src/app/core/credits/credit-image.ts',
   'src/app/features/about/about.component.ts',
+  'src/app/features/gallery/gallery.component.ts',
+  'src/app/shared/components/credit-legende/credit-legende.component.ts',
+  'src/app/features/unit-detail/unit-datasheet-dialog.component.ts',
 ]);
 let chromium: typeof import('playwright-core').chromium | null = null;
 try {
@@ -44,7 +47,9 @@ const PAGES = [...new Set(ROUTES_TS.split('\n')
   .map((p) => '/' + (p.includes(':') ? PARAMS[p] : p));
 
 const WIKI = 'https://static.wikia.nocookie.net/warhammer40k/images/c/c1/Adeptus_Astartes_Icon.jpg/revision/latest/scale-to-width-down/700';
-const CAPTURES = resolve(FRONTEND, '../../warhammer40k-20261120110107-646844.captures');
+// Captures à la demande : CAPTURES_DIR=<dossier hors du dépôt> npm run test:e2e (aucune capture sinon).
+const CAPTURES = process.env['CAPTURES_DIR'] ? resolve(process.env['CAPTURES_DIR']) : null;
+if (CAPTURES) mkdirSync(CAPTURES, { recursive: true });
 const JPEG = readFileSync(resolve(FRONTEND, '../backend/public/datasheets/admech-cawl.jpg'));
 
 /** Wiki et fiches techniques servis localement : aucune requête externe, mêmes adresses qu'en prod. */
@@ -130,13 +135,84 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
       for (const b of await footer.locator('a, summary').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().height))) {
         expect(b).toBeGreaterThanOrEqual(24);
       }
-      if (existsSync(CAPTURES) && w !== 320) await footer.screenshot({ path: `${CAPTURES}/l238-pied-factions-${w}.png` });
+      if (CAPTURES && w !== 320) await footer.screenshot({ path: `${CAPTURES}/l238-pied-factions-${w}.png` });
 
       await page.goto(`${base}/about#credits`);
       const section = page.locator('section#credits');
       await section.waitFor();
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
-      if (existsSync(CAPTURES) && w !== 320) await section.screenshot({ path: `${CAPTURES}/l238-about-credits-${w}.png` });
+      if (CAPTURES && w !== 320) await section.screenshot({ path: `${CAPTURES}/l238-about-credits-${w}.png` });
+      await page.close();
+    });
+  }
+
+  // ── r1 ──────────────────────────────────────────────────────────────────────────────────────────
+  it('r1 (WCAG 1.4.1) : « Crédits et droits », les liens de fichiers et « Tous les crédits » sont soulignés', async () => {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await brancher(page);
+    await page.goto(`${base}/factions`);
+    const credits = page.locator('[data-testid="credits-page"]');
+    await credits.waitFor();
+    await credits.locator('summary').click();
+    await credits.locator('.credits-liens a').first().waitFor();
+    const deco = (sel: string) => page.locator(sel).evaluateAll((els) => els.map((e) => getComputedStyle(e).textDecorationLine));
+    for (const sel of ['[data-testid="mention-droits"] a', '.credits-liens a', '.credits-tout']) {
+      const d = await deco(sel);
+      expect(d.length, sel).toBeGreaterThan(0);
+      for (const x of d) expect(x, sel).toContain('underline');
+    }
+    await page.close();
+  });
+
+  for (const [w, h] of [[1440, 900], [390, 844]] as const) {
+    it(`r1 ${w} px : galerie — artiste « Catalogue : », source réelle de l’image, visionneuse avec l’écart et le crédit en légende 12 px`, async () => {
+      const page = await browser.newPage({ viewport: { width: w, height: h } });
+      await brancher(page);
+      await page.goto(`${base}/gallery`);
+      const carte = page.locator('.art-card').first();
+      await carte.waitFor();
+      await expect.poll(() => carte.locator('.art-artist').innerText()).toMatch(/^Catalogue : .+/);
+      await expect.poll(() => carte.locator('[data-testid="source-image"]').innerText()).toBe('Image : Warhammer 40k Wiki');
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+      if (CAPTURES) await page.locator('.art-grid').screenshot({ path: `${CAPTURES}/l238r1-galerie-cartes-${w}.png` });
+      await carte.locator('.art-open').click();
+      const d = page.locator('dialog.modal');
+      await d.waitFor();
+      await expect.poll(() => d.locator('.vi-meta').innerText()).toMatch(/Artiste au catalogue : /);
+      await expect(d.locator('[data-testid="viewer-ecart"]').innerText()).resolves.toMatch(/^Image trouvée sur le Warhammer 40k Wiki d’après le titre de l’œuvre : rien n’indique qu’elle soit de .+\.$/);
+      const legende = d.locator('[data-testid="credit-legende"]');
+      await expect(legende.innerText()).resolves.toContain('Illustration © Games Workshop — via le Warhammer 40k Wiki (Fandom), fichier « Adeptus Astartes Icon.jpg »');
+      expect(await legende.evaluate((e) => getComputedStyle(e).fontSize)).toBe('12px');
+      expect(await legende.locator('a').getAttribute('href')).toBe('https://warhammer40k.fandom.com/wiki/File:Adeptus_Astartes_Icon.jpg');
+      expect(await legende.locator('a').evaluate((e) => getComputedStyle(e).textDecorationLine)).toContain('underline');
+      const b = (await legende.boundingBox())!;
+      expect(b.x).toBeGreaterThanOrEqual(0);
+      expect(b.x + b.width).toBeLessThanOrEqual(w);
+      if (CAPTURES) {
+        await page.waitForTimeout(400); // fondu d'ouverture (0,2 s)
+        await page.screenshot({ path: `${CAPTURES}/l238r1-galerie-visionneuse-${w}.png` });
+      }
+      await page.close();
+    });
+
+    it(`r1 ${w} px : agrandissement de la fiche unité — crédit visible en légende 12 px, sous l’image, dans l’écran`, async () => {
+      const page = await browser.newPage({ viewport: { width: w, height: h } });
+      await brancher(page);
+      await page.goto(`${base}/units/admech-cawl`);
+      const bouton = page.locator('.zoom-btn').first();
+      await bouton.waitFor();
+      await bouton.click();
+      const d = page.locator('dialog.ds-dialog');
+      await d.waitFor();
+      const legende = d.locator('[data-testid="credit-legende"]');
+      await expect(legende.innerText()).resolves.toBe('Fiche technique © Games Workshop');
+      expect(await legende.evaluate((e) => getComputedStyle(e).fontSize)).toBe('12px');
+      expect(await legende.isVisible()).toBe(true);
+      const l = (await legende.boundingBox())!;
+      const sc = (await d.locator('.ds-scroll').boundingBox())!;
+      expect(l.y).toBeGreaterThanOrEqual(sc.y + sc.height - 1); // sous la zone de l'image, jamais recouverte
+      expect(l.y + l.height).toBeLessThanOrEqual(h);
+      if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/l238r1-agrandissement-fiche-${w}.png` });
       await page.close();
     });
   }

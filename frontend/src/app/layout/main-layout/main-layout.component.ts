@@ -329,7 +329,8 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       margin: 0;
       line-height: 1.6;
     }
-    .legal-text a { color: var(--gold); white-space: nowrap; display: inline-block; padding: 2px 4px; min-height: 24px; }
+    /* L238 r1 (WCAG 1.4.1) : souligné, l'or seul ne se distingue pas assez du texte voisin (1,51:1). */
+    .legal-text a { color: var(--gold); white-space: nowrap; display: inline-block; padding: 2px 4px; min-height: 24px; text-decoration: underline; text-underline-offset: 3px; }
     .legal-text a:hover { color: var(--gold-bright); }
     .legal-text a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
 

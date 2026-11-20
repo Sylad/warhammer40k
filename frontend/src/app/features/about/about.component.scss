@@ -205,12 +205,16 @@
     /* L238 : crédits et droits, une ligne par source (nom · usage · droits). */
     .credits { margin-bottom: 44px; scroll-margin-top: 80px; }
     .credits:focus { outline: none; }
-    .credits-liste { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
-    .credits-liste li {
-      display: grid; grid-template-columns: minmax(10em, 1fr) 2fr 2fr; gap: 6px 20px;
-      padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.5;
+    .credits-liste { width: 100%; border-collapse: collapse; border-top: 1px solid var(--border); font-size: 14px; line-height: 1.5; }
+    .credits-liste thead th {
+      text-align: left; padding: 10px 20px 10px 0; color: var(--muted); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--border);
     }
-    .credit-nom { font-family: var(--serif); color: var(--gold); letter-spacing: 0.04em; }
+    .credits-liste tbody tr { border-bottom: 1px solid var(--border); }
+    .credits-liste tbody th, .credits-liste td { padding: 12px 20px 12px 0; vertical-align: top; text-align: left; }
+    .credits-liste tbody th { width: 22%; font-weight: 400; }
+    /* L238 r1 (Nielsen 4) : l'or souligné est réservé aux liens ; un nom qui n'est pas un lien est en texte clair. */
+    .credit-nom { font-family: var(--serif); color: var(--text); letter-spacing: 0.04em; }
     .credit-nom a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
     .credit-nom a:hover { color: var(--gold-bright); }
     .credit-usage { color: var(--text); }
@@ -290,7 +294,11 @@
     @media (max-width: 1024px) {
       .stack { grid-template-columns: minmax(0, 1fr); }
       .inspirations { grid-template-columns: 1fr; }
-      .credits-liste li { grid-template-columns: 1fr; }
+      .credits-liste thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .credits-liste, .credits-liste tbody, .credits-liste tr, .credits-liste tbody th, .credits-liste td { display: block; width: auto; }
+      .credits-liste tbody tr { padding: 12px 0; }
+      .credits-liste tbody th, .credits-liste td { padding: 2px 0; }
+      .credits-liste td::before { content: attr(data-col) ' : '; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; }
       .story { grid-template-columns: 1fr; padding: 28px; }
       .story-side {
         flex-direction: row;

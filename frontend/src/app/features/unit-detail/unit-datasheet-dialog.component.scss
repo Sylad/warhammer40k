@@ -13,7 +13,7 @@
 .ds-dialog[open] { display: block; }
 
 .ds-scroll {
-  position: absolute; inset: 24px;
+  position: absolute; inset: 24px 24px 44px; // bas : place du crédit (.ds-credit)
   display: flex; align-items: flex-start; // pas d'étirement : la hauteur de l'image reste celle de son rapport
   overflow: auto;
   overscroll-behavior: contain;
@@ -39,8 +39,17 @@
 }
 .ds-close:hover, .ds-close:focus-visible { border-color: var(--gold-bright); background: rgba(123, 17, 19, 0.6); }
 
+// L238 r1 : crédit visible de l'image, 12 px, sous l'image.
+.ds-credit {
+  position: absolute; left: 24px; right: 24px; bottom: 8px;
+  width: fit-content; margin-inline: auto; // centrée, fond opaque : jamais lue sur la page derrière
+  padding: 0 10px; background: #050403;
+  text-align: center;
+}
+
 @media (max-width: 760px) {
-  .ds-scroll { inset: 68px 0 0 0; }
+  .ds-scroll { inset: 68px 0 52px 0; }
+  .ds-credit { left: 12px; right: 12px; bottom: 6px; }
   .ds-img {
     margin: 0;
     max-width: 898px; max-height: none;
