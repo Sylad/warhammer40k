@@ -827,6 +827,7 @@ lots:
     visible: true
     created: 2026-10-06
     started: 2026-11-20
+    review: { date: 2026-11-20, verdict: "conforme : 0 bloquant ; mineur antérieur au lot noté (galerie : compte du catalogue seul tant que /api/images manque, l'accueil affiche « — ») (revue r1 du 20-11, ad29266)", commit: ad29266db2f38d308109a30be656d15108ea1ffb }
   - id: L74
     title: "Données : contenu éditorial lu dans l'image, données utilisateur seules sur le volume — 1) inventaire de data/ : « contenu » (aucun endpoint d'écriture : artworks, artwork-collections, factions, units, lore…) vs « utilisateur » (image-meta, imported/, favoris…, tout ce qu'un POST/DELETE écrit) ; 2) AVANT bascule, comparer chaque fichier « contenu » de la prod (API publique) au dépôt, écart = STOP et question à Sylvain ; 3) le backend lit le contenu depuis le seed embarqué dans l'image, le volume ne garde que l'utilisateur ; 4) CLAUDE.md + « Mise à jour contenu en prod » réécrits (plus de kubectl cp pour du contenu) — demande de Sylvain 06-10 après la mise à jour manuelle du volume pour L70"
     status: done
