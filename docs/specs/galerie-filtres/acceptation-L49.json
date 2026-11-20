@@ -6,7 +6,7 @@
   ],
   "vert": true,
   "empreintes": {
-    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "3726ff3e1b1ed24eca60403bf6857768191182d3"
+    "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": "e873246119476d17639bbf882d018d95769b1359"
   },
   "resceaux": [
     {
@@ -39,6 +39,15 @@
       "avant": "0d663d7565999535f99dc7d03998d6929f45ba0d",
       "apres": "3726ff3e1b1ed24eca60403bf6857768191182d3",
       "porteur": "L217"
+    },
+    {
+      "test": "frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts",
+      "raison": "R6 amendée le 20-11 (compte au-dessus de Faction, revue UX r2 de L239 m3) ; test réécrit d'après la fiche par une session distincte de celle qui a codé ; borne 60 px non sourcée retirée",
+      "date": "2026-11-20",
+      "avant": "3726ff3e1b1ed24eca60403bf6857768191182d3",
+      "apres": "e873246119476d17639bbf882d018d95769b1359",
+      "porteur": "L240",
+      "ficheAmendee": "60452a7"
     }
   ]
 }
