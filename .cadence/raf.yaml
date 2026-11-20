@@ -2642,6 +2642,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-20, sha: d9393260ef61ad39fed2e277572f2fa2bf4ea1ee }
     created: 2026-11-20
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme (r2 du lead sur 04552a9 : sélecteur h3 + .row-link/.row-stat, test e2e rouge avant/vert après, instantané des styles mis à jour ; relu le diff)", commit: 04552a9113db7c2f83666fe8d1bfa897c0c75c7e }
