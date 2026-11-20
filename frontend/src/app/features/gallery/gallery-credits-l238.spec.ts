@@ -18,7 +18,7 @@ const ARTWORKS = [
 ];
 const POST = { id: 'p', title: 'Mon Ultra', imageUrl: 'https://i.redd.it/abc.jpg', permalink: 'https://reddit.com/r/Warhammer40k/comments/p/x/', author: 'peintre', upvotes: 3, thumbnail: null, postedAt: 0 };
 
-type Wiki = { imageUrl: string | null; pageTitle: null; pageUrl: null };
+type Wiki = { imageUrl: string | null; pageTitle: null; pageUrl: null; erreur?: boolean };
 const wikiParDefaut = (q: string): Observable<Wiki> => of({ imageUrl: q === 'Ultramarines' ? WIKI : null, pageTitle: null, pageUrl: null });
 
 async function render(getWikiImage: (q: string) => Observable<Wiki> = wikiParDefaut): Promise<ComponentFixture<GalleryComponent>> {
@@ -133,7 +133,7 @@ describe('galerie — crédit réel de l’image affichée (L238 r1)', () => {
     const ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
     expect(ecart.dataset['etat']).toBe('erreur');
     expect(ecart.getAttribute('role')).toBe('alert');
-    expect(ecart.textContent).toContain('La recherche de l’image a échoué : le wiki n’a pas répondu.');
+    expect(ecart.textContent).toContain('La recherche de l’image sur le Warhammer 40k Wiki a échoué.');
     expect(d.textContent).not.toContain('Aucune image trouvée');
     expect(d.querySelector('[data-testid="credit-legende"]')).toBeNull();
     // Une panne n'est pas relancée en boucle : une seule recherche par œuvre tant qu'on ne le demande pas.
@@ -145,6 +145,65 @@ describe('galerie — crédit réel de l’image affichée (L238 r1)', () => {
     expect(appels.filter((q) => q === 'Ultramarines')).toHaveLength(2);
     expect(d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!.textContent).toContain('rien n’indique qu’elle soit de John Stone');
     expect(d.querySelector('[data-testid="viewer-reessayer"]')).toBeNull();
+  });
+
+  it('r3 — Fandom en panne (notre API répond 200 avec erreur: true) : état « erreur » avec « Réessayer », pas « Aucune image trouvée »', async () => {
+    const f = await render((q) => (q === 'Ultramarines' ? of({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true }) : wikiParDefaut(q)));
+    const d = ouvrir(f, 'Ultramarines');
+    const ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.dataset['etat']).toBe('erreur');
+    expect(ecart.getAttribute('role')).toBe('alert');
+    expect(d.textContent).not.toContain('Aucune image trouvée');
+    expect(d.querySelector('[data-testid="viewer-reessayer"]')).not.toBeNull();
+    // La vraie absence (réponse sans champ erreur) reste une absence.
+    const d2 = ouvrir(f, 'Nécron');
+    expect(d2.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!.dataset['etat']).toBe('absente');
+  });
+
+  it('r3 — « Réessayer » qui échoue encore : le même bouton reste en place et garde le focus (WCAG 2.4.3) ; inactif pendant la recherche', async () => {
+    const appels: Subject<Wiki>[] = [];
+    const f = await render((q) => {
+      if (q !== 'Ultramarines') return wikiParDefaut(q);
+      const s = new Subject<Wiki>();
+      appels.push(s);
+      return s;
+    });
+    appels[0].error(new Error('502'));
+    const d = ouvrir(f, 'Ultramarines');
+    const bouton = d.querySelector<HTMLButtonElement>('[data-testid="viewer-reessayer"]')!;
+    bouton.focus();
+    bouton.click();
+    f.detectChanges();
+    // Nouvelle recherche en cours : même bouton, focus gardé, clic sans effet.
+    let ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.dataset['etat']).toBe('chargement');
+    expect(ecart.textContent).toContain('Nouvelle recherche de l’image sur le Warhammer 40k Wiki…');
+    expect(d.querySelector('[data-testid="viewer-reessayer"]')).toBe(bouton);
+    expect(bouton.getAttribute('aria-disabled')).toBe('true');
+    expect(document.activeElement).toBe(bouton);
+    bouton.click();
+    f.detectChanges();
+    expect(appels).toHaveLength(2);
+
+    // Fandom en panne à nouveau (200 erreur: true) : l'échec est redit, le focus est toujours sur « Réessayer ».
+    appels[1].next({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
+    f.detectChanges();
+    ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.dataset['etat']).toBe('erreur');
+    expect(ecart.textContent).toContain('La recherche de l’image sur le Warhammer 40k Wiki a échoué.');
+    expect(d.querySelector('[data-testid="viewer-reessayer"]')).toBe(bouton);
+    expect(bouton.getAttribute('aria-disabled')).toBeNull();
+    expect(document.activeElement).toBe(bouton);
+
+    // Troisième essai, l'image arrive : le bouton disparaît, le focus va au message qui le remplace (pas au corps de la page).
+    bouton.click();
+    f.detectChanges();
+    appels[2].next({ imageUrl: WIKI, pageTitle: null, pageUrl: null });
+    f.detectChanges();
+    expect(d.querySelector('[data-testid="viewer-reessayer"]')).toBeNull();
+    ecart = d.querySelector<HTMLElement>('[data-testid="viewer-ecart"]')!;
+    expect(ecart.textContent).toContain('rien n’indique qu’elle soit de John Stone');
+    expect(document.activeElement).toBe(ecart);
   });
 
   it('visionneuse (collection perso) : la légende nomme l’artiste indiqué, sinon « auteur d’origine non conservé »', async () => {

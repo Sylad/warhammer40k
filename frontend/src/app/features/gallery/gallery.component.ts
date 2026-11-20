@@ -385,9 +385,10 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                     <p class="vi-ecart" data-testid="viewer-ecart" data-etat="chargement" role="status">Recherche de l’image sur le Warhammer 40k Wiki…</p>
                   }
                   @case ('erreur') {
-                    <p class="vi-ecart vi-ecart-erreur" data-testid="viewer-ecart" data-etat="erreur" role="alert">
-                      La recherche de l’image a échoué : le wiki n’a pas répondu.
-                      <button type="button" class="vi-reessayer" data-testid="viewer-reessayer" (click)="reessayerImage(art)">Réessayer</button>
+                    <!-- r3 : le bouton reste dans la page pendant la nouvelle recherche (aria-disabled), il garde donc le focus si elle échoue encore (WCAG 2.4.3). -->
+                    <p class="vi-ecart vi-ecart-erreur" data-testid="viewer-ecart" [attr.data-etat]="viewerReessai() ? 'chargement' : 'erreur'" role="alert">
+                      {{ viewerReessai() ? 'Nouvelle recherche de l’image sur le Warhammer 40k Wiki…' : 'La recherche de l’image sur le Warhammer 40k Wiki a échoué.' }}
+                      <button type="button" class="vi-reessayer" data-testid="viewer-reessayer" [attr.aria-disabled]="viewerReessai() ? 'true' : null" (click)="reessayerImage(art)">Réessayer</button>
                     </p>
                   }
                   @default {
@@ -927,8 +928,13 @@ export class GalleryComponent {
   readonly heroBgUrl = signal<string>('linear-gradient(135deg, #1a0a08 0%, #050403 100%)');
   private readonly imgCache = signal<Record<string, string>>({});
   private readonly imgInflight = new Set<string>();
-  /** r2 — issue d'une recherche sans image : le wiki a répondu « rien » (`absente`) ou n'a pas répondu (`erreur`). */
+  /**
+   * r2 — issue d'une recherche sans image : le wiki a répondu « rien » (`absente`) ou la recherche a échoué
+   * (`erreur` : notre API en erreur, ou — r3 — sa réponse `erreur: true` quand Fandom n'a pas répondu).
+   */
   private readonly imgIssue = signal<Record<string, 'absente' | 'erreur'>>({});
+  /** r3 — clé de l'image dont « Réessayer » a relancé la recherche, tant qu'elle n'a pas abouti. */
+  private readonly imgReessai = signal<string | null>(null);
 
   /** Cap simultaneous wiki-image fetches to ease load on the backend proxy. */
   private static readonly FETCH_QUEUE_LIMIT = 6;
@@ -1162,18 +1168,37 @@ export class GalleryComponent {
       this.service.getWikiImage(query).subscribe({
         next: r => {
           if (r.imageUrl) this.imgCache.update(c => ({ ...c, [key]: r.imageUrl! }));
-          else this.imgIssue.update(c => ({ ...c, [key]: 'absente' }));
-          this.imgInflight.delete(key);
-          this.releaseFetchSlot();
+          // r3 : `erreur` = Fandom n'a pas répondu (réseau, délai, 429) ; ce n'est pas une absence.
+          this.finRecherche(key, r.imageUrl ? null : r.erreur ? 'erreur' : 'absente');
         },
-        error: () => {
-          this.imgIssue.update(c => ({ ...c, [key]: 'erreur' }));
-          this.imgInflight.delete(key);
-          this.releaseFetchSlot();
-        },
+        error: () => this.finRecherche(key, 'erreur'),
       });
     });
     this.pumpFetchQueue();
+  }
+
+  /** Fin d'une recherche d'image : son issue (`null` = image trouvée), puis la place rendue à la file. */
+  private finRecherche(key: string, issue: 'absente' | 'erreur' | null): void {
+    this.imgIssue.update(c => {
+      const { [key]: _, ...reste } = c;
+      return issue ? { ...reste, [key]: issue } : reste;
+    });
+    if (this.imgReessai() === key) {
+      this.imgReessai.set(null);
+      // r3 : nouvel échec → le bouton « Réessayer », resté en place, garde le focus. Sinon il disparaît :
+      // le focus va au message qui le remplace, au lieu de retomber sur le corps de la page (WCAG 2.4.3).
+      const bouton = this.host.nativeElement.querySelector<HTMLElement>('dialog [data-testid="viewer-reessayer"]');
+      if (issue !== 'erreur' && bouton && document.activeElement === bouton) {
+        this.cdr.detectChanges(); // le message remplace le bouton tout de suite, pour y porter le focus
+        const message = this.host.nativeElement.querySelector<HTMLElement>('dialog [data-testid="viewer-ecart"]');
+        if (message) {
+          message.tabIndex = -1;
+          message.focus();
+        }
+      }
+    }
+    this.imgInflight.delete(key);
+    this.releaseFetchSlot();
   }
 
   private pumpFetchQueue(): void {
@@ -1225,7 +1250,8 @@ export class GalleryComponent {
 
   /**
    * L238 r2 — où en est l'image d'une œuvre du catalogue dans la visionneuse : `trouvee`, `chargement` (recherche
-   * en file ou en cours), `erreur` (le wiki n'a pas répondu) ou `absente` (le wiki a répondu sans image).
+   * en file ou en cours), `erreur` (la recherche a échoué ; l'état tient pendant la nouvelle recherche de
+   * « Réessayer », voir `viewerReessai`) ou `absente` (le wiki a répondu sans image).
    */
   viewerEtatImage(): 'trouvee' | 'chargement' | 'erreur' | 'absente' {
     if (this.viewerImageUrl()) return 'trouvee';
@@ -1233,10 +1259,20 @@ export class GalleryComponent {
     return (a && this.imgIssue()[`art:${a.id}`]) || 'chargement';
   }
 
-  /** L238 r2 — relance la recherche d'une image après une panne du wiki. */
+  /** L238 r3 — « Réessayer » a relancé la recherche de l'image affichée et elle n'a pas encore abouti. */
+  viewerReessai(): boolean {
+    const a = this.selectedArt();
+    return !!a && this.imgReessai() === `art:${a.id}`;
+  }
+
+  /**
+   * L238 r2 — relance la recherche d'une image après une panne du wiki. r3 : l'état `erreur` (donc le bouton,
+   * avec le focus) reste en place jusqu'à la réponse ; un second appui pendant la recherche ne fait rien.
+   */
   reessayerImage(art: Artwork): void {
     const key = `art:${art.id}`;
-    this.imgIssue.update(c => { const { [key]: _, ...reste } = c; return reste; });
+    if (this.imgInflight.has(key)) return;
+    this.imgReessai.set(key);
     this.fetchImage(key, art.wikiQuery ?? `${art.title} warhammer 40k`);
   }
 

@@ -14,6 +14,8 @@ export interface WikiImageResult {
   imageUrl: string | null;
   pageTitle: string | null;
   pageUrl: string | null;
+  /** L238 r3 — `true` : la recherche a échoué côté wiki (réseau, délai, 429) ; absent : le wiki a répondu. */
+  erreur?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })

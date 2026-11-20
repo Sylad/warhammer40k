@@ -2412,6 +2412,10 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "padding": "0 4px",
     "text-decoration": "underline",
   },
+  "app-gallery .vi-reessayer[aria-disabled=true]": {
+    "cursor": "default",
+    "text-decoration": "none",
+  },
   "app-gallery .vi-title": {
     "color": "var(--gold-bright)",
     "font-family": "var(--serif)",

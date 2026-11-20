@@ -82,5 +82,7 @@ app-gallery {
   .vi-reessayer {
     min-height: 24px; margin-left: 6px; padding: 0 4px; border: 0; background: none; cursor: pointer;
     color: var(--gold); font: inherit; text-decoration: underline;
+    /* r3 — nouvelle recherche en cours : le bouton reste (il garde le focus) mais ne s'offre plus au clic. */
+    &[aria-disabled='true'] { cursor: default; text-decoration: none; }
   }
 }

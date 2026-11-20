@@ -3,11 +3,14 @@
 // (pages fixes et une fiche par route à paramètre) ; les images du wiki et les fiches techniques portent
 // leur crédit (infobulle + liste « Crédits des images de cette page ») ; pas de débordement à 320/390 px.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import type { Server } from 'node:http';
+import { createServer, type Server } from 'node:http';
+import type { AddressInfo } from 'node:net';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Browser, Page } from 'playwright-core';
 import { distState, startDistServer, FRONTEND } from '../../../testing/dist-server';
+// r3 — le vrai code du backend (module sans dépendance), pour simuler une panne au niveau de Fandom.
+import { rechercherImageWiki, viderCacheWiki } from '../../../../../backend/src/modules/wiki-image/fandom-lookup';
 
 const { built, stale } = distState([
   'src/app/layout/main-layout/main-layout.component.ts',
@@ -15,6 +18,7 @@ const { built, stale } = distState([
   'src/app/core/credits/credit-image.ts',
   'src/app/features/about/about.component.ts',
   'src/app/features/gallery/gallery.component.ts',
+  'src/styles/_gallery-visionneuse.scss',
   'src/app/shared/components/credit-legende/credit-legende.component.ts',
   'src/app/features/unit-detail/unit-datasheet-dialog.component.ts',
 ]);
@@ -50,6 +54,13 @@ const WIKI = 'https://static.wikia.nocookie.net/warhammer40k/images/c/c1/Adeptus
 // Captures à la demande : CAPTURES_DIR=<dossier hors du dépôt> npm run test:e2e (aucune capture sinon).
 const CAPTURES = process.env['CAPTURES_DIR'] ? resolve(process.env['CAPTURES_DIR']) : null;
 if (CAPTURES) mkdirSync(CAPTURES, { recursive: true });
+/** r3 — une capture de la visionneuse attend la fin de son fondu d'entrée (0,2 s), fond de la fenêtre compris. */
+async function capturer(page: Page, nom: string): Promise<void> {
+  if (!CAPTURES) return;
+  await page.locator('dialog.modal').evaluate((d) =>
+    Promise.all(d.getAnimations({ subtree: true }).map((a) => a.finished.catch(() => undefined))));
+  await page.screenshot({ path: `${CAPTURES}/${nom}` });
+}
 const JPEG = readFileSync(resolve(FRONTEND, '../backend/public/datasheets/admech-cawl.jpg'));
 
 /** Wiki et fiches techniques servis localement : aucune requête externe, mêmes adresses qu'en prod. */
@@ -191,7 +202,7 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
     await expect(ecart.innerText()).resolves.toBe('Recherche de l’image sur le Warhammer 40k Wiki…');
     expect(await ecart.getAttribute('data-etat')).toBe('chargement');
     expect(await page.locator('dialog.modal [data-testid="credit-legende"]').count()).toBe(0);
-    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/l238r2-visionneuse-chargement-390.png` });
+    await capturer(page, 'l238r2-visionneuse-chargement-390.png');
     // … puis l'image arrive.
     mode = 'ok';
     liberer();
@@ -202,17 +213,14 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
     ecart = await ouvrir();
     await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
     expect(await ecart.getAttribute('role')).toBe('alert');
-    expect(await ecart.innerText()).toContain('La recherche de l’image a échoué : le wiki n’a pas répondu.');
+    expect(await ecart.innerText()).toContain('La recherche de l’image sur le Warhammer 40k Wiki a échoué.');
     expect(await page.locator('dialog.modal').innerText()).not.toContain('Aucune image trouvée');
     const bouton = ecart.locator('[data-testid="viewer-reessayer"]');
     const b = (await bouton.boundingBox())!;
     expect(b.height).toBeGreaterThanOrEqual(24); // WCAG 2.5.8
     expect(b.x + b.width).toBeLessThanOrEqual(390);
     expect(await bouton.evaluate((e) => getComputedStyle(e).textDecorationLine)).toContain('underline');
-    if (CAPTURES) {
-      await page.waitForTimeout(400);
-      await page.screenshot({ path: `${CAPTURES}/l238r2-visionneuse-panne-390.png` });
-    }
+    await capturer(page, 'l238r2-visionneuse-panne-390.png');
     mode = 'ok';
     await bouton.click();
     await expect.poll(() => ecart.innerText()).toMatch(/^Image trouvée sur le Warhammer 40k Wiki/);
@@ -223,8 +231,80 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
     ecart = await ouvrir();
     await expect.poll(() => ecart.getAttribute('data-etat')).toBe('absente');
     expect(await ecart.innerText()).toBe('Aucune image trouvée pour cette œuvre.');
-    if (CAPTURES) await page.screenshot({ path: `${CAPTURES}/l238r2-visionneuse-absente-390.png` });
+    await capturer(page, 'l238r2-visionneuse-absente-390.png');
     await page.close();
+  });
+
+  // r3 — la panne est simulée au niveau de Fandom : /api/wiki-image est rendu par le vrai code du backend
+  // (rechercherImageWiki), branché sur un faux Fandom local qui coupe la connexion ou répond 429 en HTML.
+  it('r3 390 px : Fandom en panne (connexion coupée, puis 429 HTML) — « erreur » et « Réessayer », jamais « Aucune image trouvée » ; le focus reste sur « Réessayer »', async () => {
+    let fandom: 'coupe' | '429' | 'sans-image' = 'coupe';
+    let appelsFandom = 0;
+    const faux = createServer((req, res) => {
+      appelsFandom++;
+      if (fandom === 'coupe') return void req.socket.destroy(); // ECONNRESET côté backend
+      if (fandom === '429') {
+        res.writeHead(429, { 'content-type': 'text/html' });
+        return void res.end('<!DOCTYPE html><html><body>Too Many Requests</body></html>');
+      }
+      res.writeHead(200, { 'content-type': 'application/json' });
+      res.end(JSON.stringify(req.url!.includes('list=search') ? { query: { search: [] } } : { query: { pages: { '-1': { missing: '' } } } }));
+    });
+    await new Promise<void>((ok) => faux.listen(0, '127.0.0.1', ok));
+    const baseFandom = `http://127.0.0.1:${(faux.address() as AddressInfo).port}/api.php`;
+    viderCacheWiki();
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    try {
+      await brancher(page);
+      const reponses: unknown[] = [];
+      await page.route('**/api/wiki-image**', async (r) => {
+        const q = new URL(r.request().url()).searchParams.get('q')!;
+        const json = await rechercherImageWiki(q, { base: baseFandom });
+        reponses.push(json);
+        return r.fulfill({ json }); // notre API répond 200, comme le contrôleur
+      });
+      await page.goto(`${base}/gallery`);
+      const carte = page.locator('.art-card').first();
+      await carte.waitFor();
+      await carte.locator('.art-open').click();
+      const d = page.locator('dialog.modal');
+      await d.waitFor();
+      const ecart = d.locator('[data-testid="viewer-ecart"]');
+
+      // 1. Connexion coupée par Fandom : notre API a répondu 200, la visionneuse dit quand même l'échec.
+      await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
+      expect(appelsFandom).toBeGreaterThan(0);
+      expect(reponses.length).toBeGreaterThan(0);
+      for (const r of reponses) expect(r).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
+      expect(await ecart.getAttribute('role')).toBe('alert');
+      expect(await ecart.innerText()).toContain('La recherche de l’image sur le Warhammer 40k Wiki a échoué.');
+      expect(await d.innerText()).not.toContain('Aucune image trouvée');
+      await capturer(page, 'l238r3-visionneuse-fandom-en-panne-390.png');
+
+      // 2. « Réessayer » au clavier, Fandom répond 429 en HTML : encore l'échec, le focus n'a pas quitté le bouton.
+      fandom = '429';
+      const bouton = d.locator('[data-testid="viewer-reessayer"]');
+      await bouton.focus();
+      const avant = reponses.length;
+      await page.keyboard.press('Enter');
+      await expect.poll(() => reponses.length).toBeGreaterThan(avant);
+      await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
+      expect(reponses.at(-1)).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
+      expect(await d.innerText()).not.toContain('Aucune image trouvée');
+      expect(await page.evaluate(() => document.activeElement?.getAttribute('data-testid'))).toBe('viewer-reessayer');
+      expect(await bouton.getAttribute('aria-disabled')).toBeNull();
+
+      // 3. Fandom répond, sans image : là seulement « Aucune image trouvée » ; le focus suit le message, pas le corps de la page.
+      fandom = 'sans-image';
+      await page.keyboard.press('Enter');
+      await expect.poll(() => ecart.getAttribute('data-etat')).toBe('absente');
+      expect(await ecart.innerText()).toBe('Aucune image trouvée pour cette œuvre.');
+      expect(await bouton.count()).toBe(0);
+      expect(await page.evaluate(() => document.activeElement?.getAttribute('data-testid'))).toBe('viewer-ecart');
+    } finally {
+      await page.close();
+      await new Promise((ok) => faux.close(ok));
+    }
   });
 
   for (const [w, h] of [[1440, 900], [390, 844]] as const) {

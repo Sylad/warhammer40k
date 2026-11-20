@@ -23,7 +23,7 @@ Le suivi d'usage / solde Claude (`claude-usage`, `/api/claude/usage`, `/api/clau
 Endpoints clés :
 - `GET /api/factions/:id`, `GET /api/units?factionId=X`, `GET /api/units/:id`
 - `POST /api/units/:id/description` — génère une description Claude
-- `GET /api/wiki-image?q=NAME` — proxy images Wiki avec cache
+- `GET /api/wiki-image?q=NAME` — proxy images Wiki avec cache. Toujours 200 : `imageUrl: null` seul = le wiki a répondu sans image (gardé en cache) ; avec `erreur: true` = la recherche a échoué chez Fandom (réseau, délai, 429, HTML ; jamais en cache) — L238, `wiki-image/fandom-lookup.ts`, module sans dépendance que l'e2e du frontend importe. La visionneuse de la galerie lit ce champ (« Réessayer ») ; les autres pages se passent d'image.
 - `GET /api/images?category=X` — galerie utilisateur (1468 images perso)
 - `POST /api/image-import` — import depuis Reddit/URL externe
 
