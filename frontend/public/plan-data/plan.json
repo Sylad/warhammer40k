@@ -212,8 +212,9 @@
     {
       "id": "L73",
       "title": "Accueil : le compte des œuvres est le même que dans la galerie",
-      "status": "doing",
-      "started": "2026-11-20"
+      "status": "done",
+      "started": "2026-11-20",
+      "finished": "2026-11-20"
     },
     {
       "id": "L78",
