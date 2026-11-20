@@ -823,8 +823,9 @@
     {
       "id": "L239",
       "title": "Galerie et Vidéos : un filtre ne fait plus sauter la page",
-      "status": "doing",
-      "started": "2026-11-20"
+      "status": "done",
+      "started": "2026-11-20",
+      "finished": "2026-11-20"
     }
   ]
 }

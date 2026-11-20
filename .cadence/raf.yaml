@@ -2667,13 +2667,19 @@ lots:
       - { date: 2026-11-20, text: "QA prod conforme 31/31 routes, 1440 et 390 px (tmp/qa-L238.md, captures tmp/qa-L238/)" }
   - id: L239
     title: "Galerie et Vidéos à 390 px : appliquer un filtre fait sauter la page de 309 à 858 px avec un défilement non demandé (revue UX de L238, antérieur au lot)"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "conforme après 1 correction : test Collections populaires manquant (tmp/revue-L239.md)", commit: f623a6d211e36fac8ad3f9f8e8b419616f7e7d1a }
-    ux: { date: 2026-11-20, verdict: "non-conforme M1 1440 ancrage de défilement, focus hors écran ; M2 390 filtres au-dessus des résultats : titre hors écran (tmp/ux-L239.md)" }
+    review: { date: 2026-11-20, verdict: "conforme r2 lead : test .col-row à 390 et 1440 ajouté, 14/33 cas échouent sans le correctif, porte verte", commit: 0515793a5e2deedf9906855bb610dd609b3adc24 }
+    ux: { date: 2026-11-20, verdict: "conforme r2 tmp/ux-L239-r2.md : M1, M2, m3 corrigés ; Faction sans déplacement (WCAG 3.2.2) acceptée ; 3 mineurs en lot de suite" }
+    finished: 2026-11-20
+  - id: L240
+    title: "Vidéos : un clic sur la puce déjà active (« Tous ») fait défiler de 1554 à 2737 px sans rien changer ; à 1440, après un filtre avancé, la rangée pressée finit sous la barre du haut (54-90 px) ; à 390×667 le compte des résultats passe sous le pli après la liste Faction (relevés par la revue UX r2 de L239, tmp/ux-L239-r2.md)"
+    status: todo
+    estimate: 0.25
+    created: 2026-11-20
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
