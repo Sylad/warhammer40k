@@ -1,11 +1,87 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SOURCES_IMAGES } from '../../core/credits/credit-image';
 
 interface StackGroup {
   group: string;
   ico: string;
   items: string[];
 }
+
+/** L238 : une source réelle d'image ou de texte affichés, et ses droits. */
+export interface CreditLigne {
+  id: string;
+  nom: string;
+  url?: string;
+  usage: string;
+  droits: string;
+}
+
+/**
+ * L238 — crédits et droits, une ligne par source. Les droits des sources d'images sont ceux de
+ * `SOURCES_IMAGES` (même texte que la liste du pied de page). Rien de deviné : une origine non
+ * retrouvée est dite telle.
+ */
+export const CREDITS: CreditLigne[] = [
+  {
+    id: 'games-workshop', nom: 'Games Workshop Limited', url: 'https://www.warhammer.com/',
+    usage: 'Univers de Warhammer 40,000 : noms, marques, logos, personnages, illustrations, fiches techniques, textes des codex et des romans Black Library.',
+    droits: 'Warhammer 40,000 et ses marques, logos, images et textes sont ®, ™ et/ou © Games Workshop Limited. Utilisés sans autorisation, sans contestation de leurs droits.',
+  },
+  {
+    id: 'fandom', nom: SOURCES_IMAGES.fandom.nom, url: 'https://warhammer40k.fandom.com/',
+    usage: 'Images des fiches, des héros de page et du lore (cherchées à l’affichage), icônes des factions.',
+    droits: SOURCES_IMAGES.fandom.droits + ' Texte du wiki : licence CC BY-SA (fandom.com/licensing) ; les fiches de la chronologie qui s’en servent citent sa page en source.',
+  },
+  { id: 'fiche', nom: SOURCES_IMAGES.fiche.nom, usage: '119 scans des fiches d’unités (profil, armes, aptitudes), embarqués dans le site.', droits: SOURCES_IMAGES.fiche.droits },
+  { id: 'portrait', nom: SOURCES_IMAGES.portrait.nom, usage: '14 portraits et insignes d’unités sans fiche technique, embarqués dans le site.', droits: SOURCES_IMAGES.portrait.droits },
+  { id: 'carte', nom: SOURCES_IMAGES.carte.nom, usage: 'Fond de la carte galactique.', droits: SOURCES_IMAGES.carte.droits },
+  {
+    id: 'galerie', nom: 'Galerie',
+    usage: 'Catalogue d’œuvres (titre et artiste du catalogue, image cherchée sur le Warhammer 40k Wiki d’après le titre), collection personnelle et images importées.',
+    droits: SOURCES_IMAGES.perso.droits + ' ' + SOURCES_IMAGES.import.droits,
+  },
+  {
+    id: 'youtube', nom: 'YouTube', url: 'https://www.youtube.com/',
+    usage: 'Vidéos intégrées, miniatures et chaînes de la page Vidéos.',
+    droits: SOURCES_IMAGES.youtube.droits + ' Vidéos © leurs chaînes ; chaque carte mène à la vidéo d’origine.',
+  },
+  {
+    id: 'lexicanum', nom: 'Lexicanum', url: 'https://wh40k.lexicanum.com/',
+    usage: 'Source principale des textes de lore (successeurs Space Marines, chronologie, personnages secondaires), réécrits en français.',
+    droits: 'Univers © Games Workshop Limited ; les fiches de la chronologie citent la page utilisée.',
+  },
+  {
+    id: 'omnis-bibliotheca', nom: 'Omnis Bibliotheca', url: 'https://omnis-bibliotheca.com/',
+    usage: 'Wiki francophone, source des fiches en français.',
+    droits: 'Le wiki indique que ses textes sources et nombre de ses illustrations sont la propriété de Games Workshop Limited.',
+  },
+  {
+    id: 'appoint', nom: 'Fluff Bible et 2d4chan',
+    usage: 'Sources d’appoint du lore (document communautaire, wiki 2d4chan).',
+    droits: 'Univers © Games Workshop Limited.',
+  },
+  {
+    id: 'textes', nom: 'Textes du codex',
+    usage: 'Rédigés pour ce site en français d’après les sources ci-dessus ; les descriptions d’unités et de séries demandées à la volée sont générées par Claude (Anthropic).',
+    droits: 'Univers, noms et personnages © Games Workshop Limited ; romans © leurs auteurs et Black Library.',
+  },
+  {
+    id: 'jeux-video', nom: 'Jeux vidéo',
+    usage: 'Dates, plateformes et résumés d’après les annonces des éditeurs et la presse.',
+    droits: 'Chaque jeu à venir renvoie à la source de son annonce ; jeux © leurs éditeurs et Games Workshop Limited.',
+  },
+  {
+    id: 'polices', nom: 'Polices Cinzel et Inter', url: 'https://fonts.google.com/',
+    usage: 'Titres (Cinzel) et texte courant (Inter), servis par Google Fonts.',
+    droits: 'SIL Open Font License 1.1.',
+  },
+  {
+    id: 'code', nom: 'Code du site',
+    usage: 'Application Angular et NestJS.',
+    droits: 'Licence MIT, © Sylvain Ladoire. Ne couvre aucun contenu de Games Workshop.',
+  },
+];
 
 interface Inspiration {
   name: string;
@@ -118,6 +194,31 @@ interface Inspiration {
       }
     </section>
 
+    <!-- L238 : une ligne par source réelle d'image ou de texte (recensée dans le code), avec ses droits. -->
+    <section id="credits" class="credits" aria-labelledby="credits-titre" tabindex="-1">
+      <h2 class="section-title" id="credits-titre">Crédits et droits</h2>
+      <p class="section-lede">
+        Site de fan non officiel, sans approbation de Games Workshop et sans lien avec elle. Chaque image
+        d’un tiers porte son crédit en infobulle ; le pied de chaque page liste les images de la page et
+        leur fichier d’origine.
+      </p>
+      <ul class="credits-liste" data-testid="credits-liste">
+        @for (c of credits; track c.id) {
+          <li [attr.data-credit-id]="c.id">
+            <span class="credit-nom">
+              @if (c.url) {
+                <a [href]="c.url" target="_blank" rel="noopener noreferrer">{{ c.nom }}<span class="sr-only"> (nouvel onglet)</span></a>
+              } @else {
+                {{ c.nom }}
+              }
+            </span>
+            <span class="credit-usage">{{ c.usage }}</span>
+            <span class="credit-droits">{{ c.droits }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+
     <section class="other-sites">
       <h2>Mes autres sites</h2>
       <p class="other-intro">Quatre autres apps perso vibe-codées avec Claude Code, toutes en open-source.</p>
@@ -152,6 +253,8 @@ interface Inspiration {
   styleUrls: ['./about.component.scss'],
 })
 export class AboutComponent {
+  readonly credits = CREDITS;
+
   stack: StackGroup[] = [
     {
       group: 'Frontend',

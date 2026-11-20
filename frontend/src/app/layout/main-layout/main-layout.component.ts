@@ -13,12 +13,13 @@ import { SectionAnchorDirective } from '../../shared/section-anchor.directive';
 import { DemoBannerComponent } from '../../shared/components/demo-banner/demo-banner.component';
 import { QuotaAlertService } from '../../core/services/quota-alert.service';
 import { PageTitleService } from '../../core/services/page-title.service';
+import { CreditsPageComponent } from '../credits-page/credits-page.component';
 import { searchShortcut, type PlatformHints } from './search-shortcut';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, LoreMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent, SectionAnchorDirective],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, LoreMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent, SectionAnchorDirective, CreditsPageComponent],
   template: `
     <!-- L21 : premier élément focalisable — évite la barre (≈ 14 arrêts de Tab au bureau). -->
     <a class="skip-link" sectionAnchor="contenu" [attr.inert]="pageInert()">Aller au contenu</a>
@@ -140,9 +141,13 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
         <!-- Écart porté par le gap flex, sans « · » : rien d'orphelin au retour à la ligne (320 px). -->
         <a routerLink="/nouveautes">Nouveautés</a><a routerLink="/plan">Plan de travail</a><a routerLink="/about">À propos</a>
       </nav>
-      <div class="legal-text">
-        Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
-      </div>
+      <!-- L238 : droits de Games Workshop sur chaque page, crédits des images de la page, détail dans À propos. -->
+      <p class="legal-text" data-testid="mention-droits">
+        Site de fan non officiel, sans approbation de Games Workshop. Warhammer 40,000 et ses marques,
+        logos, images et textes sont © Games Workshop Limited.
+        <a routerLink="/about" fragment="credits">Crédits et droits</a>
+      </p>
+      <app-credits-page [cible]="main" />
     </footer>
   `,
   styles: [`
@@ -321,7 +326,12 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
       letter-spacing: 0.08em;
       text-align: center;
       max-width: 720px;
+      margin: 0;
+      line-height: 1.6;
     }
+    .legal-text a { color: var(--gold); white-space: nowrap; display: inline-block; padding: 2px 4px; min-height: 24px; }
+    .legal-text a:hover { color: var(--gold-bright); }
+    .legal-text a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
 
     /* L21 : lien d'évitement, hors écran tant qu'il n'a pas le focus. */
     .skip-link {

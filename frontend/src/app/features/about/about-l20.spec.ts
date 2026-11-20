@@ -11,7 +11,7 @@ const scss = readFileSync(resolve(__dirname, 'about.component.scss'), 'utf8');
 describe('page À propos — revue UX (L20)', () => {
   it('R1 — chaque lien qui s’ouvre dans un nouvel onglet l’annonce aux lecteurs d’écran', () => {
     const anchors = ts.match(/<a\b[^>]*target="_blank"[\s\S]*?<\/a>/g) ?? [];
-    expect(anchors.length).toBe(4); // Claude Code, ChatGPT, inspirations, autres sites
+    expect(anchors.length).toBe(5); // Claude Code, ChatGPT, inspirations, crédits et droits (L238), autres sites
     for (const a of anchors) expect(a).toContain('(nouvel onglet)');
   });
 

@@ -338,7 +338,6 @@ type SortBy = 'recent' | 'popular' | 'alpha';
       </section>
 
       <footer class="page-footer">
-        Site fan non officiel Warhammer 40,000. Toutes les images appartiennent à leurs auteurs respectifs.
         <button class="edit-toggle" type="button" [attr.aria-pressed]="editMode()" (click)="toggleEditMode()">{{ editMode() ? 'Quitter l’édition' : 'Mode édition' }}</button>
       </footer>
     </section>

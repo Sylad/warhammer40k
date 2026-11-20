@@ -8,6 +8,7 @@ libellés en capitales).
 
 ## *
 - shows: un h1 non vide
+- shows: au pied de page, « Site de fan non officiel, sans approbation de Games Workshop » et « © Games Workshop Limited », avec le lien « Crédits et droits » (L238) ; chaque image d'un tiers (wiki, fiche technique, YouTube…) porte son crédit en infobulle (attribut title) et la liste « Crédits des images de cette page » la nomme
 - never: « undefined », « NaN », un message d'erreur d'API affiché ; une erreur dans la console (hors les icônes de faction en 404, voir /factions) ; une image cassée (naturalWidth 0)
 - never: un défilement horizontal (scrollWidth > clientWidth) — 390 only
 
@@ -199,5 +200,6 @@ Complété par L235 (QA prod du 17-11, L68).
 ## /about
 Complété par L235 (QA prod du 17-11, L68).
 - shows: le h1 « Le Scribe et son Daemon »
-- shows: 4 sections h2 : « L'histoire courte », « Composantes techniques », « Inspirations & sources », « Mes autres sites »
+- shows: 5 sections h2 : « L'histoire courte », « Composantes techniques », « Inspirations & sources », « Crédits et droits », « Mes autres sites »
+- shows: « Crédits et droits » (L238, ancre #credits) : une ligne par source d'image ou de texte (Games Workshop, Warhammer 40k Wiki, fiches techniques, portraits locaux, carte, galerie, YouTube, Lexicanum, Omnis Bibliotheca…), chacune avec ses droits
 - api: aucun appel /api/ (page sans données chargées) ; les liens externes s'ouvrent dans un nouvel onglet (target="_blank", rel="noopener")
