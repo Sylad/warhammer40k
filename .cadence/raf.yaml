@@ -2639,12 +2639,14 @@ lots:
     created: 2026-11-18
   - id: L237
     title: "Fiche faction Chaos Space Marines : le sujet « Croisades Noires d'Abaddon » disparaît des liens rapides (renommé « Chronologie générale » puis retiré comme doublon par sansDoublon, faction-detail.component.ts:77 et :880) alors que la Nouveauté de L94 dit que les autres sujets restent en texte simple — revue r1 de L94"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "conforme (r1 : premier lien gardé par destination, sujets suivants en texte simple ; test des 17 factions ; Nouveauté exacte, JSON identique à news build)", commit: 24625a25cc5bc375e16f9e39af85aace6ccdd14b }
+    review: { date: 2026-11-20, verdict: "conforme (r2 du lead sur 04552a9 : sélecteur h3 + .row-link/.row-stat, test e2e rouge avant/vert après, instantané des styles mis à jour ; relu le diff)", commit: 04552a9113db7c2f83666fe8d1bfa897c0c75c7e }
+    ux: { date: 2026-11-20, verdict: "conforme (lead : ux-reviewer r1 conforme + mineur du filet corrigé ; captures CSM 390 et Aeldari 1440 du correctif relues, filet et hauteur réguliers)" }
+    finished: 2026-11-20
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }

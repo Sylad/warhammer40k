@@ -809,8 +809,9 @@
     {
       "id": "L237",
       "title": "Fiche faction : aucun sujet ne disparaît des liens rapides",
-      "status": "doing",
-      "started": "2026-11-20"
+      "status": "done",
+      "started": "2026-11-20",
+      "finished": "2026-11-20"
     }
   ]
 }
