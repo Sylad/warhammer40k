@@ -58,6 +58,8 @@ interface SidebarLink {
   label: string;
   route?: string;
   fragment?: string;
+  /** Sujet d'origine quand le libellé a pris le nom de la page visée (« Croisades Noires d'Abaddon »). */
+  sujet?: string;
 }
 
 const DEFAULT_LIENS = [
@@ -73,15 +75,31 @@ function plier(texte: string): string {
   return texte.toLowerCase().replace(/œ/g, 'oe').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-/** Un seul lien par destination ; un libellé sans lien n'apparaît qu'une fois. */
+/**
+ * Un seul lien par destination ; un libellé sans lien n'apparaît qu'une fois. L237 : un sujet dont la
+ * destination a déjà son lien n'est pas perdu, il reste affiché en texte simple sous son nom d'origine
+ * (« Croisades Noires d'Abaddon » après « Hérésie d'Horus », tous deux vers la chronologie générale).
+ */
 function sansDoublon(liens: SidebarLink[]): SidebarLink[] {
   const vus = new Set<string>();
-  return liens.filter(l => {
-    const cle = l.route || l.fragment ? `${l.route ?? ''}#${l.fragment ?? ''}` : `texte:${l.label}`;
-    if (vus.has(cle)) return false;
+  const garde: SidebarLink[] = [];
+  for (const lien of liens) {
+    let l = lien;
+    if (l.route || l.fragment) {
+      const cle = `${l.route ?? ''}#${l.fragment ?? ''}`;
+      if (!vus.has(cle)) {
+        vus.add(cle);
+        garde.push({ ico: l.ico, label: l.label, route: l.route, fragment: l.fragment });
+        continue;
+      }
+      l = { ico: l.ico, label: l.sujet ?? l.label };
+    }
+    const cle = `texte:${plier(l.label)}`;
+    if (vus.has(cle)) continue;
     vus.add(cle);
-    return true;
-  });
+    garde.push(l);
+  }
+  return garde;
 }
 
 const DEFAULT_RESOURCES = [
@@ -878,13 +896,13 @@ export class FactionDetailComponent {
   private toQuickLink(label: string, ico: string): SidebarLink {
     const l = plier(label);
     if (l.includes('chronologie') || l.includes('heresie') || l.includes('croisade')) {
-      return { ico, label: 'Chronologie générale', route: '/lore/timeline' };
+      return { ico, label: 'Chronologie générale', route: '/lore/timeline', sujet: label };
     }
     if (/personnage|heros|warlord|champion|celebre/.test(l)) {
       return this.faction()?.notableHeroes?.length ? { ico, label, fragment: 'heros' } : { ico, label };
     }
     if (/monde|craftworld|oeil|webway|carte/.test(l)) {
-      return { ico, label: 'Carte de la galaxie', route: '/lore/galaxy' };
+      return { ico, label: 'Carte de la galaxie', route: '/lore/galaxy', sujet: label };
     }
     if (this.nommeLesSousFactions(l)) {
       return { ico, label, fragment: 'subfactions' };
@@ -895,16 +913,16 @@ export class FactionDetailComponent {
   private toResourceLink(label: string, ico: string): SidebarLink {
     const l = plier(label);
     if (l.includes('roman') || l.includes('black library')) {
-      return { ico, label: 'Tous les romans', route: '/romans' };
+      return { ico, label: 'Tous les romans', route: '/romans', sujet: label };
     }
     if (l.includes('chronologie')) {
-      return { ico, label: 'Chronologie générale', route: '/lore/timeline' };
+      return { ico, label: 'Chronologie générale', route: '/lore/timeline', sujet: label };
     }
     if (/carte|galactique|craftworld|oeil/.test(l)) {
-      return { ico, label: 'Carte de la galaxie', route: '/lore/galaxy' };
+      return { ico, label: 'Carte de la galaxie', route: '/lore/galaxy', sujet: label };
     }
     if (/lexique|glossaire|catalogue|mythe/.test(l)) {
-      return { ico, label: 'Concepts et lieux du lore', route: '/lore/concepts' };
+      return { ico, label: 'Concepts et lieux du lore', route: '/lore/concepts', sujet: label };
     }
     return { ico, label };
   }

@@ -805,6 +805,11 @@
       "status": "done",
       "started": "2026-10-31",
       "finished": "2026-10-31"
+    },
+    {
+      "id": "L237",
+      "title": "Fiche faction : aucun sujet ne disparaît des liens rapides",
+      "status": "todo"
     }
   ]
 }

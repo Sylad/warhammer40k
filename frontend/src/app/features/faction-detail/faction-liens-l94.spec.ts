@@ -125,3 +125,24 @@ describe('fiche faction : liens latéraux honnêtes (L94)', () => {
     }
   });
 });
+
+// L237 — un sujet dont la page a déjà son lien n'est plus retiré : il reste en texte simple.
+describe('fiche faction : aucun sujet perdu par le dédoublonnage (L237)', () => {
+  it('Chaos Space Marines : « Croisades Noires d\'Abaddon » reste, en texte simple, après le lien de « Hérésie d\'Horus »', async () => {
+    const { rapides } = await monter('chaos-space-marines');
+    expect(rapides.liens.filter(l => l.href === '/lore/timeline')).toEqual([{ label: 'Chronologie générale', href: '/lore/timeline' }]);
+    expect(rapides.textes).toContain('Croisades Noires d\'Abaddon');
+    expect(rapides.liens.some(l => l.label === 'Croisades Noires d\'Abaddon')).toBe(false);
+    // les cinq sujets du seed sont tous à l'écran (lien ou texte)
+    expect(rapides.liens.length + rapides.textes.length).toBe(5);
+  });
+
+  it.each(FACTIONS.map(f => f.id))('%s : autant de lignes que de sujets distincts dans le seed', async (id) => {
+    const brut = FACTIONS.find(f => f.id === id) as F & { liensRapides?: string[]; resources?: string[] };
+    const { rapides, ressources } = await monter(id);
+    for (const [bloc, sujets] of [[rapides, brut.liensRapides], [ressources, brut.resources]] as const) {
+      if (!sujets?.length) continue;
+      expect(bloc.liens.length + bloc.textes.length).toBe(new Set(sujets).size);
+    }
+  });
+});
