@@ -774,6 +774,7 @@ lots:
     review: { date: 2026-11-20, verdict: "conforme : 3 majeurs et 1 mineur de r1 traités — navigation Angular vers /plan (pied de page, À propos, Ctrl+K) : 0 px ajouté, carte non surlignée ; plan.e2e.spec.ts joué en CI après le build ; Nouveauté au format (= cadence news build) ; recalage au redimensionnement gardé et testé, pas de fuite d'écouteurs ; spec échoue sur l'ancien code (revue r2 du 20-11)", commit: 7be46d60f9074e5e9d85159593d404ce324c8961 }
     notes:
       - { date: 2026-11-20, text: "20-11 : choix du correctif r1 accepté par le lead — recalage après redimensionnement seulement si la carte a le focus et sans défilement du visiteur depuis (évite de confisquer le défilement au doigt sur téléphone)" }
+      - { date: 2026-11-20, text: "QA prod 20-11 (Sonnet) : conforme, 29 routes × 2 largeurs sans défaut ; mineurs : /plan#L220 à 390 px place la carte à 80 px (L67 : 90) ; plan.json servi antérieur aux commits de plan (normal, poussés après la QA)" }
     ux: { date: 2026-11-20, verdict: "conforme (lead, capture 390 de la Nouveauté) : le dernier lot arrive sous la barre, surligné ; l'espace réservé sous lui n'existe que sur un lien d'ancre (0 px sur /plan ordinaire, mesuré par la revue r2)" }
     finished: 2026-11-20
   - id: L68
