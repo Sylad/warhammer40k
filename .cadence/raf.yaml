@@ -2658,7 +2658,7 @@ lots:
     visible: true
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "non conforme (r1 : galerie, artiste du catalogue affiché sous une image cherchée sur le wiki — crédits contradictoires ; mineurs : chemin de captures en dur, import Reddit « non identifié »)", commit: 94180404572f2eff5525a47bf2c487ef346cc4ea }
+    review: { date: 2026-11-20, verdict: "non conforme (r2 : constats r1 corrigés et testés ; captures de la Nouveauté périmées, « Aucune image trouvée » pendant le chargement et sur erreur, texte des droits Reddit)", commit: 403fb46c1809f0ebd4e35a9dbf9b84c2dd8936c4 }
     ux: { date: 2026-11-20, verdict: "non conforme (r1 : liens du pied distingués par la seule couleur, 1,51:1, WCAG 1.4.1 ; mineurs : « en infobulle » faux au toucher, noms de sources non-liens en or, tableau sans en-têtes)" }
   - id: L239
     title: "Galerie et Vidéos à 390 px : appliquer un filtre fait sauter la page de 309 à 858 px avec un défilement non demandé (revue UX de L238, antérieur au lot)"
