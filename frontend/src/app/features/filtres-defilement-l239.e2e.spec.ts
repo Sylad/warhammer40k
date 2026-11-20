@@ -149,9 +149,11 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       expect(apres.focusResultats, ctx).toBe(false);
     } else {
       // sous la barre ; plus bas seulement si la page filtrée finit avant (on ne défile pas au-delà de sa fin), ou si le
-      // contrôle pressé, dans une colonne collée, serait passé sous la barre (L240 : il reste juste dessous)
+      // contrôle pressé, dans une colonne collée, serait passé sous la barre : la colonne, arrivée au bas de son
+      // conteneur, reste à son `top` collé (L240 r1), ou le contrôle seul juste sous la barre
       const colle = await placeColle(controle);
-      const borneParLeControle = colle !== null && (Math.abs(colle.haut - apres.marge) <= 2 || Math.abs(colle.colonne - apres.marge) <= 2);
+      const borneParLeControle = colle !== null && colle.auBas
+        && (Math.abs(colle.haut - apres.marge) <= 2 || Math.abs(colle.colonne - colle.topColle) <= 2);
       if (!apres.finDePage && !borneParLeControle) expect(Math.abs(apres.haut - apres.marge), `haut des résultats pas sous la barre : ${ctx}`).toBeLessThanOrEqual(2);
       expect(apres.focusResultats, `focus pas sur la liste : ${ctx}`).toBe(true);
     }
@@ -161,13 +163,26 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
     expect(await controle.getAttribute('aria-pressed')).toBe('true');
   }
 
-  /** Haut et bas du contrôle, et haut de sa colonne, dans la fenêtre s'il est dans un bloc `position: sticky`, sinon null. */
+  /**
+   * Haut et bas du contrôle, haut de sa colonne et son `top` collé, dans la fenêtre, et si la colonne touche le bas de son
+   * conteneur (elle ne peut plus rester collée plus bas), s'il est dans un bloc `position: sticky` ; sinon null.
+   */
   const placeColle = (controle: Locator) =>
     controle.evaluate((e) => {
-      let colle: Element | null = null;
-      for (let x: Element | null = e; x && x !== document.body; x = x.parentElement) if (getComputedStyle(x).position === 'sticky') colle = x;
+      let colle: HTMLElement | null = null;
+      for (let x: HTMLElement | null = e; x && x !== document.body; x = x.parentElement) if (getComputedStyle(x).position === 'sticky') colle = x;
+      if (!colle) return null;
       const r = e.getBoundingClientRect();
-      return colle ? { haut: Math.round(r.top), bas: Math.round(r.bottom), colonne: Math.round(colle.getBoundingClientRect().top) } : null;
+      const c = colle.getBoundingClientRect();
+      const parent = colle.parentElement!;
+      const fin = parent.getBoundingClientRect().bottom - (parseFloat(getComputedStyle(parent).paddingBottom) || 0);
+      return {
+        haut: Math.round(r.top),
+        bas: Math.round(r.bottom),
+        colonne: Math.round(c.top),
+        topColle: parseFloat(getComputedStyle(colle).top),
+        auBas: c.bottom + (parseFloat(getComputedStyle(colle).marginBottom) || 0) >= fin - 2,
+      };
     });
 
   for (const width of [390, 1440]) {
@@ -245,6 +260,55 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       expect(colle.colonne, `haut de la colonne à ${colle.colonne} px, barre ${apres.marge}`).toBeGreaterThanOrEqual(apres.marge - 2);
       await page.close();
     });
+  }
+
+  // L240, revue UX r1 (M1) : départs 1700 et 2000, colonne collée à son `top` (96 px). Le défilement la posait à 78 px
+  // (scroll-padding-top) : la rangée pressée sautait de 18 à 49 px et un second clic au même point tombait sur la rangée
+  // suivante (« Long format » au lieu de défaire « Durée courte »). Attendu : la rangée ne bouge pas de plus de 2 px, ni au
+  // filtre ni quand on le défait, et le second clic au même point défait le filtre ; titre et compte en vue.
+  for (const motion of ['reduce', 'no-preference'] as const) {
+    for (const [nom, depart] of [['Durée courte', 1700], ['Durée courte', 2000], ['Long format', 1700], ['FR uniquement', 2000]] as const) {
+      it(`1440 px, /videos (${motion}) : « ${nom} » depuis scrollY ${depart} → la rangée reste sous le pointeur, un second clic défait le filtre`, async () => {
+        const page = await ouvrir(1440, '/videos', motion);
+        const controle = page.locator('.check-row', { hasText: nom });
+        await controle.waitFor();
+        await expect.poll(() => controle.isEnabled()).toBe(true);
+        await page.evaluate((y) => window.scrollTo(0, y), depart);
+        await page.waitForTimeout(150);
+        const avant = (await placeColle(controle))!;
+        expect(avant, 'colonne collée').not.toBeNull();
+        const box = (await controle.boundingBox())!;
+        const x = box.x + box.width / 2;
+        const y = box.y + box.height / 2;
+        // trace image par image de la rangée pressée : jamais sous la barre pendant le glissé (revue r1, m1)
+        await controle.evaluate((e) => {
+          const w = window as unknown as { traceRangee: number[] };
+          w.traceRangee = [];
+          const pas = () => { w.traceRangee.push(e.getBoundingClientRect().top); if (w.traceRangee.length < 90) requestAnimationFrame(pas); };
+          requestAnimationFrame(pas);
+        });
+        await page.mouse.click(x, y);
+        await expect.poll(() => controle.getAttribute('aria-pressed')).toBe('true');
+        await page.waitForTimeout(motion === 'reduce' ? 400 : 1600);
+        const trace = await page.evaluate(() => (window as unknown as { traceRangee: number[] }).traceRangee);
+        const marge = (await mesure(page, VIDEOS)).marge;
+        expect(Math.min(...trace), `rangée pendant le défilement : ${trace.map(Math.round).join(' ')}`).toBeGreaterThanOrEqual(marge - 2);
+        const apres = (await placeColle(controle))!;
+        expect(Math.abs(apres.haut - avant.haut), `rangée ${avant.haut} → ${apres.haut} px, colonne ${avant.colonne} → ${apres.colonne}`).toBeLessThanOrEqual(2);
+        expect(Math.abs(apres.colonne - avant.colonne), `colonne ${avant.colonne} → ${apres.colonne}`).toBeLessThanOrEqual(2);
+        const m = await mesure(page, VIDEOS);
+        expect(teteEnVue(m), `titre et compte : ${m.teteHaut}–${m.teteBas} px`).toBe(true);
+        // le pointeur, resté au même point, est toujours sur la rangée pressée
+        expect(await page.evaluate(([px, py]) => document.elementFromPoint(px, py)?.closest('.check-row')?.textContent?.trim(), [x, y] as const)).toContain(nom);
+        await page.mouse.click(x, y);
+        await expect.poll(() => controle.getAttribute('aria-pressed')).toBe('false');
+        await page.waitForTimeout(motion === 'reduce' ? 400 : 1600);
+        expect(await page.locator('.check-row[aria-pressed="true"]').count(), 'aucun autre filtre avancé activé').toBe(0);
+        const defait = (await placeColle(controle))!;
+        expect(Math.abs(defait.haut - avant.haut), `rangée après le second clic : ${avant.haut} → ${defait.haut} px`).toBeLessThanOrEqual(2);
+        await page.close();
+      });
+    }
   }
 
   // L240 (revue r2 de L239, m2) : un clic sur la puce déjà active (« Tous » au chargement, ou Lore cliquée deux fois)

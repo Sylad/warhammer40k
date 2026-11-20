@@ -660,9 +660,9 @@ export class VideosComponent {
    * compte de la liste sont en vue (sinon un défilement les y amène, focus sur la liste) — voir avantFiltre().
    */
   private filtrer(appliquer: () => void, controle?: HTMLElement | null): void {
-    const fin = avantFiltre();
+    const fin = avantFiltre(controle);
     appliquer();
-    afterNextRender(() => fin(this.listeVideos?.nativeElement, controle), { injector: this.injector });
+    afterNextRender(() => fin(this.listeVideos?.nativeElement), { injector: this.injector });
   }
 
   loadMoreFeatured(): void {

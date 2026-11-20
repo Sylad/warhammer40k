@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { avantFiltre, GEL_MAX_MS, garderResultatsEnVue } from './resultats-en-vue';
+import { avantFiltre, GEL_MAX_MS, garderResultatsEnVue, limiteCollee } from './resultats-en-vue';
 
 /** Section de résultats dont l'en-tête est à `haut` px du bord de la fenêtre (768 px sous jsdom), 60 px de haut. */
 function resultats(haut: number): HTMLElement {
@@ -90,5 +90,27 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
     fin2(section);
     expect(html.style.overflowAnchor).toBe('');
     expect(html.style.minHeight).toBe('');
+  });
+
+  // L240, revue UX r1 (M1) : la colonne entière se pose à son `top` collé (96 px), pas à la marge de la barre (78 px)
+  it('limiteCollee : colonne entière posée à son top collé, contrôle seul à la marge ; conteneur gardé jusqu’au rendu', () => {
+    document.body.innerHTML = `<div class="grille"><aside style="position: sticky; top: 96px"><button>Durée courte</button></aside></div>`;
+    const grille = document.querySelector<HTMLElement>('.grille')!;
+    const aside = document.querySelector('aside')!;
+    const bouton = document.querySelector('button')!;
+    const rect = (top: number, h: number) => ({ top, bottom: top + h, left: 0, right: 0, width: 0, height: h, x: 0, y: top, toJSON: () => ({}) }) as DOMRect;
+    grille.getBoundingClientRect = () => rect(0, 2000);
+    aside.getBoundingClientRect = () => rect(96, 430);
+    bouton.getBoundingClientRect = () => rect(150, 36);
+    expect(limiteCollee(bouton, 78, true)).toBe(2000 - 430 - 96);
+    expect(limiteCollee(bouton, 78)).toBe(2000 - 430 + 54 - 78);
+    aside.style.top = 'auto';
+    expect(limiteCollee(bouton, 78, true)).toBe(2000 - 430 - 78);
+    expect(limiteCollee(null, 78, true)).toBe(Infinity);
+
+    const fin = avantFiltre(bouton);
+    expect(grille.style.minHeight).toBe('2000px');
+    fin(null);
+    expect(grille.style.minHeight).toBe('');
   });
 });
