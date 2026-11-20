@@ -815,6 +815,7 @@ lots:
     title: "Specs galerie : partager le render() TestBed (5 copies du bouchon de service : collections-count, collections-hidden-l64, plural-count, filters-a11y, faction-param) — revue de code L64"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-20, sha: ad29266db2f38d308109a30be656d15108ea1ffb }
     created: 2026-10-06
     started: 2026-11-19
     review: { date: 2026-11-19, verdict: "conforme : un seul rendu TestBed partagé par les 5 specs, aucun test retiré ni affaibli ; porte verte à b53a76d", commit: b53a76dec0ef41e0e193b260f5751c7f432fea41 }
@@ -825,6 +826,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-20, sha: ad29266db2f38d308109a30be656d15108ea1ffb }
     created: 2026-10-06
     started: 2026-11-20
     review: { date: 2026-11-20, verdict: "conforme : 0 bloquant ; mineur antérieur au lot noté (galerie : compte du catalogue seul tant que /api/images manque, l'accueil affiche « — ») (revue r1 du 20-11, ad29266)", commit: ad29266db2f38d308109a30be656d15108ea1ffb }
