@@ -770,7 +770,10 @@ lots:
     visible: true
     created: 2026-10-05
     started: 2026-11-20
-    review: { date: 2026-11-20, verdict: "non conforme : 3 majeurs — espace resté sans ancre après navigation Angular vers /plan (plan.component.ts:155, 416 px de vide, carte surlignée), plan.e2e.spec.ts hors CI (absent de l'include de vitest.e2e.config.ts), entrée Nouveautés absente ; mineur : pas de redéfilement après redimensionnement (revue r1 du 20-11)", commit: a9ebfa54d56d5490ab56597969063b390742174d }
+    review: { date: 2026-11-20, verdict: "conforme : 3 majeurs et 1 mineur de r1 traités — navigation Angular vers /plan (pied de page, À propos, Ctrl+K) : 0 px ajouté, carte non surlignée ; plan.e2e.spec.ts joué en CI après le build ; Nouveauté au format (= cadence news build) ; recalage au redimensionnement gardé et testé, pas de fuite d'écouteurs ; spec échoue sur l'ancien code (revue r2 du 20-11)", commit: 7be46d60f9074e5e9d85159593d404ce324c8961 }
+    notes:
+      - { date: 2026-11-20, text: "20-11 : choix du correctif r1 accepté par le lead — recalage après redimensionnement seulement si la carte a le focus et sans défilement du visiteur depuis (évite de confisquer le défilement au doigt sur téléphone)" }
+    ux: { date: 2026-11-20, verdict: "conforme (lead, capture 390 de la Nouveauté) : le dernier lot arrive sous la barre, surligné ; l'espace réservé sous lui n'existe que sur un lien d'ancre (0 px sur /plan ordinaire, mesuré par la revue r2)" }
   - id: L68
     title: "QA : parcourir le reste des pages (lore, nouveautes, about, gallery) à 1440 et 390 px avec les comptes de docs/qa/expectations.md (QA prod 05-10 partielle)"
     status: done
