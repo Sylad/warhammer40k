@@ -37,6 +37,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/gallery/gallery-pagination-l71.e2e.spec.ts'),
       // L239 : un filtre de la Galerie ou des Vidéos ne fait plus sauter la page (scrollY mesuré, 390 et 1440 px).
       path.resolve(__dirname, 'src/app/features/filtres-defilement-l239.e2e.spec.ts'),
+      // L241/t1 : Vidéos de 761 à 1220 px, rappel du compte et de l'état vide en tête de « Filtres avancés ».
+      path.resolve(__dirname, 'src/app/features/videos/videos-rappel-compte-l241.e2e.spec.ts'),
       // L67 : /plan#<lot> amène la carte sous la barre (espace réservé en fin de page), sans vide en navigation ordinaire.
       path.resolve(__dirname, 'src/app/features/plan/plan.e2e.spec.ts'),
     ],

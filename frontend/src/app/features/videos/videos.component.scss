@@ -812,6 +812,7 @@
     }
     .skel { min-height: 245px; border: 1px solid rgba(201, 162, 74, 0.24); background: linear-gradient(90deg, var(--panel), #1b150f, var(--panel)); }
 
+    /* L241/t1 : rappel du compte de « Filtres avancés » (761 à 1220 px) dans src/styles/_videos-rappel.scss (budget L29) */
     /* RESPONSIVE */
     @media (max-width: 1220px) {
       .hero-content { grid-template-columns: minmax(0, 1fr); }

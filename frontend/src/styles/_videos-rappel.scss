@@ -1,0 +1,31 @@
+/*
+ * L241/t1 — Vidéos, « Filtres avancés » de 761 à 1220 px (colonne sous la liste, rangée pressée gardée sous le
+ * pointeur par L241) : rappel du compte, et de l'état vide avec « Effacer les filtres », au-dessus ou au-dessous des
+ * rangées. Les deux places gardent leur hauteur (44 px) à ces largeurs, ailleurs elles n'existent pas. Partiel global
+ * (budget anyComponentStyle de la feuille du composant, L29) : préfixé .videos-page, classes propres à ce rappel.
+ */
+.videos-page {
+  .rappel-place { display: none; }
+  .rappel-compte {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px;
+    color: var(--gold); font-size: 11px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  /* à 761 px, le panneau n'a que 264 px : le texte passe sur deux lignes (28 px) dans les 44 px, le bouton reste entier */
+  .rappel-compte > span { min-width: 0; line-height: 1.25; }
+  .rappel-effacer {
+    min-height: 44px; padding: 0 2px; background: transparent; border: 0; cursor: pointer;
+    flex: none; white-space: nowrap;
+    color: var(--gold-bright); font: inherit; letter-spacing: 0.08em; text-transform: inherit;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .rappel-effacer:hover { color: #fff3cf; }
+  .rappel-effacer:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: -2px; }
+  @media (min-width: 760.02px) and (max-width: 1220px) {
+    /* titre plus près du rappel ; :first-child pour passer la règle encapsulée du composant (0,3,1) */
+    .sidebar .side-panel h3:first-child { margin-bottom: 4px; }
+    /* la place du bas tient lieu de marge basse : la fin de page ne remonte les rangées que de 24 px */
+    .sidebar .side-panel:first-child { padding-bottom: 0; }
+    .rappel-place { display: block; min-height: 44px; border-bottom: 1px solid rgba(201, 162, 74, 0.12); }
+    .rappel-place.bas { border-bottom: 0; border-top: 1px solid rgba(201, 162, 74, 0.12); }
+  }
+}

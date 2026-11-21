@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-11-20 13:37",
+  "generated": "2026-11-21 16:30",
   "entries": [
+    {
+      "slug": "2026-11-21-videos-sur-tablette-la-rangee-cochee-reste-sous-le-doigt",
+      "title": "Vidéos sur tablette : la rangée cochée reste sous le doigt, le nombre de résultats s'affiche à côté",
+      "date": "2026-11-21",
+      "lots": [
+        "L241"
+      ],
+      "captures": [
+        "captures/L241-videos-filtre-avance-tablette.png",
+        "captures/L241-videos-aucun-resultat-1024.png"
+      ],
+      "alts": [
+        "Vidéos à 768 px de large, juste après avoir coché « FR uniquement » : la rangée est restée à sa place et le panneau « Filtres avancés » affiche « 2 résultats » sous son titre",
+        "Vidéos à 1024 px de large, en bas de page, après avoir coché « Long format » puis « Durée courte » : sous les rangées, « Aucun résultat » et le bouton « Effacer les filtres »"
+      ],
+      "html": "<p>Sur tablette et petit écran d'ordinateur (de 761 à 1220 px de large), les « Filtres avancés » des Vidéos sont placés sous la liste. Cocher l'un d'eux faisait défiler la page vers les résultats : la rangée touchée bougeait, et un second toucher au même endroit pouvait cocher la rangée voisine.</p>\n<p>Maintenant, la rangée cochée reste exactement sous le doigt ou le pointeur, et un second toucher la décoche. Comme la liste est alors hors de l'écran, le panneau rappelle le nombre de résultats, juste au-dessus des rangées, ou juste en dessous si le haut du panneau est caché. Quand plus aucune vidéo ne correspond, il le dit (« Aucun résultat ») et propose « Effacer les filtres », sans avoir à remonter la page.</p>"
+    },
     {
       "slug": "2026-11-20-galerie-et-videos-un-filtre-ne-fait-plus-sauter-la-page",
       "title": "Galerie et Vidéos : un filtre ne fait plus sauter la page",

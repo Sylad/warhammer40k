@@ -342,6 +342,12 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
         <aside class="sidebar">
           <section class="side-panel">
             <h3>Filtres avancés</h3>
+            <!-- L241/t1 : de 761 à 1220 px, la rangée pressée reste sous le pointeur et la liste est hors de l'écran :
+                 le compte (et l'état vide) est rappelé dans le panneau, au-dessus OU au-dessous des rangées — la place
+                 qui est en vue au clic. Les deux places gardent leur hauteur : rien ne bouge quand le rappel change. -->
+            <div class="rappel-place" #rappelHaut>
+              @if (placeRappel() === 'haut') { <ng-container [ngTemplateOutlet]="rappelCompte" /> }
+            </div>
             @for (sf of sidebarOptions; track sf.key) {
               <button class="check-row" type="button"
                 [class.active]="sidebarFilters().has(sf.key)"
@@ -354,6 +360,22 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                 @if (loaded()) { <span class="count">{{ counts()[sf.key] }}</span> }
               </button>
             }
+            <div class="rappel-place bas" #rappelBas>
+              @if (placeRappel() === 'bas') { <ng-container [ngTemplateOutlet]="rappelCompte" /> }
+            </div>
+            <ng-template #rappelCompte>
+              @if (loaded() && videos().length > 0) {
+                <!-- aria-hidden : le compte est déjà annoncé par la région live de la liste (une seule annonce) -->
+                <div class="rappel-compte" data-testid="rappel-compte-videos">
+                  @if (filteredVideos().length === 0) {
+                    <span aria-hidden="true">Aucun résultat</span>
+                    <button type="button" class="rappel-effacer" (click)="effacerDepuisRappel()">Effacer les filtres</button>
+                  } @else {
+                    <span aria-hidden="true">{{ filteredVideos().length }} résultat{{ filteredVideos().length > 1 ? 's' : '' }}</span>
+                  }
+                </div>
+              }
+            </ng-template>
           </section>
           <section class="side-panel">
             <h3>Vidéos récentes</h3>
@@ -441,6 +463,10 @@ export class VideosComponent {
 
   @ViewChild('pageTitle') private pageTitle?: ElementRef<HTMLElement>;
   @ViewChild('listeVideos') private listeVideos?: ElementRef<HTMLElement>;
+  @ViewChild('rappelHaut') private rappelHaut?: ElementRef<HTMLElement>;
+  @ViewChild('rappelBas') private rappelBas?: ElementRef<HTMLElement>;
+  /** L241/t1 : place du rappel du compte dans « Filtres avancés » (761 à 1220 px), choisie au clic d'une rangée. */
+  readonly placeRappel = signal<'haut' | 'bas'>('haut');
   /** Bouton qui a ouvert la fenêtre « Ajouter une vidéo » : il récupère le focus à la fermeture. */
   private addOpener: HTMLElement | null = null;
   /** « Réessayer » : le bouton disparaît avec le bandeau, le focus va sur la liste une fois chargée (WCAG 2.4.3). */
@@ -651,10 +677,46 @@ export class VideosComponent {
     const set = new Set(this.sidebarFilters());
     if (set.has(key)) set.delete(key); else set.add(key);
     const sousLePointeur = typeof window.matchMedia === 'function' && window.matchMedia(VideosComponent.HORS_TELEPHONE).matches;
+    const place = this.placeEnVue();
     this.filtrer(() => {
+      this.placeRappel.set(place);
       this.sidebarFilters.set(set);
       this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
     }, bouton, sousLePointeur);
+  }
+
+  /**
+   * L241/t1 : la rangée pressée ne bouge pas (L241), donc le panneau non plus ; le rappel va à la place réservée qui est
+   * entièrement dans la fenêtre, sous la barre (`scroll-padding-top`) : en haut de préférence, sinon en bas. Rangée juste
+   * sous la barre ou fin de page : le haut est caché, le bas est en vue ; rangée au bas de la fenêtre : l'inverse.
+   */
+  private placeEnVue(): 'haut' | 'bas' {
+    const haut = this.rappelHaut?.nativeElement;
+    const bas = this.rappelBas?.nativeElement;
+    if (!haut || !bas) return 'haut';
+    const bord = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const enVue = (e: HTMLElement) => {
+      const b = e.getBoundingClientRect();
+      return b.height > 0 && b.top >= bord - 1 && b.bottom <= window.innerHeight + 1;
+    };
+    return enVue(haut) || !enVue(bas) ? 'haut' : 'bas';
+  }
+
+  /**
+   * L241/t1 : « Effacer les filtres » du rappel. Le rappel reste sous le pointeur (même défilement que les rangées, L241) ;
+   * le bouton disparaît avec l'état vide, le focus va à la rangée voisine du rappel, dans le panneau.
+   */
+  effacerDepuisRappel(): void {
+    const place = this.placeRappel();
+    const slot = (place === 'haut' ? this.rappelHaut : this.rappelBas)?.nativeElement ?? null;
+    this.filtrer(() => {
+      this.clearFilters();
+      this.allLimit.set(VideosComponent.PAGE_ALL);
+    }, slot, true);
+    afterNextRender(() => {
+      const rangees = this.host.nativeElement.querySelectorAll<HTMLElement>('.check-row');
+      rangees[place === 'haut' ? 0 : rangees.length - 1]?.focus({ preventScroll: true });
+    }, { injector: this.injector });
   }
 
   /** Au-delà de la mise en page téléphone de cette page (`@media (max-width: 760px)` de videos.component.scss). */
