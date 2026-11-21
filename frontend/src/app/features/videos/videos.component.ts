@@ -8,7 +8,7 @@ import { WarhammerService, VideoPreview, VideoImportBody } from '../../core/serv
 import type { Video, Channel } from '../../core/models/models';
 import { PinService } from '../../core/services/pin.service';
 import { toSafeSignal } from '../../shared/safe-signal';
-import { avantFiltre } from '../../core/utils/resultats-en-vue';
+import { avantFiltre, relacherColonneTenue } from '../../core/utils/resultats-en-vue';
 
 type FilterKey = 'all' | 'lore' | 'animation' | 'official' | 'FR' | 'EN';
 type SortKey = 'recommended' | 'duration' | 'channel' | 'recent';
@@ -555,7 +555,11 @@ export class VideosComponent {
 
   constructor() {
     this.loadVideos();
-    inject(DestroyRef).onDestroy(() => { this.videosSub?.unsubscribe(); this.setBackgroundInert(false); });
+    inject(DestroyRef).onDestroy(() => {
+      this.videosSub?.unsubscribe();
+      this.setBackgroundInert(false);
+      relacherColonneTenue(); // r4 de L240 : hauteur tenue de « Filtres avancés » et son écouteur resize
+    });
 
     effect(() => {
       const open = !!this.selectedVideo();

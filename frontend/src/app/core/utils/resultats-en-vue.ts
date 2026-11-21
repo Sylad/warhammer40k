@@ -41,7 +41,7 @@ import { defilementSelonPreference } from './section-anchor';
  * par le bas de son conteneur, ramenée à son `top` par le défilement vers les résultats, +26 à +131 px). Une colonne
  * COLLÉE (à son `top` ou repoussée au-dessus) reste maintenant là où elle était avant le clic : son conteneur garde la
  * hauteur qui la laisse à cette place au défilement visé (`tenir`, gardée jusqu'au filtre suivant ou à un
- * redimensionnement), et ce défilement ne remonte pas au-delà de la borne où la colonne devrait bouger (`borneBasse`),
+ * redimensionnement, rendue à la destruction de la page par `relacherColonneTenue()`), et ce défilement ne remonte pas au-delà de la borne où la colonne devrait bouger (`borneBasse`),
  * quitte à ne pas amener l'en-tête des résultats sous la barre : la rangée pressée reste sous le pointeur, le focus aussi. *
  * L241 (revue UX r2 de L240, hors lot) : entre le téléphone et le bureau (Vidéos de 761 à 1220 px), « Filtres avancés »
  * est sous la liste, sans colonne collée ; le défilement vers les résultats de L239 déplaçait la rangée pressée de 35 à
@@ -100,6 +100,9 @@ export function avantFiltre(
   return (resultats, ctrl = controle) => {
     if (gelActif !== liberer) return false; // un filtre plus récent a pris la main
     colonne?.rendre(); // mesures sur la mise en page filtrée
+    // r4 de L240 : une hauteur tenue par un filtre précédent d'une AUTRE colonne (ou par la colonne, filtre sans
+    // contrôle : puce, carte) est rendue avant de mesurer — gardée, elle laissait une bande vide sous une liste courte
+    if (relacherAuRedimensionnement && relacherAuRedimensionnement.conteneur !== colonne?.conteneur) relacherColonneTenue();
     const hauteurFiltree = basDuCorps() + surplus;
     const lisse = defilementSelonPreference() === 'smooth';
     if (placeControle !== null && controle?.isConnected) {
@@ -157,7 +160,16 @@ export function avantFiltre(
 /** Valeur de `min-height` de chaque conteneur avant qu'on la tienne (L240 r2). */
 const styleInitial = new WeakMap<HTMLElement, string>();
 /** Hauteur tenue rendue au premier redimensionnement de la fenêtre (une colonne à la fois). */
-let relacherAuRedimensionnement: { conteneur: HTMLElement; retirer(): void } | null = null;
+let relacherAuRedimensionnement: { conteneur: HTMLElement; relacher(): void } | null = null;
+
+/**
+ * Rend la hauteur tenue d'une colonne collée (`tenir`) et retire son écouteur `resize` (r4 de L240). Appelée par
+ * `avantFiltre` à un filtre qui ne vient pas de cette colonne, et par la page à sa destruction (sinon l'écouteur et la
+ * référence au conteneur détaché survivaient jusqu'au premier redimensionnement).
+ */
+export function relacherColonneTenue(): void {
+  relacherAuRedimensionnement?.relacher();
+}
 
 /**
  * Colonne collée (`position: sticky`) qui porte `controle`, mesurée avant le filtre ; null hors bloc collé.
@@ -200,6 +212,7 @@ function colonneDuControle(controle: HTMLElement | null | undefined) {
   const finAvant = finContenu();
   const rendre = () => { conteneur.style.minHeight = initial; };
   return {
+    conteneur,
     /** Collée à son `top`, ou repoussée au-dessus par le bas de son conteneur (sinon : dans le flux, pas encore collée). */
     collee: Number.isFinite(top) && place <= top + 0.5,
     /** `top` collé posé à la place de la colonne (elle n'en bouge plus tant qu'elle est collée) ; rend la fonction qui le rétablit. */
@@ -213,16 +226,13 @@ function colonneDuControle(controle: HTMLElement | null | undefined) {
     tenir: (s: number) => {
       poser(place + hauteur + s);
       if (relacherAuRedimensionnement?.conteneur === conteneur) return;
-      relacherAuRedimensionnement?.retirer();
+      relacherAuRedimensionnement?.relacher(); // une autre colonne tenue : rendue
       const relacher = () => {
-        retirer();
+        window.removeEventListener('resize', relacher);
+        if (relacherAuRedimensionnement?.relacher === relacher) relacherAuRedimensionnement = null;
         conteneur.style.minHeight = initial;
       };
-      const retirer = () => {
-        window.removeEventListener('resize', relacher);
-        relacherAuRedimensionnement = null;
-      };
-      relacherAuRedimensionnement = { conteneur, retirer };
+      relacherAuRedimensionnement = { conteneur, relacher };
       window.addEventListener('resize', relacher);
     },
     borneBasse: () => {

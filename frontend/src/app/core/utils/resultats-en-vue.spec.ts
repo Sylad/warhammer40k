@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { avantFiltre, enteteEnVue, GEL_MAX_MS, garderResultatsEnVue, limiteCollee } from './resultats-en-vue';
+import { avantFiltre, enteteEnVue, GEL_MAX_MS, garderResultatsEnVue, limiteCollee, relacherColonneTenue } from './resultats-en-vue';
 
 /** Section de résultats dont l'en-tête est à `haut` px du bord de la fenêtre (768 px sous jsdom), 60 px de haut. */
 function resultats(haut: number): HTMLElement {
@@ -158,6 +158,46 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
     expect(document.activeElement).not.toBe(c.section);
     window.dispatchEvent(new Event('resize')); // redimensionnement : hauteur rendue
     expect(c.grille.style.minHeight).toBe('');
+  });
+
+  // revue de code r4 de L240, constat 1 : la hauteur tenue survivait à un filtre sans contrôle (puce des Vidéos)
+  it('hauteur tenue de la colonne rendue au filtre suivant qui ne vient pas d’elle (puce), écouteur resize retiré', () => {
+    const c = colonneCollee(1500, { avant: 2100, apres: 1600 }, 1500);
+    expect(c.filtrer()).toBe(false);
+    expect(c.grille.style.minHeight).toBe(`${96 + 430 + 1500}px`);
+    const retrait = vi.spyOn(window, 'removeEventListener');
+    const puce = avantFiltre(); // puce « Lore » : la liste raccourcit encore
+    expect(c.grille.style.minHeight).toBe(`${96 + 430 + 1500}px`); // rien ne bouge avant le rendu
+    c.etat.nat = 900;
+    puce(c.section);
+    expect(c.grille.style.minHeight).toBe(''); // sans la correction : 2026px, bande vide sous la liste courte
+    expect(retrait).toHaveBeenCalledWith('resize', expect.any(Function));
+  });
+
+  it('second filtre de la même colonne : la hauteur tenue n’est pas rendue entre les deux (la colonne ne bouge pas)', () => {
+    const c = colonneCollee(1500, { avant: 2100, apres: 1600 }, 1500);
+    expect(c.filtrer()).toBe(false);
+    expect(c.filtrer(1400)).toBe(false);
+    expect(c.colonne()).toBe(96);
+    expect(c.grille.style.minHeight).toBe(`${96 + 430 + 1500}px`);
+    relacherColonneTenue();
+  });
+
+  // revue de code r4 de L240, constat 2 : l'écouteur resize survivait à la destruction de la page
+  it('relacherColonneTenue : hauteur rendue, écouteur resize retiré (un redimensionnement ultérieur ne touche rien)', () => {
+    const c = colonneCollee(1500, { avant: 2100, apres: 1600 }, 1500);
+    c.filtrer();
+    expect(c.grille.style.minHeight).not.toBe('');
+    const retrait = vi.spyOn(window, 'removeEventListener');
+    relacherColonneTenue();
+    expect(c.grille.style.minHeight).toBe('');
+    const relacher = retrait.mock.calls.find(([type]) => type === 'resize')?.[1];
+    expect(relacher).toBeTypeOf('function');
+    c.grille.style.minHeight = '1234px'; // posé par autre chose : un resize ne doit plus y toucher
+    window.dispatchEvent(new Event('resize'));
+    expect(c.grille.style.minHeight).toBe('1234px');
+    relacherColonneTenue(); // sans tenue : sans effet
+    expect(c.grille.style.minHeight).toBe('1234px');
   });
 
   it('fin de page, colonne repoussée au-dessus de son top : la page défile vers les résultats, la colonne ne bouge pas', () => {
