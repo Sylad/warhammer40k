@@ -2702,6 +2702,12 @@ lots:
     ux: { date: 2026-11-21, verdict: "non conforme (tmp/ux-L241.md) : critère du lot tenu (64/64 cas à 768 et 1024, rangée à 0 px, clavier, mouvement réduit ; 1440 et 390 sans écart) ; M1 Nielsen 1 et 9 — à 768 et 1024 le compte « N résultats » est hors écran dans 24 départs sur 32 et l'état vide à −226 px : aucun signe visible que la liste a changé" }
     tasks:
       - { id: t1, title: "Vidéos 761-1220 px : rappel du compte (et de l'état vide) en tête de Filtres avancés", status: doing }
+  - id: L242
+    title: "Vidéos : « Effacer les filtres » de l'état vide de la liste disparaît au clic et le focus retombe sur le corps de la page (WCAG 2.4.3 ; vu par le run L241/t1, antérieur)"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-11-21
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
