@@ -2687,9 +2687,10 @@ lots:
     review: { date: 2026-11-21, verdict: "conforme (r6, af0be7e, revue du lead : test seul, getComputedStyle remplacé par le style en ligne dans la page modèle avec égalité contrôlée en tête de cas, balayage rendu au worker toutes les 100 positions, aucun délai relevé ; neutralisations identiques à r5 ; mocks restaurés par afterEach)", commit: af0be7ec4edd6ea85357200560cee3aae1391021 }
     notes:
       - { date: 2026-11-20, text: "test d'acceptation rescellé (lot livré L49, frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche amendée en 60452a7) : R6 amendée le 20-11 (compte au-dessus de Faction, revue UX r2 de L239 m3) ; test réécrit d'après la fiche par une session distincte de celle qui a codé ; borne 60 px non sourcée retirée" }
+      - { date: 2026-11-21, text: "L240/t1 (21-11) : revue de code conforme (tmp/revue-L240t1.md, 31/31 ciblés) ; mineur : l'ordre « rendre la tenue avant la mesure » (resultats-en-vue.ts:105) n'est fixé par aucun test" }
     ux: { date: 2026-11-21, verdict: "conforme r3 (21-11) : M1-bis fermé, 561 cas à 1440 sans hors critère, aucune régression 1440/390 ; mineur noté : après « Animations » en fin de page à 1440 l'en-tête « 5 résultats » reste hors vue (prix voulu de 94f08e1) ; 768/1024 → L241 (tmp/ux-L240-r3.md)" }
     tasks:
-      - { id: t1, title: "Vidéos 1440 : la min-height tenue du conteneur survit à un changement de puce (choisirFiltre appelle avantFiltre sans la rendre, resultats-en-vue.ts:198-212, videos.component.ts:652-664) ; écouteur resize actif après destruction du composant (resultats-en-vue.ts:146, 209-211) ; un test pour chacun — tmp/revue-L240-r4.md", status: todo }
+      - { id: t1, title: "Vidéos 1440 : la min-height tenue du conteneur survit à un changement de puce (choisirFiltre appelle avantFiltre sans la rendre, resultats-en-vue.ts:198-212, videos.component.ts:652-664) ; écouteur resize actif après destruction du composant (resultats-en-vue.ts:146, 209-211) ; un test pour chacun — tmp/revue-L240-r4.md", status: done }
     finished: 2026-11-21
   - id: L241
     title: "Vidéos 768/1024 : filtre avancé — la rangée bouge de 35 à 200 px avec le défilement vers les résultats de L239 ; à 768 le second clic active la rangée voisine (identique prod ; tmp/ux-L240-r2.md)"
