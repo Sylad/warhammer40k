@@ -2716,6 +2716,7 @@ lots:
     title: "Test e2e instable : credits-l238 « r3 390 px : Fandom en panne » rouge en CI sur 9a9452b (expected 'erreur' to be 'absente'), vert à la relance — stabiliser sans relever de délai"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-21, sha: 29257194687b423df995d8b64e7c7e0f4e1a4687 }
     created: 2026-11-21
     started: 2026-11-21
     review: { date: 2026-11-21, verdict: "conforme test seul (84b18be) : attend la réponse de la bonne œuvre ; 4/20 échecs sur un cœur avant, 20/20 après", commit: 84b18be5539ecfe6081d7827b4e86eb6d235c72c }
