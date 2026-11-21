@@ -2693,9 +2693,11 @@ lots:
     finished: 2026-11-21
   - id: L241
     title: "Vidéos 768/1024 : filtre avancé — la rangée bouge de 35 à 200 px avec le défilement vers les résultats de L239 ; à 768 le second clic active la rangée voisine (identique prod ; tmp/ux-L240-r2.md)"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-11-20
+    started: 2026-11-21
+    review: { date: 2026-11-21, verdict: "conforme (resultats-en-vue 27/27, e2e L239 62/62 ; tests rouges sans le correctif en unitaire et en e2e ; aucune fuite d'écouteur ; note m1 : seuil 760 px du scss recopié dans videos.component.ts:657 sans test — tmp/revue-L241.md)", commit: 846c89a572630c6a6f04336933e49b99e13f3a2c }
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
