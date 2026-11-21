@@ -2683,7 +2683,7 @@ lots:
     estimate: 0.25
     created: 2026-11-20
     started: 2026-11-20
-    review: { date: 2026-11-21, verdict: "conforme (r5, d28b119 : régression attrapée en unitaire 9/12 et 6/12, en e2e 6/6 et 3/3 ; 1 constat mineur de rédaction, CLAUDE.md:134 — tmp/revue-L240-r5.md)", commit: d28b119b45552db2181fcf4a167fabe6a51d20db }
+    review: { date: 2026-11-21, verdict: "conforme (r6, af0be7e, revue du lead : test seul, getComputedStyle remplacé par le style en ligne dans la page modèle avec égalité contrôlée en tête de cas, balayage rendu au worker toutes les 100 positions, aucun délai relevé ; neutralisations identiques à r5 ; mocks restaurés par afterEach)", commit: af0be7ec4edd6ea85357200560cee3aae1391021 }
     notes:
       - { date: 2026-11-20, text: "test d'acceptation rescellé (lot livré L49, frontend/src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts, fiche amendée en 60452a7) : R6 amendée le 20-11 (compte au-dessus de Faction, revue UX r2 de L239 m3) ; test réécrit d'après la fiche par une session distincte de celle qui a codé ; borne 60 px non sourcée retirée" }
     ux: { date: 2026-11-21, verdict: "conforme r3 (21-11) : M1-bis fermé, 561 cas à 1440 sans hors critère, aucune régression 1440/390 ; mineur noté : après « Animations » en fin de page à 1440 l'en-tête « 5 résultats » reste hors vue (prix voulu de 94f08e1) ; 768/1024 → L241 (tmp/ux-L240-r3.md)" }
