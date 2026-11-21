@@ -2714,9 +2714,10 @@ lots:
     created: 2026-11-21
   - id: L243
     title: "Test e2e instable : credits-l238 « r3 390 px : Fandom en panne » rouge en CI sur 9a9452b (expected 'erreur' to be 'absente'), vert à la relance — stabiliser sans relever de délai"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-11-21
+    started: 2026-11-21
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
