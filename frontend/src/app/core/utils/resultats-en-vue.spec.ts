@@ -242,6 +242,20 @@ describe('L240 r2 — balayage exhaustif : colonne collée des Vidéos sous le p
       trajets.push({ de: etat.y, a: o.top!, lisse: o.behavior === 'smooth' });
       etat.y = Math.min(Math.max(0, o.top!), maxY());
     }) as typeof window.scrollTo);
+    // Coût (CI du 21-11, « Timeout calling onTaskUpdate ») : ~70 % d'un départ passait dans le `getComputedStyle` de jsdom,
+    // qui parcourt sa feuille de style par défaut à chaque appel. Sur ce modèle, il ne rend pour les propriétés que lit
+    // `resultats-en-vue.ts` que les styles en ligne : vérifié ici, élément par élément, avant de le remplacer.
+    const lues: [HTMLElement, (keyof CSSStyleDeclaration & string)[]][] = [
+      [html, ['scrollPaddingTop']],
+      [conteneur, ['position', 'paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth', 'boxSizing']],
+      [aside, ['position', 'top', 'marginBottom']],
+      [bouton, ['position']],
+    ];
+    for (const [el, proprietes] of lues) {
+      const vrai = getComputedStyle(el);
+      for (const k of proprietes) expect(el.style[k], `${el.tagName}.${k}`).toBe(vrai[k]);
+    }
+    vi.spyOn(window, 'getComputedStyle').mockImplementation((el: Element) => (el as HTMLElement).style);
     conteneur.getBoundingClientRect = () => rect(G.flux - etat.y, fin() - G.flux);
     aside.getBoundingClientRect = () => rect(colonne(), G.hauteur);
     bouton.getBoundingClientRect = () => rect(colonne() + 54, 35);
@@ -280,16 +294,21 @@ describe('L240 r2 — balayage exhaustif : colonne collée des Vidéos sous le p
     return { colonne, cliquer, maxY, remettre, section, bouton };
   }
 
+  /** Départs balayés entre deux retours à la boucle d'événements du worker. */
+  const TRANCHE = 100;
+
   for (const lisse of [false, true]) {
     for (const hauteur of [900, 768, 700]) {
       for (const [filtre, apres] of [['2 résultats (Durée courte, Long format, FR uniquement)', 1962], ['Animations (5 résultats)', 2223]] as const) {
-        it(`1440×${hauteur}, ${lisse ? 'glissé' : 'reduce'}, ${filtre} : chaque départ de 1300 à la fin de page, au pixel → la colonne ne bouge pas, au filtre ni quand on le défait`, () => {
+        it(`1440×${hauteur}, ${lisse ? 'glissé' : 'reduce'}, ${filtre} : chaque départ de 1300 à la fin de page, au pixel → la colonne ne bouge pas, au filtre ni quand on le défait`, async () => {
           const echecs: string[] = [];
           let defilements = 0;
           etat = { y: 0, nat: G.finAvant };
           const p = page(hauteur, lisse);
           const finDePage = p.maxY();
           for (let depart = 1300; depart <= finDePage; depart++) {
+            // rendre la main au worker par tranches : un balayage d'un bloc l'empêchait de répondre au RPC de vitest
+            if (depart % TRANCHE === 0) await new Promise((r) => setTimeout(r, 0));
             p.remettre(depart);
             const place = p.colonne();
             const enVueAvant = enteteEnVue(p.section);
