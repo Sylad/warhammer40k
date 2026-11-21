@@ -13,6 +13,7 @@ function resultats(haut: number): HTMLElement {
 
 describe('L239 — après un filtre, le titre et le compte des résultats sont en vue', () => {
   afterEach(() => {
+    Reflect.deleteProperty(document.documentElement, 'scrollHeight'); // posé par sousLaListe (L241)
     vi.restoreAllMocks();
     vi.useRealTimers();
     document.body.innerHTML = '';
@@ -191,6 +192,57 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
     expect(c.aside.style.top).toBe('96px');
     expect(c.colonne()).toBe(place);
     expect(c.grille.style.minHeight).toBe(`${place + 430 + 1200}px`);
+  });
+
+  // L241 : 768 et 1024 px, « Filtres avancés » sous la liste, sans colonne collée. Modèle : en-tête des résultats à
+  // 1000 px du haut du document, liste de `liste` px, rangée 300 px sous la fin de la liste, page qui finit 600 px plus
+  // bas ; fenêtre de 768 px (jsdom).
+  function sousLaListe(depart: number, liste: { avant: number; apres: number }) {
+    document.body.innerHTML = `<section tabindex="-1"><header>2 résultats</header></section><aside><button>Durée courte</button></aside>`;
+    const section = document.querySelector('section')!;
+    const bouton = document.querySelector('button')!;
+    const etat = { y: depart, liste: liste.avant };
+    Object.defineProperty(window, 'scrollY', { configurable: true, get: () => etat.y });
+    const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(((o: ScrollToOptions) => { etat.y = o.top!; }) as typeof window.scrollTo);
+    const rect = (top: number, h: number) => ({ top, bottom: top + h, left: 0, right: 0, width: 0, height: h, x: 0, y: top, toJSON: () => ({}) }) as DOMRect;
+    section.getBoundingClientRect = () => rect(1000 - etat.y, etat.liste);
+    section.querySelector('header')!.getBoundingClientRect = () => rect(1000 - etat.y, 60);
+    bouton.getBoundingClientRect = () => rect(1000 + etat.liste + 300 - etat.y, 36);
+    document.body.getBoundingClientRect = () => rect(-etat.y, 1000 + etat.liste + 900);
+    Object.defineProperty(document.documentElement, 'scrollHeight', { configurable: true, get: () => 1000 + etat.liste + 900 });
+    return { section, bouton, scroll, etat, filtrer: (apres: number, options = { sousLePointeur: true }) => {
+      const f = avantFiltre(bouton, options);
+      etat.liste = apres;
+      return f(section);
+    } };
+  }
+
+  it('sous la liste, hors téléphone : la rangée garde sa place dans la fenêtre (défilement instantané), au filtre et quand on le défait', () => {
+    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false } as MediaQueryList); // glissé permis : il ne doit pas servir
+    const c = sousLaListe(3000, { avant: 2400, apres: 300 });
+    const place = c.bouton.getBoundingClientRect().top; // 700
+    c.bouton.focus();
+    expect(c.filtrer(300)).toBe(true);
+    expect(c.scroll).toHaveBeenCalledWith({ top: 3000 - 2100, behavior: 'instant' });
+    expect(c.bouton.getBoundingClientRect().top).toBe(place);
+    expect(document.activeElement).toBe(c.bouton); // en-tête hors de vue : le focus n'est pas déplacé vers la liste
+    expect(document.documentElement.style.minHeight).toBe(''); // dégel immédiat
+    expect(c.filtrer(2400)).toBe(true);
+    expect(c.etat.y).toBe(3000);
+    expect(c.bouton.getBoundingClientRect().top).toBe(place);
+  });
+
+  it('sous la liste, téléphone (option absente) : défilement vers les résultats de L239, inchangé', () => {
+    const c = sousLaListe(3000, { avant: 2400, apres: 300 });
+    expect(c.filtrer(300, { sousLePointeur: false })).toBe(true);
+    expect(c.etat.y).toBe(1000);
+    expect(document.activeElement).toBe(c.section);
+  });
+
+  it('sous la liste, longueur de liste inchangée : rien ne bouge', () => {
+    const c = sousLaListe(3000, { avant: 2400, apres: 2400 });
+    expect(c.filtrer(2400)).toBe(false);
+    expect(c.scroll).not.toHaveBeenCalled();
   });
 });
 

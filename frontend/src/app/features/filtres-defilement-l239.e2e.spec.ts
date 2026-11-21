@@ -555,6 +555,94 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
     }
   }
 
+  // L241 (revue UX r2 de L240, hors lot) : à 768 × 1024 et 1024 × 768, « Filtres avancés » est sous la liste, colonne non
+  // collée. Le défilement vers les résultats (L239) déplaçait la rangée pressée de 35 à 200 px : à 768 le second clic au
+  // même point activait la rangée voisine (« Long format » → « Durée courte »), à 1024 il tombait dans la marge.
+  // Attendu : la rangée reste sous le pointeur (±2 px à chaque image, du clic au repos), au filtre et quand un second clic
+  // au même point le défait ; aucun autre filtre activé. Départs : rangée juste sous la barre, au milieu de la fenêtre,
+  // en bas de la fenêtre, et fin de page. Une seule page par configuration (le second clic rend l'état neuf, vérifié).
+  for (const [largeur, hauteur] of [[768, 1024], [1024, 768]] as const) {
+    for (const motion of ['reduce', 'no-preference'] as const) {
+      it(`${largeur}×${hauteur}, /videos (${motion}) : filtre avancé → la rangée pressée reste sous le pointeur, le second clic défait le filtre`, async () => {
+        const page = await ouvrir(largeur, '/videos', motion, hauteur);
+        const premiere = page.locator('.check-row').first();
+        await premiere.waitFor();
+        await expect.poll(() => premiere.isEnabled()).toBe(true);
+        expect(await placeColle(premiere), `colonne non collée à ${largeur} px`).toBeNull();
+        const nombre = () => page.locator(`${VIDEOS} .card-link`).count();
+        const total = await nombre();
+        const marge = (await mesure(page, VIDEOS)).marge;
+        /** Clic au point (x, y) ; haut de la rangée à chaque image jusqu'au repos (scrollY et rangée immobiles sur 6 images). */
+        const cliquer = async (rangee: Locator, x: number, y: number) => {
+          await rangee.evaluate((e) => {
+            const w = window as unknown as { suiviL241: Promise<number[]> };
+            w.suiviL241 = new Promise((fin) => {
+              const trace: number[] = [];
+              let stable = 0, avant = '';
+              const pas = () => {
+                trace.push(e.getBoundingClientRect().top);
+                const etat = `${scrollY} ${trace[trace.length - 1]} ${document.documentElement.style.minHeight}`;
+                stable = etat === avant ? stable + 1 : 0;
+                avant = etat;
+                if ((trace.length > 8 && stable >= 6) || trace.length > 150) fin(trace); else requestAnimationFrame(pas);
+              };
+              requestAnimationFrame(pas);
+            });
+          });
+          await page.mouse.click(x, y);
+          return page.evaluate(() => (window as unknown as { suiviL241: Promise<number[]> }).suiviL241);
+        };
+        const echecs: string[] = [];
+        let testes = 0;
+        for (const nom of FILTRES_AVANCES) {
+          const rangee = page.locator('.check-row', { hasText: nom });
+          const departs = await rangee.evaluate((r, m) => {
+            const max = document.documentElement.scrollHeight - innerHeight;
+            const b = r.getBoundingClientRect();
+            const doc = b.top + scrollY;
+            const vers = (place: number) => Math.round(Math.min(max, Math.max(0, doc - place)));
+            return [...new Set([vers(m + 2), vers((innerHeight - b.height) / 2), vers(innerHeight - b.height - 2), max])];
+          }, marge);
+          for (const depart of departs) {
+            const cas = `${nom} depuis ${depart}`;
+            const { box, visee } = await rangee.evaluate(async (r, y) => {
+              window.scrollTo({ top: y, behavior: 'instant' });
+              await new Promise((f) => requestAnimationFrame(() => requestAnimationFrame(f)));
+              const b = r.getBoundingClientRect();
+              return { box: { x: b.left, y: b.top, w: b.width, h: b.height }, visee: document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2)?.closest('.check-row')?.textContent ?? '' };
+            }, depart);
+            if (!visee.includes(nom)) { echecs.push(`${cas} : rangée pas cliquable au départ (${Math.round(box.y)} px)`); continue; }
+            testes++;
+            const x = box.x + box.w / 2;
+            const y = box.y + box.h / 2;
+            const ecart = (t: number[]) => Math.max(...t.map((v) => Math.abs(v - box.y)));
+            const un = await cliquer(rangee, x, y);
+            const sous = await page.evaluate(([px, py]) => document.elementFromPoint(px, py)?.closest('.check-row')?.textContent?.trim() ?? '', [x, y] as const);
+            if (await rangee.getAttribute('aria-pressed') !== 'true' || (await nombre()) === total) echecs.push(`${cas} : filtre pas appliqué`);
+            if (ecart(un) > 2 || !sous.includes(nom)) {
+              echecs.push(`${cas} : rangée ${Math.round(box.y)} → ${Math.round(un[un.length - 1])} px (${Math.round(Math.min(...un))} à ${Math.round(Math.max(...un))}), sous le pointeur : « ${sous.replace(/\s+\d+$/, '')} »`);
+            }
+            const deux = await cliquer(rangee, x, y);
+            const actifs = (await page.locator('.check-row[aria-pressed="true"]').allTextContents()).map((t) => t.replace(/\s+\d+\s*$/, '').trim());
+            if (actifs.length || ecart(deux) > 2) {
+              echecs.push(`${cas}, second clic : rangée ${Math.round(box.y)} → ${Math.round(deux[deux.length - 1])} px (${Math.round(Math.min(...deux))} à ${Math.round(Math.max(...deux))}), filtres actifs : ${actifs.join(', ') || 'aucun'}`);
+              // état neuf pour le départ suivant (un clic perdu a pu ouvrir une vidéo : fenêtre fermée d'abord)
+              if (await page.getByTestId('modale-video').count()) {
+                await page.keyboard.press('Escape');
+                await page.getByTestId('modale-video').waitFor({ state: 'detached' });
+              }
+              await page.evaluate(() => document.querySelectorAll<HTMLElement>('.check-row[aria-pressed="true"]').forEach((e) => e.click()));
+              await repos(page);
+            }
+            expect(await nombre(), `${cas} : liste complète après le second clic`).toBe(total);
+          }
+        }
+        expect(testes).toBeGreaterThanOrEqual(FILTRES_AVANCES.length * 2);
+        expect(echecs, `${echecs.length} départs sur ${testes}`).toEqual([]);
+      }, 60_000);
+    }
+  }
+
   // L240 (revue r2 de L239, m2) : un clic sur la puce déjà active (« Tous » au chargement, ou Lore cliquée deux fois)
   // faisait défiler la page de 1554 px (1440) ou 2737 px (390) sans changer la liste. Attendu : rien ne bouge.
   for (const width of [390, 1440]) {

@@ -638,15 +638,23 @@ export class VideosComponent {
     return `url('${url}')`;
   }
 
-  /** `bouton` : la rangée pressée ; au bureau la colonne est collée, le défilement la garde sous la barre (L240). */
+  /**
+   * `bouton` : la rangée pressée ; au bureau la colonne est collée, le défilement la garde sous la barre (L240). Entre le
+   * téléphone et le bureau (colonne sous la liste, pas collée), la rangée reste sous le pointeur (L241) ; au téléphone,
+   * les résultats sont ramenés en vue (L239).
+   */
   toggleSidebar(key: SidebarFilter, bouton?: HTMLElement | null): void {
     const set = new Set(this.sidebarFilters());
     if (set.has(key)) set.delete(key); else set.add(key);
+    const sousLePointeur = typeof window.matchMedia === 'function' && window.matchMedia(VideosComponent.HORS_TELEPHONE).matches;
     this.filtrer(() => {
       this.sidebarFilters.set(set);
       this.allLimit.set(VideosComponent.PAGE_ALL);  // reset pagination "Toutes" sur changement filtre
-    }, bouton);
+    }, bouton, sousLePointeur);
   }
+
+  /** Au-delà de la mise en page téléphone de cette page (`@media (max-width: 760px)` de videos.component.scss). */
+  static readonly HORS_TELEPHONE = '(min-width: 760.02px)';
 
   /** L240 : la puce déjà active ne change rien, donc rien ne bouge (ni page, ni focus). */
   choisirFiltre(key: FilterKey): void {
@@ -659,8 +667,8 @@ export class VideosComponent {
    * bureau). Pendant le changement, ni ancrage ni rabattement ne déplacent la page ; après le rendu, le titre et le
    * compte de la liste sont en vue (sinon un défilement les y amène, focus sur la liste) — voir avantFiltre().
    */
-  private filtrer(appliquer: () => void, controle?: HTMLElement | null): void {
-    const fin = avantFiltre(controle);
+  private filtrer(appliquer: () => void, controle?: HTMLElement | null, sousLePointeur = false): void {
+    const fin = avantFiltre(controle, { sousLePointeur });
     appliquer();
     afterNextRender(() => fin(this.listeVideos?.nativeElement), { injector: this.injector });
   }

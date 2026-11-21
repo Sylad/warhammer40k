@@ -42,7 +42,12 @@ import { defilementSelonPreference } from './section-anchor';
  * COLLÉE (à son `top` ou repoussée au-dessus) reste maintenant là où elle était avant le clic : son conteneur garde la
  * hauteur qui la laisse à cette place au défilement visé (`tenir`, gardée jusqu'au filtre suivant ou à un
  * redimensionnement), et ce défilement ne remonte pas au-delà de la borne où la colonne devrait bouger (`borneBasse`),
- * quitte à ne pas amener l'en-tête des résultats sous la barre : la rangée pressée reste sous le pointeur, le focus aussi.
+ * quitte à ne pas amener l'en-tête des résultats sous la barre : la rangée pressée reste sous le pointeur, le focus aussi. *
+ * L241 (revue UX r2 de L240, hors lot) : entre le téléphone et le bureau (Vidéos de 761 à 1220 px), « Filtres avancés »
+ * est sous la liste, sans colonne collée ; le défilement vers les résultats de L239 déplaçait la rangée pressée de 35 à
+ * 200 px, et un second clic au même point activait la rangée voisine (768) ou tombait dans la marge (1024).
+ * `avantFiltre(controle, { sousLePointeur: true })` : la page défile d'exactement ce dont la liste a changé, la rangée
+ * garde sa place dans la fenêtre (focus compris) ; le téléphone (390 px) garde le défilement vers les résultats de L239.
  */
 
 /** Délai maximal avant de rendre au document sa hauteur (navigateur sans `scrollend`, rendu qui n'arrive pas). */
@@ -53,6 +58,7 @@ let gelActif: (() => void) | null = null;
 /** Coupe l'ancrage et garde la hauteur du document le temps d'un filtre. Rend la fonction à appeler après le rendu. */
 export function avantFiltre(
   controle?: HTMLElement | null,
+  options: { sousLePointeur?: boolean } = {},
 ): (resultats: HTMLElement | null | undefined, controle?: HTMLElement | null) => boolean {
   gelActif?.();
   const html = document.documentElement;
@@ -67,6 +73,8 @@ export function avantFiltre(
   // contrôle dans une colonne collée : son conteneur garde sa hauteur jusqu'au rendu (et pendant le glissé, voir plus bas)
   const colonne = colonneDuControle(controle);
   colonne?.garder();
+  // L241 : contrôle hors colonne collée qui doit rester sous le pointeur → sa place dans la fenêtre avant le filtre
+  const placeControle = options.sousLePointeur && !colonne && controle?.isConnected ? controle.getBoundingClientRect().top : null;
   let delai: ReturnType<typeof setTimeout> | undefined;
   /** Ce que `liberer` fait du conteneur de la colonne : le rendre (par défaut), ou le tenir à sa place (L240 r2). */
   let finColonne = () => colonne?.rendre();
@@ -94,6 +102,19 @@ export function avantFiltre(
     colonne?.rendre(); // mesures sur la mise en page filtrée
     const hauteurFiltree = basDuCorps() + surplus;
     const lisse = defilementSelonPreference() === 'smooth';
+    if (placeControle !== null && controle?.isConnected) {
+      // L241 : la liste au-dessus a changé de longueur ; un défilement instantané, avant que l'image ne soit peinte,
+      // rend au contrôle sa place dans la fenêtre (rien ne bouge à l'écran au-dessous de la liste : aucun mouvement à
+      // réduire). L'en-tête des résultats n'est pas ramené : le focus reste sur le contrôle, sous le pointeur.
+      const depart = window.scrollY;
+      const but = Math.max(0, Math.min(depart + controle.getBoundingClientRect().top - placeControle, hauteurFiltree - window.innerHeight));
+      if (Math.abs(but - depart) < 0.5) {
+        liberer();
+        return false;
+      }
+      defiler(but, false);
+      return true;
+    }
     if (colonne?.collee) {
       // L240 r2 : la colonne reste où elle était (rangée sous le pointeur) ; défilement vers les résultats borné en conséquence
       const depart = window.scrollY;
