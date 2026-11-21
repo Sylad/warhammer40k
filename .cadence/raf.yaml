@@ -2696,6 +2696,7 @@ lots:
     title: "Vidéos 768/1024 : filtre avancé — la rangée bouge de 35 à 200 px avec le défilement vers les résultats de L239 ; à 768 le second clic active la rangée voisine (identique prod ; tmp/ux-L240-r2.md)"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-21, sha: 9a9452bf1329b2a29dd2f88cc2364dc7f2942169 }
     created: 2026-11-20
     started: 2026-11-21
     review: { date: 2026-11-21, verdict: "conforme (lead, L241/t1 662eba7 : rappel dans deux places de hauteur fixe choisies au clic selon ce qui est en vue, aria-hidden sur le texte, une seule région live, focus rendu à la rangée voisine ; styles en partiel global préfixé .videos-page à cause du budget du composant ; test e2e rouge 6/11 avant, 16/16 après)", commit: 662eba719312b9bb4d0b60770d16011d4eec3a3c }
