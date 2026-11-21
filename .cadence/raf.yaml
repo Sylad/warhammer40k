@@ -2704,6 +2704,8 @@ lots:
     tasks:
       - { id: t1, title: "Vidéos 761-1220 px : rappel du compte (et de l'état vide) en tête de Filtres avancés", status: done }
     finished: 2026-11-21
+    notes:
+      - { date: 2026-11-21, text: "QA prod 9a9452b (21-11, tmp/qa-warhammer-9a9452b.md) : 30/30 pages conformes ; L240/L241 tenus à 761/768/1024/1220. Le « saut » à 390/320 au clic d'un filtre avancé est le défilement vers les résultats voulu par L239 (confirmé en revues UX L241 r1 et r2), pas un défaut" }
   - id: L242
     title: "Vidéos : « Effacer les filtres » de l'état vide de la liste disparaît au clic et le focus retombe sur le corps de la page (WCAG 2.4.3 ; vu par le run L241/t1, antérieur)"
     status: todo
