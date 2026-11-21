@@ -30,6 +30,13 @@ try {
 }
 
 const SEED = resolve(FRONTEND, '../backend/seed');
+/** r3 — requête du wiki d'une œuvre du catalogue, comme la galerie la forme (`fetchImage`). */
+const ARTWORKS = JSON.parse(readFileSync(resolve(SEED, 'artworks.json'), 'utf8')) as { title: string; wikiQuery?: string }[];
+const requeteOeuvre = (titre: string): string => {
+  const a = ARTWORKS.find((x) => x.title === titre);
+  if (!a) throw new Error(`œuvre absente du seed : ${titre}`);
+  return a.wikiQuery ?? `${a.title} warhammer 40k`;
+};
 const premier = (f: string) => (JSON.parse(readFileSync(resolve(SEED, f), 'utf8')) as { id: string }[])[0].id;
 const PARAMS: Record<string, string> = {
   'factions/:id': `factions/${premier('factions.json')}`,
@@ -256,11 +263,11 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     try {
       await brancher(page);
-      const reponses: unknown[] = [];
+      const reponses: { q: string; json: unknown }[] = [];
       await page.route('**/api/wiki-image**', async (r) => {
         const q = new URL(r.request().url()).searchParams.get('q')!;
         const json = await rechercherImageWiki(q, { base: baseFandom });
-        reponses.push(json);
+        reponses.push({ q, json });
         return r.fulfill({ json }); // notre API répond 200, comme le contrôleur
       });
       await page.goto(`${base}/gallery`);
@@ -270,12 +277,21 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
       const d = page.locator('dialog.modal');
       await d.waitFor();
       const ecart = d.locator('[data-testid="viewer-ecart"]');
+      // L243 — la galerie cherche en même temps l'image de chaque œuvre et de chaque catégorie (file de 6) :
+      // compter toutes les réponses, ou lire `data-etat` juste après la touche, ne prouve pas que la recherche
+      // relancée a abouti (l'état « erreur » d'avant l'appui passait pour celui d'après, et l'Entrée de l'étape 3
+      // tombait pendant la recherche de l'étape 2, ignorée). On attend la réponse à la requête de CETTE œuvre.
+      const requete = requeteOeuvre(await d.locator('#viewer-titre').innerText());
+      const reponseOeuvre = () => page.waitForResponse((r) =>
+        r.url().includes('/api/wiki-image') && new URL(r.url()).searchParams.get('q') === requete);
+      const derniere = () => reponses.filter((r) => r.q === requete).at(-1)?.json;
 
       // 1. Connexion coupée par Fandom : notre API a répondu 200, la visionneuse dit quand même l'échec.
       await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
       expect(appelsFandom).toBeGreaterThan(0);
       expect(reponses.length).toBeGreaterThan(0);
-      for (const r of reponses) expect(r).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
+      for (const r of reponses) expect(r.json).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
+      expect(derniere()).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
       expect(await ecart.getAttribute('role')).toBe('alert');
       expect(await ecart.innerText()).toContain('La recherche de l’image sur le Warhammer 40k Wiki a échoué.');
       expect(await d.innerText()).not.toContain('Aucune image trouvée');
@@ -285,18 +301,21 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
       fandom = '429';
       const bouton = d.locator('[data-testid="viewer-reessayer"]');
       await bouton.focus();
-      const avant = reponses.length;
+      let relance = reponseOeuvre();
       await page.keyboard.press('Enter');
-      await expect.poll(() => reponses.length).toBeGreaterThan(avant);
+      await relance; // la visionneuse est en « chargement » jusqu'à ce que l'application lise cette réponse
       await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
-      expect(reponses.at(-1)).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
+      expect(derniere()).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
       expect(await d.innerText()).not.toContain('Aucune image trouvée');
       expect(await page.evaluate(() => document.activeElement?.getAttribute('data-testid'))).toBe('viewer-reessayer');
       expect(await bouton.getAttribute('aria-disabled')).toBeNull();
 
       // 3. Fandom répond, sans image : là seulement « Aucune image trouvée » ; le focus suit le message, pas le corps de la page.
       fandom = 'sans-image';
+      relance = reponseOeuvre();
       await page.keyboard.press('Enter');
+      await relance;
+      expect(derniere()).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null });
       await expect.poll(() => ecart.getAttribute('data-etat')).toBe('absente');
       expect(await ecart.innerText()).toBe('Aucune image trouvée pour cette œuvre.');
       expect(await bouton.count()).toBe(0);
