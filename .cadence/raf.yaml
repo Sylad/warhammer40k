@@ -2681,6 +2681,7 @@ lots:
     title: "Vidéos : un clic sur la puce déjà active (« Tous ») fait défiler de 1554 à 2737 px sans rien changer ; à 1440, après un filtre avancé, la rangée pressée finit sous la barre du haut (54-90 px) ; à 390×667 le compte des résultats passe sous le pli après la liste Faction (relevés par la revue UX r2 de L239, tmp/ux-L239-r2.md)"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-21, sha: f7f97adbc3a8d9cc6ae5252faf730fec0125ab39 }
     created: 2026-11-20
     started: 2026-11-20
     review: { date: 2026-11-21, verdict: "conforme (r6, af0be7e, revue du lead : test seul, getComputedStyle remplacé par le style en ligne dans la page modèle avec égalité contrôlée en tête de cas, balayage rendu au worker toutes les 100 positions, aucun délai relevé ; neutralisations identiques à r5 ; mocks restaurés par afterEach)", commit: af0be7ec4edd6ea85357200560cee3aae1391021 }
