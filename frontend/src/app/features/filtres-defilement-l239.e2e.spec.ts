@@ -8,7 +8,7 @@
 // (M2) ; sans réduction de mouvement, une image de rabattement précédait le glissé (m3).
 // Règle mesurée (voir verifier()) : titre et compte des résultats en vue, focus en vue ; page immobile s'ils l'étaient
 // déjà ; sinon un seul défilement (glissé sans saut) jusqu'au haut des résultats, focus sur la liste.
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, onTestFailed } from 'vitest';
 import type { Server } from 'node:http';
 import type { Browser, Locator, Page } from 'playwright-core';
 import { distState, startDistServer } from '../../testing/dist-server';
@@ -72,16 +72,66 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
     await browser?.close();
     server?.close();
   });
+  /** Une page par configuration (largeur × hauteur, réduction de mouvement), chargée une fois (correction L240 du 21-11). */
+  const pages = new Map<string, { page: Page; style: string }>();
 
   it('application construite à jour (sinon : ng build)', () => {
     expect(stale).toBe(false);
   });
 
+  /**
+   * Page de `adresse` telle qu'au premier chargement. Correction L240 du 21-11 : chaque cas ouvrait sa page et attendait
+   * le repos du réseau (~1,3 s par cas). La page d'une configuration est chargée une fois ; les cas suivants y reviennent
+   * par la navigation de l'application (/about puis `adresse` : composant recréé, filtres et panneaux d'origine), après
+   * la fin du gel d'un filtre précédent (`avantFiltre`, au plus GEL_MAX_MS) et un redimensionnement qui rend toute hauteur
+   * tenue ; l'état d'arrivée est vérifié : haut de page, focus sur le corps, document sans style posé, images toutes
+   * chargées ou en échec et mise en page immobile sur deux images. Un cas en échec ferme sa page (le suivant repart d'un
+   * chargement).
+   */
   async function ouvrir(width: number, adresse: string, reducedMotion: 'reduce' | 'no-preference' = 'reduce', height = width > 500 ? 900 : 844): Promise<Page> {
-    const page = await browser.newPage({ reducedMotion });
-    await page.route((u) => !u.host.startsWith('127.0.0.1'), (r) => r.abort()); // aucune requête externe
-    await page.setViewportSize({ width, height });
-    await page.goto(base + adresse, { waitUntil: 'networkidle' }); // vignettes en échec posées : la page ne bouge plus
+    const cle = `${width}×${height} ${reducedMotion}`;
+    const deja = pages.get(cle);
+    onTestFailed(async () => {
+      const p = pages.get(cle);
+      pages.delete(cle);
+      await p?.page.close();
+    });
+    if (!deja) {
+      const page = await browser.newPage({ reducedMotion });
+      await page.route((u) => !u.host.startsWith('127.0.0.1'), (r) => r.abort()); // aucune requête externe
+      await page.setViewportSize({ width, height });
+      await page.goto(base + adresse, { waitUntil: 'networkidle' }); // vignettes en échec posées : la page ne bouge plus
+      pages.set(cle, { page, style: (await page.evaluate(() => document.documentElement.getAttribute('style'))) ?? '' });
+      return page;
+    }
+    const { page, style } = deja;
+    await page.mouse.move(0, 0);
+    const arrivee = await page.evaluate(async (adresse) => {
+      const attendre = (ms: number) => new Promise((r) => setTimeout(r, ms));
+      const image = () => new Promise((r) => requestAnimationFrame(() => r(null)));
+      const html = document.documentElement;
+      for (let i = 0; i < 200 && (html.style.minHeight || html.style.overflowAnchor); i++) await attendre(10);
+      dispatchEvent(new Event('resize'));
+      const routee = () => document.querySelector('main router-outlet')?.nextElementSibling?.tagName ?? '';
+      const aller = async (u: string, balise: string) => {
+        history.pushState(null, '', u);
+        dispatchEvent(new PopStateEvent('popstate'));
+        for (let i = 0; i < 300 && routee() !== balise; i++) await attendre(10);
+      };
+      await aller('/about', 'APP-ABOUT');
+      await aller(adresse, adresse === '/gallery' ? 'APP-GALLERY' : 'APP-VIDEOS');
+      (document.activeElement as HTMLElement | null)?.blur();
+      // vignettes chargées ou en échec, puis mise en page immobile sur deux images
+      let hauteur = -1;
+      for (let i = 0, stables = 0; i < 300 && stables < 2; i++) {
+        await image();
+        const pretes = Array.from(document.images).every((img) => img.complete);
+        stables = pretes && html.scrollHeight === hauteur ? stables + 1 : 0;
+        hauteur = html.scrollHeight;
+      }
+      return { route: routee(), y: scrollY, actif: document.activeElement === document.body, style: html.getAttribute('style') ?? '', images: Array.from(document.images).every((img) => img.complete) };
+    }, adresse);
+    expect(arrivee, `retour à ${adresse} (${cle})`).toEqual({ route: adresse === '/gallery' ? 'APP-GALLERY' : 'APP-VIDEOS', y: 0, actif: true, style, images: true });
     return page;
   }
 
@@ -200,7 +250,6 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
         await page.waitForTimeout(400);
         await verifier(page, c, controle, avant, await mesure(page, c.resultats), width);
         if (c.liste) expect(await controle.inputValue()).not.toBe('');
-        await page.close();
       });
     }
   }
@@ -232,7 +281,6 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
       await page.waitForTimeout(400);
       await verifier(page, c, controle, avant, await mesure(page, c.resultats), 1440);
-      await page.close();
     });
   }
 
@@ -258,9 +306,28 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       expect(colle.haut, `rangée pressée à ${colle.haut}–${colle.bas} px, barre ${apres.marge}`).toBeGreaterThanOrEqual(apres.marge - 2);
       // la colonne entière (titre « Filtres avancés » compris) tient sous la barre avec l'en-tête des résultats
       expect(colle.colonne, `haut de la colonne à ${colle.colonne} px, barre ${apres.marge}`).toBeGreaterThanOrEqual(apres.marge - 2);
-      await page.close();
     });
   }
+
+  /**
+   * Fin de tout ce qu'un filtre déclenche : document dégelé (`avantFiltre` rend sa hauteur et le conteneur de la colonne
+   * à la fin du défilement, au plus GEL_MAX_MS = 1,5 s après), puis défilement, hauteur du document et place de l'élément
+   * focalisé immobiles sur six images. Remplace l'attente fixe de 1 600 ms (choisie pour dépasser GEL_MAX_MS) ; plafonné
+   * à 4 s.
+   */
+  const repos = (page: Page) => page.evaluate(async () => {
+    const html = document.documentElement;
+    const image = () => new Promise((r) => requestAnimationFrame(r));
+    const debut = performance.now();
+    while ((html.style.minHeight || html.style.overflowAnchor) && performance.now() - debut < 3000) await image();
+    let avant = '';
+    for (let stables = 0; stables < 6 && performance.now() - debut < 4000;) {
+      await image();
+      const etat = `${scrollY} ${html.scrollHeight} ${document.activeElement?.getBoundingClientRect().top}`;
+      stables = etat === avant ? stables + 1 : 0;
+      avant = etat;
+    }
+  });
 
   // L240, revue UX r1 (M1) : départs 1700 et 2000, colonne collée à son `top` (96 px). Le défilement la posait à 78 px
   // (scroll-padding-top) : la rangée pressée sautait de 18 à 49 px et un second clic au même point tombait sur la rangée
@@ -282,14 +349,15 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
         const y = box.y + box.height / 2;
         // trace image par image de la rangée pressée : jamais sous la barre pendant le glissé (revue r1, m1)
         await controle.evaluate((e) => {
-          const w = window as unknown as { traceRangee: number[] };
-          w.traceRangee = [];
-          const pas = () => { w.traceRangee.push(e.getBoundingClientRect().top); if (w.traceRangee.length < 90) requestAnimationFrame(pas); };
+          // tableau propre à ce cas : la boucle d'un cas précédent, sur la même page, n'y écrit pas
+          const trace: number[] = [];
+          (window as unknown as { traceRangee: number[] }).traceRangee = trace;
+          const pas = () => { trace.push(e.getBoundingClientRect().top); if (trace.length < 90) requestAnimationFrame(pas); };
           requestAnimationFrame(pas);
         });
         await page.mouse.click(x, y);
         await expect.poll(() => controle.getAttribute('aria-pressed')).toBe('true');
-        await page.waitForTimeout(motion === 'reduce' ? 400 : 1600);
+        await repos(page);
         const trace = await page.evaluate(() => (window as unknown as { traceRangee: number[] }).traceRangee);
         const marge = (await mesure(page, VIDEOS)).marge;
         expect(Math.min(...trace), `rangée pendant le défilement : ${trace.map(Math.round).join(' ')}`).toBeGreaterThanOrEqual(marge - 2);
@@ -302,11 +370,10 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
         expect(await page.evaluate(([px, py]) => document.elementFromPoint(px, py)?.closest('.check-row')?.textContent?.trim(), [x, y] as const)).toContain(nom);
         await page.mouse.click(x, y);
         await expect.poll(() => controle.getAttribute('aria-pressed')).toBe('false');
-        await page.waitForTimeout(motion === 'reduce' ? 400 : 1600);
+        await repos(page);
         expect(await page.locator('.check-row[aria-pressed="true"]').count(), 'aucun autre filtre avancé activé').toBe(0);
         const defait = (await placeColle(controle))!;
         expect(Math.abs(defait.haut - avant.haut), `rangée après le second clic : ${avant.haut} → ${defait.haut} px`).toBeLessThanOrEqual(2);
-        await page.close();
       });
     }
   }
@@ -316,13 +383,22 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
   // raccourcie raccourcit le conteneur de la colonne collée, qui la repoussait vers le haut (Durée courte à 1500 :
   // 154 → 108 px, le second clic activait Long format). (b) fin de page : la colonne, déjà repoussée par le bas de son
   // conteneur, revenait à son `top` quand la page défilait vers les résultats (+26 à +131 px, second clic perdu).
-  // Balayage : chaque départ de 1300 à la fin de la page, par pas de 20 px, chaque filtre avancé, 1440 × 900, 768 et 700 ;
-  // page neuve à chaque départ (navigation dans l'application). Attendu : la rangée pressée reste sous le pointeur à ±4 px,
-  // pendant le défilement compris, et un second clic au même point défait ce filtre, rangée toujours sous le pointeur.
+  // Le balayage de chaque départ, au pixel, est dans `core/utils/resultats-en-vue.spec.ts` (vrai `avantFiltre`, mise en
+  // page modèle de cette page, géométrie mesurée). Ici, dans le navigateur, les cas limites, calculés sur la page :
+  // 1500 (revue) et le dernier départ de la bande où l'en-tête est en vue, le premier départ après cette bande, 1700
+  // (revue ; 1700 et 2000 aussi plus haut), de part et d'autre du départ où le bas du conteneur commence à repousser la
+  // colonne, dernier départ où la rangée est encore cliquable sous la barre, fin de page −1 et fin de page ; chaque filtre
+  // avancé, 1440 × 900, 768 et 700 (répartition ci-dessous).
+  // Une seule navigation par configuration (L240, correction du 21-11 : une page neuve à chaque départ faisait 1456
+  // navigations, l'étape e2e de la CI dépassait 7 min) : le second clic défait le filtre, un redimensionnement rend la
+  // hauteur tenue, et l'état d'une page neuve (hauteur du document, styles posés, filtres actifs, nombre de vidéos) est
+  // vérifié avant chaque départ ; s'il diffère (filtre resté actif après un échec), retour par la navigation de l'application.
+  // Attendu : la rangée pressée reste sous le pointeur à ±4 px, pendant le défilement compris, et un second clic au même
+  // point défait ce filtre, rangée toujours sous le pointeur.
   const FILTRES_AVANCES = ['Durée courte', 'Long format', 'FR uniquement', 'Animations'] as const;
   for (const motion of ['reduce', 'no-preference'] as const) {
     for (const hauteur of [900, 768, 700]) {
-      it(`1440×${hauteur}, /videos (${motion}) : tout départ de 1300 à la fin de page, pas de 20 px → la rangée pressée reste sous le pointeur (±4 px), le second clic défait le filtre`, async () => {
+      it(`1440×${hauteur}, /videos (${motion}) : départs limites (bande de l'en-tête, colonne repoussée, fin de page) → la rangée pressée reste sous le pointeur (±4 px), le second clic défait le filtre`, async () => {
         const page = await ouvrir(1440, '/videos', motion, hauteur);
         /** Page neuve : on quitte /videos et on y revient dans l'application (composant recréé, aucun style gardé). */
         const recharger = async () => {
@@ -338,6 +414,33 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
             }
             await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
           });
+        };
+        /** Ce qui distingue une page neuve d'une page déjà filtrée : à comparer avant chaque départ. */
+        const etat = () => page.evaluate(() => {
+          const html = document.documentElement;
+          let colle: HTMLElement | null = null;
+          for (let x = document.querySelector<HTMLElement>('.check-row'); x && x !== document.body; x = x.parentElement) if (getComputedStyle(x).position === 'sticky') colle = x;
+          return JSON.stringify({
+            hauteur: html.scrollHeight,
+            document: html.getAttribute('style') ?? '',
+            colonne: colle?.getAttribute('style') ?? '',
+            conteneur: colle?.parentElement?.getAttribute('style') ?? '',
+            actifs: Array.from(document.querySelectorAll('[aria-pressed="true"]')).map((e) => e.textContent?.trim()),
+            videos: document.querySelectorAll('[data-testid="liste-videos"] .card-link').length,
+          });
+        });
+        /** Retour à l'état neuf dans la même page : hauteur tenue rendue (redimensionnement), document dégelé. */
+        let navigations = 0;
+        const remettre = async (neuf: string) => {
+          await page.mouse.move(0, 0);
+          await page.evaluate(async () => {
+            dispatchEvent(new Event('resize'));
+            const html = document.documentElement;
+            for (let i = 0; i < 200 && (html.style.minHeight || html.style.overflowAnchor); i++) await new Promise((r) => setTimeout(r, 10));
+          });
+          let maintenant = await etat();
+          if (maintenant !== neuf) { navigations++; await recharger(); maintenant = await etat(); }
+          expect(maintenant, 'retour à l\'état d\'une page neuve').toBe(neuf);
         };
         /** Clic au point (x, y) ; rend le haut de la rangée (min, max) pendant le défilement qui suit, puis à l'arrêt. */
         const cliquer = async (rangee: Locator, x: number, y: number) => {
@@ -363,28 +466,72 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
             return { min: w.suivi.min, max: w.suivi.max, fin };
           });
         };
-        await page.locator('.check-row').first().waitFor();
-        const finDePage = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
-        const departs: number[] = [];
-        for (let y = 1300; y < finDePage; y += 20) departs.push(y);
-        departs.push(finDePage);
+        const premiere = page.locator('.check-row').first();
+        await premiere.waitFor();
+        await expect.poll(() => premiere.isEnabled()).toBe(true);
+        await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+        const neuf = await etat();
+        // géométrie de la page neuve : fin de la bande où l'en-tête des résultats est en vue (la page ne défile pas), départ
+        // où le bas du conteneur commence à repousser la colonne collée, fin de page
+        const geo = await page.evaluate(() => {
+          const html = document.documentElement;
+          const marge = parseFloat(getComputedStyle(html).scrollPaddingTop) || 0;
+          let colle: HTMLElement | null = null;
+          for (let x = document.querySelector<HTMLElement>('.check-row'); x && x !== document.body; x = x.parentElement) if (getComputedStyle(x).position === 'sticky') colle = x;
+          const cs = getComputedStyle(colle!);
+          const conteneur = getComputedStyle(colle!.parentElement!);
+          const fin = colle!.parentElement!.getBoundingClientRect().bottom + scrollY - (parseFloat(conteneur.paddingBottom) || 0) - (parseFloat(conteneur.borderBottomWidth) || 0);
+          const tete = document.querySelector('[data-testid="liste-videos"] > header')!.getBoundingClientRect().top + scrollY;
+          return {
+            finDePage: html.scrollHeight - innerHeight,
+            bande: Math.round(tete - marge),
+            pousse: Math.round(fin - colle!.getBoundingClientRect().height - (parseFloat(cs.marginBottom) || 0) - parseFloat(cs.top)),
+          };
+        });
+        expect(geo.bande, `fin de la bande de l'en-tête ${JSON.stringify(geo)}`).toBeGreaterThan(1300);
+        expect(geo.pousse, `colonne repoussée ${JSON.stringify(geo)}`).toBeLessThan(geo.finDePage);
         const echecs: string[] = [];
         let testes = 0;
-        let caches = 0;
+        const caches: number[] = [];
         const ecart = (s: { min: number; max: number; fin: number }, y0: number) => Math.max(Math.abs(s.min - y0), Math.abs(s.max - y0), Math.abs(s.fin - y0));
         for (const nom of FILTRES_AVANCES) {
+          const rangee = page.locator('.check-row', { hasText: nom });
+          // dernier départ où la rangée, repoussée vers la barre avec sa colonne, est encore sous le pointeur
+          const dernier = await rangee.evaluate((r, [fin, debut]) => {
+            for (let y = fin; y >= debut; y--) {
+              window.scrollTo({ top: y, behavior: 'instant' });
+              const b = r.getBoundingClientRect();
+              if (document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2)?.closest('.check-row') === r) return y;
+            }
+            return debut;
+          }, [geo.finDePage, 1300] as const);
+          // Départs propres à la rangée et à la hauteur de la fenêtre : dernier départ cliquable, fin de page. Les autres
+          // ne dépendent que de la colonne et du conteneur, au même endroit du document à 900, 768 et 700 px et pour les
+          // trois filtres à 2 résultats (mesuré, voir resultats-en-vue.spec.ts) : joués à 900 px, avec « Durée courte »
+          // (rangée du haut) et « Animations » (5 résultats, autre longueur de liste) ; la bande de l'en-tête (rien ne
+          // défile) suit le même chemin avec ou sans réduction de mouvement : jouée avec reduce. Début de la poussée par
+          // le bas du conteneur (M1-bis b) : à chaque hauteur.
+          const colonne = nom === 'Durée courte' || nom === 'Animations';
+          const departs = [...new Set([
+            ...(colonne && hauteur === 900 && motion === 'reduce' ? [1500, geo.bande - 1] : []),
+            ...(colonne && hauteur === 900 ? [geo.bande + 1, 1700, geo.pousse - 1] : []),
+            ...(colonne ? [geo.pousse + 1] : []),
+            dernier, geo.finDePage - 1, geo.finDePage,
+          ])].filter((y) => y >= 1300 && y <= geo.finDePage).sort((p, q) => p - q);
           for (const depart of departs) {
-            await recharger();
-            const rangee = page.locator('.check-row', { hasText: nom });
-            await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), depart);
-            await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
-            const box = (await rangee.boundingBox())!;
+            await remettre(neuf);
+            // départ posé, puis centre de la rangée et ce qui est sous ce point
+            const { box, visee } = await rangee.evaluate(async (r, y) => {
+              window.scrollTo({ top: y, behavior: 'instant' });
+              await new Promise((f) => requestAnimationFrame(() => requestAnimationFrame(f)));
+              const b = r.getBoundingClientRect();
+              return { box: { x: b.left, y: b.top, width: b.width, height: b.height }, visee: document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2)?.closest('.check-row')?.textContent ?? '' };
+            }, depart);
             const x = box.x + box.width / 2;
             const y = box.y + box.height / 2;
             const cas = `${nom} depuis ${depart}`;
             // rangée cachée sous la barre du haut (fin de page : colonne repoussée par le bas de son conteneur) : pas de clic possible
-            const visee = await page.evaluate(([px, py]) => document.elementFromPoint(px, py)?.closest('.check-row')?.textContent ?? '', [x, y] as const);
-            if (!visee.includes(nom)) { caches++; continue; }
+            if (!visee.includes(nom)) { caches.push(depart); continue; }
             testes++;
             const un = await cliquer(rangee, x, y);
             const sous = await page.evaluate(([px, py]) => document.elementFromPoint(px, py)?.closest('.check-row')?.textContent?.trim() ?? '', [x, y] as const);
@@ -400,10 +547,11 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
             }
           }
         }
-        expect(echecs, `${echecs.length} départs sur ${testes} (fin de page ${finDePage}, ${caches} départs où la rangée est sous la barre)`).toEqual([]);
-        expect(caches, 'rangée cliquable à au moins trois départs sur quatre').toBeLessThan((testes + caches) / 4);
-        await page.close();
-      }, 600_000);
+        expect(echecs, `${echecs.length} départs sur ${testes} (${JSON.stringify(geo)})`).toEqual([]);
+        // la rangée n'est cachée sous la barre que lorsque le bas du conteneur repousse la colonne
+        expect(caches.filter((y) => y <= geo.pousse + 1), `départs où une rangée est sous la barre : ${caches.join(', ')}`).toEqual([]);
+        expect(navigations, 'chaque départ repart de la même page, sans navigation').toBe(0);
+      }, 120_000);
     }
   }
 
@@ -432,7 +580,6 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
         expect(apres.focusResultats).toBe(false);
         expect(await controle.evaluate((e) => e === document.activeElement)).toBe(true);
         expect(await page.locator(`${VIDEOS} .card-link`).count()).toBe(nombre);
-        await page.close();
       });
     }
   }
@@ -465,7 +612,6 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       expect(r.haut >= apres.marge - 2 && r.bas <= hauteur, `compte à ${r.haut}–${r.bas} px (fenêtre ${hauteur}, barre ${apres.marge})`).toBe(true);
       // la région d'état de la grille annonce le même compte (le rappel du panneau est aria-hidden)
       expect((await page.getByTestId('resultats-statut').textContent())?.trim()).toBe((await page.getByTestId('resultats-panneau').textContent())?.trim());
-      await page.close();
     });
   }
 
@@ -480,9 +626,9 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
       const avant = await mesure(page, c.resultats);
       expect(avant.haut).toBeLessThan(0);
       await page.evaluate(() => {
-        const w = window as unknown as { traceY: number[] };
-        w.traceY = [];
-        const pas = () => { w.traceY.push(scrollY); if (w.traceY.length < 240) requestAnimationFrame(pas); };
+        const trace: number[] = []; // propre à ce cas (même page que les cas précédents)
+        (window as unknown as { traceY: number[] }).traceY = trace;
+        const pas = () => { trace.push(scrollY); if (trace.length < 240) requestAnimationFrame(pas); };
         requestAnimationFrame(pas);
       });
       await c.appliquer(controle);
@@ -502,7 +648,6 @@ describe.skipIf(!built || !chromium)('filtres de la Galerie et des Vidéos : pas
         expect(trace[i], `dépassement image ${i}`).toBeGreaterThanOrEqual(fin - 1);
       }
       expect(trace.filter((y, i) => i > 0 && y !== trace[i - 1]).length, `glissé en ${trace.length} images`).toBeGreaterThan(3);
-      await page.close();
     });
   }
 });

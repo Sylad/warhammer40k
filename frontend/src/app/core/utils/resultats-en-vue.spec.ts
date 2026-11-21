@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { avantFiltre, GEL_MAX_MS, garderResultatsEnVue, limiteCollee } from './resultats-en-vue';
+import { avantFiltre, enteteEnVue, GEL_MAX_MS, garderResultatsEnVue, limiteCollee } from './resultats-en-vue';
 
 /** Section de résultats dont l'en-tête est à `haut` px du bord de la fenêtre (768 px sous jsdom), 60 px de haut. */
 function resultats(haut: number): HTMLElement {
@@ -192,4 +192,124 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
     expect(c.colonne()).toBe(place);
     expect(c.grille.style.minHeight).toBe(`${place + 430 + 1200}px`);
   });
+});
+
+// Balayage exhaustif de la règle de L240 r2 (« la rangée pressée reste sous le pointeur »), au pixel près, sur le vrai
+// `avantFiltre` et une mise en page modèle de /videos à 1440 px. Il tournait dans le navigateur par pas de 20 px
+// (filtres-defilement-l239.e2e.spec.ts, 1456 navigations, plus de 7 min en CI) ; le navigateur n'y garde que les cas
+// limites (départs calculés sur la page). Géométrie mesurée le 21-11 sur l'application construite (1440 × 900, 768 et
+// 700 : identique en coordonnées du document) : colonne « Filtres avancés » de 418 px, collée à 96 px, dans le flux à
+// 808 ; conteneur de 808 à 2541 (contenu naturel), 1962 avec un filtre à 2 résultats, 2223 avec « Animations » (5) ;
+// pied de page 502 px sous le conteneur ; en-tête des résultats à 1616 (57 px) ; barre du haut 78 px.
+describe('L240 r2 — balayage exhaustif : colonne collée des Vidéos sous le pointeur, au filtre et quand on le défait', () => {
+  const G = { flux: 808, top: 96, hauteur: 418, finAvant: 2541, pied: 502, tete: 1616, teteH: 57, marge: 78 };
+  const rect = (top: number, h: number) => ({ top, bottom: top + h, left: 0, right: 0, width: 0, height: h, x: 0, y: top, toJSON: () => ({}) }) as DOMRect;
+  let fenetre = 900;
+  let etat = { y: 0, nat: G.finAvant };
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    document.body.innerHTML = '';
+    document.documentElement.removeAttribute('style');
+    window.dispatchEvent(new Event('resize')); // tenue rendue : le module n'en garde aucune pour le cas suivant
+  });
+
+  /** Page modèle : le navigateur borne `scrollY` à la hauteur du document (min-height comprises). */
+  function page(innerHeight: number, lisse: boolean) {
+    fenetre = innerHeight;
+    vi.spyOn(window, 'innerHeight', 'get').mockImplementation(() => fenetre);
+    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: !lisse } as MediaQueryList);
+    Object.defineProperty(window, 'scrollY', { configurable: true, get: () => etat.y });
+    const html = document.documentElement;
+    html.style.scrollPaddingTop = `${G.marge}px`;
+    document.body.innerHTML = `<section class="layout"><div class="liste"><section tabindex="-1"><header>2 résultats</header></section></div>`
+      + `<aside style="position: sticky; top: ${G.top}px"><button>Durée courte</button></aside></section>`;
+    const conteneur = document.querySelector<HTMLElement>('.layout')!;
+    const aside = document.querySelector('aside')!;
+    const bouton = document.querySelector('button')!;
+    const section = document.querySelector<HTMLElement>('.liste > section')!;
+    // conteneur en border-box (comme .layout), min-height posée en px depuis son haut (808 dans le document)
+    const fin = () => Math.max(etat.nat, G.flux + (parseFloat(conteneur.style.minHeight) || 0));
+    const hauteurPage = () => Math.max(fin() + G.pied, parseFloat(html.style.minHeight) || 0);
+    const maxY = () => Math.max(0, hauteurPage() - fenetre);
+    Object.defineProperty(html, 'scrollHeight', { configurable: true, get: hauteurPage });
+    const colonne = () => {
+      if (aside.style.position === 'static') return G.flux - etat.y;
+      return Math.min(Math.max(parseFloat(aside.style.top), G.flux - etat.y), fin() - G.hauteur - etat.y);
+    };
+    const trajets: { de: number; a: number; lisse: boolean }[] = [];
+    vi.spyOn(window, 'scrollTo').mockImplementation(((o: ScrollToOptions) => {
+      trajets.push({ de: etat.y, a: o.top!, lisse: o.behavior === 'smooth' });
+      etat.y = Math.min(Math.max(0, o.top!), maxY());
+    }) as typeof window.scrollTo);
+    conteneur.getBoundingClientRect = () => rect(G.flux - etat.y, fin() - G.flux);
+    aside.getBoundingClientRect = () => rect(colonne(), G.hauteur);
+    bouton.getBoundingClientRect = () => rect(colonne() + 54, 35);
+    section.getBoundingClientRect = () => rect(G.tete - etat.y, 300);
+    section.querySelector('header')!.getBoundingClientRect = () => rect(G.tete - etat.y, G.teteH);
+    document.body.getBoundingClientRect = () => rect(-etat.y, hauteurPage());
+    /** Un clic : liste naturelle `apres` ; rend la place de la colonne à chaque étape du glissé, et à la fin. */
+    const cliquer = (apres: number) => {
+      const f = avantFiltre(bouton);
+      etat.nat = apres;
+      const depart = etat.y;
+      trajets.length = 0;
+      etat.y = depart;
+      f(section);
+      const places: number[] = [];
+      const t = trajets[0];
+      if (t?.lisse) {
+        // glissé : la page passe par chaque scrollY entre départ et but avant `scrollend`
+        const but = etat.y;
+        for (let y = t.de; y !== but; y += Math.sign(but - y)) { etat.y = y; places.push(colonne()); }
+        etat.y = but;
+        places.push(colonne());
+        window.dispatchEvent(new Event('scrollend'));
+      }
+      places.push(colonne());
+      return { places, defile: trajets.length > 0 };
+    };
+    /** Page neuve au défilement `depart` : liste complète, aucune hauteur tenue ni `top` posé (une seule mise en page par cas). */
+    const remettre = (depart: number) => {
+      window.dispatchEvent(new Event('resize')); // tenue rendue, comme au redimensionnement
+      expect(conteneur.style.minHeight).toBe('');
+      expect(aside.style.top).toBe(`${G.top}px`);
+      expect(html.style.minHeight).toBe('');
+      etat = { y: depart, nat: G.finAvant };
+    };
+    return { colonne, cliquer, maxY, remettre, section, bouton };
+  }
+
+  for (const lisse of [false, true]) {
+    for (const hauteur of [900, 768, 700]) {
+      for (const [filtre, apres] of [['2 résultats (Durée courte, Long format, FR uniquement)', 1962], ['Animations (5 résultats)', 2223]] as const) {
+        it(`1440×${hauteur}, ${lisse ? 'glissé' : 'reduce'}, ${filtre} : chaque départ de 1300 à la fin de page, au pixel → la colonne ne bouge pas, au filtre ni quand on le défait`, () => {
+          const echecs: string[] = [];
+          let defilements = 0;
+          etat = { y: 0, nat: G.finAvant };
+          const p = page(hauteur, lisse);
+          const finDePage = p.maxY();
+          for (let depart = 1300; depart <= finDePage; depart++) {
+            p.remettre(depart);
+            const place = p.colonne();
+            const enVueAvant = enteteEnVue(p.section);
+            const un = p.cliquer(apres);
+            const apresUn = etat.y;
+            if (un.defile) defilements++;
+            if (un.places.some((x) => Math.abs(x - place) > 0.5)) echecs.push(`${depart} : colonne ${place} → ${un.places.find((x) => Math.abs(x - place) > 0.5)} au filtre`);
+            // en-tête déjà en vue : rien ne défile ; sinon la page remonte vers les résultats (jamais au-delà de la fin)
+            if (enVueAvant && apresUn !== depart) echecs.push(`${depart} : en-tête en vue, la page a défilé jusqu'à ${apresUn}`);
+            if (!enVueAvant && (apresUn > depart || apresUn > p.maxY())) echecs.push(`${depart} : défilement vers ${apresUn} (fin ${p.maxY()})`);
+            p.bouton.focus();
+            const deux = p.cliquer(G.finAvant);
+            if (deux.places.some((x) => Math.abs(x - place) > 0.5)) echecs.push(`${depart}, second clic : colonne ${place} → ${deux.places.find((x) => Math.abs(x - place) > 0.5)}`);
+          }
+          expect(echecs.slice(0, 10), `${echecs.length} échecs sur ${finDePage - 1300 + 1} départs`).toEqual([]);
+          // le balayage passe bien par les deux régimes : page immobile (bande 1300-1538) et défilement vers les résultats
+          expect(defilements).toBeGreaterThan(0);
+          expect(defilements).toBeLessThan(finDePage - 1300 + 1);
+        });
+      }
+    }
+  }
 });
