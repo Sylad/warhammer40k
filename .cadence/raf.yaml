@@ -2711,6 +2711,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-22, sha: 0db6409099e4e1396827a7ad189a7c62bbc64294 }
     created: 2026-11-21
     started: 2026-11-22
     ux: { date: 2026-11-22, verdict: "conforme revue courte conforme (tmp/ux-L242.md) : focus sur le 1er résultat, status 0→16, aucun saut ; mineur : coupure après « en 390 ; défilements des sondes = L239 voulu" }
