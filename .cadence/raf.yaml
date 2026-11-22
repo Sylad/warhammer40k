@@ -873,6 +873,7 @@ lots:
     title: "Vidéos et chaînes : séparer la référence (seed, dans l'image) des ajouts/suppressions de l'utilisateur (volume), fusionnés à la lecture — fait arriver les 2 URL YouTube corrigées par 0171157 (suite de L74, 06-10)"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-22, sha: 972a08b84fe3b5829e573ea8f84ae62fd7c9e8ed }
     created: 2026-10-06
     review: { date: 2026-11-22, verdict: "conforme r0 — 0 bloquant, 0 majeur ; 9 tests de service rouges sans le correctif ; migration idempotente, écriture atomique ; 3 mineurs notés (retour arrière non symétrique, volume illisible visible au seul journal, entrée null dans la surcouche fait tomber le démarrage) — tmp/revue-wh-L76.md", commit: c68d5b1d741aaa16ac1c3a4898c997746326bca7 }
     started: 2026-11-22
@@ -2757,6 +2758,7 @@ lots:
     title: "ancres.e2e.spec.ts « Fiche faction, lien rapide vers #subfactions » rouge à 1440 et 390 (vu au run L44 le 22-11) : le lien attendu n'existe plus, probablement depuis L237 — trancher test ou page ; ce test n'est pas dans la liste e2e de la porte (à y ajouter)"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-22, sha: 972a08b84fe3b5829e573ea8f84ae62fd7c9e8ed }
     created: 2026-11-22
     started: 2026-11-22
     review: { date: 2026-11-22, verdict: "r2 (suite CI) conforme — lead : timeouts mesurés et gardés par ci-frontend-checks.test.mjs, entrée sans id filtrée + 2 tests rouges avant", commit: 5a7b4fba35705f63549ccbfef74cd566f7898b4f }
