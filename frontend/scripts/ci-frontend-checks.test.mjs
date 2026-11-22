@@ -106,6 +106,32 @@ describe('workflow frontend-checks.yml', () => {
     });
   });
 
+  // L245 — le job (10 min) était annulé pendant les e2e (~7 min observées, 428 s en local le 22-11).
+  describe('timeouts (L245)', () => {
+    const job = Object.values(wf.jobs)[0];
+    const step = (re) => steps.find((s) => re.test(String(s.run ?? '')));
+    const E2E_OBSERVE_MIN = 7;
+
+    it('R1 — l’étape e2e a son timeout, au moins ×1,5 la durée observée', () => {
+      const e2e = step(/test:e2e/);
+      expect(e2e['timeout-minutes']).toBeGreaterThanOrEqual(E2E_OBSERVE_MIN * 1.5);
+    });
+
+    it('R2 — Vitest et le build ont chacun leur timeout (une étape trop longue échoue sur son nom)', () => {
+      expect(step(/npx vitest run/)['timeout-minutes']).toBeGreaterThan(0);
+      expect(step(/npm run build/)['timeout-minutes']).toBeGreaterThan(0);
+    });
+
+    it('R3 — le job vaut au moins la somme des timeouts d’étape d’un même passage (installations de Chromium : l’une ou l’autre)', () => {
+      const installs = steps.filter((s) => /playwright-core install/.test(String(s.run ?? '')));
+      const autres = steps.filter((s) => !installs.includes(s));
+      const somme = autres.reduce((t, s) => t + (s['timeout-minutes'] ?? 0), 0) + Math.max(...installs.map((s) => s['timeout-minutes']));
+      expect(somme).toBeGreaterThanOrEqual(E2E_OBSERVE_MIN * 1.5);
+      expect(job['timeout-minutes']).toBeGreaterThanOrEqual(somme);
+      for (const s of steps) if (s['timeout-minutes'] !== undefined) expect(s['timeout-minutes']).toBeLessThan(job['timeout-minutes']);
+    });
+  });
+
   // L52 — la preuve de nginx.conf sur un vrai nginx n'était jouée qu'à la main.
   it('L52 — scripts/test-nginx-cache.sh est joué APRÈS le build (il sert dist) et à la racine du dépôt', () => {
     const at = steps.findIndex((s) => /scripts\/test-nginx-cache\.sh/.test(String(s.run ?? '')));

@@ -26,7 +26,13 @@ jobs:
   frontend-checks:
     name: Plan publié, tests et build frontend
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # L245 : 10 min ne suffisaient plus (run de 1006ccf annulé pendant les e2e, ~7 min depuis l'ajout
+    # d'ancres.e2e et section-anchor-href-l160.e2e). Durées mesurées le 22-11 (local, 32 cœurs ; les e2e
+    # tournent un fichier à la fois, donc peu sensibles au nombre de cœurs) : Vitest 46 s, build 14 s,
+    # e2e 428 s (300 cas, dont filtres-defilement-l239 116 s et ancres 105 s). Le job vaut au moins la
+    # somme des timeouts d'étape d'un même passage (8 + 5 + 3 + 5 + 12 = 33) : une étape trop longue
+    # échoue sur son nom, le job n'est jamais annulé au milieu d'une étape. Garde : ci-frontend-checks.test.mjs.
+    timeout-minutes: 35
     defaults:
       run:
         working-directory: frontend
@@ -44,9 +50,11 @@ jobs:
         run: node scripts/plan-data.mjs --check
 
       - name: Tests Vitest
+        timeout-minutes: 8
         run: npx vitest run
 
       - name: Build (avec vérification de fuite du plan)
+        timeout-minutes: 5
         run: npm run build
 
       # L52 : nginx.conf sur un vrai nginx (Docker, présent sur ubuntu-latest) : en-têtes de cache
@@ -99,7 +107,10 @@ jobs:
       # L166 : durée de chaque cas (junit), charge du runner et journal horodaté de chaque appel Playwright
       # (DEBUG=pw:api : clic, onglet ouvert, waitForEvent) conservés, échec compris, pour qu'un rouge
       # aléatoire qui revient laisse de quoi distinguer clic manqué, onglet absent et onglet en retard.
+      # L245 : ~7 min observées sur le runner (428 s en local) ; 12 min = plus de ×1,5. À relever si
+      # l'artefact e2e-junit montre la somme des fichiers au-delà de 8 min (×1,5 ne tiendrait plus).
       - name: Acceptation de bout en bout (application construite, Chromium)
+        timeout-minutes: 12
         shell: bash
         run: |
           nproc; uptime

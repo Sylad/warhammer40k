@@ -64,6 +64,11 @@ export function migrerAncienVolume<T extends AvecId>(ancien: readonly T[], seed:
   return { ajouts, retraits };
 }
 
+/** Une entrée utilisable : un objet dont l'identifiant est une chaîne non vide. */
+function estEntree(e: unknown): e is AvecId {
+  return typeof e === 'object' && e !== null && typeof (e as AvecId).id === 'string' && (e as AvecId).id !== '';
+}
+
 function estSurcouche(x: unknown): x is Surcouche<unknown> {
   const s = x as Surcouche<unknown> | null;
   return !!s && Array.isArray(s.ajouts) && Array.isArray(s.retraits) && s.retraits.every(r => typeof r === 'string');
@@ -103,13 +108,13 @@ export class DepotFusionne<T extends AvecId> {
       if (fs.existsSync(chemin)) {
         const lue: unknown = JSON.parse(fs.readFileSync(chemin, 'utf-8'));
         if (!estSurcouche(lue)) throw new Error('format inattendu (ajouts / retraits)');
-        this.surcouche = { ajouts: lue.ajouts as T[], retraits: lue.retraits };
+        this.surcouche = { ajouts: this.entreesValides(lue.ajouts, chemin), retraits: lue.retraits };
         return;
       }
       if (fs.existsSync(ancien)) {
         const lu: unknown = JSON.parse(fs.readFileSync(ancien, 'utf-8'));
         if (!Array.isArray(lu)) throw new Error('ancien fichier : un tableau était attendu');
-        this.surcouche = migrerAncienVolume(lu as T[], this.seed, this.o);
+        this.surcouche = migrerAncienVolume(this.entreesValides(lu, ancien), this.seed, this.o);
         this.ecrire();
         this.logger.log(
           `migration L76 depuis data/${this.o.nom}.json (laissé intact) : ${this.surcouche.ajouts.length} ajout(s), ` +
@@ -121,6 +126,20 @@ export class DepotFusionne<T extends AvecId> {
       this.surcouche = { ajouts: [], retraits: [] };
       this.logger.error(`volume illisible, repli sur le seed seul, écritures refusées : ${(e as Error).message}`);
     }
+  }
+
+  /**
+   * L245 — une entrée sans identifiant (null, nombre, objet sans `id`…) dans le volume est ignorée et
+   * journalisée : avant, elle levait dans `fusionner` (`e.id`) hors du `try` et faisait tomber le
+   * démarrage du backend. Elle disparaît du fichier à la prochaine écriture (rien d'utilisable à garder).
+   */
+  private entreesValides(liste: readonly unknown[], chemin: string): T[] {
+    const valides = liste.filter(estEntree) as T[];
+    const ignorees = liste.length - valides.length;
+    if (ignorees > 0) {
+      this.logger.warn(`${chemin} : ${ignorees} entrée(s) sans identifiant ignorée(s) (null ou format inattendu)`);
+    }
+    return valides;
   }
 
   private calculer(): T[] {

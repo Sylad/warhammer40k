@@ -1,4 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { Logger } from '@nestjs/common';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
@@ -188,5 +189,41 @@ describe('VideosService / ChannelsService sur un volume (L76)', () => {
     expect(read('channels-utilisateur.json')).toEqual({ version: 1, ajouts: [chaine('u')], retraits: [] });
     s.add(chaine('v'));
     expect(ids(new ChannelsService().findAll())).toEqual(['a', 'b', 'u', 'v']);
+  });
+
+  // L245 (constat 3 de la revue L76) : une entrée null dans `ajouts` levait dans `fusionner` hors du try
+  // et faisait tomber le démarrage du backend.
+  it('L245 — entrées sans identifiant dans la surcouche : ignorées, journalisées, le service démarre et écrit', () => {
+    const warn = vi.spyOn(Logger.prototype, 'warn').mockImplementation(() => undefined);
+    try {
+      write('seed', 'videos.json', [video('a')]);
+      write('data', 'videos-utilisateur.json', { version: 1, ajouts: [null, video('u'), 3, { titre: 'sans id' }, { id: '' }], retraits: [] });
+      write('seed', 'channels.json', [chaine('a')]);
+      write('data', 'channels-utilisateur.json', { version: 1, ajouts: [chaine('u'), null], retraits: [] });
+      const v = new VideosService();
+      const c = new ChannelsService();
+      expect(ids(v.findAll())).toEqual(['a', 'u']);
+      expect(ids(c.findAll())).toEqual(['a', 'u']);
+      const messages = warn.mock.calls.map(a => String(a[0]));
+      expect(messages.some(m => m.includes('videos-utilisateur.json') && m.includes('4 entrée(s) sans identifiant'))).toBe(true);
+      expect(messages.some(m => m.includes('channels-utilisateur.json') && m.includes('1 entrée(s) sans identifiant'))).toBe(true);
+      v.add(video('w')); // écritures permises : seules les entrées inutilisables sont perdues
+      expect(read('videos-utilisateur.json')).toEqual({ version: 1, ajouts: [video('u'), video('w')], retraits: [] });
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
+  it('L245 — entrée null dans l’ancien fichier à migrer : ignorée, migration faite', () => {
+    const warn = vi.spyOn(Logger.prototype, 'warn').mockImplementation(() => undefined);
+    try {
+      write('seed', 'videos.json', [video('a')]);
+      write('data', 'videos.json', [video('a'), null, video('importee')]);
+      expect(ids(new VideosService().findAll())).toEqual(['a', 'importee']);
+      expect(read('videos-utilisateur.json')).toEqual({ version: 1, ajouts: [video('importee')], retraits: [] });
+      expect(warn).toHaveBeenCalled();
+    } finally {
+      warn.mockRestore();
+    }
   });
 });
