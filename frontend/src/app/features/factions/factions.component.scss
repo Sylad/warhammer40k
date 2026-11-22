@@ -314,9 +314,7 @@
       text-align: center;
     }
     .etat p { margin: 0; }
-    .etat-erreur { border-color: rgba(123, 17, 19, 0.75); }
     .etat .filter { min-height: 44px; }
-    .filter[aria-disabled='true'] { opacity: 0.6; cursor: progress; }
     .card-fantome {
       cursor: default;
       background: linear-gradient(180deg, rgba(201, 162, 74, 0.06) 0%, var(--panel) 70%);

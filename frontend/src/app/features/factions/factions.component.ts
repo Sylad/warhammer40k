@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { Alignment, Faction, Unit } from '../../core/models/models';
 import { retryAll, toSafeSignal } from '../../shared/safe-signal';
+import { LoadErrorComponent } from '../../shared/components/load-error/load-error.component';
 
 const WIKI_SEARCH: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -32,7 +33,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
 @Component({
   selector: 'app-factions',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, LoadErrorComponent],
   template: `
     <section class="hero" [style.--hero-img]="heroBgUrl()">
       <div class="hero-content">
@@ -69,12 +70,10 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
       <!-- L96 : région live toujours présente (jamais display:none), annonce le chargement puis le nombre de résultats. -->
       <p class="results-count" role="status" data-testid="compte-factions">{{ compte() }}</p>
       @if (etat() === 'erreur') {
-        <div class="etat etat-erreur" role="alert" data-testid="erreur-factions">
-          <p>{{ reessai() ? 'Nouvel essai en cours…' : 'Les factions n’ont pas pu être chargées. Vérifiez la connexion, puis réessayez.' }}</p>
-          <!-- aria-disabled (pas disabled) pendant le nouvel essai : le bouton garde le focus (WCAG 2.4.3). -->
-          <button #boutonReessayer type="button" class="filter" data-testid="bouton-reessayer"
-                  [attr.aria-disabled]="reessai() ? 'true' : null" (click)="reessayer()">Réessayer</button>
-        </div>
+        <!-- L96 : alerte partagée ; pendant le nouvel essai elle reste affichée, bouton en aria-disabled (focus gardé). -->
+        <app-load-error message="Les factions n’ont pas pu être chargées. Vérifiez la connexion, puis réessayez."
+                        [enCours]="reessai()" alerteTestId="erreur-factions" boutonTestId="bouton-reessayer"
+                        (retry)="reessayer()" />
       } @else if (etat() === 'chargement') {
         <div class="grid" aria-hidden="true" data-testid="chargement-factions">
           @for (i of fantomes; track i) {
@@ -180,12 +179,11 @@ export class FactionsComponent {
   }
   /** L102/L96 : « — » à la place des comptes tant que /api/units charge ou a échoué : jamais un faux « 0 ». */
   readonly units = toSafeSignal(this.service.getUnits(), [] as Unit[]);
-  readonly unitsErreur = this.units.failed;
   readonly wikiImages = signal(new Map<string, string>());
 
   @ViewChild('toutes') private toutes?: ElementRef<HTMLButtonElement>;
   @ViewChild('resultats') private resultats?: ElementRef<HTMLElement>;
-  @ViewChild('boutonReessayer') private boutonReessayer?: ElementRef<HTMLButtonElement>;
+  @ViewChild(LoadErrorComponent, { read: ElementRef }) private alerteErreur?: ElementRef<HTMLElement>;
 
   readonly filterKey = signal<FilterKey>('all');
   readonly searchQuery = signal('');
@@ -213,7 +211,8 @@ export class FactionsComponent {
   /** L96 : « Réessayer » relance les deux sources ; le bouton reste en place pendant l'essai. */
   reessayer(): void {
     if (this.reessai()) return;
-    const avaitFocus = document.activeElement === this.boutonReessayer?.nativeElement;
+    const actif = document.activeElement;
+    const avaitFocus = !!actif && !!this.alerteErreur?.nativeElement.contains(actif);
     this.reessai.set(true);
     retryAll(this.source, this.units);
     const fini = effect(() => {

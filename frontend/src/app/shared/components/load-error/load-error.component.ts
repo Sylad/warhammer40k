@@ -10,10 +10,12 @@ import { RouterLink } from '@angular/router';
     @if (notFound || heading) {
       <h1 class="load-error-title">{{ heading || 'Fiche introuvable' }}</h1>
     }
-    <div class="load-error" role="alert">
-      <p>{{ notFound ? 'Cette fiche est introuvable.' : message }}</p>
+    <div class="load-error" role="alert" [attr.data-testid]="alerteTestId">
+      <p>{{ notFound ? 'Cette fiche est introuvable.' : enCours ? messageEnCours : message }}</p>
       @if (!notFound) {
-        <button type="button" (click)="retry.emit()">Réessayer</button>
+        <!-- L96 : aria-disabled (pas disabled) pendant le nouvel essai : le bouton garde le focus (WCAG 2.4.3). -->
+        <button type="button" [attr.data-testid]="boutonTestId" [attr.aria-disabled]="enCours ? 'true' : null"
+                (click)="enCours || retry.emit()">Réessayer</button>
       } @else if (backLink) {
         <a class="back" [routerLink]="backLink">{{ backLabel }}</a>
       }
@@ -38,6 +40,7 @@ import { RouterLink } from '@angular/router';
       color: var(--gold-bright, #f0d276); font: 600 0.85rem var(--sans, 'Inter', sans-serif); letter-spacing: 0.08em; cursor: pointer;
     }
     button:hover { border-color: var(--gold, #c9a24a); }
+    button[aria-disabled='true'] { opacity: 0.6; cursor: progress; }
     button:focus-visible { outline: 2px solid var(--gold-bright, #f0d276); outline-offset: 3px; }
   `],
 })
@@ -50,5 +53,14 @@ export class LoadErrorComponent {
   /** Lien vers la liste, affiché seulement quand notFound. */
   @Input() backLink: string | null = null;
   @Input() backLabel = 'Retour à la liste';
+  /**
+   * L96 : nouvel essai en cours. La page garde l'état affiché jusqu'à la réponse : le même bouton reste en place,
+   * en aria-disabled (le focus n'est pas perdu), le message dit l'essai, et un clic n'émet pas `retry`.
+   */
+  @Input() enCours = false;
+  @Input() messageEnCours = 'Nouvel essai en cours…';
+  /** Repères de test (data-testid) de l'alerte et du bouton, posés seulement s'ils sont fournis. */
+  @Input() alerteTestId: string | null = null;
+  @Input() boutonTestId: string | null = null;
   @Output() retry = new EventEmitter<void>();
 }

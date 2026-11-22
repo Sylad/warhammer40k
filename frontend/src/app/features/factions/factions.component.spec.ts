@@ -353,3 +353,45 @@ describe('liste des factions — « Autres » conditionnel et états de la liste
     expect(el.querySelector('[role="status"]')).not.toBeNull();
   });
 });
+
+// L96 (revue de code r0) — l'état des filtres et les noms des champs passent aux aides techniques :
+// `aria-pressed` suit le filtre actif (pas seulement la classe `active`), recherche, tri et groupe nommés.
+describe('liste des factions — filtres et champs accessibles (L96)', () => {
+  async function monte() {
+    const service = fakeWarhammerService({
+      factions$: of([{ ...F('a'), alignement: 'Imperium' }, { ...F('b'), alignement: 'Chaos' }, { ...F('c'), alignement: 'Neutre' }]),
+      getUnits: () => of([]),
+    });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    return f;
+  }
+  const pressions = (el: HTMLElement) =>
+    Object.fromEntries([...el.querySelectorAll<HTMLButtonElement>('.filters button')]
+      .map((b) => [b.textContent!.trim(), b.getAttribute('aria-pressed')]));
+
+  it('aria-pressed est vrai sur le seul filtre choisi, au clic, et suit chaque changement', async () => {
+    const f = await monte();
+    const el = f.nativeElement as HTMLElement;
+    expect(pressions(el)).toEqual({
+      'Toutes les factions': 'true', Imperium: 'false', Chaos: 'false', 'Xénos': 'false', Autres: 'false',
+    });
+    for (const libelle of ['Chaos', 'Autres', 'Imperium', 'Xénos', 'Toutes les factions']) {
+      [...el.querySelectorAll<HTMLButtonElement>('.filters button')].find((b) => b.textContent!.trim() === libelle)!.click();
+      f.detectChanges();
+      const attendu = Object.fromEntries(Object.keys(pressions(el)).map((k) => [k, k === libelle ? 'true' : 'false']));
+      expect(pressions(el), `après « ${libelle} »`).toEqual(attendu);
+    }
+  });
+
+  it('la recherche, le tri et le groupe des filtres ont un nom accessible', async () => {
+    const f = await monte();
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('input[type="search"]')?.getAttribute('aria-label')).toBe('Rechercher une faction');
+    expect(el.querySelector('select')?.getAttribute('aria-label')).toBe('Trier les factions');
+    const groupe = el.querySelector('.filters')!;
+    expect(groupe.getAttribute('role')).toBe('group');
+    expect(groupe.getAttribute('aria-label')).toBe('Alignement');
+  });
+});
