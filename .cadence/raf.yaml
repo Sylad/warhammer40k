@@ -2727,6 +2727,13 @@ lots:
     started: 2026-11-21
     review: { date: 2026-11-21, verdict: "conforme test seul (84b18be) : attend la réponse de la bonne œuvre ; 4/20 échecs sur un cœur avant, 20/20 après", commit: 84b18be5539ecfe6081d7827b4e86eb6d235c72c }
     finished: 2026-11-21
+  - id: L244
+    title: "Test e2e instable credits-l238 r3 390 px (Fandom en panne → « erreur » au lieu de « absente », credits-l238.e2e.spec.ts:300) : rouge à la 1re tentative CI du 21-11 (run 44916942652), vert au 2e — stabiliser ; et jouer l'e2e (vitest.e2e.config.ts) dans la porte pour la parité porte ↔ CI"
+    status: todo
+    estimate: 0.5
+    quickwin: true
+    planned: { from: 2026-11-23, to: 2026-11-23 }
+    created: 2026-11-22
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
