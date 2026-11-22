@@ -1,25 +1,18 @@
 {
-  "verifieLe": "2026-10-11",
+  "verifieLe": "2026-11-22",
   "aVenir": [
-    {
-      "id": "boltgun-2",
-      "titre": "Warhammer 40,000: Boltgun II",
-      "statut": "Annoncé",
-      "sortie": "14 octobre 2026",
-      "genre": "Tir à la première personne rétro",
-      "plateformes": ["PC (Steam)", "PlayStation 5", "Xbox Series", "Switch 2 (plus tard)"],
-      "resume": "Suite du tir rétro Boltgun : campagne à embranchements, nouveaux biomes (cité-ruche, marais de jungle), nouveaux ennemis comme les Sanguinaires et les Juggernauts, nouvelles armes dont l’épée tronçonneuse et le fusil à pompe.",
-      "source": "https://www.gematsu.com/2026/08/warhammer-40000-boltgun-ii-launches-october-14-for-ps5-xbox-series-and-pc-later-for-switch-2"
-    },
     {
       "id": "dawn-of-war-4",
       "titre": "Warhammer 40,000: Dawn of War IV",
-      "statut": "En développement",
+      "statut": "Annoncé",
       "sortie": "3 décembre 2026",
       "genre": "Stratégie en temps réel",
-      "plateformes": ["PC (Steam)"],
-      "resume": "Développé par King Art Games, édité par Deep Silver. Quatre factions au lancement (Space Marines, Adeptus Mechanicus, Nécrons, Orks), une cinquième prévue la première année. Campagne sur Kronus, jouable en coopération, escarmouche, Dernier Rempart et multijoueur compétitif en 1c1, 2c2 et 3c3. Sortie repoussée du 17 septembre au 3 décembre 2026 ; accès anticipé le 30 novembre pour l’édition Commandant.",
-      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Dawn_of_War_IV"
+      "plateformes": [
+        "PC (Steam)"
+      ],
+      "resume": "Développé par King Art Games, édité par Deep Silver. Quatre factions au lancement (Space Marines, Adeptus Mechanicus, Nécrons, Orks), une cinquième prévue la première année. Sortie repoussée du 17 septembre au 3 décembre 2026 ; accès anticipé le 30 novembre pour l’édition Commandant.",
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Dawn_of_War_IV",
+      "consulteLe": "2026-11-22"
     },
     {
       "id": "total-war-warhammer-40000",
@@ -27,21 +20,171 @@
       "statut": "Annoncé",
       "sortie": null,
       "genre": "Stratégie au tour par tour et batailles en temps réel",
-      "plateformes": ["PC", "PlayStation 5", "Xbox Series"],
-      "resume": "Développé par Creative Assembly, révélé aux Game Awards en décembre 2025. Campagne galactique sur plusieurs mondes avec économie de guerre et flottes, batailles en temps réel à décors destructibles. Quatre factions au lancement : Space Marines, Astra Militarum, Aeldari et Orks.",
-      "source": "https://www.wargamer.com/total-war-warhammer-40k/release-date"
+      "plateformes": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series"
+      ],
+      "resume": "Le premier Total War dans l’univers de Warhammer 40 000, révélé aux Game Awards en décembre 2025. Aucune date de sortie n’est annoncée.",
+      "source": "https://en.wikipedia.org/wiki/Total_War_(video_game_series)",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "space-marine-3",
+      "titre": "Warhammer 40,000: Space Marine 3",
+      "statut": "En développement",
+      "sortie": null,
+      "genre": "Action à la troisième personne",
+      "plateformes": [],
+      "resume": "Suite de Space Marine 2, annoncée le 13 mars 2025 par Saber Interactive, Focus Entertainment et Games Workshop. Ni plateformes ni date : le jeu est « sans doute à plusieurs années de sa sortie », selon l’annonce.",
+      "source": "https://www.warhammer-community.com/en-gb/articles/glahjvsr/space-marine-3-is-officially-in-development/",
+      "consulteLe": "2026-11-22"
     }
   ],
   "existants": [
-    { "id": "space-marine-2", "titre": "Warhammer 40,000: Space Marine 2", "annee": 2024, "resume": "Action à la troisième personne : campagne dans la peau d’un Space Marine Ultramarine, coopération et modes en ligne.", "plateformes": ["PC", "PlayStation 5", "Xbox Series"] },
-    { "id": "rogue-trader", "titre": "Warhammer 40,000: Rogue Trader", "annee": 2023, "resume": "Jeu de rôle d’Owlcat Games : un Marchand Libre explore le Dominion Koronus à la tête de son vaisseau.", "plateformes": ["PC"] },
-    { "id": "boltgun", "titre": "Warhammer 40,000: Boltgun", "annee": 2023, "resume": "Tir rétro rapide et brutal, dans l’esprit des classiques des années 1990.", "plateformes": ["PC"] },
-    { "id": "darktide", "titre": "Warhammer 40,000: Darktide", "annee": 2022, "resume": "Coopérative à quatre contre les hordes du Chaos dans la cité-ruche de Tertium.", "plateformes": ["PC"] },
-    { "id": "chaos-gate", "titre": "Warhammer 40,000: Chaos Gate – Daemonhunters", "annee": 2022, "resume": "Tactique au tour par tour : les Chevaliers Gris affrontent la Peste de Nurgle.", "plateformes": ["PC"] },
-    { "id": "battlesector", "titre": "Warhammer 40,000: Battlesector", "annee": 2021, "resume": "Tactique au tour par tour : Blood Angels contre Tyranides.", "plateformes": ["PC"] },
-    { "id": "mechanicus", "titre": "Warhammer 40,000: Mechanicus", "annee": 2018, "resume": "Tactique au tour par tour menée par le Techno-prêtre Dominus, face aux Nécrons.", "plateformes": ["PC"] },
-    { "id": "dawn-of-war-2", "titre": "Warhammer 40,000: Dawn of War II", "annee": 2009, "resume": "Stratégie en temps réel centrée sur de petites escouades de héros.", "plateformes": ["PC"] },
-    { "id": "space-marine", "titre": "Warhammer 40,000: Space Marine", "annee": 2011, "resume": "Action à la troisième personne : le capitaine Titus défend un monde forge contre les Orks.", "plateformes": ["PC"] },
-    { "id": "dawn-of-war", "titre": "Warhammer 40,000: Dawn of War", "annee": 2004, "resume": "Stratégie en temps réel qui a lancé la série, sur Tarsis Ultra et ses extensions.", "plateformes": ["PC"] }
+    {
+      "id": "boltgun-2",
+      "titre": "Warhammer 40,000: Boltgun 2",
+      "annee": 2026,
+      "resume": "Suite du tir rétro Boltgun, sortie le 14 octobre 2026 : deux personnages jouables, Malum Caedo et Nyra Veyrath, et une campagne à embranchements.",
+      "plateformes": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Boltgun_2",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "mechanicus-2",
+      "titre": "Warhammer 40,000: Mechanicus II",
+      "annee": 2026,
+      "resume": "Tactique au tour par tour de Bulwark Studios, sortie le 21 mai 2026 : deux campagnes, l’une côté Adeptus Mechanicus, l’autre côté Nécrons.",
+      "plateformes": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Mechanicus_II",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "space-marine-2",
+      "titre": "Warhammer 40,000: Space Marine 2",
+      "annee": 2024,
+      "resume": "Action à la troisième personne : campagne dans la peau d’un Space Marine Ultramarine, coopération et modes en ligne.",
+      "plateformes": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Space_Marine_2",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "rogue-trader",
+      "titre": "Warhammer 40,000: Rogue Trader",
+      "annee": 2023,
+      "resume": "Jeu de rôle d’Owlcat Games : un Marchand Libre explore le Dominion Koronus à la tête de son vaisseau.",
+      "plateformes": [
+        "PC",
+        "macOS",
+        "PlayStation 5",
+        "Xbox Series",
+        "Switch 2"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Rogue_Trader_(video_game)",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "boltgun",
+      "titre": "Warhammer 40,000: Boltgun",
+      "annee": 2023,
+      "resume": "Tir rétro rapide et brutal, dans l’esprit des classiques des années 1990.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Boltgun",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "darktide",
+      "titre": "Warhammer 40,000: Darktide",
+      "annee": 2022,
+      "resume": "Coopérative à quatre contre les hordes du Chaos dans la cité-ruche de Tertium.",
+      "plateformes": [
+        "PC",
+        "Xbox Series",
+        "PlayStation 5"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Darktide",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "chaos-gate",
+      "titre": "Warhammer 40,000: Chaos Gate – Daemonhunters",
+      "annee": 2022,
+      "resume": "Tactique au tour par tour : les Chevaliers Gris affrontent la Peste de Nurgle.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Chaos_Gate_%E2%80%93_Daemonhunters",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "battlesector",
+      "titre": "Warhammer 40,000: Battlesector",
+      "annee": 2021,
+      "resume": "Tactique au tour par tour : Blood Angels contre Tyranides.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Battlesector",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "mechanicus",
+      "titre": "Warhammer 40,000: Mechanicus",
+      "annee": 2018,
+      "resume": "Tactique au tour par tour menée par le Techno-prêtre Dominus, face aux Nécrons.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Mechanicus",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "dawn-of-war-2",
+      "titre": "Warhammer 40,000: Dawn of War II",
+      "annee": 2009,
+      "resume": "Stratégie en temps réel centrée sur de petites escouades de héros.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Dawn_of_War_II",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "space-marine",
+      "titre": "Warhammer 40,000: Space Marine",
+      "annee": 2011,
+      "resume": "Action à la troisième personne : le capitaine Titus défend un monde forge contre les Orks.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Space_Marine",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "dawn-of-war",
+      "titre": "Warhammer 40,000: Dawn of War",
+      "annee": 2004,
+      "resume": "Stratégie en temps réel qui a lancé la série, sur Tarsis Ultra et ses extensions.",
+      "plateformes": [
+        "PC"
+      ],
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Dawn_of_War",
+      "consulteLe": "2026-11-22"
+    }
   ]
 }

@@ -36,6 +36,7 @@ h3 { font-family: 'Cinzel', serif; color: #f0d276; margin: 0; overflow-wrap: any
 .jv-annee { color: var(--gold); font-weight: 700; white-space: nowrap; }
 .jv-detail { grid-column: 1 / -1; margin: 0; font-size: .9rem; }
 .jv-plat { grid-column: 1 / -1; margin: 0; color: #8d8678; font-size: .82rem; }
+.jv-lien-source { color: #f0d276; display: inline-block; min-height: 24px; line-height: 24px; }
 .jv-msg { padding: 28px 24px; background: #0b0907; border: 1px solid rgba(201, 162, 74, .28); max-width: 640px; }
 .jv-msg p { margin: 0 0 6px; }
 .jv-aide { color: #8d8678; font-size: .9rem; }

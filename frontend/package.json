@@ -11,6 +11,7 @@
     "test:watch": "vitest",
     "news": "rm -rf public/nouveautes-data && cadence news build -o public/nouveautes-data && rm -f public/nouveautes-data/index.html && node scripts/nouveautes-tailles.mjs",
     "plan": "node scripts/plan-data.mjs",
+    "veille": "node scripts/veille-data.mjs",
     "liens": "node scripts/liens.mjs",
     "liens:crawl": "node scripts/liens-crawl.mjs",
     "liens:externes": "node scripts/liens-externes.mjs",

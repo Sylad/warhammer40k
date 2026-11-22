@@ -13,6 +13,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { JEUX_VIDEO_NOW } from '../app/features/jeux-video/jeux-video.component';
+import { VEILLE_CHARGEMENT } from '../app/features/dashboard/actualites/veille.utils';
 
 const KEY = Symbol.for('wh40k.testbed.ready');
 const g = globalThis as Record<symbol, unknown>;
@@ -67,6 +68,11 @@ export async function setupTestBed(imports: unknown[], providers: unknown[] = []
   const pages = routes.flatMap((r) => [r, ...(r.children ?? [])]);
   await Promise.all(pages.map((r) => (r.loadComponent as (() => Promise<unknown>) | undefined)?.()));
   await resolveComponentResources(async (url) => gabarit(url));
-  TestBed.configureTestingModule({ imports: imports as never[], providers: [{ provide: JEUX_VIDEO_NOW, useValue: () => new Date(2026, 9, 12) }, ...providers] as never[] });
+  TestBed.configureTestingModule({ imports: imports as never[], providers: [
+    { provide: JEUX_VIDEO_NOW, useValue: () => new Date(2026, 9, 12) },
+    // L44 : la section « Actualités » de l'accueil reste en chargement, sauf si un test fournit son chargement.
+    { provide: VEILLE_CHARGEMENT, useValue: () => new Promise<unknown>(() => {}) },
+    ...providers,
+  ] as never[] });
   await TestBed.compileComponents();
 }

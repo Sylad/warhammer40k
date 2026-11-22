@@ -1,0 +1,46 @@
+{
+  "revueLe": "2026-11-22",
+  "rythmeJours": 30,
+  "actualites": [
+    {
+      "id": "throne-questoris",
+      "date": "2026-10-07",
+      "titre": "Black Library annonce « Throne Questoris »",
+      "resume": "Nouveau roman de Victoria Hayward : l’héritier d’une maison de Chevaliers Impériaux, aux commandes de son antique machine de guerre, doit défendre un monde mourant où des Chevaliers disparaissent dans les tempêtes de neige. Précommandes annoncées pour bientôt, sans date de sortie.",
+      "source": "https://www.warhammer-community.com/en-gb/articles/cz327wys/imperial-knights-star-in-a-new-black-library-novel/",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "crucible-of-fire-raptors",
+      "date": "2026-09-09",
+      "titre": "Deux romans révélés : « Crucible of Fire » et « Raptors: War and Shadow »",
+      "resume": "Premier roman complet de Tom R Pike, « Crucible of Fire » suit le lieutenant Kallisto Rytsar de l’Astra Militarum, qui défend un manufactorum contre les Orks avec les survivants de sa compagnie. William Crowe raconte une demi-compagnie de Raptors face à une vrille de la flotte-ruche Léviathan. Sans date de sortie annoncée.",
+      "source": "https://www.warhammer-community.com/en-gb/articles/30qnykae/revealed-new-warhammer-40000-novels/",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "serie-animee-deathwatch",
+      "date": "2026-08-03",
+      "titre": "Une série animée Warhammer 40 000 en préparation chez Amazon",
+      "resume": "Amazon MGM Studios, Blur Studios et Games Workshop développent une série animée centrée sur la Deathwatch, dans la lignée de l’épisode Warhammer 40 000 de l’anthologie « Secret Level ». Henry Cavill en est producteur exécutif. Aucune date de diffusion n’est annoncée, pas plus que pour la série en prises de vues réelles.",
+      "source": "https://movieweb.com/warhammer-40000-animated-series-henry-cavill/",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "onzieme-edition-sortie",
+      "date": "2026-06",
+      "titre": "La 11e édition du jeu est sortie",
+      "resume": "La onzième édition de Warhammer 40 000 est sortie en juin 2026 ; c’est l’édition en cours.",
+      "source": "https://en.wikipedia.org/wiki/Warhammer_40,000",
+      "consulteLe": "2026-11-22"
+    },
+    {
+      "id": "onzieme-edition-annonce",
+      "date": "2026-03",
+      "titre": "11e édition annoncée avec la boîte « Armageddon »",
+      "resume": "Annoncée en direct à l’AdeptiCon 2026, la onzième édition s’ouvre sur la boîte « Armageddon », Blood Angels contre Orks. Games Workshop la présente comme une évolution des règles, pas une refonte : les codex existants restent utilisables au lancement.",
+      "source": "https://www.wargamer.com/warhammer-40k/11th-edition-revealed",
+      "consulteLe": "2026-11-22"
+    }
+  ]
+}

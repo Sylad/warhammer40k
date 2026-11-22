@@ -7,6 +7,7 @@ import type { LoreEvent } from '../../core/models/models';
 import { wikiThumbWidth } from '../../shared/media-thumb';
 import { accord } from '../../core/utils/pluriel';
 import { nombreOeuvresGalerie } from '../../core/utils/galerie';
+import { ActualitesComponent } from './actualites/actualites.component';
 
 /** L84 : largeurs demandées à Fandom — le héros s'étale sur tout l'écran, les cartes font ~330 px (écrans 2x). */
 const HERO_WIDTH = 1400;
@@ -36,7 +37,7 @@ const TYPE_LABEL: Record<string, string> = {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ActualitesComponent],
   template: `
     <section class="hero hero-flicker">
       <div class="hero-bg" [style.background-image]="heroImg()"></div>
@@ -134,6 +135,8 @@ const TYPE_LABEL: Record<string, string> = {
         </div>
       </section>
     }
+
+    <app-actualites />
 
     <section class="stats-bar">
       <div class="stat">

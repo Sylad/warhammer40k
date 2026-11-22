@@ -16,6 +16,8 @@ export interface JeuAVenir {
   plateformes: string[];
   resume: string;
   source: string;
+  /** L44 : date de consultation de la source (contrôlée par scripts/veille-data.mjs). */
+  consulteLe?: string;
   image?: string;
 }
 
@@ -25,6 +27,8 @@ export interface JeuSorti {
   annee: number;
   resume: string;
   plateformes: string[];
+  source?: string;
+  consulteLe?: string;
 }
 
 export interface JeuxData {
@@ -51,7 +55,7 @@ export function repartirJeux(data: JeuxData, now: Date): { aVenir: JeuAVenir[]; 
   const sortis: JeuSorti[] = [];
   for (const j of data.aVenir) {
     const d = jourComplet(j.sortie);
-    if (d && d <= jour) sortis.push({ id: j.id, titre: j.titre, annee: d.getFullYear(), resume: j.resume, plateformes: j.plateformes });
+    if (d && d <= jour) sortis.push({ id: j.id, titre: j.titre, annee: d.getFullYear(), resume: j.resume, plateformes: j.plateformes, source: j.source, consulteLe: j.consulteLe });
     else aVenir.push(j);
   }
   return { aVenir, existants: [...sortis, ...data.existants] };
@@ -66,7 +70,8 @@ export function dateFr(iso: string): string {
 
 /**
  * L35 — page « Jeux vidéo » (/jeux-video) : jeux à venir d'abord, puis jeux déjà sortis.
- * Données : public/jeux-data/jeux.json (versionné, vérifié en ligne à la date `verifieLe`),
+ * Données : public/jeux-data/jeux.json (versionné, vérifié en ligne à la date `verifieLe`, recopiée de
+ * public/veille-data/veille.json par `npm run veille` — L44 : chaque jeu a sa `source` https et `consulteLe`),
  * lues par fetch comme /nouveautes-data. Une date n'est jamais devinée : affichée à la précision
  * annoncée, ou « Date non communiquée ».
  */
@@ -127,7 +132,7 @@ export function dateFr(iso: string): string {
                             @if (j.sortie) { {{ j.sortie }} <span class="jv-tag">annoncée</span> } @else { Date non communiquée }
                           </dd>
                           <dt>Genre</dt><dd data-testid="jeu-genre">{{ j.genre }}</dd>
-                          <dt>Plateformes</dt><dd data-testid="jeu-plateformes">{{ j.plateformes.join(' · ') }}</dd>
+                          <dt>Plateformes</dt><dd data-testid="jeu-plateformes">{{ j.plateformes.length ? j.plateformes.join(' · ') : 'Non communiquées' }}</dd>
                         </dl>
                         <p class="jv-resume" data-testid="jeu-resume">{{ j.resume }}</p>
                         <p class="jv-source">
@@ -153,6 +158,9 @@ export function dateFr(iso: string): string {
                       <span class="jv-annee" data-testid="existant-annee">{{ j.annee }}</span>
                       <p class="jv-detail" data-testid="existant-resume">{{ j.resume }}</p>
                       <p class="jv-plat" data-testid="existant-plateformes">{{ j.plateformes.join(' · ') }}</p>
+                      @if (j.source) {
+                        <p class="jv-plat"><a class="jv-lien-source" [href]="j.source" target="_blank" rel="noopener noreferrer" data-testid="existant-source">Source<span class="sr-only"> : {{ j.titre }} (nouvel onglet)</span> ↗</a></p>
+                      }
                     </article>
                   </li>
                 }
