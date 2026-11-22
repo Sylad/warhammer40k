@@ -1107,6 +1107,8 @@ lots:
     visible: true
     created: 2026-10-10
     started: 2026-11-22
+    ux: { date: 2026-11-22, verdict: "conforme — revue UX courte (tmp/ux-wh-L96.md) ; mineurs notés : « AUCUNE FACTION » en double sur recherche vide, « UNITÉS — » lu « tiret »" }
+    review: { date: 2026-11-22, verdict: "non conforme r0 (tmp/revue-wh-L96.md) : majeur aria-pressed des filtres et aria-label recherche/tri sans test ; mineurs unitsErreur mort (factions.component.ts:183), alerte Réessayer en 3e copie au lieu d'app-load-error", commit: 05d0f1a83dcd618bd010fdd2a4d9133ca31bcad1 }
   - id: L97
     title: "/factions/<id inconnu> : titre « Faction introuvable » mais « Chargement de la faction... » sans fin — message d'erreur + lien vers /factions (revue UX L3)"
     public: "Faction inconnue : un message clair au lieu d'un chargement sans fin"
