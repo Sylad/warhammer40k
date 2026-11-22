@@ -356,8 +356,9 @@
     {
       "id": "L98",
       "title": "Sous-factions : les libellés du bandeau sont lisibles",
-      "status": "doing",
-      "started": "2026-11-22"
+      "status": "done",
+      "started": "2026-11-22",
+      "finished": "2026-11-22"
     },
     {
       "id": "L100",
