@@ -2769,6 +2769,7 @@ lots:
     title: "QA : attentes de /videos (cartes, chaînes, API) dans docs/qa/expectations.md ; trancher « UNITÉS 0 » de Custodes, Drukhari, Genestealer Cults et Grey Knights sur /factions (QA L76 du 22-11)"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-22, sha: 3d5ec54641c6fadd1a8e3716fc23f176b7adf121 }
     created: 2026-11-22
     started: 2026-11-22
     ux: { date: 2026-11-22, verdict: "conforme (lead, captures du run 1440/390) : « Aucune fiche d'unité pour l'instant » sur les 6 factions vides, contraste mesuré 5,8:1 (#8d8678 sur #000), pas de défilement" }
