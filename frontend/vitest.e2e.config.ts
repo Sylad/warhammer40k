@@ -45,6 +45,11 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/factions/factions-etats-l96.e2e.spec.ts'),
       // L67 : /plan#<lot> amène la carte sous la barre (espace réservé en fin de page), sans vide en navigation ordinaire.
       path.resolve(__dirname, 'src/app/features/plan/plan.e2e.spec.ts'),
+      // L245 : arrivée sur une ancre (liens rapides, barres d'ancres, /plan, /nouveautes) juste sous la barre du haut ;
+      // hors de la porte, le cas #subfactions est resté rouge sans que personne ne le voie depuis L94.
+      path.resolve(__dirname, 'src/app/layout/main-layout/ancres.e2e.spec.ts'),
+      // L245 : liens d'ancre de section (sectionAnchor, L160) — href vers la page + fragment, clics modifiés non annulés.
+      path.resolve(__dirname, 'src/app/core/utils/section-anchor-href-l160.e2e.spec.ts'),
     ],
   },
 });

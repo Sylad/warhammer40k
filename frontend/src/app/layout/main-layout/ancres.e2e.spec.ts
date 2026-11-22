@@ -164,9 +164,14 @@ describe.skipIf(!built || !chromium)('ancres : la cible arrive sous la barre du 
       await p.locator('a.row-link[href$="#heros"]').first().click();
       return 'heros';
     }],
+    // L245 : depuis L94, un lien rapide ne mène à #subfactions que si son libellé nomme la section
+    // (« Les neuf Légions traîtresses » → « Légions ») ; « Héraldique et symboles » des Space Marines
+    // n'y mène plus (WCAG 2.4.4). Le cas vise donc une faction dont un lien rapide nomme ses sous-factions.
     ['Fiche faction, lien rapide vers #subfactions', async (p) => {
-      await p.goto(`${base}/factions/space-marines`);
-      await p.locator('a.row-link[href$="#subfactions"]').first().click();
+      await p.goto(`${base}/factions/chaos-space-marines`);
+      const a = p.locator('a.row-link[href$="#subfactions"]');
+      expect(await a.count(), 'chaos-space-marines : un lien rapide vers #subfactions').toBe(1);
+      await a.click();
       return 'subfactions';
     }],
     ['/plan#<lot>', async (p) => {

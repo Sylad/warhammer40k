@@ -50,6 +50,8 @@ orchestrate:
   # l'étape « Acceptation de bout en bout » de frontend-checks.yml : un e2e rouge ne se découvrait qu'en CI (credits-l238,
   # 21-11). Ici et pas dans `test:` : ils lisent le dist que ce build vient de produire. ~4 min 30 s sur Big-Blue
   # (15 fichiers, 230 cas, verts le 22-11) ; un fichier à la fois (fileParallelism: false), Chromium de playwright-core requis.
+  # L245 (22-11) : + ancres.e2e.spec.ts et section-anchor-href-l160.e2e.spec.ts (le cas #subfactions était rouge hors
+  # porte depuis L94) → 18 fichiers, 300 cas, ~8 min 40 s sur Big-Blue.
   build: (cd backend && npm run build) && (cd frontend && npm run build && npm run test:e2e)
   ux:
     command: '(cd backend && npm run start:dev) & (cd frontend && npm start) & wait'
