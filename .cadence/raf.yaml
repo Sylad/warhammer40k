@@ -1137,10 +1137,11 @@ lots:
   - id: L98
     title: "Sous-faction : libellés du bandeau (10 px #8d8678) sur l'image à 2,8:1 (Blood Angels) — voile ≥ 0,8 sous .key-info comme L78 (WCAG 1.4.3, revue UX L3)"
     public: "Sous-factions : les libellés du bandeau sont lisibles"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-11-22
   - id: L99
     title: "Contrôles sans nom ni état : sélecteur « Tri » sans nom accessible, boutons de filtre sans aria-pressed (/factions et unités d'une faction) — WCAG 4.1.2 (revue UX L3)"
     status: todo
