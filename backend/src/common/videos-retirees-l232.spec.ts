@@ -49,7 +49,7 @@ describe('vidéos supprimées de YouTube (L232)', () => {
     const s = new VideosService();
     expect(() => s.add(video('raptors-CcFcmPQklyY', 'CcFcmPQklyY'))).toThrow(BadRequestException);
     expect(() => s.add(video('autre-nom', null, 'https://www.youtube.com/watch?v=huKRew_nEGI&t=3'))).toThrow(/L232/);
-    expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'videos.json'), 'utf-8'))).toHaveLength(1);
+    expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'videos-utilisateur.json'), 'utf-8')).ajouts).toHaveLength(1);
   });
 
   it('R3 — l’identifiant est reconnu dans toutes les formes d’adresse, pas en sous-chaîne', () => {

@@ -1,41 +1,32 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import * as fs from 'fs';
-import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 import { estChaineRetiree, motifChaineRetiree } from '../../common/chaines-retirees.js';
-import { readContent, userDataPath } from '../../common/content.js';
+import { VIDEOS_RETIREES_DU_SEED } from '../../common/retires-du-seed.js';
+import { DepotFusionne } from '../../common/surcouche-utilisateur.js';
 import { estVideoRetiree, motifVideoRetiree } from '../../common/videos-retirees.js';
 import type { Video } from './video.model.js';
 
-
-
 @Injectable()
 export class VideosService {
-  private videos: Video[];
-
-  constructor() {
-    // Garde existsSync + try/catch comme tous les services frères : un
-    // videos.json manquant/tronqué faisait crash-looper TOUT le backend
-    // (throw dans le constructor = bootstrap Nest avorté). Review 2026-08-14.
-    try {
-      const lues = fs.existsSync(userDataPath('videos.json'))
-        ? (JSON.parse(fs.readFileSync(userDataPath('videos.json'), 'utf-8')) as Video[])
-        : readContent<Video[]>('videos.json', []); // L74 : vidéos ajoutées → volume ; à défaut, le seed
-      // L41 (chaînes retirées) et L232 (vidéos supprimées de YouTube) : filtrées à la lecture.
-      this.videos = lues.filter(v => !estChaineRetiree(v.url) && !estVideoRetiree(v));
-    } catch {
-      this.videos = [];
-    }
-  }
+  // L76 : seed (référence, dans l'image) + data/videos-utilisateur.json (ajouts et retraits de
+  // l'utilisateur), fusionnés à la lecture. Un volume illisible ne fait pas tomber le backend
+  // (repli sur le seed, écritures refusées) : avant, un throw ici avortait le bootstrap Nest.
+  // L41 (chaînes retirées) et L232 (vidéos supprimées de YouTube) : masquées à la lecture.
+  private readonly depot = new DepotFusionne<Video>({
+    nom: 'videos',
+    idsRetiresDuSeed: VIDEOS_RETIREES_DU_SEED,
+    retraitsPossibles: true,
+    masquee: v => estChaineRetiree(v.url) || estVideoRetiree(v),
+  });
 
   findAll(type?: string, langue?: string): Video[] {
-    let result = this.videos;
+    let result = this.depot.tout();
     if (type) result = result.filter(v => v.type === type);
     if (langue) result = result.filter(v => v.langue.includes(langue));
     return result;
   }
 
   exists(id: string): boolean {
-    return this.videos.some(v => v.id === id);
+    return this.depot.tout().some(v => v.id === id);
   }
 
   add(video: Video): Video {
@@ -45,20 +36,15 @@ export class VideosService {
     if (this.exists(video.id)) {
       throw new BadRequestException(`Video ${video.id} already exists`);
     }
-    const retiree = motifChaineRetiree(video.url); // L41 R8 : sinon l'entrée serait filtrée au prochain démarrage
+    const retiree = motifChaineRetiree(video.url); // L41 R8 : sinon l'entrée serait masquée à la lecture
     if (retiree) throw new BadRequestException(retiree);
     const supprimee = motifVideoRetiree(video); // L232 : même raison
     if (supprimee) throw new BadRequestException(supprimee);
-    this.videos.push(video);
-    atomicWriteJsonSync(userDataPath('videos.json'), this.videos);
+    this.depot.ajouter(video);
     return video;
   }
 
   remove(id: string): boolean {
-    const idx = this.videos.findIndex(v => v.id === id);
-    if (idx < 0) return false;
-    this.videos.splice(idx, 1);
-    atomicWriteJsonSync(userDataPath('videos.json'), this.videos);
-    return true;
+    return this.depot.retirer(id);
   }
 }

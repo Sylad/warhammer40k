@@ -2,7 +2,7 @@
 // vérifié le 2026-11-17, QA prod après L229). Elles ne vivent que dans le volume `data/videos.json`
 // (importées par POST /videos/import), qu'une livraison ne touche pas : comme les chaînes retirées
 // (L41, `chaines-retirees.ts`), elles sont filtrées à la lecture, et `VideosService.add` refuse de
-// les réenregistrer. Le fichier du volume n'est réécrit sans elles qu'au prochain ajout ou retrait.
+// les réenregistrer. Elles restent dans les ajouts du volume (L76), seulement masquées.
 // Une vidéo remise en ligne revient par un lot qui la sort de cette liste, puis par un import.
 const IDS_RETIRES = [
   'huKRew_nEGI', // « The Emperor Returns. The Galaxy Reacts. » — Delta Drift Codex

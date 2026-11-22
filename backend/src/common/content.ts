@@ -7,8 +7,9 @@ import * as path from 'path';
  * - **Contenu éditorial** (factions, unités, lore, galerie d'œuvres…) : aucun endpoint
  *   ne l'écrit. Il vit dans `seed/`, embarqué dans l'image : un déploiement le met à jour,
  *   sans toucher au volume. `CONTENT_DIR` le déplace (tests, image).
- * - **Données utilisateur** (image-meta, imported/, vidéos et chaînes ajoutées…) : tout ce
- *   qu'un POST/DELETE écrit. Elles vivent dans `data/` (volume persistant).
+ * - **Données utilisateur** (image-meta, imported/, vidéos et chaînes ajoutées ou retirées…) :
+ *   tout ce qu'un POST/DELETE écrit. Elles vivent dans `data/` (volume persistant). Vidéos et
+ *   chaînes : surcouche fusionnée au seed à la lecture (L76, `surcouche-utilisateur.ts`).
  *
  * Les chemins sont résolus à l'appel, pas à l'import (les tests changent de cwd).
  */

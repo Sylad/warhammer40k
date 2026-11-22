@@ -15,8 +15,8 @@ import { ArtworksService } from '../modules/artworks/artworks.service.js';
 
 /**
  * L74 : chaque service de contenu lit `seed/` (image), jamais `data/` (volume) ;
- * seuls videos.json et channels.json, écrits par POST/DELETE, viennent du volume
- * quand il en a un, et retombent sur le seed sinon.
+ * seuls videos.json et channels.json, écrits par POST/DELETE, y ajoutent ce que l'utilisateur
+ * a ajouté ou retiré (L76 : surcouche du volume fusionnée au seed, voir surcouche-utilisateur-l76.spec.ts).
  */
 describe('services de contenu — seed/ prime sur data/ (L74)', () => {
   const cwd = process.cwd();
@@ -102,14 +102,14 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
       expect(new ChannelsService().findAll().map((c) => c.id)).toEqual(['seed']);
     });
 
-    it('avec un fichier dans le volume : le volume gagne (données utilisateur)', () => {
+    it('avec un ancien fichier dans le volume (L76) : ajouts repris ; vidéo du seed absente = retirée, chaîne non (pas de DELETE)', () => {
       both('videos.json', [{ id: 'seed' }], [{ id: 'user' }]);
       both('channels.json', [{ id: 'seed' }], [{ id: 'user' }]);
       expect(new VideosService().findAll().map((v) => v.id)).toEqual(['user']);
-      expect(new ChannelsService().findAll().map((c) => c.id)).toEqual(['user']);
+      expect(new ChannelsService().findAll().map((c) => c.id)).toEqual(['seed', 'user']);
     });
 
-    it('R6 — les chaînes retirées (L41) disparaissent aussi du volume, sans toucher au reste ni au fichier', () => {
+    it('R6 — les chaînes retirées (L41) disparaissent aussi du volume, sans toucher au reste ni à l’ancien fichier', () => {
       const morte = (id: string, handle: string) => ({ id, url: `https://www.youtube.com/@${handle}` });
       const volume = [morte('indomitus-40k', 'Indomitus40k'), morte('warfo40k', 'warfo40k'), morte('vivante', 'Vivante')];
       write('data', 'channels.json', volume);
@@ -118,6 +118,10 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
       expect(new ChannelsService().findPriority()).toEqual([]);
       expect(new VideosService().findAll().map((v) => v.id)).toEqual(['vivante']);
       expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels.json'), 'utf-8'))).toHaveLength(3);
+      // L76 : les ajouts de l'utilisateur passent dans la surcouche (masqués à la lecture, pas effacés) ;
+      // indomitus-40k venait du seed (ôté par L41), ce n'est pas un ajout de l'utilisateur
+      const ajouts = JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels-utilisateur.json'), 'utf-8')).ajouts;
+      expect(ajouts.map((c: { id: string }) => c.id)).toEqual(['warfo40k', 'vivante']);
     });
 
     it('R7 — ChannelsService.add refuse une chaîne retirée (L41) : erreur explicite, rien n’est écrit', () => {
@@ -127,7 +131,7 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
         /@Indomitus40k.*retirée/,
       );
       expect(s.findAll().map((c) => c.id)).toEqual(['vivante']);
-      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels.json'), 'utf-8'))).toHaveLength(1);
+      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'channels-utilisateur.json'), 'utf-8')).ajouts).toHaveLength(1);
     });
 
     it('R8 — VideosService.add refuse une vidéo dont l’adresse est une chaîne retirée (L41)', () => {
@@ -137,7 +141,7 @@ describe('services de contenu — seed/ prime sur data/ (L74)', () => {
         /@Astartes40k.*retirée/,
       );
       expect(s.findAll().map((v) => v.id)).toEqual(['vivante']);
-      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'videos.json'), 'utf-8'))).toHaveLength(1);
+      expect(JSON.parse(fs.readFileSync(path.join(dir, 'data', 'videos-utilisateur.json'), 'utf-8')).ajouts).toHaveLength(1);
     });
 
     it('ni volume ni seed : vide', () => {

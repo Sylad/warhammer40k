@@ -1,7 +1,6 @@
 // L41 : chaînes YouTube introuvables (audit du 2026-10-02), retirées du seed sur décision de
-// Sylvain (30-10). Un volume `data/` qui les porte encore (channels.json / videos.json, données
-// utilisateur) ne les affiche plus : le filtre s'applique à la lecture ; le fichier du volume n'est
-// réécrit (sans elles) qu'au prochain ajout ou retrait d'une vidéo ou d'une chaîne. Tant qu'un
+// Sylvain (30-10). Un volume `data/` qui les porte encore (ajouts de l'utilisateur, L76) ne les
+// affiche plus : le filtre s'applique à la lecture, l'entrée reste dans le fichier. Tant qu'un
 // handle figure ici, `ChannelsService.add` et `VideosService.add` refusent de l'enregistrer
 // (R7, R8) : l'import ne peut pas réussir puis disparaître au redémarrage. Une chaîne retrouvée
 // en ligne revient par un lot qui la retire de cette liste.

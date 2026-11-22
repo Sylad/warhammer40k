@@ -1,23 +1,23 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import * as fs from 'fs';
-import { atomicWriteJsonSync } from '../../common/atomic-write.js';
 import { estChaineRetiree, motifChaineRetiree } from '../../common/chaines-retirees.js';
-import { readContent, userDataPath } from '../../common/content.js';
+import { CHAINES_RETIREES_DU_SEED } from '../../common/retires-du-seed.js';
+import { DepotFusionne } from '../../common/surcouche-utilisateur.js';
 import type { Channel } from '../videos/video.model.js';
-
-
 
 @Injectable()
 export class ChannelsService {
-  private channels: Channel[];
+  // L76 : seed (référence) + data/channels-utilisateur.json (chaînes ajoutées par
+  // POST /videos/import), fusionnés à la lecture. Aucun endpoint ne retire une chaîne : une
+  // chaîne du seed absente de l'ancien data/channels.json n'est pas un retrait à la migration.
+  private readonly depot = new DepotFusionne<Channel>({
+    nom: 'channels',
+    idsRetiresDuSeed: CHAINES_RETIREES_DU_SEED,
+    retraitsPossibles: false,
+    masquee: c => estChaineRetiree(c.url),
+  });
 
-  constructor() {
-    // L74 : chaînes ajoutées par POST /videos/import → volume ; à défaut, le seed.
-    this.channels = fs.existsSync(userDataPath('channels.json'))
-      ? (JSON.parse(fs.readFileSync(userDataPath('channels.json'), 'utf-8')) as Channel[]).filter(
-          c => !estChaineRetiree(c.url),
-        )
-      : readContent<Channel[]>('channels.json', []);
+  private get channels(): Channel[] {
+    return this.depot.tout();
   }
 
   findAll(): Channel[] {
@@ -53,8 +53,7 @@ export class ChannelsService {
     }
     const retiree = motifChaineRetiree(channel.url); // L41 R7 : sinon l'entrée serait filtrée au prochain démarrage
     if (retiree) throw new BadRequestException(retiree);
-    this.channels.push(channel);
-    atomicWriteJsonSync(userDataPath('channels.json'), this.channels);
+    this.depot.ajouter(channel);
     return channel;
   }
 }
