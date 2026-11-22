@@ -27,6 +27,7 @@ export interface UnitEquipment {
 export interface Unit {
   id: string;
   factionId: string;
+  sourceFaction?: string;         // L247 : source vérifiée du rattachement quand il a été corrigé (URL + date)
   nom: string;
   type: UnitType;
   pointsCost?: number;

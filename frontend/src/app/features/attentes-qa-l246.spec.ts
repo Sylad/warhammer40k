@@ -101,3 +101,19 @@ describe('L246 — factions sans unité sur /factions', () => {
     expect(s).toContain('data-testid="aucune-unite"');
   });
 });
+
+describe('L247 — assassins de l’Officio Assassinorum dans les attendus de /factions/:id', () => {
+  const s = section('/factions/:id');
+  const unites = seed<{ id: string; nom: string; factionId: string }>('units');
+  const de = (f: string) => unites.filter((u) => u.factionId === f);
+
+  it('les fiches et les comptes écrits = seed', () => {
+    const l = s.split('\n').find((x) => x.includes('(L247)')) ?? '';
+    const officio = de('officio-assassinorum');
+    for (const u of officio) expect(l).toContain(u.nom);
+    expect(l).toContain(`factionId=officio-assassinorum\` en rend ${officio.length}`);
+    expect(l).toContain(`inquisition : ${de('inquisition').length} fiches`);
+    expect(l).toContain(`factionId=inquisition\` en rend ${de('inquisition').length}`);
+    expect(de('inquisition').filter((u) => u.nom.includes('Assassin'))).toEqual([]);
+  });
+});

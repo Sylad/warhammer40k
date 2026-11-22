@@ -24,7 +24,7 @@ libellés en capitales).
 - api: les icônes externes de static.wikia.nocookie.net peuvent répondre 404 (6 le 05-10, suivi par L41) ; le symbole de repli doit alors s'afficher
 - shows: au-dessus des cartes, le compte « 17 factions » (région `role=status`, `data-testid="compte-factions"`), qui suit chaque filtre et chaque recherche (« Imperium » → « N faction(s) ») (L96)
 - shows: sur chaque carte, « UNITÉS » suivi d'un nombre une fois /api/units chargé ; « — » tant qu'il charge ou s'il est en erreur (L96)
-- shows: une faction qui n'a aucune unité dans les données (vraies données, pas un défaut de correspondance : aucune unité du seed n'a son `factionId`) dit « Aucune fiche d'unité pour l'instant » (`data-testid="aucune-unite"`) à la place du compteur ; le 22-11, six factions : Adeptus Custodes, Officio Assassinorum, Drukhari, Grey Knights, Leagues of Votann, Genestealer Cults ; les onze autres ont « UNITÉS » suivi d'un nombre ≥ 1 (L246, QA prod du 22-11)
+- shows: une faction qui n'a aucune unité dans les données (vraies données, pas un défaut de correspondance : aucune unité du seed n'a son `factionId`) dit « Aucune fiche d'unité pour l'instant » (`data-testid="aucune-unite"`) à la place du compteur ; le 22-11, cinq factions : Adeptus Custodes, Drukhari, Grey Knights, Leagues of Votann, Genestealer Cults ; les douze autres ont « UNITÉS » suivi d'un nombre ≥ 1 (L246, QA prod du 22-11) — dont Officio Assassinorum « UNITÉS 3 » (Vindicare, Eversor, Callidus) depuis L247, l'Inquisition passant de 10 à 7
 - never: « UNITÉS 0 » sur une carte, chargement fini ou non (L246)
 - shows: une recherche sans résultat (taper « zzzz ») : le compte « Aucune faction », le message « Aucune faction ne correspond à la recherche « zzzz » » et le bouton « Effacer les filtres », qui ramène les 17 cartes et met le focus sur la première (L96)
 - never: une grille vide sans message ; « UNITÉS 0 » sur toutes les cartes pendant que les unités chargent ; une recherche sans résultat sans message (L96)
@@ -36,6 +36,7 @@ Visiter space-marines.
 - shows: le nom de la faction en titre ; au moins un lien vers une fiche d'unité
 - never: pour une faction sans sous-faction (visiter inquisition) : une section ou un lien d'ancre « sous-factions », un compteur « 0 », un message d'erreur
 - api: `/api/subfactions?factionId=inquisition` répond `[]` (200), ce n'est pas une erreur (QA prod 15-10, L135)
+- shows: visiter officio-assassinorum : les fiches d'unité Assassin Vindicare, Assassin Eversor et Assassin Callidus (`/api/units?factionId=officio-assassinorum` en rend 3) ; visiter inquisition : 7 fiches d'unité, aucune « Assassin » (`/api/units?factionId=inquisition` en rend 7) ; même identifiant d'unité qu'avant (/units/inq-vindicare…), fiche technique comprise (L247)
 
 - never: pour un identifiant inconnu (visiter /factions/n-existe-pas) : « Chargement… » sans fin ; le titre est alors « Faction introuvable » avec un lien vers /factions et sans bouton Réessayer (L97)
 - 404 (visiter /factions/n-existe-pas) : à la place de la fiche, le message d'absence (h1 « Faction introuvable » + lien « Toutes les factions » vers /factions, pas de Réessayer) ; `/api/factions/n-existe-pas` répond 404 et l'erreur 404 qu'il laisse dans la console est permise, comme pour /subfactions (QA prod 17-11, L233)
