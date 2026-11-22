@@ -104,7 +104,11 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
               <span class="badge" [class]="alignClass(f.alignement)">{{ f.alignement }}</span>
               <p>{{ f.description }}</p>
               <div class="card-footer">
-                <span class="units-count">UNITÉS <strong>{{ unitCountLabel(f) }}</strong></span>
+                @if (sansUnite(f)) {
+                  <span class="units-count units-aucune" data-testid="aucune-unite">Aucune fiche d’unité pour l’instant</span>
+                } @else {
+                  <span class="units-count">UNITÉS <strong>{{ unitCountLabel(f) }}</strong></span>
+                }
                 <span class="card-arrow">→</span>
               </div>
             </div>
@@ -298,6 +302,17 @@ export class FactionsComponent {
 
   unitCount(f: Faction): number {
     return f.unitCount ?? this.unitCountByFaction().get(f.id) ?? 0;
+  }
+
+  /**
+   * L246 : la faction n'a vraiment aucune unité dans les données (compte servi, ou /api/units chargé) :
+   * la carte le dit en toutes lettres plutôt qu'un « UNITÉS 0 » qui ressemble à une panne.
+   * Six factions du seed sont dans ce cas le 22-11 (Custodes, Assassinorum, Drukhari, Grey Knights,
+   * Votann, Genestealer Cults).
+   */
+  sansUnite(f: Faction): boolean {
+    if (f.unitCount != null) return f.unitCount === 0;
+    return !this.units.pending() && !this.units.failed() && this.unitCount(f) === 0;
   }
 
   /** « — » tant que /api/units n'a pas répondu ou a échoué (sauf compte servi avec la faction). */

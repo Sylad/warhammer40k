@@ -318,7 +318,24 @@ describe('liste des factions — « Autres » conditionnel et états de la liste
     units.next([{ id: 'u1', factionId: 'a' }]);
     units.complete();
     f.detectChanges();
-    expect(comptes()).toEqual(['1', '0']);
+    expect(comptes()).toEqual(['1']);
+    expect(el.querySelectorAll('[data-testid="aucune-unite"]')).toHaveLength(1);
+  });
+
+  it('L246 : une faction sans unité dans les données dit « Aucune fiche d’unité pour l’instant », jamais « UNITÉS 0 »', async () => {
+    const service = fakeWarhammerService({
+      factions$: of([F('a'), F('b')]),
+      getUnits: () => of([{ id: 'u1', factionId: 'a' }, { id: 'u2', factionId: 'a' }]),
+    });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const cartes = Array.from((f.nativeElement as HTMLElement).querySelectorAll('a.card'));
+    const pied = (c: Element) => c.querySelector('.card-footer')!.textContent!.replace(/\s+/g, ' ').trim();
+    expect(pied(cartes[0])).toContain('UNITÉS 2');
+    expect(pied(cartes[1])).toContain('Aucune fiche d’unité pour l’instant');
+    expect(pied(cartes[1])).not.toMatch(/UNITÉS\s*0/);
+    expect(cartes[1].querySelector('.units-count strong')).toBeNull();
   });
 
   it('/api/units en erreur : les cartes s’affichent quand même avec « — » à la place du compte (jamais un faux « 0 »)', async () => {
@@ -333,9 +350,11 @@ describe('liste des factions — « Autres » conditionnel et états de la liste
     expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('2 factions');
   });
 
-  it('/api/units répond : les comptes restent des nombres', async () => {
+  it('/api/units répond sans unité pour la faction : le texte d’absence, pas un compteur « 0 » (L246)', async () => {
     const f = await monteAvec(of([F('a')]));
-    expect((f.nativeElement as HTMLElement).querySelector('.units-count strong')?.textContent?.trim()).toBe('0');
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('.units-count strong')).toBeNull();
+    expect(el.querySelector('[data-testid="aucune-unite"]')?.textContent?.trim()).toBe('Aucune fiche d’unité pour l’instant');
   });
 
   it('les deux appels en erreur : le message d’erreur des factions s’affiche', async () => {

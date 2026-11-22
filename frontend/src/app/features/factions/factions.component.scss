@@ -211,6 +211,12 @@
       font-size: 10px;
       letter-spacing: 0.12em;
     }
+    /* L246 : faction sans fiche d'unité — phrase en casse normale, pas un compteur */
+    .units-count.units-aucune {
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      font-style: italic;
+    }
     .units-count strong {
       color: var(--gold);
       font-family: var(--serif);

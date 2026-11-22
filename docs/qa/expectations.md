@@ -24,6 +24,8 @@ libellés en capitales).
 - api: les icônes externes de static.wikia.nocookie.net peuvent répondre 404 (6 le 05-10, suivi par L41) ; le symbole de repli doit alors s'afficher
 - shows: au-dessus des cartes, le compte « 17 factions » (région `role=status`, `data-testid="compte-factions"`), qui suit chaque filtre et chaque recherche (« Imperium » → « N faction(s) ») (L96)
 - shows: sur chaque carte, « UNITÉS » suivi d'un nombre une fois /api/units chargé ; « — » tant qu'il charge ou s'il est en erreur (L96)
+- shows: une faction qui n'a aucune unité dans les données (vraies données, pas un défaut de correspondance : aucune unité du seed n'a son `factionId`) dit « Aucune fiche d'unité pour l'instant » (`data-testid="aucune-unite"`) à la place du compteur ; le 22-11, six factions : Adeptus Custodes, Officio Assassinorum, Drukhari, Grey Knights, Leagues of Votann, Genestealer Cults ; les onze autres ont « UNITÉS » suivi d'un nombre ≥ 1 (L246, QA prod du 22-11)
+- never: « UNITÉS 0 » sur une carte, chargement fini ou non (L246)
 - shows: une recherche sans résultat (taper « zzzz ») : le compte « Aucune faction », le message « Aucune faction ne correspond à la recherche « zzzz » » et le bouton « Effacer les filtres », qui ramène les 17 cartes et met le focus sur la première (L96)
 - never: une grille vide sans message ; « UNITÉS 0 » sur toutes les cartes pendant que les unités chargent ; une recherche sans résultat sans message (L96)
 - erreur (non déclenchable en prod, joué par `factions-etats-l96.e2e.spec.ts`) : /api/factions en échec → alerte « Les factions n’ont pas pu être chargées… » avec « Réessayer », aucune carte ; pendant le chargement, « Chargement des factions… » et des cartes fantômes (L96)
@@ -69,6 +71,13 @@ Ajouté par L137 (QA prod du 17-10, après L5 et L136) : 38 séries Black Librar
 - api: /api/series (38 séries), /api/wiki-image?q= (couvertures)
 
 ## /videos
+Complété par L246 (QA prod du 22-11, L76). Le seed compte 16 vidéos et 6 chaînes ; la prod sert en plus les ajouts de l'utilisateur gardés sur le volume (28 vidéos et 20 chaînes le 22-11), d'où des minimums plutôt que des comptes exacts. Les chaînes n'ont pas de page à elles : **/chaines n'est pas une route** (repli SPA vers /factions, h1 « Factions ») et aucun lien de l'application n'y mène (L246) ; elles se voient ici.
+- shows: le h1 « Archives Cinématiques »
+- shows: des cartes vidéo (`article[data-testid="carte-video"]`), au moins une, chacune avec un titre lié (`h3.video-title a`) : au premier affichage, au plus 3 dans « Incontournables » et 9 dans « Toutes les vidéos » (12 en tout le 22-11), le reste derrière les boutons « Charger plus … »
+- shows: le panneau « Chaînes prioritaires » du bandeau : un bouton par chaîne (`.channel-mini`), au moins « Le Librarium » et « Imperial Iterator » (chaînes `priority: true` du seed)
+- shows: la section « Chaînes recommandées » : des cartes chaîne (`.channel-card`), au plus 6 au premier affichage ; s'il en reste, le bouton « Charger plus de chaînes (N restantes) »
+- never: « Impossible de charger les vidéos » (`data-testid="message-erreur"`), « Le codex ne contient encore aucune vidéo » ; un panneau « Chaînes prioritaires » ou une section « Chaînes recommandées » sans aucune chaîne ; une chaîne retirée par Sylvain (L41 : @Indomitus40k, @Astartes40k, @SireLambert, @LaVoxObscura, @BaldermortGW, @WarFo40k) ; une vidéo du seed supprimée de YouTube (L232)
+- api: /api/videos (200, liste non vide), /api/channels (200, liste non vide), /api/channels?priority=true (200, liste non vide : 2 chaînes le 22-11)
 - never: le panneau latéral (section.side-panel) qui dépasse à droite et crée un défilement horizontal (1511 px pour 1434 à 1440, 493 pour 384 à 390 le 05-10, mesuré à nouveau le 30-10 par L57 : 0 px à 1440 et 390, plus de 27 px à 320 sur « Incontournables » ; reproduit en prod le 30-10 par L62 (1518 / 494), cause : piste de grille `auto` de la barre latérale élargie par les titres récents longs, corrigée en `minmax(0, 1fr)` ; gardé par `features/videos/defilement-horizontal-l57.e2e.spec.ts`, aussi pour /romans)
 
 ## /gallery
