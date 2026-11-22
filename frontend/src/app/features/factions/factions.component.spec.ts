@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { Subject, of, throwError } from 'rxjs';
+import { Subject, defer, of, throwError } from 'rxjs';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { FactionsComponent } from './factions.component';
 
@@ -85,7 +85,7 @@ describe('liste des factions — filtre « Autres » et panneau latéral (L92)',
     f.componentInstance.searchQuery.set('zzz');
     f.detectChanges();
     expect(noms(el)).toEqual([]);
-    expect(el.querySelector('.empty')?.textContent).toContain('Aucune faction');
+    expect(el.querySelector('[data-testid="filtres-vides"]')?.textContent).toContain('Aucune faction');
   });
 
   it('le panneau « Filtres rapides » et la légende Loyal/Neutre/Hostile n’existent plus', async () => {
@@ -114,9 +114,11 @@ describe('liste des factions — ressources rapides (L93)', () => {
   });
 });
 
-// L102 — « Autres » n'apparaît que si une faction y entre (décision de Sylvain, 11-10) ; le message
-// de liste vide est une région role=status (WCAG 4.1.3) avec un bouton de retour à « Toutes les factions ».
-describe('liste des factions — « Autres » conditionnel et liste vide (L102)', () => {
+// L102 — « Autres » n'apparaît que si une faction y entre (décision de Sylvain, 11-10).
+// L96 — chaque état a son affichage : chargement (région live + cartes fantômes), erreur (alerte +
+// « Réessayer »), recherche vide (« Effacer les filtres » comme /videos L242), et une région live
+// role=status qui annonce le nombre de résultats.
+describe('liste des factions — « Autres » conditionnel et états de la liste (L102, L96)', () => {
   async function monte(alignements: string[]) {
     const service = fakeWarhammerService({
       factions$: of(alignements.map((a, i) => ({ ...F('f' + i), alignement: a }))),
@@ -128,6 +130,7 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     return f;
   }
   const filtres = (el: HTMLElement) => [...el.querySelectorAll('.filters .filter')].map((b) => b.textContent?.trim());
+  const statut = (el: HTMLElement) => el.querySelector('[role="status"]')!;
 
   it('sans faction hors Imperium, Chaos et Xénos, le bouton « Autres » est absent', async () => {
     const f = await monte(['Imperium', 'Chaos', 'Xenos']);
@@ -139,63 +142,63 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     expect(filtres(f.nativeElement)).toContain('Autres');
   });
 
-  it('la liste vide est annoncée dans une région role=status, présente avant le message', async () => {
-    const f = await monte(['Imperium']);
+  it('une seule région role=status, qui annonce le nombre de résultats à chaque filtre', async () => {
+    const f = await monte(['Imperium', 'Chaos', 'Chaos']);
     const el = f.nativeElement as HTMLElement;
-    const status = el.querySelector('[role="status"]');
-    expect(status).not.toBeNull();
-    expect(status?.textContent?.trim()).toBe('');
+    expect(el.querySelectorAll('[role="status"]')).toHaveLength(1);
+    const status = statut(el);
+    expect(status.textContent?.trim()).toBe('3 factions');
+    f.componentInstance.filterKey.set('Imperium');
+    f.detectChanges();
+    expect(statut(el)).toBe(status);
+    expect(status.textContent?.trim()).toBe('1 faction');
     f.componentInstance.searchQuery.set('zzz');
     f.detectChanges();
-    expect(el.querySelector('[role="status"]')).toBe(status);
-    expect(status?.textContent).toContain('Aucune faction');
+    expect(statut(el)).toBe(status);
+    expect(status.textContent?.trim()).toBe('Aucune faction');
   });
 
-  it('« Toutes les factions » dans le message remet le filtre et la recherche à zéro', async () => {
+  it('recherche sans résultat : message qui nomme la recherche et le filtre, bouton « Effacer les filtres »', async () => {
     const f = await monte(['Imperium', 'Chaos']);
     const el = f.nativeElement as HTMLElement;
     f.componentInstance.filterKey.set('Chaos');
     f.componentInstance.searchQuery.set('zzz');
     f.detectChanges();
-    const retour = el.querySelector<HTMLButtonElement>('[role="status"] button');
-    expect(retour?.textContent?.trim()).toBe('Toutes les factions');
-    retour!.click();
+    const vide = el.querySelector('[data-testid="filtres-vides"]')!;
+    expect(vide.textContent).toContain('Aucune faction ne correspond à la recherche « zzz » et le filtre Chaos');
+    const bouton = vide.querySelector<HTMLButtonElement>('button')!;
+    expect(bouton.textContent?.trim()).toBe('Effacer les filtres');
+    bouton.click();
     f.detectChanges();
     expect(f.componentInstance.filterKey()).toBe('all');
     expect(f.componentInstance.searchQuery()).toBe('');
     expect(el.querySelectorAll('a.card')).toHaveLength(2);
-    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+    expect(el.querySelector('[data-testid="filtres-vides"]')).toBeNull();
+    expect(statut(el).textContent?.trim()).toBe('2 factions');
   });
 
-  // WCAG 2.4.3 : le bouton du message disparaît quand on l'active ; le focus doit passer au filtre
-  // « Toutes les factions » de la barre, sinon il tombe sur <body> et Tab saute les cartes.
-  it('après « Toutes les factions » du message, le focus est sur le filtre « Toutes les factions » de la barre', async () => {
+  // WCAG 2.4.3 : le bouton disparaît à son propre clic ; le focus va au premier résultat revenu, jamais sur <body>.
+  it('après « Effacer les filtres », le focus est sur la première carte revenue', async () => {
     const f = await monte(['Imperium', 'Chaos']);
     const el = f.nativeElement as HTMLElement;
     document.body.appendChild(el);
     f.componentInstance.searchQuery.set('zzz');
     f.detectChanges();
-    const retour = el.querySelector<HTMLButtonElement>('[role="status"] button')!;
-    retour.focus();
-    retour.click();
+    const bouton = el.querySelector<HTMLButtonElement>('[data-testid="effacer-etat-vide"]')!;
+    bouton.focus();
+    bouton.click();
     f.detectChanges();
-    expect(el.querySelector('[role="status"] button')).toBeNull();
-    const actif = document.activeElement as HTMLElement;
-    expect(actif).toBe(el.querySelector('.filters .filter'));
-    expect(actif.textContent?.trim()).toBe('Toutes les factions');
+    await f.whenStable();
+    TestBed.tick();
+    expect(document.activeElement).toBe(el.querySelector('a.card'));
     el.remove();
   });
 
   // jsdom ne charge pas les styles : on lit la feuille. Une région live en display:none est hors de
   // l'arbre d'accessibilité ; quand elle apparaît avec son texte, l'annonce n'est pas fiable.
-  it('la région role=status vide n\'est jamais en display:none (le style est porté par un enfant)', async () => {
+  it('la région role=status n\'est jamais en display:none', async () => {
     const scss = readFileSync(resolve(__dirname, 'factions.component.scss'), 'utf8');
-    expect(scss).not.toMatch(/\.empty(:empty)?\s*\{[^}]*display:\s*none/);
-    const f = await monte(['Imperium']);
-    const el = f.nativeElement as HTMLElement;
-    f.componentInstance.searchQuery.set('zzz');
-    f.detectChanges();
-    expect(el.querySelector('[role="status"] > .empty-msg')?.textContent).toContain('Aucune faction');
+    expect(scss).not.toMatch(/\.results-count(:empty)?\s*\{[^}]*display:\s*none/);
   });
 
   // Revue de la vague 2026-10-11-0935 : avant la réponse de /api/factions (ou en cas d'erreur) la
@@ -208,32 +211,114 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     return f;
   }
 
-  it('pendant le chargement : pas de « Aucune faction » ni de bouton, un message de chargement', async () => {
+  it('pendant le chargement : région live « Chargement des factions… », cartes fantômes cachées, ni « Aucune faction » ni bouton', async () => {
     const flux = new Subject<ReturnType<typeof F>[]>();
     const f = await monteAvec(flux);
     const el = f.nativeElement as HTMLElement;
-    const status = el.querySelector('[role="status"]')!;
-    expect(status.textContent).toContain('Chargement');
-    expect(status.textContent).not.toContain('Aucune faction');
-    expect(status.querySelector('button')).toBeNull();
+    expect(statut(el).textContent?.trim()).toBe('Chargement des factions…');
+    const fantomes = el.querySelector('[data-testid="chargement-factions"]')!;
+    expect(fantomes.getAttribute('aria-hidden')).toBe('true');
+    expect(fantomes.querySelectorAll('.card-fantome').length).toBeGreaterThan(0);
+    expect(el.textContent).not.toContain('Aucune faction');
+    expect(el.querySelector('.results button')).toBeNull();
+    expect(el.querySelector('.results')?.getAttribute('aria-busy')).toBe('true');
     flux.next([F('a'), F('b')]);
     flux.complete();
     f.detectChanges();
     expect(el.querySelectorAll('a.card')).toHaveLength(2);
-    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+    expect(el.querySelector('[data-testid="chargement-factions"]')).toBeNull();
+    expect(statut(el).textContent?.trim()).toBe('2 factions');
+    expect(el.querySelector('.results')?.getAttribute('aria-busy')).toBe('false');
   });
 
-  it('chargement terminé sans aucune faction : le message de liste vide apparaît', async () => {
+  it('chargement terminé sans aucune faction : « Le codex ne contient encore aucune faction », sans bouton de filtre', async () => {
     const f = await monteAvec(of([]));
-    expect(f.nativeElement.querySelector('[role="status"]').textContent).toContain('Aucune faction');
+    const el = f.nativeElement as HTMLElement;
+    expect(el.querySelector('[data-testid="catalogue-vide"]')?.textContent).toContain('aucune faction');
+    expect(el.querySelector('[data-testid="effacer-etat-vide"]')).toBeNull();
   });
 
-  it('en cas d’erreur de /api/factions : message d’erreur, pas de « Aucune faction », pas de bouton inopérant', async () => {
+  it('en cas d’erreur de /api/factions : alerte avec « Réessayer », ni « Aucune faction » ni cartes', async () => {
     const f = await monteAvec(throwError(() => new Error('500')));
-    const status = (f.nativeElement as HTMLElement).querySelector('[role="status"]')!;
-    expect(status.textContent).toContain('n’ont pas pu être chargées');
-    expect(status.textContent).not.toContain('Aucune faction');
-    expect(status.querySelector('button')).toBeNull();
+    const el = f.nativeElement as HTMLElement;
+    const alerte = el.querySelector('[role="alert"]')!;
+    expect(alerte.textContent).toContain('n’ont pas pu être chargées');
+    expect(alerte.querySelector('button')?.textContent?.trim()).toBe('Réessayer');
+    expect(el.textContent).not.toContain('Aucune faction');
+    expect(el.querySelectorAll('a.card, .card-fantome')).toHaveLength(0);
+    expect(statut(el).textContent?.trim()).toBe('');
+  });
+
+  it('« Réessayer » relance /api/factions et /api/units ; le bouton reste en place, inactif, pendant l’essai ; au succès le focus va à la première carte', async () => {
+    let appelsFactions = 0;
+    let appelsUnits = 0;
+    let reponse: Subject<ReturnType<typeof F>[]> | null = null;
+    const factions$ = defer(() => {
+      appelsFactions++;
+      if (appelsFactions === 1) return throwError(() => new Error('500'));
+      reponse = new Subject<ReturnType<typeof F>[]>();
+      return reponse;
+    });
+    const service = fakeWarhammerService({ factions$, getUnits: () => defer(() => { appelsUnits++; return of([]); }) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    document.body.appendChild(el);
+    const bouton = el.querySelector<HTMLButtonElement>('[data-testid="bouton-reessayer"]')!;
+    bouton.focus();
+    bouton.click();
+    f.detectChanges();
+    expect(appelsFactions).toBe(2);
+    expect(appelsUnits).toBe(2);
+    expect(el.querySelector('[data-testid="bouton-reessayer"]')).toBe(bouton);
+    expect(bouton.getAttribute('aria-disabled')).toBe('true');
+    expect(document.activeElement).toBe(bouton);
+    expect(el.querySelector('[role="alert"]')?.textContent).toContain('Nouvel essai');
+    reponse!.next([F('a'), F('b')]);
+    reponse!.complete();
+    f.detectChanges();
+    await f.whenStable();
+    TestBed.tick();
+    expect(el.querySelector('[role="alert"]')).toBeNull();
+    expect(el.querySelectorAll('a.card')).toHaveLength(2);
+    expect(document.activeElement).toBe(el.querySelector('a.card'));
+    el.remove();
+  });
+
+  it('« Réessayer » qui échoue encore : même bouton, actif de nouveau, focus gardé', async () => {
+    const service = fakeWarhammerService({ factions$: throwError(() => new Error('500')), getUnits: () => of([]) });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    document.body.appendChild(el);
+    const bouton = el.querySelector<HTMLButtonElement>('[data-testid="bouton-reessayer"]')!;
+    bouton.focus();
+    bouton.click();
+    f.detectChanges();
+    await f.whenStable();
+    TestBed.tick();
+    f.detectChanges();
+    expect(el.querySelector('[data-testid="bouton-reessayer"]')).toBe(bouton);
+    expect(bouton.getAttribute('aria-disabled')).toBeNull();
+    expect(document.activeElement).toBe(bouton);
+    el.remove();
+  });
+
+  it('/api/units en cours : « — » à la place du compte, jamais « 0 » ; puis le nombre', async () => {
+    const units = new Subject<{ id: string; factionId: string }[]>();
+    const service = fakeWarhammerService({ factions$: of([F('a'), F('b')]), getUnits: () => units });
+    await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
+    const f = TestBed.createComponent(FactionsComponent);
+    f.detectChanges();
+    const el = f.nativeElement as HTMLElement;
+    const comptes = () => Array.from(el.querySelectorAll('.units-count strong')).map(x => x.textContent?.trim());
+    expect(comptes()).toEqual(['—', '—']);
+    units.next([{ id: 'u1', factionId: 'a' }]);
+    units.complete();
+    f.detectChanges();
+    expect(comptes()).toEqual(['1', '0']);
   });
 
   it('/api/units en erreur : les cartes s’affichent quand même avec « — » à la place du compte (jamais un faux « 0 »)', async () => {
@@ -245,7 +330,7 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     expect(el.querySelectorAll('a.card')).toHaveLength(2);
     const comptes = Array.from(el.querySelectorAll('.units-count strong')).map(x => x.textContent?.trim());
     expect(comptes).toEqual(['—', '—']);
-    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('');
+    expect(el.querySelector('[role="status"]')?.textContent?.trim()).toBe('2 factions');
   });
 
   it('/api/units répond : les comptes restent des nombres', async () => {
@@ -258,7 +343,7 @@ describe('liste des factions — « Autres » conditionnel et liste vide (L102)'
     await setupTestBed([FactionsComponent], [provideRouter([]), { provide: WarhammerService, useValue: service }]);
     const f = TestBed.createComponent(FactionsComponent);
     f.detectChanges();
-    expect((f.nativeElement as HTMLElement).querySelector('[role="status"]')?.textContent).toContain('n’ont pas pu être chargées');
+    expect((f.nativeElement as HTMLElement).querySelector('[role="alert"]')?.textContent).toContain('n’ont pas pu être chargées');
   });
 
   it('la région de statut est hors de la grille (pas d’écart de 18 px sous la dernière carte)', async () => {

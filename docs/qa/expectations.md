@@ -22,6 +22,12 @@ libellés en capitales).
 - shows: 17 cartes de faction, chacune avec son icône ou le symbole de repli de la faction
 - never: une carte sans nom de faction
 - api: les icônes externes de static.wikia.nocookie.net peuvent répondre 404 (6 le 05-10, suivi par L41) ; le symbole de repli doit alors s'afficher
+- shows: au-dessus des cartes, le compte « 17 factions » (région `role=status`, `data-testid="compte-factions"`), qui suit chaque filtre et chaque recherche (« Imperium » → « N faction(s) ») (L96)
+- shows: sur chaque carte, « UNITÉS » suivi d'un nombre une fois /api/units chargé ; « — » tant qu'il charge ou s'il est en erreur (L96)
+- shows: une recherche sans résultat (taper « zzzz ») : le compte « Aucune faction », le message « Aucune faction ne correspond à la recherche « zzzz » » et le bouton « Effacer les filtres », qui ramène les 17 cartes et met le focus sur la première (L96)
+- never: une grille vide sans message ; « UNITÉS 0 » sur toutes les cartes pendant que les unités chargent ; une recherche sans résultat sans message (L96)
+- erreur (non déclenchable en prod, joué par `factions-etats-l96.e2e.spec.ts`) : /api/factions en échec → alerte « Les factions n’ont pas pu être chargées… » avec « Réessayer », aucune carte ; pendant le chargement, « Chargement des factions… » et des cartes fantômes (L96)
+- api: /api/factions, /api/units
 
 ## /factions/:id
 Visiter space-marines.

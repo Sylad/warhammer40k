@@ -41,6 +41,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/videos/videos-rappel-compte-l241.e2e.spec.ts'),
       // L242 : Vidéos, « Effacer les filtres » de l'état vide : le focus va au premier résultat revenu, jamais sur body.
       path.resolve(__dirname, 'src/app/features/videos/videos-effacer-l242.e2e.spec.ts'),
+      // L96 : /factions, chargement, erreur avec « Réessayer », recherche vide avec « Effacer les filtres », compte annoncé.
+      path.resolve(__dirname, 'src/app/features/factions/factions-etats-l96.e2e.spec.ts'),
       // L67 : /plan#<lot> amène la carte sous la barre (espace réservé en fin de page), sans vide en navigation ordinaire.
       path.resolve(__dirname, 'src/app/features/plan/plan.e2e.spec.ts'),
     ],

@@ -290,12 +290,41 @@
       line-height: 1.4;
     }
 
-    /* Région live toujours dans l'arbre (jamais display:none) : vide, elle n'a pas de hauteur ;
-       l'espacement est porté par le message. */
-    .results { min-width: 0; }
-    .empty { margin: 0; padding: 0; }
-    .empty-msg { margin: 0; padding: 28px 0; color: var(--muted); text-align: center; }
-    .empty .filter { margin-left: 12px; }
+    /* L96 : région live toujours dans l'arbre (jamais display:none) ; vide, elle n'a pas de hauteur. */
+    .results { min-width: 0; outline: none; }
+    .results-count {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .results-count:empty { margin: 0; }
+    .etat {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px 16px;
+      padding: 28px 18px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--text);
+      text-align: center;
+    }
+    .etat p { margin: 0; }
+    .etat-erreur { border-color: rgba(123, 17, 19, 0.75); }
+    .etat .filter { min-height: 44px; }
+    .filter[aria-disabled='true'] { opacity: 0.6; cursor: progress; }
+    .card-fantome {
+      cursor: default;
+      background: linear-gradient(180deg, rgba(201, 162, 74, 0.06) 0%, var(--panel) 70%);
+      animation: fantome 1.6s ease-in-out infinite alternate;
+    }
+    .card-fantome:hover { transform: none; border-color: rgba(201, 162, 74, 0.22); }
+    @keyframes fantome { from { opacity: 0.45; } to { opacity: 0.9; } }
+    @media (prefers-reduced-motion: reduce) { .card-fantome { animation: none; opacity: 0.6; } }
 
     /* RESPONSIVE */
     @media (max-width: 1280px) {

@@ -1,12 +1,10 @@
-import { Component, ElementRef, ViewChild, computed, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, map, of, startWith } from 'rxjs';
+import { Component, ElementRef, Injector, ViewChild, afterNextRender, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { Alignment, Faction, Unit } from '../../core/models/models';
-import { toSafeSignal } from '../../shared/safe-signal';
+import { retryAll, toSafeSignal } from '../../shared/safe-signal';
 
 const WIKI_SEARCH: Record<string, string> = {
   'space-marines':       'Space Marines Adeptus Astartes',
@@ -24,6 +22,10 @@ const WIKI_SEARCH: Record<string, string> = {
 
 type SortKey = 'az' | 'units' | 'alignement';
 type FilterKey = 'all' | 'Imperium' | 'Chaos' | 'Xenos' | 'autres';
+
+const FILTRE_LIBELLE: Record<Exclude<FilterKey, 'all'>, string> = {
+  Imperium: 'Imperium', Chaos: 'Chaos', Xenos: 'Xénos', autres: 'Autres',
+};
 
 const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].includes(x.alignement.toLowerCase());
 
@@ -44,18 +46,18 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
     </section>
 
     <section class="toolbar">
-      <div class="filters">
-        <button #toutes class="filter" [class.active]="filterKey() === 'all'" (click)="filterKey.set('all')">Toutes les factions</button>
-        <button class="filter" [class.active]="filterKey() === 'Imperium'" (click)="filterKey.set('Imperium')">Imperium</button>
-        <button class="filter" [class.active]="filterKey() === 'Chaos'" (click)="filterKey.set('Chaos')">Chaos</button>
-        <button class="filter" [class.active]="filterKey() === 'Xenos'" (click)="filterKey.set('Xenos')">Xénos</button>
+      <div class="filters" role="group" aria-label="Alignement">
+        <button #toutes type="button" class="filter" [class.active]="filterKey() === 'all'" [attr.aria-pressed]="filterKey() === 'all'" (click)="filterKey.set('all')">Toutes les factions</button>
+        <button type="button" class="filter" [class.active]="filterKey() === 'Imperium'" [attr.aria-pressed]="filterKey() === 'Imperium'" (click)="filterKey.set('Imperium')">Imperium</button>
+        <button type="button" class="filter" [class.active]="filterKey() === 'Chaos'" [attr.aria-pressed]="filterKey() === 'Chaos'" (click)="filterKey.set('Chaos')">Chaos</button>
+        <button type="button" class="filter" [class.active]="filterKey() === 'Xenos'" [attr.aria-pressed]="filterKey() === 'Xenos'" (click)="filterKey.set('Xenos')">Xénos</button>
         @if (hasAutres()) {
-          <button class="filter" [class.active]="filterKey() === 'autres'" (click)="filterKey.set('autres')">Autres</button>
+          <button type="button" class="filter" [class.active]="filterKey() === 'autres'" [attr.aria-pressed]="filterKey() === 'autres'" (click)="filterKey.set('autres')">Autres</button>
         }
       </div>
-      <input class="search" type="text" placeholder="Rechercher une faction..."
+      <input class="search" type="search" placeholder="Rechercher une faction..." aria-label="Rechercher une faction"
              [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
-      <select class="sort" [ngModel]="sortKey()" (ngModelChange)="sortKey.set($event)">
+      <select class="sort" aria-label="Trier les factions" [ngModel]="sortKey()" (ngModelChange)="sortKey.set($event)">
         <option value="az">Tri : A-Z</option>
         <option value="units">Tri : nb d'unités</option>
         <option value="alignement">Tri : alignement</option>
@@ -63,7 +65,30 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
     </section>
 
     <section class="layout">
-      <div class="results">
+      <div #resultats class="results" tabindex="-1" [attr.aria-busy]="etat() === 'chargement' || reessai()">
+      <!-- L96 : région live toujours présente (jamais display:none), annonce le chargement puis le nombre de résultats. -->
+      <p class="results-count" role="status" data-testid="compte-factions">{{ compte() }}</p>
+      @if (etat() === 'erreur') {
+        <div class="etat etat-erreur" role="alert" data-testid="erreur-factions">
+          <p>{{ reessai() ? 'Nouvel essai en cours…' : 'Les factions n’ont pas pu être chargées. Vérifiez la connexion, puis réessayez.' }}</p>
+          <!-- aria-disabled (pas disabled) pendant le nouvel essai : le bouton garde le focus (WCAG 2.4.3). -->
+          <button #boutonReessayer type="button" class="filter" data-testid="bouton-reessayer"
+                  [attr.aria-disabled]="reessai() ? 'true' : null" (click)="reessayer()">Réessayer</button>
+        </div>
+      } @else if (etat() === 'chargement') {
+        <div class="grid" aria-hidden="true" data-testid="chargement-factions">
+          @for (i of fantomes; track i) {
+            <div class="card card-fantome"></div>
+          }
+        </div>
+      } @else if (!factions().length) {
+        <div class="etat" data-testid="catalogue-vide"><p>Le codex ne contient encore aucune faction.</p></div>
+      } @else if (!displayedFactions().length) {
+        <div class="etat" data-testid="filtres-vides">
+          <p>Aucune faction ne correspond à {{ filtresActifs() }}.</p>
+          <button type="button" class="filter" data-testid="effacer-etat-vide" (click)="effacerFiltres()">Effacer les filtres</button>
+        </div>
+      } @else {
       <div class="grid">
         @for (f of displayedFactions(); track f.id) {
           <a class="card" [routerLink]="['/factions', f.id]"
@@ -80,22 +105,14 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
               <span class="badge" [class]="alignClass(f.alignement)">{{ f.alignement }}</span>
               <p>{{ f.description }}</p>
               <div class="card-footer">
-                <span class="units-count">UNITÉS <strong>{{ unitsErreur() ? '—' : unitCount(f) }}</strong></span>
+                <span class="units-count">UNITÉS <strong>{{ unitCountLabel(f) }}</strong></span>
                 <span class="card-arrow">→</span>
               </div>
             </div>
           </a>
         }
       </div>
-      <div class="empty" role="status">
-        @if (etat() === 'chargement') {
-          <p class="empty-msg">Chargement des factions…</p>
-        } @else if (etat() === 'erreur') {
-          <p class="empty-msg">Les factions n’ont pas pu être chargées. Rechargez la page pour réessayer.</p>
-        } @else if (!displayedFactions().length) {
-          <p class="empty-msg">Aucune faction ne correspond à ce filtre. <button type="button" class="filter" (click)="reset()">Toutes les factions</button></p>
-        }
-      </div>
+      }
       </div>
 
       <aside class="sidebar">
@@ -139,39 +156,76 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
 })
 export class FactionsComponent {
   private readonly service = inject(WarhammerService);
+  private readonly injector = inject(Injector);
 
-  /** L102 : le chargement et l'erreur de /api/factions ne sont pas une « liste vide » due au filtre. */
-  private readonly chargement = toSignal(
-    this.service.factions$.pipe(
-      map(data => ({ etat: 'ok' as const, data })),
-      catchError(() => of({ etat: 'erreur' as const, data: [] as Faction[] })),
-      startWith({ etat: 'chargement' as const, data: [] as Faction[] }),
-    ),
-    { requireSync: true },
-  );
-  readonly etat = computed(() => this.chargement().etat);
-  readonly factions = computed(() => this.chargement().data);
+  /**
+   * L102/L96 : le chargement et l'erreur de /api/factions ne sont pas une « liste vide » due au filtre.
+   * `toSafeSignal` absorbe l'échec et permet « Réessayer » (le `shareReplay` du service se réinitialise sur erreur).
+   */
+  private readonly source = toSafeSignal(this.service.factions$, [] as Faction[]);
+  /** L96 : un nouvel essai garde l'état d'erreur affiché (bouton en place, focus gardé) jusqu'à la réponse. */
+  readonly reessai = signal(false);
+  readonly etat = computed<'chargement' | 'erreur' | 'ok'>(() => {
+    if (this.source.failed()) return 'erreur';
+    if (this.source.pending()) return this.reessai() ? 'erreur' : 'chargement';
+    return 'ok';
+  });
+  readonly factions = computed(() => this.source());
+  /** Cartes fantômes de la grille pendant le premier chargement (décoratives, `aria-hidden`). */
+  readonly fantomes = [0, 1, 2, 3, 4, 5];
   /** L39 : icônes du wiki introuvables (404) → symbole de la faction à la place. */
   readonly brokenIcons = signal(new Set<string>());
   iconFailed(id: string): void {
     this.brokenIcons.update(s => new Set(s).add(id));
   }
-  /** Une erreur de /api/units affiche « — » à la place des comptes : jamais un faux « 0 » (L102). */
-  readonly unitsErreur = signal(false);
-  readonly units = toSafeSignal(
-    // Sans catchError, une erreur de /api/units relève à la lecture du signal et fige la page (L102).
-    this.service.getUnits().pipe(catchError(() => {
-      this.unitsErreur.set(true);
-      return of([] as Unit[]);
-    })), [] as Unit[]);
+  /** L102/L96 : « — » à la place des comptes tant que /api/units charge ou a échoué : jamais un faux « 0 ». */
+  readonly units = toSafeSignal(this.service.getUnits(), [] as Unit[]);
+  readonly unitsErreur = this.units.failed;
   readonly wikiImages = signal(new Map<string, string>());
 
   @ViewChild('toutes') private toutes?: ElementRef<HTMLButtonElement>;
+  @ViewChild('resultats') private resultats?: ElementRef<HTMLElement>;
+  @ViewChild('boutonReessayer') private boutonReessayer?: ElementRef<HTMLButtonElement>;
 
   readonly filterKey = signal<FilterKey>('all');
   readonly searchQuery = signal('');
   readonly sortKey = signal<SortKey>('az');
 
+  /** L96 : texte de la région live — chargement, puis nombre de résultats (vide en erreur : l'alerte parle). */
+  readonly compte = computed(() => {
+    const e = this.etat();
+    if (e === 'chargement') return 'Chargement des factions…';
+    if (e === 'erreur') return '';
+    const n = this.displayedFactions().length;
+    return n === 0 ? 'Aucune faction' : `${n} faction${n > 1 ? 's' : ''}`;
+  });
+
+  /** L96 : ce qui vide la liste, nommé dans le message (« la recherche « x » et le filtre Chaos »). */
+  readonly filtresActifs = computed(() => {
+    const parts: string[] = [];
+    const q = this.searchQuery().trim();
+    if (q) parts.push(`la recherche « ${q} »`);
+    const f = this.filterKey();
+    if (f !== 'all') parts.push(`le filtre ${FILTRE_LIBELLE[f]}`);
+    return parts.join(' et ') || 'ces filtres';
+  });
+
+  /** L96 : « Réessayer » relance les deux sources ; le bouton reste en place pendant l'essai. */
+  reessayer(): void {
+    if (this.reessai()) return;
+    const avaitFocus = document.activeElement === this.boutonReessayer?.nativeElement;
+    this.reessai.set(true);
+    retryAll(this.source, this.units);
+    const fini = effect(() => {
+      if (this.source.pending()) return;
+      fini.destroy();
+      untracked(() => this.reessai.set(false));
+      // Succès : le bouton disparaît, le focus va à la liste revenue (WCAG 2.4.3) ; échec : il reste sur le bouton.
+      if (avaitFocus && !this.source.failed()) {
+        afterNextRender(() => this.focusPremierResultat(), { injector: this.injector });
+      }
+    }, { injector: this.injector, manualCleanup: true });
+  }
 
   readonly unitCountByFaction = computed(() => {
     const map = new Map<string, number>();
@@ -182,11 +236,19 @@ export class FactionsComponent {
   /** L102 : « Autres » n'est proposé que si au moins une faction y entre. */
   readonly hasAutres = computed(() => this.factions().some(x => isAutre(x)));
 
-  reset(): void {
+  /**
+   * L96 (comme /videos L242) : « Effacer les filtres » de l'état vide disparaît avec lui ; le focus va au premier
+   * résultat revenu (jamais `body`, WCAG 2.4.3) et la région live annonce le nombre de factions.
+   */
+  effacerFiltres(): void {
     this.filterKey.set('all');
     this.searchQuery.set('');
-    // Le bouton du message vide disparaît avec lui : le focus va au filtre « Toutes les factions » (WCAG 2.4.3).
-    this.toutes?.nativeElement.focus();
+    afterNextRender(() => this.focusPremierResultat(), { injector: this.injector });
+  }
+
+  private focusPremierResultat(): void {
+    const liste = this.resultats?.nativeElement;
+    (liste?.querySelector<HTMLElement>('a.card') ?? liste ?? this.toutes?.nativeElement)?.focus();
   }
 
   readonly displayedFactions = computed(() => {
@@ -237,6 +299,12 @@ export class FactionsComponent {
 
   unitCount(f: Faction): number {
     return f.unitCount ?? this.unitCountByFaction().get(f.id) ?? 0;
+  }
+
+  /** « — » tant que /api/units n'a pas répondu ou a échoué (sauf compte servi avec la faction). */
+  unitCountLabel(f: Faction): string {
+    if (f.unitCount != null) return String(f.unitCount);
+    return this.units.pending() || this.units.failed() ? '—' : String(this.unitCount(f));
   }
 
   alignClass(alignement: string): string {
