@@ -871,9 +871,12 @@ lots:
     finished: 2026-10-06
   - id: L76
     title: "Vidéos et chaînes : séparer la référence (seed, dans l'image) des ajouts/suppressions de l'utilisateur (volume), fusionnés à la lecture — fait arriver les 2 URL YouTube corrigées par 0171157 (suite de L74, 06-10)"
-    status: todo
+    status: done
     estimate: 1
     created: 2026-10-06
+    review: { date: 2026-11-22, verdict: "conforme r0 — 0 bloquant, 0 majeur ; 9 tests de service rouges sans le correctif ; migration idempotente, écriture atomique ; 3 mineurs notés (retour arrière non symétrique, volume illisible visible au seul journal, entrée null dans la surcouche fait tomber le démarrage) — tmp/revue-wh-L76.md", commit: c68d5b1d741aaa16ac1c3a4898c997746326bca7 }
+    started: 2026-11-22
+    finished: 2026-11-22
   - id: L77
     title: orchestrate.ux déclaré (port 4201) pour la revue UX automatique des vagues — suite de cadence L95
     status: done
