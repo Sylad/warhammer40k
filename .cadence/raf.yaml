@@ -1102,10 +1102,11 @@ lots:
   - id: L96
     title: "/factions : grille vide au chargement et sur erreur d'API, « UNITÉS 0 » tant que les unités chargent, recherche sans résultat muette — états + région live (revue UX L3, cf L79)"
     public: "Factions : chargement, erreur et recherche vide annoncés"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-11-22
   - id: L97
     title: "/factions/<id inconnu> : titre « Faction introuvable » mais « Chargement de la faction... » sans fin — message d'erreur + lien vers /factions (revue UX L3)"
     public: "Faction inconnue : un message clair au lieu d'un chargement sans fin"
@@ -2733,6 +2734,7 @@ lots:
     estimate: 0.5
     quickwin: true
     planned: { from: 2026-11-23, to: 2026-11-23 }
+    delivered: { date: 2026-11-22, sha: 6ed3479708c8abfae042a363b6c5e8e074efaed3 }
     created: 2026-11-22
     started: 2026-11-22
     review: { date: 2026-11-22, verdict: "conforme — tmp/revue-wh-L244.md : course imgInflight visée sans délai fixe, test toujours capable d'échouer, porte = npm run test:e2e de la CI sans double jeu ; mineurs : playwright-core absent → 15 fichiers sautés en silence, gestionnaire de route suspendu si relancer() échoue", commit: f507e047e6bcf878d564050f5ef98e5839c612f8 }
