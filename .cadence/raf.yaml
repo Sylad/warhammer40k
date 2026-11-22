@@ -487,6 +487,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-22, sha: 2d834a9b7f3a708bc6ac6732e3dca27a3bbddb7a }
     created: 2026-10-02
     started: 2026-11-22
     ux: { date: 2026-11-22, verdict: "conforme — revue UX courte (tmp/ux-wh-L44.md) ; mineurs : contour de focus du lien Source sur la ligne « consultée le », deux libellés pour la même date (« Contenu revu le » / « Informations vérifiées le »), « ↗ » lu dans le nom des liens, trou à 1440 (5 cartes sur 3 colonnes)" }
