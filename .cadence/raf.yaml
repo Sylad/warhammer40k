@@ -1140,6 +1140,7 @@ lots:
     status: done
     estimate: 0.25
     visible: true
+    delivered: { date: 2026-11-22, sha: c16a7e551d8e1c399369344d5b5784c586a6af04 }
     created: 2026-10-10
     started: 2026-11-22
     ux: { date: 2026-11-22, verdict: "conforme — revue UX r0 (tmp/ux-wh-L98.md) : contraste au pixel libellés ≥ 5,00:1, valeurs ≥ 7,53:1 sur 12 sous-factions à 1440/390/320 × 100/200 % et zoom 200 %, encart dans la charte ; le majeur (encart vide sur 42 sous-factions) corrigé en 057872f, test rouge avant / vert après, captures Iyanden et Blood Angels vues par le run" }
