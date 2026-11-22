@@ -830,8 +830,9 @@
     {
       "id": "L242",
       "title": "Vidéos : « Effacer les filtres » vous ramène au premier résultat",
-      "status": "doing",
-      "started": "2026-11-22"
+      "status": "done",
+      "started": "2026-11-22",
+      "finished": "2026-11-22"
     }
   ]
 }

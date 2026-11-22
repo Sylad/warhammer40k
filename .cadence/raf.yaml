@@ -2708,11 +2708,14 @@ lots:
       - { date: 2026-11-21, text: "QA prod 9a9452b (21-11, tmp/qa-warhammer-9a9452b.md) : 30/30 pages conformes ; L240/L241 tenus à 761/768/1024/1220. Le « saut » à 390/320 au clic d'un filtre avancé est le défilement vers les résultats voulu par L239 (confirmé en revues UX L241 r1 et r2), pas un défaut" }
   - id: L242
     title: "Vidéos : « Effacer les filtres » de l'état vide de la liste disparaît au clic et le focus retombe sur le corps de la page (WCAG 2.4.3 ; vu par le run L241/t1, antérieur)"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-11-21
     started: 2026-11-22
+    ux: { date: 2026-11-22, verdict: "conforme revue courte conforme (tmp/ux-L242.md) : focus sur le 1er résultat, status 0→16, aucun saut ; mineur : coupure après « en 390 ; défilements des sondes = L239 voulu" }
+    review: { date: 2026-11-22, verdict: "conforme diff du run relu sur rapport ; tests navigateur rouges avant 6/6, verts après ; revue UX indépendante conforme", commit: 5fe14db8bc77a597ae3a82223955ab7e6bb5b519 }
+    finished: 2026-11-22
   - id: L243
     title: "Test e2e instable : credits-l238 « r3 390 px : Fandom en panne » rouge en CI sur 9a9452b (expected 'erreur' to be 'absente'), vert à la relance — stabiliser sans relever de délai"
     status: done
