@@ -264,8 +264,17 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
     try {
       await brancher(page);
       const reponses: { q: string; json: unknown }[] = [];
+      // L244 — la recherche de l'œuvre ouverte peut être retenue ici (`porte`) : le test voit l'état « chargement »
+      // avant de laisser partir la réponse (voir `relancer`).
+      let requete = '';
+      let arrivees = 0;
+      let porte: Promise<void> | null = null;
       await page.route('**/api/wiki-image**', async (r) => {
         const q = new URL(r.request().url()).searchParams.get('q')!;
+        if (q === requete) {
+          arrivees++;
+          if (porte) await porte;
+        }
         const json = await rechercherImageWiki(q, { base: baseFandom });
         reponses.push({ q, json });
         return r.fulfill({ json }); // notre API répond 200, comme le contrôleur
@@ -277,13 +286,32 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
       const d = page.locator('dialog.modal');
       await d.waitFor();
       const ecart = d.locator('[data-testid="viewer-ecart"]');
-      // L243 — la galerie cherche en même temps l'image de chaque œuvre et de chaque catégorie (file de 6) :
-      // compter toutes les réponses, ou lire `data-etat` juste après la touche, ne prouve pas que la recherche
-      // relancée a abouti (l'état « erreur » d'avant l'appui passait pour celui d'après, et l'Entrée de l'étape 3
-      // tombait pendant la recherche de l'étape 2, ignorée). On attend la réponse à la requête de CETTE œuvre.
-      const requete = requeteOeuvre(await d.locator('#viewer-titre').innerText());
-      const reponseOeuvre = () => page.waitForResponse((r) =>
-        r.url().includes('/api/wiki-image') && new URL(r.url()).searchParams.get('q') === requete);
+      // L243 — la galerie cherche en même temps l'image de chaque œuvre et de chaque catégorie (file de 6) : compter
+      // toutes les réponses ne dit rien de la recherche relancée ; on suit la requête de CETTE œuvre.
+      // L244 — cause de l'instabilité : `provideZoneChangeDetection({ eventCoalescing: true })` repousse le rendu qui
+      // suit l'appui sur Entrée à la trame suivante. Juste après `keyboard.press`, `data-etat` affiche donc encore
+      // l'« erreur » d'AVANT l'appui : lire « erreur » ne prouvait pas que la relance avait abouti, et l'Entrée de
+      // l'étape 3 pouvait tomber pendant la recherche de l'étape 2 (ignorée, comme le veut `reessayerImage`) ; celle-ci
+      // finissait en 429 → « erreur » au lieu de « absente » (CI du 21-11, 9a9452b). `relancer` attend donc trois
+      // faits observables, sans délai fixe : la requête de l'œuvre est partie (l'appui a été pris), l'écran dit
+      // « chargement » pendant qu'elle est retenue, puis sa réponse est arrivée. Seulement ensuite l'état final est lu :
+      // il ne peut plus être celui d'avant l'appui.
+      requete = requeteOeuvre(await d.locator('#viewer-titre').innerText());
+      const relancer = async (): Promise<void> => {
+        let liberer!: () => void;
+        porte = new Promise<void>((ok) => { liberer = ok; });
+        const avant = arrivees;
+        const reponse = page.waitForResponse((r) =>
+          r.url().includes('/api/wiki-image') && new URL(r.url()).searchParams.get('q') === requete);
+        await page.keyboard.press('Enter');
+        await expect.poll(() => arrivees, { timeout: 10_000, message: 'la relance n’a pas envoyé la recherche de l’œuvre' }).toBe(avant + 1);
+        await expect.poll(() => ecart.getAttribute('data-etat'), { timeout: 5_000 }).toBe('chargement');
+        expect(await ecart.innerText()).toContain('Nouvelle recherche de l’image sur le Warhammer 40k Wiki…');
+        expect(await d.locator('[data-testid="viewer-reessayer"]').getAttribute('aria-disabled')).toBe('true');
+        porte = null;
+        liberer();
+        await reponse;
+      };
       const derniere = () => reponses.filter((r) => r.q === requete).at(-1)?.json;
 
       // 1. Connexion coupée par Fandom : notre API a répondu 200, la visionneuse dit quand même l'échec.
@@ -301,10 +329,8 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
       fandom = '429';
       const bouton = d.locator('[data-testid="viewer-reessayer"]');
       await bouton.focus();
-      let relance = reponseOeuvre();
-      await page.keyboard.press('Enter');
-      await relance; // la visionneuse est en « chargement » jusqu'à ce que l'application lise cette réponse
-      await expect.poll(() => ecart.getAttribute('data-etat')).toBe('erreur');
+      await relancer();
+      await expect.poll(() => ecart.getAttribute('data-etat'), { timeout: 5_000 }).toBe('erreur');
       expect(derniere()).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null, erreur: true });
       expect(await d.innerText()).not.toContain('Aucune image trouvée');
       expect(await page.evaluate(() => document.activeElement?.getAttribute('data-testid'))).toBe('viewer-reessayer');
@@ -312,11 +338,9 @@ describe.skipIf(!built || !chromium)('crédits et droits (navigateur, dist) — 
 
       // 3. Fandom répond, sans image : là seulement « Aucune image trouvée » ; le focus suit le message, pas le corps de la page.
       fandom = 'sans-image';
-      relance = reponseOeuvre();
-      await page.keyboard.press('Enter');
-      await relance;
+      await relancer();
       expect(derniere()).toEqual({ imageUrl: null, pageTitle: null, pageUrl: null });
-      await expect.poll(() => ecart.getAttribute('data-etat')).toBe('absente');
+      await expect.poll(() => ecart.getAttribute('data-etat'), { timeout: 5_000 }).toBe('absente');
       expect(await ecart.innerText()).toBe('Aucune image trouvée pour cette œuvre.');
       expect(await bouton.count()).toBe(0);
       expect(await page.evaluate(() => document.activeElement?.getAttribute('data-testid'))).toBe('viewer-ecart');

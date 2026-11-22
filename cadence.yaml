@@ -46,7 +46,11 @@ orchestrate:
     - { dir: backend, run: npm test }
     - { dir: frontend, run: "npx vitest run --exclude '**/*.e2e.spec.ts'", replay: "npx vitest run --minWorkers=1 --maxWorkers=$CADENCE_TEST_WORKERS {files}" }
   # Build backend (nest build) puis frontend (ng build + contrôle de fuite du plan), verts le 25-10.
-  build: (cd backend && npm run build) && (cd frontend && npm run build)
+  # L244 (22-11) : puis les e2e de navigateur sur ce dist (`npm run test:e2e` = vitest -c vitest.e2e.config.ts), comme
+  # l'étape « Acceptation de bout en bout » de frontend-checks.yml : un e2e rouge ne se découvrait qu'en CI (credits-l238,
+  # 21-11). Ici et pas dans `test:` : ils lisent le dist que ce build vient de produire. ~4 min 30 s sur Big-Blue
+  # (15 fichiers, 230 cas, verts le 22-11) ; un fichier à la fois (fileParallelism: false), Chromium de playwright-core requis.
+  build: (cd backend && npm run build) && (cd frontend && npm run build && npm run test:e2e)
   ux:
     command: '(cd backend && npm run start:dev) & (cd frontend && npm start) & wait'
     url: http://localhost:4201

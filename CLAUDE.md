@@ -306,9 +306,9 @@ Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l
 `cadence.yaml` : `orchestrate.spec: { dir: docs/specs }` et `orchestrate.accept` (lanceur `frontend/vitest.acceptation.config.ts`, fichiers donnés par `CADENCE_ACCEPTATION`). `frontend/vitest.config.ts` (suite et CI) exclut les fichiers des `docs/specs/*/acceptation-<lot>.json` à `vert: false` via `frontend/scripts/acceptation-runner.mjs` (testé : `acceptation-runner.test.mjs`). Nommer les tests d'acceptation `*.acceptation.spec.ts` sous `frontend/src/`.
 
 **Porte de la vague (L203)** : `orchestrate.test` = suite backend (`npm test`) puis suite frontend
-(`npx vitest run --exclude '**/*.e2e.spec.ts'` : les e2e Chromium sur `dist` tournent à la main ; en CI, `npm run test:e2e` ne lance que les acceptations de navigateur,
+(`npx vitest run --exclude '**/*.e2e.spec.ts'` : les e2e Chromium sur `dist` n'y sont pas, ils suivent le build ; en CI comme dans `orchestrate.build`, `npm run test:e2e` ne lance que les acceptations de navigateur,
 `espacement-texte.e2e.spec.ts` (L61), `morceau-absent.e2e.spec.ts` (L52), `densite-pilotes-l40.e2e.spec.ts` (L40) et `plan.e2e.spec.ts` (L67) — la liste complète est l'`include` de `vitest.e2e.config.ts` —, pas `topbar`/`search-hint`, l'un d'eux a expiré sous la charge de la suite complète) ; `orchestrate.build` = `nest build` puis
-`npm run build` du frontend. Les acceptations rouges restent hors de la porte (exclues par `vitest.config.ts`,
+`npm run build` du frontend, puis `npm run test:e2e` sur ce dist (L244 : la porte joue les mêmes e2e que « Contrôles frontend », ~4 min 30 s). Les acceptations rouges restent hors de la porte (exclues par `vitest.config.ts`,
 lancées seules par `accept:`). `orchestrate.precheck: true` (Sonnet), plus `local` (cadence L328). Toute
 commande déclarée se vérifie verte sur main avant d'être écrite.
 Une acceptation qui importe `playwright-core` (navigateur réel, `dist` requis) tourne par `npm run test:e2e` (`vitest.e2e.config.ts`, 30 s par cas, après `npm run build`, Chromium installé) : `vitest.config.ts` l'exclut quel que soit `vert`.
