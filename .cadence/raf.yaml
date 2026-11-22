@@ -1102,13 +1102,14 @@ lots:
   - id: L96
     title: "/factions : grille vide au chargement et sur erreur d'API, « UNITÉS 0 » tant que les unités chargent, recherche sans résultat muette — états + région live (revue UX L3, cf L79)"
     public: "Factions : chargement, erreur et recherche vide annoncés"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
     started: 2026-11-22
-    ux: { date: 2026-11-22, verdict: "conforme — revue UX courte (tmp/ux-wh-L96.md) ; mineurs notés : « AUCUNE FACTION » en double sur recherche vide, « UNITÉS — » lu « tiret »" }
-    review: { date: 2026-11-22, verdict: "non conforme r0 (tmp/revue-wh-L96.md) : majeur aria-pressed des filtres et aria-label recherche/tri sans test ; mineurs unitsErreur mort (factions.component.ts:183), alerte Réessayer en 3e copie au lieu d'app-load-error", commit: 05d0f1a83dcd618bd010fdd2a4d9133ca31bcad1 }
+    ux: { date: 2026-11-22, verdict: "conforme r1 — alerte d'erreur passée au composant partagé, captures 390/1440 regardées par le lead (même aspect que les autres pages)" }
+    review: { date: 2026-11-22, verdict: "conforme r1 (relu par le lead : test jsdom aria-pressed et aria-label, app-load-error étendu enCours/aria-disabled avec son test, unitsErreur retiré ; porte complète verte 159+1449+239 e2e)", commit: f3ecd1cbd81a55278dd3eab90b0634bfe407668e }
+    finished: 2026-11-22
   - id: L97
     title: "/factions/<id inconnu> : titre « Faction introuvable » mais « Chargement de la faction... » sans fin — message d'erreur + lien vers /factions (revue UX L3)"
     public: "Faction inconnue : un message clair au lieu d'un chargement sans fin"
