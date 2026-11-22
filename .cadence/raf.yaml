@@ -2780,6 +2780,7 @@ lots:
     title: "Contenu : Vindicare, Eversor et Callidus sont rattachés à l'Inquisition dans le seed ; dans le canon (Games Workshop) ils relèvent de l'Officio Assassinorum, dont la carte affiche « Aucune fiche d'unité » — les rattacher (source à citer)"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-22, sha: 9734fcd7d20ec3ef31845a0de2991368ab5be299 }
     created: 2026-11-22
     started: 2026-11-22
     ux: { date: 2026-11-22, verdict: "conforme — données seules (3 fiches changent de faction), aucun écran ni composant modifié ; captures du run 1440/390 : Officio « UNITÉS 3 », Inquisition 7, fiche inq-vindicare ouverte" }
