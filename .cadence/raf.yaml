@@ -484,10 +484,11 @@ lots:
   - id: L44
     title: "Veille et enrichissement régulier du contenu (consigne Sylvain 02-10) : rechercher les informations à jour (jeux vidéo et sorties à venir, romans et séries, nouvelles éditions, actualités de l'univers), les vérifier sur des sources en ligne citées et datées, compléter et corriger les pages concernées ; images seulement si libres de droits ou créées pour le site ; fixer un rythme de revue et afficher la date de dernière mise à jour"
     public: "Un codex tenu à jour : actualités de l'univers et pages révisées"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     created: 2026-10-02
+    started: 2026-11-22
   - id: L45
     title: "Galerie : libellés associés aux filtres (Faction, Catégorie, Trier par, recherche — WCAG 1.3.1 / 4.1.2 / 3.3.2) et noms de faction lisibles dans la liste au lieu des identifiants bruts (revue UX L42)"
     status: done
@@ -1105,6 +1106,7 @@ lots:
     status: done
     estimate: 0.25
     visible: true
+    delivered: { date: 2026-11-22, sha: 987e8c8f9a3b2db9cc7e2e12a4dae4c451fa1f60 }
     created: 2026-10-10
     started: 2026-11-22
     ux: { date: 2026-11-22, verdict: "conforme r1 — alerte d'erreur passée au composant partagé, captures 390/1440 regardées par le lead (même aspect que les autres pages)" }
@@ -2358,6 +2360,7 @@ lots:
       - { date: 2026-11-20, text: "Livraison d7ec3d2 : titres publics livrés « Crédits et droits : Games Workshop et la source de chaque image ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
       - { date: 2026-11-20, text: "Livraison 4ca5327 : titres publics livrés « Crédits et droits : Games Workshop et la source de chaque image », « Galerie et Vidéos : un filtre ne fait plus sauter la page ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
       - { date: 2026-11-22, text: "Livraison 0db6409 : titres publics livrés « Vidéos : « Effacer les filtres » vous ramène au premier résultat ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
+      - { date: 2026-11-22, text: "Livraison 987e8c8 : titres publics livrés « Factions : chargement, erreur et recherche vide annoncés ». Article : ../claude-code-codex/frontend/src/pages/case-studies/warhammer40k.astro. Sections à relire : (aucun titre trouvé : relire tout l'article). Réécrire ce que ces changements rendent faux ou incomplet, sans rien inventer ; les commits du dépôt ../claude-code-codex citent le lot et « warhammer40k »." }
   - id: L206
     title: "cadence.yaml : plan.onWrite régénère frontend/public/plan-data/plan.json à chaque écriture du plan — livraison de L200 refusée le 27-10 par la CI « Plan publié à jour » après un raf ux/done du lead"
     status: done
