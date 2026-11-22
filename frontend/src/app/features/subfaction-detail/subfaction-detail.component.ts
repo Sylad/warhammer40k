@@ -49,27 +49,30 @@ const TYPE_LABEL: Record<SubFactionType, string> = {
             <span class="eyebrow">{{ typeLabel(d.subfaction.type) }} · {{ d.faction?.nom }}</span>
             <h1 [style.--longest-word]="longestWord(d.subfaction.name)">{{ d.subfaction.name }}</h1>
             <p class="hero-desc">{{ d.subfaction.description }}</p>
-            <div class="key-info">
-              @if (d.subfaction.primarch) {
-                <div>
-                  <span class="ki-label">Primarque</span>
-                  @if (d.subfaction.primarchId) {
-                    <a class="ki-val ki-link" [routerLink]="['/lore/primarchs', d.subfaction.primarchId]">{{ d.subfaction.primarch }} →</a>
-                  } @else {
-                    <span class="ki-val">{{ d.subfaction.primarch }}</span>
-                  }
-                </div>
-              }
-              @if (d.subfaction.homeworld) {
-                <div><span class="ki-label">Monde-mère</span><span class="ki-val">{{ d.subfaction.homeworld }}</span></div>
-              }
-              @if (d.subfaction.founding) {
-                <div><span class="ki-label">Fondation</span><span class="ki-val">{{ d.subfaction.founding }}</span></div>
-              }
-              @if (d.subfaction.motto) {
-                <div><span class="ki-label">Devise</span><span class="ki-val">« {{ d.subfaction.motto }} »</span></div>
-              }
-            </div>
+            <!-- L98 r1 : pas d'encart (fond et filet) sans aucun champ — 42 sous-factions sur 182. -->
+            @if (d.subfaction.primarch || d.subfaction.homeworld || d.subfaction.founding || d.subfaction.motto) {
+              <div class="key-info">
+                @if (d.subfaction.primarch) {
+                  <div>
+                    <span class="ki-label">Primarque</span>
+                    @if (d.subfaction.primarchId) {
+                      <a class="ki-val ki-link" [routerLink]="['/lore/primarchs', d.subfaction.primarchId]">{{ d.subfaction.primarch }} →</a>
+                    } @else {
+                      <span class="ki-val">{{ d.subfaction.primarch }}</span>
+                    }
+                  </div>
+                }
+                @if (d.subfaction.homeworld) {
+                  <div><span class="ki-label">Monde-mère</span><span class="ki-val">{{ d.subfaction.homeworld }}</span></div>
+                }
+                @if (d.subfaction.founding) {
+                  <div><span class="ki-label">Fondation</span><span class="ki-val">{{ d.subfaction.founding }}</span></div>
+                }
+                @if (d.subfaction.motto) {
+                  <div><span class="ki-label">Devise</span><span class="ki-val">« {{ d.subfaction.motto }} »</span></div>
+                }
+              </div>
+            }
           </div>
         </div>
       </header>

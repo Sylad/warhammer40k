@@ -31,6 +31,8 @@ const IMAGES: Record<string, string> = {
 };
 /** Sous-factions dont le bandeau porte des libellés (primarque, monde natal, fondation…). */
 const SUBS = ['blood-angels', 'ultramarines', 'dark-angels'];
+/** Sous-factions sans primarque, monde-mère, fondation ni devise (42 sur 182 dans le seed) : pas d'encart du tout. */
+const SANS_CHAMP = ['iyanden', 'saim-hann'];
 const CIBLES = ['.key-info .ki-label', '.key-info .ki-val'];
 
 async function ouvrir(page: Page, base: string, id: string, image: string): Promise<void> {
@@ -119,6 +121,17 @@ describe.skipIf(!built || !chromium)('sous-faction — voile sous les libellés 
       }
       expect(echecs).toEqual([]);
     }, 120_000);
+  }
+
+  for (const width of [1440, 390]) {
+    it(`${width} px : sous-faction sans aucun champ (${SANS_CHAMP.join(', ')}) → aucun encart vide dans le bandeau`, async () => {
+      for (const id of SANS_CHAMP) {
+        const page = await browser.newPage({ viewport: { width, height: 900 } });
+        await ouvrir(page, base, id, 'blanc');
+        expect(await page.locator('.hero .key-info').count(), `${id} : encart .key-info rendu sans aucun champ`).toBe(0);
+        await page.close();
+      }
+    }, 60_000);
   }
 
   it('bureau : le voile reste un encart sous les libellés, le bandeau garde sa hauteur', async () => {
