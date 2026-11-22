@@ -2759,7 +2759,7 @@ lots:
     estimate: 1
     created: 2026-11-22
     started: 2026-11-22
-    review: { date: 2026-11-22, verdict: "conforme — test corrigé (lien #subfactions retiré volontairement par L94, WCAG 2.4.4 ; cas déplacé sur Chaos Space Marines, compte exact du lien), 2 fichiers d'ancres ajoutés à la porte e2e ; 300 cas e2e verts (94ba096)", commit: 94ba09686231ab65b1cd7a1be4d77e7c4057c057 }
+    review: { date: 2026-11-22, verdict: "r2 (suite CI) conforme — lead : timeouts mesurés et gardés par ci-frontend-checks.test.mjs, entrée sans id filtrée + 2 tests rouges avant", commit: 5a7b4fba35705f63549ccbfef74cd566f7898b4f }
     finished: 2026-11-22
     notes:
       - { date: 2026-11-22, text: "22-11 : CI « Contrôles frontend » annulée sur 1006ccf — le job a atteint son timeout-minutes: 10 (frontend-checks.yml:29) : l'étape e2e passe à ~7 min depuis l'ajout des 2 fichiers d'ancres. À faire après L76 : relever le timeout du job (et de l'étape) avec marge, ou partager les e2e ; puis relivrer." }
