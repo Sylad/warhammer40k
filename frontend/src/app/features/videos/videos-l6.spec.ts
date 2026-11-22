@@ -183,6 +183,29 @@ describe('L6 t3 — états de la liste', () => {
     expect(nombreResultats(el)).toBe(VIDEOS.length);
   });
 
+  // L242 : le bouton disparaît avec l'état vide ; le focus ne retombe pas sur body (WCAG 2.4.3).
+  for (const geste of ['souris', 'clavier'] as const) {
+    it(`L242 — « Effacer les filtres » de l'état vide (${geste}) : focus sur le premier résultat revenu, compte annoncé`, async () => {
+      const { f, el } = await rendre();
+      document.body.appendChild(el);
+      f.componentInstance.searchQuery.set('zzz');
+      await maj(f);
+      const b = bouton(el, 'Effacer les filtres')!;
+      b.focus();
+      if (geste === 'clavier') b.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      b.click(); // un bouton activé au clavier (Entrée, Espace) émet aussi « click »
+      await maj(f);
+      await new Promise((r) => setTimeout(r, 0));
+      const premier = liste(el).querySelector('.card-link');
+      expect(document.activeElement).not.toBe(document.body);
+      expect(document.activeElement).toBe(premier);
+      const compte = el.querySelector('.results-count')!;
+      expect(compte.getAttribute('role')).toBe('status');
+      expect(compte.textContent).toContain(`${VIDEOS.length} résultats`);
+      el.remove();
+    });
+  }
+
   it('après « Réessayer » réussi, le focus va sur la liste', async () => {
     const flux = new Subject<Video[]>();
     let appels = 0;

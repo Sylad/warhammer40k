@@ -297,7 +297,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
             } @else if (filteredVideos().length === 0) {
               <div class="empty" data-testid="filtres-vides">
                 <p>Aucune vidéo ne correspond à {{ activeFiltersLabel() }}.</p>
-                <button class="load-more" type="button" (click)="clearFilters()">Effacer les filtres</button>
+                <button class="load-more" type="button" data-testid="effacer-etat-vide" (click)="effacerDepuisEtatVide($any($event.currentTarget))">Effacer les filtres</button>
               </div>
             } @else {
               <div class="video-grid">
@@ -716,6 +716,22 @@ export class VideosComponent {
     afterNextRender(() => {
       const rangees = this.host.nativeElement.querySelectorAll<HTMLElement>('.check-row');
       rangees[place === 'haut' ? 0 : rangees.length - 1]?.focus({ preventScroll: true });
+    }, { injector: this.injector });
+  }
+
+  /**
+   * L242 : « Effacer les filtres » de l'état vide de la liste. Le bouton disparaît avec l'état vide : sans geste, le
+   * focus retombait sur `body` (WCAG 2.4.3). Il va au premier résultat revenu, à la place de l'état vide (en tête de la
+   * liste) ; le compte de la liste (`role=status`) passe de « 0 résultat » à « N résultats » et l'annonce.
+   */
+  effacerDepuisEtatVide(bouton?: HTMLElement | null): void {
+    this.filtrer(() => {
+      this.clearFilters();
+      this.allLimit.set(VideosComponent.PAGE_ALL);
+    }, bouton);
+    afterNextRender(() => {
+      const liste = this.listeVideos?.nativeElement;
+      (liste?.querySelector<HTMLElement>('.card-link') ?? liste)?.focus();
     }, { injector: this.injector });
   }
 

@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-11-21 16:30",
+  "generated": "2026-11-22 09:50",
   "entries": [
+    {
+      "slug": "2026-11-22-videos-effacer-les-filtres-ramene-a-la-liste",
+      "title": "Vidéos : « Effacer les filtres » vous ramène au premier résultat",
+      "date": "2026-11-22",
+      "lots": [
+        "L242"
+      ],
+      "captures": [
+        "captures/L242-videos-effacer-les-filtres-telephone.png",
+        "captures/L242-videos-effacer-les-filtres-bureau.png"
+      ],
+      "alts": [
+        "Vidéos à 390 px de large, juste après « Effacer les filtres » : la liste est revenue (« 16 résultats ») et la première vidéo est encadrée, prête à être ouverte",
+        "Vidéos à 1440 px de large, juste après « Effacer les filtres » : à la place du message « Aucune vidéo ne correspond », la première vidéo de la liste revenue est encadrée"
+      ],
+      "html": "<p>Quand une recherche ou des filtres ne laissent plus aucune vidéo, la page Vidéos propose « Effacer les filtres ». Ce bouton disparaissait au clic : en naviguant au clavier ou avec un lecteur d'écran, on se retrouvait tout en haut de la page, sans savoir où reprendre.</p>\n<p>Maintenant, après « Effacer les filtres », la sélection passe à la première vidéo de la liste revenue, à l'endroit même où était le message, au clavier comme à la souris, sur téléphone comme sur ordinateur. Un lecteur d'écran annonce le nombre de résultats retrouvés, puis le titre de cette vidéo.</p>"
+    },
     {
       "slug": "2026-11-21-videos-sur-tablette-la-rangee-cochee-reste-sous-le-doigt",
       "title": "Vidéos sur tablette : la rangée cochée reste sous le doigt, le nombre de résultats s'affiche à côté",
