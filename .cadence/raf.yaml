@@ -1173,6 +1173,7 @@ lots:
     status: done
     estimate: 0.25
     visible: true
+    delivered: { date: 2026-11-23, sha: 5f158568875e9aaa77999c5adec1bf1dfaadc028 }
     created: 2026-10-10
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme revue du lead : aria-hidden sur les glyphes décoratifs, emblème alt vide (h2 nomme), flèche porteuse de sens réécrite dans le seed, sup global ; e2e sur l'arbre d'accessibilité", commit: e5dab5b384ddfaf3a8e3b34a55fb0e125a08d61c }
