@@ -1247,6 +1247,7 @@ lots:
     status: done
     estimate: 0.5
     visible: true
+    delivered: { date: 2026-11-23, sha: 091303638127762bb01f1750ead7b0ba2c63294a }
     created: 2026-10-12
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme Passe 2 28fd19e : contain retiré, listes .side-list qui défilent seules sous leur titre, fondu par suivreIndiceDeSuite (testé, arrêté à la destruction), clic artiste/collection passé à avantFiltre(controle) comme L240 r2, relacherColonneTenue au destroy (gallery.component.ts:1155) ; 8 cas e2e rouges avant.", commit: 28fd19edd4820b30b6396b3bdcf930a059fd911c }
