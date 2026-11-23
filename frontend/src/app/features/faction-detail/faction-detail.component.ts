@@ -1,12 +1,14 @@
 import { afterNextRender, Component, computed, DestroyRef, effect, ElementRef, inject, Injector, signal, untracked } from '@angular/core';
 import { CommonModule, ViewportScroller } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
+import { catchError, distinctUntilChanged, firstValueFrom, map, of, switchMap } from 'rxjs';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WarhammerService } from '../../core/services/warhammer.service';
 import { namedPage, PageTitleService } from '../../core/services/page-title.service';
 import { localUnitImage } from '../../core/utils/local-unit-image';
-import { Faction, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
+import { Faction, Primarch, Unit, UnitType, SubFaction, SubFactionType } from '../../core/models/models';
+import { pageCiblee } from '../../core/utils/page-ciblee';
 import { createThumbResolver, mediaThumbSource } from '../../shared/media-thumb';
 import { longestWord } from '../../shared/longest-word';
 import { artworkForFaction, videoForFaction } from './faction-media';
@@ -108,6 +110,11 @@ const DEFAULT_RESOURCES = [
   { ico: '☖', label: 'Bibliothèque des archives' },
   { ico: '✎', label: 'Voir les romans liés' },
 ];
+
+/** L100 — alt du mini-portrait : « Portrait de Rogal Dorn », « Portrait d’Angron » (élision devant une voyelle). */
+export function portraitDe(nom: string): string {
+  return /^[aeiouyàâéèêîïôûü]/i.test(nom) ? `Portrait d’${nom}` : `Portrait de ${nom}`;
+}
 
 @Component({
   selector: 'app-faction-detail',
@@ -271,9 +278,9 @@ const DEFAULT_RESOURCES = [
                 @for (sf of displayedSubFactions(); track sf.id) {
                   <a class="sf-card" [routerLink]="['/subfactions', sf.id]"
                      [style.--sf-img]="subFactionImg(sf.id)">
-                    @if (primarchImgUrl(sf.id); as pImg) {
-                      <div class="sf-primarch" [title]="sf.primarch">
-                        <img [src]="pImg" [alt]="sf.primarch || ''" loading="lazy" />
+                    @if (primarchPortrait(sf); as pp) {
+                      <div class="sf-primarch" [title]="pp.nom">
+                        <img [src]="pp.url" [alt]="pp.alt" loading="lazy" />
                       </div>
                     }
                     <div class="sf-content">
@@ -538,7 +545,18 @@ export class FactionDetailComponent {
   readonly subFactions = toSafeSignal(
     this.route.paramMap, p => this.service.getSubFactions(p.get('id')!), [] as SubFaction[]);
   readonly subFactionImages = signal(new Map<string, string>());
+  /** L100 — portrait par identifiant de primarque (pas par chapitre : deux chapitres, une requête). */
   readonly primarchImages = signal(new Map<string, string>());
+  /** Les fiches primarques, demandées seulement si un chapitre de la faction a un primarque. */
+  private readonly primarchsById = toSignal(
+    toObservable(this.subFactions).pipe(
+      map(list => list.some(s => !!s.primarchId)),
+      distinctUntilChanged(),
+      switchMap(need => (need ? this.service.primarchs$.pipe(catchError(() => of([] as Primarch[]))) : of([] as Primarch[]))),
+      map(list => new Map(list.map(p => [p.id, p] as const))),
+    ),
+    { initialValue: new Map<string, Primarch>() },
+  );
 
   readonly subFactionLabel = computed(() => {
     const list = this.subFactions();
@@ -637,8 +655,16 @@ export class FactionDetailComponent {
     return map[type] ?? type;
   }
 
-  primarchImgUrl(id: string): string | null {
-    return this.primarchImages().get(id) ?? null;
+  /**
+   * L100 — mini-portrait d'une carte de chapitre : celui de la fiche de SON primarque (`primarchId` →
+   * `wikiQuery` du primarque, la requête même de /lore/primarchs/:id), retenu seulement si le wiki a
+   * répondu sous ce titre (`pageCiblee`) : une recherche libre rendait Fulgrim pour les Iron Hands.
+   * Pas de primarque, de fiche ou d'image sûre → pas de portrait (la carte nomme quand même le primarque).
+   */
+  primarchPortrait(sf: SubFaction): { url: string; nom: string; alt: string } | null {
+    const p = sf.primarchId ? this.primarchsById().get(sf.primarchId) : undefined;
+    const url = p ? this.primarchImages().get(p.id) : undefined;
+    return p && url ? { url, nom: p.name, alt: portraitDe(p.name) } : null;
   }
 
   subFactionImg(id: string): string | null {
@@ -804,20 +830,20 @@ export class FactionDetailComponent {
       });
     });
 
-    // Charge images primarques pour mini-portrait dans sous-faction card
+    // L100 — portrait du primarque de chaque chapitre, pris à la fiche du primarque (voir primarchPortrait).
     effect(() => {
-      const list = this.subFactions();
-      if (!list.length) return;
-      list.forEach(s => {
-        if (!s.primarchWikiQuery || this.primarchImgInflight.has(s.id) || untracked(() => this.primarchImages()).has(s.id)) return;
-        this.primarchImgInflight.add(s.id);
-        this.service.getWikiImage(s.primarchWikiQuery).subscribe({
+      const byId = this.primarchsById();
+      this.subFactions().forEach(s => {
+        const p = s.primarchId ? byId.get(s.primarchId) : undefined;
+        if (!p?.wikiQuery || this.primarchImgInflight.has(p.id)) return;
+        this.primarchImgInflight.add(p.id);
+        const query = p.wikiQuery;
+        this.service.getWikiImage(query).subscribe({
           next: r => {
-            if (r.imageUrl) {
-              this.primarchImages.update(m => new Map(m).set(s.id, r.imageUrl!));
-            }
+            if (pageCiblee(query, r)) this.primarchImages.update(m => new Map(m).set(p.id, r.imageUrl!));
+            else if (r.erreur) this.primarchImgInflight.delete(p.id);
           },
-          error: () => {},
+          error: () => this.primarchImgInflight.delete(p.id),
         });
       });
     });

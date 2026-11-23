@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-11-22 16:59",
+  "generated": "2026-11-23 08:34",
   "entries": [
+    {
+      "slug": "2026-11-23-chapitres-le-bon-portrait-de-primarque",
+      "title": "Chapitres : le bon portrait de primarque",
+      "date": "2026-11-23",
+      "lots": [
+        "L100"
+      ],
+      "captures": [
+        "captures/L100-chapitres-portraits-bureau.png",
+        "captures/L100-chapitres-portraits-telephone.png"
+      ],
+      "alts": [
+        "Page des Space Marines à 1440 px de large, liste des chapitres : sur les cartes Imperial Fists, Iron Hands et Raven Guard, le petit médaillon rond en haut à droite montre le portrait de Rogal Dorn, de Ferrus Manus et de Corvus Corax, les primarques nommés en bas de chaque carte",
+        "Même liste à 390 px de large : la carte Iron Hands, avec dans son médaillon le portrait de Ferrus Manus, et sous le titre la mention du primarque, Ferrus Manus"
+      ],
+      "html": "<p>Sur la page d'une faction, chaque carte de chapitre porte dans un petit médaillon le portrait de son primarque. Ce portrait venait d'une recherche libre sur le wiki, qui se trompait parfois de personnage : les Iron Hands ont pu montrer Fulgrim, les Imperial Fists un char.</p>\n<p>Le médaillon reprend maintenant l'image de la fiche du primarque lui-même : Ferrus Manus pour les Iron Hands, Rogal Dorn pour les Imperial Fists, et ainsi pour chaque chapitre. Quand le wiki ne renvoie pas une image sûre de ce primarque, le médaillon n'apparaît pas, plutôt qu'un portrait faux ; la carte nomme toujours le primarque. Pour un lecteur d'écran, l'image s'annonce « Portrait de » suivi du nom du primarque.</p>"
+    },
     {
       "slug": "2026-11-22-sous-factions-les-libelles-du-bandeau-sont-lisibles",
       "title": "Sous-factions : les libellés du bandeau sont lisibles",

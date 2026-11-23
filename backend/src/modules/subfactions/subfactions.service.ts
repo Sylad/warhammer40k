@@ -49,7 +49,6 @@ export interface SubFaction {
   motto?: string;
   primarch?: string;
   primarchId?: string;
-  primarchWikiQuery?: string;
   currentLeader?: string;
   currentLeaderRole?: string;
   homeworld?: string;
