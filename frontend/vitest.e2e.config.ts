@@ -50,6 +50,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/layout/main-layout/ancres.e2e.spec.ts'),
       // L245 : liens d'ancre de section (sectionAnchor, L160) — href vers la page + fragment, clics modifiés non annulés.
       path.resolve(__dirname, 'src/app/core/utils/section-anchor-href-l160.e2e.spec.ts'),
+      // L99 : /factions et fiche faction, sélecteur de tri nommé, filtres à état (aria-pressed) lus dans l'arbre d'accessibilité.
+      path.resolve(__dirname, 'src/app/features/faction-detail/controles-nommes-l99.e2e.spec.ts'),
       // L98 : libellés du bandeau d'une sous-faction ≥ 4,5:1 sur image claire (pixels mesurés, 1440 et 390 px).
       path.resolve(__dirname, 'src/app/features/subfaction-detail/subfaction-bandeau-l98.e2e.spec.ts'),
     ],

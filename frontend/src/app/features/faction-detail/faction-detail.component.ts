@@ -305,14 +305,15 @@ const DEFAULT_RESOURCES = [
               </div>
 
               <div class="toolbar">
-                <div class="filters">
+                <div class="filters" role="group" aria-label="Type d'unité">
                   @for (t of typeFilters; track t.key) {
-                    <button class="filter" [class.active]="typeFilter() === t.key" (click)="typeFilter.set(t.key)">
+                    <button type="button" class="filter" [class.active]="typeFilter() === t.key"
+                            [attr.aria-pressed]="typeFilter() === t.key" (click)="typeFilter.set(t.key)">
                       {{ t.label }}
                     </button>
                   }
                 </div>
-                <input class="search" type="text" placeholder="Rechercher une unité..."
+                <input class="search" type="search" placeholder="Rechercher une unité..." aria-label="Rechercher une unité"
                        [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
               </div>
 
