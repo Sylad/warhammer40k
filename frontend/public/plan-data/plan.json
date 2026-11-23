@@ -391,8 +391,9 @@
     {
       "id": "L108",
       "title": "Galerie : les filtres restent à portée en faisant défiler la page",
-      "status": "doing",
-      "started": "2026-11-23"
+      "status": "done",
+      "started": "2026-11-23",
+      "finished": "2026-11-23"
     },
     {
       "id": "L111",
