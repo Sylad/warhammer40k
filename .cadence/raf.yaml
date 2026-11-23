@@ -2828,6 +2828,8 @@ lots:
     estimate: 1
     created: 2026-11-23
     started: 2026-11-23
+    review: { date: 2026-11-23, verdict: "conforme (lead) : rangée active exemptée du masquage nth-of-type(n+5), défilement de la liste pour la ramener dans la partie visible au redimensionnement ; test e2e rouge avant / vert après (9 cas)", commit: 09bf1d22372c3714aa09012c0876763643c63af4 }
+    ux: { date: 2026-11-23, verdict: "non conforme (lead, capture 1440×900) : l'artiste actif est affiché mais rien ne le distingue des autres — seul .artist-row.active { color: var(--gold-bright) } (gallery.component.scss:180), quasi identique au doré normal : état porté par la couleur seule (WCAG 1.4.1), filtre actif toujours invisible dans la colonne (Nielsen 1)" }
   - id: L249
     title: "Vidéos du seed dont l'auteur annoncé n'est pas la chaîne réelle (relevé de liens:externes par L109, oEmbed 23-11) : helsreach (Richard Boylan annoncé, chaîne Rostam Archives), lord-inquisitor (Erasmus Brosdau annoncé, chaîne Actual Hammer « 4K Upscaled »), angels-of-death (« Games Workshop (officiel) » annoncé, chaîne COUNTERPOINTS 40K) ; lord-inquisitor-prologue (chaîne Warhammer Animations) à relire. Pour chacune : source officielle vérifiée en ligne, sinon titre, auteur et durée de la vidéo réellement lue"
     status: todo
