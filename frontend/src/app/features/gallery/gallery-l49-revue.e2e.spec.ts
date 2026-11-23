@@ -1,6 +1,6 @@
 // @vitest-environment node
 // L49 (relecture) — navigateur réel, application construite (dist) : R2 l'aside (Artistes, Collections) reste collant et
-// n'est jamais recouvert au défilement (bureau), R12 reflow à 320 px de l'état vide, R6 rappel visible à 390 px dans l'application
+// n'est jamais recouvert (L108 : sous le panneau Filtres, collant lui aussi) au défilement (bureau), R12 reflow à 320 px de l'état vide, R6 rappel visible à 390 px dans l'application
 // en marche (polices chargées), R8/R9 message et Réessayer dans le premier écran à 1440×900.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
@@ -183,19 +183,22 @@ describe.skipIf(!built || !chromium)('galerie — relecture L49 (navigateur, dis
     expect(b).toBeLessThanOrEqual(900);
   }, 30_000);
 
-  it('R2 — 1440×900 : après 1500 px de défilement, l\'aside seul est collant (en haut de l\'écran) et le panneau Filtres n\'est pas collant', async () => {
+  it('R2 (L108) — 1440×900 : après 1500 px de défilement, le panneau Filtres est collant en haut et l\'aside collant juste dessous', async () => {
     const page = await open(1440, 900);
     await page.evaluate(() => window.scrollTo(0, 1500));
     await page.waitForTimeout(200);
     const m = await page.evaluate(() => {
       const f = document.querySelector('[data-testid="panneau-filtres"]')!;
+      const fr = f.getBoundingClientRect();
       const a = document.querySelector('.sidebar')!.getBoundingClientRect();
-      return { y: window.scrollY, filtres: getComputedStyle(f).position, at: a.top, ab: a.bottom };
+      return { y: window.scrollY, filtres: getComputedStyle(f).position, ft: fr.top, fb: fr.bottom, at: a.top, ab: a.bottom };
     });
     await page.close();
     expect(m.y).toBeGreaterThan(1000);
-    expect(m.filtres, JSON.stringify(m)).toBe('static');
-    expect(m.at, JSON.stringify(m)).toBeGreaterThanOrEqual(0);
-    expect(m.at, JSON.stringify(m)).toBeLessThanOrEqual(120);
+    expect(m.filtres, JSON.stringify(m)).toBe('sticky');
+    expect(m.ft, JSON.stringify(m)).toBeGreaterThanOrEqual(90);
+    expect(m.ft, JSON.stringify(m)).toBeLessThanOrEqual(100);
+    expect(m.at, JSON.stringify(m)).toBeGreaterThanOrEqual(m.fb);
+    expect(m.ab, JSON.stringify(m)).toBeLessThanOrEqual(900);
   }, 30_000);
 });

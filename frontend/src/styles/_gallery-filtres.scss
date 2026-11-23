@@ -6,11 +6,23 @@
  */
 .gallery-page {
   /* le panneau précède la grille dans le DOM ; la grille CSS le replace en haut de la colonne de droite */
-  .layout { grid-template-areas: "main filtres" "main aside"; grid-template-rows: var(--filtres-h, 17rem) 1fr; }
-  /* R2 : le panneau est en tête de la colonne de droite (rangée 1) ; l'aside (Artistes, Collections) reste collant comme avant L49, en rangée 2 : un seul élément collant, jamais de recouvrement */
-  .p-filtres { grid-column: 2; grid-row: 1; align-self: start; }
+  /* L108 : deux blocs collants empilés dans la même case de la colonne de droite. Filtres à 96 px ; l'aside (Artistes,
+     Collections) juste dessous (marge et top = hauteur mesurée des Filtres + 24 px), et au plus jusqu'au bas de la fenêtre
+     (défilement interne si la pile n'y tient pas, 1440×900 compris). La marge basse des Filtres (hauteur de l'aside + 24 px)
+     les fait remonter ensemble en bas de la grille : jamais de recouvrement. Hauteurs : --filtres-h, --aside-h (composant). */
+  .layout { grid-template-areas: "main filtres"; grid-template-rows: auto; }
+  .p-filtres {
+    grid-column: 2; grid-row: 1; align-self: start; position: sticky; top: 96px;
+    margin-bottom: calc(var(--aside-h, 0px) + 24px);
+  }
   .main-col { grid-area: main; }
-  .sidebar { grid-column: 2; grid-row: 2; }
+  /* .layout : plus spécifique que .sidebar du composant (top: 96px), chargé après ce partiel */
+  .layout .sidebar {
+    grid-column: 2; grid-row: 1;
+    margin-top: calc(var(--filtres-h, 17rem) + 24px); top: calc(96px + var(--filtres-h, 17rem) + 24px);
+    max-height: calc(100vh - 96px - var(--filtres-h, 17rem) - 24px - 16px); overflow-y: auto; overscroll-behavior: contain;
+    scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+  }
   .import-btn-hero.btn-filtres { display: none; }
   /* WCAG 1.4.3 : ces boutons reposent sur la photo du bandeau ; fond opaque (maquette : var(--panel)), teinte or au survol */
   .hero .import-btn-hero { background: var(--panel); }
@@ -50,8 +62,8 @@
 }
 @media (max-width: 1024px) {
   .gallery-page .layout { grid-template-areas: "filtres" "main" "aside"; grid-template-rows: auto; }
-  .gallery-page .p-filtres { grid-area: filtres; position: static; }
-  .gallery-page .sidebar { grid-area: aside; }
+  .gallery-page .p-filtres { grid-area: filtres; position: static; margin-bottom: 0; }
+  .gallery-page .layout .sidebar { grid-area: aside; margin-top: 0; top: auto; max-height: none; overflow-y: visible; scrollbar-width: auto; }
 }
 @media (max-width: 760px) {
   .gallery-page {

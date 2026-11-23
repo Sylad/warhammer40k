@@ -41,6 +41,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/videos/videos-rappel-compte-l241.e2e.spec.ts'),
       // L242 : Vidéos, « Effacer les filtres » de l'état vide : le focus va au premier résultat revenu, jamais sur body.
       path.resolve(__dirname, 'src/app/features/videos/videos-effacer-l242.e2e.spec.ts'),
+      // L108 : Galerie au bureau, le panneau Filtres reste collant sans recouvrir Artistes / Collections (1440, 1300, 1024, 390 px).
+      path.resolve(__dirname, 'src/app/features/gallery/gallery-filtres-collants-l108.e2e.spec.ts'),
       // L107 : Vidéos, le ▶ d'une carte ne recouvre jamais le titre (1440, 1024, 390 px, titres réels et allongés).
       path.resolve(__dirname, 'src/app/features/videos/videos-play-l107.e2e.spec.ts'),
       // L96 : /factions, chargement, erreur avec « Réessayer », recherche vide avec « Effacer les filtres », compte annoncé.

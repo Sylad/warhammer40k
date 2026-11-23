@@ -1077,14 +1077,19 @@ export class GalleryComponent {
   readonly pageRangeEnd = computed(() => Math.min(this.currentPage() * PAGE_SIZE, this.totalFiltered()));
 
   constructor() {
-    // L49/R2 : au bureau le panneau Filtres est en tête de la colonne de droite ; la rangée « filtres »
-    // de la grille prend sa hauteur (--filtres-h) et l'aside, seul collant, occupe la rangée suivante.
+    // L108 : au bureau le panneau Filtres et l'aside sont collants et empilés dans la même case de la grille ;
+    // --filtres-h place l'aside sous les Filtres, --aside-h fait remonter les Filtres avec lui en bas de la grille.
     afterNextRender(() => {
       const layout = this.host.nativeElement.querySelector<HTMLElement>('.layout');
       const panel = this.host.nativeElement.querySelector<HTMLElement>('#panneau-filtres');
-      if (!layout || !panel || typeof ResizeObserver === 'undefined') return;
-      const ro = new ResizeObserver(() => layout.style.setProperty('--filtres-h', `${panel.offsetHeight}px`));
+      const aside = this.host.nativeElement.querySelector<HTMLElement>('.sidebar');
+      if (!layout || !panel || !aside || typeof ResizeObserver === 'undefined') return;
+      const ro = new ResizeObserver(() => {
+        layout.style.setProperty('--filtres-h', `${panel.offsetHeight}px`);
+        layout.style.setProperty('--aside-h', `${aside.offsetHeight}px`);
+      });
       ro.observe(panel);
+      ro.observe(aside);
       this.destroyRef.onDestroy(() => ro.disconnect());
     });
     // L42 : ?q= (alias historique ?search=, liens des pages Lore) et ?faction=<id> (carte

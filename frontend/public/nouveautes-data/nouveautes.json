@@ -1,7 +1,24 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-11-23 10:29",
+  "generated": "2026-11-23 11:44",
   "entries": [
+    {
+      "slug": "2026-11-23-galerie-les-filtres-restent-a-portee",
+      "title": "Galerie : les filtres restent à portée en faisant défiler la page",
+      "date": "2026-11-23",
+      "lots": [
+        "L108"
+      ],
+      "captures": [
+        "captures/L108-galerie-filtres-avant-bureau.png",
+        "captures/L108-galerie-filtres-apres-bureau.png"
+      ],
+      "alts": [
+        "Avant, à 1440 px, après 1 200 px de défilement : la colonne de droite ne montre plus que « Artistes à découvrir » et « Collections populaires », le panneau Filtres est resté en haut de la page",
+        "Après, au même endroit : le panneau Filtres (Faction, Catégorie, Trier par) est collé sous la barre du haut, « Artistes à découvrir » juste dessous, puis le début de « Collections populaires »"
+      ],
+      "html": "<p>Sur ordinateur, le panneau Filtres de la Galerie restait en haut de la page : dès qu’on descendait dans les illustrations, il fallait remonter pour changer de faction, de catégorie ou de tri.</p>\n<p>Le panneau Filtres suit désormais le défilement, sous la barre du haut, et « Artistes à découvrir » et « Collections populaires » le suivent juste dessous, sans jamais passer sous lui. Si l’écran est trop bas pour tout montrer, la liste des artistes et des collections défile dans sa propre colonne. Sur tablette et sur téléphone, rien ne change : les filtres restent au-dessus des illustrations.</p>"
+    },
     {
       "slug": "2026-11-23-videos-le-bouton-lecture-ne-cache-plus-le-titre",
       "title": "Vidéos : le bouton de lecture ne cache plus le titre",
