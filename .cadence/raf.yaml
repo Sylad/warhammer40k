@@ -2824,12 +2824,13 @@ lots:
     finished: 2026-11-22
   - id: L248
     title: "Galerie : un filtre artiste actif reste visible. Sous 1024 px on peut choisir le 5e ou 6e artiste ; en élargissant au bureau (4 artistes depuis L108) son bouton disparaît alors que le filtre reste actif. Attendu : l'artiste actif est toujours affiché dans la colonne (ou un rappel du filtre actif est visible), test e2e qui rejoue le cas."
-    status: doing
+    status: done
     estimate: 1
     created: 2026-11-23
     started: 2026-11-23
-    review: { date: 2026-11-23, verdict: "conforme (lead) : rangée active exemptée du masquage nth-of-type(n+5), défilement de la liste pour la ramener dans la partie visible au redimensionnement ; test e2e rouge avant / vert après (9 cas)", commit: 09bf1d22372c3714aa09012c0876763643c63af4 }
-    ux: { date: 2026-11-23, verdict: "non conforme (lead, capture 1440×900) : l'artiste actif est affiché mais rien ne le distingue des autres — seul .artist-row.active { color: var(--gold-bright) } (gallery.component.scss:180), quasi identique au doré normal : état porté par la couleur seule (WCAG 1.4.1), filtre actif toujours invisible dans la colonne (Nielsen 1)" }
+    review: { date: 2026-11-23, verdict: "conforme (lead, r2 sur 96d3879) : 4 lignes de gabarit, 16 lignes de SCSS dans le partiel des filtres (feuille du composant à 17,03/17,5 kB), test navigateur artiste+collection à 1440 et 390 avec contraste mesuré, instantané de styles régénéré.", commit: 96d38792a83986f0289089b11841b1f190029fa1 }
+    ux: { date: 2026-11-23, verdict: "conforme (lead, captures l248r1-apres-1440/390) : rangée active d'artiste et de collection reconnaissable sans la couleur — fond éclairé, filet doré 3 px (≈13:1), pastille pleine (≈8:1), marque ✕ ; hauteur inchangée. Nom accessible : aria-pressed sur un nom stable (règle ARIA du bouton à bascule), « Retirer le filtre … » en title — écart accepté. Non vu : focus clavier et 200 % sur l'état actif." }
+    finished: 2026-11-23
   - id: L249
     title: "Vidéos du seed dont l'auteur annoncé n'est pas la chaîne réelle (relevé de liens:externes par L109, oEmbed 23-11) : helsreach (Richard Boylan annoncé, chaîne Rostam Archives), lord-inquisitor (Erasmus Brosdau annoncé, chaîne Actual Hammer « 4K Upscaled »), angels-of-death (« Games Workshop (officiel) » annoncé, chaîne COUNTERPOINTS 40K) ; lord-inquisitor-prologue (chaîne Warhammer Animations) à relire. Pour chacune : source officielle vérifiée en ligne, sinon titre, auteur et durée de la vidéo réellement lue"
     status: todo
