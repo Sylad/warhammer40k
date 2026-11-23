@@ -1255,10 +1255,12 @@ lots:
     finished: 2026-11-23
   - id: L109
     title: "Vidéo « Astartes — Partie 1 » (id astartes, carte « Vidéo à la une » Space Marines) : l'embed JpK4fcFNKbM lit une ré-upload « ASTARTES 8K » de D_Play (12:43) et non la Partie 1 de Syama Pedersen annoncée (21:34) — remplacer l'embed par la source officielle (vérifiée en ligne) ou corriger titre/auteur/durée ; videos.json est une donnée utilisateur (volume) : corriger aussi en prod ; attente QA « la carte à la une ouvre la vidéo qu'elle annonce » (QA prod 12-10)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-12
     started: 2026-11-23
+    review: { date: 2026-11-23, verdict: "conforme (lead) : 957de41 — aucune source officielle de Syama Pedersen sur YouTube (série retirée en 2021, officielle sur Warhammer+ ; sources Wargamer, PC Gamer, oEmbed) → repli prévu : titre, auteur D_Play, durée 12:43 et description décrivent la vidéo lue, id inchangé ; liens:externes compare l'auteur oEmbed (4 tests) ; le seed l'emporte sur le volume à id égal (surcouche L76) → correction en prod par la livraison", commit: 957de41e96d74c671795d6683978c9cda01a2c0e }
+    finished: 2026-11-23
   - id: L110
     title: "Palette Ctrl+K : après un échec du backend au démarrage, la recherche reste vide toute la session (« Horus » introuvable) — relancer les sources en échec à l'ouverture de la palette, avec un test échec puis succès (constat revue L38)"
     status: done
@@ -2821,6 +2823,11 @@ lots:
     finished: 2026-11-22
   - id: L248
     title: "Galerie : un filtre artiste actif reste visible. Sous 1024 px on peut choisir le 5e ou 6e artiste ; en élargissant au bureau (4 artistes depuis L108) son bouton disparaît alors que le filtre reste actif. Attendu : l'artiste actif est toujours affiché dans la colonne (ou un rappel du filtre actif est visible), test e2e qui rejoue le cas."
+    status: todo
+    estimate: 1
+    created: 2026-11-23
+  - id: L249
+    title: "Vidéos du seed dont l'auteur annoncé n'est pas la chaîne réelle (relevé de liens:externes par L109, oEmbed 23-11) : helsreach (Richard Boylan annoncé, chaîne Rostam Archives), lord-inquisitor (Erasmus Brosdau annoncé, chaîne Actual Hammer « 4K Upscaled »), angels-of-death (« Games Workshop (officiel) » annoncé, chaîne COUNTERPOINTS 40K) ; lord-inquisitor-prologue (chaîne Warhammer Animations) à relire. Pour chacune : source officielle vérifiée en ligne, sinon titre, auteur et durée de la vidéo réellement lue"
     status: todo
     estimate: 1
     created: 2026-11-23
