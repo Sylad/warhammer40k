@@ -7,9 +7,10 @@
 .gallery-page {
   /* le panneau précède la grille dans le DOM ; la grille CSS le replace en haut de la colonne de droite */
   /* L108 : deux blocs collants empilés dans la même case de la colonne de droite. Filtres à 96 px ; l'aside (Artistes,
-     Collections) juste dessous (marge et top = hauteur mesurée des Filtres + 24 px), et au plus jusqu'au bas de la fenêtre
-     (défilement interne si la pile n'y tient pas, 1440×900 compris). La marge basse des Filtres (hauteur de l'aside + 24 px)
-     les fait remonter ensemble en bas de la grille : jamais de recouvrement. Hauteurs : --filtres-h, --aside-h (composant). */
+     Collections) juste dessous (marge et top = hauteur mesurée des Filtres + 24 px), et au plus jusqu'au bas de la fenêtre.
+     La marge basse des Filtres (hauteur de l'aside + 24 px) les fait remonter ensemble en bas de la grille : jamais de
+     recouvrement. Hauteurs : --filtres-h, --aside-h (composant). L108 r1 : pas d'overscroll-behavior (la molette en
+     butée repasse à la page) ; colonne en flex, voir le bloc (min-width: 1024.02px) plus bas. */
   .layout { grid-template-areas: "main filtres"; grid-template-rows: auto; }
   .p-filtres {
     grid-column: 2; grid-row: 1; align-self: start; position: sticky; top: 96px;
@@ -20,7 +21,7 @@
   .layout .sidebar {
     grid-column: 2; grid-row: 1;
     margin-top: calc(var(--filtres-h, 17rem) + 24px); top: calc(96px + var(--filtres-h, 17rem) + 24px);
-    max-height: calc(100vh - 96px - var(--filtres-h, 17rem) - 24px - 16px); overflow-y: auto; overscroll-behavior: contain;
+    max-height: calc(100vh - 96px - var(--filtres-h, 17rem) - 24px - 16px); overflow-y: auto;
     scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
   }
   .import-btn-hero.btn-filtres { display: none; }
@@ -54,6 +55,26 @@
     border: 1px solid var(--border); aspect-ratio: 3 / 4;
   }
   .category-card:disabled { opacity: 0.5; cursor: default; }
+}
+/* L108 r1 (revue UX du 23-11) — au bureau, la colonne Artistes / Collections :
+   - M2 / M4 : 4 artistes (pas 6) : la pile Filtres + colonne tient à 1440×900 (976 px demandés pour 884), rien n'y
+     défile ni n'est coupé, collée comme relâchée en bas de page ; 6 au-dessous de 1024 px, où elle est dans le flux ;
+   - plus bas (1440×700, zoom 125 %) : chaque section garde son titre et sa liste défile seule (flex, au moins une
+     ligne et le titre, 8rem), avec un fondu en bas tant qu'elle n'est pas au bout (data-suite, indice-de-suite.ts) et
+     une gouttière stable ; le focus clavier s'arrête au-dessus du fondu (scroll-padding-bottom). */
+@media (min-width: 1024.02px) {
+  .gallery-page .layout .sidebar { display: flex; flex-direction: column; }
+  .gallery-page .layout .sidebar .artist-row:nth-of-type(n + 5) { display: none; }
+  .gallery-page .layout .sidebar .side-panel { display: flex; flex-direction: column; min-height: 8rem; flex: 0 1 auto; }
+  .gallery-page .layout .sidebar .side-panel h3 { flex: none; }
+  .gallery-page .layout .sidebar .side-list {
+    flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-gutter: stable;
+    scrollbar-width: thin; scrollbar-color: var(--gold) transparent; scroll-padding-bottom: 32px;
+  }
+  .gallery-page .layout .sidebar .side-list[data-suite] {
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 40px), transparent);
+  }
 }
 /* R8/R9 : cartes désactivées et vides sur une rangée compacte, pour que le message d'état (et Réessayer) reste dans le premier écran */
 @media (min-width: 1281px) {

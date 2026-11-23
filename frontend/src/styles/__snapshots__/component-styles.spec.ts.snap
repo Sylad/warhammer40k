@@ -1656,7 +1656,6 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "margin-top": "calc(var(--filtres-h, 17rem) + 24px)",
     "max-height": "calc(100vh - 96px - var(--filtres-h, 17rem) - 24px - 16px)",
     "overflow-y": "auto",
-    "overscroll-behavior": "contain",
     "scrollbar-color": "var(--gold) transparent",
     "scrollbar-width": "thin",
     "top": "calc(96px + var(--filtres-h, 17rem) + 24px)",
@@ -2352,6 +2351,35 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "font-size": "clamp(10px, 3.1vw, 12px)",
     "letter-spacing": "0",
     "overflow-wrap": "anywhere",
+  },
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar": {
+    "display": "flex",
+    "flex-direction": "column",
+  },
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .artist-row:nth-of-type(n + 5)": {
+    "display": "none",
+  },
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .side-list": {
+    "flex": "1 1 auto",
+    "min-height": "0",
+    "overflow-y": "auto",
+    "scroll-padding-bottom": "32px",
+    "scrollbar-color": "var(--gold) transparent",
+    "scrollbar-gutter": "stable",
+    "scrollbar-width": "thin",
+  },
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .side-list[data-suite]": {
+    "-webkit-mask-image": "linear-gradient(to bottom, #000 calc(100% - 40px), transparent)",
+    "mask-image": "linear-gradient(to bottom, #000 calc(100% - 40px), transparent)",
+  },
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .side-panel": {
+    "display": "flex",
+    "flex": "0 1 auto",
+    "flex-direction": "column",
+    "min-height": "8rem",
+  },
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .side-panel h3": {
+    "flex": "none",
   },
   "@media (min-width: 1281px) .gallery-page .category-grid.attente": {
     "grid-template-columns": "repeat(7, minmax(0, 1fr))",

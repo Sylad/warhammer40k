@@ -12,7 +12,8 @@ import { PlurielPipe } from '../../shared/pluriel.pipe';
 import { plural } from '../../core/utils/pluriel';
 import { nombreOeuvresGalerie } from '../../core/utils/galerie';
 import { defilementSelonPreference } from '../../core/utils/section-anchor';
-import { avantFiltre } from '../../core/utils/resultats-en-vue';
+import { avantFiltre, relacherColonneTenue } from '../../core/utils/resultats-en-vue';
+import { suivreIndiceDeSuite } from '../../core/utils/indice-de-suite';
 import { creditImage, SOURCES_IMAGES } from '../../core/credits/credit-image';
 import { CreditLegendeComponent } from '../../shared/components/credit-legende/credit-legende.component';
 import type { Artwork, ArtworkCategory, ArtworkCollection, ArtworkArtist, Faction } from '../../core/models/models';
@@ -309,6 +310,8 @@ type SortBy = 'recent' | 'popular' | 'alpha';
         <aside class="sidebar">
           <section class="side-panel">
             <h3>Artistes à découvrir</h3>
+            <!-- L108 r1 : la liste défile seule sous son titre quand la colonne ne tient pas dans la fenêtre -->
+            <div class="side-list">
             @if (artists().length === 0) {
               <div class="empty-mini">Aucun artiste indexé.</div>
             }
@@ -316,7 +319,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <button class="artist-row" type="button"
                 [class.active]="filterArtist() === a.name"
                 [attr.aria-pressed]="filterArtist() === a.name"
-                (click)="toggleArtistFilter(a.name)">
+                (click)="toggleArtistFilter(a.name, $event.currentTarget)">
                 <span class="ar-avatar">{{ initials(a.name) }}</span>
                 <span class="ar-info">
                   <strong>{{ a.name }}</strong>
@@ -324,16 +327,18 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 </span>
               </button>
             }
+            </div>
           </section>
 
           @if (nonEmptyCollections().length > 0) {
           <section class="side-panel">
             <h3>Collections populaires</h3>
+            <div class="side-list">
             @for (col of nonEmptyCollections(); track col.id) {
               <button class="col-row" type="button"
                 [class.active]="filterCollection() === col.id"
                 [attr.aria-pressed]="filterCollection() === col.id"
-                (click)="toggleCollectionFilter(col.id)">
+                (click)="toggleCollectionFilter(col.id, $event.currentTarget)">
                 <span class="col-icon">▤</span>
                 <span class="col-info">
                   <strong>{{ col.name }}</strong>
@@ -341,6 +346,7 @@ type SortBy = 'recent' | 'popular' | 'alpha';
                 </span>
               </button>
             }
+            </div>
           </section>
           }
         </aside>
@@ -1090,7 +1096,12 @@ export class GalleryComponent {
       });
       ro.observe(panel);
       ro.observe(aside);
-      this.destroyRef.onDestroy(() => ro.disconnect());
+      // L108 r1 (M2) : fondu en bas d'une liste de l'aside qui défile et n'est pas au bout
+      const arreterIndice = suivreIndiceDeSuite(aside, '.side-list');
+      this.destroyRef.onDestroy(() => {
+        ro.disconnect();
+        arreterIndice();
+      });
     });
     // L42 : ?q= (alias historique ?search=, liens des pages Lore) et ?faction=<id> (carte
     // « Galerie » des pages faction) SUIVENT l'adresse : paramètre absent → recherche vide / plus
@@ -1141,6 +1152,7 @@ export class GalleryComponent {
       clearTimeout(this.scrollTimer);
       clearTimeout(live);
       navEvents.unsubscribe();
+      relacherColonneTenue(); // L108 r1 : hauteur tenue de la grille (colonne Artistes / Collections) et son écouteur resize
     });
 
     this.service.getWikiImage('warhammer 40k Imperium gothic city space marine').subscribe(r => {
@@ -1316,12 +1328,17 @@ export class GalleryComponent {
     this.filtrer(() => this.filterCategory.set(this.filterCategory() === key ? null : key));
   }
 
-  toggleArtistFilter(name: string): void {
-    this.filtrer(() => this.filterArtist.set(this.filterArtist() === name ? '' : name));
+  /**
+   * L108 r1 (M3) : au bureau, Artistes / Collections est une colonne collée, comme « Filtres avancés » des Vidéos
+   * (L240 r2) : le bouton pressé est passé à avantFiltre(), la colonne (et les Filtres collés au-dessus, même conteneur)
+   * reste à sa place, sous le pointeur, au lieu d'être repoussée par une grille raccourcie.
+   */
+  toggleArtistFilter(name: string, controle?: EventTarget | null): void {
+    this.filtrer(() => this.filterArtist.set(this.filterArtist() === name ? '' : name), controle as HTMLElement | null);
   }
 
-  toggleCollectionFilter(id: string): void {
-    this.filtrer(() => this.filterCollection.set(this.filterCollection() === id ? '' : id));
+  toggleCollectionFilter(id: string, controle?: EventTarget | null): void {
+    this.filtrer(() => this.filterCollection.set(this.filterCollection() === id ? '' : id), controle as HTMLElement | null);
   }
 
   /**
@@ -1330,8 +1347,8 @@ export class GalleryComponent {
    * rabattement ne déplacent la page ; après le rendu, le titre et le compte des résultats sont en vue (sinon un
    * défilement les y amène, focus sur la liste) — voir avantFiltre().
    */
-  private filtrer(appliquer: () => void): void {
-    const fin = avantFiltre();
+  private filtrer(appliquer: () => void, controle?: HTMLElement | null): void {
+    const fin = avantFiltre(controle);
     appliquer();
     this.currentPage.set(1);
     afterNextRender(
