@@ -1244,13 +1244,14 @@ lots:
   - id: L108
     title: "Galerie au bureau : le panneau Filtres suit à nouveau le défilement sans recouvrir « Artistes à découvrir » — deux blocs collants empilés (Filtres top 96 px, Artistes/Collections top = 96 + hauteur des Filtres, mesurée) ou autre schéma, l'ordre du DOM de L49 inchangé (Filtres avant la grille, Artistes après) ; test e2e 1440×900 après 800 et 1200 px de défilement (régression de L49, UX 12-10)"
     public: "Galerie : les filtres restent à portée en faisant défiler la page"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-10-12
     started: 2026-11-23
-    review: { date: 2026-11-23, verdict: "conforme 13c1d17 : Filtres et aside collants empilés dans la même case, hauteurs par ResizeObserver déconnecté à la destruction (gallery.component.ts:1093) ; R2 de L49 réécrit (Filtres sticky à 96 px, aside dessous, bas ≤ 900) ; 1024/390 inchangés par media query ; e2e L108 13 cas, rouge avant. Point UX à juger : défilement interne de l'aside à 1440×900.", commit: 13c1d17c6ebd4478ea0c94757943e85e4f959830 }
+    review: { date: 2026-11-23, verdict: "conforme Passe 2 28fd19e : contain retiré, listes .side-list qui défilent seules sous leur titre, fondu par suivreIndiceDeSuite (testé, arrêté à la destruction), clic artiste/collection passé à avantFiltre(controle) comme L240 r2, relacherColonneTenue au destroy (gallery.component.ts:1155) ; 8 cas e2e rouges avant.", commit: 28fd19edd4820b30b6396b3bdcf930a059fd911c }
     ux: { date: 2026-11-23, verdict: "conforme Passe 2 (28fd19e), vérifiée par le lead sur les captures du run et les 8 cas e2e écrits d'après tmp/ux-wh-L108.md (rouges avant avec les chiffres du rapport) : M1 contain retiré ; M2 4 artistes au bureau, colonne entière à 1440×900 (501/507 px), titres visibles + fondu + gouttière sous 900 px ; M3 la colonne reste en place au clic, 0 saut > 1 px sur 3 boutons × 2 positions ; M4 rien de coupé en bas de page. Reste mineur → sous-lot : un artiste actif choisi sous 1024 px (5e/6e) disparaît du bureau en élargissant." }
+    finished: 2026-11-23
   - id: L109
     title: "Vidéo « Astartes — Partie 1 » (id astartes, carte « Vidéo à la une » Space Marines) : l'embed JpK4fcFNKbM lit une ré-upload « ASTARTES 8K » de D_Play (12:43) et non la Partie 1 de Syama Pedersen annoncée (21:34) — remplacer l'embed par la source officielle (vérifiée en ligne) ou corriger titre/auteur/durée ; videos.json est une donnée utilisateur (volume) : corriger aussi en prod ; attente QA « la carte à la une ouvre la vidéo qu'elle annonce » (QA prod 12-10)"
     status: todo
