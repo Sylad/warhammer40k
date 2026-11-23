@@ -2832,12 +2832,33 @@ lots:
     review: { date: 2026-11-23, verdict: "conforme (lead, r2 sur 96d3879) : 4 lignes de gabarit, 16 lignes de SCSS dans le partiel des filtres (feuille du composant à 17,03/17,5 kB), test navigateur artiste+collection à 1440 et 390 avec contraste mesuré, instantané de styles régénéré.", commit: 96d38792a83986f0289089b11841b1f190029fa1 }
     ux: { date: 2026-11-23, verdict: "conforme (lead, captures l248r1-apres-1440/390) : rangée active d'artiste et de collection reconnaissable sans la couleur — fond éclairé, filet doré 3 px (≈13:1), pastille pleine (≈8:1), marque ✕ ; hauteur inchangée. Nom accessible : aria-pressed sur un nom stable (règle ARIA du bouton à bascule), « Retirer le filtre … » en title — écart accepté. Non vu : focus clavier et 200 % sur l'état actif." }
     finished: 2026-11-23
+    notes:
+      - { date: 2026-11-23, text: "QA prod conforme 23-11 (tmp/qa-warhammer-L248.md) : marque hors couleur, aria-pressed 18/18, focus visible, 200 % sans coupe" }
   - id: L249
     title: "Vidéos du seed dont l'auteur annoncé n'est pas la chaîne réelle (relevé de liens:externes par L109, oEmbed 23-11) : helsreach (Richard Boylan annoncé, chaîne Rostam Archives), lord-inquisitor (Erasmus Brosdau annoncé, chaîne Actual Hammer « 4K Upscaled »), angels-of-death (« Games Workshop (officiel) » annoncé, chaîne COUNTERPOINTS 40K) ; lord-inquisitor-prologue (chaîne Warhammer Animations) à relire. Pour chacune : source officielle vérifiée en ligne, sinon titre, auteur et durée de la vidéo réellement lue"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-11-23
     started: 2026-11-23
+    review: { date: 2026-11-23, verdict: "conforme (lead) : 4d59342 relu — 4 fiches du seed alignées sur la chaîne, le titre et la durée réels (Helsreach playlist de l'auteur, prologue sur la chaîne d'Erasmus Brosdau, 4K upscalée nommée comme telle, Angels of Death retitré) ; test sans réseau rouge sur l'ancien seed ; liens:externes 200", commit: 4d593424e3e3c9ee8f524f8ec69f18659f5da7a5 }
+    finished: 2026-11-23
+  - id: L250
+    title: "En-tête global : à 200 % de texte la page défile horizontalement (1440 : scrollWidth 2000 ; 390 : 543) — nav, .lore-toggle, .menu-toggle (QA L248, tmp/qa-warhammer-L248.md)"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-11-23
+  - id: L251
+    title: "Vidéos : mettre « à la une » et « incontournable » le prologue officiel de The Lord Inquisitor (chaîne d'Erasmus Brosdau) au lieu du ré-upload 4K d'Actual Hammer (décision du lead, réversible : l'œuvre de l'auteur prime ; relevé du run L249)"
+    status: todo
+    estimate: 1
+    visible: true
+    created: 2026-11-23
+  - id: L252
+    title: "Liens morts units.json : inq-vindicare/eversor/callidus.sourceFaction ont le texte de la source collé à l'URL (L247) ; et npm run liens:externes plante dans un worktree (sortie par défaut ../../../tmp absente) — relevés du run L249"
+    status: todo
+    estimate: 1
+    created: 2026-11-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
