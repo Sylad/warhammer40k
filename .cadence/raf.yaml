@@ -1148,10 +1148,12 @@ lots:
     finished: 2026-11-22
   - id: L99
     title: "Contrôles sans nom ni état : sélecteur « Tri » sans nom accessible, boutons de filtre sans aria-pressed (/factions et unités d'une faction) — WCAG 4.1.2 (revue UX L3)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-10
     started: 2026-11-23
+    review: { date: 2026-11-23, verdict: "conforme (revue du lead) : 7 lignes dans faction-detail (role=group nommé, aria-pressed lié au signal, type=button, recherche nommée en type=search) ; test e2e controles-nommes-l99 rouge sur l'ancienne fiche, vert après, inscrit dans vitest.e2e.config ; /factions déjà corrigé par L96 et couvert par le test", commit: accf82b7fb394a98a895c6077c96ebcac6d3563a }
+    finished: 2026-11-23
   - id: L100
     title: "Chapitres : portrait de primarque faux via la recherche wiki (Iron Hands → Fulgrim, Imperial Fists → un char) — image de la fiche primarque, alt vide (revue UX L3)"
     public: "Chapitres : le bon portrait de primarque"
