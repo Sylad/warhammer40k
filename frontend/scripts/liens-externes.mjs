@@ -10,8 +10,11 @@
 // Vidéos YouTube : point d'accès public oEmbed (404/400 = vidéo ou liste supprimée ou privée).
 // `--wiki http://localhost:3001` : résout aussi chaque requête d'image `wikiQuery` des données via
 // le proxy du backend local (qui interroge Fandom) et relève celles qui ne donnent aucune image.
+// L109 : une vidéo du seed dont l'auteur réel (oEmbed) n'est pas son `createur` passe en « auteur
+// différent » : ré-upload d'un tiers ou embed remplacé, la fiche annonçant peut-être une autre vidéo
+// que celle lue — à examiner (une chaîne officielle qui republie l'auteur sort aussi ici).
 import { writeFileSync } from 'node:fs';
-import { apiAssets, inventory, loadSeed } from './liens-lib.mjs';
+import { apiAssets, auteurVideoDiffere, inventory, loadSeed } from './liens-lib.mjs';
 
 const arg = (name, def) => {
   const i = process.argv.indexOf(name);
@@ -67,7 +70,7 @@ async function check(url) {
         const r = await politeFetch(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(url)}`);
         if (r.ok) {
           const j = await r.json();
-          return { url, status: r.status, cls: 'ok', title: j.title };
+          return { url, status: r.status, cls: 'ok', title: j.title, author: j.author_name };
         }
         if (r.status === 401) return { url, status: 401, cls: 'ok', note: 'existe, intégration désactivée' };
         if (r.status === 404 || r.status === 400) return { url, status: r.status, cls: 'mort', note: 'oEmbed : vidéo ou liste supprimée / privée' };
@@ -148,6 +151,16 @@ async function checkFandom(list) {
 const fandom = await checkFandom(urls.filter((u) => FANDOM.test(u)));
 const others = await pool(urls.filter((u) => !FANDOM.test(u)), check);
 const results = [...fandom, ...others].map((r) => ({ ...r, sources: sources.get(r.url) }));
+
+// L109 : la fiche vidéo annonce-t-elle la vidéo que le lecteur lit ?
+const parUrl = new Map(results.map((r) => [r.url, r]));
+for (const v of loadSeed().videos ?? []) {
+  const r = parUrl.get(v.url);
+  if (r?.cls === 'ok' && r.author && auteurVideoDiffere(v.createur, r.author)) {
+    r.cls = 'auteur différent';
+    r.note = `videos.json#${v.id} annonce « ${v.titre} » de ${v.createur}, oEmbed lit « ${r.title} » de ${r.author}`;
+  }
+}
 
 let wiki = null;
 if (WIKI) {

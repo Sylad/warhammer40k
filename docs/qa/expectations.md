@@ -38,6 +38,8 @@ Visiter space-marines.
 - api: `/api/subfactions?factionId=inquisition` répond `[]` (200), ce n'est pas une erreur (QA prod 15-10, L135)
 - shows: visiter officio-assassinorum : les fiches d'unité Assassin Vindicare, Assassin Eversor et Assassin Callidus (`/api/units?factionId=officio-assassinorum` en rend 3) ; visiter inquisition : 7 fiches d'unité, aucune « Assassin » (`/api/units?factionId=inquisition` en rend 7) ; même identifiant d'unité qu'avant (/units/inq-vindicare…), fiche technique comprise (L247)
 
+- shows: la carte à la une ouvre la vidéo qu'elle annonce : sur space-marines, la carte « Vidéo à la une » (`data-testid="carte-une-faction"`) mène à `/videos?video=astartes` ; le titre, la durée et l'auteur de `/api/videos` (id astartes) décrivent la vidéo de son `embedId` — l'oEmbed YouTube (`https://www.youtube.com/oembed?format=json&url=https://youtu.be/<embedId>`) rend un `author_name` contenu dans `createur` (le 23-11 : « Astartes — version remasterisée 8K », D_Play, 12:43, embed JpK4fcFNKbM) ; jamais « Astartes — Partie 1 » de Syama Pedersen (21:34) sur cet embed (L109)
+
 - never: pour un identifiant inconnu (visiter /factions/n-existe-pas) : « Chargement… » sans fin ; le titre est alors « Faction introuvable » avec un lien vers /factions et sans bouton Réessayer (L97)
 - 404 (visiter /factions/n-existe-pas) : à la place de la fiche, le message d'absence (h1 « Faction introuvable » + lien « Toutes les factions » vers /factions, pas de Réessayer) ; `/api/factions/n-existe-pas` répond 404 et l'erreur 404 qu'il laisse dans la console est permise, comme pour /subfactions (QA prod 17-11, L233)
 

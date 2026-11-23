@@ -7,7 +7,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { tmpdir } from 'node:os';
 import {
-  APP, ROOT, checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, galaxyLinks, inventory, loadSeed,
+  APP, ROOT, auteurVideoDiffere, checkInternal, codeLinks, dataLinks, existsCaseSensitive, fieldValues, galaxyLinks, inventory, loadSeed,
   newsLinks, readRoutes, staleDeclarations,
 } from './liens-lib.mjs';
 
@@ -187,5 +187,30 @@ describe('liens internes du site (garde L39)', () => {
 
   it('aucune déclaration orpheline (DATA_LINKS, SELF_LINKS, COVERED : chaque gabarit déclaré existe)', () => {
     expect(staleDeclarations(inv)).toEqual([]);
+  });
+});
+
+// L109 : « Vidéo à la une » Space Marines annonçait « Astartes — Partie 1 » de Syama Pedersen (21:34),
+// l'embed JpK4fcFNKbM lisait un ré-upload « ASTARTES  8K (Remastered) » de D_Play (12:43, oEmbed et
+// page YouTube du 23-11). `npm run liens:externes` compare l'auteur oEmbed au créateur de la fiche.
+describe('auteur d\'une vidéo (L109)', () => {
+  it('ré-upload d\'un tiers : auteur différent', () => {
+    expect(auteurVideoDiffere('Syama Pedersen', 'D_Play')).toBe(true);
+  });
+  it('même auteur, casse, accents et précisions ignorés', () => {
+    expect(auteurVideoDiffere('D_Play (ré-upload de l\'animation de Syama Pedersen)', 'D_Play')).toBe(false);
+    expect(auteurVideoDiffere('Le Librarium', 'Le librarium')).toBe(false);
+    expect(auteurVideoDiffere('Bob Éric', 'bob eric')).toBe(false);
+  });
+  it('sans créateur ou sans auteur : rien à comparer', () => {
+    expect(auteurVideoDiffere(undefined, 'D_Play')).toBe(false);
+    expect(auteurVideoDiffere('X', '')).toBe(false);
+  });
+  it('la carte à la une « astartes » décrit la vidéo réellement lue (constat oEmbed du 23-11)', () => {
+    const v = data.videos.find((x) => x.id === 'astartes');
+    expect(v.embedId).toBe('JpK4fcFNKbM');
+    expect(auteurVideoDiffere(v.createur, 'D_Play')).toBe(false);
+    expect(v.duration).toBe('12:43');
+    expect(v.titre).not.toMatch(/Partie 1/);
   });
 });

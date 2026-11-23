@@ -440,6 +440,20 @@ export function seedExternals(data) {
   return out;
 }
 
+/**
+ * L109 — la vidéo lue est-elle celle que la fiche annonce ? `auteur` = `author_name` rendu par
+ * oEmbed pour l'URL de la fiche. Vrai si ni le créateur de la fiche ne contient l'auteur réel, ni
+ * l'inverse (casse, accents, espaces et ponctuation ignorés) : « Syama Pedersen » contre « D_Play »
+ * (ré-upload) diffère ; « D_Play (ré-upload de …) » contre « D_Play » ne diffère pas.
+ */
+export function auteurVideoDiffere(createur, auteur) {
+  const n = (s) => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const a = n(createur);
+  const b = n(auteur);
+  if (!a || !b) return false;
+  return !a.includes(b) && !b.includes(a);
+}
+
 /** Ressources servies par l'API : fiches techniques des unités, requêtes d'image du wiki. */
 export function apiAssets(data) {
   const out = [];

@@ -92,9 +92,9 @@
   },
   {
     "id": "astartes",
-    "titre": "Astartes — Partie 1",
-    "createur": "Syama Pedersen",
-    "description": "Le chef-d'œuvre absolu de l'animation fan-made WH40k. Cinq courts-métrages d'une qualité stupéfiante montrant des Space Marines en action. Aucun dialogue, aucune explication — juste l'atmosphère pure du 41e millénaire. Tellement impressionnant que Games Workshop a racheté les droits.",
+    "titre": "Astartes — version remasterisée 8K",
+    "createur": "D_Play (ré-upload de l'animation de Syama Pedersen)",
+    "description": "Ré-upload remasterisé en 8K, par la chaîne D_Play, d'Astartes, l'animation fan-made de Syama Pedersen : des Space Marines en action, sans aucun dialogue ni explication, juste l'atmosphère pure du 41e millénaire. La série originale a été retirée de YouTube en 2021, quand Games Workshop a engagé son auteur ; la version officielle est désormais sur Warhammer+.",
     "url": "https://youtu.be/JpK4fcFNKbM",
     "embedId": "JpK4fcFNKbM",
     "embedType": "video",
@@ -108,7 +108,7 @@
     ],
     "incontournable": true,
     "thumbnail": null,
-    "duration": "21:34",
+    "duration": "12:43",
     "category": "animation",
     "language": "Sans dialogue",
     "featured": true
