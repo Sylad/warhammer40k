@@ -1257,6 +1257,7 @@ lots:
     title: "Vidéo « Astartes — Partie 1 » (id astartes, carte « Vidéo à la une » Space Marines) : l'embed JpK4fcFNKbM lit une ré-upload « ASTARTES 8K » de D_Play (12:43) et non la Partie 1 de Syama Pedersen annoncée (21:34) — remplacer l'embed par la source officielle (vérifiée en ligne) ou corriger titre/auteur/durée ; videos.json est une donnée utilisateur (volume) : corriger aussi en prod ; attente QA « la carte à la une ouvre la vidéo qu'elle annonce » (QA prod 12-10)"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-23, sha: 2c3d77422c67465e97b42872e46c3c8e09dc1ea9 }
     created: 2026-10-12
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme (lead) : 957de41 — aucune source officielle de Syama Pedersen sur YouTube (série retirée en 2021, officielle sur Warhammer+ ; sources Wargamer, PC Gamer, oEmbed) → repli prévu : titre, auteur D_Play, durée 12:43 et description décrivent la vidéo lue, id inchangé ; liens:externes compare l'auteur oEmbed (4 tests) ; le seed l'emporte sur le volume à id égal (surcouche L76) → correction en prod par la livraison", commit: 957de41e96d74c671795d6683978c9cda01a2c0e }
