@@ -2826,6 +2826,7 @@ lots:
     title: "Galerie : un filtre artiste actif reste visible. Sous 1024 px on peut choisir le 5e ou 6e artiste ; en élargissant au bureau (4 artistes depuis L108) son bouton disparaît alors que le filtre reste actif. Attendu : l'artiste actif est toujours affiché dans la colonne (ou un rappel du filtre actif est visible), test e2e qui rejoue le cas."
     status: done
     estimate: 1
+    delivered: { date: 2026-11-23, sha: 79646059b1820e65730f5588e5cd40fa98868a85 }
     created: 2026-11-23
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme (lead, r2 sur 96d3879) : 4 lignes de gabarit, 16 lignes de SCSS dans le partiel des filtres (feuille du composant à 17,03/17,5 kB), test navigateur artiste+collection à 1440 et 390 avec contraste mesuré, instantané de styles régénéré.", commit: 96d38792a83986f0289089b11841b1f190029fa1 }
