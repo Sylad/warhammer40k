@@ -125,7 +125,7 @@ export function portraitDe(nom: string): string {
       @if (units.failed() || subFactions.failed() || videos.failed() || artworks.failed()) {
         <app-load-error message="Une partie de cette fiche n’a pas pu être chargée." (retry)="retryAll(faction, units, subFactions, videos, artworks)" />
       }
-      <a class="back-btn" routerLink="/factions">← RETOUR AUX FACTIONS</a>
+      <a class="back-btn" routerLink="/factions"><span aria-hidden="true">← </span>RETOUR AUX FACTIONS</a>
 
       <section class="hero hero-flicker" [style.--hero-img]="heroImg()">
         <div class="dust-motes" aria-hidden="true"></div>
@@ -142,16 +142,16 @@ export function portraitDe(nom: string): string {
           }
           <p class="hero-desc">{{ f.description }}</p>
           @if (f.motto) {
-            <p class="hero-motto"><span class="motto-mark">✠</span> {{ f.motto }}</p>
+            <p class="hero-motto"><span class="motto-mark" aria-hidden="true">✠</span> {{ f.motto }}</p>
           }
           @if (units().length > 0) {
             <button class="cta" (click)="scrollToUnits()">
-              <span class="cta-ico">⚔</span>EXPLORER LES UNITÉS
+              <span class="cta-ico" aria-hidden="true">⚔</span>EXPLORER LES UNITÉS
             </button>
           }
           @if (f.citation) {
             <blockquote class="hero-quote">
-              <span class="quote-sigil">{{ f.symbole }}</span>
+              <span class="quote-sigil" aria-hidden="true">{{ f.symbole }}</span>
               <span class="quote-text">« {{ f.citation }} »</span>
             </blockquote>
           }
@@ -173,23 +173,23 @@ export function portraitDe(nom: string): string {
       <section class="layout">
         <div class="main">
           <section class="lore" id="histoire" [style.--lore-img]="loreImg()">
-            <h2 class="section-title"><span class="t-flourish">✠</span>Histoire & Lore</h2>
+            <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Histoire & Lore</h2>
             <div class="lore-grid">
               <div class="lore-cols">
                 <article class="lore-col">
-                  <div class="lc-head"><span class="lc-ico">⊛</span><strong>Origine</strong></div>
+                  <div class="lc-head"><span class="lc-ico" aria-hidden="true">⊛</span><strong>Origine</strong></div>
                   <app-texte-repliable [texte]="f.lore?.origine || loreFallback(f, 'origine')" sujet="Origine">
                     <p>{{ f.lore?.origine || loreFallback(f, 'origine') }}</p>
                   </app-texte-repliable>
                 </article>
                 <article class="lore-col">
-                  <div class="lc-head"><span class="lc-ico">⚜</span><strong>Organisation</strong></div>
+                  <div class="lc-head"><span class="lc-ico" aria-hidden="true">⚜</span><strong>Organisation</strong></div>
                   <app-texte-repliable [texte]="f.lore?.organisation || loreFallback(f, 'organisation')" sujet="Organisation">
                     <p>{{ f.lore?.organisation || loreFallback(f, 'organisation') }}</p>
                   </app-texte-repliable>
                 </article>
                 <article class="lore-col">
-                  <div class="lc-head"><span class="lc-ico">⚔</span><strong>Doctrine</strong></div>
+                  <div class="lc-head"><span class="lc-ico" aria-hidden="true">⚔</span><strong>Doctrine</strong></div>
                   <app-texte-repliable [texte]="f.lore?.doctrine || loreFallback(f, 'doctrine')" sujet="Doctrine">
                     <p>{{ f.lore?.doctrine || loreFallback(f, 'doctrine') }}</p>
                   </app-texte-repliable>
@@ -201,7 +201,7 @@ export function portraitDe(nom: string): string {
 
           @if (f.longHistory) {
             <section class="bible-panel" id="chronique">
-              <h2 class="section-title"><span class="t-flourish">✠</span>Chronique Complète</h2>
+              <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Chronique Complète</h2>
               <app-texte-repliable [texte]="f.longHistory" sujet="Chronique complète">
                 <p class="bible-text lecture">{{ f.longHistory }}</p>
               </app-texte-repliable>
@@ -210,7 +210,7 @@ export function portraitDe(nom: string): string {
 
           @if (f.notableWars?.length) {
             <section class="bible-panel" id="guerres">
-              <h2 class="section-title"><span class="t-flourish">✠</span>Guerres Notables</h2>
+              <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Guerres Notables</h2>
               <ul class="bible-battles">
                 @for (w of f.notableWars; track w.name) {
                   <li>
@@ -227,7 +227,7 @@ export function portraitDe(nom: string): string {
 
           @if (f.notableHeroes?.length) {
             <section class="bible-panel" id="heros">
-              <h2 class="section-title"><span class="t-flourish">✠</span>Héros Marquants</h2>
+              <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Héros Marquants</h2>
               <div class="bible-heroes">
                 @for (h of f.notableHeroes; track h.name) {
                   <article class="bible-hero">
@@ -235,10 +235,10 @@ export function portraitDe(nom: string): string {
                     <p>{{ h.summary }}</p>
                     <div class="bible-hero-links">
                       @if (h.unitId) {
-                        <a [routerLink]="['/units', h.unitId]">Voir l'unité →</a>
+                        <a [routerLink]="['/units', h.unitId]">Voir l'unité <span aria-hidden="true">→</span></a>
                       }
                       @if (h.primarchId) {
-                        <a [routerLink]="['/lore/primarchs', h.primarchId]">Fiche Primarque →</a>
+                        <a [routerLink]="['/lore/primarchs', h.primarchId]">Fiche Primarque <span aria-hidden="true">→</span></a>
                       }
                     </div>
                   </article>
@@ -251,7 +251,7 @@ export function portraitDe(nom: string): string {
             <section class="subfactions" id="subfactions">
               <div class="units-head">
                 <h2 class="section-title">
-                  <span class="t-flourish">✠</span>{{ subFactionLabel() }}
+                  <span class="t-flourish" aria-hidden="true">✠</span>{{ subFactionLabel() }}
                 </h2>
                 <span class="sf-count">
                   @if (subFactionSearch().trim()) {
@@ -267,7 +267,7 @@ export function portraitDe(nom: string): string {
                   <input
                     class="sf-search"
                     type="search"
-                    placeholder="Filtrer par nom (ex: Ultramarines → ramène le chapitre + ses 26 successeurs)"
+                    placeholder="Filtrer par nom (ex. : Ultramarines ramène le chapitre et ses 26 successeurs)"
                     [ngModel]="subFactionSearch()"
                     (ngModelChange)="subFactionSearch.set($event)"
                     aria-label="Filtrer les sous-factions"
@@ -289,7 +289,7 @@ export function portraitDe(nom: string): string {
                       <p>{{ sf.loreShort || sf.description }}</p>
                       @if (sf.primarch) { <span class="sf-meta">Primarque · {{ sf.primarch }}</span> }
                       @else if (sf.homeworld) { <span class="sf-meta">{{ sf.homeworld }}</span> }
-                      <span class="u-arrow">→</span>
+                      <span class="u-arrow" aria-hidden="true">→</span>
                     </div>
                   </a>
                 }
@@ -308,7 +308,7 @@ export function portraitDe(nom: string): string {
           @if (units().length > 0) {
             <section class="units" id="units">
               <div class="units-head">
-                <h2 class="section-title"><span class="t-flourish">✠</span>Explorer les unités</h2>
+                <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Explorer les unités</h2>
               </div>
 
               <div class="toolbar">
@@ -337,16 +337,16 @@ export function portraitDe(nom: string): string {
                       <div class="unit-content">
                         <h3>{{ u.nom }}</h3>
                         <p>{{ u.loreCourt || u.description || u.role || '—' }}</p>
-                        <span class="u-arrow">→</span>
+                        <span class="u-arrow" aria-hidden="true">→</span>
                       </div>
                     </a>
                   }
                   @if (extraUnitCount() > 0) {
                     <button type="button" class="unit-extra" (click)="revealAllUnits()">
-                      <div class="ue-sigil">⚜</div>
+                      <div class="ue-sigil" aria-hidden="true">⚜</div>
                       <h3>Voir toutes les unités</h3>
                       <p>+{{ extraUnitCount() }} autres unités disponibles</p>
-                      <span class="u-arrow">→</span>
+                      <span class="u-arrow" aria-hidden="true">→</span>
                     </button>
                   }
                 </div>
@@ -356,7 +356,7 @@ export function portraitDe(nom: string): string {
 
           @if (f.currentState) {
             <section class="bible-panel" id="etat">
-              <h2 class="section-title"><span class="t-flourish">✠</span>État Actuel · M42</h2>
+              <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>État Actuel · M42</h2>
               <app-texte-repliable [texte]="f.currentState" sujet="État actuel">
                 <p class="bible-text lecture">{{ f.currentState }}</p>
               </app-texte-repliable>
@@ -365,7 +365,7 @@ export function portraitDe(nom: string): string {
 
           @if (f.legacy) {
             <section class="bible-panel" id="heritage">
-              <h2 class="section-title"><span class="t-flourish">✠</span>Héritage</h2>
+              <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Héritage</h2>
               <app-texte-repliable [texte]="f.legacy" sujet="Héritage">
                 <p class="bible-text lecture">{{ f.legacy }}</p>
               </app-texte-repliable>
@@ -374,7 +374,7 @@ export function portraitDe(nom: string): string {
 
           @if (galleryImages().length > 0) {
             <section class="bible-panel" id="iconographie">
-              <h2 class="section-title"><span class="t-flourish">✠</span>Iconographie</h2>
+              <h2 class="section-title"><span class="t-flourish" aria-hidden="true">✠</span>Iconographie</h2>
               <div class="iconography-grid">
                 @for (g of galleryImages(); track g) {
                   <a class="iconography-card" routerLink="/gallery" [queryParams]="{ faction: f.id }"
@@ -392,19 +392,19 @@ export function portraitDe(nom: string): string {
             @for (l of liensRapides(); track l.label) {
               @if (l.route) {
                 <a class="row-link" [routerLink]="l.route" [fragment]="l.fragment">
-                  <span class="rl-ico">{{ l.ico }}</span>
+                  <span class="rl-ico" aria-hidden="true">{{ l.ico }}</span>
                   <span class="rl-label">{{ l.label }}</span>
-                  <span class="rl-arrow">›</span>
+                  <span class="rl-arrow" aria-hidden="true">›</span>
                 </a>
               } @else if (l.fragment) {
                 <a class="row-link" [routerLink]="[]" [fragment]="l.fragment">
-                  <span class="rl-ico">{{ l.ico }}</span>
+                  <span class="rl-ico" aria-hidden="true">{{ l.ico }}</span>
                   <span class="rl-label">{{ l.label }}</span>
-                  <span class="rl-arrow">›</span>
+                  <span class="rl-arrow" aria-hidden="true">›</span>
                 </a>
               } @else {
                 <div class="row-link static">
-                  <span class="rl-ico">{{ l.ico }}</span>
+                  <span class="rl-ico" aria-hidden="true">{{ l.ico }}</span>
                   <span class="rl-label">{{ l.label }}</span>
                 </div>
               }
@@ -474,19 +474,19 @@ export function portraitDe(nom: string): string {
             @for (r of ressources(); track r.label) {
               @if (r.route) {
                 <a class="row-link" [routerLink]="r.route" [fragment]="r.fragment">
-                  <span class="rl-ico">{{ r.ico }}</span>
+                  <span class="rl-ico" aria-hidden="true">{{ r.ico }}</span>
                   <span class="rl-label">{{ r.label }}</span>
-                  <span class="rl-arrow">›</span>
+                  <span class="rl-arrow" aria-hidden="true">›</span>
                 </a>
               } @else if (r.fragment) {
                 <a class="row-link" [routerLink]="[]" [fragment]="r.fragment">
-                  <span class="rl-ico">{{ r.ico }}</span>
+                  <span class="rl-ico" aria-hidden="true">{{ r.ico }}</span>
                   <span class="rl-label">{{ r.label }}</span>
-                  <span class="rl-arrow">›</span>
+                  <span class="rl-arrow" aria-hidden="true">›</span>
                 </a>
               } @else {
                 <div class="row-link static">
-                  <span class="rl-ico">{{ r.ico }}</span>
+                  <span class="rl-ico" aria-hidden="true">{{ r.ico }}</span>
                   <span class="rl-label">{{ r.label }}</span>
                 </div>
               }

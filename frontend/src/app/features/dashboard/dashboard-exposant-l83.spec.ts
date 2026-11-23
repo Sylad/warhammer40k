@@ -6,14 +6,15 @@ import { resolve } from 'node:path';
 import * as sass from 'sass';
 import postcss from 'postcss';
 
-const css = sass.compile(resolve(__dirname, 'dashboard.component.scss'), { loadPaths: [resolve(__dirname, '../../..')] }).css;
+// L101 : la règle est devenue globale (styles.scss), pour toutes les pages en capitales (/factions…).
+const css = sass.compile(resolve(__dirname, '../../../styles.scss'), { loadPaths: [resolve(__dirname, '../../..')] }).css;
 const ts = readFileSync(resolve(__dirname, 'dashboard.component.ts'), 'utf8');
 
 describe('Accueil — exposant « e » (L83)', () => {
-  it('sup garde sa casse malgré text-transform: uppercase du parent', () => {
+  it('sup garde sa casse malgré text-transform: uppercase du parent (règle globale, L101)', () => {
     let valeur = '';
     postcss.parse(css).walkRules((r) => {
-      if (r.selectors.includes('sup')) r.walkDecls('text-transform', (d) => { valeur = d.value; });
+      if (r.selectors.includes('sup') && r.parent?.type === 'root') r.walkDecls('text-transform', (d) => { valeur = d.value; });
     });
     expect(valeur).toBe('none');
   });

@@ -83,6 +83,10 @@ h1 { text-shadow: 0 0 35px rgba(201, 162, 74, 0.22); }
 main[tabindex='-1']:focus, main h1[tabindex='-1']:focus { outline: none; }
 
 a { color: var(--gold); text-decoration: none; }
+
+/* L83 → L101 : un exposant garde sa casse sous un parent en capitales — « 41e » s'affiche et se lit « 41ᵉ »,
+   jamais « 41E ». Règle globale : toute page (accueil, /factions, lore…) en profite sans y penser. */
+sup { text-transform: none; }
 a:hover { color: var(--gold-bright); }
 
 /* Badges d'alignement (legacy, à harmoniser avec .badge) */

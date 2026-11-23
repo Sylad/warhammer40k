@@ -38,7 +38,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
     <section class="hero" [style.--hero-img]="heroBgUrl()">
       <div class="hero-content">
         <div class="eyebrow">Les peuples du 41<sup>e</sup> millénaire</div>
-        <h1>Factions <span class="fleur">✠</span></h1>
+        <h1>Factions <span class="fleur" aria-hidden="true">✠</span></h1>
         <p>
           De l'Imperium à la menace du Chaos, des civilisations anciennes aux races xénos —
           chaque peuple lutte pour sa survie dans une galaxie en guerre éternelle.
@@ -94,7 +94,8 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
                    [style.--card-img]="cardImageUrl(f)">
             <div class="card-sigil">
               @if (f.iconUrl && !brokenIcons().has(f.id)) {
-                <img [src]="f.iconUrl" [alt]="f.nom" (error)="iconFailed(f.id)" />
+                <!-- L101 : emblème décoratif, le h2 de la carte nomme déjà la faction. -->
+                <img [src]="f.iconUrl" alt="" (error)="iconFailed(f.id)" />
               } @else {
                 <span aria-hidden="true">{{ f.symbole }}</span>
               }
@@ -109,7 +110,7 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
                 } @else {
                   <span class="units-count">UNITÉS <strong>{{ unitCountLabel(f) }}</strong></span>
                 }
-                <span class="card-arrow">→</span>
+                <span class="card-arrow" aria-hidden="true">→</span>
               </div>
             </div>
           </a>
@@ -131,21 +132,21 @@ const isAutre = (x: Faction): boolean => !['imperium', 'chaos', 'xenos'].include
         <section class="side-panel">
           <h3>Ressources rapides</h3>
           <a class="resource-row" routerLink="/lore/timeline">
-            <div class="resource-ico">⌚</div>
+            <div class="resource-ico" aria-hidden="true">⌚</div>
             <div>
               <strong>Chronologie</strong>
               <span>Voir les grands événements</span>
             </div>
           </a>
           <a class="resource-row" routerLink="/lore/galaxy">
-            <div class="resource-ico">⊛</div>
+            <div class="resource-ico" aria-hidden="true">⊛</div>
             <div>
               <strong>Carte galactique</strong>
               <span>Explorer la galaxie</span>
             </div>
           </a>
           <a class="resource-row" routerLink="/lore/concepts">
-            <div class="resource-ico">▤</div>
+            <div class="resource-ico" aria-hidden="true">▤</div>
             <div>
               <strong>Concepts</strong>
               <span>Termes et notions clés</span>
