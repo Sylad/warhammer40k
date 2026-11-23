@@ -1233,9 +1233,10 @@ lots:
     finished: 2026-10-11
   - id: L107
     title: "Vidéos à 1440 px : le carré ▶ de 62 px centré sur la carte chevauche le titre quand il fait 3 lignes (« Toutes les vidéos ») — placer le ▶ sur la vignette, pas au centre de la carte ; test (UX L47)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-12
+    started: 2026-11-23
   - id: L108
     title: "Galerie au bureau : le panneau Filtres suit à nouveau le défilement sans recouvrir « Artistes à découvrir » — deux blocs collants empilés (Filtres top 96 px, Artistes/Collections top = 96 + hauteur des Filtres, mesurée) ou autre schéma, l'ordre du DOM de L49 inchangé (Filtres avant la grille, Artistes après) ; test e2e 1440×900 après 800 et 1200 px de défilement (régression de L49, UX 12-10)"
     public: "Galerie : les filtres restent à portée en faisant défiler la page"
