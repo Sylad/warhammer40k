@@ -2845,12 +2845,14 @@ lots:
     finished: 2026-11-23
   - id: L250
     title: "En-tête global : à 200 % de texte la page défile horizontalement (1440 : scrollWidth 2000 ; 390 : 543) — nav, .lore-toggle, .menu-toggle (QA L248, tmp/qa-warhammer-L248.md)"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-11-23
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme (lead) : f096787 relu — seuils de la barre recomptés en rem (taille de police de la page) dans seuils-barre.ts, classes posées sur l'hôte en miroir des media queries en em, valeurs comparées par seuils-barre.spec.ts ; e2e texte-200 ; à 100 % classes = media queries. Note : règles en double (media query + classe), tenues par le test", commit: f0967875a3978c307e4c2c77e9be6c17c0785f66 }
+    ux: { date: 2026-11-23, verdict: "conforme (ux-reviewer, tmp/ux-warhammer-L250.md) : 0 défilement horizontal sur /, /gallery, fiche unité à 320–1440 px, 100 et 200 % (avant 2000/1440 et 543/390) ; tiroir au clavier (focus Fermer, piège, Échap rend Menu) ; bureau 100 % identique au pixel" }
+    finished: 2026-11-23
   - id: L251
     title: "Vidéos : mettre « à la une » et « incontournable » le prologue officiel de The Lord Inquisitor (chaîne d'Erasmus Brosdau) au lieu du ré-upload 4K d'Actual Hammer (décision du lead, réversible : l'œuvre de l'auteur prime ; relevé du run L249)"
     status: todo
@@ -2861,6 +2863,12 @@ lots:
     title: "Liens morts units.json : inq-vindicare/eversor/callidus.sourceFaction ont le texte de la source collé à l'URL (L247) ; et npm run liens:externes plante dans un worktree (sortie par défaut ../../../tmp absente) — relevés du run L249"
     status: todo
     estimate: 1
+    created: 2026-11-23
+  - id: L253
+    title: "Texte à 200 % : le corps des pages grandit à peine (tailles en px), WCAG 1.4.4 non tenu pour le contenu — passer les tailles de texte en rem (revue UX de L250, tmp/ux-warhammer-L250.md)"
+    status: todo
+    estimate: 1
+    visible: true
     created: 2026-11-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
