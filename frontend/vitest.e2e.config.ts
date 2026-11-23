@@ -43,6 +43,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/features/videos/videos-effacer-l242.e2e.spec.ts'),
       // L108 : Galerie au bureau, le panneau Filtres reste collant sans recouvrir Artistes / Collections (1440, 1300, 1024, 390 px).
       path.resolve(__dirname, 'src/app/features/gallery/gallery-filtres-collants-l108.e2e.spec.ts'),
+      // L248 : Galerie, un 5e / 6e artiste choisi sous 1024 px reste affiché et retirable une fois la fenêtre élargie au bureau.
+      path.resolve(__dirname, 'src/app/features/gallery/gallery-artiste-actif-l248.e2e.spec.ts'),
       // L107 : Vidéos, le ▶ d'une carte ne recouvre jamais le titre (1440, 1024, 390 px, titres réels et allongés).
       path.resolve(__dirname, 'src/app/features/videos/videos-play-l107.e2e.spec.ts'),
       // L96 : /factions, chargement, erreur avec « Réessayer », recherche vide avec « Effacer les filtres », compte annoncé.

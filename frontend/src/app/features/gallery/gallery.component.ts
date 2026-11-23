@@ -1090,9 +1090,20 @@ export class GalleryComponent {
       const panel = this.host.nativeElement.querySelector<HTMLElement>('#panneau-filtres');
       const aside = this.host.nativeElement.querySelector<HTMLElement>('.sidebar');
       if (!layout || !panel || !aside || typeof ResizeObserver === 'undefined') return;
+      // L248 : quand la colonne change de taille (fenêtre élargie, texte agrandi), la rangée de l'artiste du filtre
+      // actif reste dans la partie visible de sa liste, si elle défile seule ; le défilement de l'utilisateur n'y touche pas.
+      const ramenerArtisteActif = () => {
+        const row = aside.querySelector<HTMLElement>('.artist-row.active');
+        const list = row?.closest<HTMLElement>('.side-list');
+        if (!row || !list || list.scrollHeight - list.clientHeight <= 1) return;
+        const l = list.getBoundingClientRect(), r = row.getBoundingClientRect();
+        if (r.top < l.top) list.scrollTop -= l.top - r.top;
+        else if (r.bottom > l.bottom) list.scrollTop += r.bottom - l.bottom;
+      };
       const ro = new ResizeObserver(() => {
         layout.style.setProperty('--filtres-h', `${panel.offsetHeight}px`);
         layout.style.setProperty('--aside-h', `${aside.offsetHeight}px`);
+        ramenerArtisteActif();
       });
       ro.observe(panel);
       ro.observe(aside);

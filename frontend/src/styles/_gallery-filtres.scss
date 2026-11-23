@@ -64,7 +64,8 @@
      une gouttière stable ; le focus clavier s'arrête au-dessus du fondu (scroll-padding-bottom). */
 @media (min-width: 1024.02px) {
   .gallery-page .layout .sidebar { display: flex; flex-direction: column; }
-  .gallery-page .layout .sidebar .artist-row:nth-of-type(n + 5) { display: none; }
+  /* L248 : l'artiste du filtre actif reste affiché même s'il est 5e ou 6e (choisi sous 1024 px puis fenêtre élargie) */
+  .gallery-page .layout .sidebar .artist-row:nth-of-type(n + 5):not(.active) { display: none; }
   .gallery-page .layout .sidebar .side-panel { display: flex; flex-direction: column; min-height: 8rem; flex: 0 1 auto; }
   .gallery-page .layout .sidebar .side-panel h3 { flex: none; }
   .gallery-page .layout .sidebar .side-list {

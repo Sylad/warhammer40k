@@ -2356,7 +2356,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "display": "flex",
     "flex-direction": "column",
   },
-  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .artist-row:nth-of-type(n + 5)": {
+  "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .artist-row:nth-of-type(n + 5):not(.active)": {
     "display": "none",
   },
   "@media (min-width: 1024.02px) .gallery-page .layout .sidebar .side-list": {
