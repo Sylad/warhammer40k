@@ -1249,6 +1249,7 @@ lots:
     visible: true
     created: 2026-10-12
     started: 2026-11-23
+    review: { date: 2026-11-23, verdict: "conforme 13c1d17 : Filtres et aside collants empilés dans la même case, hauteurs par ResizeObserver déconnecté à la destruction (gallery.component.ts:1093) ; R2 de L49 réécrit (Filtres sticky à 96 px, aside dessous, bas ≤ 900) ; 1024/390 inchangés par media query ; e2e L108 13 cas, rouge avant. Point UX à juger : défilement interne de l'aside à 1440×900.", commit: 13c1d17c6ebd4478ea0c94757943e85e4f959830 }
   - id: L109
     title: "Vidéo « Astartes — Partie 1 » (id astartes, carte « Vidéo à la une » Space Marines) : l'embed JpK4fcFNKbM lit une ré-upload « ASTARTES 8K » de D_Play (12:43) et non la Partie 1 de Syama Pedersen annoncée (21:34) — remplacer l'embed par la source officielle (vérifiée en ligne) ou corriger titre/auteur/durée ; videos.json est une donnée utilisateur (volume) : corriger aussi en prod ; attente QA « la carte à la une ouvre la vidéo qu'elle annonce » (QA prod 12-10)"
     status: todo
