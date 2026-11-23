@@ -2845,10 +2845,11 @@ lots:
     finished: 2026-11-23
   - id: L250
     title: "En-tête global : à 200 % de texte la page défile horizontalement (1440 : scrollWidth 2000 ; 390 : 543) — nav, .lore-toggle, .menu-toggle (QA L248, tmp/qa-warhammer-L248.md)"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     created: 2026-11-23
+    started: 2026-11-23
   - id: L251
     title: "Vidéos : mettre « à la une » et « incontournable » le prologue officiel de The Lord Inquisitor (chaîne d'Erasmus Brosdau) au lieu du ré-upload 4K d'Actual Hammer (décision du lead, réversible : l'œuvre de l'auteur prime ; relevé du run L249)"
     status: todo
