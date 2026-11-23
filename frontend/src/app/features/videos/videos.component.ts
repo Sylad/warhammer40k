@@ -224,7 +224,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                     @if (indisponibles().has(v.id)) {
                       <span class="unavailable" data-testid="video-indisponible" id="indispo-culte-{{ v.id }}"><span aria-hidden="true">⚠ </span>Vidéo indisponible</span>
                     }
-                    <span class="play">▶</span>
+                    <span class="play" aria-hidden="true">▶</span>
                     <div class="video-content">
                       <div class="tags">
                         <span class="tag official">Culte</span>
@@ -309,7 +309,7 @@ const SIDEBAR_OPTIONS: { key: SidebarFilter; label: string }[] = [
                     @if (indisponibles().has(v.id)) {
                       <span class="unavailable" data-testid="video-indisponible" id="indispo-liste-{{ v.id }}"><span aria-hidden="true">⚠ </span>Vidéo indisponible</span>
                     }
-                    <span class="play">▶</span>
+                    <span class="play" aria-hidden="true">▶</span>
                     <div class="video-content">
                       <div class="tags">
                         @if (v.language === 'FR') { <span class="tag fr">FR</span> }

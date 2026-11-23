@@ -1,7 +1,28 @@
 {
   "project": "warhammer40k",
-  "generated": "2026-11-23 09:53",
+  "generated": "2026-11-23 10:29",
   "entries": [
+    {
+      "slug": "2026-11-23-videos-le-bouton-lecture-ne-cache-plus-le-titre",
+      "title": "Vidéos : le bouton de lecture ne cache plus le titre",
+      "date": "2026-11-23",
+      "lots": [
+        "L107"
+      ],
+      "captures": [
+        "captures/L107-videos-lecture-avant-bureau.png",
+        "captures/L107-videos-lecture-apres-bureau.png",
+        "captures/L107-videos-lecture-avant-telephone.png",
+        "captures/L107-videos-lecture-apres-telephone.png"
+      ],
+      "alts": [
+        "Avant, à 1440 px : sur trois cartes de « Toutes les vidéos », le carré ▶ est posé sur les étiquettes et sur le titre « If the Emperor had a Text-to-Speech Device »",
+        "Après, à 1440 px : le carré ▶ est sur l'image de chaque carte, au-dessus des étiquettes ; les titres se lisent en entier",
+        "Avant, à 390 px : le carré ▶ recouvre l'étiquette « Animation » et le début du titre « The Lord Inquisitor — Prologue »",
+        "Après, à 390 px : le carré ▶ est sur l'image, au-dessus des étiquettes et du titre sur trois lignes"
+      ],
+      "html": "<p>Sur la page Vidéos, le carré ▶ était posé au milieu de chaque carte. Quand le titre d'une vidéo tenait sur trois lignes, le carré passait par-dessus le titre et les étiquettes (langue, catégorie).</p>\n<p>Le ▶ est désormais sur l'image de la vidéo, au-dessus du texte : un titre long agrandit la carte au lieu de passer dessous, sur ordinateur, sur tablette comme sur téléphone. Un clic sur le ▶ ouvre la vidéo, comme le reste de la carte.</p>"
+    },
     {
       "slug": "2026-11-23-factions-les-ornements-ne-sont-plus-lus",
       "title": "Factions : les ornements ne sont plus lus à voix haute",

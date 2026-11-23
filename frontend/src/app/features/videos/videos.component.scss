@@ -445,7 +445,9 @@
       flex-direction: column;
       justify-content: flex-end;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      padding: 0;
+      /* L107 : bande des pastilles (durée, indisponible, ✕ : 10 + 44 px) réservée au-dessus du ▶. */
+      padding: 56px 0 0;
+      row-gap: 12px;
       text-align: left;
       font: inherit;
       color: inherit;
@@ -503,14 +505,16 @@
       font-weight: 900;
       letter-spacing: 0.05em;
     }
+    /* L107 : le ▶ n'est plus centré sur la carte (il recouvrait un titre de 3 lignes) mais posé sur la vignette,
+       dans le flux : centré dans l'espace libre entre la bande des pastilles (padding-top de la carte) et le texte.
+       Un texte plus haut agrandit la carte au lieu de passer sous le ▶. Le clic le traverse jusqu'au lien étiré. */
     .play {
-      position: absolute;
+      position: relative;
       z-index: 2;
-      top: 50%;
-      left: 50%;
+      align-self: center;
+      margin: auto 0;
       width: 62px;
       height: 62px;
-      transform: translate(-50%, -50%);
       display: grid;
       place-items: center;
       border: 1px solid rgba(201, 162, 74, 0.65);
@@ -519,6 +523,7 @@
       font-size: 24px;
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.55);
       opacity: 0.9;
+      pointer-events: none;
     }
     /* Élément flex non positionné : le ::after du lien étiré prend l'article pour bloc conteneur. */
     .video-content {
