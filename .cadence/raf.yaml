@@ -1158,10 +1158,11 @@ lots:
   - id: L100
     title: "Chapitres : portrait de primarque faux via la recherche wiki (Iron Hands → Fulgrim, Imperial Fists → un char) — image de la fiche primarque, alt vide (revue UX L3)"
     public: "Chapitres : le bon portrait de primarque"
-    status: todo
+    status: doing
     estimate: 0.25
     visible: true
     created: 2026-10-10
+    started: 2026-11-23
   - id: L101
     title: "Pages faction : glyphes lus (✠ des titres, ⚔, ⌚⊛⚠▤, →) et « 41E » en capitales (/factions) — aria-hidden et règle sup globale, suites de L81/L83/L86 (revue UX L3)"
     public: "Pages faction : symboles décoratifs muets et « 41ᵉ » correct"
