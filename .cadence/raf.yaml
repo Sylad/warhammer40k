@@ -2838,6 +2838,7 @@ lots:
     title: "Vidéos du seed dont l'auteur annoncé n'est pas la chaîne réelle (relevé de liens:externes par L109, oEmbed 23-11) : helsreach (Richard Boylan annoncé, chaîne Rostam Archives), lord-inquisitor (Erasmus Brosdau annoncé, chaîne Actual Hammer « 4K Upscaled »), angels-of-death (« Games Workshop (officiel) » annoncé, chaîne COUNTERPOINTS 40K) ; lord-inquisitor-prologue (chaîne Warhammer Animations) à relire. Pour chacune : source officielle vérifiée en ligne, sinon titre, auteur et durée de la vidéo réellement lue"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-23, sha: 4d593424e3e3c9ee8f524f8ec69f18659f5da7a5 }
     created: 2026-11-23
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme (lead) : 4d59342 relu — 4 fiches du seed alignées sur la chaîne, le titre et la durée réels (Helsreach playlist de l'auteur, prologue sur la chaîne d'Erasmus Brosdau, 4K upscalée nommée comme telle, Angels of Death retitré) ; test sans réseau rouge sur l'ancien seed ; liens:externes 200", commit: 4d593424e3e3c9ee8f524f8ec69f18659f5da7a5 }
