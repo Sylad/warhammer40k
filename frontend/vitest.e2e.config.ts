@@ -21,6 +21,8 @@ export default defineConfig({
       ...acceptationBrowser(root).filter((f) => !pending.has(f)).map((f) => path.resolve(root, f)),
       // L61 : la garde de l'espacement de texte (WCAG 1.4.12) ne tournait nulle part en CI (`vitest run` passe avant le build, dist absent).
       path.resolve(__dirname, 'src/app/layout/main-layout/espacement-texte.e2e.spec.ts'),
+      // L250 : texte de la page à 200 % — ni défilement horizontal ni lien de l'en-tête inatteignable (/, /gallery, fiche unité).
+      path.resolve(__dirname, 'src/app/layout/main-layout/texte-200-l250.e2e.spec.ts'),
       // L52 : le rechargement sur « morceau absent » se mesure avec le réseau coupé et des réponses 404/502 : navigateur réel.
       path.resolve(__dirname, 'src/app/core/utils/morceau-absent.e2e.spec.ts'),
       // L40 : les pages pilotes de la densité (fiches faction et primarque) tiennent les règles D1 à D6 à 1440 et 390 px.

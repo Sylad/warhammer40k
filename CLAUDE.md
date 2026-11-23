@@ -49,6 +49,7 @@ Le premier élément focalisable est le lien « Aller au contenu » (L21, `.skip
 `topbar.e2e.spec.ts` mesure chaque seuil ±1 px avec la pastille « 9+ » dans quatre configurations
 (polices web, polices bloquées, police par défaut 18 et 20 px) : relancer `ng build` puis ce test
 après tout changement de la barre. L61 : `espacement-texte.e2e.spec.ts` rejoue la barre de 320 à 400 px avec l'espacement de texte WCAG 1.4.12 injecté (interligne 1,5, lettres 0,12em, mots 0,16em ; 16 et 20 px, polices web bloquées) : ni défilement horizontal ni contenu du bouton « Menu » coupé ; il échoue si le mot « Menu » n'est plus masqué sous 20.5em. L46 : `search-hint.e2e.spec.ts` balaie 320–1800 px à 16, 18 et 20 px, barre de défilement visible (mot « Menu » masqué sous 20.5em, aigle sous 19em, bascule compacte à 31em).
+L250 : les media queries en em ne suivent pas la police de la PAGE (`html { font-size: 200% }`) ; les mêmes seuils comptés en rem (`seuils-barre.ts`, sonde de 1rem observée) posent sur l'hôte `barre-compacte`, `barre-tiroir`, `barre-etroite`, `barre-sans-mot`, `barre-sans-aigle` (+ `texte-agrandi` dès 125 % de la police par défaut : logo resserré au téléphone, tiroir en 20rem), dont les règles `:host(.…)` doublent celles des media queries — un nouveau seuil ou une nouvelle règle de seuil se pose aux DEUX endroits (`seuils-barre.spec.ts` compare les valeurs). Garde : `texte-200-l250.e2e.spec.ts` (/, /gallery, fiche unité, 320 à 1440 px, 100 et 200 % ; tiroir au clavier ; barre identique avec et sans les classes à 100 %).
 
 ## Workflow dev
 

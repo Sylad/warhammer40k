@@ -15,12 +15,25 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
 import { PageTitleService } from '../../core/services/page-title.service';
 import { CreditsPageComponent } from '../credits-page/credits-page.component';
 import { searchShortcut, type PlatformHints } from './search-shortcut';
+import { classesBarre, type ClasseBarre } from './seuils-barre';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, AboutMenuComponent, LoreMenuComponent, BreadcrumbComponent, CommandPaletteComponent, DemoBannerComponent, SectionAnchorDirective, CreditsPageComponent],
+  // L250 : seuils de la barre comptés en rem (taille de police de la page), voir seuils-barre.ts.
+  host: {
+    '[class.barre-compacte]': 'barre()["barre-compacte"]',
+    '[class.barre-tiroir]': 'barre()["barre-tiroir"]',
+    '[class.barre-etroite]': 'barre()["barre-etroite"]',
+    '[class.barre-sans-mot]': 'barre()["barre-sans-mot"]',
+    '[class.barre-sans-aigle]': 'barre()["barre-sans-aigle"]',
+    '[class.texte-agrandi]': 'barre()["texte-agrandi"]',
+  },
   template: `
+    <!-- L250 : sondes de 1rem (police de la page) et de 1em « medium » (police par défaut du navigateur). -->
+    <span #sondeRem class="sonde-rem" aria-hidden="true"></span>
+    <span #sondeDefaut class="sonde-rem sonde-defaut" aria-hidden="true"></span>
     <!-- L21 : premier élément focalisable — évite la barre (≈ 14 arrêts de Tab au bureau). -->
     <a class="skip-link" sectionAnchor="contenu" [attr.inert]="pageInert()">Aller au contenu</a>
     <app-demo-banner [attr.inert]="pageInert()" />
@@ -450,6 +463,49 @@ import { searchShortcut, type PlatformHints } from './search-shortcut';
     @media (width < 19em) {
       .brand .aigle { display: none; }
     }
+
+    /* L250 : les mêmes seuils en rem (classes posées par seuils-barre.ts). Texte de la page à 200 %,
+       la barre suit : tiroir sous 84rem (2688 px), etc. À 100 %, elles coïncident avec les media
+       queries ci-dessus : rien ne change. Garde : texte-200-l250.e2e.spec.ts. */
+    .sonde-rem {
+      position: absolute; top: 0; left: 0; width: 1rem; height: 0; visibility: hidden; pointer-events: none;
+    }
+    .sonde-defaut { font-size: medium; width: 1em; }
+    :host(.barre-compacte) .brand .brand-sub, :host(.barre-compacte) .nav-ico { display: none; }
+    :host(.barre-compacte) .nav { gap: 16px; }
+    :host(.barre-compacte) .nav-search-btn .nav-ico { display: inline; }
+    :host(.barre-tiroir) .topbar { padding: 0 18px; }
+    :host(.barre-tiroir) .nav { display: none; }
+    :host(.barre-tiroir) .menu-toggle { display: inline-flex; }
+    :host(.barre-tiroir) .nav-search-btn { min-height: 44px; margin-left: 0; }
+    :host(.barre-tiroir) .brand { white-space: normal; flex-shrink: 1; }
+    :host(.barre-tiroir) .drawer { display: flex; }
+    :host(.barre-tiroir) .drawer-backdrop { display: block; }
+    :host(.barre-etroite) .topbar { padding: 0 12px; gap: 8px; }
+    :host(.barre-etroite) .topbar-actions { gap: 6px; }
+    :host(.barre-etroite) .nav-search-btn { padding: 0 12px; }
+    :host(.barre-etroite) .brand { gap: 8px; }
+    :host(.barre-etroite) .brand strong { font-size: 1.05rem; }
+    :host(.barre-etroite) .nav-search-kbd { display: none; }
+    :host(.barre-etroite) .menu-toggle { padding: 0 10px; min-width: 44px; justify-content: center; }
+    :host(.barre-etroite) .menu-toggle.has-badge .menu-word { display: none; }
+    :host(.barre-etroite) .menu-toggle.has-badge { padding: 0 6px; gap: 4px; }
+    :host(.barre-sans-mot) .menu-toggle .menu-word { display: none; }
+    :host(.barre-sans-aigle) .brand .aigle { display: none; }
+    /* Texte agrandi au téléphone : « WARHAMMER » seul ne tenait pas à côté de la loupe et du menu
+       (320 px à 200 % : 74 px de trop). Le logo passe sur deux lignes resserrées, borné par la largeur
+       de la fenêtre, et tient dans les 70 px de la barre (les rubans collants s'alignent dessous). */
+    /* Le tiroir suit le texte (20rem = 320 px à 100 %) : « PLAN DE TRAVAIL » tient sur sa ligne. */
+    :host(.texte-agrandi) .drawer { width: min(20rem, 86vw); }
+    /* Au téléphone, « NOUVEAUTÉS » et sa pastille ne tiennent plus sur une ligne : la pastille passe dessous. */
+    :host(.texte-agrandi) .drawer a { flex-wrap: wrap; row-gap: 4px; padding-block: 6px; }
+    /* 320 px à 200 %, polices web bloquées : « NOUVEAUTÉS » (≈ 240 px) dépassait les 224 px du lien. */
+    :host(.texte-agrandi.barre-etroite) .drawer { width: min(20rem, 92vw); padding-inline: 12px; }
+    :host(.texte-agrandi.barre-etroite) .drawer a { letter-spacing: 0.06em; overflow-wrap: anywhere; }
+    :host(.texte-agrandi) .drawer-head { flex-wrap: wrap; gap: 8px; }
+    :host(.texte-agrandi.barre-etroite) .brand strong {
+      font-size: min(1.05rem, 7.5vw); letter-spacing: 0.04em; line-height: 1.05; overflow-wrap: anywhere;
+    }
   `],
 })
 export class MainLayoutComponent implements OnInit {
@@ -469,6 +525,10 @@ export class MainLayoutComponent implements OnInit {
   readonly badge = computed(() => badgeLabel(this.news.unseen()));
   readonly unseenText = computed(() => unseenLabel(this.news.unseen()));
   readonly menuOpen = signal(false);
+  /** L250 : classes de la barre comptées en rem (voir seuils-barre.ts). */
+  readonly barre = signal(classesBarre(window.innerWidth, parseFloat(getComputedStyle(document.documentElement).fontSize)));
+  @ViewChild('sondeRem', { static: true }) private sondeRem?: ElementRef<HTMLElement>;
+  @ViewChild('sondeDefaut', { static: true }) private sondeDefaut?: ElementRef<HTMLElement>;
   /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
   readonly pageInert = computed(() => (this.menuOpen() ? '' : null));
   /**
@@ -550,10 +610,40 @@ export class MainLayoutComponent implements OnInit {
     // Passage au bureau (≥ 84em) menu ouvert : le tiroir disparaît, la page doit redéfiler.
     const desktop = window.matchMedia?.('(min-width: 84em)');
     if (desktop) {
-      const onChange = (e: MediaQueryListEvent) => { if (e.matches) this.closeMenu(); };
+      const onChange = (e: MediaQueryListEvent) => { if (e.matches && !this.barre()['barre-tiroir']) this.closeMenu(); };
       desktop.addEventListener('change', onChange);
       this.destroyRef.onDestroy(() => desktop.removeEventListener('change', onChange));
     }
+    // L250 : seuils en rem, recalculés au redimensionnement et quand la police de la page change
+    // (la sonde de 1rem change alors de largeur).
+    const maj = () => this.majBarre();
+    window.addEventListener('resize', maj);
+    this.destroyRef.onDestroy(() => window.removeEventListener('resize', maj));
+    maj();
+    const sonde = this.sondeRem?.nativeElement;
+    if (sonde && typeof ResizeObserver === 'function') {
+      const observer = new ResizeObserver(maj);
+      observer.observe(sonde);
+      if (this.sondeDefaut) observer.observe(this.sondeDefaut.nativeElement);
+      this.destroyRef.onDestroy(() => observer.disconnect());
+    }
+  }
+
+  /** L250 : classes de la barre d'après la largeur de la fenêtre et la taille de police de la page. */
+  private calculerBarre(): Record<ClasseBarre, boolean> {
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const sonde = this.sondeDefaut?.nativeElement;
+    const defaut = sonde ? parseFloat(getComputedStyle(sonde).fontSize) : rem;
+    return classesBarre(window.innerWidth, rem, defaut);
+  }
+
+  private majBarre(): void {
+    const suivant = this.calculerBarre();
+    const actuel = this.barre();
+    if ((Object.keys(suivant) as ClasseBarre[]).every((k) => suivant[k] === actuel[k])) return;
+    this.barre.set(suivant);
+    // Le tiroir n'existe plus (bureau, à 84em ET à 84rem) : menu ouvert, la page doit redéfiler.
+    if (!suivant['barre-tiroir'] && !window.matchMedia?.('(width < 84em)')?.matches) this.closeMenu();
   }
 
   toggleMenu(): void {

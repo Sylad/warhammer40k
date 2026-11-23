@@ -845,6 +845,12 @@
       "status": "done",
       "started": "2026-11-22",
       "finished": "2026-11-22"
+    },
+    {
+      "id": "L250",
+      "title": "Texte agrandi : la barre du haut se replie au lieu de déborder",
+      "status": "doing",
+      "started": "2026-11-23"
     }
   ]
 }
