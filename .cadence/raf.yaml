@@ -1235,6 +1235,7 @@ lots:
     title: "Vidéos à 1440 px : le carré ▶ de 62 px centré sur la carte chevauche le titre quand il fait 3 lignes (« Toutes les vidéos ») — placer le ▶ sur la vignette, pas au centre de la carte ; test (UX L47)"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-23, sha: 1262ed5700e7f42aa5a780c1a53b7df84176276b }
     created: 2026-10-12
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme (lead) 8a6e040 : ▶ dans le flux de la carte (padding-top 56 px réservé aux pastilles, marges auto, row-gap 12 px), pointer-events none → clic au lien étiré, aria-hidden ; test e2e 1440/1024/390 avec titres allongés rouge avant, vert après ; budget CSS tenu", commit: 8a6e0408d520a709d4a572d088a0f17995bf1349 }
