@@ -2848,6 +2848,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-23, sha: f0967875a3978c307e4c2c77e9be6c17c0785f66 }
     created: 2026-11-23
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme (lead) : f096787 relu — seuils de la barre recomptés en rem (taille de police de la page) dans seuils-barre.ts, classes posées sur l'hôte en miroir des media queries en em, valeurs comparées par seuils-barre.spec.ts ; e2e texte-200 ; à 100 % classes = media queries. Note : règles en double (media query + classe), tenues par le test", commit: f0967875a3978c307e4c2c77e9be6c17c0785f66 }
