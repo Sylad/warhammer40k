@@ -1250,7 +1250,7 @@ lots:
     created: 2026-10-12
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme 13c1d17 : Filtres et aside collants empilés dans la même case, hauteurs par ResizeObserver déconnecté à la destruction (gallery.component.ts:1093) ; R2 de L49 réécrit (Filtres sticky à 96 px, aside dessous, bas ≤ 900) ; 1024/390 inchangés par media query ; e2e L108 13 cas, rouge avant. Point UX à juger : défilement interne de l'aside à 1440×900.", commit: 13c1d17c6ebd4478ea0c94757943e85e4f959830 }
-    ux: { date: 2026-11-23, verdict: "non-conforme Revue UX tmp/ux-wh-L108.md : M1 molette piégée par overscroll contain sur l'aside à 1440×900 ; M2 défilement interne non découvrable (coupure à 16 px du bas, barre en surimpression, titre Collections caché à 1440×700/125 %) ; M3 clic artiste à y=800 → grille 2163→788 px, Filtres à -156 px, saut de 252 px ; M4 aside relâché coupé à 507 px en bas de page. Tenu : 0 recouvrement, 1024/390 inchangés, clavier et focus." }
+    ux: { date: 2026-11-23, verdict: "conforme Passe 2 (28fd19e), vérifiée par le lead sur les captures du run et les 8 cas e2e écrits d'après tmp/ux-wh-L108.md (rouges avant avec les chiffres du rapport) : M1 contain retiré ; M2 4 artistes au bureau, colonne entière à 1440×900 (501/507 px), titres visibles + fondu + gouttière sous 900 px ; M3 la colonne reste en place au clic, 0 saut > 1 px sur 3 boutons × 2 positions ; M4 rien de coupé en bas de page. Reste mineur → sous-lot : un artiste actif choisi sous 1024 px (5e/6e) disparaît du bureau en élargissant." }
   - id: L109
     title: "Vidéo « Astartes — Partie 1 » (id astartes, carte « Vidéo à la une » Space Marines) : l'embed JpK4fcFNKbM lit une ré-upload « ASTARTES 8K » de D_Play (12:43) et non la Partie 1 de Syama Pedersen annoncée (21:34) — remplacer l'embed par la source officielle (vérifiée en ligne) ou corriger titre/auteur/durée ; videos.json est une donnée utilisateur (volume) : corriger aussi en prod ; attente QA « la carte à la une ouvre la vidéo qu'elle annonce » (QA prod 12-10)"
     status: todo
@@ -2815,6 +2815,11 @@ lots:
     ux: { date: 2026-11-22, verdict: "conforme — données seules (3 fiches changent de faction), aucun écran ni composant modifié ; captures du run 1440/390 : Officio « UNITÉS 3 », Inquisition 7, fiche inq-vindicare ouverte" }
     review: { date: 2026-11-22, verdict: "conforme — revue du lead : seed (3 factionId + sourceFaction sourcée Wahapedia), champ optionnel au modèle, test rouge avant/vert après, attendus QA comparés au seed ; ids inchangés donc liens et fiches techniques valables", commit: 4517c15c5543c9a98e7c7dc3b178f27784ea4bd9 }
     finished: 2026-11-22
+  - id: L248
+    title: "Galerie : un filtre artiste actif reste visible. Sous 1024 px on peut choisir le 5e ou 6e artiste ; en élargissant au bureau (4 artistes depuis L108) son bouton disparaît alors que le filtre reste actif. Attendu : l'artiste actif est toujours affiché dans la colonne (ou un rappel du filtre actif est visible), test e2e qui rejoue le cas."
+    status: todo
+    estimate: 1
+    created: 2026-11-23
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
