@@ -319,12 +319,14 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <button class="artist-row" type="button"
                 [class.active]="filterArtist() === a.name"
                 [attr.aria-pressed]="filterArtist() === a.name"
+                [attr.title]="filterArtist() === a.name ? 'Retirer le filtre ' + a.name : null"
                 (click)="toggleArtistFilter(a.name, $event.currentTarget)">
                 <span class="ar-avatar">{{ initials(a.name) }}</span>
                 <span class="ar-info">
                   <strong>{{ a.name }}</strong>
                   <small>{{ a.artworkCount | pluriel:'œuvre':'œuvres' }}</small>
                 </span>
+                @if (filterArtist() === a.name) { <span class="row-mark" aria-hidden="true">✕</span> }
               </button>
             }
             </div>
@@ -338,12 +340,14 @@ type SortBy = 'recent' | 'popular' | 'alpha';
               <button class="col-row" type="button"
                 [class.active]="filterCollection() === col.id"
                 [attr.aria-pressed]="filterCollection() === col.id"
+                [attr.title]="filterCollection() === col.id ? 'Retirer le filtre ' + col.name : null"
                 (click)="toggleCollectionFilter(col.id, $event.currentTarget)">
                 <span class="col-icon">▤</span>
                 <span class="col-info">
                   <strong>{{ col.name }}</strong>
                   <small>{{ col.count | pluriel:'œuvre':'œuvres' }}</small>
                 </span>
+                @if (filterCollection() === col.id) { <span class="row-mark" aria-hidden="true">✕</span> }
               </button>
             }
             </div>

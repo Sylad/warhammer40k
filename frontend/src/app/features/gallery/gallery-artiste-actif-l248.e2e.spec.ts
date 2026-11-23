@@ -113,3 +113,80 @@ describe.skipIf(!built || !chromium)('galerie — l\'artiste du filtre actif res
     }
   }
 });
+
+// L248 r1 — la rangée active (artiste, collection) se distingue des autres sans la couleur du texte (WCAG 1.4.1) :
+// fond, filet à gauche et marque « ✕ » mesurés ; le filet et la pastille contrastent d'au moins 3:1 avec le fond du
+// panneau (WCAG 1.4.11) ; le nom du bouton ne change pas, « Retirer le filtre … » en title.
+type Marque = { fond: string; filet: string; marque: boolean; pastille: string; title: string | null; nom: string; contrasteFilet: number; contrastePastille: number };
+
+function marques([selecteur, index]: [string, number]): Marque {
+  const b = document.querySelectorAll<HTMLElement>(selecteur)[index];
+  const cs = getComputedStyle(b);
+  const pastille = b.querySelector<HTMLElement>('.ar-avatar, .col-icon')!;
+  const rgb = (c: string) => (c.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+  const lum = ([r, g, v]: number[]) => {
+    const f = (x: number) => ((x /= 255) <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(v);
+  };
+  const ratio = (a: number[], c: number[]) => { const [x, y] = [lum(a), lum(c)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const panneau = [19, 15, 11]; // haut du dégradé du panneau, le plus clair (rgba(19,15,11,.92))
+  const filet = cs.boxShadow.match(/rgba?\([^)]*\)/)?.[0] ?? '';
+  return {
+    fond: cs.backgroundColor,
+    filet: cs.boxShadow,
+    marque: !!b.querySelector('.row-mark') && b.querySelector('.row-mark')!.getClientRects().length > 0,
+    pastille: getComputedStyle(pastille).backgroundColor,
+    title: b.getAttribute('title'),
+    nom: b.querySelector('strong')!.textContent!.trim(),
+    contrasteFilet: filet ? ratio(rgb(filet), panneau) : 0,
+    contrastePastille: ratio(rgb(getComputedStyle(pastille).backgroundColor), panneau),
+  };
+}
+
+describe.skipIf(!built || !chromium)('galerie — la rangée active se reconnaît sans la couleur (L248 r1, navigateur, dist)', () => {
+  let server: Server;
+  let browser: Browser;
+  let base: string;
+  beforeAll(async () => {
+    ({ base, server } = await startDistServer());
+    browser = await chromium!.launch();
+  });
+  afterAll(async () => {
+    await browser?.close();
+    server?.close();
+  });
+
+  for (const [w, h] of [[1440, 900], [390, 844]] as const) {
+    for (const sel of ['.sidebar .artist-row', '.sidebar .col-row']) {
+      it(`${sel.includes('artist') ? 'artiste' : 'collection'} à ${w}×${h} : fond, filet et marque, contraste ≥ 3:1`, async () => {
+        const page = await browser.newPage();
+        page.setDefaultTimeout(6000);
+        await page.setViewportSize({ width: w, height: h });
+        await page.goto(base + '/gallery');
+        await page.locator('[data-testid="grille-oeuvres"]').waitFor();
+        await page.locator(sel).nth(1).waitFor();
+        const avant = await page.evaluate(([s]) => document.querySelectorAll<HTMLElement>(s)[1].getBoundingClientRect().height, [sel]);
+        await page.locator(sel).nth(1).click();
+        await page.waitForTimeout(300);
+        expect(await page.locator(sel).nth(1).getAttribute('aria-pressed')).toBe('true');
+        const actif = await page.evaluate(marques, [sel, 1] as [string, number]);
+        const autre = await page.evaluate(marques, [sel, 0] as [string, number]);
+        const m = JSON.stringify({ actif, autre });
+        expect(actif.fond, m).not.toBe(autre.fond);
+        expect(actif.filet, m).not.toBe(autre.filet);
+        expect(actif.filet, m).toMatch(/inset/);
+        expect(actif.marque, m).toBe(true);
+        expect(autre.marque, m).toBe(false);
+        expect(actif.pastille, m).not.toBe(autre.pastille);
+        expect(actif.contrasteFilet, m).toBeGreaterThanOrEqual(3);
+        expect(actif.contrastePastille, m).toBeGreaterThanOrEqual(3);
+        expect(actif.title, m).toBe('Retirer le filtre ' + actif.nom);
+        expect(autre.title, m).toBeNull();
+        // la marque ne fait pas grandir la rangée (la colonne tient toujours, L108 r1)
+        const hauteur = await page.evaluate(([s]) => document.querySelectorAll<HTMLElement>(s)[1].getBoundingClientRect().height, [sel]);
+        expect(hauteur).toBeLessThanOrEqual(avant + 0.5);
+        await page.close();
+      }, 30_000);
+    }
+  }
+});

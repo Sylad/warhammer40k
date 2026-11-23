@@ -1660,6 +1660,44 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
     "scrollbar-width": "thin",
     "top": "calc(96px + var(--filtres-h, 17rem) + 24px)",
   },
+  ".gallery-page .layout .sidebar .active .ar-avatar": {
+    "background": "var(--gold)",
+    "border-color": "var(--gold-bright)",
+    "color": "var(--bg)",
+  },
+  ".gallery-page .layout .sidebar .active .col-icon": {
+    "background": "var(--gold)",
+    "border-color": "var(--gold-bright)",
+    "color": "var(--bg)",
+  },
+  ".gallery-page .layout .sidebar .artist-row": {
+    "grid-template-columns": "32px minmax(0, 1fr) auto",
+  },
+  ".gallery-page .layout .sidebar .artist-row.active": {
+    "background": "rgba(240, 210, 118, 0.1)",
+    "box-shadow": "inset 3px 0 0 var(--gold-bright)",
+    "padding-left": "11px",
+    "padding-right": "8px",
+  },
+  ".gallery-page .layout .sidebar .col-row": {
+    "grid-template-columns": "32px minmax(0, 1fr) auto",
+  },
+  ".gallery-page .layout .sidebar .col-row.active": {
+    "background": "rgba(240, 210, 118, 0.1)",
+    "box-shadow": "inset 3px 0 0 var(--gold-bright)",
+    "padding-left": "11px",
+    "padding-right": "8px",
+  },
+  ".gallery-page .layout .sidebar .row-mark": {
+    "border": "1px solid var(--gold-bright)",
+    "color": "var(--gold-bright)",
+    "display": "grid",
+    "font-size": "12px",
+    "height": "24px",
+    "line-height": "1",
+    "place-items": "center",
+    "width": "24px",
+  },
   ".gallery-page .main-col": {
     "grid-area": "main",
   },

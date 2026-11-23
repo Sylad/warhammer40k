@@ -55,6 +55,22 @@
     border: 1px solid var(--border); aspect-ratio: 3 / 4;
   }
   .category-card:disabled { opacity: 0.5; cursor: default; }
+  /* L248 r1 (WCAG 1.4.1, 1.4.11 ; Nielsen 1) : la rangée du filtre actif (artiste, collection) se reconnaît sans la
+     couleur du texte — fond éclairé, filet doré à gauche (#f0d276 sur le panneau ≈ 13:1), pastille pleine (#c9a24a ≈ 8:1)
+     et marque « ✕ » de retrait (le nom du bouton ne change pas : état par aria-pressed, « Retirer le filtre … » en title).
+     .layout .sidebar : plus spécifique que les règles du composant, chargées après ce partiel. */
+  .layout .sidebar .artist-row, .layout .sidebar .col-row { grid-template-columns: 32px minmax(0, 1fr) auto; }
+  .layout .sidebar .artist-row.active, .layout .sidebar .col-row.active {
+    padding-left: 11px; padding-right: 8px;
+    background: rgba(240, 210, 118, 0.1); box-shadow: inset 3px 0 0 var(--gold-bright);
+  }
+  .layout .sidebar .active .ar-avatar, .layout .sidebar .active .col-icon {
+    background: var(--gold); border-color: var(--gold-bright); color: var(--bg);
+  }
+  .layout .sidebar .row-mark {
+    display: grid; place-items: center; width: 24px; height: 24px;
+    border: 1px solid var(--gold-bright); color: var(--gold-bright); font-size: 12px; line-height: 1;
+  }
 }
 /* L108 r1 (revue UX du 23-11) — au bureau, la colonne Artistes / Collections :
    - M2 / M4 : 4 artistes (pas 6) : la pile Filtres + colonne tient à 1440×900 (976 px demandés pour 884), rien n'y
