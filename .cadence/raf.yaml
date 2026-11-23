@@ -2824,9 +2824,10 @@ lots:
     finished: 2026-11-22
   - id: L248
     title: "Galerie : un filtre artiste actif reste visible. Sous 1024 px on peut choisir le 5e ou 6e artiste ; en élargissant au bureau (4 artistes depuis L108) son bouton disparaît alors que le filtre reste actif. Attendu : l'artiste actif est toujours affiché dans la colonne (ou un rappel du filtre actif est visible), test e2e qui rejoue le cas."
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-11-23
+    started: 2026-11-23
   - id: L249
     title: "Vidéos du seed dont l'auteur annoncé n'est pas la chaîne réelle (relevé de liens:externes par L109, oEmbed 23-11) : helsreach (Richard Boylan annoncé, chaîne Rostam Archives), lord-inquisitor (Erasmus Brosdau annoncé, chaîne Actual Hammer « 4K Upscaled »), angels-of-death (« Games Workshop (officiel) » annoncé, chaîne COUNTERPOINTS 40K) ; lord-inquisitor-prologue (chaîne Warhammer Animations) à relire. Pour chacune : source officielle vérifiée en ligne, sinon titre, auteur et durée de la vidéo réellement lue"
     status: todo
