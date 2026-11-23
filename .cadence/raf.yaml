@@ -1161,6 +1161,7 @@ lots:
     status: done
     estimate: 0.25
     visible: true
+    delivered: { date: 2026-11-23, sha: 4f362f5734c9fbcaff4b98f2b74fa16dca3463b8 }
     created: 2026-10-10
     started: 2026-11-23
     review: { date: 2026-11-23, verdict: "conforme revue du lead : portrait par primarchId → wikiQuery de la fiche, retenu seulement sous le titre exact (pageCiblee), alt nommé, test sur le vrai seed (18 chapitres)", commit: 7881e6ae80f282ec61849ca1d5115b1b57a6af9f }
