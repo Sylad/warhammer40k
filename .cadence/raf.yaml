@@ -1158,11 +1158,14 @@ lots:
   - id: L100
     title: "Chapitres : portrait de primarque faux via la recherche wiki (Iron Hands → Fulgrim, Imperial Fists → un char) — image de la fiche primarque, alt vide (revue UX L3)"
     public: "Chapitres : le bon portrait de primarque"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     created: 2026-10-10
     started: 2026-11-23
+    review: { date: 2026-11-23, verdict: "conforme revue du lead : portrait par primarchId → wikiQuery de la fiche, retenu seulement sous le titre exact (pageCiblee), alt nommé, test sur le vrai seed (18 chapitres)", commit: 7881e6ae80f282ec61849ca1d5115b1b57a6af9f }
+    ux: { date: 2026-11-23, verdict: "conforme verdict du lead sur captures 1440 et 390 : médaillons des bons primarques (Rogal Dorn, Ferrus Manus, Corvus Corax), alt « Portrait de … » ; à regarder plus tard : image de Lorgar (miniature de vidéo), Black Templars sans médaillon (pas de primarque dans les données)" }
+    finished: 2026-11-23
   - id: L101
     title: "Pages faction : glyphes lus (✠ des titres, ⚔, ⌚⊛⚠▤, →) et « 41E » en capitales (/factions) — aria-hidden et règle sup globale, suites de L81/L83/L86 (revue UX L3)"
     public: "Pages faction : symboles décoratifs muets et « 41ᵉ » correct"

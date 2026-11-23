@@ -363,8 +363,9 @@
     {
       "id": "L100",
       "title": "Chapitres : le bon portrait de primarque",
-      "status": "doing",
-      "started": "2026-11-23"
+      "status": "done",
+      "started": "2026-11-23",
+      "finished": "2026-11-23"
     },
     {
       "id": "L101",
