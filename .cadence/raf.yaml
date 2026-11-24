@@ -2893,10 +2893,22 @@ lots:
     created: 2026-11-24
   - id: L256
     title: "CI Contrôles frontend : l'étape e2e (Acceptation de bout en bout) a dépassé son délai de 12 min sur 05480b1 (L253, run 45415489011, aucun test rouge) ; elle prenait déjà 11 min avant (runs du 24-11 matin). Attendu : un délai avec une marge mesurée (durée réelle + 50 % au moins), ou un partage en deux jobs parallèles si ça garde la CI sous ~15 min ; la somme des délais du job tenue par ci-frontend-checks.test.mjs ; relancer la CI de 05480b1 n'est pas une option (même temps)"
-    status: doing
+    status: done
     estimate: 0.5
     created: 2026-11-24
     started: 2026-11-24
+    review: { date: 2026-11-24, verdict: "conforme (actionlint sans erreur ; README.md:172/174 pas à jour → L258 ; note : une assertion d'écart toujours vraie ; rapport tmp/revue-warhammer-L256.md)", commit: 330b8bd932f5bc3f63e736643ef1d7b69f44be3f }
+    finished: 2026-11-24
+  - id: L257
+    title: "La suite Vitest écrit des captures du test L21 (l21-*.png) dans frontend/undefined/ : chemin de sortie non défini dans le test (vu au run L256 le 24-11)"
+    status: todo
+    estimate: 0.1
+    created: 2026-11-24
+  - id: L258
+    title: "README.md:172/174 : artefacts e2e-junit-<partie> et e2e en job matriciel séparé (2 parties, table e2e-durees.json) au lieu de l'étape unique ; reporter les durées réelles du premier run CI dans e2e-durees.json (suites de L256)"
+    status: todo
+    estimate: 0.1
+    created: 2026-11-24
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
