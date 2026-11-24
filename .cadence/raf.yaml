@@ -2879,6 +2879,11 @@ lots:
     started: 2026-11-24
     review: { date: 2026-11-24, verdict: "conforme après 1 correction : entrée Nouveautés manquante ; mineurs : tiroir 92vw écrasé par 86vw (main-layout:456 vs :510), garde px qui laisse passer les valeurs négatives (rapport tmp/revue-warhammer-L253.md)", commit: 583a53a2c32b24393343f46cf1c72efd2bb4d1d2 }
     ux: { date: 2026-11-24, verdict: "non conforme r1 : 1 bloquant (une lettre par ligne à 200 % : citation accueil, filtres /videos, infos unité), 3 majeurs (grands titres coupés sans trait, noms de chaînes tronqués, mots coupés dans cartes/dates/pastilles) — tmp/ux-warhammer-L253.md" }
+  - id: L254
+    title: "D-31 du registre parent : adopter cadence analyse (L801, cadence ≥ 2.0.18) — déclarer analyse: dans cadence.yaml avec les outils de la pile du projet (JS/TS : ESLint + typescript-eslint + eslint-plugin-sonarjs avec les seuils de cadence : max-lines 400, max-lines-per-function 80, max-depth 4, max-params 5, complexity 15, cognitive-complexity 15, plus tsc ; Python : ruff), base figée à l'existant (cadence analyse --init), aucune correction de l'existant ; la porte de cadence run le joue ensuite à chaque lot. Mesurer le temps ajouté à la porte (cible < 1 min) et le nombre de violations figées par outil, à rendre dans le rapport"
+    status: todo
+    estimate: 1
+    created: 2026-11-24
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
