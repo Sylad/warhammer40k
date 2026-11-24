@@ -2863,9 +2863,10 @@ lots:
     created: 2026-11-23
   - id: L252
     title: "Liens morts units.json : inq-vindicare/eversor/callidus.sourceFaction ont le texte de la source collé à l'URL (L247) ; et npm run liens:externes plante dans un worktree (sortie par défaut ../../../tmp absente) — relevés du run L249"
-    status: todo
+    status: doing
     estimate: 1
     created: 2026-11-23
+    started: 2026-11-24
   - id: L253
     title: "Texte à 200 % : le corps des pages grandit à peine (tailles en px), WCAG 1.4.4 non tenu pour le contenu — passer les tailles de texte en rem (revue UX de L250, tmp/ux-warhammer-L250.md)"
     status: todo
