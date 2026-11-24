@@ -2872,17 +2872,24 @@ lots:
     finished: 2026-11-24
   - id: L253
     title: "Texte à 200 % : le corps des pages grandit à peine (tailles en px), WCAG 1.4.4 non tenu pour le contenu — passer les tailles de texte en rem (revue UX de L250, tmp/ux-warhammer-L250.md)"
-    status: doing
+    status: done
     estimate: 1
     visible: true
     created: 2026-11-23
     started: 2026-11-24
-    review: { date: 2026-11-24, verdict: "conforme r2 (da13e23) — 0 bloquant, 0 majeur ; 3 mineurs (tmp/revue-warhammer-L253-r2.md) : titre réduit sous sa taille à 100 % sur /lore/timeline à 320 px, flèches transformées réduites à tort, media queries doublées sans garde", commit: da13e2345e251318a3d702ededb3ea6b24f3542d }
+    review: { date: 2026-11-24, verdict: "conforme r3 (05480b1) : 0 bloquant, 0 majeur, constats r2 levés ; mineur : texte-agrandi-miroirs-l253.spec.ts:90-97 ne fait pas tourner la comparaison M2/M3 — tmp/revue-warhammer-L253-r3.md", commit: 05480b153b6814b9376ce0e2dbcc76d8acb64375 }
     ux: { date: 2026-11-24, verdict: "conforme r3 (05480b1) : N-C1, N-C2, N-C3 levés, 0 mot coupé sans trait, 0 défilement sur 120 rendus, 100 % identique à la prod ; mineurs M1 (Tri tronqué à 320/200 %), M2 (anneau 30 %/TERMINÉ 4 px), M3 (Nouveautés « se resserrent » à ajuster) — tmp/ux-warhammer-L253-r3.md" }
+    finished: 2026-11-24
   - id: L254
     title: "D-31 du registre parent : adopter cadence analyse (L801, cadence ≥ 2.0.18) — déclarer analyse: dans cadence.yaml avec les outils de la pile du projet (JS/TS : ESLint + typescript-eslint + eslint-plugin-sonarjs avec les seuils de cadence : max-lines 400, max-lines-per-function 80, max-depth 4, max-params 5, complexity 15, cognitive-complexity 15, plus tsc ; Python : ruff), base figée à l'existant (cadence analyse --init), aucune correction de l'existant ; la porte de cadence run le joue ensuite à chaque lot. Mesurer le temps ajouté à la porte (cible < 1 min) et le nombre de violations figées par outil, à rendre dans le rapport"
     status: todo
     estimate: 1
+    created: 2026-11-24
+  - id: L255
+    title: "Suites de L253 (mineurs des revues r3) : liste Tri tronquée « Tri : recommand » sur /videos à 320 px et 200 % (WCAG 1.4.4) ; « 30% » et « TERMINÉ » de l'anneau de /romans se chevauchent de 4 px à 200 % ; entrée Nouveautés L253 à corriger (« les titres se resserrent » → coupés avec un trait au téléphone, résumés des romans entiers) ; texte-agrandi-miroirs-l253.spec.ts:90-97 doit faire tourner la comparaison M2/M3 réelle (tmp/ux-warhammer-L253-r3.md, tmp/revue-warhammer-L253-r3.md)"
+    status: todo
+    estimate: 1
+    visible: true
     created: 2026-11-24
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
