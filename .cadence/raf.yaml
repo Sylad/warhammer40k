@@ -2889,10 +2889,13 @@ lots:
     created: 2026-11-24
   - id: L255
     title: "Suites de L253 (mineurs des revues r3) : liste Tri tronquée « Tri : recommand » sur /videos à 320 px et 200 % (WCAG 1.4.4) ; « 30% » et « TERMINÉ » de l'anneau de /romans se chevauchent de 4 px à 200 % ; entrée Nouveautés L253 à corriger (« les titres se resserrent » → coupés avec un trait au téléphone, résumés des romans entiers) ; texte-agrandi-miroirs-l253.spec.ts:90-97 doit faire tourner la comparaison M2/M3 réelle (tmp/ux-warhammer-L253-r3.md, tmp/revue-warhammer-L253-r3.md)"
-    status: todo
+    status: doing
     estimate: 1
     visible: true
     created: 2026-11-24
+    notes:
+      - { date: 2026-11-24, text: "QA de L253 en prod (24-11, tmp/qa-warhammer-L253.md) : 30/30 pages conformes ; mineur — /lore/concepts à 390 px, un élément passe de 11,5 à 21,4 px au lieu de 23 px avec la police à 200 % (unité non relative restante)" }
+    started: 2026-11-24
   - id: L256
     title: "CI Contrôles frontend : l'étape e2e (Acceptation de bout en bout) a dépassé son délai de 12 min sur 05480b1 (L253, run 45415489011, aucun test rouge) ; elle prenait déjà 11 min avant (runs du 24-11 matin). Attendu : un délai avec une marge mesurée (durée réelle + 50 % au moins), ou un partage en deux jobs parallèles si ça garde la CI sous ~15 min ; la somme des délais du job tenue par ci-frontend-checks.test.mjs ; relancer la CI de 05480b1 n'est pas une option (même temps)"
     status: done
