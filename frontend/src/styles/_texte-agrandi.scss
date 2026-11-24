@@ -1,0 +1,41 @@
+/*
+ * L253 (WCAG 1.4.4 et 1.4.10) — texte agrandi : classe `texte-plus-grand` sur l'hôte de la mise en page, posée dès
+ * que 1rem dépasse 16 px, que la police vienne du réglage du navigateur (police par défaut 20, 32 px…) ou de la
+ * page (`html { font-size: 200% }`) ; jamais au réglage normal (seuils-barre.ts). Les tailles de texte sont en rem
+ * et doublent à 200 % ; ces règles rattrapent ce que le texte agrandi ferait déborder, sans rien changer au rendu
+ * normal. Partiel global : il passe devant les feuilles des composants (sélecteurs par `#contenu`, le <main>
+ * de la mise en page) et ne pèse pas sur leur budget (L29). Garde : texte-200-contenu-l253.e2e.spec.ts.
+ */
+@use 'fit-title' as *;
+
+app-main-layout.texte-plus-grand {
+  /* Un mot plus long que sa colonne se coupe au lieu de pousser la page en largeur. */
+  #contenu, footer { overflow-wrap: anywhere; }
+
+  /* Un champ a une largeur intrinsèque qui suit la police (attribut size, libellé de l'option la plus longue) :
+     dans une piste de grille « 1fr », elle élargissait la barre d'outils (/factions, fiche faction, /videos). */
+  #contenu :is(input, select, textarea) { max-width: 100%; min-width: 0; }
+
+  /* Badges et filtres à hauteur fixe en px (24, 36, 40 px) : leur libellé doublé passe sur deux lignes ; la boîte
+     grandit avec lui au lieu de le laisser déborder sur la rangée voisine. */
+  #contenu :is(.badge, .filter) { height: auto; min-height: 2em; }
+
+  /* Galerie : « Page 1 sur 35 · 1–24 sur 840 » passe à la ligne au téléphone au lieu de déborder. */
+  #contenu app-gallery .page-indicator { white-space: normal; flex-wrap: wrap; justify-content: center; }
+
+  /* Nouveautés : la date d'une entrée peut passer à la ligne (« 23 novembre 2026 » insécable mesurait 310 px). */
+  #contenu app-nouveautes .news-date time { white-space: normal; }
+
+  /* Équipement : une seule colonne au téléphone, qui ne prend plus la largeur minimale du contenu d'une carte. */
+  #contenu app-lore-equipment .grid { grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr)); }
+
+  /* Titre des fiches faction et unité (sans figure) : fit-title se mesurait à tout l'en-tête, pas à la colonne du texte
+     (56 %) ; à 1440 px « ESCOUADE » se coupait au milieu. La colonne devient le conteneur (largeur tirée de flex-basis,
+     bornée par son max-width), comme la fiche unité avec figure (L120) : le mot le plus long tient. */
+  #contenu :is(app-faction-detail .hero, app-unit-detail .hero:not(.hero--figure)) > .hero-text {
+    flex: 0 1 100%; container-type: inline-size;
+  }
+  /* Sans figure, le titre de la fiche unité n'avait pas de borne : même taille, bornée comme avec figure (0,95 em
+     par caractère, unit-detail.component.scss). */
+  #contenu app-unit-detail .hero:not(.hero--figure) h1 { @include fit-title(clamp(2.375rem, 4.4vw + 4rem - 64px, 4rem), 0.95); }
+}

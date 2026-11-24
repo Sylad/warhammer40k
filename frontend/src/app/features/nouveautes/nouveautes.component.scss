@@ -1,14 +1,14 @@
 // L23 — page Nouveautés. Identité gothique noir/or (tokens de styles.scss), aucun texte
 // posé sur une image. Les règles du HTML de cadence passent par :host ::ng-deep (innerHTML).
-.news { max-width: 860px; margin: 0 auto; }
+.news { max-width: 53.75rem; margin: 0 auto; }
 
 .news-head { margin-bottom: 28px; }
 .news-eyebrow {
   margin: 0 0 8px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
 }
-.news-head h1 { font-size: clamp(1.7rem, 5vw, 2.6rem); margin-bottom: 10px; overflow-wrap: anywhere; }
-.news-lede { margin: 0; color: var(--text); max-width: 640px; line-height: 1.6; }
+.news-head h1 { font-size: clamp(1.7rem, 5vw + 2.6rem - 41.6px, 2.6rem); margin-bottom: 10px; overflow-wrap: anywhere; }
+.news-lede { margin: 0; color: var(--text); max-width: 40rem; line-height: 1.6; }
 
 .news-empty, .news-since { color: var(--text); }
 .news-since { margin: 0 0 18px; color: var(--gold-bright); font-size: 0.9rem; &:empty { display: none; } }
@@ -35,7 +35,7 @@
   background: var(--gold); color: var(--bg); letter-spacing: 0.08em;
 }
 
-.news-entry h2 { font-size: clamp(1.05rem, 3.4vw, 1.35rem); margin: 0 0 4px; overflow-wrap: anywhere; }
+.news-entry h2 { font-size: clamp(1.05rem, 3.4vw + 1.35rem - 21.6px, 1.35rem); margin: 0 0 4px; overflow-wrap: anywhere; }
 
 // L34 : bouton « Copier le lien » — 24 px au bureau, 44 × 44 px au toucher (marges négatives :
 // la ligne de la date ne grandit pas). Libellés superposés dans une seule case de grille.

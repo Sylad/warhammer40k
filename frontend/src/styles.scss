@@ -3,6 +3,8 @@
 @use 'styles/gallery-filtres';
 @use 'styles/gallery-visionneuse';
 @use 'styles/videos-rappel';
+@use 'styles/videos-chaines';
+@use 'styles/texte-agrandi';
 @use 'styles/densite';
 /* Leaflet CSS chargé via angular.json styles[] (node_modules/leaflet/dist/leaflet.css) */
 
@@ -40,6 +42,11 @@ html {
 :root:has(dialog[open]) { overflow: hidden; }
 
 * { box-sizing: border-box; }
+
+/* L253 (WCAG 1.4.4) : le navigateur donne aux contrôles de formulaire une taille fixe (13,333334 px, police
+   « small-control ») qui ne suit pas la police de la page ; même taille, en rem. Un composant qui fixe la sienne
+   l'emporte comme avant. */
+button, input, select, textarea { font-size: 0.833333375rem; }
 
 body {
   margin: 0;
@@ -82,6 +89,7 @@ h1 { text-shadow: 0 0 35px rgba(201, 162, 74, 0.22); }
 /* L23 : cibles de focus posées par le code (arrivée depuis le menu du téléphone) — pas d'anneau. */
 main[tabindex='-1']:focus, main h1[tabindex='-1']:focus { outline: none; }
 
+
 a { color: var(--gold); text-decoration: none; }
 
 /* L83 → L101 : un exposant garde sa casse sous un parent en capitales — « 41e » s'affiche et se lit « 41ᵉ »,
@@ -117,7 +125,7 @@ a:hover { color: var(--gold-bright); }
   border: 1px solid rgba(201, 162, 74, 0.35);
   background: rgba(201, 162, 74, 0.12);
   color: var(--gold);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;

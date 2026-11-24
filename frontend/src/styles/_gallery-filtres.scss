@@ -32,13 +32,13 @@
   .hero::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.65); pointer-events: none; }
   .btn-filtres .count {
     min-width: 1.5em; padding: 1px 6px; border-radius: 999px;
-    background: var(--gold); color: var(--bg); font-size: 11px; text-align: center;
+    background: var(--gold); color: var(--bg); font-size: 0.6875rem; text-align: center;
   }
-  .btn-filtres .caret { font-size: 10px; opacity: 0.8; }
+  .btn-filtres .caret { font-size: 0.625rem; opacity: 0.8; }
   /* L240 : sous le titre du panneau, au-dessus des listes (au plus ~60 px de Faction, rien à faire défiler) */
   .panel-count {
     display: none; margin: -6px 0 12px;
-    color: var(--gold); font-size: 11px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); font-size: 0.6875rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
   }
   .rappel-vide { display: none; }
   /* L220 : échec de lecture d'une source — bloc compact (le message et « Réessayer » restent dans le premier écran), séparé du suivant */
@@ -59,7 +59,7 @@
      couleur du texte — fond éclairé, filet doré à gauche (#f0d276 sur le panneau ≈ 13:1), pastille pleine (#c9a24a ≈ 8:1)
      et marque « ✕ » de retrait (le nom du bouton ne change pas : état par aria-pressed, « Retirer le filtre … » en title).
      .layout .sidebar : plus spécifique que les règles du composant, chargées après ce partiel. */
-  .layout .sidebar .artist-row, .layout .sidebar .col-row { grid-template-columns: 32px minmax(0, 1fr) auto; }
+  .layout .sidebar .artist-row, .layout .sidebar .col-row { grid-template-columns: 2rem minmax(0, 1fr) auto; }
   .layout .sidebar .artist-row.active, .layout .sidebar .col-row.active {
     padding-left: 11px; padding-right: 8px;
     background: rgba(240, 210, 118, 0.1); box-shadow: inset 3px 0 0 var(--gold-bright);
@@ -69,7 +69,7 @@
   }
   .layout .sidebar .row-mark {
     display: grid; place-items: center; width: 24px; height: 24px;
-    border: 1px solid var(--gold-bright); color: var(--gold-bright); font-size: 12px; line-height: 1;
+    border: 1px solid var(--gold-bright); color: var(--gold-bright); font-size: 0.75rem; line-height: 1;
   }
 }
 /* L108 r1 (revue UX du 23-11) — au bureau, la colonne Artistes / Collections :
@@ -116,7 +116,7 @@
     .p-filtres .filter-row:last-of-type { margin-bottom: 0; }
     .rappel-vide {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      margin-top: 12px; padding: 10px 12px; flex-wrap: wrap; border: 1px dashed var(--border); background: var(--panel); color: var(--text); font-size: 14px;
+      margin-top: 12px; padding: 10px 12px; flex-wrap: wrap; border: 1px dashed var(--border); background: var(--panel); color: var(--text); font-size: 0.875rem;
     }
     .rappel-vide .reset-btn { min-height: 44px; padding: 0 4px; flex: none; }
   }

@@ -20,18 +20,18 @@
         radial-gradient(circle at 30% 80%, rgba(201, 162, 74, 0.15), transparent 50%),
         linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.92) 80%);
     }
-    .hero-content { position: relative; z-index: 1; max-width: 760px; min-width: 0; }
+    .hero-content { position: relative; z-index: 1; max-width: 47.5rem; min-width: 0; }
     .eyebrow {
       color: var(--gold);
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 950;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 14px;
     }
-    .eyebrow.small { font-size: 10px; margin-bottom: 8px; }
+    .eyebrow.small { font-size: 0.625rem; margin-bottom: 8px; }
     .hero h1 {
-      font-size: clamp(32px, 5vw, 68px);
+      font-size: clamp(2rem, 5vw + 4.25rem - 68px, 4.25rem);
       line-height: 1.05;
       margin: 0 0 18px;
       color: var(--gold-bright);
@@ -40,11 +40,11 @@
     @media (max-width: 600px) {
       .hero { padding: 32px 20px 28px; }
     }
-    .lede { font-size: 16px; color: var(--text); line-height: 1.65; margin: 0; }
+    .lede { font-size: 1rem; color: var(--text); line-height: 1.65; margin: 0; }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(17.5rem, 100%), 1fr));
       gap: 18px;
       margin-bottom: 44px;
     }
@@ -65,20 +65,20 @@
     }
     .card.disabled { opacity: 0.55; cursor: default; }
     .card-ico {
-      font-size: 38px;
+      font-size: 2.375rem;
       color: var(--gold);
       line-height: 1;
       filter: drop-shadow(0 0 10px rgba(201, 162, 74, 0.4));
     }
     .card-ico.muted { color: var(--muted); filter: none; }
     .card h2 {
-      font-size: 22px;
+      font-size: 1.375rem;
       margin: 4px 0 6px;
       color: var(--gold);
     }
     .card p {
       flex: 1;
-      font-size: 13px;
+      font-size: 0.8125rem;
       color: var(--muted);
       line-height: 1.6;
       margin: 0;
@@ -92,14 +92,14 @@
       margin-top: 8px;
     }
     .card-foot .meta {
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gold);
     }
-    .card-foot .arrow { color: var(--gold-bright); font-size: 18px; }
+    .card-foot .arrow { color: var(--gold-bright); font-size: 1.125rem; }
     .badge-soon {
-      font-size: 9px;
+      font-size: 0.5625rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
@@ -108,7 +108,7 @@
     }
 
     .footnote {
-      max-width: 720px;
+      max-width: 45rem;
       margin: 24px auto 8px;
       text-align: center;
     }
@@ -124,9 +124,9 @@
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
     }
-    .ornament .aigle { color: var(--gold); font-size: 18px; }
+    .ornament .aigle { color: var(--gold); font-size: 1.125rem; }
     .footnote p {
-      font-size: 13px;
+      font-size: 0.8125rem;
       color: var(--muted);
       line-height: 1.7;
       font-style: italic;

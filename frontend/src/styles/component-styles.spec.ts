@@ -35,6 +35,18 @@ const GUARDED: Record<string, string[]> = {
 
 type Effective = Record<string, Record<string, string>>;
 
+/** L253 : tailles de texte passées en rem (elles suivent la police choisie, WCAG 1.4.4), ainsi que les boîtes
+ *  d'icônes qui portent un glyphe et leur colonne de grille, pistes minmax() des grilles et largeurs de lecture (max-width). Comparées en px au réglage normal (1rem = 16 px), où
+ *  le terme « Brem - Bpx » ajouté aux clamp() en vw vaut 0 : l'instantané d'avant L253 reste la référence, le
+ *  rendu à 100 % ne change pas. (Aucune de ces propriétés n'était en rem dans l'instantané.) */
+const TEXTE = new Set(['font-size', 'line-height', 'letter-spacing', 'width', 'height', 'grid-template-columns', 'max-width']);
+function auReglageNormal(prop: string, value: string): string {
+  if (!TEXTE.has(prop)) return value;
+  return value
+    .replace(/ \+ (\d*\.?\d+)rem - (\d*\.?\d+)px/g, (m, r, p) => (parseFloat(r) * 16 === parseFloat(p) ? '' : m))
+    .replace(/(?<![\w.])(\d*\.?\d+)rem/g, (_, r) => `${parseFloat(r) * 16}px`);
+}
+
 function collect(file: string, into: Effective): void {
   const css = sass.compile(resolve(src, file), { loadPaths: [src] }).css;
   postcss.parse(css).walkRules((rule) => {
@@ -47,7 +59,7 @@ function collect(file: string, into: Effective): void {
       const key = ctx + sel.replace(/\s+/g, ' ').trim();
       const decls = (into[key] ??= {});
       rule.walkDecls((d) => {
-        decls[d.prop] = d.value + (d.important ? ' !important' : '');
+        decls[d.prop] = auReglageNormal(d.prop, d.value) + (d.important ? ' !important' : '');
       });
     }
   });

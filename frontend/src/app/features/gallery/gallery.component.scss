@@ -37,7 +37,7 @@
     .eyebrow {
       display: block;
       color: var(--gold);
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 950;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -47,23 +47,23 @@
       margin: 0 0 14px;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: clamp(40px, 5vw, 68px);
+      font-size: clamp(2.5rem, 5vw + 4.25rem - 68px, 4.25rem);
       line-height: 0.95;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 38px rgba(201, 162, 74, 0.28);
     }
     .hero-desc {
-      max-width: 620px;
+      max-width: 38.75rem;
       margin: 0 0 22px;
       color: #cfc3ad;
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 1.65;
     }
     /* L45/t1 : libellé + champ ; libellé en onglet sur fond opaque (le bandeau est une image claire). */
     .search-field {
       flex: 1;
-      max-width: 520px;
+      max-width: 32.5rem;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -78,7 +78,7 @@
       position: absolute;
       left: 14px;
       color: var(--gold);
-      font-size: 16px;
+      font-size: 1rem;
       pointer-events: none;
     }
     /* Champs de recherche (bandeau, import wiki), sélecteurs et saisies des catégories : même habillage. */
@@ -90,7 +90,7 @@
       color: var(--text);
       outline: none;
       font: inherit;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .search-bar input {
       background: var(--panel); /* L45/t1 : placeholder ≥ 4,5:1 quelle que soit l'image du bandeau */
@@ -118,19 +118,19 @@
     }
     .stat-icon {
       color: var(--gold);
-      font-size: 22px;
+      font-size: 1.375rem;
       margin-bottom: 6px;
     }
     .stat-num {
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 32px;
+      font-size: 2rem;
       font-weight: 700;
       line-height: 1;
     }
     .stat-label {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-top: 4px;
@@ -157,12 +157,12 @@
       font-family: var(--serif);
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      font-size: 22px;
+      font-size: 1.375rem;
     }
     .results-count {
       display: block;
       color: var(--gold);
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -179,7 +179,7 @@
     }
     .see-all:hover, .reset-btn:hover, .cat-toggle:hover, .artist-row:hover, .col-row:hover, .artist-row.active, .col-row.active { color: var(--gold-bright); }
     .see-all {
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       letter-spacing: 0.12em;
       transition: color 0.15s ease;
@@ -236,7 +236,7 @@
       bottom: 32px;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -245,7 +245,7 @@
     .cat-count {
       bottom: 12px;
       color: #c9beaa;
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.05em;
     }
 
@@ -320,7 +320,7 @@
     .art-title {
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 1.2;
       letter-spacing: 0.03em;
       margin-bottom: 6px;
@@ -329,7 +329,7 @@
       display: flex;
       justify-content: space-between;
       gap: 8px;
-      font-size: 12px;
+      font-size: 0.75rem;
     }
     .art-artist { color: #c9beaa; }
     .art-likes { color: var(--gold); white-space: nowrap; }
@@ -355,7 +355,7 @@
       background: rgba(5, 4, 3, 0.65);
       color: var(--gold);
       font-family: 'Cinzel', serif;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
       transition: border-color 200ms, color 200ms, background 200ms, transform 150ms;
@@ -376,7 +376,7 @@
       gap: 0.4em;
       padding: 0 14px;
       font-family: 'Cinzel', serif;
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.1em;
       white-space: nowrap;
       color: var(--muted);
@@ -386,7 +386,7 @@
       font-weight: 700;
     }
     .page-range {
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
     }
 
@@ -418,7 +418,7 @@
       font-family: var(--serif);
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .panel-head {
       display: flex;
@@ -428,7 +428,7 @@
     }
     .panel-head h3 { margin: 0; }
     .reset-btn {
-      font-size: 10px;
+      font-size: 0.625rem;
       font-weight: 900;
       letter-spacing: 0.14em;
     }
@@ -442,7 +442,7 @@
     .filter-row:last-child { margin-bottom: 0; }
     .filter-row label, .search-label {
       color: var(--muted);
-      font-size: 10px;
+      font-size: 0.625rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -454,7 +454,7 @@
       color: var(--text);
       padding: 0 10px;
       font-family: inherit;
-      font-size: 13px;
+      font-size: 0.8125rem;
       outline: none;
     }
     /* L45/t3 : anneau de focus clavier, convention du site (plan, nouveautés). */
@@ -464,7 +464,7 @@
 
     .artist-row, .col-row {
       display: grid;
-      grid-template-columns: 32px 1fr;
+      grid-template-columns: 2rem 1fr; /* L253 : colonne de la pastille, en rem comme elle */
       gap: 10px;
       align-items: center;
       padding: 8px 0;
@@ -482,8 +482,8 @@
 
     /* Pastilles 32 px des listes artistes / collections. */
     .ar-avatar, .col-icon {
-      width: 32px;
-      height: 32px;
+      width: 2rem;
+      height: 2rem;
       display: grid;
       place-items: center;
       border: 1px solid rgba(201, 162, 74, 0.26);
@@ -491,16 +491,16 @@
       color: var(--gold);
     }
     .ar-avatar {
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       font-family: var(--serif);
       letter-spacing: 0.05em;
     }
-    .col-icon { font-size: 14px; }
+    .col-icon { font-size: 0.875rem; }
     .ar-info, .col-info { display: flex; flex-direction: column; min-width: 0; }
     .ar-info strong, .col-info strong {
       color: #ead7a2;
-      font-size: 13px;
+      font-size: 0.8125rem;
       font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
@@ -508,11 +508,11 @@
     }
     .ar-info small, .col-info small, .reddit-meta {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 0.6875rem;
     }
     .empty-mini {
       color: var(--muted);
-      font-size: 12px;
+      font-size: 0.75rem;
       font-style: italic;
     }
 
@@ -535,7 +535,7 @@
       border-top: 1px solid rgba(201, 162, 74, 0.2);
       color: var(--muted);
       text-align: center;
-      font-size: 12px;
+      font-size: 0.75rem;
       line-height: 1.5;
     }
 
@@ -547,7 +547,7 @@
       gap: 6px;
       color: var(--gold-bright);
       font-family: inherit;
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 900;
       text-transform: uppercase;
       cursor: pointer;
@@ -577,7 +577,7 @@
       right: 18px;
       width: 40px;
       height: 40px;
-      font-size: 22px;
+      font-size: 1.375rem;
     }
     .close:hover { border-color: var(--gold); }
     .nav-arrow {
@@ -585,7 +585,7 @@
       transform: translateY(-50%);
       width: 48px;
       height: 60px;
-      font-size: 32px;
+      font-size: 2rem;
       line-height: 1;
     }
     .nav-arrow.left { left: 18px; }
@@ -599,7 +599,7 @@
     @media (max-width: 1024px) {
       .hero-content { grid-template-columns: minmax(0, 1fr); } /* L32 : 1fr = largeur minimale du contenu */
       .hero-stats { gap: 14px; justify-self: start; } /* L60 : colonne unique, le bandeau garde sa largeur de contenu */
-      .stat-num { font-size: 24px; }
+      .stat-num { font-size: 1.5rem; }
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, 1fr); }
     }
@@ -613,14 +613,14 @@
       .page-indicator { order: 5; flex: 0 0 100%; justify-content: center; } /* L64 : sous les boutons */
       /* 12 px dès ~390 px, où « COLLECTIONS » tient ; 10 px à 320 px (WCAG 1.4.10) ; overflow-wrap : avec l'espacement
          de texte imposé (1.4.12) le mot se coupe au lieu de sortir du fond --panel */
-      .stat-label { font-size: clamp(10px, 3.1vw, 12px); letter-spacing: 0; overflow-wrap: anywhere; }
-      .hero h1 { font-size: clamp(28px, 9vw, 40px); } /* L32 : « IMPÉRIALE » tient à 320 px */
+      .stat-label { font-size: clamp(0.625rem, 3.1vw + 0.75rem - 12px, 0.75rem); letter-spacing: 0; overflow-wrap: anywhere; }
+      .hero h1 { font-size: clamp(1.75rem, 9vw + 2.5rem - 40px, 2.5rem); } /* L32 : « IMPÉRIALE » tient à 320 px */
       .search-field { flex-basis: 100%; max-width: none; } /* L32 (R1) : champ pleine largeur, « Importer » dessous */
       .art-content { padding: 14px 12px; }
       .category-grid, .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* L143 : le texte des cartes est dans le flux, un mot long ne doit plus élargir la colonne */
       .art-grid { gap: 10px; }
       .sidebar { grid-template-columns: 1fr; }
-      .nav-arrow { width: 40px; height: 50px; font-size: 26px; }
+      .nav-arrow { width: 40px; height: 50px; font-size: 1.625rem; }
       .nav-arrow.left { left: 8px; }
       .nav-arrow.right { right: 8px; }
     }
@@ -640,11 +640,11 @@
     .cat-box h3, .import-box h3 {
       margin: 0 0 8px;
       color: var(--gold-bright);
-      font-size: 22px;
+      font-size: 1.375rem;
     }
     .cat-hint {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 0.8125rem;
       margin: 0 0 20px;
       line-height: 1.5;
     }
@@ -656,7 +656,7 @@
     }
     .cat-row label {
       color: #c9beaa;
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -672,7 +672,7 @@
       color: var(--text);
       padding: 0 12px;
       font-family: inherit;
-      font-size: 13px;
+      font-size: 0.8125rem;
       outline: none;
     }
     /* Bordure au focus de tous les champs (recherche, filtres, Catégoriser) — L45/t5 : règles réunies (budget). */
@@ -680,7 +680,7 @@
     .cat-row select:focus, .cat-row input[type="text"]:focus { border-color: var(--border-strong); }
     .cat-toggle {
       align-self: flex-start;
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       padding: 4px 0;
@@ -710,7 +710,7 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: flex-end; /* L45/t1 : « Importer » aligné sur le champ, pas sur le libellé */
-      max-width: 720px;
+      max-width: 45rem;
     }
     .import-btn-hero {
       height: 44px;
@@ -721,7 +721,7 @@
       white-space: nowrap;
     }
     .import-btn-hero:hover, .chip-add:hover { background: rgba(201, 162, 74, 0.22); }
-    .import-btn-hero span { font-size: 16px; line-height: 1; }
+    .import-btn-hero span { font-size: 1rem; line-height: 1; }
 
     /* Chips input */
     .chip-input {
@@ -740,7 +740,7 @@
       background: transparent;
       color: var(--text);
       font-family: inherit;
-      font-size: 13px;
+      font-size: 0.8125rem;
       outline: none;
     }
     .chip, .chip-add, .cat-dropdown { border: 1px solid rgba(201, 162, 74, 0.5); }
@@ -751,7 +751,7 @@
       padding: 3px 4px 3px 9px;
       background: rgba(201, 162, 74, 0.18);
       color: var(--gold-bright);
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.04em;
     }
@@ -763,7 +763,7 @@
       background: transparent;
       border: 0;
       color: var(--gold);
-      font-size: 14px;
+      font-size: 0.875rem;
       cursor: pointer;
       font-family: inherit;
     }
@@ -775,7 +775,7 @@
       place-items: center;
       background: rgba(201, 162, 74, 0.12);
       color: var(--gold-bright);
-      font-size: 14px;
+      font-size: 0.875rem;
       cursor: pointer;
       font-family: inherit;
     }
@@ -806,7 +806,7 @@
       background: rgba(201, 162, 74, 0.08);
       color: var(--gold);
       font-family: var(--serif);
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -816,7 +816,7 @@
     .cat-section-count {
       color: rgba(201, 162, 74, 0.55);
       font-family: var(--sans);
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0;
     }
     .cat-section-items {
@@ -831,7 +831,7 @@
       gap: 8px;
       padding: 5px 14px;
       color: var(--text);
-      font-size: 13px;
+      font-size: 0.8125rem;
       cursor: pointer;
       transition: background 0.08s ease;
     }
@@ -846,7 +846,7 @@
     }
     .cat-item-check {
       color: var(--gold-bright);
-      font-size: 12px;
+      font-size: 0.75rem;
     }
 
     /* Import modal */
@@ -864,7 +864,7 @@
       border-bottom: 2px solid transparent;
       color: var(--muted);
       font-family: inherit;
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -891,7 +891,7 @@
 
     .reddit-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(13.75rem, 100%), 1fr));
       gap: 12px;
     }
     .reddit-card {
@@ -922,7 +922,7 @@
     .reddit-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
     .reddit-title {
       color: var(--text);
-      font-size: 13px;
+      font-size: 0.8125rem;
       font-weight: 600;
       line-height: 1.3;
       display: -webkit-box;
@@ -930,7 +930,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .import-btn { justify-self: stretch; height: 32px; font-size: 11px; }
+    .import-btn { justify-self: stretch; height: 32px; font-size: 0.6875rem; }
     .import-btn:disabled { opacity: 0.5; cursor: wait; }
 
     .import-message {
@@ -939,7 +939,7 @@
       border: 1px solid rgba(15, 107, 67, 0.5);
       background: rgba(15, 107, 67, 0.15);
       color: #80e0ad;
-      font-size: 13px;
+      font-size: 0.8125rem;
     }
     .import-message.error {
       border-color: rgba(170, 45, 45, 0.55);

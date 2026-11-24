@@ -7,6 +7,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as sass from 'sass';
 import postcss from 'postcss';
+import { taillePx } from '../../../testing/taille-px';
 
 const src = resolve(__dirname, '../../..');
 const css = sass.compile(resolve(src, 'app/features/ship-detail/ship-detail.component.scss'), { loadPaths: [src] }).css;
@@ -38,7 +39,7 @@ describe('Titans, taille dans l\'en-tête (L18)', () => {
 
   it('R5 — .hero-size fait 14 px au moins et ne casse pas « 410 tonnes » en laissant un mot orphelin', () => {
     const d = decls('.hero-size');
-    expect(parseFloat(d['font-size'])).toBeGreaterThanOrEqual(14);
+    expect(taillePx(d['font-size'])).toBeGreaterThanOrEqual(14); // L253 : en rem, 14 px au réglage normal
     expect(d['text-wrap']).toBe('balance');
   });
 

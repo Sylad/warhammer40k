@@ -629,7 +629,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".sf-grid": {
     "display": "grid",
     "gap": "14px",
-    "grid-template-columns": "repeat(auto-fill, minmax(260px, 1fr))",
+    "grid-template-columns": "repeat(auto-fill, minmax(min(260px, 100%), 1fr))",
     "margin-top": "18px",
   },
   ".sf-load-more": {
@@ -910,7 +910,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".units-grid": {
     "display": "grid",
     "gap": "16px",
-    "grid-template-columns": "repeat(auto-fill, minmax(220px, 1fr))",
+    "grid-template-columns": "repeat(auto-fill, minmax(min(220px, 100%), 1fr))",
   },
   ".units-head": {
     "align-items": "center",
@@ -1992,7 +1992,7 @@ exports[`styles de composants — déclarations effectives inchangées (L29) > a
   ".reddit-grid": {
     "display": "grid",
     "gap": "12px",
-    "grid-template-columns": "repeat(auto-fill, minmax(220px, 1fr))",
+    "grid-template-columns": "repeat(auto-fill, minmax(min(220px, 100%), 1fr))",
   },
   ".reddit-info": {
     "display": "flex",

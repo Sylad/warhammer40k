@@ -12,7 +12,7 @@
     }
     .back-btn {
       color: var(--gold);
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       letter-spacing: 0.18em;
       text-decoration: none;
@@ -29,7 +29,7 @@
       border: 1px solid rgba(201, 162, 74, 0.32);
       color: var(--gold);
       cursor: pointer;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-family: inherit;
       transition: border-color 0.2s, background 0.2s;
     }
@@ -80,7 +80,7 @@
     .zoom-btn {
       display: block; width: 100%; min-height: 44px; padding: 8px 12px;
       background: transparent; border: 0; cursor: pointer;
-      color: var(--gold); font: inherit; font-size: 12px; font-weight: 700;
+      color: var(--gold); font: inherit; font-size: 0.75rem; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase;
     }
     .zoom-btn:hover { color: var(--gold-bright); background: rgba(201, 162, 74, 0.08); }
@@ -92,13 +92,13 @@
       margin: 0 0 14px;
       font-family: var(--serif);
       color: var(--gold-bright);
-      font-size: clamp(38px, 4.4vw, 64px);
+      font-size: clamp(2.375rem, 4.4vw + 4rem - 64px, 4rem);
       line-height: 0.95;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       text-shadow: 0 0 36px rgba(201, 162, 74, 0.32);
     }
-    .hero--figure h1 { @include fit-title(clamp(38px, 4.4vw, 64px), 0.95); } /* 0,95 em par caractère : « COMMANDANT » (M, D, N larges) dépassait de 7 px à 0,85 */
+    .hero--figure h1 { @include fit-title(clamp(2.375rem, 4.4vw + 4rem - 64px, 4rem), 0.95); } /* 0,95 em par caractère : « COMMANDANT » (M, D, N larges) dépassait de 7 px à 0,85 */
     .hero-badges {
       display: flex;
       flex-wrap: wrap;
@@ -108,7 +108,7 @@
     }
     .ub {
       padding: 4px 11px;
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.16em;
       font-weight: 900;
       text-transform: uppercase;
@@ -129,7 +129,7 @@
       width: 26px;
       height: 26px;
       color: var(--gold);
-      font-size: 16px;
+      font-size: 1rem;
       margin-left: 4px;
     }
     .hero-sigil img { width: 22px; height: 22px; object-fit: contain; }
@@ -138,15 +138,15 @@
       color: var(--gold);
       font-family: var(--serif);
       font-style: italic;
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.04em;
     }
     .hero-desc {
       margin: 0 0 22px;
       color: #cfc3ad;
-      font-size: 14.5px;
+      font-size: 0.90625rem;
       line-height: 1.65;
-      max-width: 530px;
+      max-width: 33.125rem;
     }
     .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
     .cta {
@@ -155,7 +155,7 @@
       gap: 10px;
       padding: 12px 22px;
       font-family: inherit;
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -178,7 +178,7 @@
     }
     .cta-outline:hover { border-color: var(--gold-bright); background: rgba(201, 162, 74, 0.1); }
     .cta-block { width: 100%; justify-content: center; margin-top: 12px; }
-    .cta-ico { font-size: 14px; }
+    .cta-ico { font-size: 0.875rem; }
 
     /* TABS */
     .tabs {
@@ -194,7 +194,7 @@
       color: var(--muted);
       padding: 14px 22px;
       font-family: inherit;
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -236,14 +236,14 @@
       margin: 0 0 16px;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 18px;
+      font-size: 1.125rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
     .panel-text {
       margin: 0;
       color: #c3baaa;
-      font-size: 13.5px;
+      font-size: 0.84375rem;
       line-height: 1.7;
     }
     .panel-text.muted { color: var(--muted); font-style: italic; }
@@ -255,18 +255,18 @@
       align-items: center;
       gap: 14px;
       color: #d6cdb6;
-      font-size: 13px;
+      font-size: 0.8125rem;
       line-height: 1.5;
     }
     .cap-ico {
-      width: 32px;
-      height: 32px;
+      width: 2rem;
+      height: 2rem;
       display: grid;
       place-items: center;
       border: 1px solid rgba(201,162,74,0.4);
       border-radius: 50%;
       color: var(--gold);
-      font-size: 14px;
+      font-size: 0.875rem;
       background: rgba(201,162,74,0.08);
       flex-shrink: 0;
     }
@@ -298,7 +298,7 @@
       border: 1px solid rgba(201,162,74,0.3);
       color: var(--gold);
       background: rgba(201,162,74,0.06);
-      font-size: 16px;
+      font-size: 1rem;
     }
     /* Image inline (cas exceptionnel : reliques cosmiques iconiques type
        Anaris) — remplace l'icône texte. Bordure or pour signaler "cas spé". */
@@ -315,14 +315,14 @@
       display: block;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
     .equip-list li span {
       color: #c3baaa;
-      font-size: 12.5px;
+      font-size: 0.78125rem;
       line-height: 1.55;
     }
 
@@ -337,7 +337,7 @@
     }
     .stat-lbl {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 900;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -345,7 +345,7 @@
     .stat-val {
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       text-align: center;
     }
     .stat-bar {
@@ -363,7 +363,7 @@
       margin: 4px 0 0;
       color: var(--gold);
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
@@ -382,12 +382,12 @@
       border: 1px solid rgba(201, 162, 74, 0.45);
       border-radius: 50%;
       color: var(--gold);
-      font-size: 22px;
+      font-size: 1.375rem;
       background: rgba(201, 162, 74, 0.08);
     }
     .ki-lbl {
       color: var(--muted);
-      font-size: 9.5px;
+      font-size: 0.59375rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       text-align: center;
@@ -415,7 +415,7 @@
     /* VARIANTES */
     .variants-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(10.625rem, 100%), 1fr));
       gap: 14px;
     }
     .variant-card {
@@ -450,13 +450,13 @@
     .variant-card strong {
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       line-height: 1.15;
       margin-bottom: 4px;
     }
-    .variant-card span { color: var(--muted); font-size: 11.5px; letter-spacing: 0.05em; }
+    .variant-card span { color: var(--muted); font-size: 0.71875rem; letter-spacing: 0.05em; }
 
     /* SIDEBAR */
     .sidebar {
@@ -479,7 +479,7 @@
       font-family: var(--serif);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .info-row {
       display: grid;
@@ -498,12 +498,12 @@
       border: 1px solid rgba(201, 162, 74, 0.3);
       color: var(--gold);
       background: rgba(201, 162, 74, 0.05);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .info-row strong {
       display: block;
       color: var(--muted);
-      font-size: 10.5px;
+      font-size: 0.65625rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-bottom: 3px;
@@ -511,7 +511,7 @@
     .info-row span {
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 13.5px;
+      font-size: 0.84375rem;
       letter-spacing: 0.04em;
     }
     .row-link {
@@ -527,24 +527,24 @@
     .row-link:first-of-type { border-top: 0; padding-top: 2px; }
     .row-link:hover { opacity: 0.8; }
     .rl-ico {
-      width: 28px;
-      height: 28px;
+      width: 1.75rem;
+      height: 1.75rem;
       display: grid;
       place-items: center;
       border: 1px solid rgba(201, 162, 74, 0.3);
       color: var(--gold);
-      font-size: 13px;
+      font-size: 0.8125rem;
       background: rgba(201, 162, 74, 0.05);
     }
     .rl-label {
       flex: 1;
       color: #d6cdb6;
-      font-size: 12.5px;
+      font-size: 0.78125rem;
       letter-spacing: 0.04em;
     }
     .rl-arrow {
       color: var(--gold);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
 
     .related {
@@ -575,14 +575,14 @@
       display: block;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 2px;
     }
     .related-info span {
       color: var(--muted);
-      font-size: 11.5px;
+      font-size: 0.71875rem;
       letter-spacing: 0.06em;
     }
 
@@ -619,7 +619,7 @@
       background: linear-gradient(180deg, transparent 0%, rgba(5, 4, 3, 0.92) 70%);
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 10.5px;
+      font-size: 0.65625rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       line-height: 1.2;
@@ -634,7 +634,7 @@
       color: #d4c8aa;
       font-family: var(--serif);
       font-style: italic;
-      font-size: 13.5px;
+      font-size: 0.84375rem;
       line-height: 1.7;
       position: relative;
       padding: 0 22px;
@@ -642,7 +642,7 @@
     .q-mark {
       color: var(--gold);
       font-family: var(--serif);
-      font-size: 36px;
+      font-size: 2.25rem;
       line-height: 0.5;
       position: absolute;
       opacity: 0.6;
@@ -654,7 +654,7 @@
       display: block;
       margin-top: 10px;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.08em;
       text-align: right;
     }
@@ -662,7 +662,7 @@
     /* ICONOGRAPHIE — main panel, character art prominent */
     .panel-iconography .panel-sub-text {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 0.8125rem;
       margin: 0 0 16px;
       font-style: italic;
     }
@@ -742,7 +742,7 @@
       .sidebar { display: contents; }
       .sp-info { order: -1; }
       .sp-info-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 14px; }
-      .sp-info .info-row { border-top: 0; padding: 6px 0; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; }
+      .sp-info .info-row { border-top: 0; padding: 6px 0; grid-template-columns: 2rem minmax(0, 1fr); gap: 10px; }
       .sp-info .info-ico { width: 32px; height: 32px; }
       /* L128 : un mot long (12/133 fiches à 390 px, toutes à 320 px) ne doit pas sortir de sa colonne
          ni chevaucher la voisine : la cellule peut rétrécir, le mot se coupe */

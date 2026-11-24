@@ -29,6 +29,8 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
     '[class.barre-sans-mot]': 'barre()["barre-sans-mot"]',
     '[class.barre-sans-aigle]': 'barre()["barre-sans-aigle"]',
     '[class.texte-agrandi]': 'barre()["texte-agrandi"]',
+    // L253 : 1rem au-delà de 16 px (police du navigateur ou de la page) : reflux du contenu, styles/_texte-agrandi.scss.
+    '[class.texte-plus-grand]': 'barre()["texte-plus-grand"]',
   },
   template: `
     <!-- L250 : sondes de 1rem (police de la page) et de 1em « medium » (police par défaut du navigateur). -->
@@ -449,6 +451,13 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
          de la pastille et élargit « ☰ 9+ » : police par défaut de 20 px, la barre débordait de 3 à 5 px
          à 320–324 px. Marges réduites : le bouton reste ≥ 44 px (min-width, min-height). */
       .menu-toggle.has-badge { padding: 0 6px; gap: 4px; }
+      /* L253 : police du NAVIGATEUR agrandie (texte-plus-grand ; texte-agrandi, relatif à elle, n'est pas posé) :
+         mêmes règles que « texte-agrandi + barre-etroite » plus bas — 32 px : la barre défilait de 74 px à 320 px. */
+      :host(.texte-plus-grand) .drawer { width: min(20rem, 92vw); padding-inline: 12px; }
+      :host(.texte-plus-grand) .drawer a { letter-spacing: 0.06em; overflow-wrap: anywhere; }
+      :host(.texte-plus-grand) .brand strong {
+        font-size: min(1.05rem, 7.5vw); letter-spacing: 0.04em; line-height: 1.05; overflow-wrap: anywhere;
+      }
     }
     /* L46 : police par défaut de 18 ou 20 px, 320–371 px — « ⚜ WARHAMMER 40,000 » + « ☰ Menu » ne
        tiennent plus côte à côte : le mot s'efface aussi sans pastille (« ☰ » seul, nom accessible
@@ -495,14 +504,16 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
     /* Texte agrandi au téléphone : « WARHAMMER » seul ne tenait pas à côté de la loupe et du menu
        (320 px à 200 % : 74 px de trop). Le logo passe sur deux lignes resserrées, borné par la largeur
        de la fenêtre, et tient dans les 70 px de la barre (les rubans collants s'alignent dessous). */
+    /* L253 : mêmes règles quand c'est la police par défaut du NAVIGATEUR qui grossit (texte-plus-grand, 1rem > 16 px) ;
+       texte-agrandi est relatif à elle et n'est pas posé. Variante étroite : dans la media query de 31em plus haut. */
     /* Le tiroir suit le texte (20rem = 320 px à 100 %) : « PLAN DE TRAVAIL » tient sur sa ligne. */
-    :host(.texte-agrandi) .drawer { width: min(20rem, 86vw); }
+    :host(.texte-agrandi) .drawer, :host(.texte-plus-grand) .drawer { width: min(20rem, 86vw); }
     /* Au téléphone, « NOUVEAUTÉS » et sa pastille ne tiennent plus sur une ligne : la pastille passe dessous. */
-    :host(.texte-agrandi) .drawer a { flex-wrap: wrap; row-gap: 4px; padding-block: 6px; }
+    :host(.texte-agrandi) .drawer a, :host(.texte-plus-grand) .drawer a { flex-wrap: wrap; row-gap: 4px; padding-block: 6px; }
     /* 320 px à 200 %, polices web bloquées : « NOUVEAUTÉS » (≈ 240 px) dépassait les 224 px du lien. */
     :host(.texte-agrandi.barre-etroite) .drawer { width: min(20rem, 92vw); padding-inline: 12px; }
     :host(.texte-agrandi.barre-etroite) .drawer a { letter-spacing: 0.06em; overflow-wrap: anywhere; }
-    :host(.texte-agrandi) .drawer-head { flex-wrap: wrap; gap: 8px; }
+    :host(.texte-agrandi) .drawer-head, :host(.texte-plus-grand) .drawer-head { flex-wrap: wrap; gap: 8px; }
     :host(.texte-agrandi.barre-etroite) .brand strong {
       font-size: min(1.05rem, 7.5vw); letter-spacing: 0.04em; line-height: 1.05; overflow-wrap: anywhere;
     }

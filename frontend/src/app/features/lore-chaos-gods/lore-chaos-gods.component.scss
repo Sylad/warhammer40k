@@ -3,7 +3,7 @@
     .back-link {
       display: inline-block;
       margin-bottom: 18px;
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
@@ -34,12 +34,12 @@
         radial-gradient(circle at 75% 90%, rgba(156, 38, 128, 0.28), transparent 45%),
         linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.94));
     }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; min-width: 0; }
+    .hero-content { position: relative; z-index: 1; max-width: 50rem; min-width: 0; }
 
     .badge {
       display: inline-block;
       padding: 5px 12px;
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 800;
@@ -50,7 +50,7 @@
     }
 
     h1 {
-      font-size: clamp(40px, 5vw, 60px);
+      font-size: clamp(2.5rem, 5vw + 3.75rem - 60px, 3.75rem);
       line-height: 1.04;
       margin: 0 0 14px;
       color: var(--gold-bright);
@@ -58,9 +58,9 @@
     }
     @media (max-width: 600px) {
       .hero { padding: 32px 20px 28px; }
-      h1 { font-size: 32px; overflow-wrap: break-word; }
+      h1 { font-size: 2rem; overflow-wrap: break-word; }
     }
-    .lede { font-size: 15px; color: var(--text); line-height: 1.7; margin: 0 0 22px; max-width: 720px; }
+    .lede { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin: 0 0 22px; max-width: 45rem; }
 
     .quick-nav {
       display: flex;
@@ -76,13 +76,13 @@
       padding: 8px 14px;
       border: 1px solid var(--god-color);
       background: rgba(0, 0, 0, 0.3);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 700;
     }
     .quick-link:hover { background: rgba(0, 0, 0, 0.55); }
-    .quick-sigil { font-size: 16px; }
+    .quick-sigil { font-size: 1rem; }
 
     /* Per-god article */
     .god {
@@ -138,7 +138,7 @@
       background: rgba(8,7,6,0.7);
       border: 1px solid var(--god-color, rgba(201,162,74,0.4));
       color: var(--god-text, var(--gold-soft));
-      font-size: 14px;
+      font-size: 0.875rem;
       cursor: pointer;
       opacity: 0.7;
       transition: opacity 0.15s, transform 0.15s;
@@ -150,7 +150,7 @@
       pointer-events: none;
       background: linear-gradient(180deg, color-mix(in srgb, var(--god-color) 22%, transparent) 0%, rgba(0,0,0,0.85) 75%);
     }
-    .god-head-content { position: relative; z-index: 1; max-width: 760px; min-width: 0; }
+    .god-head-content { position: relative; z-index: 1; max-width: 47.5rem; min-width: 0; }
     /* Au téléphone : marges de 20 px, et le texte s'arrête au-dessus du ⛶ (32 px à 16 px du bas). */
     @media (max-width: 600px) {
       .god-head { padding: 40px 20px 64px; }
@@ -158,7 +158,7 @@
 
     .number {
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.2em;
       color: var(--gold-bright);
       text-transform: uppercase;
@@ -166,12 +166,12 @@
     }
     .god-sigil-wrap { margin-bottom: 14px; }
     .god-sigil {
-      font-size: 56px;
+      font-size: 3.5rem;
       line-height: 1;
       filter: drop-shadow(0 0 16px currentColor);
     }
     h2 {
-      font-size: clamp(30px, 9vw, 48px);
+      font-size: clamp(1.875rem, 9vw + 3rem - 48px, 3rem);
       overflow-wrap: break-word;
       line-height: 1;
       margin: 0 0 8px;
@@ -180,14 +180,14 @@
     }
     .god-title {
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.04em;
       color: var(--gold);
       text-transform: uppercase;
       margin-bottom: 8px;
     }
     .god-sphere {
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
@@ -196,13 +196,13 @@
     .citation {
       font-style: italic;
       color: var(--text);
-      font-size: 15px;
-      max-width: 600px;
+      font-size: 0.9375rem;
+      max-width: 37.5rem;
       padding-top: 12px;
       border-top: 1px solid var(--border);
       margin: 0;
     }
-    .citation .quote { color: var(--gold); font-family: var(--serif); font-size: 22px; margin: 0 4px; }
+    .citation .quote { color: var(--gold); font-family: var(--serif); font-size: 1.375rem; margin: 0 4px; }
 
     .god-body {
       display: grid;
@@ -231,20 +231,20 @@
 
     .god-main p.description {
       color: var(--gold-bright);
-      font-size: 15.5px;
+      font-size: 0.96875rem;
       line-height: 1.65;
       margin: 0 0 16px;
       font-style: italic;
     }
     .god-main p.loreLong {
       color: var(--text);
-      font-size: 14px;
+      font-size: 0.875rem;
       line-height: 1.75;
       margin: 0 0 24px;
     }
 
     .section-title {
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--god-text, var(--gold));
@@ -265,19 +265,19 @@
     .daemon-tier { display: flex; gap: 14px; align-items: baseline; }
     .tier-label {
       flex: 0 0 80px;
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
     }
     .tier-value {
       color: var(--text);
-      font-size: 13px;
+      font-size: 0.8125rem;
     }
 
     .notable-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(13.75rem, 100%), 1fr));
       gap: 12px;
     }
     .notable-card {
@@ -299,7 +299,7 @@
       position: absolute;
       top: 8px; right: 10px;
       color: var(--god-text, var(--gold-soft));
-      font-size: 12px;
+      font-size: 0.75rem;
       opacity: 0.5;
       transition: opacity 0.15s;
     }
@@ -307,13 +307,13 @@
     .notable-name {
       color: var(--god-text, var(--gold));
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 6px;
     }
     .notable-card p {
-      font-size: 12px;
+      font-size: 0.75rem;
       color: var(--muted);
       line-height: 1.55;
       margin: 0;
@@ -330,7 +330,7 @@
       background: rgba(0, 0, 0, 0.35);
     }
     .side-title {
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--god-text, var(--gold));
@@ -340,7 +340,7 @@
       border-bottom: 1px solid var(--border);
     }
     .side-block ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-    .side-block li { font-size: 12px; color: var(--text); padding: 3px 0; line-height: 1.5; }
+    .side-block li { font-size: 0.75rem; color: var(--text); padding: 3px 0; line-height: 1.5; }
     .side-block li::before { content: '› '; color: var(--gold-soft); }
 
     .primarch-link { padding: 8px 0; border-bottom: 1px solid var(--border); }
@@ -348,19 +348,19 @@
     .primarch-name {
       font-family: var(--serif);
       color: var(--gold);
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
     .primarch-legion {
-      font-size: 11px;
+      font-size: 0.6875rem;
       color: var(--muted);
       margin-top: 2px;
     }
     .primarch-go {
       display: inline-block;
       margin-top: 6px;
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--god-text, var(--gold));
@@ -368,7 +368,7 @@
     .primarch-go:hover { color: var(--gold-bright); }
 
     .cta-bottom {
-      max-width: 720px;
+      max-width: 45rem;
       margin: 30px auto 8px;
       text-align: center;
       padding: 32px 24px;
@@ -387,13 +387,13 @@
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
     }
-    .ornament .aigle { color: var(--gold); font-size: 18px; }
+    .ornament .aigle { color: var(--gold); font-size: 1.125rem; }
     .cta-text {
       color: var(--gold);
       font-family: var(--serif);
       font-style: italic;
       letter-spacing: 0.04em;
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 1.7;
       margin: 0 0 20px;
     }
@@ -401,7 +401,7 @@
     .cta-link {
       display: inline-block;
       color: var(--gold-bright);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 800;

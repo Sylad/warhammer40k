@@ -123,15 +123,15 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
       display: flex; align-items: center; gap: 12px;
       padding: 18px 22px; border-bottom: 1px solid var(--border);
     }
-    .cmdk-icon { font-size: 22px; color: var(--gold); }
+    .cmdk-icon { font-size: 1.375rem; color: var(--gold); }
     .cmdk-input {
       flex: 1; background: transparent; border: none; outline: none;
-      font-family: var(--sans); font-size: 16px; color: var(--text);
+      font-family: var(--sans); font-size: 1rem; color: var(--text);
       letter-spacing: 0.04em;
     }
     .cmdk-input::placeholder { color: var(--muted); }
     .cmdk-shortcut {
-      font-family: var(--serif); font-size: 10px; letter-spacing: 0.18em;
+      font-family: var(--serif); font-size: 0.625rem; letter-spacing: 0.18em;
       color: var(--muted); border: 1px solid var(--border); padding: 4px 8px;
     }
     .cmdk-results {
@@ -139,7 +139,7 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
     }
     .cmdk-empty, .cmdk-hint {
       padding: 24px; text-align: center; color: var(--muted);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .cmdk-item {
       display: grid; grid-template-columns: 100px 1fr auto 16px;
@@ -154,21 +154,21 @@ const TYPE_LABEL: Record<SearchResult['type'], string> = {
     }
     .cmdk-item.active .cmdk-label { color: var(--gold-bright); }
     .cmdk-type {
-      font-family: var(--serif); font-size: 10px; letter-spacing: 0.18em;
+      font-family: var(--serif); font-size: 0.625rem; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--gold);
     }
-    .cmdk-label { font-size: 14px; font-weight: 500; }
-    .cmdk-sub { font-size: 12px; color: var(--muted); }
+    .cmdk-label { font-size: 0.875rem; font-weight: 500; }
+    .cmdk-sub { font-size: 0.75rem; color: var(--muted); }
     .cmdk-arrow { color: var(--muted); }
     .cmdk-footer {
       display: flex; gap: 24px; justify-content: center;
       padding: 12px; border-top: 1px solid var(--border);
-      font-size: 11px; color: var(--muted);
+      font-size: 0.6875rem; color: var(--muted);
     }
     .cmdk-footer kbd {
       font-family: var(--sans); padding: 2px 6px; margin-right: 4px;
       background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-      border-radius: 2px; font-size: 10px;
+      border-radius: 2px; font-size: 0.625rem;
     }
     @media (max-width: 760px) {
       .cmdk-panel { top: 60px; width: 96vw; }

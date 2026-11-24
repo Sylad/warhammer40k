@@ -4,7 +4,7 @@
       display: inline-block;
       margin: 16px 0 24px;
       color: var(--gold);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       font-weight: 700;
@@ -38,20 +38,20 @@
         radial-gradient(circle at 20% 80%, rgba(123,17,19,0.42), transparent 50%),
         linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.92) 80%);
     }
-    .hero-content { position: relative; z-index: 1; max-width: 880px; }
+    .hero-content { position: relative; z-index: 1; max-width: 55rem; }
     .badge {
       display: inline-block;
       padding: 4px 12px;
       border: 1px solid var(--border);
       color: var(--gold);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       font-weight: 700;
       margin-bottom: 16px;
     }
     .hero h1 {
-      font-size: clamp(36px, 5vw, 60px);
+      font-size: clamp(2.25rem, 5vw + 3.75rem - 60px, 3.75rem);
       line-height: 1.05;
       margin: 0 0 16px;
       color: var(--gold-bright);
@@ -59,7 +59,7 @@
       letter-spacing: 0.02em;
       text-shadow: 0 2px 14px rgba(0,0,0,0.85);
     }
-    .lede { font-size: 16px; color: var(--text); max-width: 700px; line-height: 1.65; margin: 0 0 22px; }
+    .lede { font-size: 1rem; color: var(--text); max-width: 43.75rem; line-height: 1.65; margin: 0 0 22px; }
 
     .counters { display: flex; gap: 20px; flex-wrap: wrap; }
     .counter {
@@ -68,8 +68,8 @@
       border: 1px solid var(--border);
       background: rgba(8,7,6,0.55);
     }
-    .counter strong { color: var(--gold-bright); font-family: var(--serif); font-size: 22px; }
-    .counter span { color: var(--muted); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .counter strong { color: var(--gold-bright); font-family: var(--serif); font-size: 1.375rem; }
+    .counter span { color: var(--muted); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
 
     .filters {
       position: sticky;
@@ -93,7 +93,7 @@
       border: 1px solid rgba(201,162,74,0.28);
       background: rgba(8,7,6,0.55);
       color: var(--text);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 700;
@@ -111,7 +111,7 @@
       background: rgba(201,162,74,0.08);
       box-shadow: inset 0 0 0 1px var(--t-color, var(--gold));
     }
-    .filter-sigil { font-size: 14px; }
+    .filter-sigil { font-size: 0.875rem; }
     .filter:focus-visible, .card-toggle:focus-visible, .card-zoom:focus-visible, .fiche-link:focus-visible {
       outline: 2px solid var(--gold-bright);
       outline-offset: 2px;
@@ -124,7 +124,7 @@
       background: rgba(8,7,6,0.78);
       color: var(--text);
       font-family: inherit;
-      font-size: 13px;
+      font-size: 0.8125rem;
       outline: none;
     }
     .search { flex: 1; min-width: 200px; max-width: 400px; }
@@ -133,7 +133,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
       gap: 16px;
     }
     .card {
@@ -177,12 +177,12 @@
       border-bottom: 1px solid rgba(201,162,74,0.18);
     }
     .card-head.with-zoom { padding-left: 56px; }
-    .card-sigil { font-size: 22px; line-height: 1; text-shadow: 0 0 14px rgba(0,0,0,0.7); }
+    .card-sigil { font-size: 1.375rem; line-height: 1; text-shadow: 0 0 14px rgba(0,0,0,0.7); }
     .card-type {
       color: var(--text);
       background: rgba(8,7,6,0.85);
       padding: 2px 6px;
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       font-weight: 700;
@@ -191,7 +191,7 @@
     .card-body h3 {
       margin: 0 0 4px;
       font-family: var(--serif);
-      font-size: 18px;
+      font-size: 1.125rem;
       color: var(--gold-bright);
       letter-spacing: 0.02em;
       line-height: 1.2;
@@ -203,14 +203,14 @@
       color: inherit;
       letter-spacing: inherit;
     }
-    .card-vo { color: #bdb5a4; font-size: 11px; font-style: italic; margin-bottom: 8px; letter-spacing: 0.04em; } /* 6,2:1 sur #333333, le fond le plus clair sous le voile ; --muted y faisait 3,5:1 (L15) */
-    .card-desc { color: var(--text); font-size: 13px; line-height: 1.55; margin: 4px 0 12px; flex: 1; }
+    .card-vo { color: #bdb5a4; font-size: 0.6875rem; font-style: italic; margin-bottom: 8px; letter-spacing: 0.04em; } /* 6,2:1 sur #333333, le fond le plus clair sous le voile ; --muted y faisait 3,5:1 (L15) */
+    .card-desc { color: var(--text); font-size: 0.8125rem; line-height: 1.55; margin: 4px 0 12px; flex: 1; }
     .card-factions { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
     .faction-pill {
       padding: 2px 8px;
       border: 1px solid rgba(201,162,74,0.32);
       color: var(--gold);
-      font-size: 9.5px;
+      font-size: 0.59375rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 700;
@@ -222,7 +222,7 @@
       top: 14px; right: 16px;
       z-index: 2;
       color: var(--gold-soft);
-      font-size: 22px;
+      font-size: 1.375rem;
       line-height: 1;
       transition: transform 0.25s;
     }
@@ -238,7 +238,7 @@
       background: rgba(8,7,6,0.85);
       border: 1px solid rgba(201,162,74,0.4);
       color: var(--t-text, var(--gold)); /* teinte éclaircie du type : ≥ 3:1 sur le voile même sur une image blanche (WCAG 1.4.11, L15) */
-      font-size: 13px;
+      font-size: 0.8125rem;
       cursor: pointer;
       font-family: inherit;
       transition: transform 0.15s, border-color 0.15s;
@@ -261,7 +261,7 @@
     .lore-long {
       grid-column: 1 / -1;
       color: var(--text);
-      font-size: 14px;
+      font-size: 0.875rem;
       line-height: 1.7;
       margin: 0;
     }
@@ -272,15 +272,15 @@
     }
     .detail-label {
       color: var(--gold);
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       font-weight: 700;
       margin-bottom: 6px;
     }
-    .detail-value { color: var(--text); font-size: 12.5px; line-height: 1.6; }
-    .detail-value.mono { font-family: ui-monospace, 'Cascadia Mono', Menlo, monospace; font-size: 11.5px; color: var(--gold); }
-    .notable-list { margin: 0; padding-left: 18px; color: var(--text); font-size: 12.5px; line-height: 1.55; }
+    .detail-value { color: var(--text); font-size: 0.78125rem; line-height: 1.6; }
+    .detail-value.mono { font-family: ui-monospace, 'Cascadia Mono', Menlo, monospace; font-size: 0.71875rem; color: var(--gold); }
+    .notable-list { margin: 0; padding-left: 18px; color: var(--text); font-size: 0.78125rem; line-height: 1.55; }
     .notable-list li { margin-bottom: 4px; }
     .citation {
       grid-column: 1 / -1;
@@ -291,9 +291,9 @@
       font-style: italic;
       color: var(--gold-bright);
       font-family: var(--serif);
-      font-size: 15px;
+      font-size: 0.9375rem;
     }
-    .quote { color: var(--t-color, var(--gold)); font-size: 24px; font-style: normal; margin: 0 4px; }
+    .quote { color: var(--t-color, var(--gold)); font-size: 1.5rem; font-style: normal; margin: 0 4px; }
 
     .empty {
       grid-column: 1 / -1;
@@ -301,7 +301,7 @@
       text-align: center;
       color: var(--muted);
       border: 1px dashed rgba(201,162,74,0.3);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
 
     @media (max-width: 600px) {

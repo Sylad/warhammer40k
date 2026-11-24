@@ -4,7 +4,7 @@
     }
 
     .romans-page {
-      max-width: 1840px;
+      max-width: 115rem;
       margin: 0 auto;
       padding: 18px 4px 60px;
       display: flex;
@@ -35,7 +35,7 @@
     }
     .eyebrow {
       font-family: 'Cinzel', serif;
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--gold);
@@ -43,7 +43,7 @@
     }
     .hero h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(40px, 4.5vw, 64px);
+      font-size: clamp(2.5rem, 4.5vw + 4rem - 64px, 4rem);
       line-height: 1.05;
       margin: 0;
       color: var(--text);
@@ -52,8 +52,8 @@
       text-shadow: 0 4px 18px rgba(0,0,0,0.7);
     }
     .hero-desc {
-      max-width: 540px;
-      font-size: 15px;
+      max-width: 33.75rem;
+      font-size: 0.9375rem;
       line-height: 1.65;
       color: rgba(232, 222, 202, 0.78);
       margin: 0;
@@ -67,7 +67,7 @@
       border: 1px solid rgba(201, 162, 74, 0.32);
       border-radius: 3px;
       background: rgba(8, 5, 3, 0.7);
-      max-width: 540px;
+      max-width: 33.75rem;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .search-bar:focus-within {
@@ -76,7 +76,7 @@
     }
     .s-icon {
       color: var(--gold);
-      font-size: 16px;
+      font-size: 1rem;
       opacity: 0.7;
     }
     .search-bar input {
@@ -85,7 +85,7 @@
       border: 0;
       color: var(--text);
       font-family: inherit;
-      font-size: 14px;
+      font-size: 0.875rem;
       min-width: 0;
       padding: 14px 0;
       outline: none;
@@ -130,7 +130,7 @@
       border: 0;
       color: rgba(232, 222, 202, 0.55);
       font-family: 'Cinzel', serif;
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 14px 22px;
@@ -162,7 +162,7 @@
     .t-block { display: flex; flex-direction: column; gap: 8px; }
     .t-label {
       font-family: 'Cinzel', serif;
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: rgba(232, 222, 202, 0.55);
@@ -177,13 +177,13 @@
       border-radius: 3px;
       color: var(--text);
       font-family: inherit;
-      font-size: 13px;
+      font-size: 0.8125rem;
       cursor: pointer;
     }
     .select-wrap select:focus { border-color: rgba(201, 162, 74, 0.55); }
     .select-wrap select:focus-visible { outline: 2px solid var(--gold-light, #f0d276); outline-offset: 2px; }
     .select-wrap select:disabled { opacity: 0.5; cursor: not-allowed; }
-    .sort-note { font-size: 11.5px; line-height: 1.4; color: rgba(232, 222, 202, 0.7); }
+    .sort-note { font-size: 0.71875rem; line-height: 1.4; color: rgba(232, 222, 202, 0.7); }
     .caret {
       position: absolute;
       right: 12px;
@@ -191,7 +191,7 @@
       transform: translateY(-50%);
       color: var(--gold);
       pointer-events: none;
-      font-size: 12px;
+      font-size: 0.75rem;
     }
 
     .letters {
@@ -207,7 +207,7 @@
       border-radius: 50%;
       color: rgba(232, 222, 202, 0.65);
       font-family: 'Cinzel', serif;
-      font-size: 11px;
+      font-size: 0.6875rem;
       cursor: pointer;
       transition: all 0.18s;
     }
@@ -232,7 +232,7 @@
     /* GRID */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(16.25rem, 100%), 1fr));
       gap: 22px;
     }
 
@@ -276,7 +276,7 @@
       background: rgba(8, 7, 6, 0.78);
       border: 1px solid rgba(201, 162, 74, 0.4);
       color: var(--gold-soft);
-      font-size: 12px;
+      font-size: 0.75rem;
       opacity: 0;
       transition: opacity 0.15s, color 0.15s, border-color 0.15s;
     }
@@ -297,7 +297,7 @@
     }
     .card-title {
       font-family: 'Cinzel', serif;
-      font-size: 16px;
+      font-size: 1rem;
       letter-spacing: 0.04em;
       color: var(--gold-light, #f0d276);
       margin: 0;
@@ -306,11 +306,11 @@
     }
     .card-author {
       font-style: italic;
-      font-size: 12px;
+      font-size: 0.75rem;
       color: rgba(232, 222, 202, 0.6);
     }
     .card-epoque {
-      font-size: 12px;
+      font-size: 0.75rem;
       color: rgba(240, 210, 118, 0.85);
     }
     .continue-note {
@@ -319,12 +319,12 @@
       align-items: center;
       gap: 6px 14px;
       margin: 0 0 14px;
-      font-size: 13px;
+      font-size: 0.8125rem;
       color: rgba(232, 222, 202, 0.8);
-      .empty-reset { padding: 6px 14px; font-size: 11px; }
+      .empty-reset { padding: 6px 14px; font-size: 0.6875rem; }
     }
     .card-desc {
-      font-size: 12.5px;
+      font-size: 0.78125rem;
       line-height: 1.6;
       color: rgba(232, 222, 202, 0.75);
       margin: 4px 0 6px;
@@ -338,17 +338,17 @@
       align-items: center;
       gap: 6px;
       font-family: 'Cinzel', serif;
-      font-size: 10.5px;
+      font-size: 0.65625rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
       margin-top: 2px;
     }
-    .count-ico { font-size: 12px; }
+    .count-ico { font-size: 0.75rem; }
 
     .card-progress { display: flex; flex-direction: column; gap: 4px; }
     .prog-text {
-      font-size: 12px;
+      font-size: 0.75rem;
       color: rgba(232, 222, 202, 0.7);
     }
     .prog-bar {
@@ -371,7 +371,7 @@
       margin-top: 4px;
     }
     .badge {
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.06em;
       padding: 3px 9px;
       border-radius: 2px;
@@ -431,7 +431,7 @@
       border-radius: 3px;
       color: var(--gold-light, #f0d276);
       font-family: 'Cinzel', serif;
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
@@ -446,7 +446,7 @@
       gap: 10px;
       padding: 8px 0 4px;
     }
-    .lm-count { margin: 0; font-size: 12.5px; color: rgba(232, 222, 202, 0.7); }
+    .lm-count { margin: 0; font-size: 0.78125rem; color: rgba(232, 222, 202, 0.7); }
     .load-more {
       display: inline-flex;
       align-items: center;
@@ -457,7 +457,7 @@
       border-radius: 3px;
       color: var(--gold-light, #f0d276);
       font-family: 'Cinzel', serif;
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       cursor: pointer;
@@ -486,7 +486,7 @@
     }
     .panel-title {
       font-family: 'Cinzel', serif;
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
@@ -516,12 +516,12 @@
     }
     .donut-pct {
       font-family: 'Cinzel', serif;
-      font-size: 22px;
+      font-size: 1.375rem;
       color: var(--gold-light, #f0d276);
       line-height: 1;
     }
     .donut-sub {
-      font-size: 9px;
+      font-size: 0.5625rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: rgba(232, 222, 202, 0.5);
@@ -539,7 +539,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
+      font-size: 0.75rem;
       color: rgba(232, 222, 202, 0.8);
     }
     .prog-list strong {
@@ -556,7 +556,7 @@
       margin-top: 12px;
       padding-top: 12px;
       border-top: 1px solid var(--border);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.04em;
       color: rgba(232, 222, 202, 0.65);
       text-align: center;
@@ -583,7 +583,7 @@
       padding: 11px 4px;
       border: 0;
       background: transparent;
-      font-size: 13px;
+      font-size: 0.8125rem;
       color: rgba(232, 222, 202, 0.85);
       cursor: pointer;
       font: inherit;
@@ -595,7 +595,7 @@
       color: var(--gold);
       width: 20px;
       text-align: center;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .li-arrow { margin-left: auto; color: rgba(201, 162, 74, 0.4); }
 
@@ -615,13 +615,13 @@
       gap: 8px;
       padding: 8px 4px;
       border-bottom: 1px solid rgba(201, 162, 74, 0.08);
-      font-size: 12.5px;
+      font-size: 0.78125rem;
     }
     .popular li:last-child { border-bottom: 0; }
     .pop-rank {
       font-family: 'Cinzel', serif;
       color: var(--gold);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
     .pop-na { margin: 0; padding: 8px 4px; color: rgba(232, 222, 202, 0.65); }
     .pop-name {
@@ -632,7 +632,7 @@
     }
     .pop-count {
       color: rgba(232, 222, 202, 0.62);
-      font-size: 11px;
+      font-size: 0.6875rem;
     }
 
     /* Legend */
@@ -649,7 +649,7 @@
       grid-template-columns: 100px 1fr;
       align-items: center;
       gap: 10px;
-      font-size: 11.5px;
+      font-size: 0.71875rem;
       color: rgba(232, 222, 202, 0.7);
     }
     .legend-desc { line-height: 1.4; }

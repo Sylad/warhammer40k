@@ -70,6 +70,7 @@ describe('galerie — statistiques à 390 px (L54)', () => {
   });
 
   it('libellé 12 px dès que « COLLECTIONS » tient, réduit jusqu\'à 10 px à 320 px', () => {
-    expect(mobileDecls('.stat-label')['font-size']).toBe('clamp(10px, 3.1vw, 12px)');
+    // L253 : en rem ; le terme « 0.75rem - 12px » vaut 0 au réglage normal (= clamp(10px, 3.1vw, 12px)) et suit la police au-delà.
+    expect(mobileDecls('.stat-label')['font-size']).toBe('clamp(0.625rem, 3.1vw + 0.75rem - 12px, 0.75rem)');
   });
 });

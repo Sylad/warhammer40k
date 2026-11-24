@@ -50,7 +50,7 @@
     .map-help {
       margin-top: 10px;
       font-family: var(--serif);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.12em;
       color: var(--muted);
       text-align: center;
@@ -63,7 +63,7 @@
     }
     .map-filter-btn {
       font-family: var(--serif);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       background: rgba(11,9,7,0.7);
@@ -100,7 +100,7 @@
       box-shadow: 0 0 6px currentColor;
     }
     .map-filter-count {
-      font-size: 10px;
+      font-size: 0.625rem;
       opacity: 0.7;
       margin-left: 4px;
     }
@@ -115,7 +115,7 @@
       margin-top: 8px;
       background: rgba(11,9,7,0.7);
       border: 1px dashed rgba(201,162,74,0.25);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.06em;
       transition: border-color 0.18s, background 0.18s;
       &.active {
@@ -133,7 +133,7 @@
       border: 1px solid var(--border);
       color: var(--gold);
       font-family: var(--sans);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       cursor: pointer;
@@ -150,11 +150,11 @@
       background: rgba(201,162,74,0.12);
       box-shadow: inset 0 0 0 1px var(--gold);
     }
-    .calib-ico { font-size: 13px; }
+    .calib-ico { font-size: 0.8125rem; }
     .calib-hint {
       font-style: italic;
       color: var(--muted);
-      font-size: 10.5px;
+      font-size: 0.65625rem;
       letter-spacing: 0.02em;
       flex: 1;
       min-width: 200px;
@@ -180,10 +180,10 @@
       color: var(--gold) !important;
       border-bottom: 1px solid var(--border) !important;
       font-family: var(--serif) !important;
-      font-size: 18px !important;
-      width: 36px !important;
-      height: 36px !important;
-      line-height: 36px !important;
+      font-size: 1.125rem !important;
+      width: 2.25rem !important;
+      height: 2.25rem !important;
+      line-height: 2.25rem !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -214,10 +214,10 @@
       margin: 14px !important;
     }
     :host ::ng-deep .lf-fs-btn {
-      width: 36px !important;
-      height: 36px !important;
-      line-height: 36px !important;
-      font-size: 18px !important;
+      width: 2.25rem !important;
+      height: 2.25rem !important;
+      line-height: 2.25rem !important;
+      font-size: 1.125rem !important;
     }
     :host ::ng-deep .leaflet-galaxy:fullscreen,
     :host ::ng-deep .leaflet-galaxy.lf-is-fullscreen {
@@ -281,8 +281,8 @@
       left: 50%;
       transform: translateX(-50%);
       font-family: var(--serif);
-      font-size: 10px;
-      letter-spacing: 1.5px;
+      font-size: 0.625rem;
+      letter-spacing: 0.09375rem;
       color: #fff;
       white-space: nowrap;
       text-shadow: 0 0 6px #000, 0 0 3px #000;
@@ -296,7 +296,7 @@
     }
     :host ::ng-deep .lf-cicatrix-label {
       font-family: var(--serif);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #f0d276;
@@ -322,7 +322,7 @@
     }
     :host ::ng-deep .lf-popup-wrapper .leaflet-popup-close-button {
       color: var(--gold) !important;
-      font-size: 22px !important;
+      font-size: 1.375rem !important;
       padding: 4px 8px !important;
     }
     :host ::ng-deep .lf-popup {
@@ -362,13 +362,13 @@
     }
     :host ::ng-deep .lf-popup-name {
       font-family: var(--serif);
-      font-size: 18px;
+      font-size: 1.125rem;
       letter-spacing: 0.04em;
       margin-bottom: 4px;
     }
     :host ::ng-deep .lf-popup-type {
       font-family: var(--serif);
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
@@ -377,7 +377,7 @@
       border-bottom: 1px solid var(--border);
     }
     :host ::ng-deep .lf-popup p {
-      font-size: 13px;
+      font-size: 0.8125rem;
       line-height: 1.6;
       color: #d8d0bf;
       margin: 0 0 12px;
@@ -385,7 +385,7 @@
     :host ::ng-deep .lf-popup-cta {
       display: inline-block;
       font-family: var(--serif);
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gold-bright);
@@ -403,7 +403,7 @@
     .back-link {
       display: inline-block;
       margin-bottom: 18px;
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
@@ -432,11 +432,11 @@
         radial-gradient(circle at 20% 80%, rgba(122, 74, 139, 0.32), transparent 55%),
         linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.95) 80%);
     }
-    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+    .hero-content { position: relative; z-index: 1; max-width: 47.5rem; }
     .badge {
       display: inline-block;
       padding: 5px 12px;
-      font-size: 11px;
+      font-size: 0.6875rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 800;
@@ -446,13 +446,13 @@
       background: rgba(201, 162, 74, 0.1);
     }
     h1 {
-      font-size: clamp(38px, 4.8vw, 56px);
+      font-size: clamp(2.375rem, 4.8vw + 3.5rem - 56px, 3.5rem);
       line-height: 1.04;
       margin: 0 0 12px;
       color: var(--gold-bright);
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85), 0 0 35px rgba(201, 162, 74, 0.25);
     }
-    .lede { font-size: 14px; color: var(--text); line-height: 1.65; margin: 0; max-width: 720px; }
+    .lede { font-size: 0.875rem; color: var(--text); line-height: 1.65; margin: 0; max-width: 45rem; }
 
     .layout {
       display: grid;
@@ -494,26 +494,26 @@
     }
     .tt-name {
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 0.875rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
     .tt-type {
-      font-size: 9px;
+      font-size: 0.5625rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 8px;
     }
     .tooltip p {
-      font-size: 11.5px;
+      font-size: 0.71875rem;
       color: var(--text);
       line-height: 1.5;
       margin: 0 0 8px;
     }
     .tt-cta {
-      font-size: 9px;
+      font-size: 0.5625rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gold);
@@ -531,7 +531,7 @@
       overflow-y: auto;
     }
     .legend h3 {
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
@@ -560,13 +560,13 @@
     }
     .seg-name {
       font-family: var(--serif);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--seg-color);
     }
     .seg-card p {
-      font-size: 11px;
+      font-size: 0.6875rem;
       color: var(--muted);
       line-height: 1.45;
       margin: 2px 0 0;
@@ -583,20 +583,20 @@
     .rift-card.cicatrix { border-left: 3px solid #f0d276; }
     .rift-name {
       font-family: var(--serif);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--gold-bright);
       margin-bottom: 4px;
     }
     .rift-card p {
-      font-size: 11px;
+      font-size: 0.6875rem;
       color: var(--text);
       line-height: 1.5;
       margin: 0 0 6px;
     }
     .rift-link {
-      font-size: 10px;
+      font-size: 0.625rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
@@ -615,7 +615,7 @@
       border: 1px solid transparent;
       color: var(--text);
       font-family: var(--sans);
-      font-size: 12px;
+      font-size: 0.75rem;
       cursor: pointer;
       text-align: left;
       transition: all 0.15s;
@@ -635,7 +635,7 @@
     }
 
     .credit {
-      font-size: 10px;
+      font-size: 0.625rem;
       color: var(--muted);
       line-height: 1.5;
       padding-top: 12px;
@@ -645,7 +645,7 @@
     .credit em { color: var(--gold); font-style: italic; }
 
     .cta-bottom {
-      max-width: 760px;
+      max-width: 47.5rem;
       margin: 30px auto 8px;
       text-align: center;
       padding: 28px 24px;
@@ -664,20 +664,20 @@
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
     }
-    .ornament .aigle { color: var(--gold); font-size: 18px; }
+    .ornament .aigle { color: var(--gold); font-size: 1.125rem; }
     .cta-text {
       color: var(--gold);
       font-family: var(--serif);
       font-style: italic;
       letter-spacing: 0.04em;
-      font-size: 15px;
+      font-size: 0.9375rem;
       line-height: 1.7;
       margin: 0 0 16px;
     }
     .cta-link {
       display: inline-block;
       color: var(--gold-bright);
-      font-size: 12px;
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 800;
@@ -711,14 +711,14 @@
     }
     :host ::ng-deep .lf-sector-tip .lf-sector-name {
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 4px;
       font-weight: 700;
     }
     :host ::ng-deep .lf-sector-tip p {
-      font-size: 11px;
+      font-size: 0.6875rem;
       color: var(--text);
       line-height: 1.5;
       margin: 0;

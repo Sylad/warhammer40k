@@ -82,7 +82,7 @@ import type { LightboxState } from '../../shared/components/figure-lightbox/figu
       background: rgba(8,7,6,0.78);
       border: 1px solid rgba(201,162,74,0.4);
       color: var(--gold-bright);
-      font-size: 16px;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.15s;
       font-family: inherit;
@@ -110,12 +110,12 @@ import type { LightboxState } from '../../shared/components/figure-lightbox/figu
     }
     .lightbox-org {
       color: var(--muted);
-      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+      font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
     }
-    .lightbox-sigil { color: var(--gold); font-size: 18px; }
+    .lightbox-sigil { color: var(--gold); font-size: 1.125rem; }
     .lightbox-title {
       font-family: var(--serif);
-      font-size: clamp(22px, 3vw, 30px);
+      font-size: clamp(1.375rem, 3vw + 1.875rem - 30px, 1.875rem);
       letter-spacing: 0.02em;
       margin: 0 0 4px;
       color: var(--gold-bright);
@@ -123,13 +123,13 @@ import type { LightboxState } from '../../shared/components/figure-lightbox/figu
     }
     .lightbox-role {
       color: var(--gold);
-      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
       margin-bottom: 14px;
     }
-    .lightbox-desc { color: var(--text); font-size: 14px; line-height: 1.7; margin: 0 0 18px; }
+    .lightbox-desc { color: var(--text); font-size: 0.875rem; line-height: 1.7; margin: 0 0 18px; }
     .lightbox-section-title {
       color: var(--gold);
-      font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+      font-size: 0.65625rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
       margin: 4px 0 8px;
     }
     .lightbox-thumbs {
@@ -156,12 +156,12 @@ import type { LightboxState } from '../../shared/components/figure-lightbox/figu
       padding: 12px 16px;
       border: 1px solid var(--gold);
       color: var(--gold);
-      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
       text-decoration: none;
       transition: all 0.15s;
     }
     .lightbox-cta:hover { background: rgba(201,162,74,0.08); color: var(--gold-bright); border-color: var(--gold-bright); }
-    .lightbox-cta-ico { font-size: 14px; }
+    .lightbox-cta-ico { font-size: 0.875rem; }
   `],
 })
 export class SeriesCoverViewerComponent {

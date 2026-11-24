@@ -24,7 +24,7 @@ export const SEUILS_BARRE = {
   'barre-sans-aigle': 19,
 } as const;
 
-export type ClasseBarre = keyof typeof SEUILS_BARRE | 'texte-agrandi';
+export type ClasseBarre = keyof typeof SEUILS_BARRE | 'texte-agrandi' | 'texte-plus-grand';
 
 /**
  * Police de la page agrandie d'au moins 25 % par rapport à la police par défaut du navigateur
@@ -34,6 +34,14 @@ export type ClasseBarre = keyof typeof SEUILS_BARRE | 'texte-agrandi';
 export const TEXTE_AGRANDI = 1.25;
 
 /**
+ * L253 — taille du texte de référence des feuilles (1rem = 16 px). Au-delà, quelle qu'en soit la source (police
+ * par défaut du navigateur réglée plus grande, `html { font-size: 200% }`), les tailles de texte en rem grandissent
+ * et la classe `texte-plus-grand` active les règles de reflux du contenu (`src/styles/_texte-agrandi.scss`).
+ * À 16 px, jamais : le rendu normal ne change pas.
+ */
+export const REM_REFERENCE = 16;
+
+/**
  * Classes actives pour une fenêtre de `largeur` px (barre de défilement comprise, comme une media
  * query : `window.innerWidth`), une taille de police de page de `rem` px et une police par défaut
  * du navigateur de `defaut` px.
@@ -41,7 +49,7 @@ export const TEXTE_AGRANDI = 1.25;
 export function classesBarre(largeur: number, rem: number, defaut = rem): Record<ClasseBarre, boolean> {
   const r = Number.isFinite(rem) && rem > 0 ? rem : 16;
   const d = Number.isFinite(defaut) && defaut > 0 ? defaut : r;
-  const out = { 'texte-agrandi': r >= d * TEXTE_AGRANDI } as Record<ClasseBarre, boolean>;
+  const out = { 'texte-agrandi': r >= d * TEXTE_AGRANDI, 'texte-plus-grand': r > REM_REFERENCE + 0.01 } as Record<ClasseBarre, boolean>;
   for (const [classe, seuil] of Object.entries(SEUILS_BARRE) as [keyof typeof SEUILS_BARRE, number][]) out[classe] = largeur < seuil * r;
   return out;
 }

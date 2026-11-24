@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as sass from 'sass';
 import postcss from 'postcss';
+import { taillePx } from '../../../testing/taille-px';
 
 const src = resolve(__dirname, '../../..');
 const css = sass.compile(resolve(__dirname, 'gallery.component.scss'), { loadPaths: [src] }).css;
@@ -35,7 +36,7 @@ describe('Galerie — indicateur de pagination (L64/t1)', () => {
 
   it('plage lisible : ≥ 12 px, sans opacité, contraste ≥ 4,5:1 sur le fond', () => {
     const r = decls('.page-range');
-    expect(parseFloat(r['font-size'])).toBeGreaterThanOrEqual(12);
+    expect(taillePx(r['font-size'])).toBeGreaterThanOrEqual(12); // L253 : en rem, 12 px au réglage normal
     expect(r.opacity).toBeUndefined();
     const muted = /--muted:\s*(#[0-9a-f]{6})/i.exec(theme)![1];
     const bg = /--bg:\s*(#[0-9a-f]{6})/i.exec(theme)![1];

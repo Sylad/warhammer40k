@@ -5,7 +5,7 @@
   display: inline-block;
   margin: 16px 0 24px;
   color: var(--gold);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
@@ -40,7 +40,7 @@
     radial-gradient(circle at 20% 85%, rgba(123,17,19,0.4), transparent 50%),
     linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.94) 80%);
 }
-.hero-content { position: relative; z-index: 1; max-width: 900px; }
+.hero-content { position: relative; z-index: 1; max-width: 56.25rem; }
 .badge {
   display: inline-block;
   padding: 4px 12px;
@@ -48,14 +48,14 @@
   /* Fond uni : l'or à 11 px tombait à 2,29:1 sur l'image du wiki et le halo de .hero-flicker (WCAG 1.4.3). */
   background: rgba(5,4,3,0.85);
   color: var(--gold);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 16px;
 }
 .hero h1 {
-  font-size: clamp(34px, 4.6vw, 56px);
+  font-size: clamp(2.125rem, 4.6vw + 3.5rem - 56px, 3.5rem);
   line-height: 1.05;
   margin: 0 0 18px;
   color: var(--gold-bright);
@@ -65,9 +65,9 @@
 }
 .hero h1 sup { font-size: 0.5em; vertical-align: super; }
 .lede {
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--text);
-  max-width: 760px;
+  max-width: 47.5rem;
   line-height: 1.65;
   margin: 0 0 24px;
 }
@@ -81,11 +81,11 @@
 .counter strong {
   color: var(--gold-bright);
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 1.375rem;
 }
 .counter span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -124,7 +124,7 @@
   border: 1px solid rgba(201,162,74,0.28);
   background: rgba(8,7,6,0.55);
   color: var(--text);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 700;
@@ -144,10 +144,10 @@
   box-shadow: 0 0 14px rgba(201,162,74,0.18);
 }
 .era-pill:disabled { opacity: 0.35; cursor: not-allowed; }
-.pill-sigil { color: var(--gold); font-size: 14px; }
+.pill-sigil { color: var(--gold); font-size: 0.875rem; }
 .pill-count {
   margin-left: 4px;
-  font-size: 10px;
+  font-size: 0.625rem;
   color: var(--muted);
   padding: 2px 6px;
   border: 1px solid var(--border);
@@ -181,7 +181,7 @@
   background: linear-gradient(90deg, var(--gold), transparent);
 }
 .era-sigil {
-  font-size: 32px;
+  font-size: 2rem;
   color: var(--gold);
   text-shadow: 0 0 18px rgba(201,162,74,0.45);
   flex-shrink: 0;
@@ -190,14 +190,14 @@
 .era-titles h2 {
   margin: 0;
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 1.75rem;
   color: var(--gold-bright);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 .era-range {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -264,7 +264,7 @@
 .t-card {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 32.5rem;
   min-height: 220px;
   border: 1px solid var(--border);
   background: #080706;
@@ -315,7 +315,7 @@
   margin: -2px 0 0 -10px;
   background: rgba(5,4,3,0.85);
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 1.375rem;
   color: var(--gold-bright);
   letter-spacing: 0.04em;
   text-shadow: 0 1px 6px rgba(0,0,0,0.75);
@@ -323,7 +323,7 @@
 .t-card-title {
   margin: 0;
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1.22;
   color: var(--text);
   letter-spacing: 0.02em;
@@ -352,7 +352,7 @@
 }
 .t-card-short {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 0.84375rem;
   color: var(--text);
   line-height: 1.55;
   opacity: 0.92;
@@ -369,7 +369,7 @@
   background: rgba(5,4,3,0.78);
   border: 1px solid rgba(201,162,74,0.3);
   color: var(--gold-bright);
-  font-size: 9.5px;
+  font-size: 0.59375rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 700;
@@ -386,12 +386,12 @@
 }
 .t-long {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.72;
   color: var(--text);
 }
 .t-sources-label {
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -408,7 +408,7 @@
 }
 .t-sources a {
   color: var(--gold);
-  font-size: 11px;
+  font-size: 0.6875rem;
   text-decoration: none;
   word-break: break-all;
   transition: color 0.15s;
@@ -420,7 +420,7 @@
   margin-top: 14px;
   padding: 8px 14px;
   font-family: var(--serif);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-bright);
@@ -440,7 +440,7 @@
   position: absolute;
   bottom: 18px;
   right: 22px;
-  font-size: 22px;
+  font-size: 1.375rem;
   color: var(--gold);
   font-family: var(--serif);
   line-height: 1;
@@ -456,7 +456,7 @@
   border: 1px dashed var(--border);
   text-align: center;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 0.875rem;
   letter-spacing: 0.06em;
 }
 .empty .reset {
@@ -466,7 +466,7 @@
   background: transparent;
   border: 1px solid var(--gold);
   color: var(--gold-bright);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
@@ -500,7 +500,7 @@
   border-bottom: 1px solid var(--border);
   color: var(--gold);
   font-family: var(--serif);
-  font-size: 13px;
+  font-size: 0.8125rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -508,7 +508,7 @@
 
 .filter-group + .filter-group { margin-top: 18px; }
 .filter-label {
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
@@ -528,7 +528,7 @@
   border: 1px solid rgba(201,162,74,0.28);
   background: rgba(8,7,6,0.55);
   color: var(--text);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
@@ -555,7 +555,7 @@
   background: rgba(8,7,6,0.7);
   border: 1px solid rgba(201,162,74,0.28);
   color: var(--text);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
@@ -581,7 +581,7 @@
   background: transparent;
   border: 1px solid var(--gold);
   color: var(--gold-bright);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
@@ -593,7 +593,7 @@
 .lore-text p {
   margin: 0;
   color: var(--text);
-  font-size: 12.5px;
+  font-size: 0.78125rem;
   line-height: 1.65;
 }
 .lore-text p + p { margin-top: 10px; }
@@ -602,21 +602,21 @@
   margin: 0;
   font-style: italic;
   color: var(--text);
-  font-size: 13.5px;
+  font-size: 0.84375rem;
   line-height: 1.55;
   position: relative;
 }
 .citation .quote {
   color: var(--gold);
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 1.375rem;
   line-height: 0;
   vertical-align: -8px;
 }
 .citation-footer {
   margin-top: 12px;
   font-style: normal;
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -660,7 +660,7 @@
     margin-bottom: 20px;
     scrollbar-width: thin;
   }
-  .era-pill { padding: 7px 10px; font-size: 10px; flex-shrink: 0; white-space: nowrap; }
-  .pill-label { font-size: 10px; }
-  .era-titles h2 { font-size: 22px; }
+  .era-pill { padding: 7px 10px; font-size: 0.625rem; flex-shrink: 0; white-space: nowrap; }
+  .pill-label { font-size: 0.625rem; }
+  .era-titles h2 { font-size: 1.375rem; }
 }

@@ -8,7 +8,7 @@
   .rappel-place { display: none; }
   .rappel-compte {
     display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px;
-    color: var(--gold); font-size: 11px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); font-size: 0.6875rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
   }
   /* à 761 px, le panneau n'a que 264 px : le texte passe sur deux lignes (28 px) dans les 44 px, le bouton reste entier */
   .rappel-compte > span { min-width: 0; line-height: 1.25; }

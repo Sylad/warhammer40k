@@ -39,6 +39,16 @@ describe('seuils de la barre en rem — L250', () => {
     expect(classesBarre(2688, 32, 16)['barre-tiroir']).toBe(false);
   });
 
+  it('L253 — texte plus grand dès que 1rem dépasse 16 px, quelle qu\'en soit la source ; jamais à 16 px', () => {
+    expect(classesBarre(1440, 16, 16)['texte-plus-grand']).toBe(false);
+    expect(classesBarre(320, 16, 16)['texte-plus-grand']).toBe(false);
+    // police par défaut du navigateur à 20 px : `texte-agrandi` (relatif à la police par défaut) reste faux
+    expect(classesBarre(320, 20, 20)).toMatchObject({ 'texte-agrandi': false, 'texte-plus-grand': true });
+    // police de la page à 200 %
+    expect(classesBarre(1440, 32, 16)['texte-plus-grand']).toBe(true);
+    expect(classesBarre(1440, 16.005, 16)['texte-plus-grand']).toBe(false);
+  });
+
   it('taille illisible (jsdom) : repli sur 16 px', () => {
     expect(classesBarre(1440, Number.NaN)).toEqual(classesBarre(1440, 16));
   });

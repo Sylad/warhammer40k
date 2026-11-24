@@ -1,0 +1,81 @@
+/*
+ * L253 — Vidéos, panneau des chaînes du héros (.hero-panel, .channel-mini) et briques de chaîne (.avatar, .ch-info,
+ * .lang, reprises par .channel-card). Sorti de videos.component.scss tel quel pour tenir le budget anyComponentStyle
+ * (L29) une fois les tailles de texte passées en rem. Partiel global préfixé .videos-page (aucun composant enfant dans
+ * la page) ; les surcharges de .channel-card restent dans la feuille du composant, chargée après.
+ */
+.videos-page {
+  .hero-panel {
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    background: rgba(0, 0, 0, 0.62);
+    padding: 22px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.65);
+  }
+  .hero-panel h3 {
+    margin: 0 0 14px;
+    color: var(--gold-bright);
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1rem;
+  }
+  .channel-mini {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2.75rem 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(201, 162, 74, 0.13);
+    background: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+  .channel-mini:first-of-type { border-top: 0; }
+  .channel-mini:hover { background: rgba(201, 162, 74, 0.06); }
+
+  .avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(201, 162, 74, 0.26);
+    background: rgba(201, 162, 74, 0.08);
+    color: var(--gold);
+    font-weight: 900;
+    font-family: var(--serif);
+    font-size: 0.8125rem;
+    letter-spacing: 0.05em;
+  }
+  .ch-info { display: flex; flex-direction: column; min-width: 0; }
+  .ch-info strong {
+    color: #ead7a2;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ch-info span {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lang {
+    border: 1px solid rgba(201, 162, 74, 0.28);
+    color: var(--gold);
+    padding: 4px 7px;
+    font-size: 0.625rem;
+    font-weight: 950;
+    letter-spacing: 0.05em;
+  }
+}

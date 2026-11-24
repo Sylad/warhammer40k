@@ -22,8 +22,8 @@ import { creditImage, type CreditImage } from '../../../core/credits/credit-imag
   `,
   styles: [`
     :host { display: block; }
-    .credit-legende { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
-    .credit-legende a { margin-left: 8px; color: var(--gold); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; display: inline-block; min-height: 24px; line-height: 24px; }
+    .credit-legende { margin: 0; font-size: 0.75rem; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
+    .credit-legende a { margin-left: 8px; color: var(--gold); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; display: inline-block; min-height: 24px; line-height: 1.5rem; }
     .credit-legende a:hover { color: var(--gold-bright); }
     .credit-legende a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
     .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

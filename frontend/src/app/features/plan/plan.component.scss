@@ -1,14 +1,14 @@
 // L30 — page Plan de travail. Même grammaire que les Nouveautés (identité gothique
 // noir/or, tokens de styles.scss) ; l'état est toujours écrit, la couleur le souligne.
-.plan { max-width: 860px; margin: 0 auto; }
+.plan { max-width: 53.75rem; margin: 0 auto; }
 
 .plan-head { margin-bottom: 28px; }
 .plan-eyebrow {
   margin: 0 0 8px; color: var(--gold); font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
 }
-.plan-head h1 { font-size: clamp(1.7rem, 5vw, 2.6rem); margin-bottom: 10px; overflow-wrap: anywhere; }
-.plan-lede { margin: 0; color: var(--text); max-width: 640px; line-height: 1.6; }
+.plan-head h1 { font-size: clamp(1.7rem, 5vw + 2.6rem - 41.6px, 2.6rem); margin-bottom: 10px; overflow-wrap: anywhere; }
+.plan-lede { margin: 0; color: var(--text); max-width: 40rem; line-height: 1.6; }
 
 a:not(.plan-news) { text-decoration: underline; text-underline-offset: 3px; }
 a:focus-visible, .plan-retry:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
@@ -22,7 +22,7 @@ a:focus-visible, .plan-retry:focus-visible { outline: 2px solid var(--gold-brigh
 }
 
 .plan-group { margin-bottom: 38px; }
-.plan-group h2 { font-size: clamp(1.15rem, 3.6vw, 1.5rem); margin: 0; overflow-wrap: anywhere; }
+.plan-group h2 { font-size: clamp(1.15rem, 3.6vw + 1.5rem - 24px, 1.5rem); margin: 0; overflow-wrap: anywhere; }
 .plan-count { color: var(--text); font-weight: 400; }
 .plan-hint { margin: 6px 0 14px; color: var(--text); font-size: 0.9rem; }
 
@@ -32,7 +32,7 @@ a:focus-visible, .plan-retry:focus-visible { outline: 2px solid var(--gold-brigh
   padding: 18px 22px; background: var(--panel); border: 1px solid var(--border); min-width: 0;
   &:focus { outline: none; }
   &.is-target { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
-  h3 { font-size: clamp(1rem, 3.2vw, 1.2rem); margin: 0; overflow-wrap: anywhere; text-transform: none; letter-spacing: 0.03em; }
+  h3 { font-size: clamp(1rem, 3.2vw + 1.2rem - 19.2px, 1.2rem); margin: 0; overflow-wrap: anywhere; text-transform: none; letter-spacing: 0.03em; }
 }
 
 .plan-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 10px; }
