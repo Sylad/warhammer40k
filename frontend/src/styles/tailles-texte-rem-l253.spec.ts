@@ -23,6 +23,9 @@ function fichiers(dir: string): string[] {
 /** Exceptions nommées : la marque de l'en-tête au téléphone se borne à la largeur (L250, barre réglée en rem). */
 const VW_PERMIS = ['min(1.05rem, 7.5vw)'];
 
+/** Une longueur en px, négative comprise (« -1px », L253 r1 de la revue de code), hors nom de variable (« --x-12px »). */
+const PX = /(?<![\w.-])-?\d*\.?\d+px/;
+
 const DECL = /(font-size|line-height|letter-spacing|@include fit-title\()\s*:?\s*([^;{}\n]+)/g;
 
 describe('tailles de texte en rem (L253)', () => {
@@ -34,7 +37,7 @@ describe('tailles de texte en rem (L253)', () => {
         const valeur = m[2].replace(/\/\*.*$/, '');
         const sansTerme = valeur.replace(/ \+ \d*\.?\d+rem - \d*\.?\d+px/g, '');
         const ou = `${relative(src, f)}:${i + 1} ${m[1]} ${valeur.trim()}`;
-        if (/(?<![\w.-])\d*\.?\d+px/.test(sansTerme)) ecarts.push(`px : ${ou}`);
+        if (PX.test(sansTerme)) ecarts.push(`px : ${ou}`);
         if (/vw/.test(valeur) && !/ \+ \d*\.?\d+rem - \d*\.?\d+px/.test(valeur) && !VW_PERMIS.some((v) => valeur.includes(v))) ecarts.push(`vw sans terme rem : ${ou}`);
         for (const t of valeur.matchAll(/ \+ (\d*\.?\d+)rem - (\d*\.?\d+)px/g)) {
           if (parseFloat(t[1]) * 16 !== parseFloat(t[2])) ecarts.push(`terme non nul à 100 % : ${ou}`);
@@ -42,6 +45,10 @@ describe('tailles de texte en rem (L253)', () => {
       }
     });
   }
+  it('la garde reconnaît une valeur px négative, pas un nom de variable', () => {
+    expect(['-1px', '0 -0.5px', 'calc(1rem - 2px)', '12px'].map((v) => PX.test(v))).toEqual([true, true, true, true]);
+    expect(['var(--ecart-12px)', '1.5rem', '0.12em'].map((v) => PX.test(v))).toEqual([false, false, false]);
+  });
   it('aucune taille de texte en px, terme rem des clamp() nul au réglage normal', () => {
     expect(ecarts).toEqual([]);
   });

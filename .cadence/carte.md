@@ -52,14 +52,29 @@
   la page (`html { font-size: 200% }`) ou la police par défaut du NAVIGATEUR (`texte-agrandi` de L250, relatif à
   celle-ci, n'est pas posé dans ce cas). Règles de reflux dans `src/styles/_texte-agrandi.scss` (sélecteurs par
   `#contenu` pour passer devant les feuilles des composants) ; règles de la barre sous `texte-plus-grand` dans
-  `main-layout.component.ts`, la variante étroite DANS la media query de 31em (une seule media query par seuil,
-  `seuils-barre.spec.ts` ; et R3 de L250 retire les classes en rem mais pas les media queries).
+  `main-layout.component.ts`, la variante étroite dans une media query de 31em placée APRÈS la règle générale du
+  tiroir (86vw), qu'elle doit emporter (`seuils-barre.spec.ts` dédoublonne les seuils ; R3 de L250 retire les
+  classes en rem mais pas les media queries).
 - Titres de fiche faction / unité sans figure : la colonne du texte devient conteneur et `fit-title` s'y mesure
   sous `texte-plus-grand` seulement.
 - Gardes : `tailles-texte-rem-l253.spec.ts` (aucune taille de texte en px, terme vw nul à 16 px),
   `texte-200-contenu-l253.e2e.spec.ts` (11 routes, 320 à 1440 px : p ×2, titres et libellés ≥ ×1,9 sauf titre
   borné, aucun défilement ; R5 police du navigateur à 32 px), instantané de `component-styles.spec.ts` comparé au
   réglage normal (`auReglageNormal`). Utilitaire de test : `src/testing/taille-px.ts`.
-- Limite connue : les media queries des PAGES sont en px et ne suivent pas le texte de la page ; à 200 % les héros à
-  deux colonnes de /gallery, /videos, /romans (et /lore/timeline à 1024) coupent leur h1 au milieu d'un mot
-  (`overflow-wrap: anywhere`, pas de défilement). Les compter en rem comme la barre (L250) serait un autre lot.
+- Passe 2 (revue UX r1, WCAG 1.4.4 : du texte une lettre par ligne, des mots coupés sans trait) :
+  - **classes `contenu-<px>`** (`SEUILS_CONTENU` 1280, 1220, 1100, 1024, 900, 760, 600 de `seuils-barre.ts`) : posées
+    seulement en texte plus grand, quand la fenêtre ≤ px × rem / 16 (à 200 %, 1440 px se met en page comme 720 px),
+    jamais à 16 px. Les media queries max-width en px des pages y sont doublées dans `_texte-agrandi.scss`
+    (`app-main-layout.contenu-760 #contenu app-videos …`). Une page qui bascule à une largeur en px : même règle sous
+    la classe du seuil le plus proche ; un nouveau seuil s'ajoute à `SEUILS_CONTENU`, à la liaison d'hôte et à une
+    règle (`seuils-barre.spec.ts`) ;
+  - **césure** : `hyphens: auto` sur `#contenu` en texte plus grand (`lang="fr"`) — un mot trop long se coupe à une
+    syllabe, avec un trait ; `overflow-wrap: anywhere` ne reste qu'en dernier recours ;
+  - **ajusteur des titres** (`core/utils/titres-ajustes.ts`, piloté par la mise en page : MutationObserver de
+    `<main>`, chargement des polices) : h1-h6 et textes en Cinzel dont le mot le plus long dépasse leur boîte reçoivent
+    une `font-size` en ligne et `data-titre-borne` (plancher 1rem pour un titre, la taille à 16 px pour un autre
+    texte) ; tout est retiré à 16 px ;
+  - garde **`texte-200-reflux-l253.e2e.spec.ts`** (14 routes, 320 à 1440 px, page 200 % et navigateur 32 px ; sonde
+    `testing/reflux-texte-200.ts`) : aucun mot coupé sans trait (une coupure de césure est reconnue en recoupant le
+    mot seul dans une boîte de même largeur), aucun bloc de moins de 3 em, aucun texte rogné — seulement ce qui
+    n'était pas déjà là au réglage normal.

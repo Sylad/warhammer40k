@@ -25,6 +25,8 @@ export default defineConfig({
       path.resolve(__dirname, 'src/app/layout/main-layout/texte-200-l250.e2e.spec.ts'),
       // L253 : contenu à 200 % — texte courant, titres et libellés doublent, aucune page ne défile en largeur (320 à 1440 px).
       path.resolve(__dirname, 'src/app/features/texte-200-contenu-l253.e2e.spec.ts'),
+      // L253 passe 2 : à 200 %, ni mot coupé sans trait, ni colonne d'une à deux lettres, ni texte rogné (320 à 1440 px).
+      path.resolve(__dirname, 'src/app/features/texte-200-reflux-l253.e2e.spec.ts'),
       // L52 : le rechargement sur « morceau absent » se mesure avec le réseau coupé et des réponses 404/502 : navigateur réel.
       path.resolve(__dirname, 'src/app/core/utils/morceau-absent.e2e.spec.ts'),
       // L40 : les pages pilotes de la densité (fiches faction et primarque) tiennent les règles D1 à D6 à 1440 et 390 px.

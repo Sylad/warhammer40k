@@ -852,6 +852,12 @@
       "status": "done",
       "started": "2026-11-23",
       "finished": "2026-11-23"
+    },
+    {
+      "id": "L253",
+      "title": "Texte agrandi : le contenu se remet en page au lieu de couper les mots",
+      "status": "doing",
+      "started": "2026-11-24"
     }
   ]
 }

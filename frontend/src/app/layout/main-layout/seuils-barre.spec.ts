@@ -2,13 +2,14 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { SEUILS_BARRE, classesBarre } from './seuils-barre';
+import { SEUILS_BARRE, SEUILS_CONTENU, classesBarre, classesContenu } from './seuils-barre';
 
 const SOURCE = readFileSync(resolve(__dirname, 'main-layout.component.ts'), 'utf8');
 
 describe('seuils de la barre en rem — L250', () => {
   it('mêmes valeurs que les media queries « width < Xem » du composant', () => {
-    const media = [...SOURCE.matchAll(/@media \(width < ([\d.]+)em\)/g)].map((m) => Number(m[1])).sort((a, b) => a - b);
+    // (une même media query peut revenir plus bas, pour passer après une règle qu'elle doit emporter — L253)
+    const media = [...new Set([...SOURCE.matchAll(/@media \(width < ([\d.]+)em\)/g)].map((m) => Number(m[1])))].sort((a, b) => a - b);
     expect(Object.values(SEUILS_BARRE).slice().sort((a, b) => a - b)).toEqual(media);
   });
 
@@ -51,5 +52,35 @@ describe('seuils de la barre en rem — L250', () => {
 
   it('taille illisible (jsdom) : repli sur 16 px', () => {
     expect(classesBarre(1440, Number.NaN)).toEqual(classesBarre(1440, 16));
+  });
+});
+
+// L253 passe 2 — classes contenu-<px> : les media queries max-width en px des pages, comptées en rem quand le texte
+// est agrandi (à 200 %, 1440 px se met en page comme 720 px). Jamais posées au réglage normal.
+describe('classes contenu-<px> du texte agrandi — L253', () => {
+  const STYLES = readFileSync(resolve(__dirname, '../../../styles/_texte-agrandi.scss'), 'utf8');
+  const posees = (largeur: number, rem: number) =>
+    Object.entries(classesContenu(largeur, rem)).filter(([, v]) => v).map(([k]) => k);
+
+  it('jamais au réglage normal (16 px), quelle que soit la largeur', () => {
+    for (const largeur of [320, 600, 760, 1024, 1440, 2560]) expect(posees(largeur, 16)).toEqual([]);
+    expect(posees(320, Number.NaN)).toEqual([]);
+  });
+
+  it('à 32 px, 1440 px se met en page comme 720 px : contenu-760 oui, contenu-600 non', () => {
+    expect(posees(1440, 32)).toEqual(['contenu-1280', 'contenu-1220', 'contenu-1100', 'contenu-1024', 'contenu-900', 'contenu-760']);
+    expect(posees(2561, 32)).toEqual([]);
+  });
+
+  it('bornes inclusives, comme max-width : 1200 px à 32 px = 600 px', () => {
+    expect(classesContenu(1200, 32)['contenu-600']).toBe(true);
+    expect(classesContenu(1201, 32)['contenu-600']).toBe(false);
+  });
+
+  it('chaque classe est liée à l\'hôte et a des règles dans _texte-agrandi.scss', () => {
+    for (const px of SEUILS_CONTENU) {
+      expect(SOURCE, `contenu-${px}`).toContain(`'[class.contenu-${px}]'`);
+      expect(STYLES, `contenu-${px}`).toContain(`app-main-layout.contenu-${px} `);
+    }
   });
 });

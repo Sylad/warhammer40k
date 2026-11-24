@@ -9,8 +9,9 @@
 @use 'fit-title' as *;
 
 app-main-layout.texte-plus-grand {
-  /* Un mot plus long que sa colonne se coupe au lieu de pousser la page en largeur. */
-  #contenu, footer { overflow-wrap: anywhere; }
+  /* Un mot plus long que sa colonne se coupe à une syllabe, avec un trait (césure du français, `lang="fr"`) ;
+     en dernier recours seulement (aucune syllabe ne tient), n'importe où, au lieu de pousser la page en largeur. */
+  #contenu, footer { overflow-wrap: anywhere; hyphens: auto; }
 
   /* Un champ a une largeur intrinsèque qui suit la police (attribut size, libellé de l'option la plus longue) :
      dans une piste de grille « 1fr », elle élargissait la barre d'outils (/factions, fiche faction, /videos). */
@@ -38,4 +39,188 @@ app-main-layout.texte-plus-grand {
   /* Sans figure, le titre de la fiche unité n'avait pas de borne : même taille, bornée comme avec figure (0,95 em
      par caractère, unit-detail.component.scss). */
   #contenu app-unit-detail .hero:not(.hero--figure) h1 { @include fit-title(clamp(2.375rem, 4.4vw + 4rem - 64px, 4rem), 0.95); }
+}
+
+/*
+ * L253 passe 2 — mises en page des pages en texte agrandi (revue UX r1 : une lettre par ligne, mots coupés sans
+ * trait, noms rognés). Deux leviers, jamais au réglage normal :
+ *  - `contenu-<px>` (seuils-barre.ts) : la fenêtre, comptée en rem, est sous la media query `max-width: <px>` de
+ *    la page ; la règle reprend ce que fait cette media query (à 200 %, 1440 px se met en page comme 720 px) ;
+ *  - `texte-plus-grand` seul : un nom ou un libellé passe à la ligne au lieu d'être rogné (ellipse), une boîte à
+ *    largeur fixe en px suit son texte.
+ * Les grands titres et les textes en Cinzel sont bornés par leur boîte (core/utils/titres-ajustes.ts).
+ * Garde : texte-200-reflux-l253.e2e.spec.ts (mots coupés sans trait, blocs trop étroits, textes rognés à 200 %).
+ */
+
+/* Accueil — sous 1100 px, la barre des nombres passe sur une colonne : à 200 % et 1440 px, la citation n'avait plus
+   que 77 px (une lettre par ligne) et « 182 » se coupait. Sous 760 px, la barre disparaît (L80). */
+app-main-layout.contenu-1100 #contenu app-dashboard {
+  .stats-bar { grid-template-columns: 1fr; }
+  .quote { text-align: left; }
+  .stat { border-right: none; border-bottom: 1px solid rgba(201, 162, 74, 0.13); }
+}
+app-main-layout.contenu-760 #contenu app-dashboard {
+  .hero { padding: 48px 22px 32px; }
+  .stats-bar { display: none; }
+  .shortcut-sub { display: block; }
+}
+/* Accueil au téléphone : l'icône des raccourcis et des brèves passe au-dessus du texte, qui reprend toute la largeur
+   de la carte ; le titre des brèves passe au-dessus de son sous-titre ; le bouton garde un interlettrage court. */
+app-main-layout.contenu-600 #contenu app-dashboard {
+  .ql-card, .lf-card { flex-direction: column; align-items: flex-start; gap: 8px; padding-inline: 14px; }
+  .lf-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .cta-primary, .cta-secondary { letter-spacing: 0.06em; padding-inline: 14px; }
+}
+
+/* Galerie — les grilles de cartes comptent leurs colonnes en rem (4 colonnes au bureau, 2 au téléphone gardaient
+   des cartes de 62 à 145 px : « Ultram|arines », « Nicol|as ») ; les pastilles du bandeau passent à la ligne au
+   lieu de couper « COLLEC|TIONS » ; les noms d'artistes et de collections passent à la ligne au lieu d'être rognés. */
+app-main-layout.texte-plus-grand #contenu app-gallery {
+  .category-grid, .category-grid.attente { grid-template-columns: repeat(auto-fill, minmax(min(10rem, 100%), 1fr)); }
+  .art-grid { grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr)); }
+  .art-meta { flex-wrap: wrap; }
+  .hero-stats { display: flex; flex-wrap: wrap; }
+  .stat-card { flex: 1 1 8rem; }
+  .ar-info strong, .col-info strong { white-space: normal; overflow: visible; text-overflow: clip; }
+}
+
+/* Fiche unité — au téléphone, les Informations clés restaient sur deux colonnes avec leurs icônes : 37 px pour
+   « ALLÉGEANCE », une à deux lettres par ligne. Une colonne, comme une liste. La galerie liée passe sur une
+   colonne et ses titres passent à la ligne au lieu d'être rognés. */
+app-main-layout.contenu-600 #contenu app-unit-detail .sp-info-rows { grid-template-columns: minmax(0, 1fr); }
+app-main-layout.texte-plus-grand #contenu app-unit-detail {
+  .art-grid { grid-template-columns: minmax(0, 1fr); }
+  .art-thumb-title { white-space: normal; text-overflow: clip; }
+}
+
+/* Vidéos — mêmes bascules que les media queries de 1220 et 760 px (videos.component.scss) : à 200 % et 768 px, la
+   barre d'outils gardait ses quatre colonnes et les filtres 50 px (« T/O/U/S », une lettre par ligne). */
+app-main-layout.contenu-1220 #contenu app-videos {
+  .hero-content, .layout { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .featured-grid { grid-template-columns: 1fr; }
+  .channel-grid { grid-template-columns: repeat(2, 1fr); }
+  .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+app-main-layout.contenu-760 #contenu app-videos {
+  .toolbar, .sidebar { grid-template-columns: minmax(0, 1fr); }
+  .video-grid, .channel-grid { grid-template-columns: 1fr; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+}
+/* Noms et descriptions des chaînes, titres des vidéos récentes : à la ligne, jamais rognés (« Frenc… ») ; la
+   pastille de langue reste d'un bloc (« F/R »). */
+app-main-layout.texte-plus-grand #contenu app-videos {
+  .ch-info :is(strong, span), .recent-row .rr-title { white-space: normal; overflow: visible; text-overflow: clip; }
+  .lang { overflow-wrap: normal; white-space: nowrap; }
+}
+app-main-layout.contenu-600 #contenu app-videos .load-more { letter-spacing: 0.06em; padding-inline: 14px; }
+/* Chaînes (panneau du héros et cartes) : la pastille de langue passe sous le nom ; au téléphone, l'avatar aussi
+   passe au-dessus : le nom garde toute la largeur (à 320 px, sa colonne tombait à 0 px). */
+app-main-layout.texte-plus-grand #contenu app-videos :is(.channel-mini, .channel-card) {
+  grid-template-columns: auto minmax(0, 1fr);
+  .lang { grid-column: 2; justify-self: start; }
+}
+app-main-layout.contenu-600 #contenu app-videos :is(.channel-mini, .channel-card) {
+  grid-template-columns: minmax(0, 1fr);
+  > *, .lang { grid-column: 1; justify-self: start; }
+  .ch-info { justify-self: stretch; }
+}
+
+/* Romans — mêmes bascules que la media query de 1100 px (series.component.scss) ; la légende des badges passe le
+   badge au-dessus de sa description (colonne de 100 px : « Fonda|mental ») ; les séries populaires passent à la
+   ligne au lieu d'être rognées (« L'Hérésie d'… »). */
+app-main-layout.contenu-1100 #contenu app-series {
+  .layout, .hero, .toolbar { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: static; }
+  .hero-image { display: none; }
+}
+app-main-layout.texte-plus-grand #contenu app-series {
+  /* Index alphabétique : ronds de 30 px, la lettre doublée n'y tenait plus (« M », « W » ramenés à 17 px). */
+  .letter { width: auto; height: auto; min-width: 2.75em; min-height: 2.75em; padding: 0; }
+  .legend li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .legend li > .badge { justify-self: start; }
+  .badge { overflow-wrap: normal; }
+  .popular li { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .pop-name { white-space: normal; overflow: visible; text-overflow: clip; }
+}
+
+/* Factions, fiche faction, fiche primarque, À propos : mêmes bascules que leurs media queries en px (1280, 1100,
+   1024, 900, 760 px), à la largeur où le texte agrandi les rend nécessaires (à 200 %, 1440 px se met en page comme
+   720 px). Sans elles, les colonnes latérales de 320 px gardaient un texte doublé : « Terr|a », « MILLIO|N+ »,
+   filtres de /factions à 52 px de large, en-têtes du tableau des crédits. */
+app-main-layout.contenu-1280 #contenu app-factions {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: relative; top: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+app-main-layout.contenu-760 #contenu app-factions {
+  .hero-content { padding: 22px 20px; }
+  .toolbar { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { display: none; }
+}
+app-main-layout.contenu-1280 #contenu app-faction-detail {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: relative; top: auto; max-height: none; overflow-y: visible; }
+  .hero-text { max-width: 80%; }
+}
+app-main-layout.contenu-900 #contenu app-faction-detail .lore-grid { grid-template-columns: minmax(0, 1fr); }
+app-main-layout.contenu-760 #contenu app-faction-detail {
+  .hero { padding: 26px 22px; }
+  .hero-text { max-width: 100%; }
+  .toolbar, .bible-heroes { grid-template-columns: minmax(0, 1fr); }
+  .bible-panel { padding: 24px 18px; }
+}
+app-main-layout.contenu-1100 #contenu app-primarch-detail {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: relative; top: auto; }
+}
+app-main-layout.contenu-900 #contenu app-primarch-detail {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); padding: 32px 24px; }
+  .two-col, .two-col.reverse { grid-template-columns: minmax(0, 1fr); }
+  .two-col.reverse :is(.col-text, app-texte-repliable) { grid-column: 1; grid-row: 2; }
+  .two-col.reverse .inline-figure { grid-column: 1; grid-row: 1; }
+  .inline-figure:is(.inline-right, .inline-left) { float: none; width: 100%; max-width: 420px; margin: 12px auto; }
+  .hero-portrait { max-width: 320px; margin: 0 auto; }
+  .quotes-grid { grid-template-columns: minmax(0, 1fr); }
+}
+app-main-layout.contenu-760 #contenu app-primarch-detail {
+  .hero-grid { padding: 24px 16px; gap: 20px; }
+  .panel { padding: 22px 20px; }
+}
+app-main-layout.contenu-1024 #contenu app-about {
+  .stack, .inspirations { grid-template-columns: minmax(0, 1fr); }
+  .credits-liste thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .credits-liste, .credits-liste tbody, .credits-liste tr, .credits-liste tbody th, .credits-liste td { display: block; width: auto; }
+  .credits-liste tbody tr { padding: 12px 0; }
+  .credits-liste tbody th, .credits-liste td { padding: 2px 0; }
+  .credits-liste td::before { content: attr(data-col) ' : '; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.06em; }
+}
+/* Rangées libellé / valeur des fiches : la valeur passe sous son libellé quand les deux ne tiennent pas côte à côte
+   (« Caliban (détruite) » dans 60 px, « MILLIO|N+ » dans 87 px). */
+app-main-layout.texte-plus-grand #contenu {
+  app-faction-detail .row-stat { flex-wrap: wrap; column-gap: 12px; }
+  app-primarch-detail .info-card .info-row { grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), auto)); row-gap: 2px; }
+}
+/* Autres sites : la carte passe l'image au-dessus du texte (colonne de 86 px pour « Eywa » à 320 px). */
+app-main-layout.contenu-600 #contenu app-about .other-card { flex-direction: column; align-items: flex-start; }
+/* Actualités de l'accueil : la piste minimale de 340 px suit le texte (21,25rem) ; à 768 px, deux cartes de 296 px
+   ne laissaient pas tenir « « Armageddon » » (insécable entre ses guillemets). */
+app-main-layout.texte-plus-grand #contenu app-actualites .act-liste { grid-template-columns: repeat(auto-fill, minmax(min(100%, 21.25rem), 1fr)); }
+/* Nouveautés au téléphone : la liste perd son retrait de 40 px (« « Réessayer » » insécable débordait). */
+app-main-layout.contenu-600 #contenu app-nouveautes {
+  .news-entry { padding-inline: 8px; }
+  .news-body :is(ul, ol) { padding-left: 1.1rem; }
+}
+
+/* Téléphone à 200 % (à 320 px, 160 px de texte à 16 px) : les marges latérales en px des bandeaux, panneaux et
+   cartes se resserrent, pour que les mots tiennent sur leur ligne ; les rangées à deux colonnes passent sur une. */
+app-main-layout.contenu-600 #contenu {
+  app-videos :is(.hero-content, .hero-panel) { padding-inline: 12px; }
+  app-videos .recent-row { flex-wrap: wrap; }
+  app-lore-timeline .hero { padding-inline: 12px; }
+  app-lore-timeline .t-card-body { padding-inline: 12px; }
+  app-lore-galaxy .hero { padding-inline: 16px; }
+  app-series .panel { padding-inline: 12px; }
+  app-series .progression-row { grid-template-columns: minmax(0, 1fr); }
+  app-series .popular li { grid-template-columns: auto minmax(0, 1fr); }
+  app-series .pop-count { grid-column: 2; }
 }

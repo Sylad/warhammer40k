@@ -53,3 +53,20 @@ export function classesBarre(largeur: number, rem: number, defaut = rem): Record
   for (const [classe, seuil] of Object.entries(SEUILS_BARRE) as [keyof typeof SEUILS_BARRE, number][]) out[classe] = largeur < seuil * r;
   return out;
 }
+
+/**
+ * L253 passe 2 — largeurs de fenêtre des media queries des PAGES (en px, `max-width` inclusif). Les pages
+ * basculent en px : à 200 %, une fenêtre de 1440 px garde la mise en page du bureau alors que le texte n'y
+ * trouve plus que la place de 720 px (une lettre par ligne dans la colonne de la citation de l'accueil, revue UX
+ * de L253). En texte plus grand seulement, la classe `contenu-<px>` est posée quand la fenêtre, comptée en rem,
+ * serait sous la media query : `largeur ≤ px × rem / 16`. Les règles de `styles/_texte-agrandi.scss` qui en
+ * dépendent reprennent celles de la media query de la page. Au réglage normal, jamais posées : rien ne change.
+ */
+export const SEUILS_CONTENU = [1280, 1220, 1100, 1024, 900, 760, 600] as const;
+export type ClasseContenu = `contenu-${(typeof SEUILS_CONTENU)[number]}`;
+
+export function classesContenu(largeur: number, rem: number): Record<ClasseContenu, boolean> {
+  const r = Number.isFinite(rem) && rem > 0 ? rem : REM_REFERENCE;
+  const grand = r > REM_REFERENCE + 0.01;
+  return Object.fromEntries(SEUILS_CONTENU.map((px) => [`contenu-${px}`, grand && largeur <= (px * r) / REM_REFERENCE])) as Record<ClasseContenu, boolean>;
+}

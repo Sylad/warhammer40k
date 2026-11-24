@@ -5,9 +5,11 @@
 // libellés, revue UX de L250). Attendu, sur /, /gallery, une fiche unité, /plan et d'autres pages, de 320 à 1440 px :
 //   R1 — texte courant (p) : chaque paragraphe visible double (rapport 1,95 à 2,05) ;
 //   R2 — titres (h1 à h3) : rapport ≥ 1,9, sauf un titre borné par la largeur de sa colonne (fit-title, L31 : son
-//        mot le plus long doit tenir) — alors, sans la borne (`--longest-word: 1`), il atteint 1,9, et il ne
-//        déborde pas de sa boîte ;
-//   R3 — libellés (boutons, liens, étiquettes, éléments de liste) : rapport ≥ 1,9 ;
+//        mot le plus long doit tenir) ou par l'ajusteur des titres (L253 passe 2, `data-titre-borne` sur lui ou un
+//        ancêtre, core/utils/titres-ajustes.ts) — alors, sans la borne (`--longest-word: 1`, taille en ligne de
+//        l'ajusteur retirée), il atteint 1,9, et il ne déborde pas de sa boîte ;
+//   R3 — libellés (boutons, liens, étiquettes, éléments de liste) : rapport ≥ 1,9, sauf dans un titre borné par
+//        l'ajusteur (même contrôle que R2) ;
 //   R4 — ni la page ni le contenu ne défilent horizontalement (scrollWidth = clientWidth) ;
 //   R5 — vrai réglage du navigateur (police par défaut à 32 px, CDP Page.setFontSizes) : le texte courant mesure le
 //        double de celui d'une police par défaut à 16 px, et aucune page ne défile horizontalement.
@@ -19,7 +21,7 @@ import type { Server } from 'node:http';
 import type { Browser, Page } from 'playwright-core';
 import { distState, startDistServer } from '../../testing/dist-server';
 
-const { built, stale } = distState(['src/styles.scss', 'src/styles/_texte-agrandi.scss']);
+const { built, stale } = distState(['src/styles.scss', 'src/styles/_texte-agrandi.scss', 'src/app/core/utils/titres-ajustes.ts']);
 let chromium: typeof import('playwright-core').chromium | null = null;
 try {
   chromium = (await import('playwright-core')).chromium;
@@ -67,13 +69,20 @@ async function relire(page: Page): Promise<Record<string, Mesure[]>> {
     for (const [k, liste] of Object.entries(w.__l253)) {
       out[k] = liste.filter(({ e }) => e.isConnected && e.getClientRects().length).map(({ e, avant }) => {
         const m: Mesure = { n: nom(e), avant, apres: parseFloat(getComputedStyle(e).fontSize) };
-        if (k === 'titres' && m.apres / avant < 1.9) {
-          // Titre borné par sa colonne (fit-title, L31) ? Sans la borne, il doit atteindre le double.
-          const style = e.getAttribute('style');
-          e.style.setProperty('--longest-word', '1');
-          m.borne = parseFloat(getComputedStyle(e).fontSize);
-          if (style === null) e.removeAttribute('style'); else e.setAttribute('style', style);
-          m.deborde = e.scrollWidth > e.clientWidth + 1;
+        if ((k === 'titres' || k === 'libelles') && m.apres / avant < 1.9) {
+          // Titre borné par sa colonne (fit-title, L31 ; ou ajusteur des titres, `data-titre-borne`, L253 passe 2 :
+          // le mot le plus long tient dans sa boîte) ? Sans la borne, il doit atteindre le double, et ne pas déborder.
+          const ajuste = e.closest<HTMLElement>('[data-titre-borne]');
+          if (k === 'titres' || ajuste) {
+            const style = e.getAttribute('style');
+            const styleAjuste = ajuste?.getAttribute('style') ?? null;
+            if (k === 'titres') e.style.setProperty('--longest-word', '1');
+            ajuste?.style.removeProperty('font-size');
+            m.borne = parseFloat(getComputedStyle(e).fontSize);
+            if (style === null) e.removeAttribute('style'); else e.setAttribute('style', style);
+            if (ajuste && ajuste !== e) { if (styleAjuste === null) ajuste.removeAttribute('style'); else ajuste.setAttribute('style', styleAjuste); }
+            m.deborde = e.scrollWidth > e.clientWidth + 1;
+          }
         }
         return m;
       });
@@ -129,7 +138,8 @@ describe.skipIf(!built || !chromium)('contenu — texte de la page à 200 % (nav
           if (x.borne === undefined || x.borne / x.avant < 1.9 || x.deborde) ecarts.push(`R2 ${width} px ${x.n} ${x.avant} → ${x.apres} px (sans borne ${x.borne}, déborde ${x.deborde})`);
         }
         for (const x of m.libelles) {
-          if (x.apres / x.avant < 1.9) ecarts.push(`R3 ${width} px ${x.n} ${x.avant} → ${x.apres} px`);
+          if (!(x.apres / x.avant < 1.9)) continue; // (0 → 0 px : bouton à texte masqué, comme avant)
+          if (x.borne === undefined || x.borne / x.avant < 1.9 || x.deborde) ecarts.push(`R3 ${width} px ${x.n} ${x.avant} → ${x.apres} px (sans borne ${x.borne}, déborde ${x.deborde})`);
         }
         const d = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         if (d > 0) ecarts.push(`R4 ${width} px : la page défile de ${d} px`);

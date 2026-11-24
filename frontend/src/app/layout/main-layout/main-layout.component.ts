@@ -15,7 +15,8 @@ import { QuotaAlertService } from '../../core/services/quota-alert.service';
 import { PageTitleService } from '../../core/services/page-title.service';
 import { CreditsPageComponent } from '../credits-page/credits-page.component';
 import { searchShortcut, type PlatformHints } from './search-shortcut';
-import { classesBarre, type ClasseBarre } from './seuils-barre';
+import { classesBarre, classesContenu, type ClasseBarre, type ClasseContenu } from './seuils-barre';
+import { ajusterTitres, effacerTitresAjustes } from '../../core/utils/titres-ajustes';
 
 @Component({
   selector: 'app-main-layout',
@@ -31,6 +32,14 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
     '[class.texte-agrandi]': 'barre()["texte-agrandi"]',
     // L253 : 1rem au-delà de 16 px (police du navigateur ou de la page) : reflux du contenu, styles/_texte-agrandi.scss.
     '[class.texte-plus-grand]': 'barre()["texte-plus-grand"]',
+    // L253 passe 2 : media queries des pages comptées en rem, en texte plus grand seulement (seuils-barre.ts).
+    '[class.contenu-1280]': 'barre()["contenu-1280"]',
+    '[class.contenu-1220]': 'barre()["contenu-1220"]',
+    '[class.contenu-1100]': 'barre()["contenu-1100"]',
+    '[class.contenu-1024]': 'barre()["contenu-1024"]',
+    '[class.contenu-900]': 'barre()["contenu-900"]',
+    '[class.contenu-760]': 'barre()["contenu-760"]',
+    '[class.contenu-600]': 'barre()["contenu-600"]',
   },
   template: `
     <!-- L250 : sondes de 1rem (police de la page) et de 1em « medium » (police par défaut du navigateur). -->
@@ -451,13 +460,6 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
          de la pastille et élargit « ☰ 9+ » : police par défaut de 20 px, la barre débordait de 3 à 5 px
          à 320–324 px. Marges réduites : le bouton reste ≥ 44 px (min-width, min-height). */
       .menu-toggle.has-badge { padding: 0 6px; gap: 4px; }
-      /* L253 : police du NAVIGATEUR agrandie (texte-plus-grand ; texte-agrandi, relatif à elle, n'est pas posé) :
-         mêmes règles que « texte-agrandi + barre-etroite » plus bas — 32 px : la barre défilait de 74 px à 320 px. */
-      :host(.texte-plus-grand) .drawer { width: min(20rem, 92vw); padding-inline: 12px; }
-      :host(.texte-plus-grand) .drawer a { letter-spacing: 0.06em; overflow-wrap: anywhere; }
-      :host(.texte-plus-grand) .brand strong {
-        font-size: min(1.05rem, 7.5vw); letter-spacing: 0.04em; line-height: 1.05; overflow-wrap: anywhere;
-      }
     }
     /* L46 : police par défaut de 18 ou 20 px, 320–371 px — « ⚜ WARHAMMER 40,000 » + « ☰ Menu » ne
        tiennent plus côte à côte : le mot s'efface aussi sans pastille (« ☰ » seul, nom accessible
@@ -505,7 +507,7 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
        (320 px à 200 % : 74 px de trop). Le logo passe sur deux lignes resserrées, borné par la largeur
        de la fenêtre, et tient dans les 70 px de la barre (les rubans collants s'alignent dessous). */
     /* L253 : mêmes règles quand c'est la police par défaut du NAVIGATEUR qui grossit (texte-plus-grand, 1rem > 16 px) ;
-       texte-agrandi est relatif à elle et n'est pas posé. Variante étroite : dans la media query de 31em plus haut. */
+       texte-agrandi est relatif à elle et n'est pas posé. */
     /* Le tiroir suit le texte (20rem = 320 px à 100 %) : « PLAN DE TRAVAIL » tient sur sa ligne. */
     :host(.texte-agrandi) .drawer, :host(.texte-plus-grand) .drawer { width: min(20rem, 86vw); }
     /* Au téléphone, « NOUVEAUTÉS » et sa pastille ne tiennent plus sur une ligne : la pastille passe dessous. */
@@ -516,6 +518,17 @@ import { classesBarre, type ClasseBarre } from './seuils-barre';
     :host(.texte-agrandi) .drawer-head, :host(.texte-plus-grand) .drawer-head { flex-wrap: wrap; gap: 8px; }
     :host(.texte-agrandi.barre-etroite) .brand strong {
       font-size: min(1.05rem, 7.5vw); letter-spacing: 0.04em; line-height: 1.05; overflow-wrap: anywhere;
+    }
+    /* L253 : variante étroite pour la police du NAVIGATEUR agrandie (texte-plus-grand ; texte-agrandi, relatif à elle,
+       n'est pas posé) — 32 px : la barre défilait de 74 px à 320 px. Media query de 31em (comme le reste de la barre :
+       les classes en rem n'en sont que le double, texte-200-l250 R3) placée APRÈS la règle des 86vw : dans la media
+       query du haut, la largeur du tiroir était écrasée par elle (même spécificité, revue de code L253 r1). */
+    @media (width < 31em) {
+      :host(.texte-plus-grand) .drawer { width: min(20rem, 92vw); padding-inline: 12px; }
+      :host(.texte-plus-grand) .drawer a { letter-spacing: 0.06em; overflow-wrap: anywhere; }
+      :host(.texte-plus-grand) .brand strong {
+        font-size: min(1.05rem, 7.5vw); letter-spacing: 0.04em; line-height: 1.05; overflow-wrap: anywhere;
+      }
     }
   `],
 })
@@ -537,7 +550,7 @@ export class MainLayoutComponent implements OnInit {
   readonly unseenText = computed(() => unseenLabel(this.news.unseen()));
   readonly menuOpen = signal(false);
   /** L250 : classes de la barre comptées en rem (voir seuils-barre.ts). */
-  readonly barre = signal(classesBarre(window.innerWidth, parseFloat(getComputedStyle(document.documentElement).fontSize)));
+  readonly barre = signal<Record<ClasseBarre | ClasseContenu, boolean>>(this.classesInitiales());
   @ViewChild('sondeRem', { static: true }) private sondeRem?: ElementRef<HTMLElement>;
   @ViewChild('sondeDefaut', { static: true }) private sondeDefaut?: ElementRef<HTMLElement>;
   /** Tiroir ouvert : le reste de la page (hors bouton Menu et tiroir) est inerte. */
@@ -616,6 +629,45 @@ export class MainLayoutComponent implements OnInit {
     this.destroyRef.onDestroy(() => stop(observer, timer));
   }
 
+  /**
+   * L253 passe 2 : titres bornés par leur boîte en texte plus grand (core/utils/titres-ajustes.ts), recalculés après
+   * chaque changement du contenu (navigation, données chargées), de largeur, de police ou au chargement des polices web.
+   */
+  private readonly titres = (() => {
+    let image = 0;
+    let observateur: MutationObserver | null = null;
+    const polices = () => planifier();
+    const executer = () => {
+      image = 0;
+      const main = this.main?.nativeElement;
+      if (!main || !this.barre()['texte-plus-grand']) return;
+      observateur?.disconnect();
+      ajusterTitres(main, parseFloat(getComputedStyle(document.documentElement).fontSize));
+      observateur?.takeRecords();
+      observateur?.observe(main, { childList: true, subtree: true, characterData: true });
+    };
+    const planifier = () => {
+      const main = this.main?.nativeElement;
+      if (!main || typeof MutationObserver !== 'function') return;
+      if (!observateur) {
+        observateur = new MutationObserver(() => planifier());
+        observateur.observe(main, { childList: true, subtree: true, characterData: true });
+        document.fonts?.addEventListener?.('loadingdone', polices);
+      }
+      if (!image) image = requestAnimationFrame(executer);
+    };
+    const arreter = () => {
+      if (image) cancelAnimationFrame(image);
+      image = 0;
+      observateur?.disconnect();
+      observateur = null;
+      document.fonts?.removeEventListener?.('loadingdone', polices);
+      if (this.main) effacerTitresAjustes(this.main.nativeElement);
+    };
+    this.destroyRef.onDestroy(arreter);
+    return { planifier, arreter };
+  })();
+
   ngOnInit(): void {
     void this.news.load();
     // Passage au bureau (≥ 84em) menu ouvert : le tiroir disparaît, la page doit redéfiler.
@@ -640,19 +692,27 @@ export class MainLayoutComponent implements OnInit {
     }
   }
 
+  private classesInitiales(): Record<ClasseBarre | ClasseContenu, boolean> {
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return { ...classesBarre(window.innerWidth, rem), ...classesContenu(window.innerWidth, rem) };
+  }
+
   /** L250 : classes de la barre d'après la largeur de la fenêtre et la taille de police de la page. */
-  private calculerBarre(): Record<ClasseBarre, boolean> {
+  private calculerBarre(): Record<ClasseBarre | ClasseContenu, boolean> {
     const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
     const sonde = this.sondeDefaut?.nativeElement;
     const defaut = sonde ? parseFloat(getComputedStyle(sonde).fontSize) : rem;
-    return classesBarre(window.innerWidth, rem, defaut);
+    return { ...classesBarre(window.innerWidth, rem, defaut), ...classesContenu(window.innerWidth, rem) };
   }
 
   private majBarre(): void {
     const suivant = this.calculerBarre();
     const actuel = this.barre();
-    if ((Object.keys(suivant) as ClasseBarre[]).every((k) => suivant[k] === actuel[k])) return;
+    // L253 passe 2 : texte plus grand, les titres sont re-bornés à chaque changement de largeur ou de police.
+    if (suivant['texte-plus-grand']) this.titres.planifier();
+    if ((Object.keys(suivant) as (ClasseBarre | ClasseContenu)[]).every((k) => suivant[k] === actuel[k])) return;
     this.barre.set(suivant);
+    if (!suivant['texte-plus-grand']) this.titres.arreter();
     // Le tiroir n'existe plus (bureau, à 84em ET à 84rem) : menu ouvert, la page doit redéfiler.
     if (!suivant['barre-tiroir'] && !window.matchMedia?.('(width < 84em)')?.matches) this.closeMenu();
   }
