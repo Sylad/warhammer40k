@@ -16,7 +16,10 @@
  *    texte qui le suit (`texteQuiSuit` : le premier paragraphe après lui dans son bloc, au moins 1rem) — h1 1,25,
  *    h2 1,1, h3 à h6 1 ; au-delà, le mot se coupe à une syllabe, avec un trait (`hyphens: auto`) ;
  *    le h1 dépasse aussi de `SOUS_TITRES` les h2 à h6 qui étaient plus petits que lui au réglage normal ;
- *  - un h1 que `fit-title` (L31) a figé sous ce plancher (accueil, fiche unité au téléphone) y est relevé ;
+ *  - un h1 que `fit-title` (L31) a figé sous ce plancher (accueil, fiche unité au téléphone) y est relevé ; un h2 à
+ *    h6 borné par `fit-title` (`--longest-word` posé) l'est jusqu'à ce que son mot tienne, jamais sous sa taille au
+ *    réglage normal (L255, QA de L253 : sa requête de conteneur se resserre quand le texte grandit, « L'Astronomican »
+ *    de /lore/concepts passait de 23,6 à 21,4 px à 390 px) ;
  *  - jamais un élément tourné ou mis à l'échelle (`transform` autre qu'une translation : sa boîte n'est pas mesurée dans le même repère que son texte, la
  *    flèche tournée des cartes de la chronologie) ni un glyphe seul (« › », « ▾ »).
  * Seulement en texte plus grand (classe `texte-plus-grand`) : au réglage normal, `effacerTitresAjustes` retire tout.
@@ -129,7 +132,9 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   // Lecture de toutes les mesures, puis écriture : une seule mise en page.
   const mesures = candidats.map((e) => {
     const titre = estTitre(e);
-    return { e, titre, dispo: largeurContenu(e), mot: motLePlusLong(e, titre), taille: parseFloat(getComputedStyle(e).fontSize) };
+    const s = getComputedStyle(e);
+    const fit = titre && s.getPropertyValue('--longest-word').trim() !== '';
+    return { e, titre, fit, dispo: largeurContenu(e), mot: motLePlusLong(e, titre), taille: parseFloat(s.fontSize) };
   });
   const titres = mesures.filter((m) => m.titre);
   const tn = taillesNormales(titres.map((t) => t.e));
@@ -154,7 +159,12 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
     }
     if (e.tagName === 'H1') continue;
     const normale = normales.get(e) ?? 0;
-    const cible = cibleTitre(m, Math.max(normale, (ECHELLE[e.tagName] ?? 1) * Math.max(rem, texteQuiSuit(e, racine))));
+    const plancher = Math.max(normale, (ECHELLE[e.tagName] ?? 1) * Math.max(rem, texteQuiSuit(e, racine)));
+    // borné par fit-title (L31) sous son plancher : relevé jusqu'à ce que son mot le plus long tienne, sans dépasser
+    // le plancher, et jamais sous sa taille au réglage normal (L255 ; au-delà de ce qui tient, « ASTARTE|S » se
+    // coupait sans trait : un nom propre n'a pas toujours de césure)
+    const tient = dispo > 0 && mot > 0 ? (taille * dispo * MARGE) / mot : plancher;
+    const cible = m.fit ? Math.max(cibleTitre(m, plancher), Math.min(plancher, Math.max(normale, tient))) : cibleTitre(m, plancher);
     sousTitres.push({ normale, cible });
     if (Math.abs(cible - taille) > 0.25) bornes.push([e, cible]);
   }

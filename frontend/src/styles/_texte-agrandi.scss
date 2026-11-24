@@ -114,6 +114,16 @@ app-main-layout.contenu-760 #contenu app-videos {
 app-main-layout.texte-plus-grand #contenu app-videos {
   .ch-info :is(strong, span), .recent-row .rr-title { white-space: normal; overflow: visible; text-overflow: clip; }
   .lang { overflow-wrap: normal; white-space: nowrap; }
+  /* Liste « Trier par » (L255, WCAG 1.4.4) : à 320 px, « Tri : recommandées » (265 px) dans 213 px de contenu était
+     coupé à « Tri : recommand » ; en texte agrandi, la valeur passe à la ligne et la liste grandit avec elle. */
+  .select { white-space: normal; height: auto; min-height: 2.75rem; padding-block: 6px; line-height: 1.3; }
+}
+/* … et au téléphone, ses marges latérales se resserrent (15 + 32 px) : « recommandées » tient sur sa ligne, polices
+   web bloquées comprises ; la flèche reste à 9 px du bord. */
+app-main-layout.contenu-600 #contenu app-videos .select {
+  padding-left: 10px;
+  padding-right: 26px;
+  background-position: calc(100% - 14px) 19px, calc(100% - 9px) 19px;
 }
 app-main-layout.contenu-600 #contenu app-videos .load-more { letter-spacing: 0.06em; padding-inline: 14px; }
 /* Chaînes (panneau du héros et cartes) : la pastille de langue passe sous le nom ; au téléphone, l'avatar aussi
@@ -147,6 +157,12 @@ app-main-layout.texte-plus-grand #contenu app-series {
   /* Résumés des cartes : limités à 3 lignes (line-clamp) au réglage normal ; à 200 % et 390 px, il n'en restait
      que 27 % (54 % à 100 %), sans moyen de lire la suite (revue UX r2, N-C2) : en texte agrandi, le résumé entier. */
   .card-desc { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible; }
+  /* Anneau de progression (L255) : 100 px fixes, « 30% » (44 px) et « TERMINÉ » s'y chevauchaient de 4 px et
+     débordaient de l'anneau ; en texte agrandi, l'anneau suit le texte (6,25rem = 100 px à 16 px) et l'accent de
+     « TERMINÉ » a sa place sous le pourcentage. */
+  .progression-row { grid-template-columns: 6.875rem minmax(0, 1fr); }
+  .donut { width: 6.25rem; height: 6.25rem; }
+  .donut-sub { margin-top: 0.4em; line-height: 1.2; }
 }
 
 /* Factions, fiche faction, fiche primarque, À propos : mêmes bascules que leurs media queries en px (1280, 1100,
@@ -231,6 +247,9 @@ app-main-layout.contenu-600 #contenu {
   app-lore-timeline .t-card-body { padding-inline: 12px; }
   app-lore-galaxy .hero { padding-inline: 16px; }
   app-series .panel { padding-inline: 12px; }
+  /* L255 : le symbole d'un concept (2,75rem) passe au-dessus de son nom, qui garde toute la largeur de la carte. */
+  app-lore-concepts .concept-sigil-row { flex-wrap: wrap; row-gap: 8px; }
+  app-lore-concepts .concept-names { flex-basis: 100%; }
   app-series .progression-row { grid-template-columns: minmax(0, 1fr); }
   app-series .popular li { grid-template-columns: auto minmax(0, 1fr); }
   app-series .pop-count { grid-column: 2; }
