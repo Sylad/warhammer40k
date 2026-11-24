@@ -2865,6 +2865,7 @@ lots:
     title: "Liens morts units.json : inq-vindicare/eversor/callidus.sourceFaction ont le texte de la source collé à l'URL (L247) ; et npm run liens:externes plante dans un worktree (sortie par défaut ../../../tmp absente) — relevés du run L249"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-24, sha: d0483eb924e3395de77c740203e6db652c1648c8 }
     created: 2026-11-23
     started: 2026-11-24
     review: { date: 2026-11-24, verdict: "conforme (lead, c9102a7) : URL seules dans sourceFaction, libellé à part (sourceFactionLibelle, typé), test qui refuse une URL avec espace ou texte ; rapports liens:externes/crawl dans tmp/ du dépôt (ignoré), dossier créé au besoin, test ; non visible (sourceFaction non affiché)", commit: c9102a729695639a4f7fb6dc1681c4014fd7ebfa }
