@@ -2878,7 +2878,7 @@ lots:
     created: 2026-11-23
     started: 2026-11-24
     review: { date: 2026-11-24, verdict: "conforme r2 (da13e23) — 0 bloquant, 0 majeur ; 3 mineurs (tmp/revue-warhammer-L253-r2.md) : titre réduit sous sa taille à 100 % sur /lore/timeline à 320 px, flèches transformées réduites à tort, media queries doublées sans garde", commit: da13e2345e251318a3d702ededb3ea6b24f3542d }
-    ux: { date: 2026-11-24, verdict: "non conforme r1 : 1 bloquant (une lettre par ligne à 200 % : citation accueil, filtres /videos, infos unité), 3 majeurs (grands titres coupés sans trait, noms de chaînes tronqués, mots coupés dans cartes/dates/pastilles) — tmp/ux-warhammer-L253.md" }
+    ux: { date: 2026-11-24, verdict: "non conforme r2 — r1 levé (lettre par ligne, titres, noms, 349→1 coupure) ; 3 majeurs : h1 réduit ≤ intro au téléphone à 200 %, résumés /romans à 27 % sans moyen de lire, « ARMAGEDD/ON » sans trait (tmp/ux-warhammer-L253-r2.md)" }
   - id: L254
     title: "D-31 du registre parent : adopter cadence analyse (L801, cadence ≥ 2.0.18) — déclarer analyse: dans cadence.yaml avec les outils de la pile du projet (JS/TS : ESLint + typescript-eslint + eslint-plugin-sonarjs avec les seuils de cadence : max-lines 400, max-lines-per-function 80, max-depth 4, max-params 5, complexity 15, cognitive-complexity 15, plus tsc ; Python : ruff), base figée à l'existant (cadence analyse --init), aucune correction de l'existant ; la porte de cadence run le joue ensuite à chaque lot. Mesurer le temps ajouté à la porte (cible < 1 min) et le nombre de violations figées par outil, à rendre dans le rapport"
     status: todo
