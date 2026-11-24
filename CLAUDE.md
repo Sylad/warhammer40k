@@ -305,6 +305,10 @@ Audit outillé de TOUS les liens (rapport du 2026-10-02 : `docs/liens/audit-2026
 - `npm run liens:externes [-- --wiki http://localhost:3001]` : **à la demande seulement, jamais
   en CI** — 2 requêtes simultanées, 1,5 s par hôte, une reprise ; pages Fandom via l'API MediaWiki,
   vidéos YouTube via oEmbed ; 403/429 de Cloudflare = « invérifiable », pas « mort ».
+  Rapports de `liens:externes` et `liens:crawl` dans `tmp/` à la racine du dépôt (ignoré, dossier créé au
+  besoin, worktree compris — L252, `sortieParDefaut` / `ecrireRapport` de `liens-lib.mjs`). Une URL des
+  données est une URL seule : son libellé va dans un champ voisin (`sourceFactionLibelle`), garde
+  `backend/src/modules/units/units-urls-l252.spec.ts`.
 
 Les corrections de **contenu** (`backend/seed/*.json`) atteignent la prod avec l'image (L74, voir
 « Mise à jour contenu en prod ») ; les pages tolèrent quand même les identifiants absents. Vidéos et

@@ -4,6 +4,7 @@
 // même hôte, agent utilisateur de navigateur, délai de 15 s, une seule reprise.
 //
 //   cd frontend && npm run liens:externes -- [--out <fichier.json>] [--wiki <url du backend>]
+//   (sortie par défaut : tmp/wh-liens-externes.json à la racine du dépôt, ignoré par git — L252)
 //
 // Classes : ok, redirige (URL finale relevée), mort (404/410/nom de domaine inconnu, vidéo absente),
 // invérifiable (403/429/5xx ou délai : sites qui filtrent les robots — pas une preuve de mort).
@@ -13,14 +14,13 @@
 // L109 : une vidéo du seed dont l'auteur réel (oEmbed) n'est pas son `createur` passe en « auteur
 // différent » : ré-upload d'un tiers ou embed remplacé, la fiche annonçant peut-être une autre vidéo
 // que celle lue — à examiner (une chaîne officielle qui republie l'auteur sort aussi ici).
-import { writeFileSync } from 'node:fs';
-import { apiAssets, auteurVideoDiffere, inventory, loadSeed } from './liens-lib.mjs';
+import { apiAssets, auteurVideoDiffere, ecrireRapport, inventory, loadSeed, sortieParDefaut } from './liens-lib.mjs';
 
 const arg = (name, def) => {
   const i = process.argv.indexOf(name);
   return i > 0 ? process.argv[i + 1] : def;
 };
-const OUT = arg('--out', new URL('../../../tmp/wh-liens-externes.json', import.meta.url).pathname);
+const OUT = arg('--out', sortieParDefaut('wh-liens-externes.json'));
 const WIKI = arg('--wiki', null);
 const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 const HOST_DELAY = 1500;
@@ -186,7 +186,7 @@ if (WIKI) {
   wiki = { totalQueries: all, checked: qs.length, results: res };
 }
 
-writeFileSync(OUT, JSON.stringify({ date: new Date().toISOString(), results, wiki }, null, 1));
+ecrireRapport(OUT, { date: new Date().toISOString(), results, wiki });
 const count = {};
 for (const r of results) count[r.cls] = (count[r.cls] ?? 0) + 1;
 console.log(`${urls.length} URL externes uniques :`, count);

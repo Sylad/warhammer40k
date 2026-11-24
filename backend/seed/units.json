@@ -6112,7 +6112,8 @@
   {
     "id": "inq-vindicare",
     "factionId": "officio-assassinorum",
-    "sourceFaction": "https://www.wahapedia.ru/wh40k11ed/factions/imperial-agents/Vindicare-Assassin — Imperial Agents, Faction Pack 11e éd. v1.3 : mot-clé OFFICIO ASSASSINORUM (vérifié le 2026-11-22, L247)",
+    "sourceFaction": "https://www.wahapedia.ru/wh40k11ed/factions/imperial-agents/Vindicare-Assassin",
+    "sourceFactionLibelle": "Imperial Agents, Faction Pack 11e éd. v1.3 : mot-clé OFFICIO ASSASSINORUM (vérifié le 2026-11-22, L247)",
     "nom": "Assassin Vindicare",
     "type": "Héros",
     "pointsCost": 100,
@@ -6182,7 +6183,8 @@
   {
     "id": "inq-eversor",
     "factionId": "officio-assassinorum",
-    "sourceFaction": "https://www.wahapedia.ru/wh40k11ed/factions/imperial-agents/Eversor-Assassin — Imperial Agents, Faction Pack 11e éd. v1.3 : mot-clé OFFICIO ASSASSINORUM (vérifié le 2026-11-22, L247)",
+    "sourceFaction": "https://www.wahapedia.ru/wh40k11ed/factions/imperial-agents/Eversor-Assassin",
+    "sourceFactionLibelle": "Imperial Agents, Faction Pack 11e éd. v1.3 : mot-clé OFFICIO ASSASSINORUM (vérifié le 2026-11-22, L247)",
     "nom": "Assassin Eversor",
     "type": "Héros",
     "pointsCost": 85,
@@ -6251,7 +6253,8 @@
   {
     "id": "inq-callidus",
     "factionId": "officio-assassinorum",
-    "sourceFaction": "https://www.wahapedia.ru/wh40k11ed/factions/imperial-agents/Callidus-Assassin — Imperial Agents, Faction Pack 11e éd. v1.3 : mot-clé OFFICIO ASSASSINORUM (vérifié le 2026-11-22, L247)",
+    "sourceFaction": "https://www.wahapedia.ru/wh40k11ed/factions/imperial-agents/Callidus-Assassin",
+    "sourceFactionLibelle": "Imperial Agents, Faction Pack 11e éd. v1.3 : mot-clé OFFICIO ASSASSINORUM (vérifié le 2026-11-22, L247)",
     "nom": "Assassin Callidus",
     "type": "Héros",
     "pointsCost": 100,

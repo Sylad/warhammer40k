@@ -20,7 +20,8 @@ describe('assassins rattachés à l\'Officio Assassinorum (L247)', () => {
     for (const id of ASSASSINS) {
       expect(service.findAll().filter((u) => u.id === id), id).toHaveLength(1);
       expect(service.findOne(id).factionId, id).toBe('officio-assassinorum');
-      expect(service.findOne(id).sourceFaction, id).toMatch(/^https:\/\/www\.wahapedia\.ru\/wh40k11ed\/factions\/imperial-agents\//);
+      expect(service.findOne(id).sourceFaction, id).toMatch(/^https:\/\/www\.wahapedia\.ru\/wh40k11ed\/factions\/imperial-agents\/[A-Za-z-]+$/);
+      expect(service.findOne(id).sourceFactionLibelle, id).toMatch(/OFFICIO ASSASSINORUM.*vérifié le 2026-11-22/);
     }
     expect(service.findAll('officio-assassinorum').map((u) => u.id).sort()).toEqual([...ASSASSINS].sort());
   });

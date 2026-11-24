@@ -4,12 +4,22 @@
 //
 // Utilisée par `scripts/liens.mjs` (rapport à la demande), `scripts/liens-crawl.mjs` (parcours de
 // l'application en marche) et le test de garde `scripts/liens.test.mjs` (Vitest, CI).
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const FRONTEND = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const ROOT = resolve(FRONTEND, '..');
+/** L252 : rapports des scripts à la demande, dans le dépôt (dossier ignoré par git, `/tmp/` du `.gitignore`).
+ *  Avant, `../../../tmp` visait le dossier parent du dépôt, absent dans un worktree : le script plantait
+ *  à l'écriture, après tout le parcours. */
+export const RAPPORTS = join(ROOT, 'tmp');
+export const sortieParDefaut = (nom) => join(RAPPORTS, nom);
+/** Écrit un rapport JSON en créant son dossier au besoin (sortie par défaut comme `--out`). */
+export function ecrireRapport(chemin, donnees) {
+  mkdirSync(dirname(chemin), { recursive: true });
+  writeFileSync(chemin, JSON.stringify(donnees, null, 1));
+}
 export const APP = join(FRONTEND, 'src/app');
 export const SEED = join(ROOT, 'backend/seed');
 export const PUBLIC = join(FRONTEND, 'public');

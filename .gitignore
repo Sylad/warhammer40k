@@ -50,3 +50,6 @@ debug-*.jpg
 debug-*.png
 .token-savior-cache.json
 .playwright-mcp/
+
+# Rapports des scripts à la demande (liens:externes, liens:crawl — L252)
+/tmp/

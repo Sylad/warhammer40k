@@ -11,15 +11,15 @@
 // Rien ne sort vers Internet : les requêtes externes sont coupées et `/api/wiki-image` répond
 // « pas d'image » (les requêtes Fandom sont vérifiées à part, avec ménagement, par liens-externes.mjs).
 import { chromium } from 'playwright-core';
-import { readFileSync, writeFileSync } from 'node:fs';
-import { inventory, loadSeed, matchRoute, readRoutes, routeIds, unlinkedData } from './liens-lib.mjs';
+import { readFileSync } from 'node:fs';
+import { ecrireRapport, inventory, loadSeed, matchRoute, readRoutes, routeIds, sortieParDefaut, unlinkedData } from './liens-lib.mjs';
 
 const arg = (name, def) => {
   const i = process.argv.indexOf(name);
   return i > 0 ? process.argv[i + 1] : def;
 };
 const BASE = arg('--base', 'http://localhost:4201');
-const OUT = arg('--out', new URL('../../../tmp/wh-liens-crawl.json', import.meta.url).pathname);
+const OUT = arg('--out', sortieParDefaut('wh-liens-crawl.json'));
 const MAX = Number(arg('--max', '5000'));
 const CONCURRENCY = 3;
 
@@ -304,7 +304,7 @@ for (const f of files) {
 
 await browser.close();
 const result = { base: BASE, date: new Date().toISOString(), pages: [...pages.values()], links, fileStatus };
-writeFileSync(OUT, JSON.stringify(result, null, 1));
+ecrireRapport(OUT, result);
 const a = analyse(result);
 console.log(`${a.pages} pages, ${a.liens.internes} liens internes (${a.ciblesInternesDistinctes} cibles distinctes), ${a.liens.externes} externes → ${OUT}`);
 for (const k of ['redirigees', 'api', 'chargement', 'images', 'console', 'ancresNues', 'ancresAbsentes', 'fichiers']) console.log(`  ${k.padEnd(15)} ${a[k].length}`);
