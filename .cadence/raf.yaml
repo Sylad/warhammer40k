@@ -2875,6 +2875,7 @@ lots:
     status: done
     estimate: 1
     visible: true
+    delivered: { date: 2026-11-24, sha: df6ca7f6b02e8dd592d82ce522d2570de3c1fb8a }
     created: 2026-11-23
     started: 2026-11-24
     review: { date: 2026-11-24, verdict: "conforme r3 (05480b1) : 0 bloquant, 0 majeur, constats r2 levés ; mineur : texte-agrandi-miroirs-l253.spec.ts:90-97 ne fait pas tourner la comparaison M2/M3 — tmp/revue-warhammer-L253-r3.md", commit: 05480b153b6814b9376ce0e2dbcc76d8acb64375 }
@@ -2895,6 +2896,7 @@ lots:
     title: "CI Contrôles frontend : l'étape e2e (Acceptation de bout en bout) a dépassé son délai de 12 min sur 05480b1 (L253, run 45415489011, aucun test rouge) ; elle prenait déjà 11 min avant (runs du 24-11 matin). Attendu : un délai avec une marge mesurée (durée réelle + 50 % au moins), ou un partage en deux jobs parallèles si ça garde la CI sous ~15 min ; la somme des délais du job tenue par ci-frontend-checks.test.mjs ; relancer la CI de 05480b1 n'est pas une option (même temps)"
     status: done
     estimate: 0.5
+    delivered: { date: 2026-11-24, sha: df6ca7f6b02e8dd592d82ce522d2570de3c1fb8a }
     created: 2026-11-24
     started: 2026-11-24
     review: { date: 2026-11-24, verdict: "conforme (actionlint sans erreur ; README.md:172/174 pas à jour → L258 ; note : une assertion d'écart toujours vraie ; rapport tmp/revue-warhammer-L256.md)", commit: 330b8bd932f5bc3f63e736643ef1d7b69f44be3f }
