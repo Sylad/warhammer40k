@@ -7,6 +7,8 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
+import e2eConfig from '../vitest.e2e.config.ts';
+import { dureesMesurees, partager } from './e2e-parties.mjs';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const WORKFLOW = `${root}/.github/workflows/frontend-checks.yml`;
@@ -15,6 +17,7 @@ describe('workflow frontend-checks.yml', () => {
   const wf = parse(readFileSync(WORKFLOW, 'utf8'));
   const steps = Object.values(wf.jobs).flatMap((j) => j.steps ?? []);
   const commands = steps.map((s) => String(s.run ?? '')).join('\n');
+  const jobDe = (step) => Object.values(wf.jobs).find((j) => (j.steps ?? []).includes(step));
 
   it('tourne à CHAQUE push sur main, sans filtre de chemins (un commit de plan seul compte)', () => {
     expect(wf.on.push.branches).toEqual(['main']);
@@ -93,11 +96,10 @@ describe('workflow frontend-checks.yml', () => {
     });
 
     it('R3 — chaque étape d’installation a son propre timeout, plus court que celui du job', () => {
-      const job = Object.values(wf.jobs)[0];
       expect(installs.length).toBeGreaterThan(0);
       for (const s of installs) {
         expect(s['timeout-minutes']).toBeGreaterThan(0);
-        expect(s['timeout-minutes']).toBeLessThan(job['timeout-minutes']);
+        expect(s['timeout-minutes']).toBeLessThan(jobDe(s)['timeout-minutes']);
       }
     });
 
@@ -107,28 +109,59 @@ describe('workflow frontend-checks.yml', () => {
   });
 
   // L245 — le job (10 min) était annulé pendant les e2e (~7 min observées, 428 s en local le 22-11).
+  // L256 — e2e sortis dans un job matriciel ; le délai de leur étape se mesure sur la table des durées (bloc L256).
   describe('timeouts (L245)', () => {
-    const job = Object.values(wf.jobs)[0];
     const step = (re) => steps.find((s) => re.test(String(s.run ?? '')));
-    const E2E_OBSERVE_MIN = 7;
-
-    it('R1 — l’étape e2e a son timeout, au moins ×1,5 la durée observée', () => {
-      const e2e = step(/test:e2e/);
-      expect(e2e['timeout-minutes']).toBeGreaterThanOrEqual(E2E_OBSERVE_MIN * 1.5);
-    });
 
     it('R2 — Vitest et le build ont chacun leur timeout (une étape trop longue échoue sur son nom)', () => {
       expect(step(/npx vitest run/)['timeout-minutes']).toBeGreaterThan(0);
-      expect(step(/npm run build/)['timeout-minutes']).toBeGreaterThan(0);
+      for (const s of steps.filter((s) => /npm run build/.test(String(s.run ?? '')))) expect(s['timeout-minutes']).toBeGreaterThan(0);
     });
 
-    it('R3 — le job vaut au moins la somme des timeouts d’étape d’un même passage (installations de Chromium : l’une ou l’autre)', () => {
-      const installs = steps.filter((s) => /playwright-core install/.test(String(s.run ?? '')));
-      const autres = steps.filter((s) => !installs.includes(s));
-      const somme = autres.reduce((t, s) => t + (s['timeout-minutes'] ?? 0), 0) + Math.max(...installs.map((s) => s['timeout-minutes']));
-      expect(somme).toBeGreaterThanOrEqual(E2E_OBSERVE_MIN * 1.5);
-      expect(job['timeout-minutes']).toBeGreaterThanOrEqual(somme);
-      for (const s of steps) if (s['timeout-minutes'] !== undefined) expect(s['timeout-minutes']).toBeLessThan(job['timeout-minutes']);
+    it('R3 — chaque job vaut au moins la somme des timeouts d’étape d’un même passage (installations de Chromium : l’une ou l’autre)', () => {
+      for (const job of Object.values(wf.jobs)) {
+        const js = job.steps ?? [];
+        const installs = js.filter((s) => /playwright-core install/.test(String(s.run ?? '')));
+        const autres = js.filter((s) => !installs.includes(s));
+        const somme = autres.reduce((t, s) => t + (s['timeout-minutes'] ?? 0), 0) + Math.max(0, ...installs.map((s) => s['timeout-minutes']));
+        expect(job['timeout-minutes']).toBeGreaterThanOrEqual(somme);
+        for (const s of js) if (s['timeout-minutes'] !== undefined) expect(s['timeout-minutes']).toBeLessThan(job['timeout-minutes']);
+      }
+    });
+  });
+
+  // L256 — l'étape e2e a dépassé ses 12 min sur 05480b1 : les e2e sont partagés entre les jobs d'une matrice.
+  describe('e2e en parties parallèles (L256)', () => {
+    const e2e = steps.find((s) => /test:e2e/.test(String(s.run ?? '')));
+    const job = jobDe(e2e);
+    const parties = job.strategy?.matrix?.partie ?? [];
+
+    it('R1 — un job matriciel par partie (1..n), sans fail-fast, chaque partie dit laquelle elle joue (E2E_PARTIE=k/n)', () => {
+      expect(parties.length).toBeGreaterThanOrEqual(2);
+      expect(parties).toEqual(parties.map((_, i) => i + 1));
+      expect(job.strategy['fail-fast']).toBe(false);
+      expect(e2e.env.E2E_PARTIE).toBe(`\${{ matrix.partie }}/${parties.length}`);
+      expect(job.if).toBeUndefined();
+    });
+
+    it('R2 — le job e2e construit lui-même l’application avant les e2e (il ne dépend pas de l’autre job)', () => {
+      const js = job.steps;
+      const build = js.findIndex((s) => /npm run build/.test(String(s.run ?? '')));
+      expect(js.findIndex((s) => /npm ci/.test(String(s.run ?? '')))).toBeLessThan(build);
+      expect(build).toBeGreaterThan(-1);
+      expect(build).toBeLessThan(js.indexOf(e2e));
+      expect(job.needs).toBeUndefined();
+    });
+
+    it('R3 — chaque partie garde ses artefacts sous un nom à elle (sinon le second envoi échoue)', () => {
+      const art = job.steps.find((s) => String(s.uses ?? '').startsWith('actions/upload-artifact@'));
+      expect(art.if).toBe('always()');
+      expect(art.with.name).toMatch(/\$\{\{ matrix\.partie \}\}/);
+    });
+
+    it('R4 — le timeout de l’étape e2e vaut au moins ×1,5 la partie la plus longue d’après les durées mesurées', () => {
+      const plusLongue = Math.max(...partager(e2eConfig.test.include, parties.length, dureesMesurees(), fileURLToPath(new URL('..', import.meta.url))).map((p) => p.secondes));
+      expect(e2e['timeout-minutes'] * 60).toBeGreaterThanOrEqual(plusLongue * 1.5);
     });
   });
 

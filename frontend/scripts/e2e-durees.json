@@ -1,0 +1,32 @@
+{
+  "mesure": "Secondes par fichier, moyenne de deux mesures du 24-11 sur Big-Blue (32 cœurs, charge de 19 à 88 : autres runs en cours) — npm run test:e2e entier (924 s), puis chaque partie seule (1026 s) — d’après le rapport junit. Somme 976 s. Le runner GitHub (4 cœurs) donnait des durées voisines : 11 min avant L253 pour 701 s mesurées ici. À remettre à jour depuis les artefacts e2e-junit-<partie> de la CI.",
+  "secondes": {
+    "src/app/features/filtres-defilement-l239.e2e.spec.ts": 122,
+    "src/app/layout/main-layout/ancres.e2e.spec.ts": 110,
+    "src/app/features/texte-200-reflux-l253.e2e.spec.ts": 109,
+    "src/app/features/gallery/gallery-filtres-collants-l108.e2e.spec.ts": 98,
+    "src/app/features/densite-pilotes-l40.e2e.spec.ts": 87,
+    "src/app/features/texte-200-contenu-l253.e2e.spec.ts": 70,
+    "src/app/features/faction-detail/fiche-titres-l225.e2e.spec.ts": 47,
+    "src/app/features/gallery/galerie-filtres-l49.acceptation.spec.ts": 43,
+    "src/app/features/videos/videos-ouvrir-l47.acceptation.spec.ts": 35,
+    "src/app/core/utils/section-anchor-href-l160.e2e.spec.ts": 32,
+    "src/app/features/videos/videos-rappel-compte-l241.e2e.spec.ts": 31,
+    "src/app/features/plan/plan.e2e.spec.ts": 28,
+    "src/app/layout/main-layout/espacement-texte.e2e.spec.ts": 26,
+    "src/app/features/subfaction-detail/subfaction-bandeau-l98.e2e.spec.ts": 23,
+    "src/app/features/faction-detail/glyphes-l101.e2e.spec.ts": 16,
+    "src/app/features/gallery/gallery-artiste-actif-l248.e2e.spec.ts": 16,
+    "src/app/layout/credits-page/credits-l238.e2e.spec.ts": 12,
+    "src/app/features/faction-detail/controles-nommes-l99.e2e.spec.ts": 11,
+    "src/app/core/utils/morceau-absent.e2e.spec.ts": 10,
+    "src/app/features/videos/videos-play-l107.e2e.spec.ts": 10,
+    "src/app/features/primarch-detail/primarch-chronologie-l224.e2e.spec.ts": 10,
+    "src/app/layout/main-layout/texte-200-l250.e2e.spec.ts": 9,
+    "src/app/features/videos/videos-effacer-l242.e2e.spec.ts": 7,
+    "src/app/features/gallery/gallery-pagination-l71.e2e.spec.ts": 5,
+    "src/app/features/faction-detail/faction-rangees-l237.e2e.spec.ts": 4,
+    "src/app/features/factions/factions-etats-l96.e2e.spec.ts": 3,
+    "src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": 2
+  }
+}

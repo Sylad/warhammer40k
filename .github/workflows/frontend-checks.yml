@@ -26,13 +26,11 @@ jobs:
   frontend-checks:
     name: Plan publié, tests et build frontend
     runs-on: ubuntu-latest
-    # L245 : 10 min ne suffisaient plus (run de 1006ccf annulé pendant les e2e, ~7 min depuis l'ajout
-    # d'ancres.e2e et section-anchor-href-l160.e2e). Durées mesurées le 22-11 (local, 32 cœurs ; les e2e
-    # tournent un fichier à la fois, donc peu sensibles au nombre de cœurs) : Vitest 46 s, build 14 s,
-    # e2e 428 s (300 cas, dont filtres-defilement-l239 116 s et ancres 105 s). Le job vaut au moins la
-    # somme des timeouts d'étape d'un même passage (8 + 5 + 3 + 5 + 12 = 33) : une étape trop longue
-    # échoue sur son nom, le job n'est jamais annulé au milieu d'une étape. Garde : ci-frontend-checks.test.mjs.
-    timeout-minutes: 35
+    # L245 : le job (alors unique) a dû passer de 10 à 35 min à cause des e2e. L256 : les e2e sont sortis dans le job
+    # `e2e` ci-dessous, qui tourne en parallèle de celui-ci. Ici : Vitest 46 s, build 14 s (local, 22-11), nginx < 1 min.
+    # Le job vaut au moins la somme des timeouts d'étape (8 + 5 + 3 = 16) : une étape trop longue échoue sur son nom,
+    # le job n'est jamais annulé au milieu d'une étape. Garde : ci-frontend-checks.test.mjs.
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: frontend
@@ -64,6 +62,41 @@ jobs:
         working-directory: .
         timeout-minutes: 3
         run: scripts/test-nginx-cache.sh
+
+  # L256 : les e2e ont dépassé les 12 min de leur étape sur 05480b1 (run 45415489011, aucun test rouge ; 11 min avant L253,
+  # runs 45352842388 et 45350768906). Mesure du 24-11 (npm run test:e2e entier, junit, Big-Blue chargé) : 924 s, dont 223 s
+  # pour les deux fichiers de L253 ; le runner donnait des durées voisines (11 min pour 701 s mesurées ici sans L253).
+  # Partagés en deux jobs parallèles, chacun sur son runner (un fichier à la fois sur chacun, L166) : partage par durées
+  # mesurées (scripts/e2e-durees.json, moyenne de deux mesures, plus long d'abord, scripts/e2e-parties.mjs) → 489 s et
+  # 487 s (~8 min), et non `vitest --shard`, qui découpe par empreinte du chemin (574 s contre 350 s sur la même mesure).
+  # CI attendue ~11 min de bout en bout (npm ci, build, Chromium, puis ~8 min d'e2e), en parallèle du job de contrôles.
+  e2e:
+    name: Acceptation de bout en bout, partie ${{ matrix.partie }}/2
+    runs-on: ubuntu-latest
+    strategy:
+      # les deux parties vont au bout : un rouge dans l'une n'annule pas l'autre (chaque artefact e2e-junit reste).
+      fail-fast: false
+      matrix:
+        partie: [1, 2]
+    # Somme des timeouts d'étape d'un même passage : build 5 + Chromium 5 (l'une ou l'autre installation) + e2e 15 = 25.
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Dépendances
+        run: npm ci --no-audit --no-fund
+
+      # Les e2e servent l'application construite (dist) : chaque runner la construit (~14 s en local).
+      - name: Build de l'application servie aux e2e
+        timeout-minutes: 5
+        run: npm run build
 
       # L188 : `install --with-deps chromium` se bloquait (téléchargement + apt) jusqu'au timeout du job.
       # Le navigateur (~/.cache/ms-playwright) est mis en cache, clé sur la version de playwright-core ;
@@ -107,11 +140,16 @@ jobs:
       # L166 : durée de chaque cas (junit), charge du runner et journal horodaté de chaque appel Playwright
       # (DEBUG=pw:api : clic, onglet ouvert, waitForEvent) conservés, échec compris, pour qu'un rouge
       # aléatoire qui revient laisse de quoi distinguer clic manqué, onglet absent et onglet en retard.
-      # L245 : ~7 min observées sur le runner (428 s en local) ; 12 min = plus de ×1,5. À relever si
-      # l'artefact e2e-junit montre la somme des fichiers au-delà de 8 min (×1,5 ne tiendrait plus).
+      # L256 : partie la plus longue estimée à 489 s (~8,2 min) d'après scripts/e2e-durees.json ; 15 min = ×1,84. La
+      # même partie a pris 666 s de cas sur Big-Blue à une charge de 78 sur 32 cœurs : 15 min en gardent encore ×1,35.
+      # ci-frontend-checks.test.mjs recalcule ce rapport depuis la table : un nouvel e2e qui le fait passer sous ×1,5 rend
+      # le test rouge → relever ce délai ou passer à trois parties (matrice et E2E_PARTIE ensemble). Durées réelles de
+      # chaque partie : artefacts e2e-junit-<partie>, à reporter dans la table.
       - name: Acceptation de bout en bout (application construite, Chromium)
-        timeout-minutes: 12
+        timeout-minutes: 15
         shell: bash
+        env:
+          E2E_PARTIE: ${{ matrix.partie }}/2
         run: |
           nproc; uptime
           # charge échantillonnée toutes les 2 s pendant les e2e : l'uptime d'avant le lancement ne mesure que le build
@@ -124,7 +162,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e2e-junit
+          name: e2e-junit-${{ matrix.partie }}
           path: |
             frontend/e2e-junit.xml
             frontend/e2e-pwapi.log
