@@ -2895,7 +2895,9 @@ lots:
     created: 2026-11-24
     notes:
       - { date: 2026-11-24, text: "QA de L253 en prod (24-11, tmp/qa-warhammer-L253.md) : 30/30 pages conformes ; mineur — /lore/concepts à 390 px, un élément passe de 11,5 à 21,4 px au lieu de 23 px avec la police à 200 % (unité non relative restante)" }
+      - { date: 2026-11-24, text: "À faire demain avant livraison : verdict UX (captures du run .cadence-run/warhammer40k-20261124163814-3600529.captures/), ajouter L255 aux lots: de l'entrée Nouveautés du 24-11, puis porte et livraison" }
     started: 2026-11-24
+    review: { date: 2026-11-24, verdict: "conforme (revue Opus, tmp/revue-warhammer-L255.md : 58/58 gardes, miroirs 16/16 avec mutations qui échouent, nouveautes.json cohérent, parties CI 468/468 s ; note mineure : l'entrée Nouveautés porte lots: [L253], ne cite pas L255)", commit: 05c7e5702eca0a879336dbae8bf82c4ff7632fbf }
   - id: L256
     title: "CI Contrôles frontend : l'étape e2e (Acceptation de bout en bout) a dépassé son délai de 12 min sur 05480b1 (L253, run 45415489011, aucun test rouge) ; elle prenait déjà 11 min avant (runs du 24-11 matin). Attendu : un délai avec une marge mesurée (durée réelle + 50 % au moins), ou un partage en deux jobs parallèles si ça garde la CI sous ~15 min ; la somme des délais du job tenue par ci-frontend-checks.test.mjs ; relancer la CI de 05480b1 n'est pas une option (même temps)"
     status: done
