@@ -10,7 +10,14 @@
 //        l'ajusteur retirée), il atteint 1,9, et il ne déborde pas de sa boîte ;
 //   R3 — libellés (boutons, liens, étiquettes, éléments de liste) : rapport ≥ 1,9, sauf dans un titre borné par
 //        l'ajusteur (même contrôle que R2) ;
+//        Passe 3 (revue de code r2) : un titre borné par l'ajusteur ne descend jamais sous sa taille à 100 % (h1 de
+//        /lore/timeline à 320 px : 34 → 32 px) ;
 //   R4 — ni la page ni le contenu ne défilent horizontalement (scrollWidth = clientWidth) ;
+//   R6 — passe 3 (revue UX r2, N-C1) : le h1 reste nettement un titre — au moins 1,2 fois le texte qui le suit
+//        (premier paragraphe après lui dans ses trois blocs parents, comme `texteQuiSuit`) et 1,05 fois chaque h2 ou
+//        h3 qui était plus petit que lui à 100 % (à 320 px, h1 de /videos 32 px sous une introduction de 34 px) ;
+//   R7 — passe 3 (revue de code r2) : l'ajusteur ne borne ni un glyphe seul ni un élément tourné (flèche « › » des
+//        cartes de la chronologie, restée à 22 px à 200 %) ;
 //   R5 — vrai réglage du navigateur (police par défaut à 32 px, CDP Page.setFontSizes) : le texte courant mesure le
 //        double de celui d'une police par défaut à 16 px, et aucune page ne défile horizontalement.
 // Les mêmes éléments sont mesurés avant et après (références gardées dans la page : le texte repliable ajoute des
@@ -30,7 +37,7 @@ try {
 }
 
 const ROUTES = [
-  '/', '/gallery', '/units/sm-tactique', '/plan', '/factions/space-marines', '/videos', '/romans',
+  '/', '/gallery', '/units/sm-tactique', '/plan', '/factions/space-marines', '/videos', '/romans', '/lore/timeline',
   '/lore/primarchs/lion-eljonson', '/lore/concepts', '/nouveautes', '/about',
 ];
 const LARGEURS = [1440, 1024, 768, 390, 320];
@@ -39,7 +46,7 @@ const TEXTE = '#contenu p';
 const TITRES = '#contenu :is(h1, h2, h3)';
 const LIBELLES = '#contenu :is(button, a, label, li, dt, dd, th, td, figcaption)';
 
-type Mesure = { n: string; avant: number; apres: number; borne?: number; deborde?: boolean };
+type Mesure = { n: string; avant: number; apres: number; borne?: number; deborde?: boolean; ajuste?: boolean; h1?: boolean; suit?: number };
 
 async function taille(page: Page, t: string): Promise<void> {
   await page.evaluate((v) => { document.documentElement.style.fontSize = v; }, t);
@@ -69,6 +76,18 @@ async function relire(page: Page): Promise<Record<string, Mesure[]>> {
     for (const [k, liste] of Object.entries(w.__l253)) {
       out[k] = liste.filter(({ e }) => e.isConnected && e.getClientRects().length).map(({ e, avant }) => {
         const m: Mesure = { n: nom(e), avant, apres: parseFloat(getComputedStyle(e).fontSize) };
+        if (k === 'titres') {
+          m.ajuste = e.hasAttribute('data-titre-borne');
+          m.h1 = e.tagName === 'H1';
+          // texte qui suit (même règle que titres-ajustes.ts → texteQuiSuit)
+          let bloc = e.parentElement;
+          const racine = document.querySelector('#contenu');
+          for (let i = 0; m.h1 && bloc && i < 3 && m.suit === undefined; i++, bloc = bloc === racine ? null : bloc.parentElement) {
+            const p = [...bloc.querySelectorAll<HTMLElement>('p')].find((x) => (e.compareDocumentPosition(x) & Node.DOCUMENT_POSITION_FOLLOWING)
+              && x.getClientRects().length && (x.textContent ?? '').trim());
+            if (p) m.suit = parseFloat(getComputedStyle(p).fontSize);
+          }
+        }
         if ((k === 'titres' || k === 'libelles') && m.apres / avant < 1.9) {
           // Titre borné par sa colonne (fit-title, L31 ; ou ajusteur des titres, `data-titre-borne`, L253 passe 2 :
           // le mot le plus long tient dans sa boîte) ? Sans la borne, il doit atteindre le double, et ne pas déborder.
@@ -134,6 +153,11 @@ describe.skipIf(!built || !chromium)('contenu — texte de la page à 200 % (nav
           if (r < 1.95 || r > 2.05) ecarts.push(`R1 ${width} px ${x.n} ${x.avant} → ${x.apres} px`);
         }
         for (const x of m.titres) {
+          if (x.ajuste && x.apres < x.avant - 0.5) ecarts.push(`R2 ${width} px ${x.n} borné sous sa taille à 100 % : ${x.avant} → ${x.apres} px`);
+          if (x.h1 && x.suit && x.apres < 1.2 * x.suit) ecarts.push(`R6 ${width} px ${x.n} ${x.apres} px, texte qui suit ${x.suit} px`);
+          for (const y of m.titres) {
+            if (x.h1 && !y.h1 && y.avant < x.avant && x.apres < 1.05 * y.apres) ecarts.push(`R6 ${width} px ${x.n} ${x.apres} px ≤ ${y.n} ${y.apres} px`);
+          }
           if (x.apres / x.avant >= 1.9) continue;
           if (x.borne === undefined || x.borne / x.avant < 1.9 || x.deborde) ecarts.push(`R2 ${width} px ${x.n} ${x.avant} → ${x.apres} px (sans borne ${x.borne}, déborde ${x.deborde})`);
         }
@@ -143,6 +167,10 @@ describe.skipIf(!built || !chromium)('contenu — texte de la page à 200 % (nav
         }
         const d = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         if (d > 0) ecarts.push(`R4 ${width} px : la page défile de ${d} px`);
+        const glyphes = await page.evaluate(() => [...document.querySelectorAll<HTMLElement>('#contenu [data-titre-borne]')]
+          .filter((e) => [...(e.textContent ?? '').trim()].length <= 1 || !/^(none|matrix\(1, 0, 0, 1,.*)$/.test(getComputedStyle(e).transform))
+          .map((e) => `${e.tagName.toLowerCase()}.${e.className} « ${(e.textContent ?? '').trim()} »`));
+        for (const g of glyphes) ecarts.push(`R7 ${width} px ${g} borné`);
       }
       await context.close();
       expect(paragraphes, 'paragraphes mesurés').toBeGreaterThan(0);

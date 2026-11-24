@@ -45,7 +45,9 @@ app-main-layout.texte-plus-grand {
  * L253 passe 2 — mises en page des pages en texte agrandi (revue UX r1 : une lettre par ligne, mots coupés sans
  * trait, noms rognés). Deux leviers, jamais au réglage normal :
  *  - `contenu-<px>` (seuils-barre.ts) : la fenêtre, comptée en rem, est sous la media query `max-width: <px>` de
- *    la page ; la règle reprend ce que fait cette media query (à 200 %, 1440 px se met en page comme 720 px) ;
+ *    la page ; la règle reprend ce que fait cette media query (à 200 %, 1440 px se met en page comme 720 px).
+ *    Une media query de page et sa copie ici changent ENSEMBLE : texte-agrandi-miroirs-l253.spec.ts compare les
+ *    valeurs et refuse une règle de mise en page de la media query absente de la copie ;
  *  - `texte-plus-grand` seul : un nom ou un libellé passe à la ligne au lieu d'être rogné (ellipse), une boîte à
  *    largeur fixe en px suit son texte.
  * Les grands titres et les textes en Cinzel sont bornés par leur boîte (core/utils/titres-ajustes.ts).
@@ -142,6 +144,9 @@ app-main-layout.texte-plus-grand #contenu app-series {
   .badge { overflow-wrap: normal; }
   .popular li { grid-template-columns: auto minmax(0, 1fr) auto; }
   .pop-name { white-space: normal; overflow: visible; text-overflow: clip; }
+  /* Résumés des cartes : limités à 3 lignes (line-clamp) au réglage normal ; à 200 % et 390 px, il n'en restait
+     que 27 % (54 % à 100 %), sans moyen de lire la suite (revue UX r2, N-C2) : en texte agrandi, le résumé entier. */
+  .card-desc { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible; }
 }
 
 /* Factions, fiche faction, fiche primarque, À propos : mêmes bascules que leurs media queries en px (1280, 1100,
@@ -183,6 +188,7 @@ app-main-layout.contenu-900 #contenu app-primarch-detail {
   .quotes-grid { grid-template-columns: minmax(0, 1fr); }
 }
 app-main-layout.contenu-760 #contenu app-primarch-detail {
+  .iconography-grid { grid-template-columns: 1fr 1fr; }
   .hero-grid { padding: 24px 16px; gap: 20px; }
   .panel { padding: 22px 20px; }
 }
@@ -193,6 +199,11 @@ app-main-layout.contenu-1024 #contenu app-about {
   .credits-liste tbody tr { padding: 12px 0; }
   .credits-liste tbody th, .credits-liste td { padding: 2px 0; }
   .credits-liste td::before { content: attr(data-col) ' : '; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.06em; }
+  .story { grid-template-columns: minmax(0, 1fr); padding: 28px; }
+  .story-side {
+    flex-direction: row; justify-content: flex-start; padding-right: 0; padding-bottom: 18px;
+    border-right: none; border-bottom: 1px solid var(--border);
+  }
 }
 /* Rangées libellé / valeur des fiches : la valeur passe sous son libellé quand les deux ne tiennent pas côte à côte
    (« Caliban (détruite) » dans 60 px, « MILLIO|N+ » dans 87 px). */

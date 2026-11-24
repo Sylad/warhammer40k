@@ -78,3 +78,23 @@
     `testing/reflux-texte-200.ts`) : aucun mot coupé sans trait (une coupure de césure est reconnue en recoupant le
     mot seul dans une boîte de même largeur), aucun bloc de moins de 3 em, aucun texte rogné — seulement ce qui
     n'était pas déjà là au réglage normal.
+- Passe 3 (revue UX r2 et revue de code r2) :
+  - **plancher des titres relatif** (`titres-ajustes.ts`) : un titre borné ne descend jamais sous sa taille au réglage
+    normal (lue en passant un instant la page à 16 px, `taillesNormales`) ni sous `ECHELLE` × le texte qui le suit
+    (`texteQuiSuit` : h1 1,25, h2 1,1, autres 1, au moins 1rem) ; le h1 dépasse aussi de `SOUS_TITRES` (1,1) les
+    sous-titres plus petits que lui à 16 px, et un h1 figé plus bas par `fit-title` (accueil, fiche unité) est relevé.
+    Au-delà, le mot se coupe avec un trait. Ni glyphe seul ni élément tourné / mis à l'échelle (flèches « › », « ▾ ») ;
+  - **mots collés à une espace insécable** (`core/utils/mots-colles.ts`) : Chromium ne césure pas « «\u202FArmageddon\u202F» »
+    (coupé n'importe où, sans trait) ; le mot dans son propre `<span>` se césure. Actualités de l'accueil
+    (`morceauxMotsColles`, gabarit) et Nouveautés (`htmlMotsColles` dans `news.service.ts`). Un texte de données
+    affiché en grand (titre, Cinzel) avec des guillemets français passe par là ;
+  - **résumés des romans** : `line-clamp` levé en texte agrandi (27 % visible à 200 % et 390 px) ;
+  - **sonde de reflux** : la tolérance des mots plus larges que 80 % du contenu ne vaut plus que pour un mot sans
+    coupure de césure possible (« ARMAGEDD|ON » y passait) ; un `line-clamp` qui cache du texte est signalé, sauf dans
+    un lien (qui mène au texte entier) ou le texte repliable ;
+  - **tailles** (`texte-200-contenu-l253.e2e.spec.ts`) : R2 refuse un titre borné sous sa taille à 100 %, R6 un h1 à
+    moins de 1,2 fois le texte qui le suit ou de 1,05 fois un sous-titre, R7 un glyphe ou un élément tourné borné ;
+  - **copies des media queries** (`src/styles/texte-agrandi-miroirs-l253.spec.ts`, lecteur `src/styles/scss-regles.ts`) :
+    chaque règle `contenu-<px>` d'une page doit retrouver la media query `max-width: <px>` de la page, avec les mêmes
+    valeurs, et toute règle de mise en page de cette media query doit être copiée. Une media query de page et sa
+    copie changent ensemble ; une paire sans media query (règles propres au téléphone à 200 %) est déclarée `PROPRES`.

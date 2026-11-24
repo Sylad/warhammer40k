@@ -1,4 +1,5 @@
 import { Component, InjectionToken, OnInit, computed, inject, signal } from '@angular/core';
+import { morceauxMotsColles } from '../../../core/utils/mots-colles';
 import { VEILLE_CHARGEMENT, dateVeille, estVeille, hoteSource, jourIso, prochaineRevue, trierActualites, type Veille } from './veille.utils';
 
 /** Horloge de la section (revue en retard ou non) ; les tests la figent. */
@@ -47,7 +48,8 @@ export const ACTUALITES_NOW = new InjectionToken<() => Date>('ACTUALITES_NOW', {
                 <li>
                   <article class="act-item" data-testid="actualite">
                     <time class="act-date" [attr.datetime]="a.date" data-testid="actualite-date">{{ a.dateTexte }}</time>
-                    <h3 data-testid="actualite-titre">{{ a.titre }}</h3>
+                    <!-- L253 passe 3 : un mot collé à une espace fine dans son propre élément, pour qu'il se coupe avec un trait -->
+                    <h3 data-testid="actualite-titre">@for (m of a.titreMorceaux; track $index) {@if (m.mot) {<span>{{ m.texte }}</span>} @else {<ng-container>{{ m.texte }}</ng-container>}}</h3>
                     <p class="act-resume">{{ a.resume }}</p>
                     <p class="act-source">
                       <a [href]="a.source" target="_blank" rel="noopener noreferrer" data-testid="actualite-source">Source : {{ a.hote }}<span class="sr-only"> — {{ a.titre }} (nouvel onglet)</span> ↗</a>
@@ -78,6 +80,7 @@ export class ActualitesComponent implements OnInit {
       dateTexte: dateVeille(a.date),
       consulteTexte: dateVeille(a.consulteLe),
       hote: hoteSource(a.source),
+      titreMorceaux: morceauxMotsColles(a.titre),
     })),
   );
 

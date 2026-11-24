@@ -2,12 +2,15 @@
  * L253 passe 2 — sonde du texte agrandi, exécutée DANS la page (`page.evaluate(refluxTexte, …)`) : autonome, sans
  * import. Rejoue les mesures de la revue UX r1 de L253 (texte à 200 %) sur chaque nœud texte visible de `#contenu` :
  *  - `coupes` : mot coupé sur deux lignes sans trait (ni après un trait d'union, un tiret conditionnel ou une barre
- *    oblique, ni à une syllabe par la césure, `hyphens: auto`, qui dessine le trait). Un mot plus large que `PART_MOT_INSECABLE` de la largeur du contenu de `#contenu` est toléré : aucune
- *    marge ne le ferait tenir (« d'incontournables » à 320 px) ;
+ *    oblique, ni à une syllabe par la césure, `hyphens: auto`, qui dessine le trait). Un mot plus large que
+ *    `PART_MOT_INSECABLE` de la largeur du contenu de `#contenu` n'est toléré que si ses lettres seules n'ont aucune
+ *    coupure de césure dans sa boîte : aucune marge ne le ferait tenir. Passe 3 (revue UX r2) : « « ARMAGEDD|ON » »
+ *    (316 px à 320 px) passait par cette tolérance, alors que « Armageddon » se coupe à une syllabe ;
  *  - `etroits` : bloc de texte de moins de `EM_MIN` fois sa taille de police en largeur qui porte un mot d'au moins
  *    3 lettres (une à deux lettres par ligne : la citation de l'accueil à 77 px, les filtres des Vidéos à 50 px) ;
  *  - `rognes` : texte rogné en largeur, par une ellipse (`text-overflow`) ou un ancêtre `overflow: hidden | clip`
- *    (« Frenc… »). Hors carte Leaflet (étiquettes de la carte galactique, déjà hors cadre à 100 %).
+ *    (« Frenc… »), ou en hauteur par un `line-clamp` sans moyen de lire la suite (passe 3 : résumés des romans réduits à
+ *    27 % à 200 % ; toléré dans un lien, qui mène au texte entier, et dans le texte repliable, qui a son bouton). Hors carte Leaflet (étiquettes de la carte galactique, déjà hors cadre à 100 %).
  * Les mots sont séparés par les seules espaces sécables (« Armageddon » entre espaces fines insécables est un bloc).
  * Avec `{ memoriser: true }`, mémorise dans la page les défauts présents (réglage normal) et rend leurs clés ;
  * l'appel suivant ne rend que les nouveaux, ainsi que ceux absents de `connus` (clés rendues par une autre page au
@@ -87,6 +90,24 @@ export function refluxTexte(options: { memoriser?: boolean; connus?: string[]; p
     essai.remove();
     return trouve;
   };
+  // Les lettres du mot (ponctuation et espaces insécables retirées), seules dans une boîte de la largeur du bloc, de
+  // même police, où seule la césure peut couper : passent-elles sur plusieurs lignes ?
+  const cesurePossible = (e: HTMLElement, mot: string, largeur: number) => {
+    const lettres = mot.replace(/[^\p{L}\p{M}]/gu, '');
+    if (lettres.length < 5 || largeur <= 0) return false;
+    const s = getComputedStyle(e);
+    essai.lang = e.closest('[lang]')?.getAttribute('lang') ?? 'fr';
+    essai.style.cssText = `position:absolute;left:-99999px;top:0;display:block;width:${largeur}px;font:${s.font};` +
+      `letter-spacing:${s.letterSpacing};text-transform:${s.textTransform};hyphens:auto;overflow-wrap:normal;` +
+      `word-break:normal;white-space:normal`;
+    essai.textContent = lettres;
+    document.body.appendChild(essai);
+    const r = document.createRange();
+    r.selectNodeContents(essai.firstChild!);
+    const lignes = new Set(Array.from(r.getClientRects()).filter((x) => x.width > 0).map((x) => Math.round(x.top))).size;
+    essai.remove();
+    return lignes > 1;
+  };
   const vus = new Set<string>();
   const marche = document.createTreeWalker(contenu, NodeFilter.SHOW_TEXT);
   const range = document.createRange();
@@ -130,6 +151,12 @@ export function refluxTexte(options: { memoriser?: boolean; connus?: string[]; p
     if (s.textOverflow === 'ellipsis' && el.scrollWidth > el.clientWidth + 1) {
       signaler(out.rognes, `e ${nom(el)} ${extrait}`, `${nom(el)} « ${extrait} » tronqué (ellipse)`);
     }
+    const clamp = s.getPropertyValue('-webkit-line-clamp');
+    // un lien mène au texte entier (carte de faction, d'unité), le texte repliable a son bouton « Lire la suite »
+    if (clamp && clamp !== 'none' && el.scrollHeight > el.clientHeight + 1 && !el.closest('a[href], app-texte-repliable')) {
+      const part = Math.round((100 * el.clientHeight) / el.scrollHeight);
+      signaler(out.rognes, `h ${nom(el)} ${extrait}`, `${nom(el)} « ${extrait} » coupé en hauteur (line-clamp ${clamp}, ${part} % visible)`);
+    }
 
     // Bloc trop étroit
     const b = bloc(el);
@@ -154,8 +181,8 @@ export function refluxTexte(options: { memoriser?: boolean; connus?: string[]; p
       const apres = mot.slice(coupe);
       // coupure permise : après un trait d'union, un tiret conditionnel, un tiret (« 1– 24 »), une barre oblique
       if (/[-‐­/–—]$/.test(avant) || /^[-‐]/.test(apres) || mot.includes('/')) continue;
-      if (largeurMot > partMot * largeurContenu) continue;
       if (coupeDeCesure(el, n, m.index, mot, coupe)) continue;
+      if (largeurMot > partMot * largeurContenu && !cesurePossible(el, mot, largeurBloc)) continue;
       signaler(out.coupes, `c ${nom(el)} ${mot}`, `${nom(el)} « ${avant}|${apres} » (${taille} px, mot de ${Math.round(largeurMot)} px dans ${Math.round(largeurBloc)} px)`);
     }
   }

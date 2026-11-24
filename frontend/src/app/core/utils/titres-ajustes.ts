@@ -10,9 +10,15 @@
  *  - mesure : la largeur du mot le plus long (somme des morceaux d'un mot déjà coupé) contre la largeur du contenu
  *    de la boîte du candidat ;
  *  - s'il ne tient pas, la taille du candidat est réduite juste assez (`font-size` en ligne, marqué
- *    `data-titre-borne`) ; plancher : 1rem pour un titre, la taille au réglage normal pour un autre texte
- *    (taille × 16 / rem : les tailles sont en rem) ;
- *    s'il ne tient toujours pas, la mise en page doit lui faire place (le test le signale).
+ *    `data-titre-borne`) ; plancher d'un autre texte : sa taille au réglage normal (taille × 16 / rem : les tailles
+ *    sont en rem) ; plancher d'un titre (passe 3, revue UX r2 : à 320 px, le h1 de /videos tombait à 32 px sous un
+ *    paragraphe d'introduction de 34 px) : jamais sous sa taille au réglage normal, et au moins `ECHELLE[h]` fois le
+ *    texte qui le suit (`texteQuiSuit` : le premier paragraphe après lui dans son bloc, au moins 1rem) — h1 1,25,
+ *    h2 1,1, h3 à h6 1 ; au-delà, le mot se coupe à une syllabe, avec un trait (`hyphens: auto`) ;
+ *    le h1 dépasse aussi de `SOUS_TITRES` les h2 à h6 qui étaient plus petits que lui au réglage normal ;
+ *  - un h1 que `fit-title` (L31) a figé sous ce plancher (accueil, fiche unité au téléphone) y est relevé ;
+ *  - jamais un élément tourné ou mis à l'échelle (`transform` autre qu'une translation : sa boîte n'est pas mesurée dans le même repère que son texte, la
+ *    flèche tournée des cartes de la chronologie) ni un glyphe seul (« › », « ▾ »).
  * Seulement en texte plus grand (classe `texte-plus-grand`) : au réglage normal, `effacerTitresAjustes` retire tout.
  */
 
@@ -52,11 +58,17 @@ export function motLePlusLong(e: HTMLElement, descendants = true): number {
   return max;
 }
 
+/** Tourné ou mis à l'échelle (une translation seule ne change pas les largeurs mesurées). */
+function transforme(s: CSSStyleDeclaration): boolean {
+  return s.transform !== 'none' && !/^matrix\(1, 0, 0, 1,/.test(s.transform);
+}
+
 function estCandidat(e: HTMLElement): boolean {
   if (/^H[1-6]$/.test(e.tagName)) return true;
   if (e.tagName === 'P' || e.closest('h1, h2, h3, h4, h5, h6')) return false;
   const s = getComputedStyle(e);
   if (!s.fontFamily.includes('Cinzel')) return false;
+  if (transforme(s) || [...(e.textContent ?? '').trim()].length <= 1) return false;
   // seulement les éléments qui portent eux-mêmes du texte (le plus proche du texte gagne)
   return Array.from(e.childNodes).some((n) => n.nodeType === Node.TEXT_NODE && (n.textContent ?? '').trim());
 }
@@ -69,27 +81,92 @@ export function effacerTitresAjustes(racine: ParentNode): void {
   }
 }
 
-/** Borne la taille des titres de `racine` dont le mot le plus long dépasse leur boîte ; `rem` : 1rem en px. */
+/** Facteur du plancher d'un titre, par niveau, sur la taille du texte qui le suit. */
+export const ECHELLE: Record<string, number> = { H1: 1.25, H2: 1.1 };
+/** Le h1 dépasse d'autant les sous-titres (h2 à h6) qui étaient plus petits que lui au réglage normal. */
+export const SOUS_TITRES = 1.1;
+
+const estTitre = (e: Element) => /^H[1-6]$/.test(e.tagName);
+
+/** Taille du texte qui suit le titre `e` : le premier paragraphe visible après lui, dans un de ses trois blocs
+ *  parents au plus (sans sortir de `racine`) ; 0 s'il n'y en a pas. */
+export function texteQuiSuit(e: HTMLElement, racine: HTMLElement): number {
+  let bloc = e.parentElement;
+  for (let i = 0; bloc && i < 3; i++, bloc = bloc === racine ? null : bloc.parentElement) {
+    for (const p of Array.from(bloc.querySelectorAll<HTMLElement>('p'))) {
+      if (!(e.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING) || !p.getClientRects().length) continue;
+      if (!(p.textContent ?? '').trim()) continue;
+      return parseFloat(getComputedStyle(p).fontSize);
+    }
+  }
+  return 0;
+}
+
+/** Tailles des éléments `els` au réglage normal (1rem = 16 px) : la page passe un instant à 16 px, sans image
+ *  rendue entre les deux (aucun observateur ne voit la sonde de 1rem changer). */
+function taillesNormales(els: HTMLElement[]): number[] {
+  if (!els.length) return [];
+  const html = document.documentElement;
+  const avant = html.style.getPropertyValue('font-size');
+  const priorite = html.style.getPropertyPriority('font-size');
+  html.style.setProperty('font-size', '16px', 'important');
+  const tailles = els.map((e) => parseFloat(getComputedStyle(e).fontSize));
+  if (avant) html.style.setProperty('font-size', avant, priorite);
+  else html.style.removeProperty('font-size');
+  return tailles;
+}
+
+/** Borne la taille des titres de `racine` dont le mot le plus long dépasse leur boîte, et relève un h1 figé sous
+ *  son plancher ; `rem` : 1rem en px. */
 export function ajusterTitres(racine: HTMLElement, rem: number): number {
   effacerTitresAjustes(racine);
   const candidats = Array.from(racine.querySelectorAll<HTMLElement>('*')).filter((e) => {
     if (!e.getClientRects().length || !(e.textContent ?? '').trim()) return false;
-    if (getComputedStyle(e).whiteSpace === 'nowrap') return false;
+    const s = getComputedStyle(e);
+    if (s.whiteSpace === 'nowrap' || transforme(s)) return false;
     return estCandidat(e);
   });
   // Lecture de toutes les mesures, puis écriture : une seule mise en page.
+  const mesures = candidats.map((e) => {
+    const titre = estTitre(e);
+    return { e, titre, dispo: largeurContenu(e), mot: motLePlusLong(e, titre), taille: parseFloat(getComputedStyle(e).fontSize) };
+  });
+  const titres = mesures.filter((m) => m.titre);
+  const tn = taillesNormales(titres.map((t) => t.e));
+  const normales = new Map(titres.map((m, i) => [m.e, tn[i]]));
   const bornes: [HTMLElement, number][] = [];
-  for (const e of candidats) {
-    const dispo = largeurContenu(e);
-    const mot = motLePlusLong(e, /^H[1-6]$/.test(e.tagName));
-    if (dispo <= 0 || mot <= dispo) continue;
-    const taille = parseFloat(getComputedStyle(e).fontSize);
-    // Plancher : un titre ne descend pas sous le texte courant (1rem) ; un autre texte, pas sous sa taille au réglage
-    // normal (taille × 16 / rem). Un titre en clamp(…vw + Brem − Bpx…) n'a pas doublé : on ne connaît pas sa taille à
-    // 16 px, mais sa boîte est au moins aussi large qu'au réglage normal, où il tenait.
-    const plancher = /^H[1-6]$/.test(e.tagName) ? Math.min(taille, rem) : (taille * 16) / rem;
-    const borne = Math.max(plancher, (taille * dispo * MARGE) / mot);
-    if (borne < taille - 0.25) bornes.push([e, borne]);
+  // tailles finales des titres de niveau 2 à 6 (avec leur normale) : le h1 reste au-dessus
+  const sousTitres: { normale: number; cible: number }[] = [];
+  const cibleTitre = (m: (typeof mesures)[number], plancher: number) => {
+    const { dispo, mot, taille } = m;
+    // le mot le plus long ne tient pas : réduit juste assez, pas sous le plancher (un titre déjà plus petit que son
+    // plancher garde sa taille)
+    return dispo > 0 && mot > dispo ? Math.max(Math.min(plancher, taille), (taille * dispo * MARGE) / mot) : taille;
+  };
+  for (const m of mesures) {
+    const { e, titre, dispo, mot, taille } = m;
+    if (!titre) {
+      if (!(dispo > 0 && mot > dispo)) continue;
+      // un autre texte : pas sous sa taille au réglage normal (taille × 16 / rem)
+      const borne = Math.max((taille * 16) / rem, (taille * dispo * MARGE) / mot);
+      if (borne < taille - 0.25) bornes.push([e, borne]);
+      continue;
+    }
+    if (e.tagName === 'H1') continue;
+    const normale = normales.get(e) ?? 0;
+    const cible = cibleTitre(m, Math.max(normale, (ECHELLE[e.tagName] ?? 1) * Math.max(rem, texteQuiSuit(e, racine))));
+    sousTitres.push({ normale, cible });
+    if (Math.abs(cible - taille) > 0.25) bornes.push([e, cible]);
+  }
+  for (const m of mesures.filter((x) => x.e.tagName === 'H1')) {
+    const normale = normales.get(m.e) ?? 0;
+    // au-dessus du texte qui le suit, et d'un dixième au-dessus des sous-titres qui étaient plus petits que lui au
+    // réglage normal
+    const sous = Math.max(0, ...sousTitres.filter((t) => t.normale < normale).map((t) => t.cible * SOUS_TITRES));
+    const plancher = Math.max(normale, ECHELLE['H1'] * Math.max(rem, texteQuiSuit(m.e, racine)), sous);
+    // un h1 plus petit que son plancher (figé par fit-title) y est relevé ; son mot se coupe alors avec un trait
+    const cible = Math.max(cibleTitre(m, plancher), plancher);
+    if (Math.abs(cible - m.taille) > 0.25) bornes.push([m.e, cible]);
   }
   for (const [e, borne] of bornes) {
     e.style.setProperty('font-size', `${Math.floor(borne * 100) / 100}px`);
