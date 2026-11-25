@@ -2887,6 +2887,7 @@ lots:
     title: "D-31 du registre parent : adopter cadence analyse (L801, cadence ≥ 2.0.18) — déclarer analyse: dans cadence.yaml avec les outils de la pile du projet (JS/TS : ESLint + typescript-eslint + eslint-plugin-sonarjs avec les seuils de cadence : max-lines 400, max-lines-per-function 80, max-depth 4, max-params 5, complexity 15, cognitive-complexity 15, plus tsc ; Python : ruff), base figée à l'existant (cadence analyse --init), aucune correction de l'existant ; la porte de cadence run le joue ensuite à chaque lot. Mesurer le temps ajouté à la porte (cible < 1 min) et le nombre de violations figées par outil, à rendre dans le rapport"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-25, sha: fde9f7e387ab284c7bd02a85ba73855fba281065 }
     created: 2026-11-24
     started: 2026-11-25
     review: { date: 2026-11-25, verdict: "conforme (1 note : tsc-frontend ne couvre que le graphe de main.ts, les tests ne sont pas type-vérifiés)", commit: 30237e2157c25de202fa27dcdc600e7bb003b2f3 }
