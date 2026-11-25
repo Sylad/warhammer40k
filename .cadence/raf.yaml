@@ -2943,6 +2943,7 @@ lots:
       - { date: 2026-11-25, text: "rouvert (était done) : QA prod 25-11 non conforme : à 320 px et 200 %, h1 « CONCEPT/S & LIEUX SACRÉS » coupé avec la police Cinzel réelle" }
       - { date: 2026-11-25, text: "QA prod (Sonnet, 25-11) non conforme : 320 px à 200 %, h1 40 px, noms 36,4 px, mot « CONCEPTS » coupé avec Cinzel chargée ; 390 et 1440 OK. Rapport : scratchpad/revues/warhammer-L259-qa.md" }
       - { date: 2026-11-25, text: "Mineur à reprendre au prochain passage : docs/nouveautes/2026-11-25-concepts-le-titre-tient-aussi-sur-les-petits-telephones.md:11 dit « nettement » plus grand, le code garantit ×1,05 (mesuré +9 %)" }
+      - { date: 2026-11-25, text: "QA prod 25-11 : conforme sur /lore/concepts (h1 entier, Cinzel chargée) ; mots coupés ailleurs → nouveau lot" }
     finished: 2026-11-25
   - id: L260
     title: "CI : tests navigateur à part (projet vitest séparé ou job parallèle) et budget de durée tenu par un test — attente de CI 12 à 15 min par livraison (42 en 10 jours), cible ≤ 7 min (D-33 de cadence, étude 2026-11-25 §5 P7). Mesure : étape ci des livraisons, médiane"
@@ -2954,6 +2955,13 @@ lots:
     status: todo
     estimate: 1
     created: 2026-11-25
+  - id: L262
+    title: "Texte à 200 % : mots coupés au milieu sur les pages de lore autres que /lore/concepts — /lore/civilians à 320 px h1 « Civils / Impér / iaux » et 13 h2 coupés (Adept/us…), 7 à 390 px ; /lore 6 h2 coupés à 320, 3 à 390 ; h2 figés à 35,2 px (QA prod de L259, 25-11, rapport scratchpad warhammer-L259-qa2.md). Attendu : aucun mot coupé dans h1/h2/h3 de toutes les pages /lore* à 320 et 390 px en 200 %, par une règle commune (pas page par page), et la garde texte-200 étendue à toutes ces pages"
+    status: doing
+    estimate: 1
+    visible: true
+    created: 2026-11-25
+    started: 2026-11-25
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
