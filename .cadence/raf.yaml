@@ -2925,12 +2925,14 @@ lots:
       - { date: 2026-11-24, text: "Premier vrai run CI de la répartition (df6ca7f, 24-11) : partie 1/2 420 s, partie 2/2 399 s, tests+build 217 s ; run complet 7 min 3 s contre ~14 min avant (D-33)" }
   - id: L259
     title: "/lore/concepts à 320 et 390 px : le h1 « CONCEPTS » se coupe sans trait (« CONCE|PTS ») — forcé à 1,1 × le plus grand nom de concept (« Le Warp », 64 px) ; la garde texte-200-reflux-l253 ne le voit pas (relevé du run L255, 24-11, déjà présent avant)"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     created: 2026-11-24
     started: 2026-11-25
     ux: { date: 2026-11-25, verdict: "conforme (lead, 25-11) : capture avant/après 390 px texte 200 % — « CONCEPTS » entier sur une ligne, h1 40-52 px reste au-dessus du texte courant et des noms de concepts (≥ 1,05×), 1440 px inchangé ; WCAG 1.4.10 tenu" }
+    review: { date: 2026-11-25, verdict: "conforme (cadence:code-reviewer, 25-11) : aucun constat ; garde rouge sur l'ancien build, 61/61 e2e ciblés verts (L259, reflux-l253 14 pages, contenu-l253, suites-l255) ; rapport scratchpad/revues/warhammer-L259-code.md", commit: adf248b75c256a55e7c64270eef3464347e782fc }
+    finished: 2026-11-25
   - id: L260
     title: "CI : tests navigateur à part (projet vitest séparé ou job parallèle) et budget de durée tenu par un test — attente de CI 12 à 15 min par livraison (42 en 10 jours), cible ≤ 7 min (D-33 de cadence, étude 2026-11-25 §5 P7). Mesure : étape ci des livraisons, médiane"
     status: todo

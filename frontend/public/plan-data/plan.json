@@ -863,8 +863,9 @@
     {
       "id": "L259",
       "title": "Concepts : au téléphone, le titre ne se coupe plus au milieu d’un mot",
-      "status": "doing",
-      "started": "2026-11-25"
+      "status": "done",
+      "started": "2026-11-25",
+      "finished": "2026-11-25"
     }
   ]
 }
