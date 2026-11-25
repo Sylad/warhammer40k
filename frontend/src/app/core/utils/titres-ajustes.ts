@@ -15,7 +15,9 @@
  *    paragraphe d'introduction de 34 px) : jamais sous sa taille au réglage normal, et au moins `ECHELLE[h]` fois le
  *    texte qui le suit (`texteQuiSuit` : le premier paragraphe après lui dans son bloc, au moins 1rem) — h1 1,25,
  *    h2 1,1, h3 à h6 1 ; au-delà, le mot se coupe à une syllabe, avec un trait (`hyphens: auto`) ;
- *    le h1 dépasse aussi de `SOUS_TITRES` les h2 à h6 qui étaient plus petits que lui au réglage normal ;
+ *    le h1 dépasse aussi de `SOUS_TITRES` les h2 à h6 qui étaient plus petits que lui au réglage normal, mais ceux-ci
+ *    ne le font pas grandir au-delà de ce que son mot le plus long tient : ils redescendent alors sous lui, jamais sous
+ *    leur propre plancher (L259 : « Le Warp » à 64 px portait le h1 de /lore/concepts à 70,4 px, « CONC|EPTS ») ;
  *  - un h1 que `fit-title` (L31) a figé sous ce plancher (accueil, fiche unité au téléphone) y est relevé ; un h2 à
  *    h6 borné par `fit-title` (`--longest-word` posé) l'est jusqu'à ce que son mot tienne, jamais sous sa taille au
  *    réglage normal (L255, QA de L253 : sa requête de conteneur se resserre quand le texte grandit, « L'Astronomican »
@@ -139,9 +141,9 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   const titres = mesures.filter((m) => m.titre);
   const tn = taillesNormales(titres.map((t) => t.e));
   const normales = new Map(titres.map((m, i) => [m.e, tn[i]]));
-  const bornes: [HTMLElement, number][] = [];
-  // tailles finales des titres de niveau 2 à 6 (avec leur normale) : le h1 reste au-dessus
-  const sousTitres: { normale: number; cible: number }[] = [];
+  const bornes = new Map<HTMLElement, number>();
+  // tailles finales des titres de niveau 2 à 6 (avec leur normale et leur plancher) : le h1 reste au-dessus
+  const sousTitres: { e: HTMLElement; taille: number; normale: number; plancher: number; cible: number }[] = [];
   const cibleTitre = (m: (typeof mesures)[number], plancher: number) => {
     const { dispo, mot, taille } = m;
     // le mot le plus long ne tient pas : réduit juste assez, pas sous le plancher (un titre déjà plus petit que son
@@ -154,7 +156,7 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
       if (!(dispo > 0 && mot > dispo)) continue;
       // un autre texte : pas sous sa taille au réglage normal (taille × 16 / rem)
       const borne = Math.max((taille * 16) / rem, (taille * dispo * MARGE) / mot);
-      if (borne < taille - 0.25) bornes.push([e, borne]);
+      if (borne < taille - 0.25) bornes.set(e, borne);
       continue;
     }
     if (e.tagName === 'H1') continue;
@@ -165,22 +167,29 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
     // coupait sans trait : un nom propre n'a pas toujours de césure)
     const tient = dispo > 0 && mot > 0 ? (taille * dispo * MARGE) / mot : plancher;
     const cible = m.fit ? Math.max(cibleTitre(m, plancher), Math.min(plancher, Math.max(normale, tient))) : cibleTitre(m, plancher);
-    sousTitres.push({ normale, cible });
-    if (Math.abs(cible - taille) > 0.25) bornes.push([e, cible]);
+    sousTitres.push({ e, taille, normale, plancher, cible });
   }
   for (const m of mesures.filter((x) => x.e.tagName === 'H1')) {
     const normale = normales.get(m.e) ?? 0;
-    // au-dessus du texte qui le suit, et d'un dixième au-dessus des sous-titres qui étaient plus petits que lui au
-    // réglage normal
-    const sous = Math.max(0, ...sousTitres.filter((t) => t.normale < normale).map((t) => t.cible * SOUS_TITRES));
-    const plancher = Math.max(normale, ECHELLE['H1'] * Math.max(rem, texteQuiSuit(m.e, racine)), sous);
-    // un h1 plus petit que son plancher (figé par fit-title) y est relevé ; son mot se coupe alors avec un trait
+    const sesSous = sousTitres.filter((t) => t.normale < normale);
+    // au-dessus du texte qui le suit (plancher dur : au-delà, son mot se coupe avec un trait)…
+    const dur = Math.max(normale, ECHELLE['H1'] * Math.max(rem, texteQuiSuit(m.e, racine)));
+    // … et d'un dixième au-dessus des sous-titres qui étaient plus petits que lui au réglage normal, sans que ceux-ci
+    // le fassent grandir au-delà de ce qui tient dans sa boîte (L259 : « Le Warp » à 64 px portait le h1 de
+    // /lore/concepts à 70,4 px, « CONC|EPTS » coupé sans trait à 320 et 390 px) : ce sont alors eux qui redescendent
+    const tient = m.dispo > 0 && m.mot > 0 ? (m.taille * m.dispo * MARGE) / m.mot : Infinity;
+    const sous = Math.max(0, ...sesSous.map((t) => t.cible * SOUS_TITRES));
+    const plancher = Math.max(dur, Math.min(sous, Math.max(dur, tient)));
+    // un h1 plus petit que son plancher (figé par fit-title) y est relevé
     const cible = Math.max(cibleTitre(m, plancher), plancher);
-    if (Math.abs(cible - m.taille) > 0.25) bornes.push([m.e, cible]);
+    // (jamais sous leur propre plancher : taille au réglage normal, échelle sur le texte qui les suit)
+    for (const t of sesSous) t.cible = Math.min(t.cible, Math.max(t.plancher, cible / SOUS_TITRES));
+    if (Math.abs(cible - m.taille) > 0.25) bornes.set(m.e, cible);
   }
+  for (const t of sousTitres) if (Math.abs(t.cible - t.taille) > 0.25) bornes.set(t.e, t.cible);
   for (const [e, borne] of bornes) {
     e.style.setProperty('font-size', `${Math.floor(borne * 100) / 100}px`);
     e.setAttribute(ATTRIBUT_BORNE, '');
   }
-  return bornes.length;
+  return bornes.size;
 }
