@@ -27,6 +27,8 @@ const E2E_FICHIERS = [
   path.resolve(__dirname, 'src/app/features/texte-200-suites-l255.e2e.spec.ts'),
   // L259 : /lore/concepts, le h1 tient sur sa ligne à 320 et 390 px (100 et 200 %) ; les noms de concepts ne le poussent plus.
   path.resolve(__dirname, 'src/app/features/lore-concepts/concepts-h1-l259.e2e.spec.ts'),
+  // L259 r1 : la même page avec la vraie police Cinzel (fichiers du dépôt, src/testing/polices-locales.ts) ; QA en prod, « CONCEPT|S ».
+  path.resolve(__dirname, 'src/app/features/lore-concepts/concepts-h1-polices-l259.e2e.spec.ts'),
   // L52 : le rechargement sur « morceau absent » se mesure avec le réseau coupé et des réponses 404/502 : navigateur réel.
   path.resolve(__dirname, 'src/app/core/utils/morceau-absent.e2e.spec.ts'),
   // L40 : les pages pilotes de la densité (fiches faction et primarque) tiennent les règles D1 à D6 à 1440 et 390 px.

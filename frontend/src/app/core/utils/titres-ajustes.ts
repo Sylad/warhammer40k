@@ -14,7 +14,9 @@
  *    sont en rem) ; plancher d'un titre (passe 3, revue UX r2 : à 320 px, le h1 de /videos tombait à 32 px sous un
  *    paragraphe d'introduction de 34 px) : jamais sous sa taille au réglage normal, et au moins `ECHELLE[h]` fois le
  *    texte qui le suit (`texteQuiSuit` : le premier paragraphe après lui dans son bloc, au moins 1rem) — h1 1,25,
- *    h2 1,1, h3 à h6 1 ; au-delà, le mot se coupe à une syllabe, avec un trait (`hyphens: auto`) ;
+ *    h2 1,1, h3 à h6 1 ; au-delà, le mot se coupe à une syllabe, avec un trait (`hyphens: auto`) ; le h1 cède
+ *    jusqu'à 1,2 fois ce texte si son mot n'y tient pas (L259 r1 : la vraie Cinzel, plus large que la police de
+ *    secours des e2e, coupait « CONCEPT|S » à 320 px, sans trait) ;
  *    le h1 dépasse aussi de `SOUS_TITRES` les h2 à h6 qui étaient plus petits que lui au réglage normal, mais ceux-ci
  *    ne le font pas grandir au-delà de ce que son mot le plus long tient : ils redescendent alors sous lui, jamais sous
  *    leur propre plancher (L259 : « Le Warp » à 64 px portait le h1 de /lore/concepts à 70,4 px, « CONC|EPTS ») ;
@@ -90,6 +92,10 @@ export function effacerTitresAjustes(racine: ParentNode): void {
 export const ECHELLE: Record<string, number> = { H1: 1.25, H2: 1.1 };
 /** Le h1 dépasse d'autant les sous-titres (h2 à h6) qui étaient plus petits que lui au réglage normal. */
 export const SOUS_TITRES = 1.1;
+/** Minimums du h1 quand son mot le plus long ne tient pas à `ECHELLE` / `SOUS_TITRES` (L259 r1) : 1,2 fois le texte
+ *  qui le suit (R6 de L253, « nettement un titre ») et 1,05 fois les sous-titres à leur plancher. */
+export const H1_MIN = 1.2;
+export const SOUS_TITRES_MIN = 1.05;
 
 const estTitre = (e: Element) => /^H[1-6]$/.test(e.tagName);
 
@@ -172,14 +178,23 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   for (const m of mesures.filter((x) => x.e.tagName === 'H1')) {
     const normale = normales.get(m.e) ?? 0;
     const sesSous = sousTitres.filter((t) => t.normale < normale);
-    // au-dessus du texte qui le suit (plancher dur : au-delà, son mot se coupe avec un trait)…
-    const dur = Math.max(normale, ECHELLE['H1'] * Math.max(rem, texteQuiSuit(m.e, racine)));
-    // … et d'un dixième au-dessus des sous-titres qui étaient plus petits que lui au réglage normal, sans que ceux-ci
-    // le fassent grandir au-delà de ce qui tient dans sa boîte (L259 : « Le Warp » à 64 px portait le h1 de
-    // /lore/concepts à 70,4 px, « CONC|EPTS » coupé sans trait à 320 et 390 px) : ce sont alors eux qui redescendent
+    const suit = Math.max(rem, texteQuiSuit(m.e, racine));
+    // plancher dur (au-delà, son mot se coupe, avec un trait si la langue le permet) : sa taille au réglage normal,
+    // nettement au-dessus du texte qui le suit (`H1_MIN`, R6 de L253) et des sous-titres à leur propre plancher
+    // (`SOUS_TITRES_MIN`)…
+    const dur = Math.max(normale, H1_MIN * suit, SOUS_TITRES_MIN * Math.max(0, ...sesSous.map((t) => t.plancher)));
+    // … puis, tant que son mot le plus long tient dans sa boîte : `ECHELLE` fois le texte qui le suit, et un dixième
+    // au-dessus des sous-titres qui étaient plus petits que lui au réglage normal ; ceux-ci ne le font pas grandir
+    // au-delà de ce qui tient (L259 : « Le Warp » à 64 px portait le h1 de /lore/concepts à 70,4 px, « CONC|EPTS »),
+    // ce sont alors eux qui redescendent. L259 r1 (QA en prod) : avec la vraie Cinzel, plus large que la police de
+    // secours, « CONCEPTS » ne tenait pas à 1,25 × 32 px dans 242 px à 320 px : le h1 descend à 38,4 px, pas sous `dur`.
+    const voulu = Math.max(normale, ECHELLE['H1'] * suit, ...sesSous.map((t) => t.cible * SOUS_TITRES));
     const tient = m.dispo > 0 && m.mot > 0 ? (m.taille * m.dispo * MARGE) / m.mot : Infinity;
-    const sous = Math.max(0, ...sesSous.map((t) => t.cible * SOUS_TITRES));
-    const plancher = Math.max(dur, Math.min(sous, Math.max(dur, tient)));
+    // Si son mot ne tient pas même à `dur`, céder ne sert à rien : il se coupe de toute façon (avec un trait si la
+    // langue le permet), le h1 garde `ECHELLE` fois le texte qui le suit (règle d'avant L259 r1).
+    // (sans `MARGE` : à 320 px, « CONCEPTS » tient à 38,4 px dans 242 px, la marge le mettait juste au-dessus)
+    const tientADur = !(m.dispo > 0 && m.mot > 0) || (m.mot * dur) / m.taille <= m.dispo;
+    const plancher = tientADur ? Math.max(dur, Math.min(voulu, tient)) : Math.max(dur, ECHELLE['H1'] * suit);
     // un h1 plus petit que son plancher (figé par fit-title) y est relevé
     const cible = Math.max(cibleTitre(m, plancher), plancher);
     // (jamais sous leur propre plancher : taille au réglage normal, échelle sur le texte qui les suit)
@@ -188,7 +203,8 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   }
   for (const t of sousTitres) if (Math.abs(t.cible - t.taille) > 0.25) bornes.set(t.e, t.cible);
   for (const [e, borne] of bornes) {
-    e.style.setProperty('font-size', `${Math.floor(borne * 100) / 100}px`);
+    // au centième inférieur, sans erreur flottante (1,2 × 34 = 40,8 donnait 40,79)
+    e.style.setProperty('font-size', `${Math.floor(borne * 100 + 1e-6) / 100}px`);
     e.setAttribute(ATTRIBUT_BORNE, '');
   }
   return bornes.size;
