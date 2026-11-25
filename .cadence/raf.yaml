@@ -2928,6 +2928,7 @@ lots:
     status: done
     estimate: 0.5
     visible: true
+    delivered: { date: 2026-11-25, sha: 7a007e8cf9d7475fce779f818276f7cd97dac230 }
     created: 2026-11-24
     started: 2026-11-25
     ux: { date: 2026-11-25, verdict: "conforme (lead, 25-11) : capture avant/après 390 px texte 200 % — « CONCEPTS » entier sur une ligne, h1 40-52 px reste au-dessus du texte courant et des noms de concepts (≥ 1,05×), 1440 px inchangé ; WCAG 1.4.10 tenu" }
