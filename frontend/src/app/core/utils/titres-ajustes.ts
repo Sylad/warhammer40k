@@ -60,52 +60,66 @@ function blocDe(e: Element | null): Element | null {
  *  inline-flex avec « ✠ ») ; 0 sinon. Un mot peut couvrir plusieurs nœuds de texte d'un même bloc (« « » + espace
  *  fine insécable + <span>Armageddon</span>, 11<sup>e</sup>) : il est mesuré entier. */
 export function mesurerMots(e: HTMLElement, descendants = true): { mot: number; ligne: number } {
-  const morceaux: { n: Text; debut: number }[] = [];
-  let texte = '';
-  let blocPrecedent: Element | null | undefined;
-  const marche = document.createTreeWalker(e, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
-  for (let n = marche.nextNode(); n; n = marche.nextNode()) {
-    if (n.nodeType !== Node.TEXT_NODE) {
-      if ((n as Element).tagName === 'BR') texte += ' ';
-      continue;
-    }
-    if (!descendants && n.parentNode !== e) continue;
-    // sans les descendants, les nœuds directs sont séparés par des éléments : jamais un seul mot
-    const bloc = descendants ? blocDe(n.parentElement) : null;
-    if (blocPrecedent !== undefined && (!descendants || bloc !== blocPrecedent)) texte += ' ';
-    blocPrecedent = bloc;
-    morceaux.push({ n: n as Text, debut: texte.length });
-    texte += n.textContent ?? '';
-  }
+  const { morceaux, texte } = texteDesBlocs(e, descendants);
   let max = 0;
   let ligne = 0;
   const range = document.createRange();
   // mots séparés par les seules espaces sécables : « Armageddon » (espaces fines insécables) est un bloc ; L262 :
   // la ligne peut aussi passer après un trait d'union ou une barre oblique (« Dieux- / Machines »)
   for (const m of texte.matchAll(/[^ \t\n\r\f\-‐/]+[-‐/]*|[-‐/]+/g)) {
-    const debut = m.index;
-    const fin = debut + m[0].length;
-    const rects: DOMRect[] = [];
-    for (const k of morceaux) {
-      const long = k.n.length;
-      if (k.debut >= fin || k.debut + long <= debut) continue;
-      range.setStart(k.n, Math.max(0, debut - k.debut));
-      range.setEnd(k.n, Math.min(long, fin - k.debut));
-      rects.push(...Array.from(range.getClientRects()).filter((r) => r.width > 0));
-    }
-    let l = 0;
-    for (const r of rects) l += r.width;
-    if (l > max) max = l;
-    if (rects.length < 2) continue;
-    // première ligne : les morceaux qui chevauchent en hauteur le plus haut (un exposant reste sur sa ligne)
-    const plusHaut = rects.reduce((a, r) => (r.top < a.top ? r : a));
-    const premiere = rects.filter((r) => r.top < plusHaut.bottom - 2);
-    const suite = rects.filter((r) => !premiere.includes(r));
-    if (!suite.length) continue;
-    const place = Math.max(...premiere.map((r) => r.right)) - Math.min(...suite.map((r) => r.left));
+    const rects = rectsDuMot(morceaux, m.index, m.index + m[0].length, range);
+    max = Math.max(max, rects.reduce((l, r) => l + r.width, 0));
+    const place = placeDeLigne(rects);
     if (place > 0) ligne = ligne ? Math.min(ligne, place) : place;
   }
   return { mot: max, ligne };
+}
+
+type Morceau = { n: Text; debut: number };
+
+/** Texte de `e` mis bout à bout, nœud par nœud ; une espace entre deux blocs et pour un <br>. Sans les descendants,
+ *  les nœuds directs sont séparés par des éléments : jamais un seul mot. */
+function texteDesBlocs(e: HTMLElement, descendants: boolean): { morceaux: Morceau[]; texte: string } {
+  const morceaux: Morceau[] = [];
+  let texte = '';
+  let blocPrecedent: Element | null | undefined;
+  const marche = document.createTreeWalker(e, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
+  for (let n = marche.nextNode(); n; n = marche.nextNode()) {
+    if (n.nodeType !== Node.TEXT_NODE) {
+      if ((n as Element).tagName === 'BR') texte += ' ';
+    } else if (descendants || n.parentNode === e) {
+      const bloc = descendants ? blocDe(n.parentElement) : null;
+      if (blocPrecedent !== undefined && (!descendants || bloc !== blocPrecedent)) texte += ' ';
+      blocPrecedent = bloc;
+      morceaux.push({ n: n as Text, debut: texte.length });
+      texte += n.textContent ?? '';
+    }
+  }
+  return { morceaux, texte };
+}
+
+/** Rectangles rendus du texte [debut, fin[, à travers les nœuds qui le portent. */
+function rectsDuMot(morceaux: Morceau[], debut: number, fin: number, range: Range): DOMRect[] {
+  const rects: DOMRect[] = [];
+  for (const k of morceaux) {
+    const long = k.n.length;
+    if (k.debut >= fin || k.debut + long <= debut) continue;
+    range.setStart(k.n, Math.max(0, debut - k.debut));
+    range.setEnd(k.n, Math.min(long, fin - k.debut));
+    rects.push(...Array.from(range.getClientRects()).filter((r) => r.width > 0));
+  }
+  return rects;
+}
+
+/** Mot rendu sur plusieurs lignes : du début de la ligne suivante au bout de son morceau sur la première ; 0 sinon.
+ *  Première ligne : les morceaux qui chevauchent en hauteur le plus haut (un exposant reste sur sa ligne). */
+function placeDeLigne(rects: DOMRect[]): number {
+  if (rects.length < 2) return 0;
+  const plusHaut = rects.reduce((a, r) => (r.top < a.top ? r : a));
+  const premiere = rects.filter((r) => r.top < plusHaut.bottom - 2);
+  const suite = rects.filter((r) => !premiere.includes(r));
+  if (!suite.length) return 0;
+  return Math.max(...premiere.map((r) => r.right)) - Math.min(...suite.map((r) => r.left));
 }
 
 /** Tourné ou mis à l'échelle (une translation seule ne change pas les largeurs mesurées). */
@@ -240,6 +254,34 @@ function verifierTitres(titres: { e: HTMLElement; ultime: number }[], bornes: Ma
   }
 }
 
+
+/** Plancher retenu d'un sous-titre : le souple s'il laisse tenir le mot, sinon ce qui tient (`tient`), au plus le
+ *  souple et au moins `ULTIME` fois sa taille normale ; le h1 reste au-dessus de lui (L259). */
+function plancherRetenu(m: { dispo: number; mot: number; taille: number }, plancher: number, normale: number, tient: number): number {
+  const tientAuPlancher = !(m.dispo > 0 && m.mot > 0) || (m.mot * plancher) / m.taille <= m.dispo * MARGE;
+  return tientAuPlancher ? plancher : Math.max(ULTIME * normale, Math.min(plancher, tient));
+}
+
+/** L262 : un h1 descendu pour que son mot tienne garde ses sous-titres sous lui (`SOUS_TITRES_MIN`), pas sous leur
+ *  propre `ULTIME` ; plus petits, ils tiennent d'autant mieux. (Au-dessus de son plancher dur, c'était déjà le cas.) */
+function garderSousLesH1(
+  h1s: { e: HTMLElement; normale: number }[],
+  sousTitres: { e: HTMLElement; normale: number }[],
+  bornes: Map<HTMLElement, number>,
+): void {
+  const finale = (e: HTMLElement) => parseFloat(getComputedStyle(e).fontSize);
+  for (const h1 of h1s) {
+    const f = finale(h1.e);
+    for (const t of sousTitres.filter((x) => x.normale < h1.normale && finale(x.e) > f / SOUS_TITRES_MIN + 0.01)) {
+      const borne = Math.max(ULTIME * t.normale, f / SOUS_TITRES_MIN);
+      if (borne < finale(t.e) - 0.01) {
+        poser(t.e, borne);
+        bornes.set(t.e, borne);
+      }
+    }
+  }
+}
+
 /** Borne la taille des titres de `racine` dont le mot le plus long dépasse leur boîte, et relève un h1 figé sous
  *  son plancher ; `rem` : 1rem en px. */
 export function ajusterTitres(racine: HTMLElement, rem: number): number {
@@ -273,8 +315,6 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   // titre descend jusqu'à ce qu'il tienne, pas sous son plancher dur (taille au réglage normal, `ULTIME` fois en dernier
   // recours) — QA du 25-11 : les h2
   // de /lore et /lore/civilians restaient à 1,1 × 32 = 35,2 px, « Pant|héon », « Adept|us ».
-  const tientA = (m: (typeof mesures)[number], taille: number) =>
-    !(m.dispo > 0 && m.mot > 0) || (m.mot * taille) / m.taille <= m.dispo * MARGE;
   for (const m of mesures) {
     const { e, titre, dispo, mot, taille } = m;
     if (!titre) {
@@ -291,9 +331,7 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
     // le plancher, et jamais sous sa taille au réglage normal (L255 ; au-delà de ce qui tient, « ASTARTE|S » se
     // coupait sans trait : un nom propre n'a pas toujours de césure)
     const tient = dispo > 0 && mot > 0 ? (taille * dispo * MARGE) / mot : plancher;
-    // plancher retenu : le souple s'il laisse tenir le mot, sinon ce qui tient (au moins le dur) ; le h1 reste
-    // au-dessus de lui (L259)
-    const retenu = tientA(m, plancher) ? plancher : Math.max(ULTIME * normale, Math.min(plancher, tient));
+    const retenu = plancherRetenu(m, plancher, normale, tient);
     const cible = m.fit ? Math.max(cibleTitre(m, retenu), Math.min(retenu, Math.max(normale, tient))) : cibleTitre(m, retenu);
     sousTitres.push({ e, taille, normale, plancher: retenu, cible });
   }
@@ -310,19 +348,6 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   for (const t of sousTitres) if (Math.abs(t.cible - t.taille) > 0.25) bornes.set(t.e, t.cible);
   for (const [e, borne] of bornes) poser(e, borne);
   verifierTitres(titres.map((m) => ({ e: m.e, ultime: ULTIME * (normales.get(m.e) ?? 0) })), bornes);
-  // L262 : un h1 descendu pour que son mot tienne garde ses sous-titres sous lui (`SOUS_TITRES_MIN`), pas sous leur
-  // propre `ULTIME` ; plus petits, ils tiennent d'autant mieux. (Au-dessus de son plancher dur, c'était déjà le cas.)
-  const finale = (e: HTMLElement) => parseFloat(getComputedStyle(e).fontSize);
-  for (const h1 of mesures.filter((x) => x.e.tagName === 'H1')) {
-    const f = finale(h1.e);
-    const normale = normales.get(h1.e) ?? 0;
-    for (const t of sousTitres.filter((x) => x.normale < normale && finale(x.e) > f / SOUS_TITRES_MIN + 0.01)) {
-      const borne = Math.max(ULTIME * t.normale, f / SOUS_TITRES_MIN);
-      if (borne < finale(t.e) - 0.01) {
-        poser(t.e, borne);
-        bornes.set(t.e, borne);
-      }
-    }
-  }
+  garderSousLesH1(mesures.filter((x) => x.e.tagName === 'H1').map((x) => ({ e: x.e, normale: normales.get(x.e) ?? 0 })), sousTitres, bornes);
   return bornes.size;
 }

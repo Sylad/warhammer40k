@@ -16,7 +16,7 @@ import { PageTitleService } from '../../core/services/page-title.service';
 import { CreditsPageComponent } from '../credits-page/credits-page.component';
 import { searchShortcut, type PlatformHints } from './search-shortcut';
 import { classesBarre, classesContenu, type ClasseBarre, type ClasseContenu } from './seuils-barre';
-import { ajusterTitres, effacerTitresAjustes } from '../../core/utils/titres-ajustes';
+import { suivreTitres } from '../../core/utils/suivi-titres';
 
 @Component({
   selector: 'app-main-layout',
@@ -629,69 +629,11 @@ export class MainLayoutComponent implements OnInit {
     this.destroyRef.onDestroy(() => stop(observer, timer));
   }
 
-  /**
-   * L253 passe 2 : titres bornés par leur boîte en texte plus grand (core/utils/titres-ajustes.ts), recalculés après
-   * chaque changement du contenu (navigation, données chargées), de largeur, de police ou au chargement des polices web
-   * (L262 : y compris la largeur du <main> seule, quand la barre de défilement apparaît).
-   */
+  /** L253 passe 2 / L262 : titres bornés par leur boîte en texte plus grand (core/utils/suivi-titres.ts). */
   private readonly titres = (() => {
-    let image = 0;
-    let observateur: MutationObserver | null = null;
-    // L262 : la barre de défilement verticale qui apparaît (page qui s'allonge au chargement) resserre la colonne sans
-    // événement `resize` : « DESCRIPTION » bornée pour 194 px se coupait dans 188 px. Seule la largeur compte.
-    let largeur: ResizeObserver | null = null;
-    let largeurVue = -1;
-    const polices = () => planifier();
-    const executer = () => {
-      image = 0;
-      const main = this.main?.nativeElement;
-      if (!main || !this.barre()['texte-plus-grand']) return;
-      observateur?.disconnect();
-      // L262 : ajusterTitres efface les tailles avant de mesurer ; dans cette mise en page intermédiaire, une liste qui
-      // défile seule (aside de la galerie) peut grandir et le navigateur ramène son défilement à son nouveau maximum,
-      // sans que rien ne le rende ensuite (l'artiste actif sortait de sa liste, L248). Défilements rendus après la passe.
-      const defiles = Array.from(main.querySelectorAll<HTMLElement>('*'))
-        .filter((e) => e.scrollTop > 0 || e.scrollLeft > 0)
-        .map((e) => ({ e, haut: e.scrollTop, gauche: e.scrollLeft }));
-      ajusterTitres(main, parseFloat(getComputedStyle(document.documentElement).fontSize));
-      for (const d of defiles) {
-        if (d.e.scrollTop !== d.haut) d.e.scrollTop = d.haut;
-        if (d.e.scrollLeft !== d.gauche) d.e.scrollLeft = d.gauche;
-      }
-      observateur?.takeRecords();
-      observateur?.observe(main, { childList: true, subtree: true, characterData: true });
-    };
-    const planifier = () => {
-      const main = this.main?.nativeElement;
-      if (!main || typeof MutationObserver !== 'function') return;
-      if (!observateur) {
-        observateur = new MutationObserver(() => planifier());
-        observateur.observe(main, { childList: true, subtree: true, characterData: true });
-        document.fonts?.addEventListener?.('loadingdone', polices);
-        if (typeof ResizeObserver === 'function') {
-          largeurVue = main.clientWidth;
-          largeur = new ResizeObserver(() => {
-            if (main.clientWidth === largeurVue) return;
-            largeurVue = main.clientWidth;
-            planifier();
-          });
-          largeur.observe(main);
-        }
-      }
-      if (!image) image = requestAnimationFrame(executer);
-    };
-    const arreter = () => {
-      if (image) cancelAnimationFrame(image);
-      image = 0;
-      observateur?.disconnect();
-      observateur = null;
-      largeur?.disconnect();
-      largeur = null;
-      document.fonts?.removeEventListener?.('loadingdone', polices);
-      if (this.main) effacerTitresAjustes(this.main.nativeElement);
-    };
-    this.destroyRef.onDestroy(arreter);
-    return { planifier, arreter };
+    const suivi = suivreTitres(() => this.main?.nativeElement, () => this.barre()['texte-plus-grand']);
+    this.destroyRef.onDestroy(suivi.arreter);
+    return suivi;
   })();
 
   ngOnInit(): void {
