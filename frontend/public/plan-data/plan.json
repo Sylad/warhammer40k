@@ -870,8 +870,9 @@
     {
       "id": "L262",
       "title": "Pages du lore : les titres restent plus grands que leur texte",
-      "status": "doing",
-      "started": "2026-11-25"
+      "status": "done",
+      "started": "2026-11-25",
+      "finished": "2026-11-25"
     }
   ]
 }
