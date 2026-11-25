@@ -2962,6 +2962,12 @@ lots:
     visible: true
     created: 2026-11-25
     started: 2026-11-25
+    ux: { date: 2026-11-25, verdict: "nok 1 majeur : à 320 px et texte 200 %, 61 titres passent sous le corps du texte (h1 /lore/ships 25 px pour un corps de 28 ; h2 /lore/civilians 14,8 px sous leur sous-titre) — rapport warhammer-L262-ux.md" }
+  - id: L263
+    title: Défilement horizontal à 320 px au texte normal sur /lore/timeline/war-in-heaven (+35 px, article.panel déborde) et /lore/ships (+22 px) — échec WCAG 1.4.10, vu par la revue UX de L262 le 25-11
+    status: todo
+    estimate: 1
+    created: 2026-11-25
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
