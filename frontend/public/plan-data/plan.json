@@ -863,8 +863,9 @@
     {
       "id": "L259",
       "title": "Concepts : le titre tient aussi sur les plus petits téléphones",
-      "status": "doing",
-      "started": "2026-11-25"
+      "status": "done",
+      "started": "2026-11-25",
+      "finished": "2026-11-25"
     }
   ]
 }

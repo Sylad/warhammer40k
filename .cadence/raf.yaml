@@ -2929,17 +2929,19 @@ lots:
       - { date: 2026-11-24, text: "Premier vrai run CI de la répartition (df6ca7f, 24-11) : partie 1/2 420 s, partie 2/2 399 s, tests+build 217 s ; run complet 7 min 3 s contre ~14 min avant (D-33)" }
   - id: L259
     title: "/lore/concepts à 320 et 390 px : le h1 « CONCEPTS » se coupe sans trait (« CONCE|PTS ») — forcé à 1,1 × le plus grand nom de concept (« Le Warp », 64 px) ; la garde texte-200-reflux-l253 ne le voit pas (relevé du run L255, 24-11, déjà présent avant)"
-    status: doing
+    status: done
     estimate: 0.5
     visible: true
     delivered: { date: 2026-11-25, sha: 7a007e8cf9d7475fce779f818276f7cd97dac230 }
     created: 2026-11-24
     started: 2026-11-25
-    ux: { date: 2026-11-25, verdict: "conforme (lead, 25-11) : capture avant/après 390 px texte 200 % — « CONCEPTS » entier sur une ligne, h1 40-52 px reste au-dessus du texte courant et des noms de concepts (≥ 1,05×), 1440 px inchangé ; WCAG 1.4.10 tenu" }
-    review: { date: 2026-11-25, verdict: "conforme (cadence:code-reviewer, 25-11) : aucun constat ; garde rouge sur l'ancien build, 61/61 e2e ciblés verts (L259, reflux-l253 14 pages, contenu-l253, suites-l255) ; rapport scratchpad/revues/warhammer-L259-code.md", commit: adf248b75c256a55e7c64270eef3464347e782fc }
+    ux: { date: 2026-11-25, verdict: "conforme (lead) : h1 38,4 px, texte 30 px, plus grand nom 35,2 px à 320 px police 32 px, « CONCEPTS » entier sur la capture après ; 100 % inchangé (revue warhammer-L259b-code.md)" }
+    review: { date: 2026-11-25, verdict: "conforme : correctif rouge avant et vert après avec la vraie Cinzel (P1/P2), refactor plancherH1 sans changement, 100 % inchangé ; une note de texte dans les Nouveautés (« nettement » vs ×1,05 pour les noms)", commit: 94ee3070154885deba6f4393f2f79cd2bced16d3 }
     notes:
       - { date: 2026-11-25, text: "rouvert (était done) : QA prod 25-11 non conforme : à 320 px et 200 %, h1 « CONCEPT/S & LIEUX SACRÉS » coupé avec la police Cinzel réelle" }
       - { date: 2026-11-25, text: "QA prod (Sonnet, 25-11) non conforme : 320 px à 200 %, h1 40 px, noms 36,4 px, mot « CONCEPTS » coupé avec Cinzel chargée ; 390 et 1440 OK. Rapport : scratchpad/revues/warhammer-L259-qa.md" }
+      - { date: 2026-11-25, text: "Mineur à reprendre au prochain passage : docs/nouveautes/2026-11-25-concepts-le-titre-tient-aussi-sur-les-petits-telephones.md:11 dit « nettement » plus grand, le code garantit ×1,05 (mesuré +9 %)" }
+    finished: 2026-11-25
   - id: L260
     title: "CI : tests navigateur à part (projet vitest séparé ou job parallèle) et budget de durée tenu par un test — attente de CI 12 à 15 min par livraison (42 en 10 jours), cible ≤ 7 min (D-33 de cadence, étude 2026-11-25 §5 P7). Mesure : étape ci des livraisons, médiane"
     status: todo
