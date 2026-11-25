@@ -75,3 +75,29 @@ docs:
   articles:
     - repo: ../claude-code-codex
       file: frontend/src/pages/case-studies/warhammer40k.astro
+
+# Analyse statique (L254, D-31 du registre parent ; cadence analyse, L801 de cadence) : ESLint + typescript-eslint +
+# sonarjs aux seuils de cadence (fichier 400 lignes, fonction 80, profondeur 4, 5 paramètres, complexité 15, complexité
+# cognitive 15 ; tests non mesurés) et tsc, par paquet. L'existant est figé dans .cadence/analyse/<name>.json : seules les
+# violations nouvelles font échouer la porte de `cadence run`. Mesuré le 25-11 : ~12 s ajoutées à la porte pour les quatre.
+analyse:
+  - name: eslint-backend
+    dir: backend
+    command: npx eslint -f json .
+    format: eslint-json
+    configs: [backend/eslint.config.mjs]
+  - name: tsc-backend
+    dir: backend
+    command: npx tsc --noEmit --pretty false -p tsconfig.json
+    format: tsc
+    configs: [backend/tsconfig.json]
+  - name: eslint-frontend
+    dir: frontend
+    command: npx eslint -f json .
+    format: eslint-json
+    configs: [frontend/eslint.config.mjs]
+  - name: tsc-frontend
+    dir: frontend
+    command: npx tsc --noEmit --pretty false -p tsconfig.app.json
+    format: tsc
+    configs: [frontend/tsconfig.json, frontend/tsconfig.app.json]

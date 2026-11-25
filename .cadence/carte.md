@@ -98,3 +98,22 @@
     chaque règle `contenu-<px>` d'une page doit retrouver la media query `max-width: <px>` de la page, avec les mêmes
     valeurs, et toute règle de mise en page de cette media query doit être copiée. Une media query de page et sa
     copie changent ensemble ; une paire sans media query (règles propres au téléphone à 200 %) est déclarée `PROPRES`.
+
+## Analyse statique — cliquet `cadence analyse` (L254, D-31)
+
+- `analyse:` de `cadence.yaml` : quatre outils, un par paquet et par outil — `eslint-backend`, `tsc-backend`
+  (`tsconfig.json`), `eslint-frontend`, `tsc-frontend` (`tsconfig.app.json` : l'appli, pas les tests). Bases figées dans
+  `.cadence/analyse/<name>.json` ; la porte de `cadence run` échoue sur toute violation NOUVELLE (fichier neuf compris).
+- Seuils dans `backend/eslint.config.mjs` et `frontend/eslint.config.mjs` (400 lignes par fichier, 80 par fonction,
+  profondeur 4, 5 paramètres, complexité 15, `sonarjs/cognitive-complexity` 15) ; tests (`*.spec.ts`, `*.test.*`,
+  `src/testing`, `src/__test-utils__`) non mesurés ; frontend : `src/**/*.ts` + `scripts/**/*.mjs`. `noInlineConfig` :
+  un `eslint-disable` ne masque rien et compte comme violation.
+- Ces fichiers de config et les tsconfig cités sont dans `configs:` : les changer demande un lot `config: true`. Une
+  nouvelle fonction trop longue se découpe, on ne relève pas le seuil.
+- État figé le 25-11 (bases de `cadence analyse --init`) : eslint-backend 4 (3 complexity, 1 cognitive) ; eslint-frontend 65
+  = 57 dépassements (20 cognitive, 13 complexity, 10 max-lines, 8 max-lines-per-function, 5 max-depth, 1 max-params)
+  + les 4 `// eslint-disable-next-line no-console` de lore-galaxy comptés deux fois (`directive:eslint-disable` lu dans le
+  source, et `analyse` = l'avertissement « has no effect » d'ESLint sous `noInlineConfig`) ; tsc-backend 0 ; tsc-frontend
+  2 = aucune erreur tsc, deux `@ts-expect-error` de fichiers de test (breadcrumb.utils.spec.ts, densite-pilotes-l40.e2e.spec.ts)
+  comptés comme directives (cadence lit tous les fichiers suivis sous `dir`, pas seulement ceux du tsconfig). Retirer un
+  de ces commentaires fait baisser la base. Temps ajouté à la porte ≈ 12 s.

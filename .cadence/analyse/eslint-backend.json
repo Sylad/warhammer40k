@@ -1,0 +1,8 @@
+{
+  "backend/src/modules/image-import/image-import.service.ts|complexity": 2,
+  "backend/src/modules/image-import/image-import.service.ts|complexity|total": 44,
+  "backend/src/modules/image-import/image-import.service.ts|sonarjs/cognitive-complexity": 1,
+  "backend/src/modules/image-import/image-import.service.ts|sonarjs/cognitive-complexity|total": 24,
+  "backend/src/modules/videos/videos.controller.ts|complexity": 1,
+  "backend/src/modules/videos/videos.controller.ts|complexity|total": 34
+}
