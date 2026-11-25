@@ -2930,6 +2930,7 @@ lots:
     visible: true
     created: 2026-11-24
     started: 2026-11-25
+    ux: { date: 2026-11-25, verdict: "conforme (lead, 25-11) : capture avant/après 390 px texte 200 % — « CONCEPTS » entier sur une ligne, h1 40-52 px reste au-dessus du texte courant et des noms de concepts (≥ 1,05×), 1440 px inchangé ; WCAG 1.4.10 tenu" }
   - id: L260
     title: "CI : tests navigateur à part (projet vitest séparé ou job parallèle) et budget de durée tenu par un test — attente de CI 12 à 15 min par livraison (42 en 10 jours), cible ≤ 7 min (D-33 de cadence, étude 2026-11-25 §5 P7). Mesure : étape ci des livraisons, médiane"
     status: todo
