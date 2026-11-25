@@ -2925,10 +2925,11 @@ lots:
       - { date: 2026-11-24, text: "Premier vrai run CI de la répartition (df6ca7f, 24-11) : partie 1/2 420 s, partie 2/2 399 s, tests+build 217 s ; run complet 7 min 3 s contre ~14 min avant (D-33)" }
   - id: L259
     title: "/lore/concepts à 320 et 390 px : le h1 « CONCEPTS » se coupe sans trait (« CONCE|PTS ») — forcé à 1,1 × le plus grand nom de concept (« Le Warp », 64 px) ; la garde texte-200-reflux-l253 ne le voit pas (relevé du run L255, 24-11, déjà présent avant)"
-    status: todo
+    status: doing
     estimate: 0.5
     visible: true
     created: 2026-11-24
+    started: 2026-11-25
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
