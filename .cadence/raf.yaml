@@ -2885,9 +2885,12 @@ lots:
     finished: 2026-11-24
   - id: L254
     title: "D-31 du registre parent : adopter cadence analyse (L801, cadence ≥ 2.0.18) — déclarer analyse: dans cadence.yaml avec les outils de la pile du projet (JS/TS : ESLint + typescript-eslint + eslint-plugin-sonarjs avec les seuils de cadence : max-lines 400, max-lines-per-function 80, max-depth 4, max-params 5, complexity 15, cognitive-complexity 15, plus tsc ; Python : ruff), base figée à l'existant (cadence analyse --init), aucune correction de l'existant ; la porte de cadence run le joue ensuite à chaque lot. Mesurer le temps ajouté à la porte (cible < 1 min) et le nombre de violations figées par outil, à rendre dans le rapport"
-    status: todo
+    status: done
     estimate: 1
     created: 2026-11-24
+    started: 2026-11-25
+    review: { date: 2026-11-25, verdict: "conforme (1 note : tsc-frontend ne couvre que le graphe de main.ts, les tests ne sont pas type-vérifiés)", commit: 30237e2157c25de202fa27dcdc600e7bb003b2f3 }
+    finished: 2026-11-25
   - id: L255
     title: "Suites de L253 (mineurs des revues r3) : liste Tri tronquée « Tri : recommand » sur /videos à 320 px et 200 % (WCAG 1.4.4) ; « 30% » et « TERMINÉ » de l'anneau de /romans se chevauchent de 4 px à 200 % ; entrée Nouveautés L253 à corriger (« les titres se resserrent » → coupés avec un trait au téléphone, résumés des romans entiers) ; texte-agrandi-miroirs-l253.spec.ts:90-97 doit faire tourner la comparaison M2/M3 réelle (tmp/ux-warhammer-L253-r3.md, tmp/revue-warhammer-L253-r3.md)"
     status: done
@@ -2926,7 +2929,7 @@ lots:
       - { date: 2026-11-24, text: "Premier vrai run CI de la répartition (df6ca7f, 24-11) : partie 1/2 420 s, partie 2/2 399 s, tests+build 217 s ; run complet 7 min 3 s contre ~14 min avant (D-33)" }
   - id: L259
     title: "/lore/concepts à 320 et 390 px : le h1 « CONCEPTS » se coupe sans trait (« CONCE|PTS ») — forcé à 1,1 × le plus grand nom de concept (« Le Warp », 64 px) ; la garde texte-200-reflux-l253 ne le voit pas (relevé du run L255, 24-11, déjà présent avant)"
-    status: todo
+    status: doing
     estimate: 0.5
     visible: true
     delivered: { date: 2026-11-25, sha: 7a007e8cf9d7475fce779f818276f7cd97dac230 }
@@ -2936,8 +2939,14 @@ lots:
     review: { date: 2026-11-25, verdict: "conforme (cadence:code-reviewer, 25-11) : aucun constat ; garde rouge sur l'ancien build, 61/61 e2e ciblés verts (L259, reflux-l253 14 pages, contenu-l253, suites-l255) ; rapport scratchpad/revues/warhammer-L259-code.md", commit: adf248b75c256a55e7c64270eef3464347e782fc }
     notes:
       - { date: 2026-11-25, text: "rouvert (était done) : QA prod 25-11 non conforme : à 320 px et 200 %, h1 « CONCEPT/S & LIEUX SACRÉS » coupé avec la police Cinzel réelle" }
+      - { date: 2026-11-25, text: "QA prod (Sonnet, 25-11) non conforme : 320 px à 200 %, h1 40 px, noms 36,4 px, mot « CONCEPTS » coupé avec Cinzel chargée ; 390 et 1440 OK. Rapport : scratchpad/revues/warhammer-L259-qa.md" }
   - id: L260
     title: "CI : tests navigateur à part (projet vitest séparé ou job parallèle) et budget de durée tenu par un test — attente de CI 12 à 15 min par livraison (42 en 10 jours), cible ≤ 7 min (D-33 de cadence, étude 2026-11-25 §5 P7). Mesure : étape ci des livraisons, médiane"
+    status: todo
+    estimate: 1
+    created: 2026-11-25
+  - id: L261
+    title: "Analyse D-31 : tsc-frontend ne lit que tsconfig.app.json (graphe de main.ts) — une erreur TS dans un .ts non importé ou un *.spec.ts passe ; ajouter un tsc sur les tests (tsconfig.spec.json vise jasmine, TS2688 à régler) avec base figée (revue L254, 25-11)"
     status: todo
     estimate: 1
     created: 2026-11-25
