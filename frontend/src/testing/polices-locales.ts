@@ -10,6 +10,8 @@
  * `ng build` copie la feuille de Google Fonts dans `index.html` (optimisation `inlineFonts`) : les adresses
  * `fonts.gstatic.com/s/<famille>/…` y sont figées au jour du build. Chaque fichier d'une famille connue reçoit donc
  * le fichier latin local, quel que soit son nom (les autres sous-ensembles n'ont aucun caractère du site à dessiner).
+ * L262 : quand ces adresses ne nomment pas la famille (`fonts.gstatic.com/l/font?kit=…`), les `@font-face` de la page
+ * sont réécrits vers le fichier local de leur `font-family`.
  */
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -38,6 +40,17 @@ const FEUILLE = POLICES.flatMap((p) => p.graisses.map((g) => `@font-face {
 export async function servirPolicesLocales(page: Page, retenir = false): Promise<() => void> {
   let liberer = () => {};
   const libres = retenir ? new Promise<void>((r) => (liberer = r)) : Promise.resolve();
+  // L262 : selon le jour du build, Google Fonts donne des adresses `fonts.gstatic.com/l/font?kit=…` qui ne nomment
+  // pas la famille ; les `@font-face` copiés dans `index.html` sont donc réécrits d'après leur `font-family`.
+  await page.route((url) => !/fonts\.(googleapis|gstatic)\.com/.test(url.host), async (route) => {
+    if (route.request().resourceType() !== 'document') return route.fallback();
+    const reponse = await route.fetch();
+    const corps = (await reponse.text()).replace(/@font-face\s*\{[^}]*\}/g, (bloc) => {
+      const p = POLICES.find((x) => new RegExp(`font-family:\\s*['"]?${x.famille}['"]?\\s*;`).test(bloc));
+      return p ? bloc.replace(/src:\s*url\([^)]*\)/, `src:url(${GSTATIC}/${p.fichier})`) : bloc;
+    });
+    return route.fulfill({ response: reponse, body: corps });
+  });
   await page.route(/fonts\.(googleapis|gstatic)\.com/, async (route) => {
     const url = route.request().url();
     if (/fonts\.googleapis\.com\/css2\?family=Cinzel/.test(url)) {

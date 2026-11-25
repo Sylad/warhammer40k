@@ -12,6 +12,10 @@ app-main-layout.texte-plus-grand {
   /* Un mot plus long que sa colonne se coupe à une syllabe, avec un trait (césure du français, `lang="fr"`) ;
      en dernier recours seulement (aucune syllabe ne tient), n'importe où, au lieu de pousser la page en largeur. */
   #contenu, footer { overflow-wrap: anywhere; hyphens: auto; }
+  /* L262 : un titre ne se coupe qu'entre ses mots — l'ajusteur (core/utils/titres-ajustes.ts) réduit sa taille jusqu'à
+     ce que son mot le plus long tienne ; la césure remplissait la ligne quand même (« CHEVA-LIERS », « NAIS-SANCE »,
+     le mot entier tenait sur la ligne suivante). Seul un titre dont le mot ne tient pas, même réduit, la garde. */
+  #contenu :is(h1, h2, h3, h4, h5, h6):not([data-titre-cesure]) { hyphens: manual; }
 
   /* Un champ a une largeur intrinsèque qui suit la police (attribut size, libellé de l'option la plus longue) :
      dans une piste de grille « 1fr », elle élargissait la barre d'outils (/factions, fiche faction, /videos). */

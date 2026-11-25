@@ -3,7 +3,7 @@
   "secondes": {
     "src/app/features/filtres-defilement-l239.e2e.spec.ts": 122,
     "src/app/layout/main-layout/ancres.e2e.spec.ts": 110,
-    "src/app/features/texte-200-reflux-l253.e2e.spec.ts": 109,
+    "src/app/features/texte-200-reflux-l253.e2e.spec.ts": 165,
     "src/app/features/gallery/gallery-filtres-collants-l108.e2e.spec.ts": 98,
     "src/app/features/densite-pilotes-l40.e2e.spec.ts": 87,
     "src/app/features/texte-200-contenu-l253.e2e.spec.ts": 70,

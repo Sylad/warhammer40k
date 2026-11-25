@@ -866,6 +866,12 @@
       "status": "done",
       "started": "2026-11-25",
       "finished": "2026-11-25"
+    },
+    {
+      "id": "L262",
+      "title": "Pages du lore : les titres ne se coupent plus au milieu d’un mot",
+      "status": "doing",
+      "started": "2026-11-25"
     }
   ]
 }

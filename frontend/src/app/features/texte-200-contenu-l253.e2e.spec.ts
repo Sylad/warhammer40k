@@ -16,6 +16,9 @@
 //   R6 — passe 3 (revue UX r2, N-C1) : le h1 reste nettement un titre — au moins 1,2 fois le texte qui le suit
 //        (premier paragraphe après lui dans ses trois blocs parents, comme `texteQuiSuit`) et 1,05 fois chaque h2 ou
 //        h3 qui était plus petit que lui à 100 % (à 320 px, h1 de /videos 32 px sous une introduction de 34 px) ;
+//        L262 : sauf si son mot le plus long ne tiendrait pas dans sa boîte à 1,2 fois ce texte (pour R2 : à sa
+//        taille à 100 %) — aucun mot coupé au milieu d'abord ; jamais sous 0,6 fois sa taille à 100 % ; un sous-titre
+//        déjà à 0,6 fois sa taille à 100 % n'a plus à rester sous le h1 ;
 //   R7 — passe 3 (revue de code r2) : l'ajusteur ne borne ni un glyphe seul ni un élément tourné (flèche « › » des
 //        cartes de la chronologie, restée à 22 px à 200 %) ;
 //   R5 — vrai réglage du navigateur (police par défaut à 32 px, CDP Page.setFontSizes) : le texte courant mesure le
@@ -46,7 +49,15 @@ const TEXTE = '#contenu p';
 const TITRES = '#contenu :is(h1, h2, h3)';
 const LIBELLES = '#contenu :is(button, a, label, li, dt, dd, th, td, figcaption)';
 
-type Mesure = { n: string; avant: number; apres: number; borne?: number; deborde?: boolean; ajuste?: boolean; h1?: boolean; suit?: number };
+type Mesure = {
+  n: string; avant: number; apres: number; borne?: number; deborde?: boolean; ajuste?: boolean; h1?: boolean; suit?: number;
+  /** titres : largeur du mot le plus long (coupable après un trait d'union) et du contenu de la boîte, à `apres` */
+  mot?: number; boite?: number;
+};
+
+/** L262 : le mot le plus long du titre `x` ne tiendrait pas dans sa boîte à la taille `t` (l'ajusteur ne descend
+ *  sous le plancher de R2 ou de R6 qu'alors : un mot coupé au milieu se lit plus mal qu'un titre moins détaché). */
+const neTiendraitPas = (x: Mesure, t: number) => !!x.mot && !!x.boite && (x.mot * t) / x.apres > x.boite * 0.97;
 
 async function taille(page: Page, t: string): Promise<void> {
   await page.evaluate((v) => { document.documentElement.style.fontSize = v; }, t);
@@ -78,6 +89,18 @@ async function relire(page: Page): Promise<Record<string, Mesure[]>> {
         const m: Mesure = { n: nom(e), avant, apres: parseFloat(getComputedStyle(e).fontSize) };
         if (k === 'titres') {
           m.ajuste = e.hasAttribute('data-titre-borne');
+          const range = document.createRange();
+          const marche = document.createTreeWalker(e, NodeFilter.SHOW_TEXT);
+          m.mot = 0;
+          for (let n = marche.nextNode(); n; n = marche.nextNode()) {
+            for (const x of (n.textContent ?? '').matchAll(/[^ \t\n\r\f\-‐/]+[-‐/]*/g)) {
+              range.setStart(n, x.index!);
+              range.setEnd(n, x.index! + x[0].length);
+              m.mot = Math.max(m.mot, Array.from(range.getClientRects()).reduce((l, r) => l + r.width, 0));
+            }
+          }
+          const s = getComputedStyle(e);
+          m.boite = e.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
           m.h1 = e.tagName === 'H1';
           // texte qui suit (même règle que titres-ajustes.ts → texteQuiSuit)
           let bloc = e.parentElement;
@@ -153,10 +176,12 @@ describe.skipIf(!built || !chromium)('contenu — texte de la page à 200 % (nav
           if (r < 1.95 || r > 2.05) ecarts.push(`R1 ${width} px ${x.n} ${x.avant} → ${x.apres} px`);
         }
         for (const x of m.titres) {
-          if (x.ajuste && x.apres < x.avant - 0.5) ecarts.push(`R2 ${width} px ${x.n} borné sous sa taille à 100 % : ${x.avant} → ${x.apres} px`);
-          if (x.h1 && x.suit && x.apres < 1.2 * x.suit) ecarts.push(`R6 ${width} px ${x.n} ${x.apres} px, texte qui suit ${x.suit} px`);
+          if (x.ajuste && x.apres < x.avant - 0.5 && !neTiendraitPas(x, x.avant)) ecarts.push(`R2 ${width} px ${x.n} borné sous sa taille à 100 % : ${x.avant} → ${x.apres} px`);
+          if (x.apres < 0.6 * x.avant - 0.5) ecarts.push(`R2 ${width} px ${x.n} sous 0,6 fois sa taille à 100 % : ${x.avant} → ${x.apres} px`);
+          if (x.h1 && x.suit && x.apres < 1.2 * x.suit && !neTiendraitPas(x, 1.2 * x.suit)) ecarts.push(`R6 ${width} px ${x.n} ${x.apres} px, texte qui suit ${x.suit} px`);
           for (const y of m.titres) {
-            if (x.h1 && !y.h1 && y.avant < x.avant && x.apres < 1.05 * y.apres) ecarts.push(`R6 ${width} px ${x.n} ${x.apres} px ≤ ${y.n} ${y.apres} px`);
+            // (un sous-titre déjà à 0,6 fois sa taille à 100 % ne descend plus : L262)
+            if (x.h1 && !y.h1 && y.avant < x.avant && x.apres < 1.05 * y.apres - 0.02 && y.apres > 0.6 * y.avant + 0.3) ecarts.push(`R6 ${width} px ${x.n} ${x.apres} px ≤ ${y.n} ${y.apres} px`);
           }
           if (x.apres / x.avant >= 1.9) continue;
           if (x.borne === undefined || x.borne / x.avant < 1.9 || x.deborde) ecarts.push(`R2 ${width} px ${x.n} ${x.avant} → ${x.apres} px (sans borne ${x.borne}, déborde ${x.deborde})`);
