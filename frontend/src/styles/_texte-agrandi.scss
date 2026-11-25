@@ -258,3 +258,26 @@ app-main-layout.contenu-600 #contenu {
   app-series .popular li { grid-template-columns: auto minmax(0, 1fr); }
   app-series .pop-count { grid-column: 2; }
 }
+
+/* L262 r1 — titres du lore en texte agrandi, fenêtre étroite (classe `contenu-600` : à 200 %, sous 1200 px). Règle :
+   un titre ne descend jamais sous la taille du texte qu'il introduit (core/utils/titres-ajustes.ts) ; on lui rend
+   d'abord la place que prenaient les marges doublées. Revue UX du 25-11 : à 320 px, la colonne du h1 de /lore/ships
+   faisait 202 px (118 px de marges), celle des h2 des cartes de /lore/civilians 154 px (emblème à côté du titre).
+   Marges latérales des hôtes, bandeaux, panneaux et cartes ramenées à 12 px ; emblème des cartes AU-DESSUS du titre ;
+   interlettrage des titres à 0. Garde : cas « vraie police Cinzel » de texte-200-reflux-l253.e2e.spec.ts. */
+app-main-layout.contenu-600 #contenu {
+  :is(app-lore-ships, app-lore-titans, app-lore-saints, app-equipment-detail, app-ship-detail, app-titan-detail,
+    app-saint-detail, app-timeline-event-detail) { padding-inline: 0; }
+  :is(app-lore-hub, app-lore-emperor, app-lore-primarchs, app-primarch-detail, app-lore-chaos-gods, app-lore-civilians,
+    app-lore-concepts, app-lore-galaxy, app-lore-equipment, app-equipment-detail, app-lore-timeline,
+    app-timeline-event-detail, app-lore-ships, app-ship-detail, app-lore-titans, app-titan-detail, app-lore-saints,
+    app-saint-detail) {
+    :is(.panel, .sp, .section, .card-body, .card-overlay, .god-head, .god-body, .org-head, .org-body, .concept-head,
+      .concept-body, .legend, .t-card-body, .hero-grid) { padding-inline: 12px; }
+    .hero:not(:has(> .hero-grid)) { padding-inline: 12px; }
+    :is(h1, h2, h3) { letter-spacing: 0; }
+  }
+  app-lore-hub .card { padding-inline: 12px; }
+  app-lore-civilians .org-sigil-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  app-lore-civilians .org-sigil-row > div { width: 100%; }
+}

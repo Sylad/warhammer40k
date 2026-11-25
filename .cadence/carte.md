@@ -69,7 +69,9 @@
     la classe du seuil le plus proche ; un nouveau seuil s'ajoute à `SEUILS_CONTENU`, à la liaison d'hôte et à une
     règle (`seuils-barre.spec.ts`) ;
   - **césure** : `hyphens: auto` sur `#contenu` en texte plus grand (`lang="fr"`) — un mot trop long se coupe à une
-    syllabe, avec un trait ; `overflow-wrap: anywhere` ne reste qu'en dernier recours ;
+    syllabe, avec un trait ; `overflow-wrap: anywhere` ne reste qu'en dernier recours. L262 : les titres h1-h6 sont en
+    `hyphens: manual` (ils ne se coupent qu'entre leurs mots), sauf celui que l'ajusteur marque `data-titre-cesure`
+    (son mot ne tient pas même à son plancher ultime, ci-dessous) ;
   - **ajusteur des titres** (`core/utils/titres-ajustes.ts`, piloté par la mise en page : MutationObserver de
     `<main>`, chargement des polices) : h1-h6 et textes en Cinzel dont le mot le plus long dépasse leur boîte reçoivent
     une `font-size` en ligne et `data-titre-borne` (plancher 1rem pour un titre, la taille à 16 px pour un autre
@@ -83,7 +85,19 @@
     normal (lue en passant un instant la page à 16 px, `taillesNormales`) ni sous `ECHELLE` × le texte qui le suit
     (`texteQuiSuit` : h1 1,25, h2 1,1, autres 1, au moins 1rem) ; le h1 dépasse aussi de `SOUS_TITRES` (1,1) les
     sous-titres plus petits que lui à 16 px, et un h1 figé plus bas par `fit-title` (accueil, fiche unité) est relevé.
-    Au-delà, le mot se coupe avec un trait. Ni glyphe seul ni élément tourné / mis à l'échelle (flèches « › », « ▾ ») ;
+    Ni glyphe seul ni élément tourné / mis à l'échelle (flèches « › », « ▾ ») ;
+  - **L262 r1, règle du lead (25-11) — un titre ne descend jamais sous la taille du texte qu'il introduit** : quand son
+    mot le plus long ne tient pas à ces planchers (à 320-390 px et 200 %), le titre descend jusqu'à ce qu'il tienne,
+    jusqu'à son **plancher ultime** (`plancherUltime` : la taille du premier paragraphe qui le suit, `paragrapheQuiSuit`,
+    1rem s'il n'y en a pas ; un titre-étiquette déjà plus petit que ce texte au réglage normal garde ce rapport) et
+    jamais plus bas (l'ancien plancher de 0,6 × la taille normale est retiré : h1 de /lore/ships sous le corps, h2 des
+    cartes de /lore/civilians sous leur sous-titre). Sous ce plancher, `data-titre-cesure` : le mot se coupe à une
+    syllabe AVEC un trait, jamais sans. Avant de réduire, la place est rendue en texte agrandi étroit (`contenu-600`,
+    `_texte-agrandi.scss`) sur les pages du lore : marges latérales des hôtes, bandeaux, panneaux et cartes à 12 px,
+    emblème des cartes de /lore/civilians au-dessus du titre, interlettrage des titres à 0. Recalcul à la largeur du
+    `<main>` et défilements internes rendus : `core/utils/suivi-titres.ts` (test `suivi-titres.spec.ts`). Garde : cas
+    « vraie police Cinzel » de `texte-200-reflux-l253.e2e.spec.ts` (18 pages /lore*, Cinzel du dépôt, 320 et 390 px à
+    32 px : aucun h1-h3 sous son texte, aucune coupure sans trait ; 16 px : rien de coupé ni de borné) ;
   - **mots collés à une espace insécable** (`core/utils/mots-colles.ts`) : Chromium ne césure pas « «\u202FArmageddon\u202F» »
     (coupé n'importe où, sans trait) ; le mot dans son propre `<span>` se césure. Actualités de l'accueil
     (`morceauxMotsColles`, gabarit) et Nouveautés (`htmlMotsColles` dans `news.service.ts`). Un texte de données
@@ -92,8 +106,10 @@
   - **sonde de reflux** : la tolérance des mots plus larges que 80 % du contenu ne vaut plus que pour un mot sans
     coupure de césure possible (« ARMAGEDD|ON » y passait) ; un `line-clamp` qui cache du texte est signalé, sauf dans
     un lien (qui mène au texte entier) ou le texte repliable ;
-  - **tailles** (`texte-200-contenu-l253.e2e.spec.ts`) : R2 refuse un titre borné sous sa taille à 100 %, R6 un h1 à
-    moins de 1,2 fois le texte qui le suit ou de 1,05 fois un sous-titre, R7 un glyphe ou un élément tourné borné ;
+  - **tailles** (`texte-200-contenu-l253.e2e.spec.ts`) : R2 refuse un titre borné sous sa taille à 100 % (sauf si son
+    mot n'y tiendrait pas, même marge `MARGE` que l'ajusteur) et tout titre sous son plancher ultime (L262 r1), R6 un h1
+    à moins de 1,2 fois le texte qui le suit ou de 1,05 fois un sous-titre (sauf mot qui n'y tiendrait pas et
+    sous-titre déjà à son plancher ultime), R7 un glyphe ou un élément tourné borné ;
   - **copies des media queries** (`src/styles/texte-agrandi-miroirs-l253.spec.ts`, lecteur `src/styles/scss-regles.ts`) :
     chaque règle `contenu-<px>` d'une page doit retrouver la media query `max-width: <px>` de la page, avec les mêmes
     valeurs, et toute règle de mise en page de cette media query doit être copiée. Une media query de page et sa

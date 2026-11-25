@@ -27,11 +27,28 @@ const PAGES: Record<string, string> = {
   'app-lore-timeline': 'features/lore-timeline/lore-timeline.component.ts',
   'app-lore-galaxy': 'features/lore-galaxy/lore-galaxy.component.ts',
   'app-lore-concepts': 'features/lore-concepts/lore-concepts.component.ts',
+  // L262 r1 : pages du lore dont les marges et l'interlettrage des titres se resserrent en texte agrandi étroit
+  'app-lore-hub': 'features/lore-hub/lore-hub.component.ts',
+  'app-lore-emperor': 'features/lore-emperor/lore-emperor.component.ts',
+  'app-lore-primarchs': 'features/lore-primarchs/lore-primarchs.component.ts',
+  'app-lore-chaos-gods': 'features/lore-chaos-gods/lore-chaos-gods.component.ts',
+  'app-lore-civilians': 'features/lore-civilians/lore-civilians.component.ts',
+  'app-lore-equipment': 'features/lore-equipment/lore-equipment.component.ts',
+  'app-equipment-detail': 'features/equipment-detail/equipment-detail.component.ts',
+  'app-timeline-event-detail': 'features/timeline-event-detail/timeline-event-detail.component.ts',
+  'app-lore-ships': 'features/lore-ships/lore-ships.component.ts',
+  'app-ship-detail': 'features/ship-detail/ship-detail.component.ts',
+  'app-lore-titans': 'features/lore-titans/lore-titans.component.ts',
+  'app-titan-detail': 'features/titan-detail/titan-detail.component.ts',
+  'app-lore-saints': 'features/lore-saints/lore-saints.component.ts',
+  'app-saint-detail': 'features/saint-detail/saint-detail.component.ts',
 };
 /** Règles propres au texte agrandi (téléphone à 200 %), qui ne recopient aucune media query. */
 const PROPRES = new Set([
   'app-about 600', 'app-dashboard 600', 'app-lore-concepts 600', 'app-lore-galaxy 600', 'app-lore-timeline 600', 'app-nouveautes 600',
   'app-series 600', 'app-unit-detail 600', 'app-videos 600',
+  // L262 r1 : titres du lore jamais sous le texte qu'ils introduisent — la place rendue d'abord (marges, emblème)
+  'app-primarch-detail 600', 'app-lore-hub 600', 'app-lore-emperor 600', 'app-lore-primarchs 600', 'app-lore-chaos-gods 600', 'app-lore-civilians 600', 'app-lore-equipment 600', 'app-equipment-detail 600', 'app-timeline-event-detail 600', 'app-lore-ships 600', 'app-ship-detail 600', 'app-lore-titans 600', 'app-titan-detail 600', 'app-lore-saints 600', 'app-saint-detail 600',
 ]);
 const MISE_EN_PAGE = new Set(['grid-template-columns', 'grid-column', 'grid-row', 'display', 'position', 'flex-direction', 'flex-wrap', 'float']);
 const COPIE = /^app-main-layout\.contenu-(\d+) #contenu (app-[\w-]+) (.+)$/;

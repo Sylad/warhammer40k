@@ -121,35 +121,39 @@ describe.skipIf(!built || !chromium)('contenu — texte à 200 %, ni mot coupé 
 // L262 — QA en prod du 25-11 (après L259) : police du navigateur à 32 px (texte à 200 %), vraie police Cinzel, les
 // titres des pages de lore se coupaient au milieu d'un mot — /lore/civilians à 320 px : h1 « Civils / Impér / iaux »
 // et 13 h2 (« Adept/us », « Admin/ist/rat/um »…), 7 h2 à 390 px ; /lore : 6 h2 à 320 px (« Pant/héon », « Chronol/ogie »),
-// 3 à 390 px. Les h2 restaient au plancher de l'ajusteur (1,1 × le texte qui suit, 35,2 px) même quand leur mot n'y
-// tenait pas. La garde du dessus bloque les polices web (police de secours, plus étroite) et tolère un mot coupé avec
-// un trait : ici, Cinzel et Inter sont servies depuis le dépôt (testing/polices-locales.ts), et AUCUNE coupure au
-// milieu d'un mot n'est admise dans un h1, h2 ou h3 (ni sans trait, ni à une syllabe ; seulement après un trait
-// d'union ou une barre oblique), sur TOUTES les pages /lore*, listes et fiches :
-//   L1 — 320 et 390 px, police du navigateur à 32 px ;
-//   L2 — réglage normal (16 px) à 1440, 390 et 320 px : rien de coupé non plus, rien de borné par l'ajusteur.
+// 3 à 390 px. La garde du dessus bloque les polices web (police de secours, plus étroite) et tolère un mot plus large
+// que 80 % du contenu : ici, Cinzel et Inter sont servies depuis le dépôt (testing/polices-locales.ts), sur TOUTES les
+// pages /lore*, listes et fiches.
+// L262 r1 (revue UX du 25-11, règle tranchée par le lead) : le premier correctif faisait tenir les mots en réduisant
+// les titres jusqu'à 0,6 fois leur taille à 100 % — à 320 px, le h1 de /lore/ships à 25 px sous un corps de 28, les h2
+// des cartes de /lore/civilians à 14,8 px sous leur propre sous-titre. Règle : un titre ne descend jamais sous la taille
+// du texte qu'il introduit ; plus étroit encore, il se coupe à une syllabe AVEC un trait, jamais sans.
+//   L1 — 320 et 390 px, police du navigateur à 32 px : aucun mot coupé sans trait dans un h1, h2 ou h3 (une coupure
+//        après un trait d'union, une barre oblique, ou de césure, trait dessiné, est permise) ;
+//   L3 — même réglage : aucun h1 à h3 sous la taille du texte qu'il introduit (premier paragraphe après lui dans ses
+//        trois blocs parents ; 1rem s'il n'y en a pas) ; un titre déjà plus petit que ce texte à 100 % (titre-étiquette)
+//        garde au moins ce rapport ;
+//   L2 — réglage normal (16 px) à 1440, 390 et 320 px : aucun mot coupé, rien de borné par l'ajusteur.
 const ROUTES_LORE = [
   '/lore', '/lore/emperor', '/lore/primarchs', '/lore/primarchs/lion-eljonson', '/lore/chaos-gods', '/lore/civilians',
   '/lore/concepts', '/lore/galaxy', '/lore/equipment', '/lore/equipment/boltgun-astartes', '/lore/timeline',
   '/lore/timeline/war-in-heaven', '/lore/ships', '/lore/ships/vengeful-spirit', '/lore/titans', '/lore/titans/warlord-titan',
   '/lore/saints', '/lore/saints/saint-celestine',
 ];
+const TITRES_LORE = '#contenu :is(h1, h2, h3)';
 
-/** Dans la page : les mots des h1, h2 et h3 visibles de `#contenu` rendus sur plus d'une ligne (un mot = suite sans
- *  espace sécable ; une coupure juste après « - », « ‐ » ou « / » est permise), et les tailles des titres. */
-function titresCoupes(): { coupes: string[]; tailles: string[]; bornes: number } {
+/** Dans la page, réglage normal : les mots des h1 à h3 rendus sur plus d'une ligne (une coupure juste après « - »,
+ *  « ‐ » ou « / » est permise) et le nombre d'éléments bornés par l'ajusteur. */
+function titresCoupes(): { coupes: string[]; bornes: number } {
   const coupes: string[] = [];
-  const tailles: string[] = [];
   const range = document.createRange();
   const titres = Array.from(document.querySelectorAll<HTMLElement>('#contenu :is(h1, h2, h3)'))
     .filter((h) => h.getClientRects().length && getComputedStyle(h).visibility !== 'hidden' && !h.closest('[hidden], .sr-only, .visually-hidden, dialog:not([open])'));
   for (const h of titres) {
-    tailles.push(`${h.tagName.toLowerCase()} ${parseFloat(getComputedStyle(h).fontSize)}`);
     const marche = document.createTreeWalker(h, NodeFilter.SHOW_TEXT);
     for (let n = marche.nextNode(); n; n = marche.nextNode()) {
       const texte = n.textContent ?? '';
       for (const m of texte.matchAll(/[^ \t\n\r\f]+/g)) {
-        // morceaux coupables après un trait d'union ou une barre oblique : chacun doit tenir sur une ligne
         for (const p of m[0].matchAll(/[^-‐/]*[-‐/]?/g)) {
           if (!p[0]) continue;
           range.setStart(n, m.index! + p.index!);
@@ -163,10 +167,43 @@ function titresCoupes(): { coupes: string[]; tailles: string[]; bornes: number }
       }
     }
   }
-  return { coupes, tailles, bornes: document.querySelectorAll('#contenu [data-titre-borne]').length };
+  return { coupes, bornes: document.querySelectorAll('#contenu [data-titre-borne]').length };
 }
 
-describe.skipIf(!built || !chromium)('pages de lore — vraie police Cinzel, aucun mot coupé dans les h1 à h3 (L262)', () => {
+/** Dans la page, texte agrandi : chaque h1 à h3 visible, sa taille, celle du texte qu'il introduit (`suit`, 1rem
+ *  s'il n'y en a pas), et les deux au réglage normal (page passée un instant à 16 px, tailles posées par l'ajusteur
+ *  retirées le temps de la lecture, sans image rendue entre les deux). */
+function titresEtCorps(): { n: string; taille: number; suit: number; normale: number; suitNormal: number }[] {
+  const titres = Array.from(document.querySelectorAll<HTMLElement>('#contenu :is(h1, h2, h3)'))
+    .filter((h) => h.getClientRects().length && getComputedStyle(h).visibility !== 'hidden' && !h.closest('[hidden], .sr-only, .visually-hidden, dialog:not([open])'));
+  const racine = document.querySelector('#contenu');
+  const suivant = (e: HTMLElement): HTMLElement | null => {
+    let bloc = e.parentElement;
+    for (let i = 0; bloc && i < 3; i++, bloc = bloc === racine ? null : bloc.parentElement) {
+      const p = Array.from(bloc.querySelectorAll<HTMLElement>('p')).find((x) => (e.compareDocumentPosition(x) & Node.DOCUMENT_POSITION_FOLLOWING)
+        && x.getClientRects().length && (x.textContent ?? '').trim());
+      if (p) return p;
+    }
+    return null;
+  };
+  const taille = (e: Element) => parseFloat(getComputedStyle(e).fontSize);
+  const rem = taille(document.documentElement);
+  const lignes = titres.map((h) => {
+    const p = suivant(h);
+    return { h, p, n: `${h.tagName.toLowerCase()} « ${(h.textContent ?? '').trim().replace(/\s+/g, ' ').slice(0, 32)} »`, taille: taille(h), suit: p ? taille(p) : rem };
+  });
+  const bornes = Array.from(document.querySelectorAll<HTMLElement>('#contenu [data-titre-borne]')).map((e) => ({ e, v: e.style.getPropertyValue('font-size') }));
+  const html = document.documentElement;
+  const avant = html.getAttribute('style');
+  for (const b of bornes) b.e.style.removeProperty('font-size');
+  html.style.setProperty('font-size', '16px', 'important');
+  const out = lignes.map((l) => ({ n: l.n, taille: l.taille, suit: l.suit, normale: taille(l.h), suitNormal: l.p ? taille(l.p) : 16 }));
+  if (avant === null) html.removeAttribute('style'); else html.setAttribute('style', avant);
+  for (const b of bornes) b.e.style.setProperty('font-size', b.v);
+  return out;
+}
+
+describe.skipIf(!built || !chromium)('pages de lore — vraie police Cinzel : titres jamais sous leur texte, coupés seulement avec un trait (L262)', () => {
   let server: Server;
   let browser: Browser;
   let base = '';
@@ -198,7 +235,7 @@ describe.skipIf(!built || !chromium)('pages de lore — vraie police Cinzel, auc
   }
 
   for (const route of ROUTES_LORE) {
-    it(`${route} : L1 police 32 px à 320 et 390 px, L2 réglage normal à 1440, 390 et 320 px`, async () => {
+    it(`${route} : L1 et L3 police 32 px à 320 et 390 px, L2 réglage normal à 1440, 390 et 320 px`, async () => {
       const trouves: string[] = [];
       // une page par police, redimensionnée d'une largeur à l'autre (l'ajusteur repasse à chaque largeur)
       for (const [police, largeurs] of [[32, [320, 390]], [16, [1440, 390, 320]]] as const) {
@@ -208,10 +245,20 @@ describe.skipIf(!built || !chromium)('pages de lore — vraie police Cinzel, auc
             await page.setViewportSize({ width, height: 900 });
             await stable(page);
           }
-          const r = await page.evaluate(titresCoupes);
-          if (process.env.L262_TRACE) console.log(route, width, police, r.tailles.join(', '));
-          trouves.push(...r.coupes.map((c) => `${police === 32 ? 'L1' : 'L2'} ${width} px, police ${police} px : ${c}`));
-          if (police === 16 && r.bornes) trouves.push(`L2 ${width} px : ${r.bornes} titre(s) borné(s) au réglage normal`);
+          if (police === 32) {
+            const r = await page.evaluate(refluxTexte, { partMot: Infinity, dans: TITRES_LORE });
+            trouves.push(...r.coupes.map((c) => `L1 ${width} px : ${c}`));
+            for (const t of await page.evaluate(titresEtCorps)) {
+              // un titre-étiquette (plus petit que son texte à 100 %) garde ce rapport ; les autres, au moins ce texte
+              const plancher = t.normale < t.suitNormal ? (t.normale * t.suit) / t.suitNormal : t.suit;
+              if (process.env.L262_TRACE) console.log(route, width, t.n, t.taille, t.suit, t.normale, t.suitNormal);
+              if (t.taille < plancher - 0.3) trouves.push(`L3 ${width} px : ${t.n} ${t.taille} px sous son texte ${t.suit} px (à 100 % : ${t.normale} et ${t.suitNormal} px)`);
+            }
+          } else {
+            const r = await page.evaluate(titresCoupes);
+            trouves.push(...r.coupes.map((c) => `L2 ${width} px : ${c}`));
+            if (r.bornes) trouves.push(`L2 ${width} px : ${r.bornes} titre(s) borné(s) au réglage normal`);
+          }
         }
         await page.context().close();
       }

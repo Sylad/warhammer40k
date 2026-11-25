@@ -869,7 +869,7 @@
     },
     {
       "id": "L262",
-      "title": "Pages du lore : les titres ne se coupent plus au milieu d’un mot",
+      "title": "Pages du lore : les titres restent plus grands que leur texte",
       "status": "doing",
       "started": "2026-11-25"
     }

@@ -14,7 +14,8 @@
  * Les mots sont séparés par les seules espaces sécables (« Armageddon » entre espaces fines insécables est un bloc).
  * Avec `{ memoriser: true }`, mémorise dans la page les défauts présents (réglage normal) et rend leurs clés ;
  * l'appel suivant ne rend que les nouveaux, ainsi que ceux absents de `connus` (clés rendues par une autre page au
- * réglage normal) : un mot déjà coupé à 100 % n'est pas un effet du texte agrandi.
+ * réglage normal) : un mot déjà coupé à 100 % n'est pas un effet du texte agrandi. `dans` (L262 r1) : seulement le
+ * texte des éléments qui répondent à ce sélecteur (les titres) ; `partMot: Infinity` retire la tolérance du mot long.
  */
 export interface RefluxRapport {
   coupes: string[];
@@ -26,7 +27,7 @@ export interface RefluxRapport {
 export const PART_MOT_INSECABLE = 0.8;
 export const EM_MIN = 3;
 
-export function refluxTexte(options: { memoriser?: boolean; connus?: string[]; partMot?: number; emMin?: number }): RefluxRapport {
+export function refluxTexte(options: { memoriser?: boolean; connus?: string[]; partMot?: number; emMin?: number; dans?: string }): RefluxRapport {
   const partMot = options.partMot ?? 0.8;
   const emMin = options.emMin ?? 3;
   const w = window as unknown as { __reflux?: Set<string> };
@@ -116,6 +117,7 @@ export function refluxTexte(options: { memoriser?: boolean; connus?: string[]; p
     const el = n.parentElement;
     if (!texte.trim() || !el) continue;
     if (el.closest('[hidden], [inert], .sr-only, .visually-hidden, dialog:not([open]), .leaflet-container, code')) continue;
+    if (options.dans && !el.closest(options.dans)) continue;
     const s = getComputedStyle(el);
     if (s.visibility === 'hidden') continue;
     // texte masqué pour la vue, lu par les lecteurs d'écran (boîte de 1 px coupée : en-têtes d'un tableau en cartes)

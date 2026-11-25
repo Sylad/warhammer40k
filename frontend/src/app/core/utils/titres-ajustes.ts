@@ -33,7 +33,7 @@ export const ATTRIBUT_BORNE = 'data-titre-borne';
 /** L262 : titre dont le mot le plus long ne tient pas dans sa boîte, même à sa taille finale : lui seul garde la
  *  césure (`hyphens: auto`, styles/_texte-agrandi.scss) ; les autres titres ne se coupent qu'entre les mots. */
 export const ATTRIBUT_CESURE = 'data-titre-cesure';
-const MARGE = 0.98;
+export const MARGE = 0.98;
 
 function largeurContenu(e: HTMLElement): number {
   let bloc: HTMLElement | null = e;
@@ -153,37 +153,49 @@ export const SOUS_TITRES = 1.1;
 /** Minimums du h1 quand son mot le plus long ne tient pas à `ECHELLE` / `SOUS_TITRES` (L259 r1) : 1,2 fois le texte
  *  qui le suit (R6 de L253, « nettement un titre ») et 1,05 fois les sous-titres à leur plancher. */
 export const H1_MIN = 1.2;
-/** L262 : dernier recours d'un titre dont le mot le plus long ne tient pas même à sa taille au réglage normal (à 200 %,
- *  les marges en rem des cartes et des en-têtes doublent et resserrent sa colonne) : il descend jusqu'à ce que le mot
- *  tienne, pas sous cette part de sa taille au réglage normal ; au-delà, le mot se coupe à une syllabe, avec un trait. */
-export const ULTIME = 0.6;
 export const SOUS_TITRES_MIN = 1.05;
+
+/** L262 r1 (règle du lead, 25-11) : dernier recours d'un titre dont le mot le plus long ne tient pas même à son
+ *  plancher (à 200 %, les marges des cartes et des en-têtes resserrent sa colonne) : il descend jusqu'à ce que le mot
+ *  tienne, jamais sous la taille du texte qu'il introduit au réglage courant (`suit`, 1rem s'il n'y en a pas) ; un
+ *  petit titre-étiquette, déjà plus petit que ce texte au réglage normal (« Données vitales » 13 px pour un corps de
+ *  15), garde ce rapport. Plus étroit encore, le mot se coupe à une syllabe, avec un trait (`ATTRIBUT_CESURE`).
+ *  (Avant r1 : 0,6 fois sa taille au réglage normal ; un h1 passait sous le corps, un h2 sous son propre sous-titre.) */
+export function plancherUltime(normale: number, suit: number, suitNormal: number): number {
+  return suitNormal > 0 && normale < suitNormal ? (normale * suit) / suitNormal : suit;
+}
 
 const estTitre = (e: Element) => /^H[1-6]$/.test(e.tagName);
 
-/** Taille du texte qui suit le titre `e` : le premier paragraphe visible après lui, dans un de ses trois blocs
- *  parents au plus (sans sortir de `racine`) ; 0 s'il n'y en a pas. */
-export function texteQuiSuit(e: HTMLElement, racine: HTMLElement): number {
+/** Le texte qui suit le titre `e` : le premier paragraphe visible après lui, dans un de ses trois blocs parents au
+ *  plus (sans sortir de `racine`) ; null s'il n'y en a pas. */
+export function paragrapheQuiSuit(e: HTMLElement, racine: HTMLElement): HTMLElement | null {
   let bloc = e.parentElement;
   for (let i = 0; bloc && i < 3; i++, bloc = bloc === racine ? null : bloc.parentElement) {
     for (const p of Array.from(bloc.querySelectorAll<HTMLElement>('p'))) {
       if (!(e.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING) || !p.getClientRects().length) continue;
       if (!(p.textContent ?? '').trim()) continue;
-      return parseFloat(getComputedStyle(p).fontSize);
+      return p;
     }
   }
-  return 0;
+  return null;
+}
+
+/** Taille du texte qui suit le titre `e` (`paragrapheQuiSuit`) ; 0 s'il n'y en a pas. */
+export function texteQuiSuit(e: HTMLElement, racine: HTMLElement): number {
+  const p = paragrapheQuiSuit(e, racine);
+  return p ? parseFloat(getComputedStyle(p).fontSize) : 0;
 }
 
 /** Tailles des éléments `els` au réglage normal (1rem = 16 px) : la page passe un instant à 16 px, sans image
  *  rendue entre les deux (aucun observateur ne voit la sonde de 1rem changer). */
-function taillesNormales(els: HTMLElement[]): number[] {
+function taillesNormales(els: (HTMLElement | null)[]): number[] {
   if (!els.length) return [];
   const html = document.documentElement;
   const avant = html.style.getPropertyValue('font-size');
   const priorite = html.style.getPropertyPriority('font-size');
   html.style.setProperty('font-size', '16px', 'important');
-  const tailles = els.map((e) => parseFloat(getComputedStyle(e).fontSize));
+  const tailles = els.map((e) => (e ? parseFloat(getComputedStyle(e).fontSize) : 16));
   if (avant) html.style.setProperty('font-size', avant, priorite);
   else html.style.removeProperty('font-size');
   return tailles;
@@ -197,6 +209,7 @@ function plancherH1(
   normale: number,
   suit: number,
   sesSous: { plancher: number; cible: number }[],
+  ultime: number,
 ): number {
   // plancher dur (au-delà, son mot se coupe, avec un trait si la langue le permet) : sa taille au réglage normal,
   // nettement au-dessus du texte qui le suit (`H1_MIN`, R6 de L253) et des sous-titres à leur propre plancher
@@ -214,9 +227,9 @@ function plancherH1(
   // (sans `MARGE` : à 320 px, « CONCEPTS » tient à 38,4 px dans 242 px, la marge le mettait juste au-dessus)
   const tientADur = !(m.dispo > 0 && m.mot > 0) || (m.mot * dur) / m.taille <= m.dispo;
   // L262 (QA en prod du 25-11) : si son mot ne tient même pas à `dur`, il descend jusqu'à ce qu'il tienne, jamais sous
-  // sa taille au réglage normal (`ULTIME` fois, en dernier recours) — un mot coupé au milieu (« Civils / Impér / iaux » à 320 px) se lit plus mal qu'un
-  // h1 moins détaché du texte qui le suit. (Avant : il gardait `ECHELLE` fois ce texte et le mot se coupait.)
-  return tientADur ? Math.max(dur, Math.min(voulu, tient)) : Math.max(ULTIME * normale, Math.min(dur, tient));
+  // le texte qu'il introduit (`ultime`, L262 r1) — un mot coupé au milieu (« Civils / Impér / iaux » à 320 px) se lit
+  // plus mal qu'un h1 moins détaché de ce texte ; plus bas, il se coupe à une syllabe, avec un trait.
+  return tientADur ? Math.max(dur, Math.min(voulu, tient)) : Math.max(ultime, Math.min(dur, tient));
 }
 
 /** Au centième inférieur, sans erreur flottante (1,2 × 34 = 40,8 donnait 40,79). */
@@ -256,24 +269,24 @@ function verifierTitres(titres: { e: HTMLElement; ultime: number }[], bornes: Ma
 
 
 /** Plancher retenu d'un sous-titre : le souple s'il laisse tenir le mot, sinon ce qui tient (`tient`), au plus le
- *  souple et au moins `ULTIME` fois sa taille normale ; le h1 reste au-dessus de lui (L259). */
-function plancherRetenu(m: { dispo: number; mot: number; taille: number }, plancher: number, normale: number, tient: number): number {
+ *  souple et au moins `ultime` (le texte qu'il introduit, L262 r1) ; le h1 reste au-dessus de lui (L259). */
+function plancherRetenu(m: { dispo: number; mot: number; taille: number }, plancher: number, ultime: number, tient: number): number {
   const tientAuPlancher = !(m.dispo > 0 && m.mot > 0) || (m.mot * plancher) / m.taille <= m.dispo * MARGE;
-  return tientAuPlancher ? plancher : Math.max(ULTIME * normale, Math.min(plancher, tient));
+  return tientAuPlancher ? plancher : Math.max(ultime, Math.min(plancher, tient));
 }
 
 /** L262 : un h1 descendu pour que son mot tienne garde ses sous-titres sous lui (`SOUS_TITRES_MIN`), pas sous leur
- *  propre `ULTIME` ; plus petits, ils tiennent d'autant mieux. (Au-dessus de son plancher dur, c'était déjà le cas.) */
+ *  propre plancher ultime ; plus petits, ils tiennent d'autant mieux. (Au-dessus de son plancher dur, c'était déjà le cas.) */
 function garderSousLesH1(
   h1s: { e: HTMLElement; normale: number }[],
-  sousTitres: { e: HTMLElement; normale: number }[],
+  sousTitres: { e: HTMLElement; normale: number; ultime: number }[],
   bornes: Map<HTMLElement, number>,
 ): void {
   const finale = (e: HTMLElement) => parseFloat(getComputedStyle(e).fontSize);
   for (const h1 of h1s) {
     const f = finale(h1.e);
     for (const t of sousTitres.filter((x) => x.normale < h1.normale && finale(x.e) > f / SOUS_TITRES_MIN + 0.01)) {
-      const borne = Math.max(ULTIME * t.normale, f / SOUS_TITRES_MIN);
+      const borne = Math.max(t.ultime, f / SOUS_TITRES_MIN);
       if (borne < finale(t.e) - 0.01) {
         poser(t.e, borne);
         bornes.set(t.e, borne);
@@ -300,11 +313,17 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
     return { e, titre, fit, dispo: largeurContenu(e), mot: motLePlusLong(e, titre), taille: parseFloat(s.fontSize) };
   });
   const titres = mesures.filter((m) => m.titre);
-  const tn = taillesNormales(titres.map((t) => t.e));
+  // L262 r1 : le texte que chaque titre introduit, à sa taille courante et au réglage normal (plancher ultime)
+  const suivants = titres.map((t) => paragrapheQuiSuit(t.e, racine));
+  const tn = taillesNormales([...titres.map((t) => t.e), ...suivants]);
   const normales = new Map(titres.map((m, i) => [m.e, tn[i]]));
+  const ultimes = new Map(titres.map((m, i) => {
+    const p = suivants[i];
+    return [m.e, plancherUltime(tn[i], p ? parseFloat(getComputedStyle(p).fontSize) : rem, tn[titres.length + i])];
+  }));
   const bornes = new Map<HTMLElement, number>();
   // tailles finales des titres de niveau 2 à 6 (avec leur normale et leur plancher) : le h1 reste au-dessus
-  const sousTitres: { e: HTMLElement; taille: number; normale: number; plancher: number; cible: number }[] = [];
+  const sousTitres: { e: HTMLElement; taille: number; normale: number; ultime: number; plancher: number; cible: number }[] = [];
   const cibleTitre = (m: (typeof mesures)[number], plancher: number) => {
     const { dispo, mot, taille } = m;
     // le mot le plus long ne tient pas : réduit juste assez, pas sous le plancher (un titre déjà plus petit que son
@@ -312,8 +331,8 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
     return dispo > 0 && mot > dispo ? Math.max(Math.min(plancher, taille), (taille * dispo * MARGE) / mot) : taille;
   };
   // L262 : h2 à h6, le mot le plus long tient-il au plancher souple (`ECHELLE` fois le texte qui le suit) ? Sinon, le
-  // titre descend jusqu'à ce qu'il tienne, pas sous son plancher dur (taille au réglage normal, `ULTIME` fois en dernier
-  // recours) — QA du 25-11 : les h2
+  // titre descend jusqu'à ce qu'il tienne, pas sous son plancher dur (taille au réglage normal ; en dernier recours, le
+  // texte qu'il introduit, `plancherUltime`) — QA du 25-11 : les h2
   // de /lore et /lore/civilians restaient à 1,1 × 32 = 35,2 px, « Pant|héon », « Adept|us ».
   for (const m of mesures) {
     const { e, titre, dispo, mot, taille } = m;
@@ -331,14 +350,17 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
     // le plancher, et jamais sous sa taille au réglage normal (L255 ; au-delà de ce qui tient, « ASTARTE|S » se
     // coupait sans trait : un nom propre n'a pas toujours de césure)
     const tient = dispo > 0 && mot > 0 ? (taille * dispo * MARGE) / mot : plancher;
-    const retenu = plancherRetenu(m, plancher, normale, tient);
-    const cible = m.fit ? Math.max(cibleTitre(m, retenu), Math.min(retenu, Math.max(normale, tient))) : cibleTitre(m, retenu);
-    sousTitres.push({ e, taille, normale, plancher: retenu, cible });
+    const ultime = ultimes.get(e) ?? 0;
+    const retenu = plancherRetenu(m, plancher, ultime, tient);
+    // (L262 r1 : un titre borné par fit-title non plus ne reste pas sous le texte qu'il introduit, `ultime` ; si son mot
+    // n'y tient pas, la passe de vérification lui rend la césure)
+    const cible = m.fit ? Math.max(cibleTitre(m, retenu), Math.min(retenu, Math.max(normale, tient)), ultime) : cibleTitre(m, retenu);
+    sousTitres.push({ e, taille, normale, ultime, plancher: retenu, cible });
   }
   for (const m of mesures.filter((x) => x.e.tagName === 'H1')) {
     const normale = normales.get(m.e) ?? 0;
     const sesSous = sousTitres.filter((t) => t.normale < normale);
-    const plancher = plancherH1(m, normale, Math.max(rem, texteQuiSuit(m.e, racine)), sesSous);
+    const plancher = plancherH1(m, normale, Math.max(rem, texteQuiSuit(m.e, racine)), sesSous, ultimes.get(m.e) ?? 0);
     // un h1 plus petit que son plancher (figé par fit-title) y est relevé
     const cible = Math.max(cibleTitre(m, plancher), plancher);
     // (jamais sous leur propre plancher : taille au réglage normal, échelle sur le texte qui les suit)
@@ -347,7 +369,7 @@ export function ajusterTitres(racine: HTMLElement, rem: number): number {
   }
   for (const t of sousTitres) if (Math.abs(t.cible - t.taille) > 0.25) bornes.set(t.e, t.cible);
   for (const [e, borne] of bornes) poser(e, borne);
-  verifierTitres(titres.map((m) => ({ e: m.e, ultime: ULTIME * (normales.get(m.e) ?? 0) })), bornes);
+  verifierTitres(titres.map((m) => ({ e: m.e, ultime: ultimes.get(m.e) ?? 0 })), bornes);
   garderSousLesH1(mesures.filter((x) => x.e.tagName === 'H1').map((x) => ({ e: x.e, normale: normales.get(x.e) ?? 0 })), sousTitres, bornes);
   return bornes.size;
 }
