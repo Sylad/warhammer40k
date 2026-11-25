@@ -2963,6 +2963,7 @@ lots:
     created: 2026-11-25
     started: 2026-11-25
     ux: { date: 2026-11-25, verdict: "nok 1 majeur : à 320 px et texte 200 %, 61 titres passent sous le corps du texte (h1 /lore/ships 25 px pour un corps de 28 ; h2 /lore/civilians 14,8 px sous leur sous-titre) — rapport warhammer-L262-ux.md" }
+    review: { date: 2026-11-25, verdict: "compliant (r2 : règle du lead tenue, garde e2e rouge sans le correctif, 72/72 e2e et 152/152 unitaires verts ; 1 note mineure : recherche du texte qui suit copiée trois fois, titres-ajustes.ts:173, contenu.e2e:473, reflux.e2e:580)", commit: 74d6f0c5f6dc783f87d04feeb65373f6a333ea85 }
   - id: L263
     title: Défilement horizontal à 320 px au texte normal sur /lore/timeline/war-in-heaven (+35 px, article.panel déborde) et /lore/ships (+22 px) — échec WCAG 1.4.10, vu par la revue UX de L262 le 25-11
     status: todo
