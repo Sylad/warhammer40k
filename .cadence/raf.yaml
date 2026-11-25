@@ -2930,6 +2930,11 @@ lots:
     visible: true
     created: 2026-11-24
     started: 2026-11-25
+  - id: L260
+    title: "CI : tests navigateur à part (projet vitest séparé ou job parallèle) et budget de durée tenu par un test — attente de CI 12 à 15 min par livraison (42 en 10 jours), cible ≤ 7 min (D-33 de cadence, étude 2026-11-25 §5 P7). Mesure : étape ci des livraisons, médiane"
+    status: todo
+    estimate: 1
+    created: 2026-11-25
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
