@@ -1359,9 +1359,10 @@ lots:
     finished: 2026-10-13
   - id: L119
     title: "Accueil : /api/subfactions (350 Ko, ~109 Ko gzip) téléchargé deux fois depuis L117 — compteurs de l'accueil (dashboard.component.ts:249 getSubFactions()) puis palette Ctrl+K à l'ouverture (subFactions$) ; partager subFactions$, et ajouter dans docs/qa/expectations.md (## /) « api: /api/subfactions au plus une fois par visite » (QA prod 13-10)"
-    status: todo
+    status: doing
     estimate: 0.25
     created: 2026-10-13
+    started: 2026-11-26
   - id: L120
     title: "Fiche unité : datasheet illisible — 127/133 fiches sont des tableaux de stats affichés en fond assombri et tronqué sous le titre, sans <img>, alt ni agrandissement (WCAG 1.1.1, 1.4.3) — figure + lightbox selon maquette (revue UX L4)"
     public: "Fiche unité : la fiche technique devient lisible et agrandissable"
