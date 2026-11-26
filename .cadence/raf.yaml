@@ -2974,10 +2974,12 @@ lots:
     created: 2026-11-25
   - id: L264
     title: "Failles connues (D-32 du registre parent) : corriger les failles critiques et hautes des dépendances relevées le 25-11 (Dependabot 2 critiques 2 hautes ; npm audit backend 0/2, frontend 2/2, rien en production), production d'abord ; npm audit fix sans --force, toute montée majeure une par une avec ses tests ; les alertes Dependabot ouvertes du dépôt comme liste de contrôle. Mesure : 0 critique, hautes en baisse au relevé suivant (scripts/releve-securite.py)"
-    status: doing
+    status: done
     estimate: 1
     created: 2026-11-25
     started: 2026-11-26
+    review: { date: 2026-11-26, verdict: "conforme — 0 critique 0 haute (prod 0/0) confirmés par npm audit, npm ci OK avec l'overrides, aucune dépendance de production changée, eslint identique sonarjs 3/4, test matchMedia vérifié par mutation", commit: e4e77794364e7b9fd597543293e0c842d20b5bd7 }
+    finished: 2026-11-26
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
