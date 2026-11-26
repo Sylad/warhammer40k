@@ -1359,10 +1359,12 @@ lots:
     finished: 2026-10-13
   - id: L119
     title: "Accueil : /api/subfactions (350 Ko, ~109 Ko gzip) téléchargé deux fois depuis L117 — compteurs de l'accueil (dashboard.component.ts:249 getSubFactions()) puis palette Ctrl+K à l'ouverture (subFactions$) ; partager subFactions$, et ajouter dans docs/qa/expectations.md (## /) « api: /api/subfactions au plus une fois par visite » (QA prod 13-10)"
-    status: doing
+    status: done
     estimate: 0.25
     created: 2026-10-13
     started: 2026-11-26
+    review: { date: 2026-11-26, verdict: "conforme — relu par le lead : subFactions$ partagé par l'accueil et la palette, shareReplay refCount:false (le take(1) jetait la réponse), erreur non gardée ; test rouge avant / vert après, 1 requête mesurée en local", commit: 849284a0804e2a2dec68e9d608b5decd3df3cde2 }
+    finished: 2026-11-26
   - id: L120
     title: "Fiche unité : datasheet illisible — 127/133 fiches sont des tableaux de stats affichés en fond assombri et tronqué sous le titre, sans <img>, alt ni agrandissement (WCAG 1.1.1, 1.4.3) — figure + lightbox selon maquette (revue UX L4)"
     public: "Fiche unité : la fiche technique devient lisible et agrandissable"
@@ -2982,6 +2984,16 @@ lots:
     started: 2026-11-26
     review: { date: 2026-11-26, verdict: "conforme — 0 critique 0 haute (prod 0/0) confirmés par npm audit, npm ci OK avec l'overrides, aucune dépendance de production changée, eslint identique sonarjs 3/4, test matchMedia vérifié par mutation", commit: e4e77794364e7b9fd597543293e0c842d20b5bd7 }
     finished: 2026-11-26
+  - id: L265
+    title: "Accueil : factions$, series$ et les autres flux lus en take(1) ont le même shareReplay refCount:true que subFactions$ avant L119 — vérifier s'ils sont téléchargés plusieurs fois par visite et corriger de la même façon (vu au run L119 du 26-11)"
+    status: todo
+    estimate: 1
+    created: 2026-11-26
+  - id: L266
+    title: "Fiche d'écran unit-detail-datasheet invalide : cadence spec check échoue (tests non nommés « R4 — … » comme elle l'attend, depuis 4e285d7 L161) ; mesure : spec check rc 0 (vu au run L119 du 26-11)"
+    status: todo
+    estimate: 1
+    created: 2026-11-26
 acknowledged:
   - { sha: 9d5853aeaaaa29a135b85c4c4f6f3c49765ef63e, subject: "chore: ignorer .playwright-mcp/ (artefacts du MCP Playwright, rendaient les lots orchestrés au lead)", date: 2026-10-08, reason: chore d'hygiène sans lot (.gitignore .playwright-mcp/) }
   - { sha: d59d9884d6617eb8ab46ef635e5b46f7d1e6afe7, subject: "plan: L77 fait (orchestrate.ux, suite de cadence L95)", date: 2026-10-08, reason: "citation d'un lot cadence (L95), pas d'un lot de ce plan" }
