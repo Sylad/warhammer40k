@@ -16,7 +16,7 @@ async function render() {
   const svc = {
     loreFeed: () => of([]),
     factions$: of([]), series$: of([]), videos$: of([]), artworks$: of([]),
-    getSubFactions: () => of([]),
+    subFactions$: of([]),
     getWikiImage: (q: string) => { asked.push(q); return of({ imageUrl: wiki(q), pageTitle: null, pageUrl: null }); },
   };
   await setupTestBed([DashboardComponent], [

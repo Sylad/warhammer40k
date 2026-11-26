@@ -14,7 +14,7 @@ async function render(sub: unknown) {
   const svc = {
     loreFeed: () => of([]),
     factions$: of(list(5)), series$: of(list(7)), videos$: of(list(9)), artworks$: of(list(11)),
-    getSubFactions: () => sub,
+    subFactions$: sub,
   };
   await setupTestBed([DashboardComponent], [
     provideRouter([]),

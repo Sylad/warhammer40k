@@ -39,10 +39,15 @@ export class WarhammerService {
     return this.http.get<SubFaction[]>(url);
   }
 
-  /** L117 : toutes les sous-factions, pour la palette Ctrl+K. */
+  /**
+   * L117, L119 : toutes les sous-factions (350 Ko), lues par le compteur de l'accueil et la palette
+   * Ctrl+K — une seule requête par visite. Sans `refCount` : l'accueil lit en `take(1)`, qui se
+   * désabonne à la valeur, avant la fin de la réponse ; avec `refCount: true` le cache était alors
+   * jeté et la palette redemandait tout. Une erreur n'est pas gardée (`Réessayer` relance).
+   */
   readonly subFactions$: Observable<SubFaction[]> = this.http
     .get<SubFaction[]>(`${this.base}/subfactions`)
-    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+    .pipe(shareReplay({ bufferSize: 1, refCount: false }));
 
   getSubFaction(id: string): Observable<SubFaction> {
     return this.http.get<SubFaction>(`${this.base}/subfactions/${id}`);

@@ -256,7 +256,7 @@ export class DashboardComponent {
       [count(this.service.series$), this.series],
       [count(this.service.videos$), this.videos],
       [oeuvres, this.artworks],
-      [count(this.service.getSubFactions()), this.subFactions],
+      [count(this.service.subFactions$), this.subFactions], // L119 : même flux que la palette Ctrl+K
     ];
     for (const [source, target] of sources) {
       target.set(null);

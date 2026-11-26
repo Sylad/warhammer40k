@@ -25,7 +25,7 @@ describe('Accueil — glyphes décoratifs (L81)', () => {
     await setupTestBed([DashboardComponent], [
       provideRouter([]),
       { provide: WarhammerService, useValue: fakeWarhammerService({
-        loreFeed: () => of([]), factions$: of([]), series$: of([]), videos$: of([]), artworks$: of([]), getSubFactions: () => of([]),
+        loreFeed: () => of([]), factions$: of([]), series$: of([]), videos$: of([]), artworks$: of([]), subFactions$: of([]),
       }) },
     ]);
     const f = TestBed.createComponent(DashboardComponent);

@@ -20,7 +20,7 @@ async function compteurs(n: number | null): Promise<string[]> {
       useValue: fakeWarhammerService({
         loreFeed: () => of([]),
         factions$: src, series$: src, videos$: src, artworks$: src,
-        getSubFactions: () => of([]),
+        subFactions$: of([]),
       }),
     },
   ]);

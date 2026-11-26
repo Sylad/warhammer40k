@@ -30,14 +30,14 @@ async function render(overrides: Record<string, unknown>): Promise<ComponentFixt
 
 const OK = {
   factions$: of(list(5)), series$: of(list(7)), videos$: of(list(9)), artworks$: of(list(11)),
-  getSubFactions: () => of(list(13)),
+  subFactions$: of(list(13)),
 };
 
 describe('Accueil — compteurs (L79)', () => {
   beforeEach(() => localStorage.clear());
 
   it('chargement : « — » partout, jamais « 0 », ni message d’erreur', async () => {
-    const f = await render({ factions$: NEVER, series$: NEVER, videos$: NEVER, artworks$: NEVER, getSubFactions: () => NEVER });
+    const f = await render({ factions$: NEVER, series$: NEVER, videos$: NEVER, artworks$: NEVER, subFactions$: NEVER });
     expect(nums(f)).toEqual(['—', '—', '—', '—', '—', '—', '—', '—', '—']);
     expect($(f, '[role="alert"]')).toBeNull();
   });
