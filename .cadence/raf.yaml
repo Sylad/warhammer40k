@@ -2976,6 +2976,7 @@ lots:
     title: "Failles connues (D-32 du registre parent) : corriger les failles critiques et hautes des dépendances relevées le 25-11 (Dependabot 2 critiques 2 hautes ; npm audit backend 0/2, frontend 2/2, rien en production), production d'abord ; npm audit fix sans --force, toute montée majeure une par une avec ses tests ; les alertes Dependabot ouvertes du dépôt comme liste de contrôle. Mesure : 0 critique, hautes en baisse au relevé suivant (scripts/releve-securite.py)"
     status: done
     estimate: 1
+    delivered: { date: 2026-11-26, sha: 19ae3750e501baddf80c6533a2808fb8dd7738fd }
     created: 2026-11-25
     started: 2026-11-26
     review: { date: 2026-11-26, verdict: "conforme — 0 critique 0 haute (prod 0/0) confirmés par npm audit, npm ci OK avec l'overrides, aucune dépendance de production changée, eslint identique sonarjs 3/4, test matchMedia vérifié par mutation", commit: e4e77794364e7b9fd597543293e0c842d20b5bd7 }
