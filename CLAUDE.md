@@ -235,6 +235,7 @@ Modal "Importer une image" (frontend) supporte 3 modes : Wiki Fandom, Reddit r/W
 
 - Angular 20.3 (zone.js, sans zoneless, L231), TypeScript 5.9, RxJS 7, Signals, SCSS, Cinzel + Inter
 - NestJS 11, Anthropic SDK 0.91
+- Vitest 4 au front et au back (L264, failles de tinypool et @vitest/mocker de vitest 3) : `frontend/package.json` porte un `overrides` qui force `vitest` sous `@angular/build` 20, dont le pair optionnel demande `^3` (son builder `unit-test` n'est pas utilisé ici) ; à retirer quand la montée d'Angular accepte vitest 4. jsdom n'a pas `matchMedia` et vitest 4 refuse `vi.spyOn` sur une propriété absente : `vi.stubGlobal('matchMedia', …)` + `vi.unstubAllGlobals()`.
 - Docker multi-stage (`node:22-alpine` → `nginx:alpine`), Node 22 LTS partout (`.nvmrc` 22.23.5, `engines.node >=22.12.0`, CI `node-version-file: .nvmrc`), images sur GHCR, k3s dark-blue via ArgoCD
 
 ## Nouveautés (cadence news, L23)

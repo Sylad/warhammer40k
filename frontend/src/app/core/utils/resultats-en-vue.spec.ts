@@ -11,10 +11,16 @@ function resultats(haut: number): HTMLElement {
   return section;
 }
 
+// jsdom n'a pas de matchMedia : vitest 4 refuse vi.spyOn sur une propriété absente (L264), on la pose le temps du cas.
+function simulerMatchMedia(matches: boolean): void {
+  vi.stubGlobal('matchMedia', vi.fn(() => ({ matches }) as MediaQueryList));
+}
+
 describe('L239 — après un filtre, le titre et le compte des résultats sont en vue', () => {
   afterEach(() => {
     Reflect.deleteProperty(document.documentElement, 'scrollHeight'); // posé par sousLaListe (L241)
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
     vi.useRealTimers();
     document.body.innerHTML = '';
     document.documentElement.removeAttribute('style');
@@ -218,7 +224,7 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
   });
 
   it('glissé : top collé posé à la place de la colonne pendant le défilement, rétabli à la fin, conteneur tenu', () => {
-    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false } as MediaQueryList);
+    simulerMatchMedia(false);
     const c = colonneCollee(1700, { avant: 2100, apres: 1600 }, 1200);
     const place = c.colonne();
     expect(c.filtrer()).toBe(true);
@@ -258,7 +264,7 @@ describe('L239 — après un filtre, le titre et le compte des résultats sont e
   }
 
   it('sous la liste, hors téléphone : la rangée garde sa place dans la fenêtre (défilement instantané), au filtre et quand on le défait', () => {
-    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false } as MediaQueryList); // glissé permis : il ne doit pas servir
+    simulerMatchMedia(false); // glissé permis : il ne doit pas servir
     const c = sousLaListe(3000, { avant: 2400, apres: 300 });
     const place = c.bouton.getBoundingClientRect().top; // 700
     c.bouton.focus();
@@ -301,6 +307,7 @@ describe('L240 r2 — balayage exhaustif : colonne collée des Vidéos sous le p
 
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
     document.body.innerHTML = '';
     document.documentElement.removeAttribute('style');
     window.dispatchEvent(new Event('resize')); // tenue rendue : le module n'en garde aucune pour le cas suivant
@@ -310,7 +317,7 @@ describe('L240 r2 — balayage exhaustif : colonne collée des Vidéos sous le p
   function page(innerHeight: number, lisse: boolean) {
     fenetre = innerHeight;
     vi.spyOn(window, 'innerHeight', 'get').mockImplementation(() => fenetre);
-    vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: !lisse } as MediaQueryList);
+    simulerMatchMedia(!lisse);
     Object.defineProperty(window, 'scrollY', { configurable: true, get: () => etat.y });
     const html = document.documentElement;
     html.style.scrollPaddingTop = `${G.marge}px`;
