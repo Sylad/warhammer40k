@@ -1361,6 +1361,7 @@ lots:
     title: "Accueil : /api/subfactions (350 Ko, ~109 Ko gzip) téléchargé deux fois depuis L117 — compteurs de l'accueil (dashboard.component.ts:249 getSubFactions()) puis palette Ctrl+K à l'ouverture (subFactions$) ; partager subFactions$, et ajouter dans docs/qa/expectations.md (## /) « api: /api/subfactions au plus une fois par visite » (QA prod 13-10)"
     status: done
     estimate: 0.25
+    delivered: { date: 2026-11-26, sha: 42574182f5941ebaa0367b547aa067432a3b31b0 }
     created: 2026-10-13
     started: 2026-11-26
     review: { date: 2026-11-26, verdict: "conforme — relu par le lead : subFactions$ partagé par l'accueil et la palette, shareReplay refCount:false (le take(1) jetait la réponse), erreur non gardée ; test rouge avant / vert après, 1 requête mesurée en local", commit: 849284a0804e2a2dec68e9d608b5decd3df3cde2 }
