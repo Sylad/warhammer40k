@@ -90,6 +90,47 @@ describe.skipIf(!built || !chromium)('fiche unité — cadre du panneau Fiche te
     });
   }
 
+  for (const width of [1440, 390]) {
+    it(`R7 — scan pas encore chargé à ${width} px : la place d'un scan 898×596 est réservée (cadre au rapport 898/596, pas 0 px)`, async () => {
+      // Le HEAD de la fiche répond 200 (l'image devient une fiche technique) ; le GET du scan est retenu,
+      // jamais servi pendant la mesure : seuls les attributs width/height de l'<img> donnent sa hauteur au cadre.
+      const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+      ctx.setDefaultTimeout(5000);
+      let liberer: () => void = () => {};
+      const retenu = new Promise<void>((r) => (liberer = r));
+      let getRetenu = false;
+      await ctx.route('**/api/images/datasheets/**', async (route) => {
+        if (route.request().method() === 'HEAD') return route.fulfill({ status: 200, contentType: 'image/svg+xml', body: '' });
+        getRetenu = true;
+        await retenu;
+        await route.abort().catch(() => {});
+      });
+      const page: Page = await ctx.newPage();
+      try {
+        await page.goto(`${base}/units/${UNIT}`);
+        await page.locator('.panel-datasheet .ds-frame img').waitFor({ state: 'attached' });
+        await expect.poll(() => getRetenu).toBe(true);
+        const m = await page.evaluate(() => {
+          const frame = document.querySelector<HTMLElement>('.panel-datasheet .ds-frame')!;
+          const i = frame.querySelector('img')!;
+          const cs = getComputedStyle(frame);
+          const bordH = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+          const bordL = parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
+          const f = frame.getBoundingClientRect();
+          return { charge: i.complete && i.naturalWidth > 0, l: f.width - bordL, h: f.height - bordH };
+        });
+        console.info(`L133 ${width} px, scan retenu :`, JSON.stringify(m));
+        expect(m.charge).toBe(false);
+        expect(m.l).toBeGreaterThan(100);
+        expect(m.h).toBeGreaterThan(0);
+        expect(Math.abs(m.h - (m.l * 596) / 898)).toBeLessThanOrEqual(1);
+      } finally {
+        liberer();
+        await ctx.close();
+      }
+    });
+  }
+
   it('R7 — une image d\'un autre format (800×1000) : le cadre suit son rapport, pas un 3:2 figé', async () => {
     const m = await mesurer(1440, 800, 1000);
     console.info('L133 1440 px, image 800×1000 :', JSON.stringify(m));

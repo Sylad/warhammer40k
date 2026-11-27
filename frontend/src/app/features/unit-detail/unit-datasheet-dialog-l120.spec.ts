@@ -32,7 +32,7 @@ describe('fenêtre d\'agrandissement — défilement au clavier (L120)', () => {
     expect(Array.from(dlg.children).map((c) => c.className)).toEqual(['ds-close', 'ds-scroll', 'ds-credit']); // L238 r1 : crédit après l'image
   });
 
-  it('les flèches, pages, Début et Fin font défiler le conteneur et ne laissent pas la page défiler', async () => {
+  it('R17 — les flèches, pages, Début et Fin font défiler le conteneur et ne laissent pas la page défiler', async () => {
     const { scrollBy, press } = await mount();
     expect(press('ArrowDown').defaultPrevented).toBe(true);
     expect(scrollBy).toHaveBeenLastCalledWith({ left: 0, top: 48 });

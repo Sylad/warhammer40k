@@ -34,7 +34,7 @@ describe('fiches techniques et portraits locaux (L120)', () => {
   const isScan = ({ w, h }: { w: number; h: number }) => w / h >= 1.4 && w / h <= 1.6 && w >= 800;
   const sizes = (dir: string) => ids(dir).map((id) => ({ id, ...jpegSize(path.join(dir, `${id}.jpg`)) }));
 
-  it('chaque fichier de datasheets/ a le rapport 3:2 d\'un scan de fiche (entre 1,4 et 1,6) et au moins 800 px de large', () => {
+  it('R14 — chaque fichier de datasheets/ a le rapport 3:2 d\'un scan de fiche (entre 1,4 et 1,6) et d\'au moins 800 px de large', () => {
     // ork-makari (626×422) avait le bon rapport : une illustration, pas un scan. Les scans font 898×596.
     const hors = sizes(DATASHEETS).filter((s) => !isScan(s)).map(({ id, w, h }) => `${id} ${w}×${h}`);
     expect(hors).toEqual([]);

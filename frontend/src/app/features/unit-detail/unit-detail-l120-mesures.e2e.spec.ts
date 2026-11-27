@@ -84,7 +84,7 @@ describe.skipIf(!built || !chromium)('fiche unité — focus rendu et hero sans 
     });
   }
 
-  it('F2 — un clic dans le vide du conteneur de l\'image (à côté d\'elle) ferme la fenêtre, un clic sur l\'image non', async () => {
+  it('R17 — F2 — un clic dans le vide du conteneur de l\'image (à côté d\'elle) ferme la fenêtre, un clic sur l\'image non', async () => {
     await open(1440, true);
     try {
       await page.locator('.hero button.zoom-btn').click();
@@ -96,7 +96,7 @@ describe.skipIf(!built || !chromium)('fiche unité — focus rendu et hero sans 
     } finally { await ctx.close(); }
   });
 
-  it('F2 — le clavier fait défiler l\'image à 390 px pendant que le focus reste sur Fermer', async () => {
+  it('R17 — F2 — le clavier fait défiler l\'image à 390 px pendant que le focus reste sur Fermer', async () => {
     await open(390, true);
     try {
       await page.locator('.hero button.zoom-btn').click();
@@ -111,7 +111,7 @@ describe.skipIf(!built || !chromium)('fiche unité — focus rendu et hero sans 
     } finally { await ctx.close(); }
   });
 
-  it('bonus — fenêtre ouverte, la page derrière ne défile pas à la molette (:root:has(dialog[open]) { overflow: hidden })', async () => {
+  it('R17 — bonus — fenêtre ouverte, la page derrière ne défile pas à la molette (:root:has(dialog[open]) { overflow: hidden })', async () => {
     await open(1440, true);
     try {
       const root = () => page.evaluate(() => ({ overflow: getComputedStyle(document.documentElement).overflow, y: window.scrollY }));
