@@ -86,8 +86,9 @@
     .zoom-btn:hover { color: var(--gold-bright); background: rgba(201, 162, 74, 0.08); }
     .panel-datasheet { max-width: 898px; }
     .panel-datasheet .zoom-btn { border: 1px solid rgba(201, 162, 74, 0.4); margin-top: 10px; }
-    .ds-frame { aspect-ratio: 1; background: #050403; border: 1px solid rgba(201, 162, 74, 0.3); }
-    .ds-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    // L133 (R7) : le cadre épouse le rapport de l'image (plus de carré 1:1 qui laissait 284 px vides sous un scan 3:2).
+    .ds-frame { background: #050403; border: 1px solid rgba(201, 162, 74, 0.3); }
+    .ds-frame img { width: 100%; height: auto; display: block; }
     .hero h1 {
       margin: 0 0 14px;
       font-family: var(--serif);

@@ -30,6 +30,7 @@
     "src/app/features/unit-detail/unit-detail-datasheet-e2e-l120.acceptation.spec.ts": 2,
     "src/app/features/texte-200-suites-l255.e2e.spec.ts": 10,
     "src/app/features/lore-concepts/concepts-h1-l259.e2e.spec.ts": 5,
-    "src/app/features/lore-concepts/concepts-h1-polices-l259.e2e.spec.ts": 6
+    "src/app/features/lore-concepts/concepts-h1-polices-l259.e2e.spec.ts": 6,
+    "src/app/features/unit-detail/unit-detail-cadre-l133.e2e.spec.ts": 2
   }
 }

@@ -202,7 +202,7 @@ function shownSize(img: HTMLImageElement | null | undefined): { w: number; h: nu
               <article class="panel panel-datasheet">
                 <h2 class="panel-title">Fiche technique</h2>
                 <div class="ds-frame">
-                  <img [src]="sheet" [alt]="imageAlt(u)" (error)="imageFailed()" />
+                  <img [src]="sheet" [alt]="imageAlt(u)" width="898" height="596" (error)="imageFailed()" />
                 </div>
                 <button class="zoom-btn" type="button" [attr.aria-label]="zoomLabel(u)" (click)="openZoom($event)">Fiche technique · agrandir</button>
               </article>
