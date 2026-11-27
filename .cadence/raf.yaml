@@ -1533,6 +1533,9 @@ lots:
     screen: component
     created: 2026-10-15
     started: 2026-11-27
+    tasks:
+      - { id: t1, title: "R7 : test e2e de la place réservée avant chargement (cadre ≈ 898/596, pas 0 px)", status: todo }
+    review: { date: 2026-11-27, verdict: "conforme après 1 correctif : 1 majeur (R7, réserve de place avant chargement sans test), 2 mineurs (noms de tests fiche ≠ it(), commentaire mal placé)", commit: 1dc970ff2eb1e237bf8623e50c5f74e1bd2f36fc }
   - id: L134
     title: "Images d'unité : plus de sonde 404 ni de résolutions répétées — porter le type d'image (fiche/portrait/aucune) dans /api/units ou un endpoint unique /api/images/units/:id, et une seule résolution par carte et par visite (QA prod 15-10 : HEAD datasheets/inq-ravenor ×5, wiki-image Sanguinius ×8 sur /units/sm-tactique, 404 console sur les 14 portraits)"
     status: todo
