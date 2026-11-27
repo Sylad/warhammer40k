@@ -454,8 +454,9 @@
     {
       "id": "L133",
       "title": "Fiche unité : le panneau Aperçu épouse le format de la fiche technique",
-      "status": "doing",
+      "status": "done",
       "started": "2026-11-27",
+      "finished": "2026-11-27",
       "tasks": {
         "done": 1,
         "total": 1

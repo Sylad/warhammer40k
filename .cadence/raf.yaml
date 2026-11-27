@@ -1527,7 +1527,7 @@ lots:
   - id: L133
     title: "Fiche unité : panneau Aperçu « Fiche technique » en cadre 1:1 (R7) laisse 287 px vides à 1440 et 103 px à 390 sous un scan 3:2 — cadre au rapport de l'image (revue UX L120, Nielsen 8)"
     public: "Fiche unité : le panneau Aperçu épouse le format de la fiche technique"
-    status: doing
+    status: done
     estimate: 0.25
     visible: true
     screen: component
@@ -1536,6 +1536,8 @@ lots:
     tasks:
       - { id: t1, title: "R7 : test e2e de la place réservée avant chargement (cadre ≈ 898/596, pas 0 px)", status: done }
     review: { date: 2026-11-27, verdict: "conforme (passe 2) : R7 testé (a9e26d3, contre-épreuve rouge à 0 px sans width/height), noms des tests alignés sur la fiche, commentaire déplacé", commit: a9e26d39a68a901481257e0ee16f5a158b2c6395 }
+    ux: { date: 2026-11-27, verdict: "conforme : 0 px de vide sous le scan de 320 à 1440, place réservée avant chargement (scan retardé 4 s, 0 saut), pas de débordement ni à 200 %, unité sans fiche sans panneau vide" }
+    finished: 2026-11-27
   - id: L134
     title: "Images d'unité : plus de sonde 404 ni de résolutions répétées — porter le type d'image (fiche/portrait/aucune) dans /api/units ou un endpoint unique /api/images/units/:id, et une seule résolution par carte et par visite (QA prod 15-10 : HEAD datasheets/inq-ravenor ×5, wiki-image Sanguinius ×8 sur /units/sm-tactique, 404 console sur les 14 portraits)"
     status: todo
